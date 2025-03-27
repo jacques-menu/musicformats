@@ -163,7 +163,7 @@ void lpsrPartGroupBlock::print (std::ostream& os) const
   os <<
     std::endl <<
     "PartGroupBlock for partGroup \"" <<
-    fPartGroup->fetchPartGroupNameForTrace () <<
+    fPartGroup->fetchPartGroupInformationForTrace () <<
     "\", " <<
     msrPartGroupSymbolKindAsString (
       fPartGroup->getPartGroupSymbolKind ()) <<

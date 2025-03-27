@@ -274,7 +274,7 @@ S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::createClefKeyTimeSi
         fInputLineNumber,
         fGroupInputLineNumber);
 
-  // JMI ??? v0.9.67
+  // JMI ??? 0.9.67
   if (fClef)
     newbornClone->
       setClef (fClef);
@@ -453,7 +453,7 @@ void msrClefKeyTimeSignatureGroup::setTimeSignature (
     }
   }
 
-  // set the measure full measure whole notes duration JMI v0.9.70 BABASSE
+  // set the measure full measure whole notes duration JMI 0.9.70 BABASSE
   if (fMeasureElementUpLinkToMeasure) {
     fMeasureElementUpLinkToMeasure->
       setFullMeasureWholeNotesDuration (
@@ -659,7 +659,7 @@ std::string msrClefKeyTimeSignatureGroup::asString () const
   ss <<
     ", fGroupInputLineNumber: " << fGroupInputLineNumber <<
     ", fGroupItemsNumber: " << fGroupItemsNumber <<
-//     ", line " << fInputLineNumber << // JMI v0.9.70
+//     ", line " << fInputLineNumber << // JMI 0.9.70
     ']';
 
   return ss.str ();
@@ -699,7 +699,7 @@ void msrClefKeyTimeSignatureGroup::print (std::ostream& os) const
     "fGroupItemsNumber" << ": " << fGroupItemsNumber <<
 //     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "line" << ": " << fInputLineNumber << // JMI v0.9.70
+//     "line" << ": " << fInputLineNumber << // JMI 0.9.70
     std::endl;
 
   os <<

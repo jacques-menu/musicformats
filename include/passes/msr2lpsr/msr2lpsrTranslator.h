@@ -730,7 +730,7 @@ class EXP msr2lpsrTranslator :
     // notes
     // ------------------------------------------------------
 
-    S_msrNote                 fCurrentNoteClone; // JMI v0.9.72
+    S_msrNote                 fCurrentNoteClone; // JMI 0.9.72
 
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,

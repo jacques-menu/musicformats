@@ -722,7 +722,7 @@ class EXP msr2msrTranslator :
 
     void                      displayPartHiddenMeasureAndBarLineDescrList ();
 
-    void                      handlePartHiddenMeasureAndBarLineDescrList (); // SUPERFLOUS JMI ??? v0.9.67
+    void                      handlePartHiddenMeasureAndBarLineDescrList (); // SUPERFLOUS JMI ??? 0.9.67
 
 
     // harmonies
@@ -747,7 +747,7 @@ class EXP msr2msrTranslator :
     // notes
     // ------------------------------------------------------
 
-    S_msrNote                 fCurrentNoteClone; // JMI v0.9.72
+    S_msrNote                 fCurrentNoteClone; // JMI 0.9.72
 
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,
@@ -762,7 +762,7 @@ class EXP msr2msrTranslator :
     // is being visited too
     S_msrNote                 fCurrentNonGraceNoteClone;
 
-    // to help workaround LilyPond_Issue_34 JMI ??? v0.9.70
+    // to help workaround LilyPond_Issue_34 JMI ??? 0.9.70
     S_msrNote                 fFirstNoteCloneInVoice;
 
     S_msrGraceNotesGroup      fCurrentSkipGraceNotesGroup;

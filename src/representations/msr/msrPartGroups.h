@@ -180,9 +180,9 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // names
 
-    std::string           fetchPartGroupNameForTrace () const;
+    std::string           fetchPartGroupInformationForTrace () const;
 
-    std::string           fetchPartGroupNameForTraceWithoutEndOfLines () const;
+    std::string           fetchPartGroupInformationForTraceWithoutEndOfLines () const;
                             // for comments in LilyPond code
 
     // miscellaneous
@@ -248,7 +248,7 @@ class EXP msrPartGroup : public msrPartGroupElement
     // public services
     // ------------------------------------------------------
 
-//     S_msrPart             appendPartToPartGroupByItsPartID ( // JMI superflous v0.9.69
+//     S_msrPart             appendPartToPartGroupByItsPartID ( // JMI superflous 0.9.69
 //                             int                inputLineNumber,
 //                             const std::string& partMusicXMLID);
 
@@ -316,7 +316,7 @@ class EXP msrPartGroup : public msrPartGroupElement
     // ------------------------------------------------------
 
 //     void                  checkPartGroupElement (
-//                             const S_msrPartGroupElement& partGroupElement) const; // TEMP JMI v0.9.69
+//                             const S_msrPartGroupElement& partGroupElement) const; // TEMP JMI 0.9.69
 
   private:
 

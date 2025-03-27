@@ -310,7 +310,7 @@ void msrPart::registerStaffInPart (
 
   // the staves may be regitered in disorder, for example in mxml2msr,
   // so we have to sort them
-//   sortStavesByIncreasingNumber (); // JMI v0.9.72 ???
+//   sortStavesByIncreasingNumber (); // JMI 0.9.72 ???
 
   // register staff number in the staves map
   fPartStavesMap [staffNumber] = staff;
@@ -890,7 +890,7 @@ mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
       __FILE__, __LINE__,
       ss.str ());
 
-      result = mfWholeNotes (15, 8); // TEMP JMI v0.9.61
+      result = mfWholeNotes (15, 8); // TEMP JMI 0.9.61
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1101,7 +1101,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 
   catch (const std::out_of_range& e) {
 // #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceMeasures ()) { // JMI v0.9.67
+//     if (gTraceOahGroup->getTraceMeasures ()) { // JMI 0.9.67
 //       std::stringstream ss;
 //
 //         ss <<
@@ -2393,7 +2393,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       voiceNumber <<
 //       ", \"" <<
 //       voice->getVoiceName () <<
-//       "\", has already been registered in the regular voices map of part \"" << // JMI v0.9.70
+//       "\", has already been registered in the regular voices map of part \"" << // JMI 0.9.70
 //       getPartName () <<
 //       "\", line " << voice->getInputLineNumber ();
 //
@@ -2447,7 +2447,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       voiceNumber <<
 //       ", \"" <<
 //       voice->getVoiceName () <<
-//       "\", has already been registered in the regular voices map of part \"" << // JMI v0.9.70
+//       "\", has already been registered in the regular voices map of part \"" << // JMI 0.9.70
 //       getPartName () <<
 //       "\", line " << voice->getInputLineNumber ();
 //
@@ -2557,7 +2557,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       inputLineNumber,
       fPartHarmoniesVoice);
 
-//* JMI v0.9.66
+//* JMI 0.9.66
   // set backward link
  // ->
 //     setHarmoniesVoicePartBackwardLink (fPartHarmoniesVoice);
@@ -2606,7 +2606,7 @@ void msrPart::appendHarmoniesListToPart (
     std::stringstream ss;
 
     ss <<
-      "Appending harmonies list to part " << // JMI v0.9.67 HARMFUL
+      "Appending harmonies list to part " << // JMI 0.9.67 HARMFUL
       fetchPartNameForTrace () <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
       ", line " << inputLineNumber;
@@ -2636,7 +2636,7 @@ void msrPart::cascadeAppendFiguredBassesListToPart (
 
     ss <<
       "Appending figured basses list \"" <<
-//       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
+//       figuredBasssesList->asString () << // JMI 0.9.67 HARMFUL
       "\" to part " <<
       fetchPartNameForTrace () <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
@@ -2735,7 +2735,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       inputLineNumber,
       fPartFiguredBassVoice);
 
-///* JMI v0.9.66
+///* JMI 0.9.66
   // set backward link
 //   ->
 //     setFiguredBassVoicePartBackwardLink (fPartFiguredBassVoice);
@@ -3247,7 +3247,7 @@ void msrPart::finalizePart (
   else {
     // sort the staves to have harmonies above and
     // figured bass below the part
-  if (false) // JMI v0.9.67
+  if (false) // JMI 0.9.67
     fPartAllStavesList.sort (
       msrStaff::compareStavesToHaveFiguredBassesBelowCorrespondingPart);
 
@@ -3287,9 +3287,9 @@ void msrPart::finalizePartClone (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-// JMI v0.9.67 ???
+// JMI 0.9.67 ???
     // sort the staves to have harmonies above and figured bass below the part
-  if (false) // JMI v0.9.67
+  if (false) // JMI 0.9.67
     fPartAllStavesList.sort (
        msrStaff::compareStavesToHaveFiguredBassesBelowCorrespondingPart);
 
@@ -3581,7 +3581,7 @@ void msrPart::browseData (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  /* don't enforce any order here, leave it to the client thru sorting ??? JMI v0.9.66 */
+  /* don't enforce any order here, leave it to the client thru sorting ??? JMI 0.9.66 */
 
 //   // browse the part harmonies staff if any right now, JMI
 //   // to place it before the corresponding part
@@ -3758,7 +3758,7 @@ void msrPart::printFull (std::ostream& os) const
   if (fPartUpLinkToPartGroup) {
     // it may be empty
     os <<
-      fPartUpLinkToPartGroup->fetchPartGroupNameForTrace ();
+      fPartUpLinkToPartGroup->fetchPartGroupInformationForTrace ();
   }
   else {
     os << "[NULL]";
@@ -4188,7 +4188,7 @@ void msrPart::print (std::ostream& os) const
   if (fPartUpLinkToPartGroup) {
     // it may be empty
     os <<
-      fPartUpLinkToPartGroup->fetchPartGroupNameForTrace ();
+      fPartUpLinkToPartGroup->fetchPartGroupInformationForTrace ();
   }
   else {
     os << "[NULL]";
@@ -4299,7 +4299,7 @@ void msrPart::print (std::ostream& os) const
         staffKind =
           staff->getStaffKind ();
 
-      switch (staffKind) { // JMI v0.9.66
+      switch (staffKind) { // JMI 0.9.66
         case msrStaffKind::kStaffKindRegular:
           os << staff;
           break;

@@ -32,7 +32,7 @@ enum class msrArticulationKind {
   kArticulationStress, kArticulationUnstress,
   kArticulationDetachedLegato,
   kArticulationStrongAccent, kArticulationTenuto,
-  kArticulationFermata, // barLine ??? JMI v0.9.66
+  kArticulationFermata, // barLine ??? JMI 0.9.66
   kArticulationArpeggiato, kArticulationNonArpeggiato,
   kArticulationDoit, kArticulationFalloff, kArticulationPlop, kArticulationScoop
 };

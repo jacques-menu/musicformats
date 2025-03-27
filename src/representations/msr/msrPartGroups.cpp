@@ -109,10 +109,10 @@ msrPartGroup::msrPartGroup (
 {
   // no sanity check on partGroupUpLinkToContainingPartGroup here,
   // it will be set after all 'real' (i.e. not implicit)
-  // part groups and part have been analyzed JMI v0.9.69
+  // part groups and part have been analyzed JMI 0.9.69
   fPartGroupUpLinkToContainingPartGroup = partGroupUpLinkToContainingPartGroup;
 
-/* JMI v0.9.69
+/* JMI 0.9.69
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
@@ -184,7 +184,7 @@ msrPartGroup::msrPartGroup (
 {
   // no sanity check on partGroupUpLinkToContainingPartGroup here,
   // it will be set after all 'real' (i.e. not the implicit outer-most)
-  // part groups and parts have been analyzed JMI v0.9.69
+  // part groups and parts have been analyzed JMI 0.9.69
   fPartGroupUpLinkToContainingPartGroup = partGroupUpLinkToContainingPartGroup;
 
 /* JMI
@@ -263,7 +263,9 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
 
     ss <<
       "Creating a part group newborn clone of " <<
-      fetchPartGroupNameForTrace ();
+      fPartGroupName <<
+      ", " <<
+      fetchPartGroupInformationForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -349,7 +351,7 @@ void msrPartGroup::setPartGroupUpLinkToContainingPartGroup (
     ss.str ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//     switch (fPartGroupImplicitKind) { JMI v0.9.69
+//     switch (fPartGroupImplicitKind) { JMI 0.9.69
 //       case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
 //         result = "kPartGroupImplicitOuterMostYes";
 //         break;
@@ -362,20 +364,19 @@ void msrPartGroup::setPartGroupUpLinkToContainingPartGroup (
     containingPartGroup;
 }
 
-std::string msrPartGroup::fetchPartGroupNameForTrace () const
+std::string msrPartGroup::fetchPartGroupInformationForTrace () const
 {
   std::stringstream ss;
 
   ss <<
     "[fPartGroupSequentialNumber: " << fPartGroupSequentialNumber <<
-    ", fPartGroupName \"" << fPartGroupName <<
     "\", fPartGroupNumber: " << fPartGroupNumber <<
     ']';
 
   return ss.str ();
 }
 
-std::string msrPartGroup::fetchPartGroupNameForTraceWithoutEndOfLines () const
+std::string msrPartGroup::fetchPartGroupInformationForTraceWithoutEndOfLines () const
 {
   std::list <std::string> chunksList;
 
@@ -436,10 +437,10 @@ void msrPartGroup::setPartGroupInstrumentName (
 }
 
 // void msrPartGroup::checkPartGroupElement (
-//   const S_msrPartGroupElement& partGroupElement) const // TEMP JMI v0.9.66
+//   const S_msrPartGroupElement& partGroupElement) const // TEMP JMI 0.9.66
 // {
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check // TEMP JMI v0.9.69
+//   // sanity check // TEMP JMI 0.9.69
 //   if (
 //     ((void*) partGroupElement) == (void*) 0x0000000000000001
 //       ||
@@ -452,11 +453,11 @@ void msrPartGroup::setPartGroupInstrumentName (
 //     ss <<
 //       "###### partGroupElement is " <<
 //       (void*) partGroupElement <<
-//       " ######"; // JMI v0.9.63
+//       " ######"; // JMI 0.9.63
 //
 //     msrInternalError(
 //       gServiceRunData->getInputSourceName (),
-//       fInputLineNumber, // inputLineNumber // TEMP JMI v0.9.63
+//       fInputLineNumber, // inputLineNumber // TEMP JMI 0.9.63
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -482,7 +483,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //     ss <<
 //       "partMusicXMLID \"" << partMusicXMLID <<
 //       "\" already exists in part group " <<
-//       fetchPartGroupNameForTrace ();
+//       fetchPartGroupInformationForTrace ();
 //
 //     msrWarning ( // JMI
 //       gServiceRunData->getInputSourceName (),
@@ -564,7 +565,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //       for ( ; ; ) {
 //         ss << (*i);
 //         if (++i == iEnd) break;
-// //         gLog << std::endl; // JMI v0.9.69
+// //         gLog << std::endl; // JMI 0.9.69
 //       } // for
 //     }
 //
@@ -676,7 +677,9 @@ void msrPartGroup::removePartFromPartGroup (
 
       ss <<
         "an element of partgroup " <<
-        fetchPartGroupNameForTrace () <<
+        fPartGroupName <<
+        ", " <<
+        fetchPartGroupInformationForTrace () <<
         " is not a part group nor a part";
 
       msrInternalError (
@@ -888,9 +891,9 @@ void msrPartGroup::displayPartGroupElementsListFull (
             dynamic_cast<msrPartGroup*>(&(*element))
         ) {
         // this is a part group
-//         gLog << // JMI v0.9.67
+//         gLog << // JMI 0.9.67
 //           nestedPartGroup->
-//             fetchPartGroupNameForTraceWithoutEndOfLines () <<
+//             fetchPartGroupInformationForTraceWithoutEndOfLines () <<
 //           std::endl;
 
         ++gIndenter;
@@ -924,7 +927,9 @@ void msrPartGroup::displayPartGroupElementsListFull (
 
         ss <<
           "an element of partgroup " <<
-          fetchPartGroupNameForTrace () <<
+          fPartGroupName <<
+          ", " <<
+          fetchPartGroupInformationForTrace () <<
           " is not a part group nor a part";
 
         msrInternalError (
@@ -977,9 +982,9 @@ void msrPartGroup::displayPartGroupElementsList (
             dynamic_cast<msrPartGroup*>(&(*element))
       ) {
         // this is a part group
-//         gLog << // JMI v0.9.67
+//         gLog << // JMI 0.9.67
 //           nestedPartGroup->
-//             fetchPartGroupNameForTraceWithoutEndOfLines () <<
+//             fetchPartGroupInformationForTraceWithoutEndOfLines () <<
 //           std::endl;
 
         ++gIndenter;
@@ -1007,7 +1012,9 @@ void msrPartGroup::displayPartGroupElementsList (
 
         ss <<
           "an element of partgroup " <<
-          fetchPartGroupNameForTrace () <<
+          fPartGroupName <<
+          ", " <<
+          fetchPartGroupInformationForTrace () <<
           " is not a part group nor a part";
 
         msrInternalError (
@@ -1021,7 +1028,7 @@ void msrPartGroup::displayPartGroupElementsList (
 
       if (++i == iEnd) break;
 
-      gLog << std::endl; // JMI v0.9.69
+      gLog << std::endl; // JMI 0.9.69
     } // for
   }
 
@@ -1106,7 +1113,9 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 
       ss <<
         "an element of partgroup " <<
-        fetchPartGroupNameForTrace () <<
+        fPartGroupName <<
+        ", " <<
+        fetchPartGroupInformationForTrace () <<
         " is not a part group nor a part";
 
       msrInternalError (
@@ -1160,7 +1169,9 @@ void msrPartGroup::collectPartGroupPartsList (
 
       ss <<
         "an element of partgroup " <<
-        fetchPartGroupNameForTrace () <<
+        fPartGroupName <<
+        ", " <<
+        fetchPartGroupInformationForTrace () <<
         " is not a part group nor a part";
 
       msrInternalError (
@@ -1400,7 +1411,9 @@ std::string msrPartGroup::asString () const
 
   ss <<
     "[PartGroup " <<
-    fetchPartGroupNameForTrace () <<
+    fPartGroupName <<
+    ", " <<
+    fetchPartGroupInformationForTrace () <<
     ", line " << fInputLineNumber << // JMI non significant
     ']';
 
@@ -1411,7 +1424,9 @@ void msrPartGroup::printFull (std::ostream& os) const
 {
   os <<
     "[PartGroup " <<
-    fetchPartGroupNameForTrace () <<
+    fPartGroupName <<
+    ", " <<
+    fetchPartGroupInformationForTrace () <<
 //     ", fPartGroupPartsMap.size(): " << fPartGroupPartsMap.size () <<
     ", line " << fInputLineNumber << // JMI non significant
     std::endl;
@@ -1433,7 +1448,7 @@ void msrPartGroup::printFull (std::ostream& os) const
   if (fPartGroupUpLinkToContainingPartGroup) {
     os <<
       fPartGroupUpLinkToContainingPartGroup->
-        fetchPartGroupNameForTrace ();
+        fetchPartGroupInformationForTrace ();
   }
   else {
     os << "[NULL]";
@@ -1530,15 +1545,17 @@ void msrPartGroup::printFull (std::ostream& os) const
 
 void msrPartGroup::print (std::ostream& os) const
 {
-//   static int simultaneousCalls = 0; // JMI v9.9.69
+//   static int simultaneousCalls = 0; // JMI 0.9.69
 //
 //   ++simultaneousCalls;
 
-//   if (simultaneousCalls == 100) abort (); // JMI v0.9.69 for the implicit outer-most part group...
+//   if (simultaneousCalls == 100) abort (); // JMI 0.9.69 for the implicit outer-most part group...
 
   os <<
     "[PartGroup " <<
-    fetchPartGroupNameForTrace () <<
+    fPartGroupName <<
+    ", " <<
+    fetchPartGroupInformationForTrace () <<
     ", line " << fInputLineNumber << // JMI non significant
     std::endl;
 
@@ -1578,7 +1595,9 @@ void msrPartGroup::printSummary (std::ostream& os) const
 {
   os <<
     "[PartGroup " <<
-    fetchPartGroupNameForTrace () <<
+    fPartGroupName <<
+    ", " <<
+    fetchPartGroupInformationForTrace () <<
     ", fPartGroupPartsMap.size():: " << fPartGroupPartsMap.size () <<
     std::endl;
 

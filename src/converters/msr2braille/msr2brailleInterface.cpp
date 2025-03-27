@@ -199,7 +199,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -212,7 +212,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           "xmlFile2braille() output goes to standard output" <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -246,7 +246,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -260,7 +260,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           gLanguage->openingBrailleMusicFileForWriting (outputFileName) <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -286,7 +286,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         throw bsr2brailleException (message);
       }
 
-      // convert the finalized BSR score to braille (pass D) // JMI ??? v0.9.66
+      // convert the finalized BSR score to braille (pass D) // JMI ??? 0.9.66
       try {
         translateBsrToBraille (
           finalizedBsrScore,

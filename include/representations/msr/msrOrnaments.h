@@ -26,7 +26,7 @@ namespace MusicFormats
 // data types
 
 enum class msrOrnamentKind {
-  kOrnamentTrill, // JMI kOrnamentDashes, v0.9.66
+  kOrnamentTrill, // JMI kOrnamentDashes, 0.9.66
   kOrnamentTurn, kOrnamentInvertedTurn, kOrnamentDelayedTurn,
   kOrnamentDelayedInvertedTurn, kOrnamentVerticalTurn,
   kOrnamentMordent, kOrnamentInvertedMordent,

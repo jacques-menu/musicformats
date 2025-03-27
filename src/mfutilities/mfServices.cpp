@@ -484,7 +484,7 @@ mfServiceRunData::mfServiceRunData (
   initializeRunDate ();
 
   // parts
-  fCurrentPartIDAndName = "PartIDAndName_???";
+  fCurrentPartIDAndName = "???fCurrentPartIDAndName???";
 
   // staves
   fCurrentStaveNumber = K_STAFF_NUMBER_UNKNOWN_;
@@ -681,7 +681,7 @@ EXP void initializeServices ()
       appendPassToService (
         mfPass::create (
           mfPassIDKind::kMfPassID_4,
-          gLanguage->convertTheFirstMSRIntoAnLPSR ())); // JMI ??? v0.9.70
+          gLanguage->convertTheFirstMSRIntoAnLPSR ())); // JMI ??? 0.9.70
 
     xml2lyService->
       appendPassToService (
@@ -1037,7 +1037,7 @@ EXP void initializeServices ()
     pGlobalServicesMap [mfServiceKind::kMfService_msdl] = msdlService;
   }
 
-  // JMI v0.9.67 mfsl ??? ischeme ???
+  // JMI 0.9.67 mfsl ??? ischeme ???
 }
 
 

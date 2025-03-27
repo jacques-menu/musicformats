@@ -278,7 +278,7 @@ class EXP mxsr2msrSkeletonBuilder :
     virtual void              visitEnd   (S_miscellaneous& elt);
     virtual void              visitStart (S_miscellaneous_field& elt);
 
-    // rights JMI v0.9.71
+    // rights JMI 0.9.71
     // ------------------------------------------------------
 
     // credits
@@ -520,7 +520,7 @@ class EXP mxsr2msrSkeletonBuilder :
 
     // private methods
 
-    // several part groups may start and/or stop at the same position JMI ??? v0.9.69
+    // several part groups may start and/or stop at the same position JMI ??? 0.9.69
     std::vector <S_mxsrPartGroupsList>
                               fStartedPartGroupsListsVector;
 

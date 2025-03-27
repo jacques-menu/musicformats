@@ -194,7 +194,7 @@ EXP int stringMatcher (
       insiderOahHandler =
         stringMatcherInterpreterInsiderHandler::create (
           serviceName,
-          serviceName + " insider OAH handler with argc/argv"); // JMI v0.9.67
+          serviceName + " insider OAH handler with argc/argv"); // JMI 0.9.67
 //           serviceName + " insider OAH handler with argc/argv",
 //           oahHandlerUsedThruKind::kHandlerUsedThruArgcArgv);
 
@@ -359,7 +359,7 @@ EXP int stringMatcher (
 
     gLog <<
       " with expression " <<
-      "???EXPRESSION???" <<
+      "???EXPRESSION???" << // JMI 0.9.72
       std::endl;
 
     gLog <<

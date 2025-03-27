@@ -277,7 +277,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
   return deepClone;
 }
 
-// bool msrFiguredBass::compareFiguredBassesByIncreasingDuration ( // JMI v0.9.72 ???
+// bool msrFiguredBass::compareFiguredBassesByIncreasingDuration ( // JMI 0.9.72 ???
 //   const SMARTP<msrFiguredBass>& first,
 //   const SMARTP<msrFiguredBass>& second)
 // {
@@ -492,7 +492,7 @@ msrFiguredBass::msrFiguredBass (
       fFiguredBassTupletFactor (
         figuredBassTupletFactor)
 {
-//   // sanity check JMI v0.9.66
+//   // sanity check JMI 0.9.66
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     upLinkToMeasure != nullptr,
@@ -572,7 +572,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
       msrFiguredBass::create (
         fInputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-        fMeasureElementSoundingWholeNotes, // JMI v0.9.67
+        fMeasureElementSoundingWholeNotes, // JMI 0.9.67
         fFiguredBassDisplayWholeNotes,
 //         fFiguredBassWholeNotesDuration,
         fFiguredBassParenthesesKind,
@@ -585,7 +585,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
 }
 
 S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
- // S_msrPart containingPart) // JMI v0.9.66
+ // S_msrPart containingPart) // JMI 0.9.66
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -615,7 +615,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
       msrFiguredBass::create (
         fInputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-        fMeasureElementSoundingWholeNotes, // JMI v0.9.67
+        fMeasureElementSoundingWholeNotes, // JMI 0.9.67
         fFiguredBassDisplayWholeNotes,
 //         fFiguredBassWholeNotesDuration,
         fFiguredBassParenthesesKind,

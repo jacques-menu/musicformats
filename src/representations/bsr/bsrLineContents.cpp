@@ -22,7 +22,7 @@
 
 #include "bsrLineContents.h"
 
-/* JMI v0.9.67
+/* JMI 0.9.67
 the following due to:
 /Users/menu/libmusicxml-git/src/lib/smartpointer.h:75:40: error: member access into incomplete type 'bsrLine'
 /Users/menu/libmusicxml-git/src/formats/bsr/bsrLineContents.cpp:51:18: note: in instantiation of member function 'SMARTP<bsrLine>::~SMARTP' requested here

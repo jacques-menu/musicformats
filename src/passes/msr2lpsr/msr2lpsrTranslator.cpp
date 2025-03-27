@@ -1222,13 +1222,13 @@ void msr2lpsrTranslator::circumventLilyPond34IssueIfRelevant (
 //     std::endl;
 //   gIndenter--;
 
-  if (originalVoiceFirstNonGraceNote) { // JMI v0.9.72
+  if (originalVoiceFirstNonGraceNote) { // JMI 0.9.72
     if (
 //       true || noteTheGraceNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote // JMI ISSUE34
       noteTheGraceNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote
     ) {
       // don't createSkipGraceNotesGroupClone() is there's only a single voice
-      // JMI ??? v0.9.70 maybe this criterion should be refined
+      // JMI ??? 0.9.70 maybe this criterion should be refined
       S_msrStaff
         currentVoiceOriginalStaff =
           fCurrentVoiceOriginal->
@@ -1365,7 +1365,7 @@ void msr2lpsrTranslator::visitStart (S_msrScore& elt)
       setColoredLedgerLinesIsNeeded ();
   }
 
-/* JMI v0.9.69
+/* JMI 0.9.69
   // push it onto this visitors's stack,
   // making it the current partGroup
   fPartGroupBlocksStack.push_front (
@@ -1802,7 +1802,7 @@ void msr2lpsrTranslator::visitStart (S_msrCreditWords& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // don't append it to the current credit, since the latter is no clone
-  /* JMI v0.9.64
+  /* JMI 0.9.64
   fCurrentCredit->
     appendCreditWordsToCredit (
       elt);
@@ -1882,7 +1882,7 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
 
     ss <<
       "--> Start visiting msrPartGroup " <<
-      elt->fetchPartGroupNameForTrace () <<
+      elt->fetchPartGroupInformationForTrace () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1911,7 +1911,7 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
 
       ss <<
           "Adding part group clone " <<
-          partGroupClone->fetchPartGroupNameForTrace () <<
+          partGroupClone->fetchPartGroupInformationForTrace () <<
           " to the current MSR score clone" <<
           ", line " << elt->getInputLineNumber ();
 
@@ -1938,7 +1938,7 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
 
     ss <<
       "Pushing part group clone " <<
-      partGroupClone->fetchPartGroupNameForTrace () <<
+      partGroupClone->fetchPartGroupInformationForTrace () <<
       " onto the stack" <<
       ", line " << elt->getInputLineNumber ();
 
@@ -1981,7 +1981,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 
     ss <<
       "--> End visiting msrPartGroup " <<
-      elt->fetchPartGroupNameForTrace () <<
+      elt->fetchPartGroupInformationForTrace () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2005,7 +2005,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 
       ss <<
         "Appending part group clone " <<
-        currentPartGroup->fetchPartGroupNameForTrace () <<
+        currentPartGroup->fetchPartGroupInformationForTrace () <<
         " to the current part group" <<
         ", line " << elt->getInputLineNumber ();
 
@@ -2015,7 +2015,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-//     currentPartGroup-> // JMI v0.9.69
+//     currentPartGroup-> // JMI 0.9.69
 //       appendNestedPartGroupToPartGroup (
 //         elt);
 
@@ -2026,7 +2026,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 
       ss <<
         "Popping part group clone " <<
-        fPartGroupsStack.front ()->fetchPartGroupNameForTrace () <<
+        fPartGroupsStack.front ()->fetchPartGroupInformationForTrace () <<
         " from the stack" <<
         ", line " << elt->getInputLineNumber ();
 
@@ -2055,7 +2055,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
           "Adding part group block clone for part group " <<
           currentPartGroupBlock->
             getPartGroup ()->
-              fetchPartGroupNameForTrace () <<
+              fetchPartGroupInformationForTrace () <<
           " to LPSR score";
 
         gWaeHandler->waeTrace (
@@ -2091,7 +2091,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
                 "Appending part group block for part group " <<
                 currentPartGroupBlock->
                   getPartGroup ()->
-                    fetchPartGroupNameForTrace () <<
+                    fetchPartGroupInformationForTrace () <<
                 " to the current score block '" <<
                 fCurrentScoreBlock->asShortString () <<
                 '\'' <<
@@ -2143,7 +2143,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
                 "Appending part group block for part group " <<
                 currentPartGroupBlock->
                   getPartGroup ()->
-                    fetchPartGroupNameForTrace () <<
+                    fetchPartGroupInformationForTrace () <<
                 " to the current bookpart block '" <<
                 fCurrentScoreBlock->asShortString () <<
                 '\'' <<
@@ -2177,7 +2177,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
           "Popping part group block clone for part group " <<
           currentPartGroupBlock->
             getPartGroup ()->
-              fetchPartGroupNameForTrace () <<
+              fetchPartGroupInformationForTrace () <<
           " from stack";
 
         gWaeHandler->waeTrace (
@@ -2274,7 +2274,7 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
       "Adding part clone " <<
       fCurrentPartClone->fetchPartNameForTrace () <<
       " to part group clone \"" <<
-      fPartGroupsStack.front ()->fetchPartGroupNameForTrace () <<
+      fPartGroupsStack.front ()->fetchPartGroupInformationForTrace () <<
       "\"";
 
     gWaeHandler->waeTrace (
@@ -2298,7 +2298,7 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
 
     ss <<
       "Appending part block " <<
-      fPartGroupsStack.front ()->fetchPartGroupNameForTrace () <<
+      fPartGroupsStack.front ()->fetchPartGroupInformationForTrace () <<
       " to part group blocks stack top";
 
     gWaeHandler->waeTrace (
@@ -2389,7 +2389,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPart& elt)
   if (fCurrentSkipGraceNotesGroup) {
     // add it ahead of the other voices in the part if needed
     fCurrentPartClone->
-      addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded ( // JMI only if there's more than one voice??? v0.9.70
+      addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded ( // JMI only if there's more than one voice??? 0.9.70
         fCurrentVoiceClone,
         fCurrentSkipGraceNotesGroup);
 
@@ -2777,7 +2777,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          true || fCurrentVoiceOriginal->getVoiceIsMusicallyEmpty () // superfluous test JMI ??? JMI v0.9.72
+          true || fCurrentVoiceOriginal->getVoiceIsMusicallyEmpty () // superfluous test JMI ??? JMI 0.9.72
         ) {
           // append the voice clone to the LPSR score elements list
           fResultingLpsr ->
@@ -2815,7 +2815,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
               lpsrChordNamesContext::create (
                  elt->getInputLineNumber (),
 //                 lpsrContextUseExistingKind::kUseExistingContextYes,
-                lpsrContextUseExistingKind::kUseExistingContextNo, // default value JMI v0.9.64
+                lpsrContextUseExistingKind::kUseExistingContextNo, // default value JMI 0.9.64
                 voicePathLikeName,
 // JMI                fCurrentVoiceOriginal->getHarmoniesVoiceRegularVoiceBackwardLink ());
                 fCurrentVoiceOriginal);
@@ -2891,7 +2891,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             figuredBassContext =
               lpsrFiguredBassContext::create (
                  elt->getInputLineNumber (),
-                lpsrContextUseExistingKind::kUseExistingContextNo, // default value JMI v0.9.64
+                lpsrContextUseExistingKind::kUseExistingContextNo, // default value JMI 0.9.64
                 voicePathLikeName,
                 fCurrentVoiceOriginal-> getVoiceUpLinkToStaff ());
 
@@ -3102,7 +3102,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
     // register the harmony clone in the current chord clone
     fCurrentChordClone->
       appendHarmonyToChord (
-        fCurrentHarmonyClone); // JMI ??? v0.9.66
+        fCurrentHarmonyClone); // JMI ??? 0.9.66
   }
 
   else if (fOnGoingHarmoniesVoice) {
@@ -3270,7 +3270,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
     // register the figured bass element clone in the current chord clone
     fCurrentChordClone->
       setChordFiguredBassesList (
-        fCurrentFiguredBassClone); // JMI v0.9.66
+        fCurrentFiguredBassClone); // JMI 0.9.66
   }
 
   else if (fOnGoingFiguredBassVoice) { // JMI
@@ -3541,7 +3541,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 
     case msrMeasureKind::kMeasureKindRegular:
       {
-        // don't create a bar check for the last measure of the score // JMI v0.9.70
+        // don't create a bar check for the last measure of the score // JMI 0.9.70
         // if it is not full time-signature wise
 
         // fetch the measure whole notes duration from the current measure clone
@@ -3594,7 +3594,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         std::string
           scoreLastMeasureNumber =
             elt->fetchMeasureUpLinkToScore ()->getScoreLastMeasureNumber ();
-//         gLog << // JMI v0.9.71
+//         gLog << // JMI 0.9.71
 //           "fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
 //           ", scoreLastMeasureNumber: " << scoreLastMeasureNumber <<
 //           std::endl;
@@ -3695,7 +3695,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
-//       // JMI v0.9.72
+//       // JMI 0.9.72
 //       // append a skip to the current voice clone to fill this empty measure
 //       elt->
 //         appendPaddingSkipNoteToMeasure (
@@ -3724,7 +3724,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 
   if (doCreateABarNumberCheck) {
     // create a bar number check
-    // should NOT be done in cadenza, SEE TO IT JMI v0.9.70
+    // should NOT be done in cadenza, SEE TO IT JMI 0.9.70
     S_msrBarNumberCheck
       barNumberCheck =
         msrBarNumberCheck::create (
@@ -5957,7 +5957,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
 
     else if (fOnGoingChordGraceNotesGroupLink) {
-      // JMI ??? v0.9.70
+      // JMI ??? 0.9.70
     }
 
     else {
@@ -6314,7 +6314,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
 //             voiceStaffChange =
 //               msrVoiceStaffChange::create (
 //                 elt->getInputLineNumber (),
-//                 gNullMeasure,  // JMI v0.9.72 ???  // set later in setMeasureElementUpLinkToMeasure()
+//                 gNullMeasure,  // JMI 0.9.72 ???  // set later in setMeasureElementUpLinkToMeasure()
 //                 previousNoteStaff,
 //                 currentNoteStaff);
 //
@@ -6329,7 +6329,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
       fOnGoingNonGraceNote = true;
   } // switch
 
-//* JMI v0.9.70
+//* JMI 0.9.70
   // can we optimize graceNotesGroup into afterGraceNotesGroup?
   if (
     elt->getNoteIsFollowedByGraceNotesGroup ()
@@ -6604,7 +6604,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
         std::endl;
         */
 
-      if (fCurrentGraceNotesGroupClone) { // JMI v0.9.66
+      if (fCurrentGraceNotesGroupClone) { // JMI 0.9.66
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceGraceNotes ()) {
           std::stringstream ss;
@@ -6807,7 +6807,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       break;
   } // switch
 
-  if (fCurrentNonGraceNoteClone) { // JMI v0.9.70
+  if (fCurrentNonGraceNoteClone) { // JMI 0.9.70
     // handle editorial accidentals
     switch (fCurrentNonGraceNoteClone->getNoteEditorialAccidentalKind ()) {
       case msrEditorialAccidentalKind::kEditorialAccidentalYes:

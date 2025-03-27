@@ -85,7 +85,7 @@ if (true) // for tests JMI
     finalizePartAndAllItsMeasures (
       __LINE__);
 
-  if (gMsrOahGroup->getDisplayMsr ()) { // JMI v0.9.67
+  if (gMsrOahGroup->getDisplayMsr ()) { // JMI 0.9.67
 /* JMI
     gLog <<
       "___PART___" <<
@@ -339,7 +339,7 @@ S_msrMeasure Mikrokosmos3WanderingGenerator::createMeasureInVoice (
     voice->
       cascadeCreateAMeasureAndAppendItInVoice (
         inputLineNumber,
-        333, //         previousMeasureEndInputLineNumber, v0.9.62
+        333, //         previousMeasureEndInputLineNumber, 0.9.62
         measureNumber,
         msrMeasureImplicitKind::kMeasureImplicitKindNo);
 }

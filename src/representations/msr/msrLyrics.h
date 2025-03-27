@@ -182,7 +182,7 @@ class EXP msrSyllable : public msrElement
                             const S_msrStanza&     syllableUpLinkToStanza);
 
     SMARTP<msrSyllable> createSyllableNewbornClone (
-                            const S_msrPart& containingPart); // JMI v0.9.67
+                            const S_msrPart& containingPart); // JMI 0.9.67
 
     SMARTP<msrSyllable> createSyllableDeepClone (
                             const S_msrPart& containingPart);
@@ -490,7 +490,7 @@ class EXP msrStanza : public msrElement
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
-//     void                  padUpToMeasureCurrentPositionInMeasureInStanza ( // JMI v0.9.68
+//     void                  padUpToMeasureCurrentPositionInMeasureInStanza ( // JMI 0.9.68
 //                             int                  inputLineNumber,
 //                             const mfWholeNotes& wholeNotes);
 

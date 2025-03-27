@@ -170,7 +170,7 @@ class EXP msrTuplet : public msrTupletElement
 
  // JMI   void                  applyDisplayFactorToTupletMembers ();
 
-    void                  unapplySoundingFactorToTupletMembers ( // JMI v0.9.70 ???
+    void                  unapplySoundingFactorToTupletMembers ( // JMI 0.9.70 ???
                             const msrTupletFactor& containingTupletFactor);
 
     // finalization

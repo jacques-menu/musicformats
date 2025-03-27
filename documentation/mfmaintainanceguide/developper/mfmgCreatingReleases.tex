@@ -17,7 +17,7 @@
 
 The \mf\ \repo\ is hosted by \github\ and uses so-called \MainIt{actions} to build the library on \MacOS, \Ubuntu\ and \Windows. The resulting files are then available in the \repo, where they are available to create the releases for these three \OS s.
 
-The releases \zip\ archives are supplied with all \mf\ versions, i.e. the current, most recent version of \mf\ (the \default\ \masterBranch\ in the \repo), and the earlier versions such as the \code{v0.9.65} release.
+The releases \zip\ archives are supplied with all \mf\ versions, i.e. the current, most recent version of \mf\ (the \default\ \masterBranch\ in the \repo), and the earlier versions such as the \code{0.9.65} release.
 
 
 The \code{musicformats-ubuntu-distrib} archive has to be clicked to get downloaded, since its URL cannot be guessed by an algorithm (it contains numbers internal to \github).
@@ -397,7 +397,7 @@ addAll () {
 
 \item commit to the local repository clone with the release version number:
 \begin{lstlisting}[language=Terminal]
-git commit -m "v0.9.67-alpha" -a
+git commit -m "0.9.67-alpha" -a
 \end{lstlisting}
 
 
@@ -516,7 +516,7 @@ drwx------@  5 jacquesmenu  staff       160 Jun  9 11:43 musicformats-windows-di
 \begin{enumerate}
 \item click on the Releases link in the \repo\ root window's right pane;
 \item click on the 'Draft a new release' button;
-\item clik on the 'Choose a tag' button to create a new tag such as 'v0.9.67-alpha';
+\item clik on the 'Choose a tag' button to create a new tag such as '0.9.67-alpha';
 \item describe this release as needed;
 \item drop the three \zip\ files in the \releasesFolder\ folder to attach them to this release;
 \item click on the 'Publish release' button to copy the \zip\ file to \github.
@@ -590,13 +590,13 @@ June 9, 2022
 %
 %
 %    git filter-branch --force --index-filter \
-%  'git rm -r --cached --ignore-unmatch scripts/musicformats-macos-version-v0.9.65.zip' \
+%  'git rm -r --cached --ignore-unmatch scripts/musicformats-macos-version-0.9.65.zip' \
 %  --prune-empty --tag-name-filter cat -- --all
 %
 %ou
 %
 %git filter-repo --force --index-filter \
-%  'git rm -r --cached --ignore-unmatch scripts/musicformats-macos-version-v0.9.65.zip' \
+%  'git rm -r --cached --ignore-unmatch scripts/musicformats-macos-version-0.9.65.zip' \
 %  --prune-empty --tag-name-filter cat -- --all
 %
 %puis

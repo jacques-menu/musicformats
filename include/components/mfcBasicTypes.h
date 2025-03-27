@@ -28,7 +28,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-void crackVersionNumber ( // JMI ??? v0.9.66
+void crackVersionNumber ( // JMI ??? 0.9.66
   const std::string& theString,
   int&  generationNumber,
   int&  majorNumber,

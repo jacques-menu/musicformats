@@ -1680,7 +1680,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
     return;
   }
 
-//   int numberOfTokens = 0; JMI v0.9.67
+//   int numberOfTokens = 0; JMI 0.9.67
 
   try {
     msdlTokenKind tokenKind = msdlTokenKind::kToken_UNKNOWN_;

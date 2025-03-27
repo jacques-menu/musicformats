@@ -80,7 +80,7 @@ std::string oahInsiderHandler::asString () const
   std::stringstream ss;
 
   ss <<
-    "oahInsiderHandler \"" << fHandlerHeader; // JMI v0.9.65
+    "oahInsiderHandler \"" << fHandlerHeader; // JMI 0.9.65
 
   return ss.str ();
 }

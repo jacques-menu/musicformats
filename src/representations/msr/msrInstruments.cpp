@@ -668,7 +668,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningDeepClone ()
 #endif // MF_TRACE_IS_ENABLED
 
   S_msrHarpPedalsTuning
-    harpPedalsTuningDeepClone = nullptr; // JMI v0.9.66
+    harpPedalsTuningDeepClone = nullptr; // JMI 0.9.66
 
   return harpPedalsTuningDeepClone;
 }

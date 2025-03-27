@@ -770,7 +770,7 @@ R"(In MusicXML, some informations are known too early or too late, i.e not to th
     but a different staff number, provided there is no <backup /> nor <forward /> in-between.
     The staff change then occurs from the first note to the second one.
 
-From v0.9.72 on, the skeleton builder in mxsr2msr collects such information,
+From 0.9.72 on, the skeleton builder in mxsr2msr collects such information,
 which we call events, pinning them to the note where they belong.
 
 This temporary option causes the MSR skeleton populator to take advantage

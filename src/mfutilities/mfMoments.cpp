@@ -154,7 +154,7 @@ void testMsrMomentComparisons (std::ostream& os)
     "m2: " << m2 << std::endl <<
     std::endl <<
 
-    "m0 == m0: " << Bool (m0 == m0) << std::endl << // JMI v0.9.66
+    "m0 == m0: " << Bool (m0 == m0) << std::endl << // JMI 0.9.66
     "m0 == m0: " << mfBooleanAsString (m0 == m0) << std::endl <<
     "m1 == m1: " << mfBooleanAsString (m1 == m1) << std::endl <<
     "m2 == m2: " << mfBooleanAsString (m2 == m2) << std::endl <<

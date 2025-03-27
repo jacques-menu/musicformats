@@ -167,7 +167,7 @@ class EXP msrStaff : public msrElement
                             const S_msrStaff& first,
                             const S_msrStaff& second);
 
-    // figured bass // JMI v0.9.72
+    // figured bass // JMI 0.9.72
     static bool           compareStavesToHaveFiguredBassesBelowCorrespondingPart (
                             const S_msrStaff& first,
                             const S_msrStaff& second);
@@ -353,7 +353,7 @@ class EXP msrStaff : public msrElement
                             const S_msrRepeatEnding& repeatEndingClone);
 
     // beat repeats
-    void                  createABeatRepeatFromItsFirstMeasuresInStaff ( // JMI v0.9.72
+    void                  createABeatRepeatFromItsFirstMeasuresInStaff ( // JMI 0.9.72
                             int inputLineNumber,
                             int beatRepeatMeasuresNumber,
                             int beatRepeatSlashesNumber);

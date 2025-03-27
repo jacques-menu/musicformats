@@ -66,19 +66,19 @@ class EXP msrChord : public msrTupletElement
     static SMARTP<msrChord> create (int inputLineNumber);
 
 //     static SMARTP<msrChord> create (
-//                             int                  inputLineNumber,
-//                             const S_msrMeasure&  upLinkToMeasure);
+//                             int                 inputLineNumber,
+//                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrChord> create (
-                            int                  inputLineNumber,
-                            const S_msrMeasure&  upLinkToMeasure,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
                             const mfWholeNotes& chordDisplayWholeNotes,
-                            mfDurationKind chordGraphicNotesDurationKind);
+                            mfDurationKind      chordGraphicNotesDurationKind);
 
 //     static SMARTP<msrChord> create (
-//                             int                  inputLineNumber,
+//                             int                 inputLineNumber,
 //                             const mfWholeNotes& chordDisplayWholeNotes,
-//                             mfDurationKind chordGraphicNotesDurationKind);
+//                             mfDurationKind      chordGraphicNotesDurationKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -91,18 +91,17 @@ class EXP msrChord : public msrTupletElement
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msrChord (
-                            int                  inputLineNumber);
+                          msrChord (int inputLineNumber);
 
                           msrChord (
-                            int                  inputLineNumber,
-                            const S_msrMeasure&  upLinkToMeasure);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
                           msrChord (
-                            int                  inputLineNumber,
-                            const S_msrMeasure&  upLinkToMeasure,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
                             const mfWholeNotes& chordDisplayWholeNotes,
-                            mfDurationKind chordGraphicNotesDurationKind);
+                            mfDurationKind      chordGraphicNotesDurationKind);
 
     virtual               ~msrChord ();
 
@@ -617,6 +616,9 @@ class EXP msrChord : public msrTupletElement
     S_msrGraceNotesGroup  fChordUpLinkToContainingGraceNotesGroup;
 
     msrChordInKind        fChordKind;
+
+    // have note's values be copied to the chord?
+    Bool                  fNotesValuesHaveBeenCopiedToTheChord;
 
     // display whole notes
     mfWholeNotes          fChordDisplayWholeNotes;

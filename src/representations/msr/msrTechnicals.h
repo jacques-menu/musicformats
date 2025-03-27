@@ -30,7 +30,7 @@ enum class msrTechnicalKind {
   kTechnicalFingernails,
   kTechnicalHarmonic,
   kTechnicalHeel,
-  kTechnicalHole, // rich JMI ??? v0.9.66
+  kTechnicalHole, // rich JMI ??? 0.9.66
   kTechnicalOpenString,
   kTechnicalSnapPizzicato,
   kTechnicalStopped,
@@ -46,7 +46,7 @@ std::string msrTechnicalKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrTechnicalKind& elt);
 
-/* JMI v0.9.66
+/* JMI 0.9.66
 enum class msrTechnicalAccidentalMarkKind {
   msrAlterationKind::kAlterationNatural, msrAlterationKind::kAlterationSharp, msrAlterationKind::kAlterationFlat
 };

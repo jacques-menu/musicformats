@@ -150,7 +150,7 @@ class mxsrVoice : public smartable
     // private work fields
     // ------------------------------------------------------
 
-    // we use a pair containing the staff and voice numbers: JMI v0.9.70
+    // we use a pair containing the staff and voice numbers: JMI 0.9.70
 //     std::map <S_msrVoice, S_msrTuplet>
 //     std::map <std::pair <int, int>, S_msrTuplet>
 //                               fLastHandledTupletInVoiceMap;

@@ -40,7 +40,7 @@ std::string mfDurationKindAsString (mfDurationKind notesDurationKind);
 
 std::ostream& operator << (std::ostream& os, const mfDurationKind& elt);
 
-EXP mfDurationKind mfDurationKindFromMusicXMLString (
+EXP mfDurationKind mfDurationKindFromMusicXMLGraphicNoteType (
   int                inputLineNumber,
   const std::string& durationString);
 
@@ -62,7 +62,7 @@ std::string mfDurationKindAsMusicXMLType (mfDurationKind notesDurationKind);
 //   mfPositionInMeasure        wholeNotesDuration);
 //
 // //______________________________________________________________________________
-// std::string wholeNotesAndDotsNumberPitchAndOctaveAsString ( // JMI v0.9.67
+// std::string wholeNotesAndDotsNumberPitchAndOctaveAsString ( // JMI 0.9.67
 //   int                  inputLineNumber,
 //   const mfPositionInMeasure& wholeNotes,
 //   int&                 dotsNumber);
@@ -72,7 +72,7 @@ std::string mfDurationKindAsMusicXMLType (mfDurationKind notesDurationKind);
 //   const mfPositionInMeasure& wholeNotes);
 //
 // std::string multipleMeasureRestsWholeNotesPitchAndOctaveAsString (
-//   int                  inputLineNumber, // JMI v0.9.67
+//   int                  inputLineNumber, // JMI 0.9.67
 //   const mfPositionInMeasure& wholeNotes);
 
 //______________________________________________________________________________
@@ -253,7 +253,7 @@ EXP void checkNoteDurationKindAndWholeNotesDurationConsistency (
   mfWholeNotes        wholeNotesDuration);
 
 //______________________________________________________________________________
-std::string wholeNotesAndDotsNumberPitchAndOctaveAsString ( // JMI v0.9.67
+std::string wholeNotesAndDotsNumberPitchAndOctaveAsString ( // JMI 0.9.67
   int                  inputLineNumber,
   const mfWholeNotes& wholeNotes,
   int&                 dotsNumber);
@@ -263,7 +263,7 @@ std::string wholeNotesPitchAndOctaveAsString (
   const mfWholeNotes& wholeNotes);
 
 std::string multipleMeasureRestsWholeNotesPitchAndOctaveAsString (
-  int                  inputLineNumber, // JMI v0.9.67
+  int                  inputLineNumber, // JMI 0.9.67
   const mfWholeNotes& wholeNotes);
 
 

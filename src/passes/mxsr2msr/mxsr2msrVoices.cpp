@@ -75,7 +75,7 @@ void mxsrVoice::displayTupletsStack (
         std::endl;
 
       ++gIndenter;
-      gLog << tuplet; // JMI v0.9.71
+      gLog << tuplet; // JMI 0.9.71
       --gIndenter;
 
       --n;
@@ -122,7 +122,7 @@ void mxsrVoice::pushTupletOntoTupletsStack (
       tuplet->getTupletNumber ();
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check JMI v0.9.72
+  // sanity check JMI 0.9.72
   if (fTupletsStack.empty ()) {
 //     mfAssert (
 //       __FILE__, __LINE__,
@@ -165,7 +165,7 @@ gLog << std::endl << ss.str () << std::endl;
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // the tuplets starts are implicitly supposed to be in tuplet number order
-  // sort them in to be sure? JMI ??? v0.9.72
+  // sort them in to be sure? JMI ??? 0.9.72
   fTupletsStack.push_front (tuplet);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -181,7 +181,7 @@ S_msrTuplet mxsrVoice::popInnerMostTuplet (
   const std::string& context)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check JMI v0.9.70
+  // sanity check JMI 0.9.70
   mfAssert (
     __FILE__, __LINE__,
     ! fTupletsStack.empty (),
@@ -231,7 +231,7 @@ S_msrTuplet mxsrVoice::popInnerMostTuplet (
 #endif // MF_TRACE_IS_ENABLED
 
   // pop from the tuplets stack
-  fTupletsStack.pop_front (); // JMI v0.9.68
+  fTupletsStack.pop_front (); // JMI 0.9.68
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
@@ -240,7 +240,7 @@ S_msrTuplet mxsrVoice::popInnerMostTuplet (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // forget about the current outermost tuplet and its first note // JMI v0.9.68 HARMFUL
+  // forget about the current outermost tuplet and its first note // JMI 0.9.68 HARMFUL
 //     fCurrentOuterMostTupletFirstNote = nullptr; // VITAL
   fCurrentOuterMostTuplet = nullptr;
 
@@ -571,7 +571,7 @@ void mxsrVoice::handleTupletEnd (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check JMI v0.9.70
+  // sanity check JMI 0.9.70
   mfAssert (
     __FILE__, __LINE__,
     ! fTupletsStack.empty (),

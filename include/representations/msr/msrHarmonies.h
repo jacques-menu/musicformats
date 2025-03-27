@@ -349,7 +349,7 @@ class EXP msrHarmony : public msrMeasureElement
                             const mfWholeNotes& wholeNotes,
                             const std::string&   context);
 
-    void                  setHarmonyDisplayWholeNotes ( // JMI useless??? v0.9.67
+    void                  setHarmonyDisplayWholeNotes ( // JMI useless??? 0.9.67
                             const mfWholeNotes& wholeNotes,
                             const std::string&   context);
 
@@ -524,7 +524,7 @@ class EXP msrHarmonyInterval : public smartable
 
     static SMARTP<msrHarmonyInterval> create (
                             msrIntervalKind harmonyIntervalIntervalKind,
-                            int             harmonyIntervalRelativeOctave = 0); // JMI v0.9.70
+                            int             harmonyIntervalRelativeOctave = 0); // JMI 0.9.70
                                               // 0: up to the thirteenth,
                                               // no relative octave is needed
 

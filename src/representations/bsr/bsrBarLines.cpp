@@ -217,7 +217,7 @@ std::string bsrBarLineKindAsString (
   return result;
 }
 
-std::string bsrBarLineKindAsDebugString ( // JMI of little use??? v0.9.66
+std::string bsrBarLineKindAsDebugString ( // JMI of little use??? 0.9.66
   bsrBarLineKind barLineKind)
 {
   std::string result;
@@ -236,7 +236,7 @@ std::string bsrBarLineKindAsDebugString ( // JMI of little use??? v0.9.66
       result = "kBarLineKindFinalDouble";
       break;
     case bsrBarLineKind::kBarLineKindSectionalDouble:
-      result = "||"; // L'\u2016' ??? JMI v0.9.66
+      result = "||"; // L'\u2016' ??? JMI 0.9.66
 //      result = L'\u1D101';
       break;
   } // switch

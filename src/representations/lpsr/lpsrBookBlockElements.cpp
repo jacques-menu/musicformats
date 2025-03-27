@@ -254,7 +254,7 @@ void lpsrScoreBlock::appendPartGroupBlockToScoreBlock (
 
     ss <<
       "Appending part group block " <<
-       partGroupBlock-> getPartGroup ()-> fetchPartGroupNameForTrace () <<
+       partGroupBlock-> getPartGroup ()-> fetchPartGroupInformationForTrace () <<
        " to LPSR score block" <<
        std::endl;
 
@@ -513,7 +513,7 @@ void lpsrBookPartBlock::appendPartGroupBlockToBookPartBlock (
 
     ss <<
       "Appending part group block " <<
-       partGroupBlock-> getPartGroup ()-> fetchPartGroupNameForTrace () <<
+       partGroupBlock-> getPartGroup ()-> fetchPartGroupInformationForTrace () <<
        " to LPSR book part block" <<
        std::endl;
 
@@ -751,7 +751,7 @@ void lpsrBookBlock::appendPartGroupBlockToBlock (
 
     ss <<
       "Appending part group block " <<
-       partGroupBlock-> getPartGroup ()-> fetchPartGroupNameForTrace () <<
+       partGroupBlock-> getPartGroup ()-> fetchPartGroupInformationForTrace () <<
        " to LPSR score" <<
        std::endl;
 

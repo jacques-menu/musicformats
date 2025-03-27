@@ -284,7 +284,7 @@ class EXP mfServiceRunData : public smartable
     std::string           fServiceName;
 
 //     // OAH handler
-//     S_oahHandler          fRunOahHandler; JMI v0.9.67
+//     S_oahHandler          fRunOahHandler; JMI 0.9.67
 
     // input source name
     std::string           fInputSourceName;
@@ -315,7 +315,7 @@ class EXP mfServiceRunData : public smartable
     // private work fields
     // ------------------------------------------------------
 
-  // JMIJMIJMI v0.9.67
+  // JMIJMIJMI 0.9.67
 };
 typedef SMARTP<mfServiceRunData> S_mfServiceRunData;
 EXP std::ostream& operator << (std::ostream& os, const S_mfServiceRunData& elt);

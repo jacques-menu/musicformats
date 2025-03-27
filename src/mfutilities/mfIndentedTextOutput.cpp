@@ -288,7 +288,7 @@ void mfOutputIndenter::printMultiLineStringInATable (
 
 //   int
 //     twoBytesWideCharactersInLine =
-//       countTwoBytesWideCharactersInString (line); // JMI v0.9.67
+//       countTwoBytesWideCharactersInString (line); // JMI 0.9.67
 //   os << "countTwoBytesWideCharactersInString: " << countTwoBytesWideCharactersInString << std::endl;
 
     os << std::left <<
@@ -559,7 +559,7 @@ void createTheGlobalIndentedOstreams (
 
 /*
 //______________________________________________________________________________
-  testMfIndentedStringstream (); // JMI v0.9.66
+  testMfIndentedStringstream (); // JMI 0.9.66
 
 
 void testMfIndentedStringstream ()

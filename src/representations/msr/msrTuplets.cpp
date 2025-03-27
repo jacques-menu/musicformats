@@ -178,7 +178,7 @@ void msrTuplet::appendNoteToTuplet (const S_msrNote& note)
     ss <<
       "Appending note " <<
       note->asShortString () <<
-      // the information is missing to display it the normal way JMI v0.9.70
+      // the information is missing to display it the normal way JMI 0.9.70
       " to tuplet " <<
       asString ();
 
@@ -206,7 +206,7 @@ void msrTuplet::appendNoteToTuplet (const S_msrNote& note)
   note->
     setNoteShortcutUpLinkToTuplet (this);
 
-//   // register note's uplink to measure // JMI v0.9.70 ???
+//   // register note's uplink to measure // JMI 0.9.70 ???
 //   note->
 //     setMeasureElementUpLinkToMeasure (
 //       fMeasureElementUpLinkToMeasure);
@@ -219,7 +219,7 @@ void msrTuplet::appendNoteToTuplet (const S_msrNote& note)
     note->getMeasureElementSoundingWholeNotes ();
 
   // account for note duration in tuplet displaly duration
-  fTupletDisplayWholeNotes += // JMI v0.9.70
+  fTupletDisplayWholeNotes += // JMI 0.9.70
     note->getNoteDisplayWholeNotes ();
 
   // register note's tuplet factor
@@ -269,7 +269,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
   fMeasureElementSoundingWholeNotes +=
     chord->getMeasureElementSoundingWholeNotes ();
 
-  fTupletDisplayWholeNotes += // JMI USELESS ??? v0.9.72
+  fTupletDisplayWholeNotes += // JMI USELESS ??? 0.9.72
     chord->getChordDisplayWholeNotes ();
 
 /* too early JMI
@@ -352,7 +352,7 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
   tuplet->setPositionInTuplet (
     fTupletElementsList.size ());
 
-  // account for tuplet duration // JMI v0.9.70 ???
+  // account for tuplet duration // JMI 0.9.70 ???
   fMeasureElementSoundingWholeNotes +=
     tuplet->getMeasureElementSoundingWholeNotes ();
 
@@ -777,7 +777,7 @@ void msrTuplet::setTupletMembersPositionInMeasures (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::string context = // JMI v0.9.66
+  std::string context = // JMI 0.9.66
     "setTupletMembersPositionInMeasures()";
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -807,7 +807,7 @@ void msrTuplet::setTupletMembersPositionInMeasures (
     ) {
       // note
       note->
-        setMeasureElementUpLinkToMeasure ( // JMI v0.9.70 ???
+        setMeasureElementUpLinkToMeasure ( // JMI 0.9.70 ???
           measure);
 
       note->
@@ -841,7 +841,7 @@ void msrTuplet::setTupletMembersPositionInMeasures (
       // nested tuplet
 //       currentPosition =
 //         tuplet->
-//           setTupletPositionInMeasure ( // a function JMI ??? v0.9.66
+//           setTupletPositionInMeasure ( // a function JMI ??? 0.9.66
 //             measure,
 //             currentPosition);
 
@@ -863,7 +863,7 @@ void msrTuplet::setTupletMembersPositionInMeasures (
 void msrTuplet::unapplySoundingFactorToTupletMembers (
   const msrTupletFactor& containingTupletFactor)
   /*
-  int containingTupletActualNotes, JMI v0.9.66
+  int containingTupletActualNotes, JMI 0.9.66
   int containingTupletNormalNotes)
   */
 {
@@ -1212,7 +1212,7 @@ void msrTuplet::printFull (std::ostream& os) const
   }
   else {
     os <<
-      "fMeasureElementUpLinkToMeasure: NULL"; // JMI v0.9.71
+      "fMeasureElementUpLinkToMeasure: NULL"; // JMI 0.9.71
   }
   os << std::endl;
 
@@ -1328,7 +1328,7 @@ void msrTuplet::print (std::ostream& os) const
   }
   else {
     os <<
-      "fMeasureElementUpLinkToMeasure: NULL"; // JMI v0.9.71
+      "fMeasureElementUpLinkToMeasure: NULL"; // JMI 0.9.71
   }
   os << std::endl;
 
@@ -1441,7 +1441,7 @@ void msrTuplet::finalizeTuplet (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-/ * JMI v0.9.66
+/ * JMI 0.9.66
   // we can now set the measure position for all the tuplet members
   setTupletMembersPositionInMeasures (
     fMeasureElementPositionInMeasure);

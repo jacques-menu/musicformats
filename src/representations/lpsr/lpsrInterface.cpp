@@ -330,7 +330,7 @@ void displayLpsrScoreSlices (
     std::endl << std::endl;
 
 
-  gLog << // JMI v0.9.70
+  gLog << // JMI 0.9.70
     "theLpsrScore->printSlices (gLog);" <<
     std::endl;
 

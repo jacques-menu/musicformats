@@ -3683,7 +3683,7 @@ void msrHarmonyDegree::setHarmonyDegreeUpLinkToHarmony (
     UpLinkToHarmony;
 }
 
-/* JMI ??? v0.9.71
+/* JMI ??? 0.9.71
 int msrHarmonyDegree::harmonyDegreeAsSemitones () const
 {
 / *
@@ -4529,7 +4529,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
   deepClone->setHarmoniesUpLinkToVoice (
     containingVoice);
 
-  // JMI popoulate! v0.9.66
+  // JMI popoulate! 0.9.66
 
   return deepClone;
 }
@@ -5084,7 +5084,7 @@ std::string msrHarmony::asString () const
       ss << "[NULL]";
     }
 
-//   ss << JMI v0.9.71
+//   ss << JMI 0.9.71
 //     ", fHarmonyUpLinkToVoice: ";
 //     if (fHarmonyUpLinkToVoice) {
 //       ss <<
@@ -5187,7 +5187,7 @@ std::string msrHarmony::asString () const
 //     ss << "[NULL]";
 //   }
 //
-// //   ss << JMI v0.9.67
+// //   ss << JMI 0.9.67
 // //     ", fHarmonyUpLinkToVoice: ";
 // //     if (fHarmonyUpLinkToVoice) {
 // //       ss <<

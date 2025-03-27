@@ -204,7 +204,7 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceStavesDetails () const
                               { return fTraceStavesDetails; }
 
-    // MXSR events (temporary from v0.9.72)
+    // MXSR events (temporary from 0.9.72)
     void                  setTraceMxsrEvents ()
                               { fTraceMxsrEvents = true; }
     Bool                  getTraceMxsrEvents () const
@@ -932,7 +932,7 @@ class EXP traceOahGroup : public oahGroup
     // scaling
     Bool                  fTraceGeometry;
     // identification
-    Bool                  fTraceIdentification; // specialize ??? JMI v0.9.66
+    Bool                  fTraceIdentification; // specialize ??? JMI 0.9.66
     // for tests, hidden
     Bool                  fTraceForTests;
 
@@ -1025,7 +1025,7 @@ class EXP traceOahGroup : public oahGroup
     S_oahStringAtom       fTraceOnlyMeasurerNumbeOahAtom;
     std::string           fTraceOnlyMeasure;
 
-    std::set <int>         fTraceDetailedMeasureNumbersSet; // JMI v0.9.67
+    std::set <int>         fTraceDetailedMeasureNumbersSet; // JMI 0.9.67
 
 
     // positions

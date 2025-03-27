@@ -198,7 +198,7 @@ class EXP msrMusicXMLPrintLayout : public msrMeasureElement
     std::list <S_msrStaffLayout>
                           fStaffLayoutsList;
 
-    S_msrSystemDividers   fSystemDividers; // JMI ??? v0.9.66
+    S_msrSystemDividers   fSystemDividers; // JMI ??? 0.9.66
 
     float                 fStaffSpacing;
 

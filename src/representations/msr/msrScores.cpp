@@ -230,7 +230,7 @@ void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
 
     ss <<
       "part group '" <<
-      partGroup->fetchPartGroupNameForTrace () <<
+      partGroup->fetchPartGroupInformationForTrace () <<
       "' already exists in this score";
 
     msrInternalError (
@@ -252,7 +252,7 @@ void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   if (fPartGroupsList.size () == 2) abort (); // JMI v0.9.69
+//   if (fPartGroupsList.size () == 2) abort (); // JMI 0.9.69
 }
 
 void msrScore::removePartGroupFromScore (const S_msrPartGroup& partGroup)
@@ -262,7 +262,7 @@ void msrScore::removePartGroupFromScore (const S_msrPartGroup& partGroup)
 
     ss <<
       "part group '" <<
-      partGroup->fetchPartGroupNameForTrace () <<
+      partGroup->fetchPartGroupInformationForTrace () <<
       "' is not present in this score";
 
     msrInternalError (
@@ -339,7 +339,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
       std::stringstream ss;
 
       ss <<
-        (*i)->fetchPartGroupNameForTrace () <<
+        (*i)->fetchPartGroupInformationForTrace () <<
         ", " <<
         (*i)->getPartGroupName () <<
         std::endl;
@@ -586,7 +586,7 @@ void msrScore::displayPartGroupsList (
 
       ++gIndenter;
       partGroup->printSummary (gLog);
-//       gLog << // JMI v0.9.69
+//       gLog << // JMI 0.9.69
 //         gTab << partGroup->asString () <<
 //         partGroup <<
 //         std::endl;
@@ -602,7 +602,7 @@ void msrScore::displayPartGroupsList (
     " <<++++++++++++++++ " <<
     std::endl << std::endl;
 
-//   if (partGroupsListSize == 2) abort (); // JMI v0.9.69
+//   if (partGroupsListSize == 2) abort (); // JMI 0.9.69
 }
 
 void msrScore::printFull (std::ostream& os) const
@@ -1032,7 +1032,7 @@ void msrScore::printSummary (std::ostream& os) const
     std::endl;
 
   // print the implicit outer-most part group contents
-  // it is the only element in fPartGroupsList JMI single variable JMI v0.9.69
+  // it is the only element in fPartGroupsList JMI single variable JMI 0.9.69
   if (partGroupsListSize) {
     os <<
       "Part groups list:" <<

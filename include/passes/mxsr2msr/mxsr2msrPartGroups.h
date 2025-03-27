@@ -94,7 +94,7 @@ class mxsrPartGroup : public smartable
     std::string           fetchMsrPartGroupNameForTrace () const
                               {
                                 return
-                                  fMsrPartGroup->fetchPartGroupNameForTrace ();
+                                  fMsrPartGroup->fetchPartGroupInformationForTrace ();
                               }
 
     static bool           comparePartGroupsByIncreasingIdentity (

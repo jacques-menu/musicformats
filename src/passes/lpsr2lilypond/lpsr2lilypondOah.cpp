@@ -1400,7 +1400,7 @@ void lilypondAbsoluteOctaveEntryAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
-//   os << std::left << // JMI v0.9.67
+//   os << std::left << // JMI 0.9.67
 //     std::setw (valueFieldWidth) <<
 //     fOctaveEntryKindVariable.getVariableName () <<
 //     ": " <<
@@ -1495,7 +1495,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
     ss <<
       "octave entry kind '" << theString <<
       "' is unknown" <<
-      std::endl << // JMI v0.9.71
+      std::endl << // JMI 0.9.71
       "The " <<
       gGlobalMsrOctaveEntryKindsMap.size () <<
       " known octave entry kinds are:" <<
@@ -3520,7 +3520,7 @@ R"()",
 
   // LilyPond version
 
-  fLilypondVersionMinimumValue = "2.24.4"; // JMI v0.9.71
+  fLilypondVersionMinimumValue = "2.24.4"; // JMI 0.9.71
 
   fLilypondVersion = fLilypondVersionMinimumValue;
 
@@ -3806,7 +3806,7 @@ R"(Set 'opus' to STRING in the LilyPond code \header.)",
     addStringAtom (
       opusAtom);
 
-//   const S_oahBooleanAtom& JMI v0.9.62
+//   const S_oahBooleanAtom& JMI 0.9.62
 //     opusInTitleAtom =
 //       oahBooleanAtom::create (
 //          "opus-in-title", "oit",
@@ -4013,7 +4013,7 @@ R"()",
   // auto-voices
   // --------------------------------------
 
-if (false) // JMI v0.9.67
+if (false) // JMI 0.9.67
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
@@ -5036,7 +5036,7 @@ R"(Add stanzas numbers to lyrics in LilyPond.)",
   subGroup->
     appendAtomToSubGroup (
       lilypondLyricsNotesDurationsKindAtom::create (
-        "lilypond-lyrics-durations-style", "lilylyrdurkind", // JMI v0.9.70
+        "lilypond-lyrics-durations-style", "lilylyrdurkind", // JMI 0.9.70
           regex_replace (
             regex_replace (
               regex_replace (

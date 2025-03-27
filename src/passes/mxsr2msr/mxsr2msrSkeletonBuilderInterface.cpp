@@ -156,7 +156,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 }
 
 // //_______________________________________________________________________________
-// void displayMsrScoreSkeleton ( // UNUSED JMI v0.9.66
+// void displayMsrScoreSkeleton ( // UNUSED JMI 0.9.66
 //   S_msrOahGroup&     msrOpts,
 //   const S_msrScore&  theMsrScore,
 // //   mfPassIDKind       passIDKind,
@@ -195,7 +195,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 //
 //   gGlobalTimingItemsList.appendTimingItem (
 //      mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling,
-//     gLanguage->displayTheFirstMSRSkeletonAsText (), // JMI ??? v0.9.66
+//     gLanguage->displayTheFirstMSRSkeletonAsText (), // JMI ??? 0.9.66
 //     mfTimingItemKind::kOptional,
 //     startClock,
 //     endClock);

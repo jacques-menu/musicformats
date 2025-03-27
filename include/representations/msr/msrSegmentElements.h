@@ -94,7 +94,7 @@ class EXP msrSegmentElement : public msrElement
     std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
-    void                  printFull (std::ostream& os) const override; // JMI ??? v0.9.70
+    void                  printFull (std::ostream& os) const override; // JMI ??? 0.9.70
 
     void                  printSummary (std::ostream& os) const override {}
 

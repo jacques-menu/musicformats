@@ -49,7 +49,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // global variable
-int msrStaff::sStaffMaxRegularVoices = 4; // JMI TEMP MOD v0.9.70
+int msrStaff::sStaffMaxRegularVoices = 4; // JMI TEMP MOD 0.9.70
 
 S_msrStaff msrStaff::create (
   int              inputLineNumber,
@@ -325,7 +325,7 @@ void msrStaff::copyStuffFromUpLinkToPartToStaff ()
 #endif // MF_TRACE_IS_ENABLED
 
       appendClefToStaff (
-        0, // JMI v0.9.67, groupInputLineNumber
+        0, // JMI 0.9.67, groupInputLineNumber
         clef);
     }
   }
@@ -358,7 +358,7 @@ void msrStaff::copyStuffFromUpLinkToPartToStaff ()
 #endif // MF_TRACE_IS_ENABLED
 
       appendKeyToStaff (
-        0, // JMI v0.9.67, groupInputLineNumber
+        0, // JMI 0.9.67, groupInputLineNumber
         key);
     }
   }
@@ -1011,7 +1011,7 @@ void msrStaff::registerVoiceByItsNumber (
   ++gIndenter;
 
   // register it in the 'all voices' list
-  registerVoiceInStaffAllVoicesList (voice); // JMI v0.9.63 NASTY bug???
+  registerVoiceInStaffAllVoicesList (voice); // JMI 0.9.63 NASTY bug???
 
   // register voice in the 'numbers to all voices' map
   fStaffAllVoicesMap [voiceNumber] = voice;
@@ -1249,7 +1249,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
   int inputLineNumber,
   int voiceNumber)
 {
-  S_msrVoice result; // JMI avoid repetitive messages! v0.9.66
+  S_msrVoice result; // JMI avoid repetitive messages! 0.9.66
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -1935,7 +1935,7 @@ void msrStaff::appendClefToStaff  (
     }
 
     // register clef in fCurrentClefKeyTimeSignatureGroup
-    // before the latter is cascaded to the voices if just created JMI v0.9.70
+    // before the latter is cascaded to the voices if just created JMI 0.9.70
     fCurrentClefKeyTimeSignatureGroup->
       setClef (clef);
 
@@ -1949,7 +1949,7 @@ void msrStaff::appendClefToStaff  (
     }
 
     // register clef as current staff clef
-    fStaffCurrentClef = clef; // JMI v0.9.67
+    fStaffCurrentClef = clef; // JMI 0.9.67
   }
 
   --gIndenter;
@@ -2043,7 +2043,7 @@ void msrStaff::appendKeyToStaff (
     }
 
     // register key in fCurrentClefKeyTimeSignatureGroup
-    // before the latter is cascaded to the voices if just created JMI v0.9.70
+    // before the latter is cascaded to the voices if just created JMI 0.9.70
     fCurrentClefKeyTimeSignatureGroup->
       setKey (key);
 
@@ -2159,7 +2159,7 @@ void msrStaff::appendTimeSignatureToStaff (
     }
 
     // register timeSignature in fCurrentClefKeyTimeSignatureGroup
-    // before the latter is cascaded to the voices if just created JMI v0.9.70
+    // before the latter is cascaded to the voices if just created JMI 0.9.70
     fCurrentClefKeyTimeSignatureGroup->
       setTimeSignature (timeSignature);
 
@@ -3233,7 +3233,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
 #endif // MF_TRACE_IS_ENABLED
 
   for (S_msrVoice voice : fStaffAllVoicesList) {
-    S_msrVoice foo = voice; // ??? JMI v0.9.66
+    S_msrVoice foo = voice; // ??? JMI 0.9.66
   } // for
 }
 
@@ -3521,7 +3521,7 @@ void msrStaff::browseData (basevisitor* v)
           keepMsrVoicesSetAtom->
             getSelected ();;
 
-      // JMI this should be done in mxsr2msrOahGroup::checkGroupOptionsConsistency () v0.9.62
+      // JMI this should be done in mxsr2msrOahGroup::checkGroupOptionsConsistency () 0.9.62
       if (ignoreMsrVoicesSetIsASelected && keepMsrVoicesSetIsASelected) {
         std::stringstream ss;
 

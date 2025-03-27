@@ -38,7 +38,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-void crackVersionNumber ( // JMI ??? v0.9.66
+void crackVersionNumber ( // JMI ??? 0.9.66
   const std::string& theString,
   int&  generationNumber,
   int&  majorNumber,
@@ -1421,7 +1421,7 @@ mfcMultiComponent::mfcMultiComponent (
 #endif // MF_TRACE_IS_ENABLED
 
   fComponentEntropicityKind =
-    mfcMultiComponentEntropicityKind::kComponentEntropicityYes; // JMI v0.9.66 componentEntropicityKind; SUPERFLOUS ???
+    mfcMultiComponentEntropicityKind::kComponentEntropicityYes; // JMI 0.9.66 componentEntropicityKind; SUPERFLOUS ???
 
   fComponentUsedFromTheCLIKind = componentUsedFromTheCLIKind;
 
@@ -1475,7 +1475,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
             format->
               fetchComponentMostRecentVersionNumber ();
 
-        if (false && // JMI v0.9.61 ???
+        if (false && // JMI 0.9.61 ???
           *multiComponentMostRecentVersionNumber
             <
           *formatComponentMostRecentVersionNumber
@@ -1543,7 +1543,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
             pass->
               fetchComponentMostRecentVersionNumber ();
 
-        if (false && // JMI v0.9.61 ???
+        if (false && // JMI 0.9.61 ???
           *multiComponentMostRecentVersionNumber
             <
           *passComponentMostRecentVersionNumber
@@ -2254,7 +2254,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
             converter->
               fetchComponentMostRecentVersionNumber ();
 
-        if (false && // JMI v0.9.61 ???
+        if (false && // JMI 0.9.61 ???
           *multiComponentMostRecentVersionNumber
             <
           *converterComponentMostRecentVersionNumber

@@ -39,7 +39,7 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  %{ begin kMeasureKindOverFlowing, measure 1, % measureAccumulatedWholeNotesDuration: 5/4 whn %}
+  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 5/4 %}
   
   \clef "treble"
   \key c \major

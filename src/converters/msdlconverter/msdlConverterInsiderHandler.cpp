@@ -575,7 +575,7 @@ void msdlConverterInsiderHandler::checkOptionsAndArguments () const
   if (MSDR_STANDARD_INPUT_NAME == std::string ("-")) {
     checkSingleInputSourceInArgumentsVector ();
   }
-  else if (MSDR_STANDARD_INPUT_NAME == std::string ("")) { // JMI v0.9.66
+  else if (MSDR_STANDARD_INPUT_NAME == std::string ("")) { // JMI 0.9.66
     checkNoOrOneInputSourceInArgumentsVector ();
   }
   else {
@@ -676,7 +676,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       // '-aofn, -auto-output-file-name' has been selected
       // determine output file base name
       if (inputSourceName == "-") {
-        outputFileName = "stdin"; // JMI ??? v0.9.70
+        outputFileName = "stdin"; // JMI ??? 0.9.70
       }
 
       else {

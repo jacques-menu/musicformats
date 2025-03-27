@@ -866,7 +866,7 @@ void msdlParser::createMeasureNumber (
     fCurrentVoice->
       cascadeCreateAMeasureAndAppendItInVoice (
         inputLineNumber,
-        333, //         previousMeasureEndInputLineNumber, v0.9.62
+        333, //         previousMeasureEndInputLineNumber, 0.9.62
         ss.str (),
         msrMeasureImplicitKind::kMeasureImplicitKindNo);
 }
@@ -1233,7 +1233,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
   return ss.str ();
 */
 
-  return std::string (""); // JMI v0.9.66
+  return std::string (""); // JMI 0.9.66
 }
 
 // --------------------------------------------------------------------------
@@ -1449,7 +1449,7 @@ void msdlParser::parse ()
 #endif // MF_TRACE_IS_ENABLED
 
     // should we display the MSR score?
-    if (gMsrOahGroup->getDisplayMsr ()) { // JMI v0.9.67
+    if (gMsrOahGroup->getDisplayMsr ()) { // JMI 0.9.67
       gLog <<
         std::endl <<
         "*** Built MSR score: ***" <<

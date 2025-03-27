@@ -453,7 +453,7 @@ R"(\markup {
       getGlobalMusicFormatsVersionNumberAndDate () <<
       " and LilyPond \" (lilypond-version))" <<
 
-      // JMI v0.9.71
+      // JMI 0.9.71
 //       \fill-line { \column { \italic { \concat { \lilypondFileName " - modified on " \modTimeAsString } } } }
 //       \fill-line { \column { \italic { \concat { "PDF file created on " \pdfCreationTime } } } }
 
@@ -595,7 +595,7 @@ R"(
 void lpsrScore::setScmAndAccregSchemeModulesAreNeeded ()
 {
   if (! fScmAndAccregSchemeModulesAreNeeded) {
-    // JMI v0.9.67 addAccordionRegistrationSchemeModulesToScore (); // JMI
+    // JMI 0.9.67 addAccordionRegistrationSchemeModulesToScore (); // JMI
 
     fScmAndAccregSchemeModulesAreNeeded = true;
   }
@@ -1790,7 +1790,7 @@ void lpsrScore::setScoopSchemeFunctionIsNeeded ()
 
 void lpsrScore::addScoopSchemeFunctionToScore ()
 {
-  // JMI v0.9.67, check that scoops are up or down?
+  // JMI 0.9.67, check that scoops are up or down?
   std::string
     schemeFunctionName =
       "scoop_stencils",
@@ -2803,7 +2803,7 @@ R"(
 % A set of functions to obtain the LilyPond file creation or modification time.
 )",
 
-      // JMI v0.9.71
+      // JMI 0.9.71
 // R"(
 // #(define commandLine             (object->string (command-line)))
 // #(define loc                     (+ (string-rindex commandLine #\space ) 2))
@@ -4012,7 +4012,7 @@ void lpsrScore::printSlices (std::ostream& os) const
   os <<
     std::string ("LPSR Score")
       + ", " +
-   "gLanguage->printSlices ()" << // JMI v0.9.70
+   "gLanguage->printSlices ()" << // JMI 0.9.70
     std::endl << std::endl;
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED

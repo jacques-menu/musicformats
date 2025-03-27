@@ -507,7 +507,7 @@ void bsrUTF8BrailleGenerator::writeTestData (std::ostream& os)
     "bsrUTF8BrailleGenerator::writeTestData()" <<
     std::endl;
 
-  // JMI v0.9.70 can only write wide chars to a fostream... SO WHAT?
+  // JMI 0.9.70 can only write wide chars to a fostream... SO WHAT?
   // generate the table of all Dots 6 cells
 //   for (wchar_t wch = L'\u2800'; wch <= L'\u280f'; ++wch) {
 //     os << wch;
@@ -852,7 +852,7 @@ void bsrUTF16BigEndianBrailleGenerator::writeTestData (std::ostream& os)
     "bsrUTF16BigEndianBrailleGenerator::writeTestData()" <<
     std::endl;
 
-  // JMI v0.9.70 can only write wide chars to a fostream... SO WHAT?
+  // JMI 0.9.70 can only write wide chars to a fostream... SO WHAT?
   // generate the table of all Dots 6 cells
 //   for (wchar_t wch = L'\u2800'; wch <= L'\u280f'; ++wch) {
 //     os << wch;
@@ -1076,7 +1076,7 @@ void bsrUTF16SmallEndianBrailleGenerator::writeTestData (std::ostream& os)
     "bsrUTF16SmallEndianBrailleGenerator::writeTestData()" <<
     std::endl;
 
-  // JMI v0.9.70 can only write wide chars to a fostream... SO WHAT?
+  // JMI 0.9.70 can only write wide chars to a fostream... SO WHAT?
   // generate the table of all Dots 6 cells
 //   for (wchar_t wch = L'\u2800'; wch <= L'\u280f'; ++wch) {
 //     os << wch;

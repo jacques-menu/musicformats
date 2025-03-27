@@ -185,10 +185,10 @@ void initializeMusicFormatsPassIDKindsMap ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-    gGlobalMusicFormatsPassIDKindsMap ["opt&args"] = // JMI v0.9.67
+    gGlobalMusicFormatsPassIDKindsMap ["opt&args"] = // JMI 0.9.67
       mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling;
 
-    gGlobalMusicFormatsPassIDKindsMap ["display"] = // JMI v0.9.67
+    gGlobalMusicFormatsPassIDKindsMap ["display"] = // JMI 0.9.67
       mfPassIDKind::kMfPassID_DisplayPass;
 
     gGlobalMusicFormatsPassIDKindsMap ["1"] =

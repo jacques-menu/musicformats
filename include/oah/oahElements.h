@@ -179,7 +179,7 @@ class EXP oahFindableElement : public smartable
     // public services
     // ------------------------------------------------------
 
-    virtual Bool          findStringInFindableElement ( // JMI v0.9.71 OAH_OAH
+    virtual Bool          findStringInFindableElement ( // JMI 0.9.71 OAH_OAH
                             const std::string&               lowerCaseString,
                             std::list <S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const = 0;
@@ -188,7 +188,7 @@ class EXP oahFindableElement : public smartable
                             const std::string&       lowerCaseString,
                             std::list <S_oahElement>& foundElementsList,
 //                             std::ostream&            os) const = 0;
-                            std::ostream&            os) const { return true; }; // JMI v0.9.71 OAH_OAH
+                            std::ostream&            os) const { return true; }; // JMI 0.9.71 OAH_OAH
 
   public:
 
@@ -203,7 +203,7 @@ class EXP oahFindableElement : public smartable
 
     virtual const std::string
 //                           containingFindableElementAsString () const = 0;
-                          containingFindableElementAsString () const { return ""; }; // JMI v0.9.71 OAH_OAH
+                          containingFindableElementAsString () const { return ""; }; // JMI 0.9.71 OAH_OAH
 
   private:
 
@@ -407,7 +407,7 @@ EXP std::ostream& operator << (std::ostream& os, const oahElement& elt);
 
 //______________________________________________________________________________
 /*
-  Because the set needs a comparison functor to work with. JMI v0.9.66
+  Because the set needs a comparison functor to work with. JMI 0.9.66
 
   If you don't specify one, it will make a default-constructed one.
   In this case, since you're using a function-pointer type,

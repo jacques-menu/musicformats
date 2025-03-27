@@ -313,7 +313,7 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrPartGroup& elt)
   size_t partGroupElementsSize = elt->getPartGroupElementsList ().size ();
 
   gLog <<
-    "PartGroup" << ' ' << elt->fetchPartGroupNameForTrace () <<
+    "PartGroup" << ' ' << elt->fetchPartGroupInformationForTrace () <<
     " contains " <<
     mfSingularOrPlural (
       partGroupElementsSize,

@@ -106,7 +106,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         separator <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }

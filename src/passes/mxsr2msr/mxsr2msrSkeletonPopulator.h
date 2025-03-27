@@ -107,7 +107,7 @@ class EXP mxsr2msrSkeletonPopulator :
   public                      visitor<S_part_abbreviation_display>,
   public                      visitor<S_part_symbol>,
 
-  // JMI ??? v0.9.67
+  // JMI ??? 0.9.67
   // ------------------------------------------------------
 
   public                      visitor<S_attributes>,
@@ -292,7 +292,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
   public                      visitor<S_print>,
 
-  // miscellaneous??? JMI v0.9.71
+  // miscellaneous??? JMI 0.9.71
   // ------------------------------------------------------
 
   public                      visitor<S_segno>,
@@ -1509,7 +1509,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // sounding notes
     // ------------------------------------------------------
 
-    Bool                      fCurrentNoteIsSounding;
+//     Bool                      fCurrentNoteIsSounding;
 
     // rests
     // ------------------------------------------------------
@@ -1738,10 +1738,10 @@ class EXP mxsr2msrSkeletonPopulator :
     // harmonies and figured bass elements are pending
     // until the note itself is found in the MusicXML data
     // ------------------------------------------------------
-//     void                      attachPendingHarmoniesToCurrentNote ( // JMI v0.9.67
+//     void                      attachPendingHarmoniesToCurrentNote ( // JMI 0.9.67
 //                                 int               inputLineNumber);
 
-//     void                      attachPendingFiguredBassesToCurrentNote ( // JMI v0.9.67
+//     void                      attachPendingFiguredBassesToCurrentNote ( // JMI 0.9.67
 //                                 int               inputLineNumber);
 
     // populate current note
@@ -1990,7 +1990,7 @@ class EXP mxsr2msrSkeletonPopulator :
     std::list <S_msrLineBreak>
                               fPendingLineBreaksList;
 
-//     void                      attachLineBreaksToVoice ( //JMI UNUSED??? v0.9.68
+//     void                      attachLineBreaksToVoice ( //JMI UNUSED??? 0.9.68
 //                                 const S_msrVoice& voice);
 
     void                      attachPendingLineBreaksToPart (
@@ -2003,7 +2003,7 @@ class EXP mxsr2msrSkeletonPopulator :
     std::list <S_msrPageBreak>
                               fPendingPageBreaksList;
 
-//     void                      attachPageBreaksToVoice ( //JMI UNUSED??? v0.9.68
+//     void                      attachPageBreaksToVoice ( //JMI UNUSED??? 0.9.68
 //                                 const S_msrVoice& voice);
 
     void                      attachPendingPageBreaksToPart (
@@ -2205,7 +2205,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // may occur when no current voice exists
     std::list <S_msrBarLine>  fPendingBarLinesList;
 
-//     void                      attachPendingBarLinesToVoice ( // JMI UNUSED??? v0.9.68
+//     void                      attachPendingBarLinesToVoice ( // JMI UNUSED??? 0.9.68
 //                                 const S_msrVoice& voice);
 
     void                      attachPendingBarLinesToPart (
@@ -2227,14 +2227,14 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handleRepeatEndingStart (
                                 const S_msrBarLine& barLine);
 
-/* JMI v0.9.66
+/* JMI 0.9.66
     void                      handleRepeatHookedEndingStart (
                                 S_barline     elt,
                                 const S_msrBarLine& barLine);
 */
     void                      handleRepeatHookedEndingEnd (
                                 const S_msrBarLine& barLine);
-/* JMI v0.9.66
+/* JMI 0.9.66
     void                      handleRepeatHooklessEndingStart (
                                 S_barline     elt,
                                 const S_msrBarLine& barLine);
@@ -2251,6 +2251,7 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fCurrentNoteInputStartLineNumber;
 
     // indexes are staff number and voice number
+
     std::map <int, std::map <int, S_msrNote>>
                               fStaffVoicesLastMetNoteMap;
 
@@ -2264,54 +2265,66 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const std::string& markup);
 
     // note pitch
-    msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesPitchKind;
+
+    Bool                      fCurrentNoteIsUnpitched;
+
     msrDiatonicPitchKind      fCurrentNoteDiatonicPitchKind;
+
+    msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesPitchKind;
+
     msrAlterationKind         fCurrentNoteAlterationKind;
+
     msrDiatonicPitchKind      fCurrentDisplayDiatonicPitchKind;
 
     // note octave
+
     msrOctaveKind             fCurrentNoteOctave;
     msrOctaveKind             fCurrentDisplayOctave;
 
-    // note augmentation dots
+    // MusicXML note duration
+    // not mandatory, has to be computed from note type if missing
+    int                       fCurrentNoteDuration;
+
+    // MusicXML note augmentation dots
+
     int                       fCurrentNoteDotsNumber;
 
-    // note sounding duration
-    int                       fCurrentNoteDuration;
-    mfWholeNotes             fCurrentNoteSoundingWholeNotesFromNotesDuration;
-    mfWholeNotes             fCurrentNoteSoundingWholeNotes;
-    mfDurationKind      fCurrentNoteSoundingDurationKind;
+    // MusicXML graphic note type
 
-    // note type
-    std::string               fCurrentNoteType;
+    std::string               fCurrentGraphicNoteType;
+    mfDurationKind            fCurrentNoteDurationKindFromGraphicNoteType;
 
-    // note display
+    // note quarter tones pitch
+
     msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesDisplayPitchKind;
-    mfWholeNotes             fCurrentNoteDisplayWholeNotesFromType;
-    mfWholeNotes             fCurrentNoteDisplayWholeNotes;
 
-    // note graphic duration
-    mfDurationKind      fCurrentNoteGraphicNotesDurationKind;
+    // note sounding duration
 
-    // unpitched notes
-    Bool                      fCurrentNoteIsUnpitched;
+    mfWholeNotes              fCurrentNoteSoundingWholeNotesFromNotesDuration;
+    mfWholeNotes              fCurrentNoteSoundingWholeNotes;
+    mfDurationKind            fCurrentNoteSoundingDurationKind;
 
-    // note print object kind // JMI for others too v0.9.65
+    // note display duration
+
+    mfWholeNotes              fCurrentNoteDisplayWholeNotesFromType;
+    mfWholeNotes              fCurrentNoteDisplayWholeNotes;
+
+    // note print object kind // JMI for others too 0.9.65
     msrPrintObjectKind        fCurrentNotePrintObjectKind;
 
     // note heads
+
     msrNoteHeadKind           fCurrentNoteHeadKind;
     msrNoteHeadFilledKind     fCurrentNoteHeadFilledKind;
     msrNoteHeadParenthesesKind
                               fCurrentNoteHeadParenthesesKind;
     // note color
+
     std::string               fCurrentNoteRGB;
     std::string               fCurrentNoteAlpha;
 
-    // ongoing note
-    Bool                      fOnGoingNote;
-
     // accidentals
+
     msrAccidentalKind         fCurrentAccidentalKind;
     msrEditorialAccidentalKind
                               fCurrentEditorialAccidentalKind;
@@ -2328,7 +2341,12 @@ class EXP mxsr2msrSkeletonPopulator :
     std::string               fCurrentBeamValue;
     int                       fCurrentBeamNumber;
 
+    // ongoing note
+
+    Bool                      fOnGoingNote;
+
     // initialization
+
     void                      initializeNoteData ();
 
 
@@ -2383,7 +2401,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      attachPendingWedgesToCurrentNote ();
 
-//     void                      attachPendingVoicesWedgesToCurrentNoteIfRelevant ( // superflous??? JMI v0.971
+//     void                      attachPendingVoicesWedgesToCurrentNoteIfRelevant ( // superflous??? JMI 0.9.71
 //                                 int theVoiceNumber);
 
     void                      attachPendingGlissandosToCurrentNote ();
@@ -2488,7 +2506,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
 // JMI    std::string               fCurrentTiedType;
     msrTieKind                fCurrentTieKind;
-    std::string               fCurrentTiedOrientation; // JMI v0.9.70
+    std::string               fCurrentTiedOrientation; // JMI 0.9.70
 //     S_msrTie                  fCurrentTie;
     std::list <S_msrTie>      fPendingTiesList;
 

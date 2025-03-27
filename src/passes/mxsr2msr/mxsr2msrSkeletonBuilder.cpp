@@ -487,7 +487,7 @@ void mxsr2msrSkeletonBuilder::displayPartsVector (
       if (partUpLinkToPartGroup) {
         gLog <<
           partUpLinkToPartGroup->
-            fetchPartGroupNameForTrace ();
+            fetchPartGroupInformationForTrace ();
       }
       else {
         gLog <<
@@ -683,7 +683,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
   fPartGroupsMap [fCurrentPartGroupSequentialNumber] =
     partGroup;
 
-  // register in fStartedPartGroupsMap // JMI v0.9.69 BUG ???
+  // register in fStartedPartGroupsMap // JMI 0.9.69 BUG ???
   // under its part group number,
   int theMsrPartGroupNumber =
     partGroup->
@@ -693,7 +693,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
   fStartedPartGroupsMap [theMsrPartGroupNumber] =
     partGroup;
 
-  // create an empty mxsrPartGroupsList for part groups started at scorePartIdentity // JMI v0.9.69
+  // create an empty mxsrPartGroupsList for part groups started at scorePartIdentity // JMI 0.9.69
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
   	std::stringstream ss;
@@ -803,7 +803,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 	}
 
 	else {
-		// the part group stops are out of oder JMI v0.9.69
+		// the part group stops are out of oder JMI 0.9.69
 
 #ifdef MF_TRACE_IS_ENABLED
 		if (gTraceOahGroup->getTracePartGroups ()) {
@@ -824,7 +824,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 #endif // MF_TRACE_IS_ENABLED
 	}
 
-// 	if (fPartGroupsStack.empty ()) { // JMI v0.9.71
+// 	if (fPartGroupsStack.empty ()) { // JMI 0.9.71
 //     std::stringstream ss;
 //
 //     ss <<
@@ -1070,10 +1070,10 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
     ss <<
       "Handling the nesting of part group " <<
       theMsrContainingPartGroup->
-        fetchPartGroupNameForTrace () <<
+        fetchPartGroupInformationForTrace () <<
       "' into " <<
       theMsrContainingPartGroup->
-        fetchPartGroupNameForTrace () <<
+        fetchPartGroupInformationForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1090,10 +1090,10 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
     ss <<
       "Setting the upLink of part group " <<
       theMsrPartGroupToBeStopped->
-        fetchPartGroupNameForTrace () <<
+        fetchPartGroupInformationForTrace () <<
       "' to " <<
       theMsrContainingPartGroup->
-        fetchPartGroupNameForTrace () <<
+        fetchPartGroupInformationForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1121,10 +1121,10 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
     ss <<
       "Appending sub part group " <<
       theMsrPartGroupToBeStopped->
-        fetchPartGroupNameForTrace () <<
+        fetchPartGroupInformationForTrace () <<
       "' to " <<
       theMsrContainingPartGroup->
-        fetchPartGroupNameForTrace () <<
+        fetchPartGroupInformationForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1460,7 +1460,7 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 
 					// the implicit outer-most part group isn't contained in any other
 					if (partGroup != fImplicitOuterMostPartGroup) {
-						// fetch new current part group JMI v0.9.69
+						// fetch new current part group JMI 0.9.69
 						if (fPartGroupsStack.empty ()) {
 #ifdef MF_TRACE_IS_ENABLED
 							if (gTraceOahGroup->getTracePartGroups ()) {
@@ -1591,7 +1591,7 @@ of a score exhibiting overlapping part groups)",
 		}
 	}
 
-	// handle the part groups started at partGroupSequentialNumber // JMI v0.9.69
+	// handle the part groups started at partGroupSequentialNumber // JMI 0.9.69
 	handlePartGroupsStartAtIdentity (
 		inputLineNumber,
 		partGroupSequentialNumber);
@@ -1659,7 +1659,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 
   // handle each partGroupSequentialNumber in turn in increasing order
   for (int partGroupSequentialNumber = 0; partGroupSequentialNumber<= fCurrentPartGroupSequentialNumber; ++partGroupSequentialNumber) {
-//     if (partGroupSequentialNumber> 0) { JMI v0.9.72
+//     if (partGroupSequentialNumber> 0) { JMI 0.9.72
 //       // parts actual identitys start at 1
       // append part to current part group, i.e. to the top of the stack
       S_msrPart
@@ -2352,7 +2352,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // register the first and last measure numbers and measures number in the score JMI v0.9.68
+  // register the first and last measure numbers and measures number in the score JMI 0.9.68
   fMsrScore->
     setScoreFirstMeasureNumber (
       fScoreFirstMeasureBareNumber);
@@ -2380,7 +2380,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
     setScoreMeasuresNumber (
       fScoreMeasuresNumber);
 
-/* JMI ??? THROW AWAY ??? v0.9.69
+/* JMI ??? THROW AWAY ??? 0.9.69
   // fetch the identification from the credits if any
   fMsrScore ->
     fetchIdentificationFromCreditsIfAny (
@@ -4188,7 +4188,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
   thePart->
   	setPartUpLinkToPartGroup (
   		fPartGroupsStack.top ()->
-  			getMsrPartGroup ()); // JMI HARD v0.9.69
+  			getMsrPartGroup ()); // JMI HARD 0.9.69
   --gIndenter;
 }
 
@@ -4220,7 +4220,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
 //       std::endl <<
       "<!--=== "
       " partMusicXMLID \"" << fCurrentPartID << "\"" <<
-//       "partName \"" << fCurrentPartName << "\"" << JMI from fPartGroupElementsList ??? v0.9.67
+//       "partName \"" << fCurrentPartName << "\"" << JMI from fPartGroupElementsList ??? 0.9.67
       ", line " << elt->getInputLineNumber () <<
       " ===-->";
 
@@ -4368,7 +4368,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
   fCurrentPart->
     sortStavesByIncreasingNumber ();
 
-/* JMI v0.9.69
+/* JMI 0.9.69
   // are there more staves in <staves/> that specified with <staff/>?
   fCurrentPart->
     addAVoiceToStavesThatHaveNone (
@@ -4405,7 +4405,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 //________________________________________________________________________
 // void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
 // {
-// 	// JMI v0.9.72 should be ignored!
+// 	// JMI 0.9.72 should be ignored!
 //
 // // #ifdef MF_TRACE_IS_ENABLED
 // //   if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
@@ -4453,11 +4453,11 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 // // #endif // MF_TRACE_IS_ENABLED
 //
 // //   if (stavesNumber > 1) {
-// //     // add stavesNumber staves to current part // JMI v0.9.72 which staff numbers...???
+// //     // add stavesNumber staves to current part // JMI 0.9.72 which staff numbers...???
 // //     int n = 1;
 // //
 // //     while (n <= stavesNumber) {
-// //     /* JMI v0.9.69
+// //     /* JMI 0.9.69
 // //       fCurrentPart->
 // //         addRegularStaffToPartByItsNumber (
 // //           elt->getInputLineNumber (),
@@ -4531,7 +4531,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fOnGoingNote) { // JMI v0.9.72
+  if (fOnGoingNote) { // JMI 0.9.72
     // regular staff indication in note/rest, fine
   }
   else {
@@ -4683,7 +4683,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
   // take this measure into account
   ++fPartNumberOfMeasures;
 
-  if (fScoreFirstMeasureBareNumber == K_MEASURE_NUMBER_UNKNOWN_) { // JMI v0.9.68
+  if (fScoreFirstMeasureBareNumber == K_MEASURE_NUMBER_UNKNOWN_) { // JMI 0.9.68
 #ifdef MF_USE_WRAPPED_TYPES
   	fScoreFirstMeasureBareNumber = fCurrentMeasureNumber.getBareValue ();
 		fScoreLastMeasureBareNumber = fCurrentMeasureNumber.getBareValue ();
@@ -4955,7 +4955,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 	}
 
 // 	// handle pending tuplet stops if any, after the chord end if any,
-// 	// which occurs on the current notes, i.e. the one at the end of the measure JMI v0.9.72
+// 	// which occurs on the current notes, i.e. the one at the end of the measure JMI 0.9.72
 // 	handlePendingTupletEndEventsAtMeasureEndIfAny (
 // 		fPreviousNoteInputLineNumber);
 
@@ -5539,7 +5539,7 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
     fCurrentNoteVoiceNumber == fPreviousNoteVoiceNumber
       &&
     fPreviousNoteIsATakeOffCandidate
-//     fPreviousNoteStaffNumber != K_STAFF_NUMBER_UNKNOWN_ // JMI STAFF_CHANGE v0.9.72
+//     fPreviousNoteStaffNumber != K_STAFF_NUMBER_UNKNOWN_ // JMI STAFF_CHANGE 0.9.72
   ) {
     // yes
 		result = true;
@@ -5605,7 +5605,7 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 
 		// let's create two staff changes
 		// one for take off upon the previous note
-		fResultingEventsCollection.registerStaffChangeTakeOff ( // CHORD_TUP JMI v0.9.72
+		fResultingEventsCollection.registerStaffChangeTakeOff ( // CHORD_TUP JMI 0.9.72
 			fPreviousNoteSequentialNumber,
 			fPreviousNoteStaffNumber,
 			changingVoiceNumber,							// the voice that changes staff
@@ -5616,7 +5616,7 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 			fPreviousNoteInputLineNumber);
 
 		// the other one for landing upon the current note
-		fResultingEventsCollection.registerStaffChangeLanding ( // CHORD_TUP JMI v0.9.72
+		fResultingEventsCollection.registerStaffChangeLanding ( // CHORD_TUP JMI 0.9.72
 			fCurrentNoteSequentialNumber,
 			fCurrentNoteStaffNumber,
 			changingVoiceNumber,							// the voice that changes staff
@@ -6322,7 +6322,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check JMI v0.9.70
+  // sanity check JMI 0.9.70
   mfAssert (
     __FILE__, __LINE__,
     fCurrentTupletActualNotes > 0,
@@ -6735,7 +6735,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_actual_notes& elt)
 //         fCurrentNoteBelongsToADoubleTremolo = true;
 //         break;
 //       default:
-//         fCurrentNoteBelongsToATuplet = true; // JMI v0.9.70 what when both in tuplet and a chord?
+//         fCurrentNoteBelongsToATuplet = true; // JMI 0.9.70 what when both in tuplet and a chord?
 //     } // switch
   }
 
@@ -6812,7 +6812,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_notes& elt)
     // notes inside a tuplet have no <tuplet/> markup
     // and 1 actual note indicates a double tremolo
 
-//     this is superflous since actual_notes has been seen already: // JMI v0.9.70
+//     this is superflous since actual_notes has been seen already: // JMI 0.9.70
 //     switch (fCurrentNoteNormalNotes) {
 //       case 1:
 //         fCurrentNoteBelongsToADoubleTremolo = true;
@@ -6890,7 +6890,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_type& elt)
 
 //     // the type contains a display duration
 //     fCurrentNoteNormalTypeNotesDuration =
-//       mfDurationKindFromMusicXMLString (
+//       mfDurationKindFromMusicXMLGraphicNoteType (
 //         elt->getInputLineNumber (),
 //         normalTypeString);
 
@@ -7256,7 +7256,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
 // 		// handle the values
 // 		switch (tupletEvent->getTupletEventKind ()) {
 // 			case mxsrTupletEventKind::kTupletEvent_NONE:
-// 				// should not occur // JMI v0.9.72
+// 				// should not occur // JMI 0.9.72
 // 				break;
 //
 // 			case mxsrTupletEventKind::kTupletEventBegin:

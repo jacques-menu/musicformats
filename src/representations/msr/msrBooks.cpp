@@ -212,7 +212,7 @@ void msrBook::appendCreditToBook (
   fCreditsList.push_back (credit);
 }
 
-void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.66
+void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? 0.9.66
   int inputLineNumber)
 {
 /* JMI

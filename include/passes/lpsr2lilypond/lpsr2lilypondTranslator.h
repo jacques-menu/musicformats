@@ -117,7 +117,7 @@ typedef SMARTP<lpsrRepeat> S_lpsrRepeat;
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrRepeat& elt);
 
 //________________________________________________________________________
-enum class lilypondMarkupColumnKind { // JMI v0.9.66
+enum class lilypondMarkupColumnKind { // JMI 0.9.66
   kMarkupColumnKindLeftAligned,
   kMarkupColumnKindLeftACentered
 };
@@ -952,7 +952,7 @@ class EXP lpsr2lilypondTranslator :
     // part groups
     // ------------------------------------------------------
 
- // JMI   S_msrPartGroup        fCurrentMsrPartGroupClone; // JMI v0.9.69
+ // JMI   S_msrPartGroup        fCurrentMsrPartGroupClone; // JMI 0.9.69
 
     // parts
     // ------------------------------------------------------

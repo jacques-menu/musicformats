@@ -275,7 +275,7 @@ void msrSpanner::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fSpannerUpLinkToNote" << ": " << // JMI v0.9.66
+    "fSpannerUpLinkToNote" << ": " << // JMI 0.9.66
     std::endl;
   ++gIndenter;
     os <<

@@ -38,7 +38,7 @@ mfRational::mfRational (
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-if (false) // JMI v0.9.70
+if (false) // JMI 0.9.70
   mfAssert (
     __FILE__, __LINE__,
     denom > 0,
@@ -127,7 +127,7 @@ mfRational::mfRational (const std::string& theString)
     msrError (
 //    msrWarning ( //  JMI
       gServiceRunData->getInputSourceName (),
-      0, // JMI inputLineNumber, ??? v0.9.66
+      0, // JMI inputLineNumber, ??? 0.9.66
       __FILE__, __LINE__,
       ss.str ());
   }

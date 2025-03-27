@@ -51,7 +51,7 @@ class EXP basicOah2manPage : virtual public oah2manPage,
 
   public                      visitor<S_oahCommonPrefixBooleansAtom>,
 
-// JMI  public                      visitor<S_oahAtomStoringAValue>, v0.9.66
+// JMI  public                      visitor<S_oahAtomStoringAValue>, 0.9.66
 
   public                      visitor<S_oahIntegerAtom>,
   public                      visitor<S_oahTwoIntegersAtom>,

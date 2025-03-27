@@ -75,7 +75,7 @@ void msdrMusic::addMeasureToMusic (
   int           measureNumber,
   const S_msdrMeasure& measure)
 {
-  // JMI v0.9.70
+  // JMI 0.9.70
 }
 
 void msdrMusic::acceptIn (basevisitor* v)

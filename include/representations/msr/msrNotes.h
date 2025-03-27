@@ -62,19 +62,19 @@ class EXP msrNote : public msrTupletElement
                             int                        inputLineNumber,
                             const S_msrMeasure&        upLinkToMeasure,
 
-//                             const std::string&         noteMeasureNumber, JMI v0.9.66
+//                             const std::string&         noteMeasureNumber, JMI 0.9.66
 
                             msrNoteKind                noteKind,
 
                             msrQuarterTonesPitchKind   noteQuarterTonesPitchKind,
                             msrOctaveKind              noteOctaveKind,
 
-                            const mfWholeNotes&       noteSoundingWholeNotes,
-                            const mfWholeNotes&       noteDisplayWholeNotes,
+                            const mfWholeNotes&        noteSoundingWholeNotes,
+                            const mfWholeNotes&        noteDisplayWholeNotes,
 
                             int                        noteDotsNumber,
 
-                            mfDurationKind       noteGraphicNotesDurationKind,
+                            mfDurationKind             noteGraphicNotesDurationKind,
 
                             msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
                             msrOctaveKind              noteDisplayOctaveKind,
@@ -97,49 +97,49 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     static SMARTP<msrNote> createRestNote (
-                            int                  inputLineNumber,
-                            const std::string&   noteMeasureNumber,
+                            int                 inputLineNumber,
+                            const std::string&  noteMeasureNumber,
                             const mfWholeNotes& soundingWholeNotes,
                             const mfWholeNotes& displayWholeNotes,
-                            int                  dotsNumber);
+                            int                 dotsNumber);
 
     static SMARTP<msrNote> createRestNoteWithOctave (
-                            int                  inputLineNumber,
-                            const std::string&   noteMeasureNumber,
-                            msrOctaveKind        noteOctave,
+                            int                 inputLineNumber,
+                            const std::string&  noteMeasureNumber,
+                            msrOctaveKind       noteOctave,
                             const mfWholeNotes& soundingWholeNotes,
                             const mfWholeNotes& displayWholeNotes,
-                            int                  dotsNumber);
+                            int                 dotsNumber);
 
     static SMARTP<msrNote> createSkipNote (
-                            int                  inputLineNumber,
-                            const std::string&   noteMeasureNumber,
+                            int                 inputLineNumber,
+                            const std::string&  noteMeasureNumber,
                             const mfWholeNotes& soundingWholeNotes,
                             const mfWholeNotes& displayWholeNotes,
-                            int                  dotsNumberr);
+                            int                 dotsNumberr);
 
     static SMARTP<msrNote> createSkipNoteWithOctave (
-                            int                  inputLineNumber,
-                            const std::string&   noteMeasureNumber,
-                            msrOctaveKind        noteOctave,
+                            int                 inputLineNumber,
+                            const std::string&  noteMeasureNumber,
+                            msrOctaveKind       noteOctave,
                             const mfWholeNotes& soundingWholeNotes,
                             const mfWholeNotes& displayWholeNotes,
-                            int                  dotsNumber);
+                            int                 dotsNumber);
 
     static SMARTP<msrNote> createGraceSkipNote (
-                            int                  inputLineNumber,
-                            const std::string&   noteMeasureNumber,
+                            int                 inputLineNumber,
+                            const std::string&  noteMeasureNumber,
                             const mfWholeNotes& soundingWholeNotes,
                             const mfWholeNotes& displayWholeNotes,
-                            int                  dotsNumber);
+                            int                 dotsNumber);
 
     static SMARTP<msrNote> createRegularNote (
                             int                      inputLineNumber,
                             const std::string&       noteMeasureNumber,
                             msrQuarterTonesPitchKind quarterTonesPitchKind,
                             msrOctaveKind            noteOctaveKind,
-                            const mfWholeNotes&     soundingWholeNotes,
-                            const mfWholeNotes&     displayWholeNotes,
+                            const mfWholeNotes&      soundingWholeNotes,
+                            const mfWholeNotes&      displayWholeNotes,
                             int                      dotsNumber);
 
     static SMARTP<msrNote> createRestFromString (
@@ -173,19 +173,19 @@ class EXP msrNote : public msrTupletElement
                             int                        inputLineNumber,
                             const S_msrMeasure&        upLinkToMeasure,
 
-//                             const std::string&         noteMeasureNumber, JMI v0.9.66
+//                             const std::string&         noteMeasureNumber, JMI 0.9.66
 
                             msrNoteKind                noteKind,
 
                             msrQuarterTonesPitchKind   noteQuarterTonesPitchKind,
                             msrOctaveKind              noteOctaveKind,
 
-                            const mfWholeNotes&       noteSoundingWholeNotes,
-                            const mfWholeNotes&       noteDisplayWholeNotes,
+                            const mfWholeNotes&        noteSoundingWholeNotes,
+                            const mfWholeNotes&        noteDisplayWholeNotes,
 
                             int                        noteDotsNumber,
 
-                            mfDurationKind       noteGraphicNotesDurationKind,
+                            mfDurationKind             noteGraphicNotesDurationKind,
 
                             msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
                             msrOctaveKind              noteDisplayOctaveKind,
@@ -380,7 +380,9 @@ class EXP msrNote : public msrTupletElement
                                 return
                                   fNoteKind == msrNoteKind::kNoteRestInMeasure
                                     ||
-                                  fNoteKind == msrNoteKind::kNoteRestInTuplet;
+                                  fNoteKind == msrNoteKind::kNoteRestInTuplet
+                                    ||
+                                  fNoteKind == msrNoteKind::kNoteRestInGraceNotesGroup;
                               }
 
     Bool                  fetchNoteIsAFullNoteRest () const
@@ -820,7 +822,7 @@ class EXP msrNote : public msrTupletElement
     void                  appendOtherDynamicToNote (
                             const S_msrOtherDynamic& otherDynamic);
 
-//     S_msrDynamic          removeFirstDynamics (); // ??? JMI v0.9.66
+//     S_msrDynamic          removeFirstDynamics (); // ??? JMI 0.9.66
 
     // words
     void                  appendWordsToNote (
@@ -850,7 +852,7 @@ class EXP msrNote : public msrTupletElement
     void                  appendWedgeToNote (
                             const S_msrWedge& wedge);
 
-//     S_msrWedge            removeFirstWedge (); // JMI v0.9.66
+//     S_msrWedge            removeFirstWedge (); // JMI 0.9.66
 
     // segnos
     void                  appendSegnoToNote (
@@ -932,7 +934,7 @@ class EXP msrNote : public msrTupletElement
     // graphic duration
     std::string           noteGraphicNotesDurationAsMusicXMLString () const;
 
-//     std::string           tupletNoteGraphicNotesDurationpitchAndOctaveAsString ( // JMI v0.9.66
+//     std::string           tupletNoteGraphicNotesDurationpitchAndOctaveAsString ( // JMI 0.9.66
 //                             int actualNotes, int normalNotes) const;
 
     // note as string
@@ -1117,7 +1119,7 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     S_msrGraceNotesGroup  fGraceNotesGroupBeforeNote;
-  // JMI  S_msrAfterGraceNotesGroup ??? v0.9.64
+  // JMI  S_msrAfterGraceNotesGroup ??? 0.9.64
     S_msrGraceNotesGroup  fGraceNotesGroupAfterNote;
 
     // single tremolo

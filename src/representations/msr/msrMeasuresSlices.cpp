@@ -1388,7 +1388,7 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
       std::endl;
 
     ++gIndenter;
-    gLog << std::hex << std::showbase << this << std::dec; // JMI v0.9.69
+    gLog << std::hex << std::showbase << this << std::dec; // JMI 0.9.69
     --gIndenter;
   }
 #endif // MF_TRACE_IS_ENABLED

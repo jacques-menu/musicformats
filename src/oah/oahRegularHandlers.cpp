@@ -120,7 +120,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
 
   ++gIndenter;
 
-//  this->print (gLog); JMI v0.9.66
+//  this->print (gLog); JMI 0.9.66
   this->printHelp (gOutput); // JMI
 
   gLog <<
@@ -281,7 +281,7 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
       "\"";
 
  // JMI   oahError (ss.str ());
-//     oahWarning (ss.str ()); // JMI TEMP v0.9.65
+//     oahWarning (ss.str ()); // JMI TEMP 0.9.65
   }
 }
 
@@ -291,7 +291,7 @@ std::string oahRegularHandler::asString () const
   std::stringstream ss;
 
   ss <<
-    "oahRegularHandler \"" << fHandlerHeader; // JMI v0.9.65
+    "oahRegularHandler \"" << fHandlerHeader; // JMI 0.9.65
 
   return ss.str ();
 }

@@ -478,7 +478,7 @@ std::string mfStringNumbersToEnglishWords (std::string theString)
     }
   } // for
 
-//   gLog << JMI v0.9.68
+//   gLog << JMI 0.9.68
 //     "mfStringNumbersToEnglishWords(): result = " << result <<
 //     std::endl;
 
@@ -695,7 +695,7 @@ std::string consumeString (
 {
   std::string result;
 
-/* JMI v0.9.66 ???
+/* JMI 0.9.66 ???
   std::string::const_iterator cursor = theStringIterator;
 
   while ((*cursor) != ',') {
@@ -735,7 +735,7 @@ std::set <std::string> mfDecipherStringsSetSpecification (
 
   std::set <std::string> result;
 
-/* JMI v0.9.66 ???
+/* JMI 0.9.66 ???
   if (debugMode) {
     gLog <<
       "--> mfDecipherStringsSetSpecification, theString = |" << theString <<
@@ -1007,7 +1007,7 @@ std::string mfDoubleQuoteStringIfNonAlpha (
         stringShouldBeDoubleQuoted = true;
       }
 
-      // append theChar to result // JMI v0.9.70
+      // append theChar to result // JMI 0.9.70
       result += theChar;
 
 //       if (
@@ -2166,7 +2166,7 @@ int countTwoBytesWideCharactersInString (const std::string& theString)
   If theString contains non-diacritic characters (UTF-8),
   that fouls std::setw() which accounts two characters for them
 
-  This is horrible custom code until C++20 std::format is more portable JMI v0.9.66
+  This is horrible custom code until C++20 std::format is more portable JMI 0.9.66
 */
 
   int result = 0;
@@ -2207,7 +2207,7 @@ int countTwoBytesWideCharactersInString (const std::string& theString)
 //           (theChar == '\'')
 //             ||
 //           (theChar == '"')
-          theChar <= 127 // JMI v0.9.67
+          theChar <= 127 // JMI 0.9.67
         ) {
           // theChar is 1-byte large
         }
@@ -2226,7 +2226,7 @@ int countTwoBytesWideCharactersInString (const std::string& theString)
 
 }
 
-//     switch (wchar (theChar)) { JMI v0.9.66
+//     switch (wchar (theChar)) { JMI 0.9.66
 //       case 'à':
 //       case 'â':
 //       case 'ä':

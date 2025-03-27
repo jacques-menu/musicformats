@@ -72,7 +72,7 @@ void displayBsrScore (
 
   gGlobalTimingItemsList.appendTimingItem (
     mfPassIDKind::kMfPassID_DisplayPass,
-    gLanguage->displayTheBSRAsText (), // JMI ??? v0.9.66
+    gLanguage->displayTheBSRAsText (), // JMI ??? 0.9.66
     mfTimingItemKind::kOptional,
     startClock,
     endClock);

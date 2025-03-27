@@ -34,7 +34,7 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  %{ begin kMeasureKindOverFlowing, measure 1, % measureAccumulatedWholeNotesDuration: 1/1 whn %}
+  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 1/1 %}
   
   \clef "treble"
   \key e \minor
@@ -50,7 +50,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
   }
   %{ end kMeasureKindOverFlowing, measure  %}
   
-  %{ begin kMeasureKindOverFlowing, measure 2, % measureAccumulatedWholeNotesDuration: 1/1 whn %}
+  %{ begin kMeasureKindOverFlowing, measure 2, % measureCurrentPositionInMeasure: pim 1/1 %}
   \once \omit TupletBracket
   \once \omit TupletNumber
   \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 161 %}  fis''8 [  %{ beam 1, line 175 %}

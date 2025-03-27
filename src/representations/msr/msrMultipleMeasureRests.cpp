@@ -105,7 +105,7 @@ S_msrMultipleMeasureRest msrMultipleMeasureRest::createMultipleMeasureRestNewbor
         fSlashesNumber,
         fUseSymbolsKind);
 
-/* JMI v0.9.63
+/* JMI 0.9.63
   newbornClone->fNextMeasureNumber =
     fNextMeasureNumber;
     */
@@ -331,7 +331,7 @@ void msrMultipleMeasureRest::browseData (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
- // JMI   if (! inhibitMultipleMeasureRestsBrowsing) { // JMI v0.9.67
+ // JMI   if (! inhibitMultipleMeasureRestsBrowsing) { // JMI 0.9.67
   // browse the multiple measure rests measures
   for (S_msrMeasure measure : fMeasuresList) {
     // browse the measure
@@ -376,7 +376,7 @@ std::string msrMultipleMeasureRest::asString () const
 
   if (fMultipleMeasureRestUpLinkToSegment) {
     ss <<
-      "fMultipleMeasureRestUpLinkToSegment->asString ()"; // JMI v0.9.67
+      "fMultipleMeasureRestUpLinkToSegment->asString ()"; // JMI 0.9.67
   }
   else {
     ss << "[NULL]";

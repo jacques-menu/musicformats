@@ -108,7 +108,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         separator <<
         std::endl;
 
-//       gWaeHandler->waeTraceWithoutInputLocation ( // JMI v0.9.67
+//       gWaeHandler->waeTraceWithoutInputLocation ( // JMI 0.9.67
 //         __FILE__, __LINE__,
 //         ss.str ());
     }
@@ -356,7 +356,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//         gWaeHandler->waeTraceWithoutInputLocation ( // JMI v0.9.67
+//         gWaeHandler->waeTraceWithoutInputLocation ( // JMI 0.9.67
 //           __FILE__, __LINE__,
 //           ss.str ());
       }
@@ -369,7 +369,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           "convertMsdlStream2brailleWithHandler() output goes to standard output" <<
           std::endl;
 
-//         gWaeHandler->waeTraceWithoutInputLocation ( // JMI v0.9.67
+//         gWaeHandler->waeTraceWithoutInputLocation ( // JMI 0.9.67
 //           __FILE__, __LINE__,
 //           ss.str ());
       }
@@ -403,7 +403,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//         gWaeHandler->waeTraceWithoutInputLocation ( // JMI v0.9.67
+//         gWaeHandler->waeTraceWithoutInputLocation ( // JMI 0.9.67
 //           __FILE__, __LINE__,
 //           ss.str ());
       }
@@ -634,7 +634,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
-  std::string             inputFileName, // JMI v0.9.66 ??? output ???
+  std::string             inputFileName, // JMI 0.9.66 ??? output ???
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -679,7 +679,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
 }
 
 mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
-  std::string         inputFileName, // JMI v0.9.66 ??? output ???
+  std::string         inputFileName, // JMI 0.9.66 ??? output ???
   const S_oahHandler& handler,
   std::ostream&       out,
   std::ostream&       err)

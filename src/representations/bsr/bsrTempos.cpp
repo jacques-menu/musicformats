@@ -44,7 +44,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// std::string tempoKindAsDebugString ( // JMI v0.9.66
+// std::string tempoKindAsDebugString ( // JMI 0.9.66
 //   msrTempoKBeatUnitsKind tempoKind)
 // {
 //   std::string result;

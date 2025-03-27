@@ -29,7 +29,7 @@
 
 #include "oahEarlyOptions.h"
 
-#include "musicxml2lilypondInterface.h" // JMI OUT_OF_CONTEXT v0.9.63
+#include "musicxml2lilypondInterface.h" // JMI OUT_OF_CONTEXT 0.9.63
 
 #include "mfslInterpreterInsiderHandler.h"
 #include "mfslInterpreterRegularHandler.h"
@@ -159,7 +159,7 @@ EXP int mfsl (
       insiderOahHandler =
         mfslInterpreterInsiderHandler::create (
           serviceName,
-          serviceName + " insider OAH handler with argc/argv"); // JMI v0.9.67
+          serviceName + " insider OAH handler with argc/argv"); // JMI 0.9.67
 //           serviceName + " insider OAH handler with argc/argv",
 //           oahHandlerUsedThruKind::kHandlerUsedThruArgcArgv);
 

@@ -344,7 +344,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -357,7 +357,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           "xmlFile2braille() output goes to standard output" <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -391,7 +391,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           "\"" <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }
@@ -405,7 +405,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           gLanguage->openingBrailleMusicFileForWriting (outputFileName) <<
           std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
       }

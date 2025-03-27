@@ -127,7 +127,7 @@ std::string mxsrPartGroup::asString () const
     '\'' <<
     fPartGroupNumber <<
     "' -=> " <<
-    fMsrPartGroup->fetchPartGroupNameForTrace ();
+    fMsrPartGroup->fetchPartGroupInformationForTrace ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {

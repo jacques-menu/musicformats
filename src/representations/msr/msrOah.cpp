@@ -1637,7 +1637,7 @@ void msrOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msrOahGroup::displayMsrOahValues (int valueFieldWidth) // JMI SUPERFLOUS??? v0.9.69
+void msrOahGroup::displayMsrOahValues (int valueFieldWidth) // JMI SUPERFLOUS??? 0.9.69
 {
   gLog <<
     "The MSR options are:" <<

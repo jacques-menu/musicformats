@@ -547,7 +547,7 @@ Bool oahElement::fetchElementsMatchingString (
 
   if (elementMatchesString (lowerCaseString)) {
     // append the match to foundStringsList
-//     foundElementsList.push_back (// JMI v0.9.71 OHA_OAH
+//     foundElementsList.push_back (// JMI 0.9.71 OHA_OAH
 //       oahFindStringMatch::create (
 //         fetchNames (),
 //         fDescription,
@@ -588,7 +588,7 @@ std::string oahElement::asLongNamedOptionString () const
   }
 }
 
-std::string oahElement::asShortString () const // JMI v0.9.67
+std::string oahElement::asShortString () const // JMI 0.9.67
 {
   std::stringstream ss;
 
@@ -705,7 +705,7 @@ void oahElement::print (std::ostream& os) const
     "[??? oahElement ???]" <<
     std::endl;
 
-  printOahElementEssentials (os, 40); // JMI v0.9.66
+  printOahElementEssentials (os, 40); // JMI 0.9.66
 }
 
 void oahElement::printFull (std::ostream& os) const

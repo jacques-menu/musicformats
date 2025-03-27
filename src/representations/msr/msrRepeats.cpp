@@ -183,7 +183,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
     "measureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-// JMI v0.9.67  fRepeatCommonPartElementsList.push_back (measureRepeat); JMI v0.9.66
+// JMI 0.9.67  fRepeatCommonPartElementsList.push_back (measureRepeat); JMI 0.9.66
 }
 
 void msrRepeatCommonPart::cascadeAppendMultipleMeasureRestToRepeatCommonPart (
@@ -216,7 +216,7 @@ void msrRepeatCommonPart::cascadeAppendMultipleMeasureRestToRepeatCommonPart (
     "multipleMeasureRests is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//  JMI v0.9.67 fRepeatCommonPartElementsList.push_back (multipleMeasureRests);
+//  JMI 0.9.67 fRepeatCommonPartElementsList.push_back (multipleMeasureRests);
 }
 
 void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
@@ -702,7 +702,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
     "measureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-// JMI v0.9.67  fRepeatEndingElementsList.push_back (measureRepeat);
+// JMI 0.9.67  fRepeatEndingElementsList.push_back (measureRepeat);
 }
 
 void msrRepeatEnding::cascadeAppendMultipleMeasureRestToRepeatEnding (
@@ -735,7 +735,7 @@ void msrRepeatEnding::cascadeAppendMultipleMeasureRestToRepeatEnding (
     "multipleMeasureRests is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//  JMI v0.9.67 fRepeatEndingElementsList.push_back (multipleMeasureRests);
+//  JMI 0.9.67 fRepeatEndingElementsList.push_back (multipleMeasureRests);
 }
 
 void msrRepeatEnding::appendVoiceElementToRepeatEnding (
@@ -868,7 +868,7 @@ std::string msrRepeatEnding::asString () const
     fRepeatEndingKind <<
     ", RepeatEndingUpLinkToRepeat: '";
 
-//   if (fRepeatEndingUpLinkToRepeat) { JMI v0.9.64
+//   if (fRepeatEndingUpLinkToRepeat) { JMI 0.9.64
 //     ss <<
 //       fRepeatEndingUpLinkToRepeat->
 //         asShortString ();
@@ -1299,7 +1299,7 @@ void msrRepeat::addRepeatEndingToRepeat (
               repeatEnding->asShortString () <<
               " right after the repeat common part";
 
-//             msrInternalError ( JMI v0.9.63
+//             msrInternalError ( JMI 0.9.63
             msrInternalWarning (
               gServiceRunData->getInputSourceName (),
               fInputLineNumber,
@@ -1823,7 +1823,7 @@ std::string msrRepeat::asShortString () const
 //     repeatBuildPhaseKindAsString (
 //       fCurrentRepeatBuildPhaseKind);
 
-  if (fImmediatelyPrecedingRepeat && fImmediatelyPrecedingRepeat != this) { // JMI v0.9.71 loop removal
+  if (fImmediatelyPrecedingRepeat && fImmediatelyPrecedingRepeat != this) { // JMI 0.9.71 loop removal
     ss <<
       ", fImmediatelyPrecedingRepeat: " <<
       fImmediatelyPrecedingRepeat->asShortString ();

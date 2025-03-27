@@ -159,7 +159,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // set and get
     // ------------------------------------------------------
 
-    // use MXSR events (temporary from v0.9.72)
+    // use MXSR events (temporary from 0.9.72)
     // --------------------------------------
 
     void                  setUseMxsrEvents ()
@@ -571,7 +571,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     void                  initializeMxsr2msrTraceOptions ();
 #endif // MF_TRACE_IS_ENABLED
 
-    void                  initializeMxsr2msrEventsOptions (); // (temporary from v0.9.72)
+    void                  initializeMxsr2msrEventsOptions (); // (temporary from 0.9.72)
 
     void                  initializeMxsr2msrPartsOptions ();
 
@@ -888,7 +888,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  fTraceBackup;
     Bool                  fTraceForward;
 
-    // specific trace JMI move to traceOah JMI ??? v0.9.70
+    // specific trace JMI move to traceOah JMI ??? 0.9.70
     // --------------------------------------
 
     Bool                  fTraceMxsr;

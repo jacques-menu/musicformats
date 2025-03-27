@@ -200,7 +200,7 @@ std::string wholeNotesAsLilypondString (
 
     std::string message = s1.str ();
 
-    lpsrError ( // JMI v0.9.68
+    lpsrError ( // JMI 0.9.68
 //     lpsrWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
@@ -679,7 +679,7 @@ std::string multipleMeasureRestsWholeNoteAsLilypondString (
   std::stringstream ss;
 
   mfWholeNotes
-    wholeNotesUnit = // JMI v0.9.67
+    wholeNotesUnit = // JMI 0.9.67
       mfWholeNotes (
         1,
         wholeNotes.getDenominator ());

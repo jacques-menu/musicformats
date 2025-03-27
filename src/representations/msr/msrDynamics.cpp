@@ -246,7 +246,7 @@ S_msrDynamic msrDynamic::createDynamicFromString (
     ss <<
       "Creating dynamic from string \"" <<
       dynamicsString <<
-//       "\", dynamicsMeasureNumber: '" << dynamicsMeasureNumber << JMI v0.9.67
+//       "\", dynamicsMeasureNumber: '" << dynamicsMeasureNumber << JMI 0.9.67
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (

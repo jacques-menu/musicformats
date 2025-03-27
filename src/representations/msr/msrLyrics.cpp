@@ -382,7 +382,7 @@ msrSyllable::msrSyllable (
     case msrSyllableKind::kSyllableSkipOnNonRestNote:
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
-        mfAssert ( // JMI v0.9.70 BABASSE
+        mfAssert ( // JMI 0.9.70 BABASSE
           __FILE__, __LINE__,
           syllableWholeNotes.getNumerator () > 0,
           "syllableWholeNotes "
@@ -419,7 +419,7 @@ msrSyllable::msrSyllable (
   fSyllableStanzaNumber = syllableStanzaNumber;
 
   // fSyllableUpLinkToNote will be set later
-  // by appendSyllableToNoteAndSetItsUpLinkToNote () // JMI v0.9.70
+  // by appendSyllableToNoteAndSetItsUpLinkToNote () // JMI 0.9.70
 
   fSyllableWholeNotes = syllableWholeNotes;
 
@@ -548,7 +548,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   return deepClone;
 }
 
-// void msrSyllable::setSyllableUpLinkToMeasure ( // JMI UNUSED ??? v0.9.70 BABASSE
+// void msrSyllable::setSyllableUpLinkToMeasure ( // JMI UNUSED ??? 0.9.70 BABASSE
 //   const S_msrMeasure& measure)
 // {
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -611,7 +611,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 //           "syllable with measure number '" <<
 //           measureNumber <<
 //           "' is no line nor page break" <<
-//           ", line " << fInputLineNumber; // JMI v0.9.70
+//           ", line " << fInputLineNumber; // JMI 0.9.70
 //
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
@@ -712,7 +712,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
     noteUplinkToMeasure);
 
 /*
-  // sanity check JMI v0.9.70 BABASSE ???
+  // sanity check JMI 0.9.70 BABASSE ???
   mfAssert (
     __FILE__, __LINE__,
     ! fSyllableElementsList.empty (),
@@ -1401,7 +1401,7 @@ void msrStanza::appendSyllableToStanza (
 #endif // MF_TRACE_IS_ENABLED
 
 //   // pad up stanza if relevant
-//   if (positionsDelta.getNumerator () != 0) { // JMI v0.9.70 BABASSE
+//   if (positionsDelta.getNumerator () != 0) { // JMI 0.9.70 BABASSE
 //     // create a skip on rest note syllable
 //     S_msrSyllable
 //       skipRestNoteSyllable =
@@ -1582,7 +1582,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
   ++gIndenter;
 
 //   // pad up stanza if relevant
-//   if (positionsDelta.getNumerator () > 0) { // JMI v0.9.70 it may be negative...
+//   if (positionsDelta.getNumerator () > 0) { // JMI 0.9.70 it may be negative...
 //     // create a skip on rest note syllable
 //     S_msrSyllable
 //       skipRestNoteSyllable =
@@ -1726,7 +1726,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
   return syllable;
 }
 
-void msrStanza::appendPaddingNoteToStanza ( // JMI USELESS??? v0.9.70
+void msrStanza::appendPaddingNoteToStanza ( // JMI USELESS??? 0.9.70
   int                  inputLineNumber,
   const mfWholeNotes& forwardStepLength)
 {
@@ -1752,7 +1752,7 @@ void msrStanza::appendPaddingNoteToStanza ( // JMI USELESS??? v0.9.70
 
   ++gIndenter;
 
-  // JMI TO DO ??? v0.9.70
+  // JMI TO DO ??? 0.9.70
 
   --gIndenter;
 }

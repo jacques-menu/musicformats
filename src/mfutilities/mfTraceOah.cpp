@@ -714,7 +714,7 @@ R"(Times)",
       traceTimeSignaturesAtom);
 
   // temps
-/* JMI v0.9.68
+/* JMI 0.9.68
   S_oahDeuxBooleansAtom
     traceTempsAtom =
       oahDeuxBooleansAtom::create (
@@ -1580,7 +1580,7 @@ R"()",
   S_oahCommonPrefixBooleansAtom
     instrumentsMultiplexBooleansAtom =
       oahCommonPrefixBooleansAtom::create (
-        "trace-in-instruments", "tiinstr", // JMI v0.9.67 NOT CLEAR
+        "trace-in-instruments", "tiinstr", // JMI 0.9.67 NOT CLEAR
         "Trace SHORT_NAME/LONG_NAME in instruments.",
         "SHORT_NAME",
         "LONG_NAME",
@@ -2278,7 +2278,7 @@ R"()",
   S_oahCommonPrefixBooleansAtom
     measuresSlicesMultiplexBooleansAtom =
       oahCommonPrefixBooleansAtom::create (
-        "trace-in-measures-slices", "tinmeasslices", // JMI v0.9.70
+        "trace-in-measures-slices", "tinmeasslices", // JMI 0.9.70
         "Trace SHORT_NAME/LONG_NAME in segments.",
         "SHORT_NAME",
         "LONG_NAME",
@@ -2322,7 +2322,7 @@ R"(Trace the measures slices gathering activity details.)",
       traceMeasuresSlicesDetailsBooleanAtom);
 }
 
-void traceOahGroup::initializeBooksToVoicesTraceOah () // RENAME and SPLIT? JMI v0.9.71
+void traceOahGroup::initializeBooksToVoicesTraceOah () // RENAME and SPLIT? JMI 0.9.71
 {
   S_oahSubGroup
     subGroup =
@@ -2604,7 +2604,7 @@ R"()",
 
   S_oahTwoBooleansAtom
     traceDurationsBooleanAtom =
-      oahTwoBooleansAtom::create ( // JMI trace too??? v0.9.67
+      oahTwoBooleansAtom::create ( // JMI trace too??? 0.9.67
         "trace-durations", "tdurs",
 R"(Notes durations)",
         "fTraceDurations",
@@ -2704,7 +2704,7 @@ This option implies '-trace-notes-basics, -tnotesb' and '-trace-notes, -tnotes'.
   S_oahTwoBooleansAtom
     traceDurationsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-whole-notes-durations", "twhndurs", // JMI v0.9.67 SUPERFLOUS with trace-notes-durations ???
+        "trace-whole-notes-durations", "twhndurs", // JMI 0.9.67 SUPERFLOUS with trace-notes-durations ???
 R"(Whole notes computations (quite verbose)...)",
         "fTraceDurations",
         fTraceDurations,
@@ -3911,7 +3911,7 @@ S_traceOahGroup createGlobalTraceOahGroup (
     std::stringstream ss;
 
 //     ss <<
-    gLog << // JMI ??? v0.9.71 OAH_OAH
+    gLog << // JMI ??? 0.9.71 OAH_OAH
       "Creating global trace OAH group 1" <<
       std::endl;
 

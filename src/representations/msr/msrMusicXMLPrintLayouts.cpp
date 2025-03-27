@@ -298,7 +298,7 @@ void msrMusicXMLPrintLayout::printFull (std::ostream& os) const
 void msrMusicXMLPrintLayout::print (std::ostream& os) const
 {
   os <<
-    "[MusicXMLPrintLayout" << // JMI v0.9.66
+    "[MusicXMLPrintLayout" << // JMI 0.9.66
     ", line " << fInputLineNumber <<
     ']' <<
     std::endl;

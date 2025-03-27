@@ -262,13 +262,13 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //   fMeasureElementPositionInMeasure = positionInMeasure;
 // }
 
-// void msrDoubleTremolo::setMeasureElementPositionInMeasure ( ??? JMI v0.9.66
+// void msrDoubleTremolo::setMeasureElementPositionInMeasure ( ??? JMI 0.9.66
 //   const mfWholeNotes& positionInMeasure)
 // {
 //   std::string context =
 //     "setMeasureElementPositionInMeasure()";
 //
-//   setMeasureElementPositionInMeasure ( // JMI v0.9.66 CLEAN THAT!!!
+//   setMeasureElementPositionInMeasure ( // JMI 0.9.66 CLEAN THAT!!!
 //     positionInMeasure,
 //     context);
 //
@@ -488,7 +488,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
   // compute expected double tremolo sounding whole notes
   mfWholeNotes
-    expectedDoubleTremoloSoundingWholeNotes = // JMI v0.9.72
+    expectedDoubleTremoloSoundingWholeNotes = // JMI 0.9.72
       noteDisplayWholeNotes;
 
   // check that expected double tremolo sounding whole notes
@@ -586,7 +586,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
 
   // compute expected double tremolo sounding whole notes
   mfWholeNotes
-    expectedDoubleTremoloSoundingWholeNotes = // JMI v0.9.72
+    expectedDoubleTremoloSoundingWholeNotes = // JMI 0.9.72
       chordDisplayWholeNotes * 2;
 
   // set double tremolo whole notes to the chords's displayed whole notes

@@ -266,7 +266,7 @@ std::string mfStringNumbersToEnglishWords (std::string str);
 // std::string mfInputLineNumberAsString (
 //   mfInputLineNumber inputLineNumber);
 
-// JMI v0.9.72 kept until mfInputLineNumber is used everywhere
+// JMI 0.9.72 kept until mfInputLineNumber is used everywhere
 // instead of int for input line numbers
 std::string mfInputLineNumberAsString (
   int inputLineNumber);
@@ -371,7 +371,7 @@ void mfSplitHTMLStringContainingEndOfLines ( // JMI
 
 //______________________________________________________________________________
 std::string mfBaseName (const std::string& filename);
-  // wait until C++17 for a standard library containing basename()... JMI v0.9.66
+  // wait until C++17 for a standard library containing basename()... JMI 0.9.66
 
 //______________________________________________________________________________
 std::string  mfMakeSingleWordFromString (const std::string& theString);

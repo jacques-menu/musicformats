@@ -230,7 +230,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
 //               voice);
 //
 //         secondMsrScore =
-//           translateMsrToMsrAlongPathToVoice ( JMI ??? v0.9.70
+//           translateMsrToMsrAlongPathToVoice ( JMI ??? 0.9.70
 //             firstMsrScore,
 //             gMsrOahGroup,
 //             gGlobalMsr2msrOahGroup,
@@ -262,7 +262,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
     // ------------------------------------------------------
 
     if (! gGlobalMsr2msrOahGroup->getAvoidMsr2msr ()) {
-      if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass4 ()) { // JMI v0.9.70 meaningless if msr2smr is avoided
+      if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass4 ()) { // JMI 0.9.70 meaningless if msr2smr is avoided
     #ifdef MF_TRACE_IS_ENABLED
         gWaeHandler->waeTraceToStreamWithoutInputLocation (
           err,
@@ -331,7 +331,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -344,7 +344,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
         "xmlFile2lilypond() output goes to standard output" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -387,7 +387,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
         "\"" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -401,7 +401,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
         gLanguage->openingLilypondFileForWriting (outputFileName) <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }

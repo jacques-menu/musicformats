@@ -143,7 +143,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrRepeatCoda
-    deepClone = nullptr; // JMI v0.9.66
+    deepClone = nullptr; // JMI 0.9.66
     /* JMI
       msrRepeatCoda::create (
         fInputLineNumber,

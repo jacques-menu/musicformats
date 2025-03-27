@@ -111,7 +111,7 @@ The default is 'DEFAULT_VALUE'.)",
       fGenerationAPIKindAtom);
 }
 
-void Mikrokosmos3WanderingOahGroup::initializeMultiGenerationOutputOptions () //UNUSED??? JMI v0.9.66
+void Mikrokosmos3WanderingOahGroup::initializeMultiGenerationOutputOptions () //UNUSED??? JMI 0.9.66
 {
 //   S_oahSubGroup
 //     subGroup =

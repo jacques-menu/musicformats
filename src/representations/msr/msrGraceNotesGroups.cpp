@@ -144,7 +144,7 @@ S_msrTuplet msrGraceNotesGroup::fetchGraceNoteGroupUpLinkToTuplet () const
 {
   S_msrTuplet result;
 
-  // JMI v0.9.70 ???
+  // JMI 0.9.70 ???
 
   return result;
 }
@@ -252,8 +252,8 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
         skip =
           msrNote::createGraceSkipNote (
             note->getInputLineNumber (),
-            "",                             // will be set afterwards v0.9.67
-            note->getMeasureElementSoundingWholeNotes (), // 0/1 JMI v0.9.66
+            "",                             // will be set afterwards 0.9.67
+            note->getMeasureElementSoundingWholeNotes (), // 0/1 JMI 0.9.66
             note->getNoteDisplayWholeNotes (),
             note->getNoteDotsNumber ());
 
@@ -276,7 +276,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
           msrNote::createGraceSkipNote (
             chordFirstNote->getInputLineNumber (),
             chordFirstNote->getMeasureElementUpLinkToMeasure ()->getMeasureNumber (),
-            chordFirstNote->getMeasureElementSoundingWholeNotes (), // 0/1 JMI v0.9.66
+            chordFirstNote->getMeasureElementSoundingWholeNotes (), // 0/1 JMI 0.9.66
             chordFirstNote->getNoteDisplayWholeNotes (),
             chordFirstNote->getNoteDotsNumber ());
 

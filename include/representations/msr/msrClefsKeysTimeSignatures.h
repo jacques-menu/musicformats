@@ -844,7 +844,7 @@ class EXP msrClefKeyTimeSignatureGroup : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    int                   fGroupInputLineNumber; // start/end line numbers??? JMI v0.9.70
+    int                   fGroupInputLineNumber; // start/end line numbers??? JMI 0.9.70
 
     // clef
     S_msrClef             fClef;

@@ -36,7 +36,7 @@ EXP msrXMLLangKind msrXMLLangKindFromString (
   int           inputLineNumber,
   const std::string& XMLLangString);
 
-enum class msrOtherAppearanceTypeKind { // JMI which values??? v0.9.62
+enum class msrOtherAppearanceTypeKind { // JMI which values??? 0.9.62
   kOtherAppearanceType_UNKNOWN_
 };
 

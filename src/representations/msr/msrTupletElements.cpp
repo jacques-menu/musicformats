@@ -64,7 +64,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt)
 
 std::ostream& operator << (std::ostream& os, const msrTupletElement& elt)
 {
-  os << "msrNoteHeadKindAsString (elt)" << std::endl; // v0.9.66
+  os << "msrNoteHeadKindAsString (elt)" << std::endl; // 0.9.66
   return os;
 }
 

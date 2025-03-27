@@ -540,7 +540,7 @@ S_msrMeasure createMeasureInVoice (
     voice->
       cascadeCreateAMeasureAndAppendItInVoice (
         inputLineNumber,
-        333, //         previousMeasureEndInputLineNumber, v0.9.62
+        333, //         previousMeasureEndInputLineNumber, 0.9.62
         measureNumber,
         msrMeasureImplicitKind::kMeasureImplicitKindNo);
 }

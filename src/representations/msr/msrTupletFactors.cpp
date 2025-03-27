@@ -36,7 +36,7 @@ msrTupletFactor::msrTupletFactor (
   fTupletNormalNotes = tupletNormalNotes;
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check JMI v0.9.70
+  // sanity check JMI 0.9.70
   mfAssert (
     __FILE__, __LINE__,
     fTupletActualNotes > 0,
@@ -56,7 +56,7 @@ msrTupletFactor::msrTupletFactor (
   fTupletNormalNotes = rationalTupletFactor.getDenominator ();
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check JMI v0.9.70
+  // sanity check JMI 0.9.70
   mfAssert (
     __FILE__, __LINE__,
     fTupletActualNotes > 0,

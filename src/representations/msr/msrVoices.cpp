@@ -221,7 +221,7 @@ S_msrVoice msrVoice::createRegularVoice (
 S_msrVoice msrVoice::createHarmoniesVoice (
   int               inputLineNumber,
   int               voiceNumber,
-  const S_msrStaff& voiceUpLinkToStaff) // unused yet JMI v0.9.66
+  const S_msrStaff& voiceUpLinkToStaff) // unused yet JMI 0.9.66
 {
   return
     msrVoice::create (
@@ -236,7 +236,7 @@ S_msrVoice msrVoice::createHarmoniesVoice (
 S_msrVoice msrVoice::createFiguredBassVoice (
   int               inputLineNumber,
   int               voiceNumber,
-  const S_msrStaff& voiceUpLinkToStaff) // unused yet JMIv0.9.66
+  const S_msrStaff& voiceUpLinkToStaff) // unused yet JMI0.9.66
 {
   return
     msrVoice::create (
@@ -584,7 +584,7 @@ void msrVoice::initializeVoice (
   fVoiceActualHarmoniesCounter = 0;
   fVoiceActualFiguredBassesCounter = 0;
 
-  // set a default 4/4 time, since there can be none JMI v0.9.68
+  // set a default 4/4 time, since there can be none JMI 0.9.68
   this->setVoiceCurrentTimeSignature (
     msrTimeSignature::createFourQuartersTime (
       0)); // inputLineNumber
@@ -1315,7 +1315,7 @@ void msrVoice::setNextMeasureNumberInVoice (
         nextMeasureNumber);
   }
   else {
-    // JMI ??? v0.9.71
+    // JMI ??? 0.9.71
   }
 
   // is there a current multiple measure rests in this voice?
@@ -1375,7 +1375,7 @@ void msrVoice::incrementVoiceCurrentMeasurePuristNumber (
   int                inputLineNumber,
   const std::string& context)
 {
-  if (fVoiceCurrentMeasurePuristNumber < 0) { // JMI v0.9.67
+  if (fVoiceCurrentMeasurePuristNumber < 0) { // JMI 0.9.67
     fVoiceCurrentMeasurePuristNumber = 0;
 
     fVoiceFirstMeasurePuristNumber =
@@ -1722,7 +1722,7 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
       msrMeasure::create (
         inputLineNumber,
         measureNumber,
-        fVoiceLastSegment); // JMI v0.9.67  v0.9.63 ???
+        fVoiceLastSegment); // JMI 0.9.67  0.9.63 ???
 
     // set result's ordinal number
     result->
@@ -2207,7 +2207,7 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //     fVoiceLastSegment->
 // //       prependClefKeyTimeSignatureGroupToSegment (clefKeyTimeSignatureGroup);
 //       appendClefKeyTimeSignatureGroupToSegment (
-//         clefKeyTimeSignatureGroup); // JMI v0.9.67
+//         clefKeyTimeSignatureGroup); // JMI 0.9.67
 //   }
 
   // append clefKeyTimeSignatureGroup to last segment
@@ -2251,7 +2251,7 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //     // moving clefs to the left, thus prepend to last segment
 //     fVoiceLastSegment->
 // //       prependClefToSegment (clef);
-//       appendClefToSegment (clef); // JMI v0.9.67
+//       appendClefToSegment (clef); // JMI 0.9.67
 //   }
 //
 //   --gIndenter;
@@ -2485,12 +2485,12 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 
 //     else {
 // #ifdef MF_TRACE_IS_ENABLED
-//       if (true || gTraceOahGroup->getTraceMeasuresDetails ()) { // JMI v0.9.67  // JMI v0.9.66
+//       if (true || gTraceOahGroup->getTraceMeasuresDetails ()) { // JMI 0.9.67  // JMI 0.9.66
 //         gLog <<
 //           "++++++++++ fetchVoiceFirstNonGraceNote(), this voice: ++++++++++" <<
 //           std::endl;
 //         ++gIndenter;
-//         gLog << std::hex << std::showbase << this << std::dec; // JMI v0.9.69;
+//         gLog << std::hex << std::showbase << this << std::dec; // JMI 0.9.69;
 //         --gIndenter;
 //       }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2498,7 +2498,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 //       std::stringstream ss;
 //
 //       ss <<
-//         "there is no first measure in the first segment in voice \"" << // JMI v0.9.63  // JMI v0.9.66
+//         "there is no first measure in the first segment in voice \"" << // JMI 0.9.63  // JMI 0.9.66
 //         fVoiceName <<
 //         "\", since the latter is empty";
 //
@@ -2668,7 +2668,7 @@ void msrVoice::cascadeAppendHarmonyToVoice (
     case msrVoiceKind::kVoiceKindHarmonies:
       break;
 
-    case msrVoiceKind::kVoiceKindDynamics: // JMI ??? v0.9.67
+    case msrVoiceKind::kVoiceKindDynamics: // JMI ??? 0.9.67
     case msrVoiceKind::kVoiceKindRegular:
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
@@ -2719,7 +2719,7 @@ void msrVoice::appendHarmoniesListToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending harmonies list to voice \"" << // JMI v0.9.67 HARMFUL
+      "Appending harmonies list to voice \"" << // JMI 0.9.67 HARMFUL
       fVoiceName <<
       "\"" <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
@@ -2821,7 +2821,7 @@ void msrVoice::appendFiguredBassToVoice (
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
-      break; // JMI v0.9.67
+      break; // JMI 0.9.67
 
     case msrVoiceKind::kVoiceKindRegular:
     case msrVoiceKind::kVoiceKindHarmonies:
@@ -2872,7 +2872,7 @@ void msrVoice::cascadeAppendFiguredBassesListToVoice (
 
     ss <<
       "Appending figured basses list \"" <<
-//       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
+//       figuredBasssesList->asString () << // JMI 0.9.67 HARMFUL
       " to voice \"" << fVoiceName << "\"" <<
       "\"" <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
@@ -3081,7 +3081,7 @@ void msrVoice::cascadeAppendPaddingNoteToVoice (
         inputLineNumber,
         forwardStepLength);
 
-  // pad up the voice's stanzas JMI USELESS??? v0.9.70
+  // pad up the voice's stanzas JMI USELESS??? 0.9.70
   if (! fVoiceStanzasMap.empty ()) {
     for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
@@ -3729,7 +3729,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     // then create the first measure
     cascadeCreateAMeasureAndAppendItInVoice (
       graceNotesGroup->getInputLineNumber (),
-      333, //         previousMeasureEndInputLineNumber, v0.9.62
+      333, //         previousMeasureEndInputLineNumber, 0.9.62
       graceNotesGroup->
         getGraceNotesGroupMeasureNumber (),
       msrMeasureImplicitKind::kMeasureImplicitKindNo);
@@ -4065,9 +4065,9 @@ S_msrMeasure msrVoice::fetchVoiceLastMeasure (
 
   result =
     fVoiceLastSegment->
-      getSegmentLastMeasure (); // JMI v0.9.63
+      getSegmentLastMeasure (); // JMI 0.9.63
 
-//   else { JMI v0.9.63
+//   else { JMI 0.9.63
 //     std::stringstream ss;
 //
 //     ss <<
@@ -4418,7 +4418,7 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
     context);
 }
 
-// v0.9.62
+// 0.9.62
 //   // print the voice measures flat list
 //   size_t voiceMeasuresFlatListSize =
 //     fVoiceMeasuresFlatList.size ();
@@ -4488,9 +4488,9 @@ void msrVoice::displayVoiceMeasuresFlatList (
 
       // print the measure
 // #ifdef MF_TRACE_IS_ENABLED
-//      if (gTraceOahGroup->getTraceMeasures ()) { // JMI v0.9.67
+//      if (gTraceOahGroup->getTraceMeasures ()) { // JMI 0.9.67
         gLog <<
-          measure->asStringForMeasuresSlices (); // JMI ??? v0.9.70
+          measure->asStringForMeasuresSlices (); // JMI ??? 0.9.70
 //      }
 //      else {
 //        gLog << measure->getMeasureNumber ();
@@ -4902,7 +4902,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-// //   fVoiceInitialElementsList.push_back ( JMI v0.9.67
+// //   fVoiceInitialElementsList.push_back ( JMI 0.9.67
 // //     multipleMeasureRest);
 // }
 
@@ -4930,7 +4930,7 @@ void msrVoice::appendMeasureRepeatToInitialVoiceElements (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fVoiceInitialElementsList.push_back ( JMI v0.9.67
+//   fVoiceInitialElementsList.push_back ( JMI 0.9.67
 //     measureRepeat);
 }
 
@@ -5127,7 +5127,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
       S_msrMeasure
         lastMeasureInLastSegment =
           fVoiceLastSegment->
-            getSegmentLastMeasure (); // JMI v0.9.63
+            getSegmentLastMeasure (); // JMI 0.9.63
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -5217,14 +5217,14 @@ void msrVoice::handleVoiceLevelRepeatStart (
           // and append it to the voice,
           cascadeCreateAMeasureAndAppendItInVoice (
             inputLineNumber,
-            333, //         previousMeasureEndInputLineNumber, v0.9.62
+            333, //         previousMeasureEndInputLineNumber, 0.9.62
             lastMeasureInLastSegment->getMeasureNumber (),
             msrMeasureImplicitKind::kMeasureImplicitKindNo);
 
         /* JMI
           // set it as created before a repeat
           voiceLastMeasure->
-            setMeasureCreatedForARepeatKind ( // JMI v0.9.66
+            setMeasureCreatedForARepeatKind ( // JMI 0.9.66
               msrMeasure::kMeasureCreatedForARepeatBefore);
               */
         }
@@ -5257,7 +5257,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
 #endif // MF_TRACE_IS_ENABLED
 
 //         S_msrMeasure
-//           dummyMeasure = // JMI ??? v0.9.72
+//           dummyMeasure = // JMI ??? 0.9.72
 //             fVoiceLastSegment->
 //               removeLastMeasureFromSegment (
 //                 inputLineNumber,
@@ -6019,14 +6019,14 @@ void msrVoice::handleNestedRepeatEndInVoice (
     // and append it to the voice,
     cascadeCreateAMeasureAndAppendItInVoice (
       inputLineNumber,
-      333, //         previousMeasureEndInputLineNumber, v0.9.62
+      333, //         previousMeasureEndInputLineNumber, 0.9.62
       measureNumber,
       msrMeasureImplicitKind::kMeasureImplicitKindNo);
 
   /* JMI
     // set it as created after a repeat
     voiceLastMeasure->
-      setMeasureCreatedForARepeatKind ( // JMI v0.9.66
+      setMeasureCreatedForARepeatKind ( // JMI 0.9.66
         msrMeasure::kMeasureCreatedForARepeatAfter);
         */
   }
@@ -6258,7 +6258,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         getMeasureElementsList ();
 
   // let's look at lastMeasure in detail
-  if (true || lastMeasureElementsList.empty ()) { // JMIJMIJMIJMIJMIJMI  // JMI v0.9.66
+  if (true || lastMeasureElementsList.empty ()) { // JMIJMIJMIJMIJMIJMI  // JMI 0.9.66
     // it is empty, keep it for a new voice last segment
 
     // remove last measure
@@ -6442,7 +6442,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
         getMeasureElementsList ();
 
   // let's look at lastMeasure in detail
-  if (true || lastMeasureElementsList.empty ()) { // JMIJMIJMIJMIJMIJMI  // JMI v0.9.66
+  if (true || lastMeasureElementsList.empty ()) { // JMIJMIJMIJMIJMIJMI  // JMI 0.9.66
     // it is empty, keep it for a new voice last segment
 
     // remove last measure
@@ -6661,7 +6661,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
             // -------------------------------------
             handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
               inputLineNumber,
-              gNullRepeat); // set later in XXX() JMI v0.9.66
+              gNullRepeat); // set later in XXX() JMI 0.9.66
             break;
 
           case 1:
@@ -6673,7 +6673,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
 
               switch (currentRepeat->getRepeatExplicitStartKind ()) {
                 case msrRepeatExplicitStartKind::kRepeatExplicitStartUnknown:
-                  // JMI ??? v0.9.71 this the first ending of a voice-level repeat without a start
+                  // JMI ??? 0.9.71 this the first ending of a voice-level repeat without a start
                   // -------------------------------------
                   handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
                     inputLineNumber,
@@ -7485,7 +7485,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
   S_msrMeasure
     nextMeasureAfterMeasureRepeat =
       fVoiceLastSegment->
-        getSegmentLastMeasure (); // JMI v0.9.63
+        getSegmentLastMeasure (); // JMI 0.9.63
 
 // BOFBOFBOF JMI
   // remove the next measure from the last segment's measure elements list
@@ -7902,7 +7902,7 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
             ss.str ());
         }
 
-//         if (! fVoiceLastSegment) { // JMI v0.9.63 useless???
+//         if (! fVoiceLastSegment) { // JMI 0.9.63 useless???
 //           // create a new last segment for the voice
 //           createNewLastSegmentForVoice (
 //             inputLineNumber,
@@ -8020,7 +8020,7 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
 //
 //         // this voice contails multiple measure rests
 //         this->setVoiceContainsMultipleMeasureRests (
-//           inputLineNumber); // JMI v0.9.67
+//           inputLineNumber); // JMI 0.9.67
 //
 //         // keep the multiple measure rests pending
 
@@ -8129,7 +8129,7 @@ void msrVoice::appendEmptyMeasuresToVoice (
   // get the empty measure whole notes wholeNotes
   // JMI maybe not OK if first measure such as after a repeat segment???
   mfWholeNotes
-    fullMeasureWholeNotesDuration; // JMI ??? = ??? v0.9.72
+    fullMeasureWholeNotesDuration; // JMI ??? = ??? 0.9.72
 //      =
 //       fullMeasureWholeNotesDuration->
 //         getFullMeasureWholeNotesDuration ();
@@ -8169,7 +8169,7 @@ void msrVoice::appendEmptyMeasuresToVoice (
       this->
         incrementVoiceCurrentMeasureOrdinalNumber ());
 
-  // set its whole notes wholeNotes JMI v0.9.70
+  // set its whole notes wholeNotes JMI 0.9.70
 //   emptyMeasure->
 //     setFullMeasureWholeNotesDuration (
 //       fullMeasureWholeNotesDuration);
@@ -8189,7 +8189,7 @@ void msrVoice::appendEmptyMeasuresToVoice (
 
   // append it to emptyMeasure
   mfPositionInMeasure
-    partCurrentDrawingPositionInMeasure; // needs to be supplied ??? JMI v0.9.72
+    partCurrentDrawingPositionInMeasure; // needs to be supplied ??? JMI 0.9.72
 
   emptyMeasure->
     appendNoteToMeasureAtPosition (
@@ -8223,7 +8223,7 @@ void msrVoice::appendEmptyMeasuresToVoice (
 //   fVoiceLastAppendedMeasure->
 //     setMeasureNumber (
 //       fVoiceLastAppendedMeasure->
-//         getMeasureNumber () + " added"); // JMI BLARK v0.9.61
+//         getMeasureNumber () + " added"); // JMI BLARK 0.9.61
 
   } //for
 
@@ -8310,7 +8310,7 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
         }
 #endif // MF_TRACE_IS_ENABLED
 //        fVoiceLastSegment->
-          // JMI v0.9.67
+          // JMI 0.9.67
 
         // set current multiple measure rests last measure purist number
         fVoiceCurrentMultipleMeasureRest->
@@ -8428,7 +8428,7 @@ void msrVoice::handleMultipleMeasureRestsStartInVoiceClone (
       fVoiceCurrentMultipleMeasureRest =
         multipleMeasureRest->
           createMultipleMeasureRestNewbornClone (
-            fVoiceLastSegment); // JMI ??? JMI v0.9.67
+            fVoiceLastSegment); // JMI ??? JMI 0.9.67
 
       // this voice contails multiple measure rests
       this->setVoiceContainsMultipleMeasureRests (
@@ -10205,7 +10205,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
               */
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMeasureRepeats ()) { // JMI v0.9.67
+        if (gTraceOahGroup->getTraceMeasureRepeats ()) { // JMI 0.9.67
           std::stringstream ss;
 
           ss <<
@@ -10244,7 +10244,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 
         // set the measures repeat replicas in the voice current measures repeat
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMeasureRepeats ()) { // // JMI v0.9.67
+        if (gTraceOahGroup->getTraceMeasureRepeats ()) { // // JMI 0.9.67
           std::stringstream ss;
 
           ss <<
@@ -10289,7 +10289,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 //     "multipleMeasureRest is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
-// // JMI v0.9.67  fVoiceInitialElementsList.push_back (multipleMeasureRest);
+// // JMI 0.9.67  fVoiceInitialElementsList.push_back (multipleMeasureRest);
 // }
 
 void msrVoice::appendMeasureRepeatToVoiceElementsList (
@@ -10320,7 +10320,7 @@ void msrVoice::appendMeasureRepeatToVoiceElementsList (
     "measureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-// JMI v0.9.67  fVoiceInitialElementsList.push_back (measureRepeat);
+// JMI 0.9.67  fVoiceInitialElementsList.push_back (measureRepeat);
 }
 
 void msrVoice::appendRepeatEndingCloneToVoice ( // JMI
@@ -10930,7 +10930,7 @@ void msrVoice::finalizeVoice (
   if (fVoiceHasBeenFinalized) {
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
     // maintainance check
-    if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
+    if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI 0.9.70
       std::stringstream ss;
 
       ss <<
@@ -10991,7 +10991,7 @@ void msrVoice::finalizeVoice (
   if (
     fVoiceInitialElementsList.empty ()
       &&
-    fVoiceLastSegment != nullptr // JMI should not occur??? v0.9.63
+    fVoiceLastSegment != nullptr // JMI should not occur??? 0.9.63
       &&
     fVoiceLastSegment->getSegmentElementsList ().empty ()
   ) {
@@ -11095,7 +11095,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
   if (fVoiceHasBeenFinalized) {
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
     // maintainance check
-    if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
+    if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI 0.9.70
       std::stringstream ss;
 
       ss <<
@@ -11963,7 +11963,7 @@ void msrVoice::printFull (std::ostream& os) const
 
       // print the element
       os << voiceElement;
-      if (++i == fVoiceInitialElementsList.end ()) break; //JMI v0.9.67ts
+      if (++i == fVoiceInitialElementsList.end ()) break; //JMI 0.9.67ts
       os << std::endl;
     } // for
 
@@ -12100,7 +12100,7 @@ void msrVoice::print (std::ostream& os) const
     std::endl;
 
 #ifdef MF_TRACE_IS_ENABLED
-// JMI v0.9.67 HARMFUL  displayVoiceMeasuresFlatList (fieldWidth);
+// JMI 0.9.67 HARMFUL  displayVoiceMeasuresFlatList (fieldWidth);
 #endif // MF_TRACE_IS_ENABLED
 
   // print the voice initial elements

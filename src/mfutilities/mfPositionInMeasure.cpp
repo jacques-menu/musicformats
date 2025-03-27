@@ -154,7 +154,7 @@ mfPositionInMeasure::mfPositionInMeasure (const std::string& theString)
     msrError (
 //    msrWarning ( //  JMI
       gServiceRunData->getInputSourceName (),
-      0, // JMI inputLineNumber, ??? v0.9.66
+      0, // JMI inputLineNumber, ??? 0.9.66
       __FILE__, __LINE__,
       ss.str ());
   }

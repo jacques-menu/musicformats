@@ -159,7 +159,7 @@ EXP int ischeme (
       insiderOahHandler =
         ischemeInterpreterInsiderHandler::create (
           serviceName,
-          serviceName + " insider OAH handler with argc/argv"); // JMI v0.9.67
+          serviceName + " insider OAH handler with argc/argv"); // JMI 0.9.67
 //           serviceName + " insider OAH handler with argc/argv",
 //           oahHandlerUsedThruKind::kHandlerUsedThruArgcArgv);
 

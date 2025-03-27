@@ -85,7 +85,7 @@ class EXP bsrFootNotesElement : public bsrElement
 
     std::string           fFootNoteText;
 
-    S_bsrCellsList        fFootNotesElementCellsList; // UNUSED JMI v0.9.66
+    S_bsrCellsList        fFootNotesElementCellsList; // UNUSED JMI 0.9.66
 };
 typedef SMARTP<bsrFootNotesElement> S_bsrFootNotesElement;
 EXP std::ostream& operator << (std::ostream& os, const S_bsrFootNotesElement& elt);

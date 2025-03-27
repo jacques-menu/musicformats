@@ -1203,7 +1203,7 @@ Bool oahPrefix::fetchElementsMatchingStringInPrefix (
 
   if (prefixNameMatches || prefixErsatzMatches || prefixDescriptionMatches) {
     // append the match to foundStringsList
-//     foundElementsList.push_back (// JMI v0.9.71 OHA_OAH
+//     foundElementsList.push_back (// JMI 0.9.71 OHA_OAH
 //       oahFindStringMatch::create (
 //         fetchPrefixNames (),
 //         fPrefixDescription,
@@ -1285,7 +1285,7 @@ void oahPrefix::printHelp (std::ostream& os) const
 //   std::stringstream ss;
 //
 //   ss <<
-//     "Prefix:"; // JMI v0.9.66
+//     "Prefix:"; // JMI 0.9.66
 //
 //   return ss.str ();
 // }
@@ -1552,7 +1552,7 @@ void oahAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-// std::string oahAtom::asString (std::ostream& os) const // JMI v0.9.67
+// std::string oahAtom::asString (std::ostream& os) const // JMI 0.9.67
 // {
 //   stringstream ss;
 //
@@ -1948,7 +1948,7 @@ void oahValueFittedAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-// void oahValueFittedAtom::applyAtomWithDefaultValue (std::ostream& os) // JMI ??? v0.9.66
+// void oahValueFittedAtom::applyAtomWithDefaultValue (std::ostream& os) // JMI ??? 0.9.66
 // {
 //   std::stringstream ss;
 //
@@ -3481,7 +3481,7 @@ void oahSubGroup::browseData (basevisitor* v)
   }
 }
 
-// std::string oahSubGroup::asString (std::ostream& os) const // JMI v0.9.67
+// std::string oahSubGroup::asString (std::ostream& os) const // JMI 0.9.67
 // {
 //   stringstream ss;
 //
@@ -3963,7 +3963,7 @@ void oahSubGroup::printSubGroupOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
-  if (fNumberOfUserChoseAtomsInThisSubGroup > 0) { // JMI v0.9.66
+  if (fNumberOfUserChoseAtomsInThisSubGroup > 0) { // JMI 0.9.66
     // print the header
     os <<
       fSubGroupHeader <<
@@ -4584,7 +4584,7 @@ void oahGroup::browseData (basevisitor* v)
   }
 }
 
-// std::string oahGroup::asString (std::ostream& os) const // JMI v0.9.67
+// std::string oahGroup::asString (std::ostream& os) const // JMI 0.9.67
 // {
 //   stringstream ss;
 //
@@ -4971,7 +4971,7 @@ void oahGroup::printGroupOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
-  if (fNumberOfUserChoseAtomsInThisGroup > 0) { // JMI v0.9.66
+  if (fNumberOfUserChoseAtomsInThisGroup > 0) { // JMI 0.9.66
     // print the header
     os <<
       fGroupHeader <<
@@ -5150,7 +5150,7 @@ Bool oahGroup::fetchElementsMatchingStringInGroup (
     ++gIndenter;
 
     for (S_oahSubGroup subGroup : fGroupSubGroupsList) {
-      Bool subGroupMatches = true; // JMI v0.9.71 OAH_OAH
+      Bool subGroupMatches = true; // JMI 0.9.71 OAH_OAH
 //         subGroup->
 //           findStringInSubGroup (
 //             lowerCaseString,
@@ -5409,7 +5409,7 @@ void oahHandler::registerElementNamesInHandler (
     std::string  name = thePair.first;
     S_oahElement element = thePair.second;
 
-//     gLog << // JMI v0.9.65
+//     gLog << // JMI 0.9.65
 //       "--> name: " << name <<
 //       std::endl <<
 //       "--> elementLongName: " << elementLongName <<
@@ -5430,9 +5430,9 @@ void oahHandler::registerElementNamesInHandler (
           fHandlerHeader <<
           "\"";
 
-//       gLog << ss.str () << std::endl ; abort (); // JMI TEST v0.9.65
+//       gLog << ss.str () << std::endl ; abort (); // JMI TEST 0.9.65
 
-//       oahInternalError (ss.str ()); // JMI TEMP v0.9.65
+//       oahInternalError (ss.str ()); // JMI TEMP 0.9.65
 //       oahInternalWarning (ss.str ());
     }
 
@@ -5450,9 +5450,9 @@ void oahHandler::registerElementNamesInHandler (
           fHandlerHeader <<
           "\"";
 
-//       gLog << ss.str () << std::endl ; abort (); // JMI TEST v0.9.65
+//       gLog << ss.str () << std::endl ; abort (); // JMI TEST 0.9.65
 
-//         oahInternalError (ss.str ()); // JMI TEMP v0.9.65
+//         oahInternalError (ss.str ()); // JMI TEMP 0.9.65
 //         oahInternalWarning (ss.str ());
       }
     }
@@ -6065,7 +6065,7 @@ void oahHandler::checkOneArgumentInArgumentsVector () const
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // JMI v0.9.70
+  // JMI 0.9.70
 }
 
 void oahHandler::checkOneArgumentAndNoOrOneInputSourceInArgumentsVector () const
@@ -6227,7 +6227,7 @@ void oahHandler::setOahHandlerFoundAHelpOption (
 
 std::string oahHandler::fetchOutputFileNameFromTheOptions () const
 {
-  return "*** no output file name ***"; // for MFSL v0.9.62
+  return "*** no output file name ***"; // for MFSL 0.9.62
 }
 
 void oahHandler::checkHandlerOwnOptionsConsistency ()
@@ -6385,7 +6385,7 @@ void oahHandler::displayElementUsesList (std::ostream& os) const
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-      if (false) // JMI v0.9.66
+      if (false) // JMI 0.9.66
       mfAssert (
         __FILE__, __LINE__,
         elementUse != nullptr,
@@ -6696,7 +6696,7 @@ void oahHandler::printFull (std::ostream& os) const
 
 std::string oahHandler::asString () const
 {
-  return "oahHandler::asString()"; // JMI v0.9.71
+  return "oahHandler::asString()"; // JMI 0.9.71
 }
 
 void oahHandler::print (std::ostream& os) const
@@ -6906,7 +6906,7 @@ void oahHandler::printHandlerAndGroupAndSubGroupSpecificHelp (
       "oahHandler::printHandlerAndGroupAndSubGroupSpecificHelp" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -6955,7 +6955,7 @@ void oahHandler::printNameIntrospectiveHelp (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -7168,7 +7168,7 @@ Bool oahHandler::fetchElementsMatchingStringInHandler (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -7197,10 +7197,10 @@ Bool oahHandler::fetchElementsMatchingStringInHandler (
       fHandlerUsage;
 
     // append the match to foundStringsList
-//     foundElementsList.push_back (// JMI v0.9.71 OHA_OAH
+//     foundElementsList.push_back (// JMI 0.9.71 OHA_OAH
 //       oahFindStringMatch::create (
 //         ss.str (),
-//         ss.str (), // JMI v0.9.66
+//         ss.str (), // JMI 0.9.66
 //         containingFindableElementAsString ()));
 
     result = true;
@@ -7264,7 +7264,7 @@ Bool oahHandler::findStringInFindableElement (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -7296,7 +7296,7 @@ Bool oahHandler::findStringInFindableElement (
     foundMatchesList.push_back (
       oahFindStringMatch::create (
         ss.str (),
-        ss.str (), // JMI v0.9.66
+        ss.str (), // JMI 0.9.66
         containingFindableElementAsString ()));
 
     result = true;
@@ -7357,7 +7357,7 @@ void oahHandler::includeOptionsFileInHandler (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -7452,7 +7452,7 @@ void oahHandler::printHandlerOptionsValues (
       " in the command line" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -7558,7 +7558,7 @@ void oahHandler::printHandlerOptionsValuesAll (
       " in the command line" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -7955,7 +7955,7 @@ void oahHandler::printKnownSingleCharacterOptions (std::ostream& os) const
 //
 //   ++gIndenter;
 //
-//   gIndenter.indentMultiLineString ( JMI v0.9.66
+//   gIndenter.indentMultiLineString ( JMI 0.9.66
 //     foundString,
 //     os);
 //   os  <<
@@ -8172,7 +8172,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
     oahError (ss.str ());
 
     // handle the valued atom using the default value
-    // JMI v0.9.66 THIS SWITCH IS SUPERFLUOUS...
+    // JMI 0.9.66 THIS SWITCH IS SUPERFLUOUS...
     // checkMissingPendingArgvValueFittedAtomValue() should be replaced by the direct code
     // for oahElementValueKind::kElementValueFitted below
 //     switch (fPendingArgvValueFittedAtom->getElementValueKind ()) {
@@ -8218,7 +8218,7 @@ void oahHandler::checkMissingPendingArgvValueFittedAtomValue (
 // //
 // //         fPendingArgvValueFittedAtom->
 // //           applyAtomWithDefaultValue (
-// //             gLog); // oahHandler-specific log stream??? JMI v0.9.66
+// //             gLog); // oahHandler-specific log stream??? JMI 0.9.66
 //         break;
 //     } // switch
 
@@ -9031,7 +9031,7 @@ if (gEarlyOptions.getTraceEarlyOptions ()) {
     // optionName is unknown
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-      if (false) // JMI v0.9.71 OAH_OAH
+      if (false) // JMI 0.9.71 OAH_OAH
         this->printHelp (gOutput);
 
 //       unknownOptionNameError (
@@ -9892,7 +9892,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-    displayOptionsAndArguments (gLog); // JMIJMIJMI v0.9.66
+    displayOptionsAndArguments (gLog); // JMIJMIJMI 0.9.66
 
     displayElementUsesList (gLog);
   }
@@ -10049,7 +10049,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
               oahInternalError (ss.str ());
             }
 
-//             switch (atomValueKind) { // JMI v0.9.71 OAH_OAH
+//             switch (atomValueKind) { // JMI 0.9.71 OAH_OAH
 //               case oahElementValueKind::kElementValue_UNKNOWN_:
 //                 unknownOptionValueKindError (
 //                   valueFittedAtom->fetchNamesBetweenQuotes ());
@@ -10116,7 +10116,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
                 dynamic_cast<oahValueLessAtom*>(&(*elementUsed));
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-            // sanity check // JMI v0.9.71 OAH_OAH
+            // sanity check // JMI 0.9.71 OAH_OAH
             mfAssert (
               __FILE__, __LINE__,
               valueLessAtom != nullptr,
@@ -10233,7 +10233,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
-    if (false && fOahHandlerFoundAHelpOption) { // JMIJMIJMI v0.9.66
+    if (false && fOahHandlerFoundAHelpOption) { // JMIJMIJMI 0.9.66
       gLog <<
         "This is a help-only run " <<
         std::endl;
@@ -10314,7 +10314,7 @@ void oahHandler::handleKnownOptionsVectorElement (
         "\" is already present in the options vector";
 
       oahWarning (ss.str ());
-      //abort (); // JMIJMIJMI v0.9.68
+      //abort (); // JMIJMIJMI 0.9.68
     }
   }
 
@@ -10784,7 +10784,7 @@ void oahHandler::handleUnknownOptionName (
     // optionName is unknown to this handler
     unknownOptionNameError (
       optionName,
-      "oahHandler::handleUnknownOptionName()"); // JMI do better ??? v0.9.71 OAH_OAH
+      "oahHandler::handleUnknownOptionName()"); // JMI do better ??? 0.9.71 OAH_OAH
   }
 }
 
@@ -11083,7 +11083,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }

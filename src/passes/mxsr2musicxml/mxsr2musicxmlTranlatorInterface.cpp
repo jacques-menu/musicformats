@@ -84,7 +84,7 @@ EXP void translateMxsrToMusicXML (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -104,7 +104,7 @@ EXP void translateMxsrToMusicXML (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -117,7 +117,7 @@ EXP void translateMxsrToMusicXML (
         "xmlFile2musicxml() output goes to standard output" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -137,7 +137,7 @@ EXP void translateMxsrToMusicXML (
         "\"" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -153,7 +153,7 @@ EXP void translateMxsrToMusicXML (
         gLanguage->openingMusicXMLFileForWriting (outputFileName) <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -196,7 +196,7 @@ EXP void translateMxsrToMusicXML (
         gLanguage->closingMusicXMLFile (outputFileName) <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }

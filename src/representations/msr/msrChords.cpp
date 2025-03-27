@@ -124,8 +124,8 @@ S_msrChord msrChord::create (int inputLineNumber)
 // }
 
 S_msrChord msrChord::create (
-  int                  inputLineNumber,
-  const S_msrMeasure&  upLinkToMeasure,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   const mfWholeNotes& chordDisplayWholeNotes,
   mfDurationKind chordGraphicNotesDurationKind)
 {
@@ -193,6 +193,8 @@ msrChord::msrChord (int inputLineNumber)
 
   // fChordUpLinkToMeasure = upLinkToMeasure;
 //   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
+
+  fNotesValuesHaveBeenCopiedToTheChord = false;
 
   setMeasureElementSoundingWholeNotes (
     K_WHOLE_NOTES_ZERO,
@@ -473,7 +475,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //     case msrChordInKind::kChordInTuplet:
 //       break;
 //     case msrChordInKind::kChordInGraceNotesGroup:
-//       result = fChordUpLinkToContainingGraceNotesGroup; // JMI v0.9.71
+//       result = fChordUpLinkToContainingGraceNotesGroup; // JMI 0.9.71
 //       break;
 //   } // switch
 //
@@ -670,14 +672,14 @@ void msrChord::setChordMembersPositionInMeasure (
       setMeasureElementUpLinkToMeasure (
         measure);
 
-    // set note's measure position // JMI v0.9.66
+    // set note's measure position // JMI 0.9.66
     note->
       setMeasureElementPositionInMeasure (
         measure,
         positionInMeasure, // they all share the same one
         "setChordMembersPositionInMeasure()");
 
-//    // set note's voice position JMI v0.9.66
+//    // set note's voice position JMI 0.9.66
 //       note->
 //         setMeasureElementVoicePosition (
 //           voicePosition,
@@ -692,7 +694,7 @@ void msrChord::setChordMembersPositionInMeasure (
 // //         setDalSegnoPositionInMeasure (
 // //           measure,
 // //           positionInMeasure,
-// //           "msrChord::setChordMembersPositionInMeasure()"); // JMI v0.9.66
+// //           "msrChord::setChordMembersPositionInMeasure()"); // JMI 0.9.66
 //     } // for
 }
 
@@ -717,11 +719,29 @@ void msrChord::appendNoteToChord (
 #endif // MF_TRACE_IS_ENABLED
 
 //   gLog << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-//   print (gLog); // JMI v0.9.66 ???
+//   print (gLog); // JMI 0.9.66 ???
 //   gLog << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 
   // append note to chord notes vector
   fChordNotesVector.push_back (note);
+
+  // copy note's values to chord if relevant
+  if (! fNotesValuesHaveBeenCopiedToTheChord) {
+    // copy for every note and compare values? JMI 0.9.72
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceChordsBasics ()) {
+      gLog <<
+        "===> copyNoteValuesToChord(), note: " <<
+        note <<
+        std::endl << std::endl;
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // this is the first note to be added, copy its values
+    copyNoteValuesToChord (note);
+
+    fNotesValuesHaveBeenCopiedToTheChord = true;
+  }
 
   // register note's uplink to chord
   note->
@@ -730,13 +750,13 @@ void msrChord::appendNoteToChord (
   // mark note as belonging to a chord
   note->setNoteBelongsToAChord ();
 
-  // is this note the shortest one in this voice? // JMI ??? v0.9.72
+  // is this note the shortest one in this voice? // JMI ??? 0.9.72
   voice->
     registerShortestNoteInVoiceIfRelevant (
       note);
 
   // append the note to the measure's notes flat list
-//   if (false) // JMI v0.9.70
+//   if (false) // JMI 0.9.70
 //   fMeasureElementUpLinkToMeasure->
 //     appendNoteToMeasureNotesFlatList (note);
 
@@ -813,6 +833,16 @@ void msrChord::copyNoteValuesToChord (
 	setChordGraphicNotesDurationKind (
 		note->
 			getNoteGraphicNotesDurationKind ());
+
+  if (fMeasureElementUpLinkToMeasure) { // JMI 0.9.72
+//     measureElementSoundingWholeNotes.getNumerator () != 0 ) {
+    // // JMI 0.9.72 group these two statements into a method???
+    fMeasureElementUpLinkToMeasure->
+      accountForChordDurationInMeasure (
+        note->getInputLineNumber (),
+        note->getMeasureElementSoundingWholeNotes (),
+        "copyNoteValuesToChord()");
+  }
 }
 
 //______________________________________________________________________________
@@ -823,7 +853,7 @@ void msrChord::copyNoteElementsIfAnyToChord (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    note != nullptr, // JMI v0.9.70
+    note != nullptr, // JMI 0.9.70
     "chord is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
@@ -887,7 +917,7 @@ void msrChord::copyNoteElementsIfAnyToChord (
 //     appendNoteBeamsListLinksToChord (note);
   }
 
-  // copy note's ties if any to the chord // JMI v0.9.70
+  // copy note's ties if any to the chord // JMI 0.9.70
   if (note->getNoteTiesList ().size ()) {
     copyNoteTiesToChord (note);
   }
@@ -2471,8 +2501,8 @@ void msrChord::appendChordBeamLinkToChord (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   // we can now set the measure positions for all the chord members JMI v0.9.66
-//   if (false) // JMI v0.9.67 MERDUM
+//   // we can now set the measure positions for all the chord members JMI 0.9.66
+//   if (false) // JMI 0.9.67 MERDUM
 //   setChordMembersPositionInMeasure (
 //     fMeasureElementUpLinkToMeasure,
 //     fMeasureElementPositionInMeasure);
@@ -2885,7 +2915,7 @@ void msrChord::applyTupletMemberDisplayFactorToChordMembers (
 #endif // MF_TRACE_IS_ENABLED
 */
 
-std::string msrChord::asStringwithRawDivisions () const // SUPERFLOUS??? JMI v0.9.70
+std::string msrChord::asStringwithRawDivisions () const // SUPERFLOUS??? JMI 0.9.70
 {
   std::stringstream ss;
 
@@ -2924,7 +2954,7 @@ std::string msrChord::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Chord" << // JMI v0.9.71
+    "[Chord" << // JMI 0.9.71
     ", fChordKind: " << fChordKind <<
     ", line " << fInputLineNumber <<
     ", fChordNotesVector: <";
@@ -2962,7 +2992,7 @@ std::string msrChord::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[Chord asShortString ()" << // JMI v0.9.71
+    "[Chord asShortString ()" << // JMI 0.9.71
     ", " << fChordKind <<
     ", line " << fInputLineNumber <<
     ", fChordNotesVector: <";
@@ -3067,7 +3097,7 @@ void msrChord::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fChordShortcutUpLinkToContainingTuplet" << ": ";
   if (fChordShortcutUpLinkToContainingTuplet) {
-    os << fChordShortcutUpLinkToContainingTuplet->asString (); // JMI v0.9.71
+    os << fChordShortcutUpLinkToContainingTuplet->asString (); // JMI 0.9.71
   }
   else {
     os << "[NULL]";

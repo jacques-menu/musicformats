@@ -132,7 +132,7 @@ msrEyeGlasses::~msrEyeGlasses ()
 //   fEyeGlassesPositionInMeasure = positionInMeasure;
 //
 //   // compute measure element's voice position
-// // if (false) { // JMI v0.9.67 v0.9.66
+// // if (false) { // JMI 0.9.67 0.9.66
 //   mfRational
 //     voicePosition =
 //       measure->
@@ -146,7 +146,7 @@ msrEyeGlasses::~msrEyeGlasses ()
 //     context);
 // // }
 //
-//   // update current voice position // JMI v0.9.66
+//   // update current voice position // JMI 0.9.66
 // //   S_msrVoice
 // //     voice =
 // //       measure->

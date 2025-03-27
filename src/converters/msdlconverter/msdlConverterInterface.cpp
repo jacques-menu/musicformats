@@ -86,7 +86,7 @@ EXP mfMusicformatsErrorKind msdlFile2lilypond (
   return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI ??? v0.9.66
+mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI ??? 0.9.66
   const char*         fileName,
   std::ostream&       out,
   std::ostream&       err,
@@ -218,7 +218,7 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 
 
 // //_______________________________________________________________________________
-// static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUSED v0.9.66
+// static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUSED 0.9.66
 //   SXMLFile&           sxmlfile,
 //   std::ostream&       out,
 //   std::ostream&       err,
@@ -631,7 +631,7 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 // }
 
 // //_______________________________________________________________________________
-// static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI UNUSED v0.9.66
+// static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI UNUSED 0.9.66
 //   SXMLFile&               sxmlfile,
 //   oahOptionsAndArguments& handlerOptionsAndArguments,
 //   std::ostream&           out,

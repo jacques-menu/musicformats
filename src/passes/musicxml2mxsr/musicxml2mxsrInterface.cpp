@@ -436,8 +436,8 @@ void checkDesiredEncoding (
         " manually" <<
         " - handling it as is";
 
-//       musicxml2mxsrWarning ( // JMI v0.9.72 NOT OK for Windows users???
-      musicxml2mxsrError ( // JMI v0.9.67 NOT OK for Windows users ???
+//       musicxml2mxsrWarning ( // JMI 0.9.72 NOT OK for Windows users???
+      musicxml2mxsrError ( // JMI 0.9.67 NOT OK for Windows users ???
         gServiceRunData->getInputSourceName (),
         1, // inputLineNumber,
         __FILE__, __LINE__,

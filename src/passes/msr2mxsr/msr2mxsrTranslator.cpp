@@ -511,7 +511,7 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
   if (fKeyElement) {
     // append key to the current measure attributes element
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceKeys ()) { // v0.9.67
+    if (gTraceOahGroup->getTraceKeys ()) { // 0.9.67
       gLog <<
         "--> createMxmlAttributesElementAndAppendItToMeasure() 2" <<
         ", fKeyElement: ";
@@ -526,7 +526,7 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
 
   if (fTimeElement) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTimeSignatures ()) { // v0.9.67
+    if (gTraceOahGroup->getTraceTimeSignatures ()) { // 0.9.67
       gLog <<
         "--> createMxmlAttributesElementAndAppendItToMeasure() 2" <<
         ", fTimeElement: ";
@@ -2533,7 +2533,7 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
 
     ss <<
       "--> Start visiting msrPartGroup " <<
-      elt->fetchPartGroupNameForTrace () <<
+      elt->fetchPartGroupInformationForTrace () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2554,7 +2554,7 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
           std::stringstream ss;
           ss <<
             " ========== " <<
-            elt->fetchPartGroupNameForTrace () <<
+            elt->fetchPartGroupInformationForTrace () <<
             " START" <<
               ", line " << elt->getInputLineNumber () <<
             " ========== ";
@@ -2663,7 +2663,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
 
     ss <<
       "--> End visiting msrPartGroup " <<
-      elt->fetchPartGroupNameForTrace () <<
+      elt->fetchPartGroupInformationForTrace () <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -2690,7 +2690,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
           std::stringstream ss;
           ss <<
             " ========== " <<
-            elt->fetchPartGroupNameForTrace () <<
+            elt->fetchPartGroupInformationForTrace () <<
             " END" <<
               ", line " << elt->getInputLineNumber () <<
             " ========== ";
@@ -5632,7 +5632,7 @@ void msr2mxsrTranslator::appendNoteOrnamentsList (
         ornamentKind =
           ornament->getOrnamentKind ();
 
-      int ornamentType = kComment; // JMI ??? v0.9.66
+      int ornamentType = kComment; // JMI ??? 0.9.66
 
       switch (ornamentKind) {
         case msrOrnamentKind::kOrnamentTrill:
@@ -6384,7 +6384,7 @@ void msr2mxsrTranslator::appendNoteTupletIfRelevant (
         size_t
           notePositionInTuplet =
             theMsrNote->
-              getPositionInTuplet (); // JMI v0.9.66
+              getPositionInTuplet (); // JMI 0.9.66
 
         // compute the type std::string if relevant
         std::string typeString;
@@ -6493,7 +6493,7 @@ void msr2mxsrTranslator::appendNoteSpannersListBeforeNote (
       } // switch
 
       if (doHandleSpanner) {
-        msrSpannerKind // twice ??? JMI v0.9.66
+        msrSpannerKind // twice ??? JMI 0.9.66
           spannerKind =
             spanner->
               getSpannerKind ();
@@ -6690,7 +6690,7 @@ void msr2mxsrTranslator::appendStemToNote (
 
     switch (stemKind) {
       case msrStemKind::kStemKind_NONE:
-        stemString = "[kStemKind_NONE]"; // JMI v0.9.70
+        stemString = "[kStemKind_NONE]"; // JMI 0.9.70
         break;
       case msrStemKind::kStemKindNeutral:
         stemString = "[NULL]";

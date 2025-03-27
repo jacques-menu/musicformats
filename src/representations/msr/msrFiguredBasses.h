@@ -227,7 +227,7 @@ class EXP msrFiguredBass : public msrMeasureElement
     S_msrVoice            getFiguredBassUpLinkToVoice () const
                              { return fFiguredBassUpLinkToVoice; }
 
-/* JMI v0.9.66
+/* JMI 0.9.66
     S_msrPart             getFiguredBassUpLinkToPart () const
                               { return fFiguredBassUpLinkToPart; }
 */
@@ -312,7 +312,7 @@ class EXP msrFiguredBass : public msrMeasureElement
 
     // upLinks
     S_msrNote             fFiguredBassUpLinkToNote;
-    S_msrVoice            fFiguredBassUpLinkToVoice; // for use in figured bass voices JMI v0.9.66
+    S_msrVoice            fFiguredBassUpLinkToVoice; // for use in figured bass voices JMI 0.9.66
 
     // whole notes
     mfWholeNotes          fFiguredBassDisplayWholeNotes;

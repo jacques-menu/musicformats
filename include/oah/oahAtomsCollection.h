@@ -3552,7 +3552,7 @@ class EXP oahHelpAboutOptionName : public oahPureHelpValueFittedAtom
                             const std::string& theString,
                             std::ostream&      os) override;
 
-//     void                  applyAtomWithDefaultValue (std::ostream& os) override; JMI v0.9.71 OAH_OAH
+//     void                  applyAtomWithDefaultValue (std::ostream& os) override; JMI 0.9.71 OAH_OAH
 
   public:
 

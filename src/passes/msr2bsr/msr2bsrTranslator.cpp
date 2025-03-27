@@ -443,7 +443,7 @@ void msr2bsrTranslator::visitStart (S_msrPartGroup& elt)
 
     ss <<
       "--> Start visiting msrPartGroup " <<
-      elt->fetchPartGroupNameForTrace () <<
+      elt->fetchPartGroupInformationForTrace () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -463,7 +463,7 @@ void msr2bsrTranslator::visitEnd (S_msrPartGroup& elt)
 
     ss <<
       "--> End visiting msrPartGroup " <<
-      elt->fetchPartGroupNameForTrace () <<
+      elt->fetchPartGroupInformationForTrace () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -5596,7 +5596,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
   switch (noteSyllableExtendKind) {
     case msrSyllable::kStandaloneSyllableExtend:
       {
-        / * JMI ??? v0.9.66
+        / * JMI ??? 0.9.66
         // create melisma start command
         S_bsrMelismaCommand
           melismaCommand =

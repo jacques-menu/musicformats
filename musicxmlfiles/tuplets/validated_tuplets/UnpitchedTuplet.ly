@@ -36,7 +36,7 @@
 Part_PFour_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  %{ begin kMeasureKindOverFlowing, measure 1, % measureAccumulatedWholeNotesDuration: 3/2 whn %}
+  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 3/2 %}
   
   \clef "percussion"
   \key c \major

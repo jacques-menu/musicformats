@@ -284,74 +284,74 @@ Only \constant{mfcMultiComponentUsedFromTheCLIKind}{kComponentUsedFromTheCLIYes}
 \Method{mfcMultiComponent}{print} displays the regular version numbers:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~ > xml2ly -version
-Command line version of musicxml2lilypond converter v0.9.51 (October 12 2021)
+Command line version of musicxml2lilypond converter 0.9.51 (October 12 2021)
 
 Representations versions:
   MXSR
-    v0.9.5 (October 6 2021)
+    0.9.5 (October 6 2021)
   MSR
-    v0.9.51 (October 14 2021)
+    0.9.51 (October 14 2021)
   LPSR
-    v0.9.5 (October 6 2021)
+    0.9.5 (October 6 2021)
 
 Passes versions:
   mxsr2msr
-    v0.9.5 (October 6 2021)
+    0.9.5 (October 6 2021)
   msr2msr
-    v0.9.5 (October 6 2021)
+    0.9.5 (October 6 2021)
   msr2lpsr
-    v0.9.5 (October 6 2021)
+    0.9.5 (October 6 2021)
   lpsr2lilypond
-    v0.9.5 (October 6 2021)
+    0.9.5 (October 6 2021)
 \end{lstlisting}
 
 \Method{mfcMultiComponent}{printHistory} displays information analogous to \Main{release notes}:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~ > xml2brl -history
-Command line version of musicxml2braille converter v0.9.51 (October 12 2021)
+Command line version of musicxml2braille converter 0.9.51 (October 12 2021)
 
 Own history:
-  v0.9.5 (October 6 2021):
+  0.9.5 (October 6 2021):
     Start of sequential versions numbering
 
-  v0.9.51 (October 12 2021):
+  0.9.51 (October 12 2021):
     Fixed trace OAH issue
 
 Representations history:
   MXSR
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
   MSR
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
-    v0.9.51 (October 14 2021):
+    0.9.51 (October 14 2021):
       Refined MSR names and summary display options
 
   BSR
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
 Passes history:
   mxsr2msr
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
   msr2msr
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
   msr2bsr
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
   bsr2bsr
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
   bsr2braille
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 \end{lstlisting}
 
@@ -359,9 +359,9 @@ Passes history:
 \section{Versions history creation}\label{Versions history creation}
 % -------------------------------------------------------------------------
 
-\mf\ uses \MainIt{semantic} version numbering, such as \code{v0.9.61}:%%%JMI
+\mf\ uses \MainIt{semantic} version numbering, such as \code{0.9.61}:%%%JMI
 \begin{itemize}
-\item the library itself gets a new number right after a new branch as been created for it. Branching to "v0.9.61" causes the library to be numbered "v0.9.61" with \code{SetMusicFormatsVersionNumber.bash};
+\item the library itself gets a new number right after a new branch as been created for it. Branching to "0.9.61" causes the library to be numbered "0.9.61" with \code{SetMusicFormatsVersionNumber.bash};
 
 \item each representation, converter or pass that is modified this new branch has been created gets a new history element with the same number as the library.
 \end{itemize}
@@ -806,64 +806,64 @@ Apart from the version and history options, such current version numbers may be 
 \OptionBoth{version}{v} displays the versions of generators and converters:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2xml -version
-Command line version of musicxml2musicxml converter v0.9.51 (October 12 2021)
+Command line version of musicxml2musicxml converter 0.9.51 (October 12 2021)
 
 Representations versions:
   MXSR
-    v0.9.5 (October 6 2021)
+    0.9.5 (October 6 2021)
   MSR
-    v0.9.51 (October 14 2021)
+    0.9.51 (October 14 2021)
 
 Passes versions:
   mxsr2msr
-    v0.9.5 (October 6 2021)
+    0.9.5 (October 6 2021)
   msr2msr
-    v0.9.5 (October 6 2021)
+    0.9.5 (October 6 2021)
   msr2mxsr
-    v0.9.5 (October 6 2021)
+    0.9.5 (October 6 2021)
   mxsr2musicxml
-    v0.9.5 (October 6 2021)
+    0.9.5 (October 6 2021)
 \end{lstlisting}
 
 \OptionBoth{history}{hist} display the versions history of generators and converters:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2gmn -history
-Command line version of musicxml2guido converter v0.9.51 (October 12 2021)
+Command line version of musicxml2guido converter 0.9.51 (October 12 2021)
 
 Own history:
-  v0.9.5 (October 6 2021):
+  0.9.5 (October 6 2021):
     Start of sequential versions numbering
 
-  v0.9.51 (October 12 2021):
+  0.9.51 (October 12 2021):
     Fixed trace OAH issue
 
 Representations history:
   MXSR
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
   MSR
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
-    v0.9.51 (October 14 2021):
+    0.9.51 (October 14 2021):
       Refined MSR names and summary display options
 
 Passes history:
   mxsr2msr
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
   msr2msr
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
   msr2mxsr
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 
   mxsr2guido
-    v0.9.5 (October 6 2021):
+    0.9.5 (October 6 2021):
       Start of sequential versions numbering
 \end{lstlisting}
 
@@ -966,7 +966,7 @@ myBreak = {}
 %myPageBreak = { \pageBreak }
 myPageBreak = {}
 
-% Generated by xml2ly v0.9.51 (October 12 2021)
+% Generated by xml2ly 0.9.51 (October 12 2021)
 % on Thursday 2021-11-11 @ 11:15:56 CET
 % from "basic/HelloWorld.xml"
 
@@ -1064,7 +1064,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2xml -musicxml-generat
 <score-partwise version="3.1">
     <!--
 ==================================================
-Created by xml2xml v0.9.5 (October 6 2021)
+Created by xml2xml 0.9.5 (October 6 2021)
 on Thursday 2021-11-11 @ 11:04:06 CET
 from basic/HelloWorld.xml
 ==================================================
@@ -1077,7 +1077,7 @@ from basic/HelloWorld.xml
     <movement-title/>
     <identification>
         <encoding>
-            <software>xml2xml v0.9.5 (October 6 2021), https://github.com/jacques-menu/musicformats</software>
+            <software>xml2xml 0.9.5 (October 6 2021), https://github.com/jacques-menu/musicformats</software>
             <encoding-date>2021-11-10</encoding-date>
         </encoding>
         <miscellaneous>

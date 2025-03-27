@@ -70,7 +70,7 @@ extern std::string msrVoiceRepeatPhaseKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrVoiceRepeatPhaseKind& elt);
 
-enum class msrVoiceFinalizationStatusKind { // JMI ??? v0.9.66
+enum class msrVoiceFinalizationStatusKind { // JMI ??? 0.9.66
   kKeepVoice,
   kEraseVoice
 };
@@ -660,7 +660,7 @@ class EXP msrVoice : public msrElement
 
     // last element in voice
 
-    S_msrMeasureElement   fetchVoiceLastMeasureElement ( // JMI ??? v0.9.66
+    S_msrMeasureElement   fetchVoiceLastMeasureElement ( // JMI ??? 0.9.66
                             int inputLineNumber) const;
 
     // removing elements from voice

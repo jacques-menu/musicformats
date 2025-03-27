@@ -15,9 +15,9 @@
 \chapter{Versions numbering}\label{Versions numbering}
 % -------------------------------------------------------------------------
 
-\mf\ uses \MainIt{semantic} version numbering, such as \code{v0.9.61}:%%%JMI
+\mf\ uses \MainIt{semantic} version numbering, such as \code{0.9.61}:%%%JMI
 \begin{itemize}
-\item the library itself gets a new number right after a new branch as been created for it. Branching to "v0.9.60" causes the library to be numbered "v0.9.61" with \code{SetMusicFormatsVersionNumber.bash};
+\item the library itself gets a new number right after a new branch as been created for it. Branching to "0.9.60" causes the library to be numbered "0.9.61" with \code{SetMusicFormatsVersionNumber.bash};
 
 \item each representation, converter or pass that is modified this new branch has been created gets a new history element with the same number as the library.
 \end{itemize}
@@ -25,29 +25,29 @@
 Thus all the executable services have the same version number as the library, but their components may have older version numbers. This can be seen with options \optionNameBoth{mf-version}{mfv}, \optionNameBoth{version}{v} and \optionNameBoth{version-full}{vf} :
 \begin{lstlisting}[language=Terminal]%%%JMI do this again
 jacquesmenu@macmini > xml2ly -mf-version
-MusicFormats library v0.9.61 (February 28, 2022)
+MusicFormats library 0.9.61 (February 28, 2022)
 
 jacquesmenu@macmini > xml2ly -version
-Command line version of musicxml2lilypond converter v0.9.61 (February 28, 2022)
+Command line version of musicxml2lilypond converter 0.9.61 (February 28, 2022)
 
 jacquesmenu@macmini > xml2ly -version-full
-Command line version of musicxml2lilypond converter v0.9.61 (February 28, 2022)
+Command line version of musicxml2lilypond converter 0.9.61 (February 28, 2022)
 
 Representations versions:
   MXSR
-    v0.9.50 (October 6, 2021)
+    0.9.50 (October 6, 2021)
   MSR
-    v0.9.52 (November 27, 2021)
+    0.9.52 (November 27, 2021)
   LPSR
-    v0.9.50 (October 6, 2021)
+    0.9.50 (October 6, 2021)
 
 Passes versions:
   mxsr2msr
-    v0.9.60 (February 21, 2022)
+    0.9.60 (February 21, 2022)
   msr2msr
-    v0.9.51 (November 15, 2021)
+    0.9.51 (November 15, 2021)
   msr2lpsr
-    v0.9.50 (October 6, 2021)
+    0.9.50 (October 6, 2021)
   lpsr2lilypond
-    v0.9.60 (February 21, 2022)
+    0.9.60 (February 21, 2022)
 \end{lstlisting}

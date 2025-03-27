@@ -268,12 +268,12 @@ class EXP msrBook : public msrElement
     void                  fetchIdentificationFromCreditsIfAny (
                             int inputLineNumber);
 
-/* JMI v0.9.70
+/* JMI 0.9.70
     void                  setHeaderFromOptionsIfAny (
                             int inputLineNumber);
 */
 
-//     void                  collectBookElementsList ( JMI v0.9.70
+//     void                  collectBookElementsList ( JMI 0.9.70
 //                             int                   inputLineNumber,
 //                             std::list <S_msrPart>& partsList);
 

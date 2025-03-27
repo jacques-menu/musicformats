@@ -127,7 +127,7 @@ bool msrSlur::compareSlursStopsBeforeStarts (
   const SMARTP<msrSlur>& second)
 {
   return
-    bool ( // JMI switch() here? v0.9.70
+    bool ( // JMI switch() here? 0.9.70
       first->fSlurTypeKind
         >
       second->fSlurTypeKind

@@ -642,7 +642,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
       // fetch the option value if any
       std::string optionValue;
 
-      if (i < argc - 1) { // JMI v0.9.66
+      if (i < argc - 1) { // JMI 0.9.66
         optionValue = std::string (argv [i + 1]);
       }
 

@@ -28,7 +28,7 @@ typedef SMARTP<msrMeasure> S_msrMeasure;
 
 //______________________________________________________________________________
 /*
-  Various elements can found in measures, JMI v0.9.66
+  Various elements can found in measures, JMI 0.9.66
   hence class msrMeasureElement
 */
 
@@ -115,7 +115,7 @@ class EXP msrMeasureElement : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override; // JMI ??? v0.9.66
+    void                  browseData (basevisitor* v) override; // JMI ??? 0.9.66
 
   public:
 

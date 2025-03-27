@@ -201,7 +201,7 @@ void optionsNameAndValueVectorsPlusEquals (
   const std::vector <S_oahOption>& vector2);
 
 // //_______________________________________________________________________________
-// class EXP oahOptionsNamesAndValuesVector; JMI v0.9.66
+// class EXP oahOptionsNamesAndValuesVector; JMI 0.9.66
 // typedef SMARTP<oahOptionsNamesAndValuesVector> S_oahOptionsNamesAndValuesVector;
 //
 // class EXP oahOptionsNamesAndValuesVector : public smartable
@@ -376,7 +376,7 @@ EXP mfIndentedStringStream& operator << (
 
 //______________________________________________________________________________
 class EXP oahPrefix : public oahFindableElement //  smartable
-/* JMI v0.9.71 OAH_OAH
+/* JMI 0.9.71 OAH_OAH
 An options prefix 'trace' --> 'trace-' allows:
   -trace=abc,def,gh
 to be developped into :
@@ -720,7 +720,7 @@ class EXP oahValueFittedAtom : public oahAtom
                             const std::string& theString,
                             std::ostream&      os) = 0;
 
-//     virtual void          applyAtomWithDefaultValue (std::ostream& os); // JMI ??? v0.9.66
+//     virtual void          applyAtomWithDefaultValue (std::ostream& os); // JMI ??? 0.9.66
 
   public:
 
@@ -1768,7 +1768,7 @@ class EXP oahHandler : public oahFindableElement //  smartable
                             const std::string& context);
 
     virtual std::string   fetchOutputFileNameFromTheOptions () const;
-                            // JMI the MFSL interpreter has no output file... v0.9.62
+                            // JMI the MFSL interpreter has no output file... 0.9.62
 
     // quiet mode
     virtual void          enforceHandlerQuietness ();
@@ -1794,7 +1794,7 @@ class EXP oahHandler : public oahFindableElement //  smartable
 
     void                  printKnownPrefixes (std::ostream& os) const;
     void                  printKnownSingleCharacterOptions (std::ostream& os) const;
-//     void                  printOptionsDefaultValuesInformation (std::ostream& os) const; JMI v0.9.66
+//     void                  printOptionsDefaultValuesInformation (std::ostream& os) const; JMI 0.9.66
 
     void                  displayNamesToElementsMap (std::ostream& os) const;
     void                  displayNamesToElementsMapShort (std::ostream& os) const;
@@ -1805,7 +1805,7 @@ class EXP oahHandler : public oahFindableElement //  smartable
 
     void                  displayOptionsAndArguments (std::ostream& os) const;
 
-//     void                  displayArgumentsVector (std::ostream& os) const; JMI v0.9.65
+//     void                  displayArgumentsVector (std::ostream& os) const; JMI 0.9.65
 
     virtual std::string   asString () const override;
 
@@ -2069,7 +2069,7 @@ class EXP oahHandler : public oahFindableElement //  smartable
                             std::istream&           inputStream,
                             oahOptionsAndArguments& optionsAndArguments);
 
-//     void                  analyzeOptionsAndArguments ( // UNUSED JMI v0.9.66
+//     void                  analyzeOptionsAndArguments ( // UNUSED JMI 0.9.66
 //                             std::string              serviceName,
 //                             const oahOptionsAndArguments& optionsAndArguments);
 

@@ -399,7 +399,7 @@ class EXP lilypondAbsoluteOctaveEntryAtom : public oahValueLessAtom
 
     void                  applyAtomWithValue (
                             const std::string& theString,
-                            std::ostream&      os); // JMI v0.9.67 override ??? remove method ???
+                            std::ostream&      os); // JMI 0.9.67 override ??? remove method ???
                             // returns an error
 
   public:
@@ -2214,7 +2214,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
                             // this is to avoid having to add them by hand
                             // in the LilyPond output
 
-//     Bool                  fGenerateMsrVisitingInformation; // JMI v0.9.61
+//     Bool                  fGenerateMsrVisitingInformation; // JMI 0.9.61
     Bool                  fGenerateLpsrVisitingInformation;
 
     // dynamics

@@ -40,7 +40,7 @@ class EXP msrMeasure : public msrSegmentElement
                             int                 inputLineNumber,
                             const std::string&  measureNumber,
                             const S_msrSegment& measureUpLinkToSegment);
-                              // no const alias, call argument may be 'this' JMI v0.9.66
+                              // no const alias, call argument may be 'this' JMI 0.9.66
 
     SMARTP<msrMeasure> createMeasureNewbornClone (
                             const S_msrSegment& containingSegment);
@@ -139,6 +139,9 @@ class EXP msrMeasure : public msrSegmentElement
 
     mfWholeNotes          getMeasureWholeNotesDuration () const
                               { return fMeasureWholeNotesDuration; }
+
+    void                  setMeasureIsMusicallyEmpty (Bool value)
+                              { fMeasureIsMusicallyEmpty = value; }
 
     Bool                  getMeasureIsMusicallyEmpty () const
                               { return fMeasureIsMusicallyEmpty; }
@@ -284,7 +287,7 @@ class EXP msrMeasure : public msrSegmentElement
 //     // measure lengths, in whole notes
 //
 //     mfWholeNotes          fetchFullMeasureWholeNotesDuration_KEEP (
-//                             int         inputLineNumber = 7327, // JMI v0.9.70 BABASSE
+//                             int         inputLineNumber = 7327, // JMI 0.9.70 BABASSE
 //                             std::string context = "-- CONTEXT --") const;
 
   public:
@@ -300,7 +303,7 @@ class EXP msrMeasure : public msrSegmentElement
                                 appendMeasureElementToMeasure (
                                   elem,
                                   "appendMeasureElementToSegmentElement()");
-                              } // JMI v0.9.66 ???
+                              } // JMI 0.9.66 ???
 
     // lengths
 
@@ -363,7 +366,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendTimeSignatureToMeasure (
                             const S_msrTimeSignature& timeSignature);
 
-    void                  setFullMeasureWholeNotesDurationFromTimeSignature ( // JMI v0.9.70 BABASSE SUPERFLOUS???
+    void                  setFullMeasureWholeNotesDurationFromTimeSignature ( // JMI 0.9.70 BABASSE SUPERFLOUS???
                             const S_msrTimeSignature& timeSignature);
 
     void                  appendTimeSignatureToMeasureClone (
@@ -468,6 +471,11 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  appendChordToMeasure (
                             const S_msrChord& chord);
+
+    void                  accountForChordDurationInMeasure (
+                            int                 inputLineNumber,
+                            const mfWholeNotes& wholeNotes,
+                            const std::string&  context);
 
     // tuplets
 
@@ -580,7 +588,7 @@ class EXP msrMeasure : public msrSegmentElement
     S_msrElement          getLastElementOfMeasure () const
                               { return fMeasureElementsList.back (); }
 
-     /* JMI v0.9.66
+     /* JMI 0.9.66
     S_msrElement          removeLastElementFromMeasure (
                             int inputLineNumber);
 */
@@ -685,28 +693,28 @@ class EXP msrMeasure : public msrSegmentElement
                           fMeasureElementsList;
 
 //     std::list <msrElementsBase*>
-//                           fMeasureElementsBaseList; // JMI v0.9.70
+//                           fMeasureElementsBaseList; // JMI 0.9.70
 
     Bool                  fMeasureContainsMusic;
 
     // measure lengths, in whole notes
 
     mfWholeNotes          fFullMeasureWholeNotesDuration;
-                            // denormalization from msrStaff, for efficiency // JMI v0.9.70 BABASSE
+                            // denormalization from msrStaff, for efficiency // JMI 0.9.70 BABASSE
                             // meaningfull only when there is a time signature,
                             // but not for cadenzas
 
     // measure numbers
 
     std::string           fMeasureNumber;
-    std::string           fNextMeasureNumber; // JMI v0.9.70 NOT USED, go thru noteUpLinkToMeasure each time BABASSE
+    std::string           fNextMeasureNumber; // JMI 0.9.70 NOT USED, go thru noteUpLinkToMeasure each time BABASSE
 
     int                   fMeasureOrdinalNumberInVoice;
 
     // purist measure number,
     // forcing anacruses to start at '0' if it's not the case
     // and used by LilyPond barCheck and barNumberCheck generation
-    // not shared among repeats components // JMI ??? v0.9.70
+    // not shared among repeats components // JMI ??? 0.9.70
 
     int                   fMeasurePuristNumber;
 

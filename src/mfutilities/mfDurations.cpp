@@ -145,7 +145,7 @@ mfWholeNotes::mfWholeNotes (const std::string& theString)
     msrError (
 //    msrWarning ( //  JMI
       gServiceRunData->getInputSourceName (),
-      0, // JMI inputLineNumber, ??? v0.9.66
+      0, // JMI inputLineNumber, ??? 0.9.66
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -307,7 +307,7 @@ mfWholeNotes& mfWholeNotes::operator *= (const mfRational &rat)
 
 mfWholeNotes& mfWholeNotes::operator /= (const mfRational &rat)
 {
-  fNumerator   /= rat.getDenominator (); // JMI v0.9.67
+  fNumerator   /= rat.getDenominator (); // JMI 0.9.67
   fDenominator /= rat.getNumerator ();
 
   rationalise ();
@@ -503,7 +503,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (numerator == 0) { // JMI TEMP v0.9.70
+  if (numerator == 0) { // JMI TEMP 0.9.70
     dotsNumber = 0;
     return "ZERO";
   }
@@ -523,7 +523,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
       " is not positive in wholeNotesAndDotsNumberPitchAndOctaveAsString()" <<
       ", wholeNotes: " << wholeNotes.asFractionString ();
 
-   msrError ( // JMI v0.9.70
+   msrError ( // JMI 0.9.70
 //     msrWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
@@ -913,7 +913,7 @@ std::string wholeNotesPitchAndOctaveAsString (
   int                  inputLineNumber,
   const mfWholeNotes& wholeNotes)
 {
-  int dotsNumber; // not used JMI v0.9.70
+  int dotsNumber; // not used JMI 0.9.70
 
   return
     wholeNotesAndDotsNumberPitchAndOctaveAsString (
@@ -938,7 +938,7 @@ std::string multipleMeasureRestsWholeNotesPitchAndOctaveAsString (
     wholeNotes.getNumerator ();
 
   ss <<
-    wholeNotesPitchAndOctaveAsString ( // JMI ??? v0.9.66
+    wholeNotesPitchAndOctaveAsString ( // JMI ??? 0.9.66
       inputLineNumber,
       wholeNotesUnit);
 
@@ -968,7 +968,7 @@ void testWholeNotes ()
 
 
 //______________________________________________________________________________
-mfDurationKind mfDurationKindFromMusicXMLString (
+mfDurationKind mfDurationKindFromMusicXMLGraphicNoteType (
   int                inputLineNumber,
   const std::string& durationString)
 {
@@ -1381,7 +1381,7 @@ std::string mfDurationKindAsMusicXMLType (mfDurationKind notesDurationKind)
 }
 
 std::string mfDurationKindAsString_INTERNAL (
-  mfDurationKind notesDurationKind) // JMI don't keep ??? v0.9.67
+  mfDurationKind notesDurationKind) // JMI don't keep ??? 0.9.67
 {
   std::string result;
 
@@ -1444,7 +1444,7 @@ std::string mfDurationKindAsString (
 
   switch (notesDurationKind) {
     case mfDurationKind::kDuration_UNKNOWN_:
-      result = "???NoNotesDuration???";
+      result = "kDuration_UNKNOWN_";
       break;
 
     case mfDurationKind::kDuration1024th:
@@ -1658,7 +1658,7 @@ mfWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
 mfWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
   // used in lpsrEnumTypes, dottedNotesDurationAsLilypondStringWithoutBackSlash(),
   // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
-  // JMI BUGGY, NEVER TESTED TEMP??? v0.9.67
+  // JMI BUGGY, NEVER TESTED TEMP??? 0.9.67
   int inputLineNumber) const
 {
   // convert duration into whole notes

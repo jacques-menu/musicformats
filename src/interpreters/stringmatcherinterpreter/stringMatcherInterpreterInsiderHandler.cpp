@@ -194,7 +194,7 @@ void stringMatcherInterpreterInsiderHandler::createThestringMatcherInterpreterOp
   // initialize the library
   // ------------------------------------------------------
 
-  // JMI ??? v0.9.67
+  // JMI ??? 0.9.67
 
   // initialize options handling, phase 2
   // ------------------------------------------------------

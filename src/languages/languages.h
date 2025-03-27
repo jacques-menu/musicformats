@@ -58,7 +58,7 @@ void initializeMusicFormatsLanguages ();
 //________________________________________________________________________
 class EXP language : public smartable
 {
-/* this class is purely virtual JMI v0.9.67 misses '= 0'
+/* this class is purely virtual JMI 0.9.67 misses '= 0'
   public:
 
     // creation
@@ -247,7 +247,7 @@ EXP S_language getGlobalLanguage ();
 #define gLanguage getGlobalLanguage ()
 
 //________________________________________________________________________
-void initializeLanguages (); // JMI superflous? v0.9.67
+void initializeLanguages (); // JMI superflous? 0.9.67
 
 
 }

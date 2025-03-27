@@ -88,7 +88,7 @@ void oahValueLessAtomAlias::applyValueLessAtom (std::ostream& os)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // JMI ??? v0.9.66
+  // JMI ??? 0.9.66
 
   fSelected = true;
 }
@@ -278,7 +278,7 @@ void oahValueFittedAtomAlias::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   fSelected = true;
-  // JMI ??? v0.9.66
+  // JMI ??? 0.9.66
 }
 
 void oahValueFittedAtomAlias::acceptIn (basevisitor* v)
@@ -506,7 +506,7 @@ Bool oahMacroAtom::atomMatchesString (
 
 	if (result) {
     // append this matching element to foundElementsList
-//     foundElementsList.push_back (this); // JMI v0.9.71 OHA_OAH
+//     foundElementsList.push_back (this); // JMI 0.9.71 OHA_OAH
 //       oahFindStringMatch::create (
 //         fetchNames (),
 //         fDescription,
@@ -4884,7 +4884,7 @@ Bool oahCombinedBooleansAtom::atomMatchesString (
 
 	if (result) {
     // append this matching element to foundElementsList
-//     foundElementsList.push_back (this);// JMI v0.9.71 OHA_OAH
+//     foundElementsList.push_back (this);// JMI 0.9.71 OHA_OAH
 //       oahFindStringMatch::create (
 //         fetchNames (),
 //         fDescription,
@@ -6556,7 +6556,7 @@ void oahFactorizedStringAtom::addStringAtomByName (
   }
 }
 
-void oahFactorizedStringAtom::applyValueLessAtom (std::ostream& os) // JMI v0.9.66
+void oahFactorizedStringAtom::applyValueLessAtom (std::ostream& os) // JMI 0.9.66
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
@@ -7418,7 +7418,7 @@ void oahCommonPrefixBooleansAtom::applyValueLessAtom (std::ostream& os)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // handle it at once JMI ??? v0.9.66
+  // handle it at once JMI ??? 0.9.66
 
   fSelected = true;
 }
@@ -7449,7 +7449,7 @@ Bool oahCommonPrefixBooleansAtom::atomMatchesString (
 
 	if (result) {
     // append this matching element to foundElementsList
-//     foundElementsList.push_back (this);// JMI v0.9.71 OHA_OAH
+//     foundElementsList.push_back (this);// JMI 0.9.71 OHA_OAH
 //       oahFindStringMatch::create (
 //         fetchNames (),
 //         fDescription,
@@ -7717,7 +7717,7 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
   }
 
   if (fLongSuffixDescriptor != fShortSuffixDescriptor) {
-//     int longNamesSuffixesCount = 0; // JMI v9.9.69
+//     int longNamesSuffixesCount = 0; // JMI 0.9.69
 //
 //     {
 //       std::list <std::string>::const_iterator
@@ -7835,7 +7835,7 @@ std::ostream& operator << (std::ostream& os, const S_oahCommonPrefixBooleansAtom
 }
 
 //______________________________________________________________________________
-S_oahRegexAtom oahRegexAtom::create ( // JMI UNUSED as of v0.9.66
+S_oahRegexAtom oahRegexAtom::create ( // JMI UNUSED as of 0.9.66
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -10061,7 +10061,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // theString contains the string string map specification // JMI v0.9.66
+  // theString contains the string string map specification // JMI 0.9.66
   // decipher it to extract duration and perSecond values
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -13370,9 +13370,9 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
   // theString is the pattern to be found in the help
 
   // an element list to collect the results
-  std::list <S_oahElement> foundElementsList; // JMI v0.9.71
+  std::list <S_oahElement> foundElementsList; // JMI 0.9.71
 
-  // delegate this to the handler // JMI v0.9.71
+  // delegate this to the handler // JMI 0.9.71
   Bool foundString =
 		fetchAtomUpLinkToHandler ()->
 			fetchElementsMatchingString (
@@ -13405,7 +13405,7 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    std::list <S_oahElement>::const_iterator // JMI v0.9.71
+    std::list <S_oahElement>::const_iterator // JMI 0.9.71
       iBegin = foundElementsList.begin (),
       iEnd   = foundElementsList.end (),
       i      = iBegin;
@@ -13413,7 +13413,7 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
     int counter = 0;
 
     for ( ; ; ) {
-      S_oahElement matchingElement = (*i); // JMI v0.9.71
+      S_oahElement matchingElement = (*i); // JMI 0.9.71
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
@@ -13642,7 +13642,7 @@ oahIncludeOptionsAndArgumentsFileAtom::oahIncludeOptionsAndArgumentsFileAtom (
       shortName,
       description)
 {
-//       valueSpecification, JMI v0.9.66
+//       valueSpecification, JMI 0.9.66
 //       serviceName)
 
   this->setMultipleOccurrencesAllowed ();
@@ -13671,7 +13671,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // delegate this to the handler JMIJMIJMI v0.9.66 ??? see oahHandler::handleArgvOptionValueOrArgument()
+  // delegate this to the handler JMIJMIJMI 0.9.66 ??? see oahHandler::handleArgvOptionValueOrArgument()
 //   fetchAtomUpLinkToHandler ()->
 //     includeOptionsFileInHandler (
 //       theString,

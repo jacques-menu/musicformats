@@ -1302,7 +1302,7 @@ mxsrTupletEvent::mxsrTupletEvent (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check JMI v0.9.70
+  // sanity check JMI 0.9.70
   mfAssert (
     __FILE__, __LINE__,
 #ifdef MF_USE_WRAPPED_TYPES

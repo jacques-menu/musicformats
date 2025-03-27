@@ -471,7 +471,7 @@ void waeHandler::waeTraceToStreamWithoutInputLocation (
   if (doTraceCurrentPass && doTraceCurrentMeasure) {
     ++gIndenter;
 
-//     '[' << context << "] " << JMI v0.9.68
+//     '[' << context << "] " << JMI 0.9.68
 
     // message can be a multi-line string
     gIndenter.indentMultiLineString (
@@ -548,7 +548,7 @@ void waeHandler::waeTraceToStream (
   if (doTraceCurrentPass && doTraceCurrentMeasure) {
     ++gIndenter;
 
-//     '[' << context << "] " << JMI v0.9.68
+//     '[' << context << "] " << JMI 0.9.68
     os <<
       mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
       message;

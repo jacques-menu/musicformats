@@ -528,7 +528,7 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendPendingMeasureRepeatToPart (
                             int inputLineNumber);
 
-//     void                  appendMeasureRepeatCloneToPart ( JMI UNUSED v0.9.66
+//     void                  appendMeasureRepeatCloneToPart ( JMI UNUSED 0.9.66
 //                             int                              inputLineNumber,
 //                             const S_msrMultipleMeasureRest& multipleMeasureRests);
 
@@ -568,7 +568,7 @@ class EXP msrPart : public msrPartGroupElement
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
                             const mfPositionInMeasure&          positionInMeasureToAppendAt);
 
-//     void                  appendFiguredBassToPart ( // JMI v0.9.67 HARMFUL
+//     void                  appendFiguredBassToPart ( // JMI 0.9.67 HARMFUL
 //                             const S_msrVoice&       figuredBassSupplierVoice,
 //                             const S_msrFiguredBass& figuredBass);
 
@@ -624,7 +624,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  printPartMeasuresWholeNotesVector (
                             std::ostream&      os,
-                            int                fieldWidth, // USEFUL ??? JMI v0.9.67
+                            int                fieldWidth, // USEFUL ??? JMI 0.9.67
                             const std::string& context) const;
 
     void                  print (std::ostream& os) const override;

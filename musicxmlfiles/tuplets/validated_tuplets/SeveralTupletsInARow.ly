@@ -40,7 +40,7 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  %{ begin kMeasureKindOverFlowing, measure 1, % measureAccumulatedWholeNotesDuration: 1/1 whn %}
+  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 1/1 %}
   
   \clef "treble"
   \key c \major
@@ -50,7 +50,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 157 %}  e'4 \mf _- f'8 _- }
   %{ end kMeasureKindOverFlowing, measure  %}
   
-  %{ begin kMeasureKindOverFlowing, measure 2, % measureAccumulatedWholeNotesDuration: 37/24 whn %}
+  %{ begin kMeasureKindOverFlowing, measure 2, % measureCurrentPositionInMeasure: pim 37/24 %}
   
   \once\override TupletBracket.bracket-visibility = ##t
   \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 204 %}  f'8 [  %{ beam 1, line 218 %}

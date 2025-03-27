@@ -313,7 +313,7 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrPartGroup& elt)
       elt->getPartGroupElementsList ().size ();
 
     gLog <<
-      "PartGroup" << ' ' << elt->fetchPartGroupNameForTrace () <<
+      "PartGroup" << ' ' << elt->fetchPartGroupInformationForTrace () <<
       " contains " <<
       mfSingularOrPlural (
         partGroupElementsSize,

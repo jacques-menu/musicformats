@@ -20,7 +20,7 @@
 
 
 /*
-  CAUTION: // JMI v0.9.66
+  CAUTION: // JMI 0.9.66
     if might be necessary for the the following two included
     to be strictly in this order depending on the C++ compiler
 */
@@ -90,8 +90,8 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
     ss <<
       "Setting the measure element sounding whole notes of " <<
       asString () <<
-      " to " << wholeNotes.asString () << // JMI v0.9.66
-//       " in measure '" << // JMI TOO EARLY v0.9.67
+      " to " << wholeNotes.asString () << // JMI 0.9.66
+//       " in measure '" << // JMI TOO EARLY 0.9.67
 //       upLinkToMeasure->getMeasureNumber () <<
 //       "', context: \"" <<
       ", context: \"" <<
@@ -99,7 +99,7 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
       "\"" <<
       std::endl;
 
-//     if (wholeNotes == mfWholeNotes (114, 1)) abort (); // JMI v0.9.67 HARMFUL
+//     if (wholeNotes == mfWholeNotes (114, 1)) abort (); // JMI 0.9.67 HARMFUL
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -109,8 +109,8 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED // JMI v0.9.67
-//   // sanity check // NO JMI v0.9.67
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED // JMI 0.9.67
+//   // sanity check // NO JMI 0.9.67
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     wholeNotes != K_WHOLE_NOTES_UNKNOWN_,
@@ -145,8 +145,8 @@ void msrMeasureElement::incrementMeasureElementSoundingWholeNotesBy (
     ss <<
       "Incrementing the measure element sounding whole notes of " <<
       asString () <<
-      " by " << wholeNotes.asString () << // JMI v0.9.66
-//       " in measure '" << // JMI TOO EARLY v0.9.67
+      " by " << wholeNotes.asString () << // JMI 0.9.66
+//       " in measure '" << // JMI TOO EARLY 0.9.67
 //       upLinkToMeasure->getMeasureNumber () <<
 //       "', context: \"" <<
       ", context: \"" <<
@@ -154,7 +154,7 @@ void msrMeasureElement::incrementMeasureElementSoundingWholeNotesBy (
       "\"" <<
       std::endl;
 
-//     if (wholeNotes == mfWholeNotes (114, 1)) abort (); // JMI v0.9.67 HARMFUL
+//     if (wholeNotes == mfWholeNotes (114, 1)) abort (); // JMI 0.9.67 HARMFUL
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -164,8 +164,8 @@ void msrMeasureElement::incrementMeasureElementSoundingWholeNotesBy (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED // JMI v0.9.67
-//   // sanity check // NO JMI v0.9.67
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED // JMI 0.9.67
+//   // sanity check // NO JMI 0.9.67
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     wholeNotes != K_WHOLE_NOTES_UNKNOWN_,
@@ -254,7 +254,7 @@ void msrMeasureElement::setMeasureElementPositionInMeasure (
   fMeasureElementPositionInMeasure = positionInMeasure;
 
 //   // compute measure element's voice position
-// // if (false) { // JMI v0.9.67
+// // if (false) { // JMI 0.9.67
 //   mfWholeNotes
 //     voicePosition =
 //       measure->
@@ -263,12 +263,12 @@ void msrMeasureElement::setMeasureElementPositionInMeasure (
 //       positionInMeasure;
 
   // set figured bass's voice position
-//   setMeasureElementVoicePosition ( // JMI v0.9.66
+//   setMeasureElementVoicePosition ( // JMI 0.9.66
 //     voicePosition,
 //     context);
 // }
 
-  // update current voice position // JMI v0.9.67
+  // update current voice position // JMI 0.9.67
 //   S_msrVoice
 //     voice =
 //       measure->
@@ -372,7 +372,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //       " (was '" <<
 //       fMeasureMoment.asString () <<
 // //       "') " <<
-// //       in measure " << JMI v0.9.66
+// //       in measure " << JMI 0.9.66
 // //       measure->asShortString () <<
 //       "), measureElementMeasureNumber: " <<
 //       getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<

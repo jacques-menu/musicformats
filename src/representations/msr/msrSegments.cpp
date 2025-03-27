@@ -107,7 +107,7 @@ void msrSegment::initializeSegment ()
   }
 #endif // MF_TRACE_IS_ENABLED
 
-// JMI v0.9.63
+// JMI 0.9.63
 //  // segment shortest note wholeNotes
 //  fSegmentShortestNoteWholeNotes = mfWholeNotes (INT_MAX, 1);
 
@@ -338,7 +338,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
 
     for (S_msrSegmentElement measureElement : fSegmentElementsList) {
       // append a deep clone of the measure element to the deep clone
-      // DEEP CLONING IS NOT YET FINALIZED JMI v0.9.63
+      // DEEP CLONING IS NOT YET FINALIZED JMI 0.9.63
 //       if (
 //         S_msrMeasure measure = dynamic_cast<msrRepeat*>(&(*(measureElement)))
 //       ) {
@@ -580,7 +580,7 @@ S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
         measureNumber,
         this);
 
-  // set measure end input line number JMI v0.9.66 to be done in appendMeasureToSegment() ???
+  // set measure end input line number JMI 0.9.66 to be done in appendMeasureToSegment() ???
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
     std::stringstream ss;
@@ -949,7 +949,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //
 //     if (measureRestsList.size ()) {
 //       S_msrMeasure
-//         measureRestsListFirstMeasure = // JMI v0.9.64 ???
+//         measureRestsListFirstMeasure = // JMI 0.9.64 ???
 //           measureRestsList.front ();
 //
 //       // prepend the clef to the measure rest first measure
@@ -969,9 +969,9 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //         ", in voice \"" <<
 //         fSegmentUpLinkToVoice->getVoiceName () <<
 //         "\"" <<
-//         "', line " << fInputLineNumber; // JMI v0.9.64
+//         "', line " << fInputLineNumber; // JMI 0.9.64
 //
-//       msrInternalError ( // JMI v0.9.64 ???
+//       msrInternalError ( // JMI 0.9.64 ???
 //         gServiceRunData->getInputSourceName (),
 //         fInputLineNumber,
 //         __FILE__, __LINE__,
@@ -993,7 +993,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       ", in voice \"" <<
 //       fSegmentUpLinkToVoice->getVoiceName () <<
 //       "\"" <<
-//       "', line " << fInputLineNumber; // JMI v0.9.64
+//       "', line " << fInputLineNumber; // JMI 0.9.64
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
@@ -1002,7 +1002,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     gLog << "THIS:" << std::endl;
 //     gLog << "----------------------------" << std::endl;
 //     ++gIndenter;
-//     gLog << std::hex << std::showbase << this << std::dec; // JMI v0.9.69
+//     gLog << std::hex << std::showbase << this << std::dec; // JMI 0.9.69
 //     --gIndenter;
 //
 //     gLog << std::endl;
@@ -1029,16 +1029,16 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     gLog << segmentElementsListFirstElement;
 //     --gIndenter;
 //
-// //     abort (); // JMI v0.9.67 HARMFUL
+// //     abort (); // JMI 0.9.67 HARMFUL
 //
-//     msrInternalError ( // JMI v0.9.64 ???
+//     msrInternalError ( // JMI 0.9.64 ???
 //       gServiceRunData->getInputSourceName (),
 //       fInputLineNumber,
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
 //
-// //   fSegmentMeasuresFlatList.front ()-> JMI v0.9.64
+// //   fSegmentMeasuresFlatList.front ()-> JMI 0.9.64
 // //     appendClefToMeasure (clef);
 //
 //   --gIndenter;
@@ -1260,7 +1260,7 @@ void msrSegment::appendHarmoniesListToSegment (
     std::stringstream ss;
 
     ss <<
-      "Appending harmonies list to segment " << // JMI v0.9.67 HARMFUL
+      "Appending harmonies list to segment " << // JMI 0.9.67 HARMFUL
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
@@ -1366,7 +1366,7 @@ void msrSegment::cascadeAppendFiguredBassesListToSegment (
 
     ss <<
       "Appending figured basses list \"" <<
-//       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
+//       figuredBasssesList->asString () << // JMI 0.9.67 HARMFUL
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -2117,7 +2117,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //       ss.str ());
 //   }
 //
-//   if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF v0.9.67
+//   if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF 0.9.67
 //     // pad last measure up to to this actual wholes notes
 //     fSegmentLastMeasure->
 //       padUpToPositionInMeasureInMeasure (
@@ -2193,10 +2193,10 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
 
   ++gIndenter;
 
-  if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF v0.9.67
+  if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF 0.9.67
     // append a padding note to the segment's last measure
     fSegmentLastMeasure->
-      appendPaddingSkipNoteToMeasure ( // JMI why not a rest??? v0.9.67
+      appendPaddingSkipNoteToMeasure ( // JMI why not a rest??? 0.9.67
         inputLineNumber,
         forwardStepLength);
   }
@@ -2283,7 +2283,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    msrInternalWarning ( // JMI v0.9.67 v0.9.63
+    msrInternalWarning ( // JMI 0.9.67 0.9.63
 //     msrInternalError (
       gServiceRunData->getInputSourceName (),
       measure->getInputLineNumber (),
@@ -2327,7 +2327,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
     // append measure to the segment
     fSegmentElementsList.push_back (measure);
 
-//     // set the measure full measure whole notes duration JMI v0.9.70
+//     // set the measure full measure whole notes duration JMI 0.9.70
 //     measure->
 //       setFullMeasureWholeNotesDuration (
 //         fetchSegmentUpLinkToStaff ()->
@@ -2369,7 +2369,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
         ", as first measure";
     }
 
-/* JMI v0.9.66
+/* JMI 0.9.66
     else
       gLog <<
       ", after measure number '" << currentMeasureNumber << "'";
@@ -2444,7 +2444,7 @@ void msrSegment::prependBarLineToSegment (
   // prepend barLine to this segment
   ++gIndenter;
 
-  fSegmentMeasuresFlatList.front ()-> // JMI ??? v0.9.63
+  fSegmentMeasuresFlatList.front ()-> // JMI ??? 0.9.63
     prependBarLineToMeasure (barLine);
 
   --gIndenter;
@@ -2970,7 +2970,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //   // we've got the result
 //   result = fSegmentLastMeasure;
 //
-//   // remove it from segment elements list too ??? JMI v0.9.63 JMI v0.9.67
+//   // remove it from segment elements list too ??? JMI 0.9.63 JMI 0.9.67
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -3009,7 +3009,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //     gLog << "THIS:" << std::endl;
 //     gLog << "----------------------------" << std::endl;
 //     ++gIndenter;
-//     gLog << std::hex << std::showbase << this << std::dec; // JMI v0.9.69
+//     gLog << std::hex << std::showbase << this << std::dec; // JMI 0.9.69
 //     --gIndenter;
 //
 //     gLog << std::endl;
@@ -3028,9 +3028,9 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //     gLog << segmentElementsListLastElement;
 //     --gIndenter;
 //
-// //     abort (); // JMI v0.9.67 HARMFUL
+// //     abort (); // JMI 0.9.67 HARMFUL
 //
-//     msrInternalError ( // JMI v0.9.64 ???
+//     msrInternalError ( // JMI 0.9.64 ???
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
 //       __FILE__, __LINE__,
@@ -3059,8 +3059,8 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //   fSegmentMeasuresFlatList.pop_back ();
 //
 //   // don't forget about fSegmentLastMeasure now,
-//   // since it may be used and/or re-appended soon JMI v0.9.63
-// //   setSegmentLastMeasure ( // JMI v0.9.67
+//   // since it may be used and/or re-appended soon JMI 0.9.63
+// //   setSegmentLastMeasure ( // JMI 0.9.67
 // //     nullptr);
 //
 //   return result;

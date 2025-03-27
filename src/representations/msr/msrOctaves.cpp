@@ -319,7 +319,7 @@ std::string msrOctaveKindAsString (msrOctaveKind octaveKind)
 
   switch (octaveKind) {
     case msrOctaveKind::kOctave_UNKNOWN_:
-      result = "o:kOctave_UNKNOWN_"; // JMI v0.9.70
+      result = "o:kOctave_UNKNOWN_"; // JMI 0.9.70
       break;
     case msrOctaveKind::kOctave0:
       result = "o:0";
