@@ -87,6 +87,10 @@
           <line>2</line>
         </clef>
       </attributes>
+      <print new-system="no" new-page="no"/>
+      <attributes>
+        <divisions>12</divisions>
+      </attributes>
       <note>
         <rest/>
         <duration>4</duration>
@@ -211,9 +215,9 @@
           <alter>1</alter>
           <octave>4</octave>
         </pitch>
-        <duration>4</duration>
+        <duration>2</duration>
         <voice>1</voice>
-        <type>eighth</type>
+        <type>16th</type>
         <accidental>sharp</accidental>
         <time-modification>
           <actual-notes>3</actual-notes>
@@ -223,6 +227,31 @@
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">continue</beam>
+        <beam number="2">begin</beam>
+        <notations>
+          <articulations>
+            <staccato placement="below"/>
+          </articulations>
+        </notations>
+      </note>
+      <note>
+        <pitch>
+          <step>B</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>2</duration>
+        <voice>1</voice>
+        <type>16th</type>
+        <accidental>natural</accidental>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+          <normal-type>eighth</normal-type>
+        </time-modification>
+        <stem>up</stem>
+        <staff>1</staff>
+        <beam number="1">continue</beam>
+        <beam number="2">end</beam>
         <notations>
           <articulations>
             <staccato placement="below"/>
@@ -235,9 +264,9 @@
           <alter>1</alter>
           <octave>5</octave>
         </pitch>
-        <duration>4</duration>
+        <duration>2</duration>
         <voice>1</voice>
-        <type>eighth</type>
+        <type>16th</type>
         <accidental>sharp</accidental>
         <time-modification>
           <actual-notes>3</actual-notes>
@@ -246,7 +275,31 @@
         </time-modification>
         <stem>up</stem>
         <staff>1</staff>
+        <beam number="1">continue</beam>
+        <beam number="2">begin</beam>
+        <notations>
+          <articulations>
+            <staccato placement="below"/>
+          </articulations>
+        </notations>
+      </note>
+      <note>
+        <pitch>
+          <step>D</step>
+          <octave>5</octave>
+        </pitch>
+        <duration>2</duration>
+        <voice>1</voice>
+        <type>16th</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+          <normal-type>eighth</normal-type>
+        </time-modification>
+        <stem>up</stem>
+        <staff>1</staff>
         <beam number="1">end</beam>
+        <beam number="2">end</beam>
         <notations>
           <tuplet type="stop" bracket="no" number="1"/>
         </notations>

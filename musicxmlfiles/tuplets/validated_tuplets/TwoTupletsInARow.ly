@@ -46,11 +46,11 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \numericTimeSignature \time 3/4
   
   \once\override TupletBracket.bracket-visibility = ##t
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 90 %}  r %{ sr333 %}  8 \stemUp g'8. \f [  %{ beam 1, line 138 %}
-  _- a'16 ]  %{ beam 1, line 161 %}
+  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 94 %}  r %{ sr333 %}  8 \stemUp g'8. \f [  %{ beam 1, line 142 %}
+  _- a'16 ]  %{ beam 1, line 165 %}
   _- } \once \omit TupletBracket
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 175 %}  a'8 [  %{ beam 1, line 191 %}
-  bis'! _. cis''! ]  %{ beam 1, line 249 %}
+  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 179 %}  a'8 [  %{ beam 1, line 195 %}
+  bis'!16 _. b'! _. cis''! _. d'' ]  %{ beam 1, line 301 %}
   _. } r4
   \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
   
