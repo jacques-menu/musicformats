@@ -79,16 +79,28 @@ jobs:
             MusicFormatsUserGuide.tex MusicFormatsUserGuide.tex
 
 
-      - name: Compile the libmusicxml2 presentation - 1 pdflatex run is enough
+      - name: Test the beamer package - 1 pdflatex run is enough
         # --------------------------------------------------------------------------
         uses:
           xu-cheng/latex-action@v3
         with:
           working_directory:
-            ./documentation/libmusicxml2Presentation
+            ./documentation
           root_file:
-            libmusicxml2.tex
+            beamertest.tex
 
+
+#       - name: Compile the libmusicxml2 presentation - 1 pdflatex run is enough
+#         # --------------------------------------------------------------------------
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/libmusicxml2Presentation
+#           root_file:
+#             libmusicxml2.tex
+#           extra_system_packages:
+#             "beamer"
 
 #       - name: Compile the maintenance guide - pdflatex run 1/3
 #         # --------------------------------------------------------------------------
@@ -131,7 +143,8 @@ jobs:
             musicformats-documentation-artifact
           path:
             ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
-            ./documentation/libmusicxml2Presentation/libmusicxml2.pdf
+            ./documentation/beamertest.pdf
+#             ./documentation/libmusicxml2Presentation/libmusicxml2.pdf
 #             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
           retention-days:
             10
