@@ -2,9 +2,9 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="4.0">
   <work>
-    <work-title>Several Tuplets In A Row</work-title>
+    <work-title>Two Tuplets In A Row</work-title>
   </work>
-  <movement-title>Several Tuplets In A Row</movement-title>
+  <movement-title>Two Tuplets In A Row</movement-title>
   <identification>
     <creator type="composer">Lars P. Opfermann</creator>
     <rights>©</rights>
@@ -38,11 +38,11 @@
   </defaults>
   <credit page="1">
     <credit-type>title</credit-type>
-    <credit-words font-family="Academico" font-size="20" justify="center" valign="middle" default-x="593.75" default-y="1574.38" xml:space="preserve">Several Tuplets In A Row</credit-words>
+    <credit-words font-family="Academico" font-size="20" justify="center" valign="middle" default-x="593.75" default-y="1574.38" xml:space="preserve">Two Tuplets In A Row</credit-words>
   </credit>
   <credit page="1">
     <credit-type>flow title</credit-type>
-    <credit-words font-family="Academico" font-size="16" justify="center" valign="middle" default-x="593.75" default-y="1466.88" xml:space="preserve">1. Several Tuplets In A Row</credit-words>
+    <credit-words font-family="Academico" font-size="16" justify="center" valign="middle" default-x="593.75" default-y="1466.88" xml:space="preserve">1. Two Tuplets In A Row</credit-words>
   </credit>
   <part-list>
     <score-part id="P1">

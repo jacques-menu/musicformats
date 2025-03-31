@@ -45,7 +45,7 @@ S_msrTuplet msrTuplet::create (
   msrTupletTypeKind       tupletTypeKind,
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
-  msrPlacementKind        tupletPlacementKind)
+  msrPlacementKind        tupletBracketPlacementKind)
 {
   msrTuplet* obj =
     new msrTuplet (
@@ -57,7 +57,7 @@ S_msrTuplet msrTuplet::create (
       tupletTypeKind,
       tupletShowNumberKind,
       tupletShowTypeKind,
-      tupletPlacementKind);
+      tupletBracketPlacementKind);
   assert (obj != nullptr);
   return obj;
 }
@@ -71,7 +71,7 @@ msrTuplet::msrTuplet (
   msrTupletTypeKind       tupletTypeKind,
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
-  msrPlacementKind        tupletPlacementKind)
+  msrPlacementKind        tupletBracketPlacementKind)
     : msrTupletElement (
         inputLineNumber)
 {
@@ -86,7 +86,7 @@ msrTuplet::msrTuplet (
   fTupletShowNumberKind = tupletShowNumberKind;
   fTupletShowTypeKind = tupletShowTypeKind;
 
-  fTupletPlacementKind = tupletPlacementKind;
+  fTupletBracketPlacementKind = tupletBracketPlacementKind;
 
   setMeasureElementSoundingWholeNotes (
     K_WHOLE_NOTES_ZERO,
@@ -139,7 +139,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
         fTupletTypeKind,
         fTupletShowNumberKind,
         fTupletShowTypeKind,
-        fTupletPlacementKind);
+        fTupletBracketPlacementKind);
 
 /* JMI ???
   newbornClone->fMeasureElementSoundingWholeNotes =
@@ -1071,6 +1071,7 @@ std::string msrTuplet::asShortString () const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
+    ", fTupletBracketPlacementKind: " << fTupletBracketPlacementKind <<
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes.asFractionString () <<
     ", line " << fInputLineNumber;
@@ -1144,6 +1145,7 @@ void msrTuplet::printFull (std::ostream& os) const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
+    ", fTupletBracketPlacementKind: " << fTupletBracketPlacementKind <<
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
@@ -1286,6 +1288,11 @@ void msrTuplet::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fTupletKind" << ": " <<
     fTupletKind <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTupletBracketPlacementKind" << ": " <<
+    fTupletBracketPlacementKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<

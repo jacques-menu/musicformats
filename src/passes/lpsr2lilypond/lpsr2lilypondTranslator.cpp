@@ -25960,6 +25960,29 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
       break;
   } // switch
 
+  // get bracket bracket placement kind
+  msrPlacementKind
+    tupletBracketPlacementKind  =
+      elt->getTupletBracketPlacementKind  ();
+
+  switch (tupletBracketPlacementKind ) {
+    case msrPlacementKind::kPlacement_UNKNOWN_:
+      break;
+
+    case msrPlacementKind::kPlacementAbove:
+      fLilypondCodeStream <<
+        std::endl <<
+        "\\once\\override TupletBracket.direction = -1 % DOWN" <<
+        std::endl;
+      break;
+
+    case msrPlacementKind::kPlacementBelow:
+      fLilypondCodeStream <<
+        "\\once\\override TupletBracket.direction = 1 % UP" <<
+        std::endl;
+      break;
+  } // switch
+
   // get line shape kind
   msrTupletLineShapeKind
     tupletLineShapeKind =

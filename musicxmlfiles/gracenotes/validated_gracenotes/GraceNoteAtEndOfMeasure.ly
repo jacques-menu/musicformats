@@ -1,15 +1,11 @@
 \version "2.24.4"
 
 \header {
-  workCreditTypeTitle = "Grace Notes In Tuplet"
-  encodingDate        = "2011-08-08"
-  composer            = "Franz Schubert"
-  poet                = "Walter Scott"
-  translator          = "D. Adam Storck"
-  software            = "Finale 2011 for Windows"
-  software            = "Dolet 6.0 for Finale"
-  right               = "Copyright © 2002 Recordare LLC"
-  title               = "Grace Notes In Tuplet"
+  workCreditTypeTitle = "Grace Note At End Of Mesure"
+  miscellaneousField  = "Different kinds of grace notes:
+          acciaccatura, appoggiatura; beamed grace notes; grace notes with
+          accidentals; different durations of the grace notes."
+  title               = "Grace Note At End Of Mesure"
 }
 
 \paper {
@@ -41,23 +37,15 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 5/4 %}
-  
   \clef "treble"
-  \key bes \major
+  \key c \major
   \time 4/4
-  
-  \stopStaff
-  \override Staff.StaffSymbol.line-count = 5
-  \startStaff
-  \stemDown c''4 ~  (  % noteIsFollowedByGraceNotesGroup
-  \once \omit TupletBracket
-  \tuplet 6/4 {  %{ tupletNumber: 1, tupleFactor: 6/4, line 139 %}  \stemUp c''16 [  %{ beam 1, line 153 %}
-  g' a' bes'! \grace { \stemDown c''16 [  %{ line 210, elementNumber: 1 %}
-   bes'16 ]  %{ line 222, elementNumber: 2 %}
-  } \stemUp a'16 \stemDown \stemUp g' ]  %{ beam 1, line 264 %}
-  ) } f'4 r8 f'
-  %{ end kMeasureKindOverFlowing, measure  %}
+  c''2. c''8 [  %{ beam 1, line 56 %}
+   % noteIsFollowedByGraceNotesGroup
+  \afterGrace { \slashedGrace { d''16 } e''8 ]  %{ beam 1, line 75 %}
+   % noteIsFollowedByGraceNotesGroup
+  } \grace { g'16 } f'4
+  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
 }
 
 \book {
@@ -72,7 +60,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
       
         \new Staff  = "Part_POne_Staff_One"
         \with {
-          instrumentName = "Voice"
+          instrumentName = "MusicXML Part"
         }
         <<
           \context Voice = "Part_POne_Staff_One_Voice_One" <<

@@ -42,7 +42,7 @@ class EXP msrTuplet : public msrTupletElement
                             msrTupletTypeKind       tupletTypeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
-                            msrPlacementKind        tupletPlacementKind);
+                            msrPlacementKind        tupletBracketPlacementKind);
 
     // cloning
     // ------------------------------------------------------
@@ -65,7 +65,7 @@ class EXP msrTuplet : public msrTupletElement
                             msrTupletTypeKind       tupletTypeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
-                            msrPlacementKind        tupletPlacementKind);
+                            msrPlacementKind        tupletBracketPlacementKind);
 
     virtual               ~msrTuplet ();
 
@@ -118,11 +118,12 @@ class EXP msrTuplet : public msrTupletElement
                               { return fTupletDisplayWholeNotes; };
 
     // tuplet placement
-    void                  setTupletPlacementKind (msrPlacementKind placementKind)
-                              { fTupletPlacementKind = placementKind; };
+    void                  setTupletBracketPlacementKind (
+                            msrPlacementKind placementKind)
+                              { fTupletBracketPlacementKind = placementKind; };
 
-    msrPlacementKind      getTupletPlacementKind () const
-                              { return fTupletPlacementKind; };
+    msrPlacementKind      getTupletBracketPlacementKind () const
+                              { return fTupletBracketPlacementKind; };
 
     // uplink to tuplet
     void                  setTupletUpLinkToContainingTuplet (
@@ -232,7 +233,7 @@ class EXP msrTuplet : public msrTupletElement
     mfWholeNotes          fTupletDisplayWholeNotes;
 
     // placement
-    msrPlacementKind      fTupletPlacementKind;
+    msrPlacementKind      fTupletBracketPlacementKind;
 
     // elements list
     std::list <S_msrTupletElement>
