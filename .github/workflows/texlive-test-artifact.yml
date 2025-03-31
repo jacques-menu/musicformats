@@ -48,7 +48,7 @@ jobs:
           node-version: '20'
 
 
-      - name: Compile the user guide - pdflatex run 1/2
+      - name: Compile the user guide - pdflatex run 1/3
         # --------------------------------------------------------------------------
         uses:
           xu-cheng/latex-action@v3
@@ -58,7 +58,17 @@ jobs:
           root_file:
             MusicFormatsUserGuide.tex MusicFormatsUserGuide.tex
 
-      - name: Compile the user guide - pdflatex run 2/2
+      - name: Compile the user guide - pdflatex run 2/3
+        # --------------------------------------------------------------------------
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfuserguide
+          root_file:
+            MusicFormatsUserGuide.tex MusicFormatsUserGuide.tex
+
+      - name: Compile the user guide - pdflatex run 3/3
         # --------------------------------------------------------------------------
         uses:
           xu-cheng/latex-action@v3
