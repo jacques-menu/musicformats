@@ -15,11 +15,11 @@ name: Test GitHub TexLive actions
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Triggers the workflow on push or pull request events but only for the v0.9.72-beta-2 branch
   push:
-    branches: [ master ]
+    branches: [ v0.9.72-beta-2 ]
   pull_request:
-    branches: [ master ]
+    branches: [ v0.9.72-beta-2 ]
   workflow_dispatch:
 
   # Allows you to run this workflow manually from the Actions tab
