@@ -80,37 +80,47 @@ jobs:
 #             libmusicxml2.tex
 
 
-#       - name: Compile the user guide - pdflatex run 1/2
-#         # --------------------------------------------------------------------------
-#         uses:
-#           xu-cheng/latex-action@v3
-#         with:
-#           working_directory:
-#             ./documentation/mfuserguide
-#           root_file:
-#             MusicFormatsUserGuide.tex
+      - name: Compile the maintenance guide - pdflatex run 1/3
+        # --------------------------------------------------------------------------
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfmaintainanceguide
+          root_file:
+            MusicFormatsMaintainanceGuide.tex
 
-#       - name: Compile the user guide - pdflatex run 2/2
-#         # --------------------------------------------------------------------------
-#         uses:
-#           xu-cheng/latex-action@v3
-#         with:
-#           working_directory:
-#             ./documentation/mfuserguide
-#           root_file:
-#             MusicFormatsUserGuide.tex
+      - name: Compile the user guide - pdflatex run 2/3
+        # --------------------------------------------------------------------------
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfmaintainanceguide
+          root_file:
+            MusicFormatsMaintainanceGuide.tex
+
+      - name: Compile the user guide - pdflatex run 3/3
+        # --------------------------------------------------------------------------
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfmaintainanceguide
+          root_file:
+            MusicFormatsMaintainanceGuide.tex
 
 
-#       - name: Upload the documentation PDF guides
-#         # --------------------------------------------------------------------------
-#         uses:
-#           actions/upload-artifact@v4
-#         with:
-#           # user guide
-#           name:
-#             musicformats-documentation-artifact
-#           path:
-#             ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
-# #             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
-#           retention-days:
-#             10
+      - name: Upload the documentation PDF guides
+        # --------------------------------------------------------------------------
+        uses:
+          actions/upload-artifact@v4
+        with:
+          # user guide
+          name:
+            musicformats-documentation-artifact
+          path:
+            ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
+#             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
+          retention-days:
+            10
