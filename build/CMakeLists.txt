@@ -217,6 +217,8 @@ set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/guido passes/mxsr2guido co
 
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/msdl representations/msdr passes/msdl2msr passes/msdl2msr converters/msdl2braille converters/msdl2guido converters/msdl2lilypond converters/msdl2musicxml converters/msdlconverter)
 
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/mnxsr passes/mnx2mnxsr passes/mnxsr2msr)
+
 
 message (STATUS "-----> MF_SRC_FOLDERS: ${MF_SRC_FOLDERS}")
 
@@ -388,7 +390,7 @@ message (STATUS "-----> MUSICFORMATS_PDF_DOCS: ${MUSICFORMATS_PDF_DOCS}")
 set (LXML_CLI_SAMPLES xmlversion RandomMusic RandomChords xmlfactory partsummary xml2guido xmliter countnotes readunrolled xml2midi xmlread xmltranspose xmlclone)
 message (STATUS "-----> LXML_CLI_SAMPLES: ${LXML_CLI_SAMPLES}")
 
-set (MF_CLI_SAMPLES displayMusicformatsVersion displayMusicformatsHistory MusicAndHarmonies Mikrokosmos3Wandering LilyPondIssue34 xml2ly xml2brl xml2xml xml2gmn msdl stringmatcher mfsl ischeme)
+set (MF_CLI_SAMPLES displayMusicformatsVersion displayMusicformatsHistory MusicAndHarmonies Mikrokosmos3Wandering LilyPondIssue34 xml2ly xml2brl xml2xml xml2gmn msdl stringmatcher mfsl ischeme mnx2msr)
 message (STATUS "-----> MF_CLI_SAMPLES: ${MF_CLI_SAMPLES}")
 
 if (APPLE)
