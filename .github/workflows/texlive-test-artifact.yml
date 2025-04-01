@@ -9,9 +9,8 @@
 # https://github.com/teatimeguest/setup-texlive-action?tab=readme-ov-file#basic-usage
 
 
-name: Test GitHub TexLive actions
 # --------------------------------------------------------------------------
-
+name: Test GitHub TexLive actions
 
 # Controls when the action will run.
 on:
@@ -25,62 +24,35 @@ on:
   workflow_dispatch:
 
 
+# --------------------------------------------------------------------------
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build-and-upload-the-MusicFormats-docummenntation-PDF-files:
+
     name:
       Compile and upload the user and maintenance guides
-    # --------------------------------------------------------------------------
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+
         # --------------------------------------------------------------------------
+      - name: Checkout repo
         uses:
           actions/checkout@v4
 
 
-      - name: Setup node
+
         # --------------------------------------------------------------------------
+      - name: Setup node
         uses:
           actions/setup-node@v4
         with:
           node-version: '20'
 
 
-      - name: Compile the user guide - pdflatex run 1/3
+
         # --------------------------------------------------------------------------
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
-
-      - name: Compile the user guide - pdflatex run 2/3
-        # --------------------------------------------------------------------------
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
-
-      - name: Compile the user guide - pdflatex run 3/3
-        # --------------------------------------------------------------------------
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
-
-
       - name: Test the beamer package - 1 pdflatex run is enough
-        # --------------------------------------------------------------------------
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -90,20 +62,39 @@ jobs:
             beamertest.tex
 
 
-      - name: Compile the libmusicxml2 presentation - 1 pdflatex run is enough
+
         # --------------------------------------------------------------------------
+      - name: Compile the user guide - pdflatex run 1/3
         uses:
           xu-cheng/latex-action@v3
         with:
           working_directory:
-            ./documentation/libmusicxml2Presentation
+            ./documentation/mfuserguide
           root_file:
-            libmusicxml2.tex
-          extra_system_packages:
-            "beamer"
+            MusicFormatsUserGuide.tex
 
-      - name: Compile the maintenance guide - pdflatex run 1/3
+      - name: Compile the user guide - pdflatex run 2/3
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfuserguide
+          root_file:
+            MusicFormatsUserGuide.tex
+
+      - name: Compile the user guide - pdflatex run 3/3
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfuserguide
+          root_file:
+            MusicFormatsUserGuide.tex
+
+
+
         # --------------------------------------------------------------------------
+      - name: Compile the maintenance guide - pdflatex run 1/3
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -113,7 +104,6 @@ jobs:
             MusicFormatsMaintainanceGuide.tex
 
       - name: Compile the user guide - pdflatex run 2/3
-        # --------------------------------------------------------------------------
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -123,7 +113,6 @@ jobs:
             MusicFormatsMaintainanceGuide.tex
 
       - name: Compile the user guide - pdflatex run 3/3
-        # --------------------------------------------------------------------------
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -133,8 +122,23 @@ jobs:
             MusicFormatsMaintainanceGuide.tex
 
 
-      - name: Upload the documentation PDF guides
+
+#         # --------------------------------------------------------------------------
+#       - name: Compile the libmusicxml2 presentation - 1 pdflatex run is enough
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/libmusicxml2Presentation
+#           root_file:
+#             libmusicxml2.tex
+# #           extra_system_packages:
+# #             "beamer"
+
+
+
         # --------------------------------------------------------------------------
+      - name: Upload the documentation PDF guides
         uses:
           actions/upload-artifact@v4
         with:
@@ -145,5 +149,5 @@ jobs:
             ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
 #             ./documentation/libmusicxml2Presentation/libmusicxml2.pdf
-          retention-days:
-            10
+#           retention-days:
+#             10
