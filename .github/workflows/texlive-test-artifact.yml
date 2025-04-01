@@ -138,13 +138,12 @@ jobs:
         uses:
           actions/upload-artifact@v4
         with:
-          # user guide
           name:
             musicformats-documentation-artifact
-          path:
+          path: |
             ./documentation/beamertest.pdf
             ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
-#             ./documentation/libmusicxml2Presentation/libmusicxml2.pdf
             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
+#             ./documentation/libmusicxml2Presentation/libmusicxml2.pdf
           retention-days:
             10
