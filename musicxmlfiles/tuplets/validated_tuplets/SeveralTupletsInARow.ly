@@ -53,14 +53,20 @@ Part_POne_Staff_One_Voice_One = \absolute {
   %{ begin kMeasureKindOverFlowing, measure 2, % measureCurrentPositionInMeasure: pim 37/24 %}
   
   \once\override TupletBracket.bracket-visibility = ##t
+  
+  \once\override TupletBracket.direction = -1 % DOWN
   \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 204 %}  f'8 [  %{ beam 1, line 218 %}
   g'8. _\markup { "possibile" } \f _- a'16 ]  %{ beam 1, line 273 %}
   _- }
   \once\override TupletBracket.bracket-visibility = ##t
+  
+  \once\override TupletBracket.direction = -1 % DOWN
   \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 283 %}  a'8 [  %{ beam 1, line 297 %}
   bis'!16 _. b'! _. cis''! _. d'' ]  %{ beam 1, line 384 %}
   _. }
   \once\override TupletBracket.bracket-visibility = ##t
+  
+  \once\override TupletBracket.direction = -1 % DOWN
   \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 393 %}  e''16 [  %{ beam 1, line 407 %}
   _. f''!8. \mf _- g''8 ]  %{ beam 1, line 461 %}
   _- }

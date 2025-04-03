@@ -1,49 +1,80 @@
 # This is a workflow to build the MusicFormats documentation PDF files
 # and create an artifact for them
 
-# https://github.com/xu-cheng/latex-action
-
-
-name: Build the MusicFormats documentation PDF files
 # --------------------------------------------------------------------------
+name: Build the MusicFormats PDF documentation files
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Triggers the workflow on push or pull request events but only for the v0.9.72-beta-2 branch
   push:
-    branches: [ master ]
+#     branches: [ v0.9.72-beta-2 ]
   pull_request:
-    branches: [ master ]
+#     branches: [ v0.9.72-beta-2 ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+
+# --------------------------------------------------------------------------
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build-and-upload-the-MusicFormats-docummenntation-PDF-files:
+
     name:
       Compile and upload the user and maintenance guides
-    # --------------------------------------------------------------------------
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout repo
+
         # --------------------------------------------------------------------------
+      - name: Checkout repo
         uses:
           actions/checkout@v4
 
 
-      - name: Setup node
+
         # --------------------------------------------------------------------------
+      - name: Setup node
         uses:
           actions/setup-node@v4
         with:
           node-version: '20'
 
 
-      - name: Compile the user guide - pdflatex run 1/n
+
         # --------------------------------------------------------------------------
+      - name: Test the beamer package - 1 pdflatex run is enough
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation
+          root_file:
+            beamertest.tex
+
+
+
+        # --------------------------------------------------------------------------
+      - name: Compile the user guide - pdflatex run 1/3
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfuserguide
+          root_file:
+            MusicFormatsUserGuide.tex
+
+      - name: Compile the user guide - pdflatex run 2/3
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfuserguide
+          root_file:
+            MusicFormatsUserGuide.tex
+
+      - name: Compile the user guide - pdflatex run 3/3
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -53,15 +84,62 @@ jobs:
             MusicFormatsUserGuide.tex
 
 
-      - name: Upload the documentation PDF guides
+
         # --------------------------------------------------------------------------
+      - name: Compile the maintenance guide - pdflatex run 1/3
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfmaintainanceguide
+          root_file:
+            MusicFormatsMaintainanceGuide.tex
+
+      - name: Compile the user guide - pdflatex run 2/3
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfmaintainanceguide
+          root_file:
+            MusicFormatsMaintainanceGuide.tex
+
+      - name: Compile the user guide - pdflatex run 3/3
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfmaintainanceguide
+          root_file:
+            MusicFormatsMaintainanceGuide.tex
+
+
+
+#         # --------------------------------------------------------------------------
+#       - name: Compile the libmusicxml2 presentation - 1 pdflatex run is enough
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/libmusicxml2Presentation
+#           root_file:
+#             libmusicxml2.tex
+
+
+
+        # --------------------------------------------------------------------------
+      - name: Upload the documentation PDF guides
         uses:
           actions/upload-artifact@v4
         with:
-          # user guide
           name:
             musicformats-documentation-artifact
-          path:
+          path: |
+            MusicFormatsVersionNumber.txt
+            MusicFormatsVersionDate.txt
+            ./documentation/beamertest.pdf
             ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
-          retention-days:
-            10
+            ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
+#             ./documentation/libmusicxml2Presentation/libmusicxml2.pdf
+#           retention-days:
+#             10
