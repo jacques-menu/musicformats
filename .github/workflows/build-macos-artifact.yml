@@ -52,3 +52,5 @@ jobs:
             build/Makefile
 #             uncomment to have the full libdir in the .zip archive
 #             build/libdir
+          retention-days:
+            90

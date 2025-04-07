@@ -149,5 +149,5 @@ jobs:
             ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
 #             ./documentation/libmusicxml2Presentation/libmusicxml2.pdf
-#           retention-days:
-#             10
+          retention-days:
+            90
