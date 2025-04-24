@@ -21,7 +21,7 @@ function usage ()
     exit 1
   }
 
-LIBMUSICFORMATS_GIT=${HOME}/musicformats-git-dev
+LIBMUSICFORMATS_GIT=${MY_WORK_DIR}/musicformats-git-dev
 
 
 # Write all output to logfile

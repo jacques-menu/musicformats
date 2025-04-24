@@ -20,7 +20,7 @@
 #include "msrDirections.h"
 #include "msrHiddenMeasureAndBarLines.h"
 #include "msrInstruments.h"
-#include "msrClefsKeysTimeSignatures.h"
+#include "msrClefKeyTimeSignatureGroups.h"
 #include "msrPitchesNames.h"
 #include "msrPlacements.h"
 #include "msrPrintObjects.h"

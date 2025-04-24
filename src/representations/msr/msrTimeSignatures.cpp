@@ -27,7 +27,7 @@
 
 #include "msrMeasureConstants.h"
 
-#include "msrClefsKeysTimeSignatures.h"
+#include "msrClefKeyTimeSignatureGroups.h"
 
 #include "oahOah.h"
 
@@ -1274,13 +1274,17 @@ std::string msrTimeSignature::asString () const
     } // for
   }
   else {
-    if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
-      msrInternalError (
-        gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
-        __FILE__, __LINE__,
-        "time  items vector is empty");
-    }
+    switch (fTimeSignatureSymbolKind) {
+      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
+        break;
+
+      default:
+        msrInternalError (
+          gServiceRunData->getInputSourceName (),
+          fInputLineNumber,
+          __FILE__, __LINE__,
+          "time  items vector is empty");
+    } // switch
   }
 
   ss << ']';
@@ -1348,7 +1352,9 @@ std::string msrTimeSignature::asShortString () const
 //     } // for
 //   }
 //   else {
-//     if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
+//     if (
+//       fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura
+//     ) {
 //       msrInternalError (
 //         gServiceRunData->getInputSourceName (),
 //         fInputLineNumber,

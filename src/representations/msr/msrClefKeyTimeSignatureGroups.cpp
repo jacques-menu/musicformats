@@ -17,7 +17,7 @@
 #include "mfServices.h"
 
 #include "msrBrowsers.h"
-#include "msrClefsKeysTimeSignatures.h"
+#include "msrClefKeyTimeSignatureGroups.h"
 
 #include "msrWae.h"
 

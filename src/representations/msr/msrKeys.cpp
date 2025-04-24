@@ -28,7 +28,7 @@
 
 #include "msrMeasureConstants.h"
 
-#include "msrClefsKeysTimeSignatures.h"
+#include "msrClefKeyTimeSignatureGroups.h"
 
 #include "oahOah.h"
 

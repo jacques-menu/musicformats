@@ -17,7 +17,7 @@
 
 #include "msrTypesForwardDeclarations.h"
 
-#include "msrClefsKeysTimeSignatures.h"
+#include "msrClefKeyTimeSignatureGroups.h"
 #include "msrElements.h"
 #include "msrMeasures.h"
 #include "msrMeasuresSlices.h"

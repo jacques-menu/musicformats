@@ -14,7 +14,7 @@
 
 #include "msrVoiceElements.h"
 
-#include "msrClefsKeysTimeSignatures.h"
+#include "msrClefKeyTimeSignatureGroups.h"
 #include "msrEyeGlasses.h"
 #include "msrLyrics.h"
 #include "msrMeasures.h"

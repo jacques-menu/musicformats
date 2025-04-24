@@ -28,7 +28,7 @@
 
 #include "msrStavesDetails.h"
 
-#include "msrClefsKeysTimeSignatures.h"
+#include "msrClefKeyTimeSignatureGroups.h"
 
 #include "msrTemposEnumTypes.h"
 #include "msrTempos.h"

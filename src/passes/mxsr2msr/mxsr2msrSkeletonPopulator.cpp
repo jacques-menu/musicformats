@@ -5105,7 +5105,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_senza_misura& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentTimeSignatureSymbolKind = msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura;
+  fCurrentTimeSignatureSymbolKind =
+    msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura;
 }
 
 void mxsr2msrSkeletonPopulator::visitStart (S_interchangeable& elt)
@@ -5298,13 +5299,18 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
 
   else {
     // only a 'semza misura' time may be empty
-    if (  fCurrentTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
-      mxsr2msrError (
-        gServiceRunData->getInputSourceName (),
-        elt->getInputLineNumber (),
-        __FILE__, __LINE__,
-        "time is empty");
-    }
+    switch (fCurrentTimeSignatureSymbolKind) {
+      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
+        break;
+
+      default:
+        mxsr2msrError (
+          gServiceRunData->getInputSourceName (),
+          elt->getInputLineNumber (),
+          __FILE__, __LINE__,
+          "time is empty");
+
+    } // switch
   }
 
   // register time signature in part or staff

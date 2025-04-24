@@ -14,7 +14,7 @@
 set -x
 
 # fetch the needed environment
-. ${HOME}/JMI_ShellSettings/ZshDefinitionsForMusicFormats.zsh
+. ${HOME}/JMI_SHELL_SETTINGS/ZshDefinitionsForMusicFormats.zsh
 
 
 function addAllToMusicFormatsLocalRepository ()

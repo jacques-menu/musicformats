@@ -18,7 +18,7 @@
 #include "visitor.h"
 #include "xml.h"
 
-#include "msrClefsKeysTimeSignatures.h"
+#include "msrClefKeyTimeSignatureGroups.h"
 #include "msrPlacements.h"
 #include "msrSpanners.h"
 #include "msrTupletFactors.h"

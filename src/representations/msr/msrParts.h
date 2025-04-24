@@ -18,7 +18,7 @@
 
 #include "msrTypesForwardDeclarations.h"
 
-#include "msrClefsKeysTimeSignatures.h"
+#include "msrClefKeyTimeSignatureGroups.h"
 #include "msrPartGroups.h"
 #include "msrRepeatsEnumTypes.h"
 #include "msrStavesEnumTypes.h"

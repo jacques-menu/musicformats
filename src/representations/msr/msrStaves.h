@@ -14,7 +14,7 @@
 
 #include "msrElements.h"
 
-#include "msrClefsKeysTimeSignatures.h"
+#include "msrClefKeyTimeSignatureGroups.h"
 #include "msrRepeats.h"
 #include "msrRepeatsEnumTypes.h"
 #include "msrStavesDetails.h"

@@ -16,9 +16,9 @@
 
 #include "smartpointer.h"
 
-#include "msrClefsKeysTimeSignatures.h"
-#include "msrClefsKeysTimeSignatures.h"
-#include "msrClefsKeysTimeSignatures.h"
+#include "msrClefKeyTimeSignatureGroups.h"
+#include "msrClefKeyTimeSignatureGroups.h"
+#include "msrClefKeyTimeSignatureGroups.h"
 
 
 namespace MusicFormats
