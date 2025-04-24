@@ -21,6 +21,9 @@ function usage ()
     exit 1
   }
 
+# fetch the needed environment
+. ${HOME}/JMI_SHELL_SETTINGS/ZshDefinitionsForMusicFormats.zsh
+
 LIBMUSICFORMATS_GIT=${MY_WORK_DIR}/musicformats-git-dev
 
 
