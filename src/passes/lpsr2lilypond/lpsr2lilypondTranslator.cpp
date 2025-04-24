@@ -20932,11 +20932,11 @@ void lpsr2lilypondTranslator::generateNoteBeamsAfterNote (
             if (beamNumber == 1) {
               fLilypondCodeStream <<
                 "[ " <<
-                " %{ beam " <<
-                beamNumber <<
-                ", line " <<
-                inputStartLineNumber <<
-                " %}" <<
+//                 " %{ beam " <<
+//                 beamNumber <<
+//                 ", line " <<
+//                 inputStartLineNumber <<
+//                 " %}" <<
                 std::endl;
             }
           }
@@ -20971,11 +20971,11 @@ void lpsr2lilypondTranslator::generateNoteBeamsAfterNote (
             if (beamNumber == 1) {
               fLilypondCodeStream <<
                 "] " <<
-                " %{ beam " <<
-                beamNumber <<
-                ", line " <<
-                inputStartLineNumber <<
-                " %}" <<
+//                 " %{ beam " <<
+//                 beamNumber <<
+//                 ", line " <<
+//                 inputStartLineNumber <<
+//                 " %}" <<
                 std::endl;
             }
 

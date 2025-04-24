@@ -12,6 +12,8 @@
 #ifndef ___msrTimeSignatures___
 #define ___msrTimeSignatures___
 
+#include <vector>
+
 
 namespace MusicFormats
 {

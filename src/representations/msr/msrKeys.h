@@ -12,6 +12,8 @@
 #ifndef ___msrKeys___
 #define ___msrKeys___
 
+#include <vector>
+
 #include "msrOctaves.h"
 
 
