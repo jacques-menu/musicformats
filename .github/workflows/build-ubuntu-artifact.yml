@@ -36,6 +36,11 @@ jobs:
         run:
           cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
+      - name: Move libraries and executables to the top level
+        run: |
+          mv build/lib .
+          mv build/bin .
+
       - name: Upload libraries and executables for Ubuntu
         uses: actions/upload-artifact@v4
         with:

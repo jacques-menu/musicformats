@@ -39,6 +39,10 @@ jobs:
         run:
           cmake -G "Unix Makefiles" -S cmakefiles -B build ; cd build ; make ; ls -R .
 
+      - name: Move libraries and executables to the top level
+        run: |
+          mv build/lib .
+          mv build/bin .
 
       - name: Upload libraries and executables for Windows
         uses: actions/upload-artifact@v4

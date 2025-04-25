@@ -40,12 +40,12 @@ jobs:
         run:
           cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
-      - name: Move libraries and executables for MacOS
+      - name: Move libraries and executables to the top level
         run: |
           mv build/lib .
           mv build/bin .
 
-      - name: Upload versions informations for MacOS
+      - name: Upload version informations and binaries for MacOS
         uses: actions/upload-artifact@v4
         with:
           name: musicformats-macos-latest-artifact
