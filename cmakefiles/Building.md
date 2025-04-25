@@ -9,13 +9,13 @@ The **MusicFormats** library relies on [CMake](http://www.cmake.org/), a cross-p
 
 To build the library, you should run:
 
-  cd <local MusicFormats repository>
+  `cd <local MusicFormats repository>`
 
-  cmake -S cmakefiles -B build
+  `cmake -S cmakefiles -B build`
 
-  cd build
+  `cd build`
 
-  make
+  `make
 
 Your target platform is inferred from the Makefile. It builds the MusicFormats library and various sample applications and tools.
 
