@@ -37,7 +37,7 @@ jobs:
 
       - name: Build MusicFormats for Windows
         run:
-          cd build ; uname -a ; cmake -G "Unix Makefiles" ; cmake -S . -B . . ; ls . ; make ; ls .
+          cmake -G "Unix Makefiles" -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
 
       - name: Upload libraries and executables for Windows
