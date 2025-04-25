@@ -32,8 +32,8 @@ set (MUSICXML_VERSION 4.0)
 # MusicFormats version
 #===============================================================
 
-# execute_process(COMMAND cat ../../MusicFormatsVersionNumber.txt OUTPUT_VARIABLE MUSICFORMATS_VERSION)
-execute_process(COMMAND cat ../MusicFormatsVersionNumber.txt OUTPUT_VARIABLE MUSICFORMATS_VERSION)
+# execute_process(COMMAND cat ../MusicFormatsVersionNumber.txt OUTPUT_VARIABLE MUSICFORMATS_VERSION)
+execute_process(COMMAND cat MusicFormatsVersionNumber.txt OUTPUT_VARIABLE MUSICFORMATS_VERSION)
 message (STATUS "-----> MUSICFORMATS_VERSION: ${MUSICFORMATS_VERSION}")
 
 macro (get_major_minor_patch version)
@@ -89,8 +89,8 @@ set (LXML_DOC_DIR ${ROOT_DIR}/libmusicxml/doc)
 set (LXML_DOC    ${LXML_DOC_DIR}/presentation/libmusicxml2.pdf)
 set (MXML_SCHEMAS_DIR ${ROOT_DIR}/dtds/${MUSICXML_VERSION})
 
-set (BINDIR ${CMAKE_CURRENT_SOURCE_DIR}/bin)
-set (LIBDIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+set (BINDIR ${CMAKE_CURRENT_BINARY_DIR}/bin)
+set (LIBDIR ${CMAKE_CURRENT_BINARY_DIR}/lib)
 
 
 #===============================================================
