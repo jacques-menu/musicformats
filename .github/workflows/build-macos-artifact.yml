@@ -40,6 +40,11 @@ jobs:
         run:
           cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
+      - name: Move libraries and executables for MacOS
+        run: |
+          mv build/lib .
+          mv build/bin .
+
       - name: Upload versions informations for MacOS
         uses: actions/upload-artifact@v4
         with:
@@ -47,12 +52,7 @@ jobs:
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt
-#             build/bin
-#             build/lib
+            bin
+            lib
           retention-days:
             90
-
-      - name: Upload libraries and executables for MacOS
-        run: |
-          mv build/lib/* .
-          mv build/bin/* .
