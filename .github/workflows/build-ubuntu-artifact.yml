@@ -45,6 +45,5 @@ jobs:
             MusicFormatsVersionDate.txt
             build/bin
             build/lib
-            build/Makefile
           retention-days:
             90

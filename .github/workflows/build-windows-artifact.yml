@@ -37,7 +37,7 @@ jobs:
 
       - name: Build MusicFormats for Windows
         run:
-          cmake -G "Unix Makefiles" -S cmakefiles -B build ; cd build ; make ; ls -salR .
+          cmake -G "Unix Makefiles" -S cmakefiles -B build ; cd build ; make ; ls -R .
 
 
       - name: Upload libraries and executables for Windows
@@ -49,6 +49,5 @@ jobs:
             MusicFormatsVersionDate.txt
             build/bin
             build/lib
-            build/Makefile
           retention-days:
             90
