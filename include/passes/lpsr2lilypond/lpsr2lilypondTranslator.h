@@ -994,8 +994,11 @@ class EXP lpsr2lilypondTranslator :
 
     S_msrTimeSignature    fCurrentVoiceTimeSignature;
 
-    Bool                  fVoiceIsCurrentlySenzaMisura; // JMI
+    Bool                  fOnGoingSenzaMisura;
     Bool                  fOnGoingVoiceCadenza;
+
+    void                  generateRegularTimeSignature (
+                            const S_msrTimeSignature& timeSignature);
 
     // staves
     // ------------------------------------------------------

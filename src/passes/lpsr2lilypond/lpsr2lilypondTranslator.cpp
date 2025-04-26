@@ -12873,7 +12873,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       break;
   } // switch
 
-  fVoiceIsCurrentlySenzaMisura = false;
+  fOnGoingSenzaMisura = false;
 
   fOnGoingVoice = true;
 
@@ -17810,10 +17810,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  msrTimeSignatureSymbolKind
-    timeSignatureSymbolKind =
-      elt->getTimeSignatureSymbolKind ();
-
+//   msrTimeSignatureSymbolKind
+//     timeSignatureSymbolKind =
+//       elt->getTimeSignatureSymbolKind ();
+//
 //   gLog <<
 //     "---> timeSignatureSymbolKind: " << timeSignatureSymbolKind << // JMI  0.9.70
 //     std::endl;
@@ -17830,177 +17830,193 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
   }
 
   if (doGenerateTimeSignature) {
-  /* JMI
     // is this the end of a senza misura fragment?
-    if (
-      fVoiceIsCurrentlySenzaMisura
-        &&
-      timeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
+    if (fOnGoingSenzaMisura) {
+
+//       timeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
+//       fLilypondCodeStream <<
+//         "\\undo\\omit Staff.TimeSignature" <<
+
       fLilypondCodeStream <<
-        "\\undo\\omit Staff.TimeSignature" <<
+        "\\cadenzaOff" <<
         std::endl;
 
-      fVoiceIsCurrentlySenzaMisura = false;
+      fOnGoingSenzaMisura = false;
     }
-  */
 
     // handle the time
-    if (timeSignatureSymbolKind == msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
-      // senza misura time
+    switch (elt->getTimeSignatureSymbolKind ()) {
+      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
+        // senza misura time
 
-      /* JMI
-      fLilypondCodeStream <<
-        "\\omit Staff.TimeSignature" <<
-        std::endl;
-  */
+        /* JMI
+        fLilypondCodeStream <<
+          "\\omit Staff.TimeSignature" <<
+          std::endl;
+    */
 
-//       fVoiceIsCurrentlySenzaMisura = true; // JMI  0.9.70
-    }
+        fLilypondCodeStream <<
+          "\\cadenzaOn" <<
+          std::endl;
 
-    else {
-      // con misura time
+        fOnGoingSenzaMisura = true; // JMI  0.9.70
+        break;
 
-      const std::vector <S_msrTimeSignatureItem>&
-        timeSignatureItemsVector =
-          elt->getTimeSignatureItemsVector ();
+      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
+        break;
 
-      int timesItemsNumber =
-        timeSignatureItemsVector.size ();
-
-      if (timesItemsNumber) {
-        // should there be a single number?
-        switch (timeSignatureSymbolKind) {
-          case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCommon:
-            break;
-          case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCut:
-            break;
-          case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNote:
-            break;
-          case msrTimeSignatureSymbolKind::kTimeSignatureSymbolDottedNote:
-            break;
-          case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSingleNumber:
-            fLilypondCodeStream <<
-              "\\once\\override Staff.TimeSignature.style = #'single-digit" <<
-              std::endl;
-            break;
-          case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
-            break;
-          case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
-            break;
-        } // switch
-
-        if (! elt->getTimeIsCompound ()) {
-          // simple time
-          // \time "3/4" for 3/4
-          // or senza misura
-
-          S_msrTimeSignatureItem
-            timeSignatureItem =
-              timeSignatureItemsVector [0]; // the only element;
-
-          // fetch the time signature item beat numbers vector
-          const std::vector <int>&
-            beatsNumbersVector =
-              timeSignatureItem->
-                getTimeSignatureBeatsNumbersVector ();
-
-          // should the time be numeric?
-          if (
-            timeSignatureSymbolKind == msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone
-              ||
-            gGlobalLpsr2lilypondOahGroup->getNumericalTime ()) {
-            fLilypondCodeStream <<
-              "\\numericTimeSignature ";
-          }
-
-          fLilypondCodeStream <<
-            "\\time " <<
-            beatsNumbersVector [0] << // the only element
-            '/' <<
-            timeSignatureItem->getTimeSignatureBeatValue ();
-        }
-
-        else {
-          // compound time
-          // \compoundMeter #'(3 2 8) for 3+2/8
-          // \compoundMeter #'((3 8) (2 8) (3 4)) for 3/8+2/8+3/4
-          // \compoundMeter #'((3 2 8) (3 4)) for 3+2/8+3/4
-
-          fLilypondCodeStream <<
-            "\\compoundMeter #`(";
-
-          // handle all the time signature items in the vector
-          for (int i = 0; i < timesItemsNumber; ++i) {
-            S_msrTimeSignatureItem
-              timeSignatureItem =
-                timeSignatureItemsVector [i];
-
-            // fetch the time signature item beat numbers vector
-            const std::vector <int>&
-              beatsNumbersVector =
-                timeSignatureItem->
-                  getTimeSignatureBeatsNumbersVector ();
-
-            int beatsNumbersNumber =
-              beatsNumbersVector.size ();
-
-            // first generate the opening parenthesis
-            fLilypondCodeStream <<
-              "(";
-
-            // then generate all beats numbers in the vector
-            for (int j = 0; j < beatsNumbersNumber; ++j) {
-              fLilypondCodeStream <<
-                beatsNumbersVector [j] <<
-                cLilyPondSpace;
-            } // for
-
-            // then generate the beat type
-            fLilypondCodeStream <<
-              timeSignatureItem->getTimeSignatureBeatValue ();
-
-            // and finally generate the closing parenthesis
-            fLilypondCodeStream <<
-              ")";
-
-            if (i != timesItemsNumber - 1) {
-              fLilypondCodeStream <<
-                cLilyPondSpace;
-            }
-          } // for
-
-          fLilypondCodeStream <<
-            ")";
-        }
-
-        if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
-          fLilypondCodeStream <<
-            " %{ <-- line " <<
-            elt->getInputLineNumber () <<
-             " %} ";
-        }
-
-        fLilypondCodeStream << std::endl;
-      }
-
-      else {
-        // there are no time signature items
-        if (
-          timeSignatureSymbolKind
-            !=
-          msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura
-        ) {
-          lpsr2lilypondInternalError (
-            gServiceRunData->getInputSourceName (),
-            elt->getInputLineNumber (),
-            __FILE__, __LINE__,
-            "time signature items vector is empty");
-        }
-      }
-    }
+      default:
+        // regular time signature
+        generateRegularTimeSignature (elt);
+    } // switch
   }
 
   fCurrentVoiceTimeSignature = elt;
+}
+
+void lpsr2lilypondTranslator::generateRegularTimeSignature (
+  const S_msrTimeSignature& timeSignature)
+{
+  const std::vector <S_msrTimeSignatureItem>&
+    timeSignatureItemsVector =
+      timeSignature->getTimeSignatureItemsVector ();
+
+  int timesItemsNumber =
+    timeSignatureItemsVector.size ();
+
+  if (timesItemsNumber) {
+    // should there be a single number?
+    switch (timeSignature->getTimeSignatureSymbolKind ()) {
+      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCommon:
+        break;
+      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCut:
+        break;
+      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNote:
+        break;
+      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolDottedNote:
+        break;
+      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSingleNumber:
+        fLilypondCodeStream <<
+          "\\once\\override Staff.TimeSignature.style = #'single-digit" <<
+          std::endl;
+        break;
+      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
+        break;
+      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
+        break;
+    } // switch
+
+    if (! timeSignature->getTimeIsCompound ()) {
+      // simple time
+      // \time "3/4" for 3/4
+      // or senza misura
+
+      S_msrTimeSignatureItem
+        timeSignatureItem =
+          timeSignatureItemsVector [0]; // the only element;
+
+      // fetch the time signature item beat numbers vector
+      const std::vector <int>&
+        beatsNumbersVector =
+          timeSignatureItem->
+            getTimeSignatureBeatsNumbersVector ();
+
+      // should the time be numeric?
+      if (
+        timeSignature->getTimeSignatureSymbolKind ()
+          ==
+        msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone
+          ||
+        gGlobalLpsr2lilypondOahGroup->getNumericalTime ()
+      ) {
+        fLilypondCodeStream <<
+          "\\numericTimeSignature ";
+      }
+
+      fLilypondCodeStream <<
+        "\\time " <<
+        beatsNumbersVector [0] << // the only element
+        '/' <<
+        timeSignatureItem->getTimeSignatureBeatValue ();
+    }
+
+    else {
+      // compound time
+      // \compoundMeter #'(3 2 8) for 3+2/8
+      // \compoundMeter #'((3 8) (2 8) (3 4)) for 3/8+2/8+3/4
+      // \compoundMeter #'((3 2 8) (3 4)) for 3+2/8+3/4
+
+      fLilypondCodeStream <<
+        "\\compoundMeter #`(";
+
+      // handle all the time signature items in the vector
+      for (int i = 0; i < timesItemsNumber; ++i) {
+        S_msrTimeSignatureItem
+          timeSignatureItem =
+            timeSignatureItemsVector [i];
+
+        // fetch the time signature item beat numbers vector
+        const std::vector <int>&
+          beatsNumbersVector =
+            timeSignatureItem->
+              getTimeSignatureBeatsNumbersVector ();
+
+        int beatsNumbersNumber =
+          beatsNumbersVector.size ();
+
+        // first generate the opening parenthesis
+        fLilypondCodeStream <<
+          "(";
+
+        // then generate all beats numbers in the vector
+        for (int j = 0; j < beatsNumbersNumber; ++j) {
+          fLilypondCodeStream <<
+            beatsNumbersVector [j] <<
+            cLilyPondSpace;
+        } // for
+
+        // then generate the beat type
+        fLilypondCodeStream <<
+          timeSignatureItem->getTimeSignatureBeatValue ();
+
+        // and finally generate the closing parenthesis
+        fLilypondCodeStream <<
+          ")";
+
+        if (i != timesItemsNumber - 1) {
+          fLilypondCodeStream <<
+            cLilyPondSpace;
+        }
+      } // for
+
+      fLilypondCodeStream <<
+        ")";
+    }
+
+    if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+      fLilypondCodeStream <<
+        " %{ <-- line " <<
+        timeSignature->getInputLineNumber () <<
+         " %} ";
+    }
+
+    fLilypondCodeStream << std::endl;
+  }
+
+  else {
+    // there are no time signature items
+    if (
+      timeSignature->getTimeSignatureSymbolKind ()
+        !=
+      msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura
+    ) {
+      lpsr2lilypondInternalError (
+        gServiceRunData->getInputSourceName (),
+        timeSignature->getInputLineNumber (),
+        __FILE__, __LINE__,
+        "time signature items vector is empty");
+    }
+  }
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTimeSignature& elt)

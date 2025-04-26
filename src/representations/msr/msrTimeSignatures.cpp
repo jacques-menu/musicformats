@@ -1263,46 +1263,52 @@ std::string msrTimeSignature::asString () const
   ss <<
     "[TimeSignature" <<
     ", fTimeSignatureSymbolKind: " <<
-    fTimeSignatureSymbolKind <<
-    ", fTimeIsCompound: " <<
-    fTimeIsCompound <<
-    ", fTimeSignatureItemsVector.size(): " <<
-    mfSingularOrPlural (
-      fTimeSignatureItemsVector.size (), "item", "items") <<
-    mfSingularOrPlural (
-      fTimeSignatureItemsVector.size (), "item", "items") <<
-    ", line " << fInputLineNumber;
+    fTimeSignatureSymbolKind;
 
-  if (fTimeSignatureItemsVector.size ()) {
-    ss <<
-      ", ";
+  switch (fTimeSignatureSymbolKind) {
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
+      break;
 
-    std::vector <S_msrTimeSignatureItem>::const_iterator
-      iBegin = fTimeSignatureItemsVector.begin (),
-      iEnd   = fTimeSignatureItemsVector.end (),
-      i      = iBegin;
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
+      break;
 
-    for ( ; ; ) {
-      ss << (*i)->asString ();
-      if (++i == iEnd) break;
-      ss << ", ";
-    } // for
-  }
-  else {
-    switch (fTimeSignatureSymbolKind) {
-      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
-        break;
+    default:
+      // regular time signature
+      {
+        ss <<
+          ", fTimeIsCompound: " <<
+          fTimeIsCompound <<
+          ", fTimeSignatureItemsVector.size(): " <<
+          mfSingularOrPlural (
+            fTimeSignatureItemsVector.size (), "item", "items");
 
-      default:
-        msrInternalError (
-          gServiceRunData->getInputSourceName (),
-          fInputLineNumber,
-          __FILE__, __LINE__,
-          "time  items vector is empty");
-    } // switch
-  }
+        if (fTimeSignatureItemsVector.size ()) {
+          ss << ", ";
 
-  ss << ']';
+          std::vector <S_msrTimeSignatureItem>::const_iterator
+            iBegin = fTimeSignatureItemsVector.begin (),
+            iEnd   = fTimeSignatureItemsVector.end (),
+            i      = iBegin;
+
+          for ( ; ; ) {
+            ss << (*i)->asString ();
+            if (++i == iEnd) break;
+            ss << ", ";
+          } // for
+        }
+        else {
+          msrInternalError (
+            gServiceRunData->getInputSourceName (),
+            fInputLineNumber,
+            __FILE__, __LINE__,
+            "time  items vector is empty");
+        }
+      }
+  } // switch
+
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
 
   return ss.str ();
 }
@@ -1398,35 +1404,49 @@ void msrTimeSignature::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fTimeSignatureSymbolKind" << ": " <<
     fTimeSignatureSymbolKind <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fTimeIsCompound" << ": " <<
-    fTimeIsCompound <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fTimeSignatureItemsVector.size()" << ": " <<
-    mfSingularOrPlural (
-      fTimeSignatureItemsVector.size (), "item", "items") <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fTimeSignatureItemsVector" << ": ";
+    std::endl;
 
-  if (fTimeSignatureItemsVector.size ()) {
-    os << std::endl;
+  switch (fTimeSignatureSymbolKind) {
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
+      break;
 
-    ++gIndenter;
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
+      break;
 
-    for (S_msrTimeSignatureItem timeSignatureItem : fTimeSignatureItemsVector ) {
-      os << timeSignatureItem;
-    } // for
+    default:
+      // regular time signature
+      {
+        os <<
+          std::setw (fieldWidth) <<
+          "fTimeIsCompound" << ": " <<
+          fTimeIsCompound <<
+          std::endl <<
+          std::setw (fieldWidth) <<
+          "fTimeSignatureItemsVector.size()" << ": " <<
+          mfSingularOrPlural (
+            fTimeSignatureItemsVector.size (), "item", "items") <<
+          std::endl <<
+          std::setw (fieldWidth) <<
+          "fTimeSignatureItemsVector" << ": ";
 
-    --gIndenter;
-  }
-  else {
-    os <<
-      " [EMPTY]" <<
-      std::endl;
-  }
+        if (fTimeSignatureItemsVector.size ()) {
+          os << std::endl;
+
+          ++gIndenter;
+
+          for (S_msrTimeSignatureItem timeSignatureItem : fTimeSignatureItemsVector ) {
+            os << timeSignatureItem;
+          } // for
+
+          --gIndenter;
+        }
+        else {
+          os <<
+            " [EMPTY]" <<
+            std::endl;
+        }
+      }
+  } // switch
 
   --gIndenter;
 
