@@ -543,6 +543,23 @@ void mxsr2msrSkeletonPopulator::displayGatheredNoteInformations (
 
   gLog << std::left <<
     std::setw (fieldWidth) <<
+    "fCurrentNoteDiatonicPitchKind" << ": " <<
+    fCurrentNoteDiatonicPitchKind <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fCurrentNoteAlterationKind" << ": " <<
+    fCurrentNoteAlterationKind <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fCurrentNoteOctave" << ": " <<
+    fCurrentNoteOctave <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fCurrentNoteQuarterTonesPitchKind" << ": " <<
+    fCurrentNoteQuarterTonesPitchKind <<
+    std::endl << std::endl <<
+
+    std::setw (fieldWidth) <<
     "fCurrentNoteInputStartLineNumber" << ": " <<
     fCurrentNoteInputStartLineNumber <<
     std::endl <<
@@ -11190,6 +11207,20 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
   }
 #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
+
+
+    // attach pending barlines if any to part
+    if (! fPendingBarLinesList.empty ()) {
+      attachPendingBarLinesToPart (fCurrentPart);
+    }
+
+
+//     // attach pending rehearsals if any to part
+//     attachPendingPartLevelElementsIfAnyToPart (
+//       fCurrentPart);
+
+
+
     // finalize current measure in the part,
     // to add skips if necessary and set measure kind
     fCurrentPart->
@@ -12426,6 +12457,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
         barLine->
           setBarLineCategory (
             msrBarLineCategoryKind::kBarLineCategoryStandalone);
+
+// gLog << "fPendingBarLinesList.push_back (barLine);" << std::endl;
 
         // handle the final bar line
         fPendingBarLinesList.push_back (barLine);
@@ -20651,6 +20684,8 @@ void mxsr2msrSkeletonPopulator::attachPendingBarLinesToPart (
 
 //       fCurrentPart->
 //         appendBarLineToPart (barLine); // JMI ??? 0.9.63
+
+// gLog << "appendBarLineToPart (barLine);" << std::endl;
 
     part->
       appendBarLineToPart (barLine); // JMIJMIJMI

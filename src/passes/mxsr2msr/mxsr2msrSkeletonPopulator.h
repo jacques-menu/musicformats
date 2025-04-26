@@ -2116,7 +2116,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     int                       fCurrentHarmoniesStaffNumber;
 
-    mfWholeNotes             fCurrentHarmonyWholeNotesOffset;
+    mfWholeNotes              fCurrentHarmonyWholeNotesOffset;
 
     Bool                      fOnGoingHarmony;
 

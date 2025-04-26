@@ -524,7 +524,7 @@ R"(Page breaks)",
   S_oahTwoBooleansAtom
     traceBarLinesAtom =
       oahTwoBooleansAtom::create (
-        "trace-barlines", "tblines",
+        "trace-barlines", "tbarlines",
 R"(BarLines)",
         "fTraceBarLines",
         fTraceBarLines,
@@ -542,7 +542,7 @@ R"(BarLines)",
   S_oahThreeBooleansAtom
     traceBarLinesDetailsAtom =
       oahThreeBooleansAtom::create (
-        "trace-barlines-details", "tblinesd",
+        "trace-barlines-details", "tbarlinesd",
 R"(BarLines details)",
         "fTraceBarLinesDetails",
         fTraceBarLinesDetails,
