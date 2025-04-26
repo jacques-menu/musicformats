@@ -12,6 +12,7 @@
 #include <iomanip>      // setw()), set::precision(), ...
 #include <iostream>
 #include <sstream>
+#include <climits>      // INT_MIN, INT_MAX
 
 #include <regex>
 
@@ -1093,73 +1094,87 @@ mfWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
 {
   mfWholeNotes result (0, 1); // addition neutral element
 
-  size_t vectorSize = fTimeSignatureItemsVector.size ();
+  switch (fTimeSignatureSymbolKind) {
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
+      // senza misura, no measure length limitation JMI ??? 0.9.72
+      result = mfWholeNotes (INT_MAX, 1);
+      break;
+
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
+      break;
+
+    default:
+      // regular time signature
+      {
+        size_t vectorSize = fTimeSignatureItemsVector.size ();
+
+      #ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceTimeSignatures ()) {
+            gLog <<
+              "--> timeSignatureWholeNotesPerMeasure() 1 for " <<
+              asString () <<
+              ", line " << fInputLineNumber <<
+            std::endl;
+          }
+      #endif // MF_TRACE_IS_ENABLED
+
+        if (vectorSize) {
+          /* JMI
+          // start with first item
+          result =
+            mfWholeNotes (
+              fTimeSignatureItemsVector [0]->getTimeSignatureBeatsNumber (),
+              fTimeSignatureItemsVector [0]->getTimeSignatureBeatValue ());
+      */
+
+      /* JMI
+          gLog <<
+            std::endl << std::endl <<
+            "result1: " <<
+            result.getNumerator () <<
+            '/' <<
+            result.getDenominator () <<
+            std::endl << std::endl;
+      */
+
+          // iterate over the others
+          for (size_t i = 0; i < vectorSize; ++i) {
+            result +=
+              mfWholeNotes (
+                fTimeSignatureItemsVector [i]->getTimeSignatureBeatsNumber (),
+                fTimeSignatureItemsVector [i]->getTimeSignatureBeatValue ());
+
+      /* JMI
+            gLog <<
+              std::endl << std::endl <<
+              "result2: " <<
+              result.getNumerator () <<
+              '/' <<
+              result.getDenominator () <<
+              std::endl << std::endl;
+              */
+
+          } // for
+        }
+
+        else {
+          msrInternalError (
+            gServiceRunData->getInputSourceName (),
+            fInputLineNumber,
+            __FILE__, __LINE__,
+            "time signature items vector is empty");
+        }
+      }
+  } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTimeSignatures ()) {
-      gLog <<
-        "--> timeSignatureWholeNotesPerMeasure() 1 for " <<
-        asString () <<
-        ", line " << fInputLineNumber <<
-      std::endl;
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (vectorSize) {
-    /* JMI
-    // start with first item
-    result =
-      mfWholeNotes (
-        fTimeSignatureItemsVector [0]->getTimeSignatureBeatsNumber (),
-        fTimeSignatureItemsVector [0]->getTimeSignatureBeatValue ());
-*/
-
-/* JMI
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
     gLog <<
-      std::endl << std::endl <<
-      "result1: " <<
-      result.getNumerator () <<
-      '/' <<
-      result.getDenominator () <<
-      std::endl << std::endl;
-*/
-
-    // iterate over the others
-    for (size_t i = 0; i < vectorSize; ++i) {
-      result +=
-        mfWholeNotes (
-          fTimeSignatureItemsVector [i]->getTimeSignatureBeatsNumber (),
-          fTimeSignatureItemsVector [i]->getTimeSignatureBeatValue ());
-
-/* JMI
-      gLog <<
-        std::endl << std::endl <<
-        "result2: " <<
-        result.getNumerator () <<
-        '/' <<
-        result.getDenominator () <<
-        std::endl << std::endl;
-        */
-
-    } // for
+      "--> timeSignatureWholeNotesPerMeasure() 2, result = " <<
+      result <<
+      ", line " << fInputLineNumber <<
+    std::endl;
   }
-
-  else {
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      fInputLineNumber,
-      __FILE__, __LINE__,
-      "time signature items vector is empty");
-  }
-
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTimeSignatures ()) {
-      gLog <<
-        "--> timeSignatureWholeNotesPerMeasure() 2, result = " <<
-        result <<
-        ", line " << fInputLineNumber <<
-      std::endl;
-    }
 #endif // MF_TRACE_IS_ENABLED
 
   // return result
