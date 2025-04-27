@@ -37,81 +37,21 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \key c \major
-  \numericTimeSignature \time 2/4
-  \stemUp g'2 ~  g'2  | % 3
-  \barNumberCheck #3
+  \stemUp g'2 ~  
+  
+  g'2 \bar "||"
+  
+  
   \key d \major
-  a'2 ~  \bar "||"  %{ b333 visitStart (S_msrBarLine& elt) %}
-   | % 4
-  \barNumberCheck #4
+  a'2 ~  
+  
   a'2
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
-   | % 1
-  \barNumberCheck #5
+  \bar "|."
+  
 }
 
 Part_POne_Staff_One_Voice_Two = \absolute {
   \language "nederlands"
-  
-  \clef "treble"
-  \key c \major
-  \numericTimeSignature \time 2/4
-  s %{ s222 %}  2 \stemDown b4 c'  | % 3
-  \barNumberCheck #3
-  \key d \major
-  \bar "||"  %{ b333 visitStart (S_msrBarLine& elt) %}
-  s %{ s222 %}  2  | % 4
-  \barNumberCheck #4
-  cis'4 d'
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
-   | % 5
-  \barNumberCheck #5
-}
-
-\book {
-
-  \score {
-    <<
-    
-      
-      
-      
-      <<
-      
-        \new Staff  = "Part_POne_Staff_One"
-        \with {
-          instrumentName = "Violine"
-          shortInstrumentName = "Vl."
-        }
-        <<
-          \context Voice = "Part_POne_Staff_One_Voice_One" <<
-            \voiceOne % out of 2 regular voices
-            \Part_POne_Staff_One_Voice_One
-          >>
-          \context Voice = "Part_POne_Staff_One_Voice_Two" <<
-            \voiceTwo % out of 2 regular voices
-            \Part_POne_Staff_One_Voice_Two
-          >>
-        >>
-      
-      
-      >>
-    
-    >>
-    
-    \layout {
-      \context { \Score
-        autoBeaming = ##f % to display tuplets brackets
-      }
-      \context { \Voice
-      }
-    }
-    
-    \midi {
-      \tempo 16 = 360
-    }
-  }
-  
-}

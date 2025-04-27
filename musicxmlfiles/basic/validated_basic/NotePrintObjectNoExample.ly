@@ -38,30 +38,33 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \key f \major
-  \numericTimeSignature \time 4/4
-  \stemDown f''4 f'' g''8 [  %{ beam 1, line 143 %}
-  g'' g'' f'' ]  %{ beam 1, line 179 %}
+  \stemDown f''4 f'' g''8 [
+  g'' g'' f'' ]
+  
 }
 
 Part_POne_Staff_Two_Voice_Five = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \key f \major
-  \numericTimeSignature \time 4/4
-  \stemDown d8 [  %{ beam 1, line 194 %}
-   < a d' f' >  d  < a d' f' >  ] g [  %{ beam 1, line 324 %}
- < bes d' >  g  < bes d' >  ] }
+  \stemDown d8 [
+   < a d' f' >  d  < a d' f' >  ] g [
+   < bes d' >  g  < bes d' >  ]
+}
 
 Part_POne_Staff_Two_Voice_Six = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \key f \major
-  \numericTimeSignature \time 4/4
-\once\hide NoteHead \once\hide Stem \stemDown d4 e g a }
+  \once\hide NoteHead \once\hide Stem \stemDown d4 e g a
+}
 
 \book {
 

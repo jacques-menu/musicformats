@@ -37,13 +37,14 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \key c \major
-  \numericTimeSignature \time 3/4
   \glissando
   \once\override Glissando.style = #'zigzag
   \stemDown b'4 f'' r
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
+  
 }
 
 \book {

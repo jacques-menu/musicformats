@@ -36,19 +36,18 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \key c \major
-  \numericTimeSignature \time 3/4
-  \stemUp e'8 [  %{ beam 1, line 95 %}
-  f' ]  %{ beam 1, line 106 %}
-   | % 1
-  \barNumberCheck #1
-  a'4 g' \stemDown c''  | % 2
-  \barNumberCheck #2
+  \stemUp e'8 [
+  f' ]
+  
+  
+  a'4 g' \stemDown c''
+  
   c''2 r4
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
-   | % 3
-  \barNumberCheck #3
+  \bar "|."
+  
 }
 
 \book {

@@ -3511,167 +3511,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::string partMusicXMLID = elt->getAttributeValue ("id");
 
-#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
-  if (
-    gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
-  ) {
-#ifdef MF_TRACE_IS_ENABLED
-    if (
-      gTraceOahGroup->getTraceParts ()
-    ) {
-      std::stringstream ss;
+  // ID
 
-      ss <<
-        "<!--=== partMusicXMLID \"" << partMusicXMLID << "\"" <<
-        ", line " << elt->getInputLineNumber () << " ===-->";
+  std::string idString = elt->getAttributeValue ("id");
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-  }
-#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
-
-  // fetch current part from its partMusicXMLID
-  fCurrentPart =
-    fMsrScore->
-      fetchPartFromScoreByItsPartID (
-        elt->getInputLineNumber (),
-        partMusicXMLID);
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  if (! fCurrentPart) {
-    // fetch fMsrScore's part list
-    std::list <S_msrPart> partsList;
-
-    fMsrScore->
-      collectScorePartsList (
-        elt->getInputLineNumber (),
-        partsList);
-
-    if (partsList.empty ()) {
-      std::stringstream ss;
-
-      fMsrScore->
-        printSummary (gLog); // JMI 0.9.69
-
-      gLog <<
-        fMsrScore; // JMI 0.9.69
-
-      fMsrScore->
-        displayPartGroupsList ("visitStart (S_part& elt)");
-
-      ss <<
-        "part \"" << partMusicXMLID <<
-        "\" not found in score skeleton" <<
-        ", line " << elt->getInputLineNumber ();
-
-      mxsr2msrInternalError (
-        gServiceRunData->getInputSourceName (),
-        elt->getInputLineNumber (),
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-
-    else {
-      // there's only one part in the part list,
-      // assume this is the one JMI 0.9.70
-      fCurrentPart =
-        partsList.front ();
-
-      partMusicXMLID =
-        fCurrentPart->
-          getPartMusicXMLID ();
-
-      std::stringstream ss;
-
-      ss <<
-        "part 'id' is empty, using " <<
-        partMusicXMLID <<
-        " since it is the only part in the <part-list />";
-
-      mxsr2msrWarning (
-        gServiceRunData->getInputSourceName (),
-        elt->getInputLineNumber (),
-        ss.str ());
-    }
-  }
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceParts ()) {
-    std::stringstream ss;
-
-    ss <<
-      "%--------------------------------------------------------------" <<
-      std::endl <<
-      "   ===>> " <<
-      std::endl <<
-      "      " <<
-      "part " <<
-      fCurrentPart-> fetchPartNameForTrace () <<
-      ", line " <<
-      elt->getInputLineNumber () <<
-      std::endl <<
-      "   <<===" <<
-      std::endl <<
-      "%--------------------------------------------------------------" <<
-      std::endl;
-
-    gWaeHandler->waeTraceWithoutInputLocation ( // JMI 0.9.71 without CODE location ???
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // register the current part in the service run data
-  S_mfServiceRunData
-    serviceRunData =
-      gServiceRunData;
-
-  if (fCurrentPart) {
-    serviceRunData->
-      setCurrentPartIDAndName (
-        fCurrentPart->fetchPartIDAndName ());
-  }
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoicesBasics ()) {
-    // display the current part's voices map
-    fCurrentPart->
-      displayPartStavesMap (
-        elt->getInputLineNumber (),
-        "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
-  }
-#endif
-
-  // populate the staves vector from the current part
-  populateCurrentPartStavesVectorFromPart (fCurrentPart);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
-    // display the stave vectors
-    displayCurrentPartStavesVector (
-      elt->getInputLineNumber (),
-      "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
-  }
-#endif
-
-  // populate the voices vector from the current part
-  populateCurrentPartStaffVoicesMapsFromPart (fCurrentPart);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
-    // display the voices vectors
-    displayCurrentPartStaffMsrVoicesMap (
-      elt->getInputLineNumber (),
-      "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
-  }
-#endif
+  handlePartMusicXMLID (
+    elt->getInputLineNumber (),
+    idString);
 
   // print-object
 
@@ -3739,6 +3586,170 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   ++gIndenter; // will be decremented in visitEnd (S_part& elt)
 }
 
+void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
+  int               inputLineNumber,
+  const std::string idString)
+{
+// #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+//   if (
+//     gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+//   ) {
+// #ifdef MF_TRACE_IS_ENABLED
+    if (
+      gTraceOahGroup->getTraceParts ()
+    ) {
+      std::stringstream ss;
+
+      ss <<
+        "<!--=== idString \"" << idString << "\"" <<
+        ", line " << inputLineNumber << " ===-->";
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+// #endif // MF_TRACE_IS_ENABLED
+//   }
+// #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
+
+  // fetch current part from its idString
+  fCurrentPart =
+    fMsrScore->
+      fetchPartFromScoreByItsPartID (
+        inputLineNumber,
+        idString);
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  if (! fCurrentPart) {
+    // fetch fMsrScore's part list
+    std::list <S_msrPart> partsList;
+
+    fMsrScore->
+      collectScorePartsList (
+        inputLineNumber,
+        partsList);
+
+    if (partsList.empty ()) {
+      // there aren't anyp arts in the current MSR score
+      std::stringstream ss;
+
+      fMsrScore->
+        printSummary (gLog); // JMI 0.9.69
+
+      gLog <<
+        fMsrScore; // JMI 0.9.69
+
+      fMsrScore->
+        displayPartGroupsList ("visitStart (S_part& elt)");
+
+      ss <<
+        "the MSR score doesn't contain any parts" <<
+        ", line " << inputLineNumber;
+
+      mxsr2msrInternalError (
+        gServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+
+    else {
+      // there are parts in the current MSR score, grab the first one
+      fCurrentPart =
+        partsList.front ();
+
+//       partMusicXMLID =
+//         fCurrentPart->
+//           getPartMusicXMLID ();
+
+      std::stringstream ss;
+
+      ss <<
+        "part \"" << idString <<
+        "\" not found in score skeleton" <<
+        " since it is the only part in the <part-list />";
+
+      mxsr2msrWarning (
+        gServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        ss.str ());
+    }
+  }
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceParts ()) {
+    std::stringstream ss;
+
+    ss <<
+      "%--------------------------------------------------------------" <<
+      std::endl <<
+      "   ===>> " <<
+      std::endl <<
+      "      " <<
+      "part " <<
+      fCurrentPart-> fetchPartNameForTrace () <<
+      ", line " <<
+      inputLineNumber <<
+      std::endl <<
+      "   <<===" <<
+      std::endl <<
+      "%--------------------------------------------------------------" <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithoutInputLocation ( // JMI 0.9.71 without CODE location ???
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // register the current part in the service run data
+  S_mfServiceRunData
+    serviceRunData =
+      gServiceRunData;
+
+  if (fCurrentPart) {
+    serviceRunData->
+      setCurrentPartIDAndName (
+        fCurrentPart->fetchPartIDAndName ());
+  }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceVoicesBasics ()) {
+    // display the current part's voices map
+    fCurrentPart->
+      displayPartStavesMap (
+        inputLineNumber,
+        "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
+  }
+#endif
+
+  // populate the staves vector from the current part
+  populateCurrentPartStavesVectorFromPart (fCurrentPart);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceVoices ()) {
+    // display the stave vectors
+    displayCurrentPartStavesVector (
+      inputLineNumber,
+      "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
+  }
+#endif
+
+  // populate the voices vector from the current part
+  populateCurrentPartStaffVoicesMapsFromPart (fCurrentPart);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceVoices ()) {
+    // display the voices vectors
+    displayCurrentPartStaffMsrVoicesMap (
+      inputLineNumber,
+      "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
+  }
+#endif
+}
+
 void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3787,7 +3798,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 
   // attach pending barlines if any to part
   if (! fPendingBarLinesList.empty ()) {
-    attachPendingBarLinesToPart (part);
+    attachPendingBarLinesToPart (fCurrentPart);
   }
 
 //   attachPendingPartLevelElementsIfAnyToPart (
@@ -3795,7 +3806,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 
   // attach pending rehearsals if any to part
   if (! fPendingRehearsalMarksList.empty ()) {
-    attachPendingRehearsalMarksToPart (part);
+    attachPendingRehearsalMarksToPart (fCurrentPart);
   }
 
 //   // attach pending barlines if any to part
@@ -3805,7 +3816,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 //
   // attach pending tempos if any to part
   if (! fPendingTemposList.empty ()) {
-    attachPendingTemposToPart (part);
+    attachPendingTemposToPart (fCurrentPart);
   }
 
   // finalize the current part
@@ -24243,7 +24254,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
   // attach pending barlines if any to part
   if (! fPendingBarLinesList.empty ()) {
-    attachPendingBarLinesToPart (part);
+    attachPendingBarLinesToPart (fCurrentPart);
   }
 
 //   attachPendingPartLevelElementsIfAnyToPart (
@@ -24251,12 +24262,12 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
   // attach pending rehearsals if any to part
   if (! fPendingRehearsalMarksList.empty ()) {
-    attachPendingRehearsalMarksToPart (part);
+    attachPendingRehearsalMarksToPart (fCurrentPart);
   }
 
   // attach pending tempos if any to part
   if (! fPendingTemposList.empty ()) {
-    attachPendingTemposToPart (part);
+    attachPendingTemposToPart (fCurrentPart);
   }
 
   // populate fCurrentNote with current informations

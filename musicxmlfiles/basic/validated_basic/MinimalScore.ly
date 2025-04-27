@@ -47,7 +47,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
     } % concat
   }
   bes!4 \! r ees'!2.. f'16 g,
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
    | % 3
   \barNumberCheck #3
 }

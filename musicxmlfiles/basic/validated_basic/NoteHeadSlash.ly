@@ -36,11 +36,12 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
+  
   \clef "bass"
   \key c \major
-  \numericTimeSignature \time 4/4
   \stemDown f4 \tweak style #'slash f \tweak style #'slash f \tweak style #'slash f
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
+  
 }
 
 \book {

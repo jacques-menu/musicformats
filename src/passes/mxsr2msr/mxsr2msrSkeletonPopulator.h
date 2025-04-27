@@ -1290,6 +1290,13 @@ class EXP mxsr2msrSkeletonPopulator :
     Bool                      fOnGoingInterchangeable;
 
 
+    // part handling
+    // ------------------------------------------------------
+
+    void                      handlePartMusicXMLID (
+                                int               inputLineNumber,
+                                const std::string idString);
+
     // staff handling
     // ------------------------------------------------------
 
