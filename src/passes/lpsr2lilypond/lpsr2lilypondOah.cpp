@@ -5112,28 +5112,200 @@ R"(Generate initial comments showing the LilyPond generation informations.)",
   // comments
   // --------------------------------------
 
+  // structure
   S_oahBooleanAtom
-    fLilypondCommentsBasicsAtom =
+    fCommentLilypondStructureBasicsAtom =
       oahBooleanAtom::create (
-        "lilypond-comments-basics", "lilycommsb",
-R"(Generate basic trace comments showing the structure of the score
+        "comment-lilypond-structure-basics", "comlilysb",
+R"(Generate basic comments showing the structure of the score
 such as '% part P_POne (P1).)",
-        "fLilypondCommentsBasics",
-        fLilypondCommentsBasics);
+        "fCommentLilypondStructureBasics",
+        fCommentLilypondStructureBasics);
 
   subGroup->
     appendAtomToSubGroup (
-      fLilypondCommentsBasicsAtom);
+      fCommentLilypondStructureBasicsAtom);
 
   subGroup->
     appendAtomToSubGroup (
       oahTwoBooleansAtom::create (
-        "lilypond-comments", "lilycomms",
-R"(Generate trace comments showing the structure of the score.
+        "comment-lilypond-structure", "comlilys",
+R"(Generate comments showing the structure of the score.
 This option implies '-lilypond-comments-basics, -lilycomsb'.)",
-        "fLilypondComments",
-        fLilypondComments,
-        fLilypondCommentsBasicsAtom));
+        "fCommentLilypondStructure",
+        fCommentLilypondStructure,
+        fCommentLilypondStructureBasicsAtom));
+
+  // parts, voices & measures
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-part-groups", "comlilypartgrps",
+R"(Generate comments about part groups.)",
+        "fCommentLilypondPartGroups",
+        fCommentLilypondPartGroups));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-voices", "comlilyvoices",
+R"(Generate comments about voices.)",
+        "fCommentLilypondVoices",
+        fCommentLilypondVoices));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-measures", "comlilymeasures",
+R"(Generate comments about measures.)",
+        "fCommentLilypondMeasures",
+        fCommentLilypondMeasures));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-multiple-measure-restss", "comlilymmr",
+R"(Generate comments about multiple measure rests.)",
+        "fCommentLilypondMultipleMeasureRests",
+        fCommentLilypondMultipleMeasureRests));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-measure-repeats", "comlilymeareps",
+R"(Generate comments about measure repeats.)",
+        "fCommentLilypondMeasureRepeats",
+        fCommentLilypondMeasureRepeats));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-barlines", "comlilybarlines",
+R"(Generate comments about barlines.)",
+        "fCommentLilypondBarLines",
+        fCommentLilypondBarLines));
+
+  // durations
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-durations", "comlilydurs",
+R"(Generate comments about durations.)",
+        "fCommentLilypondDurations",
+        fCommentLilypondDurations));
+
+  // notes
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-notes", "comlilynotes",
+R"(Generate comments about notes.)",
+        "fCommentLilypondNotes",
+        fCommentLilypondNotes));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-skip-notes", "comlilyskips",
+R"(Generate comments about skip notes.)",
+        "fCommentLilypondSkipNotes",
+        fCommentLilypondSkipNotes));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-rest-notes", "comlilyrests",
+R"(Generate comments about rest notes.)",
+        "fCommentLilypondRestNotes",
+        fCommentLilypondRestNotes));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-beams", "comlilybeams",
+R"(Generate comments about beams.)",
+        "fCommentLilypondBeams",
+        fCommentLilypondBeams));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-ornaments", "comlilyornaments",
+R"(Generate comments about ornaments.)",
+        "fCommentLilypondOrnaments",
+        fCommentLilypondOrnaments));
+
+  // grace notes
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-grace-notes", "comlilygraces",
+R"(Generate comments about grace notes.)",
+        "fCommentLilypondGraceNotes",
+        fCommentLilypondGraceNotes));
+
+  // chords
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-chords", "comlilychords",
+R"(Generate comments about chords.)",
+        "fCommentLilypondChords",
+        fCommentLilypondChords));
+
+  // tuplets
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-tuplets", "comlilytuplets",
+R"(Generate comments about tuplets.)",
+        "fCommentLilypondTuplets",
+        fCommentLilypondTuplets));
+
+  // ligatures
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-ligatures", "comlilyligatures",
+R"(Generate comments about ligatures.)",
+        "fCommentLilypondLigatures",
+        fCommentLilypondLigatures));
+
+  // spanners
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-spanners", "comlilyspanners",
+R"(Generate comments about spanners.)",
+        "fCommentLilypondSpanners",
+        fCommentLilypondSpanners));
+
+  // harmonies
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-harmonies", "comlilyharmonies",
+R"(Generate comments about harmonies.)",
+        "fCommentLilypondHarmonies",
+        fCommentLilypondHarmonies));
+
+  // figured basses
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-figured-basses", "comlilyfigbasses",
+R"(Generate comments about figured basses.)",
+        "fCommentLilypondFiguredBasses",
+        fCommentLilypondFiguredBasses));
+
+  // lyrics
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "comment-lilypond-lyrics", "comlilylyrics",
+R"(Generate comments about lyrics.)",
+        "fCommentLilypondLyrics",
+        fCommentLilypondLyrics));
 
   // global empty variable
   // --------------------------------------
@@ -6433,11 +6605,11 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       fXml2lyInfos <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fLilypondCommentsBasics" << ": " <<
-      fLilypondCommentsBasics <<
+    std::setw (valueFieldWidth) << "fCommentLilypondStructureBasics" << ": " <<
+      fCommentLilypondStructureBasics <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fLilypondComments" << ": " <<
-      fLilypondComments <<
+    std::setw (valueFieldWidth) << "fCommentLilypondStructure" << ": " <<
+      fCommentLilypondStructure <<
       std::endl <<
 
     std::setw (valueFieldWidth) << "fGlobalEmptyVariable" << ": " <<
@@ -7022,11 +7194,11 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
       fXml2lyInfos <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fLilypondCommentsBasics" << ": " <<
-      fLilypondCommentsBasics <<
+    std::setw (fieldWidth) << "fCommentLilypondStructureBasics" << ": " <<
+      fCommentLilypondStructureBasics <<
       std::endl <<
-    std::setw (fieldWidth) << "fLilypondComments" << ": " <<
-      fLilypondComments <<
+    std::setw (fieldWidth) << "fCommentLilypondStructure" << ": " <<
+      fCommentLilypondStructure <<
       std::endl <<
 
     std::setw (fieldWidth) << "fGlobalEmptyVariable" << ": " <<

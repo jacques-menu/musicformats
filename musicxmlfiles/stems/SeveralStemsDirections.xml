@@ -449,7 +449,7 @@
         <beam number="2">backward hook</beam>
       </note>
       <barline location="right">
-        <bar-style>light-heavy</bar-style>
+        <bar-style>light-light</bar-style>
       </barline>
       <backup>
         <duration>16</duration>

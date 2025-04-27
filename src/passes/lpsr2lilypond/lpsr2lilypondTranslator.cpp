@@ -167,266 +167,266 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
 {
   // spaces
   cLilyPondCommaAndSpace = ", ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilyPondCommaAndSpace +=
       "%{ cLilyPondCommaAndSpace %} ";
   }
 
   // parts
   cLilypondPartOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondPartOpener +=
       "%{ cLilypondPartOpener %} ";
   }
   cLilypondPartCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondPartCloser +=
       "%{ cLilypondPartCloser %} ";
   }
 
   // staff groups
   cLilypondStaffBlockOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondStaffBlockOpener +=
       "%{ cLilypondStaffBlockOpener %} ";
   }
   cLilypondStaffClockCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondStaffClockCloser +=
       "%{ cLilypondStaffClockCloser %} ";
   }
 
   cLilypondNewStaffGroup = "\\new StaffGroup ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewStaffGroup +=
       "%{ cLilypondNewStaffGroup %} ";
   }
   cLilypondStaffGroupOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondStaffGroupOpener +=
       "%{ cLilypondStaffGroupOpener %} ";
   }
   cLilypondStaffGroupCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondStaffGroupCloser +=
       "%{ cLilypondStaffGroupCloser %} ";
   }
 
   // staves
   cLilypondNewStaff = "\\new Staff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewStaff +=
       "%{ cLilypondNewStaff %} ";
   }
   cLilypondNewTabStaff = "\\new TabStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewTabStaff +=
       "%{ cLilypondNewTabStaff %} ";
   }
   cLilypondNewHarmoniesStaff = "\\new HarmoniesStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewHarmoniesStaff +=
       "%{ cLilypondNewHarmoniesStaff %} ";
   }
   cLilypondNewFiguredBassStaff = "\\new FiguredBassStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewFiguredBassStaff +=
       "%{ cLilypondNewFiguredBassStaff %} ";
   }
   cLilypondNewDrumStaff = "\\new DrumStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewDrumStaff +=
       "%{ cLilypondNewDrumStaff %} ";
   }
   cLilypondNewRythmicStaff = "\\new RythmicStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewRythmicStaff +=
       "%{ cLilypondNewRythmicStaff %} ";
   }
   cLilypondNewJianpuStaff = "\\new JianpuStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewJianpuStaff +=
       "%{ cLilypondNewJianpuStaff %} ";
   }
 
   cLilypondNewGrandStaff = "\\new GrandStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewGrandStaff +=
       "%{ cLilypondNewGrandStaff %} ";
   }
   cLilypondNewPianoStaff = "\\new PianoStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewPianoStaff +=
       "%{ cLilypondNewPianoStaff %} ";
   }
   cLilypondNewChoirStaff = "\\new ChoirStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewChoirStaff +=
       "%{ cLilypondNewChoirStaff %} ";
   }
 
   // layout context
   cLilypondLayoutContextScoreOpener = "\\context { \\Score ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondLayoutContextScoreOpener +=
       "%{ cLilypondLayoutContextScoreOpener %} ";
   }
   cLilypondLayoutContextScoreCloser = "} ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondLayoutContextScoreCloser +=
       "%{ cLilypondLayoutContextScoreCloser %} ";
   }
 
   cLilypondLayoutContextStaffOpener = "\\context { \\Staff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondLayoutContextStaffOpener +=
       "%{ cLilypondLayoutContextStaffOpener %} ";
   }
   cLilypondLayoutContextStaffCloser = "} ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondLayoutContextStaffCloser +=
       "%{ cLilypondLayoutContextStaffCloser %} ";
   }
 
   cLilypondLayoutContextVoiceOpener = "\\context { \\Voice ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondLayoutContextVoiceOpener +=
       "%{ cLilypondLayoutContextVoiceOpener %} ";
   }
   cLilypondLayoutContextVoiceCloser = "} ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondLayoutContextVoiceCloser +=
       "%{ cLilypondLayoutContextVoiceCloser %} ";
   }
 
   // voices usage
   cLilypondUseVoiceOpener = "\\context ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondUseVoiceOpener +=
       "%{ cLilypondUseVoiceOpener %} ";
   }
   cLilypondUseVoiceCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondUseVoiceCloser +=
       "%{ cLilypondUseVoiceCloser %} ";
   }
 
   // parallel music
   cLilypondParallelMusicOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondParallelMusicOpener +=
       "%{ cLilypondParallelMusicOpener %} ";
   }
   cLilypondParallelMusicCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondParallelMusicCloser +=
       "%{ cLilypondParallelMusicCloser %} ";
   }
 
   // with
   cLilypondWithOpener = "{";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondWithOpener +=
       " %{ cLilypondWithOpener %} ";
   }
   cLilypondWithCloser = "}";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondWithCloser +=
       " %{ cLilypondWithCloser %} ";
   }
 
   // scordatura
   cLilypondScordaturaOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondScordaturaOpener +=
       "%{ cLilypondScordaturaOpener %} ";
   }
   cLilypondScordaturaCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondScordaturaCloser +=
       "%{ cLilypondScordaturaCloser %} ";
   }
 
   // chords
   cLilypondChordOpener = "< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondChordOpener +=
       "%{ cLilypondChordOpener %} ";
   }
   cLilypondChordCloser = "> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondChordCloser +=
       "%{ cLilypondChordCloser %} ";
   }
 
   // tuplets
   cLilypondTupletOpener1 = "\\tuplet ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondTupletOpener1 +=
       "%{ cLilypondTupletOpener1 %} ";
   }
   cLilypondTupletOpener2 = " { ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondTupletOpener2 +=
       "%{ cLilypondTupletOpener2 %} ";
   }
   cLilypondTupletCloser = "} ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondTupletCloser +=
       "%{ cLilypondTupletCloser %} ";
   }
 
   // ligatures
   cLilypondLigatureOpener = "\\[ ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondLigatureOpener +=
       "%{ cLilypondLigatureOpener %} ";
   }
   cLilypondLigatureCloser = "\\] ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondLigatureCloser +=
       "%{ cLilypondLigatureCloser %} ";
   }
 
   // hairpins
   cLilypondHairPinsCrescendo = "\\< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondHairPinsCrescendo +=
       "%{ cLilypondHairPinsCrescendo %} ";
   }
   cLilypondHairPinsDecrescendo = "\\> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondHairPinsDecrescendo +=
       "%{ cLilypondHairPinsDecrescendo %} ";
   }
   cLilypondHairPinsStop = "\\! ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondHairPinsStop +=
       "%{ cLilypondHairPinsStop %} ";
   }
 
   // part groups
   cLilypondPartGroupOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondPartGroupOpener +=
       "%{ cLilypondPartGroupOpener %} ";
   }
   cLilypondPartGroupCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondPartGroupCloser +=
       "%{ cLilypondPartGroupCloser %} ";
   }
 
   // lyrics
   cLilypondNewLyrics = "\\new Lyrics ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewLyrics +=
       "%{ cLilypondNewLyrics %} ";
   }
 
   // hide
   cLilypondHide = "\\hide ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondHide +=
       "%{ cLilypondHide %} ";
   }
@@ -771,7 +771,7 @@ std::string lpsr2lilypondTranslator::absoluteOctaveAsLilypondString (
   std::string result;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotes ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondNotes ()) {
     fLilypondCodeStream <<
       std::endl <<
       "%{ absoluteOctaveKind: " <<
@@ -1470,7 +1470,7 @@ Bool lpsr2lilypondTranslator::wholeNotesDurationShouldBeGenerated (
     wholeNotes != fLastMetWholeNotes;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceDurations ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondDurations ()) {
     fLilypondCodeStream <<
       std::endl <<
       "%{ " <<
@@ -1885,7 +1885,7 @@ void lpsr2lilypondTranslator::generateNoteLigaturesList (
               ligatureEndEdgeHeight <<
               ")";
 
-            if (gTraceOahGroup->getTraceLigatures ()) {
+            if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLigatures ()) {
               fLilypondCodeStream <<
                 " %{ " <<
                 ligature->getInputLineNumber () <<
@@ -2699,7 +2699,7 @@ void lpsr2lilypondTranslator::generateUnpitchedRestInMeasure (
       case msrVoiceKind::kVoiceKindHarmonies:
       case msrVoiceKind::kVoiceKindFiguredBass:
         fLilypondCodeStream << 's';
-        if (gTraceOahGroup->getTraceRestNotes ()) {
+        if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondRestNotes ()) {
           fLilypondCodeStream << " %{ s111 %} ";
         }
         break;
@@ -2906,7 +2906,7 @@ void lpsr2lilypondTranslator::generateSkipInMeasure (
   else {
     // generate a skip
     fLilypondCodeStream << 's';
-    if (gTraceOahGroup->getTraceSkipNotes ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondSkipNotes ()) {
       fLilypondCodeStream << " %{ s222 %} ";
     }
 
@@ -2964,14 +2964,14 @@ void lpsr2lilypondTranslator::generateUnpitchedNoteInMeasure (
           getGenerateLpsrVisitingInformation ();
 
     if (doTraceNotes || generateMsrVisitingInformation) {
-    std::stringstream ss;
+      std::stringstream ss;
 
-    ss <<
-      std::endl <<
-      "% --> generating code for noteUnpitchedInMeasure " <<
-      note->asString () <<
-      ", line " << note->getInputLineNumber () <<
-      std::endl;
+      ss <<
+        std::endl <<
+        "% --> generating code for noteUnpitchedInMeasure " <<
+        note->asString () <<
+        ", line " << note->getInputLineNumber () <<
+        std::endl;
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
@@ -3333,7 +3333,7 @@ void lpsr2lilypondTranslator::generateRestInTuplet (
       note->getNoteOccupiesAFullMeasure ()
         ? 's' // JMI ??? 'R'
         : 'r');
-  if (gTraceOahGroup->getTraceRestNotes ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondRestNotes ()) {
     fLilypondCodeStream << " %{ sr333 %} ";
   }
 
@@ -3663,7 +3663,7 @@ void lpsr2lilypondTranslator::generateSkipInGraceNotesGroup (
   else {
     // generate the skip name
     fLilypondCodeStream << 's';
-    if (gTraceOahGroup->getTraceGraceNotes ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondGraceNotes ()) {
       fLilypondCodeStream << " %{ s444 %} ";
     }
   }
@@ -4847,7 +4847,7 @@ void lpsr2lilypondTranslator::generateOrnament (
 
         fLilypondCodeStream <<
           's';
-        if (gTraceOahGroup->getTraceOrnaments ()) {
+        if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondOrnaments ()) {
           fLilypondCodeStream <<  " %{ s555 %} ";
         }
         fLilypondCodeStream <<
@@ -4898,7 +4898,7 @@ void lpsr2lilypondTranslator::generateOrnament (
 
         fLilypondCodeStream <<
           's';
-        if (gTraceOahGroup->getTraceOrnaments ()) {
+        if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondOrnaments ()) {
           fLilypondCodeStream << " %{ s666 %} ";
         }
         fLilypondCodeStream <<
@@ -5351,7 +5351,7 @@ void lpsr2lilypondTranslator::generateSpannerAfterNote (
               if (spannerStartEnd->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
                 fLilypondCodeStream <<
                   "\\stopTrillSpan ";
-                if (gTraceOahGroup->getTraceSpanners ()) {
+                if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondSpanners ()) {
                   fLilypondCodeStream <<
                     " %{ generateSpannerAfterNote() AAA %} ";
                 }
@@ -5359,7 +5359,7 @@ void lpsr2lilypondTranslator::generateSpannerAfterNote (
               else {
                 fLilypondCodeStream <<
                   "\\stopTextSpan ";
-                if (gTraceOahGroup->getTraceSpanners ()) {
+                if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondSpanners ()) {
                   fLilypondCodeStream <<
                     " %{ generateSpannerAfterNote() BBB %} ";
                 }
@@ -5620,7 +5620,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
   switch (harmony->getHarmonyKind ()) {
     case msrHarmonyKind::kHarmonyPower:
       if (! fPowerChordHaveAlreadyBeenGenerated) {
-        if (gTraceOahGroup->getTraceHarmonies ()) {
+        if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondHarmonies ()) {
           ss << "%{ \\powerChords ??? %} ";
         }
         fPowerChordHaveAlreadyBeenGenerated = true;
@@ -5785,25 +5785,25 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
 */
     case msrHarmonyKind::kHarmonyNeapolitan:
       ss << ":3-.6-";
-      if (gTraceOahGroup->getTraceHarmonies ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondHarmonies ()) {
         ss << "%{ :Neapolitan %} ";
       }
       break;
     case msrHarmonyKind::kHarmonyItalian:
       ss << ":3.6+";
-      if (gTraceOahGroup->getTraceHarmonies ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondHarmonies ()) {
         ss << "%{ :Italian %} ";
       }
       break;
     case msrHarmonyKind::kHarmonyFrench:
       ss << ":3.5+.6+";
-      if (gTraceOahGroup->getTraceHarmonies ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondHarmonies ()) {
         ss << "%{ :French %} ";
       }
       break;
     case msrHarmonyKind::kHarmonyGerman:
       ss << ":3.5.6+";
-      if (gTraceOahGroup->getTraceHarmonies ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondHarmonies ()) {
         ss << "%{ :German %} ";
       }
       break;
@@ -5813,13 +5813,13 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
       break;
     case msrHarmonyKind::kHarmonyPower:
       ss << ":5";
-      if (gTraceOahGroup->getTraceHarmonies ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondHarmonies ()) {
         ss << "%{ power %} ";
       }
       break;
     case msrHarmonyKind::kHarmonyTristan:
       ss << ":2+.5+.6+";
-      if (gTraceOahGroup->getTraceHarmonies () ){
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondHarmonies () ){
         ss << "%{ :Tristan %} ";
       }
       break;
@@ -5978,7 +5978,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
     harmony->getHarmonyInversion ();
 
   if (harmonyInversion != K_HARMONY_INVERSION_NONE) {
-    if (gTraceOahGroup->getTraceHarmonies ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondHarmonies ()) {
       ss <<
         "%{ inversion: " << harmonyInversion << " %} ";
     }
@@ -6411,7 +6411,7 @@ std::string lpsr2lilypondTranslator::generateAColumnForMarkup (
     ss <<
       " } ";
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       ss <<
         "% " <<
         mfSingularOrPlural (
@@ -6903,7 +6903,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrHeader& elt)
   fLilypondCodeStream <<
     '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       " % header";
   }
@@ -7906,7 +7906,7 @@ void lpsr2lilypondTranslator::generatePaper (
   fLilypondCodeStream <<
     '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       " % paper";
   }
@@ -8833,7 +8833,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
     fLilypondCodeStream <<
       cLilypondLayoutContextScoreCloser;
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         " % end of score context";
     }
@@ -8864,7 +8864,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
     fLilypondCodeStream <<
       cLilypondLayoutContextVoiceCloser;
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         " % end of voice context";
     }
@@ -8990,7 +8990,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
       cLilypondLayoutContextStaffCloser <<
       " % end of staff context";
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         " % end of layout";
     }
@@ -9003,7 +9003,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
   fLilypondCodeStream <<
     '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       " % layout";
   }
@@ -9100,7 +9100,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookBlock& elt)
 
   fLilypondCodeStream << '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       " % end of book";
   }
@@ -9193,7 +9193,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScoreBlock& elt)
 
   fLilypondCodeStream << '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       " % end of score";
   }
@@ -9285,7 +9285,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookPartBlock& elt)
   fLilypondCodeStream <<
     '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       " % bookpart";
   }
@@ -9337,7 +9337,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrParallelMusicBLock& elt)
   if (fNumberOfPartGroupBlocks > 0) {
     fLilypondCodeStream << cLilypondParallelMusicOpener;
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         " % start of parallel music";
     }
@@ -9390,7 +9390,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrParallelMusicBLock& elt)
       std::endl <<
       cLilypondParallelMusicCloser;
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         " % end of parallel music";
     }
@@ -9485,14 +9485,14 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
   switch (partGroupImplicitKind) {
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
       // don't generate the implicit outer-most part group block
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
           "% start of implicit part group block";
       }
       break;
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
           "% start of explicit part group block";
       }
@@ -9542,7 +9542,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
           break;
       } // switch
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
           " %{ partGroupImplicitKind: " <<
           partGroupImplicitKind <<
@@ -9551,7 +9551,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTracePartGroups ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondPartGroups ()) {
          fLilypondCodeStream <<
           " %{ " <<
           partGroup->fetchPartGroupInformationForTrace () <<
@@ -9677,7 +9677,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
 //       fLilypondCodeStream << csvPartGroupOpener;
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
           " % start of part group block " <<
           partGroup->fetchPartGroupInformationForTraceWithoutEndOfLines ();
@@ -9785,7 +9785,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
   switch (partGroup->getPartGroupImplicitKind ()) {
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
       // don't generate the implicit outer-most part group block
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
           " % end of implicit part group block " <<
           partGroup->fetchPartGroupInformationForTraceWithoutEndOfLines ();
@@ -9794,7 +9794,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
 //       fLilypondCodeStream << kPartGroupCloser;
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
           " % end of explicit part group block " <<
           partGroup->fetchPartGroupInformationForTraceWithoutEndOfLines ();
@@ -9876,7 +9876,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
         part->getPartInstrumentAbbreviation ();
         */
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         std::left <<
         std::setw (commentFieldWidth) <<
@@ -9974,7 +9974,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
     --gIndenter;
 
     // don't generate a part with only one staff
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         "% end of part blockpart " <<
         part->fetchPartNameForTrace ();
@@ -10307,7 +10307,7 @@ R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
   // generate the comment if relevant
   fLilypondCodeStream << cLilypondStaffBlockOpener;
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       " % start of staff block for \"" << staff->getStaffPathLikeName () << "\"";
   }
@@ -10360,7 +10360,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
 
   fLilypondCodeStream <<  cLilypondStaffClockCloser;
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
   // get the staff
     S_msrStaff
       staff =
@@ -10832,7 +10832,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
   fLilypondCodeStream <<
     cLilypondUseVoiceCloser;
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     // get the voice
     S_msrVoice
       voice =
@@ -11117,7 +11117,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
 
   switch (elt->getContextUseExistingKind ()) {
     case lpsrContextUseExistingKind::kUseExistingContextYes:
-      if (gTraceOahGroup->getTraceChords ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondChords ()) {
         fLilypondCodeStream <<
           "%{ Use existing context here %} " << // JMI ??? 0.9.66
           std::endl;
@@ -11247,7 +11247,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
 
   switch (elt->getContextUseExistingKind ()) {
     case lpsrContextUseExistingKind::kUseExistingContextYes:
-      if (gTraceOahGroup->getTraceFiguredBasses ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondFiguredBasses ()) {
         fLilypondCodeStream <<
           "%{ Use existing context here %} " << // JMI ??? 0.9.66
           std::endl;
@@ -12833,7 +12833,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
   // compress multiple measure rests?
   if (gGlobalLpsr2lilypondOahGroup->getCompressMeasureRestsInLilypond ()) { // JMI 0.9.64
     fLilypondCodeStream << "\\compressMMRests";
-    if (gTraceOahGroup->getTraceVoices ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondVoices ()) {
       fLilypondCodeStream <<
         " %{ JMI 0.9.64 ??? %} " <<
         std::endl;
@@ -12955,7 +12955,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
   if (gGlobalLpsr2lilypondOahGroup->getDisplayMusic ()) {
     fLilypondCodeStream << '}';
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         " % displayMusic";
     }
@@ -12968,7 +12968,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
   // generate the end of the voice definition
   fLilypondCodeStream << '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       " % end of voice " << elt->getVoiceName ();
   }
@@ -13121,7 +13121,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 //   if (! fCurrentTupletsStack.empty ()) {
 //   /* JMI 0.9.66
 // #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceHarmonies ()) {
+//     if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondHarmonies ()) {
 //       std::stringstream ss;
 //
 //       ss <<
@@ -13278,7 +13278,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
 
 //     if (! fCurrentTupletsStack.empty ()) {
 //   #ifdef MF_TRACE_IS_ENABLED
-//       if (gTraceOahGroup->getTraceFiguredBasses ()) {
+//       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondFiguredBasses ()) {
 //         fLilypondCodeStream <<
 //           "%{ fCurrentTupletsStack.size () S_msrFiguredBass JMI " <<
 //           fCurrentFiguredBass->asString () <<
@@ -13561,7 +13561,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     // generate the end of the voice definition
     fLilypondCodeStream <<
       "% start of segment " <<
@@ -13607,7 +13607,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
 //     --gIndenter; // incremented in visitStart (S_msrSegment& elt)
 
     fLilypondCodeStream <<
@@ -13690,7 +13690,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       fCurrentMeasureNumber);
 
   // generate measure start comment if relevant
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       "% start of measure " <<
       fCurrentMeasureNumber <<
@@ -13904,7 +13904,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       &&
     measureKind != msrMeasureKind::kMeasureKindOverFlowing
   ) {
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         " % msrMeasureKind::kMeasureKindOverFlowing End" <<
         std::endl;
@@ -14084,7 +14084,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
         fLilypondCodeStream <<
           std::endl;
-        if (gTraceOahGroup->getTraceMeasures ()) {
+        if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMeasures ()) {
           fLilypondCodeStream <<
             "%{ begin kMeasureKindOverFlowing, measure " <<
             fCurrentMeasureNumber <<
@@ -14095,7 +14095,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         }
 //           std::endl; // JMI 0.9.72 too much otherwise
 
-//         if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+//         if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
 //           fLilypondCodeStream << " % msrMeasureKind::kMeasureKindOverFlowing Start";
 //         }
 //
@@ -14112,7 +14112,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           "\\cadenzaOn" <<
           std::endl;
 
-        if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+        if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
           fLilypondCodeStream << " % msrMeasureKind::kMeasureKindCadenza Start";
         }
 
@@ -14143,7 +14143,7 @@ void lpsr2lilypondTranslator::generateMusicallyEmptyMeasure (
 { // JMI 0.9.72 ???
   // now, to have the msrClefKeyTimeSignatureGroup if any
   // being handled first
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       "%{ kMeasureKindMusicallyEmpty" <<
       ", line " << measure->getInputLineNumber () <<
@@ -14178,7 +14178,7 @@ void lpsr2lilypondTranslator::generateMusicallyEmptyMeasure (
     case msrVoiceKind::kVoiceKindRegular:
     case msrVoiceKind::kVoiceKindDynamics:
       fLilypondCodeStream << 's'; // 'R' ??? JMI
-      if (gTraceOahGroup->getTraceMeasures ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMeasures ()) {
         fLilypondCodeStream << " %{ s999 %} ";
       }
       break;
@@ -14186,7 +14186,7 @@ void lpsr2lilypondTranslator::generateMusicallyEmptyMeasure (
     case msrVoiceKind::kVoiceKindHarmonies:
     case msrVoiceKind::kVoiceKindFiguredBass:
       fLilypondCodeStream << 's'; // 'R' ??? JMI
-      if (gTraceOahGroup->getTraceMeasures ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMeasures ()) {
         fLilypondCodeStream << " %{ s888 %} ";
       }
       break;
@@ -14333,14 +14333,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
     if (spannerStartEnd->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
       fLilypondCodeStream << "\\stopTrillSpan ";
-      if (gTraceOahGroup->getTraceMeasures ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMeasures ()) {
         fLilypondCodeStream <<
           "%{ XXX lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt) %} ";
       }
     }
     else {
       fLilypondCodeStream << "\\stopTextSpan ";
-      if (gTraceOahGroup->getTraceMeasures ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMeasures ()) {
         fLilypondCodeStream <<
           "%{ YYY lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt) %} ";
       }
@@ -14353,7 +14353,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
     // handle the measure
     switch (measureKind) {
       case msrMeasureKind::kMeasureKindUnknown: // should not occur
-        if (gTraceOahGroup->getTraceMeasures ()) {
+        if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMeasures ()) {
           fLilypondCodeStream <<
             "%{ measureKindUnknown, " <<
             measurePuristNumber + 1 <<
@@ -14385,7 +14385,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       case msrMeasureKind::kMeasureKindOverFlowing:
         fLilypondCodeStream <<
           std::endl;
-        if (gTraceOahGroup->getTraceMeasures ()) {
+        if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMeasures ()) {
           fLilypondCodeStream <<
             "%{ end kMeasureKindOverFlowing, measure " <<
             fCurrentMeasureNumber <<
@@ -14410,7 +14410,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 //         {
 //           // only now, to have the msrClefKeyTimeSignatureGroup if any
 //           // being handled first // JMI 0.9.72 ???
-//           if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+//           if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
 //             fLilypondCodeStream <<
 //               "%{ kMeasureKindMusicallyEmpty" <<
 //               ", line " << elt->getInputLineNumber () <<
@@ -14486,7 +14486,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         break;
     } // switch
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
  // JMI     --gIndenter; // incremented in visitStart (S_msrMeasure& elt)
 
       fLilypondCodeStream <<
@@ -14615,7 +14615,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
  */
   }
 
-//   if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+//   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
 // //     ++gIndenter; // incremented in visitStart (S_msrMeasure& elt)
 //   }
 }
@@ -14760,7 +14760,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
       fLilypondCodeStream <<
         std::endl <<
         "} ";
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           "%{ FOFO FOFO %}";
       }
@@ -14998,7 +14998,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
     generateSyllableDescripionAsComment (
       syllable);
   }
@@ -15017,7 +15017,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     case msrSyllableKind::kSyllableNone: // JMI 0.9.70
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyricsDetails ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ GENERATE_CODE_FOR_SYLLABLE_kSyllableNone" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15040,7 +15040,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
           {
 #ifdef MF_TRACE_IS_ENABLED
-            if (gTraceOahGroup->getTraceLyrics ()) {
+            if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
               fLilypondCodeStream <<
                 "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSingle" <<
                 ", line " << syllable->getInputLineNumber () <<
@@ -15053,7 +15053,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSingle" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15067,7 +15067,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
           {
 #ifdef MF_TRACE_IS_ENABLED
-            if (gTraceOahGroup->getTraceLyrics ()) {
+            if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
               fLilypondCodeStream <<
                 "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableSingle" <<
                 ", line " << syllable->getInputLineNumber () <<
@@ -15116,7 +15116,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableBegin" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15133,7 +15133,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_IMPLICIT_kSyllableBegin" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15150,7 +15150,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableBegin" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15183,7 +15183,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableMiddle" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15200,7 +15200,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_IMPLICIT_kSyllableMiddle" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15217,7 +15217,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableMiddle" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15250,7 +15250,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableEnd" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15267,7 +15267,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_IMPLICIT_kSyllableEnd" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15289,7 +15289,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableEnd" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15321,7 +15321,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     case msrSyllableKind::kSyllableOnRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyricsDetails ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ GENERATE_CODE_FOR_SYLLABLE_kSyllableOnRestNote" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15339,7 +15339,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableOnRestNote" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15356,7 +15356,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_IMPLICIT_kSyllableOnRestNote" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15373,7 +15373,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableOnRestNote" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15402,7 +15402,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSkipOnRestNote" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15422,7 +15422,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_IMPLICIT_kSyllableSkipOnRestNote" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15434,7 +15434,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableSkipOnRestNote" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15462,7 +15462,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSkipOnNonRestNote" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15482,7 +15482,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_IMPLICIT_kSyllableSkipOnNonRestNote" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15502,7 +15502,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableSkipOnNonRestNote" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15529,7 +15529,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
       {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceLyrics ()) {
+        if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
           fLilypondCodeStream <<
             "%{ GENERATE_CODE_FOR_SYLLABLE_kSyllableMeasureEnd" <<
             ", line " << syllable->getInputLineNumber () <<
@@ -15574,7 +15574,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
         }
 //         else {
-//           if (gTraceOahGroup->getTraceLyrics ()) {
+//           if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
 //             fLilypondCodeStream <<
 //               " %{ noteTheSyllableIsAttachedTo is NULL %} ";
 //           }
@@ -15602,7 +15602,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     case msrSyllableKind::kSyllableLineBreak:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ GENERATE_CODE_FOR_SYLLABLE_kSyllableLineBreak" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15613,7 +15613,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
       // generate information and line number as a comment if relevant
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           "%{ kSyllableLineBreak, line " <<
           syllable->getInputLineNumber () <<
@@ -15632,7 +15632,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     case msrSyllableKind::kSyllablePageBreak:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
             fLilypondCodeStream <<
               "%{ GENERATE_CODE_FOR_SYLLABLE_kSyllablePageBreak" <<
               ", line " << syllable->getInputLineNumber () <<
@@ -15644,7 +15644,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
       // generate information and line number as a comment
       // generate information and line number as a comment if relevant
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           "%{ kSyllablePageBreak, line " <<
           syllable->getInputLineNumber () <<
@@ -15667,7 +15667,7 @@ void lpsr2lilypondTranslator::generateCodeBeforeSyllableIfRelevant (
   const S_msrSyllable& syllable)
 {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceLyrics ()) {
+//   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
 //     fLilypondCodeStream <<
 //       "%{ GENERATE_CODE_BEFORE_SYLLABLE \"" <<
 //       syllable->asShortString () <<
@@ -15751,7 +15751,7 @@ LilyPond syntax:
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
     fLilypondCodeStream <<
       std::endl <<
       "%{ GENERATE_CODE_AFTER_SYLLABLE \"" <<
@@ -15919,7 +15919,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableNone:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ AUTOMATIC_DURATIONS_kSyllableNone" <<
@@ -15934,7 +15934,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableSingle:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ AUTOMATIC_DURATIONS_kSyllableSingle" <<
@@ -15974,7 +15974,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableBegin:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ AUTOMATIC_DURATIONS_kSyllableBegin" <<
@@ -16016,7 +16016,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableMiddle:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ AUTOMATIC_DURATIONS_kSyllableMiddle" <<
@@ -16058,7 +16058,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableEnd:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ AUTOMATIC_DURATIONS_kSyllableEnd" <<
@@ -16098,7 +16098,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableOnRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ AUTOMATIC_DURATIONS_kSyllableOnRestNote" <<
@@ -16113,7 +16113,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableSkipOnRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ AUTOMATIC_DURATIONS_kSyllableSkipOnRestNote" <<
@@ -16128,7 +16128,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableSkipOnNonRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ AUTOMATIC_DURATIONS_kSyllableSkipOnNonRestNote" <<
@@ -16158,7 +16158,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
     fLilypondCodeStream <<
       "%{ =======>" <<
       std::endl;
@@ -16258,7 +16258,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
     fLilypondCodeStream <<
       std::endl;
   }
@@ -16301,7 +16301,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableNone:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ IMPLICIT_DURATIONS_kSyllableNone" <<
@@ -16317,7 +16317,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     // ----------------------------------------------------
       {
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ IMPLICIT_DURATIONS_kSyllableSingle" <<
@@ -16389,7 +16389,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableBegin:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ IMPLICIT_DURATIONS_kSyllableBegin" <<
@@ -16468,7 +16468,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableMiddle:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ IMPLICIT_DURATIONS_kSyllableMiddle" <<
@@ -16489,9 +16489,10 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
         if (! noteTiesList.empty ()) {
           for (S_msrTie noteTie : noteTiesList) {
             if (noteTie->getTieKind () == msrTieKind::kTieStart) {
-              if (gTraceOahGroup->getTraceLyrics ()) {
+              fLilypondCodeStream << " ~ ";
+              if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
                 fLilypondCodeStream <<
-                   " ~ %{ msrNoteKind::kNoteRegularInMeasure %} "; // JMI 0.9.70
+                   " %{ msrNoteKind::kNoteRegularInMeasure %} "; // JMI 0.9.72 ZOZO
               }
             }
           } // for
@@ -16556,7 +16557,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableEnd:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ IMPLICIT_DURATIONS_kSyllableEnd" <<
@@ -16593,7 +16594,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableOnRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ IMPLICIT_DURATIONS_kSyllableOnRestNote" <<
@@ -16608,7 +16609,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableSkipOnRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ IMPLICIT_DURATIONS_kSyllableSkipOnRestNote" <<
@@ -16623,7 +16624,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableSkipOnNonRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ IMPLICIT_DURATIONS_kSyllableSkipOnNonRestNote" <<
@@ -16657,7 +16658,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
     fLilypondCodeStream <<
       "%{ =======>" <<
       std::endl;
@@ -16744,7 +16745,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
     fLilypondCodeStream <<
       std::endl;
   }
@@ -16787,7 +16788,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableNone:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ EXPLICIT_DURATIONS_kSyllableNone" <<
@@ -16802,7 +16803,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableSingle:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ EXPLICIT_DURATIONS_kSyllableSingle" <<
@@ -16865,7 +16866,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableBegin:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ EXPLICIT_DURATIONS_kSyllableBegin" <<
@@ -16945,7 +16946,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     // ----------------------------------------------------
       {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceLyrics ()) {
+        if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
           fLilypondCodeStream <<
             std::endl <<
             "%{ EXPLICIT_DURATIONS_kSyllableMiddle" <<
@@ -17030,7 +17031,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableEnd:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ EXPLICIT_DURATIONS_kSyllableEnd" <<
@@ -17066,7 +17067,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableOnRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ EXPLICIT_DURATIONS_kSyllableOnRestNote" <<
@@ -17081,7 +17082,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableSkipOnRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ EXPLICIT_DURATIONS_kSyllableSkipOnRestNote" <<
@@ -17098,7 +17099,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     case msrSyllableKind::kSyllableSkipOnNonRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
           "%{ EXPLICIT_DURATIONS_kSyllableSkipOnNonRestNote" <<
@@ -17132,7 +17133,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
     fLilypondCodeStream <<
       "%{ =======>" <<
       std::endl;
@@ -17214,7 +17215,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
     fLilypondCodeStream <<
       std::endl;
   }
@@ -21032,7 +21033,7 @@ void lpsr2lilypondTranslator::generateNoteBeamsAfterNote (
             if (beamNumber == 1) {
               fLilypondCodeStream <<
                 "[ ";
-              if (gTraceOahGroup->getTraceBeams ()) {
+              if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondBeams ()) {
                 fLilypondCodeStream <<
                   " %{ beam " <<
                   beamNumber <<
@@ -21075,7 +21076,7 @@ void lpsr2lilypondTranslator::generateNoteBeamsAfterNote (
             if (beamNumber == 1) {
               fLilypondCodeStream <<
                 "] ";
-              if (gTraceOahGroup->getTraceBeams ()) {
+              if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondBeams ()) {
                 fLilypondCodeStream <<
                   " %{ beam " <<
                   beamNumber <<
@@ -21642,7 +21643,7 @@ slash = \tweak Flag.stroke-style grace \etc
             fLilypondCodeStream << "] ";
           }
 
-          if (gTraceOahGroup->getTraceGraceNotes ()) {
+          if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondGraceNotes ()) {
             fLilypondCodeStream <<
               " %{ line " <<
               graceNotesGroupNote->getInputLineNumber () <<
@@ -21922,7 +21923,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroup& elt)
  // JMI exists? if (elt->getGraceNotesGroupIsSlashed ()) {}
   fLilypondCodeStream <<
     "\\afterGrace { ";
-  if (gTraceOahGroup->getTraceGraceNotes ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondGraceNotes ()) {
     fLilypondCodeStream <<
       "%{ visitStart (S_msrAfterGraceNotesGroup&) %} ";
   }
@@ -22908,7 +22909,7 @@ void lpsr2lilypondTranslator::generateNoteHeadAndStem (
         }
         else {
           // no
-//             if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+//             if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondBasics ()) {
 //               fLilypondCodeStream <<
 //                 "%{ " <<
 //                 gServiceRunData->getInputSourceName () <<
@@ -24858,7 +24859,7 @@ void lpsr2lilypondTranslator::generateCodeBeforeChordBegin (
   const S_msrChord& chord)
 {
 #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceChords ()) { // JMI 0.9.67
+//   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondChords ()) { // JMI 0.9.67
 //     ss <<
 //       "%{ --> generateCodeBeforeChordBegin() for chord " <<
 //       chord->asShortString () <<
@@ -25514,7 +25515,7 @@ void lpsr2lilypondTranslator::generateCodeAfterChordEnd (
         case msrBeamKind::kBeamBegin:
           if (chordBeam->getBeamNumber () == 1)
             fLilypondCodeStream << "[ ";
-            if (gTraceOahGroup->getTraceChords ()) {
+            if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondChords ()) {
               fLilypondCodeStream << " %{ generateCodeAfterChordEnd() %}";
             }
 
@@ -26123,7 +26124,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
   switch (tupletShowNumberKind) {
     case msrTupletShowNumberKind::kTupletShowNumberActual:
     /* JMI
-      if (gTraceOahGroup->getTraceTuplets ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondTuplets ()) {
         fLilypondCodeStream <<
           "%{ tupletShowNumberActual %}" <<
           std::endl;
@@ -26181,7 +26182,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 //
 //     case msrTupletShowTypeKind::kTupletShowTypeNone:
 //     /* JMI
-//       if (gTraceOahGroup->getTraceTuplets ()) {
+//       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondTuplets ()) {
 //         fLilypondCodeStream <<
   //         "%{ tupletShowTypeNone %}" <<
   //         std::endl;
@@ -26205,7 +26206,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
     elt->getTupletFactor ().getTupletNormalNotes () <<
     cLilypondTupletOpener2;
 
-  if (gTraceOahGroup->getTraceTuplets ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondTuplets ()) {
     fLilypondCodeStream <<
       " %{ tupletNumber: " << elt->getTupletNumber () <<
       ", tupleFactor: " << elt->getTupletFactor ().asFractionString () <<
@@ -26865,7 +26866,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
           break;
           */
       } // switch
-      if (gTraceOahGroup->getTraceBarLines ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondBarLines ()) {
         fLilypondCodeStream <<
           " %{ b333 visitStart (S_msrBarLine& elt) %}";
       }
@@ -27080,7 +27081,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
     elt->getNextBarPuristNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMultipleMeasureRests ()) {
     fLilypondCodeStream <<
       "% nextBarPuristNumber: " <<
       nextBarPuristNumber <<
@@ -27202,7 +27203,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMultipleMeasureRests ()) {
     fLilypondCodeStream <<
       "%, fOnGoingMultipleMeasureRests: " <<
       fOnGoingMultipleMeasureRests <<
@@ -27559,7 +27560,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
   fLilypondCodeStream <<
     ss.str ();
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       " % start of repeat";
   }
@@ -27623,7 +27624,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
 
     fLilypondCodeStream << "}";
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         " % end of repeat";
     }
@@ -27760,7 +27761,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
     // outputting the end of the repeat
     fLilypondCodeStream << '}';
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         " % end of repeat" <<
         std::endl;
@@ -27775,7 +27776,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
       std::endl << std::endl <<
       "\\alternative {";
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
       fLilypondCodeStream <<
         " % start of alternative";
     }
@@ -27792,7 +27793,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
       fLilypondCodeStream <<
         '{';
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
           " % start of repeat hooked ending";
       }
@@ -27805,7 +27806,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
       fLilypondCodeStream <<
         '{';
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
           " % start of repeat hookless ending";
       }
@@ -27887,7 +27888,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
       fLilypondCodeStream <<
         '}' << " % HAHA_1";
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
           " % end of repeat hooked ending";
       }
@@ -27897,7 +27898,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
       fLilypondCodeStream <<
         '}' << " % HAHA_2";
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ())   {
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ())   {
         fLilypondCodeStream <<
           " % end of repeat hookless ending";
       }
@@ -27912,7 +27913,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 
 /* JMI 0.9.70
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondRepeats ()) {
     fLilypondCodeStream <<
       "% ===**** fRepeatDescrsStack.back (): '" <<
       fRepeatDescrsStack.back ()->asString () <<
@@ -27946,7 +27947,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
     fLilypondCodeStream <<
       '}';
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ())   {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ())   {
       fLilypondCodeStream <<
         " % end of alternative";
     }
@@ -28150,7 +28151,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
     elt->fetchMeasureRepeatReplicasNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMeasureRepeats ()) {
     int repeatPatternMeasuresNumber =
       elt->fetchMeasureRepeatPatternMeasuresNumber ();
 
@@ -28174,7 +28175,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       " % start of measures repeat" <<
       mfSingularOrPlural (
@@ -28235,7 +28236,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
     " }" <<
     std::endl;
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       "% end of measures repeat" <<
       mfSingularOrPlural (
@@ -28348,7 +28349,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
   // output the start of the ending
   fLilypondCodeStream << "{";
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       " % start of measures repeat replicas" <<
       std::endl;
@@ -28431,7 +28432,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultipleMeasureRest& elt)
   int measuresNumber =
     elt->getMeasuresNumber ();
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
       "% start of multiple measure rests" <<
       mfSingularOrPlural (
@@ -28456,7 +28457,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultipleMeasureRest& elt)
 
   fLilypondCodeStream <<
     "\\compressMMRests { ";
-    if (gTraceOahGroup->getTraceMeasures ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMeasures ()) {
       fLilypondCodeStream << "%{ CC %} "; // JMI 0.9.64
     }
   fLilypondCodeStream <<
@@ -28602,7 +28603,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
   fLilypondCodeStream <<
     std::endl;
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     --gIndenter; // incremented in visitStart (S_msrMultipleMeasureRest&)
 
     fLilypondCodeStream <<
@@ -28618,7 +28619,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
   --gIndenter;
 
   fLilypondCodeStream << "}";
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMeasures ()) {
     fLilypondCodeStream <<
       " %{ compressMMRests %}";
   }

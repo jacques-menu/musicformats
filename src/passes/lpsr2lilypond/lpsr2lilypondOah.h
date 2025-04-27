@@ -1628,15 +1628,129 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getXml2lyInfos () const
                               { return fXml2lyInfos; }
 
-    void                  setLilypondCommentsBasics ()
-                              { fLilypondCommentsBasics = true; }
-    Bool                  getLilypondCommentsBasics () const
-                              { return fLilypondCommentsBasics; }
+    // structure
+    void                  setCommentLilypondStructureBasics ()
+                              { fCommentLilypondStructureBasics = true; }
+    Bool                  getCommentLilypondStructureBasics () const
+                              { return fCommentLilypondStructureBasics; }
 
-    void                  setLilypondComments ()
-                              { fLilypondComments = true; }
-    Bool                  getLilypondComments () const
-                              { return fLilypondComments; }
+    void                  setCommentLilypondStructure ()
+                              { fCommentLilypondStructure = true; }
+    Bool                  getCommentLilypondStructure () const
+                              { return fCommentLilypondStructure; }
+
+    // parts, voices & measures
+    void                  setCommentLilypondPartGroups ()
+                              { fCommentLilypondPartGroups = true; }
+    Bool                  getCommentLilypondPartGroups () const
+                              { return fCommentLilypondPartGroups; }
+
+    void                  setCommentLilypondVoices ()
+                              { fCommentLilypondVoices = true; }
+    Bool                  getCommentLilypondVoices () const
+                              { return fCommentLilypondVoices; }
+
+    void                  setCommentLilypondMeasures ()
+                              { fCommentLilypondMeasures = true; }
+    Bool                  getCommentLilypondMeasures () const
+                              { return fCommentLilypondMeasures; }
+
+    void                  setCommentLilypondMultipleMeasureRests ()
+                              { fCommentLilypondMultipleMeasureRests = true; }
+    Bool                  getCommentLilypondMultipleMeasureRests () const
+                              { return fCommentLilypondMultipleMeasureRests; }
+
+    void                  setCommentLilypondMeasureRepeats ()
+                              { fCommentLilypondMeasureRepeats = true; }
+    Bool                  getCommentLilypondMeasureRepeats () const
+                              { return fCommentLilypondMeasureRepeats; }
+
+    void                  setCommentLilypondBarLines ()
+                              { fCommentLilypondBarLines = true; }
+    Bool                  getCommentLilypondBarLines () const
+                              { return fCommentLilypondBarLines; }
+
+    // durations
+    void                  setCommentLilypondDurations ()
+                              { fCommentLilypondDurations = true; }
+    Bool                  getCommentLilypondDurations () const
+                              { return fCommentLilypondDurations; }
+
+    // notes
+    void                  setCommentLilypondNotes ()
+                              { fCommentLilypondNotes = true; }
+    Bool                  getCommentLilypondNotes () const
+                              { return fCommentLilypondNotes; }
+
+    void                  setCommentLilypondkipNotess ()
+                              { fCommentLilypondSkipNotes = true; }
+    Bool                  getCommentLilypondSkipNotes () const
+                              { return fCommentLilypondSkipNotes; }
+
+    void                  setCommentLilypondRestNotes ()
+                              { fCommentLilypondRestNotes = true; }
+    Bool                  getCommentLilypondRestNotes () const
+                              { return fCommentLilypondRestNotes; }
+
+    void                  setCommentLilypondBeams ()
+                              { fCommentLilypondBeams = true; }
+    Bool                  getCommentLilypondBeams () const
+                              { return fCommentLilypondBeams; }
+
+    void                  setCommentLilypondOrnaments ()
+                              { fCommentLilypondOrnaments = true; }
+    Bool                  getCommentLilypondOrnaments () const
+                              { return fCommentLilypondOrnaments; }
+
+
+    // grace notes
+    void                  setCommentLilypondGraceNotes ()
+                              { fCommentLilypondGraceNotes = true; }
+    Bool                  getCommentLilypondGraceNotes () const
+                              { return fCommentLilypondGraceNotes; }
+
+    // chords
+    void                  setCommentLilypondChords ()
+                              { fCommentLilypondChords = true; }
+    Bool                  getCommentLilypondChords () const
+                              { return fCommentLilypondChords; }
+
+    // tuplets
+    void                  setCommentLilypondTuplets ()
+                              { fCommentLilypondTuplets = true; }
+    Bool                  getCommentLilypondTuplets () const
+                              { return fCommentLilypondTuplets; }
+
+    // ligatures
+    void                  setCommentLilypondLigatures ()
+                              { fCommentLilypondLigatures = true; }
+    Bool                  getCommentLilypondLigatures () const
+                              { return fCommentLilypondLigatures; }
+
+    // spanners
+    void                  setCommentLilypondSpanners ()
+                              { fCommentLilypondSpanners = true; }
+    Bool                  getCommentLilypondSpanners () const
+                              { return fCommentLilypondSpanners; }
+
+    // harmonies
+    void                  setCommentLilypondHarmonies ()
+                              { fCommentLilypondHarmonies = true; }
+    Bool                  getCommentLilypondHarmonies () const
+                              { return fCommentLilypondHarmonies; }
+
+    // figured basses
+    void                  setCommentLilypondFiguredBasses ()
+                              { fCommentLilypondFiguredBasses = true; }
+    Bool                  getCommentLilypondFiguredBasses () const
+                              { return fCommentLilypondFiguredBasses; }
+
+    // lyrics
+    void                  setCommentLilypondLyrics ()
+                              { fCommentLilypondLyrics = true; }
+    Bool                  getCommentLilypondLyrics () const
+                              { return fCommentLilypondLyrics; }
+
 
     void                  setGlobalEmptyVariable ()
                               { fGlobalEmptyVariable = true; }
@@ -2184,10 +2298,57 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fXml2lyInfos;
 
-    Bool                  fLilypondCommentsBasics;
-    S_oahBooleanAtom      fLilypondCommentsBasicsAtom;
+    // structure
+    Bool                  fCommentLilypondStructureBasics;
+    S_oahBooleanAtom      fCommentLilypondStructureBasicsAtom;
 
-    Bool                  fLilypondComments;
+    Bool                  fCommentLilypondStructure;
+
+    // parts, voices & measures
+    Bool                  fCommentLilypondPartGroups;
+    Bool                  fCommentLilypondVoices;
+    Bool                  fCommentLilypondMeasures;
+
+    Bool                  fCommentLilypondMultipleMeasureRests;
+    Bool                  fCommentLilypondMeasureRepeats;
+
+    Bool                  fCommentLilypondBarLines;
+
+    // durations
+    Bool                  fCommentLilypondDurations;
+
+    // notes
+    Bool                  fCommentLilypondNotes;
+    Bool                  fCommentLilypondSkipNotes;
+    Bool                  fCommentLilypondRestNotes;
+
+    Bool                  fCommentLilypondBeams;
+    Bool                  fCommentLilypondOrnaments;
+
+    // grace notes
+    Bool                  fCommentLilypondGraceNotes;
+
+    // chords
+    Bool                  fCommentLilypondChords;
+
+    // tuplets
+    Bool                  fCommentLilypondTuplets;
+
+    // ligatures
+    Bool                  fCommentLilypondLigatures;
+
+    // spanners
+    Bool                  fCommentLilypondSpanners;
+
+    // harmonies
+    Bool                  fCommentLilypondHarmonies;
+
+    // figured basses
+    Bool                  fCommentLilypondFiguredBasses;
+
+    // lyrics
+    Bool                  fCommentLilypondLyrics;
+
 
     Bool                  fGlobalEmptyVariable;
 

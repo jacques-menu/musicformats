@@ -953,6 +953,36 @@ void xml2lyRegularHandler::createNotesRegularGroup ()
   registerAtomInRegularSubgroup ("merge-rests-in-msr", subGroup);
   registerAtomInRegularSubgroup ("merge-staff-common-rests-in-lilypond", subGroup);
   registerAtomInRegularSubgroup ("multiple-measure-rests-expand-limit", subGroup);
+
+  // code generation
+
+  registerAtomInRegularSubgroup ("comment-lilypond-structure-basics", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-structure", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-part-groups", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-voices", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-measures", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-measure-restss", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-measure-repeats", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-barlines", subGroup);
+
+  registerAtomInRegularSubgroup ("comment-lilypond-durations", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-notes", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-skip-notes", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-rest-notes", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-beams", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-ornaments", subGroup);
+
+  registerAtomInRegularSubgroup ("comment-lilypond-grace-notes", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-chords", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-tuplets", subGroup);
+
+  registerAtomInRegularSubgroup ("comment-lilypond-ligatures", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-spanners", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-harmonies", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-figured-basses", subGroup);
+  registerAtomInRegularSubgroup ("comment-lilypond-lyrics", subGroup);
+
+  registerAtomInRegularSubgroup ("global-empty-variable", subGroup);
 }
 
 void xml2lyRegularHandler::creatBeamsRegularGroup ()

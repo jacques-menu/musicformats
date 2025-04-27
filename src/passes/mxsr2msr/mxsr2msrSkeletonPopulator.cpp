@@ -3785,8 +3785,28 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
     "fCurrentNoteVoiceNumber is unknown");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  attachPendingPartLevelElementsIfAnyToPart (
-    fCurrentPart);
+  // attach pending barlines if any to part
+  if (! fPendingBarLinesList.empty ()) {
+    attachPendingBarLinesToPart (part);
+  }
+
+//   attachPendingPartLevelElementsIfAnyToPart (
+//     fCurrentPart);
+
+  // attach pending rehearsals if any to part
+  if (! fPendingRehearsalMarksList.empty ()) {
+    attachPendingRehearsalMarksToPart (part);
+  }
+
+//   // attach pending barlines if any to part
+//   if (! fPendingBarLinesList.empty ()) {
+//     attachPendingBarLinesToPart (part);
+//   }
+//
+  // attach pending tempos if any to part
+  if (! fPendingTemposList.empty ()) {
+    attachPendingTemposToPart (part);
+  }
 
   // finalize the current part
   fCurrentPart->
@@ -11207,19 +11227,10 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
   }
 #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
-
-
     // attach pending barlines if any to part
     if (! fPendingBarLinesList.empty ()) {
       attachPendingBarLinesToPart (fCurrentPart);
     }
-
-
-//     // attach pending rehearsals if any to part
-//     attachPendingPartLevelElementsIfAnyToPart (
-//       fCurrentPart);
-
-
 
     // finalize current measure in the part,
     // to add skips if necessary and set measure kind
@@ -21998,38 +22009,38 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
   } // while
 }
 
-void mxsr2msrSkeletonPopulator::attachPendingPartLevelElementsIfAnyToPart ( // JMI 0.9.63
-  const S_msrPart& part)
-{
-  /* JMI
-  gLog <<
-    "attachPendingPartLevelElementsIfAnyToPart()" <<
-    ", fPendingTemposList.size (): " << fPendingTemposList.size () <<
-    ", fPendingBarLinesList.size (): " << fPendingBarLinesList.size () <<
-    ", fPendingLineBreaksList.size (): " << fPendingLineBreaksList.size () <<
-    ", fPendingPageBreaksList.size (): " << fPendingPageBreaksList.size () <<
-    std::endl;
-    */
-
-  // the elements pending since before the note // JMI
-  // can now be appended to the latter's voice
-  // prior to the note itself
-
-  // attach pending rehearsals if any to part
-  if (! fPendingRehearsalMarksList.empty ()) {
-    attachPendingRehearsalMarksToPart (part);
-  }
-
-  // attach pending barlines if any to part
-  if (! fPendingBarLinesList.empty ()) {
-    attachPendingBarLinesToPart (part);
-  }
-
-  // attach pending tempos if any to part
-  if (! fPendingTemposList.empty ()) {
-    attachPendingTemposToPart (part);
-  }
-}
+// void mxsr2msrSkeletonPopulator::attachPendingPartLevelElementsIfAnyToPart ( // JMI 0.9.63
+//   const S_msrPart& part)
+// {
+//   /* JMI
+//   gLog <<
+//     "attachPendingPartLevelElementsIfAnyToPart()" <<
+//     ", fPendingTemposList.size (): " << fPendingTemposList.size () <<
+//     ", fPendingBarLinesList.size (): " << fPendingBarLinesList.size () <<
+//     ", fPendingLineBreaksList.size (): " << fPendingLineBreaksList.size () <<
+//     ", fPendingPageBreaksList.size (): " << fPendingPageBreaksList.size () <<
+//     std::endl;
+//     */
+//
+//   // the elements pending since before the note // JMI
+//   // can now be appended to the latter's voice
+//   // prior to the note itself
+//
+// //   // attach pending rehearsals if any to part
+// //   if (! fPendingRehearsalMarksList.empty ()) {
+// //     attachPendingRehearsalMarksToPart (part);
+// //   }
+// //
+// // //   // attach pending barlines if any to part
+// // //   if (! fPendingBarLinesList.empty ()) {
+// // //     attachPendingBarLinesToPart (part);
+// // //   }
+// // //
+// //   // attach pending tempos if any to part
+// //   if (! fPendingTemposList.empty ()) {
+// //     attachPendingTemposToPart (part);
+// //   }
+// }
 
 void mxsr2msrSkeletonPopulator::attachPendingNoteLevelElementsIfAnyToCurrentNote ()
 {
@@ -24230,8 +24241,23 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // fetch current note's voice
   attachThePendingDalSegnosIfAny (); // VITAL
 
- attachPendingPartLevelElementsIfAnyToPart (
-    fCurrentPart);
+  // attach pending barlines if any to part
+  if (! fPendingBarLinesList.empty ()) {
+    attachPendingBarLinesToPart (part);
+  }
+
+//   attachPendingPartLevelElementsIfAnyToPart (
+//     fCurrentPart);
+
+  // attach pending rehearsals if any to part
+  if (! fPendingRehearsalMarksList.empty ()) {
+    attachPendingRehearsalMarksToPart (part);
+  }
+
+  // attach pending tempos if any to part
+  if (! fPendingTemposList.empty ()) {
+    attachPendingTemposToPart (part);
+  }
 
   // populate fCurrentNote with current informations
   populateCurrentNoteWithCurrentInformations (

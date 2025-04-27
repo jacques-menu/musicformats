@@ -718,7 +718,7 @@ class EXP msr2mxsrTranslator :
 
     // divisions
     // ------------------------------------------------------
-    mfWholeNotes             fPartShortestNoteWholeNotes;
+    mfWholeNotes              fPartShortestNoteWholeNotes;
     msrTupletFactor           fPartShortestNoteTupletFactor;
 
     int                       fDivisionsPerQuarterNote;

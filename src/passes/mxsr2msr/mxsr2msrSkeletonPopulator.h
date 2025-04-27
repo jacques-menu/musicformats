@@ -1659,7 +1659,7 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrNote                 fCurrentOuterMostTupletFirstNote;
     S_msrTuplet               fCurrentOuterMostTuplet;
 
-    mfWholeNotes             fCurrentOuterMostTupletRelativeOffset;
+    mfWholeNotes              fCurrentOuterMostTupletRelativeOffset;
 
 		void											displayGatheredTupletInformations (
 																const std::string& context) const;
@@ -1782,8 +1782,8 @@ class EXP mxsr2msrSkeletonPopulator :
 
     Bool                      fOnGoingDirectionType;
 
-    void                      attachPendingPartLevelElementsIfAnyToPart (
-                                const S_msrPart& part);
+//     void                      attachPendingPartLevelElementsIfAnyToPart (
+//                                 const S_msrPart& part);
 
 
     // rehearsal marks handling
@@ -1955,7 +1955,7 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fCurrentMetronomeNoteNormalNotes;
     std::string               fCurrentMetronomeNoteNormalType; // JMI ???
 
-    mfWholeNotes             fCurrentMetronomeNoteWholeNotesFromMetronomeType;
+    mfWholeNotes              fCurrentMetronomeNoteWholeNotesFromMetronomeType;
 
     int                       fCurrentMetronomeTupletNumber;
     S_msrTempoTuplet          fCurrentMetronomeTuplet;
@@ -2147,8 +2147,8 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fCurrentFigureNumber;
     msrBassFigureSuffixKind   fCurrentFigureSuffixKind;
 
-    mfWholeNotes             fCurrentFiguredBassSoundingWholeNotes;
-    mfWholeNotes             fCurrentFiguredBassDisplayWholeNotes;
+    mfWholeNotes              fCurrentFiguredBassSoundingWholeNotes;
+    mfWholeNotes              fCurrentFiguredBassDisplayWholeNotes;
 
     msrFiguredBassParenthesesKind
                               fCurrentFiguredBassParenthesesKind;
