@@ -3622,16 +3622,24 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   if (! fCurrentPart) {
-    // fetch fMsrScore's part list
-    std::list <S_msrPart> partsList;
+//     // fetch fMsrScore's parts list
+//     std::list <S_msrPart> partsList;
+//
+//     fMsrScore->
+//       collectScorePartsList (
+//         inputLineNumber,
+//         partsList);
 
+    // fetch fMsrScore's parts map
+    std::map <std::string, S_msrPart> partsMap;
     fMsrScore->
-      collectScorePartsList (
+      collectScorePartsMap (
         inputLineNumber,
-        partsList);
+        partsMap);
 
-    if (partsList.empty ()) {
-      // there aren't anyp arts in the current MSR score
+    if (partsMap.empty ()) {
+      // there aren't any arts in the current MSR score
+
       std::stringstream ss;
 
       fMsrScore->
@@ -3655,25 +3663,41 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
     }
 
     else {
-      // there are parts in the current MSR score, grab the first one
+      // there are parts in the current MSR score, grab the one for idString from the map
       fCurrentPart =
-        partsList.front ();
+        std::map <std::string, S_msrPart>::iterator
+          it =
+            partsMap.find (idString);
 
-//       partMusicXMLID =
-//         fCurrentPart->
-//           getPartMusicXMLID ();
+      if (it == gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().end ()) {
+        std::stringstream ss;
 
-      std::stringstream ss;
+        ss <<
+          "part \"" << idString <<
+          "\" not found in MSR score skeleton";
 
-      ss <<
-        "part \"" << idString <<
-        "\" not found in score skeleton" <<
-        " since it is the only part in the <part-list />";
+        mxsr2msrError (
+          gServiceRunData->getInputSourceName (),
+          inputLineNumber,
+          ss.str ());
+      }
 
-      mxsr2msrWarning (
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-        ss.str ());
+      // should this part be ignored?
+      S_msrPart ignoredPart =
+        std::map <std::string, S_msrPart>::iterator
+          it =
+            gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().find (idString);
+
+      if (it != gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().end ()) {
+        // the simplest way to ignore this part
+        // is to remove it from its part-group
+        // now that is has been completely built and populated
+        fCurrentPart->
+          getPartUpLinkToPartGroup ()->
+            removePartFromPartGroup (
+              elt->getInputLineNumber (),
+              fCurrentPart);
+      }
     }
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED

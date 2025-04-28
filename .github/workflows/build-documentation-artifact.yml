@@ -95,7 +95,7 @@ jobs:
           root_file:
             MusicFormatsMaintainanceGuide.tex
 
-      - name: Compile the user guide - pdflatex run 2/3
+      - name: Compile the maintenance guide - pdflatex run 2/3
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -104,7 +104,7 @@ jobs:
           root_file:
             MusicFormatsMaintainanceGuide.tex
 
-      - name: Compile the user guide - pdflatex run 3/3
+      - name: Compile the maintenance guide - pdflatex run 3/3
         uses:
           xu-cheng/latex-action@v3
         with:

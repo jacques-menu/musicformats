@@ -272,6 +272,10 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                   inputLineNumber,
                             std::list <S_msrPart>& partsList);
 
+    void                  collectPartGroupPartsMap (
+                            int                                inputLineNumber,
+                            std::map <std::string, S_msrPart>& partsMap);
+
     // voices
 
     void                  registerVoiceInPartGroupAllVoicesList (

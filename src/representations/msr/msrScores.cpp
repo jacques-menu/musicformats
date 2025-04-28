@@ -379,22 +379,26 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 }
 
 void msrScore::collectScorePartsList (
-  int                   inputLineNumber,
+  int                    inputLineNumber,
   std::list <S_msrPart>& partsList)
 {
-  S_msrPart result;
-
-  for (
-    std::list <S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
-    i != fPartGroupsList.end ();
-    ++i
-  ) {
-    S_msrPartGroup
-      partGroup = (*i);
+  for (S_msrPartGroup partGroup : fPartGroupsList ) {
       partGroup->
         collectPartGroupPartsList (
           inputLineNumber,
           partsList);
+  } // for
+}
+
+void msrScore::collectScorePartsMap (
+  int                                inputLineNumber,
+  std::map <std::string, S_msrPart>& partsMap)
+{
+  for (S_msrPartGroup partGroup : fPartGroupsList ) {
+      partGroup->
+        collectPartGroupPartsMap (
+          inputLineNumber,
+          partsMap);
   } // for
 }
 

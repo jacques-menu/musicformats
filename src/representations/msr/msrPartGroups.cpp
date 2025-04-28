@@ -1133,19 +1133,11 @@ void msrPartGroup::collectPartGroupPartsList (
   int                   inputLineNumber,
   std::list <S_msrPart>& partsList)
 {
-  for (
-    std::list <S_msrPartGroupElement>::const_iterator i =
-      fPartGroupElementsList.begin ();
-    i != fPartGroupElementsList.end ();
-    ++i
-  ) {
-    S_msrElement
-      element = (*i);
-
+  for (S_msrPartGroupElement partGroupElement : fPartGroupElementsList) {
     if (
       S_msrPartGroup
         partGroup =
-          dynamic_cast<msrPartGroup*>(&(*element))
+          dynamic_cast<msrPartGroup*>(&(*partGroupElement))
       ) {
       // this is a part group
       partGroup->
@@ -1157,8 +1149,8 @@ void msrPartGroup::collectPartGroupPartsList (
     else if (
       S_msrPart
         part =
-          dynamic_cast<msrPart*>(&(*element))
-      ) {
+          dynamic_cast<msrPart*>(&(*partGroupElement))
+    ) {
       // this is a part
 
       partsList.push_back (part);
@@ -1168,9 +1160,58 @@ void msrPartGroup::collectPartGroupPartsList (
       std::stringstream ss;
 
       ss <<
-        "an element of partgroup " <<
+        "partGroupElement " <<
+        partGroupElement <<
+        "of part group " <<
         fPartGroupName <<
-        ", " <<
+        ", " << // JMI 0.9.72
+        fetchPartGroupInformationForTrace () <<
+        " is not a part group nor a part";
+
+      msrInternalError (
+        gServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+  } // for
+}
+
+void msrPartGroup::collectPartGroupPartsMap (
+  int                                inputLineNumber,
+  std::map <std::string, S_msrPart>& partsMap)
+{
+  for (S_msrPartGroupElement partGroupElement : fPartGroupElementsList) {
+    if (
+      S_msrPartGroup
+        partGroup =
+          dynamic_cast<msrPartGroup*>(&(*partGroupElement))
+      ) {
+      // this is a part group
+      partGroup->
+        collectPartGroupPartsMap (
+          inputLineNumber,
+          partsMap);
+    }
+
+    else if (
+      S_msrPart
+        part =
+          dynamic_cast<msrPart*>(&(*partGroupElement))
+    ) {
+      // this is a part
+      partsMap [part->getPartMusicXMLID ()] = part;
+    }
+
+    else {
+      std::stringstream ss;
+
+      ss <<
+        "partGroupElement " <<
+        partGroupElement <<
+        "of part group " <<
+        fPartGroupName <<
+        ", " << // JMI 0.9.72
         fetchPartGroupInformationForTrace () <<
         " is not a part group nor a part";
 
