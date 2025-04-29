@@ -1177,8 +1177,7 @@ void msrPartGroup::collectPartGroupPartsList (
   } // for
 }
 
-void msrPartGroup::collectPartGroupPartsMap (
-  int                                inputLineNumber,
+void msrPartGroup::collectPartGroupParts (
   std::map <std::string, S_msrPart>& partsMap)
 {
   for (S_msrPartGroupElement partGroupElement : fPartGroupElementsList) {
@@ -1187,10 +1186,9 @@ void msrPartGroup::collectPartGroupPartsMap (
         partGroup =
           dynamic_cast<msrPartGroup*>(&(*partGroupElement))
       ) {
-      // this is a part group
+      // this is a nested part group
       partGroup->
-        collectPartGroupPartsMap (
-          inputLineNumber,
+        collectPartGroupParts (
           partsMap);
     }
 
@@ -1217,7 +1215,7 @@ void msrPartGroup::collectPartGroupPartsMap (
 
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        inputLineNumber,
+        1, // inputLineNumber
         __FILE__, __LINE__,
         ss.str ());
     }

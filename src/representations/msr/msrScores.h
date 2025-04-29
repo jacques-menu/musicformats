@@ -346,12 +346,11 @@ class EXP msrScore : public msrBookElement
                             int                inputLineNumber,
                             const std::string& partMusicXMLID);
 
-    void                  collectScorePartsList (
+    void                  collectScorePartsInList (
                             int                    inputLineNumber,
                             std::list <S_msrPart>& partsList);
 
-    void                  collectScorePartsMap(
-                            int                                inputLineNumber,
+    void                  collectScorePartsInMap (
                             std::map <std::string, S_msrPart>& partsMap);
 
   public:

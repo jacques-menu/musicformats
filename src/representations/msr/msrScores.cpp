@@ -378,7 +378,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
   return result;
 }
 
-void msrScore::collectScorePartsList (
+void msrScore::collectScorePartsInList (
   int                    inputLineNumber,
   std::list <S_msrPart>& partsList)
 {
@@ -390,15 +390,13 @@ void msrScore::collectScorePartsList (
   } // for
 }
 
-void msrScore::collectScorePartsMap (
-  int                                inputLineNumber,
+void msrScore::collectScorePartsInMap (
   std::map <std::string, S_msrPart>& partsMap)
 {
   for (S_msrPartGroup partGroup : fPartGroupsList ) {
-      partGroup->
-        collectPartGroupPartsMap (
-          inputLineNumber,
-          partsMap);
+    partGroup->
+      collectPartGroupParts (
+        partsMap);
   } // for
 }
 

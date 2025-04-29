@@ -269,11 +269,10 @@ class EXP msrPartGroup : public msrPartGroupElement
                             const std::string& partMusicXMLID);
 
     void                  collectPartGroupPartsList (
-                            int                   inputLineNumber,
+                            int                    inputLineNumber,
                             std::list <S_msrPart>& partsList);
 
-    void                  collectPartGroupPartsMap (
-                            int                                inputLineNumber,
+    void                  collectPartGroupParts (
                             std::map <std::string, S_msrPart>& partsMap);
 
     // voices

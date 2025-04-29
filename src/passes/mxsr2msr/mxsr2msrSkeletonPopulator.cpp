@@ -88,6 +88,9 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fCurrentSlashGraphicNotesDurationKind =
     mfDurationKind::kDuration_UNKNOWN_;
 
+  // parts handling
+  populatePartsMapFromScore ();
+
   // staff handling
   fPreviousNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
   fCurrentNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
@@ -929,6 +932,135 @@ void mxsr2msrSkeletonPopulator::checkStep (
 }
 
 //______________________________________________________________________________
+void mxsr2msrSkeletonPopulator::populatePartsMapFromScore ()
+{
+  // fetch fMsrScore's parts map
+  fMsrScore->
+    collectScorePartsInMap (
+      fPartsMap);
+
+  if (fPartsMap.empty ()) {
+    // there aren't any arts in the current MSR score
+    std::stringstream ss;
+
+    fMsrScore->
+      printSummary (gLog); // JMI 0.9.69
+
+    gLog <<
+      fMsrScore; // JMI 0.9.69
+
+    fMsrScore->
+      displayPartGroupsList ("visitStart (S_part& elt)");
+
+    ss <<
+      "the MSR score doesn't contain any parts";
+
+    mxsr2msrInternalError (
+      gServiceRunData->getInputSourceName (),
+      1, // inputLineNumber
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+
+//   else {
+//     // populate the part staves vector
+//     for (
+//       std::pair <int, S_msrStaff> thePair : fCurrentPart->getPartStavesMap ()
+//     ) {
+//       int        staffNumber = thePair.first;
+//       S_msrStaff staff = thePair.second;
+//
+//       // register the staff
+//   #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceStaves ()) {
+//         std::stringstream ss;
+//
+//         ss <<
+//           ">>> Part \"" <<
+//           part->getPartName () <<
+//           "\" registering staff " << staff <<
+//           "in fCurrentPartStavesVector under staffNumber " << staffNumber <<
+//           ", line " << staff->getInputLineNumber ();
+//
+//         gWaeHandler->waeTrace (
+//           __FILE__, __LINE__,
+//           ss.str ());
+//       }
+//   #endif // MF_TRACE_IS_ENABLED
+//
+//       fCurrentPartStavesVector [staffNumber] = staff;
+//     } // for
+//   }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTracePartsBasics ()) {
+    displayPartsMap ();
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+//     // grab the current MSR score's parts
+//     fCurrentPart =
+//       std::map <std::string, S_msrPart>::iterator
+//         it =
+//           partsMap.find (idString);
+//
+//     if (it == gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().end ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "part \"" << idString <<
+//         "\" not found in MSR score skeleton";
+//
+//       mxsr2msrError (
+//         gServiceRunData->getInputSourceName (),
+//         inputLineNumber,
+//         ss.str ());
+//     }
+//
+//     // should this part be ignored?
+//     S_msrPart ignoredPart =
+//       std::map <std::string, S_msrPart>::iterator
+//         it =
+//           gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().find (idString);
+//
+//     if (it != gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().end ()) {
+//       // the simplest way to ignore this part
+//       // is to remove it from its part-group
+//       // now that is has been completely built and populated
+//       fCurrentPart->
+//         getPartUpLinkToPartGroup ()->
+//           removePartFromPartGroup (
+//             elt->getInputLineNumber (),
+//             fCurrentPart);
+//     }
+//   }
+}
+
+void mxsr2msrSkeletonPopulator::displayPartsMap () const
+{
+  gLog <<
+    ">>> fPartsMap content:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (std::pair <std::string, S_msrPart> thePair : fPartsMap) {
+    std::string theMusicXMLID = thePair.first;
+    S_msrPart   part = thePair.second;
+
+    gLog << std::left <<
+      std::setw (3) <<
+      theMusicXMLID << ": " <<
+      part->asShortString () <<
+      std::endl;
+  } // for
+
+  --gIndenter;
+
+  gLog << std::endl;
+}
+
+//______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::populateCurrentPartStavesVectorFromPart (
   const S_msrPart& part)
 {
@@ -993,22 +1125,15 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStavesVectorFromPart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-    std::stringstream ss;
-
-    displayCurrentPartStavesVector (
-      0,
-      "after mxsr2msrSkeletonPopulator::populateCurrentPartStavesVectorFromPart()");
+    displayCurrentPartStavesVector ();
   }
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrSkeletonPopulator::displayCurrentPartStavesVector (
-  int                inputLineNumber,
-  const std::string& context) const
+void mxsr2msrSkeletonPopulator::displayCurrentPartStavesVector () const
 {
   gLog <<
-    ">>> fCurrentPartStavesVector contents" <<
-    ", context: " << context <<
+    ">>> fCurrentPartStavesVector contents:" <<
     std::endl;
 
   for (S_msrStaff staff : fCurrentPartStavesVector) {
@@ -3626,79 +3751,10 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
 //     std::list <S_msrPart> partsList;
 //
 //     fMsrScore->
-//       collectScorePartsList (
+//       collectScorePartsInList (
 //         inputLineNumber,
 //         partsList);
 
-    // fetch fMsrScore's parts map
-    std::map <std::string, S_msrPart> partsMap;
-    fMsrScore->
-      collectScorePartsMap (
-        inputLineNumber,
-        partsMap);
-
-    if (partsMap.empty ()) {
-      // there aren't any arts in the current MSR score
-
-      std::stringstream ss;
-
-      fMsrScore->
-        printSummary (gLog); // JMI 0.9.69
-
-      gLog <<
-        fMsrScore; // JMI 0.9.69
-
-      fMsrScore->
-        displayPartGroupsList ("visitStart (S_part& elt)");
-
-      ss <<
-        "the MSR score doesn't contain any parts" <<
-        ", line " << inputLineNumber;
-
-      mxsr2msrInternalError (
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-
-    else {
-      // there are parts in the current MSR score, grab the one for idString from the map
-      fCurrentPart =
-        std::map <std::string, S_msrPart>::iterator
-          it =
-            partsMap.find (idString);
-
-      if (it == gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().end ()) {
-        std::stringstream ss;
-
-        ss <<
-          "part \"" << idString <<
-          "\" not found in MSR score skeleton";
-
-        mxsr2msrError (
-          gServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          ss.str ());
-      }
-
-      // should this part be ignored?
-      S_msrPart ignoredPart =
-        std::map <std::string, S_msrPart>::iterator
-          it =
-            gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().find (idString);
-
-      if (it != gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().end ()) {
-        // the simplest way to ignore this part
-        // is to remove it from its part-group
-        // now that is has been completely built and populated
-        fCurrentPart->
-          getPartUpLinkToPartGroup ()->
-            removePartFromPartGroup (
-              elt->getInputLineNumber (),
-              fCurrentPart);
-      }
-    }
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
@@ -3753,11 +3809,9 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
   populateCurrentPartStavesVectorFromPart (fCurrentPart);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoicesBasics ()) {
     // display the stave vectors
-    displayCurrentPartStavesVector (
-      inputLineNumber,
-      "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
+    displayCurrentPartStavesVector ();
   }
 #endif
 

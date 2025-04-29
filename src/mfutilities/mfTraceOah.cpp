@@ -2425,6 +2425,20 @@ This option implies '-trace-part-groups, -tpgrps'.)",
     addBooleanAtom (
       tracePartGroupsDetailsBooleanAtom);
 
+  // parts basic
+
+  fTracePartsBasicsBooleanAtom =
+    oahTwoBooleansAtom::create (
+      "trace-parts-basics", "tpartsb",
+R"(Parts basics)",
+      "fTracePartsBasics",
+      fTracePartsBasics,
+      fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fTracePartsBasicsBooleanAtom);
+
   // parts
 
   S_oahTwoBooleansAtom
@@ -2434,7 +2448,7 @@ This option implies '-trace-part-groups, -tpgrps'.)",
 R"(Parts)",
         "fTraceParts",
         fTraceParts,
-        fTracePassesBooleanAtom);
+        fTracePartsBasicsBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (

@@ -189,10 +189,16 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTracePartGroupsDetails () const
                               { return fTracePartGroupsDetails; }
     // parts
+    void                  setTracePartsBasics ()
+                              { fTracePartsBasics = true; }
+    Bool                  getTracePartsBasics () const
+                              { return fTracePartsBasics; }
+
     void                  setTraceParts ()
                               { fTraceParts = true; }
     Bool                  getTraceParts () const
                               { return fTraceParts; }
+
     // staves
     Bool                  getTraceStavesBasics () const
                               { return fTraceStavesBasics; }
@@ -967,6 +973,9 @@ class EXP traceOahGroup : public oahGroup
 
     // parts
     // --------------------------------------
+
+    Bool                  fTracePartsBasics;
+    S_oahBooleanAtom      fTracePartsBasicsBooleanAtom;
 
     Bool                  fTraceParts;
 

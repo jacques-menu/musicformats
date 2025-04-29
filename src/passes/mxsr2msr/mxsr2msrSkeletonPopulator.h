@@ -12,6 +12,8 @@
 #ifndef ___mxsr2msrTranslator___
 #define ___mxsr2msrTranslator___
 
+#include <map>
+
 #include "typedefs.h"
 
 #include "mxsr2msrEvents.h"
@@ -1293,6 +1295,13 @@ class EXP mxsr2msrSkeletonPopulator :
     // part handling
     // ------------------------------------------------------
 
+    std::map <std::string, S_msrPart>
+                              fPartsMap;
+
+    void                      populatePartsMapFromScore ();
+
+		void											displayPartsMap () const;
+
     void                      handlePartMusicXMLID (
                                 int               inputLineNumber,
                                 const std::string idString);
@@ -1308,9 +1317,7 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      populateCurrentPartStavesVectorFromPart (
                                   const S_msrPart& part);
 
-		void											displayCurrentPartStavesVector (
-                                int                inputLineNumber,
-																const std::string& context) const;
+		void											displayCurrentPartStavesVector () const;
 
 
     // voices handling
