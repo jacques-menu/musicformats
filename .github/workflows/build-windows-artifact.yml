@@ -48,33 +48,33 @@ jobs:
           cmake -G "Unix Makefiles" -S cmakefiles -B build ; cd build ; make ; ls -R .
 
 
-      # --------------------------------------------------------------------------
-      - name: Compile the user guide - pdflatex run 1/3
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
-
-      - name: Compile the user guide - pdflatex run 2/3
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
-
-      - name: Compile the user guide - pdflatex run 3/3
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
+#       # --------------------------------------------------------------------------
+#       - name: Compile the user guide - pdflatex run 1/3
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/mfuserguide
+#           root_file:
+#             MusicFormatsUserGuide.tex
+#
+#       - name: Compile the user guide - pdflatex run 2/3
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/mfuserguide
+#           root_file:
+#             MusicFormatsUserGuide.tex
+#
+#       - name: Compile the user guide - pdflatex run 3/3
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/mfuserguide
+#           root_file:
+#             MusicFormatsUserGuide.tex
 
 
       # --------------------------------------------------------------------------
@@ -82,7 +82,7 @@ jobs:
         run: |
           mv build/lib .
           mv build/bin .
-          mv documentation/mfuserguide/MusicFormatsUserGuide.pdf .
+#           mv documentation/mfuserguide/MusicFormatsUserGuide.pdf .
 
 
       # --------------------------------------------------------------------------
@@ -95,6 +95,6 @@ jobs:
             MusicFormatsVersionDate.txt
             bin
             lib
-            MusicFormatsUserGuide.pdf
+#             MusicFormatsUserGuide.pdf
           retention-days:
             90
