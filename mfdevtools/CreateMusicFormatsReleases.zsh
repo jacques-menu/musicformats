@@ -54,20 +54,20 @@ function CreateReleaseForOS ()
   echo
 
   ARTIFACT_NAME="musicformats-${OS_NAME}-artifact"
-  ARTIFACT_DIR="${DOWNLOADS_DIR}/${ARTIFACT_NAME}"
   echo "---> ARTIFACT_NAME: ${ARTIFACT_NAME}"
+  ARTIFACT_DIR="${DOWNLOADS_DIR}/${ARTIFACT_NAME}"
   echo "---> ARTIFACT_DIR : ${ARTIFACT_DIR}"
   ls -salh "${ARTIFACT_DIR}"
   echo
 
   OS_RELEASE_NAME="musicformats-${OS_NAME}-${MUSICFORMATS_VERSION_NUMBER}"
-  OS_RELEASE_DIR="${MUSICFORMATS_RELEASES_DIR}/${OS_RELEASE_NAME}"
   echo "---> OS_RELEASE_NAME: ${OS_RELEASE_NAME}"
+  OS_RELEASE_DIR="${MUSICFORMATS_RELEASES_DIR}/${OS_RELEASE_NAME}"
   echo "---> OS_RELEASE_DIR : ${OS_RELEASE_DIR}"
 
 
   # create OS_RELEASE_NAME
-  mkdir "${OS_RELEASE_NAME}"
+  mkdir -p "${OS_RELEASE_NAME}"
   ls -salh "${OS_RELEASE_NAME}"
   echo
 
@@ -80,12 +80,12 @@ function CreateReleaseForOS ()
 
   # populate OS_RELEASE_DIR
 # set -x
-  cp -p ${ARTIFACT_DIR}/MusicFormatsVersionNumber.txt .
-  cp -p ${ARTIFACT_DIR}/MusicFormatsVersionDate.txt .
-  cp -pr ${ARTIFACT_DIR}/documentation/*/*.pdf .
-  cp -pr ${ARTIFACT_DIR}/build/bin .
-  cp -pr ${ARTIFACT_DIR}/build/lib .
-  cp -pr ${ARTIFACT_DIR}/include .
+  cp -p  ${ARTIFACT_DIR}/MusicFormatsVersionNumber.txt .
+  cp -p  ${ARTIFACT_DIR}/MusicFormatsVersionDate.txt .
+#   cp -pr ${ARTIFACT_DIR}/*.pdf .
+  cp -pr ${ARTIFACT_DIR}/bin .
+  cp -pr ${ARTIFACT_DIR}/lib .
+#   cp -pr ${ARTIFACT_DIR}/include .
   ls -salhr .
 # set +x
   echo
