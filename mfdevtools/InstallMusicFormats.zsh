@@ -23,21 +23,24 @@ function usage ()
     exit 1
   }
 
-#	my actual work directory
-#----------------------------------------------
 
-MY_WORK_DIR=${HOME}
+# set the MusicFormats variables
+. ./MusicFormatsVariables.zsh
+
+
+# Write all output to logfile
+#exec > ${MUSICFORMATS_DIR}/$(basename $0).log 2>&1
 
 
 # dev branch
 #----------------------------------------------
 
-MUSIC_FORMATS_DEV=${MY_WORK_DIR}/musicformats-git-dev
+MUSICFORMATS_DIR=${MY_WORK_DIR}/musicformats-git-dev
 echo
-echo "==> MUSIC_FORMATS_DEV = ${MUSIC_FORMATS_DEV}"
+echo "==> MUSICFORMATS_DIR = ${MUSICFORMATS_DIR}"
 echo
 
-BUILD_DIR=${MUSIC_FORMATS_DEV}/build
+BUILD_DIR=${MUSICFORMATS_DIR}/build
 echo "==> $0: BUILD_DIR          = ${BUILD_DIR}"
 echo
 

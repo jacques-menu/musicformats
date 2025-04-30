@@ -13,25 +13,23 @@
 
 # set -x
 
-# Write all output to logfile
-# -----------------------------------------
-
-MUSIC_FORMATS_DEV_DIR=/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev
-echo "--> MUSIC_FORMATS_DEV_DIR = ${MUSIC_FORMATS_DEV_DIR}"
+# the MusicFormats directory
+export MUSICFORMATS_DIR=${HOME}/JMI_DEVELOPMENT/musicformats-git-dev
+echo "--> MUSICFORMATS_DIR: ${MUSICFORMATS_DIR}"
 echo
 
-#exec > ${MUSIC_FORMATS_DEV_DIR}/$(basename $0).log 2>&1
-
-# the MusicFormats local repo
+ls -sal ${MUSICFORMATS_DIR}
 
 
-# fetch the MusicFormats version number
-VERSION_NUMBER=`cat ${MUSIC_FORMATS_DEV_DIR}/MusicFormatsVersionNumber.txt | tr '.' '_'`
-# VERSION_NUMBER="v${VERSION_NUMBER}"
-echo "--> VERSION_NUMBER = ${VERSION_NUMBER}"
+# set the MusicFormats variables
+. ${MUSICFORMATS_DIR}/mfdevtools/SetMusicFormatsVariables.zsh
 
 
-# where to download the ZIP artifacts
+# Write all output to logfile
+#exec > ${MUSICFORMATS_DIR}/$(basename $0).log 2>&1
+
+
+# where to download the GitHub ZIP artifacts
 DOWNLOADS_DIR=${HOME}/JMI_Downloads
 echo "--> DOWNLOADS_DIR = ${DOWNLOADS_DIR}"
 echo
@@ -40,11 +38,13 @@ echo
 
 
 # create MF_RELEASES_DIR it if it does not exist
-MF_RELEASES_DIR=/Volumes/JMI_Volume/JMI_Developpement/musicformats_releases
+MF_RELEASES_DIR=$MUSICFORMATS_DIR/../musicformats_releases
 echo "--> MF_RELEASES_DIR = ${MF_RELEASES_DIR}"
 
 [[ ! -d "${MF_RELEASES_DIR}" ]] && mkdir "${MF_RELEASES_DIR}"
 
+
+# a function to create the releases
 function CreateReleaseForOS ()
 {
   OS_NAME="$1"
@@ -143,6 +143,7 @@ CreateReleaseForOS "ubuntu"
 CreateReleaseForOS "windows"
 echo
 
+
 echo "----------------------------------------------"
 echo "==> final ${MF_RELEASES_DIR} contents:"
 echo "----------------------------------------------"
@@ -152,6 +153,7 @@ cd ${MF_RELEASES_DIR}
 pwd
 echo
 
+
 echo "----------------------------------------------"
 echo "==> MacOS:"
 echo "----------------------------------------------"
@@ -159,12 +161,14 @@ echo
 ls -salht musicformats-macos-*.zip
 echo
 
+
 echo "----------------------------------------------"
 echo "==> Ubuntu:"
 echo "----------------------------------------------"
 echo
 ls -salht musicformats-ubuntu-*.zip
 echo
+
 
 echo "----------------------------------------------"
 echo "==> Windows:"

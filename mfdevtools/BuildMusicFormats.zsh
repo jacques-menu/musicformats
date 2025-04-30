@@ -11,7 +11,7 @@
 #   https://github.com/jacques-menu/musicformats
 #
 
-#set -x
+set -x
 
 function usage ()
   {
@@ -23,52 +23,36 @@ function usage ()
     exit 1
   }
 
-#	my actual work directory
-#----------------------------------------------
 
-MY_WORK_DIR=${HOME}
+# the MusicFormats directory
+export MUSICFORMATS_DIR=${HOME}/JMI_DEVELOPMENT/musicformats-git-dev
+echo "--> MUSICFORMATS_DIR: ${MUSICFORMATS_DIR}"
+echo
+
+ls -sal ${MUSICFORMATS_DIR}
 
 
-# dev branch
-#----------------------------------------------
-
-MUSIC_FORMATS_DEV=${MY_WORK_DIR}/musicformats-git-dev
-# echo
-# echo "==> MUSIC_FORMATS_DEV = ${MUSIC_FORMATS_DEV}"
-# echo
+# set the MusicFormats variables
+. ${MUSICFORMATS_DIR}/mfdevtools/SetMusicFormatsVariables.zsh
 
 
 # Write all output to logfile
-# -----------------------------------------
+#exec > ${MUSICFORMATS_DIR}/$(basename $0).log 2>&1
 
+
+# set files informations
 SCRIPT_BASE_NAME="$(basename ${0})"
 
 LOGFILE_NAME=${SCRIPT_BASE_NAME/%.zsh/.zsh.log}
-LOGFILE=${MUSIC_FORMATS_DEV}/build/${LOGFILE_NAME}
+LOGFILE=${MUSICFORMATS_DIR}/build/${LOGFILE_NAME}
 # echo "==> $0: 0 = ${0}"
 # echo "==> $0: SCRIPT_BASE_NAME = ${SCRIPT_BASE_NAME}"
 # echo "==> $0: LOGFILE_NAME     = ${LOGFILE_NAME}"
 # echo "==> $0: LOGFILE          = ${LOGFILE}"
 # echo
 
-exec > ${LOGFILE} 2>&1
+# exec > ${LOGFILE} 2>&1
 
-
-# Let's go!
-# -----------------------------------------
-
-cd ${MUSIC_FORMATS_DEV}/build
-
-echo "==> date is:"
-date
-echo
-
-echo "==> Building musicformats and the samples"
-echo
-
-echo "==> PWD is:"
-pwd
-echo
 
 # Run 'cmake'
 # -----------------------------------------
@@ -76,9 +60,7 @@ echo
 echo '--> cmake'
 echo
 
-# -S sets CMAKE_SOURCE_DIR
-# -B sets CMAKE_BINARY_DIR
-cmake -S . -B . .
+cmake -S cmakefiles -B build
 echo
 
 
@@ -87,13 +69,11 @@ echo
 
 echo '--> make'
 echo
-#make --trace
-#make -i
 
+cd build
+make
 #make cmake CMAKEOPT='-DLILY=on -DBMML=on -DMEI=on'
-
-make CMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -DAPPLEDEBUG=yes" JOBS=5
-#--debug=j
+# make CMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -DAPPLEDEBUG=yes" JOBS=5   #--debug=j
 echo
 
 

@@ -13,18 +13,25 @@
 
 #set -x
 
-LIBMUSICFORMATS_GIT=${HOME}/musicformats-git-dev
+# the MusicFormats directory
+export MUSICFORMATS_DIR=${HOME}/JMI_DEVELOPMENT/musicformats-git-dev
+echo "--> MUSICFORMATS_DIR: ${MUSICFORMATS_DIR}"
+echo
+
+ls -sal ${MUSICFORMATS_DIR}
 
 
-# Write all output to logfile
-# -----------------------------------------
+# set the MusicFormats variables
+. ${MUSICFORMATS_DIR}/mfdevtools/SetMusicFormatsVariables.zsh
 
-#exec > ${LIBMUSICFORMATS_GIT}/$(basename $0).log 2>&1
 
 echo
 
+# set documentation variables
 
-DOCUMENTATION_DIR=${LIBMUSICFORMATS_GIT}/documentation
+DOCUMENTATION_DIR=${MUSICFORMATS_DIR}/documentation
+echo "--> DOCUMENTATION_DIR: ${DOCUMENTATION_DIR}"
+ls -sal ${DOCUMENTATION_DIR}
 
 ARCHITECTURE_NAME="MusicFormatsArchitecture.pdf"
 
@@ -40,13 +47,16 @@ FIGURES_NAME="MusicFormatsFigures"
 API_GUIDE_DIR="${DOCUMENTATION_DIR}/mfapiguide"
 API_GUIDE_NAME="MusicFormatsAPIGuide"
 
-PDFLATEX=/Library/TeX/texbin/pdflatex --file-line-error --synctex=1
 
-echo "PDFLATEX: ${PDFLATEX}"
+# LaTeX
+
+PDFLATEX_COMMAND=/Library/TeX/texbin/pdflatex
+
+echo "PDFLATEX_COMMAND: ${PDFLATEX_COMMAND}"
 echo
 
 
-# user guide, 2 pdflatex runs
+# user guide, 3 pdflatex runs
 
 cd ${USER_GUIDE_DIR}
 echo -n "--> current directory: "; pwd
@@ -54,9 +64,11 @@ echo
 ls -sal ${USER_GUIDE_DIR}/${USER_GUIDE_NAME}.tex
 echo
 echo
-${PDFLATEX} \
+${PDFLATEX_COMMAND} --file-line-error --synctex=1 \
   ${USER_GUIDE_NAME}.tex
-${PDFLATEX} \
+${PDFLATEX_COMMAND} --file-line-error --synctex=1 \
+  ${USER_GUIDE_NAME}.tex
+${PDFLATEX_COMMAND} --file-line-error --synctex=1 \
   ${USER_GUIDE_NAME}.tex
 
 
@@ -68,11 +80,11 @@ echo
 ls -sal ${MAINTAINANCE_GUIDE_DIR}/${MAINTAINANCE_GUIDE_NAME}.tex
 echo
 echo
-${PDFLATEX} \
+${PDFLATEX_COMMAND} --file-line-error --synctex=1 \
   ${MAINTAINANCE_GUIDE_NAME}.tex
-${PDFLATEX} \
+${PDFLATEX_COMMAND} --file-line-error --synctex=1 \
   ${MAINTAINANCE_GUIDE_NAME}.tex
-${PDFLATEX} \
+${PDFLATEX_COMMAND} --file-line-error --synctex=1 \
   ${MAINTAINANCE_GUIDE_NAME}.tex
 
 
@@ -84,7 +96,7 @@ echo
 ls -sal ${FIGURES_DIR}/${FIGURES_NAME}.tex
 echo
 echo
-${PDFLATEX} \
+${PDFLATEX_COMMAND} --file-line-error --synctex=1 \
   ${FIGURES_NAME}.tex
 
 
@@ -96,7 +108,7 @@ echo
 ls -sal ${API_GUIDE_DIR}/${API_GUIDE_NAME}.tex
 echo
 echo
-${PDFLATEX} \
+${PDFLATEX_COMMAND} --file-line-error --synctex=1 \
   ${API_GUIDE_NAME}.tex
 
 

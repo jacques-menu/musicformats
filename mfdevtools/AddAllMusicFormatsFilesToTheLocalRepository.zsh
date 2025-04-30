@@ -13,18 +13,35 @@
 
 set -x
 
+# the MusicFormats directory
+export MUSICFORMATS_DIR=${HOME}/JMI_DEVELOPMENT/musicformats-git-dev
+echo "--> MUSICFORMATS_DIR: ${MUSICFORMATS_DIR}"
+echo
+
+ls -sal ${MUSICFORMATS_DIR}
+
+
+# set the MusicFormats variables
+. ${MUSICFORMATS_DIR}/mfdevtools/SetMusicFormatsVariables.zsh
+
+
+# Write all output to logfile
+#exec > ${MUSICFORMATS_DIR}/$(basename $0).log 2>&1
+
+
 # fetch the needed environment
 . ${HOME}/JMI_SHELL_SETTINGS/ZshDefinitionsForMusicFormats.zsh
 
 
+# main function
 function addAllToMusicFormatsLocalRepository ()
 {
   # MusicFormats version dataa
-  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
-  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.txt
+  git add -f ${MUSICFORMATS_DIR}/MusicFormatsVersionNumber.txt
+  git add -f ${MUSICFORMATS_DIR}/MusicFormatsVersionDate.txt
 
-  git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionNumber.h
-  git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionDate.h
+  git add -f ${MUSICFORMATS_DIR}/src/MusicFormatsVersionNumber.h
+  git add -f ${MUSICFORMATS_DIR}/src/MusicFormatsVersionDate.h
 
   # src
   add_src
@@ -42,6 +59,7 @@ function addAllToMusicFormatsLocalRepository ()
 }
 
 
+# specific functions to add the needed files
 function add_src ()
 {
   git add ${SRC_DIR}/*.h
@@ -119,37 +137,37 @@ function add_documentation ()
 function add_musicxmlfiles ()
 {
   # the MusicXML files Makefile
-  git add -f ${MUSIC_FORMATS_DEV}/musicxmlfiles/Makefile
+  git add -f ${MUSICFORMATS_DIR}/musicxmlfiles/Makefile
 
   # the MusicXML files in the subdirectories
-  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/*.xml
-  git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*/*.musicxml
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/*.xml
+  git add    ${MUSICFORMATS_DIR}/mfslfiles/*/*.musicxml
 
   # the MusicXML files in the validated_* subdirectories
-  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/validated_*/*.xml
-  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/validated_*/*.musicxml
-  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/validated_*/*.ly
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/validated_*/*.xml
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/validated_*/*.musicxml
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/validated_*/*.ly
 
   # the MusicXML files in the problematic_* subdirectories
-  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/problematic_*/*.xml
-  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/problematic_*/*.musicxml
-  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/problematic_*/*.ly
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/problematic_*/*.xml
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/problematic_*/*.musicxml
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/problematic_*/*.ly
 
   # the scripts
-  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.bash
-  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.mfsl
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*.bash
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*.mfsl
 
   # *.txt files
-  git add -f ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/*.txt
+  git add -f ${MUSICFORMATS_DIR}/musicxmlfiles/*/*.txt
 }
 
 
 function add_mfslfiles ()
 {
-  git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.mfsl
-  git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.xml
-  git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.musicxml
-  git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.bash
+  git add    ${MUSICFORMATS_DIR}/mfslfiles/*.mfsl
+  git add    ${MUSICFORMATS_DIR}/mfslfiles/*.xml
+  git add    ${MUSICFORMATS_DIR}/mfslfiles/*.musicxml
+  git add    ${MUSICFORMATS_DIR}/mfslfiles/*.bash
 }
 
 

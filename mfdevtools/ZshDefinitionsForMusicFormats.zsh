@@ -28,60 +28,60 @@ MY_WORK_DIR=/Volumes/JMI_Volume/JMI_Developpement
 # dev branch
 #----------------------------------------------
 
-MUSIC_FORMATS_DEV=${MY_WORK_DIR}/musicformats-git-dev
+MUSICFORMATS_DIR=${MY_WORK_DIR}/musicformats-git-dev
 # echo
-# echo "==> MUSIC_FORMATS_DEV = ${MUSIC_FORMATS_DEV}"
+# echo "==> MUSICFORMATS_DIR = ${MUSICFORMATS_DIR}"
 # echo
 
-alias mfdev="cd ${MUSIC_FORMATS_DEV}"
+alias mfdev="cd ${MUSICFORMATS_DIR}"
 alias mfd=mfdev
 
 # devtools
 #----------------------------------------------
 
-export PATH=${MUSIC_FORMATS_DEV}/devtools:$PATH
+export PATH=${MUSICFORMATS_DIR}/devtools:$PATH
 
 # working on dev branch
 #----------------------------------------------
 
-# DTDS_DIR=${MUSIC_FORMATS_DEV}/schemas/MusicXML/musicxml-4.0/
-DTDS_DIR=${MUSIC_FORMATS_DEV}/libmusicxml/dtds
+# DTDS_DIR=${MUSICFORMATS_DIR}/schemas/MusicXML/musicxml-4.0/
+DTDS_DIR=${MUSICFORMATS_DIR}/libmusicxml/dtds
 alias dtds="cd ${DTDS_DIR}"
 SCHEMA_DIR=${DTDS_DIR}/3.1/schema
 alias schem="cd ${SCHEMA_DIR}"
 
-LXML_DIR=${MUSIC_FORMATS_DEV}/libmusicxml
+LXML_DIR=${MUSICFORMATS_DIR}/libmusicxml
 
-SRC_DIR=${MUSIC_FORMATS_DEV}/src
+SRC_DIR=${MUSICFORMATS_DIR}/src
 
 LXML_SRC_DIR=${LXML_DIR}/src
 LXML_INTERFACE_DIR=${LXML_SRC_DIR}/interface
 
-LANGUAGES_DIR=${MUSIC_FORMATS_DEV}/src/languages
+LANGUAGES_DIR=${MUSICFORMATS_DIR}/src/languages
 alias lang="cd ${LANGUAGES_DIR}"
 
-DEVTOOLS_DIR=${MUSIC_FORMATS_DEV}/devtools
+DEVTOOLS_DIR=${MUSICFORMATS_DIR}/devtools
 alias tool="cd ${DEVTOOLS_DIR}"
 
-BUILD_DIR=${MUSIC_FORMATS_DEV}/build
+BUILD_DIR=${MUSICFORMATS_DIR}/build
 alias build="cd ${BUILD_DIR}"
 
 INCLUDE_DIR_NAME=include
-INCLUDE_DIR=${MUSIC_FORMATS_DEV}/${INCLUDE_DIR_NAME}
+INCLUDE_DIR=${MUSICFORMATS_DIR}/${INCLUDE_DIR_NAME}
 alias inc="cd ${INCLUDE_DIR}"
 
-alias rmbuild='cd ${MUSIC_FORMATS_DEV}/build ; rm -r bin lib libdir; ls -sal'
+alias rmbuild='cd ${MUSICFORMATS_DIR}/build ; rm -r bin lib libdir; ls -sal'
 
-DOC_DIR=${MUSIC_FORMATS_DEV}/documentation
+DOC_DIR=${MUSICFORMATS_DIR}/documentation
 
-SERVICES_DIR=${MUSIC_FORMATS_DEV}/src/services
+SERVICES_DIR=${MUSICFORMATS_DIR}/src/services
 
 LXML_SAMPLES_DIR=${LXML_DIR}/samples
-CLI_SAMPLES_DIR=${MUSIC_FORMATS_DEV}/src/clisamples
+CLI_SAMPLES_DIR=${MUSICFORMATS_DIR}/src/clisamples
 
-MXML_FILES_DIR=${MUSIC_FORMATS_DEV}/musicxmlfiles
+MXML_FILES_DIR=${MUSICFORMATS_DIR}/musicxmlfiles
 
-export PATH=${MUSIC_FORMATS_DEV}/build/bin:$PATH
+export PATH=${MUSICFORMATS_DIR}/build/bin:$PATH
 
 alias lxmlsrc="cd ${LXML_SRC_DIR}"
 alias lxmlinter="cd ${LXML_INTERFACE_DIR}"
@@ -113,7 +113,7 @@ alias useversion='export PATH=~/MusicFormatsForMacOS/bin:$PATH ; type xml2ly'
 # validation
 #----------------------------------------------
 
-VALIDATION_DIR=${MUSIC_FORMATS_DEV}/validation
+VALIDATION_DIR=${MUSICFORMATS_DIR}/validation
 
 alias valid="cd ${VALIDATION_DIR}"
 
@@ -162,11 +162,11 @@ alias b2015="cd ${MXML_FILES_DIR}/2015_bana_braille"
 
 alias igno="cd ${MXML_FILES_DIR}/lilypond-ignored"
 
-alias fmfsl="cd ${MUSIC_FORMATS_DEV}/mfslfiles"
+alias fmfsl="cd ${MUSICFORMATS_DIR}/mfslfiles"
 
-alias fmsdl="cd ${MUSIC_FORMATS_DEV}/msdlfiles"
-alias fbmml="cd ${MUSIC_FORMATS_DEV}/bmmlfiles"
-alias fmei="cd ${MUSIC_FORMATS_DEV}/meifiles"
+alias fmsdl="cd ${MUSICFORMATS_DIR}/msdlfiles"
+alias fbmml="cd ${MUSICFORMATS_DIR}/bmmlfiles"
+alias fmei="cd ${MUSICFORMATS_DIR}/meifiles"
 
 alias msdr="cd ${SRC_DIR}/representations/msdr"
 alias msdm="cd ${SRC_DIR}/translators/msdl2msr"
@@ -310,7 +310,7 @@ function smvn ()
 {
 #  set -x
   SCRIPT_NAME=SetMusicFormatsVersionNumber.zsh
-  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
+  LOGFILE=${MUSICFORMATS_DIR}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
   ${DEVTOOLS_DIR}/${SCRIPT_NAME} $@
@@ -327,7 +327,7 @@ function smvd ()
 {
 #  set -x
   SCRIPT_NAME=SetMusicFormatsVersionDate.zsh
-  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
+  LOGFILE=${MUSICFORMATS_DIR}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
   ${DEVTOOLS_DIR}/${SCRIPT_NAME} $@
@@ -344,7 +344,7 @@ function mmd ()
 {
 #  set -x
   SCRIPT_NAME=MakeMusicFormatsDistributions.zsh
-  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
+  LOGFILE=${MUSICFORMATS_DIR}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
   ${DEVTOOLS_DIR}/${SCRIPT_NAME} $@
@@ -362,7 +362,7 @@ function cmd ()
 {
 #  set -x
   SCRIPT_NAME=CleanMusicFormatsDistributions.zsh
-  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
+  LOGFILE=${MUSICFORMATS_DIR}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
   ${DEVTOOLS_DIR}/${SCRIPT_NAME} $@

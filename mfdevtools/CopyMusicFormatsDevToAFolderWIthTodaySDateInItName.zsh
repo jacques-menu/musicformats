@@ -12,10 +12,18 @@
 #
 
 
+# set the MusicFormats variables
+. ./MusicFormatsVariables.zsh
+
+
+# Write all output to logfile
+#exec > ${MUSICFORMATS_DIR}/$(basename $0).log 2>&1
+
+
 # COPY musicformats-git-dev to a folder with today's date in it's name
 # -------------------------------------------------
 
-VERSION_NUMBER="v0.9.72-beta-1"
+VERSION_NUMBER="v0.9.72"
 echo "VERSION_NUMBER: ${VERSION_NUMBER}"
 
 TIME_STAMP=$(date +"%Y_%m_%d__%H_%M")
