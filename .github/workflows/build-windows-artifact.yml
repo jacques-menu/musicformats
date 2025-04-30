@@ -1,5 +1,6 @@
 # This is a workflow to build MusicFormats and create an artifact of it
 
+# --------------------------------------------------------------------------
 name: Build Windows latest version
 
 # Controls when the action will run.
@@ -13,6 +14,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# --------------------------------------------------------------------------
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -48,33 +50,33 @@ jobs:
           cmake -G "Unix Makefiles" -S cmakefiles -B build ; cd build ; make ; ls -R .
 
 
-      # --------------------------------------------------------------------------
-      - name: Compile the user guide - pdflatex run 1/3
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
-
-      - name: Compile the user guide - pdflatex run 2/3
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
-
-      - name: Compile the user guide - pdflatex run 3/3
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
+#       # --------------------------------------------------------------------------
+#       - name: Compile the user guide - pdflatex run 1/3
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/mfuserguide
+#           root_file:
+#             MusicFormatsUserGuide.tex
+#
+#       - name: Compile the user guide - pdflatex run 2/3
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/mfuserguide
+#           root_file:
+#             MusicFormatsUserGuide.tex
+#
+#       - name: Compile the user guide - pdflatex run 3/3
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/mfuserguide
+#           root_file:
+#             MusicFormatsUserGuide.tex
 
 
       # --------------------------------------------------------------------------
