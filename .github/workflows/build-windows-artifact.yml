@@ -1,7 +1,7 @@
 # This is a workflow to build MusicFormats and create an artifact of it
 
 # --------------------------------------------------------------------------
-name: Build Windows latest version
+name: Build Windows version
 
 # Controls when the action will run.
 on:
@@ -91,7 +91,7 @@ jobs:
       - name: Upload libraries and executables for Windows
         uses: actions/upload-artifact@v4
         with:
-          name: musicformats-windows-latest-artifact
+          name: musicformats-windows-artifact
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt

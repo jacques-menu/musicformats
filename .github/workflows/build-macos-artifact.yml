@@ -1,7 +1,7 @@
 # This is a workflow to build MusicFormats and create an artifact of it
 
 # --------------------------------------------------------------------------
-name: Build MacOS latest version
+name: Build MacOS version
 
 # runs:
 #   using: 'node20'
@@ -90,7 +90,7 @@ jobs:
       - name: Upload version informations and binaries for MacOS
         uses: actions/upload-artifact@v4
         with:
-          name: musicformats-macos-latest-artifact
+          name: musicformats-macos-artifact
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt

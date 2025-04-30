@@ -30,18 +30,18 @@ ls -sal ${MUSICFORMATS_DIR}
 
 
 # where to download the GitHub ZIP artifacts
-DOWNLOADS_DIR=${HOME}/JMI_Downloads
-echo "--> DOWNLOADS_DIR = ${DOWNLOADS_DIR}"
+DOWNLOADS_DIR=${HOME}/Downloads
+echo "--> DOWNLOADS_DIR: ${DOWNLOADS_DIR}"
 echo
-ls -sal "${DOWNLOADS_DIR}/musicformats-*-latest-artifact"
+ls -sal "${DOWNLOADS_DIR}/musicformats-*-artifact"
 echo
 
 
-# create MF_RELEASES_DIR it if it does not exist
-MF_RELEASES_DIR=$MUSICFORMATS_DIR/../musicformats_releases
-echo "--> MF_RELEASES_DIR = ${MF_RELEASES_DIR}"
+# create MUSICFORMATS_RELEASES_DIR it if it does not exist
+MUSICFORMATS_RELEASES_DIR=$MUSICFORMATS_DIR/../musicformats_releases
+echo "--> MUSICFORMATS_RELEASES_DIR: ${MUSICFORMATS_RELEASES_DIR}"
 
-[[ ! -d "${MF_RELEASES_DIR}" ]] && mkdir "${MF_RELEASES_DIR}"
+[[ ! -d "${MUSICFORMATS_RELEASES_DIR}" ]] && mkdir "${MUSICFORMATS_RELEASES_DIR}"
 
 
 # a function to create the releases
@@ -53,15 +53,15 @@ function CreateReleaseForOS ()
   echo "----------------------------------------------"
   echo
 
-  ARTIFACT_NAME="musicformats-${OS_NAME}-latest-artifact"
+  ARTIFACT_NAME="musicformats-${OS_NAME}-artifact"
   ARTIFACT_DIR="${DOWNLOADS_DIR}/${ARTIFACT_NAME}"
   echo "---> ARTIFACT_NAME: ${ARTIFACT_NAME}"
   echo "---> ARTIFACT_DIR : ${ARTIFACT_DIR}"
   ls -salh "${ARTIFACT_DIR}"
   echo
 
-  OS_RELEASE_NAME="musicformats-${OS_NAME}-${VERSION_NUMBER}"
-  OS_RELEASE_DIR="${MF_RELEASES_DIR}/${OS_RELEASE_NAME}"
+  OS_RELEASE_NAME="musicformats-${OS_NAME}-${MUSICFORMATS_VERSION_NUMBER}"
+  OS_RELEASE_DIR="${MUSICFORMATS_RELEASES_DIR}/${OS_RELEASE_NAME}"
   echo "---> OS_RELEASE_NAME: ${OS_RELEASE_NAME}"
   echo "---> OS_RELEASE_DIR : ${OS_RELEASE_DIR}"
 
@@ -99,9 +99,9 @@ function CreateReleaseForOS ()
 
   # create the zip archive
   OS_RELEASE_ZIP_NAME="${OS_RELEASE_NAME}.zip"
-  echo "--> OS_RELEASE_ZIP_NAME = ${OS_RELEASE_ZIP_NAME}"
-  OS_RELEASE_ZIP_FILE="${MF_RELEASES_DIR}/${OS_RELEASE_ZIP_NAME}"
-  echo "--> OS_RELEASE_ZIP_FILE = ${OS_RELEASE_ZIP_FILE}"
+  echo "--> OS_RELEASE_ZIP_NAME: ${OS_RELEASE_ZIP_NAME}"
+  OS_RELEASE_ZIP_FILE="${MUSICFORMATS_RELEASES_DIR}/${OS_RELEASE_ZIP_NAME}"
+  echo "--> OS_RELEASE_ZIP_FILE: ${OS_RELEASE_ZIP_FILE}"
   echo
 
 # set -x
@@ -124,8 +124,8 @@ echo "==> Let's go!"
 echo "----------------------------------------------"
 echo
 
-# cd to MF_RELEASES_DIR
-cd "${MF_RELEASES_DIR}"
+# cd to MUSICFORMATS_RELEASES_DIR
+cd "${MUSICFORMATS_RELEASES_DIR}"
 echo -n "--> current directory: "; pwd
 echo
 ls -sal
@@ -145,11 +145,11 @@ echo
 
 
 echo "----------------------------------------------"
-echo "==> final ${MF_RELEASES_DIR} contents:"
+echo "==> final ${MUSICFORMATS_RELEASES_DIR} contents:"
 echo "----------------------------------------------"
 echo
 
-cd ${MF_RELEASES_DIR}
+cd ${MUSICFORMATS_RELEASES_DIR}
 pwd
 echo
 
