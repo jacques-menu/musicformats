@@ -12,6 +12,64 @@
 #
 
 
+function usage ()
+  {
+    echo "An argument is optional."
+    echo "Usage is:"
+    echo "  $0 ( | optionsString )"
+    exit 1
+  }
+
+
+# the MusicFormats directory
+export MUSICFORMATS_DIR=${HOME}/JMI_DEVELOPMENT/musicformats-git-dev
+echo "--> MUSICFORMATS_DIR: ${MUSICFORMATS_DIR}"
+echo
+
+
+# set the MusicFormats variables
+. ${MUSICFORMATS_DIR}/mfdevtools/SetMusicFormatsVariables.zsh
+
+
+# Write all output to logfile
+#exec > ${MUSICFORMATS_DIR}/$(basename $0).log 2>&1
+
+
+echo "==> PWD is:"
+pwd
+echo
+
+
+# MFDEVTOOLS_DIR=${MUSICFORMATS_DIR}/mfdevtools
+# echo "MFDEVTOOLS_DIR:          $MFDEVTOOLS_DIR"
+# echo
+#
+# cd ${MFDEVTOOLS_DIR}
+# pwd
+# echo
+
+
+# get the argument if any
+# -----------------------------------------
+
+case "$#" in
+  0)
+    OPTIONS_STRING=""
+    ;;
+
+  1)
+    OPTIONS_STRING="$1"
+  ;;
+
+  *)
+    usage
+  ;;
+esac
+
+echo "OPTIONS_STRING : ${OPTIONS_STRING}"
+echo
+
+
 # clean the current directory from previously generaterated files if any
 # ---------------------------------------------------------
 
@@ -131,7 +189,7 @@ function RunXml2lyOnFile ()
   LILYPOND_FILE_NAME="$SUFFIXLESS_FILE_NAME.ly"
   echo "LILYPOND_FILE_NAME:      $LILYPOND_FILE_NAME"
 
-  xml2ly -output-file-name $LILYPOND_FILE_NAME $MUSICXML_FILE_NAME
+  xml2ly ${OPTIONS_STRING} -output-file-name $LILYPOND_FILE_NAME $MUSICXML_FILE_NAME
   if [ -f $LILYPOND_FILE_NAME ]; then
     echo
     echo "--> resulting LilyPond file:"
@@ -303,16 +361,17 @@ function DisplayTheResults ()
   DisplayTheNotTranslatedFiles
 }
 
+
 # select which files to translate
 # ---------------------------------------------------------
 
-if (($# == 0 )); then
+# if (($# == 0 )); then
   # no arguments, all *.xml files in the current directory will be translated
   HandleAllMusicXMLFilesInCurrentDirectory
-else
+# else
   # only the files in the arguments will be translated
-  HandletheMusicXMLFilesPassedAsArguments $@
-fi
+#   HandletheMusicXMLFilesPassedAsArguments $@
+# fi
 
 
 # Display the results

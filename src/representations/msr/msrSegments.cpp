@@ -2283,11 +2283,11 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
-    msrInternalWarning ( // JMI 0.9.67 0.9.63
-//     msrInternalError (
+//     msrInternalWarning ( // JMI 0.9.73
+    msrInternalError (
       gServiceRunData->getInputSourceName (),
       measure->getInputLineNumber (),
-//       __FILE__, __LINE__,
+      __FILE__, __LINE__,
       ss.str ());
   }
 
