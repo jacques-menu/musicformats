@@ -6,7 +6,9 @@
       </score-part>
     </part-list>
   <part id="P1">
+
     <measure number="1">
+
       <attributes>
         <divisions>1</divisions>
         <key>
@@ -17,18 +19,21 @@
           <line>2</line>
           </clef>
         </attributes>
-      <harmony print-frame="no">
+
+      <!--harmony print-frame="no">
         <root>
           <root-step>A</root-step>
           <root-alter>-1</root-alter>
           </root>
         <kind>major</kind>
-        </harmony>
+        </harmony-->
+
       <note>
         <rest measure="yes"/>
         <duration>4</duration>
         <voice>1</voice>
         </note>
+
       </measure>
     </part>
   </score-partwise>

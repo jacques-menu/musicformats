@@ -3832,13 +3832,10 @@ void msrMeasure::padUpToPositionInMeasure (
   int                        inputLineNumber,
   const mfPositionInMeasure& positionInMeasureToPadUpTo)
 {
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    positionInMeasureToPadUpTo != K_POSITION_IN_MEASURE_UNKNOWN_,
-    "positionInMeasureToPadUpTo == K_POSITION_IN_MEASURE_UNKNOWN_");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+//   gLog <<
+//
+//   print (gLog);
+//   gLog << std::endl;
 
   // fetch the voice
   S_msrVoice
@@ -3847,7 +3844,7 @@ void msrMeasure::padUpToPositionInMeasure (
         getSegmentUpLinkToVoice ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (
+  if (true ||
     gTraceOahGroup->getTracePositionInMeasures ()
       ||
     gTraceOahGroup->getTraceHarmonies ()
@@ -3872,6 +3869,14 @@ void msrMeasure::padUpToPositionInMeasure (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    positionInMeasureToPadUpTo != K_POSITION_IN_MEASURE_UNKNOWN_,
+    "positionInMeasureToPadUpTo == K_POSITION_IN_MEASURE_UNKNOWN_");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {

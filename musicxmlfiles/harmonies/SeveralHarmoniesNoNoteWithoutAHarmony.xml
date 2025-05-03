@@ -2,7 +2,7 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.1">
   <work>
-    <work-title>Several Harmonies 2</work-title>
+    <work-title>Several Harmonies No Note Without A Harmony</work-title>
     </work>
   <identification>
     <encoding>
@@ -41,7 +41,7 @@
     </defaults>
   <credit page="1">
     <credit-type>title</credit-type>
-    <credit-words default-x="595.44" default-y="1627.34" justify="center" valign="top" font-size="24">Several Harmonies 2</credit-words>
+    <credit-words default-x="595.44" default-y="1627.34" justify="center" valign="top" font-size="24">Several Harmonies No Note Without A Harmony</credit-words>
     </credit>
   <part-list>
     <score-part id="P1">
@@ -132,6 +132,12 @@
         <type>eighth</type>
         <stem>up</stem>
         </note>
+      <harmony print-frame="no">
+        <root>
+          <root-step>D</root-step>
+          </root>
+        <kind text="m">minor</kind>
+        </harmony>
       <note default-x="388.34" default-y="-45.00">
         <pitch>
           <step>D</step>

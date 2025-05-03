@@ -10949,7 +10949,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
   ++fPartMeasuresCounter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasuresDetails ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<

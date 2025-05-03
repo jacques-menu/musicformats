@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <!DOCTYPE score-partwise PUBLIC '-//Recordare//DTD MusicXML 3.0 Partwise//EN' 'http://www.musicxml.org/dtds/partwise.dtd'>
 <score-partwise version='3.0'>
+	<movement-title>Harmony With Positive Offset</movement-title>
 	<identification>
-		<rights>Copyright © </rights>
 		<encoding>
-			<software>Sibelius 20231.1</software>
+			<software>Sibelius 18.5</software>
 			<software>Dolet 6.6 for Sibelius</software>
-			<encoding-date>2024-06-12</encoding-date>
+			<encoding-date>2018-10-19</encoding-date>
 			<supports element='accidental' type='yes'/>
 			<supports element='transpose' type='no'/>
 			<supports attribute='new-page' element='print' type='yes' value='yes'/>
@@ -36,6 +36,9 @@
 			<system-distance>92.5</system-distance>
 			<top-system-distance>27.5</top-system-distance>
 		</system-layout>
+		<staff-layout>
+			<staff-distance>70</staff-distance>
+		</staff-layout>
 		<?DoletSibelius StaffJustificationPercentage=100?>
 		<appearance>
 			<line-width type='beam'>5</line-width>
@@ -52,11 +55,11 @@
 			<note-size type='cue'>75</note-size>
 		</appearance>
 		<music-font font-family='Helsinki Std,music'/>
-		<word-font font-family='Quicksand'/>
+		<word-font font-family='Plantin MT Std'/>
 	</defaults>
 	<part-list>
 		<score-part id='P1'>
-			<part-name print-object='no'>[Voice]</part-name>
+			<part-name>Voice</part-name>
 			<part-abbreviation print-object='no'>Voice</part-abbreviation>
 			<score-instrument id='P1-I1'>
 				<instrument-name>Voice</instrument-name>
@@ -76,7 +79,7 @@
 			<print>
 				<system-layout>
 					<system-margins>
-						<left-margin>21.875</left-margin>
+						<left-margin>77.1875</left-margin>
 						<right-margin>0</right-margin>
 					</system-margins>
 					<top-system-distance>410.9375</top-system-distance>
@@ -89,7 +92,7 @@
 			<attributes>
 				<divisions>768</divisions>
 				<key>
-					<fifths>-1</fifths>
+					<fifths>0</fifths>
 					<mode>minor</mode>
 				</key>
 				<time>
@@ -110,162 +113,49 @@
 				</direction-type>
 				<sound tempo='130'/>
 			</direction>
-			<harmony print-frame='no' default-y='20' relative-x='8'>
+			<harmony print-frame='no' default-y='25' relative-x='7'>
 				<root>
-					<root-step>B</root-step>
-					<root-alter>-1</root-alter>
+					<root-step>A</root-step>
 				</root>
-				<kind text=''>major</kind>
+				<kind text='sus2'>suspended-second</kind>
 			</harmony>
 			<note>
-				<pitch>
-					<step>D</step>
-					<octave>4</octave>
-				</pitch>
-				<duration>768</duration>
+				<rest measure='yes'/>
+				<duration>3072</duration>
 				<voice>1</voice>
-				<type>quarter</type>
-				<stem>up</stem>
-				<notations>
-					<articulations>
-						<staccato/>
-					</articulations>
-				</notations>
 			</note>
-			<note>
-				<rest/>
-				<duration>768</duration>
-				<voice>1</voice>
-				<type>quarter</type>
-			</note>
-			<note>
-				<rest/>
-				<duration>384</duration>
-				<voice>1</voice>
-				<type>eighth</type>
-			</note>
-			<note>
-				<pitch>
-					<step>D</step>
-					<octave>5</octave>
-				</pitch>
-				<duration>384</duration>
-				<voice>1</voice>
-				<type>eighth</type>
-				<stem>down</stem>
-			</note>
-			<note>
-				<pitch>
-					<step>F</step>
-					<octave>4</octave>
-				</pitch>
-				<duration>384</duration>
-				<voice>1</voice>
-				<type>eighth</type>
-				<stem>up</stem>
-				<beam number='1'>begin</beam>
-			</note>
-			<note>
-				<pitch>
-					<step>F</step>
-					<octave>4</octave>
-				</pitch>
-				<duration>384</duration>
-				<voice>1</voice>
-				<type>eighth</type>
-				<stem>up</stem>
-				<beam number='1'>end</beam>
-			</note>
-			<barline location='right'>
-				<bar-style>light-light</bar-style>
-			</barline>
 		</measure>
 <!--=========================================================-->
 		<measure number='2'>
-			<harmony print-frame='no' default-y='20' relative-x='8'>
+			<harmony print-frame='no' default-y='25' relative-x='7'>
 				<root>
-					<root-step>D</root-step>
+					<root-step>F</root-step>
 				</root>
-				<kind text='m'>minor</kind>
+				<kind text=''>major</kind>
+				<bass>
+					<bass-step>A</bass-step>
+				</bass>
+				<offset>1536</offset>
 			</harmony>
 			<note>
-				<pitch>
-					<step>F</step>
-					<octave>4</octave>
-				</pitch>
-				<duration>768</duration>
+				<rest measure='yes'/>
+				<duration>3072</duration>
 				<voice>1</voice>
-				<type>quarter</type>
-				<stem>up</stem>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>single</syllabic>
-					<text>1.</text>
-					<elision/>
-					<syllabic>begin</syllabic>
-					<text>Jah</text>
-				</lyric>
 			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number='3'>
+			<harmony print-frame='no' default-y='25' relative-x='7'>
+				<root>
+					<root-step>A</root-step>
+				</root>
+				<kind text='sus2'>suspended-second</kind>
+			</harmony>
 			<note>
-				<pitch>
-					<step>D</step>
-					<octave>4</octave>
-				</pitch>
-				<duration>768</duration>
+				<rest measure='yes'/>
+				<duration>3072</duration>
 				<voice>1</voice>
-				<type>quarter</type>
-				<stem>up</stem>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>end</syllabic>
-					<text>re</text>
-				</lyric>
 			</note>
-			<note>
-				<pitch>
-					<step>F</step>
-					<octave>4</octave>
-				</pitch>
-				<duration>384</duration>
-				<voice>1</voice>
-				<type>eighth</type>
-				<stem>up</stem>
-				<beam number='1'>begin</beam>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>single</syllabic>
-					<text>zieh&apos;n</text>
-				</lyric>
-			</note>
-			<note>
-				<pitch>
-					<step>F</step>
-					<octave>4</octave>
-				</pitch>
-				<duration>384</duration>
-				<voice>1</voice>
-				<type>eighth</type>
-				<stem>up</stem>
-				<beam number='1'>end</beam>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>begin</syllabic>
-					<text>vor</text>
-				</lyric>
-			</note>
-			<note>
-				<pitch>
-					<step>D</step>
-					<octave>4</octave>
-				</pitch>
-				<duration>768</duration>
-				<voice>1</voice>
-				<type>quarter</type>
-				<stem>up</stem>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>end</syllabic>
-					<text>bei,</text>
-				</lyric>
-			</note>
-			<barline location='right'>
-				<bar-style>light-heavy</bar-style>
-			</barline>
 		</measure>
 	</part>
 <!--=========================================================-->

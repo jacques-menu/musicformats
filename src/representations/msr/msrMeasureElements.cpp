@@ -52,8 +52,8 @@ msrMeasureElement::msrMeasureElement (
 {
   fMeasureElementSoundingWholeNotes = K_WHOLE_NOTES_ZERO;
 
-  fMeasureElementPositionInMeasure = K_POSITION_IN_MEASURE_UNKNOWN_;
-  fMeasureElementVoicePosition = K_POSITION_IN_MEASURE_UNKNOWN_;
+  fMeasureElementPositionInMeasure = K_POSITION_IN_MEASURE_ZERO; // JMI 0.9.72
+  fMeasureElementVoicePosition = K_POSITION_IN_MEASURE_ZERO;
 }
 
 msrMeasureElement::~msrMeasureElement ()
