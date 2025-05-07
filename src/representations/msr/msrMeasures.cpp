@@ -109,9 +109,9 @@ void msrMeasure::initializeMeasure ()
     std::stringstream ss;
 
     ss <<
-      "Initializing measure " <<
+      "Initializing measure '" <<
       fMeasureNumber <<
-      ", measureDebugNumber: " <<
+      "', measureDebugNumber: " <<
       fMeasureDebugNumber <<
       "' in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
@@ -1752,6 +1752,11 @@ void msrMeasure::setMeasureIsFirstInVoice ()
 void msrMeasure::setFullMeasureWholeNotesDuration (
   const mfWholeNotes& wholeNotes)
 {
+/*
+  This method is *CRITICAL* for the correct determinations of measures kinds
+  in msrMeasure::determineMeasureKind()
+*/
+
 #ifdef MF_TRACE_IS_ENABLED
   if (
 //     true ||
@@ -4667,6 +4672,11 @@ void msrMeasure::determineMeasureKind (
   int                         inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind)
 {
+/*
+  This method is *CRITICAL* for the correct handling of anacruses,
+  incomplete/overflowing measures...
+*/
+
   if (fMeasureKindHasBeenDetermined) {
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
     if (
@@ -4791,7 +4801,7 @@ if (false)
       ss.str ());
   }
 
-  if (gTraceOahGroup->getTraceMeasuresDetails ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     displayMeasure (
       inputLineNumber,
       "determineMeasureKind() 1");
@@ -4821,6 +4831,14 @@ if (false)
 
   else {
     // this measure is incomplete or overflowing
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+      displayMeasure (
+        inputLineNumber,
+        "determineMeasureKind() 2");
+    }
+#endif // MF_TRACE_IS_ENABLED
 
     // increment voice whole notes since last regular measure end
     voice->
@@ -4878,10 +4896,10 @@ if (false)
   fMeasureKindHasBeenDetermined = true;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasuresDetails ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     displayMeasure (
       inputLineNumber,
-      "determineMeasureKind() 2");
+      "determineMeasureKind() 3");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -8459,6 +8477,12 @@ void msrMeasure::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
+    "fFullMeasureWholeNotesDuration" << ": " <<
+    fFullMeasureWholeNotesDuration <<
+//     getFullMeasureWholeNotesDuration ().asString () << JMI 0.9.73
+    std::endl <<
+
+    std::setw (fieldWidth) <<
     "fMeasureIsMusicallyEmpty" << ": " <<
     fMeasureIsMusicallyEmpty <<
     std::endl <<
@@ -8489,11 +8513,6 @@ void msrMeasure::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fMeasureEndRegularKind" << ": " <<
     fMeasureEndRegularKind <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fullMeasureWholeNotesDuration" << ": " <<
-    getFullMeasureWholeNotesDuration ().asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<

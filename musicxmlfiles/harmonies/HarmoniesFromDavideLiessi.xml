@@ -20,13 +20,13 @@
           </clef>
         </attributes>
 
-      <!--harmony print-frame="no">
+      <harmony print-frame="no">
         <root>
           <root-step>A</root-step>
           <root-alter>-1</root-alter>
           </root>
         <kind>major</kind>
-        </harmony-->
+        </harmony>
 
       <note>
         <rest measure="yes"/>

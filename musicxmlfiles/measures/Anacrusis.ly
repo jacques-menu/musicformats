@@ -35,26 +35,27 @@
 
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
-  
+  \partial 4
   
   \clef "treble"
   \key c \major
+  \numericTimeSignature \time 3/4
   \stemUp e'8 [
   f' ]
-  
-  
-  a'4 g' \stemDown c''
-  
+   | % 1
+  \barNumberCheck #1
+  a'4 g' \stemDown c''  | % 2
+  \barNumberCheck #2
   c''2 r4
   \bar "|."
-  
+   | % 3
+  \barNumberCheck #3
 }
 
 \book {
 
   \score {
     <<
-    
       
       
       

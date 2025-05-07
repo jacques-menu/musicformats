@@ -5151,6 +5151,16 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beats& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentTimeSignatureBeats = elt->getValue (); // can be a string such as 3+2
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTimeSignatures ()) { // 0.9.72
+    gLog <<
+      "--> visitStart (S_beats& elt)" <<
+      ", fCurrentTimeSignatureBeats: " <<
+      fCurrentTimeSignatureBeats <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
@@ -5170,6 +5180,16 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   int beatType = (int)(*elt);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTimeSignatures ()) { // 0.9.72
+    gLog <<
+      "--> visitStart (S_beat_type& elt)" <<
+      ", beatType: " <<
+      beatType <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   // extract the numbers list from the beat type
   std::list <int>
@@ -5208,6 +5228,16 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
       __FILE__, __LINE__,
       "beat type doesn't contain any beats numbers");
   }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTimeSignatures ()) { // 0.9.72
+    gLog <<
+      "--> visitStart (S_beat_type& elt)" <<
+      ", timeSignatureItem: " <<
+      timeSignatureItem <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   // append the time signature item to the current time signature items vector
   fCurrentTimeSignatureItemsVector.insert (

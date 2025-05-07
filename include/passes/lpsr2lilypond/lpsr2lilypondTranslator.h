@@ -838,16 +838,16 @@ class EXP lpsr2lilypondTranslator :
                             const mfWholeNotes& wholeNotes);
 
     void                  generateWholeNotesDuration (
-                            int                  inputLineNumber,
+                            int                 inputLineNumber,
                             const mfWholeNotes& wholeNotes);
 
     void                  generateWholeNotesDurationOnStream (
-                            int                  inputLineNumber,
+                            int                inputLineNumber,
                             const mfWholeNotes& wholeNotes,
-                            std::ostream&        os);
+                            std::ostream&       os);
 
     std::string           durationAsLilypondStringIfItShouldBeGenerated (
-                            int                  inputLineNumber,
+                            int                 inputLineNumber,
                             const mfWholeNotes& wholeNotes);
 
     std::string           notesDurationKindAsLilypondString (

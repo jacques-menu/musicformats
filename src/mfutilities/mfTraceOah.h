@@ -257,6 +257,11 @@ class EXP traceOahGroup : public oahGroup
     // --------------------------------------
 
     // segments
+    void                  setTraceSegmentsBasics ()
+                              { fTraceSegmentsBasics = true; }
+    Bool                  getTraceSegmentsBasics () const
+                              { return fTraceSegmentsBasics; }
+
     void                  setTraceSegments ()
                               { fTraceSegments = true; }
     Bool                  getTraceSegments () const
@@ -1019,6 +1024,7 @@ class EXP traceOahGroup : public oahGroup
     // segments
     // --------------------------------------
 
+    Bool                  fTraceSegmentsBasics;
     Bool                  fTraceSegments;
     Bool                  fTraceSegmentsDetails;
 
@@ -1034,7 +1040,7 @@ class EXP traceOahGroup : public oahGroup
     S_oahStringAtom       fTraceOnlyMeasurerNumbeOahAtom;
     std::string           fTraceOnlyMeasure;
 
-    std::set <int>         fTraceDetailedMeasureNumbersSet; // JMI 0.9.67
+    std::set <int>        fTraceDetailedMeasureNumbersSet; // JMI 0.9.67
 
 
     // positions

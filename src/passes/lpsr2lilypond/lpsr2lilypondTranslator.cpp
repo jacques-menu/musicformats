@@ -1423,7 +1423,7 @@ std::string lpsr2lilypondTranslator::notePitchAsLilypondString (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::durationAsLilypondStringIfItShouldBeGenerated (
-  int                  inputLineNumber,
+  int                 inputLineNumber,
   const mfWholeNotes& wholeNotes)
 {
   std::string result;
@@ -1486,7 +1486,7 @@ Bool lpsr2lilypondTranslator::wholeNotesDurationShouldBeGenerated (
 }
 
 void lpsr2lilypondTranslator::generateWholeNotesDuration (
-  int                  inputLineNumber,
+  int                 inputLineNumber,
   const mfWholeNotes& wholeNotes)
 {
   fLilypondCodeStream <<
@@ -1498,9 +1498,9 @@ void lpsr2lilypondTranslator::generateWholeNotesDuration (
 }
 
 void lpsr2lilypondTranslator::generateWholeNotesDurationOnStream (
-  int                  inputLineNumber,
+  int                 inputLineNumber,
   const mfWholeNotes& wholeNotes,
-  std::ostream&        os)
+  std::ostream&       os)
 {
   os <<
     wholeNotesAsLilypondString (
@@ -9342,7 +9342,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrParallelMusicBLock& elt)
         " % start of parallel music";
     }
 
-    fLilypondCodeStream << std::endl << std::endl;
+    fLilypondCodeStream << std::endl;
 
     ++gIndenter; //  // decremented in visitEnd (S_lpsrParallelMusicBLock& elt)
   }
@@ -13944,18 +13944,18 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindAnacrusis:
-//       // only generate '\partial' at the beginning of a voice // this code SUPERFLOUS??? JMI 0.9.66
-//       if (elt->getMeasureIsFirstInVoice ()) {//
-//         std::string
-//           upbeatNotesDuration =
-//             wholeNotesAsLilypondString (
-//               elt->getInputLineNumber (),
-//               elt->getMeasureCurrentPositionInMeasure ());
-//
-//         fLilypondCodeStream <<
-//           "\\partial " << upbeatNotesDuration <<
-//           std::endl;
-//       }
+      // only generate '\partial' at the beginning of a voice // this code SUPERFLOUS??? JMI 0.9.73
+      if (elt->getMeasureIsFirstInVoice ()) {//
+        std::string
+          upbeatNotesDuration =
+            wholeNotesAsLilypondString (
+              elt->getInputLineNumber (),
+              elt->getMeasureCurrentPositionInMeasure ().asWholeNotes ());
+
+        fLilypondCodeStream <<
+          "\\partial " << upbeatNotesDuration <<
+          std::endl;
+      }
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteStandalone:
@@ -14192,9 +14192,9 @@ void lpsr2lilypondTranslator::generateMusicallyEmptyMeasure (
       break;
   } // switch
 
-  mfAssertFalse ( // JMI for debug
-    __FILE__, __LINE__,
-    "generateMusicallyEmptyMeasure()");
+//   mfAssertFalse ( // JMI for debug
+//     __FILE__, __LINE__,
+//     "generateMusicallyEmptyMeasure()");
 
   // generate the duration of the skip from the full measure whole notes JMI 0.9.68
   fLilypondCodeStream <<
@@ -17811,6 +17811,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  gLog <<
+    "---> visitStart (S_msrTimeSignature& elt): " <<
+    ", elt: " <<
+    elt << // JMI  0.9.73
+    std::endl;
+
 //   msrTimeSignatureSymbolKind
 //     timeSignatureSymbolKind =
 //       elt->getTimeSignatureSymbolKind ();
@@ -17861,9 +17867,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
           std::endl;
 
         fOnGoingSenzaMisura = true; // JMI  0.9.70
-        break;
-
-      case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
         break;
 
       default:

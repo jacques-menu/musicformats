@@ -156,7 +156,7 @@ void msrSegment::setSegmentLastMeasure (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceSegments ()
+    gTraceOahGroup->getTraceSegmentsBasics ()
       ||
     gTraceOahGroup->getTraceMeasures ()
   ) {
@@ -487,13 +487,12 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
 
     ss <<
       "assertSegmentElementsListIsNotEmpty()" <<
-      ", fSegmentElementsList is empty" <<
-      ", segment: " <<
+      ", fSegmentElementsList is empty in segment: " <<
       this->asString () <<
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       std::endl;
 
     gLog <<
@@ -702,8 +701,12 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
     std::stringstream ss;
 
     ss <<
-      "fSegmentElementsList is empty"  << // JMI
-      " in segment '" <<
+      ", fSegmentElementsList is empty in segment " <<
+      this->asString () <<
+      ", in voice \"" <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
+      "\"" <<
+      ", fSegmentAbsoluteNumber: " <<
       fSegmentAbsoluteNumber <<
       ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
@@ -760,12 +763,16 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  if (fSegmentElementsList.empty ()) {
+//   if (false && fSegmentElementsList.empty ()) { // JMI 0.9.73
+  if (fSegmentElementsList.empty ()) { // JMI 0.9.73
     std::stringstream ss;
 
     ss <<
-      "fSegmentElementsList is empty"  <<
-      " in segment '" <<
+      ", fSegmentElementsList is empty in segment " <<
+      this->asString () <<
+      ", in voice \"" <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
+      "\"" <<
       fSegmentAbsoluteNumber <<
       ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
@@ -827,8 +834,11 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "fSegmentElementsList is empty"  <<
-//       " in segment '" <<
+//       ", fSegmentElementsList is empty in segment " <<
+//       this->asString () <<
+//       ", in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"" <<
 //       fSegmentAbsoluteNumber <<
 //       ", segmentDebugNumber: '" <<
 //       fSegmentDebugNumber <<
@@ -891,8 +901,11 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "fSegmentElementsList is empty"  <<
-//       " in segment '" <<
+//       ", fSegmentElementsList is empty in segment " <<
+//       this->asString () <<
+//       ", in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"" <<
 //       fSegmentAbsoluteNumber <<
 //       ", fSegmentDebugNumber: '" <<
 //       fSegmentDebugNumber <<
@@ -2246,7 +2259,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       : fSegmentLastMeasure->getMeasureNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2254,13 +2267,13 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       "' to segment " << asString ();
 
     if (fSegmentMeasuresFlatList.empty ())
-      gLog <<
+      ss <<
         ", as first measure";
     else
-      gLog <<
+      ss <<
       ", after measure number '" << currentMeasureNumber << "'";
 
-    gLog <<
+    ss <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
@@ -2277,18 +2290,27 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 
     ss <<
       "appending measure number '" << measureNumber <<
-      "' occurs twice in a row in segment " <<
+      "' occurs more that once in segment " <<
       asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
+    if (false) {
+    msrInternalWarning ( // JMI 0.9.73
+//     msrInternalError (
+      gServiceRunData->getInputSourceName (),
+      measure->getInputLineNumber (),
+//       __FILE__, __LINE__,
+      ss.str ());
+    } else {
 //     msrInternalWarning ( // JMI 0.9.73
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       measure->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
+    }
   }
 
   // is measure the first one this segment?
@@ -2357,7 +2379,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
       : fSegmentLastMeasure->getMeasureNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2392,7 +2414,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
 
     ss <<
       "prepending measure number '" << measureNumber <<
-      "' occurs twice in a row in segment " <<
+      "' occurs more that once in segment " <<
       asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<

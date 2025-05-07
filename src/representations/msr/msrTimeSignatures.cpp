@@ -1100,9 +1100,6 @@ mfWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
       result = mfWholeNotes (INT_MAX, 1);
       break;
 
-    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
-      break;
-
     default:
       // regular time signature
       {
@@ -1269,9 +1266,6 @@ std::string msrTimeSignature::asString () const
     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
       break;
 
-    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
-      break;
-
     default:
       // regular time signature
       {
@@ -1408,9 +1402,6 @@ void msrTimeSignature::print (std::ostream& os) const
 
   switch (fTimeSignatureSymbolKind) {
     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
-      break;
-
-    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
       break;
 
     default:

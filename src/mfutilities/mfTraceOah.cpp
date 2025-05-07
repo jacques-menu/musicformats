@@ -1973,6 +1973,21 @@ R"()",
     appendAtomToSubGroup (
       segmentsMultiplexBooleansAtom);
 
+  // segments basics
+
+  S_oahTwoBooleansAtom
+    traceSegmentsBasicsBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-segments-basics", "tsegsb",
+R"(Voices segments basics)",
+        "fTraceSegmentsBasics",
+        fTraceSegmentsBasics,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceSegmentsBasicsBooleanAtom);
+
   // segments
 
   S_oahTwoBooleansAtom
@@ -1982,7 +1997,7 @@ R"()",
 R"(Voices segments)",
         "fTraceSegments",
         fTraceSegments,
-        fTracePassesBooleanAtom);
+        traceSegmentsBasicsBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
