@@ -2263,17 +2263,18 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
     std::stringstream ss;
 
     ss <<
-      "Appending measure '" << measureNumber <<
-      "' to segment " << asString ();
-
+      "Appending measure '" << measureNumber << '\'';
     if (fSegmentMeasuresFlatList.empty ())
       ss <<
-        ", as first measure";
+        " as first measure";
     else
       ss <<
-      ", after measure number '" << currentMeasureNumber << "'";
+      " after measure number '" << currentMeasureNumber << "'";
+
 
     ss <<
+      " to segment " <<
+      asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
@@ -2284,6 +2285,8 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+//   if (fSegmentAbsoluteNumber == 2) abort();
 
   if (measureNumber == currentMeasureNumber) {
     std::stringstream ss;
@@ -3322,7 +3325,8 @@ void msrSegment::displaySegment (
 void msrSegment::printFull (std::ostream& os) const
 {
   os <<
-    "[Segment FULL'" <<
+    "[Segment FULL" <<
+    ", fSegmentAbsoluteNumber: '" <<
     fSegmentAbsoluteNumber <<
     "', fSegmentDebugNumber: '" <<
     fSegmentDebugNumber <<
@@ -3415,6 +3419,7 @@ void msrSegment::print (std::ostream& os) const
 {
   os <<
     "[Segment '" <<
+    ", fSegmentAbsoluteNumber: '" <<
     fSegmentAbsoluteNumber <<
     "', fSegmentDebugNumber: '" <<
     fSegmentDebugNumber <<

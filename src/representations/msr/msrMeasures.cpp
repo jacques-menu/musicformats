@@ -4801,7 +4801,7 @@ if (false)
       ss.str ());
   }
 
-  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
     displayMeasure (
       inputLineNumber,
       "determineMeasureKind() 1");
@@ -4833,7 +4833,7 @@ if (false)
     // this measure is incomplete or overflowing
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+    if (gTraceOahGroup->getTraceMeasures ()) {
       displayMeasure (
         inputLineNumber,
         "determineMeasureKind() 2");
@@ -4896,7 +4896,7 @@ if (false)
   fMeasureKindHasBeenDetermined = true;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
     displayMeasure (
       inputLineNumber,
       "determineMeasureKind() 3");
@@ -7290,9 +7290,7 @@ void msrMeasure::finalizeMeasure (
       gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
     ) {
 #ifdef MF_TRACE_IS_ENABLED
-      if (
-        gTraceOahGroup->getTraceParts ()
-      ) {
+      if (true || gTraceOahGroup->getTraceMeasures ()) {
         std::stringstream ss;
 
         ss <<
