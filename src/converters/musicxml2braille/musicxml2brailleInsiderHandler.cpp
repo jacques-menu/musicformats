@@ -263,9 +263,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       "xml2brlInsiderHandler has been initialized as:" <<
       std::endl;
 

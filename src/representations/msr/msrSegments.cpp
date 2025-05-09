@@ -89,16 +89,26 @@ void msrSegment::initializeSegment ()
   fSegmentDebugNumber = ++sSegmentDebugNumber;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceSegments ()) {
+  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Initializing new segment '" <<
+      "Initializing segment" <<
+      ", fSegmentAbsoluteNumber: " <<
       fSegmentAbsoluteNumber <<
-      "', segmentDebugNumber: '" <<
+      ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
-      "', in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
+      "', in voice";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        "\"" <<
+        fSegmentUpLinkToVoice->getVoiceName () <<
+        "\"";
+    }
+    else {
+      ss << "[NULL]";
+    }
+    ss <<
       "\", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -508,19 +518,20 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
 }
 
 S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
-  int           inputLineNumber,
-  int           previousMeasureEndInputLineNumber,
-  const std::string& measureNumber,
-  msrMeasureImplicitKind
-                measureImplicitKind)
+  int                    inputLineNumber,
+  int                    previousMeasureEndInputLineNumber,
+  const std::string&     measureNumber,
+  msrMeasureImplicitKind measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
     std::stringstream ss;
 
     ss <<
-      "Creating and appending a measure '" << measureNumber <<
-      "', to segment " << asString () <<
+      "Creating and appending a measure '" <<
+      measureNumber <<
+      "', to segment " <<
+      asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
@@ -1051,7 +1062,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       ss.str ());
 //   }
 //
-// //   fSegmentMeasuresFlatList.front ()-> JMI 0.9.64
+// //   fSegmentMeasuresList.front ()-> JMI 0.9.64
 // //     appendClefToMeasure (clef);
 //
 //   --gIndenter;
@@ -2092,11 +2103,11 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   if (false && fSegmentMeasuresFlatList.empty ()) { // JMI
+//   if (false && fSegmentMeasuresList.empty ()) { // JMI
 //     std::stringstream ss;
 //
 //     ss <<
-//       "fSegmentMeasuresFlatList is empty"  <<
+//       "fSegmentMeasuresList is empty"  <<
 //       " in segment '" <<
 //       fSegmentAbsoluteNumber <<
 //       ", segmentDebugNumber: '" <<
@@ -2130,7 +2141,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //       ss.str ());
 //   }
 //
-//   if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF 0.9.67
+//   if (fSegmentMeasuresList.size ()) { // JMI BOFBOF 0.9.67
 //     // pad last measure up to to this actual wholes notes
 //     fSegmentLastMeasure->
 //       padUpToPositionInMeasureInMeasure (
@@ -2169,7 +2180,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF
+//   if (fSegmentMeasuresList.size ()) { // JMI BOFBOF
 //     // pad last measure up to to this actual wholes notes
 //     fSegmentLastMeasure->
 //       casadeBackupByWholeNotesStepLengthInMeasure (
@@ -2206,7 +2217,7 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
 
   ++gIndenter;
 
-  if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF 0.9.67
+  if (fSegmentMeasuresList.size ()) { // JMI BOFBOF 0.9.67
     // append a padding note to the segment's last measure
     fSegmentLastMeasure->
       appendPaddingSkipNoteToMeasure ( // JMI why not a rest??? 0.9.67
@@ -2251,28 +2262,29 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
     measure->getMeasureNumber ();
 
   size_t segmentElementsListSize =
-    fSegmentMeasuresFlatList.size ();
+    fSegmentMeasuresList.size ();
 
-  std::string currentMeasureNumber =
+  std::string segmentLastMeasureNumber =
     segmentElementsListSize == 0
-      ? ""
+      ? "???"
       : fSegmentLastMeasure->getMeasureNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
-    ss <<
-      "Appending measure '" << measureNumber << '\'';
-    if (fSegmentMeasuresFlatList.empty ())
+    if (fSegmentMeasuresList.empty ())
       ss <<
-        " as first measure";
+        "Appending first measure";
     else
       ss <<
-      " after measure number '" << currentMeasureNumber << "'";
-
+      " Appending new last measure after measure number '" <<
+      segmentLastMeasureNumber <<
+      '\'';
 
     ss <<
+      ", " <<
+      measure->asString () <<
       " to segment " <<
       asString () <<
       " in voice \"" <<
@@ -2288,11 +2300,11 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 
 //   if (fSegmentAbsoluteNumber == 2) abort();
 
-  if (measureNumber == currentMeasureNumber) {
+  if (measureNumber == segmentLastMeasureNumber) {
     std::stringstream ss;
 
     ss <<
-      "appending measure number '" << measureNumber <<
+      "measure number '" << measureNumber <<
       "' occurs more that once in segment " <<
       asString () <<
       " in voice \"" <<
@@ -2360,8 +2372,8 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 //             timeSignatureWholeNotesPerMeasure ());
   }
 
-  // append measure to the segment measures flat list
-  fSegmentMeasuresFlatList.push_back (measure);
+  // append measure to the segment measures list
+  fSegmentMeasuresList.push_back (measure);
 
   // register measure as the last one in the segment
   setSegmentLastMeasure (
@@ -2376,7 +2388,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
   size_t segmentElementsListSize =
     fSegmentElementsList.size ();
 
-  std::string currentMeasureNumber =
+  std::string segmentLastMeasureNumber =
     segmentElementsListSize == 0
       ? ""
       : fSegmentLastMeasure->getMeasureNumber ();
@@ -2386,7 +2398,8 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
     std::stringstream ss;
 
     ss <<
-      "Prepending measure " << measureNumber <<
+      "Prepending measure " <<
+      measure->asString () <<
       " to segment " << asString ();
 
     if (segmentElementsListSize == 0) {
@@ -2397,7 +2410,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
 /* JMI 0.9.66
     else
       gLog <<
-      ", after measure number '" << currentMeasureNumber << "'";
+      ", after measure number '" << segmentLastMeasureNumber << "'";
 */
 
     gLog <<
@@ -2412,7 +2425,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (measureNumber == currentMeasureNumber) {
+  if (measureNumber == segmentLastMeasureNumber) {
     std::stringstream ss;
 
     ss <<
@@ -2437,7 +2450,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
   // prepend measure to the segment
   fSegmentElementsList.push_front (measure);
 
-  fSegmentMeasuresFlatList.push_front (measure);
+  fSegmentMeasuresList.push_front (measure);
 }
 
 void msrSegment::prependBarLineToSegment (
@@ -2469,7 +2482,7 @@ void msrSegment::prependBarLineToSegment (
   // prepend barLine to this segment
   ++gIndenter;
 
-  fSegmentMeasuresFlatList.front ()-> // JMI ??? 0.9.63
+  fSegmentMeasuresList.front ()-> // JMI ??? 0.9.63
     prependBarLineToMeasure (barLine);
 
   --gIndenter;
@@ -2672,7 +2685,7 @@ void msrSegment::addGraceNotesGroupAheadOfSegmentIfNeeded (
     graceNotesGroup->getInputLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  fSegmentMeasuresFlatList.front ()->
+  fSegmentMeasuresList.front ()->
     addGraceNotesGroupAheadOfMeasure (graceNotesGroup);
 }
 
@@ -2699,7 +2712,7 @@ void msrSegment::prependAfterGraceNotesToSegment (
     afterGraceNotes->getInputLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  fSegmentMeasuresFlatList.front ()->
+  fSegmentMeasuresList.front ()->
     prependAfterGraceNotesToMeasure (afterGraceNotes); // JMI
 }
 */
@@ -2737,7 +2750,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
   // this last element can be a note or a tuplet,
   // this method is used when the seconde note of a chord is mest
 
-  if (fSegmentMeasuresFlatList.size ()) {
+  if (fSegmentMeasuresList.size ()) {
     return
       fSegmentLastMeasure->
         removeLastElementFromMeasure (
@@ -2776,7 +2789,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 //
 //   ++gIndenter;
 //
-//   if (fSegmentMeasuresFlatList.size ()) {
+//   if (fSegmentMeasuresList.size ()) {
 //     fSegmentLastMeasure->
 //       removeNoteFromMeasure (
 //         inputLineNumber,
@@ -2824,7 +2837,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//  if (fSegmentMeasuresFlatList.size ()) {
+//  if (fSegmentMeasuresList.size ()) {
 //     fSegmentLastMeasure->
 //       removeElementFromMeasure (
 //         inputLineNumber,
@@ -2872,7 +2885,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (! fSegmentMeasuresFlatList.size ()) {
+  if (! fSegmentMeasuresList.size ()) {
     std::stringstream ss;
 
     ss <<
@@ -2894,7 +2907,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 
   S_msrMeasure
     result =
-      fSegmentMeasuresFlatList.back ();
+      fSegmentMeasuresList.back ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -2949,7 +2962,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-// //   if (! fSegmentMeasuresFlatList.size ()) {
+// //   if (! fSegmentMeasuresList.size ()) {
 // //     std::stringstream ss;
 // //
 // //     ss <<
@@ -3080,8 +3093,8 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   // remove the last measure from the segments measures flat list
-//   fSegmentMeasuresFlatList.pop_back ();
+//   // remove the last measure from the segments measures list
+//   fSegmentMeasuresList.pop_back ();
 //
 //   // don't forget about fSegmentLastMeasure now,
 //   // since it may be used and/or re-appended soon JMI 0.9.63
@@ -3109,7 +3122,7 @@ void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (S_msrMeasure measure : fSegmentMeasuresFlatList) {
+  for (S_msrMeasure measure : fSegmentMeasuresList) {
     measure->
       finalizeMeasure (
         inputLineNumber,
@@ -3248,12 +3261,12 @@ std::string msrSegment::asString () const
   std::stringstream ss;
 
   ss <<
-    '[' <<
-    "Segment '" <<
+    "[Segment" <<
+    ", fSegmentAbsoluteNumber: " <<
     fSegmentAbsoluteNumber <<
-    "', fSegmentDebugNumber: '" <<
+    ", fSegmentDebugNumber: " <<
     fSegmentDebugNumber <<
-    "' in voice \"" <<
+    " in voice \"" <<
     fSegmentUpLinkToVoice->getVoiceName () <<
     "\"";
 
@@ -3322,15 +3335,60 @@ void msrSegment::displaySegment (
     std::endl << std::endl;
 }
 
+void msrSegment::print (std::ostream& os) const
+{
+  os <<
+    "[Segment" <<
+    ", fSegmentAbsoluteNumber: " <<
+    fSegmentAbsoluteNumber <<
+    ", fSegmentDebugNumber: " <<
+    fSegmentDebugNumber <<
+    ", " <<
+    mfSingularOrPlural (
+      fSegmentElementsList.size (), "measure", "measures") <<
+    ", line " << fInputLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 20;
+
+  if (! fSegmentElementsList.size ()) {
+    os <<
+      std::setw (fieldWidth) <<
+      "fSegmentElementsList" << ": " << "[EMPTY]" <<
+      std::endl;
+  }
+
+  else {
+    os << std::endl;
+
+    std::list <S_msrSegmentElement>::const_iterator
+      iBegin = fSegmentElementsList.begin (),
+      iEnd   = fSegmentElementsList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+  }
+
+  --gIndenter;
+
+  os << ']' << std::endl;
+}
+
 void msrSegment::printFull (std::ostream& os) const
 {
   os <<
     "[Segment FULL" <<
-    ", fSegmentAbsoluteNumber: '" <<
+    ", fSegmentAbsoluteNumber: " <<
     fSegmentAbsoluteNumber <<
-    "', fSegmentDebugNumber: '" <<
+    ", fSegmentDebugNumber: " <<
     fSegmentDebugNumber <<
-    "', " <<
+    ", " <<
     mfSingularOrPlural (
       fSegmentElementsList.size (), "measure", "measures") <<
     ", line " << fInputLineNumber <<
@@ -3405,51 +3463,6 @@ void msrSegment::printFull (std::ostream& os) const
 
       segmentElement->printFull (os);
 
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-  }
-
-  --gIndenter;
-
-  os << ']' << std::endl;
-}
-
-void msrSegment::print (std::ostream& os) const
-{
-  os <<
-    "[Segment '" <<
-    ", fSegmentAbsoluteNumber: '" <<
-    fSegmentAbsoluteNumber <<
-    "', fSegmentDebugNumber: '" <<
-    fSegmentDebugNumber <<
-    "', " <<
-    mfSingularOrPlural (
-      fSegmentElementsList.size (), "measure", "measures") <<
-    ", line " << fInputLineNumber <<
-    std::endl;
-
-  ++gIndenter;
-
-  constexpr int fieldWidth = 20;
-
-  if (! fSegmentElementsList.size ()) {
-    os <<
-      std::setw (fieldWidth) <<
-      "fSegmentElementsList" << ": " << "[EMPTY]" <<
-      std::endl;
-  }
-
-  else {
-    os << std::endl;
-
-    std::list <S_msrSegmentElement>::const_iterator
-      iBegin = fSegmentElementsList.begin (),
-      iEnd   = fSegmentElementsList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for

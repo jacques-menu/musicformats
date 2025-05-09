@@ -102,11 +102,11 @@ class EXP msrSegment : public msrVoiceElement
     S_msrMeasure          getSegmentLastMeasure () const
                               { return fSegmentLastMeasure; }
 
-    // measures flat list
+    // measures list
 
     const std::list <S_msrMeasure>&
-                          getSegmentMeasuresFlatList () const
-                              { return fSegmentMeasuresFlatList; }
+                          getSegmentMeasureList () const
+                              { return fSegmentMeasuresList; }
 
 /* JMI
     // segment shortest note
@@ -167,11 +167,10 @@ class EXP msrSegment : public msrVoiceElement
                             const std::string& context);
 
     S_msrMeasure          cascadeCreateAMeasureAndAppendItInSegment (
-                            int           inputLineNumber,
-                            int           previousMeasureEndInputLineNumber,
-                            const std::string& measureNumber,
-                            msrMeasureImplicitKind
-                                          measureImplicitKind);
+                            int                    inputLineNumber,
+                            int                    previousMeasureEndInputLineNumber,
+                            const std::string&     measureNumber,
+                            msrMeasureImplicitKind measureImplicitKind);
 
     void                  setNextMeasureNumberInSegment (
                             int           inputLineNumber,
@@ -474,10 +473,9 @@ class EXP msrSegment : public msrVoiceElement
     std::list <S_msrSegmentElement>
                           fSegmentElementsList;
 
-    // measures flat list
-    // including those not in non-measure segment elements,
+    // segment measures list
     std::list <S_msrMeasure>
-                          fSegmentMeasuresFlatList;
+                          fSegmentMeasuresList;
 
     // debug number, unique for every msrSegment instance
     static int            sSegmentDebugNumber;

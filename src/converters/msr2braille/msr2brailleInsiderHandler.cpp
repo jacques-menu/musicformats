@@ -247,9 +247,7 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       "msr2brailleInsiderHandler has been initialized as:" <<
       std::endl;
 

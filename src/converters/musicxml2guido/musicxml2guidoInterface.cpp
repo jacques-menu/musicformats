@@ -70,9 +70,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsr2msrOahGroup->getDisplayMxsr ()) {
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl <<
@@ -89,10 +87,6 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     gLog <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
-
-    gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
-      ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 

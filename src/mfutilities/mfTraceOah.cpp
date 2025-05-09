@@ -226,7 +226,7 @@ The default is 'DEFAULT_VALUE'.)",
       mfPassIDKindAsString (
         mfPassIDKindDefaultValue)),
     "PASSID",
-    "fEarlyTraceOnlyPassRef",
+    "fEarlyTraceOnlyPass",
     gEarlyOptions.getEarlyTraceOnlyPassRef ());
 
   subGroup->

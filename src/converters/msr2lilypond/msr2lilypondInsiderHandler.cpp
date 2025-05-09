@@ -280,9 +280,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
     // print the options handler initial state
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       "msr2lilypondInsiderHandler has been initialized as:" <<
       std::endl;
 

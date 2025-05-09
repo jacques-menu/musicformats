@@ -25250,9 +25250,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
       std::endl;
 
     if (gTraceOahGroup->getTraceNotesDetails ()) {
-      std::stringstream ss;
-
-      ss <<
+      gLog <<
         std::setw (fieldWidth) << "fPendingGraceNotesGroup" << ": " <<
         std::endl <<
         "======================= handleARegularNoteInAMeasure()" <<
@@ -25537,9 +25535,7 @@ void mxsr2msrSkeletonPopulator::handleARestInAMeasure (
       std::endl;
 
     if (gTraceOahGroup->getTraceNotesDetails ()) {
-      std::stringstream ss;
-
-      ss <<
+      gLog <<
         std::setw (fieldWidth) << "fPendingGraceNotesGroup" << ": " <<
         std::endl <<
         "======================= handleARestInAMeasure()" <<
@@ -25697,9 +25693,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
       std::endl;
 
     if (gTraceOahGroup->getTraceNotesDetails ()) {
-      std::stringstream ss;
-
-      ss <<
+      gLog <<
         std::setw (fieldWidth) << "fPendingGraceNotesGroup" << ": " <<
         std::endl <<
         "======================= handleAGraceNoteAttachedToANote()" <<

@@ -620,7 +620,7 @@ void msrVoice::initializeVoice (
   // calls counter (for debug)
   fCallsCounter = 0;
 
-  // create the initial last segment if requested
+  // create the initial last segment if needed
   switch (voiceCreateInitialLastSegmentKind) {
     case msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes:
       // sanity check // JMI LAST
@@ -645,9 +645,7 @@ void msrVoice::initializeVoice (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoicesDetails ()) {
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Initial contents of voice \"" << fVoiceName <<
       "\" in staff \"" <<
       fVoiceUpLinkToStaff->getStaffPathLikeName () <<
@@ -782,9 +780,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoicesDetails ()) {
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       "****" <<
       " BEFORE deepClone: " <<
       std::endl;
@@ -793,11 +789,8 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
     gLog <<
       std::endl <<
-      "****";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+      "****" <<
+      std::endl << std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1653,27 +1646,26 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
 
   fVoiceCurrentMeasureNumber = measureNumber;
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating measure '" <<
-      measureNumber <<
-      "' and appending it to voice \"" << fVoiceName << "\"" <<
-      "', line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
   fCallsCounter++;
 
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasures ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Creating measure '" <<
+//       measureNumber <<
+//       "' and appending it to voice \"" << fVoiceName << "\"" <<
+//       "', line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+
   if (
-//     true
-//       ||
+//     true ||
     false
       &&
     (
@@ -1707,19 +1699,19 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
 
     // create a measure
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
-    std::stringstream ss;
+    if (gTraceOahGroup->getTraceMeasures ()) {
+      std::stringstream ss;
 
-    ss <<
-      "Creating a measure with number '" <<
-      measureNumber <<
-      "' in voice \"" << fVoiceName << "\"" <<
-      "', line " << inputLineNumber;
+      ss <<
+        "Creating a measure with number '" <<
+        measureNumber <<
+        "' in voice \"" << fVoiceName << "\"" <<
+        "', line " << inputLineNumber;
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
 #endif // MF_TRACE_IS_ENABLED
 
     result =
@@ -1735,22 +1727,22 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
 
     // append it to the current multiple measure rests
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
-    std::stringstream ss;
+    if (gTraceOahGroup->getTraceMeasures ()) {
+      std::stringstream ss;
 
-    ss <<
-      "Appending measure " <<
-      result->asString () <<
-      " to current multiple measure rests " <<
-      fVoiceCurrentMultipleMeasureRest->asString () <<
-      "in voice \"" <<
-      fVoiceName << "\"" <<
-      "', line " << inputLineNumber;
+      ss <<
+        "Appending measure " <<
+        result->asString () <<
+        " to current multiple measure rests " <<
+        fVoiceCurrentMultipleMeasureRest->asString () <<
+        "in voice \"" <<
+        fVoiceName << "\"" <<
+        "', line " << inputLineNumber;
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
 #endif // MF_TRACE_IS_ENABLED
 
     fVoiceCurrentMultipleMeasureRest->
@@ -8101,8 +8093,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
 
     // append it to the voice last segment
     fVoiceLastSegment->
-      appendMeasureToSegment (
-        lastAppendedMeasureClone);
+      appendMeasureToSegment (lastAppendedMeasureClone);
 
     //   // update fVoiceLastAppendedMeasure // JMI
     //   fVoiceLastAppendedMeasure->
@@ -10216,9 +10207,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceMeasureRepeats ()) { // JMI 0.9.67
-          std::stringstream ss;
-
-          ss <<
+          gLog <<
             std::endl <<
             "***********" <<
             std::endl << std::endl;
@@ -10906,7 +10895,7 @@ void msrVoice::collectVoiceMeasuresIntoFlatList (
     std::list <S_msrMeasure>
       lastSegmentMeasuresFlatList =
         fVoiceLastSegment->
-          getSegmentMeasuresFlatList ();
+          getSegmentMeasureList ();
 
     if (! lastSegmentMeasuresFlatList.empty ()) {
       for (S_msrMeasure measure : lastSegmentMeasuresFlatList) {
@@ -11668,6 +11657,180 @@ void msrVoice::displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice
     context);
 }
 
+void msrVoice::print (std::ostream& os) const
+{
+  os <<
+    "[Voice " << fVoicePathLikeName <<
+//     msrVoiceKindAsStringForPrint (fVoiceKind) <<
+    ", " <<
+    fVoicePathLikeName <<
+    ", fVoiceNumber " <<
+    fVoiceNumber <<
+    ", line " << fInputLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 43;
+
+  // print the regular voice harmonies voice name if any
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fRegularVoiceOrdinalNumberInPart " << ": " <<
+    fRegularVoiceOrdinalNumberInPart <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fRegularVoiceForwardLinkToHarmoniesVoice" << ": ";
+  if (fRegularVoiceForwardLinkToHarmoniesVoice) {
+    os <<
+      fRegularVoiceForwardLinkToHarmoniesVoice->fVoiceName;
+  }
+  else {
+    os <<
+      "[NULL]";
+  }
+  os << std::endl;
+
+  // print the figured bass voice name if any
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fRegularVoiceForwardLinkToFiguredBassVoice" << ": ";
+  if (fRegularVoiceForwardLinkToFiguredBassVoice) {
+    os <<
+      fRegularVoiceForwardLinkToFiguredBassVoice->fVoiceName;
+  }
+  else {
+    os <<
+      "[NULL]";
+  }
+  os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fVoiceActualNotesCounter" << ": " <<
+    fVoiceActualNotesCounter <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fVoiceRestsCounter" << ": " <<
+    fVoiceRestsCounter <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fVoiceSkipsCounter" << ": " <<
+    fVoiceSkipsCounter <<
+    std::endl << std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fVoiceActualHarmoniesCounter" << ": " <<
+    fVoiceActualHarmoniesCounter <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fVoiceActualFiguredBassesCounter" << ": " <<
+    fVoiceActualFiguredBassesCounter <<
+    std::endl << std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fVoiceStanzasMap.size ():" << ": " <<
+    fVoiceStanzasMap.size () <<
+    std::endl;
+
+#ifdef MF_TRACE_IS_ENABLED
+// JMI 0.9.67 HARMFUL  displayVoiceMeasuresFlatList (fieldWidth);
+#endif // MF_TRACE_IS_ENABLED
+
+  // print the voice initial elements
+  size_t voiceInitialElementsListSize =
+    fVoiceInitialElementsList.size ();
+
+  os <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fVoiceInitialElementsList";
+  if (voiceInitialElementsListSize) {
+    os << ": " <<  voiceInitialElementsListSize << " elements";
+  }
+  else {
+    os << ": " << "[EMPTY]";
+  }
+
+  if (voiceInitialElementsListSize) {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::list <S_msrVoiceElement>::const_iterator
+      iBegin = fVoiceInitialElementsList.begin (),
+      iEnd   = fVoiceInitialElementsList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      // print the element
+      os << (*i);
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+  os << std::endl;
+
+  os << std::endl;
+
+  // print the last segment
+  os <<
+    std::setw (fieldWidth) <<
+    "fVoiceLastSegment" << ": ";
+  if (fVoiceLastSegment) {
+    os << std::endl;
+
+    ++gIndenter;
+    os << fVoiceLastSegment;
+    --gIndenter;
+  }
+  else {
+    os <<
+      "[NULL]" <<
+      std::endl;
+  }
+
+  os << std::endl;
+
+  // print the voice uplink to staff if any
+  os << std::left <<
+    std::setw (fieldWidth) << "fVoiceUpLinkToStaff" << ": ";
+  if (fVoiceUpLinkToStaff) {
+    os <<
+      fVoiceUpLinkToStaff->getStaffPathLikeName ();
+  }
+  else {
+    os << "[NULL]";
+  }
+  os << std::endl;
+
+  // print the stanzas if any
+  if (! fVoiceStanzasMap.empty ()) {
+    os <<
+      std::endl <<
+      "Stanzas:" <<
+      std::endl;
+
+    ++gIndenter;
+
+    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+      S_msrStanza stanza = thePair.second;
+
+      os << stanza;
+    } // for
+
+    --gIndenter;
+  }
+
+  --gIndenter;
+
+  os << ']' << std::endl;
+}
+
 void msrVoice::printFull (std::ostream& os) const
 {
   os <<
@@ -11684,35 +11847,43 @@ void msrVoice::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  os << std::left <<
-    '(' <<
-    mfSingularOrPlural (
-      fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
-     ", " <<
-    mfSingularOrPlural (
-      fVoiceActualFiguredBassesCounter, "figured bass", "figured bass elements") <<
-     ", " <<
-    mfSingularOrPlural (
-      fVoiceActualNotesCounter, "actual note", "actual notes") <<
-     ", " <<
-    mfSingularOrPlural (
-      fVoiceRestsCounter, "rest", "rests") <<
-     ", " <<
-    mfSingularOrPlural (
-      fVoiceSkipsCounter, "skip", "skips") <<
-     ", " <<
-    mfSingularOrPlural (
-      fVoiceStanzasMap.size (), "stanza", "stanzas") <<
-    ")" <<
-    std::endl;
-
   constexpr int fieldWidth = 43;
 
   os << std::left <<
-    std::setw (fieldWidth) << "fVoiceShortestNoteWholeNotes" << ": " <<
+    std::setw (fieldWidth) <<
+    "fVoiceActualNotesCounter" << ": " <<
+    fVoiceActualNotesCounter <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fVoiceRestsCounter" << ": " <<
+    fVoiceRestsCounter <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fVoiceSkipsCounter" << ": " <<
+    fVoiceSkipsCounter <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fVoiceActualHarmoniesCounter" << ": " <<
+    fVoiceActualHarmoniesCounter <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fVoiceActualFiguredBassesCounter" << ": " <<
+    fVoiceActualFiguredBassesCounter <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fVoiceStanzasMap.size ()" << ": " <<
+    fVoiceStanzasMap.size () <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fVoiceShortestNoteWholeNotes" << ": " <<
     fVoiceShortestNoteWholeNotes.asFractionString () <<
     std::endl <<
-    std::setw (fieldWidth) << "fVoiceShortestNoteTupletFactor" << ": " <<
+    std::setw (fieldWidth) <<
+    "fVoiceShortestNoteTupletFactor" << ": " <<
     std::endl;
 
   ++gIndenter;
@@ -11727,7 +11898,8 @@ void msrVoice::printFull (std::ostream& os) const
     "\"" <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fVoiceIsMusicallyEmpty" << ": " <<
+    std::setw (fieldWidth) <<
+    "fVoiceIsMusicallyEmpty" << ": " <<
     fVoiceIsMusicallyEmpty <<
     std::endl <<
 
@@ -11746,28 +11918,41 @@ void msrVoice::printFull (std::ostream& os) const
     regularVoiceStaffSequentialNumberAsString () <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fVoiceHasBeenFinalized" << ": " <<
+    std::setw (fieldWidth) <<
+    "fVoiceHasBeenFinalized" << ": " <<
     fVoiceHasBeenFinalized <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fCurrentVoicePosition" << ": " <<
+    std::setw (fieldWidth) <<
+    "fCurrentVoicePosition" << ": " <<
     fCurrentVoicePosition <<
     std::endl <<
-    std::setw (fieldWidth) << "fCurrentVoiceMoment" << ": " <<
+    std::setw (fieldWidth) <<
+    "fCurrentVoiceMoment" << ": " <<
     fCurrentVoiceMoment <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fVoiceContainsMultipleMeasureRests" << ": " <<
+    std::setw (fieldWidth) <<
+    "fVoiceContainsMultipleMeasureRests" << ": " <<
     fVoiceContainsMultipleMeasureRests <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fVoiceContainsMeasureRepeats" << ": " <<
+    std::setw (fieldWidth) <<
+    "fVoiceContainsMeasureRepeats" << ": " <<
     fVoiceContainsMeasureRepeats <<
-    std::endl <<
-
-    std::setw (fieldWidth) << "fVoiceUpLinkToStaff" << ": " <<
-    fVoiceUpLinkToStaff->getStaffPathLikeName () <<
     std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fVoiceUpLinkToStaff" << ": ";
+  if (fVoiceUpLinkToStaff) {
+    os <<
+      fVoiceUpLinkToStaff->getStaffPathLikeName ();
+  }
+  else {
+    os << "[NULL]";
+  }
+  os << std::endl;
 
 #ifdef MF_TRACE_IS_ENABLED
   // regular measure ends detection
@@ -11787,7 +11972,8 @@ void msrVoice::printFull (std::ostream& os) const
 
   // print the voice first clef, and the current clef, key and time signature
   os << std::left <<
-    std::setw (fieldWidth) << "fVoiceFirstClef" << ": ";
+    std::setw (fieldWidth) <<
+    "fVoiceFirstClef" << ": ";
   if (fVoiceFirstClef) {
     os <<
       fVoiceFirstClef;
@@ -11796,7 +11982,8 @@ void msrVoice::printFull (std::ostream& os) const
     os << "[NULL]" << std::endl;
   }
   os << std::left <<
-    std::setw (fieldWidth) << "fVoiceCurrentClef" << ": ";
+    std::setw (fieldWidth) <<
+    "fVoiceCurrentClef" << ": ";
   if (fVoiceCurrentClef) {
     os <<
       fVoiceCurrentClef;
@@ -11806,7 +11993,8 @@ void msrVoice::printFull (std::ostream& os) const
   }
 
   os << std::left <<
-    std::setw (fieldWidth) << "fVoiceCurrentKey" << ": ";
+    std::setw (fieldWidth) <<
+    "fVoiceCurrentKey" << ": ";
   if (fVoiceCurrentKey) {
     os <<
       fVoiceCurrentKey;
@@ -11816,7 +12004,8 @@ void msrVoice::printFull (std::ostream& os) const
   }
 
   os << std::left <<
-    std::setw (fieldWidth) << "fVoiceCurrentTimeSignature" << ": ";
+    std::setw (fieldWidth) <<
+    "fVoiceCurrentTimeSignature" << ": ";
   if (fVoiceCurrentTimeSignature) {
     os << std::endl;
     ++gIndenter;
@@ -11834,7 +12023,8 @@ void msrVoice::printFull (std::ostream& os) const
 // JMI
   // print the regular voice harmonies voice name if any
   os << std::left <<
-    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToHarmoniesVoice" << ": ";
+    std::setw (fieldWidth) <<
+    "fRegularVoiceForwardLinkToHarmoniesVoice" << ": ";
   if (fRegularVoiceForwardLinkToHarmoniesVoice) {
     os <<
       fRegularVoiceForwardLinkToHarmoniesVoice->fVoiceName;
@@ -11862,7 +12052,8 @@ void msrVoice::printFull (std::ostream& os) const
 
   // print the voice first segment if any
   os <<
-    std::setw (fieldWidth) << "fVoiceFirstSegment" << ": ";
+    std::setw (fieldWidth) <<
+    "fVoiceFirstSegment" << ": ";
   if (fVoiceFirstSegment) {
     os <<
       '\'' <<
@@ -11877,7 +12068,8 @@ void msrVoice::printFull (std::ostream& os) const
 
   // print the voice last appended measure if any
   os <<
-    std::setw (fieldWidth) << "fVoiceLastAppendedMeasure" << ": ";
+    std::setw (fieldWidth) <<
+    "fVoiceLastAppendedMeasure" << ": ";
   if (fVoiceLastAppendedMeasure) {
     os <<
       '\'' <<
@@ -11892,7 +12084,8 @@ void msrVoice::printFull (std::ostream& os) const
 
   // print the voice first measure if any
   os <<
-    std::setw (fieldWidth) << "fVoiceFirstMeasure" << ": ";
+    std::setw (fieldWidth) <<
+    "fVoiceFirstMeasure" << ": ";
   if (fVoiceFirstMeasure) {
     os <<
       '\'' <<
@@ -11955,7 +12148,8 @@ void msrVoice::printFull (std::ostream& os) const
 
   if (voiceInitialElementsListSize) {
     os <<
-      voiceInitialElementsListSize << " elements" <<
+      voiceInitialElementsListSize <<
+      " elements" <<
       std::endl;
 
     ++gIndenter;
@@ -12027,159 +12221,6 @@ void msrVoice::printFull (std::ostream& os) const
     os <<
       "[EMPTY]" <<
       std::endl;
-  }
-
-  --gIndenter;
-
-  os << ']' << std::endl;
-}
-
-void msrVoice::print (std::ostream& os) const
-{
-  os <<
-    "[Voice " << fVoicePathLikeName <<
-//     msrVoiceKindAsStringForPrint (fVoiceKind) <<
-    ", " <<
-    fVoicePathLikeName <<
-    ", fVoiceNumber " <<
-    fVoiceNumber <<
-    ", line " << fInputLineNumber <<
-    std::endl;
-
-  ++gIndenter;
-
-  constexpr int fieldWidth = 43;
-
-  // print the regular voice harmonies voice name if any
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fRegularVoiceOrdinalNumberInPart " << ": " <<
-    fRegularVoiceOrdinalNumberInPart <<
-    std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fRegularVoiceForwardLinkToHarmoniesVoice" << ": ";
-  if (fRegularVoiceForwardLinkToHarmoniesVoice) {
-    os <<
-      fRegularVoiceForwardLinkToHarmoniesVoice->fVoiceName;
-  }
-  else {
-    os <<
-      "[NULL]";
-  }
-  os << std::endl;
-
-  // print the figured bass voice name if any
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fRegularVoiceForwardLinkToFiguredBassVoice" << ": ";
-  if (fRegularVoiceForwardLinkToFiguredBassVoice) {
-    os <<
-      fRegularVoiceForwardLinkToFiguredBassVoice->fVoiceName;
-  }
-  else {
-    os <<
-      "[NULL]";
-  }
-  os << std::endl;
-
-  os << std::left <<
-    '(' <<
-    mfSingularOrPlural (
-      fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
-     ", " <<
-    mfSingularOrPlural (
-      fVoiceActualFiguredBassesCounter, "figured bass", "figured bass elements") <<
-     ", " <<
-    mfSingularOrPlural (
-      fVoiceActualNotesCounter, "actual note", "actual notes") <<
-     ", " <<
-    mfSingularOrPlural (
-      fVoiceRestsCounter, "rest", "rests") <<
-     ", " <<
-    mfSingularOrPlural (
-      fVoiceSkipsCounter, "skip", "skips") <<
-     ", " <<
-    mfSingularOrPlural (
-      fVoiceStanzasMap.size (), "stanza", "stanzas") <<
-    ")" <<
-    std::endl;
-
-#ifdef MF_TRACE_IS_ENABLED
-// JMI 0.9.67 HARMFUL  displayVoiceMeasuresFlatList (fieldWidth);
-#endif // MF_TRACE_IS_ENABLED
-
-  // print the voice initial elements
-  size_t voiceInitialElementsListSize =
-    fVoiceInitialElementsList.size ();
-
-  os <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fVoiceInitialElementsList";
-  if (voiceInitialElementsListSize) {
-    os << ": " <<  voiceInitialElementsListSize << " elements";
-  }
-  else {
-    os << ": " << "[EMPTY]";
-  }
-
-  if (voiceInitialElementsListSize) {
-    os << std::endl;
-
-    ++gIndenter;
-
-    std::list <S_msrVoiceElement>::const_iterator
-      iBegin = fVoiceInitialElementsList.begin (),
-      iEnd   = fVoiceInitialElementsList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      // print the element
-      os << (*i);
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-
-    --gIndenter;
-  }
-  os << std::endl;
-
-  // print the last segment
-    os <<
-      std::endl <<
-      std::setw (fieldWidth) <<
-      "fVoiceLastSegment" << ": ";
-  if (fVoiceLastSegment) {
-    os << std::endl;
-
-    ++gIndenter;
-    os << fVoiceLastSegment;
-    --gIndenter;
-  }
-  else {
-    os <<
-      "[NULL]" <<
-      std::endl;
-  }
-
-  // print the stanzas if any
-  if (! fVoiceStanzasMap.empty ()) {
-    os <<
-      std::endl <<
-      "Stanzas:" <<
-      std::endl;
-
-    ++gIndenter;
-
-    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
-      S_msrStanza stanza = thePair.second;
-
-      os << stanza;
-    } // for
-
-    --gIndenter;
   }
 
   --gIndenter;

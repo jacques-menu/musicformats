@@ -136,16 +136,16 @@ void mxsr2msrSkeletonBuilder::browseMxsr (
 		fResultingEventsCollection.sortTheMxsrEventsLists ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getDisplayMxsrEvents ()) {
-    gLog <<
-      std::endl <<
-      "The MSR skeleton builder collected the following MXSR events:" <<
-      std::endl;
+    if (gTraceOahGroup->getDisplayMxsrEvents ()) {
+      gLog <<
+        std::endl <<
+        "The MSR skeleton builder collected the following MXSR events:" <<
+        std::endl;
 
-			++gIndenter;
-			fResultingEventsCollection.print (gLog);
-			--gIndenter;
-  }
+      ++gIndenter;
+      fResultingEventsCollection.print (gLog);
+      --gIndenter;
+    }
 #endif // MF_TRACE_IS_ENABLED
   }
 }

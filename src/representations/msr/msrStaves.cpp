@@ -536,6 +536,7 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 {
   int result = 0;
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       switch (voice->getVoiceKind ()) {
@@ -585,6 +586,7 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
 
   // cascade it to all voices
   if (! fStaffAllVoicesList.empty ()) {
+    // cascade it to all voices
     for (S_msrVoice voice : fStaffAllVoicesList) {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
     // sanity check
@@ -1050,8 +1052,8 @@ void msrStaff::registerVoiceByItsNumber (
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      // sort fStaffAllVoicesList, to have harmonies just before
-      // the corresponding voice
+      // sort fStaffAllVoicesList, to have harmonies
+      // just before the corresponding voice // JMI, 0.9.73
       if (! fStaffAllVoicesList.empty ()) {
         fStaffAllVoicesList.sort (
           msrVoice::compareVoicesToHaveHarmoniesAboveCorrespondingVoice);
@@ -1075,8 +1077,8 @@ void msrStaff::registerVoiceByItsNumber (
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      // sort fStaffAllVoicesList, to have figured bass elements just after
-      // the corresponding voice
+      // sort fStaffAllVoicesList, to have figured bass elements
+      // just after the corresponding voice
       if (! fStaffAllVoicesList.empty ()) {
         fStaffAllVoicesList.sort (
           msrVoice::compareVoicesToHaveFiguredBassesBelowCorrespondingVoice);
@@ -2267,7 +2269,7 @@ void msrStaff::appendTempoToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
- // append tempo to registered staves
+ // append tempo to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendTempoToVoice (tempo);
@@ -2292,7 +2294,7 @@ void msrStaff::appendRehearsalMarkToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
- // append rehearsal mark to registered staves
+ // append rehearsal mark to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendRehearsalMarkToVoice (rehearsalMark);
@@ -2317,7 +2319,7 @@ void msrStaff::appendLineBreakToStaff  (
   }
 #endif // MF_TRACE_IS_ENABLED
 
- // append line break to registered staves
+ // append line break to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendLineBreakToVoice (lineBreak);
@@ -2342,7 +2344,7 @@ void msrStaff::appendPageBreakToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
- // append page break to registered staves
+ // append page break to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendPageBreakToVoice (pageBreak);
@@ -2405,6 +2407,7 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       nestContentsIntoNewRepeatInVoice (
@@ -2435,6 +2438,7 @@ void msrStaff::handleRepeatStartInStaff (
 
   ++gIndenter;
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       handleRepeatStartInVoice (
@@ -2468,6 +2472,7 @@ void msrStaff::handleRepeatEndInStaff (
 
   ++gIndenter;
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       handleRepeatEndInVoice (
@@ -2501,6 +2506,7 @@ void msrStaff::handleRepeatEndingStartInStaff (
 
   ++gIndenter;
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       handleRepeatEndingStartInVoice (
@@ -2538,6 +2544,7 @@ void msrStaff::handleRepeatEndingEndInStaff (
 
   ++gIndenter;
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       handleRepeatEndingEndInVoice (
@@ -2574,6 +2581,7 @@ void msrStaff::finalizeRepeatEndInStaff (
 
   ++gIndenter;
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       finalizeRepeatEndInVoice (
@@ -2607,6 +2615,7 @@ void msrStaff::cascadeCreateAMeasureRepeatAndAppendItToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       cascadeCreateAMeasureRepeatAndAppendItToVoice (
@@ -2635,6 +2644,7 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendPendingMeasureRepeatToVoice (
@@ -2670,6 +2680,7 @@ void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
 
   fStaffContainsMultipleMeasureRests = true;
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       createAMultipleMeasureRestAndAppendItToVoice (
@@ -2700,6 +2711,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
 #endif // MF_TRACE_IS_ENABLED
 
   // add multiple rest to all staves
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       replicateLastAppendedMeasureInVoice (
@@ -2736,6 +2748,7 @@ void msrStaff::appendEmptyMeasuresToStaff (
 
   fStaffContainsMultipleMeasureRests = true;
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendEmptyMeasuresToVoice (
@@ -2764,6 +2777,7 @@ void msrStaff::appendPendingMultipleMeasureRestsToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendPendingMultipleMeasureRestsToVoice (
@@ -2792,6 +2806,7 @@ void msrStaff::appendMultipleMeasureRestCloneToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendMultipleMeasureRestCloneToVoiceClone (
@@ -2820,6 +2835,7 @@ void msrStaff::appendRepeatCloneToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendRepeatCloneToVoiceClone (
@@ -2849,6 +2865,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
 
   ++gIndenter;
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendRepeatEndingCloneToVoice (
@@ -2880,6 +2897,7 @@ void msrStaff::appendBarLineToStaff (
 
   ++gIndenter;
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendBarLineToVoice (barLine);
@@ -3013,6 +3031,7 @@ void msrStaff::appendStaffDetailsToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendStaffDetailsToVoice (staffDetails);
@@ -3022,6 +3041,7 @@ void msrStaff::appendStaffDetailsToStaff (
 void msrStaff::appendTranspositionToAllStaffVoices (
   const S_msrTransposition& transposition)
 {
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendTranspositionToVoice (transposition);
@@ -3031,6 +3051,7 @@ void msrStaff::appendTranspositionToAllStaffVoices (
 void msrStaff::appendScordaturaToStaff (
   const S_msrScordatura& scordatura)
 {
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendScordaturaToVoice (
@@ -3042,6 +3063,7 @@ void msrStaff::appendAccordionRegistrationToStaff (
   const S_msrAccordionRegistration&
     accordionRegistration)
 {
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendAccordionRegistrationToVoice (
@@ -3052,6 +3074,7 @@ void msrStaff::appendAccordionRegistrationToStaff (
 void msrStaff::appendHarpPedalsTuningToStaff (
   const S_msrHarpPedalsTuning& harpPedalsTuning)
 {
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendHarpPedalsTuningToVoice (
@@ -3199,6 +3222,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       finalizeVoice (
@@ -3232,6 +3256,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     S_msrVoice foo = voice; // ??? JMI 0.9.66
   } // for
@@ -3287,6 +3312,7 @@ void msrStaff::collectStaffMeasuresSlices (
       fStaffPathLikeName); // origin
 
   // populate it
+  // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasuresSlices ()) {
@@ -3471,9 +3497,10 @@ void msrStaff::browseData (basevisitor* v)
 
 /* JMI may be useful???
   if (f! StaffAllVoicesMap.empty ()) {
+    // cascade it to all voices
     for (S_msrVoice voice : fStaffAllVoicesList) {
-        msrBrowser<msrVoice> browser (v);
-        browser.browse (*((*i).second));
+      msrBrowser<msrVoice> browser (v);
+      browser.browse (*((*i).second));
     } // for
   }
   */
@@ -3486,6 +3513,7 @@ void msrStaff::browseData (basevisitor* v)
       std::endl;
 
     if (! fStaffAllVoicesList.empty ()) {
+      // cascade it to all voices
       for (S_msrVoice voice : fStaffAllVoicesList) {
         gLog <<
           std::endl <<
@@ -3498,6 +3526,7 @@ void msrStaff::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
   if (! fStaffAllVoicesList.empty ()) {
+    // cascade it to all voices
     for (S_msrVoice voice : fStaffAllVoicesList) {
       // get the  set of voices to ignore
       S_oahStringSetElementAtom
@@ -3656,6 +3685,103 @@ std::string msrStaff::asString () const
   return ss.str ();
 }
 
+void msrStaff::print (std::ostream& os) const
+{
+  os <<
+    "[Staff \"" << fStaffPathLikeName <<
+    "\", fStaffKind: " <<
+    msrStaffKindAsStringForPrint (fStaffKind) <<
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 27;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fStaffNumber" << ": " << fStaffNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fStaffRegularVoicesCounter" << ": " << fStaffRegularVoicesCounter <<
+    std::endl;
+
+  os << std::endl;
+
+  // print the  voices
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fStaffAllVoicesMap.size()" << ": " << fStaffAllVoicesMap.size () <<
+    std::endl <<
+
+    "fStaffAllVoicesMap" << ": ";
+  if (! fStaffAllVoicesMap.empty ()) {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::map <int, S_msrVoice>::const_iterator
+      iBegin = fStaffAllVoicesMap.begin (),
+      iEnd   = fStaffAllVoicesMap.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      S_msrVoice voice = (*i).second;
+
+      os << voice;
+
+      if (++i == iEnd) break;
+
+      os << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+
+  else {
+    os << "[EMPTY]";
+  }
+
+  os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fStaffAllVoicesList.size()" << ": " << fStaffAllVoicesList.size () <<
+    std::endl <<
+
+    "fStaffAllVoicesList" << ": ";
+  if (! fStaffAllVoicesList.empty ()) {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::list <S_msrVoice>::const_iterator
+      iBegin = fStaffAllVoicesList.begin (),
+      iEnd   = fStaffAllVoicesList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      S_msrVoice voice = (*i);
+
+      os << voice;
+
+      if (++i == iEnd) break;
+
+      os << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+
+  else {
+    os << "[EMPTY]";
+  }
+
+  --gIndenter;
+
+  os << ']' << std::endl;
+}
+
 void msrStaff::printFull (std::ostream& os) const
 {
   os <<
@@ -3793,6 +3919,7 @@ void msrStaff::printFull (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
+    // cascade it to all voices
     for (S_msrVoice voice : fStaffAllVoicesList) {
       os << "\"" << voice->getVoiceName () << "\"" << std::endl;
     } // for
@@ -4036,56 +4163,6 @@ void msrStaff::printFull (std::ostream& os) const
       S_msrVoice voice = (*i).second;
 
       voice->printFull (os);
-
-      if (++i == iEnd) break;
-
-      os << std::endl;
-    } // for
-  }
-
-  --gIndenter;
-
-  os << ']' << std::endl;
-}
-
-void msrStaff::print (std::ostream& os) const
-{
-  os <<
-    "[Staff \"" << fStaffPathLikeName <<
-    "\", fStaffKind: " <<
-    msrStaffKindAsStringForPrint (fStaffKind) <<
-    std::endl;
-
-  ++gIndenter;
-
-  constexpr int fieldWidth = 27;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fStaffNumber" << ": " << fStaffNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fStaffAllVoicesList.size()" << ": " << fStaffAllVoicesList.size () <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fStaffRegularVoicesCounter" << ": " << fStaffRegularVoicesCounter <<
-    std::endl;
-
-  // print the  voices
-  if (! fStaffAllVoicesMap.empty ()) {
-    os << std::endl;
-
-    std::map <int, S_msrVoice>::const_iterator
-      iBegin = fStaffAllVoicesMap.begin (),
-      iEnd   = fStaffAllVoicesMap.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_msrVoice voice = (*i).second;
-
-      os << voice;
 
       if (++i == iEnd) break;
 

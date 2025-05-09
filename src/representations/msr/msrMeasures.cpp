@@ -105,20 +105,22 @@ void msrMeasure::initializeMeasure ()
         getSegmentUpLinkToVoice ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Initializing measure '" <<
+      "Initializing measure: [" <<
+      "fMeasureNumber: '" <<
       fMeasureNumber <<
       "', measureDebugNumber: " <<
       fMeasureDebugNumber <<
-      "' in segment '" <<
-      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in voice \"" <<
+      " in segment " <<
+      fMeasureUpLinkToSegment->asString () <<
+      ", in voice \"" <<
       upLinkToVoice->getVoiceName () <<
       "\"" <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputLineNumber <<
+      ']';
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3708,7 +3710,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //   if (gTraceOahGroup->getTracePositionInMeasures ()) {
 //     this->print (gLog);
 //
-//       std::stringstream ss;
+//     std::stringstream ss;
 //
 //     ss <<
 //       "Padding from measure whole notes '" <<
@@ -8091,7 +8093,8 @@ std::string msrMeasure::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Measure '" <<
+    "[Measure" <<
+    ", fMeasureNumber: '" <<
     fMeasureNumber <<
     "', fMeasureKind: " <<
     fMeasureKind <<
@@ -8105,9 +8108,9 @@ std::string msrMeasure::asString () const
     fMeasureOrdinalNumberInVoice <<
     ", fMeasurePuristNumber: " <<
     fMeasurePuristNumber <<
-    ", fNextMeasureNumber: " <<
+    ", fNextMeasureNumber: '" <<
     fNextMeasureNumber <<
-    ", fMeasureDebugNumber: " <<
+    "', fMeasureDebugNumber: " <<
     fMeasureDebugNumber <<
 
     "', fMeasureCurrentPositionInMeasure: " <<
@@ -8158,9 +8161,11 @@ void msrMeasure::displayMeasure (
 void msrMeasure::printFull (std::ostream& os) const
 {
   os <<
-    "[Measure FULL'" <<
+    "[Measure FULL" <<
+    ", fMeasureNumber: '" <<
     fMeasureNumber <<
-    "', " << fMeasureKind <<
+    "', fMeasureKind: " <<
+    fMeasureKind <<
     ", " <<
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
@@ -8451,7 +8456,8 @@ void msrMeasure::printFull (std::ostream& os) const
 void msrMeasure::print (std::ostream& os) const
 {
   os <<
-    "[Measure '" <<
+    "[Measure " <<
+    ", fMeasureNumber: '" <<
     fMeasureNumber <<
     "', " << fMeasureKind <<
     ", " <<
