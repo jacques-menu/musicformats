@@ -1746,10 +1746,10 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
     while (tokenKind != msdlTokenKind::k_TokenEOF); // do
   } // try
 
-  catch ( std::out_of_range& e) {
+  catch (std::out_of_range& e) {
     mfDisplayException (e, gOutput);
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
   }
 

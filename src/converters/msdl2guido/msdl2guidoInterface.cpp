@@ -151,11 +151,11 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
   } // try
 
-  catch ( msdl2msrException& e) {
+  catch (msdl2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -189,11 +189,11 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
   } // try
 
-  catch ( msr2msrException& e) {
+  catch (msr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -213,11 +213,11 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
         mfTimingItemKind::kMandatory);
   } // try
 
-  catch ( msr2mxsrException& e) {
+  catch (msr2mxsrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -239,11 +239,11 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
       "Convert  the MXSR into Guido text");
   } // try
 
-  catch ( mxsr2guidoException& e) {
+  catch (mxsr2guidoException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -366,11 +366,11 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
     } // switch
   } // try
 
-  catch ( mfOahException& e) {
+  catch (mfOahException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

@@ -148,6 +148,10 @@ class EXP msrPart : public msrPartGroupElement
                           getPartStavesMap () const
                               { return fPartStavesMap; }
 
+    std::map <int, S_msrStaff>*
+                          getPartStavesMapPtr ()
+                              { return &fPartStavesMap; }
+
 
     // voices
 

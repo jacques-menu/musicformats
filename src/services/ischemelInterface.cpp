@@ -209,11 +209,11 @@ EXP int ischeme (
     } // switch
   } // try
 
-  catch ( mfOahException& e) {
+  catch (mfOahException& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -445,11 +445,11 @@ EXP int ischeme (
     }
   } // try
 
-  catch ( mfException& e) {
+  catch (mfException& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

@@ -172,9 +172,9 @@ Bool bsrTimeSignatureItem::isEqualTo (S_bsrTimeSignatureItem otherTimeSignatureI
   for (size_t i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
     if (
       ! (
-        fTimeSignatureBeatsNumbersVector [i]
+        fTimeSignatureBeatsNumbersVector.at (i)
           ==
-        otherTimeSignatureItem->fTimeSignatureBeatsNumbersVector [i]
+        otherTimeSignatureItem->fTimeSignatureBeatsNumbersVector.at (i)
         )
       ) {
       return false;
@@ -230,7 +230,7 @@ int bsrTimeSignatureItem::getTimeSignatureBeatsNumber () const
 
   for (size_t i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
     result +=
-      fTimeSignatureBeatsNumbersVector [i];
+      fTimeSignatureBeatsNumbersVector.at (i);
   } // for
 
   return result;
@@ -340,7 +340,7 @@ std::string bsrTimeSignatureItem::asString () const
     case 1:
       ss <<
         ", " <<
-        fTimeSignatureBeatsNumbersVector [0] << '/' << fTimeSignatureBeatValue;
+       fTimeSignatureBeatsNumbersVector.at (0) << '/' << fTimeSignatureBeatValue;
       break;
 
     default:
@@ -349,7 +349,7 @@ std::string bsrTimeSignatureItem::asString () const
 
       for (size_t i = 0; i < timeSignatureBeatsNumbersVectorSize; ++i) {
         ss <<
-          fTimeSignatureBeatsNumbersVector [i];
+          fTimeSignatureBeatsNumbersVector.at (i);
 
         if (i != timeSignatureBeatsNumbersVectorSize - 1) {
           ss <<
@@ -506,7 +506,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
             case 1:
               {
                 // determine the beats number
-                int beatsNumberToBeUsed = timeSignatureBeatsNumbersVector [0];
+                int beatsNumberToBeUsed =timeSignatureBeatsNumbersVector.at (0);
 
                 switch (fTimeKind) {
                   case bsrTimeSignatureKind::kTimeSignatureNote:
@@ -648,7 +648,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
 
               for (int i = 0; i < vectorSize; ++i) {
                 ss <<
-                  timeSignatureBeatsNumbersVector [i];
+                  timeSignatureBeatsNumbersVector.at (i);
 
                 if (i != vectorSize - 1) {
                   ss <<
@@ -702,7 +702,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                   beatsNumber =
                     bsrNumber::create (
                       fInputLineNumber,
-                      timeSignatureBeatsNumbersVector [0],
+                     timeSignatureBeatsNumbersVector.at (0),
                       bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
                 // append it to result
@@ -765,7 +765,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
 
               for (int i = 0; i < vectorSize; ++i) {
                 ss <<
-                  timeSignatureBeatsNumbersVector [i];
+                  timeSignatureBeatsNumbersVector.at (i);
 
                 if (i != vectorSize - 1) {
                   ss <<

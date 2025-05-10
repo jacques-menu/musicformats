@@ -132,11 +132,11 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         gLanguage->convertTheMXSRIntoAnMSRSkeleton ());
   } // try
 
-  catch ( mxsr2msrException& e) {
+  catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -167,11 +167,11 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
   } // try
 
-  catch ( mxsr2msrException& e) {
+  catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -205,11 +205,11 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
   } // try
 
-  catch ( mxsr2msrException& e) {
+  catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -605,11 +605,11 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
     } // switch
   } // try
 
-  catch ( mfOahException& e) {
+  catch (mfOahException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

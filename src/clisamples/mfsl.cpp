@@ -190,7 +190,7 @@ int main (int argc, char* argv[])
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -396,7 +396,7 @@ int main (int argc, char* argv[])
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

@@ -1309,15 +1309,17 @@ class EXP mxsr2msrSkeletonPopulator :
     // staff handling
     // ------------------------------------------------------
 
-    std::vector <S_msrStaff>  fCurrentPartStavesVector;
+    // we use a pointer to the current part staves map
+    std::map <int, S_msrStaff>*
+                              fCurrentPartStavesMapPtr;
 
     std::map <std::pair <int, int>, S_msrVoice>
                               fVoicesLastMetNoteMap;
 
-    void                      populateCurrentPartStavesVectorFromPart (
-                                  const S_msrPart& part);
+//     void                      populateCurrentPartStavesMapFromPart (
+//                                   const S_msrPart& part);
 
-		void											displayCurrentPartStavesVector () const;
+		void											displayCurrentPartStavesMap () const;
 
 
     // voices handling

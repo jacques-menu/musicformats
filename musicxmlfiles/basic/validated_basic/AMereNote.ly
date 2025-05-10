@@ -33,15 +33,12 @@
 
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
-  
-  c'1
-}
+c'1 }
 
 \book {
 
   \score {
     <<
-    
       
       
       

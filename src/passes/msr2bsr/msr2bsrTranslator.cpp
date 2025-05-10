@@ -1696,7 +1696,7 @@ void msr2bsrTranslator::visitStart (S_msrTimeSignature& elt)
       for (size_t i = 0; i < vectorSize; ++i) {
         int
           mTimeSignatureItemBeatsNumber =
-            mTimeSignatureBeatsNumbersVector [i];
+            mTimeSignatureBeatsNumbersVector.at (i);
 
         // create the BSR time signature item
         S_bsrTimeSignatureItem

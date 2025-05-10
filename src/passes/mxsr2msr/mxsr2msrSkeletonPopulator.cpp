@@ -12,6 +12,7 @@
 #include "xml_tree_browser.h"
 #include "mfAssert.h"
 #include "mfConstants.h"
+// #include "mfMusicformatsErrors.h"
 #include "mfStringsHandling.h"
 
 #include "msrBreaks.h"
@@ -979,7 +980,7 @@ void mxsr2msrSkeletonPopulator::populatePartsMapFromScore ()
 //           ">>> Part \"" <<
 //           part->getPartName () <<
 //           "\" registering staff " << staff <<
-//           "in fCurrentPartStavesVector under staffNumber " << staffNumber <<
+//           "in fCurrentPartStavesMap under staffNumber " << staffNumber <<
 //           ", line " << staff->getInputLineNumber ();
 //
 //         gWaeHandler->waeTrace (
@@ -988,7 +989,7 @@ void mxsr2msrSkeletonPopulator::populatePartsMapFromScore ()
 //       }
 //   #endif // MF_TRACE_IS_ENABLED
 //
-//       fCurrentPartStavesVector [staffNumber] = staff;
+//       fCurrentPartStavesMapPtr->at (staffNumber) = staff;
 //     } // for
 //   }
 
@@ -1061,83 +1062,101 @@ void mxsr2msrSkeletonPopulator::displayPartsMap () const
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::populateCurrentPartStavesVectorFromPart (
-  const S_msrPart& part)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
-    std::stringstream ss;
-
-    ss <<
-      ">>> Part \"" <<
-      part->getPartName () <<
-      "\" has stave numbers ranging from 1 to " <<
-      fCurrentPart->getPartStavesMap ().size ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // forget any previous contents if any
-  fCurrentPartStavesVector.clear ();
-
-
-// // indexes are voice numbers
-// using msrVoicesMap = std::map <int, S_msrVoice>;
+// void mxsr2msrSkeletonPopulator::populateCurrentPartStavesMapFromPart (
+//   const S_msrPart& part)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceStavesBasics ()) {
+//     std::stringstream ss;
 //
-// // indexes are staff numbers
-// using msrStavesVoicesMapMap = std::map <int, msrVoicesMap>;
+//     ss <<
+//       ">>> Part \"" <<
+//       part->getPartName () <<
+//       "\" contains " <<
+//       fCurrentPart->getPartStavesMap ().size () <<
+//       " parts";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // forget any previous contents if any
+// //   fCurrentPartStavesMap.clear ();
+//
+// // // indexes are voice numbers
+// // using msrVoicesMap = std::map <int, S_msrVoice>;
+// //
+// // // indexes are staff numbers
+// // using msrStavesVoicesMapMap = std::map <int, msrVoicesMap>;
+//
+//   // populate the part staves vector
+//   for (
+//     std::pair <int, S_msrStaff> thePair : fCurrentPart->getPartStavesMap ()
+//   ) {
+//     int        staffNumber = thePair.first;
+//     S_msrStaff staff = thePair.second;
+//
+//     // register the staff
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceStaves ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         ">>> Part \"" <<
+//         part->getPartName () <<
+//         "\": registering staff " << staff <<
+//         "in fCurrentPartStavesMap under staffNumber " << staffNumber <<
+//         ", line " << staff->getInputLineNumber ();
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//     try {
+//       fCurrentPartStavesMapPtr->at (staffNumber) = staff;
+//     } // try
+//
+//     catch (std::out_of_range& e) {
+//       mfDisplayException (e, gOutput);
+//
+//       std::stringstream ss;
+//
+//       ss <<
+//         "staffNumber index " <<
+//         staffNumber <<
+//         " in not present in fCurrentPartStavesMap";
+//
+//       mxsr2msrError (
+//         gServiceRunData->getInputSourceName (),
+//         part->getInputLineNumber (),
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+//     catch (std::exception& e) {
+//       mfDisplayException (e, gOutput);
+//     }
+//   } // for
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceStaves ()) {
+//     displayCurrentPartStavesMap ();
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+// }
 
-
-  // reserve room for enough elements // index 0 is not used
-  fCurrentPartStavesVector.reserve (
-    fCurrentPart->getPartStavesMap ().size () + 1);
-
-  // populate the part staves vector
-  for (
-    std::pair <int, S_msrStaff> thePair : fCurrentPart->getPartStavesMap ()
-  ) {
-    int        staffNumber = thePair.first;
-    S_msrStaff staff = thePair.second;
-
-    // register the staff
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceStaves ()) {
-      std::stringstream ss;
-
-      ss <<
-        ">>> Part \"" <<
-        part->getPartName () <<
-        "\" registering staff " << staff <<
-        "in fCurrentPartStavesVector under staffNumber " << staffNumber <<
-        ", line " << staff->getInputLineNumber ();
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    fCurrentPartStavesVector [staffNumber] = staff;
-  } // for
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
-    displayCurrentPartStavesVector ();
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
-
-void mxsr2msrSkeletonPopulator::displayCurrentPartStavesVector () const
+void mxsr2msrSkeletonPopulator::displayCurrentPartStavesMap () const
 {
   gLog <<
-    ">>> fCurrentPartStavesVector contents:" <<
+    ">>> fCurrentPartStavesMap contents:" <<
     std::endl;
 
-  for (S_msrStaff staff : fCurrentPartStavesVector) {
-    int staffNumber = staff->getStaffNumber ();
+  for (std::pair <int, S_msrStaff> thePair : *fCurrentPartStavesMapPtr) {
+    S_msrStaff staff = thePair.second;
+    int        staffNumber = staff->getStaffNumber ();
 
     gLog <<
       staffNumber <<
@@ -1409,9 +1428,34 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
 #endif // MF_TRACE_IS_ENABLED
 
   // fetch the staff from current part
-  S_msrStaff
+  S_msrStaff staff;
+  try {
     staff =
-      fCurrentPartStavesVector [staffNumber];
+      fCurrentPartStavesMapPtr->at (staffNumber);
+  } // try
+
+  catch (std::out_of_range& e) {
+    mfDisplayException (e, gOutput);
+
+    std::stringstream ss;
+
+    ss <<
+      "staffNumber index " <<
+      staffNumber <<
+      " in not present in fCurrentPartStavesMap";
+
+    mxsr2msrError (
+      gServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+  catch (mxsr2msrException& e) {
+    mfDisplayException (e, gOutput);
+  }
+  catch (std::exception& e) {
+    mfDisplayException (e, gOutput);
+  }
 
   // fetch the first voice from the staff
   S_msrVoice
@@ -3806,12 +3850,14 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
 #endif
 
   // populate the staves vector from the current part
-  populateCurrentPartStavesVectorFromPart (fCurrentPart);
+//   populateCurrentPartStavesMapFromPart (fCurrentPart);
+  fCurrentPartStavesMapPtr =
+    fCurrentPart->getPartStavesMapPtr ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoicesBasics ()) {
     // display the stave vectors
-    displayCurrentPartStavesVector ();
+    displayCurrentPartStavesMap ();
   }
 #endif
 
@@ -4502,9 +4548,31 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
         clef);
   }
   else {
-    S_msrStaff
+    S_msrStaff staff;
+    try {
       staff =
-        fCurrentPartStavesVector [fCurrentClefStaffNumber]; // JMI 0.9.72 SEESEESEE
+        fCurrentPartStavesMapPtr->at (fCurrentClefStaffNumber); // JMI 0.9.73
+    } // try
+
+    catch (std::out_of_range& e) {
+      mfDisplayException (e, gOutput);
+
+      std::stringstream ss;
+
+      ss <<
+        "staffNumber index " <<
+        fCurrentClefStaffNumber <<
+        " in not present in fCurrentPartStavesMap";
+
+      mxsr2msrError (
+        gServiceRunData->getInputSourceName (),
+        elt->getInputLineNumber (),
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+    catch (std::exception& e) {
+      mfDisplayException (e, gOutput);
+    }
 
     staff->
       appendClefToStaff (
@@ -4809,10 +4877,10 @@ If the cancel attribute is
 
   try {
     // indices start at 0
-    item = fCurrentHumdrumScotKeyItemsVector [number - 1];
+    item = fCurrentHumdrumScotKeyItemsVector.at (number - 1);
   } // try
 
-  catch ( int e) {
+  catch (int e) {
     std::stringstream ss;
 
     ss <<
@@ -4908,9 +4976,31 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_key& elt)
         key);
 
   else {
-    S_msrStaff
+    S_msrStaff staff;
+    try {
       staff =
-        fCurrentPartStavesVector [fCurrentKeyStaffNumber];
+        fCurrentPartStavesMapPtr->at (fCurrentKeyStaffNumber);
+    } // try
+
+    catch (std::out_of_range& e) {
+      mfDisplayException (e, gOutput);
+
+      std::stringstream ss;
+
+      ss <<
+        "staffNumber index " <<
+        fCurrentKeyStaffNumber <<
+        " in not present in fCurrentPartStavesMap";
+
+      mxsr2msrError (
+        gServiceRunData->getInputSourceName (),
+        elt->getInputLineNumber (),
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+    catch (std::exception& e) {
+      mfDisplayException (e, gOutput);
+    }
 
     staff->
       appendKeyToStaff (
@@ -5483,9 +5573,31 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
         fCurrentTimeSignature);
 
   else {
-    S_msrStaff
+    S_msrStaff staff;
+    try {
       staff =
-        fCurrentPartStavesVector [fCurrentTimeStaffNumber];
+        fCurrentPartStavesMapPtr->at (fCurrentTimeStaffNumber);
+    } // try
+
+    catch (std::out_of_range& e) {
+      mfDisplayException (e, gOutput);
+
+      std::stringstream ss;
+
+      ss <<
+        "staffNumber index " <<
+        fCurrentTimeStaffNumber <<
+        " in not present in fCurrentPartStavesMap";
+
+      mxsr2msrError (
+        gServiceRunData->getInputSourceName (),
+        elt->getInputLineNumber (),
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+    catch (std::exception& e) {
+      mfDisplayException (e, gOutput);
+    }
 
     staff->
       appendTimeSignatureToStaff (
@@ -5874,9 +5986,31 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
       appendTranspositionToPart (transposition);
 
   else {
-    S_msrStaff
+    S_msrStaff staff;
+    try {
       staff =
-        fCurrentPartStavesVector [fCurrentTransposeStaffNumber];
+        fCurrentPartStavesMapPtr->at (fCurrentTransposeStaffNumber);
+    } // try
+
+    catch (std::out_of_range& e) {
+      mfDisplayException (e, gOutput);
+
+      std::stringstream ss;
+
+      ss <<
+        "staffNumber index " <<
+        fCurrentTransposeStaffNumber <<
+        " in not present in fCurrentPartStavesMap";
+
+      mxsr2msrError (
+        gServiceRunData->getInputSourceName (),
+        elt->getInputLineNumber (),
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+    catch (std::exception& e) {
+      mfDisplayException (e, gOutput);
+    }
 
     staff->
       appendTranspositionToStaff (transposition);
@@ -8163,7 +8297,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
       {
         mfDottedNotesDuration
           beatUnits =
-            fCurrentMetronomeBeatUnitsVector [0];
+           fCurrentMetronomeBeatUnitsVector.at (0);
 
         fCurrentMetronomeTempo =
           msrTempo::createTempoPerMinute (
@@ -8179,13 +8313,13 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
       {
         mfDottedNotesDuration
           beatUnits =
-            fCurrentMetronomeBeatUnitsVector [0];
+           fCurrentMetronomeBeatUnitsVector.at (0);
 
         fCurrentMetronomeTempo =
           msrTempo::createTempoBeatUnitEquivalent (
             elt->getInputLineNumber (),
             beatUnits,
-            fCurrentMetronomeBeatUnitsVector [1],
+            fCurrentMetronomeBeatUnitsVector.at (1),
             fCurrentMetronomeParenthesedKind,
             fCurrentDirectionPlacementKind);
       }
@@ -8347,9 +8481,31 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
-    S_msrStaff
+    S_msrStaff staff;
+    try {
       staff = // fCurrentStaff ??? JMI 0.9.67
-        fCurrentPartStavesVector [fCurrentRecipientStaffNumber];
+        fCurrentPartStavesMapPtr->at (fCurrentRecipientStaffNumber);
+    } // try
+
+    catch (std::out_of_range& e) {
+      mfDisplayException (e, gOutput);
+
+      std::stringstream ss;
+
+      ss <<
+        "staffNumber index " <<
+        fCurrentRecipientStaffNumber <<
+        " in not present in fCurrentPartStavesMap";
+
+      mxsr2msrError (
+        gServiceRunData->getInputSourceName (),
+        elt->getInputLineNumber (),
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+    catch (std::exception& e) {
+      mfDisplayException (e, gOutput);
+    }
 
     std::stringstream ss;
 
@@ -8821,9 +8977,34 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_tuning& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // fetch relevant staff
-  S_msrStaff
+  S_msrStaff staff;
+  try {
     staff =
-      fCurrentPartStavesVector [fStaffDetailsStaffNumber];
+      fCurrentPartStavesMapPtr->at (fStaffDetailsStaffNumber);
+  } // try
+
+  catch (std::out_of_range& e) {
+    mfDisplayException (e, gOutput);
+
+    std::stringstream ss;
+
+    ss <<
+        "staffNumber index " <<
+        fStaffDetailsStaffNumber <<
+        " in not present in fCurrentPartStavesMap";
+
+    mxsr2msrError (
+      gServiceRunData->getInputSourceName (),
+      elt->getInputLineNumber (),
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+  catch (mxsr2msrException& e) {
+    mfDisplayException (e, gOutput);
+  }
+  catch (std::exception& e) {
+    mfDisplayException (e, gOutput);
+  }
 
   msrQuarterTonesPitchKind
     quarterTonesPitchKind =
@@ -23367,22 +23548,65 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     // fetch the current note's staff
-    S_msrStaff
+    S_msrStaff takeOffStaff;
+    try {
       takeOffStaff =
-
 #ifdef MF_USE_WRAPPED_TYPES
-        fCurrentPartStavesVector [takeOffStaffNumber.getBareValue ()],
+        fCurrentPartStavesMapPtr->at (takeOffStaffNumber.getBareValue ());
 #else
-        fCurrentPartStavesVector [takeOffStaffNumber],
+        fCurrentPartStavesMapPtr->at (takeOffStaffNumber);
 #endif // MF_USE_WRAPPED_TYPES
+    } // try
 
+    catch (std::out_of_range& e) {
+      mfDisplayException (e, gOutput);
+
+      std::stringstream ss;
+
+      ss <<
+        "staffNumber index " <<
+        takeOffStaffNumber <<
+        " in not present in fCurrentPartStavesMap";
+
+      mxsr2msrError (
+        gServiceRunData->getInputSourceName (),
+       inputLineNumber,
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+    catch (std::exception& e) {
+      mfDisplayException (e, gOutput);
+    }
+
+    S_msrStaff landingStaff;
+    try {
       landingStaff =
-
 #ifdef MF_USE_WRAPPED_TYPES
-        fCurrentPartStavesVector [landingStaffNumber.getBareValue ()]; // JMI 0.9.72
+        fCurrentPartStavesMapPtr->at (landingStaffNumber.getBareValue ()); // JMI 0.9.72
 #else
-        fCurrentPartStavesVector [landingStaffNumber]; // JMI 0.9.72
+        fCurrentPartStavesMapPtr->at (landingStaffNumber); // JMI 0.9.72
 #endif // MF_USE_WRAPPED_TYPES
+    } // try
+
+    catch (std::out_of_range& e) {
+      mfDisplayException (e, gOutput);
+
+      std::stringstream ss;
+
+      ss <<
+        "staffNumber index " <<
+        landingStaffNumber <<
+        " in not present in fCurrentPartStavesMap";
+
+      mxsr2msrError (
+        gServiceRunData->getInputSourceName (),
+       inputLineNumber,
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+    catch (std::exception& e) {
+      mfDisplayException (e, gOutput);
+    }
 
     // create the voice staff change
     S_msrVoiceStaffChange
@@ -28993,9 +29217,31 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_details& elt)
         fCurrentStaffDetails);
 
   else {
-    S_msrStaff
+    S_msrStaff staff;
+    try {
       staff =
-        fCurrentPartStavesVector [fStaffDetailsStaffNumber];
+        fCurrentPartStavesMapPtr->at (fStaffDetailsStaffNumber);
+    } // try
+
+    catch (std::out_of_range& e) {
+      mfDisplayException (e, gOutput);
+
+      std::stringstream ss;
+
+      ss <<
+        "staffNumber index " <<
+        fStaffDetailsStaffNumber <<
+        " in not present in fCurrentPartStavesMap";
+
+      mxsr2msrError (
+        gServiceRunData->getInputSourceName (),
+        elt->getInputLineNumber (),
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+    catch (std::exception& e) {
+      mfDisplayException (e, gOutput);
+    }
 
     staff->
       appendStaffDetailsToStaff (

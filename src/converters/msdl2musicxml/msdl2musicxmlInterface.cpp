@@ -153,11 +153,11 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
   } // try
 
-  catch ( msdl2musicxmlException& e) {
+  catch (msdl2musicxmlException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -191,11 +191,11 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
   } // try
 
-  catch ( msr2msrException& e) {
+  catch (msr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -215,11 +215,11 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         mfTimingItemKind::kMandatory);
   } // try
 
-  catch ( msr2mxsrException& e) {
+  catch (msr2mxsrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -241,11 +241,11 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
       "Convert the MXSR into MusicXML text");
   } // try
 
-  catch ( mxsr2musicxmlException& e) {
+  catch (mxsr2musicxmlException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -368,11 +368,11 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
     } // switch
   } // try
 
-  catch ( mfOahException& e) {
+  catch (mfOahException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

@@ -126,11 +126,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
         "Create the skeleton of the first MSR from the originalMxsr");
   } // try
 
-  catch ( mxsr2msrException& e) {
+  catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -162,11 +162,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
   } // try
 
-  catch ( mxsr2msrException& e) {
+  catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -200,11 +200,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
   } // try
 
-  catch ( mxsr2msrException& e) {
+  catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -238,11 +238,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
         mfTimingItemKind::kMandatory);
   } // try
 
-  catch ( mxsr2msrException& e) {
+  catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -264,11 +264,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       "Convert the MXSR into Guido text");
   } // try
 
-  catch ( mxsr2msrException& e) {
+  catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -415,11 +415,11 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
     } // switch
   } // try
 
-  catch ( mfOahException& e) {
+  catch (mfOahException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

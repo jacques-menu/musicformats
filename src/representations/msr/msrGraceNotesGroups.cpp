@@ -497,7 +497,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionInMeasures (
 
   voice->
     incrementCurrentVoicePosition (
-      fChordNotesVector [0]->getMeasureElementSoundingWholeNotes ());
+      fChordNotes.at (0)->getMeasureElementSoundingWholeNotes ());
 }
 */
 

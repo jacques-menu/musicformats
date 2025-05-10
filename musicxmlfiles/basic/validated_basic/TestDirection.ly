@@ -34,17 +34,15 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  
   \clef "treble"
   \key c \major
-  c'1 ^\markup { \bold "Moderato   MM 1/4=90" } ^\markup { \bold "Nr. I      Lasset die Bären erwachen" }
-}
+  \numericTimeSignature \time 4/4
+c'1 ^\markup { \bold "Moderato   MM 1/4=90" } ^\markup { \bold "Nr. I      Lasset die Bären erwachen" } }
 
 \book {
 
   \score {
     <<
-    
       
       
       

@@ -6320,7 +6320,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
 //
 //           // append it to the previous note's voice
 //           // before the note itself is appended
-//           fCurrentPartVoicesVector [fVoiceNumberToInsertInto]->
+//           fCurrentPartVoicesVector.at (fVoiceNumberToInsertInto)->
 //             appendVoiceStaffChangeToVoice (
 //               voiceStaffChange);
 //         }

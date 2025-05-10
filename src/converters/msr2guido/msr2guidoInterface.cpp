@@ -86,11 +86,11 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
         passDescription_A);
   } // try
 
-  catch ( msr2msrException& e) {
+  catch (msr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -110,11 +110,11 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
         mfTimingItemKind::kMandatory);
   } // try
 
-  catch ( msr2mxsrException& e) {
+  catch (msr2mxsrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -166,11 +166,11 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
       passDescription_C);
   } // try
 
-  catch ( mxsr2guidoException& e) {
+  catch (mxsr2guidoException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

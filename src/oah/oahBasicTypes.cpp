@@ -211,7 +211,7 @@ EXP void displayStringPairVector (
 //
 //   if (stringsVectorSize) {
 //     for (size_t i = 0; i < stringsVectorSize; ++i) {
-//       std::string str = stringsVector [i];
+//       std::string str = stringsVector.at (i);
 //
 //   #ifdef MF_TRACE_IS_ENABLED
 //       if (getTraceEarlyOptions ()) {
@@ -268,8 +268,8 @@ EXP void displayStringPairVector (
 //     const size_t fieldWidth = 2;
 //
 //     for (size_t i = 0; i < theOptionsVector.size (); ++i) {
-//       std::string optionName = theOptionsVector [i].first;
-//       std::string optionValue = theOptionsVector [i].second;
+//       std::string optionName = theOptionsVector.at (i).first;
+//       std::string optionValue = theOptionsVector.at (i).second;
 //
 //       os <<
 //         std::right << std::setw (fieldWidth) << i <<
@@ -5772,7 +5772,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
 
       for (size_t i = 0; i < argumentsNumber; ++i) {
        gLog <<
-          i << " : FII " << argumentsVector [i] << // JMIJMIJMI
+          i << " : FII " << argumentsVector.at (i) << // JMIJMIJMI
           std::endl;
       } // for
 
@@ -5865,7 +5865,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
 
       for (size_t i = 0; i < argumentsNumber; ++i) {
         gLog <<
-          i << " : FUU " << argumentsVector [i] <<
+          i << " : FUU " << argumentsVector.at (i) <<
             std::endl;
       } // for
 
@@ -5895,7 +5895,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
     case 1:
       // register intput file name
       gServiceRunData->setInputSourceName (
-        argumentsVector [0]);
+        argumentsVector.at (0));
       break;
 
     default:
@@ -5906,14 +5906,14 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
           "Several input file names are supplied to " <<
           fHandlerServiceName <<
           ", only the first one, \"" <<
-          argumentsVector [0] <<
+          argumentsVector.at (0) <<
           "\", will be used "; //JMI
 
         std::string message = ss.str ();
 
         for (size_t i = 1; i < argumentsNumber; ++i) {
           gLog <<
-            argumentsVector [i];
+            argumentsVector.at (i);
 
           if (i == argumentsNumber - 1) {
             gLog << " and ";
@@ -5930,7 +5930,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
 
         // register intput file name
         gServiceRunData->setInputSourceName (
-          argumentsVector [0]);
+          argumentsVector.at (0));
       }
       break;
   } //  switch
@@ -6019,7 +6019,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
     case 1:
       // register intput file name
       gServiceRunData->setInputSourceName (
-        argumentsVector [0]);
+        argumentsVector.at (0));
       break;
 
     default:
@@ -6116,7 +6116,7 @@ void oahHandler::checkOneArgumentAndNoOrOneInputSourceInArgumentsVector () const
 
       for (size_t i = 0; i < argumentsNumber; ++i) {
         gLog <<
-          i << " : FUU " << argumentsVector [i] <<
+          i << " : FUU " << argumentsVector.at (i) <<
             std::endl;
       } // for
 
@@ -6146,7 +6146,7 @@ void oahHandler::checkOneArgumentAndNoOrOneInputSourceInArgumentsVector () const
     case 2:
       // register intput file name
       gServiceRunData->setInputSourceName (
-        argumentsVector [1]);
+        argumentsVector.at (1));
       break;
 
     default:
@@ -6157,14 +6157,14 @@ void oahHandler::checkOneArgumentAndNoOrOneInputSourceInArgumentsVector () const
           "Several input file names are supplied to " <<
           fHandlerServiceName <<
           ", only the first one, \"" <<
-          argumentsVector [0] <<
+          argumentsVector.at (0) <<
           "\", will be used ";
 
         std::string message = ss.str ();
 
         for (size_t i = 1; i < argumentsNumber; ++i) {
           gLog <<
-            argumentsVector [i];
+            argumentsVector.at (i);
 
           if (i == argumentsNumber - 1) {
             gLog << " and ";
@@ -6181,13 +6181,13 @@ void oahHandler::checkOneArgumentAndNoOrOneInputSourceInArgumentsVector () const
 
         // register intput file name
         gServiceRunData->setInputSourceName (
-          argumentsVector [0]);
+          argumentsVector.at (0));
       }
       break;
   } //  switch
 
   // get stringMatcher expression
-  std::string stringMatcherExpression = argumentsVector [0];
+  std::string stringMatcherExpression = argumentsVector.at (0);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -9640,9 +9640,9 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
 //   if (optionsVector.size ()) {
 //     for (size_t i = 0; i < optionsVector.size (); ++i) {
 //         std::string optionName =
-//           optionsVector [i].getOptionName ();
+//           optionsVector.at (i).getOptionName ();
 //         std::string optionValue =
-//           optionsVector [i].getOptionValue ();
+//           optionsVector.at (i).getOptionValue ();
 //
 //       handleOptionNameAndValueAtTopOahLevel (
 //         optionName,
@@ -10955,9 +10955,9 @@ void oahHandler::handleOptionNameCommon (
 //   if (optionsVector.size ()) {
 //     for (size_t i = 0; i < optionsVector.size (); ++i) {
 //       std::string optionName =
-//         optionsVector [i].getOptionName ();
+//         optionsVector.at (i).getOptionName ();
 //       std::string optionValue =
-//         optionsVector [i].getOptionValue ();
+//         optionsVector.at (i).getOptionValue ();
 //
 //       Bool   argumentIsAnOption;
 //       std::string argumentWithoutDash;
@@ -11046,7 +11046,7 @@ void oahHandler::handleOptionNameCommon (
 //     case 1:
 //       {
 //         std::string argument =
-//           optionArgumentsVector [0];
+//           optionArgumentsVector.at (0);
 //         if (gEarlyOptions.getTraceEarlyOptions ()) {
 //           gLog <<
 //             serviceName <<

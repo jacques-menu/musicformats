@@ -430,7 +430,7 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
 //     for (size_t i = 0; i < otherSliceSize; ++i) {
 //       S_msrMeasure
 //         otherMeasure =
-//           otherMeasuresVector [i];
+//           otherMeasuresVector.at (i);
 //
 //       fSliceMeasuresVector.push_back (otherMeasure);
 //     } // for
@@ -1324,7 +1324,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
         for (size_t i = 0; i < slicesSequenceSize; ++i) {
           S_msrMeasuresSlice
             currentSlice =
-              fMeasuresSlicesVector [i];
+              fMeasuresSlicesVector.at (i);
 
           // create the result slice
           S_msrMeasuresSlice
@@ -1348,7 +1348,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
           resultSlice->
             appendSliceMeasuresFrom (
 //               inputLineNumber,
-              otherMeasuresSlicesVector [i]);
+              otherMeasuresSlicesVector.at (i));
         } // for
       }
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED

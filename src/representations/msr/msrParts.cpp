@@ -316,7 +316,7 @@ void msrPart::registerStaffInPart (
   fPartStavesMap [staffNumber] = staff;
 
   // register staff in the staves and voices bidimensional vector
-//   fPartStavesAndVoicesVector [staffNumber] = staff;
+//   fPartStavesAndVoicesVector.at (staffNumber) = staff;
 
   // register staff in adhoc staves lists
   switch (staff->getStaffKind ()) {
@@ -1095,7 +1095,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    fPartMeasuresWholeNotesVector [index] =
+    fPartMeasuresWholeNotesVector.at (index) =
       wholeNotes;
   }
 
@@ -3187,10 +3187,10 @@ void msrPart::displayPartStavesMap (
 //   for (int staffIndex = 0; staffIndex < fPartStavesAndVoicesVector.size (); ++staffIndex) {
 //     const std::vector <S_msrVoice>&
 //       staffVoicesVector =
-//         fPartStavesAndVoicesVector [staffIndex];
+//         fPartStavesAndVoicesVector.at (staffIndex);
 //
 //     for (int voiceIndex = 0; voiceIndex < staffVoicesVector.size (); ++voiceIndex) {
-//       S_msrVoicevoice = staffVoicesVector [voiceIndex];
+//       S_msrVoicevoice = staffVoicesVector.at (voiceIndex);
 //
 //       gLog <<
 //         "staff " <<
@@ -3729,7 +3729,7 @@ void msrPart::printPartMeasuresWholeNotesVector (
         std::setw (3) << std::right <<
         ordinalNumber << ": " <<
         std::setw (4) <<
-        fPartMeasuresWholeNotesVector [ i ].toString () <<
+        fPartMeasuresWholeNotesVector.at (i).toString () <<
         std::endl;
     } // for
 

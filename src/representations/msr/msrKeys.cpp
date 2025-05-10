@@ -537,8 +537,8 @@ Bool msrKey::isEqualTo (S_msrKey otherKey) const
         for (size_t i = 0; i < fHumdrumScotKeyItemsVector.size (); ++i) {
           if (
             ! (
-              fHumdrumScotKeyItemsVector [i]->isEqualTo (
-                otherKey->fHumdrumScotKeyItemsVector [i])
+              fHumdrumScotKeyItemsVector.at (i)->isEqualTo (
+                otherKey->fHumdrumScotKeyItemsVector.at (i))
               )
             ) {
             return false;

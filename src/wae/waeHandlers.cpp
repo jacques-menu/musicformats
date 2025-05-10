@@ -426,10 +426,10 @@ void waeHandler::waeTraceToStreamWithoutInputLocation (
       globalCurrentPassIDKind =
         getGlobalCurrentPassIDKind ();
 
-  //   os <<
-  //     "--> earlyTraceOnlyPass:      " << earlyTraceOnlyPass << std::endl <<
-  //     "--> globalCurrentPassIDKind: " << globalCurrentPassIDKind << std::endl <<
-  //     std::endl;
+    os <<
+      "--> earlyTraceOnlyPass:      " << earlyTraceOnlyPass << std::endl <<
+      "--> globalCurrentPassIDKind: " << globalCurrentPassIDKind << std::endl <<
+      std::endl;
 
     switch (earlyTraceOnlyPass) {
       case mfPassIDKind::kMfPassID_UNKNOWN_:
@@ -502,10 +502,10 @@ void waeHandler::waeTraceToStream (
       globalCurrentPassIDKind =
         getGlobalCurrentPassIDKind ();
 
-  //   os <<
-  //     "--> earlyTraceOnlyPass:      " << earlyTraceOnlyPass << std::endl <<
-  //     "--> globalCurrentPassIDKind: " << globalCurrentPassIDKind << std::endl <<
-  //     std::endl;
+    os <<
+      "--> earlyTraceOnlyPass:      " << earlyTraceOnlyPass << std::endl <<
+      "--> globalCurrentPassIDKind: " << globalCurrentPassIDKind << std::endl <<
+      std::endl;
 
     switch (earlyTraceOnlyPass) {
       case mfPassIDKind::kMfPassID_UNKNOWN_:

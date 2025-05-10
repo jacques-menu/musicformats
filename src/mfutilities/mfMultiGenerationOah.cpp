@@ -192,9 +192,9 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 //   if (optionsVector.size ()) {
 //     for (size_t i = 0; i < optionsVector.size (); ++i) {
 //       std::string optionName =
-//         optionsVector [i].getOptionName ();
+//         optionsVector.at (i).getOptionName ();
 //       std::string optionValue =
-//         optionsVector [i].getOptionValue ();
+//         optionsVector.at (i).getOptionValue ();
 //
 //       std::string optionNameWithoutDash = optionName.substr (1);
 //

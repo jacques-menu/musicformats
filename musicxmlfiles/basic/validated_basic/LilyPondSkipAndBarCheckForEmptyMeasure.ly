@@ -37,21 +37,80 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  
   \clef "treble"
   \key c \major
-  \stemUp g'2 ~  
-  
-  g'2 \bar "||"
-  
-  
+  \numericTimeSignature \time 2/4
+  \stemUp g'2 ~  g'2 \bar "||"
+   | % 3
+  \barNumberCheck #3
   \key d \major
-  a'2 ~  
-  
+  a'2 ~   | % 4
+  \barNumberCheck #4
   a'2
   \bar "|."
-  
+   | % 1
+  \barNumberCheck #5
 }
 
 Part_POne_Staff_One_Voice_Two = \absolute {
   \language "nederlands"
+  
+  \clef "treble"
+  \key c \major
+  \numericTimeSignature \time 2/4
+  s2 \stemDown b4 c' \bar "||"
+   | % 3
+  \barNumberCheck #3
+  \key d \major
+  s2  | % 4
+  \barNumberCheck #4
+  cis'4 d'
+  \bar "|."
+   | % 5
+  \barNumberCheck #5
+}
+
+\book {
+
+  \score {
+    <<
+      
+      
+      
+      <<
+      
+        \new Staff  = "Part_POne_Staff_One"
+        \with {
+          instrumentName = "Violine"
+          shortInstrumentName = "Vl."
+        }
+        <<
+          \context Voice = "Part_POne_Staff_One_Voice_One" <<
+            \voiceOne % out of 2 regular voices
+            \Part_POne_Staff_One_Voice_One
+          >>
+          \context Voice = "Part_POne_Staff_One_Voice_Two" <<
+            \voiceTwo % out of 2 regular voices
+            \Part_POne_Staff_One_Voice_Two
+          >>
+        >>
+      
+      
+      >>
+    
+    >>
+    
+    \layout {
+      \context { \Score
+        autoBeaming = ##f % to display tuplets brackets
+      }
+      \context { \Voice
+      }
+    }
+    
+    \midi {
+      \tempo 16 = 360
+    }
+  }
+  
+}

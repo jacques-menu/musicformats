@@ -38,9 +38,9 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  
   \clef "treble"
   \key f \major
+  \numericTimeSignature \time 4/4
   \stemDown f'''8 [
   e'''16 d''' ]
   c''' [
@@ -49,8 +49,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
   e''16 d'' ]
   \stemUp c'' [
   bes' a' g' ]
-  
-  
   f'8 [
   e'16 d' ]
   c'8 [
@@ -59,8 +57,8 @@ Part_POne_Staff_One_Voice_One = \absolute {
   g'16 a' ]
   \stemDown bes' [
   c'' d'' e'' ]
-  
-  
+   | % 3
+  \barNumberCheck #3
   \break | % 1333333 \myLineBreak
   
   f''8 [
@@ -71,8 +69,8 @@ Part_POne_Staff_One_Voice_One = \absolute {
   c''' a'' c''' ]
   a'' [
   f'' a'' f'' ]
-  
-  
+   | % 4
+  \barNumberCheck #4
   c''16 [
   f'' c'' a' ]
   \stemUp c'' [
@@ -83,15 +81,16 @@ Part_POne_Staff_One_Voice_One = \absolute {
   c''' f'''8 ]
   
   \bar "|."
-  
+   | % 1
+  \barNumberCheck #5
 }
 
 Part_POne_Staff_Two_Voice_Five = \absolute {
   \language "nederlands"
   
-  
   \clef "bass"
   \key f \major
+  \numericTimeSignature \time 4/4
   \stemUp f,,8 [
   g,,16 a,, ]
   bes,, [
@@ -100,8 +99,6 @@ Part_POne_Staff_Two_Voice_Five = \absolute {
   g,16 a, ]
   bes, [
   c d e ]
-  
-  
   \stemDown f8 [
   g16 a ]
   bes8 [
@@ -110,8 +107,8 @@ Part_POne_Staff_Two_Voice_Five = \absolute {
   e16 d ]
   \stemUp c [
   bes, a, g, ]
-  
-  
+   | % 3
+  \barNumberCheck #3
   \break | % 1333333 \myLineBreak
   
   f,8 [
@@ -122,8 +119,8 @@ Part_POne_Staff_Two_Voice_Five = \absolute {
   a,, c, a,, ]
   c, [
   f, c, f, ]
-  
-  
+   | % 4
+  \barNumberCheck #4
   a,16 [
   f, a, c ]
   a, [
@@ -134,14 +131,14 @@ Part_POne_Staff_Two_Voice_Five = \absolute {
   c, f,,8 ]
   
   \bar "|."
-  
+   | % 5
+  \barNumberCheck #5
 }
 
 \book {
 
   \score {
     <<
-    
       
       
       

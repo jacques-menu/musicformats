@@ -4370,7 +4370,7 @@ void msr2mxsrTranslator::visitStart (S_msrTimeSignature& elt)
 
             S_msrTimeSignatureItem
               timeSignatureItem =
-                timeSignatureItemsVector [0]; // the only element;
+                timeSignatureItemsVector.at (0); // the only element;
 
             // fetch the time signature item beat numbers vector
             const std::vector <int>&
@@ -4381,7 +4381,7 @@ void msr2mxsrTranslator::visitStart (S_msrTimeSignature& elt)
             fTimeElement->push (
               createMxmlIntegerElement (
                 k_beats,
-                beatsNumbersVector [0])); // the only element
+                beatsNumbersVector.at (0))); // the only element
             fTimeElement->push (
               createMxmlIntegerElement (
                 k_beat_type,
@@ -11591,7 +11591,7 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
 
         S_msrTimeSignatureItem
           timeSignatureItem =
-            timeSignatureItemsVector [0]; // the only element;
+            timeSignatureItemsVector.at (0); // the only element;
 
         // fetch the time signature item beat numbers vector
         const std::vector <int>&
@@ -11610,7 +11610,7 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
 
         fOutputStream <<
           "\\time " <<
-          beatsNumbersVector [0] << // the only element
+          beatsNumbersVector.at (0) << // the only element
           '/' <<
           timeSignatureItem->getTimeSignatureBeatValue () <<
           std::endl;
@@ -11629,7 +11629,7 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
         for (int i = 0; i < timesItemsNumber; ++i) {
           S_msrTimeSignatureItem
             timeSignatureItem =
-              timeSignatureItemsVector [i];
+              timeSignatureItemsVector.at (i);
 
           // fetch the time signature item beat numbers vector
           const std::vector <int>&
@@ -11647,7 +11647,7 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
           // then generate all beats numbers in the vector
           for (int j = 0; j < beatsNumbersNumber; ++j) {
             fOutputStream <<
-              beatsNumbersVector [j] <<
+              beatsNumbersVector.at (j) <<
               ' ';
           } // for
 

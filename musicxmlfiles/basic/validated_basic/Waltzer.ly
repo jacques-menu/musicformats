@@ -34,17 +34,15 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  
   \clef "treble"
   \key c \major
-  c'2.
-}
+  \numericTimeSignature \time 3/4
+c'2. }
 
 \book {
 
   \score {
     <<
-    
       
       
       

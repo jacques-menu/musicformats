@@ -3609,7 +3609,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
     {
       // get the chord's first note
       S_msrNote
-        chordFirstNote = chordNotesVector [0];
+        chordFirstNote =chordNotesVector.at (0);
 
       // is chordFirstNote the shortest one in this voice?
       this->
@@ -3621,7 +3621,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
       // get the chord's last note
       S_msrNote
         chordLastNote =
-          chordNotesVector [chordNotesVectorSize - 1];
+          chordNotesVector.at (chordNotesVectorSize - 1);
 
 /* JMI
       // is chordLastNote the shortest one in this voice?

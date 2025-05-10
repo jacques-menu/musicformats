@@ -17917,7 +17917,7 @@ void lpsr2lilypondTranslator::generateRegularTimeSignature (
 
       S_msrTimeSignatureItem
         timeSignatureItem =
-          timeSignatureItemsVector [0]; // the only element;
+          timeSignatureItemsVector.at (0); // the only element;
 
       // fetch the time signature item beat numbers vector
       const std::vector <int>&
@@ -17939,7 +17939,7 @@ void lpsr2lilypondTranslator::generateRegularTimeSignature (
 
       fLilypondCodeStream <<
         "\\time " <<
-        beatsNumbersVector [0] << // the only element
+        beatsNumbersVector.at (0) << // the only element
         '/' <<
         timeSignatureItem->getTimeSignatureBeatValue ();
     }
@@ -17957,7 +17957,7 @@ void lpsr2lilypondTranslator::generateRegularTimeSignature (
       for (int i = 0; i < timesItemsNumber; ++i) {
         S_msrTimeSignatureItem
           timeSignatureItem =
-            timeSignatureItemsVector [i];
+            timeSignatureItemsVector.at (i);
 
         // fetch the time signature item beat numbers vector
         const std::vector <int>&
@@ -17975,7 +17975,7 @@ void lpsr2lilypondTranslator::generateRegularTimeSignature (
         // then generate all beats numbers in the vector
         for (int j = 0; j < beatsNumbersNumber; ++j) {
           fLilypondCodeStream <<
-            beatsNumbersVector [j] <<
+            beatsNumbersVector.at (j) <<
             cLilyPondSpace;
         } // for
 
@@ -25126,7 +25126,7 @@ void lpsr2lilypondTranslator::generateCodeAfterChordEnd (
   switch (gGlobalLpsr2lilypondOahGroup->fetchOctaveEntryVariableValue ()) {
     case msrOctaveEntryKind::kOctaveEntryRelative:
       fCurrentOctaveEntryReference =
-        chordNotesVector [0];
+       chordNotesVector.at (0);
       break;
     case msrOctaveEntryKind::kOctaveEntryAbsolute:
       break;

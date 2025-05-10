@@ -210,9 +210,9 @@ Bool msrTimeSignatureItem::isEqualTo (
   for (size_t i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
     if (
       ! (
-        fTimeSignatureBeatsNumbersVector [i]
+        fTimeSignatureBeatsNumbersVector.at (i)
           ==
-        otherTimeSignatureItem->fTimeSignatureBeatsNumbersVector [i]
+        otherTimeSignatureItem->fTimeSignatureBeatsNumbersVector.at (i)
         )
       ) {
       return false;
@@ -268,7 +268,7 @@ int msrTimeSignatureItem::getTimeSignatureBeatsNumber () const
 
   for (size_t i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
     result +=
-      fTimeSignatureBeatsNumbersVector [i];
+      fTimeSignatureBeatsNumbersVector.at (i);
     } // for
 
   return result;
@@ -374,7 +374,7 @@ std::string msrTimeSignatureItem::asString () const
 
     case 1:
       ss <<
-        fTimeSignatureBeatsNumbersVector [0] << '/' << fTimeSignatureBeatValue;
+       fTimeSignatureBeatsNumbersVector.at (0) << '/' << fTimeSignatureBeatValue;
       break;
 
     default:
@@ -383,7 +383,7 @@ std::string msrTimeSignatureItem::asString () const
 
       for (size_t i = 0; i < vectorSize; ++i) {
         ss <<
-          fTimeSignatureBeatsNumbersVector [i];
+          fTimeSignatureBeatsNumbersVector.at (i);
 
         if (i != vectorSize - 1) {
           ss <<
@@ -427,7 +427,7 @@ std::string msrTimeSignatureItem::asString () const
 //
 //     case 1:
 //       ss <<
-//         fTimeSignatureBeatsNumbersVector [0] << '/' << fTimeSignatureBeatValue;
+//        fTimeSignatureBeatsNumbersVector.at (0) << '/' << fTimeSignatureBeatValue;
 //       break;
 //
 //     default:
@@ -436,7 +436,7 @@ std::string msrTimeSignatureItem::asString () const
 //
 //       for (size_t i = 0; i < vectorSize; ++i) {
 //         ss <<
-//           fTimeSignatureBeatsNumbersVector [i];
+//           fTimeSignatureBeatsNumbersVector.at (i);
 //
 //         if (i != vectorSize - 1) {
 //           ss <<
@@ -534,8 +534,8 @@ Bool msrTimeSignature::isEqualTo (S_msrTimeSignature otherTimeSignature) const
   for (size_t i = 0; i < fTimeSignatureItemsVector.size (); ++i) {
     if (
       ! (
-        fTimeSignatureItemsVector [i]->isEqualTo (
-          otherTimeSignature->fTimeSignatureItemsVector [i])
+        fTimeSignatureItemsVector.at (i)->isEqualTo (
+          otherTimeSignature->fTimeSignatureItemsVector.at (i))
         )
       ) {
       return false;
@@ -1120,8 +1120,8 @@ mfWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
           // start with first item
           result =
             mfWholeNotes (
-              fTimeSignatureItemsVector [0]->getTimeSignatureBeatsNumber (),
-              fTimeSignatureItemsVector [0]->getTimeSignatureBeatValue ());
+              fTimeSignatureItems.at (0)->getTimeSignatureBeatsNumber (),
+              fTimeSignatureItems.at (0)->getTimeSignatureBeatValue ());
       */
 
       /* JMI
@@ -1138,8 +1138,8 @@ mfWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
           for (size_t i = 0; i < vectorSize; ++i) {
             result +=
               mfWholeNotes (
-                fTimeSignatureItemsVector [i]->getTimeSignatureBeatsNumber (),
-                fTimeSignatureItemsVector [i]->getTimeSignatureBeatValue ());
+                fTimeSignatureItemsVector.at (i)->getTimeSignatureBeatsNumber (),
+                fTimeSignatureItemsVector.at (i)->getTimeSignatureBeatValue ());
 
       /* JMI
             gLog <<

@@ -217,7 +217,7 @@ class   XMLConverter {
       else
         $("#lognav").click();
     }
-    catch ( {
+    catch ({
       console.error ("std::exception raised while converting " + path);
       $("#lognav").click();
     }

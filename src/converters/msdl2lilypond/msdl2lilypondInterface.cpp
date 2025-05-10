@@ -154,11 +154,11 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
   } // try
 
-  catch ( msdl2msrException& e) {
+  catch (msdl2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -195,11 +195,11 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         createMsdl2lilypondConverterComponent ());
   } // try
 
-  catch ( msr2lpsrException& e) {
+  catch (msr2lpsrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -498,11 +498,11 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     } // switch
   } // try
 
-  catch ( mfOahException& e) {
+  catch (mfOahException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

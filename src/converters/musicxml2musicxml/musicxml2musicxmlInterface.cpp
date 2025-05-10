@@ -136,11 +136,11 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
         gLanguage->convertTheMXSRIntoAnMSRSkeleton ());
   } // try
 
-  catch ( mxsr2msrException& e) {
+  catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -171,11 +171,11 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
       "Populate the MSR skeletonfrom MusicXML data");
   } // try
 
-  catch ( mxsr2msrException& e) {
+  catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -209,11 +209,11 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
   } // try
 
-  catch ( msr2msrException& e) {
+  catch (msr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -247,11 +247,11 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
         mfTimingItemKind::kMandatory);
   } // try
 
-  catch ( msr2mxsrException& e) {
+  catch (msr2mxsrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -273,11 +273,11 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
       "Convert the MXSR into MusicXML text");
   } // try
 
-  catch ( mxsr2musicxmlException& e) {
+  catch (mxsr2musicxmlException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -424,11 +424,11 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithOptionsAndArguments (
     } // switch
   } // try
 
-  catch ( mfOahException& e) {
+  catch (mfOahException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch ( std::exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

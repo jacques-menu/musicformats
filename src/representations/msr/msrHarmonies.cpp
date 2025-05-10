@@ -4027,7 +4027,7 @@ msrSemiTonesPitchKind msrHarmonyContents::bassSemiTonesPitchKindForHarmonyInvers
   }
 
   return
-    fHarmonyElementsVector [inversionNumber]->
+    fHarmonyElementsVector.at (inversionNumber)->
       getSemiTonesPitchKind ();
 }
 
@@ -4238,7 +4238,7 @@ void msrHarmonyContents::print (std::ostream& os) const
     for (size_t i = 0; i < fHarmonyElementsVector.size (); ++i) {
       S_msrSemiTonesPitchAndOctave
         harmonyElement =
-          fHarmonyElementsVector [i];
+          fHarmonyElementsVector.at (i);
 
       os <<
         harmonyElement <<

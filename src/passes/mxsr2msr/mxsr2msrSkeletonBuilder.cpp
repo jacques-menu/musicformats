@@ -358,7 +358,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsVector (
 
   for (size_t i = 0; i < fPartGroupsVector.size (); ++i) {
     S_mxsrPartGroup
-      partGroup = fPartGroupsVector [i];
+      partGroup = fPartGroupsVector.at (i);
 
     S_msrPartGroup
       theMsrPartGroup =
@@ -398,7 +398,7 @@ void mxsr2msrSkeletonBuilder::displayStartedPartGroupsVector (
 	) {
 		S_mxsrPartGroupsList
 			startedMxsrPartGroupsList =
-				fStartedPartGroupsListsVector [partGroupSequentialNumber];
+				fStartedPartGroupsListsVector.at (partGroupSequentialNumber);
 
 		gLog <<
 			partGroupSequentialNumber<< ':' <<
@@ -436,7 +436,7 @@ void mxsr2msrSkeletonBuilder::displayStoppedPartGroupsVector (
 	) {
 		S_mxsrPartGroupsList
 			StoppedPartGroupssList =
-				fStoppedPartGroupsListsVector [partGroupSequentialNumber];
+				fStoppedPartGroupsListsVector.at (partGroupSequentialNumber);
 
 		gLog <<
 			partGroupSequentialNumber<< ':' <<
@@ -472,7 +472,7 @@ void mxsr2msrSkeletonBuilder::displayPartsVector (
 
     for (size_t i = 0; i < fPartsVector.size (); ++i) {
       S_msrPart
-        part = fPartsVector [i];
+        part = fPartsVector.at (i);
 
       gLog <<
         i << ": " <<
@@ -842,8 +842,8 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 //   // the same identityas partGroup
 //   S_mxsrPartGroupsList
 //     stoppedPartGroupsList =
-//       fStoppedPartGroupsListsVector [
-//         fCurrentPartGroupSequentialNumber];
+//       fStoppedPartGroupsListsVector.at (
+//         fCurrentPartGroupSequentialNumber);
 //
 // 	// append partGroup to the stoppedPartGroupsList
 // 	stoppedPartGroupsList->appendPartGroup (
@@ -1354,7 +1354,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsStartAtIdentity (
 	if (! fStartedPartGroupsListsVector.empty ()) {
 		S_mxsrPartGroupsList
 			startedMxsrPartGroupsList =
-				fStartedPartGroupsListsVector [partGroupSequentialNumber];
+				fStartedPartGroupsListsVector.at (partGroupSequentialNumber);
 
 		if (startedMxsrPartGroupsList->size ()) {
 			++gIndenter;
@@ -1401,7 +1401,7 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 	if (! fStoppedPartGroupsListsVector.empty ()) {
 		S_mxsrPartGroupsList
 			stoppedPartGroupsList =
-				fStoppedPartGroupsListsVector [partGroupSequentialNumber];
+				fStoppedPartGroupsListsVector.at (partGroupSequentialNumber);
 
 		if (stoppedPartGroupsList->size ()) {
 			++gIndenter;
@@ -1554,7 +1554,7 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 					for (int m = firstCommonPosision; m <= lastCommonPosision; ++m) {
 						S_msrPart
 							part =
-								fPartsVector [m];
+								fPartsVector.at (m);
 
 						ss <<
 							gTab <<
@@ -1664,7 +1664,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
       // append part to current part group, i.e. to the top of the stack
       S_msrPart
         part =
-          fPartsVector [partGroupSequentialNumber];
+          fPartsVector.at (partGroupSequentialNumber);
 
       // fetch the part group stack top
 			if (fPartGroupsStack.empty ()) {
