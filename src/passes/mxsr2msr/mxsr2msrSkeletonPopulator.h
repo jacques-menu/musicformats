@@ -2083,7 +2083,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     Bool                      fLastHandledNoteInVoiceHasLyrics;
 
-    void                      handleLyricsForCurrentNoteAfterItHasBeenHandled ();
+    void                      handleLyricsAfterCurrentNoteHasBeenHandled ();
 
 		void											displayGatheredLyricInformations (
 																const std::string& context) const;

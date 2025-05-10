@@ -56,7 +56,7 @@ void mfAssert (
     gLog <<
       messageIfFalse <<
       " - quitting." <<
-      std::endl;
+      std::endl << std::endl;
 
 #ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
@@ -117,7 +117,7 @@ void mfAssertWithInputLocation (
     gLog <<
       messageIfFalse <<
       " - quitting." <<
-      std::endl;
+      std::endl << std::endl;
 
 #ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();

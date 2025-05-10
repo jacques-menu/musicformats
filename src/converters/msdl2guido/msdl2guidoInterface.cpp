@@ -144,7 +144,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
 
       err <<
         message <<
-        std::endl;
+        std::endl << std::endl;
 
       throw msdlException (message);
     }

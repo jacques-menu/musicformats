@@ -536,9 +536,8 @@ void mxsr2msrSkeletonPopulator::displayGatheredNoteInformations (
 	const std::string& context) const
 {
 	gLog <<
-		"===> " <<
+		"===> GATHERED NOTE INFORMATIONS - " <<
 		context <<
-		", GATHERED NOTE INFORMATIONS:" <<
 		std::endl;
 
   ++gIndenter;
@@ -691,15 +690,14 @@ void mxsr2msrSkeletonPopulator::displayGatheredNoteInformations (
     std::setw (fieldWidth) <<
     "fCurrentNoteAlpha" << ": \"" <<
     fCurrentNoteAlpha << "\"" <<
-    std::endl << std::endl;
-
-	gLog <<
-		"<=== " <<
-		context <<
-		", GATHERED NOTE INFORMATIONS:" <<
-    std::endl << std::endl;
+    std::endl;
 
   --gIndenter;
+
+	gLog <<
+		"<=== GATHERED NOTE INFORMATIONS - " <<
+		context <<
+    std::endl << std::endl;
 }
 
 void mxsr2msrSkeletonPopulator::displayGatheredTupletInformations (
@@ -10783,9 +10781,8 @@ void mxsr2msrSkeletonPopulator::displayGatheredLyricInformations (
 	const std::string& context) const
 {
 	gLog <<
-		"===> " <<
+		"===> GATHERED LYRIC INFORMATIONS - " <<
 		context <<
-		", GATHERED LYRIC INFORMATIONS:" <<
 		std::endl;
 
   ++gIndenter;
@@ -10885,10 +10882,11 @@ void mxsr2msrSkeletonPopulator::displayGatheredLyricInformations (
 
   --gIndenter;
 
-  gLog << std::endl;
 
-  displayGatheredNoteInformations (
-    "mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)");
+	gLog <<
+		"<=== GATHERED LYRIC INFORMATIONS - " <<
+		context <<
+    std::endl << std::endl;
 }
 
 void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
@@ -10969,6 +10967,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
       ", line " << inputStartLineNumber <<
       std::endl << std::endl;
 
+    displayGatheredNoteInformations (
+      "mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)");
+
     displayGatheredLyricInformations (
       "mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)");
   }
@@ -10992,22 +10993,18 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreLyrics ()) {
     // fetch the current voice, fCurrentNote has not been set/updated yet
-    S_msrVoice
-      currentNoteVoice =
-        fCurrentRecipientMsrVoice;
-
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check JMI 0.9.70
   mfAssert (
     __FILE__, __LINE__,
-    currentNoteVoice != nullptr,
-    "currentNoteVoice is null");
+    fCurrentRecipientMsrVoice != nullptr,
+    "fCurrentRecipientMsrVoice is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     // fetch stanzaNumber in the current note's voice
     S_msrStanza
       stanza =
-        currentNoteVoice->
+        fCurrentRecipientMsrVoice->
           fetchStanzaInVoice (
             inputStartLineNumber,
             fCurrentStanzaNumber,
@@ -24387,7 +24384,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
   handleStaffChangeTakeOffEventIfAny ();
 
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesBasics ()) {
     displayGatheredNoteInformations (
@@ -24585,7 +24581,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
-  // handle the lyrics for the note after the latter itself is handled if relevant
+  // handle the lyrics if relevant for the current note after the latter has been handled
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
@@ -24595,7 +24591,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // done only now because attachPendingNoteLevelElementsToNote() // JMI 0.9.67 HARMFUL
   // may append skip syllables to the notes // JMI 0.9.70
   if (! gGlobalMxsr2msrOahGroup->getIgnoreLyrics ()) {
-    handleLyricsForCurrentNoteAfterItHasBeenHandled ();
+    handleLyricsAfterCurrentNoteHasBeenHandled ();
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -26045,7 +26041,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled ()
+void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
 {
   int currentNoteInputLineNumber =
     fCurrentNote->getInputLineNumber ();
@@ -29809,7 +29805,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //       std::stringstream ss;
 //
 //       ss <<
-//         "*** ---> handleLyricsForCurrentNoteAfterItHasBeenHandled()" <<
+//         "*** ---> handleLyricsAfterCurrentNoteHasBeenHandled()" <<
 //         ", doCreateASkipSyllable: " << doCreateASkipSyllable <<
 //         std::endl;
 //

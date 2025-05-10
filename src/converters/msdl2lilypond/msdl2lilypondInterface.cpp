@@ -147,7 +147,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
       err <<
         message <<
-        std::endl;
+        std::endl << std::endl;
 
       throw msdl2msrException (message);
     }

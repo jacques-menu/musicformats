@@ -148,7 +148,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
       err <<
         message <<
-        std::endl;
+        std::endl << std::endl;
 
       throw msdl2msrException (message);
     }

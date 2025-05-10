@@ -163,12 +163,20 @@ class EXP msrSyllable : public msrElement
 
     static SMARTP<msrSyllable> create (
                             int                    inputLineNumber,
+                            msrSyllableKind        syllableKind,
+                            msrSyllableExtendKind  syllableExtendKind,
+                            const std::string&     syllableStanzaNumber,
+                            const mfWholeNotes&    syllableWholeNotes,
+                            const msrTupletFactor& syllableTupletFactor);
+
+    static SMARTP<msrSyllable> create (
+                            int                    inputLineNumber,
 //                             int                    measurePuristNumber,
                             const S_msrMeasure&    upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
                             const std::string&     syllableStanzaNumber,
-                            const mfWholeNotes&   syllableWholeNotes,
+                            const mfWholeNotes&    syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             const S_msrStanza&     syllableUpLinkToStanza);
 
@@ -177,7 +185,7 @@ class EXP msrSyllable : public msrElement
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
                             const std::string&     syllableStanzaNumber,
-                            const mfWholeNotes&   syllableWholeNotes,
+                            const mfWholeNotes&    syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             const S_msrStanza&     syllableUpLinkToStanza);
 
@@ -194,12 +202,20 @@ class EXP msrSyllable : public msrElement
 
                           msrSyllable (
                             int                    inputLineNumber,
+                            msrSyllableKind        syllableKind,
+                            msrSyllableExtendKind  syllableExtendKind,
+                            const std::string&     syllableStanzaNumber,
+                            const mfWholeNotes&    syllableWholeNotes,
+                            const msrTupletFactor& syllableTupletFactor);
+
+                          msrSyllable (
+                            int                    inputLineNumber,
 //                             int                    measurePuristNumber,
                             const S_msrMeasure&    upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
                             const std::string&     syllableStanzaNumber,
-                            const mfWholeNotes&   syllableWholeNotes,
+                            const mfWholeNotes&    syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             const S_msrStanza&     syllableUpLinkToStanza);
 
@@ -222,51 +238,65 @@ class EXP msrSyllable : public msrElement
     const S_msrStanza&    getSyllableUpLinkToStanza () const
                               { return fSyllableUpLinkToStanza; }
 
-    void                  setSyllableMeasurePuristNumber (int measurePuristNumber)
-                              { fSyllableMeasurePuristNumber = measurePuristNumber; }
-
-    int                   getSyllableMeasurePuristNumber () const
-                              { return fSyllableMeasurePuristNumber; }
-
     void                  setSyllableUpLinkToMeasure (const S_msrMeasure& measure)
                               { fSyllableUpLinkToMeasure = measure; }
 
     const S_msrMeasure&   getSyllableUpLinkToMeasure () const
                               { return fSyllableUpLinkToMeasure; }
 
+    // measure numbers
+//     void                  setSyllableMeasureNumber (
+//                             const std::string& measureNumber);
+
+    void                  setSyllableMeasurePuristNumber (int measurePuristNumber)
+                              { fSyllableMeasurePuristNumber = measurePuristNumber; }
+
+    int                   getSyllableMeasurePuristNumber () const
+                              { return fSyllableMeasurePuristNumber; }
+
     // syllable kind
+    void                  setSyllableKind (msrSyllableKind syllableKind)
+                              { fSyllableKind = syllableKind; }
+
     msrSyllableKind       getSyllableKind () const
                               { return fSyllableKind; }
+
+    // extend kind
+    void                  setSyllableExtendKind (
+                            msrSyllableExtendKind syllableExtendKind)
+                              { fSyllableExtendKind = syllableExtendKind; }
+
+    msrSyllableExtendKind getSyllableExtendKind () const
+                              { return fSyllableExtendKind; }
+
+    // stanza number
+    void                  setSyllableStanzaNumber (
+                            const std::string& stanzaNumber)
+                              { fSyllableStanzaNumber = stanzaNumber; }
+
+    const std::string&    getSyllableStanzaNumber () const
+                              { return fSyllableStanzaNumber; }
+
+    // syllable whole notes
+    void                  setSyllableWholeNotes (const mfWholeNotes& wholeNotes)
+                              { fSyllableWholeNotes = wholeNotes; }
+
+    const mfWholeNotes&   getSyllableWholeNotes () const
+                              { return fSyllableWholeNotes; }
+
+    // syllable tuplet factor
+    void                  setSyllableTupletFactor (
+                            const msrTupletFactor& tupletFactor)
+                              { fSyllableTupletFactor = tupletFactor; }
+
+    const msrTupletFactor&
+                          getSyllableTupletFactor () const
+                              { return fSyllableTupletFactor; }
 
     // syllable elements list
     const std::list <msrSyllableElement>&
                           getSyllableElementsList ()
                               { return fSyllableElementsList; }
-
-    // extend kind
-    msrSyllableExtendKind
-                          getSyllableExtendKind () const
-                              { return fSyllableExtendKind; }
-
-    // stanza number
-    std::string           getSyllableStanzaNumber () const
-                              { return fSyllableStanzaNumber; }
-
-    // syllable whole notes
-    void                  setSyllableWholeNotes (
-                            mfWholeNotes wholeNotes)
-                              { fSyllableWholeNotes = wholeNotes; }
-
-    mfWholeNotes          getSyllableWholeNotes () const
-                              { return fSyllableWholeNotes; }
-
-    // syllable tuplet factor
-    msrTupletFactor       getSyllableTupletFactor () const
-                              { return fSyllableTupletFactor; }
-
-//     // syllable measure number
-//     void                  setSyllableMeasureNumber (
-//                             const std::string& measureNumber);
 
   public:
 
@@ -330,10 +360,6 @@ class EXP msrSyllable : public msrElement
     // syllable kind
     msrSyllableKind       fSyllableKind;
 
-    // elements
-    std::list <msrSyllableElement>
-                          fSyllableElementsList;
-
     // extend kind
     msrSyllableExtendKind fSyllableExtendKind;
 
@@ -345,6 +371,10 @@ class EXP msrSyllable : public msrElement
 
     // syllable tuplet factor
     msrTupletFactor       fSyllableTupletFactor;
+
+    // elements
+    std::list <msrSyllableElement>
+                          fSyllableElementsList;
 };
 typedef SMARTP<msrSyllable> S_msrSyllable;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt);

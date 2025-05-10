@@ -146,7 +146,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 
       err <<
         message <<
-        std::endl;
+        std::endl << std::endl;
 
       throw msdl2msrException (message);
     }

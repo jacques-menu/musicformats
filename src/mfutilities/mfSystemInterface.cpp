@@ -135,7 +135,7 @@ EXP int mfExecuteCommand (
 // //       ", failed to execute command [" <<
 // //       command <<
 // //       " - quitting." <<
-// //       std::endl;
+//         std::endl << std::endl;
 // //
 // //     result = pclose (commandOutputStream);
 // //   }

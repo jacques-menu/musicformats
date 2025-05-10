@@ -11106,7 +11106,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
 
     os <<
       message <<
-      std::endl;
+      std::endl << std::endl;
 
     printIncludeFileNamesStack (os);
 

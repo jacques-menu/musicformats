@@ -306,12 +306,32 @@ std::string syllableElementsListAsShortString (
 //______________________________________________________________________________
 S_msrSyllable msrSyllable::create (
   int                    inputLineNumber,
+  msrSyllableKind        syllableKind,
+  msrSyllableExtendKind  syllableExtendKind,
+  const std::string&     syllableStanzaNumber,
+  const mfWholeNotes&    syllableWholeNotes,
+  const msrTupletFactor& syllableTupletFactor)
+{
+  msrSyllable* obj =
+    new msrSyllable (
+      inputLineNumber,
+      syllableKind,
+      syllableExtendKind,
+      syllableStanzaNumber,
+      syllableWholeNotes,
+      syllableTupletFactor);
+  assert (obj != nullptr);
+  return obj;
+}
+
+S_msrSyllable msrSyllable::create (
+  int                    inputLineNumber,
 //   int                    measurePuristNumber,
   const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
-  const mfWholeNotes&   syllableWholeNotes,
+  const mfWholeNotes&    syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
 {
@@ -335,7 +355,7 @@ S_msrSyllable msrSyllable::create (
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
-  const mfWholeNotes&   syllableWholeNotes,
+  const mfWholeNotes&    syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
 {
@@ -353,12 +373,79 @@ S_msrSyllable msrSyllable::create (
 
 msrSyllable::msrSyllable (
   int                    inputLineNumber,
+  msrSyllableKind        syllableKind,
+  msrSyllableExtendKind  syllableExtendKind,
+  const std::string&     syllableStanzaNumber,
+  const mfWholeNotes&    syllableWholeNotes,
+  const msrTupletFactor& syllableTupletFactor)
+    : msrElement (
+        inputLineNumber)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity checks
+  switch (syllableKind) {
+    case msrSyllableKind::kSyllableNone:
+    case msrSyllableKind::kSyllableSingle:
+    case msrSyllableKind::kSyllableBegin:
+    case msrSyllableKind::kSyllableMiddle:
+    case msrSyllableKind::kSyllableEnd:
+    case msrSyllableKind::kSyllableOnRestNote:
+    case msrSyllableKind::kSyllableSkipOnRestNote:
+    case msrSyllableKind::kSyllableSkipOnNonRestNote:
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+      if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
+        mfAssert ( // JMI 0.9.70 BABASSE
+          __FILE__, __LINE__,
+          syllableWholeNotes.getNumerator () > 0,
+          "syllableWholeNotes "
+            +
+          std::to_string (syllableWholeNotes.getNumerator ())
+            +
+          " is not positive");
+        }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
+      break;
+
+    case msrSyllableKind::kSyllableMeasureEnd:
+      break;
+
+    case msrSyllableKind::kSyllableLineBreak:
+      break;
+    case msrSyllableKind::kSyllablePageBreak:
+      break;
+  } // switch
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  fSyllableKind = syllableKind;
+
+  fSyllableExtendKind = syllableExtendKind;
+
+  fSyllableStanzaNumber = syllableStanzaNumber;
+
+  fSyllableWholeNotes = syllableWholeNotes;
+
+  fSyllableTupletFactor = syllableTupletFactor;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceLyrics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a syllable containing: " <<
+      asString () <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+msrSyllable::msrSyllable (
+  int                    inputLineNumber,
 //   int                    measurePuristNumber,
   const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
-  const mfWholeNotes&   syllableWholeNotes,
+  const mfWholeNotes&    syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
     : msrElement (
