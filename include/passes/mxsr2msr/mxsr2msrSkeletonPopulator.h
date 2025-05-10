@@ -2085,6 +2085,9 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      handleLyricsForCurrentNoteAfterItHasBeenHandled ();
 
+		void											displayGatheredLyricInformations (
+																const std::string& context) const;
+
 
     // harmonies handling
     // ------------------------------------------------------

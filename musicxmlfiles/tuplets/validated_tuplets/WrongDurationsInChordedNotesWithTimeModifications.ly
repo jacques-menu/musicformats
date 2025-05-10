@@ -51,22 +51,19 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 5/4 %}
   
   \clef "treble"
   \key c \major
   \numericTimeSignature \time 4/4
   
   \once\override TupletBracket.bracket-visibility = ##t
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 53 %}  \stemUp c''4 r %{ sr333 %}  8 } r4 r2
-  %{ end kMeasureKindOverFlowing, measure  %}
+  \tuplet 3/2 {  \stemUp c''4 r8 } r4 r2
 }
 
 \book {
 
   \score {
     <<
-    
       
       
       

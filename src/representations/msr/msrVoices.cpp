@@ -1754,7 +1754,8 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
     // no
 
     // create the voice last segment if needed
-    if (false && ! fVoiceLastSegment) { // JMI 0.9.73
+//     if (false && ! fVoiceLastSegment) { // JMI 0.9.73
+    if (! fVoiceLastSegment) { // JMI 0.9.73 WHY CAN IT BE NULL ???
       createNewLastSegmentForVoice (
         inputLineNumber,
         "cascadeCreateAMeasureAndAppendItInVoice() 2");

@@ -697,7 +697,7 @@ void mxsr2msrSkeletonPopulator::displayGatheredNoteInformations (
 		"<=== " <<
 		context <<
 		", GATHERED NOTE INFORMATIONS:" <<
-		std::endl;
+    std::endl << std::endl;
 
   --gIndenter;
 }
@@ -10779,6 +10779,118 @@ void mxsr2msrSkeletonPopulator::visitStart (S_extend& elt)
   // color JMI
 }
 
+void mxsr2msrSkeletonPopulator::displayGatheredLyricInformations (
+	const std::string& context) const
+{
+	gLog <<
+		"===> " <<
+		context <<
+		", GATHERED LYRIC INFORMATIONS:" <<
+		std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 48;
+
+  gLog << std::left <<
+    std::setw (fieldWidth) <<
+    "fCurrentNoteStaffNumber" << ": " <<
+    mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentSyllableElementsList" << "  " <<
+    syllableElementsListAsString (fCurrentSyllableElementsList) <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentSyllableExtendKind" << ": " <<
+    fCurrentSyllableExtendKind <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentTieKind" << ": \"" <<
+    fCurrentTieKind <<
+    "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentSlurTypeKind" << ": \"" <<
+    msrSlurTypeKindAsString (fCurrentSlurTypeKind) <<
+    "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentLigatureKind" << ": \"" <<
+    fCurrentLigatureKind <<
+    "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fOnGoingSlur" << ": " <<
+    fOnGoingSlur <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fOnGoingSlurHasStanza" << ": " <<
+    fOnGoingSlurHasStanza <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fOnGoingLigature" << ": " <<
+    fOnGoingLigature <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fOnGoingLigatureHasStanza" << ": " <<
+    fOnGoingLigatureHasStanza <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fFirstSyllableInSlurKind" << ": \"" <<
+    fFirstSyllableInSlurKind <<
+    "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fFirstSyllableInLigatureKind" << ": \"" <<
+    fFirstSyllableInLigatureKind <<
+    "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentSyllableKind" << ": \"" <<
+    fCurrentSyllableKind <<
+    "\"" <<
+    std::endl;
+  gLog << std::endl;
+
+  gLog << std::left <<
+    "fNoteTiesList:";
+  if (! fPendingTiesList.empty ()) {
+    ++gIndenter;
+    for (S_msrTie tie : fPendingTiesList) {
+      gLog << tie;
+    } // for
+    --gIndenter;
+  }
+  else {
+    gLog << "[EMPTY]" << std::endl;
+  }
+
+  --gIndenter;
+
+  gLog << std::endl;
+
+  displayGatheredNoteInformations (
+    "mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)");
+}
+
 void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 {
   int inputStartLineNumber =
@@ -10850,137 +10962,15 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyricsDetails ()) {
+  if (gTraceOahGroup->getTraceLyricsBasics ()) {
     gLog <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
       fCurrentSyllableKind <<
       ", line " << inputStartLineNumber <<
-      ", with:" <<
-      std::endl;
+      std::endl << std::endl;
 
-    ++gIndenter;
-
-    gLog <<
-      "Lyric data:" <<
-      std::endl;
-
-    {
-      ++gIndenter;
-
-      constexpr int fieldWidth = 31;
-
-      gLog << std::left <<
-        std::setw (fieldWidth) <<
-        "fCurrentNoteStaffNumber" << ": " <<
-        mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
-        std::endl <<
-
-        std::setw (fieldWidth) <<
-        "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
-        std::endl <<
-        std::setw (fieldWidth) <<
-        "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
-        std::endl <<
-
-        std::setw (fieldWidth) <<
-        "fCurrentSyllableElementsList" << "  " <<
-        syllableElementsListAsString (fCurrentSyllableElementsList) <<
-        std::endl <<
-
-        std::setw (fieldWidth) <<
-        "fCurrentSyllableExtendKind" << ": " <<
-        fCurrentSyllableExtendKind <<
-        std::endl <<
-
-        std::setw (fieldWidth) <<
-        "fCurrentNoteIsARest" << ": " <<
-        fCurrentNoteIsARest <<
-        std::endl <<
-
-        std::setw (fieldWidth) <<
-        "fCurrentRestIsAMeasureRest" << ": " <<
-        fCurrentRestIsAMeasureRest <<
-        std::endl;
-
-      gLog << std::left <<
-        "fNoteTiesList:";
-      if (! fPendingTiesList.empty ()) {
-        ++gIndenter;
-        for (S_msrTie tie : fPendingTiesList) {
-          gLog << tie;
-        } // for
-        --gIndenter;
-      }
-      else {
-        gLog << "[EMPTY]" << std::endl;
-      }
-
-      gLog << std::left <<
-        std::setw (fieldWidth) <<
-        "fCurrentTieKind" << ": \"" <<
-        fCurrentTieKind <<
-        "\"" <<
-        std::endl;
-
-      gLog << std::left <<
-        std::setw (fieldWidth) <<
-        "fCurrentSlurTypeKind" << ": \"" <<
-        msrSlurTypeKindAsString (fCurrentSlurTypeKind) <<
-        "\"" <<
-        std::endl;
-
-      gLog << std::left <<
-        std::setw (fieldWidth) <<
-        "fCurrentLigatureKind" << ": \"" <<
-        fCurrentLigatureKind <<
-        "\"" <<
-        std::endl;
-
-      gLog << std::left <<
-        std::setw (fieldWidth) <<
-        "fOnGoingSlur" << ": " <<
-        fOnGoingSlur <<
-        std::endl <<
-        std::setw (fieldWidth) <<
-        "fOnGoingSlurHasStanza" << ": " <<
-        fOnGoingSlurHasStanza <<
-        std::endl;
-
-      gLog << std::left <<
-        std::setw (fieldWidth) <<
-        "fOnGoingLigature" << ": " <<
-        fOnGoingLigature <<
-        std::endl <<
-        std::setw (fieldWidth) <<
-        "fOnGoingLigatureHasStanza" << ": " <<
-        fOnGoingLigatureHasStanza <<
-        std::endl;
-
-      gLog << std::left <<
-        std::setw (fieldWidth) <<
-        "fFirstSyllableInSlurKind" << ": \"" <<
-        fFirstSyllableInSlurKind <<
-        "\"" <<
-        std::endl;
-
-      gLog << std::left <<
-        std::setw (fieldWidth) <<
-        "fFirstSyllableInLigatureKind" << ": \"" <<
-        fFirstSyllableInLigatureKind <<
-        "\"" <<
-      std::endl;
-
-      gLog << std::left <<
-        std::setw (fieldWidth) <<
-        "fCurrentSyllableKind" << ": \"" <<
-        fCurrentSyllableKind <<
-        "\"" <<
-      std::endl;
-
-      --gIndenter;
-    }
-
-    --gIndenter;
+    displayGatheredLyricInformations (
+      "mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10992,40 +10982,11 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
       fCurrentSyllableKind <<
       ", line: " << inputStartLineNumber <<
-      ", with:" <<
       std::endl;
 
-    ++gIndenter;
-
-    gLog <<
-      "Lyric data:" <<
-      std::endl;
-
-    {
-      ++gIndenter;
-
-      constexpr int fieldWidth = 31;
-
-      gLog << std::left <<
-        std::setw (fieldWidth) <<
-        "fCurrentNoteStaffNumber" << ": " <<
-        mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
-        std::endl <<
-        std::setw (fieldWidth) <<
-        "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
-        std::endl <<
-        std::setw (fieldWidth) <<
-        "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
-        std::endl <<
-        std::setw (fieldWidth) <<
-        "fCurrentSyllableElementsList" << ": " <<
-        syllableElementsListAsString (fCurrentSyllableElementsList) <<
-        std::endl;
-
-      --gIndenter;
-    }
-
-    --gIndenter;
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11034,6 +10995,14 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     S_msrVoice
       currentNoteVoice =
         fCurrentRecipientMsrVoice;
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check JMI 0.9.70
+  mfAssert (
+    __FILE__, __LINE__,
+    currentNoteVoice != nullptr,
+    "currentNoteVoice is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     // fetch stanzaNumber in the current note's voice
     S_msrStanza
@@ -11045,7 +11014,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
             fCurrentStanzaName);
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceLyrics ()) {
+    if (gTraceOahGroup->getTraceLyricsBasics ()) {
       std::stringstream ss;
 
       ss <<
@@ -11067,6 +11036,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
+
+      displayGatheredNoteInformations (
+        "mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)");
     }
 #endif // MF_TRACE_IS_ENABLED
 

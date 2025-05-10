@@ -39,29 +39,26 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 5/4 %}
   
   \clef "treble"
   \key c \major
   \numericTimeSignature \time 3/4
   
   \once\override TupletBracket.bracket-visibility = ##t
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 94 %}  r %{ sr333 %}  8 \stemUp g'8. \f [  %{ beam 1, line 142 %}
-  _- a'16 ]  %{ beam 1, line 165 %}
+  \tuplet 3/2 {  r8 \stemUp g'8. \f [
+  _- a'16 ]
   _- } \once \omit TupletBracket
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 179 %}  a'8 [  %{ beam 1, line 195 %}
-  bis'!16 _. b'! _. cis''! _. d'' ]  %{ beam 1, line 301 %}
+  \tuplet 3/2 {  a'8 [
+  bis'!16 _. b'! _. cis''! _. d'' ]
   _. } r4
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
   
-  %{ end kMeasureKindOverFlowing, measure  %}
 }
 
 \book {
 
   \score {
     <<
-    
       
       
       

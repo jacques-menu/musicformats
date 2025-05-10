@@ -97,34 +97,29 @@ tupletsCurvedBrackets = {
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 1/1 %}
   
   \clef "treble"
   \time 2/4
   
   \once\override TupletBracket.bracket-visibility = ##t
   \temporary \tupletsCurvedBrackets
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 30 %}  b'4 r %{ sr333 %}   d'' } \undo \tupletsCurvedBrackets
+  \tuplet 3/2 {  b'4 r d'' } \undo \tupletsCurvedBrackets
   
-  %{ end kMeasureKindOverFlowing, measure  %}
   
-  %{ begin kMeasureKindOverFlowing, measure 2, % measureCurrentPositionInMeasure: pim 1/1 %}
   
   \clef "treble"
   
   \once\override TupletBracket.bracket-visibility = ##t
   \temporary \tupletsCurvedBrackets
   \once \override TupletNumber.text = #tuplet-number::calc-fraction-text
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 85 %}  b'4 r %{ sr333 %}   d'' } \undo \tupletsCurvedBrackets
+  \tuplet 3/2 {  b'4 r d'' } \undo \tupletsCurvedBrackets
   
-  %{ end kMeasureKindOverFlowing, measure  %}
 }
 
 \book {
 
   \score {
     <<
-    
       
       
       

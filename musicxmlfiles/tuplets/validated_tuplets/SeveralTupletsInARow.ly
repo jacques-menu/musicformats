@@ -40,46 +40,41 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 1/1 %}
   
   \clef "treble"
   \key c \major
   \numericTimeSignature \time 3/4
   \stemUp c'4 d' \mp _-
   \once\override TupletBracket.bracket-visibility = ##t
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 157 %}  e'4 \mf _- f'8 _- }
-  %{ end kMeasureKindOverFlowing, measure  %}
+  \tuplet 3/2 {  e'4 \mf _- f'8 _- }
   
-  %{ begin kMeasureKindOverFlowing, measure 2, % measureCurrentPositionInMeasure: pim 37/24 %}
   
   \once\override TupletBracket.bracket-visibility = ##t
   
   \once\override TupletBracket.direction = -1 % DOWN
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 204 %}  f'8 [  %{ beam 1, line 218 %}
-  g'8. _\markup { "possibile" } \f _- a'16 ]  %{ beam 1, line 273 %}
+  \tuplet 3/2 {  f'8 [
+  g'8. _\markup { "possibile" } \f _- a'16 ]
   _- }
   \once\override TupletBracket.bracket-visibility = ##t
   
   \once\override TupletBracket.direction = -1 % DOWN
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 283 %}  a'8 [  %{ beam 1, line 297 %}
-  bis'!16 _. b'! _. cis''! _. d'' ]  %{ beam 1, line 384 %}
+  \tuplet 3/2 {  a'8 [
+  bis'!16 _. b'! _. cis''! _. d'' ]
   _. }
   \once\override TupletBracket.bracket-visibility = ##t
   
   \once\override TupletBracket.direction = -1 % DOWN
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 393 %}  e''16 [  %{ beam 1, line 407 %}
-  _. f''!8. \mf _- g''8 ]  %{ beam 1, line 461 %}
+  \tuplet 3/2 {  e''16 [
+  _. f''!8. \mf _- g''8 ]
   _- }
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
   
-  %{ end kMeasureKindOverFlowing, measure  %}
 }
 
 \book {
 
   \score {
     <<
-    
       
       
       

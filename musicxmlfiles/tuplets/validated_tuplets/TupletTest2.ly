@@ -34,35 +34,31 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 1/1 %}
   
   \clef "treble"
   \key e \minor
   \numericTimeSignature \time 2/4
   \once \omit TupletBracket
   \once \omit TupletNumber
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 48 %}  \stemUp fis''8 [  %{ beam 1, line 62 %}
-  ( e'' ) c'' ]  %{ beam 1, line 136 %}
+  \tuplet 3/2 {  \stemUp fis''8 [
+  ( e'' ) c'' ]
   } \once \omit TupletBracket
   \once \omit TupletNumber
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 141 %}  fis''8 [  %{ beam 1, line 155 %}
-  ( e'' ) c'' ]  %{ beam 1, line 192 %}
+  \tuplet 3/2 {  fis''8 [
+  ( e'' ) c'' ]
   }
-  %{ end kMeasureKindOverFlowing, measure  %}
   
-  %{ begin kMeasureKindOverFlowing, measure 2, % measureCurrentPositionInMeasure: pim 1/1 %}
   \once \omit TupletBracket
   \once \omit TupletNumber
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 200 %}  fis''8 [  %{ beam 1, line 214 %}
-  ( e'' ) c'' ]  %{ beam 1, line 287 %}
+  \tuplet 3/2 {  fis''8 [
+  ( e'' ) c'' ]
   } \once \omit TupletBracket
   \once \omit TupletNumber
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 292 %}  fis''8 [  %{ beam 1, line 306 %}
-  ( e'' ) c'' ]  %{ beam 1, line 343 %}
+  \tuplet 3/2 {  fis''8 [
+  ( e'' ) c'' ]
   }
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
   
-  %{ end kMeasureKindOverFlowing, measure  %}
 }
 
 Part_POne_Staff_One_Voice_Two = \absolute {
@@ -72,7 +68,7 @@ Part_POne_Staff_One_Voice_Two = \absolute {
   \key e \minor
   \numericTimeSignature \time 2/4
   \stemDown  < e' ~  ais'! ~  > 2  < e' ais' > 2
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
    | % 3
   \barNumberCheck #3
 }
@@ -81,7 +77,6 @@ Part_POne_Staff_One_Voice_Two = \absolute {
 
   \score {
     <<
-    
       
       
       

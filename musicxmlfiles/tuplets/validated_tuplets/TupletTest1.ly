@@ -34,42 +34,37 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 1/1 %}
   
   \clef "treble"
   \key e \minor
   \numericTimeSignature \time 2/4
   \once \omit TupletBracket
   \once \omit TupletNumber
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 46 %}  \stemDown fis''8 [  %{ beam 1, line 60 %}
-  ( e'' ) c'' ]  %{ beam 1, line 97 %}
+  \tuplet 3/2 {  \stemDown fis''8 [
+  ( e'' ) c'' ]
   } \once \omit TupletBracket
   \once \omit TupletNumber
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 102 %}  fis''8 [  %{ beam 1, line 116 %}
-  ( e'' ) c'' ]  %{ beam 1, line 153 %}
+  \tuplet 3/2 {  fis''8 [
+  ( e'' ) c'' ]
   }
-  %{ end kMeasureKindOverFlowing, measure  %}
   
-  %{ begin kMeasureKindOverFlowing, measure 2, % measureCurrentPositionInMeasure: pim 1/1 %}
   \once \omit TupletBracket
   \once \omit TupletNumber
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 161 %}  fis''8 [  %{ beam 1, line 175 %}
-  ( e'' ) c'' ]  %{ beam 1, line 212 %}
+  \tuplet 3/2 {  fis''8 [
+  ( e'' ) c'' ]
   } \once \omit TupletBracket
   \once \omit TupletNumber
-  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 217 %}  fis''8 [  %{ beam 1, line 231 %}
-  ( e'' ) c'' ]  %{ beam 1, line 268 %}
+  \tuplet 3/2 {  fis''8 [
+  ( e'' ) c'' ]
   }
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
   
-  %{ end kMeasureKindOverFlowing, measure  %}
 }
 
 \book {
 
   \score {
     <<
-    
       
       
       
