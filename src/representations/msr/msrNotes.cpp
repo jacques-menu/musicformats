@@ -4051,7 +4051,7 @@ void msrNote::browseData (basevisitor* v)
     --gIndenter;
   }
 
-  // browse the syllables if any
+  // browse the syllables if any // NO JMI ??? 0.9.73 this is done elsewhere for xml2ly
   if (fNoteSyllablesList.size ()) {
     ++gIndenter;
     for (S_msrSyllable syllable : fNoteSyllablesList) {

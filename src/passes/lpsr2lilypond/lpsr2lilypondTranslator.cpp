@@ -14662,6 +14662,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
     // don't generate the stanza inside the code for the voice
+    gLog << "fOnGoingVoice: " << fOnGoingVoice << std::endl;
+    gLog << "elt->getStanzaTextPresent (): " << elt->getStanzaTextPresent () << std::endl;
+
     fGenerateOngoingNonEmptyStanza =
       ! fOnGoingVoice
         &&
@@ -14815,7 +14818,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
-    if (fGenerateOngoingNonEmptyStanza) {
+    gLog << "fGenerateOngoingNonEmptyStanza: " << fGenerateOngoingNonEmptyStanza << std::endl;
+
+    if (fGenerateOngoingNonEmptyStanza) { // JMI 0.9.73
       generateLilypondSyllable (elt);
     }
   }
@@ -14947,11 +14952,9 @@ void lpsr2lilypondTranslator::generateLilypondSyllable (
   const S_msrSyllable& syllable)
 {
 /*
-
 From Lars Opfermann | soundnotation <Lars.Opfermann@soundnotation.com> :
 
 June 2024 : Here are the files without cue, just normal notes. Implicit lyrics placement still missing skips, explicit missing hyphens.
-
 
 Older:
 

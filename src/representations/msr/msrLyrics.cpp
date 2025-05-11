@@ -551,13 +551,11 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
     newbornClone =
       msrSyllable::create (
         fInputLineNumber,
-        gNullMeasure, // set later in setSyllableUpLinkToMeasure()
         fSyllableKind,
         fSyllableExtendKind,
         fSyllableStanzaNumber,
         fSyllableWholeNotes,
-        fSyllableTupletFactor,
-        fSyllableUpLinkToStanza);
+        fSyllableTupletFactor);
 
   // append the lyric texts to the syllable clone
   for (msrSyllableElement syllableElement : fSyllableElementsList) {
@@ -569,8 +567,8 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
   // nor 'newbornClone->fSyllableUpLinkToNote',
   // this will be done by the caller
 
-  newbornClone->fSyllableUpLinkToNote =
-    fSyllableUpLinkToNote; // TEMP
+//   newbornClone->fSyllableUpLinkToNote =
+//     fSyllableUpLinkToNote; // TEMP
 
   return newbornClone;
 }
@@ -1047,7 +1045,6 @@ std::string msrSyllable::asShortString () const
 
   ss <<
     "[Syllable " <<
-//     " \"" <<
     syllableElementsListAsShortString (fSyllableElementsList) <<
     "\", " << fSyllableKind <<
     ", " << fSyllableKind <<
@@ -1072,6 +1069,66 @@ std::string msrSyllable::asShortString () const
   ss << ']';
 
   return ss.str ();
+}
+
+void msrSyllable::print (std::ostream& os) const
+{
+  os <<
+    "[Syllable" <<
+    ", line " << fInputLineNumber << ":" <<
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 25;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fSyllableKind" << ": " << fSyllableKind <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fSyllableExtendKind" << ": " << fSyllableExtendKind <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fSyllableStanzaNumber" << ": \"" << fSyllableStanzaNumber << "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fSyllableWholeNotes" << ": " << fSyllableWholeNotes.asFractionString () <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fSyllableTupletFactor" << ": " << fSyllableTupletFactor.asFractionString () <<
+    std::endl;
+
+  os << std::left <<
+    "fSyllableUpLinkToMeasure" << ": ";
+  if (fSyllableUpLinkToMeasure) {
+    os <<
+      fSyllableUpLinkToMeasure->asString ();
+  }
+  else {
+    os << "[NULL]";
+  }
+  os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fSyllableElementsList" <<
+    std::endl;
+
+  ++gIndenter;
+  for (msrSyllableElement syllableElement : fSyllableElementsList) {
+    os <<
+      syllableElement;
+  } // for
+  --gIndenter;
+
+  --gIndenter;
+
+  os << ']' << std::endl;
 }
 
 void msrSyllable::printFull (std::ostream& os) const
@@ -1167,37 +1224,6 @@ void msrSyllable::printFull (std::ostream& os) const
   --gIndenter;
 
   os << ']' << std::endl;
-}
-
-void msrSyllable::print (std::ostream& os) const
-//   std::ostream& os,
-//   int           theFieldWidth) const
-{
-  os <<
-    asShortString () <<
-    std::endl;
-
-//   os << std::left <<
-//     std::setw (theFieldWidth) <<
-//     "fSyllableElementsList" << ": " <<
-//     syllableElementsListAsString (fSyllableElementsList) <<
-//     std::endl <<
-//     std::setw (theFieldWidth) <<
-//     "fSyllableKind" << ": " <<
-//     fSyllableKind <<
-//     std::endl;
-//
-//   os << std::left <<
-//     std::setw (theFieldWidth) <<
-//     "fSyllableUpLinkToMeasure" << ": ";
-//   if (fSyllableUpLinkToMeasure) {
-//     os <<
-//       fSyllableUpLinkToMeasure->asString ();
-//   }
-//   else {
-//     os << "[NULL]";
-//   }
-//   os << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt)

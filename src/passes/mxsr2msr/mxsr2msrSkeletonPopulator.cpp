@@ -11053,9 +11053,32 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 
     // append the lyric texts to the syllable
     for (msrSyllableElement syllableElement : fCurrentSyllableElementsList) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceLyricsBasics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Appnding syllable element " <<
+        syllableElement.asString () <<
+        " to syllable " <<
+        syllable->asString () <<
+        ", line " << inputStartLineNumber;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+
+      displayGatheredLyricInformations (
+        "mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)");
+    }
+#endif // MF_TRACE_IS_ENABLED
+
       syllable->
         appendSyllableElementToSyllable (syllableElement);
     } // for
+
+    // append syllable to current note syllabbles list
+    fCurrentNoteSyllablesList.push_back (syllable);
 
     // don't forget about fCurrentSyllableElementsList here,
     // this will be done in visitStart (S_syllabic& )
@@ -26105,9 +26128,6 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
           setSyllableUpLinkToMeasure (
             currentNoteUplinkToMeasure);
 
-        // forget about the current note syllables list
-        fCurrentNoteSyllablesList.clear ();
-
 
   //     // fetch the voice
   //     S_msrVoice
@@ -26139,11 +26159,12 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
   //         theMsrVoice->getVoiceLastAppendedMeasure (),
   //         partCurrentDrawingPositionInMeasure);
 
-      }
+      } // for
+
+      // forget about the current note syllables list
+      fCurrentNoteSyllablesList.clear ();
     }
-  } // for
-
-
+  }
 
   else {
     // fCurrentNote has no lyrics attached to it
