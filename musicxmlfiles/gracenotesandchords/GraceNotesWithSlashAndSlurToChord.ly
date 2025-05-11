@@ -37,6 +37,7 @@
 
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
+  \partial 8
   
   \clef "treble"
   \key c \major
@@ -49,7 +50,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
     } % concat
   }
   r8
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
    | % 1
   \barNumberCheck #1
 }
@@ -58,7 +59,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
 
   \score {
     <<
-    
       
       
       

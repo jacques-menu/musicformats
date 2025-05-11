@@ -41,15 +41,14 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \clef "treble"
   \key f \major
   \time 4/4
-  \grace { \stemUp b'!8 } \stemDown c''4. \stemUp ^\markup { "Andantino" } ( aes'!8 ) aes' [  %{ beam 1, line 112 %}
-  ( f' ees'! f' ]  %{ beam 1, line 150 %}
+  \grace { \stemUp b'!8 } \stemDown c''4. \stemUp ^\markup { "Andantino" } ( aes'!8 ) aes' [
+  ( f' ees'! f' ]
 ) }
 
 \book {
 
   \score {
     <<
-    
       
       
       

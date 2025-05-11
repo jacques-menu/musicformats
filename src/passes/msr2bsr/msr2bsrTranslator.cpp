@@ -3488,9 +3488,15 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
 
   else if (fOnGoingNote) { // JMI
     // visiting a syllable as attached to the current non-grace note
-    fCurrentSyllableClone->
-      appendSyllableToNoteAndSetItsUpLinkToNote (
-        fCurrentNonGraceNoteClone);
+
+    // append syllable to currentNote
+    fCurrentNonGraceNoteClone->
+      appendSyllableToNote (
+        elt);
+
+    // set syllable upLink to note
+    syllable->
+      setSyllableUpLinkToNote (fCurrentNonGraceNoteClone);
 
     if (gBsrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) {
       // get the syllable texts list

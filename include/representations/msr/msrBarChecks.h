@@ -31,32 +31,34 @@ class EXP msrBarCheck : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrBarCheck> create (
+                            int inputLineNumber);
+
+    static SMARTP<msrBarCheck> create (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
-    static SMARTP<msrBarCheck> create (
-                            int inputLineNumber);
-
     static SMARTP<msrBarCheck> createWithNextBarPuristNumber (
                             int                 inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure,
                             const std::string&  nextBarOriginalNumber,
-                            int                 nextBarPuristNumber);
+                            int                 nextBarPuristNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
+                          msrBarCheck (int inputLineNumber);
+
                           msrBarCheck (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
                           msrBarCheck (
                             int                 inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure,
                             const std::string&  nextBarOriginalNumber,
-                            int                 nextBarPuristNumber);
+                            int                 nextBarPuristNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrBarCheck ();
 

@@ -326,7 +326,6 @@ S_msrSyllable msrSyllable::create (
 
 S_msrSyllable msrSyllable::create (
   int                    inputLineNumber,
-//   int                    measurePuristNumber,
   const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
@@ -338,7 +337,6 @@ S_msrSyllable msrSyllable::create (
   msrSyllable* obj =
     new msrSyllable (
       inputLineNumber,
-//       measurePuristNumber,
       upLinkToMeasure,
       syllableKind,
       syllableExtendKind,
@@ -440,7 +438,6 @@ msrSyllable::msrSyllable (
 
 msrSyllable::msrSyllable (
   int                    inputLineNumber,
-//   int                    measurePuristNumber,
   const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
@@ -504,9 +501,6 @@ msrSyllable::msrSyllable (
   fSyllableExtendKind = syllableExtendKind;
 
   fSyllableStanzaNumber = syllableStanzaNumber;
-
-  // fSyllableUpLinkToNote will be set later
-  // by appendSyllableToNoteAndSetItsUpLinkToNote () // JMI 0.9.70
 
   fSyllableWholeNotes = syllableWholeNotes;
 
@@ -718,7 +712,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 //     measureNumber;
 // }
 //
-int msrSyllable::fetchSyllableMeasurePuristNumber () const
+int msrSyllable::fetchSyllableMeasurePuristNumber () const // JMI 0.9.72 supeflous???
 {
   return 5315;
 
@@ -769,42 +763,6 @@ void msrSyllable::setSyllableUpLinkToNote (const S_msrNote& note)
 #endif // MF_TRACE_IS_ENABLED
 
   fSyllableUpLinkToNote = note;
-}
-
-void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
-  const S_msrNote& note)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    note != nullptr,
-    "note is empty");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  // append syllable to note
-  note->
-    appendSyllableToNote (this);
-
-  // set it upLink to note
-  setSyllableUpLinkToNote (note);
-
-  // get note uplink to measure
-  S_msrMeasure
-    noteUplinkToMeasure =
-      note->getMeasureElementUpLinkToMeasure ();
-
-  // set syllable uplink to measure
-  setSyllableUpLinkToMeasure (
-    noteUplinkToMeasure);
-
-/*
-  // sanity check JMI 0.9.70 BABASSE ???
-  mfAssert (
-    __FILE__, __LINE__,
-    ! fSyllableElementsList.empty (),
-    "fSyllableElementsList is empty");
-    */
 }
 
 void msrSyllable::acceptIn (basevisitor* v)

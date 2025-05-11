@@ -52,7 +52,6 @@ Part_POne_Staff_One_Voice_Two = \absolute {
 
   \score {
     <<
-    
       
       
       

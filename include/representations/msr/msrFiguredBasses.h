@@ -161,17 +161,17 @@ class EXP msrFiguredBass : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrFiguredBass> create (
+                            int inputLineNumber);
+
+    static SMARTP<msrFiguredBass> create (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrFiguredBass> create (
-                            int inputLineNumber);
-
-    static SMARTP<msrFiguredBass> create (
                             int                    inputLineNumber,
                             const S_msrMeasure&    upLinkToMeasure,
-                            const mfWholeNotes&   figuredBassSoundingWholeNotes,
-                            const mfWholeNotes&   figuredBassDisplayWholeNotes,
+                            const mfWholeNotes&    figuredBassSoundingWholeNotes,
+                            const mfWholeNotes&    figuredBassDisplayWholeNotes,
 //                             const mfWholeNotes&   figuredBassWholeNotesDuration,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
@@ -179,8 +179,8 @@ class EXP msrFiguredBass : public msrMeasureElement
 
     static SMARTP<msrFiguredBass> create (
                             int                    inputLineNumber,
-                            const mfWholeNotes&   figuredBassSoundingWholeNotes,
-                            const mfWholeNotes&   figuredBassDisplayWholeNotes,
+                            const mfWholeNotes&    figuredBassSoundingWholeNotes,
+                            const mfWholeNotes&    figuredBassDisplayWholeNotes,
 //                             const mfWholeNotes&   figuredBassWholeNotesDuration,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
@@ -199,8 +199,8 @@ class EXP msrFiguredBass : public msrMeasureElement
                           msrFiguredBass (
                             int                    inputLineNumber,
                             const S_msrMeasure&    upLinkToMeasure,
-                            const mfWholeNotes&   figuredBassSoundingWholeNotes,
-                            const mfWholeNotes&   figuredBassDisplayWholeNotes,
+                            const mfWholeNotes&    figuredBassSoundingWholeNotes,
+                            const mfWholeNotes&    figuredBassDisplayWholeNotes,
 //                             const mfWholeNotes&   figuredBassWholeNotesDuration,
                             msrFiguredBassParenthesesKind
                                                    figuredBassParenthesesKind,
@@ -240,6 +240,9 @@ class EXP msrFiguredBass : public msrMeasureElement
                                 setMeasureElementSoundingWholeNotes (
                                   wholeNotes, context);
                               }
+
+//     mfWholeNotes          getMeasureElementSoundingWholeNotes () const
+//                               { return fFiguredBassSoundingWholeNotes; }
 
     void                  setFiguredBassDisplayWholeNotes (
                             const mfWholeNotes& wholeNotes)
@@ -316,9 +319,10 @@ class EXP msrFiguredBass : public msrMeasureElement
 
     // whole notes
     mfWholeNotes          fFiguredBassDisplayWholeNotes;
+//     mfWholeNotes          fFiguredBassSoundingWholeNotes;
 
-//     // duration
-//     mfWholeNotes          fFiguredBassWholeNotesDuration;
+    // duration
+    mfWholeNotes          fFiguredBassWholeNotesDuration;
 
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;

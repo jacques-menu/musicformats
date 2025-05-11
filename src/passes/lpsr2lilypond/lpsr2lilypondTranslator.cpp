@@ -13313,7 +13313,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
 {
-/* JMI
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -13413,7 +13412,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
       case msrBassFigureSuffixKind::kBassFigureSuffixFlat:
         fLilypondCodeStream << "flat";
         break;
-      case msrBassFigureSuffixKind::kBassFigureSuffixFlat:
+      case msrBassFigureSuffixKind::kBassFigureSuffixFlatFlat:
         fLilypondCodeStream << "flat flat";
         break;
       case msrBassFigureSuffixKind::kBassFigureSuffixNatural:
@@ -13442,7 +13441,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
       fLilypondCodeStream << cLilyPondSpace;
     }
   }
-  */
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
@@ -13480,7 +13478,6 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-/* JMI
   if (fOnGoingFiguredBassVoice) {
     fLilypondCodeStream <<
       ">";
@@ -13495,12 +13492,16 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
       fLilypondCodeStream <<
         durationAsLilypondStringIfItShouldBeGenerated (
           elt->getInputLineNumber (),
-          elt->getFiguredBassSoundingWholeNotes ());
-      if (wholeNotesDurationShouldBeGenerated ( elt->getFiguredBassSoundingWholeNotes ())) {
+          elt->getMeasureElementSoundingWholeNotes ());
+
+      if (
+        wholeNotesDurationShouldBeGenerated (
+          elt->getMeasureElementSoundingWholeNotes ())
+      ) {
         generateWholeNotesDurationOnStream (
           elt->getInputLineNumber (),
-           elt->getFiguredBassSoundingWholeNotes (),
-          ss);
+          elt->getMeasureElementSoundingWholeNotes (),
+          fLilypondCodeStream);
       }
     }
     else {
@@ -13508,15 +13509,19 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
       fLilypondCodeStream <<
         durationAsLilypondStringIfItShouldBeGenerated (
           elt->getInputLineNumber (),
-          elt->getFiguredBassDisplayWholeNotes ()) <<
-      if (wholeNotesDurationShouldBeGenerated (elt->getFiguredBassDisplayWholeNotes ())) {
+          elt->getFiguredBassDisplayWholeNotes ());
+
+      if (
+        wholeNotesDurationShouldBeGenerated (
+          elt->getFiguredBassDisplayWholeNotes ())
+      ) {
         generateWholeNotesDurationOnStream (
           elt->getInputLineNumber (),
           elt->getFiguredBassDisplayWholeNotes (),
-          ss);
+          fLilypondCodeStream);
       }
 
-      ss <<
+      fLilypondCodeStream <<
         "*" <<
         figuredBassTupletFactor.asRational ();
     }
@@ -13524,7 +13529,6 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
     fLilypondCodeStream <<
       cLilyPondSpace;
   }
-  */
 }
 
 //________________________________________________________________________

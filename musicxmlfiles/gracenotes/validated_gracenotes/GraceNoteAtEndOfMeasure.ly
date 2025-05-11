@@ -40,19 +40,18 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \clef "treble"
   \key c \major
   \time 4/4
-  c''2. c''8 [  %{ beam 1, line 56 %}
+  c''2. c''8 [
    % noteIsFollowedByGraceNotesGroup
-  \afterGrace { \slashedGrace { d''16 } e''8 ]  %{ beam 1, line 75 %}
+  \afterGrace { \slashedGrace { d''16 } e''8 ]
    % noteIsFollowedByGraceNotesGroup
   } \grace { g'16 } f'4
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
 }
 
 \book {
 
   \score {
     <<
-    
       
       
       

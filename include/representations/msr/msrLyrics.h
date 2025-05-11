@@ -171,7 +171,6 @@ class EXP msrSyllable : public msrElement
 
     static SMARTP<msrSyllable> create (
                             int                    inputLineNumber,
-//                             int                    measurePuristNumber,
                             const S_msrMeasure&    upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
@@ -210,7 +209,6 @@ class EXP msrSyllable : public msrElement
 
                           msrSyllable (
                             int                    inputLineNumber,
-//                             int                    measurePuristNumber,
                             const S_msrMeasure&    upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
@@ -248,8 +246,8 @@ class EXP msrSyllable : public msrElement
 //     void                  setSyllableMeasureNumber (
 //                             const std::string& measureNumber);
 
-    void                  setSyllableMeasurePuristNumber (int measurePuristNumber)
-                              { fSyllableMeasurePuristNumber = measurePuristNumber; }
+    void                  setSyllableMeasurePuristNumber (int measureNumber)
+                              { fSyllableMeasurePuristNumber = measureNumber; }
 
     int                   getSyllableMeasurePuristNumber () const
                               { return fSyllableMeasurePuristNumber; }
@@ -302,9 +300,6 @@ class EXP msrSyllable : public msrElement
 
     // public services
     // ------------------------------------------------------
-
-    void                  appendSyllableToNoteAndSetItsUpLinkToNote (
-                            const S_msrNote& note);
 
     void                  appendSyllableElementToSyllable (
                             const msrSyllableElement& syllableElement);

@@ -41,14 +41,13 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \key c \major
   \numericTimeSignature \time 2/4
   \grace { \stemUp a'16 } \stemDown b'4 \stemUp r
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
 }
 
 \book {
 
   \score {
     <<
-    
       
       
       

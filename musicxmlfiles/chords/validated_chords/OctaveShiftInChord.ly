@@ -69,7 +69,6 @@ Part_PTwo_Staff_Two_Voice_Five = \absolute {
 
   \score {
     <<
-    
       
       
       

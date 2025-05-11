@@ -33,13 +33,14 @@
 
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
+  \partial 4
   
   \clef "treble"
   \key c \major
   \numericTimeSignature \time 2/4
   \stemUp a'4  % noteIsFollowedByGraceNotesGroup
   
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  \bar "|."
    | % 1
   \barNumberCheck #1
 }
@@ -48,7 +49,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
 
   \score {
     <<
-    
       
       
       

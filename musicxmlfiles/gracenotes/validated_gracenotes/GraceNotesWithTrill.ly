@@ -40,18 +40,13 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \clef "treble"
   \key c \major
   \time 4/4
-  \stemDown c''4 r8 \grace { \stemUp g'16 [  %{ line 132, elementNumber: 1 %}
-   a'16 ]  %{ line 144, elementNumber: 2 %}
-  } \stemDown b'8 \stemUp \trill  % noteIsFollowedByGraceNotesGroup
-  \grace { a'16. [  %{ line 171, elementNumber: 1 %}
-   b'16. ]  %{ line 184, elementNumber: 2 %}
-} \stemDown c''4 \stemUp r }
+  \stemDown c''4 r8 \grace { \stemUp g'16 [  a'16 ] } \stemDown b'8 \stemUp \trill  % noteIsFollowedByGraceNotesGroup
+\grace { a'16. [  b'16. ] } \stemDown c''4 \stemUp r }
 
 \book {
 
   \score {
     <<
-    
       
       
       

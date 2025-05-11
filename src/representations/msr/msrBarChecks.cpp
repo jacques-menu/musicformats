@@ -35,6 +35,14 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrBarCheck msrBarCheck::create (
+  int inputLineNumber)
+{
+  return
+    msrBarCheck::create (
+      inputLineNumber);
+}
+
+S_msrBarCheck msrBarCheck::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
@@ -46,29 +54,39 @@ S_msrBarCheck msrBarCheck::create (
   return obj;
 }
 
-S_msrBarCheck msrBarCheck::create (
-  int inputLineNumber)
-{
-  return
-    msrBarCheck::create (
-      inputLineNumber,
-      gNullMeasure); // set later in setMeasureElementUpLinkToMeasure()
-}
-
 S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber (
   int                 inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure,
   const std::string&  nextBarOriginalNumber,
-  int                 nextBarPuristNumber)
+  int                 nextBarPuristNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   msrBarCheck* obj =
     new msrBarCheck (
       inputLineNumber,
-      upLinkToMeasure,
       nextBarOriginalNumber,
-      nextBarPuristNumber);
+      nextBarPuristNumber,
+      upLinkToMeasure);
   assert (obj != nullptr);
   return obj;
+}
+
+msrBarCheck::msrBarCheck (int inputLineNumber)
+  : msrMeasureElement (
+      inputLineNumber)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a bare bar check" <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrBarCheck::msrBarCheck (
@@ -82,7 +100,10 @@ msrBarCheck::msrBarCheck (
     std::stringstream ss;
 
     ss <<
-      "Creating a bar check without next bar number";
+      "Creating a bar check" <<
+      ", upLinkToMeasure: " <<
+      upLinkToMeasure->asString () <<
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -95,31 +116,36 @@ msrBarCheck::msrBarCheck (
 
 msrBarCheck::msrBarCheck (
   int                 inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure,
   const std::string&  nextBarOriginalNumber,
-  int                 nextBarPuristNumber)
+  int                 nextBarPuristNumber,
+  const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElement (
         inputLineNumber)
 {
-  fNextBarOriginalNumber = nextBarOriginalNumber;
-  fNextBarPuristNumber = nextBarPuristNumber;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
     std::stringstream ss;
 
     ss <<
-      "Creating a bar check with next bar original number '" <<
+      "Creating a bar check" <<
+      ", nextBarOriginalNumber " <<
       nextBarOriginalNumber <<
-      "' and next bar purist number '" <<
+      ", fNextBarPuristNumber " <<
       fNextBarPuristNumber <<
-      "'";
+      ", upLinkToMeasure: " <<
+      upLinkToMeasure->asString () <<
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  fNextBarOriginalNumber = nextBarOriginalNumber;
+  fNextBarPuristNumber = nextBarPuristNumber;
+
+  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 }
 
 msrBarCheck::~msrBarCheck ()

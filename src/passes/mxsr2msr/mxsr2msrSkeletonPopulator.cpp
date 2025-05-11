@@ -10992,49 +10992,48 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreLyrics ()) {
-    // fetch the current voice, fCurrentNote has not been set/updated yet
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check JMI 0.9.70
-  mfAssert (
-    __FILE__, __LINE__,
-    fCurrentRecipientMsrVoice != nullptr,
-    "fCurrentRecipientMsrVoice is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-    // fetch stanzaNumber in the current note's voice
-    S_msrStanza
-      stanza =
-        fCurrentRecipientMsrVoice->
-          fetchStanzaInVoice (
-            inputStartLineNumber,
-            fCurrentStanzaNumber,
-            fCurrentStanzaName);
+//     // fetch the current voice, fCurrentNote has not been set/updated yet
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check JMI 0.9.70
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     fCurrentRecipientMsrVoice != nullptr,
+//     "fCurrentRecipientMsrVoice is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//     // fetch stanzaNumber in the current note's voice
+//     S_msrStanza
+//       stanza =
+//         fCurrentRecipientMsrVoice->
+//           fetchStanzaInVoice (
+//             inputStartLineNumber,
+//             fCurrentStanzaNumber,
+//             fCurrentStanzaName);
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyricsBasics ()) {
       std::stringstream ss;
 
       ss <<
-        "Creating a syllable \"" <<
+        "Creating a syllable" <<
+        ", fCurrentSyllableKind: " <<
         fCurrentSyllableKind <<
-        "\", fCurrentSyllableElementsList = \"" <<
+
+        ", fCurrentNoteSoundingWholeNotesFromNotesDuration: " <<
+        fCurrentNoteSoundingWholeNotesFromNotesDuration <<
+        ", fCurrentNoteDisplayWholeNotesFromType: " <<
+         fCurrentNoteDisplayWholeNotesFromType <<
+
+        ", fCurrentSyllableElementsList = \"" <<
         syllableElementsListAsString (fCurrentSyllableElementsList) <<
         "\"" <<
-        ", whole notes: " <<
-        fCurrentNoteSoundingWholeNotesFromNotesDuration <<
-        " sounding from duration, " <<
-         fCurrentNoteDisplayWholeNotesFromType <<
-        ", display from type" <<
-        ", syllabic: \"" <<
-        fCurrentSyllableKind << "\"" <<
-        ", in stanza " << stanza->getStanzaName () <<
         ", line " << inputStartLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
 
-      displayGatheredNoteInformations (
+      displayGatheredLyricInformations (
         "mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)");
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -11050,8 +11049,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
           fCurrentNoteSoundingWholeNotesFromNotesDuration,
           msrTupletFactor (
             fCurrentNoteActualNotes,
-            fCurrentNoteNormalNotes),
-          stanza);
+            fCurrentNoteNormalNotes));
 
     // append the lyric texts to the syllable
     for (msrSyllableElement syllableElement : fCurrentSyllableElementsList) {
@@ -11062,43 +11060,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     // don't forget about fCurrentSyllableElementsList here,
     // this will be done in visitStart (S_syllabic& )
 
-    // appendSyllableToNoteAndSetItsUpLinkToNote()
-    // will be called in handleLyrics(),
-    // after the note has been created
-
-    // append syllable to current note's syllables list
-    fCurrentNoteSyllablesList.push_back (
-      syllable);
-
-    // fetch the voice
-    S_msrVoice
-      theMsrVoice =
-        stanza->getStanzaUpLinkToVoice ();
-
-    // set the syllable's measure uplink
-    syllable->
-      setSyllableUpLinkToMeasure (
-        theMsrVoice->
-          fetchVoiceLastMeasure (inputStartLineNumber));
-
-    // fetch the part
-    S_msrPart
-      part =
-        theMsrVoice->
-          fetchVoiceUpLinkToPart ();
-
-    // fetch the part current measure position
-    mfPositionInMeasure
-      partCurrentDrawingPositionInMeasure =
-        part->
-          getPartCurrentDrawingPositionInMeasure ();
-
-    // append syllable to stanza
-    stanza->
-      appendSyllableToStanza (
-        syllable,
-        theMsrVoice->getVoiceLastAppendedMeasure (),
-        partCurrentDrawingPositionInMeasure);
+    // after the note has been created, appendSyllableToNote()
+    // will be called in handleLyricsAfterCurrentNoteHasBeenHandled(),
   }
 
   // DON'T register current note as having lyrics,
@@ -26069,32 +26032,35 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentNote" << " = \"" << fCurrentNote->asShortString () << "\"" <<
-      std::endl <<
+      std::endl;
 
-      std::setw (fieldWidth) <<
-      "fLastHandledNoteInVoiceHasLyrics" << ": " <<
-      fLastHandledNoteInVoiceHasLyrics <<
-      std::endl <<
-      std::setw (fieldWidth) <<
-      "fCurrentSyllableExtendKind" << "" << ": " <<
-      fCurrentSyllableExtendKind <<
-      std::endl <<
+    displayGatheredLyricInformations (
+      "handleLyricsAfterCurrentNoteHasBeenHandled()");
 
-      std::setw (fieldWidth) <<
-      "fCurrentSyllableElementsList.size ()" << ": " <<
-      fCurrentSyllableElementsList.size () <<
-      std::endl <<
-
-      std::setw (fieldWidth) <<
-      "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
-      std::endl <<
-      std::setw (fieldWidth) <<
-      "fCurrentStanzaName" << ": " << fCurrentStanzaName << "\"" <<
-      std::endl <<
-      std::setw (fieldWidth) <<
-      "fCurrentSyllableElementsList" << ": " <<
-      syllableElementsListAsString (fCurrentSyllableElementsList) <<
-      std::endl << std::endl;
+//       std::setw (fieldWidth) <<
+//       "fLastHandledNoteInVoiceHasLyrics" << ": " <<
+//       fLastHandledNoteInVoiceHasLyrics <<
+//       std::endl <<
+//       std::setw (fieldWidth) <<
+//       "fCurrentSyllableExtendKind" << "" << ": " <<
+//       fCurrentSyllableExtendKind <<
+//       std::endl <<
+//
+//       std::setw (fieldWidth) <<
+//       "fCurrentSyllableElementsList.size ()" << ": " <<
+//       fCurrentSyllableElementsList.size () <<
+//       std::endl <<
+//
+//       std::setw (fieldWidth) <<
+//       "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
+//       std::endl <<
+//       std::setw (fieldWidth) <<
+//       "fCurrentStanzaName" << ": " << fCurrentStanzaName << "\"" <<
+//       std::endl <<
+//       std::setw (fieldWidth) <<
+//       "fCurrentSyllableElementsList" << ": " <<
+//       syllableElementsListAsString (fCurrentSyllableElementsList) <<
+//       std::endl << std::endl;
 
     --gIndenter;
   }
@@ -26118,30 +26084,66 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    for (S_msrSyllable syllable : fCurrentNoteSyllablesList) {
-      // append syllable to currentNote and set upLink to it
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceLyrics ()) {
-      std::stringstream ss;
+    if (! fCurrentNoteSyllablesList.empty ()) { // JMI ??? 0.9.73
+      for (S_msrSyllable syllable : fCurrentNoteSyllablesList) {
+        // append syllable to currentNote
+        fCurrentNote->
+          appendSyllableToNote (
+            syllable);
 
-      ss <<
-        "*** ---> for (S_msrSyllable syllable : fCurrentNoteSyllablesList) {" <<
-        ", syllable: " << syllable;
+        // set syllable upLink to note
+        syllable->
+          setSyllableUpLinkToNote (fCurrentNote);
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
+        // get note uplink to measure
+        S_msrMeasure
+          currentNoteUplinkToMeasure =
+            fCurrentNote->getMeasureElementUpLinkToMeasure ();
+
+        // set syllable uplink to measure
+        syllable->
+          setSyllableUpLinkToMeasure (
+            currentNoteUplinkToMeasure);
+
+        // forget about the current note syllables list
+        fCurrentNoteSyllablesList.clear ();
+
+
+  //     // fetch the voice
+  //     S_msrVoice
+  //       theMsrVoice =
+  //         stanza->getStanzaUpLinkToVoice ();
+  //
+  //     // set the syllable's measure uplink
+  //     syllable->
+  //       setSyllableUpLinkToMeasure (
+  //         theMsrVoice->
+  //           fetchVoiceLastMeasure (inputStartLineNumber));
+  //
+  //     // fetch the part
+  //     S_msrPart
+  //       part =
+  //         theMsrVoice->
+  //           fetchVoiceUpLinkToPart ();
+  //
+  //     // fetch the part current measure position
+  //     mfPositionInMeasure
+  //       partCurrentDrawingPositionInMeasure =
+  //         part->
+  //           getPartCurrentDrawingPositionInMeasure ();
+  //
+  //     // append syllable to stanza
+  //     stanza->
+  //       appendSyllableToStanza (
+  //         syllable,
+  //         theMsrVoice->getVoiceLastAppendedMeasure (),
+  //         partCurrentDrawingPositionInMeasure);
+
+      }
     }
-#endif // MF_TRACE_IS_ENABLED
+  } // for
 
-      syllable->
-        appendSyllableToNoteAndSetItsUpLinkToNote (
-        	fCurrentNote);
-    } // for
 
-    // forget about all of fCurrentNote's syllables
-    fCurrentNoteSyllablesList.clear ();
-  }
 
   else {
     // fCurrentNote has no lyrics attached to it
@@ -26156,12 +26158,8 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
           fCurrentRecipientMsrVoice->
             getVoiceStanzasMap ();
 
-      for (
-        std::map <std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
-        i != voiceStanzasMap.end ();
-        ++i
-      ) {
-        S_msrStanza stanza = (*i).second;
+      for (std::pair <std::string, S_msrStanza> thePair : voiceStanzasMap) {
+        S_msrStanza stanza = thePair.second;
 
         // choose the syllable kind
         msrSyllableKind
@@ -26185,9 +26183,9 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
               stanza);
 
         // set syllable note upLink to fCurrentNote
-        skipSyllable->
-          appendSyllableToNoteAndSetItsUpLinkToNote (
-            fCurrentNote);
+        fCurrentNote->
+          appendSyllableToNote (
+            skipSyllable);
 
         // fetch the voice
         S_msrVoice
@@ -29855,7 +29853,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //
 //           // set syllable note upLink to fCurrentNote
 //           syllable->
-//             appendSyllableToNoteAndSetItsUpLinkToNote (
+//             appendSyllableToNote (
 //             	fCurrentNote);
 //
 //           // append syllable to stanza

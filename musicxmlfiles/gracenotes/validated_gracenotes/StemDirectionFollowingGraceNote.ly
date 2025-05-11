@@ -41,7 +41,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \clef "treble"
   \key d \major
   \numericTimeSignature \time 4/4
-  \stemDown a'8 [  %{ beam 1, line 133 %}
+  \stemDown a'8 [
   \tempo \markup {
     \concat {
       ( \smaller \general-align #Y #DOWN \note {4} #UP
@@ -50,7 +50,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
     
     } % concat
   }
-  d'' d'' d'' ]  %{ beam 1, line 169 %}
+  d'' d'' d'' ]
 d'' r \acciaccatura { \stemUp d''8 } \stemDown d'''8 \stemUp ( ) -. r }
 
 Part_POne_Staff_Two_Voice_Five = \absolute {
@@ -73,7 +73,6 @@ Part_POne_Staff_Two_Voice_Five = \absolute {
 
   \score {
     <<
-    
       
       
       

@@ -3712,10 +3712,10 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
     fLastBarCheck =
       msrBarCheck::createWithNextBarPuristNumber (
         elt->getInputLineNumber (),
-        fCurrentMeasureClone,
         nextMeasureNumber,
         fCurrentVoiceClone->
-          getVoiceCurrentMeasurePuristNumber ());
+          getVoiceCurrentMeasurePuristNumber (),
+        fCurrentMeasureClone);
 
     // append it to the current voice clone
     fCurrentVoiceClone->
@@ -3841,9 +3841,15 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
 
   else if (fOnGoingNonGraceNote) { // JMI
     // visiting a syllable as attached to the current non-grace note
-    fCurrentSyllableClone->
-      appendSyllableToNoteAndSetItsUpLinkToNote (
-        fCurrentNonGraceNoteClone);
+
+    // append syllable to currentNote
+    fCurrentNonGraceNoteClone->
+      appendSyllableToNote (
+        elt);
+
+    // set syllable upLink to note
+    elt->
+      setSyllableUpLinkToNote (fCurrentNonGraceNoteClone);
 
     if (gLpsrOahGroup->getAddLpsrWordsFromTheLyrics ()) {
       // get the syllable texts list
