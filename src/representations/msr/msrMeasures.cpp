@@ -3851,7 +3851,7 @@ void msrMeasure::padUpToPositionInMeasure (
         getSegmentUpLinkToVoice ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true ||
+  if (
     gTraceOahGroup->getTracePositionInMeasures ()
       ||
     gTraceOahGroup->getTraceHarmonies ()

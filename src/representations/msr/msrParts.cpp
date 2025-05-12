@@ -757,7 +757,7 @@ void msrPart::cascadeCreateAMeasureAndAppendItInPart (
   msrMeasureImplicitKind measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
     std::stringstream ss;
 
     ss <<
