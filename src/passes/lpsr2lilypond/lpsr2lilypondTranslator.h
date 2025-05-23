@@ -1172,6 +1172,9 @@ class EXP lpsr2lilypondTranslator :
     // grace notes groups
     // ------------------------------------------------------
 
+    std::string           cLilypondGraceNotesGroupOpener,
+                          cLilypondGraceNotesGroupCloser;
+
     void                  generateGraceNotesGroup (
                             const S_msrGraceNotesGroup& graceNotesGroup);
 
@@ -1301,6 +1304,9 @@ class EXP lpsr2lilypondTranslator :
 
     // beams
     // ------------------------------------------------------
+
+    std::string           cLilypondBeamsOpener,
+                          cLilypondBeamsCloser;
 
     void                  generateNoteBeamsAfterNote (
                             const S_msrNote& note);

@@ -50,39 +50,40 @@ jobs:
           cmake -G "Unix Makefiles" -S cmakefiles -B build ; cd build ; make ; ls -R .
 
 
-#       # --------------------------------------------------------------------------
-#       - name: Compile the user guide - pdflatex run 1/3
-#         uses:
-#           xu-cheng/latex-action@v3
-#         with:
-#           working_directory:
-#             ./documentation/mfuserguide
-#           root_file:
-#             MusicFormatsUserGuide.tex
-#
-#       - name: Compile the user guide - pdflatex run 2/3
-#         uses:
-#           xu-cheng/latex-action@v3
-#         with:
-#           working_directory:
-#             ./documentation/mfuserguide
-#           root_file:
-#             MusicFormatsUserGuide.tex
-#
-#       - name: Compile the user guide - pdflatex run 3/3
-#         uses:
-#           xu-cheng/latex-action@v3
-#         with:
-#           working_directory:
-#             ./documentation/mfuserguide
-#           root_file:
-#             MusicFormatsUserGuide.tex
+      # --------------------------------------------------------------------------
+      - name: Compile the user guide - pdflatex run 1/3
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfuserguide
+          root_file:
+            MusicFormatsUserGuide.tex
+
+      - name: Compile the user guide - pdflatex run 2/3
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfuserguide
+          root_file:
+            MusicFormatsUserGuide.tex
+
+      - name: Compile the user guide - pdflatex run 3/3
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfuserguide
+          root_file:
+            MusicFormatsUserGuide.tex
 
 
       # --------------------------------------------------------------------------
-      - name: Move libraries and executables to the top level
+      - name: Move libraries, includes, executables and user guide to the top level
         run: |
           mv build/lib .
+          mv include .
           mv build/bin .
 #           mv documentation/mfuserguide/MusicFormatsUserGuide.pdf .
 

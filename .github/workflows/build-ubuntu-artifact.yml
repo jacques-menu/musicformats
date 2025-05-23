@@ -75,9 +75,10 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name: Move libraries and executables and user guide to the top level
+      - name: Move libraries, includes, executables and user guide to the top level
         run: |
           mv build/lib .
+          mv include .
           mv build/bin .
           mv documentation/mfuserguide/MusicFormatsUserGuide.pdf .
 

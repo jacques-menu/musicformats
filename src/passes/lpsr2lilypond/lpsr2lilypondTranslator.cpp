@@ -347,6 +347,30 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
       "%{ cLilypondScordaturaCloser %} ";
   }
 
+  // beams
+  cLilypondBeamsOpener = "[ ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondBeamsOpener +=
+      "%{ cLilypondBeamsOpener %} ";
+  }
+  cLilypondBeamsCloser = "] ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondBeamsCloser +=
+      "%{ cLilypondBeamsCloser %} ";
+  }
+
+  // grace notes groups
+  cLilypondGraceNotesGroupOpener = " { ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondGraceNotesGroupOpener +=
+      "%{ cLilypondGraceNotesGroupOpener %} ";
+  }
+  cLilypondGraceNotesGroupCloser = "} ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondGraceNotesGroupCloser +=
+      "%{ cLilypondGraceNotesGroupCloser %} ";
+  }
+
   // chords
   cLilypondChordOpener = "< ";
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
@@ -11437,8 +11461,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrComment& elt)
     "% " << elt->getContents () <<
     std::endl;
 
-  if (elt->getCommentGapKind () == lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes)
-    fLilypondCodeStream << std::endl;
+  switch (elt->getCommentGapKind ()) {
+    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes:
+      fLilypondCodeStream << std::endl;
+      break;
+    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo:
+      break;
+  } // switch
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrComment& elt)
@@ -17818,11 +17847,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  gLog <<
-    "---> visitStart (S_msrTimeSignature& elt): " <<
-    ", elt: " <<
-    elt << // JMI  0.9.73
-    std::endl;
+//   gLog <<
+//     "---> visitStart (S_msrTimeSignature& elt): " <<
+//     ", elt: " <<
+//     elt << // JMI  0.9.73
+//     std::endl;
 
 //   msrTimeSignatureSymbolKind
 //     timeSignatureSymbolKind =
@@ -21577,7 +21606,7 @@ slash = \tweak Flag.stroke-style grace \etc
   } // switch
 
   fLilypondCodeStream <<
-    " { ";
+    cLilypondGraceNotesGroupOpener;
 
   // force durations to be displayed explicitly
   // at the beginning of the grace notes
@@ -21647,10 +21676,10 @@ slash = \tweak Flag.stroke-style grace \etc
 
         if (graceNotesGroupIsBeamed) { // JMI fixed [ ] issue 0.9.70
           if (elementNumber == 1) {
-            fLilypondCodeStream << "[ ";
+            fLilypondCodeStream << cLilypondBeamsOpener;
           }
           else if (elementNumber == graceNotesGroupElementsListSize) {
-            fLilypondCodeStream << "] ";
+            fLilypondCodeStream << cLilypondBeamsCloser;
           }
 
           if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondGraceNotes ()) {
@@ -21671,7 +21700,7 @@ slash = \tweak Flag.stroke-style grace \etc
         // see gracenotes/SlurredNoteWithGraceNotes.xml for
         // extraneous '( ' JMI
 //          if (false && // JMI
-        if (
+        if (false &&
           ! graceNotesGroupNote->getNoteBelongsToAChord ()
             &&
           doGenerateASlurIfPresent
@@ -21710,7 +21739,7 @@ slash = \tweak Flag.stroke-style grace \etc
         cLilyPondSpace;
     } // for
 
-    fLilypondCodeStream << "} ";
+    fLilypondCodeStream << cLilypondGraceNotesGroupCloser;
   }
 
   else {
@@ -24296,10 +24325,12 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   }
 
   if (elt->getNoteIsFollowedByGraceNotesGroup ()) { // JMI
-    if (! elt->fetchNoteIsARest ()) {
-      fLilypondCodeStream <<
-       " % noteIsFollowedByGraceNotesGroup" <<
-        std::endl; // JMI ???
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondGraceNotes ()) {
+      if (! elt->fetchNoteIsARest ()) {
+        fLilypondCodeStream <<
+         " % noteIsFollowedByGraceNotesGroup" <<
+          std::endl; // JMI ???
+      }
     }
   }
 

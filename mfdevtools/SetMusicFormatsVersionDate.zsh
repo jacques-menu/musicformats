@@ -42,7 +42,7 @@ VERSION_DATE=$1
 
 if [[ ${VERSION_DATE} == "today" ]]; then
 #   VERSION_DATE=$(date +"%B %d, %Y - %H:%M:%S")
-  VERSION_DATE=$(date +"%B %d, %Y - %H:%M")
+  VERSION_DATE=$(date +"built %B %d, %Y @ %H:%M")
 fi
 
 echo "==> VERSION_DATE : ${VERSION_DATE}"

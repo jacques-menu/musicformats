@@ -11,7 +11,7 @@
 #   https://github.com/jacques-menu/musicformats
 #
 
-set -x
+# set -x
 
 function usage ()
   {
@@ -87,7 +87,7 @@ echo
 
 echo '--> bin'
 echo
-ls -salGTF bin/xml2* bin/msdl # bin/libMultipleInitsTest  bin/Mikrokosmos3Wandering
+ls -salGTF bin/xml2ly # bin/msdl bin/libMultipleInitsTest  bin/Mikrokosmos3Wandering
 echo
 
 

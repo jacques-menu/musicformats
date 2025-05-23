@@ -453,6 +453,8 @@ class EXP lpsrScore : public lpsrElement
 
     // command line
     S_lpsrComment         fInputSourceNameComment;
+    S_lpsrComment         fGeneratedOnComment;
+    S_lpsrComment         fGeneratedByComment;
 
     S_lpsrComment         fCommandLineAsSuppliedComment;
     S_lpsrComment         fCommandLineLongOptionsComment;
