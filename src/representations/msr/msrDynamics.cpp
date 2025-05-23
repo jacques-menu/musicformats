@@ -31,6 +31,20 @@ namespace MusicFormats
 std::string msrDynamicKindAsString (
   msrDynamicKind dynamicKind)
 {
+/*
+https://lilypond.org/doc/v2.24/Documentation/notation/expressive-marks-attached-to-notes.en.html#dynamics
+
+The available dynamic marks are:
+  \ppppp, \pppp, \ppp, \pp, \p,
+  \mp,
+  \mf,
+  \f, \ff, \fff, \ffff, \fffff,
+  \fp, \sf, \sff,
+  \sp, \spp,
+  \sfz, \rfz,
+  and \n
+*/
+
   std::string result;
 
   switch (dynamicKind) {
@@ -82,6 +96,21 @@ std::string msrDynamicKindAsString (
     case msrDynamicKind::kDynamicMP:
       result = "mp";
       break;
+
+/*
+https://lilypond.org/doc/v2.24/Documentation/notation/expressive-marks-attached-to-notes.en.html#dynamics
+
+The available dynamic marks are:
+  \ppppp, \pppp, \ppp, \pp, \p,
+  \mp,
+  \mf,
+  \f, \ff, \fff, \ffff, \fffff,
+  \fp, \sf, \sff,
+  \sp, \spp,
+  \sfz, \rfz,
+  and \n
+*/
+
     case msrDynamicKind::kDynamicFP:
       result = "fp";
       break;

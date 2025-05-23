@@ -1288,22 +1288,6 @@ class EXP lpsr2lilypondTranslator :
     void                  generateNoteSlashesList (
                             const S_msrNote& note);
 
-    // slurs
-    // ------------------------------------------------------
-
-    std::string           cLilypondSlurOpener,
-                          cLilypondSlurCloser;
-
-    void                  generateNoteSlurLineTypes (
-                            const S_msrNote& note);
-
-    // phrasing
-    // ------------------------------------------------------
-
-    std::string           cLilypondPhrasingOpener,
-                          cLilypondPhrasingContinuer,
-                          cLilypondPhrasingCloser;
-
     // note heads
     // ------------------------------------------------------
 
@@ -1330,6 +1314,13 @@ class EXP lpsr2lilypondTranslator :
     // slurs
     // ------------------------------------------------------
 
+    std::string           cLilypondSlurOpener,
+                          cLilypondSlurContinuer,
+                          cLilypondSlurCloser;
+
+    void                  generateNoteSlurLineTypes (
+                            const S_msrNote& note);
+
     void                  generateNoteSlurDirection (
                             const S_msrNote& note);
     void                  generateNoteSlursList (
@@ -1337,6 +1328,13 @@ class EXP lpsr2lilypondTranslator :
 
     void                  generateNoteLigaturesList (
                             const S_msrNote& note);
+
+    // phrasing
+    // ------------------------------------------------------
+
+    std::string           cLilypondPhrasingOpener,
+                          cLilypondPhrasingContinuer,
+                          cLilypondPhrasingCloser;
 
     // segnos
     // ------------------------------------------------------

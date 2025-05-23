@@ -384,15 +384,20 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
   }
 
   // slurs
-  cLilypondBeamsOpener = "[ ";
+  cLilypondSlurOpener = "( ";
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
-    cLilypondBeamsOpener +=
-      "%{ cLilypondBeamsOpener %} ";
+    cLilypondSlurOpener +=
+      "%{ cLilypondSlurOpener %} ";
   }
-  cLilypondBeamsCloser = "] ";
+  cLilypondSlurContinuer = "= ";
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
-    cLilypondBeamsCloser +=
-      "%{ cLilypondBeamsCloser %} ";
+    cLilypondSlurContinuer +=
+      "%{ cLilypondSlurContinuer %} ";
+  }
+  cLilypondSlurCloser = ") ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondSlurCloser +=
+      "%{ cLilypondSlurCloser %} ";
   }
 
   // phrasing
@@ -2445,10 +2450,20 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
         note->getNoteStem ();
 
     if (noteStem) {
-      generateStemIfNeededAndUpdateCurrentStemKind (noteStem);
+      switch (note->getNoteKind ()) {
+        case msrNoteKind::kNote_UNKNOWN_:
+          break;
+
+        // in grace notes groups
+        case msrNoteKind::kNoteRegularInGraceNotesGroup:
+          // let LilyPond take care of the stem JMI 0.9.74
+          break;
+
+        default:
+          generateStemIfNeededAndUpdateCurrentStemKind (noteStem);
+      } // switch
     }
   }
-
 
   // generate the note slur direction if any,
   // unless the note is chord member
@@ -21399,19 +21414,33 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          if (noteSlurStartsNumber != 1) {
-            fLilypondCodeStream <<
-              "\\=" << slur->getSlurNumber (); // JMI 0.9.68
-          }
-          fLilypondCodeStream << cLilypondSlurOpener;
+//           gLog << note << std::endl;
 
-          if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
-            // generate the input line number as a comment
-            fLilypondCodeStream <<
-              " %{ <-- line " <<
-              slur->getInputLineNumber () <<
-              " AAAAAAA %} ";
-          }
+          switch (note->getNoteKind ()) {
+            case msrNoteKind::kNote_UNKNOWN_:
+              break;
+
+            // in grace notes groups
+            case msrNoteKind::kNoteRegularInGraceNotesGroup:
+              // let LilyPond take care of the slur JMI 0.9.74
+              break;
+
+            default:
+              if (noteSlurStartsNumber != 1) {
+                fLilypondCodeStream <<
+                  cLilypondPhrasingContinuer <<
+                  slur->getSlurNumber (); // JMI 0.9.68
+              }
+              fLilypondCodeStream << cLilypondSlurOpener;
+
+              if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+                // generate the input line number as a comment
+                fLilypondCodeStream <<
+                  " %{ <-- line " <<
+                  slur->getInputLineNumber () <<
+                  " AAAAAAA %} ";
+              }
+          } // switch
           break;
 
         case msrSlurTypeKind::kSlurTypeRegularContinue:
@@ -21436,20 +21465,33 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          if (noteSlurStopsNumber != 1) {
-            fLilypondCodeStream <<
-              cLilypondPhrasingContinuer <<
-              slur->getSlurNumber ();
-          }
-          fLilypondCodeStream << cLilypondPhrasingCloser;
+          gLog << note << std::endl;
 
-          if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
-            // generate the input line number as a comment
-            fLilypondCodeStream <<
-              " %{ <-- line " <<
-              slur->getInputLineNumber () <<
-              " BBBBBBB %} ";
-          }
+          switch (note->getNoteKind ()) {
+            case msrNoteKind::kNote_UNKNOWN_:
+              break;
+
+            // in grace notes groups
+            case msrNoteKind::kNoteRegularInGraceNotesGroup:
+              // let LilyPond take care of the slur JMI 0.9.74
+              break;
+
+            default:
+              if (noteSlurStopsNumber != 1) {
+                fLilypondCodeStream <<
+                  cLilypondSlurContinuer <<
+                  slur->getSlurNumber ();
+              }
+              fLilypondCodeStream << cLilypondSlurCloser;
+
+              if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+                // generate the input line number as a comment
+                fLilypondCodeStream <<
+                  " %{ <-- line " <<
+                  slur->getInputLineNumber () <<
+                  " BBBBBBB %} ";
+              }
+          } // switch
 
           switch (slur->getSlurPlacementKind ()) {
             case msrPlacementKind::kPlacement_UNKNOWN_:
@@ -25694,12 +25736,12 @@ void lpsr2lilypondTranslator::generateCodeAfterChordEnd (
           break;
 
         case msrSlurTypeKind::kSlurTypePhrasingStart:
-          fLilypondCodeStream << "\\( ";
+          fLilypondCodeStream << cLilypondPhrasingOpener;
           break;
         case msrSlurTypeKind::kSlurTypePhrasingContinue:
           break;
         case msrSlurTypeKind::kSlurTypePhrasingStop:
-          fLilypondCodeStream << "\\) ";
+          fLilypondCodeStream << cLilypondPhrasingCloser;
           break;
       } // switch
 
