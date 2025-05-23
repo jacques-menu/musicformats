@@ -46,7 +46,7 @@ jobs:
       # --------------------------------------------------------------------------
       - name: Compile the user guide - pdflatex run 1/3
         uses:
-          xu-cheng/latex-action@v3
+          xu-cheng/latex-action@v4
         with:
           working_directory:
             ./documentation/mfuserguide
