@@ -3,10 +3,6 @@
 # --------------------------------------------------------------------------
 name: Build MacOS version
 
-# runs:
-#   using: 'node20'
-#   main: 'main.js'
-
 # Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
@@ -21,24 +17,29 @@ on:
 # --------------------------------------------------------------------------
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    name:    Build library
-    runs-on: macos-latest
+    name:
+      Build library
+    runs-on:
+      macos-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
       # --------------------------------------------------------------------------
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout repo
+      - name:
+          Checkout repo
         uses:
           actions/checkout@v4
 
 
       # --------------------------------------------------------------------------
-      - name: Setup node
+      - name:
+          Setup node
         uses:
           actions/setup-node@v4
         with:
@@ -75,13 +76,15 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name: Build MusicFormats for MacOS
+      - name:
+          Build MusicFormats for MacOS
         run:
           cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
 
       # --------------------------------------------------------------------------
-      - name: Move libraries, includes, executables and user guide to the top level
+      - name:
+          Move libraries, includes, executables and user guide to the top level
         run: |
           mv build/lib .
           mv include .
@@ -90,10 +93,13 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name: Upload version informations and binaries for MacOS
-        uses: actions/upload-artifact@v4
+      - name:
+          Upload version informations and binaries for MacOS
+        uses:
+          actions/upload-artifact@v4
         with:
-          name: musicformats-macos-artifact
+          name:
+            musicformats-macos-artifact
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt
