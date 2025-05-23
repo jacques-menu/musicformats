@@ -44,12 +44,6 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name: Build MusicFormats for MacOS
-        run:
-          cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
-
-
-      # --------------------------------------------------------------------------
       - name: Compile the user guide - pdflatex run 1/3
         uses:
           xu-cheng/latex-action@v3
@@ -76,6 +70,12 @@ jobs:
             ./documentation/mfuserguide
           root_file:
             MusicFormatsUserGuide.tex
+
+
+      # --------------------------------------------------------------------------
+      - name: Build MusicFormats for MacOS
+        run:
+          cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
 
       # --------------------------------------------------------------------------

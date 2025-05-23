@@ -965,6 +965,9 @@ class EXP lpsr2lilypondTranslator :
     // tempos
     // ------------------------------------------------------
 
+    std::string           cLilypondTempoBeatUnitsPerMinuteOpener,
+                          cLilypondTempoBeatUnitsPerMinuteCloser;
+
     void                  generateTempoBeatUnitsWordsOnly (
                             const S_msrTempo& tempo);
 
@@ -992,6 +995,9 @@ class EXP lpsr2lilypondTranslator :
     // time signatures
     // ------------------------------------------------------
 
+    std::string           cLilypondTimeSignatureOpener,
+                          cLilypondTimeSignatureCloser;
+
     S_msrTimeSignature    fCurrentVoiceTimeSignature;
 
     Bool                  fOnGoingSenzaMisura;
@@ -1004,7 +1010,7 @@ class EXP lpsr2lilypondTranslator :
     // ------------------------------------------------------
 
     std::string           cLilypondStaffBlockOpener,
-                          cLilypondStaffClockCloser;
+                          cLilypondStaffBlockCloser;
 
     // staves
     // ------------------------------------------------------
@@ -1285,8 +1291,18 @@ class EXP lpsr2lilypondTranslator :
     // slurs
     // ------------------------------------------------------
 
+    std::string           cLilypondSlurOpener,
+                          cLilypondSlurCloser;
+
     void                  generateNoteSlurLineTypes (
                             const S_msrNote& note);
+
+    // phrasing
+    // ------------------------------------------------------
+
+    std::string           cLilypondPhrasingOpener,
+                          cLilypondPhrasingContinuer,
+                          cLilypondPhrasingCloser;
 
     // note heads
     // ------------------------------------------------------
