@@ -64,21 +64,21 @@ Part_POne_Staff_One_Voice_One = \absolute {
 Part_POne_Staff_One_Voice_Two = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \key e \minor
   \numericTimeSignature \time 2/4
-  \stemDown  < e' ~  ais'! ~  > 2  < e' ais' > 2
+  \stemDown  < e' ~  ais'! ~  > 2
+  
+   < e' ais' > 2
   \bar "|."
-   | % 3
-  \barNumberCheck #3
+  
 }
 
 \book {
 
   \score {
     <<
-      
-      
       
       <<
       
@@ -97,7 +97,6 @@ Part_POne_Staff_One_Voice_Two = \absolute {
             \Part_POne_Staff_One_Voice_Two
           >>
         >>
-      
       
       >>
     

@@ -7,9 +7,9 @@ name: Build MacOS version
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-#     branches: [ master v0.9.72-beta-3 ]
-#   pull_request:
-#     branches: [ master v0.9.72-beta-3 ]
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -21,8 +21,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    name:
-      Build library
+    name: Build library
     runs-on:
       macos-latest
 
@@ -31,15 +30,13 @@ jobs:
 
       # --------------------------------------------------------------------------
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name:
-          Checkout repo
+      - name: Checkout repo
         uses:
           actions/checkout@v4
 
 
       # --------------------------------------------------------------------------
-      - name:
-          Setup node
+      - name: Setup node
         uses:
           actions/setup-node@v4
         with:
@@ -76,15 +73,13 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name:
-          Build MusicFormats for MacOS
+      - name: Build MusicFormats for MacOS
         run:
           cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
 
       # --------------------------------------------------------------------------
-      - name:
-          Move libraries, includes, executables and user guide to the top level
+      - name: Move libraries, includes, executables and user guide to the top level
         run: |
           mv build/lib .
           mv include .
@@ -93,13 +88,11 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name:
-          Upload version informations and binaries for MacOS
+      - name: Upload version informations and binaries for MacOS
         uses:
           actions/upload-artifact@v4
         with:
-          name:
-            musicformats-macos-artifact
+          name: musicformats-macos-artifact
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt

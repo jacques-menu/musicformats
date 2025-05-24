@@ -1318,6 +1318,8 @@ class EXP lpsr2lilypondTranslator :
                           cLilypondSlurContinuer,
                           cLilypondSlurCloser;
 
+    Bool                  fLilypondWillHandleTheNextSlurCloser;
+
     void                  generateNoteSlurLineTypes (
                             const S_msrNote& note);
 

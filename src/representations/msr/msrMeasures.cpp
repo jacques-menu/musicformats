@@ -7973,14 +7973,14 @@ std::string msrMeasure::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[Measure '" <<
+    "[Measure" <<
+    ", fMeasureNumber: '" <<
     fMeasureNumber <<
-// JMI    ", fMeasureKind: " <<
-    "', " <<
+    "', fMeasureKind: " <<
     fMeasureKind <<
-// JMI    ", voice: " <<
-    ", " <<
+    ", voice: " <<
     voice->getVoiceName () <<
+
     ", fMeasureOrdinalNumberInVoice: " <<
     fMeasureOrdinalNumberInVoice <<
     ", fMeasurePuristNumber: " <<
@@ -8158,14 +8158,138 @@ void msrMeasure::displayMeasure (
     std::endl << std::endl;
 }
 
-void msrMeasure::printFull (std::ostream& os) const
+void msrMeasure::print (std::ostream& os) const
 {
+  // fetch the voice
+  S_msrVoice
+    voice =
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
+
   os <<
-    "[Measure FULL" <<
+    "[Measure" <<
     ", fMeasureNumber: '" <<
     fMeasureNumber <<
     "', fMeasureKind: " <<
     fMeasureKind <<
+    ", voice: " <<
+    voice->getVoiceName () <<
+
+    ", " <<
+    mfSingularOrPlural (
+      fMeasureElementsList.size (), "element", "elements") <<
+    ", line " << fInputLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 45;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMeasureCurrentPositionInMeasure" << ": " <<
+    fMeasureCurrentPositionInMeasure.asFractionString () <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fMeasureWholeNotesDuration" << ": " <<
+    fMeasureWholeNotesDuration.asFractionString () <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fFullMeasureWholeNotesDuration" << ": " <<
+    fFullMeasureWholeNotesDuration <<
+//     getFullMeasureWholeNotesDuration ().asString () << JMI 0.9.73
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMeasureIsMusicallyEmpty" << ": " <<
+    fMeasureIsMusicallyEmpty <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMeasureIsFirstInVoice" << ": " <<
+    fMeasureIsFirstInVoice <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMeasureOrdinalNumberInVoice" << ": " <<
+    fMeasureOrdinalNumberInVoice <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMeasurePuristNumber" << ": " <<
+    fMeasurePuristNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNextMeasureNumber" << ": " <<
+    fNextMeasureNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fMeasureDebugNumber" << ": " <<
+    fMeasureDebugNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMeasureEndRegularKind" << ": " <<
+    fMeasureEndRegularKind <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fInputLineNumber" << ": " <<
+    fInputLineNumber <<
+    std::endl;
+
+  size_t
+    measureElementsListSize =
+      fMeasureElementsList.size ();
+
+  os <<
+    std::setw (fieldWidth) <<
+    "fMeasureElementsList" << ": " <<
+    mfSingularOrPlural (
+      measureElementsListSize, "element", "elements") <<
+    std::endl;
+
+  if (measureElementsListSize) {
+    os << std::endl;
+    ++gIndenter;
+
+    std::list <S_msrMeasureElement>::const_iterator
+      iBegin = fMeasureElementsList.begin (),
+      iEnd   = fMeasureElementsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+    os << std::endl;
+
+    --gIndenter;
+  }
+
+  --gIndenter;
+
+  os << ']' << std::endl;
+}
+
+void msrMeasure::printFull (std::ostream& os) const
+{
+  // fetch the voice
+  S_msrVoice
+    voice =
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
+
+  os <<
+    "[Measure" <<
+    ", fMeasureNumber: '" <<
+    fMeasureNumber <<
+    "', fMeasureKind: " <<
+    fMeasureKind <<
+    ", voice: " <<
+    voice->getVoiceName () <<
+
     ", " <<
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
@@ -8244,12 +8368,6 @@ void msrMeasure::printFull (std::ostream& os) const
 
 
 #ifdef MF_TRACE_IS_ENABLED
-  // fetch the voice
-  S_msrVoice
-    voice =
-      fMeasureUpLinkToSegment->
-        getSegmentUpLinkToVoice ();
-
   // fetch voice's current clef, key and time signature
   S_msrClef
     voiceCurrentClef =
@@ -8442,111 +8560,6 @@ void msrMeasure::printFull (std::ostream& os) const
 
       if (++i == iEnd) break;
       os << ' ';
-    } // for
-    os << std::endl;
-
-    --gIndenter;
-  }
-
-  --gIndenter;
-
-  os << ']' << std::endl;
-}
-
-void msrMeasure::print (std::ostream& os) const
-{
-  os <<
-    "[Measure " <<
-    ", fMeasureNumber: '" <<
-    fMeasureNumber <<
-    "', " << fMeasureKind <<
-    ", " <<
-    mfSingularOrPlural (
-      fMeasureElementsList.size (), "element", "elements") <<
-    ", line " << fInputLineNumber <<
-    std::endl;
-
-  ++gIndenter;
-
-  constexpr int fieldWidth = 45;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fMeasureCurrentPositionInMeasure" << ": " <<
-    fMeasureCurrentPositionInMeasure.asFractionString () <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fMeasureWholeNotesDuration" << ": " <<
-    fMeasureWholeNotesDuration.asFractionString () <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fFullMeasureWholeNotesDuration" << ": " <<
-    fFullMeasureWholeNotesDuration <<
-//     getFullMeasureWholeNotesDuration ().asString () << JMI 0.9.73
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fMeasureIsMusicallyEmpty" << ": " <<
-    fMeasureIsMusicallyEmpty <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fMeasureIsFirstInVoice" << ": " <<
-    fMeasureIsFirstInVoice <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fMeasureOrdinalNumberInVoice" << ": " <<
-    fMeasureOrdinalNumberInVoice <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fMeasurePuristNumber" << ": " <<
-    fMeasurePuristNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fNextMeasureNumber" << ": " <<
-    fNextMeasureNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fMeasureDebugNumber" << ": " <<
-    fMeasureDebugNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fMeasureEndRegularKind" << ": " <<
-    fMeasureEndRegularKind <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fInputLineNumber" << ": " <<
-    fInputLineNumber <<
-    std::endl;
-
-  size_t
-    measureElementsListSize =
-      fMeasureElementsList.size ();
-
-  os <<
-    std::setw (fieldWidth) <<
-    "fMeasureElementsList" << ": " <<
-    mfSingularOrPlural (
-      measureElementsListSize, "element", "elements") <<
-    std::endl;
-
-  if (measureElementsListSize) {
-    os << std::endl;
-    ++gIndenter;
-
-    std::list <S_msrMeasureElement>::const_iterator
-      iBegin = fMeasureElementsList.begin (),
-      iEnd   = fMeasureElementsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
-      os << std::endl;
     } // for
     os << std::endl;
 

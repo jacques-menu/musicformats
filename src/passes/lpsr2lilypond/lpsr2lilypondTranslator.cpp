@@ -21423,6 +21423,7 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
             // in grace notes groups
             case msrNoteKind::kNoteRegularInGraceNotesGroup:
               // let LilyPond take care of the slur JMI 0.9.74
+              fLilypondWillHandleTheNextSlurCloser = true;
               break;
 
             default:
@@ -21467,31 +21468,37 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
 
           gLog << note << std::endl;
 
-          switch (note->getNoteKind ()) {
-            case msrNoteKind::kNote_UNKNOWN_:
-              break;
-
-            // in grace notes groups
-            case msrNoteKind::kNoteRegularInGraceNotesGroup:
-              // let LilyPond take care of the slur JMI 0.9.74
-              break;
-
-            default:
-              if (noteSlurStopsNumber != 1) {
-                fLilypondCodeStream <<
-                  cLilypondSlurContinuer <<
-                  slur->getSlurNumber ();
+//           switch (note->getNoteKind ()) {
+//             case msrNoteKind::kNote_UNKNOWN_:
+//               break;
+//
+//             // in grace notes groups
+//             case msrNoteKind::kNoteRegularInGraceNotesGroup:
+//               // let LilyPond take care of the slur JMI 0.9.74
+//               break;
+//
+//             default:
+              if (fLilypondWillHandleTheNextSlurCloser) {
+                // let LilyPond take care of the slur JMI 0.9.74
+                fLilypondWillHandleTheNextSlurCloser = false;
               }
-              fLilypondCodeStream << cLilypondSlurCloser;
+              else {
+                if (noteSlurStopsNumber != 1) {
+                  fLilypondCodeStream <<
+                    cLilypondSlurContinuer <<
+                    slur->getSlurNumber ();
+                }
+                fLilypondCodeStream << cLilypondSlurCloser;
 
-              if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
-                // generate the input line number as a comment
-                fLilypondCodeStream <<
-                  " %{ <-- line " <<
-                  slur->getInputLineNumber () <<
-                  " BBBBBBB %} ";
+                if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+                  // generate the input line number as a comment
+                  fLilypondCodeStream <<
+                    " %{ <-- line " <<
+                    slur->getInputLineNumber () <<
+                    " BBBBBBB %} ";
+                }
               }
-          } // switch
+//           } // switch
 
           switch (slur->getSlurPlacementKind ()) {
             case msrPlacementKind::kPlacement_UNKNOWN_:

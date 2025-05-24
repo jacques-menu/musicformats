@@ -313,8 +313,9 @@ class EXP msrSegment : public msrVoiceElement
     // notes
 
     void                  appendNoteToSegment (
-                            const S_msrNote&           note,
-                            const mfPositionInMeasure& partCurrentDrawingPositionInMeasure);
+                            const S_msrNote&  note,
+                            const mfPositionInMeasure&
+                                              partCurrentDrawingPositionInMeasure);
 
     void                  appendNoteToSegmentClone (const S_msrNote& note);
 

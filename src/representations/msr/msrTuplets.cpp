@@ -265,9 +265,11 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
   chord->setPositionInTuplet (
     fTupletElementsList.size ());
 
-  // account for the chord duration,
+  // account for the chord duration, which may be 0 if the latter is not yet filled
   fMeasureElementSoundingWholeNotes +=
     chord->getMeasureElementSoundingWholeNotes ();
+
+gLog << "fMeasureElementSoundingWholeNotes: " << fMeasureElementSoundingWholeNotes << std::endl;
 
   fTupletDisplayWholeNotes += // JMI USELESS ??? 0.9.72
     chord->getChordDisplayWholeNotes ();
@@ -990,11 +992,11 @@ std::string msrTuplet::asString () const
 
   ss <<
     "[Tuplet" <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", fMeasureElementSoundingWholeNotes: " <<
-    fMeasureElementSoundingWholeNotes.asFractionString () <<
     ", line " << fInputLineNumber;
 
   ss <<
@@ -1068,12 +1070,12 @@ std::string msrTuplet::asShortString () const
 
   ss <<
     "[Tuplet" <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
     ", fTupletBracketPlacementKind: " << fTupletBracketPlacementKind <<
-    ", fMeasureElementSoundingWholeNotes: " <<
-    fMeasureElementSoundingWholeNotes.asFractionString () <<
     ", line " << fInputLineNumber;
 
   ss <<
@@ -1142,6 +1144,8 @@ void msrTuplet::printFull (std::ostream& os) const
 {
   os <<
     "[Tuplet" <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
@@ -1160,10 +1164,6 @@ void msrTuplet::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fMeasureElementPositionInMeasure" << ": " <<
     fMeasureElementPositionInMeasure.asString () <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fMeasureElementSoundingWholeNotes" << ": " <<
-    fMeasureElementSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1272,6 +1272,8 @@ void msrTuplet::print (std::ostream& os) const
 {
   os <<
     "[Tuplet" <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", " <<
@@ -1303,10 +1305,6 @@ void msrTuplet::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fMeasureElementPositionInMeasure" << ": " <<
     fMeasureElementPositionInMeasure.asString () <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fMeasureElementSoundingWholeNotes" << ": " <<
-    fMeasureElementSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<

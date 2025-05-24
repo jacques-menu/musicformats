@@ -8,9 +8,9 @@ name: Build PDF documentation files
 on:
   # Triggers the workflow on push or pull request events but only for the v0.9.72-beta-2 branch
   push:
-#     branches: [ master v0.9.72-beta-3 ]
+    branches: [ master ]
   pull_request:
-#     branches: [ master v0.9.72-beta-3 ]
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -22,23 +22,20 @@ jobs:
 
   build-and-upload-the-MusicFormats-docummenntation-PDF-files:
 
-    name:
-      Compile and upload the user and maintenance guides
+    name: Compile and upload the user and maintenance guides
     runs-on:
       ubuntu-latest
 
     steps:
 
       # --------------------------------------------------------------------------
-      - name:
-          Checkout repo
+      - name: Checkout repo
         uses:
           actions/checkout@v4
 
 
       # --------------------------------------------------------------------------
-      - name:
-          Setup node
+      - name: Setup node
         uses:
           actions/setup-node@v4
         with:
@@ -46,8 +43,7 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name:
-          Test the beamer package - 1 pdflatex run is enough
+      - name: Test the beamer package - 1 pdflatex run is enough
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -58,8 +54,7 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name:
-          Compile the user guide - pdflatex run 1/3
+      - name: Compile the user guide - pdflatex run 1/3
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -68,8 +63,7 @@ jobs:
           root_file:
             MusicFormatsUserGuide.tex
 
-      - name:
-          Compile the user guide - pdflatex run 2/3
+      - name: Compile the user guide - pdflatex run 2/3
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -78,8 +72,7 @@ jobs:
           root_file:
             MusicFormatsUserGuide.tex
 
-      - name:
-          Compile the user guide - pdflatex run 3/3
+      - name: Compile the user guide - pdflatex run 3/3
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -90,8 +83,7 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name:
-          Compile the maintenance guide - pdflatex run 1/3
+      - name: Compile the maintenance guide - pdflatex run 1/3
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -100,8 +92,7 @@ jobs:
           root_file:
             MusicFormatsMaintainanceGuide.tex
 
-      - name:
-          Compile the maintenance guide - pdflatex run 2/3
+      - name: Compile the maintenance guide - pdflatex run 2/3
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -110,8 +101,7 @@ jobs:
           root_file:
             MusicFormatsMaintainanceGuide.tex
 
-      - name:
-          Compile the maintenance guide - pdflatex run 3/3
+      - name: Compile the maintenance guide - pdflatex run 3/3
         uses:
           xu-cheng/latex-action@v3
         with:
@@ -133,13 +123,11 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name:
-          Upload the documentation PDF guides
+      - name: Upload the documentation PDF guides
         uses:
           actions/upload-artifact@v4
         with:
-          name:
-            musicformats-documentation-artifact
+          name: musicformats-documentation-artifact
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt

@@ -60,8 +60,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \score {
     <<
       
-      
-      
       <<
       
         \new Staff  = "Part_POne_Staff_One"
@@ -74,7 +72,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
             \Part_POne_Staff_One_Voice_One
           >>
         >>
-      
       
       >>
     

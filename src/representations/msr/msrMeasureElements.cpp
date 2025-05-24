@@ -130,7 +130,7 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
 
 void msrMeasureElement::incrementMeasureElementSoundingWholeNotesBy (
   const mfWholeNotes& wholeNotes,
-  const std::string&   context)
+  const std::string&  context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceDurations ()) {

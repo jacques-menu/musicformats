@@ -59,8 +59,6 @@ Part_PFour_Staff_One_Voice_One = \absolute {
   \score {
     <<
       
-      
-      
       <<
       
         \new DrumStaff  = "Part_PFour_Staff_One"
@@ -73,7 +71,6 @@ Part_PFour_Staff_One_Voice_One = \absolute {
             \Part_PFour_Staff_One_Voice_One
           >>
         >>
-      
       
       >>
     

@@ -23976,6 +23976,7 @@ void mxsr2msrSkeletonPopulator::handleChordBegin ()
   // append current chord where it belongs
   if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
     // append current chord to the innermost tuplet
+    // the chord's duratino will be added to the tuplet's upon handlelChordEnd()
     fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
       appendChordToTuplet (
         fCurrentChord);
@@ -24083,32 +24084,13 @@ void mxsr2msrSkeletonPopulator::handleChordEnd ()
 //         "fetchInnerMostTuplet () is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//   if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
-//     // append current chord to the innermost tuplet
-//     fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
-//       appendChordToTuplet (
-//         fCurrentChord);
-//   }
-//
-//   else if (fPendingGraceNotesGroup) {
-//     // append current chord to the current grace notes group
-//     // only now, so that the chord sounding duration is known
-//     // and accounted for in the measure
-//     fPendingGraceNotesGroup->
-//       appendChordToGraceNotesGroup ( // VITAL
-//         fCurrentChord);
-//   }
-//
-//   else {
-//     // append current chord to the current recipient voice
-//     // only now, so that the chord sounding duration is known
-//     // and accounted for in the measure
-// //     abort();
-//
-//     fCurrentRecipientMsrVoice->
-//       appendChordToVoice ( // VITAL
-//         fCurrentChord);
-//   }
+  if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
+    // add the chord's duration to the tuplets'
+    fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
+      incrementMeasureElementSoundingWholeNotesBy (
+        fCurrentChord->getMeasureElementSoundingWholeNotes (),
+        "handleChordEnd()");
+  }
 
   // forget about the current chord
   fCurrentChord = nullptr; // JMI 0.9.72

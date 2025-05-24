@@ -2588,8 +2588,9 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 }
 
 void msrSegment::appendNoteToSegment (
-  const S_msrNote&           note,
-  const mfPositionInMeasure& partCurrentDrawingPositionInMeasure)
+  const S_msrNote&  note,
+  const mfPositionInMeasure&
+                    partCurrentDrawingPositionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {

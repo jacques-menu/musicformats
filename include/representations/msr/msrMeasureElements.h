@@ -58,6 +58,10 @@ class EXP msrMeasureElement : public msrElement
                             const mfWholeNotes& wholeNotes,
                             const std::string&   context);
 
+    void                  incrementMeasureElementSoundingWholeNotesBy (
+                            const mfWholeNotes& wholeNotes,
+                            const std::string&  context);
+
     mfWholeNotes          getMeasureElementSoundingWholeNotes () const;
 
     // this method is overridden in sub-classes such as those for
@@ -98,10 +102,6 @@ class EXP msrMeasureElement : public msrElement
 
     // public services
     // ------------------------------------------------------
-
-    void                  incrementMeasureElementSoundingWholeNotesBy (
-                            const mfWholeNotes& wholeNotes,
-                            const std::string&   context);
 
     static bool           compareMeasureElementsByIncreasingPositionInMeasure (
                             const SMARTP<msrMeasureElement>& first,
