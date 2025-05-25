@@ -59,7 +59,9 @@ class EXP msrTupletElement : public msrMeasureElement
 
     int                   fPositionInTuplet;
 };
-typedef SMARTP<msrTupletElement> S_msrTupletElement;
+
+using S_msrTupletElement = SMARTP<msrTupletElement>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt);
 EXP std::ostream& operator << (std::ostream& os, const msrTupletElement& elt);
 

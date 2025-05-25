@@ -128,12 +128,12 @@ class EXP msrChord : public msrTupletElement
                               { return fChordUpLinkToContainingGraceNotesGroup; }
 
     // chord kind
-    void                  setChordKind (
-                            msrChordInKind chordKind)
-                              { fChordKind = chordKind; }
+    void                  setChordInKind (
+                            msrChordInKind chordInKind)
+                              { fChordInKind = chordInKind; }
 
-    msrChordInKind        getChordKind () const
-                              { return fChordKind; }
+    msrChordInKind        getChordInKind () const
+                              { return fChordInKind; }
 
     void                  setChordDisplayWholeNotes (
                             const mfWholeNotes& wholeNotes);
@@ -615,7 +615,7 @@ class EXP msrChord : public msrTupletElement
     // uplink to containing grace notes group
     S_msrGraceNotesGroup  fChordUpLinkToContainingGraceNotesGroup;
 
-    msrChordInKind        fChordKind;
+    msrChordInKind        fChordInKind;
 
     // have note's values be copied to the chord?
     Bool                  fNotesValuesHaveBeenCopiedToTheChord;
@@ -741,7 +741,9 @@ class EXP msrChord : public msrTupletElement
     // figured bass
     S_msrFiguredBass      fChordFiguredBassesList;
 };
-typedef SMARTP<msrChord> S_msrChord;
+
+using S_msrChord = SMARTP<msrChord>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrChord& elt);
 
 //______________________________________________________________________________

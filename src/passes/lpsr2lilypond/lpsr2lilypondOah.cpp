@@ -570,17 +570,15 @@ std::string lilypondTransposePartNameAtom::asShortNamedOptionString () const
     ss <<
       '-' << fShortName << " \"";
 
-    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
-      iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
-      iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (
+      std::pair <std::string, S_msrSemiTonesPitchAndOctave> thePair :
+        fStringToMsrSemiTonesPitchAndOctaveMapVariable
+    ) {
       ss <<
-        (*i).first << "=" <<
+        thePair.first << "=" <<
         msrSemiTonesPitchAndOctaveAsLilypondString (
           gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
-          (*i).second);
-      if (++i == iEnd) break;
+          thePair.second);
     } // for
 
     ss << "\"";
@@ -597,17 +595,14 @@ std::string lilypondTransposePartNameAtom::asActualLongNamedOptionString () cons
     ss <<
       '-' << fShortName << " \"";
 
-    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
-      iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
-      iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, S_msrSemiTonesPitchAndOctave> thePair :
+      fStringToMsrSemiTonesPitchAndOctaveMapVariable
+    ) {
       ss <<
-        (*i).first << "=" <<
+        thePair.first << "=" <<
         msrSemiTonesPitchAndOctaveAsLilypondString (
           gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
-          (*i).second);
-      if (++i == iEnd) break;
+          thePair.second);
     } // for
 
     ss << "\"";
@@ -687,18 +682,15 @@ void lilypondTransposePartNameAtom::displayAtomWithVariableOptionsValues (
 
     ++gIndenter;
 
-    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
-      iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
-      iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, S_msrSemiTonesPitchAndOctave> thePair :
+      fStringToMsrSemiTonesPitchAndOctaveMapVariable
+    ) {
       os <<
         "Part name \"" <<
-        (*i).first <<
+        thePair.first <<
         "\" --> " <<
-        (*i).second <<
+        thePair.second <<
         std::endl;
-      if (++i == iEnd) break;
     } // for
 
     --gIndenter;
@@ -983,17 +975,14 @@ std::string lilypondTransposePartIDAtom::asShortNamedOptionString () const
     ss <<
       '-' << fShortName << " \"";
 
-    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
-      iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
-      iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, S_msrSemiTonesPitchAndOctave> thePair :
+      fStringToMsrSemiTonesPitchAndOctaveMapVariable
+    ) {
       ss <<
-        (*i).first << "=" <<
+        thePair.first << "=" <<
         msrSemiTonesPitchAndOctaveAsLilypondString (
           gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
-          (*i).second);
-      if (++i == iEnd) break;
+          thePair.second);
     } // for
 
     ss << "\"";
@@ -1010,17 +999,14 @@ std::string lilypondTransposePartIDAtom::asActualLongNamedOptionString () const
     ss <<
       '-' << fShortName << " \"";
 
-    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
-      iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
-      iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, S_msrSemiTonesPitchAndOctave> thePair :
+      fStringToMsrSemiTonesPitchAndOctaveMapVariable
+    ) {
       ss <<
-        (*i).first << "=" <<
+        thePair.first << "=" <<
         msrSemiTonesPitchAndOctaveAsLilypondString (
           gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
-          (*i).second);
-      if (++i == iEnd) break;
+          thePair.second);
     } // for
 
     ss << "\"";
@@ -1100,18 +1086,14 @@ void lilypondTransposePartIDAtom::displayAtomWithVariableOptionsValues (
 
     ++gIndenter;
 
-    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
-      iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
-      iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, S_msrSemiTonesPitchAndOctave> thePair : fStringToMsrSemiTonesPitchAndOctaveMapVariable
+    ) {
       os <<
         "\"" <<
-        (*i).first <<
+        thePair.first <<
         "\" --> " <<
-        (*i).second <<
+        thePair.second <<
         std::endl;
-      if (++i == iEnd) break;
     } // for
 
     --gIndenter;
@@ -2834,16 +2816,10 @@ void lilypondChordsDisplayAtom::print (std::ostream& os) const
   if (fStringsPairListVariable.size ()) {
     ++gIndenter;
 
-    std::list <std::pair <std::string, std::string>>::const_iterator
-      iBegin = fStringsPairListVariable.begin (),
-      iEnd   = fStringsPairListVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, std::string> thePair : fStringsPairListVariable) {
       os <<
-        (*i).first << " --> " << (*i).second <<
+        thePair.first << " --> " << thePair.second <<
         std::endl;
-      if (++i == iEnd) break;
-  // JMI    os << std::endl;
     } // for
 
     --gIndenter;
@@ -6539,20 +6515,13 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
 
     ++gIndenter;
 
-    std::list <std::pair <std::string, std::string>>::const_iterator
-      iBegin = fChordsDisplayList.begin (),
-      iEnd   = fChordsDisplayList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
+    for (std::pair <std::string, std::string> thePair : fChordsDisplayList) {
       os <<
         gTab <<
-        (*i).first <<
+        thePair.first <<
         " -> " <<
-        (*i).second <<
+        thePair.second <<
         std::endl;
-      if (++i == iEnd) break;
-  //     os << std::endl;
     } // for
 
     --gIndenter;

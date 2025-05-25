@@ -146,8 +146,8 @@ EXP std::ostream& operator << (std::ostream& os, const oahFindStringMatch& elt);
 */
 
 // PRE-declarations
-class   oahElement;
-typedef SMARTP<oahElement> S_oahElement;
+class oahElement;
+using S_oahElement = SMARTP<oahElement>;
 
 class EXP oahFindableElement : public smartable
 {

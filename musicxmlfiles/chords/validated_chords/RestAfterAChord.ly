@@ -33,7 +33,7 @@
 
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
-  \partial 4
+  \partial 4.
   
   \clef "treble"
   \time 4/4
@@ -46,8 +46,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \score {
     <<
       
-      
-      
       <<
       
         \new Staff  = "Part_POne_Staff_One"
@@ -59,7 +57,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
             \Part_POne_Staff_One_Voice_One
           >>
         >>
-      
       
       >>
     

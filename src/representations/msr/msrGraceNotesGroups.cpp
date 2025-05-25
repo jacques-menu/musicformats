@@ -363,7 +363,7 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
 #endif // MF_TRACE_IS_ENABLED
 
   // set the chord kind
-  chord->setChordKind (msrChordInKind::kChordInGraceNotesGroup);
+  chord->setChordInKind (msrChordInKind::kChordInGraceNotesGroup);
 
   fGraceNotesGroupElementsList.push_back (chord);
 }

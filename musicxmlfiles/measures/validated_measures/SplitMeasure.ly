@@ -1,12 +1,12 @@
 \version "2.24.4"
 
 \header {
-  workCreditTypeTitle = "CHACONNE DES SCARAMOUCHES"
+  workCreditTypeTitle = "Split Measure"
   composer            = ""
   poet                = "CA"
   software            = "Neuratron PhotoScore"
   right               = ""
-  title               = "CHACONNE DES SCARAMOUCHES"
+  title               = "Split Measure"
 }
 
 \paper {
@@ -52,8 +52,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \score {
     <<
       
-      
-      
       <<
       
         \new Staff  = "Part_POne_Staff_One"
@@ -65,7 +63,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
             \Part_POne_Staff_One_Voice_One
           >>
         >>
-      
       
       >>
     

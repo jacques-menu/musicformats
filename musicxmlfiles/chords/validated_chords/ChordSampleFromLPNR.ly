@@ -36,16 +36,16 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \time 4/4
-c''4 < c'' e'' g'' >  < c''' e''' g'''' >  < c'' e' g''' >  }
+  c''4 < c'' e'' g'' >  < c''' e''' g'''' >  < c'' e' g''' >  
+}
 
 \book {
 
   \score {
     <<
-      
-      
       
       <<
       
@@ -58,7 +58,6 @@ c''4 < c'' e'' g'' >  < c''' e''' g'''' >  < c'' e' g''' >  }
             \Part_POne_Staff_One_Voice_One
           >>
         >>
-      
       
       >>
     

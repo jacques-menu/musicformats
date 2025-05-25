@@ -1641,14 +1641,10 @@ void mfcMultiComponent::printRepresentationsVersions (std::ostream&  os) const
   ++gIndenter;
 
   if (fRepresentationComponentsList.size ()) {
-    std::list <S_mfcRepresentationComponent>::const_iterator
-      iBegin = fRepresentationComponentsList.begin (),
-      iEnd   = fRepresentationComponentsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_mfcRepresentationComponent
-        representationComponent = (*i);
-
+    for (
+      S_mfcRepresentationComponent representationComponent :
+        fRepresentationComponentsList
+    ) {
       constexpr int fieldWidth = 20;
 
       os << std::left <<
@@ -1662,9 +1658,6 @@ void mfcMultiComponent::printRepresentationsVersions (std::ostream&  os) const
         representationComponent->mostRecentVersionNumberAndDateAsString () <<
         std::endl;
       --gIndenter;
-
-      if (++i == iEnd) break;
-//      os << std::endl;
     } // for
   }
   else {
@@ -1683,14 +1676,7 @@ void mfcMultiComponent::printPassesVersions (std::ostream&  os) const
   ++gIndenter;
 
   if (fPassComponentsList.size ()) {
-    std::list <S_mfcPassComponent>::const_iterator
-      iBegin = fPassComponentsList.begin (),
-      iEnd   = fPassComponentsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_mfcPassComponent
-        passComponent = (*i);
-
+    for (S_mfcPassComponent passComponent : fPassComponentsList) {
       constexpr int fieldWidth = 20;
 
       os << std::left <<
@@ -1704,9 +1690,6 @@ void mfcMultiComponent::printPassesVersions (std::ostream&  os) const
         passComponent->mostRecentVersionNumberAndDateAsString () <<
         std::endl;
       --gIndenter;
-
-      if (++i == iEnd) break;
-//      os << std::endl;
     } // for
   }
   else {
@@ -1828,23 +1811,13 @@ void mfcMultiComponent::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list <S_mfcRepresentationComponent>::const_iterator
-      iBegin = fRepresentationComponentsList.begin (),
-      iEnd   = fRepresentationComponentsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_mfcRepresentationComponent
-        formatComponent = (*i);
-
+    for (S_mfcRepresentationComponent formatComponent : fRepresentationComponentsList) {
       constexpr int fieldWidth = 20;
 
       os << std::left <<
         std::setw (fieldWidth) <<
         formatComponent->getComponentName () <<
         formatComponent->mostRecentVersionNumberAndDateAsString ();
-
-      if (++i == iEnd) break;
-    // JMI  os << std::endl;
     } // for
 
     --gIndenter;
@@ -1860,23 +1833,13 @@ void mfcMultiComponent::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list <S_mfcPassComponent>::const_iterator
-      iBegin = fPassComponentsList.begin (),
-      iEnd   = fPassComponentsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_mfcPassComponent
-        passComponent = (*i);
-
+    for (S_mfcPassComponent passComponent : fPassComponentsList) {
       constexpr int fieldWidth = 20;
 
       os << std::left <<
         std::setw (fieldWidth) <<
         passComponent->getComponentName () <<
         passComponent->fetchComponentMostRecentVersionNumber ();
-
-      if (++i == iEnd) break;
-    // JMI  os << std::endl;
     } // for
 
     --gIndenter;
@@ -2294,14 +2257,7 @@ void mfcLibraryComponent::printConvertersVersions (std::ostream&  os) const
   ++gIndenter;
 
   if (fConverterComponentsList.size ()) {
-    std::list <S_mfcConverterComponent>::const_iterator
-      iBegin = fConverterComponentsList.begin (),
-      iEnd   = fConverterComponentsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_mfcConverterComponent
-        converterComponent = (*i);
-
+    for (S_mfcConverterComponent converterComponent : fConverterComponentsList) {
       constexpr int fieldWidth = 20;
 
       os << std::left <<
@@ -2315,9 +2271,6 @@ void mfcLibraryComponent::printConvertersVersions (std::ostream&  os) const
         converterComponent->mostRecentVersionNumberAndDateAsString () <<
         std::endl;
       --gIndenter;
-
-      if (++i == iEnd) break;
-//      os << std::endl;
     } // for
   }
   else {

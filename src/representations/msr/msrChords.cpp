@@ -189,7 +189,7 @@ msrChord::msrChord (int inputLineNumber)
     : msrTupletElement (
         inputLineNumber)
 {
-  fChordKind = msrChordInKind::kChordIn_UNKNOWN_;
+  fChordInKind = msrChordInKind::kChordIn_UNKNOWN_;
 
   // fChordUpLinkToMeasure = upLinkToMeasure;
 //   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
@@ -215,7 +215,7 @@ msrChord::msrChord (int inputLineNumber)
 //     : msrTupletElement (
 //         inputLineNumber)
 // {
-//   fChordKind = msrChordInKind::kChordIn_UNKNOWN_;
+//   fChordInKind = msrChordInKind::kChordIn_UNKNOWN_;
 //
 //   // fChordUpLinkToMeasure = upLinkToMeasure;
 //   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
@@ -241,7 +241,7 @@ msrChord::msrChord (
     : msrTupletElement (
         inputLineNumber)
 {
-  fChordKind = msrChordInKind::kChordIn_UNKNOWN_;
+  fChordInKind = msrChordInKind::kChordIn_UNKNOWN_;
 
   // fChordUpLinkToMeasure = upLinkToMeasure;
   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
@@ -352,7 +352,7 @@ S_msrChord msrChord::createChordNewbornClone (
 // {
 //   S_msrMeasure result;
 //
-//   switch (fChordKind) {
+//   switch (fChordInKind) {
 //     case msrChordInKind::kChordIn_UNKNOWN_:
 //       break;
 //
@@ -438,7 +438,7 @@ S_msrChord msrChord::createChordNewbornClone (
 // {
 //   const S_msrTuplet& result;
 //
-//   switch (fChordKind) {
+//   switch (fChordInKind) {
 //     case msrChordInKind::kChordIn_UNKNOWN_:
 //       break;
 //
@@ -467,7 +467,7 @@ S_msrChord msrChord::createChordNewbornClone (
 // {
 //   S_msrGraceNotesGroup result;
 //
-//   switch (fChordKind) {
+//   switch (fChordInKind) {
 //     case msrChordInKind::kChordIn_UNKNOWN_:
 //       break;
 //     case msrChordInKind::kChordInMeasure:
@@ -741,6 +741,76 @@ void msrChord::appendNoteToChord (
     copyNoteValuesToChord (note);
 
     fNotesValuesHaveBeenCopiedToTheChord = true;
+
+
+    /*
+  switch (noteKind) {
+    case msrNoteKind::kNote_UNKNOWN_:
+      result = "kNote_UNKNOWN_";
+      break;
+
+    // in measures
+    case msrNoteKind::kNoteRegularInMeasure:
+      result = "kNoteRegularInMeasure";
+      break;
+
+    case msrNoteKind::kNoteRestInMeasure:
+      result = "kNoteRestInMeasure";
+      break;
+
+    case msrNoteKind::kNoteSkipInMeasure:
+      result = "kNoteSkipInMeasure";
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInMeasure:
+      result = "kNoteUnpitchedInMeasure";
+      break;
+
+    // in chords
+    case msrNoteKind::kNoteRegularInChord:
+      result = "kNoteRegularInChord";
+      break;
+
+    // in tuplets
+    case msrNoteKind::kNoteRegularInTuplet:
+      result = "kNoteRegularInTuplet";
+      break;
+
+    case msrNoteKind::kNoteRestInTuplet:
+      result = "kNoteRestInTuplet";
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInTuplet:
+      result = "kNoteUnpitchedInTuplet";
+      break;
+
+    // in grace notes groups
+    case msrNoteKind::kNoteRegularInGraceNotesGroup:
+      result = "kNoteRegularInGraceNotesGroup";
+      break;
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
+      result = "kNoteRestInGraceNotesGroup";
+      break;
+    case msrNoteKind::kNoteSkipInGraceNotesGroup:
+      result = "kNoteSkipInGraceNotesGroup";
+      break;
+
+    // in chords in grace notes groups
+    case msrNoteKind::kNoteInChordInGraceNotesGroup:
+      result = "kNoteInChordInGraceNotesGroup";
+      break;
+
+    // in tuplets in grace notes groups
+    case msrNoteKind::kNoteInTupletInGraceNotesGroup:
+      result = "kNoteInTupletInGraceNotesGroup";
+      break;
+
+    // in double-tremolos
+    case msrNoteKind::kNoteInDoubleTremolo:
+      result = "kNoteInDoubleTremolo";
+      break;
+  } // switch
+    */
   }
 
   // register note's uplink to chord
@@ -2957,7 +3027,7 @@ std::string msrChord::asString () const
     "[Chord" << // JMI 0.9.71
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes <<
-    ", fChordKind: " << fChordKind <<
+    ", fChordInKind: " << fChordInKind <<
     ", line " << fInputLineNumber <<
     ", fChordNotesVector: <";
 
@@ -2997,7 +3067,7 @@ std::string msrChord::asShortString () const
     "[Chord" << // JMI 0.9.71
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes <<
-    ", " << fChordKind <<
+    ", fChordInKind: " << fChordInKind <<
     ", line " << fInputLineNumber <<
     ", fChordNotesVector: <";
 
@@ -3043,6 +3113,7 @@ void msrChord::print (std::ostream& os) const
     "[Chord" <<
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes <<
+    ", fChordInKind: " << fChordInKind <<
     ", " <<
     mfSingularOrPlural (
       fChordNotesVector.size (), "note", "notes") <<
@@ -3839,7 +3910,7 @@ void msrChord::printFull (std::ostream& os) const
     "[Chord" <<
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes <<
-    ", fChordKind: " << fChordKind <<
+    ", fChordInKind: " << fChordInKind <<
     ", " <<
     mfSingularOrPlural (
       fChordNotesVector.size (), "note", "notes") <<

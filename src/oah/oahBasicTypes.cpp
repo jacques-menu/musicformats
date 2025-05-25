@@ -3550,17 +3550,9 @@ void oahSubGroup::printSummary (std::ostream& os) const
   if (fSubGroupAtomsList.size ()) {
     ++gIndenter;
 
-    std::list <S_oahAtom>::const_iterator
-      iBegin = fSubGroupAtomsList.begin (),
-      iEnd   = fSubGroupAtomsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_oahAtom atom = (*i);
-
+    for (S_oahAtom atom : fSubGroupAtomsList) {
       // print a summary of the atom
       atom->printSummary (os);
-      if (++i == iEnd) break;
-//      os << std::endl;
     } // for
 
     --gIndenter;
@@ -3669,13 +3661,7 @@ void oahSubGroup::printHelp (std::ostream& os) const
       if (fSubGroupAtomsList.size ()) {
         ++gIndenter;
 
-        std::list <S_oahAtom>::const_iterator
-          iBegin = fSubGroupAtomsList.begin (),
-          iEnd   = fSubGroupAtomsList.end (),
-          i      = iBegin;
-        for ( ; ; ) {
-          S_oahAtom atom = (*i);
-
+        for (S_oahAtom atom : fSubGroupAtomsList) {
           // print the atom help unless it is not visible
           switch (atom->getElementVisibilityKind ()) {
             case oahElementVisibilityKind::kElementVisibilityWhole:
@@ -3687,8 +3673,6 @@ void oahSubGroup::printHelp (std::ostream& os) const
             case oahElementVisibilityKind::kElementVisibilityHidden:
               break;
           } // switch
-
-          if (++i == iEnd) break;
         } // for
 
         --gIndenter;
@@ -3736,13 +3720,7 @@ void oahSubGroup::printHelpWithHeaderWidth (
       if (fSubGroupAtomsList.size ()) {
         ++gIndenter;
 
-        std::list <S_oahAtom>::const_iterator
-          iBegin = fSubGroupAtomsList.begin (),
-          iEnd   = fSubGroupAtomsList.end (),
-          i      = iBegin;
-        for ( ; ; ) {
-          S_oahAtom atom = (*i);
-
+        for (S_oahAtom atom : fSubGroupAtomsList) {
           // print the atom help unless it is not visible
           switch (atom->getElementVisibilityKind ()) {
             case oahElementVisibilityKind::kElementVisibilityWhole:
@@ -3754,8 +3732,6 @@ void oahSubGroup::printHelpWithHeaderWidth (
             case oahElementVisibilityKind::kElementVisibilityHidden:
               break;
           } // switch
-
-          if (++i == iEnd) break;
         } // for
 
         --gIndenter;
@@ -3790,15 +3766,9 @@ void oahSubGroup::printSubGroupHelp (std::ostream& os) const
   if (fSubGroupAtomsList.size ()) {
     ++gIndenter;
 
-    std::list <S_oahAtom>::const_iterator
-      iBegin = fSubGroupAtomsList.begin (),
-      iEnd   = fSubGroupAtomsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (S_oahAtom atom : fSubGroupAtomsList) {
       // print the atom help
-      (*i)->printHelp (os);
-      if (++i == iEnd) break;
-  // JMI    os << std::endl;
+      atom->printHelp (os);
     } // for
 
     --gIndenter;
@@ -3896,19 +3866,12 @@ void oahSubGroup::printSubGroupAndAtomHelp (
   if (fSubGroupAtomsList.size ()) {
     ++gIndenter;
 
-    std::list <S_oahAtom>::const_iterator
-      iBegin = fSubGroupAtomsList.begin (),
-      iEnd   = fSubGroupAtomsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_oahAtom atom = (*i);
-
+    for (S_oahAtom atom : fSubGroupAtomsList) {
       if (atom == targetAtom) {
         // print the target atom's help
         // target options atom's help
-        (*i)->printHelp (os);
+        atom->printHelp (os);
       }
-      if (++i == iEnd) break;
     } // for
 
     --gIndenter;
@@ -4063,18 +4026,12 @@ void oahSubGroup::printSubGroupOptionsValuesAll (
   if (fSubGroupAtomsList.size ()) {
     ++gIndenter;
 
-    std::list <S_oahAtom>::const_iterator
-      iBegin = fSubGroupAtomsList.begin (),
-      iEnd   = fSubGroupAtomsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (S_oahAtom atom : fSubGroupAtomsList) {
       // print the atom values
-      (*i)->
+      atom->
         displayAtomWithVariableOptionsValues (
           os,
           valueFieldWidth);
-      if (++i == iEnd) break;
-  //    os << std::endl;
     } // for
 
     --gIndenter;
@@ -4751,21 +4708,12 @@ void oahGroup::printHelp (std::ostream& os) const
       ++gIndenter;
     }
 
-    std::list <S_oahSubGroup>::const_iterator
-      iBegin = fGroupSubGroupsList.begin (),
-      iEnd   = fGroupSubGroupsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_oahSubGroup subGroup = (*i);
-
+    for (S_oahSubGroup subGroup : fGroupSubGroupsList) {
       // print the options subgroup help
       subGroup->
         printHelpWithHeaderWidth (
           os,
           maximumSubGroupHeaderLength);
-
-      if (++i == iEnd) break;
-  // JMI    os << std::endl;
     } // for
 
     if (fGroupHeaderIsToBeWritten) {
@@ -4804,19 +4752,11 @@ void oahGroup::printGroupAndSubGroupHelp (
   if (fGroupSubGroupsList.size ()) {
     ++gIndenter;
 
-    std::list <S_oahSubGroup>::const_iterator
-      iBegin = fGroupSubGroupsList.begin (),
-      iEnd   = fGroupSubGroupsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_oahSubGroup
-        subGroup = (*i);
-
+    for (S_oahSubGroup subGroup : fGroupSubGroupsList) {
       if (subGroup == targetSubGroup) {
         // print the target options subgroup help
         subGroup->printSubGroupHelp (os);
       }
-      if (++i == iEnd) break;
     } // for
 
     --gIndenter;
@@ -4830,13 +4770,7 @@ void oahGroup::printGroupAndSubGroupAndAtomHelp (
 {
   // print the target options subgroup
   if (fGroupSubGroupsList.size ()) {
-    std::list <S_oahSubGroup>::const_iterator
-      iBegin = fGroupSubGroupsList.begin (),
-      iEnd   = fGroupSubGroupsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_oahSubGroup subGroup = (*i);
-
+    for (S_oahSubGroup subGroup : fGroupSubGroupsList) {
       if (subGroup == targetSubGroup) {
         // print the target options subgroup's
         // target options targetAtom's help
@@ -4845,8 +4779,6 @@ void oahGroup::printGroupAndSubGroupAndAtomHelp (
             os,
             targetAtom);
       }
-
-      if (++i == iEnd) break;
     } // for
   }
 }
@@ -4879,16 +4811,10 @@ void oahGroup::printOptionsSummary (std::ostream& os) const
   if (fGroupSubGroupsList.size ()) {
     ++gIndenter;
 
-    std::list <S_oahSubGroup>::const_iterator
-      iBegin = fGroupSubGroupsList.begin (),
-      iEnd   = fGroupSubGroupsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (S_oahSubGroup subGroup : fGroupSubGroupsList) {
       // print the options subgroup description
-      (*i)->
+      subGroup->
         printOptionsSummary (os);
-      if (++i == iEnd) break;
- //     os << std::endl;
     } // for
 
     --gIndenter;
@@ -7988,24 +7914,18 @@ void oahHandler::displayNamesToElementsMap (std::ostream& os) const
   ++gIndenter;
 
   if (handlerElementsMapSize) {
-    std::map <std::string, S_oahElement>::const_iterator
-      iBegin = fHandlerNamesToElementsMap.begin (),
-      iEnd   = fHandlerNamesToElementsMap.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, S_oahElement> thePair : fHandlerNamesToElementsMap) {
       os <<
-        "\"" << (*i).first << "\" ==>" <<
+        "\"" << thePair.first << "\" ==>" <<
         std::endl;
 
       ++gIndenter;
 
-      (*i).second->
+      thePair.second->
         printOptionHeader (
           os);
 
       --gIndenter;
-
-      if (++i == iEnd) break;
     } // for
   }
   else {
@@ -8051,16 +7971,10 @@ void oahHandler::displayNamesToElementsMap (std::ostream& os) const
   ++gIndenter;
 
   if (optionsMapElementsNamesListSize) {
-    std::list <std::string>::const_iterator
-      iBegin = optionsMapElementsNamesList.begin (),
-      iEnd   = optionsMapElementsNamesList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::string elementName : optionsMapElementsNamesList) {
       os <<
-        "\"" << (*i) << "\" ==>" <<
+        "\"" << elementName << "\" ==>" <<
         std::endl;
-
-      if (++i == iEnd) break;
     } // for
   }
   else {
@@ -8593,8 +8507,7 @@ void oahHandler::handleOptionPrefixName (
       gLog <<
         '[' << (*i) << ']';
       if (++i == iEnd) break;
-      gLog <<
-        ' ';
+      gLog << ' ';
     } // for
 
     gLog << std::endl;

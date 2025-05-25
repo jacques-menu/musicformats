@@ -1,10 +1,10 @@
 \version "2.24.4"
 
 \header {
-  workCreditTypeTitle = "Organ example 1"
+  workCreditTypeTitle = "Organ Example"
   encodingDate        = "2016-10-24"
   software            = "MuseScore 2.0.3"
-  title               = "Organ example 1"
+  title               = "Organ Example"
 }
 
 \paper {
@@ -161,8 +161,6 @@ Part_POne_Staff_Three_Voice_Nine = \absolute {
   \score {
     <<
       
-      
-      
       <<
       
         \new PianoStaff
@@ -200,7 +198,6 @@ Part_POne_Staff_Three_Voice_Nine = \absolute {
             >>
           >>
         >>
-      
       
       >>
     

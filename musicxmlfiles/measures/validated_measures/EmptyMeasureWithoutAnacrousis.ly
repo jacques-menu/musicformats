@@ -1,9 +1,11 @@
 \version "2.24.4"
 
 \header {
+  workCreditTypeTitle = "Empty Measure Without Anacrusis"
   encodingDate        = "2025-05-05"
   software            = "Sibelius 20250.4"
   software            = "Dolet 6.6 for Sibelius"
+  title               = "Empty Measure Without Anacrusis"
 }
 
 \paper {
@@ -69,8 +71,6 @@ Part_POne_Staff_One_Voice_Two = \absolute {
   \score {
     <<
       
-      
-      
       <<
       
         \new Staff  = "Part_POne_Staff_One"
@@ -87,7 +87,6 @@ Part_POne_Staff_One_Voice_Two = \absolute {
             \Part_POne_Staff_One_Voice_Two
           >>
         >>
-      
       
       >>
     

@@ -1,7 +1,7 @@
 \version "2.24.4"
 
 \header {
-  movementTitle       = "Too Short Measure"
+  workCreditTypeTitle = "Too Short Measure"
   encodingDate        = "2022-02-28"
   composer            = "Gentil compositeur"
   arranger            = "Gentil arrangeur"
@@ -52,16 +52,12 @@ r4 r }
   \score {
     <<
       
-      
-      
       <<
       
-        
         \new StaffGroup
         \with {
           instrumentName = "WW"
         }
-        
         
         
         <<
@@ -78,51 +74,40 @@ r4 r }
           >>
         
         
-        
         >>
-        
         \new StaffGroup
         \with {
           instrumentName = "Brass"
         }
         
         
-        
         <<
         
         
         
-        
         >>
-        
         \new StaffGroup
         \with {
           instrumentName = "Non-Pitched Percussion"
         }
         
         
-        
         <<
         
         
         
-        
         >>
-        
         \new StaffGroup
         \with {
           instrumentName = "Strings"
         }
         
         
-        
         <<
         
         
         
-        
         >>
-      
       
       
       >>

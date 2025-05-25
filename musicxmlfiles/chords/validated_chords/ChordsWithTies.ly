@@ -37,12 +37,14 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \key a \minor
   \numericTimeSignature \time 4/4
   
-  \arpeggioNormal \ottava #1 < b'' ~  e''' ~  b''' ~  > 1 -\arpeggio \stemDown  < b'' e''' b''' > 2  < f''' c'''' >   | % 1
-  \barNumberCheck #3
+  \arpeggioNormal \ottava #1 < b'' ~  e''' ~  b''' ~  > 1 -\arpeggio
+  
+  \stemDown  < b'' e''' b''' > 2  < f''' c'''' >  
 }
 
 Part_POne_Staff_Two_Voice_Five = \absolute {
@@ -59,8 +61,6 @@ Part_POne_Staff_Two_Voice_Five = \absolute {
 
   \score {
     <<
-      
-      
       
       <<
       
@@ -90,7 +90,6 @@ Part_POne_Staff_Two_Voice_Five = \absolute {
             >>
           >>
         >>
-      
       
       >>
     

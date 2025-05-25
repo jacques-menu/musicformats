@@ -298,7 +298,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
   const std::string&         context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoicePositions ()) {
+  if (gTraceOahGroup->getTracePositionsInVoices ()) {
     S_msrMeasure
       upLinkToMeasure =
         getMeasureElementUpLinkToMeasure ();
@@ -331,7 +331,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 
   // set measure element voice position
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoicePositions ()) {
+  if (gTraceOahGroup->getTracePositionsInVoices ()) {
     S_msrMeasure
       upLinkToMeasure =
         getMeasureElementUpLinkToMeasure ();

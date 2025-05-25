@@ -9455,6 +9455,13 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
     handleTupletEndEventsIfAny ();
   }
 
+  // update the part current drawing position in measure JMI 0.9.74
+  fCurrentPart->
+    setPartCurrentDrawingPositionInMeasure (
+      elt->getInputLineNumber (),
+      fCurrentPart->
+        getPartCurrentDrawingPositionInMeasure ());
+
   fOnGoingForward = false;
 }
 
@@ -24085,11 +24092,14 @@ void mxsr2msrSkeletonPopulator::handleChordEnd ()
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
-    // add the chord's duration to the tuplets'
-    fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
-      incrementMeasureElementSoundingWholeNotesBy (
-        fCurrentChord->getMeasureElementSoundingWholeNotes (),
-        "handleChordEnd()");
+//     // add the chord's duration to the tuplets'
+//     fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
+//       incrementMeasureElementSoundingWholeNotesBy (
+//         fCurrentChord->getMeasureElementSoundingWholeNotes (),
+//         "handleChordEnd()");
+//     fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
+//       appendChordToTuplet (
+//         fCurrentChord);
   }
 
   // forget about the current chord

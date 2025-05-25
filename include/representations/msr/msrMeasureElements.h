@@ -149,8 +149,11 @@ class EXP msrMeasureElement : public msrElement
 //     mfMoment             fMeasureMoment;
 //     mfMoment             fVoiceMoment;
 };
-typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
+
+using S_msrMeasureElement = SMARTP<msrMeasureElement>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt);
+
 
 }
 

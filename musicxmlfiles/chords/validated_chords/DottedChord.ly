@@ -36,17 +36,17 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \key c \major
   \time 4/4
-\stemDown  < c'' e'' g'' bes''! > 8. -\p -\p -\p -! r16 d''2. }
+  \stemDown  < c'' e'' g'' bes''! > 8. -\p -\p -\p -! r16 d''2.
+}
 
 \book {
 
   \score {
     <<
-      
-      
       
       <<
       
@@ -59,7 +59,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
             \Part_POne_Staff_One_Voice_One
           >>
         >>
-      
       
       >>
     

@@ -1436,6 +1436,64 @@ S_msrNote msrNote::createSkipNote (
   return obj;
 }
 
+S_msrNote msrNote::createSkipNoteWithContext (
+  int                 inputLineNumber,
+  const std::string&  noteMeasureNumber,
+  const mfWholeNotes& soundingWholeNotes,
+  const mfWholeNotes& displayWholeNotes,
+  int                 dotsNumber,
+  const std::string&  context)
+{
+  msrNote * obj =
+    new msrNote (
+      inputLineNumber,
+      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
+
+      // noteMeasureNumber, // JMI 0.9.66
+
+      msrNoteKind::kNoteSkipInMeasure, // noteKind
+
+      msrQuarterTonesPitchKind::kQTP_Skip,
+      msrOctaveKind::kOctave_UNKNOWN_, // noteOctave,
+
+      soundingWholeNotes,
+      displayWholeNotes,
+
+      dotsNumber,
+
+      mfDurationKind::kDuration_UNKNOWN_, // noteGraphicNotesDuration
+
+      msrQuarterTonesPitchKind::kQTP_UNKNOWN_, // noteDisplayQuarterTonesPitch
+      msrOctaveKind::kOctave_UNKNOWN_, // noteDisplayOctave,
+
+      msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
+
+      msrPrintObjectKind::kPrintObjectYes, // default value
+
+      msrNoteHeadKind::kNoteHeadNormal, // JMI
+      msrNoteHeadFilledKind::kNoteHeadFilledYes, // JMI
+      msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
+  assert (obj != nullptr);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSkipNotes ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating skip note " <<
+      obj->asString () <<
+      ", context: " << context <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return obj;
+}
+
 S_msrNote msrNote::createGraceSkipNote (
 	int                 inputLineNumber,
 	const std::string&  noteMeasureNumber,

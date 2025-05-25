@@ -37,19 +37,19 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \key c \major
   \time 4/4
   \stemUp  < g' e' c' \laissezVibrer  > 2  < a' f' c' >  
   \bar "|."
+  
 }
 
 \book {
 
   \score {
     <<
-      
-      
       
       <<
       
@@ -62,7 +62,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
             \Part_POne_Staff_One_Voice_One
           >>
         >>
-      
       
       >>
     

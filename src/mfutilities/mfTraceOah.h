@@ -297,19 +297,19 @@ class EXP traceOahGroup : public oahGroup
 
     // positions
     Bool                  getTracePositionInMeasures () const
-                              { return fTracePositionInMeasures; }
+                              { return fTracePositionsInMeasures; }
     void                  setTracePositionInMeasures ()
-                              { fTracePositionInMeasures = true; }
+                              { fTracePositionsInMeasures = true; }
 
     Bool                  getTracePositionInMeasuresDetails () const
-                              { return fTracePositionInMeasuresDetails; }
+                              { return fTracePositionsInMeasuresDetails; }
     void                  setTracePositionInMeasuresDetails ()
-                              { fTracePositionInMeasuresDetails = true; }
+                              { fTracePositionsInMeasuresDetails = true; }
 
-    Bool                  getTraceVoicePositions () const
-                              { return fTraceVoicePositions; }
-    void                  setTraceVoicePositions ()
-                              { fTraceVoicePositions = true; }
+    Bool                  getTracePositionsInVoices () const
+                              { return fTracePositionsInVoices; }
+    void                  setTracePositionsInVoices ()
+                              { fTracePositionsInVoices = true; }
 
     // moments
     Bool                  getTraceMeasureMoments () const
@@ -1044,10 +1044,10 @@ class EXP traceOahGroup : public oahGroup
 
 
     // positions
-    Bool                  fTracePositionInMeasures;
-    Bool                  fTracePositionInMeasuresDetails;
+    Bool                  fTracePositionsInMeasures;
+    Bool                  fTracePositionsInMeasuresDetails;
 
-    Bool                  fTraceVoicePositions;
+    Bool                  fTracePositionsInVoices;
 
     // moments
     Bool                  fTraceMeasureMoments;

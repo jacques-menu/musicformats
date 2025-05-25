@@ -36,24 +36,26 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \time 4/4
   
-\arpeggioNormal < e'' g'' > 4 -\arpeggio < d'' f'' >  < d'' f'' > 2 }
+  \arpeggioNormal < e'' g'' > 4 -\arpeggio < d'' f'' >  < d'' f'' > 2
+}
 
 Part_POne_Staff_One_Voice_Two = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \time 4/4
-< d' f' > 2 < g' b' >  }
+  < d' f' > 2 < g' b' >  
+}
 
 \book {
 
   \score {
     <<
-      
-      
       
       <<
       
@@ -71,7 +73,6 @@ Part_POne_Staff_One_Voice_Two = \absolute {
             \Part_POne_Staff_One_Voice_Two
           >>
         >>
-      
       
       >>
     

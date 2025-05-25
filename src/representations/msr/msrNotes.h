@@ -116,7 +116,15 @@ class EXP msrNote : public msrTupletElement
                             const std::string&  noteMeasureNumber,
                             const mfWholeNotes& soundingWholeNotes,
                             const mfWholeNotes& displayWholeNotes,
-                            int                 dotsNumberr);
+                            int                 dotsNumber);
+
+    static SMARTP<msrNote> createSkipNoteWithContext (
+                            int                 inputLineNumber,
+                            const std::string&  noteMeasureNumber,
+                            const mfWholeNotes& soundingWholeNotes,
+                            const mfWholeNotes& displayWholeNotes,
+                            int                 dotsNumber,
+                            const std::string&  context);
 
     static SMARTP<msrNote> createSkipNoteWithOctave (
                             int                 inputLineNumber,
@@ -1270,7 +1278,9 @@ class EXP msrNote : public msrTupletElement
     msrSoloNoteOrRestInStaffKind
                           fNoteSoloNoteOrRestInStaffKind;
 };
-typedef SMARTP<msrNote> S_msrNote;
+
+using S_msrNote = SMARTP<msrNote>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrNote& elt);
 
 
