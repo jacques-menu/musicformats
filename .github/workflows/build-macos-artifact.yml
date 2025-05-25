@@ -83,7 +83,7 @@ jobs:
         run: |
           mv build/lib .
           mv build/bin .
-          mv documentation/mfuserguide/MusicFormatsUserGuide.pdf .
+#           mv documentation/mfuserguide/MusicFormatsUserGuide.pdf .
 
 
       # --------------------------------------------------------------------------
