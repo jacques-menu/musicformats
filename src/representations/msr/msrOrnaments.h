@@ -22,6 +22,10 @@
 namespace MusicFormats
 {
 
+/*
+  See musicxmlfiles/backupandforward/SimpleForward.xml
+*/
+
 //______________________________________________________________________________
 // data types
 
