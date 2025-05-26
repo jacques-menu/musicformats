@@ -5037,10 +5037,12 @@ void msrMeasure::handleIncompleteMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
     if (scoreMeasuresNumber == 1) {
-      setMeasureKind (msrMeasureKind::kMeasureKindIncompleteLastMeasure);
+      setMeasureKind (
+        msrMeasureKind::kMeasureKindIncompleteLastMeasure);
     }
     else {
-      setMeasureKind (msrMeasureKind::kMeasureKindAnacrusis);
+      setMeasureKind (
+        msrMeasureKind::kMeasureKindAnacrusis);
     }
 
     // this is a regular measure end

@@ -406,7 +406,7 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
     cLilypondPhrasingOpener +=
       "%{ cLilypondPhrasingOpener %} ";
   }
-  cLilypondPhrasingContinuer = "\\= ";
+  cLilypondPhrasingContinuer = "\\= "; // JMI 0.9.74 USELESS ???
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondPhrasingContinuer +=
       "%{ cLilypondPhrasingContinuer %} ";
@@ -21358,9 +21358,9 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
 
   int
     noteSlurStartsNumber =
-     note->fetchNoteSlurStartsNumber (),
+      note->fetchNoteSlurStartsNumber (),
     noteSlurStopsNumber =
-     note->fetchNoteSlurStopsNumber ();
+      note->fetchNoteSlurStopsNumber ();
 
   if (noteSlursListSize) {
     std::list <S_msrSlur>::const_iterator i;
@@ -21481,6 +21481,9 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
               if (fLilypondWillHandleTheNextSlurCloser) {
                 // let LilyPond take care of the slur JMI 0.9.74
                 fLilypondWillHandleTheNextSlurCloser = false;
+
+                // there is one slur stopper to be handled
+                noteSlurStopsNumber -= 1; // JMI 0.9.74
               }
               else {
                 if (noteSlurStopsNumber != 1) {

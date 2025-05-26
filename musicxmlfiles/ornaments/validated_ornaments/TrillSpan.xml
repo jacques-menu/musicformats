@@ -2,6 +2,9 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 1.0 Partwise//EN"
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
+	<work>
+		<work-title>Trill Span</work-title>
+	</work>
   <part-list>
     <score-part id="P1">
       <part-name>MusicXML Part</part-name>

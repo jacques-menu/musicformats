@@ -73,7 +73,7 @@ echo
 # clean the current directory from previously generaterated files if any
 # ---------------------------------------------------------
 
-rm -f *.ly *.pdf *.midi
+rm -f *.ly *.pdf *.midi *.log
 
 
 # select which files to translate

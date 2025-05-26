@@ -9428,11 +9428,11 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // append a padding note to the voice to be forwarded
-  voiceToBeForwardedTo ->
-    cascadeAppendPaddingNoteToVoice (
-      elt->getInputLineNumber (),
-      forwardStepLength);
+//   // append a padding note to the voice to be forwarded JMI 0.9.74
+//   voiceToBeForwardedTo ->
+//     cascadeAppendPaddingNoteToVoice (
+//       elt->getInputLineNumber (),
+//       forwardStepLength);
 
   // staff changes handling
 //   fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
@@ -9447,20 +9447,14 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 //   }
 
   // tuplets handling
-  if (
-    fCurrentRecipientMxsrVoice
-      &&
-    ! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()
-  ) {
-    handleTupletEndEventsIfAny ();
-  }
+  gLog << "fCurrentRecipientMxsrVoice: " << fCurrentRecipientMxsrVoice << std::endl;
 
-  // update the part current drawing position in measure JMI 0.9.74
-  fCurrentPart->
-    setPartCurrentDrawingPositionInMeasure (
-      elt->getInputLineNumber (),
-      fCurrentPart->
-        getPartCurrentDrawingPositionInMeasure ());
+  // there can be a <forward /> markup before any note in the MusicXML data
+  if (fCurrentRecipientMxsrVoice) {
+    if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
+      handleTupletEndEventsIfAny ();
+    }
+  }
 
   fOnGoingForward = false;
 }

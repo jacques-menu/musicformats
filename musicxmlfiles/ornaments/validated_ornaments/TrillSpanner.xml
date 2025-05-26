@@ -3,9 +3,9 @@
     "-//Recordare//DTD MusicXML 3.0 Partwise//EN"
     "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.0">
-  <work>
-    <work-title>Simple Forward</work-title>
-    </work>
+	<work>
+		<work-title>Trill Spanner</work-title>
+	</work>
   <!-- A very minimal MusicXML example -->
   <part-list>
     <score-part id="P1">
@@ -13,9 +13,7 @@
     </score-part>
   </part-list>
   <part id="P1">
-<!--=========================================================-->
     <measure number="1">
-  <!-- A very minimal MusicXML example, part P1, measure 1 -->
       <attributes>
         <divisions>1</divisions>
         <key>
@@ -30,31 +28,35 @@
           <line>2</line>
         </clef>
       </attributes>
-  <!-- A very minimal MusicXML example, part P1, measure 1, before first note -->
       <note>
         <pitch>
           <step>C</step>
           <octave>4</octave>
         </pitch>
-        <duration>1</duration>
-        <type>quarter</type>
-      </note>
-
-     <forward>
-        <duration>2</duration>
-        <!--voice>1</voice>
-        <staff>1</staff-->
-     </forward>
-
-      <note>
-        <pitch>
-          <step>F</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>1</duration>
-        <type>quarter</type>
+        <duration>4</duration>
+        <type>whole</type>
+        <notations>
+          <ornaments>
+            <trill-mark/>
+            <wavy-line default-y="39" number="1" type="start"/>
+          </ornaments>
+        </notations>
       </note>
     </measure>
-<!--=========================================================-->
+    <measure number="2">
+      <note>
+        <pitch>
+          <step>G</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <type>whole</type>
+        <notations>
+          <ornaments>
+            <wavy-line default-y="39" number="1" type="stop"/>
+          </ornaments>
+        </notations>
+      </note>
+    </measure>
   </part>
 </score-partwise>
