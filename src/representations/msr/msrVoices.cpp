@@ -3590,12 +3590,20 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
   fVoiceLastSegment->
     appendChordToSegment (chord);
 
-  // account for chord's wholeNotes in the part drawing measure position
-  fVoiceUpLinkToStaff->
-    getStaffUpLinkToPart ()->
-      incrementPartCurrentDrawingPositionInMeasure (
-        chord->getInputLineNumber (),
-        chord->getMeasureElementSoundingWholeNotes ());
+  // a chord can be appended to the voice
+  // before it has been populated with its member notes
+  // account for chord's wholeNotes in the part drawing measure position if relevant
+  mfWholeNotes
+    chordSoundingWholeNotes =
+      chord->getMeasureElementSoundingWholeNotes ();
+
+  if (chordSoundingWholeNotes.getNumerator () != 0) { // JMI 0.9.74
+    fVoiceUpLinkToStaff->
+      getStaffUpLinkToPart ()->
+        incrementPartCurrentDrawingPositionInMeasure (
+          chord->getInputLineNumber (),
+          chord->getMeasureElementSoundingWholeNotes ());
+  }
 
   // get the chord's notes vector
   const std::vector <S_msrNote>&

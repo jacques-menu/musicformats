@@ -3938,7 +3938,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 //
   // attach pending tempos if any to part
   if (! fPendingTemposList.empty ()) {
-    attachPendingTemposToPart (fCurrentPart);
+    attachPendingTemposToVoice (fCurrentRecipientMsrVoice); // JMI 0.9.74 is that the right voice here???
   }
 
   // finalize the current part
@@ -6465,7 +6465,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sound& elt)
             0),       // JMI could be different??? 0.9.66
           tempoString,
           msrTempoParenthesizedKind::kTempoParenthesizedNo,
-          msrPlacementKind::kPlacementBelow);
+          fCurrentDirectionPlacementKind);
     }
   }
 
@@ -24537,9 +24537,10 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     attachPendingRehearsalMarksToPart (fCurrentPart);
   }
 
-  // attach pending tempos if any to part
+  // attach pending tempos if any to the current voice
   if (! fPendingTemposList.empty ()) {
-    attachPendingTemposToPart (fCurrentPart);
+//     attachPendingTemposToPart (fCurrentPart);
+    attachPendingTemposToVoice (fCurrentRecipientMsrVoice); // JMI 0.9.74
   }
 
   // populate fCurrentNote with current informations

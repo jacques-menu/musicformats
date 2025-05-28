@@ -127,7 +127,7 @@ S_msrChord msrChord::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const mfWholeNotes& chordDisplayWholeNotes,
-  mfDurationKind chordGraphicNotesDurationKind)
+  mfDurationKind      chordGraphicNotesDurationKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
@@ -157,9 +157,9 @@ S_msrChord msrChord::create (
 }
 
 // S_msrChord msrChord::create (
-//   int                  inputLineNumber,
+//   int                 inputLineNumber,
 //   const mfWholeNotes& chordDisplayWholeNotes,
-//   mfDurationKind chordGraphicNotesDurationKind)
+//   mfDurationKind      chordGraphicNotesDurationKind)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceChordsBasics ()) {
@@ -234,10 +234,10 @@ msrChord::msrChord (int inputLineNumber)
 // }
 
 msrChord::msrChord (
-  int                  inputLineNumber,
-  const S_msrMeasure&  upLinkToMeasure,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   const mfWholeNotes& chordDisplayWholeNotes,
-  mfDurationKind chordGraphicNotesDurationKind)
+  mfDurationKind      chordGraphicNotesDurationKind)
     : msrTupletElement (
         inputLineNumber)
 {
@@ -742,72 +742,56 @@ void msrChord::appendNoteToChord (
 
     fNotesValuesHaveBeenCopiedToTheChord = true;
 
-
     /*
   switch (noteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
-      result = "kNote_UNKNOWN_";
       break;
 
     // in measures
     case msrNoteKind::kNoteRegularInMeasure:
-      result = "kNoteRegularInMeasure";
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
-      result = "kNoteRestInMeasure";
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
-      result = "kNoteSkipInMeasure";
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
-      result = "kNoteUnpitchedInMeasure";
       break;
 
     // in chords
     case msrNoteKind::kNoteRegularInChord:
-      result = "kNoteRegularInChord";
       break;
 
     // in tuplets
     case msrNoteKind::kNoteRegularInTuplet:
-      result = "kNoteRegularInTuplet";
       break;
 
     case msrNoteKind::kNoteRestInTuplet:
-      result = "kNoteRestInTuplet";
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
-      result = "kNoteUnpitchedInTuplet";
       break;
 
     // in grace notes groups
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
-      result = "kNoteRegularInGraceNotesGroup";
       break;
     case msrNoteKind::kNoteRestInGraceNotesGroup:
-      result = "kNoteRestInGraceNotesGroup";
       break;
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
-      result = "kNoteSkipInGraceNotesGroup";
       break;
 
     // in chords in grace notes groups
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
-      result = "kNoteInChordInGraceNotesGroup";
       break;
 
     // in tuplets in grace notes groups
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
-      result = "kNoteInTupletInGraceNotesGroup";
       break;
 
     // in double-tremolos
     case msrNoteKind::kNoteInDoubleTremolo:
-      result = "kNoteInDoubleTremolo";
       break;
   } // switch
     */

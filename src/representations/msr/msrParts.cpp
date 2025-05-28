@@ -462,7 +462,7 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  if (wholeNotesDelta.getNumerator () < 0) {
+  if (wholeNotesDelta.getNumerator () <= 0) {
     std::stringstream ss;
 
     ss <<
@@ -516,7 +516,7 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  if (wholeNotesDelta.getNumerator () < 0) {
+  if (wholeNotesDelta.getNumerator () <= 0) {
     std::stringstream ss;
 
     ss <<

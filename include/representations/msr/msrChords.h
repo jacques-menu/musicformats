@@ -620,6 +620,9 @@ class EXP msrChord : public msrTupletElement
     // have note's values be copied to the chord?
     Bool                  fNotesValuesHaveBeenCopiedToTheChord;
 
+    // has the chord sounding duration be accounted for?
+    Bool                  fChordSoundingDurationHasBeenAccountedFor;
+
     // display whole notes
     mfWholeNotes          fChordDisplayWholeNotes;
 
