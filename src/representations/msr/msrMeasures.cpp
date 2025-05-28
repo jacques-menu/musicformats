@@ -3672,7 +3672,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 }
 
 // void msrMeasure::padUpToPositionInMeasureInMeasure (
-//   int             inputLineNumber,
+//   int                 inputLineNumber,
 //   const mfWholeNotes& positionInMeasureToPadUpTo)
 // {
 //   // fetch the measure voice

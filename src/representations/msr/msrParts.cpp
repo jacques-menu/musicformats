@@ -394,7 +394,7 @@ void msrPart::setPartCurrentDrawingPositionInMeasure (
     std::stringstream ss;
 
     ss <<
-      "Setting the drawing measure position in part " <<
+      "Setting the part current drawing measure position in part " <<
       fetchPartNameForTrace () <<
       " to " <<
       positionInMeasure <<
@@ -443,7 +443,7 @@ void msrPart::resetPartCurrentDrawingPositionInMeasure (
     std::stringstream ss;
 
     ss <<
-      "Resetting part drawing measure position to 0 in part " <<
+      "Resetting part current drawing measure position to 0 in part " <<
       fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 

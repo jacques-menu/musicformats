@@ -317,7 +317,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrVoice&   voice);
 
 //     void                  padUpToPositionInMeasureInMeasure (
-//                             int                  inputLineNumber,
+//                             int                 inputLineNumber,
 //                             const mfWholeNotes& positionInMeasureToPadUpTo);
 
     void                  padUpToPositionInMeasure (

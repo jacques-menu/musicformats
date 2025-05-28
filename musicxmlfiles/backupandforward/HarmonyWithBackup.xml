@@ -325,7 +325,7 @@
 			<note>
 				<pitch>
 					<step>A</step>
-					<octave>0</octave>
+					<octave>2</octave>
 				</pitch>
 				<duration>1536</duration>
 				<tie type='stop'/>
@@ -341,7 +341,7 @@
 				<chord/>
 				<pitch>
 					<step>A</step>
-					<octave>1</octave>
+					<octave>3</octave>
 				</pitch>
 				<duration>1536</duration>
 				<tie type='stop'/>

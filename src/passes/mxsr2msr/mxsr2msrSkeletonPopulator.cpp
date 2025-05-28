@@ -24085,15 +24085,34 @@ void mxsr2msrSkeletonPopulator::handleChordEnd ()
 //         "fetchInnerMostTuplet () is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
+  // account for current chord sounding whole notes where it belongs // JMI v0.9.74
   if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
-//     // add the chord's duration to the tuplets'
-//     fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
+    fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
+      incrementMeasureElementSoundingWholeNotesBy (
+        fCurrentChord->getMeasureElementSoundingWholeNotes (),
+        "handleChordEnd()");
+  }
+
+  else if (fPendingGraceNotesGroup) {
+//     fPendingGraceNotesGroup->
 //       incrementMeasureElementSoundingWholeNotesBy (
 //         fCurrentChord->getMeasureElementSoundingWholeNotes (),
 //         "handleChordEnd()");
-//     fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
-//       appendChordToTuplet (
-//         fCurrentChord);
+  }
+
+  else {
+    fCurrentPart->
+      incrementPartCurrentDrawingPositionInMeasure (
+        fCurrentNoteInputStartLineNumber,
+        fCurrentChord->getMeasureElementSoundingWholeNotes ());
+
+    fCurrentRecipientMsrVoice->
+      fetchVoiceLastMeasure (
+        fCurrentNoteInputStartLineNumber)->
+          incrementMeasureCurrentPositionInMeasure (
+            fCurrentNoteInputStartLineNumber,
+            fCurrentChord->getMeasureElementSoundingWholeNotes (),
+            "handleChordEnd()");
   }
 
   // forget about the current chord
