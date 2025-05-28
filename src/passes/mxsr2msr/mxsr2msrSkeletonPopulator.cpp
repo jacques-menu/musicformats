@@ -17536,7 +17536,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_f& elt)
           msrDynamicKind::kDynamicF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_ff& elt)
@@ -17579,7 +17579,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ff& elt)
           msrDynamicKind::kDynamicFF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_fff& elt)
@@ -17622,7 +17622,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fff& elt)
           msrDynamicKind::kDynamicFFF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_ffff& elt)
@@ -17665,7 +17665,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffff& elt)
           msrDynamicKind::kDynamicFFFF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_fffff& elt)
@@ -17708,7 +17708,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fffff& elt)
           msrDynamicKind::kDynamicFFFFF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_ffffff& elt)
@@ -17751,7 +17751,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffffff& elt)
           msrDynamicKind::kDynamicFFFFFF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -17795,7 +17795,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_p& elt)
           msrDynamicKind::kDynamicP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_pp& elt)
@@ -17838,7 +17838,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pp& elt)
           msrDynamicKind::kDynamicPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_ppp& elt)
@@ -17881,7 +17881,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppp& elt)
           msrDynamicKind::kDynamicPPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_pppp& elt)
@@ -17924,7 +17924,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppp& elt)
           msrDynamicKind::kDynamicPPPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_ppppp& elt)
@@ -17967,7 +17967,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppppp& elt)
           msrDynamicKind::kDynamicPPPPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_pppppp& elt)
@@ -18010,7 +18010,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppppp& elt)
           msrDynamicKind::kDynamicPPPPPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18054,7 +18054,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mf& elt)
           msrDynamicKind::kDynamicMF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_mp& elt)
@@ -18097,7 +18097,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mp& elt)
           msrDynamicKind::kDynamicMP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18141,7 +18141,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fp& elt)
           msrDynamicKind::kDynamicFP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18185,7 +18185,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fz& elt)
           msrDynamicKind::kDynamicFZ,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18229,7 +18229,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pf& elt)
           msrDynamicKind::kDynamicPF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18273,7 +18273,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rf& elt)
           msrDynamicKind::kDynamicRF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18317,7 +18317,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sf& elt)
           msrDynamicKind::kDynamicSF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18361,7 +18361,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rfz& elt)
           msrDynamicKind::kDynamicRFZ,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18405,7 +18405,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfz& elt)
           msrDynamicKind::kDynamicSFZ,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18449,7 +18449,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfp& elt)
           msrDynamicKind::kDynamicSFP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18493,7 +18493,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfpp& elt)
           msrDynamicKind::kDynamicSFPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18537,7 +18537,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sffz& elt)
           msrDynamicKind::kDynamicSFFZ,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18581,7 +18581,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfzp& elt)
           msrDynamicKind::kDynamicSFZP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18625,7 +18625,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_n& elt)
           msrDynamicKind::kDynamicN,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18649,7 +18649,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_dynamics& elt)
 
   // placement
 
-  std::string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement"); // CANNOT BE PRESENT! JMI 0.9.74
 
   msrPlacementKind
     placementKind =
@@ -18671,7 +18671,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_dynamics& elt)
           otherDynamicsValue,
           placementKind);
 
-    fPendingOtherDynamicxList.push_back(otherDynamic);
+    fPendingOtherDynamicsList.push_back(otherDynamic);
   }
 }
 
@@ -18792,7 +18792,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_soft_pedal& elt)
         elt->getInputLineNumber (),
         otherDynamicsValue);
 
-  fPendingOtherDynamicxList.push_back(otherDynamic);
+  fPendingOtherDynamicsList.push_back(otherDynamic);
 }
 
 void mxsr2msrSkeletonPopulator::visitStart (S_sostenuto_pedal& elt)
@@ -18831,7 +18831,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sostenuto_pedal& elt)
         elt->getInputLineNumber (),
         otherDynamicsValue);
 
-  fPendingOtherDynamicxList.push_back(otherDynamic);
+  fPendingOtherDynamicsList.push_back(otherDynamic);
 }
 */
 
@@ -21412,7 +21412,7 @@ void mxsr2msrSkeletonPopulator::attachPendingDynamicsToCurrentNote ()
      if (gTraceOahGroup->getTraceLyrics ()) {
         std::stringstream ss;
 
-        int numberOfDynamics = fPendingDynamicxList.size ();
+        int numberOfDynamics = fPendingDynamicsList.size ();
 
         if (numberOfDynamics > 1) {
           ss <<
@@ -21435,13 +21435,13 @@ void mxsr2msrSkeletonPopulator::attachPendingDynamicsToCurrentNote ()
   }
 
   if (! delayAttachment) {
-    while (! fPendingDynamicxList.empty ()) {
+    while (! fPendingDynamicsList.empty ()) {
       S_msrDynamic
         dynamics =
-          fPendingDynamicxList.front ();
+          fPendingDynamicsList.front ();
 
       fCurrentNote->appendDynamicToNote (dynamics);
-      fPendingDynamicxList.pop_front ();
+      fPendingDynamicsList.pop_front ();
     } // while
   }
 }
@@ -21480,7 +21480,7 @@ void mxsr2msrSkeletonPopulator::attachPendingOtherDynamicsToCurrentNote ()
       if (gTraceOahGroup->getTraceDynamics ()) {
         std::stringstream ss;
 
-        int numberOfOtherDynamics = fPendingOtherDynamicxList.size ();
+        int numberOfOtherDynamics = fPendingOtherDynamicsList.size ();
 
         if (numberOfOtherDynamics > 1) {
           ss <<
@@ -21503,13 +21503,13 @@ void mxsr2msrSkeletonPopulator::attachPendingOtherDynamicsToCurrentNote ()
   }
 
   if (! delayAttachment) {
-    while (! fPendingOtherDynamicxList.empty ()) {
+    while (! fPendingOtherDynamicsList.empty ()) {
       S_msrOtherDynamic
         otherDynamic =
-          fPendingOtherDynamicxList.front ();
+          fPendingOtherDynamicsList.front ();
 
       fCurrentNote->appendOtherDynamicToNote (otherDynamic);
-      fPendingOtherDynamicxList.pop_front ();
+      fPendingOtherDynamicsList.pop_front ();
     } // while
   }
 }
@@ -22346,12 +22346,12 @@ void mxsr2msrSkeletonPopulator::attachPendingNoteLevelElementsIfAnyToCurrentNote
   }
 
   // attach the pending dynamics, if any, to the note
-  if (! fPendingDynamicxList.empty ()) {
+  if (! fPendingDynamicsList.empty ()) {
     attachPendingDynamicsToCurrentNote ();
   }
 
   // attach the pending other dynamics, if any, to the note
-  if (! fPendingOtherDynamicxList.empty ()) {
+  if (! fPendingOtherDynamicsList.empty ()) {
     attachPendingOtherDynamicsToCurrentNote ();
   }
 

@@ -1,51 +1,13 @@
 \version "2.24.4"
 
-% Generated from "31a-Directions.xml"
-% by xml2ly v0.9.74 (built May 26, 2025 @ 16:51)
-% on Wednesday 2025-05-28 @ 10:56:12 CEST
+% Generated from "OtherDynamics.xml"
+% by xml2ly v0.9.74-dev (built May 28, 2025 @ 09:47)
+% on Wednesday 2025-05-28 @ 11:05:31 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name 31a-Directions.ly 31a-Directions.xml
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name OtherDynamics.ly OtherDynamics.xml
 % or, with short option names:
-%     31a-Directions.ly 31a-Directions.xml
-
-
-% Scheme function(s): "dampAllMarkup"
-% A function to create damp all markups,
-
-dampAll = \markup
-%% do not use 'fontsize
-%\scale #'(5 . 5)
-{
-  \combine \bold "O"
-  \path #0.2
-  #'((moveto -.4 .8)(lineto 2.2 .8)
-      (closepath)
-      (moveto .9 -.5)(lineto .9 2.1))
-}
-
-
-
-% Scheme function(s): "dampMarkup"
-% A function to create damp markups,
-
-damp = \markup {
-%  \scale #'(5 . 5)
-  {
-    \center-column {
-      {
-        \override #'(thickness . 1.8)
-        \combine \draw-line #'(-1.5 . 0)
-        \combine \draw-line #'(0 . -1.5)
-        \combine \draw-line #'(0 . 1.5)
-        \combine \draw-line #'(1.5 . 0)
-        \draw-circle #0.8 #0.2 ##f
-      }
-    }
-  }
-
-}
-
+%     OtherDynamics.ly OtherDynamics.xml
 
 
 % Scheme function(s): "date & time"
@@ -78,19 +40,6 @@ damp = \markup {
 
 
 
-% Scheme function(s): "dynamics"
-% Creates variables define dynamics not native to LilyPond.
-
-rf = #(make-dynamic-script "rf")
-sfpp = #(make-dynamic-script "sfpp")
-sffz = #(make-dynamic-script "sffz")
-ppppp = #(make-dynamic-script "ppppp")
-pppppp = #(make-dynamic-script "pppppp")
-fffff = #(make-dynamic-script "fffff")
-ffffff = #(make-dynamic-script "ffffff")
-
-
-
 % Scheme function(s): "otherDynamic"
 % \\otherDynamic to handle any string as a dynamic.
 
@@ -120,11 +69,11 @@ otherDynamic =
 
 
 \header {
-  movementTitle       = "MusicXML directions (attached to staff)"
-  miscellaneousField  = "All <direction> elements 
-          defined in MusicXML. The lyrics for each note describes the direction
-          element assigned to that note."
-  title               = "MusicXML directions (attached to staff)"
+  workCreditTypeTitle = "Other Dynamics"
+  encodingDate        = "2025-05-20"
+  software            = "Sibelius 20250.4"
+  software            = "Dolet 6.6 for Sibelius"
+  title               = "Other Dynamics"
 }
 
 \paper {
@@ -168,7 +117,7 @@ otherDynamic =
     \column {
       \fill-line {
         #(string-append
-"Score generated from MusicXML data by xml2ly v0.9.74 (built May 26, 2025 @ 16:51) and LilyPond " (lilypond-version))
+"Score generated from MusicXML data by xml2ly v0.9.74-dev (built May 28, 2025 @ 09:47) and LilyPond " (lilypond-version))
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
@@ -193,83 +142,15 @@ otherDynamic =
 
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
+  \partial 2
   
   \clef "treble"
   \key c \major
-  \time 4/4
-  c'4
-  \once\override Score.RehearsalMark.direction = #DOWN
-  \mark\markup { \box { "A" } }
-  c'
-  
-  \mark\markup { \box { "B" } }
-  c'
-  
-  \mark\markup { \box { "Test" } }
-  c'
-  
-  \mark\markup { \circle { "Crc" } }
-  c'4 c' \mark \markup { \musicglyph #"scripts.coda" }
-  c' -\markup { "words" } c' ^\markup {\eyeglasses}  | % 3
-  \barNumberCheck #3
-  c'4 \p c' \pp c' \ppp c' \pppp  | % 4
-  \barNumberCheck #4
-  c'4 \ppppp c' \pppppp c' \f c' \ff  | % 5
-  \barNumberCheck #5
-  c'4 \fff c' \ffff c' \fffff c' \ffffff  | % 6
-  \barNumberCheck #6
-  c'4 \mp c' \mf c' \sf c' \sfp  | % 7
-  \barNumberCheck #7
-  c'4 \sfpp c' \fp c' \rf c' \rfz  | % 8
-  \barNumberCheck #8
-  c'4 \sfz c' \sffz c' \fz c' -\otherDynamic "abc-ffz"  | % 9
-  \barNumberCheck #9
-  c'4 \< c' \! \once \override TextSpanner.style = #'dashed-line
-  c' \startTextSpan
-  c' \stopTextSpan
-   | % 10
-  \barNumberCheck #10
-  
-  \once \override Staff.LigatureBracket.edge-height = #'(0 . 0)\[ c'4 \[ c' \] \ottava #-0 c' \ottava #0 c'  | % 11
-  \barNumberCheck #11
-    c'4
-    \sustainOn
-    c'
-    %{ kPedalTypeChange %}
-    c' c'
-    \sustainOff
-   | % 12
-  \barNumberCheck #12
-  c'4 \tempo \markup {
-    \concat {
-       \smaller \general-align #Y #DOWN \note {4} #UP
-      " = "
-      60
-    } % concat
-  }
-    _\markup { \harp-pedal #"-^^|--v^" }
-  c' c' ^\markup {\damp} c' ^\markup {\dampAll}  | % 13
-  \barNumberCheck #13
-  <<
-      \new Staff  \with { alignAboveContext = "Part_POne_Staff_One" } {
-        \hide  Staff.Stem
-        \hide  Staff.TimeSignature
-        \small
-        \once \override Score.RehearsalMark.self-alignment-X = #LEFT
-        \mark\markup {\small\bold "Scordatura"}
-        <ees, a dis g b e>4
-      }
-    {
-    c'4
-    }
-  >>
-  \discant "121" c' r2 \bar "||"
-   | % 14
-  \barNumberCheck #14
-  c'4 _\markup { \italic "subito" } _\markup { " " } \p c' \ppp _\< c' \fff \! r
+  \numericTimeSignature \time 4/4
+  \stemUp a'2 -\otherDynamic "sempre pp"
   \bar "|."
-   | % 15
-  \barNumberCheck #15
+   | % 1
+  \barNumberCheck #1
 }
 
 \book {
@@ -281,7 +162,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
       
         \new Staff  = "Part_POne_Staff_One"
         \with {
-          instrumentName = "MusicXML Part"
+          instrumentName = "[Unnamed (treble staff)]"
         }
         <<
           \context Voice = "Part_POne_Staff_One_Voice_One" <<

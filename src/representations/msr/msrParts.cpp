@@ -406,19 +406,19 @@ void msrPart::setPartCurrentDrawingPositionInMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
-    "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
+//     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (positionInMeasure.getNumerator () < 0) {
     std::stringstream ss;
 
     ss <<
-      "cannot set part current measure position to " <<
+      "cannot set part current drawing position in measure to " <<
       positionInMeasure <<
       " in part " <<
       fetchPartNameForTrace () <<
@@ -460,6 +460,28 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
   int                 inputLineNumber,
   const mfWholeNotes& wholeNotesDelta)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  if (wholeNotesDelta.getNumerator () < 0) {
+    std::stringstream ss;
+
+    ss <<
+      "cannot increment part current drawing positino in measure " <<
+      fPartCurrentDrawingPositionInMeasure <<
+      " by wholeNotesDelta " <<
+      wholeNotesDelta <<
+      " in part " <<
+      fetchPartNameForTrace () <<
+      ", line " << inputLineNumber;
+
+    msrInternalError (
+      gServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   mfPositionInMeasure
     newPartCurrentDrawingPositionInMeasure =
       fPartCurrentDrawingPositionInMeasure + wholeNotesDelta;
@@ -469,7 +491,7 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
     std::stringstream ss;
 
     ss <<
-      "Incrementing the drawing measure position " <<
+      "Incrementing the part current drawing position in measure " <<
       fPartCurrentDrawingPositionInMeasure <<
       " in part " <<
       fetchPartNameForTrace () <<
@@ -492,6 +514,28 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
   int                 inputLineNumber,
   const mfWholeNotes& wholeNotesDelta)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  if (wholeNotesDelta.getNumerator () < 0) {
+    std::stringstream ss;
+
+    ss <<
+      "cannot decrement part current drawing positino in measure " <<
+      fPartCurrentDrawingPositionInMeasure <<
+      " by wholeNotesDelta " <<
+      wholeNotesDelta <<
+      " in part " <<
+      fetchPartNameForTrace () <<
+      ", line " << inputLineNumber;
+
+    msrInternalError (
+      gServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   mfPositionInMeasure
     newPartCurrentDrawingPositionInMeasure =
       fPartCurrentDrawingPositionInMeasure - wholeNotesDelta;
@@ -501,7 +545,7 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
     std::stringstream ss;
 
     ss <<
-      "Decrementing the drawing measure position " <<
+      "Decrementing the part current drawing position in measure " <<
       fPartCurrentDrawingPositionInMeasure <<
       " in part " <<
       fetchPartNameForTrace () <<
@@ -523,7 +567,7 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
     std::stringstream ss;
 
     ss <<
-      "cannot decrement part current measure position " <<
+      "cannot decrement part current drawing position in measure  " <<
       fPartCurrentDrawingPositionInMeasure <<
       " by " <<
       wholeNotesDelta <<

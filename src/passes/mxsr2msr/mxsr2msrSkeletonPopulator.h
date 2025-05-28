@@ -2382,17 +2382,35 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const S_msrChord& chord);
                                 */
 
+    // dynamics handling
+    // ------------------------------------------------------
+
     // dynamics, words and wedges remain pending until the next note
     // (they precede the note in MusicXML but follow it in LilyPond)
-    std::list <S_msrDynamic>  fPendingDynamicxList;
-    std::list <S_msrOtherDynamic>
-                              fPendingOtherDynamicxList;
+//     msrPlacementKind          fCurrentDynamicsPlacementKind;
 
+    std::list <S_msrDynamic>  fPendingDynamicsList;
+    std::list <S_msrOtherDynamic>
+                              fPendingOtherDynamicsList;
+
+    // words handling
+    // ------------------------------------------------------
+
+//     msrPlacementKind          fCurrentWordsPlacementKind;
     std::list <S_msrWords>    fPendingWordsList;
+
+    // slurs handling
+    // ------------------------------------------------------
 
     std::list <S_msrSlur>     fPendingSlursList;
 
+    // ligatures handling
+    // ------------------------------------------------------
+
     std::list <S_msrLigature> fPendingLigaturesList;
+
+    // slashes handling
+    // ------------------------------------------------------
 
     std::list <S_msrSlash>    fPendingSlashesList;
 

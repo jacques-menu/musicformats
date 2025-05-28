@@ -1102,7 +1102,7 @@ void msrMeasure::appendMeasureElementToMeasure (
     incrementMeasureCurrentPositionInMeasure (
       measureElement->getInputLineNumber (),
       measureElementSoundingWholeNotes,
-      context + "appendMeasureElementToMeasure() 2: "
+      context + " -- appendMeasureElementToMeasure() 2: "
         +
       measureElement->asShortString ());
   }
