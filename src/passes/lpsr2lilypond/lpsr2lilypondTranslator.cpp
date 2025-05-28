@@ -14917,7 +14917,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
-    gLog << "fGenerateOngoingNonEmptyStanza: " << fGenerateOngoingNonEmptyStanza << std::endl;
+//     gLog << "fGenerateOngoingNonEmptyStanza: " << fGenerateOngoingNonEmptyStanza << std::endl;
 
     if (fGenerateOngoingNonEmptyStanza) { // JMI 0.9.73
       generateLilypondSyllable (elt);
