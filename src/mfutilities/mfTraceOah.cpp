@@ -2130,7 +2130,7 @@ This option implies '-trace-measures-basics, -tmeasb' and '-trace-measures, -tme
 
   fTraceOnlyMeasurerNumbeOahAtom =
     oahStringAtom::create (
-      "trace-only-measure", "tonlymea",
+      "trace-only-measure", "tom",
 R"(Restrict the production of trace information to measure NUMBER)",
       "NUMBER",
       "fTraceOnlyMeasure",

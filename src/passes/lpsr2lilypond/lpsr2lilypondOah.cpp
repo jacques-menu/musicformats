@@ -5092,7 +5092,7 @@ R"(Generate initial comments showing the LilyPond generation informations.)",
   S_oahBooleanAtom
     fCommentLilypondStructureBasicsAtom =
       oahBooleanAtom::create (
-        "comment-lilypond-structure-basics", "comlilysb",
+        "comment-lilypond-structure-basics", "clsb",
 R"(Generate basic comments showing the structure of the score
 such as '% part P_POne (P1).)",
         "fCommentLilypondStructureBasics",
@@ -5105,7 +5105,7 @@ such as '% part P_POne (P1).)",
   subGroup->
     appendAtomToSubGroup (
       oahTwoBooleansAtom::create (
-        "comment-lilypond-structure", "comlilys",
+        "comment-lilypond-structure", "cls",
 R"(Generate comments showing the structure of the score.
 This option implies '-lilypond-comments-basics, -lilycomsb'.)",
         "fCommentLilypondStructure",

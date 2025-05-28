@@ -18899,7 +18899,7 @@ void lpsr2lilypondTranslator::generateTempoBeatUnitsPerMinute (
         "\" = \"" <<
         std::endl <<
         tempoPerMinute <<
-        ")" <<
+        cLilypondTempoBeatUnitsPerMinuteCloser <<
         std::endl;
 
       --gIndenter;
@@ -18997,7 +18997,7 @@ void lpsr2lilypondTranslator::generateTempoBeatUnitsPerMinute (
   --gIndenter;
 
   fLilypondCodeStream <<
-    cLilypondTempoBeatUnitsPerMinuteCloser <<
+    '}' << // \\markup
     std::endl;
   } // switch
 }
@@ -21465,8 +21465,6 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
-
-          gLog << note << std::endl;
 
 //           switch (note->getNoteKind ()) {
 //             case msrNoteKind::kNote_UNKNOWN_:
