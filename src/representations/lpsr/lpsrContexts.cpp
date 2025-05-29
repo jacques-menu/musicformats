@@ -197,14 +197,8 @@ void lpsrContext::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list <S_msrElement>::const_iterator
-      iBegin = fContextElementsList.begin (),
-      iEnd   = fContextElementsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
- // JMI     os << std::endl;
+    for (S_msrElement element : fContextElementsList) {
+      os << element;
     } // for
 
     --gIndenter;
@@ -367,14 +361,8 @@ void lpsrChordNamesContext::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list <S_msrElement>::const_iterator
-      iBegin = fContextElementsList.begin (),
-      iEnd   = fContextElementsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
- // JMI     os << std::endl;
+    for (S_msrElement element : fContextElementsList) {
+      os << element;
     } // for
 
     --gIndenter;
@@ -550,14 +538,8 @@ void lpsrFiguredBassContext::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list <S_msrElement>::const_iterator
-      iBegin = fContextElementsList.begin (),
-      iEnd   = fContextElementsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
- // JMI     os << std::endl;
+    for (S_msrElement element : fContextElementsList) {
+      os << element;
     } // for
 
     --gIndenter;

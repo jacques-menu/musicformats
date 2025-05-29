@@ -22,9 +22,10 @@
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
 #include "msrBarNumberChecks.h"
-#include "msrBreaks.h"
 #include "msrDoubleTremolos.h"
+#include "msrLineBreaks.h"
 #include "msrOctaveShifts.h"
+#include "msrPageBreaks.h"
 #include "msrRehearsalMarks.h"
 #include "msrSegments.h"
 #include "msrTempos.h"
@@ -2588,8 +2589,9 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 }
 
 void msrSegment::appendNoteToSegment (
-  const S_msrNote&           note,
-  const mfPositionInMeasure& partCurrentDrawingPositionInMeasure)
+  const S_msrNote&  note,
+  const mfPositionInMeasure&
+                    partCurrentDrawingPositionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {

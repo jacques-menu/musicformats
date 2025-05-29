@@ -26,9 +26,10 @@
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
 #include "msrBarNumberChecks.h"
-#include "msrBreaks.h"
 #include "msrDoubleTremolos.h"
 #include "msrGlissandos.h"
+#include "msrLineBreaks.h"
+#include "msrPageBreaks.h"
 #include "msrRehearsalMarks.h"
 #include "msrSlides.h"
 #include "msrTablatures.h"
@@ -5045,7 +5046,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             fCurrentVoiceClone);
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-      // sanity check
+        // sanity check
         mfAssert (
           __FILE__, __LINE__,
           fCurrentNonGraceNoteClone != nullptr,
@@ -5060,9 +5061,9 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
           // append current chord clone to the current voice,
           // only now that its duration is known
-          fCurrentVoiceClone->
-            appendChordToVoice (
-              fCurrentChordClone);
+                                              //           fCurrentVoiceClone->
+                                              //             appendChordToVoice (
+                                              //               fCurrentChordClone);
 
 //           // increment the current measure's accumulated duration
 //           // by the current chord's duration
@@ -5640,10 +5641,10 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
     // DON'T append current chord chone to the current voice clone yet,
     // wait until its first note is appended to it,
     // i.e. its duration is known
-//     // append current chord clone to the current voice
-//     fCurrentVoiceClone->
-//       appendChordToVoice (
-//         fCurrentChordClone);
+    // append current chord clone to the current voice
+    fCurrentVoiceClone->
+      appendChordToVoice (
+        fCurrentChordClone);
   }
 
   fOnGoingChord = true;

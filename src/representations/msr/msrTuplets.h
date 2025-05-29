@@ -22,8 +22,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // PRE-declaration
-class   msrTuplet;
-typedef SMARTP<msrTuplet> S_msrTuplet;
+class msrTuplet;
+using S_msrTuplet = SMARTP<msrTuplet>;
 
 //______________________________________________________________________________
 class EXP msrTuplet : public msrTupletElement

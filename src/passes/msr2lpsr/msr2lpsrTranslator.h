@@ -727,6 +727,11 @@ class EXP msr2lpsrTranslator :
     S_msrBarCheck             fLastBarCheck;
 
 
+    // line breaks
+    // ------------------------------------------------------
+    S_msrLineBreak            fLastLineBreak;
+
+
     // notes
     // ------------------------------------------------------
 

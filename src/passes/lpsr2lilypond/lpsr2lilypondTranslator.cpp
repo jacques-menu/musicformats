@@ -26,9 +26,10 @@
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
 #include "msrBarNumberChecks.h"
-#include "msrBreaks.h"
 #include "msrDoubleTremolos.h"
 #include "msrGlissandos.h"
+#include "msrLineBreaks.h"
+#include "msrPageBreaks.h"
 #include "msrRehearsalMarks.h"
 #include "msrSlides.h"
 #include "msrTablatures.h"
@@ -190,10 +191,10 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
     cLilypondStaffBlockOpener +=
       "%{ cLilypondStaffBlockOpener %} ";
   }
-  cLilypondStaffClockCloser = ">> ";
+  cLilypondStaffBlockCloser = ">> ";
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
-    cLilypondStaffClockCloser +=
-      "%{ cLilypondStaffClockCloser %} ";
+    cLilypondStaffBlockCloser +=
+      "%{ cLilypondStaffBlockCloser %} ";
   }
 
   cLilypondNewStaffGroup = "\\new StaffGroup ";
@@ -263,6 +264,30 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondNewChoirStaff +=
       "%{ cLilypondNewChoirStaff %} ";
+  }
+
+  // time signatures
+  cLilypondTimeSignatureOpener = "(";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondTimeSignatureOpener +=
+      "%{ cLilypondTimeSignatureOpener %} ";
+  }
+  cLilypondTimeSignatureCloser = ") ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondTimeSignatureCloser +=
+      "%{ cLilypondTimeSignatureCloser %} ";
+  }
+
+  // tempos
+  cLilypondTempoBeatUnitsPerMinuteOpener = "(";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondTempoBeatUnitsPerMinuteOpener +=
+      "%{ cLilypondTempoBeatUnitsPerMinuteOpener %} ";
+  }
+  cLilypondTempoBeatUnitsPerMinuteCloser = ")";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondTempoBeatUnitsPerMinuteCloser +=
+      "%{ cLilypondTempoBeatUnitsPerMinuteCloser %} ";
   }
 
   // layout context
@@ -345,6 +370,64 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
     cLilypondScordaturaCloser +=
       "%{ cLilypondScordaturaCloser %} ";
+  }
+
+  // beams
+  cLilypondBeamsOpener = "[ ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondBeamsOpener +=
+      "%{ cLilypondBeamsOpener %} ";
+  }
+  cLilypondBeamsCloser = "] ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondBeamsCloser +=
+      "%{ cLilypondBeamsCloser %} ";
+  }
+
+  // slurs
+  cLilypondSlurOpener = "( ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondSlurOpener +=
+      "%{ cLilypondSlurOpener %} ";
+  }
+  cLilypondSlurContinuer = "= ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondSlurContinuer +=
+      "%{ cLilypondSlurContinuer %} ";
+  }
+  cLilypondSlurCloser = ") ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondSlurCloser +=
+      "%{ cLilypondSlurCloser %} ";
+  }
+
+  // phrasing
+  cLilypondPhrasingOpener = "\\( ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondPhrasingOpener +=
+      "%{ cLilypondPhrasingOpener %} ";
+  }
+  cLilypondPhrasingContinuer = "\\= "; // JMI 0.9.74 USELESS ???
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondPhrasingContinuer +=
+      "%{ cLilypondPhrasingContinuer %} ";
+  }
+  cLilypondPhrasingCloser = "\\) ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondPhrasingCloser +=
+      "%{ cLilypondPhrasingCloser %} ";
+  }
+
+  // grace notes groups
+  cLilypondGraceNotesGroupOpener = " { ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondGraceNotesGroupOpener +=
+      "%{ cLilypondGraceNotesGroupOpener %} ";
+  }
+  cLilypondGraceNotesGroupCloser = "} ";
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    cLilypondGraceNotesGroupCloser +=
+      "%{ cLilypondGraceNotesGroupCloser %} ";
   }
 
   // chords
@@ -1811,7 +1894,7 @@ void lpsr2lilypondTranslator::generateNoteLigaturesList (
             // compute ligature start edge height
             float edgeHeightAbsValue = 0.75;
 
-            float       ligatureStartEdgeHeight = 0.0;
+            float ligatureStartEdgeHeight = 0.0;
 
             switch (ligature->getLigatureLineEndKind ()) {
               case msrLigatureLineEndKind::kLigatureLineEndUp:
@@ -2368,10 +2451,20 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
         note->getNoteStem ();
 
     if (noteStem) {
-      generateStemIfNeededAndUpdateCurrentStemKind (noteStem);
+      switch (note->getNoteKind ()) {
+        case msrNoteKind::kNote_UNKNOWN_:
+          break;
+
+        // in grace notes groups
+        case msrNoteKind::kNoteRegularInGraceNotesGroup:
+          // let LilyPond take care of the stem JMI 0.9.74
+          break;
+
+        default:
+          generateStemIfNeededAndUpdateCurrentStemKind (noteStem);
+      } // switch
     }
   }
-
 
   // generate the note slur direction if any,
   // unless the note is chord member
@@ -9480,21 +9573,25 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
   // LPNR, page 567 jMI ???
 
-  fLilypondCodeStream << std::endl; // JMI 0.9.72
+//   fLilypondCodeStream << std::endl; // JMI 0.9.74
 
   switch (partGroupImplicitKind) {
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
       // don't generate the implicit outer-most part group block
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
-          "% start of implicit part group block";
+          std::endl <<
+          "% start of implicit part group block" <<
+          std::endl;
       }
       break;
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
-          "% start of explicit part group block";
+          std::endl <<
+          "% start of explicit part group block" <<
+          std::endl;
       }
 
       // don't factorize '\\new' out,
@@ -9728,7 +9825,6 @@ Affecter le graveur Span_arpeggio_engraver au contexte de la portée (Staff) per
   fLilypondCodeStream << std::endl; // JMI 0.9.72
 
   fLilypondCodeStream <<
-    std::endl <<
     cLilypondStaffGroupOpener <<
     std::endl <<
     std::endl;
@@ -9809,7 +9905,6 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
   } // switch
 
   fLilypondCodeStream <<
-    std::endl <<
     cLilypondPartGroupCloser <<
     std::endl;
 }
@@ -10358,7 +10453,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
 
   --gIndenter; // incremented in visitStart (S_lpsrStaffBlock& elt)
 
-  fLilypondCodeStream <<  cLilypondStaffClockCloser;
+  fLilypondCodeStream <<  cLilypondStaffBlockCloser;
 
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
   // get the staff
@@ -11437,8 +11532,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrComment& elt)
     "% " << elt->getContents () <<
     std::endl;
 
-  if (elt->getCommentGapKind () == lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes)
-    fLilypondCodeStream << std::endl;
+  switch (elt->getCommentGapKind ()) {
+    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes:
+      fLilypondCodeStream << std::endl;
+      break;
+    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo:
+      break;
+  } // switch
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrComment& elt)
@@ -14818,7 +14918,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
-    gLog << "fGenerateOngoingNonEmptyStanza: " << fGenerateOngoingNonEmptyStanza << std::endl;
+//     gLog << "fGenerateOngoingNonEmptyStanza: " << fGenerateOngoingNonEmptyStanza << std::endl;
 
     if (fGenerateOngoingNonEmptyStanza) { // JMI 0.9.73
       generateLilypondSyllable (elt);
@@ -17818,11 +17918,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  gLog <<
-    "---> visitStart (S_msrTimeSignature& elt): " <<
-    ", elt: " <<
-    elt << // JMI  0.9.73
-    std::endl;
+//   gLog <<
+//     "---> visitStart (S_msrTimeSignature& elt): " <<
+//     ", elt: " <<
+//     elt << // JMI  0.9.73
+//     std::endl;
 
 //   msrTimeSignatureSymbolKind
 //     timeSignatureSymbolKind =
@@ -17977,7 +18077,7 @@ void lpsr2lilypondTranslator::generateRegularTimeSignature (
 
         // first generate the opening parenthesis
         fLilypondCodeStream <<
-          "(";
+          cLilypondTimeSignatureOpener;
 
         // then generate all beats numbers in the vector
         for (int j = 0; j < beatsNumbersNumber; ++j) {
@@ -18001,7 +18101,7 @@ void lpsr2lilypondTranslator::generateRegularTimeSignature (
       } // for
 
       fLilypondCodeStream <<
-        ")";
+        cLilypondTimeSignatureCloser;
     }
 
     if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
@@ -18763,7 +18863,7 @@ void lpsr2lilypondTranslator::generateTempoBeatUnitsPerMinute (
       }
 
       fLilypondCodeStream <<
-        "(";
+        cLilypondTempoBeatUnitsPerMinuteOpener;
       if (
         versionNumberGreaterThanOrEqualTo (
           gGlobalLpsr2lilypondOahGroup->getLilypondVersion (),
@@ -18800,7 +18900,7 @@ void lpsr2lilypondTranslator::generateTempoBeatUnitsPerMinute (
         "\" = \"" <<
         std::endl <<
         tempoPerMinute <<
-        ")" <<
+        cLilypondTempoBeatUnitsPerMinuteCloser <<
         std::endl;
 
       --gIndenter;
@@ -18898,7 +18998,7 @@ void lpsr2lilypondTranslator::generateTempoBeatUnitsPerMinute (
   --gIndenter;
 
   fLilypondCodeStream <<
-    '}' <<
+    '}' << // \\markup
     std::endl;
   } // switch
 }
@@ -21259,9 +21359,9 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
 
   int
     noteSlurStartsNumber =
-     note->fetchNoteSlurStartsNumber (),
+      note->fetchNoteSlurStartsNumber (),
     noteSlurStopsNumber =
-     note->fetchNoteSlurStopsNumber ();
+      note->fetchNoteSlurStopsNumber ();
 
   if (noteSlursListSize) {
     std::list <S_msrSlur>::const_iterator i;
@@ -21315,20 +21415,34 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          if (noteSlurStartsNumber == 1) {
-            fLilypondCodeStream << "( ";
-          }
-          else {
-            fLilypondCodeStream << "\\=" << slur->getSlurNumber () << "( "; // JMI 0.9.68
-          }
+//           gLog << note << std::endl;
 
-          if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
-            // generate the input line number as a comment
-            fLilypondCodeStream <<
-              " %{ <-- line " <<
-              slur->getInputLineNumber () <<
-              " AAAAAAA %} ";
-          }
+          switch (note->getNoteKind ()) {
+            case msrNoteKind::kNote_UNKNOWN_:
+              break;
+
+            // in grace notes groups
+            case msrNoteKind::kNoteRegularInGraceNotesGroup:
+              // let LilyPond take care of the slur JMI 0.9.74
+              fLilypondWillHandleTheNextSlurCloser = true;
+              break;
+
+            default:
+              if (noteSlurStartsNumber != 1) {
+                fLilypondCodeStream <<
+                  cLilypondPhrasingContinuer <<
+                  slur->getSlurNumber (); // JMI 0.9.68
+              }
+              fLilypondCodeStream << cLilypondSlurOpener;
+
+              if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+                // generate the input line number as a comment
+                fLilypondCodeStream <<
+                  " %{ <-- line " <<
+                  slur->getInputLineNumber () <<
+                  " AAAAAAA %} ";
+              }
+          } // switch
           break;
 
         case msrSlurTypeKind::kSlurTypeRegularContinue:
@@ -21353,20 +21467,40 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          if (noteSlurStopsNumber == 1) {
-            fLilypondCodeStream << ") ";
-          }
-          else {
-            fLilypondCodeStream << "\\=" << slur->getSlurNumber () << ") ";
-          }
+//           switch (note->getNoteKind ()) {
+//             case msrNoteKind::kNote_UNKNOWN_:
+//               break;
+//
+//             // in grace notes groups
+//             case msrNoteKind::kNoteRegularInGraceNotesGroup:
+//               // let LilyPond take care of the slur JMI 0.9.74
+//               break;
+//
+//             default:
+              if (fLilypondWillHandleTheNextSlurCloser) {
+                // let LilyPond take care of the slur JMI 0.9.74
+                fLilypondWillHandleTheNextSlurCloser = false;
 
-          if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
-            // generate the input line number as a comment
-            fLilypondCodeStream <<
-              " %{ <-- line " <<
-              slur->getInputLineNumber () <<
-              " BBBBBBB %} ";
-          }
+                // there is one slur stopper to be handled
+                noteSlurStopsNumber -= 1; // JMI 0.9.74
+              }
+              else {
+                if (noteSlurStopsNumber != 1) {
+                  fLilypondCodeStream <<
+                    cLilypondSlurContinuer <<
+                    slur->getSlurNumber ();
+                }
+                fLilypondCodeStream << cLilypondSlurCloser;
+
+                if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+                  // generate the input line number as a comment
+                  fLilypondCodeStream <<
+                    " %{ <-- line " <<
+                    slur->getInputLineNumber () <<
+                    " BBBBBBB %} ";
+                }
+              }
+//           } // switch
 
           switch (slur->getSlurPlacementKind ()) {
             case msrPlacementKind::kPlacement_UNKNOWN_:
@@ -21395,7 +21529,7 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream << "\\( ";
+          fLilypondCodeStream << cLilypondPhrasingOpener;
 
           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
             // generate the input line number as a comment
@@ -21428,7 +21562,7 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream << "\\) ";
+          fLilypondCodeStream << cLilypondPhrasingCloser;
 
           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
             // generate the input line number as a comment
@@ -21449,9 +21583,9 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
 {
   /*
     1. no slash, no slur: \grace
-    2. slash and slur:    \acciaccatura, LilyPond will slur it JMI
+    2. slash and slur:    \acciaccatura, LilyPond will slur it // JMI 0.9.74
     3. slash but no slur: \slashedGrace
-    4. no slash but slur: \appoggiatura, LilyPond will slur it JMI
+    4. no slash but slur: \appoggiatura, LilyPond will slur it // JMI 0.9.74
   */
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -21577,7 +21711,7 @@ slash = \tweak Flag.stroke-style grace \etc
   } // switch
 
   fLilypondCodeStream <<
-    " { ";
+    cLilypondGraceNotesGroupOpener;
 
   // force durations to be displayed explicitly
   // at the beginning of the grace notes
@@ -21647,10 +21781,10 @@ slash = \tweak Flag.stroke-style grace \etc
 
         if (graceNotesGroupIsBeamed) { // JMI fixed [ ] issue 0.9.70
           if (elementNumber == 1) {
-            fLilypondCodeStream << "[ ";
+            fLilypondCodeStream << cLilypondBeamsOpener;
           }
           else if (elementNumber == graceNotesGroupElementsListSize) {
-            fLilypondCodeStream << "] ";
+            fLilypondCodeStream << cLilypondBeamsCloser;
           }
 
           if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondGraceNotes ()) {
@@ -21671,7 +21805,7 @@ slash = \tweak Flag.stroke-style grace \etc
         // see gracenotes/SlurredNoteWithGraceNotes.xml for
         // extraneous '( ' JMI
 //          if (false && // JMI
-        if (
+        if (false &&
           ! graceNotesGroupNote->getNoteBelongsToAChord ()
             &&
           doGenerateASlurIfPresent
@@ -21710,7 +21844,7 @@ slash = \tweak Flag.stroke-style grace \etc
         cLilyPondSpace;
     } // for
 
-    fLilypondCodeStream << "} ";
+    fLilypondCodeStream << cLilypondGraceNotesGroupCloser;
   }
 
   else {
@@ -24296,10 +24430,12 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   }
 
   if (elt->getNoteIsFollowedByGraceNotesGroup ()) { // JMI
-    if (! elt->fetchNoteIsARest ()) {
-      fLilypondCodeStream <<
-       " % noteIsFollowedByGraceNotesGroup" <<
-        std::endl; // JMI ???
+    if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondGraceNotes ()) {
+      if (! elt->fetchNoteIsARest ()) {
+        fLilypondCodeStream <<
+         " % noteIsFollowedByGraceNotesGroup" <<
+          std::endl; // JMI ???
+      }
     }
   }
 
@@ -25600,21 +25736,21 @@ void lpsr2lilypondTranslator::generateCodeAfterChordEnd (
           break;
 
         case msrSlurTypeKind::kSlurTypeRegularStart:
-          fLilypondCodeStream << "( ";
+          fLilypondCodeStream << cLilypondSlurOpener;
           break;
         case msrSlurTypeKind::kSlurTypeRegularContinue:
           break;
         case msrSlurTypeKind::kSlurTypeRegularStop:
-          fLilypondCodeStream << ") ";
+          fLilypondCodeStream << cLilypondSlurCloser;
           break;
 
         case msrSlurTypeKind::kSlurTypePhrasingStart:
-          fLilypondCodeStream << "\\( ";
+          fLilypondCodeStream << cLilypondPhrasingOpener;
           break;
         case msrSlurTypeKind::kSlurTypePhrasingContinue:
           break;
         case msrSlurTypeKind::kSlurTypePhrasingStop:
-          fLilypondCodeStream << "\\) ";
+          fLilypondCodeStream << cLilypondPhrasingCloser;
           break;
       } // switch
 
@@ -27355,18 +27491,18 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
       " (line " << elt->getInputLineNumber () << ")";
   }
 
-  // enforce a line break here, not using \myLineBreak,
-  // if this is a user selected line break
-  switch (elt->getUserSelectedLineBreakKind ()) {
-    case msrUserSelectedLineBreakKind::kUserSelectedLineBreakYes:
-      fLilypondCodeStream <<
-        " \\lineBreak ";
-      break;
-    case msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo:
-      fLilypondCodeStream <<
-        " \\myLineBreak ";
-      break;
-  } // switch
+//   // enforce a line break here, not using \myLineBreak,
+//   // if this is a user selected line break // JMI TO BE SEEN 0.9.74 abcde
+//   switch (elt->getUserSelectedLineBreakKind ()) {
+//     case msrUserSelectedLineBreakKind::kUserSelectedLineBreakYes:
+//       fLilypondCodeStream <<
+//         " \\lineBreak ";
+//       break;
+//     case msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo:
+//       fLilypondCodeStream <<
+//         " \\myLineBreak ";
+//       break;
+//   } // switch
 
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     // generate the line number as a comment

@@ -2130,7 +2130,7 @@ This option implies '-trace-measures-basics, -tmeasb' and '-trace-measures, -tme
 
   fTraceOnlyMeasurerNumbeOahAtom =
     oahStringAtom::create (
-      "trace-only-measure", "tonlymea",
+      "trace-only-measure", "tom",
 R"(Restrict the production of trace information to measure NUMBER)",
       "NUMBER",
       "fTraceOnlyMeasure",
@@ -2140,15 +2140,15 @@ R"(Restrict the production of trace information to measure NUMBER)",
     appendAtomToSubGroup (
       fTraceOnlyMeasurerNumbeOahAtom);
 
-  // measure positions
+  // positions in measures
 
   S_oahTwoBooleansAtom
     tracePositionInMeasuresBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-measure-positions", "tmeapos",
-R"(Measure positions)",
-        "fTracePositionInMeasures",
-        fTracePositionInMeasures,
+        "trace-positions-in-measures", "tpim",
+R"(Positions in measures)",
+        "fTracePositionsInMeasures",
+        fTracePositionsInMeasures,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -2161,10 +2161,10 @@ R"(Measure positions)",
   S_oahThreeBooleansAtom
     tracePositionInMeasuresDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-measure-positions-details", "tmeaposd",
-R"(Measure positions details)",
-        "fTracePositionInMeasuresDetails",
-        fTracePositionInMeasuresDetails,
+        "trace-positions-in-measures-details", "tpimd",
+R"(Positions in measures details)",
+        "fTracePositionsInMeasuresDetails",
+        fTracePositionsInMeasuresDetails,
         tracePositionInMeasuresBooleanAtom,
         fTracePassesBooleanAtom);
 
@@ -2172,23 +2172,23 @@ R"(Measure positions details)",
     appendAtomToSubGroup (
       tracePositionInMeasuresDetailsBooleanAtom);
 
-  // voice positions
+  // positions in voices
 
   S_oahTwoBooleansAtom
-    traceVoicePositionsBooleanAtom =
+    tracePositionsInVoicesBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-voice-positions", "tvoicepos",
-R"(Voice positions)",
-        "fTraceVoicePositions",
-        fTraceVoicePositions,
+        "trace-positions-in-voices", "tpiv",
+R"(Positions in voices)",
+        "fTracePositionsInVoices",
+        fTracePositionsInVoices,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceVoicePositionsBooleanAtom);
+      tracePositionsInVoicesBooleanAtom);
   measuresMultiplexBooleansAtom->
     addBooleanAtom (
-      traceVoicePositionsBooleanAtom);
+      tracePositionsInVoicesBooleanAtom);
 
   // measure moments
 
@@ -3453,17 +3453,15 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl;
 
   if (fTraceDetailedMeasureNumbersSet.size ()) {
-    std::set <int>::const_iterator
-      iBegin = fTraceDetailedMeasureNumbersSet.begin (),
-      iEnd   = fTraceDetailedMeasureNumbersSet.end (),
-      i      = iBegin;
+//     std::set <int>::const_iterator
+//       iBegin = fTraceDetailedMeasureNumbersSet.begin (),
+//       iEnd   = fTraceDetailedMeasureNumbersSet.end (),
+//       i      = iBegin;
 
     ++gIndenter;
 
-    for ( ; ; ) {
-      gLog << "v " << (*i);
-      if (++i == iEnd) break;
-      // no std::endl here
+    for (int measureNumber : fTraceDetailedMeasureNumbersSet) {
+      gLog << "v " << measureNumber;
     } // for
 
     --gIndenter;
@@ -3475,15 +3473,15 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
   gLog << std::endl;
 
   gLog << std::left <<
-    std::setw (fieldWidth) << "fTracePositionInMeasures" << ": " <<
-    fTracePositionInMeasures <<
+    std::setw (fieldWidth) << "fTracePositionsInMeasures" << ": " <<
+    fTracePositionsInMeasures <<
     std::endl <<
-    std::setw (fieldWidth) << "fTracePositionInMeasuresDetails" << ": " <<
-    fTracePositionInMeasuresDetails <<
+    std::setw (fieldWidth) << "fTracePositionsInMeasuresDetails" << ": " <<
+    fTracePositionsInMeasuresDetails <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fTraceVoicePositions" << ": " <<
-    fTraceVoicePositions <<
+    std::setw (fieldWidth) << "fTracePositionsInVoices" << ": " <<
+    fTracePositionsInVoices <<
     std::endl <<
 
     std::setw (fieldWidth) << "fTraceMeasureMoments" << ": " <<

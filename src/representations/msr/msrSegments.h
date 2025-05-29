@@ -313,8 +313,9 @@ class EXP msrSegment : public msrVoiceElement
     // notes
 
     void                  appendNoteToSegment (
-                            const S_msrNote&           note,
-                            const mfPositionInMeasure& partCurrentDrawingPositionInMeasure);
+                            const S_msrNote&  note,
+                            const mfPositionInMeasure&
+                                              partCurrentDrawingPositionInMeasure);
 
     void                  appendNoteToSegmentClone (const S_msrNote& note);
 
@@ -503,7 +504,9 @@ class EXP msrSegment : public msrVoiceElement
     S_msrMeasure          fSegmentFirstMeasure;
     S_msrMeasure          fSegmentLastMeasure;
 };
-typedef SMARTP<msrSegment> S_msrSegment;
+
+using S_msrSegment = SMARTP<msrSegment>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrSegment& elt);
 
 

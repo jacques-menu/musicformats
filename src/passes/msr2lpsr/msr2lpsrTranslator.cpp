@@ -29,9 +29,10 @@
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
 #include "msrBarNumberChecks.h"
-#include "msrBreaks.h"
 #include "msrDoubleTremolos.h"
 #include "msrGlissandos.h"
+#include "msrLineBreaks.h"
+#include "msrPageBreaks.h"
 #include "msrRehearsalMarks.h"
 #include "msrSlides.h"
 #include "msrTablatures.h"
@@ -6733,11 +6734,11 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
             copyNoteValuesToChord (
               fCurrentNoteClone);
 
-          // append current chord clone to the current voice,
-          // only now that its duration is known
-          fCurrentVoiceClone->
-            appendChordToVoice (
-              fCurrentChordClone);
+//           // append current chord clone to the current voice,
+//           // only now that its duration is known
+//           fCurrentVoiceClone->
+//             appendChordToVoice (
+//               fCurrentChordClone);
 
           fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
         }
@@ -7307,9 +7308,9 @@ void msr2lpsrTranslator::visitStart (S_msrChord& elt)
     // wait until its first note is appended to it,
     // i.e. its duration is known
     // append current chord clone to the current voice
-//     fCurrentVoiceClone->
-//       appendChordToVoice (
-//         fCurrentChordClone);
+    fCurrentVoiceClone->
+      appendChordToVoice (
+        fCurrentChordClone);
   }
 
   fOnGoingChord = true;

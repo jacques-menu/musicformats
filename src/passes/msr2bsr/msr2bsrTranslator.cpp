@@ -25,7 +25,8 @@
 #include "msr2bsrComponent.h"
 
 #include "msrBarLines.h"
-#include "msrBreaks.h"
+#include "msrLineBreaks.h"
+#include "msrPageBreaks.h"
 #include "msrVoiceStaffChanges.h"
 
 #include "bsrPages.h"

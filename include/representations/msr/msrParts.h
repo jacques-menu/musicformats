@@ -799,7 +799,9 @@ class EXP msrPart : public msrPartGroupElement
 
     mfPositionInMeasure   fPartCurrentDrawingPositionInMeasure;
 };
-typedef SMARTP<msrPart> S_msrPart;
+
+using S_msrPart = SMARTP<msrPart>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrPart& elt);
 
 

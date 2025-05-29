@@ -2,7 +2,7 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
 	<work>
-		<work-title>Organ example 2</work-title>
+		<work-title>Organ Example 2</work-title>
 	</work>
   <identification>
     <encoding>
@@ -234,7 +234,7 @@
         <staff>3</staff>
         </note>
       </measure>
-    <measure number="2" width="154.63">
+    <!--measure number="2" width="154.63">
       <note default-x="15.32" default-y="-45.00">
         <pitch>
           <step>D</step>
@@ -5869,6 +5869,6 @@
       <barline location="right">
         <bar-style>light-heavy</bar-style>
         </barline>
-      </measure>
+      </measure-->
     </part>
   </score-partwise>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="4.0">
-  <movement-title>Single Chords Tuplet</movement-title>
+  <movement-title>Chord In Tuplet Middle</movement-title>
   <identification>
     <encoding>
       <software>MuseScore 4.4.3</software>
@@ -169,6 +169,13 @@
         <notations>
           <tuplet type="stop"/>
           </notations>
+        </note>
+
+      <note default-x="153.75" default-y="-20.00">
+        <rest/>
+        <duration>6</duration>
+        <voice>1</voice>
+        <type>half</type>
         </note>
       </measure>
     </part>

@@ -325,7 +325,7 @@ void oahEarlyOptions::setEarlyTracePasses ()
 }
 
 const std::string K_TRACE_ONLY_PASS_OPTION_LONG_NAME  = "trace-only-pass";
-const std::string K_TRACE_ONLY_PASS_OPTION_SHORT_NAME = "tonlypass";
+const std::string K_TRACE_ONLY_PASS_OPTION_SHORT_NAME = "top";
 
 void oahEarlyOptions::setEarlyTraceOnlyPass (mfPassIDKind passIDKind)
 {

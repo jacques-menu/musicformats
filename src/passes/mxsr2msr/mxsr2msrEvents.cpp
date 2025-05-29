@@ -615,11 +615,11 @@ mxsrStaffChangeEvent::mxsrStaffChangeEvent (
       eventSequentialNumber,
       eventInputLineNumber)
 {
-  gLog <<
-    "======>>>> " <<
-    "takeOffStaffNumber: " << takeOffStaffNumber <<
-    ", landingStaffNumber: " << landingStaffNumber <<
-    std::endl;
+//   gLog <<
+//     "======>>>> " <<
+//     "takeOffStaffNumber: " << takeOffStaffNumber <<
+//     ", landingStaffNumber: " << landingStaffNumber <<
+//     std::endl;
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check

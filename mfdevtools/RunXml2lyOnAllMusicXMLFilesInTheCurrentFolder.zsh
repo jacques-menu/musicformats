@@ -73,7 +73,7 @@ echo
 # clean the current directory from previously generaterated files if any
 # ---------------------------------------------------------
 
-rm -f *.ly *.pdf *.midi
+rm -f *.ly *.pdf *.midi *.log
 
 
 # select which files to translate
@@ -189,7 +189,7 @@ function RunXml2lyOnFile ()
   LILYPOND_FILE_NAME="$SUFFIXLESS_FILE_NAME.ly"
   echo "LILYPOND_FILE_NAME:      $LILYPOND_FILE_NAME"
 
-  xml2ly ${OPTIONS_STRING} -output-file-name $LILYPOND_FILE_NAME $MUSICXML_FILE_NAME
+  xml2ly -lilypond-run-date -lilypond-generation-infos ${OPTIONS_STRING} -output-file-name $LILYPOND_FILE_NAME $MUSICXML_FILE_NAME
   if [ -f $LILYPOND_FILE_NAME ]; then
     echo
     echo "--> resulting LilyPond file:"

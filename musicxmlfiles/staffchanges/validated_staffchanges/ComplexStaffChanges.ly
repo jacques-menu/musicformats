@@ -101,8 +101,6 @@ Part_POne_Staff_Three_Voice_Ten = \absolute {
   \score {
     <<
       
-      
-      
       <<
       
         \new PianoStaff
@@ -144,7 +142,6 @@ Part_POne_Staff_Three_Voice_Ten = \absolute {
             >>
           >>
         >>
-      
       
       >>
     

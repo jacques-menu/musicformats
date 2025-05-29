@@ -1407,7 +1407,9 @@ class EXP msrVoice : public msrElement
     // calls counter (for debug)
     int                   fCallsCounter;
 };
-typedef SMARTP<msrVoice> S_msrVoice;
+
+using S_msrVoice = SMARTP<msrVoice>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrVoice& elt);
 
 

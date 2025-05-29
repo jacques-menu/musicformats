@@ -7,9 +7,9 @@ name: Build Windows version
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master v0.9.72-beta-3 ]
+    branches: [ master ]
   pull_request:
-    branches: [ master v0.9.72-beta-3 ]
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -17,11 +17,13 @@ on:
 # --------------------------------------------------------------------------
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    name:    Build library
-    runs-on: windows-latest
+    name: Build library
+    runs-on:
+      windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -29,19 +31,22 @@ jobs:
       # --------------------------------------------------------------------------
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses:
+          actions/checkout@v4
 
 
       # --------------------------------------------------------------------------
       - name: Setup node
-        uses: actions/setup-node@v4
+        uses:
+          actions/setup-node@v4
         with:
           node-version: '20'
 
 
       # --------------------------------------------------------------------------
       - name: Get latest CMake and ninja
-        uses: lukka/get-cmake@latest
+        uses:
+          lukka/get-cmake@latest
 
 
       # --------------------------------------------------------------------------
@@ -80,7 +85,7 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name: Move libraries and executables to the top level
+      - name: Move libraries, includes, executables and user guide to the top level
         run: |
           mv build/lib .
           mv build/bin .
@@ -89,14 +94,16 @@ jobs:
 
       # --------------------------------------------------------------------------
       - name: Upload libraries and executables for Windows
-        uses: actions/upload-artifact@v4
+        uses:
+          actions/upload-artifact@v4
         with:
           name: musicformats-windows-artifact
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt
-            bin
             lib
+            include
+            bin
 #             MusicFormatsUserGuide.pdf
           retention-days:
             90

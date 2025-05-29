@@ -256,7 +256,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set the chord kind
-  chord->setChordKind (msrChordInKind::kChordInTuplet);
+  chord->setChordInKind (msrChordInKind::kChordInTuplet);
 
   // append chord to elements list
   fTupletElementsList.push_back (chord);
@@ -265,9 +265,25 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
   chord->setPositionInTuplet (
     fTupletElementsList.size ());
 
-  // account for the chord duration,
+  // account for the chord duration in containing tuplet if relevant
   fMeasureElementSoundingWholeNotes +=
     chord->getMeasureElementSoundingWholeNotes ();
+
+  // account for the chord duration in containing tuplet if relevant
+  switch (chord->getChordInKind ()) {
+    case msrChordInKind::kChordInTuplet:
+      if (chord->getChordShortcutUpLinkToContainingTuplet ()) {
+        chord->getChordShortcutUpLinkToContainingTuplet ()->
+          incrementMeasureElementSoundingWholeNotesBy (
+            chord->getMeasureElementSoundingWholeNotes (),
+            "appendChordToTuplet()");
+      }
+      break;
+    default:
+      ;
+  } // switch
+
+// gLog << "appendChordToTuplet(): fMeasureElementSoundingWholeNotes: " << fMeasureElementSoundingWholeNotes << std::endl;
 
   fTupletDisplayWholeNotes += // JMI USELESS ??? 0.9.72
     chord->getChordDisplayWholeNotes ();
@@ -990,11 +1006,11 @@ std::string msrTuplet::asString () const
 
   ss <<
     "[Tuplet" <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", fMeasureElementSoundingWholeNotes: " <<
-    fMeasureElementSoundingWholeNotes.asFractionString () <<
     ", line " << fInputLineNumber;
 
   ss <<
@@ -1068,12 +1084,12 @@ std::string msrTuplet::asShortString () const
 
   ss <<
     "[Tuplet" <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
     ", fTupletBracketPlacementKind: " << fTupletBracketPlacementKind <<
-    ", fMeasureElementSoundingWholeNotes: " <<
-    fMeasureElementSoundingWholeNotes.asFractionString () <<
     ", line " << fInputLineNumber;
 
   ss <<
@@ -1142,6 +1158,8 @@ void msrTuplet::printFull (std::ostream& os) const
 {
   os <<
     "[Tuplet" <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
@@ -1160,10 +1178,6 @@ void msrTuplet::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fMeasureElementPositionInMeasure" << ": " <<
     fMeasureElementPositionInMeasure.asString () <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fMeasureElementSoundingWholeNotes" << ": " <<
-    fMeasureElementSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1272,6 +1286,8 @@ void msrTuplet::print (std::ostream& os) const
 {
   os <<
     "[Tuplet" <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", " <<
@@ -1303,10 +1319,6 @@ void msrTuplet::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fMeasureElementPositionInMeasure" << ": " <<
     fMeasureElementPositionInMeasure.asString () <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fMeasureElementSoundingWholeNotes" << ": " <<
-    fMeasureElementSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<

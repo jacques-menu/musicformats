@@ -1854,6 +1854,7 @@ void mfDisplayStringSet (
       ++count;
 
       os << "\"" << theString << "\"";
+
       if (++i == iEnd) break;
 
       if (count == nextToLast) {

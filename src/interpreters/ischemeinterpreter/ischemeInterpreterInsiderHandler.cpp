@@ -11,6 +11,8 @@
 
 #include <iomanip>      // setw, setprecision, ...
 
+#include "visitor.h"
+
 #include "mfPreprocessorSettings.h"
 
 #include "mfServices.h"

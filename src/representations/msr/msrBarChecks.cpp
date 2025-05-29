@@ -39,7 +39,8 @@ S_msrBarCheck msrBarCheck::create (
 {
   return
     msrBarCheck::create (
-      inputLineNumber);
+      inputLineNumber,
+      gNullMeasure); // JMI 0.9.74
 }
 
 S_msrBarCheck msrBarCheck::create (

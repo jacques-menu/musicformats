@@ -25,7 +25,8 @@
 #include "msrWae.h"
 
 #include "msrBarLines.h"
-#include "msrBreaks.h"
+#include "msrLineBreaks.h"
+#include "msrPageBreaks.h"
 #include "msrParts.h"
 #include "msrRehearsalMarks.h"
 #include "msrTempos.h"
@@ -394,7 +395,7 @@ void msrPart::setPartCurrentDrawingPositionInMeasure (
     std::stringstream ss;
 
     ss <<
-      "Setting the drawing measure position in part " <<
+      "Setting the part current drawing measure position in part " <<
       fetchPartNameForTrace () <<
       " to " <<
       positionInMeasure <<
@@ -406,19 +407,19 @@ void msrPart::setPartCurrentDrawingPositionInMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
-    "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
+//     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (positionInMeasure.getNumerator () < 0) {
     std::stringstream ss;
 
     ss <<
-      "cannot set part current measure position to " <<
+      "cannot set part current drawing position in measure to " <<
       positionInMeasure <<
       " in part " <<
       fetchPartNameForTrace () <<
@@ -443,7 +444,7 @@ void msrPart::resetPartCurrentDrawingPositionInMeasure (
     std::stringstream ss;
 
     ss <<
-      "Resetting part drawing measure position to 0 in part " <<
+      "Resetting part current drawing measure position to 0 in part " <<
       fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
@@ -460,17 +461,45 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
   int                 inputLineNumber,
   const mfWholeNotes& wholeNotesDelta)
 {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   if (wholeNotesDelta.getNumerator () <= 0) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "cannot increment part current drawing positino in measure " <<
+//       fPartCurrentDrawingPositionInMeasure <<
+//       " by wholeNotesDelta " <<
+//       wholeNotesDelta <<
+//       " in part " <<
+//       fetchPartNameForTrace () <<
+//       ", line " << inputLineNumber;
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  mfPositionInMeasure
+    newPartCurrentDrawingPositionInMeasure =
+      fPartCurrentDrawingPositionInMeasure + wholeNotesDelta;
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
     std::stringstream ss;
 
     ss <<
-      "Incrementing the drawing measure position after incrementation in part " <<
+      "Incrementing the part current drawing position in measure " <<
+      fPartCurrentDrawingPositionInMeasure <<
+      " in part " <<
       fetchPartNameForTrace () <<
       " by " <<
       wholeNotesDelta <<
-      ", fPartCurrentDrawingPositionInMeasure: " <<
-      fPartCurrentDrawingPositionInMeasure <<
+      ", making it newPartCurrentDrawingPositionInMeasure: " <<
+      newPartCurrentDrawingPositionInMeasure <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -479,49 +508,52 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fPartCurrentDrawingPositionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
-    "fPartCurrentDrawingPositionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  fPartCurrentDrawingPositionInMeasure += wholeNotesDelta;
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTracePositionInMeasures ()) {
-    std::stringstream ss;
-
-    ss <<
-      "The new part drawing measure position is " <<
-      "fPartCurrentDrawingPositionInMeasure: " <<
-      fPartCurrentDrawingPositionInMeasure <<
-      " in part " <<
-      fetchPartNameForTrace ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
+  fPartCurrentDrawingPositionInMeasure = newPartCurrentDrawingPositionInMeasure;
 }
 
 void msrPart::decrementPartCurrentDrawingPositionInMeasure (
   int                 inputLineNumber,
   const mfWholeNotes& wholeNotesDelta)
 {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   if (wholeNotesDelta.getNumerator () <= 0) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "cannot decrement part current drawing positino in measure " <<
+//       fPartCurrentDrawingPositionInMeasure <<
+//       " by wholeNotesDelta " <<
+//       wholeNotesDelta <<
+//       " in part " <<
+//       fetchPartNameForTrace () <<
+//       ", line " << inputLineNumber;
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  mfPositionInMeasure
+    newPartCurrentDrawingPositionInMeasure =
+      fPartCurrentDrawingPositionInMeasure - wholeNotesDelta;
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
     std::stringstream ss;
 
     ss <<
-      "Decrementing the drawing measure position in part " <<
+      "Decrementing the part current drawing position in measure " <<
+      fPartCurrentDrawingPositionInMeasure <<
+      " in part " <<
       fetchPartNameForTrace () <<
       " by " <<
       wholeNotesDelta <<
-      ", fPartCurrentDrawingPositionInMeasure: " <<
-      fPartCurrentDrawingPositionInMeasure <<
+      ", making it newPartCurrentDrawingPositionInMeasure: " <<
+      newPartCurrentDrawingPositionInMeasure <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -532,22 +564,18 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fPartCurrentDrawingPositionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
-    "fPartCurrentDrawingPositionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  if (fPartCurrentDrawingPositionInMeasure.getNumerator () < 0) {
+  if (newPartCurrentDrawingPositionInMeasure.getNumerator () < 0) {
     std::stringstream ss;
 
     ss <<
-      "cannot decrement part current measure position by " <<
+      "cannot decrement part current drawing position in measure  " <<
+      fPartCurrentDrawingPositionInMeasure <<
+      " by " <<
       wholeNotesDelta <<
       " in part " <<
       fetchPartNameForTrace () <<
-      " since that sets it to " <<
-      fPartCurrentDrawingPositionInMeasure <<
+      " since that sets it to newPartCurrentDrawingPositionInMeasure " <<
+      newPartCurrentDrawingPositionInMeasure <<
       ", which is negative " <<
       ", line " << inputLineNumber;
 
@@ -558,25 +586,9 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
 //       __FILE__, __LINE__,
       ss.str ());
   }
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  fPartCurrentDrawingPositionInMeasure -= wholeNotesDelta;
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTracePositionInMeasures ()) {
-    std::stringstream ss;
-
-    ss <<
-      "The new part drawing measure position after decrementation is " <<
-      "fPartCurrentDrawingPositionInMeasure: " <<
-      fPartCurrentDrawingPositionInMeasure <<
-      " in part " <<
-      fetchPartNameForTrace ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
+  fPartCurrentDrawingPositionInMeasure = newPartCurrentDrawingPositionInMeasure;
 }
 
 void msrPart::setPartShortestNoteWholeNotes (
@@ -2980,13 +2992,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
   const S_msrGraceNotesGroup& skipGraceNotesGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceMeasures ()
-      ||
-    gTraceOahGroup->getTraceGraceNotes ()
-      ||
-    gTraceOahGroup->getTraceParts ()
-    ) {
+  if (gTraceOahGroup->getTraceDurations ()) {
     std::stringstream ss;
 
     ss <<

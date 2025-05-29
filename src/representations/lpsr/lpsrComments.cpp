@@ -133,10 +133,10 @@ std::string lpsrCommentGapAfterwardsKindAsString (
   switch (commentGapAfterwardsKind) {
     case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes:
       result = "kCommentGapAfterwardsYes";
-    break;
+      break;
     case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo:
       result = "kCommentGapAfterwardsNo";
-    break;
+      break;
   } // switch
 
   return result;
@@ -160,8 +160,13 @@ void lpsrComment::print (std::ostream& os) const
     "% " << fContents <<
     std::endl;
 
-  if (fCommentGapKind == lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes)
-    os << std::endl;
+  switch (fCommentGapKind) {
+    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes:
+      os << std::endl;
+      break;
+    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo:
+    break;
+  } // switch
 
   --gIndenter;
 }

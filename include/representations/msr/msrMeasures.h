@@ -312,12 +312,12 @@ class EXP msrMeasure : public msrSegmentElement
     // backup and padding
 
     S_msrNote             createPaddingSkipNoteForVoice (
-                            int                  inputLineNumber,
+                            int                 inputLineNumber,
                             const mfWholeNotes& duration,
-                            const S_msrVoice&    voice);
+                            const S_msrVoice&   voice);
 
 //     void                  padUpToPositionInMeasureInMeasure (
-//                             int                  inputLineNumber,
+//                             int                 inputLineNumber,
 //                             const mfWholeNotes& positionInMeasureToPadUpTo);
 
     void                  padUpToPositionInMeasure (
@@ -917,7 +917,9 @@ class EXP msrMeasure : public msrSegmentElement
 
     std::string           fMeasureFinalizationContext;
 };
-typedef SMARTP<msrMeasure> S_msrMeasure;
+
+using S_msrMeasure = SMARTP<msrMeasure> ;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt);
 
 

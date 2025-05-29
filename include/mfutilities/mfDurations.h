@@ -135,19 +135,19 @@ class EXP mfWholeNotes
 
     // arithmetic
 
-    mfWholeNotes         inverse () const;
-    mfWholeNotes         opposite () const;
+    mfWholeNotes          inverse () const;
+    mfWholeNotes          opposite () const;
 
-    mfWholeNotes         operator + (const mfWholeNotes &wholeNotes) const;
-    mfWholeNotes         operator - (const mfWholeNotes &wholeNotes) const;
+    mfWholeNotes          operator + (const mfWholeNotes &wholeNotes) const;
+    mfWholeNotes          operator - (const mfWholeNotes &wholeNotes) const;
 
     //! Useful for notes with dots.
-    mfWholeNotes         operator * (const mfRational &rat) const;
-    mfWholeNotes         operator / (const mfRational &rat) const;
+    mfWholeNotes          operator * (const mfRational &rat) const;
+    mfWholeNotes          operator / (const mfRational &rat) const;
     // (i.e. wholeNotes * 3/2 or wholeNotes * 7/4)
 
-    mfWholeNotes         operator * (int num) const;
-    mfWholeNotes         operator / (int num) const;
+    mfWholeNotes          operator * (int num) const;
+    mfWholeNotes          operator / (int num) const;
 
     mfRational            operator / (const mfWholeNotes &wholeNotes) const;
 
@@ -340,7 +340,7 @@ class EXP msrNotesDuration
     // private fields
     // ------------------------------------------------------
 
-    mfDurationKind   fNotesDurationKind;
+    mfDurationKind        fNotesDurationKind;
     int                   fDotsNumber;
 };
 EXP std::ostream& operator << (std::ostream& os, const msrNotesDuration& elt);

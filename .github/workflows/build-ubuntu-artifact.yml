@@ -7,9 +7,9 @@ name: Build Ubuntu version
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master v0.9.72-beta-3 ]
+    branches: [ master ]
   pull_request:
-    branches: [ master v0.9.72-beta-3 ]
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -17,11 +17,13 @@ on:
 # --------------------------------------------------------------------------
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    name:    Build library
-    runs-on: ubuntu-latest
+    name: Build library
+    runs-on:
+      ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -29,12 +31,14 @@ jobs:
       # --------------------------------------------------------------------------
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses:
+          actions/checkout@v4
 
 
       # --------------------------------------------------------------------------
       - name: Setup node
-        uses: actions/setup-node@v4
+        uses:
+          actions/setup-node@v4
         with:
           node-version: '20'
 
@@ -45,53 +49,55 @@ jobs:
           cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
 
+#       # --------------------------------------------------------------------------
+#       - name: Compile the user guide - pdflatex run 1/3
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/mfuserguide
+#           root_file:
+#             MusicFormatsUserGuide.tex
+#
+#       - name: Compile the user guide - pdflatex run 2/3
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/mfuserguide
+#           root_file:
+#             MusicFormatsUserGuide.tex
+#
+#       - name: Compile the user guide - pdflatex run 3/3
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/mfuserguide
+#           root_file:
+#             MusicFormatsUserGuide.tex
+
+
       # --------------------------------------------------------------------------
-      - name: Compile the user guide - pdflatex run 1/3
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
-
-      - name: Compile the user guide - pdflatex run 2/3
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
-
-      - name: Compile the user guide - pdflatex run 3/3
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
-
-
-      # --------------------------------------------------------------------------
-      - name: Move libraries and executables and user guide to the top level
+      - name: Move libraries, includes, executables and user guide to the top level
         run: |
           mv build/lib .
           mv build/bin .
-          mv documentation/mfuserguide/MusicFormatsUserGuide.pdf .
+#           mv documentation/mfuserguide/MusicFormatsUserGuide.pdf .
 
 
       # --------------------------------------------------------------------------
       - name: Upload libraries and executables for Ubuntu
-        uses: actions/upload-artifact@v4
+        uses:
+          actions/upload-artifact@v4
         with:
           name: musicformats-ubuntu-artifact
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt
-            bin
             lib
+            include
+            bin
             MusicFormatsUserGuide.pdf
           retention-days:
             90

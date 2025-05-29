@@ -698,14 +698,7 @@ void oahMacroAtom::printHelp (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list <S_oahValueLessAtom>::const_iterator
-      iBegin = fMacroValueLessAtomsList.begin (),
-      iEnd   = fMacroValueLessAtomsList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_oahAtom valueLessAtom = (*i);
-
+    for (S_oahAtom valueLessAtom : fMacroValueLessAtomsList) {
       os <<
         valueLessAtom-> fetchNames () <<
         ":" <<
@@ -718,9 +711,6 @@ void oahMacroAtom::printHelp (std::ostream& os) const
         os);
 
       --gIndenter;
-
-      if (++i == iEnd) break;
-//      os << std::endl;
     } // for
 
     --gIndenter;
@@ -5114,14 +5104,7 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list <S_oahBooleanAtom>::const_iterator
-      iBegin = fBooleanAtomsList.begin (),
-      iEnd   = fBooleanAtomsList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_oahBooleanAtom booleanAtom = (*i);
-
+    for (S_oahBooleanAtom booleanAtom : fBooleanAtomsList) {
       os <<
         booleanAtom-> fetchNames () <<
         ":" <<
@@ -5134,9 +5117,6 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
         os);
 
       --gIndenter;
-
-      if (++i == iEnd) break;
-//      os << std::endl;
     } // for
 
     --gIndenter;
@@ -5189,15 +5169,7 @@ void oahCombinedBooleansAtom::displayAtomWithVariableOptionsValues (
   }
 
   else {
-    std::list <S_oahBooleanAtom>::const_iterator
-      iBegin = fBooleanAtomsList.begin (),
-      iEnd   = fBooleanAtomsList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_oahAtom
-        atom = (*i);
-
+    for (S_oahAtom atom : fBooleanAtomsList) {
       if (
         // boolean atom?
         S_oahBooleanAtom
@@ -5209,10 +5181,6 @@ void oahCombinedBooleansAtom::displayAtomWithVariableOptionsValues (
           displayAtomWithVariableOptionsValues (
             os, fieldWidth);
       }
-
-      if (++i == iEnd) break;
-
-  // JMI    os << std::endl;
     } // for
   }
 
@@ -9256,13 +9224,8 @@ void oahIntSetElementAtom::displayAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
 
-    std::set <int>::const_iterator
-      iBegin = fIntSetVariable.begin (),
-      iEnd   = fIntSetVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os << (*i) << std::endl;
-      if (++i == iEnd) break;
+    for (int variable : fIntSetVariable) {
+      os << variable << std::endl;
     } // for
 
     os <<
@@ -9582,15 +9545,10 @@ void oahStringSetElementAtom::displayAtomWithVariableOptionsValues (
 
     ++gIndenter;
 
-    std::set <std::string>::const_iterator
-      iBegin = fStringSetVariable.begin (),
-      iEnd   = fStringSetVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::string variable : fStringSetVariable) {
       os <<
-        "\"" << (*i) << "\"" <<
+        "\"" << variable << "\"" <<
         std::endl;
-      if (++i == iEnd) break;
     } // for
 
     --gIndenter;
@@ -9966,19 +9924,14 @@ void oahStringToIntMapElementAtom::displayAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
 
-    std::map <std::string, int>::const_iterator
-      iBegin = fStringToIntMapVariable.begin (),
-      iEnd   = fStringToIntMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, int> thePair : fStringToIntMapVariable) {
       os <<
         "\"" <<
-        (*i).first <<
+        thePair.first <<
         "\" --> \"" <<
-        (*i).second <<
+        thePair.second <<
         "\"" <<
         std::endl;
-      if (++i == iEnd) break;
     } // for
 
     os <<
@@ -10320,16 +10273,10 @@ void oahStringToStringMapElementAtom::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::map <std::string, std::string>::const_iterator
-      iBegin = fStringToStringMapVariable.begin (),
-      iEnd   = fStringToStringMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, std::string> thePair : fStringToStringMapVariable) {
       os <<
-        (*i).first << " --> " << (*i).second <<
+        thePair.first << " --> " << thePair.second <<
         std::endl;
-      if (++i == iEnd) break;
-//       os << std::endl; // JMI
     } // for
 
     --gIndenter;
@@ -10357,19 +10304,14 @@ void oahStringToStringMapElementAtom::displayAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
 
-    std::map <std::string, std::string>::const_iterator
-      iBegin = fStringToStringMapVariable.begin (),
-      iEnd   = fStringToStringMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, std::string> thePair : fStringToStringMapVariable) {
       os <<
         "\"" <<
-        (*i).first <<
+        thePair.first <<
         "\" --> \"" <<
-        (*i).second <<
+        thePair.second <<
         "\"" <<
         std::endl;
-      if (++i == iEnd) break;
     } // for
 
     os <<
@@ -10712,16 +10654,10 @@ void oahStringToStringMultiMapElementAtom::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::multimap <std::string, std::string>::const_iterator
-      iBegin = fStringToStringMultiMapVariable.begin (),
-      iEnd   = fStringToStringMultiMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, std::string> thePair : fStringToStringMultiMapVariable) {
       os <<
-        (*i).first << " --> " << (*i).second <<
+        thePair.first << " --> " << thePair.second <<
         std::endl;
-      if (++i == iEnd) break;
-//       os << std::endl; // JMI
     } // for
 
     --gIndenter;
@@ -10749,19 +10685,14 @@ void oahStringToStringMultiMapElementAtom::displayAtomWithVariableOptionsValues 
     os << std::endl;
     ++gIndenter;
 
-    std::multimap <std::string, std::string>::const_iterator
-      iBegin = fStringToStringMultiMapVariable.begin (),
-      iEnd   = fStringToStringMultiMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
+    for (std::pair <std::string, std::string> thePair : fStringToStringMultiMapVariable) {
       os <<
         "\"" <<
-        (*i).first <<
+        thePair.first <<
         "\" --> \"" <<
-        (*i).second <<
+        thePair.second <<
         "\"" <<
         std::endl;
-      if (++i == iEnd) break;
     } // for
 
     os <<

@@ -15,8 +15,9 @@
 // #include "mfMusicformatsErrors.h"
 #include "mfStringsHandling.h"
 
-#include "msrBreaks.h"
+#include "msrLineBreaks.h"
 #include "msrMeasureConstants.h"
+#include "msrPageBreaks.h"
 #include "msrRehearsalMarks.h"
 #include "msrVoiceStaffChanges.h"
 
@@ -3938,7 +3939,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 //
   // attach pending tempos if any to part
   if (! fPendingTemposList.empty ()) {
-    attachPendingTemposToPart (fCurrentPart);
+    attachPendingTemposToVoice (fCurrentRecipientMsrVoice); // JMI 0.9.74 is that the right voice here???
   }
 
   // finalize the current part
@@ -6465,7 +6466,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sound& elt)
             0),       // JMI could be different??? 0.9.66
           tempoString,
           msrTempoParenthesizedKind::kTempoParenthesizedNo,
-          msrPlacementKind::kPlacementBelow);
+          fCurrentDirectionPlacementKind);
     }
   }
 
@@ -9428,11 +9429,12 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // append a padding note to the voice to be forwarded
-  voiceToBeForwardedTo ->
-    cascadeAppendPaddingNoteToVoice (
-      elt->getInputLineNumber (),
-      forwardStepLength);
+  // NOT HERE
+//   // append a padding note to the voice to be forwarded JMI 0.9.74
+//   voiceToBeForwardedTo ->
+//     cascadeAppendPaddingNoteToVoice (
+//       elt->getInputLineNumber (),
+//       forwardStepLength);
 
   // staff changes handling
 //   fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
@@ -9447,15 +9449,20 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 //   }
 
   // tuplets handling
-  if (
-    fCurrentRecipientMxsrVoice
-      &&
-    ! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()
-  ) {
-    handleTupletEndEventsIfAny ();
+  gLog << "fCurrentRecipientMxsrVoice: " << fCurrentRecipientMxsrVoice << std::endl;
+
+  // there can be a <forward /> markup before any note in the MusicXML data
+  if (fCurrentRecipientMxsrVoice) {
+    if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
+      handleTupletEndEventsIfAny ();
+    }
   }
 
   fOnGoingForward = false;
+
+  fForwardedToVoicesList.push_back (voiceToBeForwardedTo);
+
+  fAForwardHasJustBeenHandled = true;
 }
 
 //________________________________________________________________________
@@ -11360,6 +11367,38 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // has there been notes since the last <forward /> in this measure?
+  gLog <<
+    "visitEnd (S_measure& elt)" <<
+    ", fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
+    ", fAForwardHasJustBeenHandled: " << fAForwardHasJustBeenHandled <<
+    std::endl;
+
+  if (! fForwardedToVoicesList.empty ()) {
+    gLog <<
+      "==> there has been notes since the last <forward /> in this measure" <<
+      std::endl;
+
+    // append a padding note to the voice that have been forwarded to JMI 0.9.74
+    while (! fForwardedToVoicesList.empty ()) {
+      S_msrVoice
+        forwardedToVoice =
+          fForwardedToVoicesList.front ();
+
+      forwardedToVoice ->
+        cascadeAppendPaddingNoteToVoice (
+          elt->getInputLineNumber (),
+          forwardedToVoice->
+            fetchVoiceLastMeasure (
+              elt->getInputLineNumber ())->
+                getFullMeasureWholeNotesDuration ());
+
+      fForwardedToVoicesList.pop_front ();
+    } // while
+
+    fAForwardHasJustBeenHandled = false;
+  }
+
   // take finalization actions if relevant 0.9.70
   if (
     fCurrentNoteStaffNumber != K_STAFF_NUMBER_UNKNOWN_
@@ -11697,7 +11736,7 @@ Staff spacing between multiple staves is measured in
 
       if (newSystem == "yes") {
         // create a line break
-  #ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceLineBreaks ()) {
           std::stringstream ss;
 
@@ -11709,13 +11748,13 @@ Staff spacing between multiple staves is measured in
             __FILE__, __LINE__,
             ss.str ());
         }
-  #endif // MF_TRACE_IS_ENABLED
+#endif // MF_TRACE_IS_ENABLED
 
+        // JMI 0.9.74 the next bar purist number will be set in msr2lpsr
         S_msrLineBreak
           lineBreak =
             msrLineBreak::create (
               elt->getInputLineNumber (),
-              1333333, // JMI 0.9.70 next purist number???
               msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo);
 
         // append lineBreak to the pending line breaks
@@ -17535,7 +17574,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_f& elt)
           msrDynamicKind::kDynamicF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_ff& elt)
@@ -17578,7 +17617,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ff& elt)
           msrDynamicKind::kDynamicFF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_fff& elt)
@@ -17621,7 +17660,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fff& elt)
           msrDynamicKind::kDynamicFFF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_ffff& elt)
@@ -17664,7 +17703,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffff& elt)
           msrDynamicKind::kDynamicFFFF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_fffff& elt)
@@ -17707,7 +17746,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fffff& elt)
           msrDynamicKind::kDynamicFFFFF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_ffffff& elt)
@@ -17750,7 +17789,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffffff& elt)
           msrDynamicKind::kDynamicFFFFFF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -17794,7 +17833,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_p& elt)
           msrDynamicKind::kDynamicP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_pp& elt)
@@ -17837,7 +17876,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pp& elt)
           msrDynamicKind::kDynamicPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_ppp& elt)
@@ -17880,7 +17919,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppp& elt)
           msrDynamicKind::kDynamicPPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_pppp& elt)
@@ -17923,7 +17962,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppp& elt)
           msrDynamicKind::kDynamicPPPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_ppppp& elt)
@@ -17966,7 +18005,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppppp& elt)
           msrDynamicKind::kDynamicPPPPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_pppppp& elt)
@@ -18009,7 +18048,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppppp& elt)
           msrDynamicKind::kDynamicPPPPPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18053,7 +18092,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mf& elt)
           msrDynamicKind::kDynamicMF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 void mxsr2msrSkeletonPopulator::visitStart (S_mp& elt)
@@ -18096,7 +18135,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mp& elt)
           msrDynamicKind::kDynamicMP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18140,7 +18179,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fp& elt)
           msrDynamicKind::kDynamicFP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18184,7 +18223,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fz& elt)
           msrDynamicKind::kDynamicFZ,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18228,7 +18267,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pf& elt)
           msrDynamicKind::kDynamicPF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18272,7 +18311,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rf& elt)
           msrDynamicKind::kDynamicRF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18316,7 +18355,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sf& elt)
           msrDynamicKind::kDynamicSF,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18360,7 +18399,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rfz& elt)
           msrDynamicKind::kDynamicRFZ,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18404,7 +18443,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfz& elt)
           msrDynamicKind::kDynamicSFZ,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18448,7 +18487,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfp& elt)
           msrDynamicKind::kDynamicSFP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18492,7 +18531,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfpp& elt)
           msrDynamicKind::kDynamicSFPP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18536,7 +18575,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sffz& elt)
           msrDynamicKind::kDynamicSFFZ,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18580,7 +18619,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfzp& elt)
           msrDynamicKind::kDynamicSFZP,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18624,7 +18663,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_n& elt)
           msrDynamicKind::kDynamicN,
           placementKind);
 
-    fPendingDynamicxList.push_back(dynamics);
+    fPendingDynamicsList.push_back(dynamics);
   }
 }
 
@@ -18648,7 +18687,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_dynamics& elt)
 
   // placement
 
-  std::string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement"); // CANNOT BE PRESENT! JMI 0.9.74
 
   msrPlacementKind
     placementKind =
@@ -18670,7 +18709,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_dynamics& elt)
           otherDynamicsValue,
           placementKind);
 
-    fPendingOtherDynamicxList.push_back(otherDynamic);
+    fPendingOtherDynamicsList.push_back(otherDynamic);
   }
 }
 
@@ -18791,7 +18830,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_soft_pedal& elt)
         elt->getInputLineNumber (),
         otherDynamicsValue);
 
-  fPendingOtherDynamicxList.push_back(otherDynamic);
+  fPendingOtherDynamicsList.push_back(otherDynamic);
 }
 
 void mxsr2msrSkeletonPopulator::visitStart (S_sostenuto_pedal& elt)
@@ -18830,7 +18869,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sostenuto_pedal& elt)
         elt->getInputLineNumber (),
         otherDynamicsValue);
 
-  fPendingOtherDynamicxList.push_back(otherDynamic);
+  fPendingOtherDynamicsList.push_back(otherDynamic);
 }
 */
 
@@ -21411,7 +21450,7 @@ void mxsr2msrSkeletonPopulator::attachPendingDynamicsToCurrentNote ()
      if (gTraceOahGroup->getTraceLyrics ()) {
         std::stringstream ss;
 
-        int numberOfDynamics = fPendingDynamicxList.size ();
+        int numberOfDynamics = fPendingDynamicsList.size ();
 
         if (numberOfDynamics > 1) {
           ss <<
@@ -21434,13 +21473,13 @@ void mxsr2msrSkeletonPopulator::attachPendingDynamicsToCurrentNote ()
   }
 
   if (! delayAttachment) {
-    while (! fPendingDynamicxList.empty ()) {
+    while (! fPendingDynamicsList.empty ()) {
       S_msrDynamic
         dynamics =
-          fPendingDynamicxList.front ();
+          fPendingDynamicsList.front ();
 
       fCurrentNote->appendDynamicToNote (dynamics);
-      fPendingDynamicxList.pop_front ();
+      fPendingDynamicsList.pop_front ();
     } // while
   }
 }
@@ -21479,7 +21518,7 @@ void mxsr2msrSkeletonPopulator::attachPendingOtherDynamicsToCurrentNote ()
       if (gTraceOahGroup->getTraceDynamics ()) {
         std::stringstream ss;
 
-        int numberOfOtherDynamics = fPendingOtherDynamicxList.size ();
+        int numberOfOtherDynamics = fPendingOtherDynamicsList.size ();
 
         if (numberOfOtherDynamics > 1) {
           ss <<
@@ -21502,13 +21541,13 @@ void mxsr2msrSkeletonPopulator::attachPendingOtherDynamicsToCurrentNote ()
   }
 
   if (! delayAttachment) {
-    while (! fPendingOtherDynamicxList.empty ()) {
+    while (! fPendingOtherDynamicsList.empty ()) {
       S_msrOtherDynamic
         otherDynamic =
-          fPendingOtherDynamicxList.front ();
+          fPendingOtherDynamicsList.front ();
 
       fCurrentNote->appendOtherDynamicToNote (otherDynamic);
-      fPendingOtherDynamicxList.pop_front ();
+      fPendingOtherDynamicsList.pop_front ();
     } // while
   }
 }
@@ -22345,12 +22384,12 @@ void mxsr2msrSkeletonPopulator::attachPendingNoteLevelElementsIfAnyToCurrentNote
   }
 
   // attach the pending dynamics, if any, to the note
-  if (! fPendingDynamicxList.empty ()) {
+  if (! fPendingDynamicsList.empty ()) {
     attachPendingDynamicsToCurrentNote ();
   }
 
   // attach the pending other dynamics, if any, to the note
-  if (! fPendingOtherDynamicxList.empty ()) {
+  if (! fPendingOtherDynamicsList.empty ()) {
     attachPendingOtherDynamicsToCurrentNote ();
   }
 
@@ -23976,6 +24015,7 @@ void mxsr2msrSkeletonPopulator::handleChordBegin ()
   // append current chord where it belongs
   if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
     // append current chord to the innermost tuplet
+    // the chord's duratino will be added to the tuplet's upon handlelChordEnd()
     fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
       appendChordToTuplet (
         fCurrentChord);
@@ -24083,32 +24123,35 @@ void mxsr2msrSkeletonPopulator::handleChordEnd ()
 //         "fetchInnerMostTuplet () is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//   if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
-//     // append current chord to the innermost tuplet
-//     fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
-//       appendChordToTuplet (
-//         fCurrentChord);
-//   }
-//
-//   else if (fPendingGraceNotesGroup) {
-//     // append current chord to the current grace notes group
-//     // only now, so that the chord sounding duration is known
-//     // and accounted for in the measure
+  // account for current chord sounding whole notes where it belongs // JMI v0.9.74
+  if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
+    fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
+      incrementMeasureElementSoundingWholeNotesBy (
+        fCurrentChord->getMeasureElementSoundingWholeNotes (),
+        "handleChordEnd()");
+  }
+
+  else if (fPendingGraceNotesGroup) {
 //     fPendingGraceNotesGroup->
-//       appendChordToGraceNotesGroup ( // VITAL
-//         fCurrentChord);
-//   }
-//
-//   else {
-//     // append current chord to the current recipient voice
-//     // only now, so that the chord sounding duration is known
-//     // and accounted for in the measure
-// //     abort();
+//       incrementMeasureElementSoundingWholeNotesBy (
+//         fCurrentChord->getMeasureElementSoundingWholeNotes (),
+//         "handleChordEnd()");
+  }
+
+  else {
+//     fCurrentPart->
+//       incrementPartCurrentDrawingPositionInMeasure (
+//         fCurrentNoteInputStartLineNumber,
+//         fCurrentChord->getMeasureElementSoundingWholeNotes ());
 //
 //     fCurrentRecipientMsrVoice->
-//       appendChordToVoice ( // VITAL
-//         fCurrentChord);
-//   }
+//       fetchVoiceLastMeasure (
+//         fCurrentNoteInputStartLineNumber)->
+//           incrementMeasureCurrentPositionInMeasure (
+//             fCurrentNoteInputStartLineNumber,
+//             fCurrentChord->getMeasureElementSoundingWholeNotes (),
+//             "handleChordEnd()");
+  }
 
   // forget about the current chord
   fCurrentChord = nullptr; // JMI 0.9.72
@@ -24551,9 +24594,10 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     attachPendingRehearsalMarksToPart (fCurrentPart);
   }
 
-  // attach pending tempos if any to part
+  // attach pending tempos if any to the current voice
   if (! fPendingTemposList.empty ()) {
-    attachPendingTemposToPart (fCurrentPart);
+//     attachPendingTemposToPart (fCurrentPart);
+    attachPendingTemposToVoice (fCurrentRecipientMsrVoice); // JMI 0.9.74
   }
 
   // populate fCurrentNote with current informations
@@ -24624,6 +24668,25 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
 	// set current note MusicXML staff number as previous for the next note
   fPreviousNoteStaffNumber = fCurrentNoteStaffNumber;
+
+  // remove fCurrentRecipientMsrVoice from fForwardedToVoicesList
+  // if it has been forwarded to
+  if (! fForwardedToVoicesList.empty ()) {
+    for (
+      std::list <S_msrVoice>::iterator i = fForwardedToVoicesList.begin ();
+      i != fForwardedToVoicesList.end ();
+      ++i
+    ) {
+      S_msrVoice forwardedToVoice = (*i);
+
+      if (forwardedToVoice == fCurrentRecipientMsrVoice) {
+        i = fForwardedToVoicesList.erase (i);
+        break;
+      }
+    } // for
+  }
+
+  fAForwardHasJustBeenHandled = false;
 
   fOnGoingNote = false;
 }
