@@ -9429,6 +9429,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // NOT HERE
 //   // append a padding note to the voice to be forwarded JMI 0.9.74
 //   voiceToBeForwardedTo ->
 //     cascadeAppendPaddingNoteToVoice (
@@ -9458,6 +9459,10 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   }
 
   fOnGoingForward = false;
+
+  fForwardedToVoicesList.push_back (voiceToBeForwardedTo);
+
+  fAForwardHasJustBeenHandled = true;
 }
 
 //________________________________________________________________________
@@ -11361,6 +11366,38 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  // has there been notes since the last <forward /> in this measure?
+  gLog <<
+    "visitEnd (S_measure& elt)" <<
+    ", fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
+    ", fAForwardHasJustBeenHandled: " << fAForwardHasJustBeenHandled <<
+    std::endl;
+
+  if (! fForwardedToVoicesList.empty ()) {
+    gLog <<
+      "==> there has been notes since the last <forward /> in this measure" <<
+      std::endl;
+
+    // append a padding note to the voice that have been forwarded to JMI 0.9.74
+    while (! fForwardedToVoicesList.empty ()) {
+      S_msrVoice
+        forwardedToVoice =
+          fForwardedToVoicesList.front ();
+
+      forwardedToVoice ->
+        cascadeAppendPaddingNoteToVoice (
+          elt->getInputLineNumber (),
+          forwardedToVoice->
+            fetchVoiceLastMeasure (
+              elt->getInputLineNumber ())->
+                getFullMeasureWholeNotesDuration ());
+
+      fForwardedToVoicesList.pop_front ();
+    } // while
+
+    fAForwardHasJustBeenHandled = false;
+  }
 
   // take finalization actions if relevant 0.9.70
   if (
@@ -24631,6 +24668,25 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
 	// set current note MusicXML staff number as previous for the next note
   fPreviousNoteStaffNumber = fCurrentNoteStaffNumber;
+
+  // remove fCurrentRecipientMsrVoice from fForwardedToVoicesList
+  // if it has been forwarded to
+  if (! fForwardedToVoicesList.empty ()) {
+    for (
+      std::list <S_msrVoice>::iterator i = fForwardedToVoicesList.begin ();
+      i != fForwardedToVoicesList.end ();
+      ++i
+    ) {
+      S_msrVoice forwardedToVoice = (*i);
+
+      if (forwardedToVoice == fCurrentRecipientMsrVoice) {
+        i = fForwardedToVoicesList.erase (i);
+        break;
+      }
+    } // for
+  }
+
+  fAForwardHasJustBeenHandled = false;
 
   fOnGoingNote = false;
 }

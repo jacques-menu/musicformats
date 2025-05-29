@@ -1,13 +1,13 @@
 \version "2.24.4"
 
-% Generated from "SimpleForwardToAnotherVoice.xml"
+% Generated from "ForwardInTheMiddleOfMeasure.xml"
 % by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04)
-% on Thursday 2025-05-29 @ 16:06:21 CEST
+% on Thursday 2025-05-29 @ 16:06:19 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name SimpleForwardToAnotherVoice.ly SimpleForwardToAnotherVoice.xml
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name ForwardInTheMiddleOfMeasure.ly ForwardInTheMiddleOfMeasure.xml
 % or, with short option names:
-%     SimpleForwardToAnotherVoice.ly SimpleForwardToAnotherVoice.xml
+%     ForwardInTheMiddleOfMeasure.ly ForwardInTheMiddleOfMeasure.xml
 
 
 % Scheme function(s): "date & time"
@@ -40,10 +40,7 @@
 
 
 \header {
-  workCreditTypeTitle = "Simple Forward To Another Voice"
-  encodingDate        = "2025-05-26"
-  software            = "MuseScore 4.5.2"
-  title               = "Simple Forward To Another Voice"
+  software            = "IMUTUS Score Editor module"
 }
 
 \paper {
@@ -116,15 +113,16 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \clef "treble"
   \key c \major
   \numericTimeSignature \time 4/4
-\stemUp c'4 \once\omit Rest r2. }
-
-Part_POne_Staff_One_Voice_Two = \absolute {
-  \language "nederlands"
-  
-  \clef "treble"
-  \key c \major
-  \numericTimeSignature \time 4/4
-s2. \stemDown f'4 }
+  e''4 \tempo \markup {
+    \concat {
+       \smaller \general-align #Y #DOWN \note {2} #UP
+      " = "
+      120
+    } % concat
+  }
+  b' s b'
+  \bar "|."
+}
 
 \book {
 
@@ -135,16 +133,11 @@ s2. \stemDown f'4 }
       
         \new Staff  = "Part_POne_Staff_One"
         \with {
-          instrumentName = "Music"
+          instrumentName = "Part_POne"
         }
         <<
           \context Voice = "Part_POne_Staff_One_Voice_One" <<
-            \voiceOne % out of 2 regular voices
             \Part_POne_Staff_One_Voice_One
-          >>
-          \context Voice = "Part_POne_Staff_One_Voice_Two" <<
-            \voiceTwo % out of 2 regular voices
-            \Part_POne_Staff_One_Voice_Two
           >>
         >>
       

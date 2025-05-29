@@ -2618,6 +2618,8 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fCurrentForwardStaffNumber;
     int                       fCurrentForwardVoiceNumber;
 
+    Bool                      fAForwardHasJustBeenHandled;
+    std::list <S_msrVoice>    fForwardedToVoicesList;
 
     // current ongoing values display
     // ------------------------------------------------------

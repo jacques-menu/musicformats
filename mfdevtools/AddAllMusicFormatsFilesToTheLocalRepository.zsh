@@ -54,8 +54,13 @@ function addAllToMusicFormatsLocalRepository ()
   # documentation
   add_documentation
 
-  add_musicxmlfiles
-  add_mfslfiles
+  // MusicXML files
+  add_musicxml_files
+
+  // LilyPond files
+  add_lilypond_files
+
+  add_mfsl_files
 }
 
 
@@ -134,7 +139,7 @@ function add_documentation ()
   cp -p ${DOC_DIR}/*/*.pdf ../musicformats-documentation-git
 }
 
-function add_musicxmlfiles ()
+function add_musicxml_files ()
 {
   # the MusicXML files Makefile
   git add -f ${MUSICFORMATS_DIR}/musicxmlfiles/Makefile
@@ -146,12 +151,10 @@ function add_musicxmlfiles ()
   # the MusicXML files in the validated_* subdirectories
   git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/validated_*/*.xml
   git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/validated_*/*.musicxml
-  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/validated_*/*.ly
 
   # the MusicXML files in the problematic_* subdirectories
   git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/problematic_*/*.xml
   git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/problematic_*/*.musicxml
-  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/problematic_*/*.ly
 
   # the scripts
   git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*.bash
@@ -162,7 +165,20 @@ function add_musicxmlfiles ()
 }
 
 
-function add_mfslfiles ()
+function add_lilypond_files ()
+{
+  # the LilyPond files in the validated_* subdirectories
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/validated_*/*.ly
+
+  # the LilyPond files in the problematic_* subdirectories
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/*/problematic_*/*.ly
+
+  # B9S
+  git add    ${MUSICFORMATS_DIR}/musicxmlfiles/challenging/BeethovenNinthSymphony.ly
+}
+
+
+function add_mfsl_files ()
 {
   git add    ${MUSICFORMATS_DIR}/mfslfiles/*.mfsl
   git add    ${MUSICFORMATS_DIR}/mfslfiles/*.xml

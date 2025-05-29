@@ -1,5 +1,44 @@
 \version "2.24.4"
 
+% Generated from "TupletAndGrace.xml"
+% by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04)
+% on Thursday 2025-05-29 @ 16:03:05 CEST
+
+% The conversion command as supplied was: 
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name TupletAndGrace.ly TupletAndGrace.xml
+% or, with short option names:
+%     TupletAndGrace.ly TupletAndGrace.xml
+
+
+% Scheme function(s): "date & time"
+% A set of functions to obtain the LilyPond file creation or modification time.
+
+#(define commandLine                  (object->string (command-line)))
+#(define loc                          (+ (string-rindex commandLine #\space ) 2))
+#(define commandLineLength            (- (string-length commandLine) 2))
+#(define lilypondFileName             (substring commandLine loc commandLineLength))
+
+#(define lilypondFileDirName          (dirname lilypondFileName))
+#(define lilypondFileBaseName         (basename lilypondFileName))
+#(define lilypondFileSuffixlessName   (basename lilypondFileBaseName ".ly"))
+
+#(define pdfFileName                  (string-append lilypondFileSuffixlessName ".pdf"))
+#(define pdfFileFullName              (string-append lilypondFileDirName file-name-separator-string pdfFileName))
+
+#(define lilypondVersion              (object->string (lilypond-version)))
+#(define currentDate                  (strftime "%d/%m/%Y" (localtime (current-time))))
+#(define currentTime                  (strftime "%H:%M:%S" (localtime (current-time))))
+
+#(define lilypondFileModificationTime (stat:mtime (stat lilypondFileName)))
+
+#(define lilypondFileModificationTimeAsString (strftime "%A %d/%m/%Y, %H:%M:%S" (localtime lilypondFileModificationTime)))
+
+#(use-modules (srfi srfi-19))
+% https://www.gnu.org/software/guile/manual/html_node/SRFI_002d19-Date-to-string.html
+%#(define pdfFileCreationTime (date->string (current-date) "~A, ~B ~e ~Y ~H:~M:~S"))
+#(define pdfFileCreationTime (date->string (current-date) "~A ~d/~m/~Y, ~H:~M:~S"))
+
+
 \header {
   movementTitle       = "Tuplet And Grace"
   encodingDate        = "2024-11-11"
@@ -20,9 +59,47 @@
   % page-count = -1
   % system-count = -1
   
-  % oddHeaderMarkup = ""
-  % evenHeaderMarkup = ""
-  % oddFooterMarkup = ""
+  oddHeaderMarkup = \markup {
+    \fill-line {
+      \unless \on-first-page {
+        \fromproperty #'page:page-number-std::string
+        ' '
+        \fromproperty #'header:title
+        ' '
+        \fromproperty #'header:subtitle
+      }
+    }
+  }
+
+  evenHeaderMarkup = \markup {
+    \fill-line {
+      \unless \on-first-page {
+        \fromproperty #'page:page-number-std::string
+        ' '
+        \fromproperty #'header:title
+        ' '
+        \fromproperty #'header:subtitle
+      }
+    }
+  }
+
+  oddFooterMarkup = \markup {
+    \tiny
+    \column {
+      \fill-line {
+        #(string-append
+"Score generated from MusicXML data by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04) and LilyPond " (lilypond-version))
+      }
+      \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
+      \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
+     \fill-line { \column { \italic { \concat { "lilypondFileDirName: " \lilypondFileDirName } } } }
+     \fill-line { \column { \italic { \concat { "pdfFileFullName: " \pdfFileFullName } } } }
+%      \fill-line { \column { \italic { \concat { "lilypondFileBaseName: " \lilypondFileBaseName } } } }
+%      \fill-line { \column { \italic { \concat { "lilypondFileSuffixlessName: " \lilypondFileSuffixlessName } } } }
+%      \fill-line { \column { \italic { \concat { "pdfFileName: " \pdfFileName } } } }
+    }
+  }
+
   % evenFooterMarkup = ""
 }
 
@@ -49,8 +126,8 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \tuplet 3/2 {  g''16 a'' cis'''! ]
   }
   \once\override TupletBracket.bracket-visibility = ##t
-  \tuplet 3/2 {  \acciaccatura { \stemUp fis''16 } \stemDown b''16 \stemUp ( [
-  ) \acciaccatura { fis''16 } \stemDown b''16 \stemUp ( ) \stemDown b'' } b''8 ]
+  \tuplet 3/2 {  \acciaccatura { fis''16 } b''16 [
+  \acciaccatura { fis''16 } b''16 b'' } b''8 ]
   
   \bar "|."
   
@@ -60,8 +137,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
 
   \score {
     <<
-      
-      
       
       <<
       
@@ -74,7 +149,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
             \Part_POne_Staff_One_Voice_One
           >>
         >>
-      
       
       >>
     

@@ -1,13 +1,13 @@
 \version "2.24.4"
 
-% Generated from "SimpleForwardToAnotherVoice.xml"
+% Generated from "BackupInBetweenTupletMembersWithFourVoices.xml"
 % by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04)
-% on Thursday 2025-05-29 @ 16:06:21 CEST
+% on Thursday 2025-05-29 @ 15:36:31 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name SimpleForwardToAnotherVoice.ly SimpleForwardToAnotherVoice.xml
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name BackupInBetweenTupletMembersWithFourVoices.ly BackupInBetweenTupletMembersWithFourVoices.xml
 % or, with short option names:
-%     SimpleForwardToAnotherVoice.ly SimpleForwardToAnotherVoice.xml
+%     BackupInBetweenTupletMembersWithFourVoices.ly BackupInBetweenTupletMembersWithFourVoices.xml
 
 
 % Scheme function(s): "date & time"
@@ -40,10 +40,8 @@
 
 
 \header {
-  workCreditTypeTitle = "Simple Forward To Another Voice"
-  encodingDate        = "2025-05-26"
-  software            = "MuseScore 4.5.2"
-  title               = "Simple Forward To Another Voice"
+  movementTitle       = "Backup Inbetween Tuplet Members With Four Voices"
+  title               = "Backup Inbetween Tuplet Members With Four Voices"
 }
 
 \paper {
@@ -110,21 +108,57 @@
   }
 }
 
+Part_POne_Staff_One_Voice_Three = \absolute {
+  \language "nederlands"
+  \partial 2
+  
+  \clef "bass"
+  \key f \major
+  \numericTimeSignature \time 3/4
+  
+  \once\override TupletBracket.bracket-visibility = ##t
+  \tuplet 3/2 {  \stemDown bes,8 [
+  d ees ]
+  }  | % 0
+  \barNumberCheck #1
+}
+
+Part_POne_Staff_One_Voice_Four = \absolute {
+  \language "nederlands"
+  \partial 2
+  
+  \clef "bass"
+  \key f \major
+  \numericTimeSignature \time 3/4
+  \stemDown f,2  | % 0
+  \barNumberCheck #1
+}
+
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
+  \partial 2
   
-  \clef "treble"
-  \key c \major
-  \numericTimeSignature \time 4/4
-\stemUp c'4 \once\omit Rest r2. }
+  \clef "bass"
+  \key f \major
+  \numericTimeSignature \time 3/4
+  
+  \once\override TupletBracket.bracket-visibility = ##t
+  \tuplet 3/2 {  \stemUp c'8 [
+  ees' f' ]
+  }  | % 0
+  \barNumberCheck #1
+}
 
 Part_POne_Staff_One_Voice_Two = \absolute {
   \language "nederlands"
+  \partial 2
   
-  \clef "treble"
-  \key c \major
-  \numericTimeSignature \time 4/4
-s2. \stemDown f'4 }
+  \clef "bass"
+  \key f \major
+  \numericTimeSignature \time 3/4
+  \stemUp g2  | % 1
+  \barNumberCheck #1
+}
 
 \book {
 
@@ -135,15 +169,24 @@ s2. \stemDown f'4 }
       
         \new Staff  = "Part_POne_Staff_One"
         \with {
-          instrumentName = "Music"
+          instrumentName = "Klavier"
+          shortInstrumentName = "Pno."
         }
         <<
+          \context Voice = "Part_POne_Staff_One_Voice_Three" <<
+            \voiceOne % out of 4 regular voices
+            \Part_POne_Staff_One_Voice_Three
+          >>
+          \context Voice = "Part_POne_Staff_One_Voice_Four" <<
+            \voiceTwo % out of 4 regular voices
+            \Part_POne_Staff_One_Voice_Four
+          >>
           \context Voice = "Part_POne_Staff_One_Voice_One" <<
-            \voiceOne % out of 2 regular voices
+            \voiceThree % out of 4 regular voices
             \Part_POne_Staff_One_Voice_One
           >>
           \context Voice = "Part_POne_Staff_One_Voice_Two" <<
-            \voiceTwo % out of 2 regular voices
+            \voiceFour % out of 4 regular voices
             \Part_POne_Staff_One_Voice_Two
           >>
         >>

@@ -1,15 +1,13 @@
 \version "2.24.4"
 
 % Generated from "SingleChord.xml"
-% on Saturday 2025-05-24 @ 11:04:06 CEST
-% by xml2ly v0.9.74 (built May 24, 2025 @ 03:48)
+% by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04)
+% on Thursday 2025-05-29 @ 15:56:47 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos -auto-output-file-name -lilypond-run-date -lilypond-generation-infos SingleChord.xml -dmsr1
-% or, with long option names:
-%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos -auto-output-file-name -lilypond-run-date -lilypond-generation-infos SingleChord.xml -display-msr1
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name SingleChord.ly SingleChord.xml
 % or, with short option names:
-%         SingleChord.xml
+%     SingleChord.ly SingleChord.xml
 
 
 % Scheme function(s): "date & time"
@@ -87,7 +85,7 @@
     \column {
       \fill-line {
         #(string-append
-"Score generated from MusicXML data by xml2ly v0.9.74 (built May 24, 2025 @ 03:48) and LilyPond " (lilypond-version))
+"Score generated from MusicXML data by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04) and LilyPond " (lilypond-version))
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
