@@ -13,6 +13,8 @@
 
 #include <regex>
 
+#include "visitor.h"
+
 #include "oahOah.h"
 
 #include "stringMatcherWae.h"

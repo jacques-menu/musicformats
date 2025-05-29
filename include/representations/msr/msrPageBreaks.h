@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrBreaks___
-#define ___msrBreaks___
+#ifndef ___msrPageBreaks___
+#define ___msrPageBreaks___
 
 #include "msrMeasureElements.h"
 
@@ -19,100 +19,6 @@
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-enum class msrUserSelectedLineBreakKind {
-  kUserSelectedLineBreakYes,
-  kUserSelectedLineBreakNo
-};
-
-std::string msrUserSelectedLineBreakKindAsString (
-  msrUserSelectedLineBreakKind userSelectedLineBreakKind);
-
-std::ostream& operator << (std::ostream& os, const msrUserSelectedLineBreakKind& elt);
-
-class EXP msrLineBreak : public msrMeasureElement
-{
-  public:
-
-    // creation from MusicXML
-    // ------------------------------------------------------
-
-    static SMARTP<msrLineBreak> create (
-                            int                 inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure,
-                            int                 nextBarPuristNumber,
-                            msrUserSelectedLineBreakKind
-                                                userSelectedLineBreakKind);
-
-    static SMARTP<msrLineBreak> create (
-                            int                 inputLineNumber,
-                            int                 nextBarPuristNumber,
-                            msrUserSelectedLineBreakKind
-                                                userSelectedLineBreakKind);
-
-  protected:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          msrLineBreak (
-                            int                 inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure,
-                            int                 nextBarPuristNumber,
-                            msrUserSelectedLineBreakKind
-                                                userSelectedLineBreakKind);
-
-    virtual               ~msrLineBreak ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-   int                   getNextBarPuristNumber () const
-                              { return fNextBarPuristNumber; }
-
-    msrUserSelectedLineBreakKind
-                          getUserSelectedLineBreakKind () const
-                              { return fUserSelectedLineBreakKind; }
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-  public:
-
-    // visitors
-    // ------------------------------------------------------
-
-    void                  acceptIn  (basevisitor* v) override;
-    void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
-
-  public:
-
-    // print
-    // ------------------------------------------------------
-
-    std::string           asString () const override;
-
-    void                  print (std::ostream& os) const override;
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-    int                   fNextBarPuristNumber;
-
-    msrUserSelectedLineBreakKind
-                          fUserSelectedLineBreakKind;
-};
-typedef SMARTP<msrLineBreak> S_msrLineBreak;
-EXP std::ostream& operator << (std::ostream& os, const S_msrLineBreak& elt);
 
 //______________________________________________________________________________
 enum class msrUserSelectedPageBreakKind {
@@ -205,11 +111,13 @@ class EXP msrPageBreak : public msrMeasureElement
     msrUserSelectedPageBreakKind
                           fUserSelectedPageBreakKind;
 };
-typedef SMARTP<msrPageBreak> S_msrPageBreak;
+
+using S_msrPageBreak = SMARTP<msrPageBreak>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrPageBreak& elt);
 
 
 }
 
 
-#endif // ___msrBreaks___
+#endif // ___msrPageBreaks___

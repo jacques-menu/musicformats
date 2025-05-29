@@ -30,12 +30,13 @@
 
 #include "msrVoices.h"
 
-#include "msrBreaks.h"
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
 #include "msrBarNumberChecks.h"
 #include "msrDoubleTremolos.h"
+#include "msrLineBreaks.h"
 #include "msrMeasureRepeats.h"
+#include "msrPageBreaks.h"
 #include "msrRehearsalMarks.h"
 #include "msrRepeats.h"
 #include "msrRepeatConstants.h"

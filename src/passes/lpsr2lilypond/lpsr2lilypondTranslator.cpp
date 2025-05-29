@@ -26,9 +26,10 @@
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
 #include "msrBarNumberChecks.h"
-#include "msrBreaks.h"
 #include "msrDoubleTremolos.h"
 #include "msrGlissandos.h"
+#include "msrLineBreaks.h"
+#include "msrPageBreaks.h"
 #include "msrRehearsalMarks.h"
 #include "msrSlides.h"
 #include "msrTablatures.h"
@@ -27490,18 +27491,18 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
       " (line " << elt->getInputLineNumber () << ")";
   }
 
-  // enforce a line break here, not using \myLineBreak,
-  // if this is a user selected line break
-  switch (elt->getUserSelectedLineBreakKind ()) {
-    case msrUserSelectedLineBreakKind::kUserSelectedLineBreakYes:
-      fLilypondCodeStream <<
-        " \\lineBreak ";
-      break;
-    case msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo:
-      fLilypondCodeStream <<
-        " \\myLineBreak ";
-      break;
-  } // switch
+//   // enforce a line break here, not using \myLineBreak,
+//   // if this is a user selected line break // JMI TO BE SEEN 0.9.74 abcde
+//   switch (elt->getUserSelectedLineBreakKind ()) {
+//     case msrUserSelectedLineBreakKind::kUserSelectedLineBreakYes:
+//       fLilypondCodeStream <<
+//         " \\lineBreak ";
+//       break;
+//     case msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo:
+//       fLilypondCodeStream <<
+//         " \\myLineBreak ";
+//       break;
+//   } // switch
 
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     // generate the line number as a comment

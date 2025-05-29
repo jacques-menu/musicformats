@@ -15,8 +15,9 @@
 // #include "mfMusicformatsErrors.h"
 #include "mfStringsHandling.h"
 
-#include "msrBreaks.h"
+#include "msrLineBreaks.h"
 #include "msrMeasureConstants.h"
+#include "msrPageBreaks.h"
 #include "msrRehearsalMarks.h"
 #include "msrVoiceStaffChanges.h"
 
@@ -11698,7 +11699,7 @@ Staff spacing between multiple staves is measured in
 
       if (newSystem == "yes") {
         // create a line break
-  #ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceLineBreaks ()) {
           std::stringstream ss;
 
@@ -11710,13 +11711,13 @@ Staff spacing between multiple staves is measured in
             __FILE__, __LINE__,
             ss.str ());
         }
-  #endif // MF_TRACE_IS_ENABLED
+#endif // MF_TRACE_IS_ENABLED
 
+        // JMI 0.9.74 the next bar purist number will be set in msr2lpsr
         S_msrLineBreak
           lineBreak =
             msrLineBreak::create (
               elt->getInputLineNumber (),
-              1333333, // JMI 0.9.70 next purist number???
               msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo);
 
         // append lineBreak to the pending line breaks

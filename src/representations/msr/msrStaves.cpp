@@ -22,7 +22,8 @@
 #include "mfStringsHandling.h"
 
 #include "msrBarLines.h"
-#include "msrBreaks.h"
+#include "msrLineBreaks.h"
+#include "msrPageBreaks.h"
 #include "msrRehearsalMarks.h"
 #include "msrRehearsalMarks.h"
 #include "msrTempos.h"

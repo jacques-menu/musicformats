@@ -23,10 +23,11 @@
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
 #include "msrBarNumberChecks.h"
-#include "msrBreaks.h"
 #include "msrDoubleTremolos.h"
 #include "msrHiddenMeasureAndBarLines.h"
+#include "msrLineBreaks.h"
 #include "msrMeasures.h"
+#include "msrPageBreaks.h"
 #include "msrRehearsalMarks.h"
 #include "msrTempos.h"
 #include "msrTuplets.h"
@@ -4294,6 +4295,11 @@ void msrMeasure::appendLineBreakToMeasure (
   appendMeasureElementToMeasure (
     lineBreak,
     "appendLineBreakToMeasure()");
+
+  // set lineBreak's next bar purist number
+  lineBreak->
+    setNextBarPuristNumber (
+      fMeasurePuristNumber);
 }
 
 void msrMeasure::appendPageBreakToMeasure (

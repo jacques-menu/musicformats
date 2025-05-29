@@ -25,7 +25,8 @@
 #include "msrWae.h"
 
 #include "msrBarLines.h"
-#include "msrBreaks.h"
+#include "msrLineBreaks.h"
+#include "msrPageBreaks.h"
 #include "msrParts.h"
 #include "msrRehearsalMarks.h"
 #include "msrTempos.h"
