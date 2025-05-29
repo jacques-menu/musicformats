@@ -13,7 +13,7 @@
 
 #set -x
 
-LIBMUSICFORMATS_GIT=${HOME}/musicformats-git-dev
+LIBMUSICFORMATS_GIT=${HOME}/JMI_DEVELOPMENT/musicformats-git-dev
 
 
 # Write all output to logfile
