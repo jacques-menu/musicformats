@@ -1,13 +1,13 @@
 \version "2.24.4"
 
 % Generated from "SimpleBackup.xml"
-% on Sunday 2025-05-25 @ 09:31:23 CEST
-% by xml2ly v0.9.74 (built May 24, 2025 @ 03:48)
+% by xml2ly v0.9.74-dev (built May 29, 2025 @ 09:33)
+% on Thursday 2025-05-29 @ 12:30:13 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos -auto-output-file-name -lilypond-run-date -lilypond-generation-infos SimpleBackup.xml
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name SimpleBackup.ly SimpleBackup.xml
 % or, with short option names:
-%         SimpleBackup.xml
+%     SimpleBackup.ly SimpleBackup.xml
 
 
 % Scheme function(s): "date & time"
@@ -87,7 +87,7 @@
     \column {
       \fill-line {
         #(string-append
-"Score generated from MusicXML data by xml2ly v0.9.74 (built May 24, 2025 @ 03:48) and LilyPond " (lilypond-version))
+"Score generated from MusicXML data by xml2ly v0.9.74-dev (built May 29, 2025 @ 09:33) and LilyPond " (lilypond-version))
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }

@@ -24102,18 +24102,18 @@ void mxsr2msrSkeletonPopulator::handleChordEnd ()
   }
 
   else {
-    fCurrentPart->
-      incrementPartCurrentDrawingPositionInMeasure (
-        fCurrentNoteInputStartLineNumber,
-        fCurrentChord->getMeasureElementSoundingWholeNotes ());
-
-    fCurrentRecipientMsrVoice->
-      fetchVoiceLastMeasure (
-        fCurrentNoteInputStartLineNumber)->
-          incrementMeasureCurrentPositionInMeasure (
-            fCurrentNoteInputStartLineNumber,
-            fCurrentChord->getMeasureElementSoundingWholeNotes (),
-            "handleChordEnd()");
+//     fCurrentPart->
+//       incrementPartCurrentDrawingPositionInMeasure (
+//         fCurrentNoteInputStartLineNumber,
+//         fCurrentChord->getMeasureElementSoundingWholeNotes ());
+//
+//     fCurrentRecipientMsrVoice->
+//       fetchVoiceLastMeasure (
+//         fCurrentNoteInputStartLineNumber)->
+//           incrementMeasureCurrentPositionInMeasure (
+//             fCurrentNoteInputStartLineNumber,
+//             fCurrentChord->getMeasureElementSoundingWholeNotes (),
+//             "handleChordEnd()");
   }
 
   // forget about the current chord

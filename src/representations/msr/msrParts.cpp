@@ -461,27 +461,27 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
   int                 inputLineNumber,
   const mfWholeNotes& wholeNotesDelta)
 {
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  if (wholeNotesDelta.getNumerator () <= 0) {
-    std::stringstream ss;
-
-    ss <<
-      "cannot increment part current drawing positino in measure " <<
-      fPartCurrentDrawingPositionInMeasure <<
-      " by wholeNotesDelta " <<
-      wholeNotesDelta <<
-      " in part " <<
-      fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   if (wholeNotesDelta.getNumerator () <= 0) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "cannot increment part current drawing positino in measure " <<
+//       fPartCurrentDrawingPositionInMeasure <<
+//       " by wholeNotesDelta " <<
+//       wholeNotesDelta <<
+//       " in part " <<
+//       fetchPartNameForTrace () <<
+//       ", line " << inputLineNumber;
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   mfPositionInMeasure
     newPartCurrentDrawingPositionInMeasure =
@@ -515,27 +515,27 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
   int                 inputLineNumber,
   const mfWholeNotes& wholeNotesDelta)
 {
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  if (wholeNotesDelta.getNumerator () <= 0) {
-    std::stringstream ss;
-
-    ss <<
-      "cannot decrement part current drawing positino in measure " <<
-      fPartCurrentDrawingPositionInMeasure <<
-      " by wholeNotesDelta " <<
-      wholeNotesDelta <<
-      " in part " <<
-      fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   if (wholeNotesDelta.getNumerator () <= 0) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "cannot decrement part current drawing positino in measure " <<
+//       fPartCurrentDrawingPositionInMeasure <<
+//       " by wholeNotesDelta " <<
+//       wholeNotesDelta <<
+//       " in part " <<
+//       fetchPartNameForTrace () <<
+//       ", line " << inputLineNumber;
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   mfPositionInMeasure
     newPartCurrentDrawingPositionInMeasure =
@@ -579,11 +579,11 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
       ", which is negative " <<
       ", line " << inputLineNumber;
 
-    msrInternalError (
-//     msrInternalWarning (
+//     msrInternalError (
+    msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+//       __FILE__, __LINE__,
       ss.str ());
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
