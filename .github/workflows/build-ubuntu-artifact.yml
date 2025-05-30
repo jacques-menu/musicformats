@@ -87,7 +87,7 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name: Upload libraries and executables for Ubuntu
+      - name: Upload version informations, examples and binaries for Ubuntu
         uses:
           actions/upload-artifact@v4
         with:
