@@ -87,7 +87,7 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name: Upload version informations and binaries for MacOS
+      - name: Upload version informations, examples and binaries for MacOS
         uses:
           actions/upload-artifact@v4
         with:
@@ -95,6 +95,7 @@ jobs:
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt
+            musicxmlfiles
             lib
             include
             bin

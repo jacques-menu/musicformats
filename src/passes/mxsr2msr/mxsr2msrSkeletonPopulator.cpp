@@ -9462,7 +9462,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 
   fForwardedToVoicesList.push_back (voiceToBeForwardedTo);
 
-  fAForwardHasJustBeenHandled = true;
+//   fAForwardHasJustBeenHandled = true;
 }
 
 //________________________________________________________________________
@@ -11371,7 +11371,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
   gLog <<
     "visitEnd (S_measure& elt)" <<
     ", fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
-    ", fAForwardHasJustBeenHandled: " << fAForwardHasJustBeenHandled <<
+//     ", fAForwardHasJustBeenHandled: " << fAForwardHasJustBeenHandled <<
+    ", fForwardedToVoicesList.empty (): " << fForwardedToVoicesList.empty () <<
     std::endl;
 
   if (! fForwardedToVoicesList.empty ()) {
@@ -11396,7 +11397,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
       fForwardedToVoicesList.pop_front ();
     } // while
 
-    fAForwardHasJustBeenHandled = false;
+//     fAForwardHasJustBeenHandled = false;
   }
 
   // take finalization actions if relevant 0.9.70
@@ -24686,7 +24687,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     } // for
   }
 
-  fAForwardHasJustBeenHandled = false;
+//   fAForwardHasJustBeenHandled = false;
 
   fOnGoingNote = false;
 }

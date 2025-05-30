@@ -93,7 +93,7 @@ jobs:
 
 
       # --------------------------------------------------------------------------
-      - name: Upload libraries and executables for Windows
+      - name: Upload version informations, examples and binaries for Windows
         uses:
           actions/upload-artifact@v4
         with:
@@ -101,6 +101,7 @@ jobs:
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt
+            musicxmlfiles
             lib
             include
             bin

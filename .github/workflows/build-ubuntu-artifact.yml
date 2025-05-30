@@ -95,6 +95,7 @@ jobs:
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt
+            musicxmlfiles
             lib
             include
             bin
