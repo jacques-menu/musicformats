@@ -1024,7 +1024,7 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
 
     fPartMeasuresWholeNotesVector.clear ();
     fPartMeasuresWholeNotesVector.resize (
-      fPartNumberOfMeasures,
+      fPartNumberOfMeasures + 1, // indexes start at 0 JMI 0.9.75
       K_WHOLE_NOTES_ZERO);
   }
 }

@@ -158,26 +158,26 @@ function RunXml2lyOnFile ()
   FILE_NAME=$1
   echo
   echo "----------------------------"
-  echo "==> FILE_NAME: $FILE_NAME:"
+  echo "==> RunXml2lyOnFile() - FILE_NAME: $FILE_NAME:"
 
 
   # handle file names
 
   FILE_BASE_NAME=$(basename "$FILE_NAME")
-  echo "FILE_BASE_NAME:          $FILE_BASE_NAME"
+  echo "FILE_BASE_NAME:            $FILE_BASE_NAME"
 
   SUFFIXLESS_FILE_NAME=$(echo "$FILE_BASE_NAME" | cut -f 1 -d '.')
-  echo "SUFFIXLESS_FILE_NAME:    $SUFFIXLESS_FILE_NAME"
+  echo "SUFFIXLESS_FILE_NAME:      $SUFFIXLESS_FILE_NAME"
 
   SUFFIXLESS_FILE_NAMES+=($SUFFIXLESS_FILE_NAME)
-  echo "SUFFIXLESS_FILE_NAMES:   $SUFFIXLESS_FILE_NAMES"
+  echo "SUFFIXLESS_FILE_NAMES:     $SUFFIXLESS_FILE_NAMES"
 
   MUSICXML_FILE_NAME="$SUFFIXLESS_FILE_NAME.xml"
     # in case the argument contains only 'FOO.', for example
-  echo "MUSICXML_FILE_NAME:      $MUSICXML_FILE_NAME"
+  echo "MUSICXML_FILE_NAME:        $MUSICXML_FILE_NAME"
 
-  MUSICXML_FILE_NAMES=($MUSICXML_FILE_NAMES $MUSICXML_FILE_NAME)
-  echo "MUSICXML_FILE_NAMES:     $MUSICXML_FILE_NAMES"
+  MUSICXML_FILE_NAMES_ARRAY=($MUSICXML_FILE_NAMES_ARRAY "$MUSICXML_FILE_NAME")
+  echo "MUSICXML_FILE_NAMES_ARRAY: $MUSICXML_FILE_NAMES_ARRAY"
 
 
   echo
@@ -230,15 +230,15 @@ function HandleAllMusicXMLFilesInCurrentDirectory ()
 
   FILES_NBR=$(ls *.xml | wc -l)
 
-  echo "There are $FILES_NBR files to be translated"
+  echo "There are $FILES_NBR MusicXML files to be translated"
   echo
 
-  for FILE_NAME in $(ls *.xml) ; do
+  for FILE_NAME in ls *.xml ; do
     echo
     echo "----------------------------"
     echo "==> FILE_NAME: $FILE_NAME:"
 
-    RunXml2lyOnFile $FILE_NAME
+    RunXml2lyOnFile ""$FILE_NAME
   done
 }
 
@@ -273,10 +273,12 @@ function DisplayTheResultingFiles ()
 {
   echo
   echo "----------------------------"
-  FILES_NBR=${#MUSICXML_FILE_NAMES[@]}
-  echo "There are $FILES_NBR handled *.xml files:"
+  echo "==> MUSICXML_FILE_NAMES_ARRAY: $MUSICXML_FILE_NAMES_ARRAY:"
+  echo "----------------------------"
+  FILES_NBR=${#MUSICXML_FILE_NAMES_ARRAY[@]}
+  echo "There are $FILES_NBR handled MusicXML files:"
   echo
-  for FILE_NAME in $MUSICXML_FILE_NAMES ; do
+  for FILE_NAME in $MUSICXML_FILE_NAMES_ARRAY ; do
     if [ -f $FILE_NAME ]; then
       ls -salGTF $FILE_NAME
     fi

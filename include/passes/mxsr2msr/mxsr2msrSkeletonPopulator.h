@@ -16,7 +16,7 @@
 
 #include "typedefs.h"
 
-#include "mxsr2msrEvents.h"
+#include "mxsrEventsCollections.h"
 
 #include "mxsr2msrVoices.h"
 

@@ -11368,17 +11368,25 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // has there been notes since the last <forward /> in this measure?
-  gLog <<
-    "visitEnd (S_measure& elt)" <<
-    ", fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
-//     ", fAForwardHasJustBeenHandled: " << fAForwardHasJustBeenHandled <<
-    ", fForwardedToVoicesList.empty (): " << fForwardedToVoicesList.empty () <<
-    std::endl;
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsr2msrOahGroup->getTraceForward ()) {
+    gLog <<
+      "visitEnd (S_measure& elt)" <<
+      ", fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
+  //     ", fAForwardHasJustBeenHandled: " << fAForwardHasJustBeenHandled <<
+      ", fForwardedToVoicesList.empty (): " << fForwardedToVoicesList.empty () <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   if (! fForwardedToVoicesList.empty ()) {
-    gLog <<
-      "==> there has been notes since the last <forward /> in this measure" <<
-      std::endl;
+#ifdef MF_TRACE_IS_ENABLED
+    if (gGlobalMxsr2msrOahGroup->getTraceForward ()) {
+      gLog <<
+        "==> there has been notes since the last <forward /> in this measure" <<
+        std::endl;
+    }
+#endif // MF_TRACE_IS_ENABLED
 
     // append a padding note to the voice that have been forwarded to JMI 0.9.74
     while (! fForwardedToVoicesList.empty ()) {

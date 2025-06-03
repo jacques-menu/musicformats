@@ -1,8 +1,8 @@
 \version "2.24.4"
 
 % Generated from "LetRingChord.xml"
-% by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04)
-% on Thursday 2025-05-29 @ 15:56:45 CEST
+% by xml2ly v0.9.75-dev (built May 30, 2025)
+% on Tuesday 2025-06-03 @ 18:24:35 CEST
 
 % The conversion command as supplied was: 
 %  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name LetRingChord.ly LetRingChord.xml
@@ -88,7 +88,7 @@
     \column {
       \fill-line {
         #(string-append
-"Score generated from MusicXML data by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04) and LilyPond " (lilypond-version))
+"Score generated from MusicXML data by xml2ly v0.9.75-dev (built May 30, 2025) and LilyPond " (lilypond-version))
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
