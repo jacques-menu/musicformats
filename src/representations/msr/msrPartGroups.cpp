@@ -1459,6 +1459,54 @@ std::string msrPartGroup::asString () const
   return ss.str ();
 }
 
+void msrPartGroup::print (std::ostream& os) const
+{
+//   static int simultaneousCalls = 0; // JMI 0.9.69
+//
+//   ++simultaneousCalls;
+
+//   if (simultaneousCalls == 100) abort (); // JMI 0.9.69 for the implicit outer-most part group...
+
+  os <<
+    "[PartGroup " <<
+    fPartGroupName <<
+    ", " <<
+    fetchPartGroupInformationForTrace () <<
+    ", line " << fInputLineNumber << // JMI non significant
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 29;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fPartGroupName" << ": \"" <<
+    fPartGroupName <<
+    "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fPartGroupImplicitKind" << ": " <<
+    fPartGroupImplicitKind <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fPartGroupPartsMap.size():" << ": " <<
+    fPartGroupPartsMap.size () <<
+    std::endl << std::endl;
+
+  // print the part group elements if any
+  displayPartGroupElementsList (
+    fInputLineNumber);
+
+  --gIndenter;
+
+  os << ']' << std::endl;
+
+//   --simultaneousCalls;
+}
+
 void msrPartGroup::printFull (std::ostream& os) const
 {
   os <<
@@ -1580,54 +1628,6 @@ void msrPartGroup::printFull (std::ostream& os) const
   --gIndenter;
 
   os << ']' << std::endl;
-}
-
-void msrPartGroup::print (std::ostream& os) const
-{
-//   static int simultaneousCalls = 0; // JMI 0.9.69
-//
-//   ++simultaneousCalls;
-
-//   if (simultaneousCalls == 100) abort (); // JMI 0.9.69 for the implicit outer-most part group...
-
-  os <<
-    "[PartGroup " <<
-    fPartGroupName <<
-    ", " <<
-    fetchPartGroupInformationForTrace () <<
-    ", line " << fInputLineNumber << // JMI non significant
-    std::endl;
-
-  ++gIndenter;
-
-  constexpr int fieldWidth = 29;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fPartGroupName" << ": \"" <<
-    fPartGroupName <<
-    "\"" <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fPartGroupImplicitKind" << ": " <<
-    fPartGroupImplicitKind <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fPartGroupPartsMap.size():" << ": " <<
-    fPartGroupPartsMap.size () <<
-    std::endl;
-
-  // print the part group elements if any
-  displayPartGroupElementsList (
-    fInputLineNumber);
-
-  --gIndenter;
-
-  os << ']' << std::endl;
-
-//   --simultaneousCalls;
 }
 
 void msrPartGroup::printSummary (std::ostream& os) const

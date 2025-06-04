@@ -197,12 +197,16 @@ class EXP msrPart : public msrPartGroupElement
 
     // measure number
 
+//     void                  setPartFirstMeasureNumber (
+//                             const std::string& measureNumber)
+//                               { fPartFirstMeasureNumber = measureNumber; }
+
+    const std::string     getPartFirstMeasureNumber () const
+                              { return fPartFirstMeasureNumber; }
+
     void                  setPartCurrentMeasureNumber (
                             const std::string& measureNumber)
-                              {
-                                fPartCurrentMeasureNumber =
-                                  measureNumber;
-                              }
+                              { fPartCurrentMeasureNumber = measureNumber; }
 
     const std::string     getPartCurrentMeasureNumber () const
                               { return fPartCurrentMeasureNumber; }
@@ -716,6 +720,7 @@ class EXP msrPart : public msrPartGroupElement
 //                           fPartStavesAndVoicesVector;
     // measures
 
+    std::string           fPartFirstMeasureNumber;
     std::string           fPartCurrentMeasureNumber;
 
     size_t                fPartNumberOfMeasures;

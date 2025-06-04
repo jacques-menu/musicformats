@@ -26952,6 +26952,17 @@ void mxsr2msrSkeletonPopulator::handleImplicitInitialForwardRepeat (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // remember repeat start measure number
+  fCurrentRepeatStartMeasureNumber = inputLineNumber;
+
+  // prepare for repeat in current part
+  fCurrentPart->
+    handleRepeatStartInPart (
+      inputLineNumber);
+
+//   // append the bar line to the current part
+//   fCurrentPart->
+//     appendBarLineToPart (barLine); // JMI 0.9.75
 }
 
 //______________________________________________________________________________

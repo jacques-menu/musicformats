@@ -176,6 +176,9 @@ void msrPart::initializePart ()
   fPartMinimumVoiceNumber = INT_MAX;
   fPartMaximumVoiceNumber = 0;
 
+  // initialize part's first measure number
+  fPartFirstMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
+
   // initialize part's number of measures
   fPartNumberOfMeasures = 0;
 
@@ -207,6 +210,17 @@ void msrPart::initializePart ()
 
 msrPart::~msrPart ()
 {}
+
+void msrPart::setPartCurrentMeasureNumber (
+  const std::string& measureNumber)
+{
+  fPartCurrentMeasureNumber = measureNumber;
+
+  // is this the first measure number assigned in this part?
+  if (fPartFirstMeasureNumber == K_MEASURE_NUMBER_UNKNOWN_) {
+    fPartFirstMeasureNumber = fPartCurrentMeasureNumber;
+  }
+}
 
 S_msrScore msrPart::fetchPartUpLinkToScore () const
 {
@@ -3743,6 +3757,181 @@ void msrPart::printPartMeasuresWholeNotesVector (
   }
 }
 
+void msrPart::print (std::ostream& os) const
+{
+  os <<
+    "[Part" << ' ' << fPartPathLikeName <<
+    " (" <<
+    mfSingularOrPlural (
+      fPartAllStavesList.size (), "staff", "staves") <<
+    ")" <<
+    ", line " << fInputLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+//abort ();
+  constexpr int fieldWidth = 39;
+
+/*
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fUpLinkToPartGroup" << ": ";
+  if (fPartUpLinkToPartGroup) {
+    // it may be empty
+    os <<
+      fPartUpLinkToPartGroup->fetchPartGroupInformationForTrace ();
+  }
+  else {
+    os << "[NULL]";
+  }
+  os << std::endl;
+*/
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fPartMusicXMLID" << ": \"" <<
+    fPartMusicXMLID << "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fPartName" << ": \"" <<
+    fPartName << "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fPartPathLikeName" << ": \"" <<
+    fPartPathLikeName << "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fPartSequentialNumber" << ": " <<
+    fPartSequentialNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fPartFirstMeasureNumber" << ": " <<
+    fPartFirstMeasureNumber <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fPartHarmoniesStaff" << ": ";
+    if (fPartHarmoniesStaff) {
+      os <<
+        fPartHarmoniesStaff->asShortString ();
+    }
+    else {
+      os << "[NULL]";
+    }
+  os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fPartHarmoniesVoice" << ": ";
+    if (fPartHarmoniesVoice) {
+      os <<
+        fPartHarmoniesVoice->asShortString ();
+    }
+    else {
+      os << "[NULL]";
+    }
+  os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fPartFiguredBassStaff" << ": ";
+    if (fPartFiguredBassStaff) {
+      os <<
+        fPartFiguredBassStaff->asShortString ();
+    }
+    else {
+      os << "[NULL]";
+    }
+  os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fPartFiguredBassVoice" << ": ";
+    if (fPartFiguredBassVoice) {
+      os <<
+        fPartFiguredBassVoice->asShortString ();
+    }
+    else {
+      os << "[NULL]";
+    }
+  os << std::endl;
+
+  // print the part measure' whole notes durations vector
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresWholeNotesVectors ()) {
+    printPartMeasuresWholeNotesVector (
+      os,
+      fieldWidth,
+      ", msrPart::print ()");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // print all the staves
+  if (! fPartAllStavesList.empty ()) {
+    os << std::endl;
+
+    std::list <S_msrStaff>::const_iterator
+      iBegin = fPartAllStavesList.begin (),
+      iEnd   = fPartAllStavesList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      S_msrStaff staff = (*i);
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+      // sanity check
+      mfAssert (
+        __FILE__, __LINE__,
+        staff != nullptr,
+        "staff is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+      msrStaffKind
+        staffKind =
+          staff->getStaffKind ();
+
+      switch (staffKind) { // JMI 0.9.66
+        case msrStaffKind::kStaffKindRegular:
+          os << staff;
+          break;
+
+        case msrStaffKind::kStaffKindTablature:
+          os << staff;
+          break;
+
+        case msrStaffKind::kStaffKindHarmonies:
+          os << staff;
+          break;
+
+        case msrStaffKind::kStaffKindFiguredBass:
+          os << staff;
+          break;
+
+        case msrStaffKind::kStaffKindDrum:
+          os << staff;
+          break;
+
+        case msrStaffKind::kStaffKindRythmic:
+          os << staff;
+          break;
+      } // switch
+
+      if (++i == iEnd) break;
+
+      os << std::endl;
+    } // for
+  }
+
+  --gIndenter;
+
+  os << ']' << std::endl;
+}
+
 void msrPart::printFull (std::ostream& os) const
 {
   os <<
@@ -3813,6 +4002,11 @@ void msrPart::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fPartInstrumentAbbreviation" << ": \"" <<
     fPartInstrumentAbbreviation << "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fPartFirstMeasureNumber" << ": " <<
+    fPartFirstMeasureNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -4165,176 +4359,6 @@ void msrPart::printFull (std::ostream& os) const
   }
   else {
     os << "[NULL]" << std::endl;
-  }
-
-  --gIndenter;
-
-  os << ']' << std::endl;
-}
-
-void msrPart::print (std::ostream& os) const
-{
-  os <<
-    "[Part" << ' ' << fPartPathLikeName <<
-    " (" <<
-    mfSingularOrPlural (
-      fPartAllStavesList.size (), "staff", "staves") <<
-    ")" <<
-    ", line " << fInputLineNumber <<
-    std::endl;
-
-  ++gIndenter;
-//abort ();
-  constexpr int fieldWidth = 39;
-
-/*
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fUpLinkToPartGroup" << ": ";
-  if (fPartUpLinkToPartGroup) {
-    // it may be empty
-    os <<
-      fPartUpLinkToPartGroup->fetchPartGroupInformationForTrace ();
-  }
-  else {
-    os << "[NULL]";
-  }
-  os << std::endl;
-*/
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fPartMusicXMLID" << ": \"" <<
-    fPartMusicXMLID << "\"" <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fPartName" << ": \"" <<
-    fPartName << "\"" <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fPartPathLikeName" << ": \"" <<
-    fPartPathLikeName << "\"" <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fPartSequentialNumber" << ": " <<
-    fPartSequentialNumber <<
-    std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fPartHarmoniesStaff" << ": ";
-    if (fPartHarmoniesStaff) {
-      os <<
-        fPartHarmoniesStaff->asShortString ();
-    }
-    else {
-      os << "[NULL]";
-    }
-  os << std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fPartHarmoniesVoice" << ": ";
-    if (fPartHarmoniesVoice) {
-      os <<
-        fPartHarmoniesVoice->asShortString ();
-    }
-    else {
-      os << "[NULL]";
-    }
-  os << std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fPartFiguredBassStaff" << ": ";
-    if (fPartFiguredBassStaff) {
-      os <<
-        fPartFiguredBassStaff->asShortString ();
-    }
-    else {
-      os << "[NULL]";
-    }
-  os << std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fPartFiguredBassVoice" << ": ";
-    if (fPartFiguredBassVoice) {
-      os <<
-        fPartFiguredBassVoice->asShortString ();
-    }
-    else {
-      os << "[NULL]";
-    }
-  os << std::endl;
-
-  // print the part measure' whole notes durations vector
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasuresWholeNotesVectors ()) {
-    printPartMeasuresWholeNotesVector (
-      os,
-      fieldWidth,
-      ", msrPart::print ()");
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // print all the staves
-  if (! fPartAllStavesList.empty ()) {
-    os << std::endl;
-
-    std::list <S_msrStaff>::const_iterator
-      iBegin = fPartAllStavesList.begin (),
-      iEnd   = fPartAllStavesList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_msrStaff staff = (*i);
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-      // sanity check
-      mfAssert (
-        __FILE__, __LINE__,
-        staff != nullptr,
-        "staff is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-      msrStaffKind
-        staffKind =
-          staff->getStaffKind ();
-
-      switch (staffKind) { // JMI 0.9.66
-        case msrStaffKind::kStaffKindRegular:
-          os << staff;
-          break;
-
-        case msrStaffKind::kStaffKindTablature:
-          os << staff;
-          break;
-
-        case msrStaffKind::kStaffKindHarmonies:
-          os << staff;
-          break;
-
-        case msrStaffKind::kStaffKindFiguredBass:
-          os << staff;
-          break;
-
-        case msrStaffKind::kStaffKindDrum:
-          os << staff;
-          break;
-
-        case msrStaffKind::kStaffKindRythmic:
-          os << staff;
-          break;
-      } // switch
-
-      if (++i == iEnd) break;
-
-      os << std::endl;
-    } // for
   }
 
   --gIndenter;
