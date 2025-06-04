@@ -77,7 +77,7 @@ class EXP mxsrEventsCollection : public smartable
     void                  setThereIsAnImplicitInitialForwardRepeat ()
                               { fThereIsAnImplicitInitialForwardRepeat = true; }
 
-    Bool                  getInitialRepeatBarIsImplicit () const
+    Bool                  getThereIsAnImplicitInitialForwardRepeat () const
                               { return fThereIsAnImplicitInitialForwardRepeat; }
 
     // staff change events

@@ -465,12 +465,12 @@ class EXP msrPart : public msrPartGroupElement
     void                  handleRepeatStartInPart (
                             int inputLineNumber);
 
-    void                  handleRepeatEndInPart (
+    void                  cascadeHandleRepeatEndInPart (
                             int                inputLineNumber,
                             const std::string& measureNumber,
                             int                repeatTimes);
 
-    void                  handleRepeatEndingStartInPart (
+    void                  cascadeHandleRepeatEndingStartInPart (
                             int inputLineNumber);
 
     void                  handleRepeatEndingEndInPart (

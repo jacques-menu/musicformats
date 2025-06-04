@@ -5355,6 +5355,21 @@ void mxsr2msrSkeletonBuilder::visitStart (S_repeat& elt)
 				if (! fAFirstForwardRepeatHasBeenMet) {
 					// this backward repeat is not preceded by a forward repeat
 					// hence there is an implicit initial forward repeat
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+            std::stringstream ss;
+
+            ss <<
+              "There is an implicit initial forward repeat in part " <<
+              fCurrentPart->fetchPartNameForTrace () <<
+              ", line " << elt->getInputLineNumber ();
+
+            gWaeHandler->waeTrace (
+              __FILE__, __LINE__,
+              ss.str ());
+          }
+#endif // MF_TRACE_IS_ENABLED
+
 					fResultingEventsCollection.
 						setThereIsAnImplicitInitialForwardRepeat ();
 				}
@@ -6335,7 +6350,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 
 	switch (fTupletTypeKind) {
 		case msrTupletTypeKind::kTupletTypeNone:
-			// ??? JMI
+			// ??? JMI 0.9.75
 			break;
 
 		case msrTupletTypeKind::kTupletTypeStart:

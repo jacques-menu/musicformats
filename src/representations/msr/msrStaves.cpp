@@ -2449,7 +2449,7 @@ void msrStaff::handleRepeatStartInStaff (
   --gIndenter;
 }
 
-void msrStaff::handleRepeatEndInStaff (
+void msrStaff::cascadeHandleRepeatEndInStaff (
   int           inputLineNumber,
   const std::string& measureNumber,
   int           repeatTimes)
@@ -2485,7 +2485,7 @@ void msrStaff::handleRepeatEndInStaff (
   --gIndenter;
 }
 
-void msrStaff::handleRepeatEndingStartInStaff (
+void msrStaff::cascadeHandleRepeatEndingStartInStaff (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED

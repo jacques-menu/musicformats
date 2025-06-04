@@ -159,13 +159,13 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // set and get
     // ------------------------------------------------------
 
-    // use MXSR events (temporary from 0.9.72)
-    // --------------------------------------
-
-    void                  setUseMxsrEvents ()
-                              { fUseMxsrEvents = true; }
-    Bool                  getUseMxsrEvents () const
-                              { return fUseMxsrEvents; }
+//     // use MXSR events (temporary from 0.9.72)
+//     // --------------------------------------
+//
+//     void                  setUseMxsrEvents ()
+//                               { fUseMxsrEvents = true; }
+//     Bool                  getUseMxsrEvents () const
+//                               { return fUseMxsrEvents; }
 
     // prefix options
     // --------------------------------------
@@ -621,10 +621,10 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // private fields
     // ------------------------------------------------------
 
-    // use MXSR events
-    // --------------------------------------
-
-    Bool                  fUseMxsrEvents;
+//     // use MXSR events
+//     // --------------------------------------
+//
+//     Bool                  fUseMxsrEvents;
 
     // prefix options
     // --------------------------------------

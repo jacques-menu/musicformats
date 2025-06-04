@@ -1603,7 +1603,7 @@ void msrPart::handleRepeatStartInPart (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1629,13 +1629,13 @@ void msrPart::handleRepeatStartInPart (
   --gIndenter;
 }
 
-void msrPart::handleRepeatEndInPart (
+void msrPart::cascadeHandleRepeatEndInPart (
   int                inputLineNumber,
   const std::string& measureNumber,
   int                repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1655,7 +1655,7 @@ void msrPart::handleRepeatEndInPart (
   // cascade to all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      handleRepeatEndInStaff (
+      cascadeHandleRepeatEndInStaff (
         inputLineNumber,
         measureNumber,
         repeatTimes);
@@ -1664,11 +1664,11 @@ void msrPart::handleRepeatEndInPart (
   --gIndenter;
 }
 
-void msrPart::handleRepeatEndingStartInPart (
+void msrPart::cascadeHandleRepeatEndingStartInPart (
   int    inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1688,7 +1688,7 @@ void msrPart::handleRepeatEndingStartInPart (
   // cascade to all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      handleRepeatEndingStartInStaff (
+      cascadeHandleRepeatEndingStartInStaff (
         inputLineNumber);
   } // for
 
@@ -1701,7 +1701,7 @@ void msrPart::handleRepeatEndingEndInPart (
   msrRepeatEndingKind repeatEndingKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<

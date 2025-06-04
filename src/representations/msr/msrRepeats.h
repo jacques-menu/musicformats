@@ -277,6 +277,10 @@ class EXP msrRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
     static SMARTP<msrRepeat> create (
+                            int inputLineNumber,
+                            int repeatTimes);
+
+    static SMARTP<msrRepeat> create (
                             int               inputLineNumber,
                             int               repeatTimes,
                             const S_msrVoice& upLinkToVoice);
@@ -302,14 +306,18 @@ class EXP msrRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
     // upLinks
+    void                  setRepeatUpLinkToVoice (S_msrVoice voice)
+                              { fRepeatUpLinkToVoice = voice; }
+
     S_msrVoice            getRepeatUpLinkToVoice () const
                               { return fRepeatUpLinkToVoice; }
-    // time signatures
-    int                   getRepeatTimes () const
-                              { return fRepeatTimes; }
 
+    // time signatures
     void                  setRepeatTimes (int repeatTimes) // JMI
                               { fRepeatTimes = repeatTimes; }
+
+    int                   getRepeatTimes () const
+                              { return fRepeatTimes; }
 
     // explicit start?
     void                  setRepeatExplicitStartKind (

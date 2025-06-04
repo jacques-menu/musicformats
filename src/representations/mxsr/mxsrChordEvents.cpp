@@ -11,20 +11,8 @@
 
 #include <iomanip>
 
-// #include <algorithm>
-// #include <cassert>
-// #include <iostream>
-// #include <sstream>
-
-// #include <map>
-//
-// #include "mfAssert.h"
-// #include "mfStringsHandling.h"
-//
 #include "mxsrCueEvents.h"
 #include "mxsrChordEvents.h"
-
-// #include "waeHandlers.h"
 
 
 namespace MusicFormats

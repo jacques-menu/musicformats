@@ -2237,6 +2237,9 @@ class EXP mxsr2msrSkeletonPopulator :
     std::string               fCurrentRepeatStartMeasureNumber;
     S_msrBarLine              fCurrentRepeatEndingStartBarLine;
 
+    void                      handleImplicitInitialForwardRepeat (
+                                int inputLineNumber);
+
     void                      handleRepeatStart (
                                 const S_msrBarLine& barLine);
 

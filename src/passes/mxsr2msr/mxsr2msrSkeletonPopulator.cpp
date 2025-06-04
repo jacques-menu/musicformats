@@ -3871,6 +3871,17 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
       "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
 #endif
+
+  // is there an implicit initial repeat?
+  Bool
+   thereIsAnImplicitInitialForwardRepeat =
+      fKnownEventsCollection.
+        getThereIsAnImplicitInitialForwardRepeat ();
+
+  if (thereIsAnImplicitInitialForwardRepeat) {
+    handleImplicitInitialForwardRepeat (
+      inputLineNumber);
+  }
 }
 
 void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
@@ -26923,22 +26934,49 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteInAChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleRepeatStart (
-  const S_msrBarLine& barLine)
+void mxsr2msrSkeletonPopulator::handleImplicitInitialForwardRepeat (
+  int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Handling repeat start" <<
-    /* JMI
-      ", measure " <<
-        barLine->getBarLineMeasureNumber () <<
-      ", position " <<
-      barLine->getBarLinePositionInMeasure () <<
-      */
-      ", line " << barLine->getInputLineNumber ();
+      "Handling the implicit initial forward repeat in part " <<
+      fCurrentPart->fetchPartNameForTrace () <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+}
+
+//______________________________________________________________________________
+void mxsr2msrSkeletonPopulator::handleRepeatStart (
+  const S_msrBarLine& barLine)
+{
+  std::string
+    repeatStartMeasureNumber =
+      fCurrentRepeatStartMeasureNumber.size ()
+        ? // there was a repeat start before hand
+          fCurrentRepeatStartMeasureNumber
+        : // there is an implicit repeat start at the beginning of the part
+          fPartFirstMeasureNumber;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Handling a repeat start in part " <<
+      fCurrentPart->fetchPartNameForTrace () <<
+      ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
+      "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
+      "\", repeatStartMeasureNumber: \"" << repeatStartMeasureNumber <<
+      "\", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26994,7 +27032,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
     appendBarLineToPart (barLine); // JMI
 
   fCurrentPart->
-    handleRepeatEndInPart (
+    cascadeHandleRepeatEndInPart (
       barLine->getInputLineNumber (),
       repeatStartMeasureNumber,
       barLine->getBarLineTimes ());
@@ -27009,6 +27047,14 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
 void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
   const S_msrBarLine& barLine)
 {
+  std::string
+    repeatStartMeasureNumber =
+      fCurrentRepeatStartMeasureNumber.size ()
+        ? // there was a repeat start before hand
+          fCurrentRepeatStartMeasureNumber
+        : // there is an implicit repeat start at the beginning of the part
+          fPartFirstMeasureNumber;
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
@@ -27016,7 +27062,10 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
     ss <<
       "Handling a repeat ending start in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
-      ", line " << barLine->getInputLineNumber ();
+      ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
+      "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
+      "\", repeatStartMeasureNumber: \"" << repeatStartMeasureNumber <<
+      "\", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27058,7 +27107,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentPart->
-    handleRepeatEndingStartInPart (
+    cascadeHandleRepeatEndingStartInPart (
       barLine->getInputLineNumber ());
 
   // append the bar line to the current part

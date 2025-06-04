@@ -12,21 +12,10 @@
 #ifndef ___mxsrChordEvents___
 #define ___mxsrChordEvents___
 
-// #include <iomanip>
-// #include <string>
-
 #include "exports.h"
 #include "smartpointer.h"
 
-// #include "mfBasicTypes.h"
-// #include "mfBool.h"
-// #include "mfIndentedTextOutput.h"
-// #include "mfWrappedValueForArithmetic.h"
-
-// #include "mxsrBasicTypes.h"
 #include "mxsrNoteEvents.h"
-
-// #include "msrTupletFactors.h"
 
 
 using namespace MusicXML2;

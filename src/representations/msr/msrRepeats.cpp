@@ -22,6 +22,7 @@
 #include "msrRepeatsEnumTypes.h"
 #include "msrRepeats.h"
 #include "msrTuplets.h"
+#include "msrVoiceConstants.h"
 
 #include "oahOah.h"
 
@@ -1068,6 +1069,19 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt)
 
 //______________________________________________________________________________
 S_msrRepeat msrRepeat::create (
+  int inputLineNumber,
+  int repeatTimes)
+{
+  msrRepeat* obj =
+    new msrRepeat (
+      inputLineNumber,
+      repeatTimes,
+      gNullVoice);
+  assert (obj != nullptr);
+  return obj;
+}
+
+S_msrRepeat msrRepeat::create (
   int               inputLineNumber,
   int               repeatTimes,
   const S_msrVoice& upLinkToVoice)
@@ -1095,8 +1109,6 @@ msrRepeat::msrRepeat (
     "upLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  fRepeatUpLinkToVoice = upLinkToVoice;
-
   fRepeatTimes = repeatTimes;
 
   fRepeatExplicitStartKind =
@@ -1107,6 +1119,8 @@ msrRepeat::msrRepeat (
   // repeat build phase
   fCurrentRepeatBuildPhaseKind =
     msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated;
+
+  fRepeatUpLinkToVoice = upLinkToVoice;
 }
 
 S_msrRepeat msrRepeat::createRepeatNewbornClone (

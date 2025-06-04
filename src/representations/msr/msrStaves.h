@@ -298,12 +298,12 @@ class EXP msrStaff : public msrElement
     void                  handleRepeatStartInStaff (
                             int inputLineNumber);
 
-    void                  handleRepeatEndInStaff (
+    void                  cascadeHandleRepeatEndInStaff (
                             int                inputLineNumber,
                             const std::string& measureNumber,
                             int                repeatTimes);
 
-    void                  handleRepeatEndingStartInStaff (
+    void                  cascadeHandleRepeatEndingStartInStaff (
                             int inputLineNumber);
 
     void                  handleRepeatEndingEndInStaff (

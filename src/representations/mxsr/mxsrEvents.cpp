@@ -9,19 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <algorithm>
-#include <cassert>
-#include <iostream>
-#include <sstream>
-
-#include <map>
-
-#include "mfAssert.h"
-#include "mfStringsHandling.h"
-
 #include "mxsrEvents.h"
-
-#include "waeHandlers.h"
 
 
 namespace MusicFormats

@@ -12,21 +12,10 @@
 #ifndef ___mxsrMultipleMeasureRestEvents___
 #define ___mxsrMultipleMeasureRestEvents___
 
-// #include <iomanip>
-// #include <string>
-
 #include "exports.h"
 #include "smartpointer.h"
 
-// #include "mfBasicTypes.h"
-// #include "mfBool.h"
-// #include "mfIndentedTextOutput.h"
-// #include "mfWrappedValueForArithmetic.h"
-
-// #include "mxsrBasicTypes.h"
 #include "mxsrPartEvents.h"
-
-// #include "msrTupletFactors.h"
 
 
 using namespace MusicXML2;
