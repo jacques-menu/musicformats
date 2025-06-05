@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrFootNotesElement bsrFootNotesElement::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& footNoteText)
 {
   bsrFootNotesElement* obj =
@@ -42,7 +42,7 @@ S_bsrFootNotesElement bsrFootNotesElement::create (
 }
 
 bsrFootNotesElement::bsrFootNotesElement (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& footNoteText)
     : bsrElement (inputLineNumber)
 {

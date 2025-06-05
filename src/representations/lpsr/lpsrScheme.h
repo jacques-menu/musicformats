@@ -51,7 +51,7 @@ class EXP lpsrSchemeVariable : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrSchemeVariable> create (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             lpsrCommentedKind commentedKind,
                             const std::string&          variableName,
                             const std::string&          value,
@@ -64,7 +64,7 @@ class EXP lpsrSchemeVariable : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrSchemeVariable (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             lpsrCommentedKind commentedKind,
                             const std::string&          variableName,
                             const std::string&          value,
@@ -142,7 +142,7 @@ class EXP lpsrSchemeFunction : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrSchemeFunction> create (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& functionName,
                             const std::string& functionDescription,
                             const std::string& functionCode);
@@ -153,7 +153,7 @@ class EXP lpsrSchemeFunction : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrSchemeFunction (
-                            int          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& functionName,
                             const std::string& functionDescription,
                             const std::string& functionCode);

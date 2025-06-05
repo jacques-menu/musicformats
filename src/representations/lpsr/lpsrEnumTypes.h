@@ -18,7 +18,7 @@
 #include "smartpointer.h"
 
 #include "msrLyrics.h"
-#include "mfDurations.h"
+#include "mfDurationsAndPositionInMeasures.h"
 #include "msrOctaves.h"
 #include "msrPitchesNames.h"
 
@@ -114,35 +114,35 @@ void initializeLpsrChordsLanguageKindsMap ();
 // whole notes as LilyPond 'make-duration'
 //______________________________________________________________________________
 // std::string wholeNotesAsLilypondMakeDurationArguments (
-//   int                  inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const mfWholeNotes& wholeNotes);
 
 // whole notes as LilyPond strings
 //______________________________________________________________________________
 std::string wholeNotesAsLilypondString (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes,
   int&                 dotsNumber);
 
 std::string wholeNotesAsLilypondString (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes);
 
 // dotted durations
 //______________________________________________________________________________
 
 std::string dottedNotesDurationAsLilypondString (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   mfDottedNotesDuration dottedNotesDuration);
 
 std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   mfDottedNotesDuration dottedNotesDuration);
 
 // rests measures
 //______________________________________________________________________________
 std::string multipleMeasureRestsWholeNoteAsLilypondString (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes);
 
 // syllable elements lists
@@ -175,7 +175,7 @@ std::string lpsrDynamicsTextSpannersStyleKindAsString (
 std::ostream& operator << (std::ostream& os, const lpsrDynamicsTextSpannersStyleKind& elt);
 
 lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& dynamicsTextSpannersStyleKindString);
 
 extern std::map <std::string, lpsrDynamicsTextSpannersStyleKind>&

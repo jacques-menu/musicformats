@@ -29,7 +29,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrWords msrWords::create (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrPlacementKind           wordsPlacementKind,
   const std::string&         wordsContents,
   msrJustifyKind             wordsJustifyKind,
@@ -59,7 +59,7 @@ S_msrWords msrWords::create (
 }
 
 msrWords::msrWords (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrPlacementKind           wordsPlacementKind,
   const std::string&         wordsContents,
   msrJustifyKind             wordsJustifyKind,

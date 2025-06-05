@@ -40,7 +40,7 @@ class EXP bsrParallel : public bsrElement
     // ------------------------------------------------------
 
     static SMARTP<bsrParallel> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -48,7 +48,7 @@ class EXP bsrParallel : public bsrElement
     // ------------------------------------------------------
 
                           bsrParallel (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~bsrParallel ();
 

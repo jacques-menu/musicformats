@@ -28,7 +28,7 @@ namespace MusicFormats
 //_______________________________________________________________________________
 /* this class is purely virtual
 S_bsrPageElement bsrPageElement::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   bsrPageElement* obj =
     new bsrPageElement (
@@ -39,7 +39,7 @@ S_bsrPageElement bsrPageElement::create (
 */
 
 bsrPageElement::bsrPageElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : bsrElement (inputLineNumber)
 {
   fSpacesBefore = 0;

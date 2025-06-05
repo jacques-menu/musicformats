@@ -11,6 +11,8 @@
 
 #include <iomanip>
 
+#include "mfIndentedTextOutput.h"
+
 #include "mxsrStaffChangeEvents.h"
 
 

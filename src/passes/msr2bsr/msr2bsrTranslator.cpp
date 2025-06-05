@@ -19,7 +19,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 
 #include "msr2bsrComponent.h"
@@ -52,7 +52,7 @@ namespace MusicFormats
 
 //________________________________________________________________________
 void msr2bsrTranslator::createFirstPageHeadingIfNotYetCreated (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 { // JMI
 //   if (! fFirstPageHeading) {
 //     // create the first page heading // JMI
@@ -66,7 +66,7 @@ void msr2bsrTranslator::createFirstPageHeadingIfNotYetCreated (
 }
 
 void msr2bsrTranslator::createFirstMusicHeadingIfNotYetCreated (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   if (! fFirstMusicHeading) {
     // create the first music heading
@@ -134,7 +134,7 @@ S_bsrScore msr2bsrTranslator::translateMsrToBsr (
 
 //________________________________________________________________________
 void msr2bsrTranslator::notSupportedMessage (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   // issue a warning message to the output log stream
@@ -3257,7 +3257,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
 }
 
 void msr2bsrTranslator::finalizeCurrentMeasureClone (
-  int          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   S_msrMeasure originalMeasure)
 {
   // take this measure into account

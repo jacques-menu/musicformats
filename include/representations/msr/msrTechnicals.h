@@ -112,7 +112,7 @@ class EXP msrTechnical : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrTechnical> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTechnicalKind technicalKind,
                             msrPlacementKind technicalPlacementKind);
 
@@ -122,7 +122,7 @@ class EXP msrTechnical : public msrElement
     // ------------------------------------------------------
 
                           msrTechnical (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTechnicalKind technicalKind,
                             msrPlacementKind technicalPlacementKind);
 
@@ -207,7 +207,7 @@ class EXP msrTechnicalWithInteger : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrTechnicalWithInteger> create (
-                            int                         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTechnicalWithIntegerKind technicalWithIntegerKind,
                             int                         technicalWithIntegerValue,
                             msrPlacementKind            technicalWithIntegerPlacementKind);
@@ -218,7 +218,7 @@ class EXP msrTechnicalWithInteger : public msrElement
     // ------------------------------------------------------
 
                           msrTechnicalWithInteger (
-                            int                         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTechnicalWithIntegerKind technicalWithIntegerKind,
                             int                         technicalWithIntegerValue,
                             msrPlacementKind            technicalWithIntegerPlacementKind);
@@ -296,7 +296,7 @@ class EXP msrTechnicalWithFloat : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrTechnicalWithFloat> create (
-                            int                       inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTechnicalWithFloatKind technicalWithFloatKind,
                             float                     technicalWithFloatValue,
                             msrPlacementKind          technicalWithFloatPlacementKind);
@@ -307,7 +307,7 @@ class EXP msrTechnicalWithFloat : public msrElement
     // ------------------------------------------------------
 
                           msrTechnicalWithFloat (
-                            int                       inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTechnicalWithFloatKind technicalWithFloatKind,
                             float                     technicalWithFloatValue,
                             msrPlacementKind          technicalWithFloatPlacementKind);
@@ -387,7 +387,7 @@ class EXP msrTechnicalWithString : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrTechnicalWithString> create (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTechnicalWithStringKind technicalWithStringKind,
                             msrTechnicalTypeKind       technicalWithStringTypeKind,
                             const std::string&         technicalWithStringValue,
@@ -399,7 +399,7 @@ class EXP msrTechnicalWithString : public msrElement
     // ------------------------------------------------------
 
                           msrTechnicalWithString (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTechnicalWithStringKind technicalWithStringKind,
                             msrTechnicalTypeKind       technicalWithStringTypeKind,
                             const std::string&         technicalWithStringValue,

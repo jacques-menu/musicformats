@@ -41,7 +41,7 @@ class EXP bsrLine : public bsrPageElement
     // ------------------------------------------------------
 
     static SMARTP<bsrLine> create (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int printLineNumber,
                             int cellsPerLine);
 
@@ -53,7 +53,7 @@ class EXP bsrLine : public bsrPageElement
     // ------------------------------------------------------
 
                           bsrLine (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int printLineNumber,
                             int cellsPerLine);
 

@@ -24,7 +24,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 void bmmlWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -36,7 +36,7 @@ void bmmlWarning (
 
 void bmmlError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -58,7 +58,7 @@ void bmmlError (
 
 void bmmlInternalError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)

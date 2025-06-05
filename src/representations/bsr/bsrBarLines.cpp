@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrBarLine bsrBarLine::create (
-  int            inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrBarLineKind barLineKind)
 {
   bsrBarLine* obj =
@@ -42,7 +42,7 @@ S_bsrBarLine bsrBarLine::create (
 }
 
 bsrBarLine::bsrBarLine (
-  int            inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrBarLineKind barLineKind)
     : bsrLineContentsElement (inputLineNumber)
 {

@@ -29,7 +29,7 @@ class EXP bsrPagination : public bsrLineContentsElement
     // ------------------------------------------------------
 
     static SMARTP<bsrPagination> create (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int printPageNumber,
                             int braillePageNumber);
 
@@ -39,7 +39,7 @@ class EXP bsrPagination : public bsrLineContentsElement
     // ------------------------------------------------------
 
                           bsrPagination (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int printPageNumber,
                             int braillePageNumber);
 

@@ -35,7 +35,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrOctaveShift msrOctaveShift::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   msrOctaveShiftKind octaveShiftKind,
   int                octaveShiftSize)
@@ -51,7 +51,7 @@ S_msrOctaveShift msrOctaveShift::create (
 }
 
 S_msrOctaveShift msrOctaveShift::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrOctaveShiftKind octaveShiftKind,
   int                octaveShiftSize)
 {
@@ -64,7 +64,7 @@ S_msrOctaveShift msrOctaveShift::create (
 }
 
 msrOctaveShift::msrOctaveShift (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   msrOctaveShiftKind octaveShiftKind,
   int                octaveShiftSize)

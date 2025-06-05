@@ -33,7 +33,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrLine bsrLine::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int printLineNumber,
   int cellsPerLine)
 {
@@ -45,7 +45,7 @@ S_bsrLine bsrLine::create (
 }
 
 bsrLine::bsrLine (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int printLineNumber,
   int cellsPerLine)
     : bsrPageElement (inputLineNumber)

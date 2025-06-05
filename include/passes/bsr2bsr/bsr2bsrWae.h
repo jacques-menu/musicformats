@@ -61,12 +61,12 @@ typedef SMARTP<bsr2bsrInternalException> S_bsr2bsrInternalException;
 //______________________________________________________________________________
 EXP void bsr2bsrWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 EXP void bsr2bsrInternalError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);

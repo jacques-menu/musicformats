@@ -33,24 +33,24 @@ typedef SMARTP<lpsr2lilypondException> S_lpsr2lilypondException;
 //______________________________________________________________________________
 EXP void lpsr2lilypondWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 EXP void lpsr2lilypondInternalWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 EXP void lpsr2lilypondError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
 
 EXP void lpsr2lilypondInternalError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);

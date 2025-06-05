@@ -62,7 +62,7 @@ class EXP msrBeam : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrBeam> create (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int         number,
                             msrBeamKind beamKind);
 
@@ -72,7 +72,7 @@ class EXP msrBeam : public msrElement
     // ------------------------------------------------------
 
                           msrBeam (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int         number,
                             msrBeamKind beamKind);
 

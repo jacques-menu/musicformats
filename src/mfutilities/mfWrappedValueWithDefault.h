@@ -43,6 +43,8 @@ class EXP mfWrappedValueWithDefault
 
                           mfWrappedValueWithDefault (T bareValue);
 
+                          mfWrappedValueWithDefault (const T& bareValue);
+
                           mfWrappedValueWithDefault ();
 
     // destructor
@@ -197,11 +199,31 @@ mfWrappedValueWithDefault <
   printPostfix,
   neutralValue,
   neutralValueString
+>::mfWrappedValueWithDefault (const T& bareValue)
+  : fBareValue (bareValue),
+    fPrintPrefix (printPrefix),
+    fDefaultValue (neutralValue),
+    fDefaultValueString (neutralValueString)
+{}
+
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
+mfWrappedValueWithDefault <
+  T,
+  printPrefix,
+  printPostfix,
+  neutralValue,
+  neutralValueString
 >::mfWrappedValueWithDefault ()
   : fBareValue (neutralValue),
-      fPrintPrefix (printPrefix),
-      fDefaultValue (neutralValue),
-      fDefaultValueString (neutralValueString)
+    fPrintPrefix (printPrefix),
+    fDefaultValue (neutralValue),
+    fDefaultValueString (neutralValueString)
 {}
 
 // destructor

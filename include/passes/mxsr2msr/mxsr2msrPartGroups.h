@@ -45,7 +45,7 @@ class mxsrPartGroup : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mxsrPartGroup> create (
-                            int                   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                   partGroupNumber,
                             const S_msrPartGroup& theMsrPartGroup,
                             int                   partGroupSequentialNumber);
@@ -56,7 +56,7 @@ class mxsrPartGroup : public smartable
     // ------------------------------------------------------
 
                           mxsrPartGroup (
-                            int                   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                   partGroupNumber,
                             const S_msrPartGroup& theMsrPartGroup,
                             int                   partGroupSequentialNumber);

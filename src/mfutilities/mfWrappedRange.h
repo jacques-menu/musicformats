@@ -14,6 +14,7 @@
 
 #include <string>
 #include <ostream>
+#include <sstream>
 
 #include "exports.h"
 

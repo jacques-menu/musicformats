@@ -29,7 +29,7 @@ class EXP lpsrVariableUseCommand : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrVariableUseCommand> create (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& variableName);
 
   protected:
@@ -38,7 +38,7 @@ class EXP lpsrVariableUseCommand : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrVariableUseCommand (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& variableName);
 
     virtual               ~lpsrVariableUseCommand ();

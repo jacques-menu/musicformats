@@ -1256,7 +1256,7 @@ class EXP mxsr2msrSkeletonPopulator :
     msrModeKind               fCurrentModeKind;
 
     S_msrKey                  handleTraditionalKey (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     // Humdrum-Scot
     S_msrHumdrumScotKeyItem   fCurrentHumdrumScotKeyItem;
@@ -1264,7 +1264,7 @@ class EXP mxsr2msrSkeletonPopulator :
                               fCurrentHumdrumScotKeyItemsVector;
 
     S_msrKey                  handleHumdrumScotKey (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
 
     // time signatures handling
@@ -1303,7 +1303,7 @@ class EXP mxsr2msrSkeletonPopulator :
 		void											displayPartsMap () const;
 
     void                      handlePartMusicXMLID (
-                                int               inputLineNumber,
+                                const mfInputLineNumber& inputLineNumber,
                                 const std::string idString);
 
     // staff handling
@@ -1328,10 +1328,10 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrMeasureElement       fPreviousMeasureElement;
 
     S_msrVoice                fetchFirstVoiceFromCurrentPart (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
 		void											displayStaffAndVoiceInformation (
-                                int                inputLineNumber,
+                                const mfInputLineNumber& inputLineNumber,
 																const std::string& context) const;
 
     /*
@@ -1350,7 +1350,7 @@ class EXP mxsr2msrSkeletonPopulator :
                               fCurrentPartStaffMsrVoicesMap;
 
 		void											displayCurrentPartStaffMsrVoicesMap (
-                                int                inputLineNumber,
+                                const mfInputLineNumber& inputLineNumber,
 																const std::string& context) const;
 
     // we need a fast access to the voices and their handlers
@@ -1402,9 +1402,6 @@ class EXP mxsr2msrSkeletonPopulator :
     // since measure numbers are actually strings
     int                       fPartMeasuresCounter;
 
-    std::string               fScoreFirstMeasureNumber;
-    std::string               fPartFirstMeasureNumber;
-
     std::string               fCurrentMeasureNumber;
 
     // measure end line number
@@ -1424,7 +1421,7 @@ class EXP mxsr2msrSkeletonPopulator :
     Bool                      fCurrentRestIsAMeasureRest;
 
 //     void                      handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure (
-//                                 int inputLineNumber);
+//                                 const mfInputLineNumber& inputLineNumber);
 
    S_mxsrMultipleMeasureRestEvent
                               fCurrentMultipleMeasureRestBegin;
@@ -1437,7 +1434,7 @@ class EXP mxsr2msrSkeletonPopulator :
     Bool                      fCurrentMeasureBelongsToAMultipleMeasureRest;
 
     S_msrMultipleMeasureRest  createMultipleMeasureRest (
-                                int inputLineNumber,
+                                const mfInputLineNumber& inputLineNumber,
                                 int tupletNumber);
 
     void                      handleMultipleMeasureRestBeginEventIfAny ();
@@ -1483,11 +1480,11 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handleMeasureRepeatEnd ();
 
     S_msrMeasureRepeat        createMeasureRepeat (
-                                int inputLineNumber,
+                                const mfInputLineNumber& inputLineNumber,
                                 int tupletNumber);
 
 //     void                      finalizeCurrentMeasureRepeat (
-//                                 int inputLineNumber);
+//                                 const mfInputLineNumber& inputLineNumber);
 
 		void											displayGatheredMeasureRepeatInformations (
 																const std::string& context) const;
@@ -1560,7 +1557,7 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handleStaffChangeTakeOffEventIfAny ();
 
     void                      createStaffChange (
-                                int                    inputLineNumber,
+                                const mfInputLineNumber& inputLineNumber,
                                 S_mxsrStaffChangeEvent staffChangeTakeOffEvent);
 
     // grace notes handling
@@ -1614,7 +1611,7 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handleChordEnd ();
 
 //     void                      finalizeCurrentChord (
-//                                 int inputLineNumber);
+//                                 const mfInputLineNumber& inputLineNumber);
 
     void                      printCurrentChord ();
 
@@ -1721,10 +1718,10 @@ class EXP mxsr2msrSkeletonPopulator :
 																const std::string& context) const;
 
     void                      handleCurrentNote (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     S_msrNote                 createNote (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     void                      handleARegularNoteInAMeasure (
 																const S_msrNote& note);
@@ -1755,22 +1752,22 @@ class EXP mxsr2msrSkeletonPopulator :
     // until the note itself is found in the MusicXML data
     // ------------------------------------------------------
 //     void                      attachPendingHarmoniesToCurrentNote ( // JMI 0.9.67
-//                                 int               inputLineNumber);
+//                                 const mfInputLineNumber& inputLineNumber);
 
 //     void                      attachPendingFiguredBassesToCurrentNote ( // JMI 0.9.67
-//                                 int               inputLineNumber);
+//                                 const mfInputLineNumber& inputLineNumber);
 
     // populate current note
     // ------------------------------------------------------
 
     void                      populateCurrentNoteWithCurrentInformations (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     // harmonies and figured bass elements need
     // the position of the note  in its measure to be known
     // when they are inserted in their own measure
     void                      populateCurrentNoteWithPendingInformations (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
 
     // transpose handling
@@ -1815,7 +1812,7 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const S_msrPart& part);
 
 //     void                  convertWordsToRehearsalMark (
-//                             int                inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const std::string& wordsValuee);
 
 
@@ -1832,7 +1829,7 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      attachThePendingDalSegnosIfAny ();
 
 //     void                      convertWordsToSegno (
-//                                 int                inputLineNumber,
+//                                 const mfInputLineNumber& inputLineNumber,
 //                                 const std::string& wordsValuee);
 
 
@@ -1848,7 +1845,7 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const S_msrChord& chord);
 
 //     void                      convertWordsToDalSegno (
-//                                 int           inputLineNumber,
+//                                 const mfInputLineNumber& inputLineNumber,
 //                                 const std::string& wordsValuee);
 
 
@@ -1864,15 +1861,15 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      attachPendingCodasToCurrentNote ();
 
 //     void                      convertWordsToDalSegnoAlFine (
-//                                 int           inputLineNumber,
+//                                 const mfInputLineNumber& inputLineNumber,
 //                                 const std::string& wordsValuee);
 //
 //     void                      convertWordsToDalSegnoAlCoda (
-//                                 int           inputLineNumber,
+//                                 const mfInputLineNumber& inputLineNumber,
 //                                 const std::string& wordsValuee);
 //
 //     void                      convertWordsToCoda (
-//                                 int           inputLineNumber,
+//                                 const mfInputLineNumber& inputLineNumber,
 //                                 const std::string& wordsValuee);
 
 
@@ -1888,11 +1885,11 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      attachPendingCrescDecrescsToCurrentNote ();
 
 //     void                      convertWordsToCresc (
-//                                 int           inputLineNumber,
+//                                 const mfInputLineNumber& inputLineNumber,
 //                                 const std::string& wordsValuee);
 
 //     void                      convertWordsToDecresc (
-//                                 int           inputLineNumber,
+//                                 const mfInputLineNumber& inputLineNumber,
 //                                 const std::string& wordsValuee);
 
 
@@ -1996,7 +1993,7 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const S_msrPart& part);
 
 //     void                      convertWordsToTempo (
-//                                 int           inputLineNumber,
+//                                 const mfInputLineNumber& inputLineNumber,
 //                                 const std::string& wordsValue);
 
 
@@ -2238,7 +2235,7 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrBarLine              fCurrentRepeatEndingStartBarLine;
 
     void                      handleImplicitInitialForwardRepeat (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     void                      handleRepeatStart (
                                 const S_msrBarLine& barLine);
@@ -2278,11 +2275,11 @@ class EXP mxsr2msrSkeletonPopulator :
                               fStaffVoicesLastMetNoteMap;
 
     void                      printVoicesLastMetNoteMap (
-                                int                inputLineNumber,
+                                const mfInputLineNumber& inputLineNumber,
                                 const std::string& context);
 
     void                      checkStep (
-                                int                inputLineNumber,
+                                const mfInputLineNumber& inputLineNumber,
                                 const std::string& stepValue,
                                 const std::string& markup);
 
@@ -2429,7 +2426,7 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      attachPendingNoteLevelElementsIfAnyToCurrentNote ();
 
     void                      attachPendingStaffLevelElementsIfAnyToCurrentNote (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     void                      attachPendingDynamicsToCurrentNote ();
     void                      attachPendingOtherDynamicsToCurrentNote ();
@@ -2609,7 +2606,7 @@ class EXP mxsr2msrSkeletonPopulator :
     Bool                      fOnGoingBackup;
 
 //     void                      handleBackup (
-//                                 int inputLineNumber);
+//                                 const mfInputLineNumber& inputLineNumber);
 
 
     // forward handling

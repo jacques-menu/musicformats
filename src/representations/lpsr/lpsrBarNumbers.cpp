@@ -25,7 +25,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrBarNumberCheck lpsrBarNumberCheck::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int nextBarNumber)
 {
   lpsrBarNumberCheck* obj =
@@ -36,7 +36,7 @@ S_lpsrBarNumberCheck lpsrBarNumberCheck::create (
 }
 
 lpsrBarNumberCheck::lpsrBarNumberCheck (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int nextBarNumber)
     : lpsrElement (inputLineNumber)
 {
@@ -142,7 +142,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrBarNumberCheck& elt)
 
 //______________________________________________________________________________
 S_lpsrBarCommand lpsrBarCommand::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   lpsrBarCommand* obj =
     new lpsrBarCommand (
@@ -152,7 +152,7 @@ S_lpsrBarCommand lpsrBarCommand::create (
 }
 
 lpsrBarCommand::lpsrBarCommand (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : lpsrElement (inputLineNumber)
 {}
 

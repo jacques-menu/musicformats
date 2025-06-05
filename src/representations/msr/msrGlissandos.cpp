@@ -56,7 +56,7 @@ std::ostream& operator << (std::ostream& os, const msrGlissandoTypeKind& elt)
 
 //______________________________________________________________________________
 S_msrGlissando msrGlissando::create (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                  glissandoNumber,
   msrGlissandoTypeKind glissandoTypeKind,
   msrLineTypeKind      glissandoLineTypeKind,
@@ -74,7 +74,7 @@ S_msrGlissando msrGlissando::create (
 }
 
 msrGlissando::msrGlissando (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                  glissandoNumber,
   msrGlissandoTypeKind glissandoTypeKind,
   msrLineTypeKind      glissandoLineTypeKind,

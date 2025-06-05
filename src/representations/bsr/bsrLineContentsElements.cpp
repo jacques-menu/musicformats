@@ -28,7 +28,7 @@ namespace MusicFormats
 //_______________________________________________________________________________
 /* this class is purely virtual
 S_bsrLineContentsElement bsrLineContentsElement::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   bsrLineContentsElement* obj =
     new bsrLineContentsElement (
@@ -39,7 +39,7 @@ S_bsrLineContentsElement bsrLineContentsElement::create (
 */
 
 bsrLineContentsElement::bsrLineContentsElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : bsrElement (inputLineNumber)
 {
   fSpacesBefore = 0;

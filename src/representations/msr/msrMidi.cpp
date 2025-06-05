@@ -29,7 +29,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrMidiTempo msrMidiTempo::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& midiTempoNotesDuration,
   int           midiTempoPerSecond)
 {
@@ -43,7 +43,7 @@ S_msrMidiTempo msrMidiTempo::create (
 }
 
 msrMidiTempo::msrMidiTempo (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& midiTempoNotesDuration,
   int           midiTempoPerSecond)
     : msrElement (inputLineNumber)

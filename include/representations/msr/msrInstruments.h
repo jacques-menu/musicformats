@@ -33,7 +33,7 @@ class EXP msrStringTuning : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrStringTuning> create (
-                            int                  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                  stringTuningNumber,
                             msrDiatonicPitchKind stringTuningDiatonicPitchKind,
                             msrAlterationKind    stringTuningAlterationKind,
@@ -45,7 +45,7 @@ class EXP msrStringTuning : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrStringTuning (
-                            int                  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                  stringTuningNumber,
                             msrDiatonicPitchKind stringTuningDiatonicPitchKind,
                             msrAlterationKind    stringTuningAlterationKind,
@@ -130,11 +130,11 @@ class EXP msrScordatura : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrScordatura> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrScordatura> create (
-                            int                 inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -142,7 +142,7 @@ class EXP msrScordatura : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrScordatura (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrScordatura ();
@@ -201,14 +201,14 @@ class EXP msrAccordionRegistration : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrAccordionRegistration> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             int           highDotsNumber,
                             int           middleDotsNumber,
                             int           lowDotsNumber);
 
     static SMARTP<msrAccordionRegistration> create (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int           highDotsNumber,
                             int           middleDotsNumber,
                             int           lowDotsNumber);
@@ -219,7 +219,7 @@ class EXP msrAccordionRegistration : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrAccordionRegistration (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             int           highDotsNumber,
                             int           middleDotsNumber,
@@ -289,11 +289,11 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrHarpPedalsTuning> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrHarpPedalsTuning> create (
-                            int                 inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     SMARTP<msrHarpPedalsTuning> createHarpPedalsTuningNewbornClone ();
 
@@ -305,11 +305,11 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrHarpPedalsTuning (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
                           msrHarpPedalsTuning (
-                            int                 inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     ~ msrHarpPedalsTuning ();
 
@@ -328,9 +328,9 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
     // ------------------------------------------------------
 
     void                  addPedalTuning (
-                            int                  intputLineNumber,
-                            msrDiatonicPitchKind diatonicPitchKind,
-                            msrAlterationKind    alterationKind);
+                            const mfInputLineNumber& inputLineNumber,
+                            msrDiatonicPitchKind     diatonicPitchKind,
+                            msrAlterationKind        alterationKind);
 
   public:
 
@@ -401,14 +401,14 @@ class EXP msrPedal : public msrMeasureElement
     // ------------------------------------------------------
 
                           static SMARTP<msrPedal> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&     upLinkToMeasure,
                             msrPedalTypeKind pedalTypeKind,
                             msrPedalLineKind pedalLineKind,
                             msrPedalSignKind pedalSignKind);
 
                           static SMARTP<msrPedal> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrPedalTypeKind pedalTypeKind,
                             msrPedalLineKind pedalLineKind,
                             msrPedalSignKind pedalSignKind);
@@ -419,7 +419,7 @@ class EXP msrPedal : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrPedal (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&     upLinkToMeasure,
                             msrPedalTypeKind pedalTypeKind,
                             msrPedalLineKind pedalLineKind,
@@ -484,11 +484,11 @@ class EXP msrDamp : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrDamp> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrDamp> create (
-                            int           inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -496,7 +496,7 @@ class EXP msrDamp : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrDamp (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrDamp ();
@@ -546,11 +546,11 @@ class EXP msrDampAll : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrDampAll> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrDampAll> create (
-                            int           inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -558,7 +558,7 @@ class EXP msrDampAll : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrDampAll (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrDampAll ();

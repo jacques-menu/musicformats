@@ -40,7 +40,7 @@ class EXP bsrNumber : public bsrLineContentsElement
     // ------------------------------------------------------
 
     static SMARTP<bsrNumber> create (
-                            int       inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int       numberValue,
                             bsrNumberSignIsNeededKind
                                       numberSignIsNeededKind);
@@ -51,7 +51,7 @@ class EXP bsrNumber : public bsrLineContentsElement
     // ------------------------------------------------------
 
                           bsrNumber (
-                            int       inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int       numberValue,
                             bsrNumberSignIsNeededKind
                                       numberSignIsNeededKind);

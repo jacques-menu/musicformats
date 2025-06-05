@@ -72,7 +72,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrTempo bsrTempo::create (
-  int        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrTempo& mTempo)
 {
   bsrTempo* obj =
@@ -83,7 +83,7 @@ S_bsrTempo bsrTempo::create (
 }
 
 bsrTempo::bsrTempo (
-  int        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrTempo& mTempo)
     : bsrLineContentsElement (inputLineNumber)
 {

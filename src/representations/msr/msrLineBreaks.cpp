@@ -52,7 +52,7 @@ std::string msrUserSelectedLineBreakKindAsString (
 
 //______________________________________________________________________________
 S_msrLineBreak msrLineBreak::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrUserSelectedLineBreakKind
                      userSelectedLineBreakKind)
 {
@@ -66,7 +66,7 @@ S_msrLineBreak msrLineBreak::create (
 }
 
 S_msrLineBreak msrLineBreak::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   int                 nextBarPuristNumber,
   msrUserSelectedLineBreakKind
@@ -83,7 +83,7 @@ S_msrLineBreak msrLineBreak::create (
 }
 
 S_msrLineBreak msrLineBreak::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                nextBarPuristNumber,
   msrUserSelectedLineBreakKind
                      userSelectedLineBreakKind)
@@ -97,7 +97,7 @@ S_msrLineBreak msrLineBreak::create (
 }
 
 msrLineBreak::msrLineBreak (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   int                 nextBarPuristNumber,
   msrUserSelectedLineBreakKind

@@ -26,7 +26,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrComment lpsrComment::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&      contents,
   lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
 {
@@ -38,7 +38,7 @@ S_lpsrComment lpsrComment::create (
 }
 
 lpsrComment::lpsrComment (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&      contents,
   lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
     : lpsrElement (inputLineNumber)

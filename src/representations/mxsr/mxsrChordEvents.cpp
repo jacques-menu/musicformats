@@ -11,6 +11,8 @@
 
 #include <iomanip>
 
+#include "mfIndentedTextOutput.h"
+
 #include "mxsrCueEvents.h"
 #include "mxsrChordEvents.h"
 

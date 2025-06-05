@@ -11,7 +11,7 @@
 
 #include <sstream>
 
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 
 #include "msrFonts.h"
@@ -71,7 +71,7 @@ std::ostream& operator << (std::ostream& os, const  msrFontSizeKind& elt)
 // font style
 //______________________________________________________________________________
 msrFontStyleKind msrFontStyleKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& fontStyleString)
 {
   msrFontStyleKind result = msrFontStyleKind::kFontStyleNone; // default value
@@ -128,7 +128,7 @@ std::ostream& operator << (std::ostream& os, const msrFontStyleKind& elt)
 // font weight
 //______________________________________________________________________________
 msrFontWeightKind msrFontWeightKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& fontWeightString)
 {
   msrFontWeightKind result = msrFontWeightKind::kFontWeightNone; // default value

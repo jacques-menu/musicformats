@@ -42,19 +42,19 @@ typedef SMARTP<bmmlException> S_bmmlException;
 //______________________________________________________________________________
 EXP void bmmlWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 EXP void bmmlError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
 
 EXP void bmmlInternalError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);

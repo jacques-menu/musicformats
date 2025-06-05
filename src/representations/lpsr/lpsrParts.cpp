@@ -322,7 +322,7 @@ void lpsrPartBlock::appendStaffBlockToPartBlock (
 }
 
 void lpsrPartBlock::appendChordNamesContextToPartBlock (
-  int                     inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_lpsrChordNamesContext& chordNamesContext)
 {
   // append chordNamesContext to the part block elements list

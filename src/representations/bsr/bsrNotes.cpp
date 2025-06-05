@@ -79,7 +79,7 @@ std::ostream& operator << (std::ostream& os, const bsrNoteOctaveKind& elt)
 }
 
 S_bsrCellsList noteOctaveKindAsCellsList (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrNoteOctaveKind noteOctaveKind)
 {
   S_bsrCellsList
@@ -125,7 +125,7 @@ S_bsrCellsList noteOctaveKindAsCellsList (
 
 //______________________________________________________________________________
 S_bsrNote bsrNote::create (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrNoteValueKind      noteValueKind,
   int                   noteDotsNumber,
   bsrNoteOctaveKind     noteOctaveKind,
@@ -145,7 +145,7 @@ S_bsrNote bsrNote::create (
 }
 
 bsrNote::bsrNote (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrNoteValueKind      noteValueKind,
   int                   noteDotsNumber,
   bsrNoteOctaveKind     noteOctaveKind,
@@ -168,7 +168,7 @@ bsrNote::~bsrNote ()
 {}
 
 S_bsrCellsList noteValueKindAsCellsList (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrNoteValueKind noteValueKind)
 {
   S_bsrCellsList
@@ -726,7 +726,7 @@ bsrNoteValueSizeKind bsrNoteValueSizeKindFromNoteValueKind (
 }
 
 S_bsrCellsList noteValueSizeKindAsCellsList (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrNoteValueSizeKind noteValueSizeKind)
 {
   S_bsrCellsList
@@ -752,7 +752,7 @@ S_bsrCellsList noteValueSizeKindAsCellsList (
 }
 
 S_bsrCellsList bsrNote::accidentalKindAsCellsList (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrAccidentalKind accidentalKind)
 {
   S_bsrCellsList

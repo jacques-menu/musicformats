@@ -140,7 +140,7 @@ class EXP msrBarLine : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrBarLine> create (
-                            int                           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&           upLinkToMeasure,
                             msrBarLineLocationKind        barLineLocationKind,
                             msrBarLineStyleKind           barLineStyleKind,
@@ -154,7 +154,7 @@ class EXP msrBarLine : public msrMeasureElement
                             msrBarLineRepeatWingedKind    barLineRepeatWingedKind);
 
     static SMARTP<msrBarLine> create (
-                            int                           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrBarLineLocationKind        barLineLocationKind,
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
@@ -170,11 +170,11 @@ class EXP msrBarLine : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrBarLine> createFinalBarLine (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrBarLine> createDoubleBarLine (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
   protected:
@@ -183,7 +183,7 @@ class EXP msrBarLine : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrBarLine (
-                            int                           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&           upLinkToMeasure,
                             msrBarLineLocationKind        barLineLocationKind,
                             msrBarLineStyleKind           barLineStyleKind,

@@ -30,7 +30,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 // brailling characters and words
 S_bsrCellsList brailleCharacter (
-  int  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   char ch)
 {
   S_bsrCellsList
@@ -162,7 +162,7 @@ S_bsrCellsList brailleCharacter (
 }
 
 S_bsrCellsList brailleWord (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& str)
 {
   S_bsrCellsList
@@ -192,7 +192,7 @@ S_bsrCellsList brailleWord (
 
 //______________________________________________________________________________
 S_bsrWords bsrWords::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& wordContents)
 {
   bsrWords* obj =
@@ -203,7 +203,7 @@ S_bsrWords bsrWords::create (
 }
 
 bsrWords::bsrWords (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& wordContents)
     : bsrLineContentsElement (inputLineNumber)
 {

@@ -60,7 +60,7 @@ struct msrHiddenMeasureAndBarLineDescr : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrHiddenMeasureAndBarLineDescr> create (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             S_msrDalSegno dalSegno);
 
   protected:
@@ -69,7 +69,7 @@ struct msrHiddenMeasureAndBarLineDescr : public smartable
     // ------------------------------------------------------
 
     msrHiddenMeasureAndBarLineDescr (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             S_msrDalSegno dalSegno);
 
     virtual               ~msrHiddenMeasureAndBarLineDescr ();

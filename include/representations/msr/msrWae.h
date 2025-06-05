@@ -14,6 +14,8 @@
 
 #include "exports.h"
 
+#include "mfBasicTypes.h"
+
 #include "mfExceptions.h"
 
 
@@ -60,18 +62,18 @@ typedef SMARTP<msrUnsupportedException> S_msrUnsupportedException;
 //______________________________________________________________________________
 EXP void msrWarningWithoutInputLocation (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 EXP void msrWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 //______________________________________________________________________________
 EXP void msrError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
@@ -79,7 +81,7 @@ EXP void msrError (
 //______________________________________________________________________________
 EXP void msrUnsupported (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
@@ -87,13 +89,13 @@ EXP void msrUnsupported (
 //______________________________________________________________________________
 EXP void msrInternalWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 //______________________________________________________________________________
 EXP void msrInternalError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);

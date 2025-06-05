@@ -199,7 +199,7 @@ std::ostream& operator << (std::ostream& os, const msrTechnicalWithStringKind& e
 
 //______________________________________________________________________________
 S_msrTechnical msrTechnical::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTechnicalKind technicalKind,
   msrPlacementKind technicalPlacementKind)
 {
@@ -213,7 +213,7 @@ S_msrTechnical msrTechnical::create (
 }
 
 msrTechnical::msrTechnical (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTechnicalKind technicalKind,
   msrPlacementKind technicalPlacementKind)
     : msrElement (inputLineNumber)
@@ -332,7 +332,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTechnical& elt)
 
 //______________________________________________________________________________
 S_msrTechnicalWithInteger msrTechnicalWithInteger::create (
-  int                         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTechnicalWithIntegerKind technicalWithIntegerKind,
   int                         technicalWithIntegerValue,
   msrPlacementKind            technicalWithIntegerPlacementKind)
@@ -348,7 +348,7 @@ S_msrTechnicalWithInteger msrTechnicalWithInteger::create (
 }
 
 msrTechnicalWithInteger::msrTechnicalWithInteger (
-  int                         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTechnicalWithIntegerKind technicalWithIntegerKind,
   int                         technicalWithIntegerValue,
   msrPlacementKind            technicalWithIntegerPlacementKind)
@@ -493,7 +493,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithInteger& el
 
 //______________________________________________________________________________
 S_msrTechnicalWithFloat msrTechnicalWithFloat::create (
-  int                       inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTechnicalWithFloatKind technicalWithFloatKind,
   float                     technicalWithFloatValue,
   msrPlacementKind          technicalWithFloatPlacementKind)
@@ -509,7 +509,7 @@ S_msrTechnicalWithFloat msrTechnicalWithFloat::create (
 }
 
 msrTechnicalWithFloat::msrTechnicalWithFloat (
-  int                       inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTechnicalWithFloatKind technicalWithFloatKind,
   float                     technicalWithFloatValue,
   msrPlacementKind          technicalWithFloatPlacementKind)
@@ -655,7 +655,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithFloat& elt)
 
 //______________________________________________________________________________
 S_msrTechnicalWithString msrTechnicalWithString::create (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTechnicalWithStringKind technicalWithStringKind,
   msrTechnicalTypeKind       technicalWithStringTypeKind,
   const std::string&    technicalWithStringValue,
@@ -673,7 +673,7 @@ S_msrTechnicalWithString msrTechnicalWithString::create (
 }
 
 msrTechnicalWithString::msrTechnicalWithString (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTechnicalWithStringKind technicalWithStringKind,
   msrTechnicalTypeKind       technicalWithStringTypeKind,
   const std::string&    technicalWithStringValue,

@@ -24,7 +24,7 @@ namespace MusicFormats
 // alignement
 //______________________________________________________________________________
 msrJustifyKind msrJustifyKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& justifyString)
 {
   msrJustifyKind result = msrJustifyKind::kJustifyNone; // default value
@@ -84,7 +84,7 @@ std::ostream& operator << (std::ostream& os, const msrJustifyKind& elt)
 }
 
 msrHorizontalAlignmentKind msrHorizontalAlignmentKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& horizontalAlignmentString)
 {
   msrHorizontalAlignmentKind
@@ -145,7 +145,7 @@ std::ostream& operator << (std::ostream& os, const msrHorizontalAlignmentKind& e
 }
 
 msrVerticalAlignmentKind msrVerticalAlignmentKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& verticalAlignmentString)
 {
   msrVerticalAlignmentKind

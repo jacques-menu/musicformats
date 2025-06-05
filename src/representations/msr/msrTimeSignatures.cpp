@@ -155,7 +155,7 @@ std::ostream& operator << (std::ostream& os, const msrTimeSignatureRelationKind&
 
 //______________________________________________________________________________
 S_msrTimeSignatureItem msrTimeSignatureItem::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   msrTimeSignatureItem* obj =
     new msrTimeSignatureItem (
@@ -165,7 +165,7 @@ S_msrTimeSignatureItem msrTimeSignatureItem::create (
 }
 
 msrTimeSignatureItem::msrTimeSignatureItem (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {
   fTimeSignatureBeatValue = -1;
@@ -475,7 +475,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTimeSignatureItem& elt)
 
 //______________________________________________________________________________
 S_msrTimeSignature msrTimeSignature::create (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&        upLinkToMeasure,
   msrTimeSignatureSymbolKind timeSignatureSymbolKind)
 {
@@ -489,7 +489,7 @@ S_msrTimeSignature msrTimeSignature::create (
 }
 
 S_msrTimeSignature msrTimeSignature::create (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTimeSignatureSymbolKind timeSignatureSymbolKind)
 {
   return
@@ -500,7 +500,7 @@ S_msrTimeSignature msrTimeSignature::create (
 }
 
 msrTimeSignature::msrTimeSignature (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&        upLinkToMeasure,
   msrTimeSignatureSymbolKind timeSignatureSymbolKind)
     : msrMeasureElement (
@@ -546,7 +546,7 @@ Bool msrTimeSignature::isEqualTo (S_msrTimeSignature otherTimeSignature) const
 }
 
 S_msrTimeSignature msrTimeSignature::createTwoEightsTime (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // create the time
   S_msrTimeSignature
@@ -576,7 +576,7 @@ S_msrTimeSignature msrTimeSignature::createTwoEightsTime (
 }
 
 S_msrTimeSignature msrTimeSignature::createThreeEightsTime (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // create the time
   S_msrTimeSignature
@@ -606,7 +606,7 @@ S_msrTimeSignature msrTimeSignature::createThreeEightsTime (
 }
 
 S_msrTimeSignature msrTimeSignature::createSixEightsTime (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // create the time
   S_msrTimeSignature
@@ -636,7 +636,7 @@ S_msrTimeSignature msrTimeSignature::createSixEightsTime (
 }
 
 S_msrTimeSignature msrTimeSignature::createTwoQuartersTime (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // create the time
   S_msrTimeSignature
@@ -666,7 +666,7 @@ S_msrTimeSignature msrTimeSignature::createTwoQuartersTime (
 }
 
 S_msrTimeSignature msrTimeSignature::createThreeQuartersTime (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // create the time
   S_msrTimeSignature
@@ -696,7 +696,7 @@ S_msrTimeSignature msrTimeSignature::createThreeQuartersTime (
 }
 
 S_msrTimeSignature msrTimeSignature::createFourQuartersTime (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // create the time
   S_msrTimeSignature
@@ -726,7 +726,7 @@ S_msrTimeSignature msrTimeSignature::createFourQuartersTime (
 }
 
 S_msrTimeSignature msrTimeSignature::createFiveQuartersTime (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // create the time
   S_msrTimeSignature
@@ -756,7 +756,7 @@ S_msrTimeSignature msrTimeSignature::createFiveQuartersTime (
 }
 
 S_msrTimeSignature msrTimeSignature::createTwoHalvesTime (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // create the time
   S_msrTimeSignature
@@ -786,7 +786,7 @@ S_msrTimeSignature msrTimeSignature::createTwoHalvesTime (
 }
 
 S_msrTimeSignature msrTimeSignature::createThreeHalvesTime (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // create the time
   S_msrTimeSignature
@@ -816,7 +816,7 @@ S_msrTimeSignature msrTimeSignature::createThreeHalvesTime (
 }
 
 S_msrTimeSignature msrTimeSignature::createFourHalvesTime (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // create the time
   S_msrTimeSignature
@@ -847,7 +847,7 @@ S_msrTimeSignature msrTimeSignature::createFourHalvesTime (
 
 //________________________________________________________________________
 S_msrTimeSignature msrTimeSignature::createTimeFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& timeString)
 {
   /*

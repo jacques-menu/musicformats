@@ -32,7 +32,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::create (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice)
 {
   msrAfterGraceNotesGroupContents* obj =
@@ -44,7 +44,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::create (
 }
 
 msrAfterGraceNotesGroupContents::msrAfterGraceNotesGroupContents (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice)
     : msrElement (inputLineNumber)
 {
@@ -280,7 +280,7 @@ std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroupCont
 
 //______________________________________________________________________________
 S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::create (
-  int          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrElement& afterGraceNotesGroupElement,
   Bool         afterGraceNotesGroupIsSlashed,
   const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice)
@@ -296,7 +296,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::create (
 }
 
 msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
-  int          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrElement& afterGraceNotesGroupElement,
   Bool         afterGraceNotesGroupIsSlashed,
   const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice)

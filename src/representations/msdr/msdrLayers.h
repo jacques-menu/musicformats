@@ -33,7 +33,7 @@ class EXP msdrLayer : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msdrLayer> create (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& layerNumber);
 
     SMARTP<msdrLayer> createMusicNewbornClone ();
@@ -45,7 +45,7 @@ class EXP msdrLayer : public smartable
 
     // for regular voices
                           msdrLayer (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& layerNumber);
 
                           msdrLayer ();
@@ -88,22 +88,22 @@ class EXP msdrLayer : public smartable
     // ------------------------------------------------------
 
     void                  addClefToLayer (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int              measureNumber,
                             const S_msrClef& clef);
 
     void                  addKeyToLayer (
-                            int   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int   measureNumber,
                             const S_msrKey& key);
 
     void                  addTimeSignatureToLayer (
-                            int                       inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                       measureNumber,
                             const S_msrTimeSignature& timeSignature);
 
     void                  addNoteToLayer (
-                            int   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int   measureNumber,
                             const S_msrNote& note);
 
@@ -131,7 +131,7 @@ class EXP msdrLayer : public smartable
     std::string           asString () const;
 
     void                  displayLayer (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context) const;
 
     void                  print (std::ostream& os) const;

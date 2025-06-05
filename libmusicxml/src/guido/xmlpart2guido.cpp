@@ -1666,7 +1666,7 @@ void xmlpart2guido::parseTime(ctree<xmlelement>::iterator &iter) {
          This leads to the conclusion that the numbering in Guido and XML can NOT be the same. So we should track them indefinitely!
          */
         std::vector<S_slur>::const_iterator i;
-        int counter = 0;
+//         int counter = 0; // JMI MusicFormats 0.9.75
         for (i = slurs.begin(); i != slurs.end(); i++) {
             if ((*i)->getAttributeValue("type") == "start") {
                 // There is a Slur Begin. Creat BeamBegin tag, and add its number to Stack
@@ -1679,7 +1679,7 @@ void xmlpart2guido::parseTime(ctree<xmlelement>::iterator &iter) {
                 // Skip Slur creation, if the CLOSING Slur is not on the same voice/staff (Guido limitation)
                 if (isSlurClosing(*i)==false) {
                     //cerr<< "XML Slur at line:"<< (*i)->getInputLineNumber()<<" measure:"<<fMeasNum << " not closing on same voice! Skipping!"<<endl;
-                    counter++;
+//                     counter++; // JMI MusicFormats 0.9.75
                     continue;
                 }
 
@@ -1699,7 +1699,7 @@ void xmlpart2guido::parseTime(ctree<xmlelement>::iterator &iter) {
                 std::pair<int,int> toto2(lastSlurInternalNumber, (*i)->getAttributeIntValue("number", 0));
                 fSlurStack.push_back(toto2);
             }
-            counter++;
+//             counter++; // JMI MusicFormats 0.9.75
         }
     }
 
@@ -2040,31 +2040,31 @@ std::vector< std::pair<int, int> >::const_iterator xmlpart2guido::findSlur ( con
 
             /// Determine the graphical format inside Tuplet
             std::string dispNotePar ;
-            int dy1offset = 6;
+//             int dy1offset = 6; // JMI MusicFormats 0.9.75
             if (tupletGraphicType=="64th")
             {
                 dispNotePar = "\"/64\"";
-                dy1offset+=4;
+//                 dy1offset+=4; // JMI MusicFormats 0.9.75
             }
             if (tupletGraphicType=="32nd")
             {
                 dispNotePar = "\"/32\"";
-                dy1offset+=4;
+//                 dy1offset+=4; // JMI MusicFormats 0.9.75
             }
             else if (tupletGraphicType=="16th")
             {
                 dispNotePar = "\"/16\"";
-                dy1offset+=3;
+//                 dy1offset+=3; // JMI MusicFormats 0.9.75
             }
             else if (tupletGraphicType=="eighth")
             {
                 dispNotePar = "\"/8\"";
-                dy1offset+=2;
+//                 dy1offset+=2; // JMI MusicFormats 0.9.75
             }
             else if (tupletGraphicType=="quarter")
             {
                 dispNotePar = "\"/4\"";
-                dy1offset+=1;
+//                 dy1offset+=1; // JMI MusicFormats 0.9.75
             }
             else if (tupletGraphicType=="half")
             {
@@ -2073,7 +2073,7 @@ std::vector< std::pair<int, int> >::const_iterator xmlpart2guido::findSlur ( con
             else if (tupletGraphicType=="whole")
             {
                 dispNotePar = "\"/1\"";
-                dy1offset-=5;
+//                 dy1offset-=5; // JMI MusicFormats 0.9.75
             }
 
             /// Generate tag and parameters

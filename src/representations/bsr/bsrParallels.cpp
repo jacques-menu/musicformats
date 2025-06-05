@@ -29,7 +29,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrParallel bsrParallel::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   bsrParallel* obj =
     new bsrParallel (
@@ -39,7 +39,7 @@ S_bsrParallel bsrParallel::create (
 }
 
 bsrParallel::bsrParallel (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : bsrElement (inputLineNumber)
 {}
 

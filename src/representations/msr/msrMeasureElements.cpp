@@ -16,7 +16,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 
 
 /*
@@ -43,7 +43,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrMeasureElement::msrMeasureElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 //       fMeasureMoment ( JMI 0.9.72 ???
 //         K_POSITION_IN_MEASURE_UNKNOWN_, K_POSITION_IN_MEASURE_UNKNOWN_),

@@ -64,7 +64,7 @@ std::ostream& operator << (std::ostream& os, const lpsrElementsSeparatorKind& el
 
 //______________________________________________________________________________
 S_lpsrParallelMusicBLock lpsrParallelMusicBLock::create (
-  int                       inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   lpsrElementsSeparatorKind elementsSeparatorKind)
 {
   lpsrParallelMusicBLock* obj =
@@ -76,7 +76,7 @@ S_lpsrParallelMusicBLock lpsrParallelMusicBLock::create (
 }
 
 lpsrParallelMusicBLock::lpsrParallelMusicBLock (
-  int                       inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   lpsrElementsSeparatorKind elementsSeparatorKind)
     : lpsrElement (inputLineNumber)
 {

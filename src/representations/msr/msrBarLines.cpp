@@ -35,7 +35,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrBarLine msrBarLine::create (
-  int                           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&           upLinkToMeasure,
   msrBarLineLocationKind        barLineLocationKind,
   msrBarLineStyleKind           barLineStyleKind,
@@ -67,7 +67,7 @@ S_msrBarLine msrBarLine::create (
 }
 
 S_msrBarLine msrBarLine::create (
-  int                           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrBarLineLocationKind        barLineLocationKind,
   msrBarLineStyleKind           barLineStyleKind,
   msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
@@ -96,7 +96,7 @@ S_msrBarLine msrBarLine::create (
 }
 
 msrBarLine::msrBarLine (
-  int                           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&           upLinkToMeasure,
   msrBarLineLocationKind        barLineLocationKind,
   msrBarLineStyleKind           barLineStyleKind,
@@ -170,7 +170,7 @@ msrBarLine::~msrBarLine ()
 // }
 
 S_msrBarLine msrBarLine::createFinalBarLine (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
   return
@@ -190,7 +190,7 @@ S_msrBarLine msrBarLine::createFinalBarLine (
 }
 
 S_msrBarLine msrBarLine::createDoubleBarLine (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
   return

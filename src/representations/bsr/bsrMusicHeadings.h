@@ -46,7 +46,7 @@ class EXP bsrMusicHeading : public bsrLine
     // ------------------------------------------------------
 
     static SMARTP<bsrMusicHeading> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -54,7 +54,7 @@ class EXP bsrMusicHeading : public bsrLine
     // ------------------------------------------------------
 
                           bsrMusicHeading (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~bsrMusicHeading ();
 

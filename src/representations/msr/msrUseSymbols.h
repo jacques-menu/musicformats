@@ -32,7 +32,7 @@ std::string msrUseSymbolsKindAsString (
 std::ostream& operator << (std::ostream& os, const msrUseSymbolsKind& elt);
 
 msrUseSymbolsKind msrUseSymbolsKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& useSymbolsString);
 
 

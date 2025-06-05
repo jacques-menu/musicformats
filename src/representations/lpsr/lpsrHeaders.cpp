@@ -30,7 +30,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrHeader lpsrHeader::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   lpsrHeader* obj =
     new lpsrHeader (
@@ -40,7 +40,7 @@ S_lpsrHeader lpsrHeader::create (
 }
 
 lpsrHeader::lpsrHeader (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : lpsrElement (inputLineNumber)
 {}
 
@@ -362,7 +362,7 @@ EXP mfIndentedStringStream& operator << (
 
 /*
 void lpsrHeader::appendRight (
-  int    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -385,7 +385,7 @@ void lpsrHeader::appendRight (
 }
 
 void lpsrHeader::appendComposer (
-  int    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -408,7 +408,7 @@ void lpsrHeader::appendComposer (
 }
 
 void lpsrHeader::appendArranger (
-  int    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -431,7 +431,7 @@ void lpsrHeader::appendArranger (
 }
 
 void lpsrHeader::appendLyricist (
-  int    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -454,7 +454,7 @@ void lpsrHeader::appendLyricist (
 }
 
 void lpsrHeader::appendPoet (
-  int    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -477,7 +477,7 @@ void lpsrHeader::appendPoet (
 }
 
 void lpsrHeader::removeAllPoets (
-  int    inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceIdentification ()) {
@@ -497,7 +497,7 @@ void lpsrHeader::removeAllPoets (
 }
 
 void lpsrHeader::appendTranslator (
-  int    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -520,7 +520,7 @@ void lpsrHeader::appendTranslator (
 }
 
 void lpsrHeader::appendArtist (
-  int    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -543,7 +543,7 @@ void lpsrHeader::appendArtist (
 }
 
 void lpsrHeader::appendSoftware (
-  int    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   std::string value)
 {
 #ifdef MF_TRACE_IS_ENABLED

@@ -33,7 +33,7 @@ class EXP msrRepeatCommonPart : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrRepeatCommonPart> create (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeat& upLinkToRepeat);
 
   protected:
@@ -42,7 +42,7 @@ class EXP msrRepeatCommonPart : public msrElement
     // ------------------------------------------------------
 
                           msrRepeatCommonPart (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeat& upLinkToRepeat);
 
     virtual               ~msrRepeatCommonPart ();
@@ -67,34 +67,34 @@ class EXP msrRepeatCommonPart : public msrElement
     // ------------------------------------------------------
 
     void                  appendVoiceElementToRepeatCommonPart (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoiceElement& voiceElement,
                             const std::string&          context);
 
     void                  appendSegmentToRepeatCommonPart (
-                            int          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrSegment& segment,
                             const std::string&context);
 
     void                  appendRepeatToRepeatCommonPart (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeat&   repeat,
                             const std::string& context);
 
     void                  appendMeasureRepeatToRepeatCommonPart (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasureRepeat& measureRepeat,
                             const std::string&           context);
 
     void                  cascadeAppendMultipleMeasureRestToRepeatCommonPart (
-                            int                   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMultipleMeasureRest& multipleMeasureRests,
                             const std::string&         context);
 
     S_msrNote             fetchRepeatCommonPartFirstNonGraceNote () const;
 
     void                  collectRepeatCommonPartMeasuresIntoFlatList (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   public:
 
@@ -140,7 +140,7 @@ class EXP msrRepeatEnding : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrRepeatEnding> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string&  repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind repeatEndingKind,
                             const S_msrRepeat&  upLinkToRepeat);
@@ -151,7 +151,7 @@ class EXP msrRepeatEnding : public msrElement
     // ------------------------------------------------------
 
                           msrRepeatEnding (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string&  repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind repeatEndingKind,
                             const S_msrRepeat&  upLinkToRepeat);
@@ -199,32 +199,32 @@ class EXP msrRepeatEnding : public msrElement
     // ------------------------------------------------------
 
     void                  appendVoiceElementToRepeatEnding ( // JMI
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoiceElement& voiceElement,
                             const std::string&          context);
 
     void                  appendSegmentToRepeatEnding (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrSegment&  segment,
                             const std::string& context);
 
     void                  appendRepeatToRepeatEnding (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeat&   repeat,
                             const std::string& context);
 
     void                  appendMeasureRepeatToRepeatEnding (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasureRepeat& measureRepeat,
                             const std::string&           context);
 
     void                  cascadeAppendMultipleMeasureRestToRepeatEnding (
-                            int                   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMultipleMeasureRest& multipleMeasureRests,
                             const std::string&         context);
 
     void                  collectRepeatEndingMeasuresIntoFlatList (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   public:
 
@@ -277,11 +277,11 @@ class EXP msrRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
     static SMARTP<msrRepeat> create (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int repeatTimes);
 
     static SMARTP<msrRepeat> create (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int               repeatTimes,
                             const S_msrVoice& upLinkToVoice);
 
@@ -294,7 +294,7 @@ class EXP msrRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
                           msrRepeat (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int               repeatTimes,
                             const S_msrVoice& upLinkToVoice);
 
@@ -364,33 +364,33 @@ class EXP msrRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
     void                  addRepeatEndingToRepeat (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeatEnding& repeatEnding);
 
     void                  appendSegmentToRepeat (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrSegment&  segment,
                             const std::string& context);
 
     void                  appendRepeatToRepeat (
-                            int          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeat&  repeat,
                             const std::string& context);
 
     void                  appendMeasureRepeatToRepeat (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasureRepeat& measureRepeat,
                             const std::string&           context);
 
     void                  cascadeAppendMultipleMeasureRestToRepeat (
-                            int                   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMultipleMeasureRest& multipleMeasureRests,
                             const std::string&         context);
 
     S_msrNote             fetchRepeatFirstNonGraceNote () const;
 
     void                  collectRepeatMeasuresIntoFlatList (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   public:
 
@@ -411,7 +411,7 @@ class EXP msrRepeat : public msrVoiceElement
     std::string           asString () const override;
 
     void                  displayRepeat (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;

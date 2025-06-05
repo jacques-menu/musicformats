@@ -31,7 +31,7 @@ class EXP lpsrNewLyricsBlock : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrNewLyricsBlock> create (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrStanza& stanza,
                             const S_msrVoice&  voice);
 
@@ -41,7 +41,7 @@ class EXP lpsrNewLyricsBlock : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrNewLyricsBlock (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrStanza& stanza,
                             const S_msrVoice&  voice);
 

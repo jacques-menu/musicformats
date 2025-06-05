@@ -29,7 +29,7 @@ class EXP bsrFootNotes : public bsrLine
     // ------------------------------------------------------
 
     static SMARTP<bsrFootNotes> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -37,7 +37,7 @@ class EXP bsrFootNotes : public bsrLine
     // ------------------------------------------------------
 
                           bsrFootNotes (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~bsrFootNotes ();
 

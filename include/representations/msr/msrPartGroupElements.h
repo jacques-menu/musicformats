@@ -48,7 +48,7 @@ class EXP msrPartGroupElement : public msrElement
 
 /* this class is purely virtual
     static SMARTP<msrPartGroupElement> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 */
 
   protected:
@@ -57,7 +57,7 @@ class EXP msrPartGroupElement : public msrElement
     // ------------------------------------------------------
 
                           msrPartGroupElement (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrPartGroupElement ();
 

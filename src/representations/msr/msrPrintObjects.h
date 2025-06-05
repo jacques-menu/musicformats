@@ -32,7 +32,7 @@ std::string msrPrintObjectKindAsString (
 std::ostream& operator << (std::ostream& os, const msrPrintObjectKind& elt);
 
 msrPrintObjectKind msrPrintObjectKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& printObjectString);
 
 

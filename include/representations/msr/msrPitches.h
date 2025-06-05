@@ -17,6 +17,8 @@
 
 #include "exports.h"
 
+#include "mfBasicTypes.h"
+
 
 namespace MusicFormats
 {
@@ -191,22 +193,22 @@ msrQuarterTonesPitchKind msrSemiTonesPitchKindAsQuarterTonesPitchKind (
   msrAlterationPreferenceKind alterationPreferenceKind);
 
 EXP void fetchDiatonicPitchKindAndAlterationKindFromQuarterTonesPitchKind (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind,
   msrDiatonicPitchKind&    diatonicPitchKind,
   msrAlterationKind&       alterationKind);
 
 EXP msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrDiatonicPitchKind diatonicPitchKind,
   msrAlterationKind    alterationKind);
 
 EXP msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind);
 
 EXP msrAlterationKind alterationKindFromQuarterTonesPitchKind (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind);
 
 EXP msrQuarterTonesPitchKind quarterTonesPitchKindFromSemiTonesPitchKind (

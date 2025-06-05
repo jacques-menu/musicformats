@@ -49,7 +49,7 @@ class EXP msrCreditWords : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrCreditWords> create (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string&         creditWordsContents,
                             float                      creditWordsDefaultX,
                             float                      creditWordsDefaultY,
@@ -68,7 +68,7 @@ class EXP msrCreditWords : public msrElement
     // ------------------------------------------------------
 
                           msrCreditWords (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string&         creditWordsContents,
                             float                      creditWordsDefaultX,
                             float                      creditWordsDefaultY,
@@ -181,7 +181,7 @@ class EXP msrCredit : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrCredit> create (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int creditPageNumber);
 
   protected:
@@ -190,7 +190,7 @@ class EXP msrCredit : public msrElement
     // ------------------------------------------------------
 
                           msrCredit (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int creditPageNumber);
 
     virtual               ~msrCredit ();

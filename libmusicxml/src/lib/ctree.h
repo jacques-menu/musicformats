@@ -25,12 +25,20 @@
 #include "smartpointer.h"
 #include "visitable.h"
 
-namespace MusicXML2 
+namespace MusicXML2
 {
 
 //______________________________________________________________________________
-template <typename T> class EXP treeIterator : public std::iterator<std::input_iterator_tag, T>
+// template <typename T> class EXP treeIterator : public std::iterator<std::input_iterator_tag, T>
+
+// JMI MusicFormat 0.9.75
+template <typename T> class EXP treeIterator
 {
+// JMI MusicFormat 0.9.75
+  public:
+    using iterator_category = std::input_iterator_tag;
+    using value_type = T;
+
 	protected:
 		typedef typename std::vector<T>::iterator nodes_iterator;
 		typedef std::pair<nodes_iterator, T> state;
@@ -48,15 +56,15 @@ template <typename T> class EXP treeIterator : public std::iterator<std::input_i
 				 }
 				 treeIterator(const treeIterator& a)  { *this = a; }
 		virtual ~treeIterator() {}
-		
+
 		T operator  *() const	{ return *fCurrentIterator; }
-		T operator ->() const	{ return *fCurrentIterator; } 
-		
+		T operator ->() const	{ return *fCurrentIterator; }
+
 		//________________________________________________________________________
 		T getParent() const		{ return fStack.size() ? fStack.top().second : fRootElement; }
-		
+
 		//________________________________________________________________________
-		// current element has sub-elements: go down to sub-elements first			
+		// current element has sub-elements: go down to sub-elements first
 		virtual void forward_down(const T& t) {
 			fCurrentIterator = t->elements().begin();
 			if (fCurrentIterator != t->elements().end())
@@ -77,7 +85,7 @@ template <typename T> class EXP treeIterator : public std::iterator<std::input_i
 				}
 			}
 		}
-		
+
 		//________________________________________________________________________
 		// move the iterator forward
 		void forward() {
@@ -96,7 +104,7 @@ template <typename T> class EXP treeIterator : public std::iterator<std::input_i
 				fStack.push( make_pair(fCurrentIterator+1, parent));
 			}
 			else forward_up();
-			return *this; 
+			return *this;
 		}
 
 		//________________________________________________________________________
@@ -109,7 +117,7 @@ template <typename T> class EXP treeIterator : public std::iterator<std::input_i
 		}
 
 		//________________________________________________________________________
-		bool operator ==(const treeIterator& i) const		{ 
+		bool operator ==(const treeIterator& i) const		{
 			// we check that the iterators have the same parent (due to iterator compatibility issue with visual c++)
 			return getParent() == i.getParent() ?  ( fCurrentIterator==i.fCurrentIterator ) : false;
 		}
@@ -129,9 +137,9 @@ template <typename T> class EXP ctree : virtual public smartable
 		typedef treeIterator<treePtr>		iterator;	///< the top -> bottom iterator type
 
 		static treePtr new_tree() { ctree<T>* o = new ctree<T>; assert(o!=0); return o; }
-		
-		branchs& elements()						{ return fElements; }		
-		const branchs& elements() const			{ return fElements; }		
+
+		branchs& elements()						{ return fElements; }
+		const branchs& elements() const			{ return fElements; }
 		virtual void push (const treePtr& t)	{ fElements.push_back(t); }
 		virtual int  size  () const				{ return int(fElements.size()); }
 		virtual bool empty () const				{ return fElements.size()==0; }
@@ -140,7 +148,7 @@ template <typename T> class EXP ctree : virtual public smartable
 		iterator end()				{ treePtr start=dynamic_cast<T*>(this); return iterator(start, true); }
 		iterator erase(iterator i)	{ return i.erase(); }
 		iterator insert(iterator before, const treePtr& value)	{ return before.insert(value); }
-		
+
 		literator lbegin() { return fElements.begin(); }
 		literator lend()   { return fElements.end(); }
 

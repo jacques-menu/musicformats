@@ -120,7 +120,7 @@ int lpsrNumberOfDots (int n)
 
 //_______________________________________________________________________________
 // std::string wholeNotesAsLilypondMakeDurationArguments (
-//   int                  inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const mfWholeNotes& wholeNotes)
 // {
 //   return
@@ -131,7 +131,7 @@ int lpsrNumberOfDots (int n)
 
 //_______________________________________________________________________________
 std::string wholeNotesAsLilypondString (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes,
   int&                 dotsNumber)
 {
@@ -630,7 +630,7 @@ std::string wholeNotesAsLilypondString (
 }
 
 std::string wholeNotesAsLilypondString (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes)
 {
   int dotsNumber; // set by wholeNotesAsLilypondString() below, not used
@@ -644,7 +644,7 @@ std::string wholeNotesAsLilypondString (
 
 //_______________________________________________________________________________
 std::string dottedNotesDurationAsLilypondString (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   mfDottedNotesDuration dottedNotesDuration)
 {
   return
@@ -655,7 +655,7 @@ std::string dottedNotesDurationAsLilypondString (
 }
 
 std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   mfDottedNotesDuration dottedNotesDuration)
 {
   std::string result =
@@ -673,7 +673,7 @@ std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
 
 //_______________________________________________________________________________
 std::string multipleMeasureRestsWholeNoteAsLilypondString (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes)
 {
   std::stringstream ss;
@@ -1343,7 +1343,7 @@ std::ostream& operator << (std::ostream& os, const lpsrDynamicsTextSpannersStyle
 }
 
 lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& dynamicsTextSpannersStyleKindString)
 {
   lpsrDynamicsTextSpannersStyleKind result =

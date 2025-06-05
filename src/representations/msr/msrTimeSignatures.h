@@ -71,7 +71,7 @@ class EXP msrTimeSignatureItem : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrTimeSignatureItem> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -79,7 +79,7 @@ class EXP msrTimeSignatureItem : public msrElement
     // ------------------------------------------------------
 
                           msrTimeSignatureItem (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrTimeSignatureItem ();
 
@@ -155,52 +155,52 @@ class EXP msrTimeSignature : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrTimeSignature> create (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&        upLinkToMeasure,
                             msrTimeSignatureSymbolKind timeSignatureSymbolKind);
 
     static SMARTP<msrTimeSignature> create (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTimeSignatureSymbolKind timeSignatureSymbolKind);
 
     // creation from the applications
     // ------------------------------------------------------
 
     static SMARTP<msrTimeSignature> createTwoEightsTime (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrTimeSignature> createThreeEightsTime (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrTimeSignature> createSixEightsTime (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrTimeSignature> createTwoQuartersTime (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrTimeSignature> createThreeQuartersTime (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrTimeSignature> createFourQuartersTime (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrTimeSignature> createFiveQuartersTime (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrTimeSignature> createTwoHalvesTime (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrTimeSignature> createThreeHalvesTime (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrTimeSignature> createFourHalvesTime (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     // creation from the applications
     // ------------------------------------------------------
 
     static SMARTP<msrTimeSignature> createTimeFromString (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& timeString);
 
   protected:
@@ -209,7 +209,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrTimeSignature (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&        upLinkToMeasure,
                             msrTimeSignatureSymbolKind timeSignatureSymbolKind);
 

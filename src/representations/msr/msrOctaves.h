@@ -61,11 +61,11 @@ msrOctaveKind operator++ (msrOctaveKind& octaveKind, int);
 msrOctaveKind operator-- (msrOctaveKind& octaveKind, int);
 
 EXP msrOctaveKind msrOctaveKindFromNumber (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int octaveNumber);
 
 EXP msrOctaveKind msrOctaveKindFromCommasOrQuotes (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& octaveIndication);
 
 // octave entry
@@ -108,7 +108,7 @@ class EXP msrSemiTonesPitchAndOctave : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrSemiTonesPitchAndOctave> createFromString (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& theString);
 
   protected:
@@ -181,7 +181,7 @@ class EXP msrQuarterTonesPitchAndOctave : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrQuarterTonesPitchAndOctave> createFromString (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& theString);
 
   protected:

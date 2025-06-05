@@ -37,7 +37,7 @@ class EXP msrVoiceElement : public msrElement
   protected:
 
                           msrVoiceElement (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrVoiceElement ();
 

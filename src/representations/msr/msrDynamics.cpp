@@ -250,7 +250,7 @@ msrDynamicKind dynamicFromString (const std::string& theString)
 
 //______________________________________________________________________________
 S_msrDynamic msrDynamic::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrDynamicKind   dynamicKind,
   msrPlacementKind dynamicPlacementKind)
 {
@@ -264,7 +264,7 @@ S_msrDynamic msrDynamic::create (
 }
 
 S_msrDynamic msrDynamic::createDynamicFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& dynamicsString,
   msrPlacementKind   dynamicPlacementKind)
 {
@@ -292,7 +292,7 @@ S_msrDynamic msrDynamic::createDynamicFromString (
 }
 
 msrDynamic::msrDynamic (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrDynamicKind   dynamicKind,
   msrPlacementKind dynamicPlacementKind)
     : msrElement (inputLineNumber)
@@ -406,7 +406,7 @@ std::ostream& operator << (std::ostream& os, const S_msrDynamic& elt)
 
 //______________________________________________________________________________
 S_msrOtherDynamic msrOtherDynamic::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& otherDynamicString,
   msrPlacementKind   otherDynamicPlacementKind)
 {
@@ -420,7 +420,7 @@ S_msrOtherDynamic msrOtherDynamic::create (
 }
 
 msrOtherDynamic::msrOtherDynamic (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& otherDynamicString,
   msrPlacementKind   otherDynamicPlacementKind)
     : msrElement (inputLineNumber)
@@ -567,7 +567,7 @@ std::ostream& operator << (std::ostream& os, const msrCrescDecrescKind& elt)
 
 //______________________________________________________________________________
 S_msrCrescDecresc msrCrescDecresc::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrCrescDecrescKind crescDecrescKind)
 {
   msrCrescDecresc* obj =
@@ -579,7 +579,7 @@ S_msrCrescDecresc msrCrescDecresc::create (
 }
 
 msrCrescDecresc::msrCrescDecresc (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrCrescDecrescKind crescDecrescKind)
     : msrElement (inputLineNumber)
 {
@@ -741,7 +741,7 @@ std::ostream& operator << (std::ostream& os, const msrWedgeNienteKind& elt)
 
 //______________________________________________________________________________
 S_msrWedge msrWedge::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                wedgeNumber,
   msrWedgeKind       wedgeKind,
   msrWedgeNienteKind wedgeNienteKind,
@@ -763,7 +763,7 @@ S_msrWedge msrWedge::create (
 }
 
 msrWedge::msrWedge (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                wedgeNumber,
   msrWedgeKind       wedgeKind,
   msrWedgeNienteKind wedgeNienteKind,

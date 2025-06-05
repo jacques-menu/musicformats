@@ -725,7 +725,7 @@ class EXP msr2mxsrTranslator :
     int                       fDivisionsMultiplyingFactor;
 
     int                       wholeNotesAsDivisions (
-                                int                  inputLineNumber,
+                                const mfInputLineNumber& inputLineNumber,
                                 const mfWholeNotes& wholeNotes);
 
     Bool                      fPartDivisionsElementHasToBeAppended;

@@ -34,7 +34,7 @@ class EXP lpsrNewStaffGroupBlock : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrNewStaffGroupBlock> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -42,7 +42,7 @@ class EXP lpsrNewStaffGroupBlock : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrNewStaffGroupBlock (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~lpsrNewStaffGroupBlock ();
 
@@ -92,7 +92,7 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrNewStaffTuningBlock> create (
-                            int                     inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrStaffTuning& staffTuning);
 
   protected:
@@ -101,7 +101,7 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrNewStaffTuningBlock (
-                            int                     inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrStaffTuning& staffTuning);
 
     virtual               ~lpsrNewStaffTuningBlock ();
@@ -155,7 +155,7 @@ class EXP lpsrNewStaffBlock : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrNewStaffBlock> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -163,7 +163,7 @@ class EXP lpsrNewStaffBlock : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrNewStaffBlock (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~lpsrNewStaffBlock ();
 

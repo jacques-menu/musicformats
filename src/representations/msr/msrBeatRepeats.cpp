@@ -38,7 +38,7 @@ namespace MusicFormats
 /* JMI
 //______________________________________________________________________________
 S_msrBeatRepeatElement msrBeatRepeatElement::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrBeatRepeat& upLinkToBeatRepeat)
 {
   msrBeatRepeatElement* obj =
@@ -50,7 +50,7 @@ S_msrBeatRepeatElement msrBeatRepeatElement::create (
 }
 
 msrBeatRepeatElement::msrBeatRepeatElement (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrBeatRepeat& upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
@@ -69,7 +69,7 @@ msrBeatRepeatElement::~msrBeatRepeatElement ()
 {}
 
 void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrSegment&  segment,
   const std::string& context)
 {
@@ -101,7 +101,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
 }
 
 void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
-  int             inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   S_msrBeatRepeat beatRepeat,
   const std::string&   context)
 {
@@ -133,7 +133,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
 }
 
 void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoiceElement& voiceElement,
   const std::string&     context)
 {
@@ -479,7 +479,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatElement& elt)
 
 //______________________________________________________________________________
 S_msrBeatRepeatPattern msrBeatRepeatPattern::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrBeatRepeat& upLinkToBeatRepeat)
 {
   msrBeatRepeatPattern* obj =
@@ -491,7 +491,7 @@ S_msrBeatRepeatPattern msrBeatRepeatPattern::create (
 }
 
 msrBeatRepeatPattern::msrBeatRepeatPattern (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrBeatRepeat& upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
@@ -718,7 +718,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatPattern& elt)
 
 //______________________________________________________________________________
 S_msrBeatRepeatReplicas msrBeatRepeatReplicas::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrBeatRepeat& upLinkToBeatRepeat)
 {
   msrBeatRepeatReplicas* obj =
@@ -730,7 +730,7 @@ S_msrBeatRepeatReplicas msrBeatRepeatReplicas::create (
 }
 
 msrBeatRepeatReplicas::msrBeatRepeatReplicas (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrBeatRepeat& upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
@@ -957,7 +957,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatReplicas& elt)
 
 //______________________________________________________________________________
 S_msrBeatRepeat msrBeatRepeat::create (
-  int        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int        beatRepeatMeasuresNumber,
   int        beatRepeatSlashesNumber,
   const S_msrVoice& upLinkToVoice)
@@ -973,7 +973,7 @@ S_msrBeatRepeat msrBeatRepeat::create (
 }
 
 msrBeatRepeat::msrBeatRepeat (
-  int        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int        beatRepeatMeasuresNumber,
   int        beatRepeatSlashesNumber,
   const S_msrVoice& upLinkToVoice)
@@ -1393,7 +1393,7 @@ std::string msrBeatRepeat::asString () const
 }
 
 void msrBeatRepeat::displayBeatRepeat (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
   gLog <<

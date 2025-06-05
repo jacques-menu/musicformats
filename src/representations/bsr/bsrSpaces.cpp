@@ -29,7 +29,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrSpaces bsrSpaces::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int numberOfSpaces)
 {
   bsrSpaces* obj =
@@ -40,7 +40,7 @@ S_bsrSpaces bsrSpaces::create (
 }
 
 bsrSpaces::bsrSpaces (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int numberOfSpaces)
     : bsrLineContentsElement (inputLineNumber)
 {

@@ -85,7 +85,7 @@ void mfAssertWithInputLocation (
   int                sourceCodeLineNumber,
   Bool               condition,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& messageIfFalse)
 //   const std::string  measureNumber,
 //   int                scoreMeasuresNumber)

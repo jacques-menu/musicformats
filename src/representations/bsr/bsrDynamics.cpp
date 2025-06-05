@@ -29,7 +29,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrDynamic bsrDynamic::create (
-  int             inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrDynamicKind dynamicKind)
 {
   bsrDynamic* obj =
@@ -40,7 +40,7 @@ S_bsrDynamic bsrDynamic::create (
 }
 
 bsrDynamic::bsrDynamic (
-  int             inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrDynamicKind dynamicKind)
     : bsrLineContentsElement (inputLineNumber)
 {

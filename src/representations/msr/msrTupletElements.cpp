@@ -25,7 +25,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrTupletElement::msrTupletElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 //     : msrElement (
     : msrMeasureElement (
         inputLineNumber)

@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrMusicXMLPrintLayout msrMusicXMLPrintLayout::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
   msrMusicXMLPrintLayout* obj =
@@ -43,7 +43,7 @@ S_msrMusicXMLPrintLayout msrMusicXMLPrintLayout::create (
 }
 
 S_msrMusicXMLPrintLayout msrMusicXMLPrintLayout::create (
-  int                 inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   return
     msrMusicXMLPrintLayout::create (
@@ -52,7 +52,7 @@ S_msrMusicXMLPrintLayout msrMusicXMLPrintLayout::create (
 }
 
 msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElement (
         inputLineNumber)

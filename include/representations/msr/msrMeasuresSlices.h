@@ -355,7 +355,7 @@ class EXP msrMeasuresSlicesSequence : public smartable
 
     S_msrMeasuresSlicesSequence
                           mergeWithMeasuresSlicesSequence (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& measuresOrigin,
                             const S_msrMeasuresSlicesSequence&
                                           otherMeasuresSlicesSequence);

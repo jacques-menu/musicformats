@@ -33,7 +33,7 @@ class EXP msrTupletElement : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrTupletElement (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrTupletElement ();
 

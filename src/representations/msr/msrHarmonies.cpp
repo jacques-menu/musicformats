@@ -16,7 +16,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfEnumAll.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
@@ -45,7 +45,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrHarmonyInterval msrHarmonyInterval::create (
-// JMI  int             inputLineNumber,
+// JMI  const mfInputLineNumber& inputLineNumber,
   msrIntervalKind harmonyIntervalIntervalKind,
   int             harmonyIntervalRelativeOctave)
 {
@@ -60,7 +60,7 @@ S_msrHarmonyInterval msrHarmonyInterval::create (
 }
 
 msrHarmonyInterval::msrHarmonyInterval (
-// JMI  int             inputLineNumber,
+// JMI  const mfInputLineNumber& inputLineNumber,
   msrIntervalKind harmonyIntervalIntervalKind,
   int             harmonyIntervalRelativeOctave)
   // JMI  : msrElement (inputLineNumber)
@@ -2815,7 +2815,7 @@ std::ostream& operator << (std::ostream& os, const msrModeKind& elt)
 }
 
 msrModeKind modeKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& modeString)
 {
   // no CamelCase here, these strings are used in the command line options
@@ -3623,7 +3623,7 @@ std::string availableHarmonyKindsNames (size_t namesListMaxLength)
 
 //______________________________________________________________________________
 S_msrHarmonyDegree msrHarmonyDegree::create (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                      harmonyDegreeValue,
   msrAlterationKind        harmonyDegreeAlterationKind,
   msrHarmonyDegreeTypeKind harmonyDegreeTypeKind)
@@ -3639,7 +3639,7 @@ S_msrHarmonyDegree msrHarmonyDegree::create (
 }
 
 msrHarmonyDegree::msrHarmonyDegree (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                      harmonyDegreeValue,
   msrAlterationKind        harmonyDegreeAlterationKind,
   msrHarmonyDegreeTypeKind harmonyDegreeTypeKind)
@@ -3895,7 +3895,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHarmonyDegree& elt)
 // harmonies contents
 //______________________________________________________________________________
 S_msrHarmonyContents msrHarmonyContents::create (
-// JMI  int                   inputLineNumber,
+// JMI  const mfInputLineNumber& inputLineNumber,
   msrSemiTonesPitchKind harmonyContentsRootNote,
   msrHarmonyKind        harmonyContentsHarmonyKind)
 {
@@ -3909,7 +3909,7 @@ S_msrHarmonyContents msrHarmonyContents::create (
 }
 
 msrHarmonyContents::msrHarmonyContents (
-// JMI  int                   inputLineNumber,
+// JMI  const mfInputLineNumber& inputLineNumber,
   msrSemiTonesPitchKind harmonyContentsRootNote,
   msrHarmonyKind        harmonyContentsHarmonyKind)
 {
@@ -3998,7 +3998,7 @@ std::string msrHarmonyContents::harmonyContentsAsString () const
 }
 
 msrSemiTonesPitchKind msrHarmonyContents::bassSemiTonesPitchKindForHarmonyInversion (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int inversionNumber)
 {
   /*
@@ -4270,7 +4270,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHarmonyContents& elt)
 
 //______________________________________________________________________________
 S_msrHarmony msrHarmony::create (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&      upLinkToMeasure,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
@@ -4304,7 +4304,7 @@ S_msrHarmony msrHarmony::create (
 }
 
 msrHarmony::msrHarmony (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&      upLinkToMeasure,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
@@ -4768,7 +4768,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 }
 
 // void msrHarmony::incrementHarmonySoundingWholeNotes (
-//   int                  inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const mfWholeNotes& wholeNotesDelta)
 // {
 //   // compute currentHarmony's future sounding whole notes
@@ -6994,7 +6994,7 @@ void msrHarmonyStructure::browseData (basevisitor* v)
 */
 
 S_msrHarmonyInterval msrHarmonyStructure::bassHarmonyIntervalForHarmonyInversion (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int inversionNumber)
 {
   /*

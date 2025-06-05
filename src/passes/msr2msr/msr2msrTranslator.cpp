@@ -17,7 +17,7 @@
 
 #include "mfAssert.h"
 
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -63,7 +63,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrHiddenMeasureAndBarLineDescr msrHiddenMeasureAndBarLineDescr::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   S_msrDalSegno dalSegno)
 {
   msrHiddenMeasureAndBarLineDescr* obj = new
@@ -75,7 +75,7 @@ S_msrHiddenMeasureAndBarLineDescr msrHiddenMeasureAndBarLineDescr::create (
 }
 
 msrHiddenMeasureAndBarLineDescr::msrHiddenMeasureAndBarLineDescr (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   S_msrDalSegno dalSegno)
 {
   fInputLineNumber = inputLineNumber;

@@ -67,7 +67,7 @@ class EXP msrScore : public msrBookElement
     // ------------------------------------------------------
 
     static SMARTP<msrScore> create (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& scoreName);
 
     SMARTP<msrScore> createScoreNewbornClone ();
@@ -78,7 +78,7 @@ class EXP msrScore : public msrBookElement
     // ------------------------------------------------------
 
                           msrScore (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& scoreName);
 
     virtual               ~msrScore ();
@@ -343,11 +343,11 @@ class EXP msrScore : public msrBookElement
                             const S_msrCredit& credit);
 
     S_msrPart             fetchPartFromScoreByItsPartID (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& partMusicXMLID);
 
     void                  collectScorePartsInList (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             std::list <S_msrPart>& partsList);
 
     void                  collectScorePartsInMap (

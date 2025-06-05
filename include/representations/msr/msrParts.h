@@ -41,11 +41,11 @@ class EXP msrPart : public msrPartGroupElement
     // ------------------------------------------------------
 
     static SMARTP<msrPart> create (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& partMusicXMLID);
 
     static SMARTP<msrPart> create (
-                            int                   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string&    partMusicXMLID,
                             const S_msrPartGroup& partUpLinkToPartGroup);
 
@@ -58,7 +58,7 @@ class EXP msrPart : public msrPartGroupElement
     // ------------------------------------------------------
 
                           msrPart (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& partMusicXMLID);
 
     virtual               ~msrPart ();
@@ -205,8 +205,7 @@ class EXP msrPart : public msrPartGroupElement
                               { return fPartFirstMeasureNumber; }
 
     void                  setPartCurrentMeasureNumber (
-                            const std::string& measureNumber)
-                              { fPartCurrentMeasureNumber = measureNumber; }
+                            const std::string& measureNumber);
 
     const std::string     getPartCurrentMeasureNumber () const
                               { return fPartCurrentMeasureNumber; }
@@ -281,18 +280,18 @@ class EXP msrPart : public msrPartGroupElement
     // part drawing measure position
 
     void                  setPartCurrentDrawingPositionInMeasure (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfPositionInMeasure& positionInMeasure);
 
     void                  resetPartCurrentDrawingPositionInMeasure (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  incrementPartCurrentDrawingPositionInMeasure (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes& wholeNotesDelta);
 
     void                  decrementPartCurrentDrawingPositionInMeasure (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes& wholeNotesDelta);
 
     mfPositionInMeasure   getPartCurrentDrawingPositionInMeasure () const
@@ -328,21 +327,21 @@ class EXP msrPart : public msrPartGroupElement
     S_msrScore            fetchPartUpLinkToScore () const;
 
     void                  assignSequentialNumbersToRegularVoicesInPart (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
 /* JMI
     void                  addAVoiceToStavesThatHaveNone (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 */
 
     // whole notes durations
 
     mfWholeNotes          fetchPartMeasuresWholeNotesVectorAt (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int indexValue) const;
 
     void                  registerOrdinalMeasureNumberWholeNotes (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                 measureOrdinalNumber,
                             const mfWholeNotes& wholeNotes);
 
@@ -354,13 +353,13 @@ class EXP msrPart : public msrPartGroupElement
     // measures
 
     void                  cascadeCreateAMeasureAndAppendItInPart (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
                             const std::string&     measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
     void                  setNextMeasureNumberInPart (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& nextMeasureNumber);
 
     // clef, key, time signature
@@ -394,15 +393,15 @@ class EXP msrPart : public msrPartGroupElement
     // staves
 
     S_msrStaff            addRegularStaffToPartByItsNumber (
-                            int          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrStaffKind staffKind,
                             int          staffNumber);
 
     S_msrStaff            addHarmoniesStaffToPart (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     S_msrStaff            addHFiguredBassStaffToPart (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  addStaffToPartCloneByItsNumber (
                             const S_msrStaff& staff);
@@ -420,15 +419,15 @@ class EXP msrPart : public msrPartGroupElement
 //                             const S_msrVoice& voice);
 
     void                  displayPartStavesMap (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context) const;
 
 //     void                  displayPartRegularVoicesMap (
-//                             int                inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const std::string& context) const;
 
 //     void                  displayPartStavesAndVoicesVector (
-//                             int                inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const std::string& context) const;
 
     // rehearsal marks
@@ -454,7 +453,7 @@ class EXP msrPart : public msrPartGroupElement
                             const S_msrBarLine& barLine);
 
     void                  insertHiddenMeasureAndBarLineInPartClone (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfPositionInMeasure& positionInMeasure);
 
     // breaks
@@ -466,31 +465,31 @@ class EXP msrPart : public msrPartGroupElement
 
     // repeats
 
-    void                  handleRepeatStartInPart (
-                            int inputLineNumber);
+    void                  cascadeHandleRepeatStartInPart (
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  cascadeHandleRepeatEndInPart (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& measureNumber,
                             int                repeatTimes);
 
     void                  cascadeHandleRepeatEndingStartInPart (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
-    void                  handleRepeatEndingEndInPart (
-                            int                 inputLineNumber,
+    void                  cascadeHandleRepeatEndingEndInPart (
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string&  repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind repeatEndingKind);
 
     /* JMI ???
     void                  finalizeRepeatEndInPart (
-                            int    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& measureNumber,
                             int    repeatTimes);
                             */
 
     void                  appendRepeatCloneToPart (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeat& repeatCLone);
 
     void                  appendRepeatEndingCloneToPart (
@@ -499,42 +498,42 @@ class EXP msrPart : public msrPartGroupElement
     // multiple measure rests
 
     void                  cascadeAppendMultipleMeasureRestToPart (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int               multipleMeasureRestMeasuresNumber,
                             int               multipleMeasureRestSlashesNumber,
                             msrUseSymbolsKind multipleMeasureRestUseSymbolsKind);
 
     void                  appendPendingMultipleMeasureRestsToPart (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  replicateLastAppendedMeasureInPart (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int replicatasNumber);
 
     void                  appendEmptyMeasuresToPart (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& previousMeasureNumber,
                             int                measureRestsNumber);
 
     void                  appendMultipleMeasureRestCloneToPart (
-                            int                          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMultipleMeasureRest& multipleMeasureRests);
 
     // measure repeats
 
     void                  cascadeCreateAMeasureRepeatAndAppendItToPart (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int measureRepeatMeasuresNumber,
                             int measureRepeatSlashesNumber);
 
     void                  cascadeCreateAMeasureRepeatAndAppendItToPart (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
                             const std::string&     measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
     void                  appendPendingMeasureRepeatToPart (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
 //     void                  appendMeasureRepeatCloneToPart ( JMI UNUSED 0.9.66
 //                             int                              inputLineNumber,
@@ -547,11 +546,11 @@ class EXP msrPart : public msrPartGroupElement
     // harmonies
 
     S_msrVoice            createPartHarmoniesVoice (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& currentMeasureNumber);
 
     void                  appendHarmonyToPart (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrHarmony&        harmony,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
@@ -563,11 +562,11 @@ class EXP msrPart : public msrPartGroupElement
     // figured bass
 
     S_msrVoice            createPartFiguredBassVoice (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& currentMeasureNumber);
 
     void                  appendFiguredBassToPart (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrFiguredBass&    figuredBass,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
@@ -610,7 +609,7 @@ class EXP msrPart : public msrPartGroupElement
 //     // backup
 //
 //     void                  handleBackupInPart (
-//                             int             inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const mfWholeNotes& backupStepLength);
 //
   public:
@@ -767,19 +766,19 @@ class EXP msrPart : public msrPartGroupElement
     // finalization
 
     void                  finalizeLastAppendedMeasureInPart (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  finalizePart (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  finalizePartClone (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  finalizePartAndAllItsMeasures (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  collectPartMeasuresSlices (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   private:
 

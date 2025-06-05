@@ -34,7 +34,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrBook msrBook::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& bookName)
 {
   msrBook* obj =
@@ -46,7 +46,7 @@ S_msrBook msrBook::create (
 }
 
 msrBook::msrBook (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& bookName)
     : msrElement (inputLineNumber)
 {
@@ -213,7 +213,7 @@ void msrBook::appendCreditToBook (
 }
 
 void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? 0.9.66
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 /* JMI
   if (

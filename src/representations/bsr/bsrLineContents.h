@@ -49,7 +49,7 @@ class EXP bsrLineContents : public bsrElement
     // ------------------------------------------------------
 
     static SMARTP<bsrLineContents> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrLineContentsKind lineContentsKind);
 
     SMARTP<bsrLineContents> createLineNewbornClone ();
@@ -60,7 +60,7 @@ class EXP bsrLineContents : public bsrElement
     // ------------------------------------------------------
 
                           bsrLineContents (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrLineContentsKind lineContentsKind);
 
     virtual               ~bsrLineContents ();

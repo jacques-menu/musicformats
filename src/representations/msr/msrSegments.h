@@ -40,7 +40,7 @@ class EXP msrSegment : public msrVoiceElement
     // ------------------------------------------------------
 
     static SMARTP<msrSegment> create (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& segmentUpLinkToVoice);
 
     SMARTP<msrSegment> createSegmentNewbornClone (
@@ -55,7 +55,7 @@ class EXP msrSegment : public msrVoiceElement
     // ------------------------------------------------------
 
                           msrSegment (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& segmentUpLinkToVoice);
 
     virtual               ~msrSegment ();
@@ -148,32 +148,32 @@ class EXP msrSegment : public msrVoiceElement
     // backup and padding
 
 //     void                  padUpToPositionInMeasureInSegment (
-//                             int             inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const mfWholeNotes& wholeNotes);
 
 //     void                  casadeBackupByWholeNotesStepLengthInSegment (
-//                             int     inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const mfWholeNotes&
 //                                     backupTargetMeasureElementPositionInMeasure);
 
     void                  cascadeAppendPaddingNoteToSegment (
-                            int                  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes& forwardStepLength);
 
     // measures
 
     S_msrMeasure          fetchLastMeasureFromSegment (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context);
 
     S_msrMeasure          cascadeCreateAMeasureAndAppendItInSegment (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
                             const std::string&     measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
     void                  setNextMeasureNumberInSegment (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& nextMeasureNumber);
 
     void                  appendMeasureToSegment (
@@ -185,7 +185,7 @@ class EXP msrSegment : public msrVoiceElement
     // measure repeats
 
     void                  cascadeCreateAMeasureRepeatAndAppendItToSegment (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
                             const std::string&     measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
@@ -222,7 +222,7 @@ class EXP msrSegment : public msrVoiceElement
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInSegmentClone (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfPositionInMeasure& positionInMeasure);
 
     // transposition
@@ -270,7 +270,7 @@ class EXP msrSegment : public msrVoiceElement
     // harmonies
 
     void                  appendHarmonyToSegment (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrHarmony&        harmony,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
@@ -293,7 +293,7 @@ class EXP msrSegment : public msrVoiceElement
     // figured bass
 
     void                  appendFiguredBassToSegment (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrFiguredBass&    figuredBass,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
@@ -407,19 +407,19 @@ class EXP msrSegment : public msrVoiceElement
     // removing elements
 
 //     void                  removeNoteFromSegment (
-//                             int              inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const S_msrNote& note);
 
 //     void                  removeElementFromSegment (
-//                             int                 inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const S_msrElement& element);
 
 //     S_msrMeasure          removeLastMeasureFromSegment (
-//                             int                inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const std::string& context);
 
     void                  finalizeAllTheMeasuresOfSegment (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   public:
 
@@ -440,7 +440,7 @@ class EXP msrSegment : public msrVoiceElement
     std::string           asString () const override;
 
     void                  displaySegment (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;
@@ -453,11 +453,11 @@ class EXP msrSegment : public msrVoiceElement
 
     // measures
     void                  assertSegmentLastMeasureIsNotNull (
-                            int inputLineNumber) const;
+                            const mfInputLineNumber& inputLineNumber) const;
 
     // necessary due to the complexity of repeats management
     void                  assertSegmentElementsListIsNotEmpty (
-                            int inputLineNumber) const;
+                            const mfInputLineNumber& inputLineNumber) const;
 
   private:
 

@@ -305,7 +305,7 @@ if (false) { // JMI TEMP 0.9.66
 
 //------------------------------------------------------------------------
 S_msrVoice LilyPondIssue34Generator::createRegularVoiceInStaff (
-  int          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int          voiceNumber,
   const S_msrStaff&   staff)
 //------------------------------------------------------------------------
@@ -329,7 +329,7 @@ S_msrVoice LilyPondIssue34Generator::createRegularVoiceInStaff (
 
 //------------------------------------------------------------------------
 S_msrMeasure LilyPondIssue34Generator::createMeasureInVoice (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& measureNumber,
   const S_msrVoice&    voice)
 //------------------------------------------------------------------------

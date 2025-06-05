@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrPagination bsrPagination::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int printPageNumber,
   int braillePageNumber)
 {
@@ -43,7 +43,7 @@ S_bsrPagination bsrPagination::create (
 }
 
 bsrPagination::bsrPagination (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int printPageNumber,
   int braillePageNumber)
     : bsrLineContentsElement (inputLineNumber)

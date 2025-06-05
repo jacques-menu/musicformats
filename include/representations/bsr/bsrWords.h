@@ -23,11 +23,11 @@ namespace MusicFormats
 //______________________________________________________________________________
 // brailling characters and words
 S_bsrCellsList brailleCharacter (
-  int  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   char ch);
 
 S_bsrCellsList brailleWord (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& str);
 
 //______________________________________________________________________________
@@ -39,7 +39,7 @@ class EXP bsrWords : public bsrLineContentsElement
     // ------------------------------------------------------
 
     static SMARTP<bsrWords> create (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& wordContents);
 
   protected:
@@ -48,7 +48,7 @@ class EXP bsrWords : public bsrLineContentsElement
     // ------------------------------------------------------
 
                           bsrWords (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& wordContents);
 
     virtual               ~bsrWords ();

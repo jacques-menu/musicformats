@@ -27,7 +27,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrUseVoiceCommand lpsrUseVoiceCommand::create (
-  int        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& voice)
 {
   lpsrUseVoiceCommand* obj =
@@ -39,7 +39,7 @@ S_lpsrUseVoiceCommand lpsrUseVoiceCommand::create (
 }
 
 lpsrUseVoiceCommand::lpsrUseVoiceCommand (
-  int        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& voice)
     : lpsrElement (inputLineNumber)
 {

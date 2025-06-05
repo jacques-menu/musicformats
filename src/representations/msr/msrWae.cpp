@@ -78,7 +78,7 @@ S_msrUnsupportedException msrUnsupportedException::create (
 //______________________________________________________________________________
 void msrWarningWithoutInputLocation (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -90,7 +90,7 @@ void msrWarningWithoutInputLocation (
 
 void msrWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 //   const std::string  measureNumber,
 //   int                scoreMeasuresNumber)
@@ -107,7 +107,7 @@ void msrWarning (
 //______________________________________________________________________________
 void msrError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -133,7 +133,7 @@ void msrError (
 //______________________________________________________________________________
 void msrUnsupported (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -165,7 +165,7 @@ void msrUnsupported (
 //______________________________________________________________________________
 void msrInternalWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   waeInternalWarning (
@@ -178,7 +178,7 @@ void msrInternalWarning (
 //______________________________________________________________________________
 void msrInternalError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)

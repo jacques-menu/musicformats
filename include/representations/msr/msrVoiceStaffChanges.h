@@ -31,7 +31,7 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrVoiceStaffChange> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             const S_msrStaff&   takeOffStaff,
                             const S_msrStaff&   landingStaff);
@@ -44,7 +44,7 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrVoiceStaffChange (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             const S_msrStaff&   takeOffStaff,
                             const S_msrStaff&   landingStaff);

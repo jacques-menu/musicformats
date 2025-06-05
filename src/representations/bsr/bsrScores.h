@@ -38,7 +38,7 @@ class EXP bsrScore : public bsrElement
     // ------------------------------------------------------
 
     static SMARTP<bsrScore> create (
-                            int            inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrScore&     theMsrScore);
 
   protected:
@@ -47,7 +47,7 @@ class EXP bsrScore : public bsrElement
     // ------------------------------------------------------
 
                           bsrScore (
-                            int            inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrScore&     theMsrScore);
 
     virtual               ~bsrScore ();

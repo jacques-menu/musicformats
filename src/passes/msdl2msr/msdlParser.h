@@ -235,21 +235,21 @@ class msdlParser : public smartable
     // private score building methods
     // ------------------------------------------------------
 
-    void                  createBookIfNeeded (int inputLineNumber);
+    void                  createBookIfNeeded (const mfInputLineNumber& inputLineNumber);
 
-    void                  createScoreIfNeeded (int inputLineNumber);
-    void                  createIdentificationIfNeeded (int inputLineNumber);
+    void                  createScoreIfNeeded (const mfInputLineNumber& inputLineNumber);
+    void                  createIdentificationIfNeeded (const mfInputLineNumber& inputLineNumber);
 
-    void                  createPartGroupIfNeeded (int inputLineNumber);
+    void                  createPartGroupIfNeeded (const mfInputLineNumber& inputLineNumber);
 
-    void                  createPartIfNeeded (int inputLineNumber);
+    void                  createPartIfNeeded (const mfInputLineNumber& inputLineNumber);
 
-    void                  createStaffIfNeeded (int inputLineNumber);
+    void                  createStaffIfNeeded (const mfInputLineNumber& inputLineNumber);
 
-    void                  createVoiceIfNeeded (int inputLineNumber);
+    void                  createVoiceIfNeeded (const mfInputLineNumber& inputLineNumber);
 
     void                  createMeasureNumber (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int measureNumber);
 
   private:

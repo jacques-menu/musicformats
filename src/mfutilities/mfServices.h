@@ -17,6 +17,8 @@
 #include "smartpointer.h"
 #include "exports.h"
 
+#include "mfBasicTypes.h"
+
 #include "mfPasses.h"
 
 
@@ -230,22 +232,27 @@ class EXP mfServiceRunData : public smartable
                               { return fCurrentVoiceNumber; }
 
     // measures
-    void                  setCurrentMeasureNumber (const std::string& measureNumber)
+    void                  setCurrentMeasureNumber (
+                            const mfMeasureNumber& measureNumber)
                               { fCurrentMeasureNumber = measureNumber; }
 
-    const std::string     getCurrentMeasureNumber () const
+    const mfMeasureNumber getCurrentMeasureNumber () const
                               { return fCurrentMeasureNumber; }
 
-    void                  setScoreFirstMeasureNumber (const std::string& scoreFirstMeasureNumber)
+    void                  setScoreFirstMeasureNumber (
+                            const mfMeasureNumber& scoreFirstMeasureNumber)
                               { fScoreFirstMeasureNumber = scoreFirstMeasureNumber; }
 
-    const std::string&    getScoreFirstMeasureNumber () const
+    const mfMeasureNumber&
+                          getScoreFirstMeasureNumber () const
                               { return fScoreFirstMeasureNumber; }
 
-    void                  setScoreLastMeasureNumber (const std::string& scoreLastMeasureNumber)
+    void                  setScoreLastMeasureNumber (
+                            const mfMeasureNumber& scoreLastMeasureNumber)
                               { fScoreLastMeasureNumber = scoreLastMeasureNumber; }
 
-    const std::string&    getScoreLastMeasureNumber () const
+    const mfMeasureNumber&
+                          getScoreLastMeasureNumber () const
                               { return fScoreLastMeasureNumber; }
 
     void                  setScoreMeasuresNumber (int scoreMeasuresNumber)
@@ -303,10 +310,10 @@ class EXP mfServiceRunData : public smartable
     int                   fCurrentVoiceNumber;
 
     // measures
-    std::string           fCurrentMeasureNumber;
+    mfMeasureNumber       fCurrentMeasureNumber;
 
-    std::string           fScoreFirstMeasureNumber;
-    std::string           fScoreLastMeasureNumber;
+    mfMeasureNumber       fScoreFirstMeasureNumber;
+    mfMeasureNumber       fScoreLastMeasureNumber;
 
     int                   fScoreMeasuresNumber;
 

@@ -11,7 +11,7 @@
 
 #include "xml_tree_browser.h"
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 // #include "mfMusicformatsErrors.h"
 #include "mfStringsHandling.h"
 
@@ -138,8 +138,6 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
 
   // measures handling
   fPartMeasuresCounter = 0;
-  fScoreFirstMeasureNumber = "";
-  fPartFirstMeasureNumber = "";
   fCurrentMeasureNumber = "K_MEASURE_NUMBER_UNKNOWN_";
 
   fPreviousMeasureInputLineNumber = -1;
@@ -780,7 +778,7 @@ void mxsr2msrSkeletonPopulator::displayGatheredTupletInformations (
 }
 
 void mxsr2msrSkeletonPopulator::displayStaffAndVoiceInformation (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
 	const std::string& context) const
 {
 	gLog <<
@@ -832,7 +830,7 @@ void mxsr2msrSkeletonPopulator::displayStaffAndVoiceInformation (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonPopulator::printVoicesLastMetNoteMap (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
   size_t
@@ -892,7 +890,7 @@ void mxsr2msrSkeletonPopulator::printVoicesLastMetNoteMap (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonPopulator::checkStep (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& stepValue,
   const std::string& markup)
 {
@@ -1287,7 +1285,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
 }
 
 void mxsr2msrSkeletonPopulator::displayCurrentPartStaffMsrVoicesMap (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context) const
 {
   size_t
@@ -1406,7 +1404,7 @@ void mxsr2msrSkeletonPopulator::displayCurrentPartStaffMxsrVoicesMap () const
 
 //______________________________________________________________________________
 S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   int staffNumber = 1;
 
@@ -3101,96 +3099,6 @@ void mxsr2msrSkeletonPopulator::visitStart (S_appearance& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-/*
-<!--
-  The appearance element controls general graphical
-  settings for the music's final form appearance on a
-  printed page of display. This includes support
-  for line widths, definitions for note sizes, and standard
-  distances between notation elements, plus an extension
-  element for other aspects of appearance.
-
-  The line-width element indicates the width of a line type
-  in tenths. The type attribute defines what type of line is
-  being defined. Values include beam, bracket, dashes,
-  enclosure, ending, extend, heavy barLine, leger,
-  light barLine, octave shift, pedal, slur middle, slur tip,
-  staff, stem, tie middle, tie tip, tuplet bracket, and
-  wedge. The text content is expressed in tenths.
-
-  The note-size element indicates the percentage of the
-  regular note size to use for notes with a cue and large
-  size as defined in the type element. The grace type is
-  used for notes of cue size that that include a grace
-  element. The cue type is used for all other notes with
-  cue size, whether defined explicitly or implicitly via a
-  cue element. The large type is used for notes of large
-  size. The text content represent the numeric percentage.
-  A value of 100 would be identical to the size of a regular
-  note as defined by the music font.
-
-  The distance element represents standard distances between
-  notation elements in tenths. The type attribute defines what
-  type of distance is being defined. Values include hyphen
-  (for hyphens in lyrics) and beam.
-
-  The glyph element represents what SMuFL glyph should be used
-  for different variations of symbols that are semantically
-  identical. The type attribute specifies what type of glyph
-  is being defined. The element value specifies what
-  SMuFL glyph to use, including recommended stylistic
-  regulars.
-
-  Glyph type attribute values include quarter-rest,
-  g-clef-ottava-bassa, c-clef, f-clef, percussion-clef,
-  octave-shift-up-8, octave-shift-down-8,
-  octave-shift-continue-8, octave-shift-down-15,
-  octave-shift-up-15, octave-shift-continue-15,
-  octave-shift-down-22, octave-shift-up-22, and
-  octave-shift-continue-22. A quarter-rest type specifies the
-  glyph to use when a note has a rest element and a type value
-  of quarter. The c-clef, f-clef, and percussion-clef types
-  specify the glyph to use when a clef sign element value is C,
-  F, or percussion respectively. The g-clef-ottava-bassa type
-  specifies the glyph to use when a clef sign element value is
-  G and the clef-octave-change element value is -1. The
-  octave-shift types specify the glyph to use when an
-  octave-shift type attribute value is up, down, or continue
-  and the octave-shift size attribute value is 8, 15, or 22.
-
-  The SMuFL glyph name should match the type. For instance,
-  a type of quarter-rest would use values restQuarter,
-  restQuarterOld, or restQuarterZ. A type of g-clef-ottava-bassa
-  would use values gClef8vb, gClef8vbOld, or gClef8vbCClef. A
-  type of octave-shift-up-8 would use values ottava, ottavaBassa,
-  ottavaBassaBa, ottavaBassaVb, or octaveBassa.
-
-  The other-appearance element is used to define any
-  graphical settings not yet in the current version of the
-  MusicXML format. This allows extended representation,
-  though without application interoperability.
--->
-<!ELEMENT appearance
-  (line-width*, note-size*, distance*,
-   other-appearance*)>
-<!ELEMENT line-width %layout-tenths;>
-<!ATTLIST line-width
-    type CDATA #REQUIRED
->
-<!ELEMENT note-size (#PCDATA)>
-<!ATTLIST note-size
-    type (cue | grace | large) #REQUIRED
->
-<!ELEMENT distance %layout-tenths;>
-<!ATTLIST distance
-    type CDATA #REQUIRED
->
-<!ELEMENT other-appearance (#PCDATA)>
-<!ATTLIST other-appearance
-    type CDATA #REQUIRED
->
-*/
-
   // create an appearance
   fCurrentAppearance =
     msrAppearance::create (
@@ -3745,8 +3653,6 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 
   // measures
   fPartMeasuresCounter = 0;
-  fScoreFirstMeasureNumber = "";
-  fPartFirstMeasureNumber = "";
   fCurrentMeasureNumber = "K_MEASURE_NUMBER_UNKNOWN_";
 
   fPreviousMeasureInputLineNumber = -1;
@@ -3755,7 +3661,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 }
 
 void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string idString)
 {
 // #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
@@ -5020,7 +4926,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_key& elt)
 }
 
 S_msrKey mxsr2msrSkeletonPopulator::handleTraditionalKey (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // key fifths number
   msrQuarterTonesPitchKind
@@ -5130,7 +5036,7 @@ S_msrKey mxsr2msrSkeletonPopulator::handleTraditionalKey (
 }
 
 S_msrKey mxsr2msrSkeletonPopulator::handleHumdrumScotKey (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
  //  msrQuarterTonesPitch fCurrentNoteQuarterTonesPitch; // JMI BOF
 
@@ -5643,54 +5549,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_score_instrument& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-/*
-<!--
-  The score-instrument element allows for multiple instruments
-  per score-part. As with the score-part element, each
-  score-instrument has a required ID attribute, a name,
-  and an optional abbreviation. The instrument-name and
-  instrument-abbreviation are typically used within a software
-  application, rather than appearing on the printed page of a
-  score.
-
-  A score-instrument element is also required if the score
-  specifies MIDI 1.0 channels, banks, or programs. An initial
-  midi-instrument assignment can also be made here. MusicXML
-  software should be able to automatically assign reasonable
-  channels and instruments without these elements in simple
-  cases, such as where part names match General MIDI
-  instrument names.
-
-  The score-instrument element can also distinguish multiple
-  instruments of the same type that are on the same part,
-  such as Clarinet 1 and Clarinet 2 instruments within a
-  Clarinets 1 and 2 part.
-
-  The virtual-instrument-data entity is defined in the
-  common.mod file, as it can be used within both the
-  score-part and instrument-change elements.
--->
-<!ELEMENT score-instrument
-  (instrument-name, instrument-abbreviation?,
-  %virtual-instrument-data;)>
-<!ATTLIST score-instrument
-    id ID #REQUIRED
->
-<!ELEMENT instrument-name (#PCDATA)>
-<!ELEMENT instrument-abbreviation (#PCDATA)>
-
-    <score-part id="P1">
-      <part-name print-object="no">Voice</part-name>
-      <score-instrument id="P1-I6">
-        <instrument-name>Voice</instrument-name>
-        <instrument-sound>voice.vocals</instrument-sound>
-        <solo/>
-      </score-instrument>
-*/
-
-//  int instruments = (int)(*elt); // JMI
+//  int instruments = (int)(*elt); // JMI 0.9.75
 }
-
 
 void mxsr2msrSkeletonPopulator::visitStart (S_instrument_name& elt)
 {
@@ -11283,35 +11143,6 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 //     else {
 //       // JMI ???
 //     }
-  }
-
-  // consistency check
-  if (fPartFirstMeasureNumber.empty ()) {
-    // this is the first measure in the part
-    fPartFirstMeasureNumber = fCurrentMeasureNumber;
-
-    if (fScoreFirstMeasureNumber.empty ()) {
-      // this is the first measure of the first part in the score
-      fScoreFirstMeasureNumber = fPartFirstMeasureNumber;
-    }
-    else {
-      if (fPartFirstMeasureNumber != fScoreFirstMeasureNumber) {
-        std::stringstream ss;
-
-        ss <<
-          "measure numbering inconsistency: first measure numbers '" <<
-          fScoreFirstMeasureNumber <<
-           "' and '" <<
-          fPartFirstMeasureNumber <<
-          "' found";
-
-        mxsr2msrInternalError (
-          gServiceRunData->getInputSourceName (),
-          elt->getInputLineNumber (),
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-    }
   }
 
   // reset the part measure position
@@ -20179,7 +20010,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_unpitched& elt)
 
 // //______________________________________________________________________________
 // void mxsr2msrSkeletonPopulator::finalizeCurrentChord (
-//   int inputLineNumber)
+//   const mfInputLineNumber& inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceChords ()) {
@@ -22460,7 +22291,7 @@ void mxsr2msrSkeletonPopulator::attachPendingNoteLevelElementsIfAnyToCurrentNote
 }
 
 void mxsr2msrSkeletonPopulator::attachPendingStaffLevelElementsIfAnyToCurrentNote (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -22502,7 +22333,7 @@ void mxsr2msrSkeletonPopulator::attachPendingStaffLevelElementsIfAnyToCurrentNot
 
 //______________________________________________________________________________
 S_msrNote mxsr2msrSkeletonPopulator::createNote (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // determine quarter tones note pitch
   if (fCurrentNoteIsARest) { // JMI 0.9.70
@@ -22858,7 +22689,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 
 //______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::populateCurrentNoteWithCurrentInformations (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -23055,7 +22886,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteWithCurrentInformations (
 }
 
 void mxsr2msrSkeletonPopulator::populateCurrentNoteWithPendingInformations (
-  int inputLineNumber) // JMI 0.9.72
+  const mfInputLineNumber& inputLineNumber) // JMI 0.9.72
 {
   // attach the regular pending elements (not dal segnos), if any, to fCurrentNote
   attachPendingNoteLevelElementsIfAnyToCurrentNote ();
@@ -23066,7 +22897,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteWithPendingInformations (
 
 //______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::handleCurrentNote (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesBasics ()) {
@@ -23459,7 +23290,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
 }
 
 void mxsr2msrSkeletonPopulator::createStaffChange (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   S_mxsrStaffChangeEvent staffChangeTakeOffEvent)
 {
   if (staffChangeTakeOffEvent) {
@@ -26935,7 +26766,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteInAChord (
 
 //______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::handleImplicitInitialForwardRepeat (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -26957,7 +26788,7 @@ void mxsr2msrSkeletonPopulator::handleImplicitInitialForwardRepeat (
 
   // prepare for repeat in current part
   fCurrentPart->
-    handleRepeatStartInPart (
+    cascadeHandleRepeatStartInPart (
       inputLineNumber);
 
 //   // append the bar line to the current part
@@ -26969,14 +26800,6 @@ void mxsr2msrSkeletonPopulator::handleImplicitInitialForwardRepeat (
 void mxsr2msrSkeletonPopulator::handleRepeatStart (
   const S_msrBarLine& barLine)
 {
-  std::string
-    repeatStartMeasureNumber =
-      fCurrentRepeatStartMeasureNumber.size ()
-        ? // there was a repeat start before hand
-          fCurrentRepeatStartMeasureNumber
-        : // there is an implicit repeat start at the beginning of the part
-          fPartFirstMeasureNumber;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
@@ -26986,7 +26809,6 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
       fCurrentPart->fetchPartNameForTrace () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
-      "\", repeatStartMeasureNumber: \"" << repeatStartMeasureNumber <<
       "\", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -27000,7 +26822,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
 
   // prepare for repeat in current part
   fCurrentPart->
-    handleRepeatStartInPart (
+    cascadeHandleRepeatStartInPart (
       barLine->getInputLineNumber ());
 
   // append the bar line to the current part
@@ -27012,14 +26834,6 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
 void mxsr2msrSkeletonPopulator::handleRepeatEnd (
   const S_msrBarLine& barLine)
 {
-  std::string
-    repeatStartMeasureNumber =
-      fCurrentRepeatStartMeasureNumber.size ()
-        ? // there was a repeat start before hand
-          fCurrentRepeatStartMeasureNumber
-        : // there is an implicit repeat start at the beginning of the part
-          fPartFirstMeasureNumber;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
@@ -27029,7 +26843,6 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
       fCurrentPart->fetchPartNameForTrace () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
-      "\", repeatStartMeasureNumber: \"" << repeatStartMeasureNumber <<
       "\", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -27045,7 +26858,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
   fCurrentPart->
     cascadeHandleRepeatEndInPart (
       barLine->getInputLineNumber (),
-      repeatStartMeasureNumber,
+      fCurrentRepeatStartMeasureNumber,
       barLine->getBarLineTimes ());
 
   // forget about the current repeat start barLine
@@ -27058,14 +26871,6 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
 void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
   const S_msrBarLine& barLine)
 {
-  std::string
-    repeatStartMeasureNumber =
-      fCurrentRepeatStartMeasureNumber.size ()
-        ? // there was a repeat start before hand
-          fCurrentRepeatStartMeasureNumber
-        : // there is an implicit repeat start at the beginning of the part
-          fPartFirstMeasureNumber;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
@@ -27075,7 +26880,6 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
       fCurrentPart->fetchPartNameForTrace () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
-      "\", repeatStartMeasureNumber: \"" << repeatStartMeasureNumber <<
       "\", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -27183,7 +26987,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentPart->
-    handleRepeatEndingEndInPart (
+    cascadeHandleRepeatEndingEndInPart (
       barLine->getInputLineNumber (),
       fCurrentBarLineEndingNumber,
       msrRepeatEndingKind::kRepeatEndingHooked);
@@ -27255,7 +27059,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentPart->
-    handleRepeatEndingEndInPart (
+    cascadeHandleRepeatEndingEndInPart (
       barLine->getInputLineNumber (),
       fCurrentBarLineEndingNumber,
       msrRepeatEndingKind::kRepeatEndingHookless);
@@ -29600,7 +29404,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 
 
 // void mxsr2msrSkeletonPopulator::convertWordsToTempo (
-//   int                inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const std::string& wordsValue)
 // {
 //   // create an msrWords containing wordsValue
@@ -29649,7 +29453,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 // }
 
 // void mxsr2msrSkeletonPopulator::convertWordsToRehearsalMark (
-//   int                inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const std::string& wordsValue)
 //     {
 //       // create an msrWords containing wordsValue
@@ -29683,7 +29487,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 // }
 //
 // void mxsr2msrSkeletonPopulator::convertWordsToSegno (
-//   int                inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const std::string& wordsValue)
 //     {
 //       // create an msrWords containing wordsValue
@@ -29748,7 +29552,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 // }
 //
 // void mxsr2msrSkeletonPopulator::convertWordsToDalSegnoAlCoda (
-//   int                inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const std::string& wordsValue)
 // {
 //   // create an msrWords containing wordsValue
@@ -29781,7 +29585,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //   fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 // void mxsr2msrSkeletonPopulator::convertWordsToCoda (
-//   int                inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const std::string& wordsValue)
 //     {
 //       // create an msrWords containing wordsValue
@@ -29815,7 +29619,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 // }
 //
 // void mxsr2msrSkeletonPopulator::convertWordsToCresc (
-//   int                inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const std::string& wordsValue)
 //     {
 //       // create an msrWords containing wordsValue
@@ -29851,7 +29655,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 
 
 // void mxsr2msrSkeletonPopulator::convertWordsToDecresc (
-//   int                inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const std::string& wordsValue)
 //     {
 //       // create an msrWords containing wordsValue
@@ -30021,7 +29825,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 
 
 // void mxsr2msrSkeletonPopulator::handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure (
-//   int inputLineNumber)
+//   const mfInputLineNumber& inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {

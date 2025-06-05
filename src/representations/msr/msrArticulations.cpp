@@ -28,7 +28,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrArticulation msrArticulation::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrArticulationKind articulationKind,
   msrPlacementKind    articulationPlacementKind)
 {
@@ -42,7 +42,7 @@ S_msrArticulation msrArticulation::create (
 }
 
 msrArticulation::msrArticulation (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrArticulationKind articulationKind,
   msrPlacementKind    articulationPlacementKind)
     : msrElement (inputLineNumber)
@@ -238,7 +238,7 @@ std::ostream& operator << (std::ostream& os, const S_msrArticulation& elt)
 
 //______________________________________________________________________________
 S_msrFermata msrFermata::create (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrFermataShapeKind        fermataShapeKind,
   msrArticulationFermataType fermataTypeKind)
 {
@@ -252,7 +252,7 @@ S_msrFermata msrFermata::create (
 }
 
 msrFermata::msrFermata (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrFermataShapeKind        fermataShapeKind,
   msrArticulationFermataType fermataTypeKind)
     : msrArticulation (
@@ -427,7 +427,7 @@ std::ostream& operator << (std::ostream& os, const S_msrFermata& elt)
 
 //______________________________________________________________________________
 S_msrArpeggiato msrArpeggiato::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrPlacementKind arpeggiatoPlacementKind,
   msrDirectionKind arpeggiatoDirectionKind,
   int              arpeggiatoNumber)
@@ -443,7 +443,7 @@ S_msrArpeggiato msrArpeggiato::create (
 }
 
 msrArpeggiato::msrArpeggiato (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrPlacementKind arpeggiatoPlacementKind,
   msrDirectionKind arpeggiatoDirectionKind,
   int              arpeggiatoNumber)
@@ -575,7 +575,7 @@ std::ostream& operator << (std::ostream& os, const S_msrArpeggiato& elt)
 
 //______________________________________________________________________________
 S_msrNonArpeggiato msrNonArpeggiato::create (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrPlacementKind         nonArpeggiatoPlacementKind,
   msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind,
   int                      nonArpeggiatoNumber)
@@ -591,7 +591,7 @@ S_msrNonArpeggiato msrNonArpeggiato::create (
 }
 
 msrNonArpeggiato::msrNonArpeggiato (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrPlacementKind         nonArpeggiatoPlacementKind,
   msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind,
   int                      nonArpeggiatoNumber)

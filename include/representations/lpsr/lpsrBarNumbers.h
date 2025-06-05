@@ -29,7 +29,7 @@ class EXP lpsrBarNumberCheck : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrBarNumberCheck> create (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int nextBarNumber);
 
   protected:
@@ -38,7 +38,7 @@ class EXP lpsrBarNumberCheck : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrBarNumberCheck(
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int nextBarNumber);
 
     virtual               ~lpsrBarNumberCheck ();
@@ -88,7 +88,7 @@ class EXP lpsrBarCommand : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrBarCommand> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -96,7 +96,7 @@ class EXP lpsrBarCommand : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrBarCommand (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~lpsrBarCommand ();
 

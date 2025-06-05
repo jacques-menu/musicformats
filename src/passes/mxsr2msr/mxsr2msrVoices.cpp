@@ -177,7 +177,7 @@ gLog << std::endl << ss.str () << std::endl;
 }
 
 S_msrTuplet mxsrVoice::popInnerMostTuplet (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -248,7 +248,7 @@ S_msrTuplet mxsrVoice::popInnerMostTuplet (
 }
 
 void mxsrVoice::appendNoteToInnerMostTuplet (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrNote&   note,
   const std::string& context)
 {
@@ -272,7 +272,7 @@ void mxsrVoice::appendNoteToInnerMostTuplet (
 }
 
 void mxsrVoice::appendTupletToMsrVoice (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrTuplet& tuplet,
   const std::string& context)
 {
@@ -296,7 +296,7 @@ void mxsrVoice::appendTupletToMsrVoice (
 }
 
 void mxsrVoice::appendTupletWhereItBelongs (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrTuplet& tuplet,
   const std::string& context)
 {

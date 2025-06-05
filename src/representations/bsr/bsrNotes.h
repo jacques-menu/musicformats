@@ -45,7 +45,7 @@ extern std::string bsrNoteOctaveKindAsDebugString (
   bsrNoteOctaveKind noteOctaveKind);
 
 extern S_bsrCellsList noteOctaveKindAsCellsList (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrNoteOctaveKind noteOctaveKind);
 
 //______________________________________________________________________________
@@ -150,7 +150,7 @@ std::string bsrNoteValueKindAsDebugString (
   bsrNoteValueKind noteValueKind);
 
 S_bsrCellsList noteValueKindAsCellsList (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrNoteValueKind noteValueKind);
 
 enum class bsrNoteValueSizeKind {
@@ -168,7 +168,7 @@ bsrNoteValueSizeKind bsrNoteValueSizeKindFromNoteValueKind (
   bsrNoteValueKind noteValueKind);
 
 S_bsrCellsList noteValueSizeKindAsCellsList (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrNoteValueSizeKind noteValueSizeKind);
 
 enum class bsrNoteOctaveIsNeeded {
@@ -205,14 +205,14 @@ class EXP bsrNote : public bsrLineContentsElement
     // ------------------------------------------------------
 
     static S_bsrCellsList accidentalKindAsCellsList (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrAccidentalKind accidentalKind);
 
     // creation
     // ------------------------------------------------------
 
     static SMARTP<bsrNote> create (
-                            int                   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrNoteValueKind      noteValueKind,
                             int                   noteDotsNumber,
                             bsrNoteOctaveKind     noteOctaveKind,
@@ -225,7 +225,7 @@ class EXP bsrNote : public bsrLineContentsElement
     // ------------------------------------------------------
 
                           bsrNote (
-                            int                   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrNoteValueKind      noteValueKind,
                             int                   noteDotsNumber,
                             bsrNoteOctaveKind     noteOctaveKind,

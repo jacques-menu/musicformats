@@ -13,6 +13,8 @@
 
 #include <iostream>
 
+#include "mfIndentedTextOutput.h"
+
 #include "mxsrEventsCollections.h"
 
 

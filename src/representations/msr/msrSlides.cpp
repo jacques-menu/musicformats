@@ -56,7 +56,7 @@ std::ostream& operator << (std::ostream& os, const msrSlideTypeKind& elt)
 
 //______________________________________________________________________________
 S_msrSlide msrSlide::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int              slideNumber,
   msrSlideTypeKind slideTypeKind,
   msrLineTypeKind  slideLineTypeKind,
@@ -74,7 +74,7 @@ S_msrSlide msrSlide::create (
 }
 
 msrSlide::msrSlide (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int              slideNumber,
   msrSlideTypeKind slideTypeKind,
   msrLineTypeKind  slideLineTypeKind,

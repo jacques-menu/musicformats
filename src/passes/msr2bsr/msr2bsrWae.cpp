@@ -32,7 +32,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 void msr2bsrUnsupported (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -64,7 +64,7 @@ void msr2bsrUnsupported (
 //______________________________________________________________________________
 void msr2bsrInternalWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   waeInternalWarning (
@@ -76,7 +76,7 @@ void msr2bsrInternalWarning (
 
 void msr2bsrInternalError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -101,7 +101,7 @@ void msr2bsrInternalError (
 //______________________________________________________________________________
 void msr2bsrWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -113,7 +113,7 @@ void msr2bsrWarning (
 
 void msr2bsrError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)

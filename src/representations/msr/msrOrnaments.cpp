@@ -27,7 +27,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrOrnament msrOrnament::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrOrnamentKind  ornamentKind,
   msrPlacementKind ornamentPlacementKind)
 {
@@ -39,7 +39,7 @@ S_msrOrnament msrOrnament::create (
 }
 
 msrOrnament::msrOrnament (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrOrnamentKind  ornamentKind,
   msrPlacementKind ornamentPlacementKind)
     : msrElement (inputLineNumber)

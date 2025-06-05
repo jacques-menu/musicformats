@@ -44,7 +44,7 @@ class EXP msrStem : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrStem> create (
-      int         inputLineNumber,
+      const mfInputLineNumber& inputLineNumber,
       msrStemKind stemKind);
 
   protected:
@@ -53,7 +53,7 @@ class EXP msrStem : public msrElement
     // ------------------------------------------------------
 
                           msrStem (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrStemKind stemKind);
 
     virtual               ~msrStem ();

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfStringsHandling.h"
 
 #include "mxsr2msrPartGroups.h"
@@ -65,7 +65,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_mxsrPartGroup mxsrPartGroup::create (
-	int                   inputLineNumber,
+	const mfInputLineNumber& inputLineNumber,
 	int                   partGroupNumber,
 	const S_msrPartGroup& theMsrPartGroup,
 	int                   partGroupSequentialNumber)
@@ -81,7 +81,7 @@ S_mxsrPartGroup mxsrPartGroup::create (
 }
 
 mxsrPartGroup::mxsrPartGroup (
-	int                   inputLineNumber,
+	const mfInputLineNumber& inputLineNumber,
 	int                   partGroupNumber,
 	const S_msrPartGroup& theMsrPartGroup,
 	int                   partGroupSequentialNumber)

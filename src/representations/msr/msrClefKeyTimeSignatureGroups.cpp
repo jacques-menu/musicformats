@@ -66,7 +66,7 @@ std::ostream& operator << (std::ostream& os, const msrClefKeyTimeSignatureOrderK
 }
 
 msrClefKeyTimeSignatureOrderKind msrClefKeyTimeSignatureOrderKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& clefKeyTimeSignatureString)
 {
   msrClefKeyTimeSignatureOrderKind result = msrClefKeyTimeSignatureOrderKind::kClefKeyTimeSignatureOrder_UNKNOWN_;
@@ -212,7 +212,7 @@ msrClefKeyTimeSignatureOrderKind
     msrClefKeyTimeSignatureOrderKind::kClefKeyTimeSignatureOrderClefKeyTimeSignature; // musician's order
 
 S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int groupInputLineNumber)
 {
   msrClefKeyTimeSignatureGroup* obj =
@@ -224,7 +224,7 @@ S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::create (
 }
 
 msrClefKeyTimeSignatureGroup::msrClefKeyTimeSignatureGroup (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int groupInputLineNumber)
     : msrMeasureElement (
         inputLineNumber)

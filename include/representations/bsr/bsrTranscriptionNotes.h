@@ -30,7 +30,7 @@ class EXP bsrTranscriptionNotesElement : public bsrElement
     // ------------------------------------------------------
 
     static SMARTP<bsrTranscriptionNotesElement> create (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& transcriptionNoteText);
 
   protected:
@@ -39,7 +39,7 @@ class EXP bsrTranscriptionNotesElement : public bsrElement
     // ------------------------------------------------------
 
                           bsrTranscriptionNotesElement (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& transcriptionNoteText);
 
     virtual               ~bsrTranscriptionNotesElement ();
@@ -105,7 +105,7 @@ class EXP bsrTranscriptionNotes : public bsrLine
     // ------------------------------------------------------
 
     static SMARTP<bsrTranscriptionNotes> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -113,7 +113,7 @@ class EXP bsrTranscriptionNotes : public bsrLine
     // ------------------------------------------------------
 
                           bsrTranscriptionNotes (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~bsrTranscriptionNotes ();
 

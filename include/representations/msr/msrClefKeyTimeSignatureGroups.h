@@ -41,7 +41,7 @@ std::string msrClefKeyTimeSignatureOrderKindAsString (
 std::ostream& operator << (std::ostream& os, const msrClefKeyTimeSignatureOrderKind& elt);
 
 EXP msrClefKeyTimeSignatureOrderKind msrClefKeyTimeSignatureOrderKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& clefKeyTimeSignatureString);
 
 std::string availableClefKeyTimeSignatureOrderKinds (size_t namesListMaxLength);
@@ -64,7 +64,7 @@ class EXP msrClefKeyTimeSignatureGroup : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrClefKeyTimeSignatureGroup> create (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int groupInputLineNumber);
 
     SMARTP<msrClefKeyTimeSignatureGroup> createClefKeyTimeSignatureGroupNewbornClone ();
@@ -75,7 +75,7 @@ class EXP msrClefKeyTimeSignatureGroup : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrClefKeyTimeSignatureGroup (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int groupInputLineNumber);
 
     virtual               ~msrClefKeyTimeSignatureGroup ();

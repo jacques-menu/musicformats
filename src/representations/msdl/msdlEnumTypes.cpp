@@ -14,7 +14,7 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "mfConstants.h"
+// #include "mfConstants.h"
 
 #include "mfPreprocessorSettings.h"
 

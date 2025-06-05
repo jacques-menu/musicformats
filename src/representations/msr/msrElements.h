@@ -18,6 +18,8 @@
 #include "smartpointer.h"
 #include "basevisitor.h"
 
+#include "mfBasicTypes.h"
+
 #include "msrTypesForwardDeclarations.h"
 
 
@@ -40,7 +42,7 @@ class EXP msrElement : public smartable
   protected:
 
                           msrElement (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrElement ();
 

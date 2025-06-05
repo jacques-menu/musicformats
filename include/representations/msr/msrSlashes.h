@@ -41,7 +41,7 @@ std::string msrUseDotsKindAsString (
 std::ostream& operator << (std::ostream& os, const msrUseDotsKind& elt);
 
 msrUseDotsKind msrUseDotsFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& useDotsString);
 
 enum class msrSlashUseStemsKind {
@@ -63,7 +63,7 @@ class EXP msrSlash : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrSlash> create (
-                            int                  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrSlashTypeKind     slashTypeKind,
                             msrUseDotsKind  useDotsKind,
                             msrSlashUseStemsKind slashUseStemsKind);
@@ -74,7 +74,7 @@ class EXP msrSlash : public msrElement
     // ------------------------------------------------------
 
                           msrSlash (
-                            int                  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrSlashTypeKind     slashTypeKind,
                             msrUseDotsKind  useDotsKind,
                             msrSlashUseStemsKind slashUseStemsKind);

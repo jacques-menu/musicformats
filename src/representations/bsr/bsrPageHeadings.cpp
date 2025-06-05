@@ -30,7 +30,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrPageHeading bsrPageHeading::create (
-  int             inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&   pageHeadingTitle,
   const S_bsrPagination& pageHeadingPagination,
   int             pageHeadingNumber)
@@ -44,7 +44,7 @@ S_bsrPageHeading bsrPageHeading::create (
 }
 
 bsrPageHeading::bsrPageHeading (
-  int             inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&   pageHeadingTitle,
   const S_bsrPagination& pageHeadingPagination,
   int             pageHeadingNumber)

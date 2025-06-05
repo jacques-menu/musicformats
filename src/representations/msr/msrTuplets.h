@@ -34,7 +34,7 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
     static S_msrTuplet    create (
-                            int                     inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                     tupletNumber,
                             const msrTupletFactor&  tupletFactor,
                             msrTupletBracketKind    tupletBracketKind,
@@ -57,7 +57,7 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
                           msrTuplet (
-                            int                     inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                     tupletNumber,
                             const msrTupletFactor&  tupletFactor,
                             msrTupletBracketKind    tupletBracketKind,
@@ -161,13 +161,13 @@ class EXP msrTuplet : public msrTupletElement
     S_msrNote             fetchTupletFirstNonGraceNote () const;
 
 //     S_msrNote             removeFirstNoteFromTuplet ( // JMI
-//                             int inputLineNumber);
+//                             const mfInputLineNumber& inputLineNumber);
 
 //     S_msrNote             removeLastNoteFromTuplet (
-//                             int inputLineNumber);
+//                             const mfInputLineNumber& inputLineNumber);
 //
 //     S_msrTupletElement    removeLastElementFromTuplet (
-//                             int inputLineNumber);
+//                             const mfInputLineNumber& inputLineNumber);
 
  // JMI   void                  applyDisplayFactorToTupletMembers ();
 
@@ -176,7 +176,7 @@ class EXP msrTuplet : public msrTupletElement
 
     // finalization
 //     void                  finalizeTuplet (
-//                             int inputLineNumber);
+//                             const mfInputLineNumber& inputLineNumber);
 
   public:
 

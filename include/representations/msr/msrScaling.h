@@ -27,7 +27,7 @@ class EXP msrScaling : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrScaling> create (
-                            int   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             float millimeters,
                             float tenths);
 
@@ -39,7 +39,7 @@ class EXP msrScaling : public msrElement
     // ------------------------------------------------------
 
                           msrScaling (
-                            int   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             float millimeters,
                             float tenths);
 

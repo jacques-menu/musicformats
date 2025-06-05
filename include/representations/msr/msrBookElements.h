@@ -37,7 +37,7 @@ class EXP msrBookElement : public msrElement
   protected:
 
                           msrBookElement (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrBookElement ();
 

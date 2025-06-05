@@ -33,7 +33,7 @@ class EXP msrStaffTuning : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrStaffTuning> create (
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                      staffTuningLineNumber,
                             msrQuarterTonesPitchKind staffTuningQuarterTonesPitchKind,
                             msrOctaveKind            staffTuningOctaveKind);
@@ -48,7 +48,7 @@ class EXP msrStaffTuning : public msrElement
     // ------------------------------------------------------
 
                           msrStaffTuning (
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                      staffTuningLineNumber,
                             msrQuarterTonesPitchKind staffTuningQuarterTonesPitchKind,
                             msrOctaveKind            staffTuningOctaveKind);
@@ -150,7 +150,7 @@ class EXP msrStaffDetails : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrStaffDetails> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&        upLinkToMeasure,
                             msrStaffTypeKind    staffTypeKind,
                             msrShowFretsKind    showFretsKind,
@@ -158,7 +158,7 @@ class EXP msrStaffDetails : public msrMeasureElement
                             msrPrintSpacingKind printSpacingKin);
 
     static SMARTP<msrStaffDetails> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrStaffTypeKind    staffTypeKind,
                             msrShowFretsKind    showFretsKind,
                             msrPrintObjectKind  printObjectKind,
@@ -170,7 +170,7 @@ class EXP msrStaffDetails : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrStaffDetails (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&        upLinkToMeasure,
                             msrStaffTypeKind    staffTypeKind,
                             msrShowFretsKind    showFretsKind,

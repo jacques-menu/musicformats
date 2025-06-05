@@ -72,7 +72,7 @@ class mxsrVoice : public smartable
                               { return fMsrVoice->getVoiceName (); }
 
     void                  appendTupletToMsrVoice (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrTuplet& tuplet,
                             const std::string& context);
 
@@ -90,16 +90,16 @@ class mxsrVoice : public smartable
                             const std::string& context);
 
     S_msrTuplet           popInnerMostTuplet (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context);
 
     void                  appendNoteToInnerMostTuplet (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrNote&   note,
                             const std::string& context);
 
     void                  appendTupletWhereItBelongs (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrTuplet& tuplet,
                             const std::string& context);
 

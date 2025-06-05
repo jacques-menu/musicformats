@@ -33,7 +33,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrLigature msrLigature::create (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                    ligatureNumber,
   msrLigatureKind        ligatureKind,
   msrLigatureLineEndKind ligatureLineEndKind,
@@ -53,7 +53,7 @@ S_msrLigature msrLigature::create (
 }
 
 msrLigature::msrLigature (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                    ligatureNumber,
   msrLigatureKind        ligatureKind,
   msrLigatureLineEndKind ligatureLineEndKind,

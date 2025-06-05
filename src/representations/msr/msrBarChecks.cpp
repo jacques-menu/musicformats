@@ -35,7 +35,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrBarCheck msrBarCheck::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   return
     msrBarCheck::create (
@@ -44,7 +44,7 @@ S_msrBarCheck msrBarCheck::create (
 }
 
 S_msrBarCheck msrBarCheck::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
   msrBarCheck* obj =
@@ -56,7 +56,7 @@ S_msrBarCheck msrBarCheck::create (
 }
 
 S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&  nextBarOriginalNumber,
   int                 nextBarPuristNumber,
   const S_msrMeasure& upLinkToMeasure)
@@ -71,7 +71,7 @@ S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber (
   return obj;
 }
 
-msrBarCheck::msrBarCheck (int inputLineNumber)
+msrBarCheck::msrBarCheck (const mfInputLineNumber& inputLineNumber)
   : msrMeasureElement (
       inputLineNumber)
 {
@@ -91,7 +91,7 @@ msrBarCheck::msrBarCheck (int inputLineNumber)
 }
 
 msrBarCheck::msrBarCheck (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElement (
         inputLineNumber)
@@ -116,7 +116,7 @@ msrBarCheck::msrBarCheck (
 }
 
 msrBarCheck::msrBarCheck (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&  nextBarOriginalNumber,
   int                 nextBarPuristNumber,
   const S_msrMeasure& upLinkToMeasure)

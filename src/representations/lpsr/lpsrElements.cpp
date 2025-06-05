@@ -25,7 +25,7 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 S_lpsrElement lpsrElement::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   lpsrElement* obj =
     new lpsrElement (
@@ -35,7 +35,7 @@ S_lpsrElement lpsrElement::create (
 }
 
 lpsrElement::lpsrElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {}
 

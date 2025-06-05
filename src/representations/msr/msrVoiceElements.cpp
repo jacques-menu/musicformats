@@ -19,7 +19,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrVoiceElement::msrVoiceElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {}
 

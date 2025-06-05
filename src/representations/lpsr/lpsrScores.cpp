@@ -79,7 +79,7 @@ customBreathe = {
 
 //______________________________________________________________________________
 S_lpsrScore lpsrScore::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrScore&   theMsrScore,
   const S_mfcMultiComponent& multiComponent)
 {
@@ -92,7 +92,7 @@ S_lpsrScore lpsrScore::create (
 }
 
 lpsrScore::lpsrScore (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrScore&   theMsrScore,
   const S_mfcMultiComponent& multiComponent)
     : lpsrElement (inputLineNumber)

@@ -25,7 +25,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrNewLyricsBlock lpsrNewLyricsBlock::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrStanza& stanza,
   const S_msrVoice&  voice)
 {
@@ -38,7 +38,7 @@ S_lpsrNewLyricsBlock lpsrNewLyricsBlock::create (
 }
 
 lpsrNewLyricsBlock::lpsrNewLyricsBlock (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrStanza& stanza,
   const S_msrVoice&  voice)
     : lpsrElement (inputLineNumber)

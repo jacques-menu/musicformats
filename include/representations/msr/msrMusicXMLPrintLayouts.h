@@ -81,11 +81,11 @@ class EXP msrMusicXMLPrintLayout : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrMusicXMLPrintLayout> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrMusicXMLPrintLayout> create (
-                            int           inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -93,7 +93,7 @@ class EXP msrMusicXMLPrintLayout : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrMusicXMLPrintLayout (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrMusicXMLPrintLayout ();

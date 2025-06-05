@@ -39,7 +39,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrFrameNote msrFrameNote::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int              frameNoteStringNumber,
   int              frameNoteFretNumber,
   int              frameNoteFingering,
@@ -57,7 +57,7 @@ S_msrFrameNote msrFrameNote::create (
 }
 
 msrFrameNote::msrFrameNote (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int              frameNoteStringNumber,
   int              frameNoteFretNumber,
   int              frameNoteFingering,
@@ -251,7 +251,7 @@ std::ostream& operator << (std::ostream& os, const S_msrFrameNote& elt)
 
 //______________________________________________________________________________
 S_msrFrame msrFrame::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int frameStringsNumber,
   int frameFretsNumber,
   int frameFirstFretNumber)
@@ -267,7 +267,7 @@ S_msrFrame msrFrame::create (
 }
 
 msrFrame::msrFrame (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int frameStringsNumber,
   int frameFretsNumber,
   int frameFirstFretNumber)

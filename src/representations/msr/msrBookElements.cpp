@@ -17,7 +17,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrBookElement::msrBookElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {}
 

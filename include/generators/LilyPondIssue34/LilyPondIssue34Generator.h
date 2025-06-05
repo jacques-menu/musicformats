@@ -84,13 +84,13 @@ class EXP LilyPondIssue34Generator : public smartable
 
     // the voices
     S_msrVoice            createRegularVoiceInStaff (
-                            int          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int          voiceNumber,
                             const S_msrStaff&   staff);
 
     // the measures
     S_msrMeasure          createMeasureInVoice (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& measureNumber,
                             const S_msrVoice&    voice);
 

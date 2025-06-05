@@ -67,7 +67,7 @@ std::ostream& operator << (std::ostream& os, const msrBeamKind& elt)
 
 //______________________________________________________________________________
 S_msrBeam msrBeam::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int         number,
   msrBeamKind beamKind)
 {
@@ -79,7 +79,7 @@ S_msrBeam msrBeam::create (
 }
 
 msrBeam::msrBeam (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int         number,
   msrBeamKind beamKind)
     : msrElement (inputLineNumber)

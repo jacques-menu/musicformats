@@ -33,7 +33,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrMeasure bsrMeasure::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& printMeasureNumber)
 {
   bsrMeasure* obj =
@@ -44,7 +44,7 @@ S_bsrMeasure bsrMeasure::create (
 }
 
 bsrMeasure::bsrMeasure (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& printMeasureNumber)
     : bsrLineContentsElement (inputLineNumber)
 {

@@ -16,7 +16,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfStringsHandling.h"
 #include "mfServices.h"
 
@@ -852,7 +852,7 @@ Bool msdlParser::checkOptionalTokenKindsSet (
 // --------------------------------------------------------------------------
 
 void msdlParser::createMeasureNumber (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int measureNumber)
 {
   createVoiceIfNeeded (inputLineNumber);
@@ -871,7 +871,7 @@ void msdlParser::createMeasureNumber (
         msrMeasureImplicitKind::kMeasureImplicitKindNo);
 }
 
-void msdlParser::createVoiceIfNeeded (int inputLineNumber)
+void msdlParser::createVoiceIfNeeded (const mfInputLineNumber& inputLineNumber)
 {
   if (! fCurrentStaff) {
     createStaffIfNeeded (inputLineNumber);
@@ -891,7 +891,7 @@ void msdlParser::createVoiceIfNeeded (int inputLineNumber)
   }
 }
 
-void msdlParser::createStaffIfNeeded (int inputLineNumber)
+void msdlParser::createStaffIfNeeded (const mfInputLineNumber& inputLineNumber)
 {
   if (! fCurrentStaff) {
     createPartIfNeeded (inputLineNumber);
@@ -911,7 +911,7 @@ void msdlParser::createStaffIfNeeded (int inputLineNumber)
   }
 }
 
-void msdlParser::createPartIfNeeded (int inputLineNumber)
+void msdlParser::createPartIfNeeded (const mfInputLineNumber& inputLineNumber)
 {
   if (! fCurrentPart) {
     createPartGroupIfNeeded (inputLineNumber);
@@ -935,7 +935,7 @@ void msdlParser::createPartIfNeeded (int inputLineNumber)
   }
 }
 
-void msdlParser::createPartGroupIfNeeded (int inputLineNumber)
+void msdlParser::createPartGroupIfNeeded (const mfInputLineNumber& inputLineNumber)
 {
   if (! fCurrentPartGroup) {
     createScoreIfNeeded (inputLineNumber);
@@ -955,7 +955,7 @@ void msdlParser::createPartGroupIfNeeded (int inputLineNumber)
   }
 }
 
-void msdlParser::createScoreIfNeeded (int inputLineNumber)
+void msdlParser::createScoreIfNeeded (const mfInputLineNumber& inputLineNumber)
 {
   if (! fCurrentScore) {
     // create the book if needed
@@ -981,7 +981,7 @@ void msdlParser::createScoreIfNeeded (int inputLineNumber)
     addBookElementToBook (fCurrentScore);
 }
 
-void msdlParser::createIdentificationIfNeeded (int inputLineNumber)
+void msdlParser::createIdentificationIfNeeded (const mfInputLineNumber& inputLineNumber)
 {
   if (! fMsrIdentification) {
 /* JMI
@@ -1025,7 +1025,7 @@ void msdlParser::createIdentificationIfNeeded (int inputLineNumber)
   }
 }
 
-void msdlParser::createBookIfNeeded (int inputLineNumber)
+void msdlParser::createBookIfNeeded (const mfInputLineNumber& inputLineNumber)
 {
   if (! fCurrentBook) {
     fCurrentBook =

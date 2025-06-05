@@ -74,7 +74,7 @@ std::ostream& operator << (std::ostream& os, const msrChordInKind& elt)
 }
 
 //______________________________________________________________________________
-S_msrChord msrChord::create (int inputLineNumber)
+S_msrChord msrChord::create (const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
@@ -98,7 +98,7 @@ S_msrChord msrChord::create (int inputLineNumber)
 }
 
 // S_msrChord msrChord::create (
-//   int                  inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const S_msrMeasure&  upLinkToMeasure)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -124,7 +124,7 @@ S_msrChord msrChord::create (int inputLineNumber)
 // }
 
 S_msrChord msrChord::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const mfWholeNotes& chordDisplayWholeNotes,
   mfDurationKind      chordGraphicNotesDurationKind)
@@ -157,7 +157,7 @@ S_msrChord msrChord::create (
 }
 
 // S_msrChord msrChord::create (
-//   int                 inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const mfWholeNotes& chordDisplayWholeNotes,
 //   mfDurationKind      chordGraphicNotesDurationKind)
 // {
@@ -185,7 +185,7 @@ S_msrChord msrChord::create (
 //       chordGraphicNotesDurationKind);
 // }
 
-msrChord::msrChord (int inputLineNumber)
+msrChord::msrChord (const mfInputLineNumber& inputLineNumber)
     : msrTupletElement (
         inputLineNumber)
 {
@@ -210,7 +210,7 @@ msrChord::msrChord (int inputLineNumber)
 }
 
 // msrChord::msrChord (
-//   int                  inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const S_msrMeasure&  upLinkToMeasure)
 //     : msrTupletElement (
 //         inputLineNumber)
@@ -234,7 +234,7 @@ msrChord::msrChord (int inputLineNumber)
 // }
 
 msrChord::msrChord (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const mfWholeNotes& chordDisplayWholeNotes,
   mfDurationKind      chordGraphicNotesDurationKind)
@@ -544,7 +544,7 @@ void msrChord::setChordDisplayWholeNotes (
 }
 
 void msrChord::setChordGraceNotesGroupLinkBefore (
-  int     inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrChordGraceNotesGroupLink&
           chordChordGraceNotesGroupLinkBefore)
 {
@@ -570,7 +570,7 @@ void msrChord::setChordGraceNotesGroupLinkBefore (
 }
 
 void msrChord::setChordGraceNotesGroupLinkAfter (
-  int     inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrChordGraceNotesGroupLink&
           chordChordGraceNotesGroupLinkAfter)
 {
@@ -2534,7 +2534,7 @@ void msrChord::appendChordBeamLinkToChord (
 }
 
 // void msrChord::finalizeChord (
-//   int inputLineNumber)
+//   const mfInputLineNumber& inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceChordsBasics ()) {
@@ -4612,7 +4612,7 @@ std::ostream& operator << (std::ostream& os, const S_msrChord& elt)
 
 //______________________________________________________________________________
 S_msrChordBeamLink msrChordBeamLink::create (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrBeam&  originalBeam,
   const S_msrChord& upLinkToChord)
 {
@@ -4626,7 +4626,7 @@ S_msrChordBeamLink msrChordBeamLink::create (
 }
 
 msrChordBeamLink::msrChordBeamLink (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrBeam&  originalBeam,
   const S_msrChord& upLinkToChord)
     : msrElement (inputLineNumber)
@@ -4869,7 +4869,7 @@ std::ostream& operator << (std::ostream& os, const S_msrChordBeamLink& elt)
 
 //______________________________________________________________________________
 S_msrChordSlurLink msrChordSlurLink::create (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrSlur&  originalSlur,
   const S_msrChord& upLinkToChord)
 {
@@ -4883,7 +4883,7 @@ S_msrChordSlurLink msrChordSlurLink::create (
 }
 
 msrChordSlurLink::msrChordSlurLink (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrSlur&  originalSlur,
   const S_msrChord& upLinkToChord)
     : msrElement (inputLineNumber)
@@ -5097,7 +5097,7 @@ std::ostream& operator << (std::ostream& os, const S_msrChordSlurLink& elt)
 
 //______________________________________________________________________________
 S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::create (
-  int                         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrGraceNotesGroup& originalGraceNotesGroup,
   const S_msrChord&           upLinkToChord)
 {
@@ -5111,7 +5111,7 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::create (
 }
 
 msrChordGraceNotesGroupLink::msrChordGraceNotesGroupLink (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrGraceNotesGroup& originalGraceNotesGroup,
   const S_msrChord&           upLinkToChord)
     : msrElement (inputLineNumber)

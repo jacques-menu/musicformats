@@ -14,7 +14,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -38,7 +38,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrPartGroup msrPartGroup::create (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                      partGroupNumber,
   int                      partGroupSequentialNumber,
   const std::string&       partGroupName,
@@ -72,7 +72,7 @@ S_msrPartGroup msrPartGroup::create (
 }
 
 S_msrPartGroup msrPartGroup::create (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                   partGroupNumber,
   int                   partGroupSequentialNumber,
   const std::string&    partGroupName,
@@ -92,7 +92,7 @@ S_msrPartGroup msrPartGroup::create (
 }
 
 msrPartGroup::msrPartGroup (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                      partGroupNumber,
   int                      partGroupSequentialNumber,
   const std::string&       partGroupName,
@@ -174,7 +174,7 @@ msrPartGroup::msrPartGroup (
 }
 
 msrPartGroup::msrPartGroup (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                   partGroupNumber,
   int                   partGroupSequentialNumber,
   const std::string&    partGroupName,
@@ -317,7 +317,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
 }
 
 void msrPartGroup::setPartGroupUpLinkToContainingPartGroup (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrPartGroup& containingPartGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -465,7 +465,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 // }
 
 // S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
-//   int                inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const std::string& partMusicXMLID)
 // {
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -623,7 +623,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 }
 
 void msrPartGroup::removePartFromPartGroup (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrPart& partToBeRemoved)
 {
   // register part in this part group
@@ -840,7 +840,7 @@ void msrPartGroup::appendNestedPartGroupToPartGroup (
 }
 
 void msrPartGroup::displayPartGroupPartsMap (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   gLog <<
     std::endl <<
@@ -861,7 +861,7 @@ void msrPartGroup::displayPartGroupPartsMap (
 }
 
 void msrPartGroup::displayPartGroupElementsListFull (
-  int inputLineNumber) const
+  const mfInputLineNumber& inputLineNumber) const
 {
   size_t
     partGroupElementsListSize =
@@ -950,7 +950,7 @@ void msrPartGroup::displayPartGroupElementsListFull (
 }
 
 void msrPartGroup::displayPartGroupElementsList (
-  int inputLineNumber) const
+  const mfInputLineNumber& inputLineNumber) const
 {
   size_t
     partGroupElementsListSize =
@@ -1038,7 +1038,7 @@ void msrPartGroup::displayPartGroupElementsList (
 }
 
 S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& partMusicXMLID)
 {
   S_msrPart result;
@@ -1130,7 +1130,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 }
 
 void msrPartGroup::collectPartGroupPartsList (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   std::list <S_msrPart>& partsList)
 {
   for (S_msrPartGroupElement partGroupElement : fPartGroupElementsList) {

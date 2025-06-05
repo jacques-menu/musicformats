@@ -61,7 +61,7 @@ std::ostream& operator << (std::ostream& os, const msrStemKind& elt)
 
 //______________________________________________________________________________
 S_msrStem msrStem::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrStemKind stemKind)
 {
   msrStem* obj =
@@ -72,7 +72,7 @@ S_msrStem msrStem::create (
 }
 
 msrStem::msrStem (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrStemKind stemKind)
     : msrElement (inputLineNumber)
 {

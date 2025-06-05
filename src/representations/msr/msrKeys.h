@@ -52,7 +52,7 @@ std::string msrModeKindAsString (
 std::ostream& operator << (std::ostream& os,const msrModeKind& elt);
 
 msrModeKind modeKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& modeString);
 
 //______________________________________________________________________________
@@ -70,7 +70,7 @@ class EXP msrHumdrumScotKeyItem : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrHumdrumScotKeyItem> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -78,7 +78,7 @@ class EXP msrHumdrumScotKeyItem : public msrElement
     // ------------------------------------------------------
 
                           msrHumdrumScotKeyItem (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrHumdrumScotKeyItem ();
 
@@ -161,30 +161,30 @@ class EXP msrKey : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrKey> createTraditional (
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
                             msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
                             msrModeKind              modeKind,
                             int                      keyCancel);
 
     static SMARTP<msrKey> createTraditional (
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
                             msrModeKind              modeKind,
                             int                      keyCancel);
 
     static SMARTP<msrKey> createHumdrumScot ( // for Humdrum/Scot keys
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrKey> createHumdrumScot ( // for Humdrum/Scot keys
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     // creation from the applications
     // ------------------------------------------------------
 
     static SMARTP<msrKey> createTraditionalKeyFromString (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& keyString);
 
   protected:
@@ -193,14 +193,14 @@ class EXP msrKey : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrKey ( // for traditional keys
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
                             msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
                             msrModeKind              modeKind,
                             int                      keyCancel);
 
                           msrKey ( // for Humdrum/Scot keys
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrKey ();

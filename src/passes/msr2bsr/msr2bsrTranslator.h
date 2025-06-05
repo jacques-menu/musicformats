@@ -163,7 +163,7 @@ class EXP msr2bsrTranslator :
     // ------------------------------------------------------
 
     void                      notSupportedMessage (
-                                int                inputLineNumber,
+                                const mfInputLineNumber& inputLineNumber,
                                 const std::string& message);
 
     // the MSR score we're visiting
@@ -363,7 +363,7 @@ class EXP msr2bsrTranslator :
     S_msrMeasure              fCurrentMeasureClone;
 
     void                      finalizeCurrentMeasureClone (
-                                int          inputLineNumber,
+                                const mfInputLineNumber& inputLineNumber,
                                 const S_msrMeasure& originalMeasure);
 
     // bar checks
@@ -452,9 +452,9 @@ class EXP msr2bsrTranslator :
     // private work methods
 
     void                      createFirstPageHeadingIfNotYetCreated (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
     void                      createFirstMusicHeadingIfNotYetCreated (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     // current ongoing values display
     // ------------------------------------------------------

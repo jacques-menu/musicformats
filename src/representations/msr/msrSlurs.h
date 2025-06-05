@@ -46,14 +46,14 @@ class EXP msrSlur : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrSlur> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int              slurNumber,
                             msrSlurTypeKind  slurTypeKind,
                             msrLineTypeKind  slurLineTypeKind,
                             msrPlacementKind slurPlacementKind);
 
     static SMARTP<msrSlur> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int              slurNumber,
                             msrSlurTypeKind  slurTypeKind,
                             msrLineTypeKind  slurLineTypeKind);
@@ -64,7 +64,7 @@ class EXP msrSlur : public msrElement
     // ------------------------------------------------------
 
                           msrSlur (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int              slurNumber,
                             msrSlurTypeKind  slurTypeKind,
                             msrLineTypeKind  slurLineTypeKind,

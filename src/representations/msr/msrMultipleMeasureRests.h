@@ -14,7 +14,7 @@
 
 #include <list>
 
-#include "mfDurations.h"
+#include "mfDurationsAndPositionInMeasures.h"
 #include "msrSegmentElements.h"
 #include "msrUseSymbols.h"
 
@@ -31,7 +31,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     // ------------------------------------------------------
 
     static SMARTP<msrMultipleMeasureRest> create (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int               measuresNumber,
                             int               slashesNumber,
                             msrUseSymbolsKind fUseSymbolsKind);
@@ -45,7 +45,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     // ------------------------------------------------------
 
                           msrMultipleMeasureRest (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int               measuresNumber,
                             int               slashesNumber,
                             msrUseSymbolsKind fUseSymbolsKind);
@@ -80,7 +80,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
                               { return fNextMeasureNumber; }
 
     void                  setLastMeasurePuristMeasureNumber (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int puristMeasureNumber);
 
     int                   getLastMeasurePuristMeasureNumber () const
@@ -101,7 +101,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
                             const S_msrMeasure& measure);
 
     void                  collectMultipleMeasureRestIntoFlatList (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   public:
 
@@ -121,7 +121,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     std::string           asString () const override;
 
     void                  displayMultipleMeasureRest (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;

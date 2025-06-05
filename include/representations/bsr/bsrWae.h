@@ -14,6 +14,8 @@
 
 #include "exports.h"
 
+#include "mfBasicTypes.h"
+
 #include "mfExceptions.h"
 
 
@@ -42,12 +44,12 @@ typedef SMARTP<bsrInternalException> S_bsrInternalException;
 //______________________________________________________________________________
 EXP void bsrWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 EXP void bsrInternalError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);

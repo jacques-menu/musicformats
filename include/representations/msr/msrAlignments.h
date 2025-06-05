@@ -15,6 +15,9 @@
 #include <string>
 #include <ostream>
 
+#include "mfBasicTypes.h"
+
+
 namespace MusicFormats
 {
 
@@ -39,7 +42,7 @@ std::string msrJustifyKindAsString (
 std::ostream& operator << (std::ostream& os, const msrJustifyKind& elt);
 
 msrJustifyKind msrJustifyKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& justifyString);
 
 enum class msrHorizontalAlignmentKind {
@@ -53,7 +56,7 @@ std::string msrHorizontalAlignmentKindAsString (
 std::ostream& operator << (std::ostream& os, const msrHorizontalAlignmentKind& elt);
 
 msrHorizontalAlignmentKind msrHorizontalAlignmentKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& horizontalAlignString);
 
 enum class msrVerticalAlignmentKind {
@@ -67,7 +70,7 @@ std::string msrVerticalAlignmentKindAsString (
 std::ostream& operator << (std::ostream& os, const msrVerticalAlignmentKind& elt);
 
 msrVerticalAlignmentKind msrVerticalAlignmentKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& verticalAlignmentString);
 
 

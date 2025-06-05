@@ -45,7 +45,7 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 S_bsrLineContents bsrLineContents::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrLineContentsKind lineContentsKind)
 {
   bsrLineContents* obj =
@@ -57,7 +57,7 @@ S_bsrLineContents bsrLineContents::create (
 }
 
 bsrLineContents::bsrLineContents (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrLineContentsKind lineContentsKind)
     : bsrElement (inputLineNumber)
 {

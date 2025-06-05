@@ -19,7 +19,7 @@
 
 #include "mfBool.h"
 
-#include "mfDurations.h"
+// #include "mfDurationsAndPositionInMeasures.h"
 #include "mfPositionInMeasure.h"
 
 
@@ -115,13 +115,41 @@ class EXP mfMoment
     // private fields
     // ------------------------------------------------------
 
-    mfPositionInMeasure  fWrittenPositionInMeseasure;
+    mfPositionInMeasure   fWrittenPositionInMeseasure;
     mfWholeNotes          fSoundingRelativeOffset;
 };
 EXP std::ostream& operator << (std::ostream& os, const mfMoment& elt);
 
 //______________________________________________________________________________
 void testMsrMomentComparisons (std::ostream& os);
+
+
+// moments
+//______________________________________________________________________________
+
+EXP extern const mfMoment K_MOMENT_UNKNOWN_;
+
+EXP extern const std::string
+  kMomentPrefix,
+  kMomentDefaultValueString;
+
+
+// moments
+//______________________________________________________________________________
+
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfMoment = mfMoment;
+// #else
+//   using mfMoment =
+//     mfWrappedValueWithDefault <
+//       mfMoment,
+//       kMomentPrefix,
+//       K_MF_EMPTY_STRING,
+//       K_MOMENT_UNKNOWN_,
+//       kMomentDefaultValueString
+//     >;
+// #endif // MF_USE_WRAPPED_TYPES
+
 
 
 }

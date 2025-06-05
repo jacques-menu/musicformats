@@ -32,7 +32,7 @@ namespace MusicFormats
 // measure style
 //______________________________________________________________________________
 msrUseDotsKind msrUseDotsFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& useDotsString)
 {
   msrUseDotsKind result = msrUseDotsKind::kUseDotsNo; // default value
@@ -140,7 +140,7 @@ std::ostream& operator << (std::ostream& os, const msrSlashUseStemsKind& elt)
 
 //______________________________________________________________________________
 S_msrSlash msrSlash::create (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrSlashTypeKind     slashTypeKind,
   msrUseDotsKind  useDotsKind,
   msrSlashUseStemsKind slashUseStemsKind)
@@ -156,7 +156,7 @@ S_msrSlash msrSlash::create (
 }
 
 msrSlash::msrSlash (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrSlashTypeKind     slashTypeKind,
   msrUseDotsKind  useDotsKind,
   msrSlashUseStemsKind slashUseStemsKind)

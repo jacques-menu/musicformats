@@ -1469,7 +1469,7 @@ std::ostream& operator << (std::ostream& os, const msrQuarterTonesPitchKind& elt
 }
 
 void fetchDiatonicPitchKindAndAlterationKindFromQuarterTonesPitchKind (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind,
   msrDiatonicPitchKind&    diatonicPitchKind,
   msrAlterationKind&       alterationKind)
@@ -1537,7 +1537,7 @@ std::string availableQuarterTonesPitchesLanguageKinds (size_t namesListMaxLength
 // quarter tones pitches
 //______________________________________________________________________________
 msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrDiatonicPitchKind diatonicPitchKind,
   msrAlterationKind    alterationKind)
 {
@@ -1943,7 +1943,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
 }
 
 msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind)
 {
   msrDiatonicPitchKind result = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
@@ -2112,7 +2112,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
 }
 
 msrAlterationKind alterationKindFromQuarterTonesPitchKind (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind)
 {
   msrAlterationKind result = msrAlterationKind::kAlteration_UNKNOWN_;

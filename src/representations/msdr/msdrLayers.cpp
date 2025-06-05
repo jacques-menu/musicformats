@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msdrLayer msdrLayer::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& layerNumber)
 {
   msdrLayer* obj =
@@ -43,7 +43,7 @@ S_msdrLayer msdrLayer::create (
 }
 
 msdrLayer::msdrLayer (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& layerNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -73,28 +73,28 @@ msdrLayer::~msdrLayer ()
 {}
 
 void msdrLayer::addClefToLayer (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int              measureNumber,
   const S_msrClef& clef)
 {
 }
 
 void msdrLayer::addKeyToLayer (
-  int             inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int             measureNumber,
   const S_msrKey& key)
 {
 }
 
 void msdrLayer::addTimeSignatureToLayer (
-  int                       inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                       measureNumber,
   const S_msrTimeSignature& timeSignature)
 {
 }
 
 void msdrLayer::addNoteToLayer (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int              measureNumber,
   const S_msrNote& note)
 {
@@ -260,7 +260,7 @@ std::string msdrLayer::asString () const
 }
 
 void msdrLayer::displayLayer (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context) const
 {
   gLog <<

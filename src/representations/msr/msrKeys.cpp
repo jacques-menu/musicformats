@@ -70,7 +70,7 @@ std::ostream& operator << (std::ostream& os, const msrKeyKind& elt)
 
 //______________________________________________________________________________
 S_msrHumdrumScotKeyItem msrHumdrumScotKeyItem::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   msrHumdrumScotKeyItem* obj =
     new msrHumdrumScotKeyItem (
@@ -80,7 +80,7 @@ S_msrHumdrumScotKeyItem msrHumdrumScotKeyItem::create (
 }
 
 msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -312,7 +312,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHumdrumScotKeyItem& elt)
 
 //______________________________________________________________________________
 S_msrKey msrKey::createTraditional (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&      upLinkToMeasure,
   msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
   msrModeKind              modeKind,
@@ -330,7 +330,7 @@ S_msrKey msrKey::createTraditional (
 }
 
 S_msrKey msrKey::createTraditional (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
   msrModeKind              modeKind,
   int                      keyCancel)
@@ -345,7 +345,7 @@ S_msrKey msrKey::createTraditional (
 }
 
 S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
   msrKey* obj =
@@ -357,7 +357,7 @@ S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
 }
 
 S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   return
     msrKey::createHumdrumScot (
@@ -366,7 +366,7 @@ S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
 }
 
 msrKey::msrKey ( // for traditional keys
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&      upLinkToMeasure,
   msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
   msrModeKind              modeKind,
@@ -436,7 +436,7 @@ msrKey::msrKey ( // for traditional keys
 }
 
 msrKey::msrKey ( // for Humdrum/Scot keys
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElement (
         inputLineNumber)
@@ -579,7 +579,7 @@ void msrKey::appendHumdrumScotKeyItem (
 
 //________________________________________________________________________
 S_msrKey msrKey::createTraditionalKeyFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& keyString)
 {
   /*

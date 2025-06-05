@@ -32,7 +32,7 @@ class EXP msdrMusic : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msdrMusic> create (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& musicName);
 
     SMARTP<msdrMusic> createMusicNewbornClone ();
@@ -43,7 +43,7 @@ class EXP msdrMusic : public smartable
     // ------------------------------------------------------
 
                           msdrMusic (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& musicName);
 
                           msdrMusic ();
@@ -85,7 +85,7 @@ class EXP msdrMusic : public smartable
     // ------------------------------------------------------
 
     void                  addMeasureToMusic (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int           measureNumber,
                             const S_msdrMeasure& measure);
 
@@ -113,7 +113,7 @@ class EXP msdrMusic : public smartable
     std::string           asString () const;
 
     void                  displayMusic (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context) const;
 
     void                  print (std::ostream& os) const;

@@ -40,13 +40,13 @@ class EXP msrCoda : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrCoda> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             int                 staffNumber,
                             msrCodaKind         codaKind);
 
     static SMARTP<msrCoda> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                 staffNumber,
                             msrCodaKind         codaKind);
 
@@ -56,7 +56,7 @@ class EXP msrCoda : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrCoda (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             int                 staffNumber,
                             msrCodaKind         codaKind);

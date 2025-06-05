@@ -52,7 +52,7 @@ class EXP msrOrnament : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrOrnament> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrOrnamentKind  ornamentKind,
                             msrPlacementKind ornamentPlacementKind);
 
@@ -62,7 +62,7 @@ class EXP msrOrnament : public msrElement
     // ------------------------------------------------------
 
                           msrOrnament (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrOrnamentKind  ornamentKind,
                             msrPlacementKind ornamentPlacementKind);
 

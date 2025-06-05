@@ -35,7 +35,7 @@ class EXP bsrMeasure : public bsrLineContentsElement
     // ------------------------------------------------------
 
     static SMARTP<bsrMeasure> create (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& printMeasureNumber);
 
     SMARTP<bsrMeasure> createMeasureNewbornClone ();
@@ -46,7 +46,7 @@ class EXP bsrMeasure : public bsrLineContentsElement
     // ------------------------------------------------------
 
                           bsrMeasure (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& printMeasureNumber);
 
     virtual               ~bsrMeasure ();

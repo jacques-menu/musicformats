@@ -68,7 +68,7 @@ std::ostream& operator << (std::ostream& os, const bsrKeyKind& elt)
 
 //______________________________________________________________________________
 S_bsrKey bsrKey::create (
-  int          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrKeyKind   keyKind,
   size_t numberOfAlterations)
 {
@@ -80,7 +80,7 @@ S_bsrKey bsrKey::create (
 }
 
 bsrKey::bsrKey (
-  int          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrKeyKind   keyKind,
   size_t numberOfAlterations)
     : bsrLineContentsElement (inputLineNumber)

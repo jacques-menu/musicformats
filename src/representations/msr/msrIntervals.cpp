@@ -1077,7 +1077,7 @@ msrSemiTonesPitchKind noteAtIntervalKindFromNote (
 */
 
 msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrIntervalKind       intervalKind,
   msrSemiTonesPitchKind semiTonesPitchKind)
 {
@@ -4431,7 +4431,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
 }
 
 msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrIntervalKind          intervalKind,
   msrQuarterTonesPitchKind quarterTonesPitchKind)
 {

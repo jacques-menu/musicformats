@@ -16,7 +16,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -37,7 +37,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrTuplet msrTuplet::create (
-  int                     inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                     tupletNumber,
   const msrTupletFactor&  tupletFactor,
   msrTupletBracketKind    tupletBracketKind,
@@ -63,7 +63,7 @@ S_msrTuplet msrTuplet::create (
 }
 
 msrTuplet::msrTuplet (
-  int                     inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                     tupletNumber,
   const msrTupletFactor&  tupletFactor,
   msrTupletBracketKind    tupletBracketKind,
@@ -377,7 +377,7 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 }
 
 // void msrTuplet::removeLastElementFromTuplet (
-//   int                 inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const S_msrElement& element)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -441,7 +441,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 }
 
 // S_msrNote msrTuplet::removeFirstNoteFromTuplet (
-//   int inputLineNumber)
+//   const mfInputLineNumber& inputLineNumber)
 // {
 //   S_msrNote result;
 //
@@ -552,7 +552,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 // }
 
 // S_msrNote msrTuplet::removeLastNoteFromTuplet (
-//   int inputLineNumber)
+//   const mfInputLineNumber& inputLineNumber)
 // {
 //   S_msrNote result;
 //
@@ -641,7 +641,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 // }
 
 // S_msrTupletElement msrTuplet::removeLastElementFromTuplet (
-//   int inputLineNumber)
+//   const mfInputLineNumber& inputLineNumber)
 // {
 //   S_msrTupletElement result;
 //
@@ -1443,7 +1443,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt)
 
 /* JMI ???
 void msrTuplet::finalizeTuplet (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {

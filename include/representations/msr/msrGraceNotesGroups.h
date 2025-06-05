@@ -13,7 +13,7 @@
 #define ___msrGraceNotesGroups___
 
 #include "msrElements.h"
-#include "mfDurations.h"
+#include "mfDurationsAndPositionInMeasures.h"
 #include "msrTypesForwardDeclarations.h"
 
 
@@ -42,7 +42,7 @@ class EXP msrGraceNotesGroup : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrGraceNotesGroup> create (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrGraceNotesGroupKind graceNotesGroupKind,
                             Bool                   graceNotesGroupIsSlashed,
                             Bool                   graceNotesGroupIsBeamed,
@@ -62,7 +62,7 @@ class EXP msrGraceNotesGroup : public msrElement
     // ------------------------------------------------------
 
                           msrGraceNotesGroup (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrGraceNotesGroupKind graceNotesGroupKind,
                             Bool                   graceNotesGroupIsSlashed,
                             Bool                   graceNotesGroupIsBeamed,
@@ -150,7 +150,7 @@ class EXP msrGraceNotesGroup : public msrElement
     void                  appendChordToGraceNotesGroup (const S_msrChord& chord);
 
 //     S_msrNote             removeLastNoteFromGraceNotesGroup (
-//                             int inputLineNumber);
+//                             const mfInputLineNumber& inputLineNumber);
 
 
   public:

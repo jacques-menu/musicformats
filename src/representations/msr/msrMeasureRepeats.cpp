@@ -37,7 +37,7 @@ namespace MusicFormats
 /* JMI
 //______________________________________________________________________________
 S_msrMeasureRepeatElement msrMeasureRepeatElement::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
 {
   msrMeasureRepeatElement* obj =
@@ -49,7 +49,7 @@ S_msrMeasureRepeatElement msrMeasureRepeatElement::create (
 }
 
 msrMeasureRepeatElement::msrMeasureRepeatElement (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
@@ -68,7 +68,7 @@ msrMeasureRepeatElement::~msrMeasureRepeatElement ()
 {}
 
 void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI ???
-  int          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrSegment& segment,
   std::string       context)
 {
@@ -100,7 +100,7 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
 }
 
 void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   S_msrMeasureRepeat  measureRepeat,
   std::string          context)
 {
@@ -132,7 +132,7 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
 }
 
 void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoiceElement& voiceElement,
   std::string       context)
 {
@@ -478,7 +478,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatElement& el
 
 //______________________________________________________________________________
 S_msrMeasureRepeatPattern msrMeasureRepeatPattern::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
 {
   msrMeasureRepeatPattern* obj =
@@ -490,7 +490,7 @@ S_msrMeasureRepeatPattern msrMeasureRepeatPattern::create (
 }
 
 msrMeasureRepeatPattern::msrMeasureRepeatPattern (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
@@ -717,7 +717,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatPattern& el
 
 //______________________________________________________________________________
 S_msrMeasureRepeatReplicas msrMeasureRepeatReplicas::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
 {
   msrMeasureRepeatReplicas* obj =
@@ -729,7 +729,7 @@ S_msrMeasureRepeatReplicas msrMeasureRepeatReplicas::create (
 }
 
 msrMeasureRepeatReplicas::msrMeasureRepeatReplicas (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
@@ -956,7 +956,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatReplicas& e
 
 //______________________________________________________________________________
 S_msrMeasureRepeat msrMeasureRepeat::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int measureRepeatMeasuresNumber,
   int measureRepeatSlashesNumber)
 {
@@ -970,7 +970,7 @@ S_msrMeasureRepeat msrMeasureRepeat::create (
 }
 
 msrMeasureRepeat::msrMeasureRepeat (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int  measureRepeatMeasuresNumber,
   int  measureRepeatSlashesNumber)
     : msrSegmentElement (inputLineNumber)
@@ -1380,7 +1380,7 @@ std::string msrMeasureRepeat::asString () const
 }
 
 void msrMeasureRepeat::displayMeasureRepeat (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
   gLog <<

@@ -43,7 +43,7 @@ class EXP bsrTimeSignatureItem : public bsrElement
     // ------------------------------------------------------
 
     static SMARTP<bsrTimeSignatureItem> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -51,7 +51,7 @@ class EXP bsrTimeSignatureItem : public bsrElement
     // ------------------------------------------------------
 
                           bsrTimeSignatureItem (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~bsrTimeSignatureItem ();
 
@@ -142,7 +142,7 @@ class EXP bsrTimeSignature : public bsrLineContentsElement
     // ------------------------------------------------------
 
     static SMARTP<bsrTimeSignature> create (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrTimeSignatureKind timeKind);
 
   protected:
@@ -151,7 +151,7 @@ class EXP bsrTimeSignature : public bsrLineContentsElement
     // ------------------------------------------------------
 
                           bsrTimeSignature (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrTimeSignatureKind timeKind);
 
     virtual               ~bsrTimeSignature ();

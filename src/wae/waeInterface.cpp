@@ -34,7 +34,7 @@ namespace MusicFormats
 void waeWarning (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   gWaeHandler->
@@ -51,7 +51,7 @@ void waeWarning (
 void waeInternalWarning (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   gWaeHandler->
@@ -82,7 +82,7 @@ void waeErrorWithoutException (
 void waeErrorWithoutExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -121,7 +121,7 @@ abort (); // JMI 0.9.67
 void waeErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
@@ -146,7 +146,7 @@ abort (); // JMI
 void waeInternalErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -165,7 +165,7 @@ void waeInternalErrorWithInputLocation (
 void waeInternalErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
@@ -205,7 +205,7 @@ abort (); // JMI 0.9.67
 void waeErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)

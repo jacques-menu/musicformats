@@ -17,7 +17,7 @@
 #include "mfPreprocessorSettings.h"
 
 
-#include "mfDurations.h"
+#include "mfDurationsAndPositionInMeasures.h"
 #include "msrSegmentElements.h"
 
 #include "oahOah.h"
@@ -32,7 +32,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrSegmentElement::msrSegmentElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 //       fSegmentElementMeasureMoment (
 //         K_POSITION_IN_MEASURE_UNKNOWN_, K_POSITION_IN_MEASURE_UNKNOWN_),

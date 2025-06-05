@@ -22,7 +22,7 @@
 
 #include "msrMeasures.h"
 
-#include "mfDurations.h"
+#include "mfDurationsAndPositionInMeasures.h"
 #include "msrIntervals.h"
 #include "msrTablatures.h"
 #include "msrTupletFactors.h"
@@ -190,7 +190,7 @@ class EXP msrHarmonyDegree : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrHarmonyDegree> create (
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                      harmonyDegreeValue,
                             msrAlterationKind        harmonyDegreeAlterationKind,
                             msrHarmonyDegreeTypeKind harmonyDegreeTypeKind);
@@ -201,7 +201,7 @@ class EXP msrHarmonyDegree : public msrElement
     // ------------------------------------------------------
 
                           msrHarmonyDegree (
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                      harmonyDegreeValue,
                             msrAlterationKind        harmonyDegreeAlterationKind,
                             msrHarmonyDegreeTypeKind harmonyDegreeTypeKind);
@@ -283,7 +283,7 @@ class EXP msrHarmony : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrHarmony> create (
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
@@ -309,7 +309,7 @@ class EXP msrHarmony : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrHarmony (
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
@@ -433,7 +433,7 @@ class EXP msrHarmony : public msrMeasureElement
                               }
 
 //     void                  incrementHarmonySoundingWholeNotes (
-//                             int                  inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const mfWholeNotes& wholeNotesDelta);
 
   public:
@@ -681,7 +681,7 @@ class EXP msrHarmonyStructure : public smartable
     std::string           harmonyStructureAsShortString () const;
 
     S_msrHarmonyInterval    bassHarmonyIntervalForHarmonyInversion (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int inversionNumber);
 
     S_msrHarmonyStructure   invertHarmonyStructure (int inversion);
@@ -727,7 +727,7 @@ class EXP msrHarmonyContents : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrHarmonyContents> create (
-                       // JMI     int                   inputLineNumber,
+                       // JMI     const mfInputLineNumber& inputLineNumber,
                             msrSemiTonesPitchKind harmonyContentsRootNote,
                             msrHarmonyKind        harmonyContentsHarmonyKind);
 
@@ -737,7 +737,7 @@ class EXP msrHarmonyContents : public smartable
     // ------------------------------------------------------
 
                           msrHarmonyContents (
-                       // JMI     int                   inputLineNumber,
+                       // JMI     const mfInputLineNumber& inputLineNumber,
                             msrSemiTonesPitchKind harmonyContentsRootNote,
                             msrHarmonyKind        harmonyContentsHarmonyKind);
 
@@ -768,7 +768,7 @@ class EXP msrHarmonyContents : public smartable
     std::string           harmonyContentsAsShortString () const;
 
     msrSemiTonesPitchKind bassSemiTonesPitchKindForHarmonyInversion (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int inversionNumber);
 
     static void           printAllHarmoniesContents (

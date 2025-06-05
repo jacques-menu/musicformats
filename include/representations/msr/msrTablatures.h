@@ -50,7 +50,7 @@ class EXP msrFrameNote : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrFrameNote> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int              frameNoteStringNumber,
                             int              frameNoteFretNumber,
                             int              frameNoteFingering,
@@ -62,7 +62,7 @@ class EXP msrFrameNote : public msrElement
     // ------------------------------------------------------
 
                           msrFrameNote (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int              frameNoteStringNumber,
                             int              frameNoteFretNumber,
                             int              frameNoteFingering,
@@ -177,7 +177,7 @@ class EXP msrFrame : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrFrame> create (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int frameStringsNumber,
                             int frameFretsNumber,
                             int frameFirstFretNumber);
@@ -188,7 +188,7 @@ class EXP msrFrame : public msrElement
     // ------------------------------------------------------
 
                           msrFrame (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int frameStringsNumber,
                             int frameFretsNumber,
                             int frameFirstFretNumber);

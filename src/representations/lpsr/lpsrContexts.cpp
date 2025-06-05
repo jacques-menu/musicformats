@@ -70,7 +70,7 @@ std::ostream& operator << (std::ostream& os, const lpsrContextUseExistingKind& e
 
 //______________________________________________________________________________
 S_lpsrContext lpsrContext::create (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   lpsrContextTypeKind        contextTypeKind,
   const std::string&         contextPathLikeName)
@@ -86,7 +86,7 @@ S_lpsrContext lpsrContext::create (
 }
 
 lpsrContext::lpsrContext (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   lpsrContextTypeKind        contextTypeKind,
   const std::string&         contextPathLikeName)
@@ -213,7 +213,7 @@ void lpsrContext::print (std::ostream& os) const
 
 //______________________________________________________________________________
 S_lpsrChordNamesContext lpsrChordNamesContext::create (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   const std::string&         contextPathLikeName,
   const S_msrVoice&          contextVoice)
@@ -229,7 +229,7 @@ S_lpsrChordNamesContext lpsrChordNamesContext::create (
 }
 
 lpsrChordNamesContext::lpsrChordNamesContext (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   const std::string&         contextPathLikeName,
   const S_msrVoice&          contextVoice)
@@ -390,7 +390,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrChordNamesContext& elt)
 
 //______________________________________________________________________________
 S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   const std::string&         contextPathLikeName,
   const S_msrStaff&          contextStaff)
@@ -406,7 +406,7 @@ S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
 }
 
 lpsrFiguredBassContext::lpsrFiguredBassContext (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   const std::string&         contextPathLikeName,
   const S_msrStaff&          contextStaff)

@@ -14,6 +14,8 @@
 
 #include "exports.h"
 
+#include "mfBasicTypes.h"
+
 #include "mfExceptions.h"
 
 
@@ -33,19 +35,19 @@ typedef SMARTP<musicxml2mxsrException> S_musicxml2mxsrException;
 //______________________________________________________________________________
 EXP void musicxml2mxsrWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 EXP void musicxml2mxsrError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
 
 EXP void musicxml2mxsrInternalError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);

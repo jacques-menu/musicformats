@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "msdlTokens.h"
 
 #include "msdlKeywords.h"

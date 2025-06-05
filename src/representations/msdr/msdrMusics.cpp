@@ -29,7 +29,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msdrMusic msdrMusic::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& musicName)
 {
   msdrMusic* obj =
@@ -41,7 +41,7 @@ S_msdrMusic msdrMusic::create (
 }
 
 msdrMusic::msdrMusic (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& musicName)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -71,7 +71,7 @@ msdrMusic::~msdrMusic ()
 {}
 
 void msdrMusic::addMeasureToMusic (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int           measureNumber,
   const S_msdrMeasure& measure)
 {
@@ -238,7 +238,7 @@ std::string msdrMusic::asString () const
 }
 
 void msdrMusic::displayMusic (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context) const
 {
   gLog <<

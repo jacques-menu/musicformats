@@ -46,7 +46,7 @@ class EXP bsrBarLine : public bsrLineContentsElement
     // ------------------------------------------------------
 
     static SMARTP<bsrBarLine> create (
-                            int            inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrBarLineKind barLineKind);
 
   protected:
@@ -55,7 +55,7 @@ class EXP bsrBarLine : public bsrLineContentsElement
     // ------------------------------------------------------
 
                           bsrBarLine (
-                            int            inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrBarLineKind barLineKin);
 
     virtual               ~bsrBarLine ();

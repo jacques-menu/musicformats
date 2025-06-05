@@ -26,22 +26,14 @@ using namespace MusicXML2;
 #define use_visitor
 
 //_______________________________________________________________________________
-class countnotes : 
+class countnotes :
 	public visitor<S_note>
 {
 	public:
 		int	fCount;
-
-				 countnotes() : fCount(0)	{}
+		countnotes() : fCount(0)	{}
 		virtual ~countnotes() {}
 		void visitStart( S_note& elt )		{ fCount++; }
-};
-
-//_______________________________________________________________________________
-struct predicate {
-	bool operator () (const Sxmlelement elt) const { 
-		return elt->getType() == k_note;
-	}
 };
 
 //_______________________________________________________________________________
@@ -59,8 +51,7 @@ static int read(FILE * fd)
 			browser.browse(*elt);
 			count = v.fCount;
 #else // use iterator
-			predicate p;
-			count = count_if(elt->begin(), elt->end(), p);
+			count = count_if(elt->begin(), elt->end(), [](int i) { return i == k_note; });
 #endif
 		}
 	}

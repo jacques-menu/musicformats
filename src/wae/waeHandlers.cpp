@@ -44,7 +44,7 @@ waeHandler::~waeHandler ()
 void waeHandler::waeWarning (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 //   const std::string  measureNumber,
 //   int                scoreMeasuresNumber)
@@ -101,7 +101,7 @@ void waeHandler::waeWarning (
 void waeHandler::waeInternalWarning (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 //   const std::string  measureNumber,
 //   int                scoreMeasuresNumber)
@@ -220,7 +220,7 @@ void waeHandler::waeErrorWithoutException (
 void waeHandler::waeErrorWithoutExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -307,7 +307,7 @@ abort (); // JMI
 void waeHandler::waeErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
@@ -347,7 +347,7 @@ void waeHandler::waeError (
 void waeHandler::waeErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -369,7 +369,7 @@ void waeHandler::waeErrorWithInputLocation (
 void waeHandler::waeInternalErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -388,7 +388,7 @@ void waeHandler::waeInternalErrorWithInputLocation (
 void waeHandler::waeInternalErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
@@ -412,7 +412,7 @@ void waeHandler::waeTraceToStreamWithoutInputLocation (
 //   const std::string& context,
   std::ostream&      os,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   // should the current pass be traced?
@@ -487,7 +487,7 @@ void waeHandler::waeTraceToStream (
 //    const std::string& context,
   std::ostream&      os,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 //   const std::string  measureNumber,
 //   int                scoreMeasuresNumber)
@@ -595,7 +595,7 @@ void waeHandler::waeTraceToStream (
 void waeHandler::waeTraceWithoutInputLocation (
 //   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   this->waeTraceToStreamWithoutInputLocation (
@@ -608,7 +608,7 @@ void waeHandler::waeTraceWithoutInputLocation (
 void waeHandler::waeTrace (
 //   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 //   const std::string  measureNumber,
 //   int                scoreMeasuresNumber)

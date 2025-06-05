@@ -29,7 +29,7 @@ class EXP bsrFootNotesElement : public bsrElement
     // ------------------------------------------------------
 
     static SMARTP<bsrFootNotesElement> create (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& footNoteText);
 
   protected:
@@ -38,7 +38,7 @@ class EXP bsrFootNotesElement : public bsrElement
     // ------------------------------------------------------
 
                           bsrFootNotesElement (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& footNoteText);
 
     virtual               ~bsrFootNotesElement ();

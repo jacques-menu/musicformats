@@ -17,7 +17,7 @@
 
 #include "mfAssert.h"
 #include "msrBrowsers.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -305,7 +305,7 @@ std::string syllableElementsListAsShortString (
 
 //______________________________________________________________________________
 S_msrSyllable msrSyllable::create (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
@@ -325,7 +325,7 @@ S_msrSyllable msrSyllable::create (
 }
 
 S_msrSyllable msrSyllable::create (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
@@ -349,7 +349,7 @@ S_msrSyllable msrSyllable::create (
 }
 
 S_msrSyllable msrSyllable::create (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
@@ -370,7 +370,7 @@ S_msrSyllable msrSyllable::create (
 }
 
 msrSyllable::msrSyllable (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
@@ -437,7 +437,7 @@ msrSyllable::msrSyllable (
 }
 
 msrSyllable::msrSyllable (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
@@ -1240,7 +1240,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt)
 
 //______________________________________________________________________________
 S_msrStanza msrStanza::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& stanzaNumber,
   const S_msrVoice&  stanzaUpLinkToVoice)
 {
@@ -1254,7 +1254,7 @@ S_msrStanza msrStanza::create (
 }
 
 msrStanza::msrStanza (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& stanzaNumber,
   const S_msrVoice&  stanzaUpLinkToVoice)
     : msrElement (inputLineNumber)
@@ -1606,7 +1606,7 @@ void msrStanza::appendSyllableToStanzaClone (
 }
 
 void msrStanza::appendMeasureEndSyllableToStanza (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&        upLinkToMeasure,
   const mfPositionInMeasure& partCurrentDrawingPositionInMeasure)
 {
@@ -1706,7 +1706,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
 }
 
 S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1752,7 +1752,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
 }
 
 S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1798,7 +1798,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
 }
 
 void msrStanza::appendPaddingNoteToStanza ( // JMI USELESS??? 0.9.70
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED

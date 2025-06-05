@@ -33,7 +33,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrScaling msrScaling::create (
-  int   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   float millimeters,
   float tenths)
 {
@@ -47,7 +47,7 @@ S_msrScaling msrScaling::create (
 }
 
 msrScaling::msrScaling (
-  int   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   float millimeters,
   float tenths)
     : msrElement (inputLineNumber)

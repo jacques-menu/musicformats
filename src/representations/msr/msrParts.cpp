@@ -16,7 +16,7 @@
 #include "visitor.h"
 
 #include "mfPreprocessorSettings.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -50,7 +50,7 @@ namespace MusicFormats
 int msrPart::sPartsCounter = 0;
 
 S_msrPart msrPart::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& partMusicXMLID)
 {
   msrPart* obj =
@@ -62,7 +62,7 @@ S_msrPart msrPart::create (
 }
 
 S_msrPart msrPart::create (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&    partMusicXMLID,
   const S_msrPartGroup& partUpLinkToPartGroup)
 {
@@ -83,7 +83,7 @@ S_msrPart msrPart::create (
 }
 
 msrPart::msrPart (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& partMusicXMLID)
     : msrPartGroupElement (inputLineNumber)
 {
@@ -401,7 +401,7 @@ void msrPart::registerStaffInPart (
 }
 
 void msrPart::setPartCurrentDrawingPositionInMeasure (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -451,7 +451,7 @@ void msrPart::setPartCurrentDrawingPositionInMeasure (
 }
 
 void msrPart::resetPartCurrentDrawingPositionInMeasure (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -472,7 +472,7 @@ void msrPart::resetPartCurrentDrawingPositionInMeasure (
 }
 
 void msrPart::incrementPartCurrentDrawingPositionInMeasure (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotesDelta)
 {
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -526,7 +526,7 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
 }
 
 void msrPart::decrementPartCurrentDrawingPositionInMeasure (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotesDelta)
 {
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -658,7 +658,7 @@ void msrPart::setPartShortestNoteTupletFactor (
 }
 
 void msrPart::assignSequentialNumbersToRegularVoicesInPart (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
@@ -777,7 +777,7 @@ std::string msrPart::fetchPartNameForTrace () const
 }
 
 void msrPart::cascadeCreateAMeasureAndAppendItInPart (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                    previousMeasureEndInputLineNumber,
   const std::string&     measureNumber,
   msrMeasureImplicitKind measureImplicitKind)
@@ -820,7 +820,7 @@ void msrPart::cascadeCreateAMeasureAndAppendItInPart (
 }
 
 void msrPart::setNextMeasureNumberInPart (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -854,7 +854,7 @@ void msrPart::setNextMeasureNumberInPart (
 }
 
 mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int indexValue) const
 {
   mfWholeNotes result;
@@ -1044,7 +1044,7 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
 }
 
 void msrPart::registerOrdinalMeasureNumberWholeNotes (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                 measureOrdinalNumber,
   const mfWholeNotes& wholeNotes)
 {
@@ -1544,7 +1544,7 @@ void msrPart::appendPageBreakToPart (
 }
 
 void msrPart::insertHiddenMeasureAndBarLineInPartClone (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1603,7 +1603,7 @@ void msrPart::appendTranspositionToPart (
 
 /* JMI
 void msrPart::nestContentsIntoNewRepeatInPart (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   for (S_msrStaff staff : fPartAllStavesList) {
     (*i)->
@@ -1613,8 +1613,8 @@ void msrPart::nestContentsIntoNewRepeatInPart (
 }
 */
 
-void msrPart::handleRepeatStartInPart (
-  int inputLineNumber)
+void msrPart::cascadeHandleRepeatStartInPart (
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -1636,7 +1636,7 @@ void msrPart::handleRepeatStartInPart (
   // cascade to all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      handleRepeatStartInStaff (
+      cascadeHandleRepeatStartInStaff (
         inputLineNumber);
   } // for
 
@@ -1644,7 +1644,7 @@ void msrPart::handleRepeatStartInPart (
 }
 
 void msrPart::cascadeHandleRepeatEndInPart (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& measureNumber,
   int                repeatTimes)
 {
@@ -1679,7 +1679,7 @@ void msrPart::cascadeHandleRepeatEndInPart (
 }
 
 void msrPart::cascadeHandleRepeatEndingStartInPart (
-  int    inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -1709,8 +1709,8 @@ void msrPart::cascadeHandleRepeatEndingStartInPart (
   --gIndenter;
 }
 
-void msrPart::handleRepeatEndingEndInPart (
-  int                 inputLineNumber,
+void msrPart::cascadeHandleRepeatEndingEndInPart (
+  const mfInputLineNumber& inputLineNumber,
   const std::string&  repeatEndingNumber, // may be "1, 2"
   msrRepeatEndingKind repeatEndingKind)
 {
@@ -1738,7 +1738,7 @@ void msrPart::handleRepeatEndingEndInPart (
   // cascade to all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      handleRepeatEndingEndInStaff (
+      cascadeHandleRepeatEndingEndInStaff (
         inputLineNumber,
         repeatEndingNumber,
         repeatEndingKind);
@@ -1749,7 +1749,7 @@ void msrPart::handleRepeatEndingEndInPart (
 
 /* JMI
 void msrPart::finalizeRepeatEndInPart (
-  int    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& measureNumber,
   int    repeatTimes)
 {
@@ -1785,7 +1785,7 @@ void msrPart::finalizeRepeatEndInPart (
 */
 
 void msrPart::appendRepeatCloneToPart (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat& repeatCLone)
 {
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1827,7 +1827,7 @@ void msrPart::appendRepeatEndingCloneToPart (
 }
 
 void msrPart::cascadeCreateAMeasureRepeatAndAppendItToPart (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int measureRepeatMeasuresNumber,
   int measureRepeatSlashesNumber)
 {
@@ -1842,7 +1842,7 @@ void msrPart::cascadeCreateAMeasureRepeatAndAppendItToPart (
 }
 
 void msrPart::appendPendingMeasureRepeatToPart (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // append pending measures repeat to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1853,7 +1853,7 @@ void msrPart::appendPendingMeasureRepeatToPart (
 }
 
 void msrPart::cascadeAppendMultipleMeasureRestToPart (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int               multipleMeasureRestMeasuresNumber,
   int               multipleMeasureRestSlashesNumber,
   msrUseSymbolsKind multipleMeasureRestUseSymbolsKind)
@@ -1890,7 +1890,7 @@ void msrPart::cascadeAppendMultipleMeasureRestToPart (
 }
 
 void msrPart::replicateLastAppendedMeasureInPart (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int replicatasNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1917,7 +1917,7 @@ void msrPart::replicateLastAppendedMeasureInPart (
 }
 
 void msrPart::appendEmptyMeasuresToPart (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& previousMeasureNumber,
   int                measureRestsNumber)
 {
@@ -1952,7 +1952,7 @@ void msrPart::appendEmptyMeasuresToPart (
 }
 
 void msrPart::appendPendingMultipleMeasureRestsToPart (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -1977,7 +1977,7 @@ void msrPart::appendPendingMultipleMeasureRestsToPart (
 }
 
 void msrPart::appendMultipleMeasureRestCloneToPart (
-  int                          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRests)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2030,7 +2030,7 @@ void msrPart::appendBarLineToPart (
 }
 
 S_msrStaff msrPart::addRegularStaffToPartByItsNumber (
-  int          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrStaffKind staffKind,
   int          staffNumber)
 {
@@ -2096,7 +2096,7 @@ S_msrStaff msrPart::addRegularStaffToPartByItsNumber (
 }
 
 S_msrStaff msrPart::addHarmoniesStaffToPart (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStavesBasics ()) {
@@ -2148,7 +2148,7 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
 }
 
 S_msrStaff msrPart::addHFiguredBassStaffToPart (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStavesBasics ()) {
@@ -2283,7 +2283,7 @@ void msrPart::registerVoiceInPartVoicesList (
 }
 
 // void msrPart::registerVoiceInPartStavesVoicesMapMap (
-//   int               inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const S_msrVoice& voice)
 // {
 //   int
@@ -2504,7 +2504,7 @@ void msrPart::registerVoiceInPartVoicesList (
 // }
 
 S_msrVoice msrPart::createPartHarmoniesVoice (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& currentMeasureNumber)
 {
   if (fPartHarmoniesVoice) {
@@ -2593,7 +2593,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 }
 
 void msrPart::appendHarmonyToPart (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrHarmony&        harmony,
   const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
@@ -2682,7 +2682,7 @@ void msrPart::cascadeAppendFiguredBassesListToPart (
 }
 
 S_msrVoice msrPart::createPartFiguredBassVoice (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& currentMeasureNumber)
 {
   if (fPartFiguredBassVoice) {
@@ -2771,7 +2771,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 }
 
 void msrPart::appendFiguredBassToPart (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrFiguredBass&    figuredBass,
   const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
@@ -3040,7 +3040,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 }
 
 // void msrPart::handleBackupInPart (
-//   int                  inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const mfWholeNotes& backupStepLength)
 // {
 //   // account for backup in part
@@ -3050,7 +3050,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 // }
 
 void msrPart::finalizeLastAppendedMeasureInPart (
-  int    inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -3114,7 +3114,7 @@ void msrPart::setPartInstrumentNamesMaxLengthes ()
 }
 
 void msrPart::displayPartStavesMap (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context) const
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3193,7 +3193,7 @@ void msrPart::displayPartStavesMap (
 
 
 // void msrPart::displayPartStavesAndVoicesVector (
-//   int                inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const std::string& context) const
 // {
 //   gLog <<
@@ -3231,7 +3231,7 @@ void msrPart::displayPartStavesMap (
 // }
 
 void msrPart::finalizePart (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
@@ -3290,7 +3290,7 @@ void msrPart::finalizePart (
 }
 
 void msrPart::finalizePartClone (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
@@ -3329,7 +3329,7 @@ void msrPart::finalizePartClone (
 }
 
 void msrPart::finalizePartAndAllItsMeasures (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   return; // JMI TEMP NOEL
 
@@ -3360,7 +3360,7 @@ void msrPart::finalizePartAndAllItsMeasures (
 }
 
 void msrPart::collectPartMeasuresSlices (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {

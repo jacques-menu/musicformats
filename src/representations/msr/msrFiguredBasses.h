@@ -67,7 +67,7 @@ class EXP msrBassFigure : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrBassFigure> create (
-                            int                     inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrPart&        figureUpLinkToPart,
                             msrBassFigurePrefixKind figurePrefixKind,
                             int                     figureNumber,
@@ -85,7 +85,7 @@ class EXP msrBassFigure : public msrElement
     // ------------------------------------------------------
 
                           msrBassFigure (
-                            int                     inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrPart&        figureUpLinkToPart,
                             msrBassFigurePrefixKind figurePrefixKind,
                             int                     figureNumber,
@@ -161,14 +161,14 @@ class EXP msrFiguredBass : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrFiguredBass> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrFiguredBass> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrFiguredBass> create (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&    upLinkToMeasure,
                             const mfWholeNotes&    figuredBassSoundingWholeNotes,
                             const mfWholeNotes&    figuredBassDisplayWholeNotes,
@@ -178,7 +178,7 @@ class EXP msrFiguredBass : public msrMeasureElement
                             const msrTupletFactor& figuredBassTupletFactor);
 
     static SMARTP<msrFiguredBass> create (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes&    figuredBassSoundingWholeNotes,
                             const mfWholeNotes&    figuredBassDisplayWholeNotes,
 //                             const mfWholeNotes&   figuredBassWholeNotesDuration,
@@ -197,7 +197,7 @@ class EXP msrFiguredBass : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrFiguredBass (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&    upLinkToMeasure,
                             const mfWholeNotes&    figuredBassSoundingWholeNotes,
                             const mfWholeNotes&    figuredBassDisplayWholeNotes,

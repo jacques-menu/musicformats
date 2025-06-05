@@ -35,7 +35,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrTransposition msrTransposition::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   int           transposeDiatonic,
   int           transposeChromatic,
@@ -55,7 +55,7 @@ S_msrTransposition msrTransposition::create (
 }
 
 S_msrTransposition msrTransposition::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int           transposeDiatonic,
   int           transposeChromatic,
   int           transposeOctaveChange,
@@ -72,7 +72,7 @@ S_msrTransposition msrTransposition::create (
 }
 
 msrTransposition::msrTransposition (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   int           transposeDiatonic,
   int           transposeChromatic,

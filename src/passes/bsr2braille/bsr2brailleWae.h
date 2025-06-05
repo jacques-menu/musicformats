@@ -15,6 +15,8 @@
 #include "exports.h"
 #include "smartpointer.h"
 
+#include "mfBasicTypes.h"
+
 #include "mfExceptions.h"
 
 
@@ -49,12 +51,12 @@ typedef SMARTP<bsr2brailleInternalException> S_bsr2brailleInternalException;
 //______________________________________________________________________________
 EXP void bsr2brailleWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 EXP void bsr2brailleInternalError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);

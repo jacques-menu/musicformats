@@ -31,7 +31,7 @@ class EXP bsrDynamic : public bsrLineContentsElement
     // ------------------------------------------------------
 
     static SMARTP<bsrDynamic> create (
-                            int             inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrDynamicKind dynamicKind);
 
   protected:
@@ -40,7 +40,7 @@ class EXP bsrDynamic : public bsrLineContentsElement
     // ------------------------------------------------------
 
                           bsrDynamic (
-                            int             inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrDynamicKind dynamicKind);
 
     virtual               ~bsrDynamic ();

@@ -16,7 +16,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -70,7 +70,7 @@ std::ostream& operator << (std::ostream& os, const msrDoubleTremoloTypeKind& elt
 
 //______________________________________________________________________________
 S_msrDoubleTremolo msrDoubleTremolo::create (
-  int                       inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&       upLinkToMeasure,
   msrDoubleTremoloKind      doubleTremoloKind,
   msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
@@ -90,7 +90,7 @@ S_msrDoubleTremolo msrDoubleTremolo::create (
 }
 
 S_msrDoubleTremolo msrDoubleTremolo::create (
-  int                       inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrDoubleTremoloKind      doubleTremoloKind,
   msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
   int                       doubleTremoloMarksNumber,
@@ -107,7 +107,7 @@ S_msrDoubleTremolo msrDoubleTremolo::create (
 }
 
 msrDoubleTremolo::msrDoubleTremolo (
-  int                       inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&       upLinkToMeasure,
   msrDoubleTremoloKind      doubleTremoloKind,
   msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,

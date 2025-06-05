@@ -45,7 +45,7 @@ waeHandlerForGUI::~waeHandlerForGUI ()
 void waeHandlerForGUI::waeWarning (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
@@ -67,7 +67,7 @@ void waeHandlerForGUI::waeWarning (
 void waeHandlerForGUI::waeInternalWarning (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
@@ -119,7 +119,7 @@ void waeHandlerForGUI::waeErrorWithoutException (
 void waeHandlerForGUI::waeErrorWithoutExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -167,7 +167,7 @@ void waeHandlerForGUI::waeError (
 void waeHandlerForGUI::waeErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -204,7 +204,7 @@ abort (); // JMI
 void waeHandlerForGUI::waeErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
@@ -227,7 +227,7 @@ abort (); // JMI
 void waeHandlerForGUI::waeInternalErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
@@ -246,7 +246,7 @@ void waeHandlerForGUI::waeInternalErrorWithInputLocation (
 void waeHandlerForGUI::waeInternalErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,

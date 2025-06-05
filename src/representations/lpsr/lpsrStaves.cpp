@@ -35,7 +35,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrNewStaffGroupBlock lpsrNewStaffGroupBlock::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   lpsrNewStaffGroupBlock* obj =
     new lpsrNewStaffGroupBlock (
@@ -45,7 +45,7 @@ S_lpsrNewStaffGroupBlock lpsrNewStaffGroupBlock::create (
 }
 
 lpsrNewStaffGroupBlock::lpsrNewStaffGroupBlock (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : lpsrElement (inputLineNumber)
 {}
 
@@ -150,7 +150,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffGroupBlock& nst
 
 //______________________________________________________________________________
 S_lpsrNewStaffTuningBlock lpsrNewStaffTuningBlock::create (
-  int                     inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrStaffTuning& staffTuning)
 {
   lpsrNewStaffTuningBlock* obj =
@@ -161,7 +161,7 @@ S_lpsrNewStaffTuningBlock lpsrNewStaffTuningBlock::create (
 }
 
 lpsrNewStaffTuningBlock::lpsrNewStaffTuningBlock (
-  int                     inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrStaffTuning& staffTuning)
     : lpsrElement (inputLineNumber)
 {
@@ -266,7 +266,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffTuningBlock& ns
 
 //______________________________________________________________________________
 S_lpsrNewStaffBlock lpsrNewStaffBlock::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   lpsrNewStaffBlock* obj =
     new lpsrNewStaffBlock (
@@ -276,7 +276,7 @@ S_lpsrNewStaffBlock lpsrNewStaffBlock::create (
 }
 
 lpsrNewStaffBlock::lpsrNewStaffBlock (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : lpsrElement (inputLineNumber)
 {}
 

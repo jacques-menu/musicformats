@@ -31,7 +31,7 @@ class EXP msrBeatRepeatPattern : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrBeatRepeatPattern> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrBeatRepeat& upLinkToBeatRepeat);
 
     SMARTP<msrBeatRepeatPattern> createABeatRepeatPatternNewbornClone (
@@ -46,7 +46,7 @@ class EXP msrBeatRepeatPattern : public msrElement
     // ------------------------------------------------------
 
                           msrBeatRepeatPattern (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrBeatRepeat& upLinkToBeatRepeat);
 
     virtual               ~msrBeatRepeatPattern ();
@@ -75,7 +75,7 @@ class EXP msrBeatRepeatPattern : public msrElement
     int                   fetchMeasuresNumber () const;
 
     void                  collectRepeatPatternMeasuresIntoFlatList (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   public:
 
@@ -119,7 +119,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrBeatRepeatReplicas> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrBeatRepeat& upLinkToBeatRepeat);
 
     SMARTP<msrBeatRepeatReplicas> createABeatRepeatReplicasNewbornClone (
@@ -134,7 +134,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
     // ------------------------------------------------------
 
                           msrBeatRepeatReplicas (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrBeatRepeat& upLinkToBeatRepeat);
 
     virtual               ~msrBeatRepeatReplicas ();
@@ -164,7 +164,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
     int                   fetchBeatRepeatReplicasNumber () const;
 
     void                  collectRepeatReplicasMeasuresIntoFlatList (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   public:
 
@@ -232,7 +232,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
     // ------------------------------------------------------
 
     static SMARTP<msrBeatRepeat> create (
-                            int        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int        beatRepeatMeasuresNumber,
                             int        beatRepeatSlashesNumber,
                             const S_msrVoice& upLinkToVoice);
@@ -249,7 +249,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
     // ------------------------------------------------------
 
                           msrBeatRepeat (
-                            int        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int        beatRepeatMeasuresNumber,
                             int        beatRepeatSlashesNumber,
                             const S_msrVoice& upLinkToVoice);
@@ -317,7 +317,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
     int                   fetchBeatRepeatReplicasMeasuresNumber () const;
 
     void                  collectBeatRepeatMeasuresIntoFlatList (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   public:
 
@@ -337,7 +337,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
     std::string           asString () const override;
 
     void                  displayBeatRepeat (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;

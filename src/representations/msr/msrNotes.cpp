@@ -17,7 +17,7 @@
 
 #include "mfAssert.h"
 
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -47,7 +47,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrNote msrNote::create (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&        upLinkToMeasure,
 
 //   const std::string&         noteMeasureNumber, // JMI 0.9.66
@@ -109,7 +109,7 @@ S_msrNote msrNote::create (
 }
 
 msrNote::msrNote (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&        upLinkToMeasure,
 
 //   const std::string&         noteMeasureNumber, // JMI 0.9.66
@@ -1325,7 +1325,7 @@ S_msrNote msrNote::createNoteDeepClone (
 }
 
 S_msrNote msrNote::createRestNote (
-	int                 inputLineNumber,
+	const mfInputLineNumber& inputLineNumber,
 	const std::string&  noteMeasureNumber,
 	const mfWholeNotes& soundingWholeNotes,
 	const mfWholeNotes& displayWholeNotes,
@@ -1381,7 +1381,7 @@ S_msrNote msrNote::createRestNote (
 }
 
 S_msrNote msrNote::createSkipNote (
-	int                 inputLineNumber,
+	const mfInputLineNumber& inputLineNumber,
 	const std::string&  noteMeasureNumber,
 	const mfWholeNotes& soundingWholeNotes,
 	const mfWholeNotes& displayWholeNotes,
@@ -1437,7 +1437,7 @@ S_msrNote msrNote::createSkipNote (
 }
 
 S_msrNote msrNote::createSkipNoteWithContext (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&  noteMeasureNumber,
   const mfWholeNotes& soundingWholeNotes,
   const mfWholeNotes& displayWholeNotes,
@@ -1495,7 +1495,7 @@ S_msrNote msrNote::createSkipNoteWithContext (
 }
 
 S_msrNote msrNote::createGraceSkipNote (
-	int                 inputLineNumber,
+	const mfInputLineNumber& inputLineNumber,
 	const std::string&  noteMeasureNumber,
 	const mfWholeNotes& soundingWholeNotes,
 	const mfWholeNotes& displayWholeNotes,
@@ -1552,7 +1552,7 @@ S_msrNote msrNote::createGraceSkipNote (
 
 //________________________________________________________________________
 S_msrNote msrNote::createRestNoteWithOctave (
-	int                 inputLineNumber,
+	const mfInputLineNumber& inputLineNumber,
 	const std::string&  noteMeasureNumber,
 	msrOctaveKind       noteOctave,
 	const mfWholeNotes& soundingWholeNotes,
@@ -1610,7 +1610,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
 
 //________________________________________________________________________
 S_msrNote msrNote::createSkipNoteWithOctave (
-	int                 inputLineNumber,
+	const mfInputLineNumber& inputLineNumber,
 	const std::string&  noteMeasureNumber,
 	msrOctaveKind       noteOctave,
 	const mfWholeNotes& soundingWholeNotes,
@@ -1668,7 +1668,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 
 //________________________________________________________________________
 S_msrNote msrNote::createRegularNote (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&       noteMeasureNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind,
   msrOctaveKind            noteOctaveKind,
@@ -1727,7 +1727,7 @@ S_msrNote msrNote::createRegularNote (
 
 //________________________________________________________________________
 S_msrNote msrNote::createRestFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& restString,
   const std::string& restMeasureNumber)
 {
@@ -1888,7 +1888,7 @@ S_msrNote msrNote::createRestFromString (
 
 //________________________________________________________________________
 S_msrNote msrNote::createSkipFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& skipString,
   const std::string& skipMeasureNumber)
 {
@@ -2050,7 +2050,7 @@ S_msrNote msrNote::createSkipFromString (
 
 //________________________________________________________________________
 S_msrNote msrNote::createNoteFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& noteString,
   const std::string& noteMeasureNumber)
 {
@@ -2448,7 +2448,7 @@ void msrNote::setNoteOccupiesAFullMeasure ()
 }
 
 msrDiatonicPitchKind msrNote::noteDiatonicPitchKind (
-  int inputLineNumber) const
+  const mfInputLineNumber& inputLineNumber) const
 {
   return
     diatonicPitchKindFromQuarterTonesPitchKind (
@@ -4163,7 +4163,7 @@ void msrNote::browseData (basevisitor* v)
 }
 
 std::string msrNote::noteDiatonicPitchKindAsString (
-  int inputLineNumber) const
+  const mfInputLineNumber& inputLineNumber) const
 {
   return
     msrDiatonicPitchKindAsStringInLanguage (

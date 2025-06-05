@@ -41,7 +41,7 @@ class EXP msrGlissando : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrGlissando> create (
-                            int                  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                  glissandoNumber,
                             msrGlissandoTypeKind glissandoTypeKind,
                             msrLineTypeKind      glissandoLineTypeKind,
@@ -57,7 +57,7 @@ class EXP msrGlissando : public msrElement
     // ------------------------------------------------------
 
                           msrGlissando (
-                            int                  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                  glissandoNumber,
                             msrGlissandoTypeKind glissandoTypeKind,
                             msrLineTypeKind      glissandoLineTypeKind,

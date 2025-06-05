@@ -91,12 +91,12 @@ EXP msrSemiTonesPitchKind noteAtIntervalKindFromNote (
 */
 
 EXP msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrIntervalKind       intervalKind,
   msrSemiTonesPitchKind semiTonesPitchKind);
 
 EXP msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrIntervalKind          intervalKind,
   msrQuarterTonesPitchKind quarterTonesPitchKind);
 

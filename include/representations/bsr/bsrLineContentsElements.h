@@ -31,7 +31,7 @@ class EXP bsrLineContentsElement : public bsrElement
 
 /*
     static SMARTP<bsrLineContentsElement> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 */
 
   protected:
@@ -40,7 +40,7 @@ class EXP bsrLineContentsElement : public bsrElement
     // ------------------------------------------------------
 
                           bsrLineContentsElement (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~bsrLineContentsElement ();
 

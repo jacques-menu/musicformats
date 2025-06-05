@@ -16,7 +16,7 @@
 
 #include "msrTypesForwardDeclarations.h"
 
-#include "mfDurations.h"
+#include "mfDurationsAndPositionInMeasures.h"
 #include "msrPlacements.h"
 
 
@@ -32,7 +32,7 @@ class EXP msrSingleTremolo : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrSingleTremolo> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int              singleTremoloMarksNumber,
                             msrPlacementKind singleTremoloPlacementKind);
 
@@ -42,7 +42,7 @@ class EXP msrSingleTremolo : public msrElement
     // ------------------------------------------------------
 
                           msrSingleTremolo (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int              singleTremoloMarksNumber,
                             msrPlacementKind singleTremoloPlacementKind);
 

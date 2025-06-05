@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrRepeatCoda msrRepeatCoda::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrSegment& repeatCodaSegment,
   const S_msrRepeat&  upLinkToRepeat)
 {
@@ -45,7 +45,7 @@ S_msrRepeatCoda msrRepeatCoda::create (
 }
 
 msrRepeatCoda::msrRepeatCoda (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrSegment& repeatCodaSegment,
   const S_msrRepeat&  upLinkToRepeat)
     : msrElement (inputLineNumber)

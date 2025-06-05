@@ -24,7 +24,7 @@ namespace MusicFormats
 // print object
 //______________________________________________________________________________
 msrPrintObjectKind msrPrintObjectKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& printObjectString)
 {
   msrPrintObjectKind

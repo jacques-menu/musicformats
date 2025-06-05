@@ -136,7 +136,7 @@ std::ostream& operator << (std::ostream& os, const msrClefKind& elt)
 }
 
 msrClefKind msrClefKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& clefString)
 {
   msrClefKind result = msrClefKind::kClef_UNKNOWN_;
@@ -361,7 +361,7 @@ std::string availableClefKindsNames (size_t namesListMaxLength)
 
 //______________________________________________________________________________
 S_msrClef msrClef::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   msrClefKind         clefKind,
   int                 clefStaffNumber)
@@ -377,7 +377,7 @@ S_msrClef msrClef::create (
 }
 
 S_msrClef msrClef::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrClefKind         clefKind,
   int                 clefStaffNumber)
 {
@@ -390,7 +390,7 @@ S_msrClef msrClef::create (
 }
 
 msrClef::msrClef (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   msrClefKind         clefKind,
   int                 clefStaffNumber)
@@ -405,7 +405,7 @@ msrClef::~msrClef ()
 {}
 
 S_msrClef msrClef::createClefFromString (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const std::string&  clefString,
   int                 clefLineNumber)

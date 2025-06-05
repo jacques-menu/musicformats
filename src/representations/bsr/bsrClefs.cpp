@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrClef bsrClef::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrClefKind clefKind)
 {
   bsrClef* obj =
@@ -42,7 +42,7 @@ S_bsrClef bsrClef::create (
 }
 
 bsrClef::bsrClef (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrClefKind clefKind)
     : bsrLineContentsElement (inputLineNumber)
 {

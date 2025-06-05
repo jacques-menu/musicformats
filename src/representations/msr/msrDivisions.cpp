@@ -37,7 +37,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrDivisions msrDivisions::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int divisionsPerQuarterNote)
 {
   msrDivisions* obj =
@@ -74,7 +74,7 @@ S_msrDivisions msrDivisions::createDivisionsNewbornClone ()
 }
 
 msrDivisions::msrDivisions (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int divisionsPerQuarterNote)
     : msrElement (inputLineNumber)
 {
@@ -172,7 +172,7 @@ void msrDivisions::initializeDivisions ()
 }
 
 int msrDivisions::notesDurationKindAsDivisions (
-  int             inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   mfDurationKind notesDurationKind)
 {
   for (
@@ -264,7 +264,7 @@ void msrDivisions::printNotesDurationKindsDivisions (std::ostream& os)
 }
 
 std::string msrDivisions::divisionspitchAndOctaveAsString (
-  int  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int  divisions,
   int& numberOfDotsNeeded)
 {
@@ -500,7 +500,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
 }
 
 std::string msrDivisions::divisionspitchAndOctaveAsString (
-  int  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int  divisions)
 {
   int numberOfDots; // to be ignored
@@ -513,7 +513,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
 }
 
 std::string msrDivisions::tupletDivisionspitchAndOctaveAsString (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int divisions,
   int actualNotes,
   int normalNotes)
@@ -525,7 +525,7 @@ std::string msrDivisions::tupletDivisionspitchAndOctaveAsString (
 }
 
 std::string tupletWholeNotesPitchAndOctaveAsString (
-  int             inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes,
   int             actualNotes,
   int             normalNotes)

@@ -73,7 +73,7 @@ std::ostream& operator << (std::ostream& os, const msrSlurTypeKind& elt)
 
 //______________________________________________________________________________
 S_msrSlur msrSlur::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int              slurNumber,
   msrSlurTypeKind  slurTypeKind,
   msrLineTypeKind  slurLineTypeKind,
@@ -91,7 +91,7 @@ S_msrSlur msrSlur::create (
 }
 
 S_msrSlur msrSlur::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int              slurNumber,
   msrSlurTypeKind  slurTypeKind,
   msrLineTypeKind  slurLineTypeKind)
@@ -106,7 +106,7 @@ S_msrSlur msrSlur::create (
 }
 
 msrSlur::msrSlur (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int              slurNumber,
   msrSlurTypeKind  slurTypeKind,
   msrLineTypeKind  slurLineTypeKind,

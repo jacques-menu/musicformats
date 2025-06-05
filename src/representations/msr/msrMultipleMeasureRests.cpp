@@ -35,7 +35,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrMultipleMeasureRest msrMultipleMeasureRest::create (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int               measuresNumber,
   int               slashesNumber,
   msrUseSymbolsKind useSymbolsKind)
@@ -51,7 +51,7 @@ S_msrMultipleMeasureRest msrMultipleMeasureRest::create (
 }
 
 msrMultipleMeasureRest::msrMultipleMeasureRest (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int               measuresNumber,
   int               slashesNumber,
   msrUseSymbolsKind useSymbolsKind)
@@ -148,7 +148,7 @@ void msrMultipleMeasureRest::setNextMeasureNumber (
 }
 
 void msrMultipleMeasureRest::setLastMeasurePuristMeasureNumber (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int puristMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -405,7 +405,7 @@ std::string msrMultipleMeasureRest::asString () const
 }
 
 void msrMultipleMeasureRest::displayMultipleMeasureRest (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
   gLog <<

@@ -31,13 +31,13 @@ class EXP msrBarNumberCheck : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrBarNumberCheck> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             const std::string&  nextBarOriginalNumber,
                             int                 nextBarPuristNumber);
 
     static SMARTP<msrBarNumberCheck> create (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& nextBarOriginalNumber,
                             int                nextBarPuristNumber);
 
@@ -47,7 +47,7 @@ class EXP msrBarNumberCheck : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrBarNumberCheck (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             const std::string&  nextBarOriginalNumber,
                             int                 nextBarPuristNumber);

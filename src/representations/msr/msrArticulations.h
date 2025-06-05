@@ -51,7 +51,7 @@ class EXP msrArticulation : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrArticulation> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrArticulationKind articulationKind,
                             msrPlacementKind    articulationPlacementKind);
 
@@ -61,7 +61,7 @@ class EXP msrArticulation : public msrElement
     // ------------------------------------------------------
 
                           msrArticulation (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrArticulationKind articulationKind,
                             msrPlacementKind    articulationPlacementKind);
 
@@ -144,7 +144,7 @@ class EXP msrFermata : public msrArticulation
     // ------------------------------------------------------
 
     static SMARTP<msrFermata> create (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrFermataShapeKind        fermataShapeKind,
                             msrArticulationFermataType fermataTypeKind);
 
@@ -154,7 +154,7 @@ class EXP msrFermata : public msrArticulation
     // ------------------------------------------------------
 
                           msrFermata (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrFermataShapeKind        fermataShapeKind,
                             msrArticulationFermataType fermataTypeKind);
 
@@ -219,7 +219,7 @@ class EXP msrArpeggiato : public msrArticulation
     // ------------------------------------------------------
 
     static SMARTP<msrArpeggiato> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrPlacementKind arpeggiatoPlacementKind,
                             msrDirectionKind arpeggiatoDirectionKind,
                             int              arpeggiatoNumber);
@@ -230,7 +230,7 @@ class EXP msrArpeggiato : public msrArticulation
     // ------------------------------------------------------
 
                           msrArpeggiato (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrPlacementKind arpeggiatoPlacementKind,
                             msrDirectionKind arpeggiatoDirectionKind,
                             int              arpeggiatoNumber);
@@ -307,7 +307,7 @@ class EXP msrNonArpeggiato : public msrArticulation
     // ------------------------------------------------------
 
     static SMARTP<msrNonArpeggiato> create (
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrPlacementKind         nonArpeggiatoPlacementKind,
                             msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind,
                             int                      nonArpeggiatoNumber);
@@ -318,7 +318,7 @@ class EXP msrNonArpeggiato : public msrArticulation
     // ------------------------------------------------------
 
                           msrNonArpeggiato (
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrPlacementKind         nonArpeggiatoPlacementKind,
                             msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind,
                             int                      nonArpeggiatoNumber);

@@ -32,7 +32,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrScore bsrScore::create (
-  int            inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrScore&     theMsrScore)
 {
   bsrScore* obj = new bsrScore (
@@ -42,7 +42,7 @@ S_bsrScore bsrScore::create (
 }
 
 bsrScore::bsrScore (
-  int            inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrScore&     theMsrScore)
     : bsrElement (inputLineNumber)
 {

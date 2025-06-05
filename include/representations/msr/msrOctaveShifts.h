@@ -41,13 +41,13 @@ class EXP msrOctaveShift : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrOctaveShift> create (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             msrOctaveShiftKind octaveShiftKind,
                             int                octaveShiftSize);
 
     static SMARTP<msrOctaveShift> create (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrOctaveShiftKind octaveShiftKind,
                             int                octaveShiftSize);
 
@@ -57,7 +57,7 @@ class EXP msrOctaveShift : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrOctaveShift (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             msrOctaveShiftKind octaveShiftKind,
                             int                octaveShiftSize);

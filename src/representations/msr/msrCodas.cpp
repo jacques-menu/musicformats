@@ -59,7 +59,7 @@ std::ostream& operator << (std::ostream& os, const msrCodaKind& elt)
 
 //______________________________________________________________________________
 S_msrCoda msrCoda::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   int                 staffNumber,
   msrCodaKind         codaKind)
@@ -75,7 +75,7 @@ S_msrCoda msrCoda::create (
 }
 
 S_msrCoda msrCoda::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                 staffNumber,
   msrCodaKind         codaKind)
 {
@@ -88,7 +88,7 @@ S_msrCoda msrCoda::create (
 }
 
 msrCoda::msrCoda (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   int                 staffNumber,
   msrCodaKind         codaKind)

@@ -41,7 +41,7 @@ class EXP lpsrScore : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrScore> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrScore&          theMsrScore,
                             const S_mfcMultiComponent& multiComponent);
 
@@ -51,7 +51,7 @@ class EXP lpsrScore : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrScore (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrScore&          theMsrScore,
                             const S_mfcMultiComponent& multiComponent);
 

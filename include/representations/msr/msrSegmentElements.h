@@ -33,7 +33,7 @@ class EXP msrSegmentElement : public msrElement
     // ------------------------------------------------------
 
                           msrSegmentElement (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrSegmentElement ();
 

@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrVoiceStaffChange msrVoiceStaffChange::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const S_msrStaff&   takeOffStaff,
   const S_msrStaff&   landingStaff)
@@ -47,7 +47,7 @@ S_msrVoiceStaffChange msrVoiceStaffChange::create (
 }
 
 msrVoiceStaffChange::msrVoiceStaffChange (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const S_msrStaff&   takeOffStaff,
   const S_msrStaff&   landingStaff)

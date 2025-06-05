@@ -14,10 +14,10 @@
 #include "visitor.h"
 
 #include "mfPreprocessorSettings.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -53,7 +53,7 @@ namespace MusicFormats
 int msrStaff::sStaffMaxRegularVoices = 4; // JMI TEMP MOD 0.9.70
 
 S_msrStaff msrStaff::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrStaffKind     staffKind,
   int              staffNumber)
 {
@@ -67,7 +67,7 @@ S_msrStaff msrStaff::create (
 }
 
 S_msrStaff msrStaff::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrStaffKind     staffKind,
   int              staffNumber,
   const S_msrPart& staffUpLinkToPart)
@@ -86,7 +86,7 @@ S_msrStaff msrStaff::create (
 }
 
 msrStaff::msrStaff (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrStaffKind     staffKind,
   int              staffNumber)
     : msrElement (inputLineNumber)
@@ -564,7 +564,7 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 */
 
 void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                    previousMeasureEndInputLineNumber,
   const std::string&     measureNumber,
   msrMeasureImplicitKind measureImplicitKind)
@@ -608,7 +608,7 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
 }
 
 void msrStaff::setNextMeasureNumberInStaff (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -665,7 +665,7 @@ void msrStaff::setNextMeasureNumberInStaff (
 }
 
 S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                   voiceNumber,
   const std::string&    currentMeasureNumber,
   const S_msrPartGroup& partUpLinkToPartGroup)
@@ -986,7 +986,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 }
 
 void msrStaff::registerVoiceByItsNumber (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int               staffNumber,
   const S_msrVoice& voice)
 {
@@ -1097,7 +1097,7 @@ void msrStaff::registerVoiceByItsNumber (
 }
 
 void msrStaff::registerRegularVoiceByItsNumber (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& regularVoice,
   int               voiceNumber)
 {
@@ -1191,7 +1191,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
 }
 
 void msrStaff::registerHarmoniesVoiceByItsNumber (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1220,7 +1220,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
 }
 
 void msrStaff::registerFiguredBassVoiceByItsNumber (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1249,7 +1249,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
 }
 
 S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int voiceNumber)
 {
   S_msrVoice result; // JMI avoid repetitive messages! 0.9.66
@@ -1310,7 +1310,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
 }
 
 void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -1385,7 +1385,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
 }
 
 S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   S_msrVoice result;
 
@@ -1470,7 +1470,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
 }
 
 void msrStaff::registerVoiceInStaff (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -1582,7 +1582,7 @@ void msrStaff::registerVoiceInStaff (
 }
 
 void msrStaff::registerPartLevelVoiceInStaff (
-  int        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -1700,7 +1700,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
 }
 
 void msrStaff::registerVoiceInStaffClone (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -2353,7 +2353,7 @@ void msrStaff::appendPageBreakToStaff (
 }
 
 void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2390,7 +2390,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
 
 /* JMI
 void msrStaff::nestContentsIntoNewRepeatInStaff (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
@@ -2417,8 +2417,8 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
 }
 */
 
-void msrStaff::handleRepeatStartInStaff (
-  int inputLineNumber)
+void msrStaff::cascadeHandleRepeatStartInStaff (
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
@@ -2450,7 +2450,7 @@ void msrStaff::handleRepeatStartInStaff (
 }
 
 void msrStaff::cascadeHandleRepeatEndInStaff (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& measureNumber,
   int           repeatTimes)
 {
@@ -2486,7 +2486,7 @@ void msrStaff::cascadeHandleRepeatEndInStaff (
 }
 
 void msrStaff::cascadeHandleRepeatEndingStartInStaff (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
@@ -2517,8 +2517,8 @@ void msrStaff::cascadeHandleRepeatEndingStartInStaff (
   --gIndenter;
 }
 
-void msrStaff::handleRepeatEndingEndInStaff (
-  int              inputLineNumber,
+void msrStaff::cascadeHandleRepeatEndingEndInStaff (
+  const mfInputLineNumber& inputLineNumber,
   const std::string&    repeatEndingNumber, // may be "1, 2"
   msrRepeatEndingKind
                     repeatEndingKind)
@@ -2559,7 +2559,7 @@ void msrStaff::handleRepeatEndingEndInStaff (
 
 /* JMI
 void msrStaff::finalizeRepeatEndInStaff (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& measureNumber,
   int           repeatTimes)
 {
@@ -2596,7 +2596,7 @@ void msrStaff::finalizeRepeatEndInStaff (
 */
 
 void msrStaff::cascadeCreateAMeasureRepeatAndAppendItToStaff (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int measureRepeatMeasuresNumber,
   int measureRepeatSlashesNumber)
 {
@@ -2627,7 +2627,7 @@ void msrStaff::cascadeCreateAMeasureRepeatAndAppendItToStaff (
 }
 
 void msrStaff::appendPendingMeasureRepeatToStaff (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
@@ -2654,7 +2654,7 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
 }
 
 void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int               multipleMeasureRestMeasuresNumber,
   int               multipleMeasureRestSlashesNumber,
   msrUseSymbolsKind multipleMeasureRestUseSymbolsKind)
@@ -2693,7 +2693,7 @@ void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
 }
 
 void msrStaff::replicateLastAppendedMeasureInStaff (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int replicatasNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2722,7 +2722,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
 }
 
 void msrStaff::appendEmptyMeasuresToStaff (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& previousMeasureNumber,
   int           emptyMeasuresNumber)
 {
@@ -2760,7 +2760,7 @@ void msrStaff::appendEmptyMeasuresToStaff (
 }
 
 void msrStaff::appendPendingMultipleMeasureRestsToStaff (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -2787,7 +2787,7 @@ void msrStaff::appendPendingMultipleMeasureRestsToStaff (
 }
 
 void msrStaff::appendMultipleMeasureRestCloneToStaff (
-  int                          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRests)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2817,7 +2817,7 @@ void msrStaff::appendMultipleMeasureRestCloneToStaff (
 }
 
 void msrStaff::appendRepeatCloneToStaff (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat& repeatCLone)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3084,7 +3084,7 @@ void msrStaff::appendHarpPedalsTuningToStaff (
 }
 
 void msrStaff::finalizeLastAppendedMeasureInStaff (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -3188,7 +3188,7 @@ bool msrStaff::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
   return result;
 }
 
-void msrStaff::finalizeStaff (int inputLineNumber)
+void msrStaff::finalizeStaff (const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
@@ -3238,7 +3238,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
 }
 
 void msrStaff::collectStaffMeasuresIntoFlatListsVector (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // collect measures from the staff voices
 #ifdef MF_TRACE_IS_ENABLED
@@ -3264,7 +3264,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
 }
 
 void msrStaff::collectStaffMeasuresSlices (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {

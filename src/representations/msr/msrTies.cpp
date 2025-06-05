@@ -63,7 +63,7 @@ std::ostream& operator << (std::ostream& os, const msrTieKind& elt)
 
 //______________________________________________________________________________
 S_msrTie msrTie::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTieKind       tieKind,
   msrPlacementKind placementKind)
 {
@@ -77,7 +77,7 @@ S_msrTie msrTie::create (
 }
 
 S_msrTie msrTie::create (
-  int        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTieKind tieKind)
 {
   return
@@ -88,7 +88,7 @@ S_msrTie msrTie::create (
 }
 
 msrTie::msrTie (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTieKind       tieKind,
   msrPlacementKind placementKind)
     : msrElement (inputLineNumber)

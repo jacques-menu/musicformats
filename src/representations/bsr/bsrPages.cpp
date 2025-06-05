@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrPage bsrPage::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int printPageNumber,
   int linesPerPage)
 {
@@ -43,7 +43,7 @@ S_bsrPage bsrPage::create (
 }
 
 bsrPage::bsrPage (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int printPageNumber,
   int linesPerPage)
     : bsrElement (inputLineNumber)

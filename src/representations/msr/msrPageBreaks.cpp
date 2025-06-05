@@ -52,7 +52,7 @@ std::string msrUserSelectedPageBreakKindAsString (
 
 //______________________________________________________________________________
 S_msrPageBreak msrPageBreak::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   int                 nextBarPuristNumber,
   msrUserSelectedPageBreakKind
@@ -69,7 +69,7 @@ S_msrPageBreak msrPageBreak::create (
 }
 
 S_msrPageBreak msrPageBreak::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                 nextBarPuristNumber,
   msrUserSelectedPageBreakKind
                       userSelectedPageBreakKind)
@@ -83,7 +83,7 @@ S_msrPageBreak msrPageBreak::create (
 }
 
 msrPageBreak::msrPageBreak (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   int                 nextBarPuristNumber,
   msrUserSelectedPageBreakKind

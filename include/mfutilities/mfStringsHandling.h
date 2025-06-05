@@ -269,7 +269,7 @@ std::string mfStringNumbersToEnglishWords (std::string str);
 // JMI 0.9.72 kept until mfInputLineNumber is used everywhere
 // instead of int for input line numbers
 std::string mfInputLineNumberAsString (
-  int inputLineNumber);
+  const mfInputLineNumber& inputLineNumber);
 
 //______________________________________________________________________________
 std::set <int> mfDecipherNaturalNumbersSetSpecification (

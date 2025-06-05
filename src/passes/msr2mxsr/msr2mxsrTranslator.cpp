@@ -109,7 +109,7 @@ Sxmlelement msr2mxsrTranslator::translateMsrToMxsr ()
 
 //________________________________________________________________________
 int msr2mxsrTranslator::wholeNotesAsDivisions (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes)
 {
   mfRational

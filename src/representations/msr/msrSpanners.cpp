@@ -59,7 +59,7 @@ std::ostream& operator << (std::ostream& os, const msrSpannerTypeKind& elt)
 
 //______________________________________________________________________________
 S_msrSpanner msrSpanner::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                spannerNumber,
   msrSpannerKind     spannerKind,
   msrSpannerTypeKind spannerTypeKind,
@@ -79,7 +79,7 @@ S_msrSpanner msrSpanner::create (
 }
 
 msrSpanner::msrSpanner (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                spannerNumber,
   msrSpannerKind     spannerKind,
   msrSpannerTypeKind spannerTypeKind,

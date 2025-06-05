@@ -33,7 +33,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrPaper lpsrPaper::create (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrScaling&    scaling,
   const S_msrPageLayout& pageLayout)
 {
@@ -47,7 +47,7 @@ S_lpsrPaper lpsrPaper::create (
 }
 
 lpsrPaper::lpsrPaper (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrScaling&    scaling,
   const S_msrPageLayout& pageLayout)
     : lpsrElement (inputLineNumber)

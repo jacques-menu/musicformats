@@ -12,6 +12,8 @@
 #ifndef ___msrMidi___
 #define ___msrMidi___
 
+#include "mfBasicTypes.h"
+
 #include "msrElements.h"
 
 
@@ -27,7 +29,7 @@ class EXP msrMidiTempo : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrMidiTempo> create (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& midiTempoNotesDuration,
                             int           midiTempoPerSecond);
 
@@ -39,7 +41,7 @@ class EXP msrMidiTempo : public msrElement
     // ------------------------------------------------------
 
                           msrMidiTempo (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& midiTempoNotesDuration,
                             int           midiTempoPerSecond);
 

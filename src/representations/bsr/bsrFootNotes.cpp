@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrFootNotes bsrFootNotes::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   bsrFootNotes* obj =
     new bsrFootNotes (
@@ -41,7 +41,7 @@ S_bsrFootNotes bsrFootNotes::create (
 }
 
 bsrFootNotes::bsrFootNotes (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : bsrLine (
         inputLineNumber,
         0, // JMI ???

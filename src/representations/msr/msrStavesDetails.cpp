@@ -118,7 +118,7 @@ std::ostream& operator << (std::ostream& os, const msrPrintSpacingKind& elt)
 
 //______________________________________________________________________________
 S_msrStaffTuning msrStaffTuning::create (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                      staffTuningLineNumber,
   msrQuarterTonesPitchKind staffTuningQuarterTonesPitchKind,
   msrOctaveKind            staffTuningOctaveKind)
@@ -134,7 +134,7 @@ S_msrStaffTuning msrStaffTuning::create (
 }
 
 msrStaffTuning::msrStaffTuning (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                      staffTuningLineNumber,
   msrQuarterTonesPitchKind staffTuningQuarterTonesPitchKind,
   msrOctaveKind            staffTuningOctaveKind)
@@ -317,7 +317,7 @@ std::ostream& operator << (std::ostream& os, const S_msrStaffTuning& elt)
 
 //______________________________________________________________________________
 S_msrStaffDetails msrStaffDetails::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   msrStaffTypeKind    staffTypeKind,
   msrShowFretsKind    showFretsKind,
@@ -337,7 +337,7 @@ S_msrStaffDetails msrStaffDetails::create (
 }
 
 S_msrStaffDetails msrStaffDetails::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrStaffTypeKind    staffTypeKind,
   msrShowFretsKind    showFretsKind,
   msrPrintObjectKind  printObjectKind,
@@ -354,7 +354,7 @@ S_msrStaffDetails msrStaffDetails::create (
 }
 
 msrStaffDetails::msrStaffDetails (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   msrStaffTypeKind    staffTypeKind,
   msrShowFretsKind    showFretsKind,

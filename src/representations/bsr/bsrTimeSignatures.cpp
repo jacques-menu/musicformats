@@ -118,7 +118,7 @@ std::string bsrTimeKindAsDebugString (
 
 //______________________________________________________________________________
 S_bsrTimeSignatureItem bsrTimeSignatureItem::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   bsrTimeSignatureItem* obj =
     new bsrTimeSignatureItem (
@@ -128,7 +128,7 @@ S_bsrTimeSignatureItem bsrTimeSignatureItem::create (
 }
 
 bsrTimeSignatureItem::bsrTimeSignatureItem (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : bsrElement (inputLineNumber)
 {
   fTimeSignatureBeatValue = -1;
@@ -387,7 +387,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrTimeSignatureItem& elt)
 
 //______________________________________________________________________________
 S_bsrTimeSignature bsrTimeSignature::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrTimeSignatureKind timeKind)
 {
   bsrTimeSignature* obj =
@@ -399,7 +399,7 @@ S_bsrTimeSignature bsrTimeSignature::create (
 }
 
 bsrTimeSignature::bsrTimeSignature (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrTimeSignatureKind timeKind)
     : bsrLineContentsElement (inputLineNumber)
 {

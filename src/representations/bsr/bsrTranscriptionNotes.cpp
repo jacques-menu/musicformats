@@ -33,7 +33,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrTranscriptionNotesElement bsrTranscriptionNotesElement::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& transcriptionNoteText)
 {
   bsrTranscriptionNotesElement* obj =
@@ -44,7 +44,7 @@ S_bsrTranscriptionNotesElement bsrTranscriptionNotesElement::create (
 }
 
 bsrTranscriptionNotesElement::bsrTranscriptionNotesElement (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& transcriptionNoteText)
     : bsrElement (inputLineNumber)
 {
@@ -183,7 +183,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrTranscriptionNotesElemen
 
 //______________________________________________________________________________
 S_bsrTranscriptionNotes bsrTranscriptionNotes::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   bsrTranscriptionNotes* obj =
     new bsrTranscriptionNotes (
@@ -193,7 +193,7 @@ S_bsrTranscriptionNotes bsrTranscriptionNotes::create (
 }
 
 bsrTranscriptionNotes::bsrTranscriptionNotes (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : bsrLine (
         inputLineNumber,
         0, // JMI ???

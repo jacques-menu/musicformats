@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrElement::msrElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   fInputLineNumber = inputLineNumber;
 }

@@ -15,7 +15,7 @@
 #include <list>
 
 #include "msrElements.h"
-#include "mfDurations.h"
+#include "mfDurationsAndPositionInMeasures.h"
 
 
 namespace MusicFormats
@@ -30,7 +30,7 @@ class EXP msrDivisions : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrDivisions> create (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int divisionsPerQuarterNote);
 
     SMARTP<msrDivisions> createDivisionsNewbornClone (); // JMI
@@ -48,7 +48,7 @@ class EXP msrDivisions : public msrElement
     // ------------------------------------------------------
 
                           msrDivisions (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int divisionsPerQuarterNote);
 
     virtual               ~msrDivisions ();
@@ -75,29 +75,29 @@ class EXP msrDivisions : public msrElement
 
     // durations
     int                   notesDurationKindAsDivisions (
-                            int             inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             mfDurationKind notesDurationKind);
 
     void                  printNotesDurationKindsDivisions (std::ostream& os);
 
     // MSR strings
     std::string           divisionspitchAndOctaveAsString (
-                            int  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int  divisions,
                             int& numberOfDotsNeeded);
 
     std::string           divisionspitchAndOctaveAsString (
-                            int  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int  divisions);
 
     std::string           tupletDivisionspitchAndOctaveAsString (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int divisions,
                             int actualNotes,
                             int normalNotes);
 
     std::string           tupletWholeNotesPitchAndOctaveAsString (
-                            int             inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes& wholeNotes,
                             int             actualNotes,
                             int             normalNotes);

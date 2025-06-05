@@ -38,7 +38,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 // XMLLang
 msrXMLLangKind msrXMLLangKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& XMLLangString)
 {
   msrXMLLangKind
@@ -332,7 +332,7 @@ std::ostream& operator << (std::ostream& os, const msrGlyphTypeKind& elt)
 
 //______________________________________________________________________________
 S_msrPageLayout msrPageLayout::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   msrPageLayout* obj =
     new msrPageLayout (
@@ -342,7 +342,7 @@ S_msrPageLayout msrPageLayout::create (
 }
 
 msrPageLayout::msrPageLayout (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {}
 
@@ -350,7 +350,7 @@ msrPageLayout::~msrPageLayout ()
 {}
 
 void msrPageLayout::setOddMarginsGroup (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMarginsGroup& val)
 {
   if (fBothMarginsGroup) {
@@ -371,7 +371,7 @@ void msrPageLayout::setOddMarginsGroup (
 }
 
 void msrPageLayout::setEvenMarginsGroup (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMarginsGroup& val)
 {
   if (fBothMarginsGroup) {
@@ -392,7 +392,7 @@ void msrPageLayout::setEvenMarginsGroup (
 }
 
 void msrPageLayout::setBothMarginsGroup (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMarginsGroup& val)
 {
   if (fOddMarginsGroup || fEvenMarginsGroup) {
@@ -673,7 +673,7 @@ std::ostream& operator << (std::ostream& os, const S_msrPageLayout& elt)
 
 //______________________________________________________________________________
 S_msrSystemLayout msrSystemLayout::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   msrSystemLayout* obj =
     new msrSystemLayout (
@@ -683,7 +683,7 @@ S_msrSystemLayout msrSystemLayout::create (
 }
 
 msrSystemLayout::msrSystemLayout (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {}
 
@@ -860,7 +860,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSystemLayout& elt)
 
 //______________________________________________________________________________
 S_msrSystemDividers msrSystemDividers::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   msrSystemDividers* obj =
     new msrSystemDividers (
@@ -870,7 +870,7 @@ S_msrSystemDividers msrSystemDividers::create (
 }
 
 msrSystemDividers::msrSystemDividers (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {
   fLeftDivider = false;
@@ -1002,7 +1002,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSystemDividers& elt)
 
 //______________________________________________________________________________
 S_msrStaffLayout msrStaffLayout::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int staffNumber)
 {
   msrStaffLayout* obj =
@@ -1014,7 +1014,7 @@ S_msrStaffLayout msrStaffLayout::create (
 }
 
 msrStaffLayout::msrStaffLayout (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int staffNumber)
     : msrElement (inputLineNumber)
 {
@@ -1154,7 +1154,7 @@ std::ostream& operator << (std::ostream& os, const S_msrStaffLayout& elt)
 
 //______________________________________________________________________________
 S_msrMeasureLayout msrMeasureLayout::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   msrMeasureLayout* obj =
     new msrMeasureLayout (
@@ -1164,7 +1164,7 @@ S_msrMeasureLayout msrMeasureLayout::create (
 }
 
 msrMeasureLayout::msrMeasureLayout (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {}
 
@@ -1292,7 +1292,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureLayout& elt)
 
 //______________________________________________________________________________
 S_msrLineWidth msrLineWidth::create (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrLineWidthTypeKind lineWidthTypeKind,
   const S_msrLength&   lineWidthValue)
 {
@@ -1306,7 +1306,7 @@ S_msrLineWidth msrLineWidth::create (
 }
 
 msrLineWidth::msrLineWidth (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrLineWidthTypeKind lineWidthTypeKind,
   const S_msrLength&   lineWidthValue)
     : msrElement (inputLineNumber)
@@ -1472,7 +1472,7 @@ std::ostream& operator << (std::ostream& os, const S_msrLineWidth& elt)
 
 //______________________________________________________________________________
 S_msrNoteSize msrNoteSize::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrNoteSizeTypeKind noteSizeTypeKind,
   float               noteSizeValue)
 {
@@ -1486,7 +1486,7 @@ S_msrNoteSize msrNoteSize::create (
 }
 
 msrNoteSize::msrNoteSize (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrNoteSizeTypeKind noteSizeTypeKind,
   float               noteSizeValue)
     : msrElement (inputLineNumber)
@@ -1639,7 +1639,7 @@ std::ostream& operator << (std::ostream& os, const S_msrNoteSize& elt)
 
 //______________________________________________________________________________
 S_msrDistance msrDistance::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrDistanceTypeKind distanceTypeKind,
   S_msrLength         distanceValue)
 {
@@ -1653,7 +1653,7 @@ S_msrDistance msrDistance::create (
 }
 
 msrDistance::msrDistance (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrDistanceTypeKind distanceTypeKind,
   S_msrLength         distanceValue)
     : msrElement (inputLineNumber)
@@ -1806,7 +1806,7 @@ std::ostream& operator << (std::ostream& os, const S_msrDistance& elt)
 
 //______________________________________________________________________________
 S_msrGlyph msrGlyph::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrGlyphTypeKind glyphTypeKind,
   const std::string&    glyphValue)
 {
@@ -1820,7 +1820,7 @@ S_msrGlyph msrGlyph::create (
 }
 
 msrGlyph::msrGlyph (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrGlyphTypeKind glyphTypeKind,
   const std::string&    glyphValue)
     : msrElement (inputLineNumber)
@@ -1973,7 +1973,7 @@ std::ostream& operator << (std::ostream& os, const S_msrGlyph& elt)
 
 //______________________________________________________________________________
 S_msrOtherAppearance msrOtherAppearance::create (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrOtherAppearanceTypeKind otherAppearanceTypeKind,
   const std::string&    otherAppearanceValue)
 {
@@ -1987,7 +1987,7 @@ S_msrOtherAppearance msrOtherAppearance::create (
 }
 
 msrOtherAppearance::msrOtherAppearance (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrOtherAppearanceTypeKind otherAppearanceTypeKind,
   const std::string&    otherAppearanceValue)
     : msrElement (inputLineNumber)
@@ -2140,7 +2140,7 @@ std::ostream& operator << (std::ostream& os, const S_msrOtherAppearance& elt)
 
 //______________________________________________________________________________
 S_msrAppearance msrAppearance::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   msrAppearance* obj =
     new msrAppearance (
@@ -2150,7 +2150,7 @@ S_msrAppearance msrAppearance::create (
 }
 
 msrAppearance::msrAppearance (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED

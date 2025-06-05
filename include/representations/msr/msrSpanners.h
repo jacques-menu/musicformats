@@ -57,7 +57,7 @@ class EXP msrSpanner : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrSpanner> create (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                spannerNumber,
                             msrSpannerKind     spannerKind,
                             msrSpannerTypeKind spannerTypeKind,
@@ -70,7 +70,7 @@ class EXP msrSpanner : public msrElement
     // ------------------------------------------------------
 
                           msrSpanner (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                spannerNumber,
                             msrSpannerKind     spannerKind,
                             msrSpannerTypeKind spannerTypeKind,

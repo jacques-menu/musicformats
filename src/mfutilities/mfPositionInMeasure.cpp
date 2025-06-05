@@ -24,10 +24,10 @@
 #include "mfPositionInMeasure.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 
-#include "mfDurations.h"
+#include "mfDurationsAndPositionInMeasures.h"
 
 #include "oahEarlyOptions.h"
 
@@ -422,6 +422,19 @@ EXP mfIndentedStringStream& operator << (
 
   return iss;
 }
+
+
+// position in measure
+//______________________________________________________________________________
+
+const int K_POSITION_IN_MEASURE_NUMERATOR_UNKNOWN_ = -2;
+
+const mfPositionInMeasure K_POSITION_IN_MEASURE_UNKNOWN_ =
+  mfPositionInMeasure (K_POSITION_IN_MEASURE_NUMERATOR_UNKNOWN_, 1);
+
+const mfPositionInMeasure K_POSITION_IN_MEASURE_ZERO =
+  mfPositionInMeasure (0, 1);
+
 
 
 }

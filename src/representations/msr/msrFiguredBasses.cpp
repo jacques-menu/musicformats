@@ -144,7 +144,7 @@ std::ostream& operator << (std::ostream& os, const msrBassFigureSuffixKind& elt)
 
 //______________________________________________________________________________
 S_msrBassFigure msrBassFigure::create (
-  int                     inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrPart&        figureUpLinkToPart,
   msrBassFigurePrefixKind figurePrefixKind,
   int                     figureNumber,
@@ -162,7 +162,7 @@ S_msrBassFigure msrBassFigure::create (
 }
 
 msrBassFigure::msrBassFigure (
-  int                     inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrPart&        figureUpLinkToPart,
   msrBassFigurePrefixKind figurePrefixKind,
   int                     figureNumber,
@@ -410,7 +410,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBassFigure& elt)
 
 //______________________________________________________________________________
 S_msrFiguredBass msrFiguredBass::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
   msrFiguredBass* obj =
@@ -427,7 +427,7 @@ S_msrFiguredBass msrFiguredBass::create (
 }
 
 S_msrFiguredBass msrFiguredBass::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   return
      msrFiguredBass::create (
@@ -436,7 +436,7 @@ S_msrFiguredBass msrFiguredBass::create (
 }
 
 S_msrFiguredBass msrFiguredBass::create (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
   const mfWholeNotes&   figuredBassSoundingWholeNotes,
   const mfWholeNotes&   figuredBassDisplayWholeNotes,
@@ -459,7 +459,7 @@ S_msrFiguredBass msrFiguredBass::create (
 }
 
 S_msrFiguredBass msrFiguredBass::create (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes&   figuredBassSoundingWholeNotes,
   const mfWholeNotes&   figuredBassDisplayWholeNotes,
 //   const mfWholeNotes&   figuredBassWholeNotesDuration,
@@ -479,7 +479,7 @@ S_msrFiguredBass msrFiguredBass::create (
 }
 
 msrFiguredBass::msrFiguredBass (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
   const mfWholeNotes&   figuredBassSoundingWholeNotes,
   const mfWholeNotes&   figuredBassDisplayWholeNotes,

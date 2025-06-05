@@ -14,6 +14,8 @@
 
 #include "exports.h"
 
+#include "mfBasicTypes.h"
+
 #include "mfExceptions.h"
 
 
@@ -26,7 +28,7 @@ namespace MusicFormats
 EXP void waeWarning (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 //______________________________________________________________________________
@@ -35,7 +37,7 @@ EXP void waeWarning (
 EXP void waeInternalWarning (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message);
 
 //______________________________________________________________________________
@@ -50,7 +52,7 @@ EXP void waeErrorWithoutException (
 EXP void waeErrorWithoutExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
@@ -68,7 +70,7 @@ EXP void waeErrorWithException (
 EXP void waeErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
@@ -86,7 +88,7 @@ EXP void waeError (
 EXP void waeErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
@@ -97,7 +99,7 @@ EXP void waeErrorWithInputLocation (
 EXP void waeInternalErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
@@ -105,7 +107,7 @@ EXP void waeInternalErrorWithInputLocation (
 EXP void waeInternalErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,

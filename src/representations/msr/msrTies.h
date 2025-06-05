@@ -43,12 +43,12 @@ class EXP msrTie : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrTie> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTieKind       tieKind,
                             msrPlacementKind placementKind);
 
     static SMARTP<msrTie> create (
-                            int        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTieKind tieKind);
 
   protected:
@@ -57,7 +57,7 @@ class EXP msrTie : public msrElement
     // ------------------------------------------------------
 
                           msrTie (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrTieKind       tieKind,
                             msrPlacementKind placementKind);
 

@@ -37,9 +37,9 @@ class EXP msrMeasure : public msrSegmentElement
     // ------------------------------------------------------
 
     static SMARTP<msrMeasure> create (
-                            int                 inputLineNumber,
-                            const std::string&  measureNumber,
-                            const S_msrSegment& measureUpLinkToSegment);
+                            const mfInputLineNumber&     inputLineNumber,
+                            const mfMeasureNumber& measureNumber,
+                            const S_msrSegment&    measureUpLinkToSegment);
                               // no const alias, call argument may be 'this' JMI 0.9.66
 
     SMARTP<msrMeasure> createMeasureNewbornClone (
@@ -49,8 +49,8 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrSegment& containingSegment);
 
     SMARTP<msrMeasure> createMeasureCopyWithNotesOnly (
-                            const S_msrSegment& containingSegment,
-                            const std::string&  measureNumber);
+                            const S_msrSegment&    containingSegment,
+                            const mfMeasureNumber& measureNumber);
 
   protected:
 
@@ -58,9 +58,9 @@ class EXP msrMeasure : public msrSegmentElement
     // ------------------------------------------------------
 
                           msrMeasure (
-                            int                 inputLineNumber,
-                            const std::string&  measureNumber,
-                            const S_msrSegment& measureUpLinkToSegment);
+                            const mfInputLineNumber&                    inputLineNumber,
+                            const mfMeasureNumber& measureNumber,
+                            const S_msrSegment&    measureUpLinkToSegment);
 
   public:
 
@@ -89,9 +89,9 @@ class EXP msrMeasure : public msrSegmentElement
     // measure numbers
 
     void                  setMeasureNumber (
-                            const std::string& measureNumber);
+                            const mfMeasureNumber& measureNumber);
 
-    std::string           getMeasureNumber () const
+    mfMeasureNumber       getMeasureNumber () const
                               { return fMeasureNumber; }
 
     void                  setMeasureOrdinalNumberInVoice (
@@ -106,9 +106,10 @@ class EXP msrMeasure : public msrSegmentElement
     int                   getMeasurePuristNumber () const
                               { return fMeasurePuristNumber; }
 
-    void                  setNextMeasureNumber (const std::string& nextMeasureNumber);
+    void                  setNextMeasureNumber (
+                            const mfMeasureNumber& nextMeasureNumber);
 
-    std::string           getNextMeasureNumber () const
+    mfMeasureNumber       getNextMeasureNumber () const
                               { return fNextMeasureNumber; }
 
     void                  setMeasureIsFirstInVoice ();
@@ -125,12 +126,12 @@ class EXP msrMeasure : public msrSegmentElement
                               { return fFullMeasureWholeNotesDuration; }
 
     void                  setMeasureCurrentPositionInMeasure (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber&   inputLineNumber,
                             const mfPositionInMeasure& positionInMeasure,
                             std::string                context);
 
     void                  incrementMeasureCurrentPositionInMeasure (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes& wholeNotesDelta,
                             std::string         context);
 
@@ -287,7 +288,7 @@ class EXP msrMeasure : public msrSegmentElement
 //     // measure lengths, in whole notes
 //
 //     mfWholeNotes          fetchFullMeasureWholeNotesDuration_KEEP (
-//                             int         inputLineNumber = 7327, // JMI 0.9.70 BABASSE
+//                             const mfInputLineNumber& inputLineNumber = 7327, // JMI 0.9.70 BABASSE
 //                             std::string context = "-- CONTEXT --") const;
 
   public:
@@ -312,29 +313,29 @@ class EXP msrMeasure : public msrSegmentElement
     // backup and padding
 
     S_msrNote             createPaddingSkipNoteForVoice (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes& duration,
                             const S_msrVoice&   voice);
 
 //     void                  padUpToPositionInMeasureInMeasure (
-//                             int                 inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const mfWholeNotes& positionInMeasureToPadUpTo);
 
     void                  padUpToPositionInMeasure (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfPositionInMeasure& positionInMeasureToPadUpTo);
 
     void                  padUpToPositionAtTheEndOfTheMeasure (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfPositionInMeasure& positionInMeasureToPadUpTo,
                             const std::string&         context);
 
 //     void                  casadeBackupByWholeNotesStepLengthInMeasure (
-//                             int                 inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const mfWholeNotes& backupStepLength);
 
     void                  appendPaddingSkipNoteToMeasure (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes& forwardStepLength);
 
     // print layout
@@ -375,7 +376,7 @@ class EXP msrMeasure : public msrSegmentElement
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInMeasureClone (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfPositionInMeasure& positionInMeasure);
 
     // transposition
@@ -473,7 +474,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrChord& chord);
 
     void                  accountForChordDurationInMeasure (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes& wholeNotes,
                             const std::string&  context);
 
@@ -490,12 +491,12 @@ class EXP msrMeasure : public msrSegmentElement
     // harmonies
 
     void                  appendHarmonyToMeasure (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrHarmony&        harmony,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  appendHarmonyToMeasureWithoutPadUp (
-                            int                  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrHarmony&  harmony);
 
     void                  appendHarmoniesListToMeasure (
@@ -517,12 +518,12 @@ class EXP msrMeasure : public msrSegmentElement
     // figured bass
 
     void                  appendFiguredBassToMeasure (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrFiguredBass&    figuredBass,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  appendFiguredBassToMeasureWithoutPadUp (
-                            int                     inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrFiguredBass& figuredBass);
 
     void                  cascadeAppendFiguredBassesListToMeasure (
@@ -590,17 +591,17 @@ class EXP msrMeasure : public msrSegmentElement
 
      /* JMI 0.9.66
     S_msrElement          removeLastElementFromMeasure (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 */
 
     // removing elements from measure
 
 //     void                  removeNoteFromMeasure (
-//                             int              inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const S_msrNote& note);
 //
 //     void                  removeElementFromMeasure (
-//                             int                 inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const S_msrElement& elem);
 
     // notes flat list
@@ -613,16 +614,16 @@ class EXP msrMeasure : public msrSegmentElement
     void                  setMeasurePuristNumberFromVoice ();
 
     void                  determineMeasureKind (
-                            int                         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind);
 
     void                  finalizeMeasure (
-                            int                         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
                             const std::string&          context);
 
     void                  finalizeMeasureClone (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& originalMeasure,
                             const S_msrVoice&   voiceClone,
                             const std::string&  context);
@@ -637,17 +638,17 @@ class EXP msrMeasure : public msrSegmentElement
                             const std::string&         context);
 
     void                  finalizeMeasureInRegularVoice (
-                            int                         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
                             const std::string&          context);
 
     void                  finalizeMeasureInHarmonyVoice (
-                            int                         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
                             const std::string&          context);
 
     void                  finalizeMeasureInFiguredBassVoice (
-                            int                         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
                             const std::string&          context);
 
@@ -672,7 +673,7 @@ class EXP msrMeasure : public msrSegmentElement
     std::string           asStringForMeasuresSlices () const override;
 
     void                  displayMeasure (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;
@@ -706,8 +707,8 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure numbers
 
-    std::string           fMeasureNumber;
-    std::string           fNextMeasureNumber; // JMI 0.9.70 NOT USED, go thru noteUpLinkToMeasure each time BABASSE
+    mfMeasureNumber       fMeasureNumber;
+    mfMeasureNumber       fNextMeasureNumber; // JMI 0.9.70 NOT USED, go thru noteUpLinkToMeasure each time BABASSE
 
     int                   fMeasureOrdinalNumberInVoice;
 
@@ -806,27 +807,27 @@ class EXP msrMeasure : public msrSegmentElement
 
     // harmonies
 //     void                  handleTheFirstHarmonyInAHarmoniesMeasure (
-//                             int                 inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const S_msrVoice&   voice,
 //                             const S_msrHarmony& currentHarmony);
 //
 //     void                  handleASubsequentHarmonyInAHarmoniesMeasure (
-//                             int                 inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const S_msrVoice&   voice,
 //                             const S_msrHarmony& previousHarmony,
 //                             const S_msrHarmony& currentHarmony);
 
     void                  handleTheLastHarmonyInAHarmoniesMeasure (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice&   voice,
                             const S_msrHarmony& currentHarmony);
 
     void                  finalizeTheHarmoniesInAHarmoniesMeasure (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context);
 
 //     void                  finalizeHarmonyInAHarmoniesMeasure (
-//                             int                 inputLineNumber,
+//                             const mfInputLineNumber& inputLineNumber,
 //                             const S_msrVoice&   voice,
 //                             const S_msrHarmony& previousHarmony,
 //                             const S_msrHarmony& currentHarmony,
@@ -834,7 +835,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // figurd bass
     void                  handleFirstFiguredBassInFiguredBassMeasure (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice&          voice,
                             std::list <S_msrMeasureElement>::iterator&
                                                        i,
@@ -843,7 +844,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const mfPositionInMeasure& currentFiguredBassPositionInMeasure);
 
     void                  handleSubsequentFiguredBassInFiguredBassMeasure (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice&          voice,
                             std::list <S_msrMeasureElement>::iterator&
                                                        i,
@@ -852,22 +853,22 @@ class EXP msrMeasure : public msrSegmentElement
                             const mfPositionInMeasure& currentFiguredBassPositionInMeasure);
 
     void                  handleTheLastFiguredBassInFiguredBassMeasure (
-                            int                     inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice&       voice,
                             const S_msrFiguredBass& currentFiguredBass);
 
     void                  finalizeTheFiguredBassesInAFiguredBassMeasure (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context);
 
     // measure elements
     void                  insertElementInMeasureBeforeIterator (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber&                  inputLineNumber,
                             std::list <S_msrMeasureElement>::iterator iter,
-                            const S_msrMeasureElement& elem);
+                            const S_msrMeasureElement&                elem);
 
     void                  insertElementInMeasureBeforeReverseIterator (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             std::list <S_msrMeasureElement>::reverse_iterator
                                                        iter,
                             const S_msrMeasureElement& elem);
@@ -876,27 +877,27 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrMeasureElement& elem);
 
     void                  insertElementAtPositionInMeasure (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfPositionInMeasure& positionInMeasure,
                             const S_msrMeasureElement& elem);
 
     void                  handleEmptyMeasure (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& voice);
 
     void                  handleRegularMeasure (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& voice);
 
     void                  handleIncompleteMeasure (
-                            int                  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice&    voice,
                             msrMeasureRepeatContextKind
                                                  measureRepeatContextKind,
                             const mfWholeNotes& newWholeNotesSinceLastRegularMeasureEnd);
 
     void                  handleOverflowingMeasure (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& voice);
 
     void                  printMeasurePendingMeasureElementsList ();

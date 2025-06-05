@@ -12,7 +12,7 @@
 #ifndef ___msrMeasureElements___
 #define ___msrMeasureElements___
 
-#include "mfDurations.h"
+#include "mfDurationsAndPositionInMeasures.h"
 #include "mfPositionInMeasure.h"
 
 #include "msrTypesForwardDeclarations.h"
@@ -40,7 +40,7 @@ class EXP msrMeasureElement : public msrElement
     // ------------------------------------------------------
 
                           msrMeasureElement (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrMeasureElement ();
 

@@ -27,22 +27,33 @@ using namespace MusicXML2;
 #define debug	0
 
 //_______________________________________________________________________________
-class predicate {
-	public:
-		int fType;
-			 predicate(int type) : fType(type) {}
-	virtual ~predicate() {}
-	virtual bool operator () (const Sxmlelement elt) const { 
-		return elt->getType() == fType;
-	}
-};
+// class predic { // JMI 0.9.75 std::predicate exists in C++20
+// 	public:
+// 		int fType;
+// 		predic(int type) : fType(type) {}
+// 	virtual ~predic() {}
+// 	virtual bool operator () (const Sxmlelement elt) const {
+// 		return elt->getType() == fType;
+// 	}
+// };
 
 //_______________________________________________________________________________
 static void count(Sxmlelement elt, int type)
 {
-	predicate p(type);
-	cerr << "  count of type " << type << " elements: " 
-		 << count_if(elt->begin(), elt->end(), p) << endl;
+// 	predic p(type);
+
+// https://stackoverflow.com/questions/31998613/c11-lambda-mixed-capture-list
+// https://www.learncpp.com/cpp-tutorial/lambda-captures/
+
+	cerr <<
+	  "  count of type " << type << " elements: " <<
+    count_if (
+      elt->begin(),
+      elt->end(),
+      [=](int i) // default capture by value of all variables
+        { return elt->getType() == type; }
+      ) <<
+    endl;
 }
 
 //_______________________________________________________________________________
@@ -55,7 +66,7 @@ static void test1(Sxmlelement elt)
 	while (iter != elt->end()) {
 		Sxmlelement xml = *iter;
 		if (xml)
-			cerr << "  element type " << xml->getType() 
+			cerr << "  element type " << xml->getType()
 				 << " - " << xml->getName()
 				 << " - size: " << xml->size() << endl;
 		else
@@ -77,7 +88,7 @@ static void test2(Sxmlelement elt)
 		next++;
 		assert (xml);
 		if (xml->getType() == k_software) {
-				next = elt->erase(iter);			
+				next = elt->erase(iter);
 		}
 		else if (xml->getType() == k_measure) {
 			if (!(measure & 1)) {
@@ -137,7 +148,7 @@ int main(int argc, char *argv[]) {
 				count(st, k_note);
 
 				file->print (cout);
-				cout << endl;		
+				cout << endl;
 			}
 		}
 	}

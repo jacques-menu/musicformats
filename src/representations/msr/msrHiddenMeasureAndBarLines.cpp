@@ -35,7 +35,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -61,7 +61,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
 }
 
 S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
-  int                 inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   return
     msrHiddenMeasureAndBarLine::create (
@@ -70,7 +70,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
 }
 
 msrHiddenMeasureAndBarLine::msrHiddenMeasureAndBarLine (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElement (
         inputLineNumber)

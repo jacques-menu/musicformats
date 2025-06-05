@@ -44,7 +44,7 @@ class EXP lpsrParallelMusicBLock : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrParallelMusicBLock> create (
-                            int                       inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             lpsrElementsSeparatorKind elementsSeparatorKind);
 
   protected:
@@ -53,7 +53,7 @@ class EXP lpsrParallelMusicBLock : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrParallelMusicBLock (
-                            int                       inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             lpsrElementsSeparatorKind elementsSeparatorKind);
 
     virtual               ~lpsrParallelMusicBLock ();

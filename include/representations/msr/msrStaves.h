@@ -36,12 +36,12 @@ class EXP msrStaff : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrStaff> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrStaffKind     staffKind,
                             int              staffNumber);
 
     static SMARTP<msrStaff> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrStaffKind     staffKind,
                             int              staffNumber,
                             const S_msrPart& staffUpLinkToPart);
@@ -55,7 +55,7 @@ class EXP msrStaff : public msrElement
     // ------------------------------------------------------
 
                           msrStaff (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrStaffKind     staffKind,
                             int              staffNumber);
 
@@ -235,7 +235,7 @@ class EXP msrStaff : public msrElement
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInStaffClone (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfPositionInMeasure& positionInMeasure);
 
     // transposition
@@ -246,75 +246,75 @@ class EXP msrStaff : public msrElement
     // voices
 
     S_msrVoice            createRegularVoiceInStaffByItsNumber (
-                            int                   inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                   voiceNumber,
                             const std::string&    currentMeasureNumber,
                             const S_msrPartGroup& partUpLinkToPartGroup);
 
     void                  registerVoiceInStaff (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& voice);
 
     void                  registerVoiceInStaffClone (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& voice);
 
     S_msrVoice            fetchRegularVoiceFromStaffByItsNumber (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int voiceNumber);
 
     S_msrVoice            fetchFirstRegularVoiceFromStaff (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  assignSequentialNumbersToRegularVoicesInStaff (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     // measures
 
     void                  cascadeCreateAMeasureAndAppendItInStaff (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
                             const std::string&     measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
     void                  setNextMeasureNumberInStaff (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& nextMeasureNumber);
 
     // measure repeats
 
     void                  cascadeCreateAMeasureRepeatAndAppendItToStaff (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int measureRepeatMeasuresNumber,
                             int measureRepeatSlashesNumber);
 
     void                  appendPendingMeasureRepeatToStaff (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     // measure rests
 
     // repeats
 
-    void                  handleRepeatStartInStaff (
-                            int inputLineNumber);
+    void                  cascadeHandleRepeatStartInStaff (
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  cascadeHandleRepeatEndInStaff (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& measureNumber,
                             int                repeatTimes);
 
     void                  cascadeHandleRepeatEndingStartInStaff (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
-    void                  handleRepeatEndingEndInStaff (
-                            int                inputLineNumber,
+    void                  cascadeHandleRepeatEndingEndInStaff (
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind
                                                repeatEndingKind);
 
 /* JMI
     void                  finalizeRepeatEndInStaff (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& measureNumber,
                             int                repeatTimes);
     */
@@ -322,31 +322,31 @@ class EXP msrStaff : public msrElement
     // multiple measure rests
 
     void                  cascadeAppendMultipleMeasureRestToStaff (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int               multipleMeasureRestMeasuresNumber,
                             int               multipleMeasureRestSlashesNumber,
                             msrUseSymbolsKind multipleMeasureRestUseSymbolsKind);
 
     void                  appendPendingMultipleMeasureRestsToStaff (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     // other
 
     void                  replicateLastAppendedMeasureInStaff (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int replicatasNumber);
 
     void                  appendEmptyMeasuresToStaff (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& previousMeasureNumber,
                             int                emptyMeasuresNumber);
 
     void                  appendMultipleMeasureRestCloneToStaff (
-                            int                          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMultipleMeasureRest& multipleMeasureRests);
 
     void                  appendRepeatCloneToStaff (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeat& repeatCLone);
 
     void                  appendRepeatEndingCloneToStaff (
@@ -354,7 +354,7 @@ class EXP msrStaff : public msrElement
 
     // beat repeats
     void                  createABeatRepeatFromItsFirstMeasuresInStaff ( // JMI 0.9.72
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int beatRepeatMeasuresNumber,
                             int beatRepeatSlashesNumber);
 
@@ -512,16 +512,16 @@ class EXP msrStaff : public msrElement
     // finalization
 
     void                  finalizeLastAppendedMeasureInStaff (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  finalizeStaff (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  collectStaffMeasuresIntoFlatListsVector (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     void                  collectStaffMeasuresSlices (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   private:
 
@@ -534,25 +534,25 @@ class EXP msrStaff : public msrElement
                             const S_msrVoice& voice);
 
     void                  registerVoiceByItsNumber (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int               staffNumber,
                             const S_msrVoice& voice);
 
     void                  registerRegularVoiceByItsNumber (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& regularVoice,
                             int               voiceNumber);
 
     void                  registerHarmoniesVoiceByItsNumber (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& voice);
 
     void                  registerFiguredBassVoiceByItsNumber (
-                            int        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& voice);
 
     void                  registerPartLevelVoiceInStaff ( // JMI rename for harmonies and figured bass ???
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& voice);
 
     // transposition

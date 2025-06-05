@@ -16,7 +16,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -54,8 +54,8 @@ namespace MusicFormats
 int msrMeasure::sGlobalMeasureDebugNumber = 0;
 
 S_msrMeasure msrMeasure::create (
-  int                 inputLineNumber,
-  const std::string&  measureNumber,
+  const mfInputLineNumber& inputLineNumber,
+  const mfMeasureNumber&  measureNumber,
   const S_msrSegment& measureUpLinkToSegment)
 {
   msrMeasure* obj =
@@ -68,9 +68,9 @@ S_msrMeasure msrMeasure::create (
 }
 
 msrMeasure::msrMeasure (
-  int                 inputLineNumber,
-  const std::string&  measureNumber,
-  const S_msrSegment& measureUpLinkToSegment)
+  const mfInputLineNumber& inputLineNumber,
+  const mfMeasureNumber& measureNumber,
+  const S_msrSegment&    measureUpLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -587,7 +587,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 
 S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
   const S_msrSegment& containingSegment,
-  const std::string&  measureNumber)
+  const mfMeasureNumber&  measureNumber)
 {
   S_msrVoice
     containingSegmentUpLinkToVoice =
@@ -899,7 +899,7 @@ void msrMeasure::setMeasureRepeatContextKind (
 }
 
 void msrMeasure::setMeasureNumber (
-  const std::string& measureNumber)
+  const mfMeasureNumber& measureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
@@ -1124,9 +1124,9 @@ void msrMeasure::appendMeasureElementToMeasure (
 }
 
 void msrMeasure::insertElementInMeasureBeforeIterator (
-  int                                      inputLineNumber,
+  const mfInputLineNumber&                  inputLineNumber,
   std::list <S_msrMeasureElement>::iterator iter,
-  const S_msrMeasureElement&               elem)
+  const S_msrMeasureElement&                elem)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -1420,7 +1420,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
 }
 
 void msrMeasure::insertElementAtPositionInMeasure (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfPositionInMeasure& positionInMeasure,
   const S_msrMeasureElement& elem)
 {
@@ -1563,7 +1563,7 @@ void msrMeasure::insertElementAtPositionInMeasure (
     elem->asShortString ());
 }
 
-void msrMeasure::setNextMeasureNumber (const std::string& nextMeasureNumber)
+void msrMeasure::setNextMeasureNumber (const mfMeasureNumber& nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -1622,7 +1622,7 @@ void msrMeasure::setMeasureIsFirstInVoice ()
 }
 
 // mfWholeNotes msrMeasure::fetchFullMeasureWholeNotesDuration_KEEP (
-// int         inputLineNumber,
+// const mfInputLineNumber& inputLineNumber,
 // std::string context) const
 // {
 //   mfWholeNotes result;
@@ -1780,7 +1780,7 @@ void msrMeasure::setFullMeasureWholeNotesDuration (
 }
 
 void msrMeasure::setMeasureCurrentPositionInMeasure (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfPositionInMeasure& positionInMeasure,
   std::string                context)
 {
@@ -1836,7 +1836,7 @@ void msrMeasure::setMeasureCurrentPositionInMeasure (
 }
 
 void msrMeasure::incrementMeasureCurrentPositionInMeasure (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotesDelta,
   std::string         context)
 {
@@ -2421,7 +2421,7 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
 }
 
 void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3191,7 +3191,7 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
 }
 
 void msrMeasure::accountForChordDurationInMeasure (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes,
   const std::string&  context)
 {
@@ -3287,7 +3287,7 @@ void msrMeasure::appendDoubleTremoloToMeasure (
 }
 
 void msrMeasure::appendHarmonyToMeasureWithoutPadUp (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrHarmony&  harmony)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3325,7 +3325,7 @@ void msrMeasure::appendHarmonyToMeasureWithoutPadUp (
 }
 
 void msrMeasure::appendHarmonyToMeasure (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrHarmony&        harmony,
   const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
@@ -3461,7 +3461,7 @@ void msrMeasure::appendHarmonyToMeasureClone (
 }
 
 void msrMeasure::appendFiguredBassToMeasureWithoutPadUp (
-  int                     inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrFiguredBass& figuredBass)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3497,7 +3497,7 @@ void msrMeasure::appendFiguredBassToMeasureWithoutPadUp (
 }
 
 void msrMeasure::appendFiguredBassToMeasure (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrFiguredBass&    figuredBass,
   const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
@@ -3624,7 +3624,7 @@ void msrMeasure::appendFiguredBassToMeasureClone (
 }
 
 S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& duration,
   const S_msrVoice&   voice)
 {
@@ -3673,7 +3673,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 }
 
 // void msrMeasure::padUpToPositionInMeasureInMeasure (
-//   int                 inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const mfWholeNotes& positionInMeasureToPadUpTo)
 // {
 //   // fetch the measure voice
@@ -3812,7 +3812,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 // }
 //
 void msrMeasure::padUpToPositionInMeasure (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfPositionInMeasure& positionInMeasureToPadUpTo)
 {
 //   gLog <<
@@ -3940,7 +3940,7 @@ void msrMeasure::padUpToPositionInMeasure (
 }
 
 void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfPositionInMeasure& positionInMeasureToPadUpTo,
   const std::string&         context)
 {
@@ -4134,7 +4134,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 }
 
 // void msrMeasure::casadeBackupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? 0.9.66
-//   int                 inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const mfWholeNotes& backupStepLength)
 // {
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -4194,7 +4194,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 // }
 
 void msrMeasure::appendPaddingSkipNoteToMeasure (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4367,7 +4367,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 // }
 
 // void msrMeasure::removeNoteFromMeasure (
-//   int              inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const S_msrNote& note)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -4481,7 +4481,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 // }
 
 // void msrMeasure::removeElementFromMeasure (
-//   int                 inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const S_msrElement& element)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -4646,7 +4646,7 @@ void msrMeasure::setMeasurePuristNumberFromVoice ()
 }
 
 void msrMeasure::determineMeasureKind (
-  int                         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind)
 {
 /*
@@ -4881,7 +4881,7 @@ if (false)
 }
 
 void msrMeasure::handleEmptyMeasure (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4959,7 +4959,7 @@ void msrMeasure::handleEmptyMeasure (
 }
 
 void msrMeasure::handleRegularMeasure (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4997,7 +4997,7 @@ void msrMeasure::handleRegularMeasure (
 }
 
 void msrMeasure::handleIncompleteMeasure (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice&    voice,
   msrMeasureRepeatContextKind
                        measureRepeatContextKind,
@@ -5176,7 +5176,7 @@ void msrMeasure::handleIncompleteMeasure (
 }
 
 void msrMeasure::handleOverflowingMeasure (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5214,7 +5214,7 @@ void msrMeasure::handleOverflowingMeasure (
 }
 
 void msrMeasure::finalizeMeasureInRegularVoice (
-  int                         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
   const std::string&          context)
 {
@@ -5381,7 +5381,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 }
 
 // void msrMeasure::handleTheFirstHarmonyInAHarmoniesMeasure (
-//   int                 inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const S_msrVoice&   voice,
 //   const S_msrHarmony& currentHarmony)
 // {
@@ -5505,7 +5505,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 // }
 //
 // void msrMeasure::handleASubsequentHarmonyInAHarmoniesMeasure (
-//   int                 inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const S_msrVoice&   voice,
 //   const S_msrHarmony& previousHarmony,
 //   const S_msrHarmony& currentHarmony)
@@ -5686,7 +5686,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 // }
 //
 void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice&   voice,
   const S_msrHarmony& currentHarmony)
 {
@@ -5985,7 +5985,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
 }
 
 void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
   // running this method for each and every measure in turn
@@ -6255,7 +6255,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
 }
 
 // void msrMeasure::finalizeHarmonyInAHarmoniesMeasure (
-//   int                 inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const S_msrVoice&   voice,
 //   const S_msrHarmony& previousHarmony,
 //   const S_msrHarmony& currentHarmony,
@@ -6349,7 +6349,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
 // }
 
 void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice&          voice,
   std::list <S_msrMeasureElement>::iterator&
                              i,
@@ -6441,7 +6441,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
 }
 
 void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice&          voice,
   std::list <S_msrMeasureElement>::iterator&
                              i,
@@ -6621,7 +6621,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 }
 
 void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
-  int                     inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice&       voice,
   const S_msrFiguredBass& currentFiguredBass)
 {
@@ -6788,7 +6788,7 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
 }
 
 void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
   // running this method for each and every measure in turn
@@ -7010,7 +7010,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
 }
 
 void msrMeasure::finalizeMeasureInHarmonyVoice (
-  int                         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
   const std::string&          context)
 {
@@ -7127,7 +7127,7 @@ void msrMeasure::finalizeMeasureInHarmonyVoice (
 }
 
 void msrMeasure::finalizeMeasureInFiguredBassVoice (
-  int                         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
   const std::string&          context)
 {
@@ -7248,7 +7248,7 @@ void msrMeasure::finalizeMeasureInFiguredBassVoice (
 }
 
 void msrMeasure::finalizeMeasure (
-  int                         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
   const std::string&          context)
 {
@@ -7484,7 +7484,7 @@ void msrMeasure::finalizeMeasure (
 }
 
 void msrMeasure::finalizeMeasureClone (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& originalMeasure,
   const S_msrVoice&   voiceClone,
   const std::string&  context)
@@ -8099,7 +8099,7 @@ std::string msrMeasure::asString () const
 }
 
 void msrMeasure::displayMeasure (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
   gLog <<

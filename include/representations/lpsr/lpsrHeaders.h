@@ -31,7 +31,7 @@ class EXP lpsrHeader : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrHeader> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -39,7 +39,7 @@ class EXP lpsrHeader : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrHeader (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~lpsrHeader ();
 

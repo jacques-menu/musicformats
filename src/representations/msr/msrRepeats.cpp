@@ -57,7 +57,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrRepeatCommonPart msrRepeatCommonPart::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat& upLinkToRepeat)
 {
   msrRepeatCommonPart* obj =
@@ -69,7 +69,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::create (
 }
 
 msrRepeatCommonPart::msrRepeatCommonPart (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat& upLinkToRepeat)
     : msrElement (inputLineNumber)
 {
@@ -88,7 +88,7 @@ msrRepeatCommonPart::~msrRepeatCommonPart ()
 {}
 
 void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrSegment&  segment,
   const std::string& context)
 {
@@ -121,7 +121,7 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
 }
 
 void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat& repeat,
   const std::string& context)
 {
@@ -155,7 +155,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
 }
 
 void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasureRepeat& measureRepeat,
   const std::string&      context)
 {
@@ -188,7 +188,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
 }
 
 void msrRepeatCommonPart::cascadeAppendMultipleMeasureRestToRepeatCommonPart (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRests,
   const std::string&    context)
 {
@@ -221,7 +221,7 @@ void msrRepeatCommonPart::cascadeAppendMultipleMeasureRestToRepeatCommonPart (
 }
 
 void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoiceElement& voiceElement,
   const std::string&     context)
 {
@@ -574,7 +574,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatCommonPart& elt)
 
 //______________________________________________________________________________
 S_msrRepeatEnding msrRepeatEnding::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&  repeatEndingNumber, // may be "1, 2"
   msrRepeatEndingKind repeatEndingKind,
   const S_msrRepeat&  upLinkToRepeat)
@@ -590,7 +590,7 @@ S_msrRepeatEnding msrRepeatEnding::create (
 }
 
 msrRepeatEnding::msrRepeatEnding (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&  repeatEndingNumber, // may be "1, 2"
   msrRepeatEndingKind repeatEndingKind,
   const S_msrRepeat&  upLinkToRepeat)
@@ -610,7 +610,7 @@ msrRepeatEnding::~msrRepeatEnding ()
 {}
 
 void msrRepeatEnding::appendSegmentToRepeatEnding (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrSegment&  segment,
   const std::string& context)
 {
@@ -642,7 +642,7 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
 }
 
 void msrRepeatEnding::appendRepeatToRepeatEnding (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat& repeat,
   const std::string& context)
 {
@@ -674,7 +674,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
 }
 
 void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasureRepeat& measureRepeat,
   const std::string&      context)
 {
@@ -707,7 +707,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
 }
 
 void msrRepeatEnding::cascadeAppendMultipleMeasureRestToRepeatEnding (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRests,
   const std::string&    context)
 {
@@ -740,7 +740,7 @@ void msrRepeatEnding::cascadeAppendMultipleMeasureRestToRepeatEnding (
 }
 
 void msrRepeatEnding::appendVoiceElementToRepeatEnding (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoiceElement& voiceElement,
   const std::string&     context)
 {
@@ -1069,7 +1069,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt)
 
 //______________________________________________________________________________
 S_msrRepeat msrRepeat::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int repeatTimes)
 {
   msrRepeat* obj =
@@ -1082,7 +1082,7 @@ S_msrRepeat msrRepeat::create (
 }
 
 S_msrRepeat msrRepeat::create (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int               repeatTimes,
   const S_msrVoice& upLinkToVoice)
 {
@@ -1096,7 +1096,7 @@ S_msrRepeat msrRepeat::create (
 }
 
 msrRepeat::msrRepeat (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int               repeatTimes,
   const S_msrVoice& upLinkToVoice)
     : msrVoiceElement (inputLineNumber)
@@ -1197,7 +1197,7 @@ void msrRepeat::setRepeatCommonPart (
 }
 
 void msrRepeat::addRepeatEndingToRepeat (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrRepeatEnding& repeatEnding)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -1360,7 +1360,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 }
 
 void msrRepeat::appendSegmentToRepeat (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrSegment&  segment,
   const std::string& context)
 {
@@ -1450,7 +1450,7 @@ void msrRepeat::appendSegmentToRepeat (
 }
 
 void msrRepeat::appendRepeatToRepeat (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat& repeat,
   const std::string& context)
 {
@@ -1540,7 +1540,7 @@ void msrRepeat::appendRepeatToRepeat (
 }
 
 void msrRepeat::appendMeasureRepeatToRepeat (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasureRepeat& measureRepeat,
   const std::string&      context)
 {
@@ -1630,7 +1630,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 }
 
 void msrRepeat::cascadeAppendMultipleMeasureRestToRepeat (
-  int                   inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRests,
   const std::string&    context)
 {
@@ -1945,7 +1945,7 @@ std::string msrRepeat::asString () const
 }
 
 void msrRepeat::displayRepeat (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
   gLog <<

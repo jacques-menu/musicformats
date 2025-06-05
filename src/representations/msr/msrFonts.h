@@ -46,7 +46,7 @@ std::string msrFontStyleKindAsString (
 std::ostream& operator << (std::ostream& os, const msrFontStyleKind& elt);
 
 msrFontStyleKind msrFontStyleKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& fontStyleString);
 
 enum class msrFontWeightKind {
@@ -60,7 +60,7 @@ std::string msrFontWeightKindAsString (
 std::ostream& operator << (std::ostream& os, const msrFontWeightKind& elt);
 
 msrFontWeightKind msrFontWeightKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& fontWeightString);
 
 std::ostream& operator << (std::ostream& os, const msrFontSizeKind& elt);

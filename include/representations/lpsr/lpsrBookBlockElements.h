@@ -37,7 +37,7 @@ class EXP lpsrBookBlockElement : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrBookBlockElement> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -45,7 +45,7 @@ class EXP lpsrBookBlockElement : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrBookBlockElement (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~lpsrBookBlockElement ();
 
@@ -111,7 +111,7 @@ class EXP lpsrScoreBlock : public lpsrBookBlockElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrScoreBlock> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -119,7 +119,7 @@ class EXP lpsrScoreBlock : public lpsrBookBlockElement
     // ------------------------------------------------------
 
                           lpsrScoreBlock (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~lpsrScoreBlock ();
 
@@ -180,7 +180,7 @@ class EXP lpsrBookPartBlock : public lpsrBookBlockElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrBookPartBlock> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -188,7 +188,7 @@ class EXP lpsrBookPartBlock : public lpsrBookBlockElement
     // ------------------------------------------------------
 
                           lpsrBookPartBlock (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~lpsrBookPartBlock ();
 
@@ -239,7 +239,7 @@ class EXP lpsrBookBlock : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrBookBlock> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -247,7 +247,7 @@ class EXP lpsrBookBlock : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrBookBlock (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~lpsrBookBlock ();
 

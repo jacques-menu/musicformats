@@ -42,7 +42,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrTempoNote msrTempoNote::create (
-  int             inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& tempoNoteWholeNotes,
   Bool            tempoNoteBelongsToATuplet)
 {
@@ -56,7 +56,7 @@ S_msrTempoNote msrTempoNote::create (
 }
 
 msrTempoNote::msrTempoNote (
-  int             inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& tempoNoteWholeNotes,
   Bool            tempoNoteBelongsToATuplet)
     : msrElement (inputLineNumber)
@@ -236,7 +236,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempoNote& elt)
 
 //______________________________________________________________________________
 S_msrTempoTuplet msrTempoTuplet::create (
-  int                          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                          tempoTupletNumber,
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
@@ -256,7 +256,7 @@ S_msrTempoTuplet msrTempoTuplet::create (
 }
 
 msrTempoTuplet::msrTempoTuplet (
-  int                          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                          tempoTupletNumber,
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
@@ -447,7 +447,7 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
 }
 
 void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
-  int            inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrTempoNote& tempoNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -874,7 +874,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempoTuplet& elt)
 
 //______________________________________________________________________________
 S_msrTempoNotesRelationshipElements msrTempoNotesRelationshipElements::create (
-  int      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTempoNotesRelationshipElementsKind
            tempoNotesRelationshipElementsKind)
 {
@@ -887,7 +887,7 @@ S_msrTempoNotesRelationshipElements msrTempoNotesRelationshipElements::create (
 }
 
 msrTempoNotesRelationshipElements::msrTempoNotesRelationshipElements (
-  int      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrTempoNotesRelationshipElementsKind
            tempoNotesRelationshipElementsKind)
     : msrElement (inputLineNumber)
@@ -1106,7 +1106,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempoNotesRelationshipEl
 
 //______________________________________________________________________________
 S_msrTempo msrTempo::createTempoWordsOnly (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const S_msrWords& tempoWords,
   msrTempoParenthesizedKind
@@ -1125,7 +1125,7 @@ S_msrTempo msrTempo::createTempoWordsOnly (
 }
 
 S_msrTempo msrTempo::createTempoWordsOnly (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrWords& tempoWords,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1141,7 +1141,7 @@ S_msrTempo msrTempo::createTempoWordsOnly (
 }
 
 S_msrTempo msrTempo::createTempoPerMinute (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   mfDottedNotesDuration tempoBeatUnit,
   std::string       tempoPerMinute,
@@ -1162,7 +1162,7 @@ S_msrTempo msrTempo::createTempoPerMinute (
 }
 
 S_msrTempo msrTempo::createTempoPerMinute (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   mfDottedNotesDuration tempoBeatUnit,
   std::string       tempoPerMinute,
   msrTempoParenthesizedKind
@@ -1180,7 +1180,7 @@ S_msrTempo msrTempo::createTempoPerMinute (
 }
 
 S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   mfDottedNotesDuration tempoBeatUnit,
   mfDottedNotesDuration tempoEquivalentBeatUnit,
@@ -1201,7 +1201,7 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
 }
 
 S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   mfDottedNotesDuration tempoBeatUnit,
   mfDottedNotesDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
@@ -1219,7 +1219,7 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
 }
 
 S_msrTempo msrTempo::createTempoNotesRelationship (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const S_msrTempoNotesRelationshipElements&
                     tempoNotesRelationshipLeftElements,
@@ -1245,7 +1245,7 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
 }
 
 S_msrTempo msrTempo::createTempoNotesRelationship (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrTempoNotesRelationshipElements&
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind
@@ -1268,7 +1268,7 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
 }
 
 msrTempo::msrTempo (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const S_msrWords& tempoWords,
   msrTempoParenthesizedKind
@@ -1302,7 +1302,7 @@ msrTempo::msrTempo (
 }
 
 msrTempo::msrTempo (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   mfDottedNotesDuration tempoBeatUnit,
   std::string       tempoPerMinute,
@@ -1327,7 +1327,7 @@ msrTempo::msrTempo (
 }
 
 msrTempo::msrTempo (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   mfDottedNotesDuration tempoBeatUnit,
   mfDottedNotesDuration tempoEquivalentBeatUnit,
@@ -1352,7 +1352,7 @@ msrTempo::msrTempo (
 }
 
 msrTempo::msrTempo (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const S_msrTempoNotesRelationshipElements&
                     tempoNotesRelationshipLeftElements,

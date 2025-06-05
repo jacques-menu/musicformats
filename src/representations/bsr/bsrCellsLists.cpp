@@ -27,7 +27,7 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 S_bsrCellsList bsrCellsList::create (
-  int         inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   bsrCellsList* obj =
     new bsrCellsList (
@@ -37,7 +37,7 @@ S_bsrCellsList bsrCellsList::create (
 }
 
 S_bsrCellsList bsrCellsList::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1)
 {
   bsrCellsList* obj =
@@ -49,7 +49,7 @@ S_bsrCellsList bsrCellsList::create (
 }
 
 S_bsrCellsList bsrCellsList::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1,
   bsrCellKind cellKind2)
 {
@@ -62,7 +62,7 @@ S_bsrCellsList bsrCellsList::create (
 }
 
 S_bsrCellsList bsrCellsList::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1,
   bsrCellKind cellKind2,
   bsrCellKind cellKind3)
@@ -76,7 +76,7 @@ S_bsrCellsList bsrCellsList::create (
 }
 
 S_bsrCellsList bsrCellsList::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1,
   bsrCellKind cellKind2,
   bsrCellKind cellKind3,
@@ -91,7 +91,7 @@ S_bsrCellsList bsrCellsList::create (
 }
 
 S_bsrCellsList bsrCellsList::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1,
   bsrCellKind cellKind2,
   bsrCellKind cellKind3,
@@ -107,7 +107,7 @@ S_bsrCellsList bsrCellsList::create (
 }
 
 S_bsrCellsList bsrCellsList::create (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1,
   bsrCellKind cellKind2,
   bsrCellKind cellKind3,
@@ -124,12 +124,12 @@ S_bsrCellsList bsrCellsList::create (
 }
 
 bsrCellsList::bsrCellsList (
-  int         inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
  //   : bsrElement (inputLineNumber)
 {}
 
 bsrCellsList::bsrCellsList (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1)
  //   : bsrElement (inputLineNumber)
 {
@@ -137,7 +137,7 @@ bsrCellsList::bsrCellsList (
 }
 
 bsrCellsList::bsrCellsList (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1,
   bsrCellKind cellKind2)
  //   : bsrElement (inputLineNumber)
@@ -147,7 +147,7 @@ bsrCellsList::bsrCellsList (
 }
 
 bsrCellsList::bsrCellsList (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1,
   bsrCellKind cellKind2,
   bsrCellKind cellKind3)
@@ -159,7 +159,7 @@ bsrCellsList::bsrCellsList (
 }
 
 bsrCellsList::bsrCellsList (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1,
   bsrCellKind cellKind2,
   bsrCellKind cellKind3,
@@ -173,7 +173,7 @@ bsrCellsList::bsrCellsList (
 }
 
 bsrCellsList::bsrCellsList (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1,
   bsrCellKind cellKind2,
   bsrCellKind cellKind3,
@@ -189,7 +189,7 @@ bsrCellsList::bsrCellsList (
 }
 
 bsrCellsList::bsrCellsList (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   bsrCellKind cellKind1,
   bsrCellKind cellKind2,
   bsrCellKind cellKind3,

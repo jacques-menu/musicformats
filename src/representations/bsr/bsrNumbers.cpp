@@ -29,7 +29,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrNumber bsrNumber::create (
-  int       inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int       numberValue,
   bsrNumberSignIsNeededKind
             numberSignIsNeededKind)
@@ -42,7 +42,7 @@ S_bsrNumber bsrNumber::create (
 }
 
 bsrNumber::bsrNumber (
-  int       inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int       numberValue,
   bsrNumberSignIsNeededKind
             numberSignIsNeededKind)

@@ -30,7 +30,7 @@ class EXP msrRepeatCoda : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrRepeatCoda> create (
-                            int          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrSegment& segment,
                             const S_msrRepeat&  upLinkToRepeat);
 
@@ -46,7 +46,7 @@ class EXP msrRepeatCoda : public msrElement
     // ------------------------------------------------------
 
                           msrRepeatCoda (
-                            int          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrSegment& segment,
                             const S_msrRepeat&  upLinkToRepeat);
 

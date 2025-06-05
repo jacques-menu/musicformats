@@ -54,7 +54,7 @@ class EXP bsrClef : public bsrLineContentsElement
     // ------------------------------------------------------
 
     static SMARTP<bsrClef> create (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrClefKind clefKind);
 
   protected:
@@ -63,7 +63,7 @@ class EXP bsrClef : public bsrLineContentsElement
     // ------------------------------------------------------
 
                           bsrClef (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrClefKind clefKind);
 
     virtual               ~bsrClef ();

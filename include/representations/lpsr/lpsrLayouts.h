@@ -29,7 +29,7 @@ class EXP lpsrLayout : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrLayout> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -37,7 +37,7 @@ class EXP lpsrLayout : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrLayout (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~lpsrLayout ();
 

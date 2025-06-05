@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrIdentification msrIdentification::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   msrIdentification* obj =
     new msrIdentification (
@@ -41,7 +41,7 @@ S_msrIdentification msrIdentification::create (
 }
 
 msrIdentification::msrIdentification (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {}
 
@@ -49,7 +49,7 @@ msrIdentification::~msrIdentification ()
 {}
 
 void msrIdentification::setIdentificationWorkNumber (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -69,7 +69,7 @@ void msrIdentification::setIdentificationWorkNumber (
 }
 
 void msrIdentification::setIdentificationWorkCreditTypeTitle (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -89,7 +89,7 @@ void msrIdentification::setIdentificationWorkCreditTypeTitle (
 }
 
 void msrIdentification::setIdentificationOpus (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -109,7 +109,7 @@ void msrIdentification::setIdentificationOpus (
 }
 
 void msrIdentification::setIdentificationMovementNumber (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -129,7 +129,7 @@ void msrIdentification::setIdentificationMovementNumber (
 }
 
 void msrIdentification::setIdentificationMovementTitle (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -149,7 +149,7 @@ void msrIdentification::setIdentificationMovementTitle (
 }
 
 void msrIdentification::setIdentificationEncodingDate (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& val)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -169,7 +169,7 @@ void msrIdentification::setIdentificationEncodingDate (
 }
 
 void msrIdentification::setIdentificationMiscellaneousField (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& val)
 {
  #ifdef MF_TRACE_IS_ENABLED
@@ -189,7 +189,7 @@ void msrIdentification::setIdentificationMiscellaneousField (
 }
 
 void msrIdentification::setIdentificationScoreInstrument (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& val)
 {
  #ifdef MF_TRACE_IS_ENABLED
@@ -209,7 +209,7 @@ void msrIdentification::setIdentificationScoreInstrument (
 }
 
 void msrIdentification::appendComposer (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -229,7 +229,7 @@ void msrIdentification::appendComposer (
 }
 
 void msrIdentification::appendLyricist (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -249,7 +249,7 @@ void msrIdentification::appendLyricist (
 }
 
 void msrIdentification::appendArranger (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -269,7 +269,7 @@ void msrIdentification::appendArranger (
 }
 
 void msrIdentification::appendPoet (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -289,7 +289,7 @@ void msrIdentification::appendPoet (
 }
 
 void msrIdentification::appendTranslator (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -309,7 +309,7 @@ void msrIdentification::appendTranslator (
 }
 
 void msrIdentification::appendArtist (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -329,7 +329,7 @@ void msrIdentification::appendArtist (
 }
 
 void msrIdentification::appendSoftware (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -349,7 +349,7 @@ void msrIdentification::appendSoftware (
 }
 
 void msrIdentification::appendRight (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -369,7 +369,7 @@ void msrIdentification::appendRight (
 }
 
 void msrIdentification::appendSource (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -389,7 +389,7 @@ void msrIdentification::appendSource (
 }
 
 void msrIdentification::appendRelation (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& value)
 {
 #ifdef MF_TRACE_IS_ENABLED

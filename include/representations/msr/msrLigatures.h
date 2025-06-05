@@ -59,7 +59,7 @@ class EXP msrLigature : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrLigature> create (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                    ligatureNumber,
                             msrLigatureKind        ligatureKind,
                             msrLigatureLineEndKind ligatureLineEndKind,
@@ -72,7 +72,7 @@ class EXP msrLigature : public msrElement
     // ------------------------------------------------------
 
                           msrLigature (
-                            int                    inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                    ligatureNumber,
                             msrLigatureKind        ligatureKind,
                             msrLigatureLineEndKind ligatureLineEndKind,

@@ -30,7 +30,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrBookBlockElement lpsrBookBlockElement::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   lpsrBookBlockElement* obj = new lpsrBookBlockElement (
     inputLineNumber);
@@ -39,7 +39,7 @@ S_lpsrBookBlockElement lpsrBookBlockElement::create (
 }
 
 lpsrBookBlockElement::lpsrBookBlockElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : lpsrElement (inputLineNumber)
 {
   // create the book block element parallel music
@@ -184,7 +184,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrBookBlockElement& scr)
 
 //______________________________________________________________________________
 S_lpsrScoreBlock lpsrScoreBlock::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   lpsrScoreBlock* obj = new lpsrScoreBlock (
     inputLineNumber);
@@ -193,7 +193,7 @@ S_lpsrScoreBlock lpsrScoreBlock::create (
 }
 
 lpsrScoreBlock::lpsrScoreBlock (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : lpsrBookBlockElement (inputLineNumber)
 {
   // create the score block parallel music block
@@ -482,7 +482,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrScoreBlock& scr)
 
 //______________________________________________________________________________
 S_lpsrBookPartBlock lpsrBookPartBlock::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   lpsrBookPartBlock* obj = new lpsrBookPartBlock (
     inputLineNumber);
@@ -491,7 +491,7 @@ S_lpsrBookPartBlock lpsrBookPartBlock::create (
 }
 
 lpsrBookPartBlock::lpsrBookPartBlock (
-  int            inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : lpsrBookBlockElement (inputLineNumber)
 {
   // create the bookpart block parallel music
@@ -708,7 +708,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrBookPartBlock& scr)
 
 //______________________________________________________________________________
 S_lpsrBookBlock lpsrBookBlock::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   lpsrBookBlock* obj = new lpsrBookBlock (
     inputLineNumber);
@@ -717,7 +717,7 @@ S_lpsrBookBlock lpsrBookBlock::create (
 }
 
 lpsrBookBlock::lpsrBookBlock (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : lpsrElement (inputLineNumber)
 {
   /* JMI

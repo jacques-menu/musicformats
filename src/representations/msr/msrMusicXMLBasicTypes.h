@@ -33,7 +33,7 @@ std::string msrXMLLangKindAsString (
 std::ostream& operator << (std::ostream& os, const msrXMLLangKind& elt);
 
 EXP msrXMLLangKind msrXMLLangKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& XMLLangString);
 
 enum class msrOtherAppearanceTypeKind { // JMI which values??? 0.9.62
@@ -148,7 +148,7 @@ class EXP msrPageLayout : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrPageLayout> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -156,7 +156,7 @@ class EXP msrPageLayout : public msrElement
     // ------------------------------------------------------
 
                           msrPageLayout (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrPageLayout ();
 
@@ -178,19 +178,19 @@ class EXP msrPageLayout : public msrElement
 
     // margins groups
     void                  setOddMarginsGroup (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMarginsGroup& val);
     S_msrMarginsGroup     getOddMarginsGroup () const
                               { return fOddMarginsGroup; }
 
     void                  setEvenMarginsGroup (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMarginsGroup& val);
     S_msrMarginsGroup     getEvenMarginsGroup () const
                               { return fEvenMarginsGroup; }
 
     void                  setBothMarginsGroup (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMarginsGroup& val);
     S_msrMarginsGroup     getBothMarginsGroup () const
                               { return fBothMarginsGroup; }
@@ -254,7 +254,7 @@ class EXP msrSystemLayout : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrSystemLayout> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -262,7 +262,7 @@ class EXP msrSystemLayout : public msrElement
     // ------------------------------------------------------
 
                           msrSystemLayout (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrSystemLayout ();
 
@@ -384,7 +384,7 @@ class EXP msrSystemDividers : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrSystemDividers> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -392,7 +392,7 @@ class EXP msrSystemDividers : public msrElement
     // ------------------------------------------------------
 
                           msrSystemDividers (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrSystemDividers ();
 
@@ -473,7 +473,7 @@ class EXP msrStaffLayout : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrStaffLayout> create (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int staffNumber);
 
   protected:
@@ -482,7 +482,7 @@ class EXP msrStaffLayout : public msrElement
     // ------------------------------------------------------
 
                           msrStaffLayout (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int staffNumber);
 
     virtual               ~msrStaffLayout ();
@@ -563,7 +563,7 @@ class EXP msrMeasureLayout : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrMeasureLayout> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -571,7 +571,7 @@ class EXP msrMeasureLayout : public msrElement
     // ------------------------------------------------------
 
                           msrMeasureLayout (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrMeasureLayout ();
 
@@ -632,14 +632,14 @@ class EXP msrLineWidth : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrLineWidth> create (
-                            int                  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrLineWidthTypeKind lineWidthTypeKind,
                             const S_msrLength&          lineWidthValue);
 
   protected:
 
                           msrLineWidth (
-                            int                  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrLineWidthTypeKind lineWidthTypeKind,
                             const S_msrLength&          lineWidthValue);
 
@@ -695,7 +695,7 @@ class EXP msrNoteSize : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrNoteSize> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrNoteSizeTypeKind noteSizeTypeKind,
                             float               noteSizeValue);
 
@@ -703,7 +703,7 @@ class EXP msrNoteSize : public msrElement
   protected:
 
                           msrNoteSize (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrNoteSizeTypeKind noteSizeTypeKind,
                             float               noteSizeValue);
 
@@ -761,14 +761,14 @@ class EXP msrDistance : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrDistance> create (
-      int                 inputLineNumber,
+      const mfInputLineNumber& inputLineNumber,
       msrDistanceTypeKind distanceTypeKind,
       S_msrLength         distanceValue);
 
   protected:
 
     msrDistance (
-      int                  inputLineNumber,
+      const mfInputLineNumber& inputLineNumber,
       msrDistanceTypeKind  distanceTypeKind,
       S_msrLength          distanceValue);
 
@@ -826,14 +826,14 @@ class EXP msrGlyph : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrGlyph> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrGlyphTypeKind glyphTypeKind,
                             const std::string&         glyphValue);
 
   protected:
 
                           msrGlyph (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrGlyphTypeKind glyphTypeKind,
                             const std::string&         glyphValue);
 
@@ -891,14 +891,14 @@ class EXP msrOtherAppearance : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrOtherAppearance> create (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
                             const std::string&         otherAppearanceValue);
 
   protected:
 
                           msrOtherAppearance (
-                            int                        inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
                             const std::string&         otherAppearanceValue);
 
@@ -1051,7 +1051,7 @@ class EXP msrAppearance : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrAppearance> create (
-      int inputLineNumber);
+      const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -1059,7 +1059,7 @@ class EXP msrAppearance : public msrElement
     // ------------------------------------------------------
 
     msrAppearance (
-      int inputLineNumber);
+      const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrAppearance ();
 

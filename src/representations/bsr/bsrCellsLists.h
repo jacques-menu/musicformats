@@ -19,6 +19,8 @@
 #include "smartpointer.h"
 #include "basevisitor.h"
 
+#include "mfBasicTypes.h"
+
 #include "bsrEnumTypes.h"
 #include "bsrCellsLists.h"
 
@@ -41,32 +43,32 @@ class EXP bsrCellsList : public smartable
     // ------------------------------------------------------
 
     static SMARTP<bsrCellsList> create (
-                            int         inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<bsrCellsList> create (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1);
 
     static SMARTP<bsrCellsList> create (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1,
       bsrCellKind cellKind2);
 
     static SMARTP<bsrCellsList> create (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1,
                             bsrCellKind cellKind2,
                             bsrCellKind cellKind3);
 
     static SMARTP<bsrCellsList> create (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1,
                             bsrCellKind cellKind2,
                             bsrCellKind cellKind3,
                             bsrCellKind cellKind4);
 
     static SMARTP<bsrCellsList> create (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1,
                             bsrCellKind cellKind2,
                             bsrCellKind cellKind3,
@@ -74,7 +76,7 @@ class EXP bsrCellsList : public smartable
                             bsrCellKind cellKind5);
 
     static SMARTP<bsrCellsList> create (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1,
                             bsrCellKind cellKind2,
                             bsrCellKind cellKind3,
@@ -88,32 +90,32 @@ class EXP bsrCellsList : public smartable
     // ------------------------------------------------------
 
                           bsrCellsList (
-                            int         inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
                           bsrCellsList (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1);
 
                           bsrCellsList (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1,
                             bsrCellKind cellKind2);
 
                           bsrCellsList (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1,
                             bsrCellKind cellKind2,
                             bsrCellKind cellKind3);
 
                           bsrCellsList (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1,
                             bsrCellKind cellKind2,
                             bsrCellKind cellKind3,
                             bsrCellKind cellKind4);
 
                           bsrCellsList (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1,
                             bsrCellKind cellKind2,
                             bsrCellKind cellKind3,
@@ -121,7 +123,7 @@ class EXP bsrCellsList : public smartable
                             bsrCellKind cellKind5);
 
                           bsrCellsList (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrCellKind cellKind1,
                             bsrCellKind cellKind2,
                             bsrCellKind cellKind3,

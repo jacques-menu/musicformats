@@ -14,9 +14,142 @@
 
 #include "mfBasicTypes.h"
 
+#include "mfIndentedTextOutput.h"
+
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+// the empty string
+const std::string K_MF_EMPTY_STRING ("");
+
+//______________________________________________________________________________
+// input line numbers
+
+const int K_MF_INPUT_LINE_UNKNOWN_ = -1;
+
+const std::string
+  kInputLineNumberPrefix             ("line_"),
+  kInputLineNumberDefaultValueString ("*line_Unknown*");
+
+//______________________________________________________________________________
+// input locations
+
+const std::string
+  kInputLocationRangePrefix (".."),
+  kInputLocationDefaultValueString ("*location_Unknown*");
+
+//______________________________________________________________________________
+// staff numbers
+
+const int K_STAFF_NUMBER_UNKNOWN_ = -99;
+
+const std::string
+  kStaffNumberPrefix ("staff_"),
+  kStaffNumberDefaultValueString ("*staff_Unknown*");
+
+EXP extern const int K_PART_HARMONIES_STAFF_NUMBER = 10;
+
+EXP extern const int K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
+
+std::string mfStaffNumberAsString (int staffNumber)
+{
+  std::string result;
+
+  if (staffNumber == K_STAFF_NUMBER_UNKNOWN_) {
+    result = "K_STAFF_NUMBER_UNKNOWN_";
+  }
+  else {
+    result = std::to_string (staffNumber);
+  }
+
+  return result;
+}
+
+//______________________________________________________________________________
+// voice numbers
+
+const int K_VOICE_NUMBER_UNKNOWN_ = -96;
+
+const std::string
+  kVoiceNumberPrefix ("voice_"),
+  kVoiceNumberDefaultValueString ("*voice_Unknown*");
+
+EXP extern const int K_PART_HARMONIES_VOICE_NUMBER = 11;
+EXP extern const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER = 20;
+
+EXP extern const int K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
+EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER = 40;
+
+std::string mfVoiceNumberAsString (int voiceNumber)
+{
+  std::string result;
+
+  if (voiceNumber == K_VOICE_NUMBER_UNKNOWN_) {
+    result = "K_VOICE_NUMBER_UNKNOWN_";
+  }
+  else {
+    result = std::to_string (voiceNumber);
+  }
+
+  return result;
+}
+
+//______________________________________________________________________________
+// measure numbers
+
+const std::string K_MEASURE_NUMBER_UNKNOWN_ =
+  "K_MEASURE_NUMBER_UNKNOWN_";
+
+const std::string
+  kMeasureNumberPrefix ("measure_"),
+  kMeasureNumberDefaultValueString ("*measure_Unknown*");
+
+std::string mfMeasureNumberAsString (
+  const mfMeasureNumber& measureNumber)
+{
+  std::string result;
+
+  if (measureNumber == K_MEASURE_NUMBER_UNKNOWN_) {
+    result = "K_MEASURE_NUMBER_UNKNOWN_";
+  }
+  else {
+    result = measureNumber;
+  }
+
+  return result;
+}
+
+//______________________________________________________________________________
+// lyrics
+
+const std::string
+  kStanzaNumberPrefix ("stanza_"),
+  kStanzaNumberDefaultValueString ("*stanza_Unknown*");
+
+const std::string
+  K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_",
+  K_STANZA_NAME_UNKNOWN_ = "K_STANZA_NAME_UNKNOWN_";
+
+std::string mfStanzaNumberAsString (std::string stanzaNumber)
+{
+  std::string result;
+
+  if (stanzaNumber == K_STANZA_NUMBER_UNKNOWN_) {
+    result = "K_STANZA_NAME_UNKNOWN_";
+  }
+  else {
+    result = stanzaNumber;
+  }
+
+  return result;
+}
+
+//______________________________________________________________________________
+// names lists max length
+
+EXP extern const int K_MF_NAMES_LIST_MAX_LENGTH = 50;
 
 //______________________________________________________________________________
 void testMfBasicTypes ()

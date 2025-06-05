@@ -38,12 +38,12 @@ class EXP msrSegno : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrSegno> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             int                 staffNumber);
 
     static SMARTP<msrSegno> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int                 staffNumber);
 
   protected:
@@ -52,7 +52,7 @@ class EXP msrSegno : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrSegno (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             int                 staffNumber);
 
@@ -109,14 +109,14 @@ class EXP msrDalSegno : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrDalSegno> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             msrDalSegnoKind     dalSegnoKind,
                             const std::string&  dalSegnoString,
                             int                 staffNumber);
 
     static SMARTP<msrDalSegno> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrDalSegnoKind     dalSegnoKind,
                             const std::string&  dalSegnoString,
                             int                 staffNumber);
@@ -127,7 +127,7 @@ class EXP msrDalSegno : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrDalSegno (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             msrDalSegnoKind     dalSegnoKind,
                             const std::string&  dalSegnoString,

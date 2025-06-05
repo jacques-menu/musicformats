@@ -25,7 +25,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrVariableUseCommand lpsrVariableUseCommand::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& variableName)
 {
   lpsrVariableUseCommand* obj =
@@ -36,7 +36,7 @@ S_lpsrVariableUseCommand lpsrVariableUseCommand::create (
 }
 
 lpsrVariableUseCommand::lpsrVariableUseCommand (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& variableName)
     : lpsrElement (inputLineNumber)
 {

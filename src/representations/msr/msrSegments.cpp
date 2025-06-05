@@ -49,7 +49,7 @@ int msrSegment::sSegmentsCounter = 0;
 int msrSegment::sSegmentDebugNumber = 0;
 
 S_msrSegment msrSegment::create (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& segmentUpLinkToVoice)
 {
   msrSegment* obj =
@@ -61,7 +61,7 @@ S_msrSegment msrSegment::create (
 }
 
 msrSegment::msrSegment (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& segmentUpLinkToVoice)
     : msrVoiceElement (inputLineNumber)
 {
@@ -438,7 +438,7 @@ void msrSegment::setSegmentShortestNoteTupletFactor (
 */
 
 void msrSegment::assertSegmentLastMeasureIsNotNull (
-  int inputLineNumber) const
+  const mfInputLineNumber& inputLineNumber) const
 {
   if (! fSegmentLastMeasure) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -476,7 +476,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
 }
 
 void msrSegment::assertSegmentElementsListIsNotEmpty (
-  int inputLineNumber) const
+  const mfInputLineNumber& inputLineNumber) const
 {
   if (! fSegmentElementsList.size ()) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -519,7 +519,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
 }
 
 S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                    previousMeasureEndInputLineNumber,
   const std::string&     measureNumber,
   msrMeasureImplicitKind measureImplicitKind)
@@ -634,7 +634,7 @@ S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
 }
 
 void msrSegment::setNextMeasureNumberInSegment (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1195,7 +1195,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (
 }
 
 void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1235,7 +1235,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
 }
 
 void msrSegment::appendHarmonyToSegment (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrHarmony&        harmony,
   const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
@@ -1337,7 +1337,7 @@ void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
 }
 
 void msrSegment::appendFiguredBassToSegment (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrFiguredBass&    figuredBass,
   const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
@@ -2080,7 +2080,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 }
 
 // void msrSegment::padUpToPositionInMeasureInSegment (
-//   int                  inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const mfWholeNotes& wholeNotes)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -2152,7 +2152,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 // }
 
 // void msrSegment::casadeBackupByWholeNotesStepLengthInSegment (
-//   int     inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const mfWholeNotes&
 //           backupTargetMeasureElementPositionInMeasure)
 // {
@@ -2191,7 +2191,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 // }
 
 void msrSegment::cascadeAppendPaddingNoteToSegment (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2747,7 +2747,7 @@ void msrSegment::prependAfterGraceNotesToSegment (
 
 /* JMI
 S_msrElement msrSegment::removeLastElementFromSegment (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   // this last element can be a note or a tuplet,
   // this method is used when the seconde note of a chord is mest
@@ -2770,7 +2770,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 */
 
 // void msrSegment::removeNoteFromSegment (
-//   int              inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const S_msrNote& note)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -2820,7 +2820,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 // }
 
 // void msrSegment::removeElementFromSegment (
-//   int                 inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const S_msrElement& element)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -2866,7 +2866,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 // }
 
 S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2932,7 +2932,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 }
 
 // S_msrMeasure msrSegment::removeLastMeasureFromSegment (
-//   int                inputLineNumber,
+//   const mfInputLineNumber& inputLineNumber,
 //   const std::string& context)
 // {
 //   S_msrMeasure result;
@@ -3107,7 +3107,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 // }
 
 void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -3305,7 +3305,7 @@ std::string msrSegment::asString () const
 }
 
 void msrSegment::displaySegment (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
   gLog <<

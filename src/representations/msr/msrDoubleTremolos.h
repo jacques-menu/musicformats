@@ -52,7 +52,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrDoubleTremolo> create (
-                            int                       inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&       upLinkToMeasure,
                             msrDoubleTremoloKind      doubleTremoloKind,
                             msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
@@ -61,7 +61,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
 
     static SMARTP<msrDoubleTremolo> create (
-                            int                       inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrDoubleTremoloKind      doubleTremoloKind,
                             msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
                             int                       doubleTremoloMarksNumber,
@@ -78,7 +78,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrDoubleTremolo (
-                            int                       inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&       upLinkToMeasure,
                             msrDoubleTremoloKind      doubleTremoloKind,
                             msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,

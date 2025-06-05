@@ -38,7 +38,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrGraceNotesGroup msrGraceNotesGroup::create (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrGraceNotesGroupKind graceNotesGroupKind,
   Bool                   graceNotesGroupIsSlashed,
   Bool                   graceNotesGroupIsBeamed,
@@ -60,7 +60,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::create (
 }
 
 msrGraceNotesGroup::msrGraceNotesGroup (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrGraceNotesGroupKind graceNotesGroupKind,
   Bool                   graceNotesGroupIsSlashed,
   Bool                   graceNotesGroupIsBeamed,
@@ -369,7 +369,7 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
 }
 
 // S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
-//   int inputLineNumber)
+//   const mfInputLineNumber& inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceGraceNotes ()) {

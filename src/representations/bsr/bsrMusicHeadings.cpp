@@ -30,7 +30,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_bsrMusicHeading bsrMusicHeading::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   bsrMusicHeading* obj =
     new bsrMusicHeading (
@@ -40,7 +40,7 @@ S_bsrMusicHeading bsrMusicHeading::create (
 }
 
 bsrMusicHeading::bsrMusicHeading (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : bsrLine (
         inputLineNumber,
         0, // JMI ???

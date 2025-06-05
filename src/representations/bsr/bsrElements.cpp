@@ -25,7 +25,7 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 S_bsrElement bsrElement::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   bsrElement* obj =
     new bsrElement (
@@ -35,7 +35,7 @@ S_bsrElement bsrElement::create (
 }
 
 bsrElement::bsrElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {}
 

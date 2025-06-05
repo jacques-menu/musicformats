@@ -30,7 +30,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrAfterGraceNotesGroupContents> create (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice);
 
     SMARTP<msrAfterGraceNotesGroupContents> createAfterGraceNotesGroupContentsNewbornClone (
@@ -45,7 +45,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // ------------------------------------------------------
 
                           msrAfterGraceNotesGroupContents (
-                            int               inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice);
 
     virtual               ~msrAfterGraceNotesGroupContents ();
@@ -119,7 +119,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrAfterGraceNotesGroup> create (
-                            int          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrElement& afterGraceNotesGroupElement,
                             Bool         afterGraceNotesGroupIsSlashed,
                             const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice);
@@ -138,7 +138,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
     // ------------------------------------------------------
 
                           msrAfterGraceNotesGroup (
-                            int          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrElement& afterGraceNotesGroupElement,
                             Bool         afterGraceNotesGroupIsSlashed,
                             const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice);

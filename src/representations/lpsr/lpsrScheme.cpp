@@ -78,7 +78,7 @@ std::ostream& operator << (std::ostream& os, const lpsrEndOfLineKind& elt)
 
 //______________________________________________________________________________
 S_lpsrSchemeVariable lpsrSchemeVariable::create (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   lpsrCommentedKind commentedKind,
   const std::string&     variableName,
   const std::string&     value,
@@ -94,7 +94,7 @@ S_lpsrSchemeVariable lpsrSchemeVariable::create (
 }
 
 lpsrSchemeVariable::lpsrSchemeVariable (
-  int               inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   lpsrCommentedKind commentedKind,
   const std::string&     variableName,
   const std::string&     value,
@@ -250,7 +250,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrSchemeVariable& schemeV
 
 //______________________________________________________________________________
 S_lpsrSchemeFunction lpsrSchemeFunction::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& functionName,
   const std::string& functionDescription,
   const std::string& functionCode)
@@ -264,7 +264,7 @@ S_lpsrSchemeFunction lpsrSchemeFunction::create (
 }
 
 lpsrSchemeFunction::lpsrSchemeFunction (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& functionName,
   const std::string& functionDescription,
   const std::string& functionCode)

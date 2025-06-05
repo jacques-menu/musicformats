@@ -38,7 +38,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrStringTuning msrStringTuning::create (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                  stringTuningNumber,
   msrDiatonicPitchKind stringTuningDiatonicPitchKind,
   msrAlterationKind    stringTuningAlterationKind,
@@ -56,7 +56,7 @@ S_msrStringTuning msrStringTuning::create (
 }
 
 msrStringTuning::msrStringTuning (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int                  stringTuningNumber,
   msrDiatonicPitchKind stringTuningDiatonicPitchKind,
   msrAlterationKind    stringTuningAlterationKind,
@@ -221,7 +221,7 @@ std::ostream& operator << (std::ostream& os, const S_msrStringTuning& elt)
 
 //______________________________________________________________________________
 S_msrScordatura msrScordatura::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
   msrScordatura* obj =
@@ -233,7 +233,7 @@ S_msrScordatura msrScordatura::create (
 }
 
 S_msrScordatura msrScordatura::create (
-  int                 inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   return
     msrScordatura::create (
@@ -242,7 +242,7 @@ S_msrScordatura msrScordatura::create (
 }
 
 msrScordatura::msrScordatura (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElement (
         inputLineNumber)
@@ -410,7 +410,7 @@ std::ostream& operator << (std::ostream& os, const S_msrScordatura& elt)
 
 //______________________________________________________________________________
 S_msrAccordionRegistration msrAccordionRegistration::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   int           highDotsNumber,
   int           middleDotsNumber,
@@ -426,7 +426,7 @@ S_msrAccordionRegistration msrAccordionRegistration::create (
 }
 
 S_msrAccordionRegistration msrAccordionRegistration::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int           highDotsNumber,
   int           middleDotsNumber,
   int           lowDotsNumber)
@@ -441,7 +441,7 @@ S_msrAccordionRegistration msrAccordionRegistration::create (
 }
 
 msrAccordionRegistration::msrAccordionRegistration (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   int           highDotsNumber,
   int           middleDotsNumber,
@@ -599,7 +599,7 @@ std::ostream& operator << (std::ostream& os, const S_msrAccordionRegistration& e
 
 //______________________________________________________________________________
 S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
   msrHarpPedalsTuning* obj =
@@ -611,7 +611,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
 }
 
 S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
-  int                 inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   return
     msrHarpPedalsTuning::create (
@@ -620,7 +620,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
 }
 
 msrHarpPedalsTuning::msrHarpPedalsTuning (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElement (
         inputLineNumber)
@@ -704,9 +704,9 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningDeepClone ()
 // }
 
 void msrHarpPedalsTuning::addPedalTuning (
-  int                  inputLineNumber,
-  msrDiatonicPitchKind diatonicPitchKind,
-  msrAlterationKind    alterationKind)
+  const mfInputLineNumber& inputLineNumber,
+  msrDiatonicPitchKind     diatonicPitchKind,
+  msrAlterationKind        alterationKind)
 {
   // is diatonicPitch in the part renaming map?
   std::map <msrDiatonicPitchKind, msrAlterationKind>::const_iterator
@@ -903,7 +903,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHarpPedalsTuning& elt)
 
 //______________________________________________________________________________
 S_msrPedal msrPedal::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   msrPedalTypeKind pedalTypeKind,
   msrPedalLineKind pedalLineKind,
@@ -921,7 +921,7 @@ S_msrPedal msrPedal::create (
 }
 
 S_msrPedal msrPedal::create (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrPedalTypeKind pedalTypeKind,
   msrPedalLineKind pedalLineKind,
   msrPedalSignKind pedalSignKind)
@@ -936,7 +936,7 @@ S_msrPedal msrPedal::create (
 }
 
 msrPedal::msrPedal (
-  int              inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   msrPedalTypeKind pedalTypeKind,
   msrPedalLineKind pedalLineKind,
@@ -1161,7 +1161,7 @@ std::ostream& operator << (std::ostream& os, const S_msrPedal& elt)
 
 //______________________________________________________________________________
 S_msrDamp msrDamp::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
   msrDamp* obj =
@@ -1173,7 +1173,7 @@ S_msrDamp msrDamp::create (
 }
 
 S_msrDamp msrDamp::create (
-  int                 inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   return
     msrDamp::create (
@@ -1182,7 +1182,7 @@ S_msrDamp msrDamp::create (
 }
 
 msrDamp::msrDamp (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElement (
         inputLineNumber)
@@ -1318,7 +1318,7 @@ std::ostream& operator << (std::ostream& os, const S_msrDamp& elt)
 
 //______________________________________________________________________________
 S_msrDampAll msrDampAll::create (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
   msrDampAll* obj =
@@ -1330,7 +1330,7 @@ S_msrDampAll msrDampAll::create (
 }
 
 S_msrDampAll msrDampAll::create (
-  int                 inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   return
     msrDampAll::create (
@@ -1339,7 +1339,7 @@ S_msrDampAll msrDampAll::create (
 }
 
 msrDampAll::msrDampAll (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElement (
         inputLineNumber)

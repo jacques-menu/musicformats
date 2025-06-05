@@ -12,7 +12,7 @@
 #include <sstream>
 #include <iomanip>      // setw()), set::precision(), ...
 
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfIndentedTextOutput.h"
 #include "mfStringsHandling.h"
 
@@ -140,6 +140,20 @@ std::ostream& operator << (std::ostream& os, const mfMoment& elt)
   elt.print (os);
   return os;
 }
+
+
+// moments
+//______________________________________________________________________________
+
+const mfMoment K_MOMENT_UNKNOWN_ =
+  mfMoment (
+    K_POSITION_IN_MEASURE_UNKNOWN_,
+    K_WHOLE_NOTES_UNKNOWN_);
+
+const std::string
+  kMomentPrefix ("moment_"),
+  kMomentDefaultValueString ("K_MOMENT_UNKNOWN_");
+
 
 //______________________________________________________________________________
 void testMsrMomentComparisons (std::ostream& os)

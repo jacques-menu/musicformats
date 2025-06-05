@@ -498,7 +498,7 @@ std::string mfStringNumbersToEnglishWords (std::string theString)
 // }
 
 std::string mfInputLineNumberAsString (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   std::stringstream ss;
 
@@ -510,7 +510,7 @@ std::string mfInputLineNumberAsString (
 
 // std::string mfInputLineNumbersAsString (
 //   int inputStartLineNumber,
-//   int inputLineNumber)
+//   const mfInputLineNumber& inputLineNumber)
 // {
 //   std::stringstream ss;
 //

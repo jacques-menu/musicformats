@@ -21,13 +21,13 @@
 
 #include "mfPreprocessorSettings.h"
 
-#include "mfDurations.h"
+#include "mfDurationsAndPositionInMeasures.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 
-#include "mfDurations.h"
+#include "mfDurationsAndPositionInMeasures.h"
 
 #include "oahEarlyOptions.h"
 
@@ -464,7 +464,7 @@ EXP mfIndentedStringStream& operator << (
 
 //_______________________________________________________________________________
 std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes,
   int&                 dotsNumber)
 {
@@ -910,7 +910,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
 }
 
 std::string wholeNotesPitchAndOctaveAsString (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes)
 {
   int dotsNumber; // not used JMI 0.9.70
@@ -923,7 +923,7 @@ std::string wholeNotesPitchAndOctaveAsString (
 }
 
 std::string multipleMeasureRestsWholeNotesPitchAndOctaveAsString (
-  int                  inputLineNumber, // JMI
+  const mfInputLineNumber& inputLineNumber, // JMI
   const mfWholeNotes& wholeNotes)
 {
   std::stringstream ss;
@@ -969,7 +969,7 @@ void testWholeNotes ()
 
 //______________________________________________________________________________
 mfDurationKind mfDurationKindFromMusicXMLGraphicNoteType (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& durationString)
 {
   mfDurationKind result = mfDurationKind::kDuration_UNKNOWN_;
@@ -1034,7 +1034,7 @@ mfDurationKind mfDurationKindFromMusicXMLGraphicNoteType (
 }
 
 EXP mfDurationKind mfDurationKindFromInteger (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int durationInteger)
 {
   mfDurationKind result = mfDurationKind::kDuration_UNKNOWN_;
@@ -1081,7 +1081,7 @@ EXP mfDurationKind mfDurationKindFromInteger (
 }
 
 mfDurationKind mfDurationKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& durationString)
 {
   mfDurationKind result = mfDurationKind::kDuration_UNKNOWN_;
@@ -1502,7 +1502,7 @@ std::ostream& operator << (std::ostream& os, const mfDurationKind& elt)
 
 //______________________________________________________________________________
 EXP void checkNoteDurationKindAndWholeNotesDurationConsistency (
-  int                  inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   mfDurationKind notesDurationKind,
   mfWholeNotes        wholeNotesDuration)
 {
@@ -1595,7 +1595,7 @@ msrNotesDuration::~msrNotesDuration ()
 {}
 
 mfWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
-  int inputLineNumber) const
+  const mfInputLineNumber& inputLineNumber) const
 {
   // convert duration into whole notes
   mfWholeNotes
@@ -1659,7 +1659,7 @@ mfWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
   // used in lpsrEnumTypes, dottedNotesDurationAsLilypondStringWithoutBackSlash(),
   // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
   // JMI BUGGY, NEVER TESTED TEMP??? 0.9.67
-  int inputLineNumber) const
+  const mfInputLineNumber& inputLineNumber) const
 {
   // convert duration into whole notes
   mfWholeNotes
@@ -1863,7 +1863,7 @@ mfDottedNotesDuration::~mfDottedNotesDuration ()
 {}
 
 mfWholeNotes mfDottedNotesDuration::dottedNotesDurationAsWholeNotes (
-  int inputLineNumber) const
+  const mfInputLineNumber& inputLineNumber) const
 {
   // convert duration into whole notes
   mfWholeNotes
@@ -1927,7 +1927,7 @@ mfWholeNotes mfDottedNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
   // used in lpsrEnumTypes, dottedNotesDurationAsLilypondStringWithoutBackSlash(),
   // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
   // JMI BUGGY, NEVER TESTED TEMP???
-  int inputLineNumber) const
+  const mfInputLineNumber& inputLineNumber) const
 {
   // convert duration into whole notes
   mfWholeNotes
@@ -2014,6 +2014,24 @@ std::ostream& operator << (std::ostream& os, const mfDottedNotesDuration& elt)
   os << elt.asString ();
   return os;
 }
+
+
+
+
+// whole notes durations
+//______________________________________________________________________________
+
+const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = -1;
+
+const mfWholeNotes K_WHOLE_NOTES_UNKNOWN_ =
+  mfWholeNotes (-1, 1);
+
+const mfWholeNotes K_WHOLE_NOTES_ZERO =
+  mfWholeNotes (0, 1);
+
+const std::string
+  kWholeNotePrefix ("whole_notes_"),
+  kWholeNoteDefaultValueString ("K_WHOLE_NOTES_UNKNOWN_");
 
 
 }

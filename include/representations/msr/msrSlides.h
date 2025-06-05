@@ -41,7 +41,7 @@ class EXP msrSlide : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrSlide> create (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int              slideNumber,
                             msrSlideTypeKind slideTypeKind,
                             msrLineTypeKind  slideLineTypeKind,
@@ -57,7 +57,7 @@ class EXP msrSlide : public msrElement
     // ------------------------------------------------------
 
                           msrSlide (
-                            int              inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int              slideNumber,
                             msrSlideTypeKind slideTypeKind,
                             msrLineTypeKind  slideLineTypeKind,

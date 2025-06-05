@@ -24,7 +24,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 void musicxmlWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -36,7 +36,7 @@ void musicxmlWarning (
 
 void musicxmlError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)

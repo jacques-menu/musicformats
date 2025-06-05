@@ -820,7 +820,7 @@ class EXP lpsr2lilypondTranslator :
     // ------------------------------------------------------
 
     std::string           absoluteOctaveAsLilypondString (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrOctaveKind absoluteOctaveKind);
 
     // alterations
@@ -838,16 +838,16 @@ class EXP lpsr2lilypondTranslator :
                             const mfWholeNotes& wholeNotes);
 
     void                  generateWholeNotesDuration (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes& wholeNotes);
 
     void                  generateWholeNotesDurationOnStream (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes& wholeNotes,
                             std::ostream&       os);
 
     std::string           durationAsLilypondStringIfItShouldBeGenerated (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const mfWholeNotes& wholeNotes);
 
     std::string           notesDurationKindAsLilypondString (
@@ -1504,7 +1504,7 @@ class EXP lpsr2lilypondTranslator :
     // ------------------------------------------------------
 
     std::string           stringTuningAsLilypondString (
-                            int                      inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrStringTuning& stringTuning);
 
     // harp pedals tuning
@@ -1517,7 +1517,7 @@ class EXP lpsr2lilypondTranslator :
     // ------------------------------------------------------
 
     void                  transposeDiatonicError (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int transposeDiatonic,
                             int transposeChromatic);
 

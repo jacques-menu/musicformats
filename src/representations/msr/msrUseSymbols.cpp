@@ -24,7 +24,7 @@ namespace MusicFormats
 // placement
 //______________________________________________________________________________
 msrUseSymbolsKind msrUseSymbolsKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& useSymbolsString)
 {
   msrUseSymbolsKind

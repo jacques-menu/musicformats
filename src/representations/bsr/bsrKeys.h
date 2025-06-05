@@ -38,7 +38,7 @@ class EXP bsrKey : public bsrLineContentsElement
     // ------------------------------------------------------
 
     static SMARTP<bsrKey> create (
-                            int          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrKeyKind   keyKind,
                             size_t numberOfAlterations);
 
@@ -48,7 +48,7 @@ class EXP bsrKey : public bsrLineContentsElement
     // ------------------------------------------------------
 
                           bsrKey (
-                            int          inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             bsrKeyKind   keyKind,
                             size_t numberOfAlterations);
 

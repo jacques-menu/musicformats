@@ -48,7 +48,7 @@ std::string msrClefKindAsString (
 std::ostream& operator << (std::ostream& os, const msrClefKind& elt);
 
 EXP msrClefKind msrClefKindFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& clefString);
 
 std::string availableClefKinds (size_t namesListMaxLength);
@@ -77,13 +77,13 @@ class EXP msrClef : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrClef> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             msrClefKind         clefKind,
                             int                 clefStaffNumber);
 
     static SMARTP<msrClef> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             msrClefKind         clefKind,
                             int                 clefStaffNumber);
 
@@ -91,7 +91,7 @@ class EXP msrClef : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrClef> createClefFromString (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             const std::string& clefString,
                             int                 clefLineNumber);
@@ -102,7 +102,7 @@ class EXP msrClef : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrClef (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             msrClefKind         clefKind,
                             int                 clefStaffNumber);

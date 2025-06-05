@@ -195,7 +195,7 @@ msrMarginsGroup::~msrMarginsGroup ()
 {}
 
 void msrMarginsGroup::setLeftMargin (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMargin& val)
 {
   msrMarginTypeKind
@@ -223,7 +223,7 @@ void msrMarginsGroup::setLeftMargin (
 }
 
 void msrMarginsGroup::setRightMargin (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMargin& val)
 {
   msrMarginTypeKind
@@ -251,7 +251,7 @@ void msrMarginsGroup::setRightMargin (
 }
 
 void msrMarginsGroup::setTopMargin (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMargin& val)
 {
   msrMarginTypeKind
@@ -279,7 +279,7 @@ void msrMarginsGroup::setTopMargin (
 }
 
 void msrMarginsGroup::setBottomMargin (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrMargin& val)
 {
   msrMarginTypeKind

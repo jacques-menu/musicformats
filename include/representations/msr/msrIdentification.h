@@ -29,7 +29,7 @@ class EXP msrIdentification : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrIdentification> create (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
   protected:
 
@@ -37,7 +37,7 @@ class EXP msrIdentification : public msrElement
     // ------------------------------------------------------
 
                           msrIdentification (
-                            int inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber);
 
     virtual               ~msrIdentification ();
 
@@ -48,7 +48,7 @@ class EXP msrIdentification : public msrElement
 
     // work number
     void                  setIdentificationWorkNumber (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& val);
 
     std::string           getIdentificationWorkNumber () const
@@ -56,7 +56,7 @@ class EXP msrIdentification : public msrElement
 
     // work title
     void                  setIdentificationWorkCreditTypeTitle (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& val);
 
     std::string           getIdentificationWorkCreditTypeTitle () const
@@ -64,7 +64,7 @@ class EXP msrIdentification : public msrElement
 
     // opus
     void                  setIdentificationOpus (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& val);
 
     std::string           getIdentificationOpus () const
@@ -72,7 +72,7 @@ class EXP msrIdentification : public msrElement
 
     // movement number
     void                  setIdentificationMovementNumber (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& val);
 
     std::string           getIdentificationMovementNumber () const
@@ -80,7 +80,7 @@ class EXP msrIdentification : public msrElement
 
     // movement title
     void                  setIdentificationMovementTitle (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& val);
 
     std::string           getIdentificationMovementTitle () const
@@ -88,7 +88,7 @@ class EXP msrIdentification : public msrElement
 
     // encoding date
     void                  setIdentificationEncodingDate (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& val);
 
     std::string           getIdentificationEncodingDate () const
@@ -96,7 +96,7 @@ class EXP msrIdentification : public msrElement
 
     // miscellaneous field
     void                  setIdentificationMiscellaneousField (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& val);
 
     std::string           getIdentificationMiscellaneousField () const
@@ -104,7 +104,7 @@ class EXP msrIdentification : public msrElement
 
     // score instrument
     void                  setIdentificationScoreInstrument (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& val);
 
     std::string           getIdentificationScoreInstrument () const
@@ -167,52 +167,52 @@ class EXP msrIdentification : public msrElement
 
     // composers
     void                  appendComposer (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& value);
 
     // lyricists
     void                  appendLyricist (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& value);
 
     // arrangers
     void                  appendArranger (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& value);
 
     // poets
     void                  appendPoet (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& value);
 
     // translators
     void                  appendTranslator (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& value);
 
     // artists
     void                  appendArtist (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& value);
 
     // softwares
     void                  appendSoftware (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& value);
 
     // rights
     void                  appendRight (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& value);
 
     // rources
     void                  appendSource (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& value);
 
     // relations
     void                  appendRelation (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& value);
 
     size_t                maxIdentificationNamesLength ();

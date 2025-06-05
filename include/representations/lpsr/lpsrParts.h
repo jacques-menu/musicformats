@@ -85,7 +85,7 @@ class EXP lpsrPartBlock : public lpsrElement
                             const S_lpsrStaffBlock& staffBlock);
 
     void                  appendChordNamesContextToPartBlock (
-                            int                     inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_lpsrChordNamesContext& chordNamesContext);
 
     void                  appendFiguredBassContextToPartBlock (

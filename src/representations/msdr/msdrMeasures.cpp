@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msdrMeasure msdrMeasure::create (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& measureNumber)
 {
   msdrMeasure* obj =
@@ -43,7 +43,7 @@ S_msdrMeasure msdrMeasure::create (
 }
 
 msdrMeasure::msdrMeasure (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& measureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -73,7 +73,7 @@ msdrMeasure::~msdrMeasure ()
 {}
 
 void msdrMeasure::addLayerToMeasure (
-  int         inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int         layerNumber,
   const S_msdrLayer& layer)
 {
@@ -239,7 +239,7 @@ std::string msdrMeasure::asString () const
 }
 
 void msdrMeasure::displayMeasure (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& context) const
 {
   gLog <<

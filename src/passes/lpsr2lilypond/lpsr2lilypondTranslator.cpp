@@ -16,7 +16,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-#include "mfConstants.h"
+// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
@@ -848,7 +848,7 @@ std::string lpsrContextTypeKindAsLilypondString (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::absoluteOctaveAsLilypondString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   msrOctaveKind absoluteOctaveKind)
 {
   std::string result;
@@ -1222,7 +1222,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
-  int                      inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const S_msrStringTuning& stringTuning)
 {
   msrDiatonicPitchKind
@@ -1506,7 +1506,7 @@ std::string lpsr2lilypondTranslator::notePitchAsLilypondString (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::durationAsLilypondStringIfItShouldBeGenerated (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes)
 {
   std::string result;
@@ -1569,7 +1569,7 @@ Bool lpsr2lilypondTranslator::wholeNotesDurationShouldBeGenerated (
 }
 
 void lpsr2lilypondTranslator::generateWholeNotesDuration (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes)
 {
   fLilypondCodeStream <<
@@ -1581,7 +1581,7 @@ void lpsr2lilypondTranslator::generateWholeNotesDuration (
 }
 
 void lpsr2lilypondTranslator::generateWholeNotesDurationOnStream (
-  int                 inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes,
   std::ostream&       os)
 {
@@ -5566,7 +5566,7 @@ std::string lpsr2lilypondTranslator::harpPedalTuningAsLilypondString (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::transposeDiatonicError (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int transposeDiatonic,
   int transposeChromatic)
 {

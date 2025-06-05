@@ -75,7 +75,7 @@ std::ostream& operator << (std::ostream& os, const msrStavesBrowingOrderKind& el
 
 //______________________________________________________________________________
 S_msrScore msrScore::create (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& scoreName)
 {
   msrScore* obj =
@@ -87,7 +87,7 @@ S_msrScore msrScore::create (
 }
 
 msrScore::msrScore (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& scoreName)
     : msrBookElement (inputLineNumber)
 {
@@ -316,7 +316,7 @@ void msrScore::appendCreditToScore (
 }
 
 S_msrPart msrScore::fetchPartFromScoreByItsPartID (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& partMusicXMLID)
 {
   S_msrPart result;
@@ -379,7 +379,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 }
 
 void msrScore::collectScorePartsInList (
-  int                    inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   std::list <S_msrPart>& partsList)
 {
   for (S_msrPartGroup partGroup : fPartGroupsList ) {

@@ -33,7 +33,7 @@ class EXP bsrSpaces : public bsrLineContentsElement
     // ------------------------------------------------------
 
     static SMARTP<bsrSpaces> create (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int numberOfSpaces);
 
   protected:
@@ -42,7 +42,7 @@ class EXP bsrSpaces : public bsrLineContentsElement
     // ------------------------------------------------------
 
                           bsrSpaces (
-                            int inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int numberOfSpaces);
 
     virtual               ~bsrSpaces ();

@@ -198,7 +198,7 @@ msrOctaveKind operator-- (msrOctaveKind& octaveKind, int)
 }
 
 msrOctaveKind msrOctaveKindFromNumber (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int octaveNumber)
 {
   msrOctaveKind result = msrOctaveKind::kOctave_UNKNOWN_;
@@ -235,7 +235,7 @@ msrOctaveKind msrOctaveKindFromNumber (
 }
 
 msrOctaveKind msrOctaveKindFromCommasOrQuotes (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& octaveIndication)
 {
   /*
@@ -509,7 +509,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createSemiTonesPitchAnd
 }
 
 S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& theString)
 {
   S_msrSemiTonesPitchAndOctave result;
@@ -1011,7 +1011,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createQuarterTone
 }
 
 S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& theString)
 {
   S_msrQuarterTonesPitchAndOctave result;

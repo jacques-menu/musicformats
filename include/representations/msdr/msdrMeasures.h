@@ -31,7 +31,7 @@ class EXP msdrMeasure : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msdrMeasure> create (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& measureNumber);
 
     SMARTP<msdrMeasure> createMusicNewbornClone ();
@@ -43,7 +43,7 @@ class EXP msdrMeasure : public smartable
 
     // for regular voices
                           msdrMeasure (
-                            int           inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& measureNumber);
 
                           msdrMeasure ();
@@ -86,7 +86,7 @@ class EXP msdrMeasure : public smartable
     // ------------------------------------------------------
 
     void                  addLayerToMeasure (
-                            int         inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int         layerNumber,
                             const S_msdrLayer& layer);
 
@@ -114,7 +114,7 @@ class EXP msdrMeasure : public smartable
     std::string           asString () const;
 
     void                  displayMeasure (
-                            int                inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const std::string& context) const;
 
     void                  print (std::ostream& os) const;

@@ -33,7 +33,7 @@ class EXP msrTransposition : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrTransposition> create (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             int           transposeDiatonic,
                             int           transposeChromatic,
@@ -41,7 +41,7 @@ class EXP msrTransposition : public msrMeasureElement
                             Bool          transposeDouble);
 
     static SMARTP<msrTransposition> create (
-                            int  inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             int  transposeDiatonic,
                             int  transposeChromatic,
                             int  transposeOctaveChange,
@@ -53,7 +53,7 @@ class EXP msrTransposition : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrTransposition (
-                            int                 inputLineNumber,
+                            const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             int           transposeDiatonic,
                             int           transposeChromatic,

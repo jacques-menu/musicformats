@@ -11,7 +11,8 @@
 
 #include <map>
 
-#include "mfConstants.h"
+#include "mfBasicTypes.h"
+
 #include "mfIndentedTextOutput.h"
 #include "mfPasses.h"
 

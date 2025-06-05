@@ -79,7 +79,7 @@ std::ostream& operator << (std::ostream& os, const msrCreditTypeKind& elt)
 
 //______________________________________________________________________________
 S_msrCreditWords msrCreditWords::create (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&    creditWordsContents,
   float                      creditWordsDefaultX,
   float                      creditWordsDefaultY,
@@ -111,7 +111,7 @@ S_msrCreditWords msrCreditWords::create (
 }
 
 msrCreditWords::msrCreditWords (
-  int                        inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string&    creditWordsContents,
   float                      creditWordsDefaultX,
   float                      creditWordsDefaultY,
@@ -307,7 +307,7 @@ std::ostream& operator << (std::ostream& os, const S_msrCreditWords& elt)
 
 //______________________________________________________________________________
 S_msrCredit msrCredit::create (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int creditPageNumber)
 {
   msrCredit* obj =
@@ -318,7 +318,7 @@ S_msrCredit msrCredit::create (
 }
 
 msrCredit::msrCredit (
-  int inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int creditPageNumber)
     : msrElement (inputLineNumber)
 {

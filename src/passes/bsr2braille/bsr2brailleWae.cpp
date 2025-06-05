@@ -57,7 +57,7 @@ S_bsr2brailleInternalException bsr2brailleInternalException::create (
 //______________________________________________________________________________
 void bsr2brailleWarning (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -69,7 +69,7 @@ void bsr2brailleWarning (
 
 void bsr2brailleInternalError (
   const std::string& inputSourceName,
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)

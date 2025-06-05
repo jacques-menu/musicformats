@@ -29,7 +29,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrLayout lpsrLayout::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   lpsrLayout* obj =
     new lpsrLayout (
@@ -39,7 +39,7 @@ S_lpsrLayout lpsrLayout::create (
 }
 
 lpsrLayout::lpsrLayout (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : lpsrElement (inputLineNumber)
 {
   fLayoutGlobalStaffSize = 20; // LilyPond default // JMI

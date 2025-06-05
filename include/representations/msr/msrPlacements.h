@@ -32,7 +32,7 @@ std::string msrPlacementKindAsString (
 std::ostream& operator << (std::ostream& os, const msrPlacementKind& elt);
 
 msrPlacementKind msrPlacementKindFromString (
-  int                inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& placementString);
 
 

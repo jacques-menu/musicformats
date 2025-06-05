@@ -306,7 +306,7 @@ if (false) { // JMI TEMP
 
 //------------------------------------------------------------------------
 S_msrVoice Mikrokosmos3WanderingGenerator::createRegularVoiceInStaff (
-  int          inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   int          voiceNumber,
   const S_msrStaff&   staff)
 //------------------------------------------------------------------------
@@ -330,7 +330,7 @@ S_msrVoice Mikrokosmos3WanderingGenerator::createRegularVoiceInStaff (
 
 //------------------------------------------------------------------------
 S_msrMeasure Mikrokosmos3WanderingGenerator::createMeasureInVoice (
-  int           inputLineNumber,
+  const mfInputLineNumber& inputLineNumber,
   const std::string& measureNumber,
   const S_msrVoice&    voice)
 //------------------------------------------------------------------------

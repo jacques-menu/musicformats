@@ -24,7 +24,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 /* this class is purely virtual
 S_msrPartGroupElement msrPartGroupElement::create (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   msrPartGroupElement* obj =
     new msrPartGroupElement (
@@ -35,7 +35,7 @@ S_msrPartGroupElement msrPartGroupElement::create (
 */
 
 msrPartGroupElement::msrPartGroupElement (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
     : msrElement (inputLineNumber)
 {}
 
