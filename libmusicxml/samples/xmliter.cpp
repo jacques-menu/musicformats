@@ -27,34 +27,49 @@ using namespace MusicXML2;
 #define debug	0
 
 //_______________________________________________________________________________
-// class predic { // JMI 0.9.75 std::predicate exists in C++20
-// 	public:
-// 		int fType;
-// 		predic(int type) : fType(type) {}
-// 	virtual ~predic() {}
-// 	virtual bool operator () (const Sxmlelement elt) const {
-// 		return elt->getType() == fType;
-// 	}
-// };
+class predicate {
+	public:
+		int fType;
+			 predicate(int type) : fType(type) {}
+	virtual ~predicate() {}
+	virtual bool operator () (const Sxmlelement elt) const {
+		return elt->getType() == fType;
+	}
+};
 
 //_______________________________________________________________________________
 static void count(Sxmlelement elt, int type)
 {
-// 	predic p(type);
-
-// https://stackoverflow.com/questions/31998613/c11-lambda-mixed-capture-list
-// https://www.learncpp.com/cpp-tutorial/lambda-captures/
-
-	cerr <<
-	  "  count of type " << type << " elements: " <<
-    count_if (
-      elt->begin(),
-      elt->end(),
-      [=](int i) // default capture by value of all variables
-        { return elt->getType() == type; }
-      ) <<
-    endl;
+// 	predicate p(type);
+// 	cerr << "  count of type " << type << " elements: "
+// 		 << count_if(elt->begin(), elt->end(), p) << endl;
 }
+
+// //_______________________________________________________________________________
+// static void count(Sxmlelement elt, int type) // JMI 0.9.75
+// {
+//   int count = 0;
+//
+// /*
+// libmusicxml/samples/xmliter.cpp.o -c /Users/jacquesmenu/JMI_DEVELOPMENT/musicformats-git-dev/libmusicxml/samples/xmliter.cpp
+// /Users/jacquesmenu/JMI_DEVELOPMENT/musicformats-git-dev/libmusicxml/samples/xmliter.cpp:54:23: error: no type named 'const_iterator' in 'MusicXML2::xmlelement'
+//    54 |     const xmlelement::const_iterator it = elt->begin();
+//       |           ~~~~~~~~~~~~^
+// */
+//
+// //   for (
+// //     const xmlelement::const_iterator it = elt->begin();
+// //     it != elt->end();
+// //     it++
+// //   ) {
+// //     if (it->getType() == type) ++count;
+// //   } // for
+//
+// 	cerr <<
+// 	  "  count of type " << type << " elements: " <<
+// 		count <<
+// 		endl;
+// }
 
 //_______________________________________________________________________________
 static void test1(Sxmlelement elt)

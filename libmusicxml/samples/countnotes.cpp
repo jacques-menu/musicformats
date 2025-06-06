@@ -51,7 +51,11 @@ static int read(FILE * fd)
 			browser.browse(*elt);
 			count = v.fCount;
 #else // use iterator
-			count = count_if(elt->begin(), elt->end(), [](int i) { return i == k_note; });
+			count =
+			  count_if (
+			    elt->begin(),
+			    elt->end(),
+			    [] (int i) { return i == k_note; });
 #endif
 		}
 	}
