@@ -27,11 +27,11 @@ using namespace MusicXML2;
 #define debug	0
 
 //_______________________________________________________________________________
-class predicate {
+class predicate_ {
 	public:
 		int fType;
-			 predicate(int type) : fType(type) {}
-	virtual ~predicate() {}
+			 predicate_(int type) : fType(type) {}
+	virtual ~predicate_() {}
 	virtual bool operator () (const Sxmlelement elt) const {
 		return elt->getType() == fType;
 	}
@@ -40,9 +40,9 @@ class predicate {
 //_______________________________________________________________________________
 static void count(Sxmlelement elt, int type)
 {
-// 	predicate p(type);
-// 	cerr << "  count of type " << type << " elements: "
-// 		 << count_if(elt->begin(), elt->end(), p) << endl;
+	predicate_ p(type);
+	cerr << "  count of type " << type << " elements: "
+		 << count_if(elt->begin(), elt->end(), p) << endl;
 }
 
 // //_______________________________________________________________________________

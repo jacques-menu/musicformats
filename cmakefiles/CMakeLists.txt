@@ -97,7 +97,7 @@ set (LIBDIR ${CMAKE_CURRENT_BINARY_DIR}/lib)
 # CXX
 #===============================================================
 
-set (CMAKE_CXX_STANDARD 17)
+set (CMAKE_CXX_STANDARD 20)
 message (STATUS "-----> CMAKE_CXX_STANDARD: ${CMAKE_CXX_STANDARD}")
 
 message (STATUS "-----> UNIX: ${UNIX}")
