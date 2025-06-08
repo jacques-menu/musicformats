@@ -101,7 +101,7 @@ class EXP msrVoice : public msrElement
     static SMARTP<msrVoice> create (
                             const mfInputLineNumber& inputLineNumber,
                             msrVoiceKind      voiceKind,
-                            int               voiceNumber,
+                            const mfVoiceNumber&     voiceNumber,
                             msrVoiceCreateInitialLastSegmentKind
                                               voiceCreateInitialLastSegmentKind,
                             const S_msrStaff& voiceUpLinkToStaff);
@@ -112,7 +112,7 @@ class EXP msrVoice : public msrElement
     SMARTP<msrVoice> createVoiceDeepClone (
                             const mfInputLineNumber& inputLineNumber,
                             msrVoiceKind      voiceKind,
-                            int               voiceNumber,
+                            const mfVoiceNumber&     voiceNumber,
                             const S_msrStaff& containingStaff);
 
     // creation from the API
@@ -120,17 +120,17 @@ class EXP msrVoice : public msrElement
 
     static SMARTP<msrVoice> createRegularVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            int               voiceNumber,
+                            const mfVoiceNumber&     voiceNumber,
                             const S_msrStaff& voiceUpLinkToStaff);
 
     static SMARTP<msrVoice> createHarmoniesVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            int               voiceNumber,
+                            const mfVoiceNumber&     voiceNumber,
                             const S_msrStaff& voiceUpLinkToStaff);
 
     static SMARTP<msrVoice> createFiguredBassVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            int               voiceNumber,
+                            const mfVoiceNumber&     voiceNumber,
                             const S_msrStaff& voiceUpLinkToStaff);
 
   protected:
@@ -142,7 +142,7 @@ class EXP msrVoice : public msrElement
                           msrVoice (
                             const mfInputLineNumber& inputLineNumber,
                             msrVoiceKind      voiceKind,
-                            int               voiceNumber,
+                            const mfVoiceNumber&     voiceNumber,
                             msrVoiceCreateInitialLastSegmentKind
                                               voiceCreateInitialLastSegmentKind,
                             const S_msrStaff& voiceUpLinkToStaff);

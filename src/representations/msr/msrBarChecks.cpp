@@ -57,8 +57,8 @@ S_msrBarCheck msrBarCheck::create (
 
 S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&  nextBarOriginalNumber,
-  int                 nextBarPuristNumber,
+  const mfMeasureNumber&   nextBarOriginalNumber,
+  int                      nextBarPuristNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
   msrBarCheck* obj =

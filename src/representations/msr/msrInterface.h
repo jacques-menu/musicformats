@@ -78,7 +78,7 @@ S_msrStaff createStaffInPart (
 // ------------------------------------------------------
 S_msrVoice createRegularVoiceInStaff (
   const mfInputLineNumber& inputLineNumber,
-  int               voiceNumber,
+  const mfVoiceNumber&     voiceNumber,
   const S_msrStaff& staff);
 
 // measures

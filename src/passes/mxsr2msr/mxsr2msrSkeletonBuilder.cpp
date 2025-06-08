@@ -1411,8 +1411,9 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 					stoppedPartGroupsList->getMxsrPartGroupsStdList ();
 
 			for (S_mxsrPartGroup partGroup : stoppedPartGroupsStdList) {
-				int stopInputLineNumber =
-					partGroup->getStopInputLineNumber ();
+				mfInputLineNumber
+				  stopInputLineNumber =
+					  partGroup->getStopInputLineNumber ();
 
 				S_msrPartGroup
 					theMsrPartGroup =

@@ -2658,7 +2658,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::set <int>&     intSetVariable);
+                            std::set <int>&    intSetVariable);
 
   protected:
 
@@ -2671,7 +2671,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::set <int>&     intSetVariable);
+                            std::set <int>&    intSetVariable);
 
     virtual               ~oahIntSetElementAtom ();
 
@@ -2680,7 +2680,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    const std::set <int>&       getIntSetVariable () const
+    const std::set <int>& getIntSetVariable () const
                               { return fIntSetVariable; }
 
   public:
@@ -2721,7 +2721,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::set <int>&        fIntSetVariable;
+    std::set <int>&       fIntSetVariable;
 };
 
 using S_oahIntSetElementAtom = SMARTP<oahIntSetElementAtom>;
@@ -2823,6 +2823,96 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
 using S_oahStringSetElementAtom = SMARTP<oahStringSetElementAtom>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_oahStringSetElementAtom& elt);
+
+//______________________________________________________________________________
+class EXP oahMeasureNumberSetElementAtom : public oahAtomStoringAValue
+{
+/*
+  an atom controlling a set of integer variables
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahMeasureNumberSetElementAtom> create (
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
+                            std::set <mfMeasureNumber>& measureNumberSetVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahMeasureNumberSetElementAtom (
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
+                            std::set <mfMeasureNumber>& measureNumberSetVariable);
+
+    virtual               ~oahMeasureNumberSetElementAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    const std::set <mfMeasureNumber>&
+                          getMeasureNumberSetVariable () const
+                              { return fMeasureNumberSetVariable; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyAtomWithValue (
+                            const std::string& theString,
+                            std::ostream&      os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
+
+    void                  print (std::ostream& os) const override;
+
+    void                  displayAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    std::set <mfMeasureNumber>&
+                          fMeasureNumberSetVariable;
+};
+
+using S_oahMeasureNumberSetElementAtom = SMARTP<oahMeasureNumberSetElementAtom>;
+
+EXP std::ostream& operator << (std::ostream& os, const S_oahMeasureNumberSetElementAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
@@ -3050,7 +3140,7 @@ class EXP oahMeasureNumberToMeasureNumberMapElementAtom : public oahAtomStoringA
     // set and get
     // ------------------------------------------------------
 
-    const std::map <mfMeasureNumber, int>&
+    const std::map <mfMeasureNumber, mfMeasureNumber>&
                           getMeasureNumberToMeasureNumberMapVariable () const
                               { return fMeasureNumberToMeasureNumberMapVariable; }
 
@@ -3092,7 +3182,7 @@ class EXP oahMeasureNumberToMeasureNumberMapElementAtom : public oahAtomStoringA
     // private fields
     // ------------------------------------------------------
 
-    std::map <mfMeasureNumber, int>&
+    std::map <mfMeasureNumber, mfMeasureNumber>&
                           fMeasureNumberToMeasureNumberMapVariable;
 };
 

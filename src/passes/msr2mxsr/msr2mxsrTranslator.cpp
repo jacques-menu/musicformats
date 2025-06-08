@@ -3386,7 +3386,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // has a measure element for this measure number been created already?
-  std::map <std::string, Sxmlelement>::iterator
+  std::map <mfMeasureNumber, Sxmlelement>::iterator
     it =
       fPartMeasureNumbersToElementsMap.find (fCurrentMeasureNumber);
 
@@ -3415,7 +3415,12 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
     // create a measure element
     fCurrentMeasureElement = createMxmlelement (k_measure, "");
     // set its "number" attribute
-    fCurrentMeasureElement->add (createMxmlAttribute ("number", fCurrentMeasureNumber));
+    fCurrentMeasureElement->add (
+#ifdef MF_USE_WRAPPED_TYPES
+      createMxmlAttribute ("number", fCurrentMeasureNumber.getBareValue ()));
+#else
+      createMxmlAttribute ("number", fCurrentMeasureNumber));
+#endif // MF_USE_WRAPPED_TYPES
 
     // append it to the current part element
     fCurrentPartElement->push (fCurrentMeasureElement);
@@ -3497,7 +3502,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
 {
   fCurrentMSRMeasure = elt;
 
-  std::string
+  mfMeasureNumber
     nextMeasureNumber =
       elt->getNextMeasureNumber ();
 

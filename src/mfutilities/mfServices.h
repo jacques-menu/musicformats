@@ -218,17 +218,17 @@ class EXP mfServiceRunData : public smartable
                               { return fCurrentPartIDAndName; }
 
     // staves
-    void                  setCurrentStaveNumber (int staveNumber)
+    void                  setCurrentStaveNumber (mfStaffNumber staveNumber)
                               { fCurrentStaveNumber = staveNumber; }
 
-    int                   getCurrentStaveNumber () const
+    mfStaffNumber         getCurrentStaveNumber () const
                               { return fCurrentStaveNumber; }
 
     // voices
-    void                  setCurrentVoiceNumber (int voiceNumber)
+    void                  setCurrentVoiceNumber (mfVoiceNumber voiceNumber)
                               { fCurrentVoiceNumber = voiceNumber; }
 
-    int                   getCurrentVoiceNumber () const
+    mfVoiceNumber         getCurrentVoiceNumber () const
                               { return fCurrentVoiceNumber; }
 
     // measures
@@ -304,10 +304,10 @@ class EXP mfServiceRunData : public smartable
     std::string           fCurrentPartIDAndName;
 
     // staves
-    int                   fCurrentStaveNumber;
+    mfStaffNumber         fCurrentStaveNumber;
 
     // voices
-    int                   fCurrentVoiceNumber;
+    mfVoiceNumber         fCurrentVoiceNumber;
 
     // measures
     mfMeasureNumber       fCurrentMeasureNumber;

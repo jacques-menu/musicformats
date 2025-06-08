@@ -1099,7 +1099,7 @@ void msrStaff::registerVoiceByItsNumber (
 void msrStaff::registerRegularVoiceByItsNumber (
   const mfInputLineNumber& inputLineNumber,
   const S_msrVoice& regularVoice,
-  int               voiceNumber)
+  const mfVoiceNumber&     voiceNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {

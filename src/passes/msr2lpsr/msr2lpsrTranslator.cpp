@@ -3456,7 +3456,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 {
-  std::string
+  mfMeasureNumber
     nextMeasureNumber =
       elt->getNextMeasureNumber ();
 
@@ -3709,13 +3709,17 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
   } // switch
 
   if (doCreateABarCheck) {
+//     int
+//       measurePuristNumber =
+//         elt->getMeasurePuristNumber ();
+
     // create a bar check
     fLastBarCheck =
       msrBarCheck::createWithNextBarPuristNumber (
         elt->getInputLineNumber (),
-        nextMeasureNumber,
+        fCurrentMeasureNumber, // JMI 0.9.75
         fCurrentVoiceClone->
-          getVoiceCurrentMeasurePuristNumber (),
+          getVoiceCurrentMeasurePuristNumber () + 1,
         fCurrentMeasureClone);
 
     // append it to the current voice clone

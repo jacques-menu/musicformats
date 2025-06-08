@@ -13734,9 +13734,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     measureKind =
       elt->getMeasureKind ();
 
-  int
-    measurePuristNumber =
-      elt->getMeasurePuristNumber ();
+//   int
+//     measurePuristNumber =
+//       elt->getMeasurePuristNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   {
@@ -13756,7 +13756,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         ", measureKind: " << measureKind <<
         ", measureEndRegularKind: " <<
         elt-> getMeasureEndRegularKind () <<
-        ", measurePuristNumber: '" << measurePuristNumber << '\'' <<
+        ", fCurrentMeasureNumber: '" << fCurrentMeasureNumber << '\'' <<
         ", fOnGoingMultipleMeasureRests: " << fOnGoingMultipleMeasureRests <<
         ", line " << elt->getInputLineNumber () <<
         std::endl;
@@ -13809,10 +13809,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
   // should we generate a box around this bar number?
   {
-    std::set <int>::const_iterator
+    std::set <mfMeasureNumber>::const_iterator
       it =
         gGlobalLpsr2lilypondOahGroup->
-          getBoxAroundBarNumberSet ().find (measurePuristNumber);
+          getBoxAroundBarNumberSet ().find (fCurrentMeasureNumber);
 
     if (
       gGlobalLpsr2lilypondOahGroup->getBoxAroundAllBarNumbers ()
@@ -13826,8 +13826,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
         ss <<
           std::endl <<
-          "Generating a box around LilyPond measure purist number '" <<
-          measurePuristNumber <<
+          "Generating a box around LilyPond measure number '" <<
+          fCurrentMeasureNumber <<
           "', line " << elt->getInputLineNumber () << " ===-->";
 
         gWaeHandler->waeTrace (
@@ -13844,7 +13844,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
   // should we reset the measure purist number?
   {
-    std::map <mfMeasureNumber, int>::const_iterator
+    std::map <mfMeasureNumber, mfMeasureNumber>::const_iterator
       it =
         gGlobalLpsr2lilypondOahGroup->
           getResetMeasureElementMeasureNumberMap ().find (fCurrentMeasureNumber);
@@ -13855,9 +13855,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       gGlobalLpsr2lilypondOahGroup->getResetMeasureElementMeasureNumberMap ().end ()
     ) {
       // yes, reset measure number
-      int lilypondMeasureNumber = (*it).second;
+      mfMeasureNumber lilypondMeasureNumber = (*it).second;
 
-      if (std::to_string (lilypondMeasureNumber) != fCurrentMeasureNumber) {
+      if (lilypondMeasureNumber != fCurrentMeasureNumber) {
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
           std::stringstream ss;
@@ -13926,7 +13926,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       ", measure \"" << fCurrentMeasureNumber << "\"" <<
       ", measureEndRegularKind: " <<
       elt-> getMeasureEndRegularKind () <<
-      ", measurePuristNumber: " << measurePuristNumber <<
+      ", fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
       ", fOnGoingMultipleMeasureRests: " << fOnGoingMultipleMeasureRests <<
       ", line " << elt->getInputLineNumber () <<
       " ===-->";
@@ -13938,15 +13938,15 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // should we show the measure number???
-  std::set <std::string, int>::const_iterator
+  std::set <mfMeasureNumber>::const_iterator
     it =
       gGlobalLpsr2lilypondOahGroup->
-        getShowNumbersAtMeasureSet ().find (fCurrentMeasureNumber); // JMI variable 0.9.67
+        getShowMeasureNumbersAtMeasureSet ().find (fCurrentMeasureNumber); // JMI variable 0.9.75
 
   if (
     it
       !=
-    gGlobalLpsr2lilypondOahGroup->getShowNumbersAtMeasureSet ().end ()
+    gGlobalLpsr2lilypondOahGroup->getShowMeasureNumbersAtMeasureSet ().end ()
   ) {
     // yes, display the measure number
     fLilypondCodeStream <<
@@ -14252,7 +14252,7 @@ void lpsr2lilypondTranslator::generateMusicallyEmptyMeasure (
       "%{ kMeasureKindMusicallyEmpty" <<
       ", line " << measure->getInputLineNumber () <<
       " %} % " <<
-      measure->getMeasurePuristNumber () + 1 <<
+      measure->getMeasureNumber () << // JMI 0.9.75    + 1 ???
       std::endl;
   }
 
@@ -14327,9 +14327,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
     measureKind =
       elt->getMeasureKind ();
 
-  int
-    measurePuristNumber =
-      elt->getMeasurePuristNumber ();
+//   int
+//     measurePuristNumber =
+//       elt->getMeasurePuristNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   {
@@ -14351,7 +14351,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         ", measureEndRegularKind: '" <<
         elt-> getMeasureEndRegularKind () <<
         '\'' <<
-        ", measurePuristNumber: '" << measurePuristNumber << '\'' <<
+        ", elt->getMeasureNumber (): '" << elt->getMeasureNumber () << '\'' <<
         ", fOnGoingMultipleMeasureRests: " << fOnGoingMultipleMeasureRests <<
         ", line " << elt->getInputLineNumber () <<
         std::endl;
@@ -14391,7 +14391,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
       ", measureEndRegularKind: '" <<
       elt-> getMeasureEndRegularKind () <<
-      ", measurePuristNumber: " << measurePuristNumber << '\'' <<
+      ", elt->getMeasureNumber (): " << elt->getMeasureNumber () << '\'' <<
       ", fOnGoingMultipleMeasureRests: " << fOnGoingMultipleMeasureRests <<
       ", line " << elt->getInputLineNumber () <<
       " ===-->";
@@ -14460,7 +14460,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondMeasures ()) {
           fLilypondCodeStream <<
             "%{ measureKindUnknown, " <<
-            measurePuristNumber + 1 <<
+            elt->getMeasureNumber () << // JMI 0.9.75     + 1 ???
             " %}" <<
             std::endl;
         }
@@ -14619,7 +14619,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
   // should we generate a line break?
   {
-    std::set <std::string>::const_iterator
+    std::set <mfMeasureNumber>::const_iterator
       it =
         gGlobalLpsr2lilypondOahGroup->
           getBreakLineAfterMeasureNumberSet ().find (fCurrentMeasureNumber);
@@ -14669,7 +14669,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
   // should we generate a page break?
   {
-    std::set <std::string>::const_iterator
+    std::set <mfMeasureNumber>::const_iterator
       it =
         gGlobalLpsr2lilypondOahGroup->
           getBreakPageAfterMeasureNumberSet ().find (fCurrentMeasureNumber);
@@ -27370,8 +27370,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
         fOnGoingMultipleMeasureRests
       )
   ) {
-    std::string nextBarOriginalNumber =
-      elt->getNextBarOriginalNumber ();
+    mfMeasureNumber
+      nextBarOriginalNumber =
+        elt->getNextBarOriginalNumber ();
 
     int nextBarPuristNumber =
       elt->getNextBarPuristNumber ();

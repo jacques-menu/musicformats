@@ -36,7 +36,7 @@ class EXP bsrMeasure : public bsrLineContentsElement
 
     static SMARTP<bsrMeasure> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& printMeasureNumber);
+                            const mfMeasureNumber&   printMeasureNumber);
 
     SMARTP<bsrMeasure> createMeasureNewbornClone ();
 
@@ -47,7 +47,7 @@ class EXP bsrMeasure : public bsrLineContentsElement
 
                           bsrMeasure (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& printMeasureNumber);
+                            const mfMeasureNumber&   printMeasureNumber);
 
     virtual               ~bsrMeasure ();
 
@@ -56,10 +56,10 @@ class EXP bsrMeasure : public bsrLineContentsElement
     // set and get
     // ------------------------------------------------------
 
-    std::string           getPrintMeasureNumber () const
+    mfMeasureNumber       getPrintMeasureNumber () const
                               { return fPrintMeasureNumber; }
 
-    std::string           getBrailleMeasureNumber () const
+    mfMeasureNumber       getBrailleMeasureNumber () const
                               { return fBrailleMeasureNumber; }
 
   public:
@@ -122,8 +122,8 @@ class EXP bsrMeasure : public bsrLineContentsElement
     // private fields
     // ------------------------------------------------------
 
-    std::string           fPrintMeasureNumber;
-    std::string           fBrailleMeasureNumber;
+    mfMeasureNumber       fPrintMeasureNumber;
+    mfMeasureNumber       fBrailleMeasureNumber;
 
     std::list <S_bsrLineContentsElement>
                           fMeasureLineElementsList;

@@ -1451,9 +1451,9 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getBoxAroundAllBarNumbers () const
                               { return fBoxAroundAllBarNumbers; }
 
-    const std::set <std::string>&
-                          getShowNumbersAtMeasureSet () const
-                              { return fShowNumbersAtMeasureSet; }
+    const std::set <mfMeasureNumber>&
+                          getShowMeasureNumbersAtMeasureSet () const
+                              { return fShowMeasureNumbersAtMeasureSet; }
 
     void                  setBarNumbersSize (float value)
                               { fBarNumbersSize = value; }
@@ -1463,7 +1463,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahFloatAtom        getBarNumbersSizeAtom () const
                               { return fBarNumbersSizeAtom; }
 
-    const std::set <int>&  getBoxAroundBarNumberSet () const
+    const std::set <mfMeasureNumber>&
+                          getBoxAroundBarNumberSet () const
                               { return fBoxAroundBarNumberSet; }
 
     // bar number checks
@@ -1500,7 +1501,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     int                   getSeparatorLineEveryNMeasures () const
                               { return fSeparatorLineEveryNMeasures; }
 
-    const std::set <std::string>&
+    const std::set <mfMeasureNumber>&
                           getBreakLineAfterMeasureNumberSet () const
                               { return fBreakLineAfterMeasureNumberSet; }
 
@@ -1512,7 +1513,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getIgnoreLpsrPageBreaks () const
                               { return fIgnoreLpsrPageBreaks; }
 
-    const std::set <std::string>&
+    const std::set <mfMeasureNumber>&
                           getBreakPageAfterMeasureNumberSet () const
                               { return fBreakPageAfterMeasureNumberSet; }
 
@@ -2135,15 +2136,17 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fShowAllBarNumbers;
 
-    std::set <std::string> fShowNumbersAtMeasureSet;
-    S_oahStringSetElementAtom
-                          fShowNumbersAtMeasureAtom;
+    std::set <mfMeasureNumber>
+                          fShowMeasureNumbersAtMeasureSet;
+    S_oahMeasureNumberSetElementAtom
+                          fShowMeasureNumbersAtMeasureAtom;
 
     float                 fBarNumbersSize;
     S_oahFloatAtom        fBarNumbersSizeAtom;
 
     Bool                  fBoxAroundAllBarNumbers;
-    std::set <int>         fBoxAroundBarNumberSet;
+    std::set <mfMeasureNumber>
+                          fBoxAroundBarNumberSet;
 
     // bar number checks
     // --------------------------------------
@@ -2171,7 +2174,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     int                   fSeparatorLineEveryNMeasures;
 
-    std::set <std::string> fBreakLineAfterMeasureNumberSet;
+    std::set <mfMeasureNumber>
+                          fBreakLineAfterMeasureNumberSet;
 
     // page and line breaks
     // --------------------------------------
@@ -2180,7 +2184,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // this atom is used by the '-minimal' combined option
     S_oahBooleanAtom      fIgnoreLpsrPageBreaksAtom;
 
-    std::set <std::string> fBreakPageAfterMeasureNumberSet;
+    std::set <mfMeasureNumber>
+                          fBreakPageAfterMeasureNumberSet;
 
 
     // staves

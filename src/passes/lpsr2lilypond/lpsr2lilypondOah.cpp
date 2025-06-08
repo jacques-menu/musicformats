@@ -4447,24 +4447,24 @@ This option is an alias for '-all-bar-numbers, -abn'.)",
   // show measure number at
   // --------------------------------------
 
-  fShowNumbersAtMeasureAtom =
-    oahStringSetElementAtom::create (
+  fShowMeasureNumbersAtMeasureAtom =
+    oahMeasureNumberSetElementAtom::create (
       "show-lilypond-measure-number-at", "slmna",
 R"(Generate LilyPond code to show the measure number at measure MEASURE_NUMBER.)",
       "MEASURE_NUMBER",
-      "fShowNumbersAtMeasureSet",
-      fShowNumbersAtMeasureSet);
+      "fShowMeasureNumbersAtMeasureSet",
+      fShowMeasureNumbersAtMeasureSet);
 
   subGroup->
     appendAtomToSubGroup (
-      fShowNumbersAtMeasureAtom);
+      fShowMeasureNumbersAtMeasureAtom);
 
   // reset measure number
   // --------------------------------------
 
   subGroup->
     appendAtomToSubGroup (
-      oahMeasureNumberToIntMapElementAtom::create (
+      oahMeasureNumberToMeasureNumberMapElementAtom::create (
         "reset-measure-number", "rmn",
 R"(Generate a '\set Score.currentBarNumber = #NEW' command
 at the beginning of measure OLD in the LilyPond code.
@@ -4500,9 +4500,9 @@ R"(Generate LilyPond code to show a box around all bar numbers.)",
   // generate a box around bar number
   // --------------------------------------
 
-  S_oahIntSetElementAtom
+  S_oahMeasureNumberSetElementAtom
     generateABoxAroundBarNumberAtom =
-      oahIntSetElementAtom::create (
+      oahMeasureNumberSetElementAtom::create (
         "generate-a-box-around-bar-number", "gababn",
 R"(Generate a box around LilyPond bar number BAR_NUMBER, // purist JMI ???
 where BAR_NUMBER is an integer.
@@ -6312,7 +6312,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
     os << " empty";
   }
   else {
-    std::map <mfMeasureNumber, int>::const_iterator
+    std::map <mfMeasureNumber, mfMeasureNumber>::const_iterator
       iBegin = fResetMeasureElementMeasureNumberMap.begin (),
       iEnd   = fResetMeasureElementMeasureNumberMap.end (),
       i      = iBegin;
@@ -6330,7 +6330,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
     os << "[EMPTY]";
   }
   else {
-    std::set <int>::const_iterator
+    std::set <mfMeasureNumber>::const_iterator
       iBegin = fBoxAroundBarNumberSet.begin (),
       iEnd   = fBoxAroundBarNumberSet.end (),
       i      = iBegin;
@@ -6946,7 +6946,7 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
     gLog << "[EMPTY]";
   }
   else {
-    std::map <mfMeasureNumber, int>::const_iterator
+    std::map <mfMeasureNumber, mfMeasureNumber>::const_iterator
       iBegin = fResetMeasureElementMeasureNumberMap.begin (),
       iEnd   = fResetMeasureElementMeasureNumberMap.end (),
       i      = iBegin;
@@ -6964,7 +6964,7 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
     gLog << "[EMPTY]";
   }
   else {
-    std::set <int>::const_iterator
+    std::set <mfMeasureNumber>::const_iterator
       iBegin = fBoxAroundBarNumberSet.begin (),
       iEnd   = fBoxAroundBarNumberSet.end (),
       i      = iBegin;

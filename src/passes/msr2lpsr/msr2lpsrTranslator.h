@@ -713,7 +713,7 @@ class EXP msr2lpsrTranslator :
 
     // measures
     // ------------------------------------------------------
-    std::string               fCurrentMeasureNumber;
+    mfMeasureNumber           fCurrentMeasureNumber;
     S_msrMeasure              fCurrentMeasureClone;
 
     // multiple measure rests compression
@@ -741,7 +741,8 @@ class EXP msr2lpsrTranslator :
     // being ongoing simultaneously,
     // since such groups are attached to a note, hence:
     std::list <S_msrNote>     fOnGoingNotesStack;
-    void                      displayOnGoingNotesStack (const std::string& context);
+    void                      displayOnGoingNotesStack (
+                                const std::string& context);
 
     Bool                      fOnGoingNonGraceNote;
 

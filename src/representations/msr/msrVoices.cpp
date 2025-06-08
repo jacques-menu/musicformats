@@ -188,7 +188,7 @@ std::ostream& operator << (std::ostream& os, const msrVoiceCreateInitialLastSegm
 S_msrVoice msrVoice::create (
   const mfInputLineNumber& inputLineNumber,
   msrVoiceKind      voiceKind,
-  int               voiceNumber,
+  const mfVoiceNumber&     voiceNumber,
   msrVoiceCreateInitialLastSegmentKind
                     voiceCreateInitialLastSegmentKind,
   const S_msrStaff& voiceUpLinkToStaff)
@@ -206,7 +206,7 @@ S_msrVoice msrVoice::create (
 
 S_msrVoice msrVoice::createRegularVoice (
   const mfInputLineNumber& inputLineNumber,
-  int               voiceNumber,
+  const mfVoiceNumber&     voiceNumber,
   const S_msrStaff& voiceUpLinkToStaff)
 {
   return
@@ -221,7 +221,7 @@ S_msrVoice msrVoice::createRegularVoice (
 
 S_msrVoice msrVoice::createHarmoniesVoice (
   const mfInputLineNumber& inputLineNumber,
-  int               voiceNumber,
+  const mfVoiceNumber&     voiceNumber,
   const S_msrStaff& voiceUpLinkToStaff) // unused yet JMI 0.9.66
 {
   return
@@ -236,7 +236,7 @@ S_msrVoice msrVoice::createHarmoniesVoice (
 
 S_msrVoice msrVoice::createFiguredBassVoice (
   const mfInputLineNumber& inputLineNumber,
-  int               voiceNumber,
+  const mfVoiceNumber&     voiceNumber,
   const S_msrStaff& voiceUpLinkToStaff) // unused yet JMI0.9.66
 {
   return
@@ -252,7 +252,7 @@ S_msrVoice msrVoice::createFiguredBassVoice (
 msrVoice::msrVoice (
   const mfInputLineNumber& inputLineNumber,
   msrVoiceKind      voiceKind,
-  int               voiceNumber,
+  const mfVoiceNumber&     voiceNumber,
   msrVoiceCreateInitialLastSegmentKind
                     voiceCreateInitialLastSegmentKind,
   const S_msrStaff& voiceUpLinkToStaff)
@@ -750,7 +750,7 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
 S_msrVoice msrVoice::createVoiceDeepClone (
   const mfInputLineNumber& inputLineNumber,
   msrVoiceKind      voiceKind,
-  int               voiceNumber,
+  const mfVoiceNumber&     voiceNumber,
   const S_msrStaff& containingStaff)
 {
 #ifdef MF_TRACE_IS_ENABLED

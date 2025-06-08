@@ -42,12 +42,12 @@ class EXP msrPart : public msrPartGroupElement
 
     static SMARTP<msrPart> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& partMusicXMLID);
+                            const std::string&       partMusicXMLID);
 
     static SMARTP<msrPart> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&    partMusicXMLID,
-                            const S_msrPartGroup& partUpLinkToPartGroup);
+                            const std::string&       partMusicXMLID,
+                            const S_msrPartGroup&    partUpLinkToPartGroup);
 
     SMARTP<msrPart> createPartNewbornClone (
                             const S_msrPartGroup& partGroupClone);
@@ -59,7 +59,7 @@ class EXP msrPart : public msrPartGroupElement
 
                           msrPart (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& partMusicXMLID);
+                            const std::string&       partMusicXMLID);
 
     virtual               ~msrPart ();
 
@@ -144,14 +144,13 @@ class EXP msrPart : public msrPartGroupElement
 
     // staves
 
-    const std::map <int, S_msrStaff>&
+    const std::map <mfStaffNumber, S_msrStaff>&
                           getPartStavesMap () const
                               { return fPartStavesMap; }
 
-    std::map <int, S_msrStaff>*
+    std::map <mfStaffNumber, S_msrStaff>*
                           getPartStavesMapPtr ()
                               { return &fPartStavesMap; }
-
 
     // voices
 
@@ -201,13 +200,15 @@ class EXP msrPart : public msrPartGroupElement
 //                             const std::string& measureNumber)
 //                               { fPartFirstMeasureNumber = measureNumber; }
 
-    const std::string     getPartFirstMeasureNumber () const
+    const mfMeasureNumber&
+                          getPartFirstMeasureNumber () const
                               { return fPartFirstMeasureNumber; }
 
     void                  setPartCurrentMeasureNumber (
-                            const std::string& measureNumber);
+                            const mfMeasureNumber& measureNumber);
 
-    const std::string     getPartCurrentMeasureNumber () const
+    const mfMeasureNumber&
+                          getPartCurrentMeasureNumber () const
                               { return fPartCurrentMeasureNumber; }
 
     // clef, key, time signature
@@ -394,8 +395,8 @@ class EXP msrPart : public msrPartGroupElement
 
     S_msrStaff            addRegularStaffToPartByItsNumber (
                             const mfInputLineNumber& inputLineNumber,
-                            msrStaffKind staffKind,
-                            int          staffNumber);
+                            msrStaffKind             staffKind,
+                            const mfStaffNumber&     staffNumber);
 
     S_msrStaff            addHarmoniesStaffToPart (
                             const mfInputLineNumber& inputLineNumber);
@@ -406,7 +407,7 @@ class EXP msrPart : public msrPartGroupElement
     void                  addStaffToPartCloneByItsNumber (
                             const S_msrStaff& staff);
 
-    S_msrStaff            fetchStaffFromPart (int staffNumber);
+    S_msrStaff            fetchStaffFromPart (const mfStaffNumber& staffNumber);
 
     void                  sortStavesByIncreasingNumber ();
 
@@ -696,7 +697,7 @@ class EXP msrPart : public msrPartGroupElement
     std::list <S_msrStaff>
                           fPartRegularStavesList;
 
-    std::map <int, S_msrStaff>
+    std::map <mfStaffNumber, S_msrStaff>
                           fPartStavesMap;
 
     std::list <S_msrStaff>
@@ -719,8 +720,8 @@ class EXP msrPart : public msrPartGroupElement
 //                           fPartStavesAndVoicesVector;
     // measures
 
-    std::string           fPartFirstMeasureNumber;
-    std::string           fPartCurrentMeasureNumber;
+    mfMeasureNumber       fPartFirstMeasureNumber;
+    mfMeasureNumber       fPartCurrentMeasureNumber;
 
     size_t                fPartNumberOfMeasures;
 

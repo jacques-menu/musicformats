@@ -8900,7 +8900,7 @@ S_oahIntSetElementAtom oahIntSetElementAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set <int>&     intSetVariable)
+  std::set <int>&    intSetVariable)
 {
   oahIntSetElementAtom* obj = new
     oahIntSetElementAtom (
@@ -8920,7 +8920,7 @@ oahIntSetElementAtom::oahIntSetElementAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set <int>&     intSetVariable)
+  std::set <int>&    intSetVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -9556,6 +9556,363 @@ void oahStringSetElementAtom::displayAtomWithVariableOptionsValues (
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahStringSetElementAtom& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
+S_oahMeasureNumberSetElementAtom oahMeasureNumberSetElementAtom::create (
+  const std::string&          longName,
+  const std::string&          shortName,
+  const std::string&          description,
+  const std::string&          valueSpecification,
+  const std::string&          variableName,
+  std::set <mfMeasureNumber>& measureNumberSetVariable)
+{
+  oahMeasureNumberSetElementAtom* obj = new
+    oahMeasureNumberSetElementAtom (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName,
+      measureNumberSetVariable);
+  assert (obj != nullptr);
+  return obj;
+}
+
+oahMeasureNumberSetElementAtom::oahMeasureNumberSetElementAtom (
+  const std::string&          longName,
+  const std::string&          shortName,
+  const std::string&          description,
+  const std::string&          valueSpecification,
+  const std::string&          variableName,
+  std::set <mfMeasureNumber>& measureNumberSetVariable)
+  : oahAtomStoringAValue (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName),
+    fMeasureNumberSetVariable (
+      measureNumberSetVariable)
+{
+  fMultipleOccurrencesAllowed = true;
+}
+
+oahMeasureNumberSetElementAtom::~oahMeasureNumberSetElementAtom ()
+{}
+
+void oahMeasureNumberSetElementAtom::applyAtomWithValue (
+  const std::string& theString,
+  std::ostream&      os)
+{
+  // theString contains the bar number specification
+  // decipher it to extract duration and perSecond values
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Handling atom '" <<
+      fetchNames () <<
+      "' of type 'oahMeasureNumberSetElementAtom'" <<
+      " with value \"" << theString << "\"";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  std::string regularExpression (
+    "([[:digit:]]+)"
+    );
+
+  std::regex  e (regularExpression);
+  std::smatch sm;
+
+  regex_match (theString, sm, e);
+
+  size_t smSize = sm.size ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "There are " << smSize << " matches" <<
+      " for reset measure number string \"" << theString <<
+      "\" with std::regex \"" << regularExpression <<
+      "\":" <<
+      std::endl;
+
+    ++gIndenter;
+
+    for (unsigned i = 0; i < smSize; ++i) {
+      gLog <<
+        i << ": " << "\"" << sm [i] << "\"" <<
+        std::endl;
+    } // for
+    gLog << std::endl;
+
+    --gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (smSize != 2) {
+    std::stringstream ss;
+
+    ss <<
+      "-boxAroundBarNumber argument \"" << theString <<
+      "\" is ill-formed";
+
+    oahError (ss.str ());
+  }
+
+  int lilypondStringMeasureNumber;
+  {
+    std::stringstream ss;
+    ss << sm [1];
+    ss >> lilypondStringMeasureNumber;
+  }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "lilypondStringMeasureNumber: " <<
+      lilypondStringMeasureNumber;
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fMeasureNumberSetVariable.insert (
+    mfMeasureNumber (
+      std::to_string (lilypondStringMeasureNumber)));
+
+  fSelected = true;
+}
+
+void oahMeasureNumberSetElementAtom::acceptIn (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahMeasureNumberSetElementAtom::acceptIn ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahMeasureNumberSetElementAtom>*
+    p =
+      dynamic_cast<visitor<S_oahMeasureNumberSetElementAtom>*> (v)) {
+        S_oahMeasureNumberSetElementAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahMeasureNumberSetElementAtom::visitStart ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, mfInputLineNumber (__LINE__),
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitStart (elem);
+  }
+}
+
+void oahMeasureNumberSetElementAtom::acceptOut (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahMeasureNumberSetElementAtom::acceptOut ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahMeasureNumberSetElementAtom>*
+    p =
+      dynamic_cast<visitor<S_oahMeasureNumberSetElementAtom>*> (v)) {
+        S_oahMeasureNumberSetElementAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahMeasureNumberSetElementAtom::visitEnd ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, mfInputLineNumber (__LINE__),
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitEnd (elem);
+  }
+}
+
+void oahMeasureNumberSetElementAtom::browseData (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahMeasureNumberSetElementAtom::browseData ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+std::string oahMeasureNumberSetElementAtom::asShortNamedOptionString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    '-' << fShortName << ' ';
+
+  if (! fMeasureNumberSetVariable.size ()) {
+    ss << "[EMPTY]";
+  }
+  else {
+    std::set <mfMeasureNumber>::const_iterator
+      iBegin = fMeasureNumberSetVariable.begin (),
+      iEnd   = fMeasureNumberSetVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      ss << (*i);
+      if (++i == iEnd) break;
+      ss << ",";
+    } // for
+  }
+
+  return ss.str ();
+}
+
+std::string oahMeasureNumberSetElementAtom::asActualLongNamedOptionString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    '-' << fLongName << ' ';
+
+  if (! fMeasureNumberSetVariable.size ()) {
+    ss << "[EMPTY]";
+  }
+  else {
+    std::set <mfMeasureNumber>::const_iterator
+      iBegin = fMeasureNumberSetVariable.begin (),
+      iEnd   = fMeasureNumberSetVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      ss << (*i);
+      if (++i == iEnd) break;
+      ss << ",";
+    } // for
+  }
+
+  return ss.str ();
+}
+
+void oahMeasureNumberSetElementAtom::print (std::ostream& os) const
+{
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "IntSetElementAtom:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  printAtomWithVariableEssentials (
+    os, fieldWidth);
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMeasureNumberSetVariable" << " : '" <<
+    std::endl;
+
+  if (! fMeasureNumberSetVariable.size ()) {
+    os << "[EMPTY]";
+  }
+  else {
+    std::set <mfMeasureNumber>::const_iterator
+      iBegin = fMeasureNumberSetVariable.begin (),
+      iEnd   = fMeasureNumberSetVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+  }
+
+  os << std::endl;
+
+  --gIndenter;
+}
+
+void oahMeasureNumberSetElementAtom::displayAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
+    fVariableName <<
+    ": ";
+
+  if (! fMeasureNumberSetVariable.size ()) {
+    os <<
+      "[EMPTY]" <<
+      std::endl;
+  }
+  else {
+    os << std::endl;
+    ++gIndenter;
+
+    for (mfMeasureNumber variable : fMeasureNumberSetVariable) {
+      os << variable << std::endl;
+    } // for
+
+    os <<
+      "selected" <<
+      std::endl;
+
+    --gIndenter;
+  }
+}
+
+std::ostream& operator << (std::ostream& os, const S_oahMeasureNumberSetElementAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -10478,13 +10835,13 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::applyAtomWithValue (
     oahError (ss.str ());
   }
 
-  std::string musicxmlMeasureNumber = sm [1];
+  std::string musicxmlStringMeasureNumber = sm [1];
 
-  int lilypondMeasureNumber;
+  std::string lilypondStringMeasureNumber;
   {
     std::stringstream ss;
     ss << sm [2];
-    ss >> lilypondMeasureNumber;
+    ss >> lilypondStringMeasureNumber;
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -10492,11 +10849,11 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "musicxmlMeasureNumber: " <<
-      musicxmlMeasureNumber <<
+      "musicxmlStringMeasureNumber: " <<
+      musicxmlStringMeasureNumber <<
       std::endl <<
-      "lilypondMeasureNumber: " <<
-      lilypondMeasureNumber;
+      "lilypondStringMeasureNumber: " <<
+      lilypondStringMeasureNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10504,8 +10861,8 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fMeasureNumberToMeasureNumberMapVariable [musicxmlMeasureNumber] =
-    lilypondMeasureNumber;
+  fMeasureNumberToMeasureNumberMapVariable [musicxmlStringMeasureNumber] =
+    mfMeasureNumber (lilypondStringMeasureNumber);
 
   fSelected = true;
 }
@@ -10609,7 +10966,7 @@ std::string oahMeasureNumberToMeasureNumberMapElementAtom::asShortNamedOptionStr
     ss << "[EMPTY]";
   }
   else {
-    std::map <mfMeasureNumber, int>::const_iterator
+    std::map <mfMeasureNumber, mfMeasureNumber>::const_iterator
       iBegin = fMeasureNumberToMeasureNumberMapVariable.begin (),
       iEnd   = fMeasureNumberToMeasureNumberMapVariable.end (),
       i      = iBegin;
@@ -10634,7 +10991,7 @@ std::string oahMeasureNumberToMeasureNumberMapElementAtom::asActualLongNamedOpti
     ss << "[EMPTY]";
   }
   else {
-    std::map <mfMeasureNumber, int>::const_iterator
+    std::map <mfMeasureNumber, mfMeasureNumber>::const_iterator
       iBegin = fMeasureNumberToMeasureNumberMapVariable.begin (),
       iEnd   = fMeasureNumberToMeasureNumberMapVariable.end (),
       i      = iBegin;
@@ -10670,7 +11027,7 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::print (std::ostream& os) con
     os << "[EMPTY]";
   }
   else {
-    std::map <mfMeasureNumber, int>::const_iterator
+    std::map <mfMeasureNumber, mfMeasureNumber>::const_iterator
       iBegin = fMeasureNumberToMeasureNumberMapVariable.begin (),
       iEnd   = fMeasureNumberToMeasureNumberMapVariable.end (),
       i      = iBegin;
@@ -10704,7 +11061,7 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::displayAtomWithVariableOptio
     os << std::endl;
     ++gIndenter;
 
-    for (std::pair <mfMeasureNumber, int> thePair : fMeasureNumberToMeasureNumberMapVariable) {
+    for (std::pair <mfMeasureNumber, mfMeasureNumber> thePair : fMeasureNumberToMeasureNumberMapVariable) {
       os <<
         "\"" <<
         thePair.first <<

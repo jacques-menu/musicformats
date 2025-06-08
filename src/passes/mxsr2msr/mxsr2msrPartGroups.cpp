@@ -66,9 +66,9 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_mxsrPartGroup mxsrPartGroup::create (
 	const mfInputLineNumber& inputLineNumber,
-	int                   partGroupNumber,
-	const S_msrPartGroup& theMsrPartGroup,
-	int                   partGroupSequentialNumber)
+	int                      partGroupNumber,
+	const S_msrPartGroup&    theMsrPartGroup,
+	int                      partGroupSequentialNumber)
 {
   mxsrPartGroup* obj = new
     mxsrPartGroup (
@@ -82,9 +82,9 @@ S_mxsrPartGroup mxsrPartGroup::create (
 
 mxsrPartGroup::mxsrPartGroup (
 	const mfInputLineNumber& inputLineNumber,
-	int                   partGroupNumber,
-	const S_msrPartGroup& theMsrPartGroup,
-	int                   partGroupSequentialNumber)
+	int                      partGroupNumber,
+	const S_msrPartGroup&    theMsrPartGroup,
+	int                      partGroupSequentialNumber)
 {
   fPartGroupNumber = partGroupNumber;
 

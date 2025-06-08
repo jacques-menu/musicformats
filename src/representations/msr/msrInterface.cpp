@@ -510,7 +510,7 @@ S_msrStaff createStaffInPart (
 //_______________________________________________________________________________
 S_msrVoice createRegularVoiceInStaff (
   const mfInputLineNumber& inputLineNumber,
-  int               voiceNumber,
+  const mfVoiceNumber&     voiceNumber,
   const S_msrStaff& staff)
 {
   // create the functions voice

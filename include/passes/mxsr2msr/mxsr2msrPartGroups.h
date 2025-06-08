@@ -46,9 +46,9 @@ class mxsrPartGroup : public smartable
 
     static SMARTP<mxsrPartGroup> create (
                             const mfInputLineNumber& inputLineNumber,
-                            int                   partGroupNumber,
-                            const S_msrPartGroup& theMsrPartGroup,
-                            int                   partGroupSequentialNumber);
+                            int                      partGroupNumber,
+                            const S_msrPartGroup&    theMsrPartGroup,
+                            int                      partGroupSequentialNumber);
 
   protected:
 
@@ -57,9 +57,9 @@ class mxsrPartGroup : public smartable
 
                           mxsrPartGroup (
                             const mfInputLineNumber& inputLineNumber,
-                            int                   partGroupNumber,
-                            const S_msrPartGroup& theMsrPartGroup,
-                            int                   partGroupSequentialNumber);
+                            int                      partGroupNumber,
+                            const S_msrPartGroup&    theMsrPartGroup,
+                            int                      partGroupSequentialNumber);
 
     virtual               ~mxsrPartGroup ();
 
@@ -77,10 +77,10 @@ class mxsrPartGroup : public smartable
     int                   getPartGroupSequentialNumber () const
                               { return fPartGroupSequentialNumber; }
 
-    int                   getInputLineNumber () const
+    mfInputLineNumber     getInputLineNumber () const
                               { return fInputLineNumber; }
 
-    int                   getStopInputLineNumber () const
+    mfInputLineNumber     getStopInputLineNumber () const
                               { return fStopInputLineNumber; }
 
     S_msrPartGroup        getMsrPartGroup () const
@@ -123,8 +123,8 @@ class mxsrPartGroup : public smartable
 
     int                   fPartGroupSequentialNumber; // set upon part group start
 
-    int                   fInputLineNumber;
-    int                   fStopInputLineNumber;
+    mfInputLineNumber     fInputLineNumber;
+    mfInputLineNumber     fStopInputLineNumber;
 
 
     S_msrPartGroup        fMsrPartGroup;

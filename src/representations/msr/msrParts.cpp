@@ -51,7 +51,7 @@ int msrPart::sPartsCounter = 0;
 
 S_msrPart msrPart::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& partMusicXMLID)
+  const std::string&       partMusicXMLID)
 {
   msrPart* obj =
     new msrPart (
@@ -63,8 +63,8 @@ S_msrPart msrPart::create (
 
 S_msrPart msrPart::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&    partMusicXMLID,
-  const S_msrPartGroup& partUpLinkToPartGroup)
+  const std::string&       partMusicXMLID,
+  const S_msrPartGroup&    partUpLinkToPartGroup)
 {
   msrPart* obj =
     new msrPart (
@@ -84,7 +84,7 @@ S_msrPart msrPart::create (
 
 msrPart::msrPart (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& partMusicXMLID)
+  const std::string&       partMusicXMLID)
     : msrPartGroupElement (inputLineNumber)
 {
   // replace spaces by underscores in partMusicXMLID to set fPartMusicXMLID
@@ -212,7 +212,7 @@ msrPart::~msrPart ()
 {}
 
 void msrPart::setPartCurrentMeasureNumber (
-  const std::string& measureNumber)
+  const mfMeasureNumber& measureNumber)
 {
   fPartCurrentMeasureNumber = measureNumber;
 
@@ -296,8 +296,9 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
 void msrPart::registerStaffInPart (
   const S_msrStaff& staff)
 {
-  int staffNumber =
-    staff->getStaffNumber ();
+  mfStaffNumber
+    staffNumber =
+      staff->getStaffNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStavesBasics ()) {
@@ -2257,7 +2258,7 @@ void msrPart::sortStavesByIncreasingNumber ()
 }
 
 S_msrStaff msrPart::fetchStaffFromPart (
-  int staffNumber)
+  mfStaffNumber staffNumber)
 {
   S_msrStaff result;
 

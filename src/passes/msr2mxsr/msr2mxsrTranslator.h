@@ -795,12 +795,12 @@ class EXP msr2mxsrTranslator :
     // measures
     // ------------------------------------------------------
 
-    std::string               fCurrentMeasureNumber;
+    mfMeasureNumber           fCurrentMeasureNumber;
     S_msrMeasure              fCurrentMSRMeasure;
 
     Sxmlelement               fCurrentMeasureElement;
 
-    std::map <std::string, Sxmlelement>
+    std::map <mfMeasureNumber, Sxmlelement>
                               fPartMeasureNumbersToElementsMap;
 
     void                      appendOtherMusicXMLElementToMeasure (

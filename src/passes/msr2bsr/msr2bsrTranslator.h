@@ -230,7 +230,7 @@ class EXP msr2bsrTranslator :
     // measures
     // ------------------------------------------------------
 
-    std::string               fCurrentMeasureNumber;
+    mfMeasureNumber           fCurrentMeasureNumber;
     S_bsrMeasure              fCurrentMeasure;
 
 

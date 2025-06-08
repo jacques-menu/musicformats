@@ -64,7 +64,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrHiddenMeasureAndBarLineDescr msrHiddenMeasureAndBarLineDescr::create (
   const mfInputLineNumber& inputLineNumber,
-  S_msrDalSegno dalSegno)
+  S_msrDalSegno            dalSegno)
 {
   msrHiddenMeasureAndBarLineDescr* obj = new
     msrHiddenMeasureAndBarLineDescr (
@@ -76,7 +76,7 @@ S_msrHiddenMeasureAndBarLineDescr msrHiddenMeasureAndBarLineDescr::create (
 
 msrHiddenMeasureAndBarLineDescr::msrHiddenMeasureAndBarLineDescr (
   const mfInputLineNumber& inputLineNumber,
-  S_msrDalSegno dalSegno)
+  S_msrDalSegno            dalSegno)
 {
   fInputLineNumber = inputLineNumber;
   fDalSegno = dalSegno;
@@ -1946,7 +1946,7 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
 //________________________________________________________________________
 void msr2msrTranslator::visitStart (S_msrMeasure& elt)
 {
-  std::string
+  mfMeasureNumber
     fCurrentMeasureNumber =
       elt->getMeasureNumber ();
 
@@ -2039,7 +2039,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
 
 void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 {
-  std::string
+  mfMeasureNumber
     nextMeasureNumber =
       elt->getNextMeasureNumber ();
 

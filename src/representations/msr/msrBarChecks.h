@@ -39,9 +39,9 @@ class EXP msrBarCheck : public msrMeasureElement
 
     static SMARTP<msrBarCheck> createWithNextBarPuristNumber (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&  nextBarOriginalNumber,
-                            int                 nextBarPuristNumber,
-                            const S_msrMeasure& upLinkToMeasure);
+                            const mfMeasureNumber&    nextBarOriginalNumber,
+                            int                       nextBarPuristNumber,
+                            const S_msrMeasure&       upLinkToMeasure);
 
   protected:
 
@@ -56,7 +56,7 @@ class EXP msrBarCheck : public msrMeasureElement
 
                           msrBarCheck (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&  nextBarOriginalNumber,
+                            const mfMeasureNumber&  nextBarOriginalNumber,
                             int                 nextBarPuristNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
@@ -67,7 +67,7 @@ class EXP msrBarCheck : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    std::string           getNextBarOriginalNumber () const
+    mfMeasureNumber       getNextBarOriginalNumber () const
                               { return fNextBarOriginalNumber; }
 
     void                  setNextBarPuristNumber (int puristNumber);
@@ -104,7 +104,7 @@ class EXP msrBarCheck : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    std::string           fNextBarOriginalNumber;
+    mfMeasureNumber           fNextBarOriginalNumber;
     int                   fNextBarPuristNumber;
 };
 typedef SMARTP<msrBarCheck> S_msrBarCheck;

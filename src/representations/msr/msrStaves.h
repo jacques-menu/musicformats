@@ -541,7 +541,7 @@ class EXP msrStaff : public msrElement
     void                  registerRegularVoiceByItsNumber (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrVoice& regularVoice,
-                            int               voiceNumber);
+                            const mfVoiceNumber&     voiceNumber);
 
     void                  registerHarmoniesVoiceByItsNumber (
                             const mfInputLineNumber& inputLineNumber,
