@@ -40,7 +40,7 @@ void initializeLPSR ()
         "Initializing LPSR";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

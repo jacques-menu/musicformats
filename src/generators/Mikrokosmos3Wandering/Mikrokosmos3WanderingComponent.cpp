@@ -91,7 +91,7 @@ S_mfcGeneratorComponent createMikrokosmos3WanderingGeneratorComponent ()
         "Crerating the Mikrokosmos3Wandering component";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

@@ -71,7 +71,7 @@ msrEyeGlasses::~msrEyeGlasses ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -123,7 +123,7 @@ msrEyeGlasses::~msrEyeGlasses ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
 //     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -168,7 +168,7 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
       "% ==> msrEyeGlasses::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -186,7 +186,7 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
             "% ==> Launching msrEyeGlasses::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -204,7 +204,7 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
       "% ==> msrEyeGlasses::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -222,7 +222,7 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
             "% ==> Launching msrEyeGlasses::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

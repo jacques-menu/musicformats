@@ -129,7 +129,7 @@ EXP int xml2brl (
       ", insiderOption: " << insiderOption;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -243,7 +243,7 @@ EXP int xml2brl (
       separator;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -369,7 +369,7 @@ EXP int xml2brl (
       "The command line options and arguments have been analyzed";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -410,7 +410,7 @@ EXP int xml2brl (
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED

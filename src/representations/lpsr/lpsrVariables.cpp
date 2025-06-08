@@ -56,7 +56,7 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
       "% ==> lpsrVariableUseCommand::acceptIn()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -74,7 +74,7 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
             "% ==> Launching lpsrVariableUseCommand::visitStart()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -92,7 +92,7 @@ void lpsrVariableUseCommand::acceptOut (basevisitor* v)
       "% ==> lpsrVariableUseCommand::acceptOut()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -110,7 +110,7 @@ void lpsrVariableUseCommand::acceptOut (basevisitor* v)
             "% ==> Launching lpsrVariableUseCommand::visitEnd()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

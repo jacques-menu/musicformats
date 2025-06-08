@@ -77,7 +77,7 @@ void msrLigature::setLigatureSideLinkToOtherEnd (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     sideLinkToOtherEnd != nullptr,
     "sideLinkToOtherEnd is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -100,7 +100,7 @@ void msrLigature::acceptIn (basevisitor* v)
       "% ==> msrLigature::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -118,7 +118,7 @@ void msrLigature::acceptIn (basevisitor* v)
             "% ==> Launching msrLigature::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -136,7 +136,7 @@ void msrLigature::acceptOut (basevisitor* v)
       "% ==> msrLigature::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -154,7 +154,7 @@ void msrLigature::acceptOut (basevisitor* v)
             "% ==> Launching msrLigature::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

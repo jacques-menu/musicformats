@@ -31,7 +31,7 @@ S_mfcPassComponent createMsr2lpsrComponent ()
         "Creating the msr2lpsr pass component";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

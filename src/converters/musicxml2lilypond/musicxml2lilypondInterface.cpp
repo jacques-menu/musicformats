@@ -149,7 +149,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2));
 #endif // MF_TRACE_IS_ENABLED
 
@@ -184,7 +184,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
 #endif // MF_TRACE_IS_ENABLED
 
@@ -266,7 +266,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
     #ifdef MF_TRACE_IS_ENABLED
         gWaeHandler->waeTraceToStreamWithoutInputLocation (
           err,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_4));
     #endif // MF_TRACE_IS_ENABLED
 
@@ -332,7 +332,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -345,7 +345,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
         std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -388,7 +388,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
         std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -402,7 +402,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
         std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -464,7 +464,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
         gLanguage->closingLilypondFile (outputFileName);
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -552,7 +552,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
       ", insiderOption: " << insiderOption;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

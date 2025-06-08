@@ -145,7 +145,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> guidoGenerationOahGroup::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -163,7 +163,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching guidoGenerationOahGroup::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -181,7 +181,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> guidoGenerationOahGroup::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -199,7 +199,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching guidoGenerationOahGroup::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -217,7 +217,7 @@ void guidoGenerationOahGroup::browseData (basevisitor* v)
       ".\\\" ==> guidoGenerationOahGroup::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -282,7 +282,7 @@ S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
       "Creating global generators insider OAH group";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

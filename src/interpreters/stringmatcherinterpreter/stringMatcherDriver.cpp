@@ -99,7 +99,7 @@ stringMatcherDriver::~stringMatcherDriver ()
 // {
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     fExpressionsStack.size (),
 //     "expressionsStackTop(): fExpressionsStack is empty");
 //
@@ -222,7 +222,7 @@ int stringMatcherDriver::parseInput_Pass1 ()
 // {
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     fExpressionsStack.size (),
 //     "expressionsStackTop(): fExpressionsStack is empty");
 //
@@ -234,7 +234,7 @@ int stringMatcherDriver::parseInput_Pass1 ()
 // {
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     ! fExpressionsStack.empty (),
 //     "expressionsStackPop(): fExpressionsStack is empty");
 //
@@ -288,7 +288,7 @@ mfMusicformatsErrorKind stringMatcherDriver::launchstringMatcherService_Pass2 ()
       mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     fExpressionsStack.size () == 1,
 //     "fExpressionsStack should contain only the main options block after parsing");
 //
@@ -303,7 +303,7 @@ mfMusicformatsErrorKind stringMatcherDriver::launchstringMatcherService_Pass2 ()
 //
 //   // sanity checks
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     fExpressionsStack.empty (),
 //     "fExpressionsStack should be empty after parsing");
 //

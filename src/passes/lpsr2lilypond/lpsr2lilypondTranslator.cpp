@@ -589,7 +589,7 @@ if (false) // JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         gGlobalLpsr2lilypondOahGroup->
         getFixedOctaveEntrySemiTonesPitchAndOctave () != nullptr,
        "gGlobalLpsr2lilypondOahGroup->getFixedOctaveEntrySemiTonesPitchAndOctave () is NULL");
@@ -626,7 +626,7 @@ if (false) // JMI
     }
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -729,7 +729,7 @@ void lpsr2lilypondTranslator::setCurrentOctaveEntryReferenceFromTheLilypondOah (
     }
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -881,7 +881,7 @@ std::string lpsr2lilypondTranslator::absoluteOctaveAsLilypondString (
 //         lpsr2lilypondInternalError (
 //           gServiceRunData->getInputSourceName (),
 //           inputLineNumber,
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           ss.str ());
       }
     case msrOctaveKind::kOctave0:
@@ -1047,7 +1047,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1081,7 +1081,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1128,7 +1128,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
       absoluteOctavesDifference;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1284,7 +1284,7 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1396,7 +1396,7 @@ std::string lpsr2lilypondTranslator::notePitchAsLilypondString (
       note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1414,7 +1414,7 @@ std::string lpsr2lilypondTranslator::notePitchAsLilypondString (
             ", line " << note->getInputLineNumber ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1439,7 +1439,7 @@ std::string lpsr2lilypondTranslator::notePitchAsLilypondString (
             ", line " << note->getInputLineNumber ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1822,7 +1822,7 @@ void lpsr2lilypondTranslator::generateNoteHeadColor (
       lpsr2lilypondInternalError (
         gServiceRunData->getInputSourceName (),
         note->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -1886,7 +1886,7 @@ void lpsr2lilypondTranslator::generateNoteLigaturesList (
                 std::endl;
 
               gWaeHandler->waeTrace (
-                __FILE__, __LINE__,
+                __FILE__, mfInputLineNumber (__LINE__),
                 ss.str ());
             }
 #endif // MF_TRACE_IS_ENABLED
@@ -2030,7 +2030,7 @@ std::string lpsr2lilypondTranslator::stemAsLilypondString (
       stemKind;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2070,7 +2070,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
       fCurrentStemKind;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2106,7 +2106,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
       doGenerateAStemDirection;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2125,7 +2125,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
           ", line " << stem->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -2386,7 +2386,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
       std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     if (
@@ -2508,7 +2508,7 @@ void lpsr2lilypondTranslator::generateTheNoteItself (
         std::endl;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
 
       if (generateMsrVisitingInformation) {
@@ -2539,7 +2539,7 @@ void lpsr2lilypondTranslator::generateTheNoteItself (
         lpsr2lilypondInternalError (
           gServiceRunData->getInputSourceName (),
           note->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -2654,7 +2654,7 @@ void lpsr2lilypondTranslator::generateRegularNoteInMeasure (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -2923,7 +2923,7 @@ void lpsr2lilypondTranslator::generateRestInMeasure (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -2974,7 +2974,7 @@ void lpsr2lilypondTranslator::generateSkipInMeasure (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3068,7 +3068,7 @@ void lpsr2lilypondTranslator::generateUnpitchedNoteInMeasure (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3151,7 +3151,7 @@ void lpsr2lilypondTranslator::generateCuedNoteInMeasure (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3222,7 +3222,7 @@ void lpsr2lilypondTranslator::generateRegularNoteInChord (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3322,7 +3322,7 @@ void lpsr2lilypondTranslator::generateRegularNoteInTuplet (
 
         if (doTraceNotes) {
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 
@@ -3405,7 +3405,7 @@ void lpsr2lilypondTranslator::generateRestInTuplet (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3503,7 +3503,7 @@ void lpsr2lilypondTranslator::generateNoteUnpitchedInTuplet (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3579,7 +3579,7 @@ void lpsr2lilypondTranslator::generateRegularNoteInGraceNotesGroup (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3658,7 +3658,7 @@ void lpsr2lilypondTranslator::generateRestInGraceNotesGroup (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3737,7 +3737,7 @@ void lpsr2lilypondTranslator::generateSkipInGraceNotesGroup (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3823,7 +3823,7 @@ void lpsr2lilypondTranslator::generateNoteInChordInGraceNotesGroup (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3898,7 +3898,7 @@ void lpsr2lilypondTranslator::generateNoteInTupletInGraceNotesGroup (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -4004,7 +4004,7 @@ void lpsr2lilypondTranslator::generateNoteInDoubleTremolo (
 
       if (doTraceNotes) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -4298,7 +4298,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
       ", line " << articulation->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4503,7 +4503,7 @@ R"(\once\override BreathingSign.text = \markup {\musicglyph #"scripts.caesura.st
         lpsr2lilypondInternalError (
           gServiceRunData->getInputSourceName (),
           articulation->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -4560,7 +4560,7 @@ void lpsr2lilypondTranslator::generateChordArticulation (
       ", line " << articulation->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4695,7 +4695,7 @@ R"(\once\override BreathingSign.text = \markup {\musicglyph #"scripts.caesura.st
         lpsr2lilypondInternalError (
           gServiceRunData->getInputSourceName (),
           articulation->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -5200,7 +5200,7 @@ void lpsr2lilypondTranslator::generateSpannerBeforeNote (
       spanner->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5339,7 +5339,7 @@ void lpsr2lilypondTranslator::generateSpannerAfterNote (
       spanner->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5419,7 +5419,7 @@ void lpsr2lilypondTranslator::generateSpannerAfterNote (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
             // sanity check
             mfAssert (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               spannerStartEnd != nullptr,
               "spannerStartEnd is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -5436,7 +5436,7 @@ void lpsr2lilypondTranslator::generateSpannerAfterNote (
                   std::endl;
 
                 gWaeHandler->waeTraceWithoutInputLocation (
-                  __FILE__, __LINE__,
+                  __FILE__, mfInputLineNumber (__LINE__),
                   ss.str ());
               }
 #endif // MF_TRACE_IS_ENABLED
@@ -5472,7 +5472,7 @@ void lpsr2lilypondTranslator::generateSpannerAfterNote (
                   std::endl;
 
                 gWaeHandler->waeTraceWithoutInputLocation (
-                  __FILE__, __LINE__,
+                  __FILE__, mfInputLineNumber (__LINE__),
                   ss.str ());
               }
 #endif // MF_TRACE_IS_ENABLED
@@ -5581,7 +5581,7 @@ void lpsr2lilypondTranslator::transposeDiatonicError (
   lpsr2lilypondError (
     gServiceRunData->getInputSourceName (),
     inputLineNumber,
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ss.str ());
 }
 
@@ -5640,7 +5640,7 @@ std::string lpsr2lilypondTranslator::singleTremoloNotesDurationAsLilypondString 
       durationToUse;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6588,7 +6588,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -6665,7 +6665,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScore& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -6710,7 +6710,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrIdentification& elt) // JMI
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -6744,7 +6744,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrIdentification& elt) // JMI
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -6800,7 +6800,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrSchemeVariable& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -6871,7 +6871,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrSchemeVariable& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -6927,7 +6927,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrHeader& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -6982,7 +6982,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrHeader& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -8810,7 +8810,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPaper& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -8852,7 +8852,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPaper& elt) // superflous ??? JMI
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -8891,7 +8891,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9005,7 +9005,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9128,7 +9128,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBookBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9174,7 +9174,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9229,7 +9229,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScoreBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9271,7 +9271,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScoreBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9320,7 +9320,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBookPartBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9362,7 +9362,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookPartBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9412,7 +9412,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrParallelMusicBLock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9465,7 +9465,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrParallelMusicBLock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9525,7 +9525,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9855,7 +9855,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -9936,7 +9936,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -10054,7 +10054,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -10110,7 +10110,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -10440,7 +10440,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -10500,7 +10500,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewStaffGroupBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -10540,7 +10540,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewStaffGroupBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -10581,7 +10581,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewStaffBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -10617,7 +10617,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewStaffBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -10655,7 +10655,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -10796,7 +10796,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10869,7 +10869,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
         "\"";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -10913,7 +10913,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
       }
 
       lpsr2lilypondWarning (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -10963,7 +10963,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrUseVoiceCommand& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -10998,7 +10998,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11087,7 +11087,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewLyricsBlock& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11126,7 +11126,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrVariableUseCommand& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11162,7 +11162,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrVariableUseCommand& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11199,7 +11199,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11284,7 +11284,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrChordNamesContext& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11319,7 +11319,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11413,7 +11413,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrFiguredBassContext& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11448,7 +11448,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBarCommand& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11482,7 +11482,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBarCommand& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11517,7 +11517,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrComment& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11563,7 +11563,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrComment& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11598,7 +11598,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrSchemeFunction& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11641,7 +11641,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrSchemeFunction& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11677,7 +11677,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrMelismaCommand& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11720,7 +11720,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrMelismaCommand& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11756,7 +11756,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScore& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11790,7 +11790,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScore& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11825,7 +11825,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScaling& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11859,7 +11859,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScaling& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11894,7 +11894,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageLayout& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11951,7 +11951,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageLayout& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11986,7 +11986,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSystemLayout& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12020,7 +12020,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSystemLayout& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12055,7 +12055,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffLayout& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12089,7 +12089,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaffLayout& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12124,7 +12124,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAppearance& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12158,7 +12158,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAppearance& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12193,7 +12193,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCredit& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12227,7 +12227,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCredit& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12261,7 +12261,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCreditWords& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12295,7 +12295,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCreditWords& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12335,7 +12335,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPartGroup& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12370,7 +12370,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPartGroup& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12410,7 +12410,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12437,7 +12437,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
         ", line " << elt->getInputLineNumber () << " ===-->";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -12483,7 +12483,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12523,7 +12523,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaff& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12570,7 +12570,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaff& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12605,7 +12605,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffTuning& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12674,7 +12674,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffDetails& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12726,7 +12726,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12747,7 +12747,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       ", line " << elt->getInputLineNumber () << " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -12900,7 +12900,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
         ", line " << elt->getInputLineNumber () << " ===-->";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -13028,7 +13028,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -13120,7 +13120,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -13152,7 +13152,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
       std::endl;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13207,7 +13207,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -13230,7 +13230,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 //         " %} ";
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -13282,7 +13282,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -13344,7 +13344,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -13435,7 +13435,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -13567,7 +13567,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -13654,7 +13654,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -13700,7 +13700,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -13726,7 +13726,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 {
-  std::string
+  mfMeasureNumber
     fCurrentMeasureNumber =
       elt->getMeasureNumber ();
 
@@ -13763,7 +13763,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -13831,7 +13831,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           "', line " << elt->getInputLineNumber () << " ===-->";
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -13844,7 +13844,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
   // should we reset the measure purist number?
   {
-    std::map <std::string, int>::const_iterator
+    std::map <mfMeasureNumber, int>::const_iterator
       it =
         gGlobalLpsr2lilypondOahGroup->
           getResetMeasureElementMeasureNumberMap ().find (fCurrentMeasureNumber);
@@ -13871,7 +13871,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             "', line " << elt->getInputLineNumber () << " ===-->";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -13896,7 +13896,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             "', line " << elt->getInputLineNumber () << " ===-->";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -13932,7 +13932,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14034,7 +14034,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 // //         lpsr2lilypondInternalError (
 // //           gServiceRunData->getInputSourceName (),
 // //           elt->getInputLineNumber (),
-// //           __FILE__, __LINE__,
+// //           __FILE__, mfInputLineNumber (__LINE__),
 // //           ss.str ());
 // // else
 //         lpsr2lilypondInternalWarning (
@@ -14157,7 +14157,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //           lpsr2lilypondInternalWarning (
 //             gServiceRunData->getInputSourceName (),
 //             elt->getInputLineNumber (),
-//     // JMI        __FILE__, __LINE__,
+//     // JMI        __FILE__, mfInputLineNumber (__LINE__),
 //             ss.str ());
 //         }
 //
@@ -14297,7 +14297,7 @@ void lpsr2lilypondTranslator::generateMusicallyEmptyMeasure (
   } // switch
 
 //   mfAssertFalse ( // JMI for debug
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     "generateMusicallyEmptyMeasure()");
 
   // generate the duration of the skip from the full measure whole notes JMI 0.9.68
@@ -14358,7 +14358,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -14397,7 +14397,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14416,7 +14416,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -14430,7 +14430,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
     // sanity check
     mfAssert (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       spannerStartEnd != nullptr,
       "spannerStartEnd is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -14637,7 +14637,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
             "', line " << elt->getInputLineNumber () << " ===-->";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
   #endif // MF_TRACE_IS_ENABLED
@@ -14659,7 +14659,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
   #endif // MF_TRACE_IS_ENABLED
@@ -14687,7 +14687,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
             "', line " << elt->getInputLineNumber () << " ===-->";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
   #endif // MF_TRACE_IS_ENABLED
@@ -14711,7 +14711,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
   #endif // MF_TRACE_IS_ENABLED
@@ -14749,7 +14749,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -14849,7 +14849,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -14906,7 +14906,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -17353,7 +17353,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -17390,7 +17390,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrClefKeyTimeSignatureGroup& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -17426,7 +17426,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClefKeyTimeSignatureGroup& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -17463,7 +17463,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -17520,7 +17520,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
             elt->asShortString ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
   #endif // MF_TRACE_IS_ENABLED
@@ -17656,7 +17656,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClef& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -17693,7 +17693,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -17831,7 +17831,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
                 lpsr2lilypondInternalError (
                   gServiceRunData->getInputSourceName (),
                   elt->getInputLineNumber (),
-                  __FILE__, __LINE__,
+                  __FILE__, mfInputLineNumber (__LINE__),
                   "Humdrum/Scot key items vector is empty");
               }
             }
@@ -17870,7 +17870,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrKey& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -17907,7 +17907,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -18124,7 +18124,7 @@ void lpsr2lilypondTranslator::generateRegularTimeSignature (
       lpsr2lilypondInternalError (
         gServiceRunData->getInputSourceName (),
         timeSignature->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "time signature items vector is empty");
     }
   }
@@ -18153,7 +18153,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTimeSignature& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -18188,7 +18188,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTransposition& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -18595,7 +18595,7 @@ If the double element is present, it indicates that the music is doubled one oct
         lpsr2lilypondError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
   } // switch
@@ -18696,7 +18696,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTransposition& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -18731,7 +18731,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempo& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19236,7 +19236,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNotesRelationshipElements& e
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19276,7 +19276,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoNotesRelationshipElements& elt
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19317,7 +19317,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNote& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19358,7 +19358,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoTuplet& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19401,7 +19401,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoTuplet& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19438,7 +19438,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempo& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19473,7 +19473,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrArticulation& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19510,7 +19510,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArticulation& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19545,7 +19545,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFermata& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19624,7 +19624,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFermata& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19659,7 +19659,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrArpeggiato& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19696,7 +19696,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArpeggiato& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19731,7 +19731,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNonArpeggiato& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19768,7 +19768,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNonArpeggiato& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19803,7 +19803,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnical& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19840,7 +19840,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnical& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19877,7 +19877,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithInteger& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19914,7 +19914,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19951,7 +19951,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithFloat& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -19988,7 +19988,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20023,7 +20023,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithString& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20060,7 +20060,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithString& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20095,7 +20095,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOrnament& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20132,7 +20132,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOrnament& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20167,7 +20167,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrGlissando& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20204,7 +20204,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGlissando& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20239,7 +20239,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlide& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20276,7 +20276,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlide& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20311,7 +20311,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSingleTremolo& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20348,7 +20348,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSingleTremolo& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20383,7 +20383,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20455,7 +20455,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDoubleTremolo& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20496,7 +20496,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDynamic& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20530,7 +20530,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDynamic& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20565,7 +20565,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOtherDynamic& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20599,7 +20599,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOtherDynamic& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20634,7 +20634,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrWords& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20668,7 +20668,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWords& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20704,7 +20704,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlur& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20739,7 +20739,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlur& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20775,7 +20775,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordSlurLink& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20810,7 +20810,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordSlurLink& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20846,7 +20846,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLigature& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20880,7 +20880,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLigature& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20915,7 +20915,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCrescDecresc& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20960,7 +20960,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCrescDecresc& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -20995,7 +20995,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrWedge& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -21029,7 +21029,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWedge& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -21062,7 +21062,7 @@ void lpsr2lilypondTranslator::generateNoteBeamsAfterNote (
           note->asShortString ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -21127,7 +21127,7 @@ void lpsr2lilypondTranslator::generateNoteBeamsAfterNote (
           ", line " << inputStartLineNumber ;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -21268,7 +21268,7 @@ void lpsr2lilypondTranslator::generateNoteSlurDirection (
           ", line " << slur->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -21303,7 +21303,7 @@ void lpsr2lilypondTranslator::generateNoteSlurDirection (
           doGenerateASlurDirection;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -21322,7 +21322,7 @@ void lpsr2lilypondTranslator::generateNoteSlurDirection (
             ", line " << slur->getInputLineNumber ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
   #endif // MF_TRACE_IS_ENABLED
@@ -21381,7 +21381,7 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
           ", line " << slur->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -21410,7 +21410,7 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
               ", line " << slur->getInputLineNumber ();
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -21462,7 +21462,7 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
               ", line " << slur->getInputLineNumber ();
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -21524,7 +21524,7 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
               note->asShortString ();
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -21557,7 +21557,7 @@ void lpsr2lilypondTranslator::generateNoteSlursList (
               std::endl;
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -21627,7 +21627,7 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
       ", graceNotesGroupIsSlurred: " << graceNotesGroupIsSlurred;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21741,7 +21741,7 @@ slash = \tweak Flag.stroke-style grace \etc
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         element != nullptr,
         "element is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -21835,7 +21835,7 @@ slash = \tweak Flag.stroke-style grace \etc
         lpsr2lilypondInternalError (
           gServiceRunData->getInputSourceName (),
           graceNotesGroup->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -21859,7 +21859,7 @@ slash = \tweak Flag.stroke-style grace \etc
     lpsr2lilypondInternalError (
       gServiceRunData->getInputSourceName (),
       graceNotesGroup->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -21898,7 +21898,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -21937,7 +21937,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGraceNotesGroup& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -21978,7 +21978,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -22015,7 +22015,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -22053,7 +22053,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroup& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -22096,7 +22096,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroupContents& elt
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -22139,7 +22139,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroupContents& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -22177,7 +22177,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroup& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -22472,7 +22472,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -22587,7 +22587,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 //         }
 //
 //         gWaeHandler->waeTrace (
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           ss.str ());
 //       }
 // #endif // MF_TRACE_IS_ENABLED
@@ -22693,7 +22693,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
             }
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -22736,7 +22736,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
                   std::endl;
 
                 gWaeHandler->waeTrace (
-                  __FILE__, __LINE__,
+                  __FILE__, mfInputLineNumber (__LINE__),
                   ss.str ());
               }
 
@@ -22769,7 +22769,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
               std::endl;
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -22792,7 +22792,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
               elt->asString ();
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -22817,7 +22817,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
               elt->asString ();
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -22839,7 +22839,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
               elt->asString ();
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -22890,7 +22890,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -23952,7 +23952,7 @@ void lpsr2lilypondTranslator:: generateArticulations (
           lpsr2lilypondInternalError (
             gServiceRunData->getInputSourceName (),
             articulation->getInputLineNumber (),
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
         break;
@@ -24036,7 +24036,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -24078,7 +24078,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                 "% ==> end visiting multiple measure rests is ignored";
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
             }
 #endif // MF_TRACE_IS_ENABLED
@@ -24091,7 +24091,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                 "% ==> returning from visitEnd (S_msrNote&)";
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
             }
 #endif // MF_TRACE_IS_ENABLED
@@ -24115,7 +24115,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
               "% ==> end visiting skip notes is ignored";
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -24139,7 +24139,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
               "% ==> end visiting grace notes is ignored";
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -24479,7 +24479,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOctaveShift& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -24513,7 +24513,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOctaveShift& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -24548,7 +24548,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAccordionRegistration& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -24621,7 +24621,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarpPedalsTuning& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -24690,7 +24690,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStem& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -24724,7 +24724,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStem& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -24759,7 +24759,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBeam& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -24795,7 +24795,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -24978,7 +24978,7 @@ void lpsr2lilypondTranslator::generateChordStems (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     firstChordStem != nullptr,
     "firstChordStem is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -25013,7 +25013,7 @@ void lpsr2lilypondTranslator::generateCodeBeforeChordBegin (
 //       " %}";
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 #endif // MF_TRACE_IS_ENABLED
@@ -25031,7 +25031,7 @@ void lpsr2lilypondTranslator::generateCodeBeforeChordBegin (
   }
 
   gWaeHandler->waeTrace (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ss.str ());
 */
 
@@ -25316,7 +25316,7 @@ void lpsr2lilypondTranslator::generateCodeAfterChordEnd (
   }
 
   gWaeHandler->waeTrace (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ss.str ());
 
   if (chordGraceNotesGroupAfter) {
@@ -25998,7 +25998,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26072,7 +26072,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChord& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26160,7 +26160,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26399,7 +26399,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26477,7 +26477,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26526,7 +26526,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTie& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26561,7 +26561,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegno& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26595,7 +26595,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHiddenMeasureAndBarLine& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26642,7 +26642,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCoda& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26677,7 +26677,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrEyeGlasses& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26714,7 +26714,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScordatura& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26805,7 +26805,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26832,7 +26832,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
         lpsr2lilypondInternalError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -26881,7 +26881,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDamp& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26918,7 +26918,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDampAll& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -26957,7 +26957,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27133,7 +27133,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
         lpsr2lilypondInternalWarning (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-  // JMI        __FILE__, __LINE__,
+  // JMI        __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -27170,7 +27170,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarLine& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27207,7 +27207,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27297,7 +27297,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarCheck& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27332,7 +27332,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27427,7 +27427,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarNumberCheck& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27462,7 +27462,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27538,7 +27538,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLineBreak& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27573,7 +27573,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageBreak& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27632,7 +27632,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageBreak& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27667,7 +27667,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27746,7 +27746,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27809,7 +27809,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatCommonPart& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27845,7 +27845,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatCommonPart& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -27882,7 +27882,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28013,7 +28013,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28068,7 +28068,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28126,7 +28126,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsalMark& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28242,7 +28242,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRehearsalMark& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28277,7 +28277,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28364,7 +28364,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28415,7 +28415,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28448,7 +28448,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28481,7 +28481,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28527,7 +28527,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28564,7 +28564,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultipleMeasureRest& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28635,7 +28635,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28663,7 +28663,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
       fRemainingMeasureRestsNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28683,7 +28683,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
       multipleMeasureRestsMeasureSoundingNotes;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28706,7 +28706,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
       measureRestsWholeNoteAsLilypondString;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28801,7 +28801,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28875,7 +28875,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -28950,7 +28950,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
               lpsr2lilypondInternalError (
                 gServiceRunData->getInputSourceName (),
                 articulation->getInputLineNumber (),
-                __FILE__, __LINE__,
+                __FILE__, mfInputLineNumber (__LINE__),
                 ss.str ());
             }
             break;

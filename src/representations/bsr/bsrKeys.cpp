@@ -104,7 +104,7 @@ bsrKey::bsrKey (
     bsrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -121,7 +121,7 @@ bsrKey::bsrKey (
       fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -220,7 +220,7 @@ void bsrKey::acceptIn (basevisitor* v)
       "% ==> bsrKey::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -238,7 +238,7 @@ void bsrKey::acceptIn (basevisitor* v)
             "% ==> Launching bsrKey::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -257,7 +257,7 @@ void bsrKey::acceptOut (basevisitor* v)
       "% ==> bsrKey::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -275,7 +275,7 @@ void bsrKey::acceptOut (basevisitor* v)
             "% ==> Launching bsrKey::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

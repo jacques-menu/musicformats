@@ -91,7 +91,7 @@ msrFontStyleKind msrFontStyleKindFromString (
       msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -148,7 +148,7 @@ msrFontWeightKind msrFontWeightKindFromString (
       msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -267,7 +267,7 @@ float msrFontSize::getFontNumericSize () const
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           K_MF_INPUT_LINE_UNKNOWN_, // JMI
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;

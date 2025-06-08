@@ -91,7 +91,7 @@ Usage: msr2braille [option]* [MusicXMLFile|-] [[option]*
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -155,7 +155,7 @@ void msr2brailleInsiderHandler::createTheXml2braillePrefixes ()
       "Creating the msr2braille prefixes";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -177,7 +177,7 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -276,7 +276,7 @@ void msr2brailleInsiderHandler::checkOptionsAndArguments () const
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -297,7 +297,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -391,7 +391,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -457,7 +457,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -489,7 +489,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -555,7 +555,7 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msr2brailleInsiderOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -573,7 +573,7 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -591,7 +591,7 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msr2brailleInsiderOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -609,7 +609,7 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -627,7 +627,7 @@ void msr2brailleInsiderOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msr2brailleInsiderOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -736,7 +736,7 @@ void msr2brailleInsiderOahGroup::initializeXml2brailleInsiderOahGroup ()
       "\" group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -786,7 +786,7 @@ S_msr2brailleInsiderOahGroup createGlobalMrailleGenerationOahGroup (
       "Creating global msr2braille OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

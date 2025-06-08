@@ -94,7 +94,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -110,7 +110,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -160,7 +160,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -178,7 +178,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -196,7 +196,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -214,7 +214,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -232,7 +232,7 @@ void lpsrPitchesLanguageAtom::browseData (basevisitor* v)
       ".\\\" ==> lpsrPitchesLanguageAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -376,7 +376,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -392,7 +392,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -440,7 +440,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lpsrChordsLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -458,7 +458,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lpsrChordsLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -476,7 +476,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lpsrChordsLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -494,7 +494,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lpsrChordsLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -512,7 +512,7 @@ void lpsrChordsLanguageAtom::browseData (basevisitor* v)
       ".\\\" ==> lpsrChordsLanguageAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -657,7 +657,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -673,7 +673,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -702,7 +702,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -745,7 +745,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       "--> partInstrumentName = \"" << partInstrumentName << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -784,7 +784,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -802,7 +802,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -820,7 +820,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -838,7 +838,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -856,7 +856,7 @@ void lpsrStaffInstrumentNameAtom::browseData (basevisitor* v)
       ".\\\" ==> lpsrStaffInstrumentNameAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1074,7 +1074,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lpsrTransposeAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1090,7 +1090,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lpsrTransposeAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1119,7 +1119,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lpsrTransposeAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1137,7 +1137,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lpsrTransposeAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1155,7 +1155,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lpsrTransposeAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1173,7 +1173,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lpsrTransposeAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1191,7 +1191,7 @@ void lpsrTransposeAtom::browseData (basevisitor* v)
       ".\\\" ==> lpsrTransposeAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2282,7 +2282,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> lpsrOahGroup::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2300,7 +2300,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lpsrOahGroup::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2318,7 +2318,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> lpsrOahGroup::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2336,7 +2336,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lpsrOahGroup::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2354,7 +2354,7 @@ void lpsrOahGroup::browseData (basevisitor* v)
       ".\\\" ==> lpsrOahGroup::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2663,7 +2663,7 @@ S_lpsrOahGroup createGlobalLpsrOahGroup ()
       "Creating global LPSR OAH group";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

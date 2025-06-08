@@ -301,7 +301,7 @@ void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
       "; which is of type 'mfMultiGenerationOutputKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -333,7 +333,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -351,7 +351,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -369,7 +369,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -387,7 +387,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -405,7 +405,7 @@ void mfMultiGenerationOutputKindAtom::browseData (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOutputKindAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -627,7 +627,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -645,7 +645,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -663,7 +663,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -681,7 +681,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -699,7 +699,7 @@ void mfMultiGenerationOahGroup::browseData (basevisitor* v)
       ".\\\" ==> mfMultiGenerationOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -757,7 +757,7 @@ S_multiGenerationOahGroup createGlobalMultiGenerationOahGroup ()
       "Creating multi generator OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

@@ -125,7 +125,7 @@ void lpsrSchemeVariable::acceptIn (basevisitor* v)
       "% ==> lpsrSchemeVariable::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -143,7 +143,7 @@ void lpsrSchemeVariable::acceptIn (basevisitor* v)
             "% ==> Launching lpsrSchemeVariable::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -161,7 +161,7 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
       "% ==> lpsrSchemeVariable::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -179,7 +179,7 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
             "% ==> Launching lpsrSchemeVariable::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -288,7 +288,7 @@ void lpsrSchemeFunction::acceptIn (basevisitor* v)
       "% ==> lpsrSchemeFunction::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -306,7 +306,7 @@ void lpsrSchemeFunction::acceptIn (basevisitor* v)
             "% ==> Launching lpsrSchemeFunction::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -324,7 +324,7 @@ void lpsrSchemeFunction::acceptOut (basevisitor* v)
       "% ==> lpsrSchemeFunction::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -342,7 +342,7 @@ void lpsrSchemeFunction::acceptOut (basevisitor* v)
             "% ==> Launching lpsrSchemeFunction::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

@@ -40,9 +40,9 @@ EXP void msdlWarning (
 EXP void msdlError (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeErrorWithInputLocation (
     "MSDL",
@@ -62,9 +62,9 @@ EXP void msdlError (
 EXP void msdlInternalError (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   gIndenter.resetToZero ();
 

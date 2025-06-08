@@ -156,7 +156,7 @@ void msrCreditWords::acceptIn (basevisitor* v)
       "% ==> msrCreditWords::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -174,7 +174,7 @@ void msrCreditWords::acceptIn (basevisitor* v)
             "% ==> Launching msrCreditWords::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -192,7 +192,7 @@ void msrCreditWords::acceptOut (basevisitor* v)
       "% ==> msrCreditWords::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -210,7 +210,7 @@ void msrCreditWords::acceptOut (basevisitor* v)
             "% ==> Launching msrCreditWords::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif
@@ -346,7 +346,7 @@ void msrCredit::acceptIn (basevisitor* v)
       "% ==> msrCredit::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -364,7 +364,7 @@ void msrCredit::acceptIn (basevisitor* v)
             "% ==> Launching msrCredit::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -382,7 +382,7 @@ void msrCredit::acceptOut (basevisitor* v)
       "% ==> msrCredit::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -400,7 +400,7 @@ void msrCredit::acceptOut (basevisitor* v)
             "% ==> Launching msrCredit::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif

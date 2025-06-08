@@ -111,7 +111,7 @@ mxsrStaffChangeEvent::mxsrStaffChangeEvent (
       landingStaffNumber;
 
     mfAssert (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       false,
       ss.str ());
   }

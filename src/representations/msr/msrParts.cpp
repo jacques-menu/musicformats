@@ -97,7 +97,7 @@ msrPart::msrPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     partUpLinkToPartGroup != nullptr,
     "partUpLinkToPartGroup is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -120,7 +120,7 @@ void msrPart::initializePart ()
       "Creating part " << asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -202,7 +202,7 @@ void msrPart::initializePart ()
       "The created part contains: " << asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -246,7 +246,7 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -254,7 +254,7 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     partGroupClone != nullptr,
     "partGroupClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -315,7 +315,7 @@ void msrPart::registerStaffInPart (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -366,7 +366,7 @@ void msrPart::registerStaffInPart (
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
           staff->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -389,7 +389,7 @@ void msrPart::registerStaffInPart (
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
           staff->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -416,7 +416,7 @@ void msrPart::setPartCurrentDrawingPositionInMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -424,7 +424,7 @@ void msrPart::setPartCurrentDrawingPositionInMeasure (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
 //     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -443,7 +443,7 @@ void msrPart::setPartCurrentDrawingPositionInMeasure (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -463,7 +463,7 @@ void msrPart::resetPartCurrentDrawingPositionInMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -492,7 +492,7 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -517,7 +517,7 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -546,7 +546,7 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -571,7 +571,7 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -597,7 +597,7 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
     msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -623,7 +623,7 @@ void msrPart::setPartShortestNoteWholeNotes (
       wholeNotes.asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -649,7 +649,7 @@ void msrPart::setPartShortestNoteTupletFactor (
       noteTupletFactor;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -673,7 +673,7 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -706,7 +706,7 @@ void msrPart::setPartPathLikeName (const std::string& partPathLikeName)
          std::endl;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -787,14 +787,14 @@ void msrPart::cascadeCreateAMeasureAndAppendItInPart (
     std::stringstream ss;
 
     ss <<
-      "Creating measure '" <<
+      "Cascading creating a measure '" <<
       measureNumber <<
       "' and appending it to part " <<
       fetchPartNameForTrace () <<
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -835,7 +835,7 @@ void msrPart::setNextMeasureNumberInPart (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -880,7 +880,7 @@ mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
       ", indexValue: " << indexValue;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -913,7 +913,7 @@ mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
      msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
       result = mfWholeNotes (15, 8); // TEMP JMI 0.9.61
@@ -933,7 +933,7 @@ mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -982,7 +982,7 @@ void msrPart::registerShortestNoteInPartIfRelevant (const S_msrNote& note)
         " becomes " << note->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1031,7 +1031,7 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
         " measures";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1062,7 +1062,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1088,7 +1088,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1116,7 +1116,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
         " in part " << fetchPartNameForTrace ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1141,7 +1141,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 //         std::endl;
 //
 //           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
+//             __FILE__, mfInputLineNumber (__LINE__),
 //             ss.str (),
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1201,7 +1201,7 @@ void msrPart::appendStaffDetailsToPart (
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1245,7 +1245,7 @@ void msrPart::appendClefToPart (
       ", groupInputLineNumber: " << groupInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1292,7 +1292,7 @@ void msrPart::appendKeyToPart (
       ", groupInputLineNumber: " << groupInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1342,7 +1342,7 @@ void msrPart::appendTimeSignatureToPart (
       ", groupInputLineNumber: " << groupInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1391,7 +1391,7 @@ void msrPart::appendTimeSignatureToPart (
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1423,7 +1423,7 @@ void msrPart::appendClefKeyTimeSignatureGroupToPartClone (
       " to part clone " << fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1455,7 +1455,7 @@ void msrPart::appendTempoToPart (
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1480,7 +1480,7 @@ void msrPart::appendRehearsalMarkToPart (
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1506,7 +1506,7 @@ void msrPart::appendLineBreakToPart (
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1531,7 +1531,7 @@ void msrPart::appendPageBreakToPart (
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1558,7 +1558,7 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1617,16 +1617,16 @@ void msrPart::cascadeHandleRepeatStartInPart (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat start in part \"" <<
+      "Cascading handling a repeat start in part \"" <<
       fetchPartNameForTrace () <<
       "\", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1649,17 +1649,17 @@ void msrPart::cascadeHandleRepeatEndInPart (
   int                repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat end in part \"" <<
+      "Cascading handling a repeat end in part \"" <<
       fetchPartNameForTrace () <<
       "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1686,13 +1686,13 @@ void msrPart::cascadeHandleRepeatEndingStartInPart (
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat ending start in part \"" <<
+      "Cascading handling a repeat ending start in part \"" <<
       fetchPartNameForTrace () <<
       "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1719,7 +1719,7 @@ void msrPart::cascadeHandleRepeatEndingEndInPart (
     std::stringstream ss;
 
     ss <<
-      "Handling a " <<
+      "Cascading handling a " <<
       msrRepeatEndingKindAsString (
         repeatEndingKind) <<
       " repeat ending end in part \"" <<
@@ -1728,7 +1728,7 @@ void msrPart::cascadeHandleRepeatEndingEndInPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1764,7 +1764,7 @@ void msrPart::finalizeRepeatEndInPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1863,7 +1863,7 @@ void msrPart::cascadeAppendMultipleMeasureRestToPart (
     std::stringstream ss;
 
     ss <<
-      "Appending a multiple measure rest for " <<
+      "Cascading apending a multiple measure rest for " <<
       mfSingularOrPlural (
         multipleMeasureRestMeasuresNumber, "measure", "measures") <<
       " to part " <<
@@ -1871,7 +1871,7 @@ void msrPart::cascadeAppendMultipleMeasureRestToPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1902,7 +1902,7 @@ void msrPart::replicateLastAppendedMeasureInPart (
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1934,7 +1934,7 @@ void msrPart::appendEmptyMeasuresToPart (
       ", ";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1963,7 +1963,7 @@ void msrPart::appendPendingMultipleMeasureRestsToPart (
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1991,7 +1991,7 @@ void msrPart::appendMultipleMeasureRestCloneToPart (
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2017,7 +2017,7 @@ void msrPart::appendBarLineToPart (
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2045,7 +2045,7 @@ S_msrStaff msrPart::addRegularStaffToPartByItsNumber (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -2061,7 +2061,7 @@ S_msrStaff msrPart::addRegularStaffToPartByItsNumber (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2108,7 +2108,7 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2160,7 +2160,7 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2210,7 +2210,7 @@ void msrPart::addStaffToPartCloneByItsNumber (const S_msrStaff& staff)
       "\" to part clone " << fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2237,7 +2237,7 @@ void msrPart::sortStavesByIncreasingNumber ()
 //       ", line " << voice->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     print (gLog);
@@ -2311,7 +2311,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       ", line " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2332,7 +2332,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 //
@@ -2358,7 +2358,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //     msrError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 //
@@ -2405,7 +2405,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       ", line " << voice->getInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2426,7 +2426,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //     msrError (
 //       gServiceRunData->getInputSourceName (),
 //       voice->getInputLineNumber (),
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 //
@@ -2459,7 +2459,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       ", line " << voice->getInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2480,7 +2480,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //     msrError (
 //       gServiceRunData->getInputSourceName (),
 //       voice->getInputLineNumber (),
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 //
@@ -2519,7 +2519,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -2539,7 +2539,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2564,7 +2564,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2610,7 +2610,7 @@ void msrPart::appendHarmonyToPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2638,7 +2638,7 @@ void msrPart::appendHarmoniesListToPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2661,7 +2661,7 @@ void msrPart::cascadeAppendFiguredBassesListToPart (
     std::stringstream ss;
 
     ss <<
-      "Appending figured basses list \"" <<
+      "Cascading appending figured basses list \"" <<
 //       figuredBasssesList->asString () << // JMI 0.9.67 HARMFUL
       "\" to part " <<
       fetchPartNameForTrace () <<
@@ -2669,7 +2669,7 @@ void msrPart::cascadeAppendFiguredBassesListToPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2697,7 +2697,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -2717,7 +2717,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2742,7 +2742,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2788,7 +2788,7 @@ void msrPart::appendFiguredBassToPart (
       ", line " << figuredBass->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2822,7 +2822,7 @@ void msrPart::appendFiguredBassToPart (
 //           std::endl;
 //
 //           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
+//             __FILE__, mfInputLineNumber (__LINE__),
 //             ss.str (),
 //       }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2853,7 +2853,7 @@ void msrPart::appendFiguredBassToPart (
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
 //           figuredBass->getInputLineNumber (),
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           ss.str ());
 //       }
 //       break;
@@ -2883,7 +2883,7 @@ void msrPart::appendFiguredBassToPartClone (
           ", line " << figuredBass->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -2912,7 +2912,7 @@ void msrPart::appendFiguredBassToPartClone (
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           figuredBass->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -2935,7 +2935,7 @@ void msrPart::appendScordaturaToPart (
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2962,7 +2962,7 @@ void msrPart::appendAccordionRegistrationToPart (
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2989,7 +2989,7 @@ void msrPart::appendHarpPedalsTuningToPart (
       fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3015,7 +3015,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
       ", line " << skipGraceNotesGroup->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3062,7 +3062,7 @@ void msrPart::finalizeLastAppendedMeasureInPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3243,7 +3243,7 @@ void msrPart::finalizePart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3302,7 +3302,7 @@ void msrPart::finalizePartClone (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3343,7 +3343,7 @@ void msrPart::finalizePartAndAllItsMeasures (
       "\", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3382,7 +3382,7 @@ void msrPart::collectPartMeasuresSlices (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3393,7 +3393,7 @@ void msrPart::collectPartMeasuresSlices (
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
   if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
     mfAssert (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fPartMeasuresSlicesSequence == nullptr,
       "fPartMeasuresSlicesSequence is not null");
   }
@@ -3420,7 +3420,7 @@ void msrPart::collectPartMeasuresSlices (
         "\":";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -3484,7 +3484,7 @@ void msrPart::acceptIn (basevisitor* v)
       "% ==> msrPart::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3502,7 +3502,7 @@ void msrPart::acceptIn (basevisitor* v)
             "% ==> Launching msrPart::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3520,7 +3520,7 @@ void msrPart::acceptOut (basevisitor* v)
       "% ==> msrPart::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3538,7 +3538,7 @@ void msrPart::acceptOut (basevisitor* v)
             "% ==> Launching msrPart::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3556,7 +3556,7 @@ void msrPart::browseData (basevisitor* v)
       "% ==> msrPart::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3624,7 +3624,7 @@ void msrPart::browseData (basevisitor* v)
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -3886,7 +3886,7 @@ void msrPart::print (std::ostream& os) const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         staff != nullptr,
         "staff is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4301,7 +4301,7 @@ void msrPart::printFull (std::ostream& os) const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         staff != nullptr,
         "staff is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED

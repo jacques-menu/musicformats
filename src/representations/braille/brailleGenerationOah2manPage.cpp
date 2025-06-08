@@ -52,7 +52,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleOutputKindAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -86,7 +86,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -105,7 +105,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleUTFKindAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -139,7 +139,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -158,7 +158,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleByteOrderingKindAtom& el
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -192,7 +192,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleByteOrderingKindAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

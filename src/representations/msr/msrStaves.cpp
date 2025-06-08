@@ -108,7 +108,7 @@ msrStaff::msrStaff (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -127,7 +127,7 @@ S_msrStaff msrStaff::createStaffNewbornClone (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -135,7 +135,7 @@ S_msrStaff msrStaff::createStaffNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingPart != nullptr,
     "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -184,7 +184,7 @@ void msrStaff::initializeStaff ()
           " is not positive";
 
         mfAssert (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           false,
           ss.str ());
       }
@@ -208,7 +208,7 @@ void msrStaff::initializeStaff ()
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       */
@@ -235,7 +235,7 @@ void msrStaff::setStaffUpLinkToPart (const S_msrPart& part)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     part != nullptr,
     "part is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -320,7 +320,7 @@ void msrStaff::copyStuffFromUpLinkToPartToStaff ()
           fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -353,7 +353,7 @@ void msrStaff::copyStuffFromUpLinkToPartToStaff ()
           fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -384,7 +384,7 @@ void msrStaff::copyStuffFromUpLinkToPartToStaff ()
           fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -480,7 +480,7 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (const S_msrNote& note)
         " becomes " << note->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -519,7 +519,7 @@ void msrStaff::setStaffCurrentTimeSignature (
       timeSignature->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -574,13 +574,13 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
     std::stringstream ss;
 
     ss <<
-      "Creating measure '" <<
+      "CCascading creating measure '" <<
       measureNumber <<
       "' and appending it to staff \"" << fStaffPathLikeName << "\"" <<
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -592,7 +592,7 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
     // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         voice != nullptr,
         "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -622,7 +622,7 @@ void msrStaff::setNextMeasureNumberInStaff (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -634,7 +634,7 @@ void msrStaff::setNextMeasureNumberInStaff (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
     mfAssert (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       voice != nullptr,
       "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -650,7 +650,7 @@ void msrStaff::setNextMeasureNumberInStaff (
         ", in voice \"" << voice->getVoiceName () << "\"";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -688,7 +688,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
  // JMI     " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -717,7 +717,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
 // JMI    musicxmlWarning ( JMI
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
       */
   }
@@ -748,7 +748,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
     msrInternalError ( // JMI ???
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -789,7 +789,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
      // JMI     " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -812,7 +812,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
      // JMI     " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -866,7 +866,7 @@ void msrStaff::setStaffShortestNoteWholeNotes (
         wholeNotes.asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -888,7 +888,7 @@ void msrStaff::setStaffShortestNoteTupletFactor (
         noteTupletFactor;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -909,7 +909,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
       " line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -942,7 +942,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
           voice->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -968,7 +968,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
           voice->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     } // for
@@ -1006,7 +1006,7 @@ void msrStaff::registerVoiceByItsNumber (
       " line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1048,7 +1048,7 @@ void msrStaff::registerVoiceByItsNumber (
           ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -1073,7 +1073,7 @@ void msrStaff::registerVoiceByItsNumber (
           ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -1115,7 +1115,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1146,7 +1146,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
           regularVoice->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -1172,7 +1172,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
           regularVoice->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     } // for
@@ -1207,7 +1207,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1236,7 +1236,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1267,7 +1267,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1296,7 +1296,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
           '\'';
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -1323,7 +1323,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1349,7 +1349,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         voice != nullptr,
         "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1370,7 +1370,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
           "\"";
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -1401,7 +1401,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1419,7 +1419,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
     msrInternalError ( // JMI ???
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -1429,7 +1429,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
     mfAssert (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       result->getRegularVoiceStaffSequentialNumber () == 1,
       "result->getRegularVoiceStaffSequentialNumber () is not equal to 1");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1445,7 +1445,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
         result->asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1461,7 +1461,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1476,7 +1476,7 @@ void msrStaff::registerVoiceInStaff (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     voice != nullptr,
     "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1494,7 +1494,7 @@ void msrStaff::registerVoiceInStaff (
 // JMI       " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1533,7 +1533,7 @@ void msrStaff::registerVoiceInStaff (
     // JMI    musicxmlWarning ( JMI
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
           */
       }
@@ -1588,7 +1588,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     voice != nullptr,
     "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1634,7 +1634,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
     // JMI    musicxmlWarning ( JMI
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
           */
       }
@@ -1655,7 +1655,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
 // JMI       " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1706,7 +1706,7 @@ void msrStaff::registerVoiceInStaffClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     voice != nullptr,
     "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1732,7 +1732,7 @@ void msrStaff::registerVoiceInStaffClone (
 // JMI       " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1767,7 +1767,7 @@ void msrStaff::registerVoiceInStaffClone (
     // JMI    musicxmlWarning ( JMI
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
           */
       }
@@ -1815,7 +1815,7 @@ void msrStaff::registerVoiceInStaffClone (
 //       fStaffUpLinkToPart->fetchPartNameForTrace ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1862,7 +1862,7 @@ void msrStaff::registerVoiceInStaffClone (
 //         fStaffUpLinkToPart->fetchPartNameForTrace ();
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1889,7 +1889,7 @@ void msrStaff::appendClefToStaff  (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1975,7 +1975,7 @@ void msrStaff::appendKeyToStaff (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2009,7 +2009,7 @@ void msrStaff::appendKeyToStaff (
             fStaffUpLinkToPart->fetchPartNameForTrace ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2082,7 +2082,7 @@ void msrStaff::appendTimeSignatureToStaff (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2116,7 +2116,7 @@ void msrStaff::appendTimeSignatureToStaff (
             fStaffUpLinkToPart->fetchPartNameForTrace ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2195,7 +2195,7 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2230,7 +2230,7 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2265,7 +2265,7 @@ void msrStaff::appendTempoToStaff (
       fStaffPathLikeName;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2290,7 +2290,7 @@ void msrStaff::appendRehearsalMarkToStaff (
       fStaffPathLikeName;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2315,7 +2315,7 @@ void msrStaff::appendLineBreakToStaff  (
       fStaffPathLikeName;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2340,7 +2340,7 @@ void msrStaff::appendPageBreakToStaff (
       fStaffPathLikeName;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2370,7 +2370,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2403,7 +2403,7 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2425,14 +2425,14 @@ void msrStaff::cascadeHandleRepeatStartInStaff (
     std::stringstream ss;
 
     ss <<
-      "Handling repeat start in staff \"" <<
+      "Cascading handling repeat start in staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2459,14 +2459,14 @@ void msrStaff::cascadeHandleRepeatEndInStaff (
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat end in staff \"" <<
+      "Cascading handling a repeat end in staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2493,14 +2493,14 @@ void msrStaff::cascadeHandleRepeatEndingStartInStaff (
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat ending start in staff \"" <<
+      "Cascading handling a repeat ending start in staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2528,7 +2528,7 @@ void msrStaff::cascadeHandleRepeatEndingEndInStaff (
     std::stringstream ss;
 
     ss <<
-      "Handling a " <<
+      "Cascading handling a " <<
       msrRepeatEndingKindAsString (
         repeatEndingKind) <<
       " repeat ending end in staff \"" <<
@@ -2538,7 +2538,7 @@ void msrStaff::cascadeHandleRepeatEndingEndInStaff (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2575,7 +2575,7 @@ void msrStaff::finalizeRepeatEndInStaff (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2605,13 +2605,13 @@ void msrStaff::cascadeCreateAMeasureRepeatAndAppendItToStaff (
     std::stringstream ss;
 
     ss <<
-      "Creating a measures repeat from it's first measure in staff \"" <<
+      "Cascading creating a measures repeat from it's first measure in staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2640,7 +2640,7 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2664,7 +2664,7 @@ void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
     std::stringstream ss;
 
     ss <<
-      "Appending a multiple measure rest for " <<
+      "Cascading appending a multiple measure rest for " <<
       mfSingularOrPlural (
         multipleMeasureRestMeasuresNumber, "measure", "measures") <<
       " to staff \"" <<
@@ -2674,7 +2674,7 @@ void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2706,7 +2706,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2742,7 +2742,7 @@ void msrStaff::appendEmptyMeasuresToStaff (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2773,7 +2773,7 @@ void msrStaff::appendPendingMultipleMeasureRestsToStaff (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2802,7 +2802,7 @@ void msrStaff::appendMultipleMeasureRestCloneToStaff (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2831,7 +2831,7 @@ void msrStaff::appendRepeatCloneToStaff (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2859,7 +2859,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
       ", line " << repeatEndingClone->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2891,7 +2891,7 @@ void msrStaff::appendBarLineToStaff (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2923,7 +2923,7 @@ void msrStaff::appendTranspositionToStaff (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2950,7 +2950,7 @@ void msrStaff::appendTranspositionToStaff (
           fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -2984,7 +2984,7 @@ void msrStaff::appendStaffDetailsToStaff (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2992,7 +2992,7 @@ void msrStaff::appendStaffDetailsToStaff (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     staffDetails != nullptr,
     "staffDetails is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3027,7 +3027,7 @@ void msrStaff::appendStaffDetailsToStaff (
       fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3096,7 +3096,7 @@ void msrStaff::finalizeLastAppendedMeasureInStaff (
       "\", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3200,7 +3200,7 @@ void msrStaff::finalizeStaff (const mfInputLineNumber& inputLineNumber)
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3218,7 +3218,7 @@ void msrStaff::finalizeStaff (const mfInputLineNumber& inputLineNumber)
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3252,7 +3252,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3286,7 +3286,7 @@ void msrStaff::collectStaffMeasuresSlices (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3297,7 +3297,7 @@ void msrStaff::collectStaffMeasuresSlices (
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
   if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
     mfAssert (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fStaffMeasuresSlicesSequence == nullptr,
       "fStaffMeasuresSlicesSequence is not null");
   }
@@ -3325,7 +3325,7 @@ void msrStaff::collectStaffMeasuresSlices (
         "\":";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -3404,7 +3404,7 @@ void msrStaff::acceptIn (basevisitor* v)
       "% ==> msrStaff::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3422,7 +3422,7 @@ void msrStaff::acceptIn (basevisitor* v)
             "% ==> Launching msrStaff::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3440,7 +3440,7 @@ void msrStaff::acceptOut (basevisitor* v)
       "% ==> msrStaff::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3458,7 +3458,7 @@ void msrStaff::acceptOut (basevisitor* v)
             "% ==> Launching msrStaff::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3476,7 +3476,7 @@ void msrStaff::browseData (basevisitor* v)
       "% ==> msrStaff::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3566,7 +3566,7 @@ void msrStaff::browseData (basevisitor* v)
         msrError (
           gServiceRunData->getInputSourceName (),
           voice->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3646,7 +3646,7 @@ void msrStaff::browseData (basevisitor* v)
             "\"";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3662,7 +3662,7 @@ void msrStaff::browseData (basevisitor* v)
       "% <== msrStaff::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3948,7 +3948,7 @@ void msrStaff::printFull (std::ostream& os) const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         voice != nullptr,
         "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3998,7 +3998,7 @@ void msrStaff::printFull (std::ostream& os) const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         voice != nullptr,
         "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4045,7 +4045,7 @@ void msrStaff::printFull (std::ostream& os) const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         voice != nullptr,
         "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED

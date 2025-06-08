@@ -273,7 +273,7 @@ char* mfCharStarCat (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
     mfAssert (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       false,
       ss.str ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED

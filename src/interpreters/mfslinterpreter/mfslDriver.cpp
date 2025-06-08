@@ -229,7 +229,7 @@ S_mfslOptionsBlock mfslDriver::optionsBlocksStackTop () const
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fOptionsBlocksStack.size (),
     "optionsBlocksStackTop(): fOptionsBlocksStack is empty");
 
@@ -241,7 +241,7 @@ void mfslDriver::optionsBlocksStackPop (
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ! fOptionsBlocksStack.empty (),
     "optionsBlocksStackPop(): fOptionsBlocksStack is empty");
 
@@ -299,7 +299,7 @@ void mfslDriver::registerOptionInCurrentOptionsBlock (
 
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     currentOptionsBlock != nullptr,
     "currentOptionsBlock is NULL");
 
@@ -376,7 +376,7 @@ S_mfslCaseChoiceStatement mfslDriver::caseChoiceStatementsStackTop () const
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCaseChoiceStatementsStack.size (),
     "caseChoiceStatementsStackTop(): fCaseChoiceStatementsStack is empty");
 
@@ -387,7 +387,7 @@ void mfslDriver::caseChoiceStatementsStackPop ()
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ! fCaseChoiceStatementsStack.empty (),
     "caseChoiceStatementsStackPop(): fCaseChoiceStatementsStack is empty");
 
@@ -456,7 +456,7 @@ S_mfslCaseInputStatement mfslDriver::caseInputStatementsStackTop () const
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCaseInputStatementsStack.size (),
     "caseInputStatementsStackTop(): fCaseInputStatementsStack is empty");
 
@@ -467,7 +467,7 @@ void mfslDriver::caseInputStatementsStackPop ()
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ! fCaseInputStatementsStack.empty (),
     "caseInputStatementsStackPop(): fCaseInputStatementsStack is empty");
 
@@ -785,7 +785,7 @@ mfMusicformatsErrorKind mfslDriver::launchMfslService_Pass2 ()
       mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fOptionsBlocksStack.size () == 1,
     "fOptionsBlocksStack should contain only the main options block after parsing");
 
@@ -800,7 +800,7 @@ mfMusicformatsErrorKind mfslDriver::launchMfslService_Pass2 ()
 
   // sanity checks
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCaseChoiceStatementsStack.empty (),
     "fCaseChoiceStatementsStack should be empty after parsing");
 

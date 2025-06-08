@@ -50,7 +50,7 @@ void msrOah2manPage::visitStart (S_msrRenamePartAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -85,7 +85,7 @@ void msrOah2manPage::visitEnd (S_msrRenamePartAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -104,7 +104,7 @@ void msrOah2manPage::visitStart (S_msrIgnorePartAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -139,7 +139,7 @@ void msrOah2manPage::visitEnd (S_msrIgnorePartAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -158,7 +158,7 @@ void msrOah2manPage::visitStart (S_msrKeepPartAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -193,7 +193,7 @@ void msrOah2manPage::visitEnd (S_msrKeepPartAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -212,7 +212,7 @@ void msrOah2manPage::visitStart (S_msrPitchesLanguageAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -247,7 +247,7 @@ void msrOah2manPage::visitEnd (S_msrPitchesLanguageAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

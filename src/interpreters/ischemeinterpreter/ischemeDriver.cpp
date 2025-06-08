@@ -226,7 +226,7 @@ S_ischemeOptionsBlock ischemeDriver::optionsBlocksStackTop () const
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fOptionsBlocksStack.size (),
     "optionsBlocksStackTop(): fOptionsBlocksStack is empty");
 
@@ -243,7 +243,7 @@ void ischemeDriver::registerOptionInCurrentOptionsBlock (
 
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     currentOptionsBlock != nullptr,
     "currentOptionsBlock is NULL");
 
@@ -298,7 +298,7 @@ void ischemeDriver::optionsBlocksStackPop (
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ! fOptionsBlocksStack.empty (),
     "optionsBlocksStackPop(): fOptionsBlocksStack is empty");
 
@@ -371,7 +371,7 @@ S_ischemeCaseChoiceStatement ischemeDriver::caseChoiceStatementsStackTop () cons
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCaseChoiceStatementsStack.size (),
     "caseChoiceStatementsStackTop(): fCaseChoiceStatementsStack is empty");
 
@@ -382,7 +382,7 @@ void ischemeDriver::caseChoiceStatementsStackPop ()
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ! fCaseChoiceStatementsStack.empty (),
     "caseChoiceStatementsStackPop(): fCaseChoiceStatementsStack is empty");
 
@@ -451,7 +451,7 @@ S_ischemeCaseInputStatement ischemeDriver::caseInputStatementsStackTop () const
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCaseInputStatementsStack.size (),
     "caseInputStatementsStackTop(): fCaseInputStatementsStack is empty");
 
@@ -462,7 +462,7 @@ void ischemeDriver::caseInputStatementsStackPop ()
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ! fCaseInputStatementsStack.empty (),
     "caseInputStatementsStackPop(): fCaseInputStatementsStack is empty");
 
@@ -777,7 +777,7 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeService_Pass2 ()
       mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fOptionsBlocksStack.size () == 1,
     "fOptionsBlocksStack should contain only the main options block after parsing");
 
@@ -792,7 +792,7 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeService_Pass2 ()
 
   // sanity checks
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCaseChoiceStatementsStack.empty (),
     "fCaseChoiceStatementsStack should be empty after parsing");
 

@@ -54,7 +54,7 @@ msdrMeasure::msdrMeasure (
       "Creating MSDR music \"" << asString () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -89,7 +89,7 @@ void msdrMeasure::acceptIn (basevisitor* v)
       "% ==> msdrMeasure::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -107,7 +107,7 @@ void msdrMeasure::acceptIn (basevisitor* v)
             "% ==> Launching msdrMeasure::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -125,7 +125,7 @@ void msdrMeasure::acceptOut (basevisitor* v)
       "% ==> msdrMeasure::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -143,7 +143,7 @@ void msdrMeasure::acceptOut (basevisitor* v)
             "% ==> Launching msdrMeasure::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -161,7 +161,7 @@ void msdrMeasure::browseData (basevisitor* v)
       "% ==> msdrMeasure::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -210,7 +210,7 @@ void msdrMeasure::browseData (basevisitor* v)
       "% <== msdrMeasure::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
   */

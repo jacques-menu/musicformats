@@ -109,7 +109,7 @@ msrCoda::~msrCoda ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -143,7 +143,7 @@ void msrCoda::acceptIn (basevisitor* v)
       "% ==> msrCoda::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -161,7 +161,7 @@ void msrCoda::acceptIn (basevisitor* v)
             "% ==> Launching msrCoda::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -179,7 +179,7 @@ void msrCoda::acceptOut (basevisitor* v)
       "% ==> msrCoda::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -197,7 +197,7 @@ void msrCoda::acceptOut (basevisitor* v)
             "% ==> Launching msrCoda::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

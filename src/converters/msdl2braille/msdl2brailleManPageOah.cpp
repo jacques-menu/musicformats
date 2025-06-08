@@ -70,7 +70,7 @@ void msdl2brailleManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a msdl2brailleManPageGenerateAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -88,7 +88,7 @@ void msdl2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageGenerateAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -106,7 +106,7 @@ void msdl2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2brailleManPageGenerateAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -124,7 +124,7 @@ void msdl2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageGenerateAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -142,7 +142,7 @@ void msdl2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2brailleManPageGenerateAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -160,7 +160,7 @@ void msdl2brailleManPageGenerateAtom::browseData (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageGenerateAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -325,7 +325,7 @@ void msdl2brailleManPageOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -343,7 +343,7 @@ void msdl2brailleManPageOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2brailleManPageOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -361,7 +361,7 @@ void msdl2brailleManPageOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -379,7 +379,7 @@ void msdl2brailleManPageOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2brailleManPageOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -397,7 +397,7 @@ void msdl2brailleManPageOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msdl2brailleManPageOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -441,7 +441,7 @@ S_msdl2brailleManPageOahGroup createGlobalMsdl2brlManPageOahHandler (
       "Creating global msdl2blrManPage OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

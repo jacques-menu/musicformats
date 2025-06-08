@@ -90,7 +90,7 @@ S_bsrScore msr2bsrTranslator::translateMsrToBsr (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theMsrScore != nullptr,
     "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -158,7 +158,7 @@ void msr2bsrTranslator::visitStart (S_msrLineBreak& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -190,7 +190,7 @@ void msr2bsrTranslator::visitEnd (S_msrLineBreak& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -208,7 +208,7 @@ void msr2bsrTranslator::visitStart (S_msrPageBreak& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -234,7 +234,7 @@ void msr2bsrTranslator::visitEnd (S_msrPageBreak& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -252,7 +252,7 @@ void msr2bsrTranslator::visitStart (S_msrScore& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -362,7 +362,7 @@ void msr2bsrTranslator::visitEnd (S_msrScore& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -448,7 +448,7 @@ void msr2bsrTranslator::visitStart (S_msrPartGroup& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -468,7 +468,7 @@ void msr2bsrTranslator::visitEnd (S_msrPartGroup& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -491,7 +491,7 @@ void msr2bsrTranslator::visitStart (S_msrPart& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -512,7 +512,7 @@ void msr2bsrTranslator::visitStart (S_msrPart& elt)
         ", line " << elt->getInputLineNumber () << " ===-->";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -546,7 +546,7 @@ void msr2bsrTranslator::visitEnd (S_msrPart& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -566,7 +566,7 @@ void msr2bsrTranslator::visitStart (S_msrStaffTuning& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -587,7 +587,7 @@ void msr2bsrTranslator::visitStart (S_msrStaffDetails& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -606,7 +606,7 @@ void msr2bsrTranslator::visitEnd (S_msrStaffDetails& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -625,7 +625,7 @@ void msr2bsrTranslator::visitStart (S_msrStaff& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -658,7 +658,7 @@ void msr2bsrTranslator::visitEnd (S_msrStaff& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -677,7 +677,7 @@ void msr2bsrTranslator::visitStart (S_msrVoice& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -714,7 +714,7 @@ void msr2bsrTranslator::visitEnd (S_msrVoice& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -733,7 +733,7 @@ void msr2bsrTranslator::visitStart (S_msrVoiceStaffChange& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -751,7 +751,7 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -766,7 +766,7 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
         elt->getBarLineCategory ());
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -851,7 +851,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -889,7 +889,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasure& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -907,7 +907,7 @@ void msr2bsrTranslator::visitStart (S_msrClef& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1019,7 +1019,7 @@ void msr2bsrTranslator::visitEnd (S_msrClef& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1037,7 +1037,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1588,7 +1588,7 @@ void msr2bsrTranslator::visitEnd (S_msrKey& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1606,7 +1606,7 @@ void msr2bsrTranslator::visitStart (S_msrTimeSignature& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1753,7 +1753,7 @@ void msr2bsrTranslator::visitEnd (S_msrTimeSignature& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1771,7 +1771,7 @@ void msr2bsrTranslator::visitStart (S_msrTempo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1801,7 +1801,7 @@ void msr2bsrTranslator::visitEnd (S_msrTempo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1923,7 +1923,7 @@ bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkIfNeeded (
       ", line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2652,7 +2652,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
       ", line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2684,7 +2684,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2706,7 +2706,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2724,7 +2724,7 @@ void msr2bsrTranslator::visitStart (S_msrDynamic& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2752,7 +2752,7 @@ void msr2bsrTranslator::visitEnd (S_msrDynamic& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2771,7 +2771,7 @@ void msr2bsrTranslator::visitStart (S_msrIdentification& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2801,7 +2801,7 @@ void msr2bsrTranslator::visitEnd (S_msrIdentification& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2821,7 +2821,7 @@ void msr2bsrTranslator::visitStart (S_msrCredit& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2845,7 +2845,7 @@ void msr2bsrTranslator::visitEnd (S_msrCredit& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2864,7 +2864,7 @@ void msr2bsrTranslator::visitStart (S_msrCreditWords& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2888,7 +2888,7 @@ void msr2bsrTranslator::visitEnd (S_msrCreditWords& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2907,7 +2907,7 @@ void msr2bsrTranslator::visitStart (S_msrSegment& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2948,7 +2948,7 @@ void msr2bsrTranslator::visitEnd (S_msrSegment& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2973,7 +2973,7 @@ void msr2bsrTranslator::visitStart (S_msrHarmony& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3025,7 +3025,7 @@ void msr2bsrTranslator::visitStart (S_msrHarmonyDegree& elt)
       "', line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3049,7 +3049,7 @@ void msr2bsrTranslator::visitEnd (S_msrHarmony& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3069,7 +3069,7 @@ void msr2bsrTranslator::visitStart (S_msrFrame& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3095,7 +3095,7 @@ void msr2bsrTranslator::visitStart (S_msrFiguredBass& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3143,7 +3143,7 @@ void msr2bsrTranslator::visitStart (S_msrBassFigure& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3167,7 +3167,7 @@ void msr2bsrTranslator::visitEnd (S_msrFiguredBass& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3192,7 +3192,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3223,7 +3223,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3299,7 +3299,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       "measureCurrentPositionInMeasure: " << measureCurrentPositionInMeasure.asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3357,7 +3357,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -3375,7 +3375,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasure& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3403,7 +3403,7 @@ void msr2bsrTranslator::visitStart (S_msrStanza& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3446,7 +3446,7 @@ void msr2bsrTranslator::visitEnd (S_msrStanza& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3469,7 +3469,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3523,7 +3523,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
       // JMI      fCurrentSyllableClone->asString ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3553,7 +3553,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
             "'";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3594,7 +3594,7 @@ void msr2bsrTranslator::visitEnd (S_msrSyllable& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3614,7 +3614,7 @@ void msr2bsrTranslator::visitStart (S_msrTransposition& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3635,7 +3635,7 @@ void msr2bsrTranslator::visitEnd (S_msrTransposition& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3653,7 +3653,7 @@ void msr2bsrTranslator::visitStart (S_msrRehearsalMark& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3673,7 +3673,7 @@ void msr2bsrTranslator::visitEnd (S_msrRehearsalMark& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3691,7 +3691,7 @@ void msr2bsrTranslator::visitStart (S_msrArticulation& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3717,7 +3717,7 @@ void msr2bsrTranslator::visitEnd (S_msrArticulation& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3735,7 +3735,7 @@ void msr2bsrTranslator::visitStart (S_msrFermata& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3764,7 +3764,7 @@ void msr2bsrTranslator::visitStart (S_msrArpeggiato& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3793,7 +3793,7 @@ void msr2bsrTranslator::visitStart (S_msrNonArpeggiato& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3822,7 +3822,7 @@ void msr2bsrTranslator::visitStart (S_msrTechnical& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3888,7 +3888,7 @@ void msr2bsrTranslator::visitEnd (S_msrTechnical& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3906,7 +3906,7 @@ void msr2bsrTranslator::visitStart (S_msrTechnicalWithInteger& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3932,7 +3932,7 @@ void msr2bsrTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3950,7 +3950,7 @@ void msr2bsrTranslator::visitStart (S_msrTechnicalWithFloat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3976,7 +3976,7 @@ void msr2bsrTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3994,7 +3994,7 @@ void msr2bsrTranslator::visitStart (S_msrTechnicalWithString& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4031,7 +4031,7 @@ void msr2bsrTranslator::visitEnd (S_msrTechnicalWithString& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4049,7 +4049,7 @@ void msr2bsrTranslator::visitStart (S_msrOrnament& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4075,7 +4075,7 @@ void msr2bsrTranslator::visitEnd (S_msrOrnament& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4093,7 +4093,7 @@ void msr2bsrTranslator::visitStart (S_msrSpanner& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4131,7 +4131,7 @@ void msr2bsrTranslator::visitEnd (S_msrSpanner& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4149,7 +4149,7 @@ void msr2bsrTranslator::visitStart (S_msrGlissando& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4181,7 +4181,7 @@ void msr2bsrTranslator::visitEnd (S_msrGlissando& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4199,7 +4199,7 @@ void msr2bsrTranslator::visitStart (S_msrSlide& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4225,7 +4225,7 @@ void msr2bsrTranslator::visitEnd (S_msrSlide& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4243,7 +4243,7 @@ void msr2bsrTranslator::visitStart (S_msrSingleTremolo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4269,7 +4269,7 @@ void msr2bsrTranslator::visitEnd (S_msrSingleTremolo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4287,7 +4287,7 @@ void msr2bsrTranslator::visitStart (S_msrDoubleTremolo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4316,7 +4316,7 @@ void msr2bsrTranslator::visitEnd (S_msrDoubleTremolo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4344,7 +4344,7 @@ void msr2bsrTranslator::visitStart (S_msrOtherDynamic& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4370,7 +4370,7 @@ void msr2bsrTranslator::visitEnd (S_msrOtherDynamic& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4388,7 +4388,7 @@ void msr2bsrTranslator::visitStart (S_msrWords& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4414,7 +4414,7 @@ void msr2bsrTranslator::visitEnd (S_msrWords& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4432,7 +4432,7 @@ void msr2bsrTranslator::visitStart (S_msrSlur& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4477,7 +4477,7 @@ void msr2bsrTranslator::visitEnd (S_msrSlur& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4495,7 +4495,7 @@ void msr2bsrTranslator::visitStart (S_msrLigature& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4521,7 +4521,7 @@ void msr2bsrTranslator::visitEnd (S_msrLigature& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4539,7 +4539,7 @@ void msr2bsrTranslator::visitStart (S_msrSlash& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4567,7 +4567,7 @@ void msr2bsrTranslator::visitStart (S_msrCrescDecresc& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4594,7 +4594,7 @@ void msr2bsrTranslator::visitEnd (S_msrCrescDecresc& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4612,7 +4612,7 @@ void msr2bsrTranslator::visitStart (S_msrWedge& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4639,7 +4639,7 @@ void msr2bsrTranslator::visitEnd (S_msrWedge& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4657,7 +4657,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4718,7 +4718,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     gLog << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4739,7 +4739,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -4773,7 +4773,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
        "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4805,7 +4805,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
        "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4838,7 +4838,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
             " to work around LilyPond_Issue_34";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -4873,7 +4873,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
           "' into after grace notes";
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -4923,7 +4923,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
           "' to work around LilyPond_Issue_34";
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -4981,7 +4981,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
           "Appending the after grace notes to current note clone";
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -5008,7 +5008,7 @@ void msr2bsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5047,7 +5047,7 @@ void msr2bsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
         "Removing the after grace notes element from the current voice clone";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -5080,7 +5080,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5116,7 +5116,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
              "'";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -5149,7 +5149,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
              "'";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -5174,7 +5174,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
         ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -5205,7 +5205,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5256,7 +5256,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -5275,7 +5275,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -5294,7 +5294,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -5313,7 +5313,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -5376,7 +5376,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           msrInternalError (
             gServiceRunData->getInputSourceName (),
             elt->getInputLineNumber (),
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
       }
@@ -5391,7 +5391,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -5416,7 +5416,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       else {
@@ -5431,7 +5431,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
             fCurrentVoiceClone->getVoiceName () << "\"";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -5452,7 +5452,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
             fCurrentVoiceClone->getVoiceName () << "\"";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -5472,7 +5472,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
             fCurrentVoiceClone->getVoiceName () << "\"";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -5495,7 +5495,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       * /
@@ -5520,7 +5520,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
         }
       break;
@@ -5544,7 +5544,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
         }
       break;
@@ -5561,7 +5561,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
           fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -5647,7 +5647,7 @@ void msr2bsrTranslator::visitStart (S_msrOctaveShift& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5667,7 +5667,7 @@ void msr2bsrTranslator::visitEnd (S_msrOctaveShift& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5685,7 +5685,7 @@ void msr2bsrTranslator::visitStart (S_msrAccordionRegistration& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5711,7 +5711,7 @@ void msr2bsrTranslator::visitStart (S_msrHarpPedalsTuning& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5733,7 +5733,7 @@ void msr2bsrTranslator::visitStart (S_msrStem& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5759,7 +5759,7 @@ void msr2bsrTranslator::visitEnd (S_msrStem& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5781,7 +5781,7 @@ void msr2bsrTranslator::visitStart (S_msrBeam& elt)
 // JMI      ", fOnGoingChord: " << fOnGoingChord;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5815,7 +5815,7 @@ void msr2bsrTranslator::visitEnd (S_msrBeam& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5833,7 +5833,7 @@ void msr2bsrTranslator::visitStart (S_msrChord& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5874,7 +5874,7 @@ void msr2bsrTranslator::visitStart (S_msrChord& elt)
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -5907,7 +5907,7 @@ void msr2bsrTranslator::visitEnd (S_msrChord& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5927,7 +5927,7 @@ void msr2bsrTranslator::visitStart (S_msrTuplet& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5948,7 +5948,7 @@ void msr2bsrTranslator::visitStart (S_msrTuplet& elt)
       "' to tuplets stack";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5976,7 +5976,7 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5991,7 +5991,7 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
       "' from tuplets stack";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6047,7 +6047,7 @@ void msr2bsrTranslator::visitStart (S_msrTie& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6067,7 +6067,7 @@ void msr2bsrTranslator::visitEnd (S_msrTie& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6085,7 +6085,7 @@ void msr2bsrTranslator::visitStart (S_msrSegno& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6105,7 +6105,7 @@ void msr2bsrTranslator::visitStart (S_msrCoda& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6126,7 +6126,7 @@ void msr2bsrTranslator::visitStart (S_msrEyeGlasses& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6146,7 +6146,7 @@ void msr2bsrTranslator::visitStart (S_msrScordatura& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6166,7 +6166,7 @@ void msr2bsrTranslator::visitStart (S_msrPedal& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6186,7 +6186,7 @@ void msr2bsrTranslator::visitStart (S_msrDamp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6210,7 +6210,7 @@ void msr2bsrTranslator::visitStart (S_msrDampAll& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6237,7 +6237,7 @@ void msr2bsrTranslator::visitStart (S_msrBarCheck& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6257,7 +6257,7 @@ void msr2bsrTranslator::visitEnd (S_msrBarCheck& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6275,7 +6275,7 @@ void msr2bsrTranslator::visitStart (S_msrBarNumberCheck& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6295,7 +6295,7 @@ void msr2bsrTranslator::visitEnd (S_msrBarNumberCheck& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6313,7 +6313,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6338,7 +6338,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
       fCurrentPartClone->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6369,7 +6369,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6392,7 +6392,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6408,7 +6408,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeat& elt)
       fCurrentPartClone->fetchPartNameForTrace () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6435,7 +6435,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeatCommonPart& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6465,7 +6465,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeatCommonPart& elt)
     --gIndenter;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6482,7 +6482,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6524,7 +6524,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6549,7 +6549,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeatEnding& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6566,7 +6566,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatEnding& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6595,7 +6595,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatEnding& elt)
       " <<*********";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6619,7 +6619,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasureRepeat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6638,7 +6638,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6656,7 +6656,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6674,7 +6674,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6693,7 +6693,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6716,7 +6716,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6745,7 +6745,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
       ", line " << elt-> G ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6764,7 +6764,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6782,7 +6782,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6807,7 +6807,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6822,7 +6822,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6895,7 +6895,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6956,7 +6956,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
       fCurrentVoiceClone->getVoiceName () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7013,7 +7013,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRestContents& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7058,7 +7058,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7081,7 +7081,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7130,7 +7130,7 @@ void msr2bsrTranslator::visitStart (S_msrLayout& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7151,7 +7151,7 @@ void msr2bsrTranslator::visitEnd (S_msrLayout& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

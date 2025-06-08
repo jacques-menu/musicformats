@@ -54,7 +54,7 @@ msdrLayer::msdrLayer (
       "Creating MSDR music \"" << asString () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -110,7 +110,7 @@ void msdrLayer::acceptIn (basevisitor* v)
       "% ==> msdrLayer::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -128,7 +128,7 @@ void msdrLayer::acceptIn (basevisitor* v)
             "% ==> Launching msdrLayer::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -146,7 +146,7 @@ void msdrLayer::acceptOut (basevisitor* v)
       "% ==> msdrLayer::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -164,7 +164,7 @@ void msdrLayer::acceptOut (basevisitor* v)
             "% ==> Launching msdrLayer::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -182,7 +182,7 @@ void msdrLayer::browseData (basevisitor* v)
       "% ==> msdrLayer::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -231,7 +231,7 @@ void msdrLayer::browseData (basevisitor* v)
       "% <== msdrLayer::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
   */

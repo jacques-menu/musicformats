@@ -102,7 +102,7 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
 //     if (wholeNotes == mfWholeNotes (114, 1)) abort (); // JMI 0.9.67 HARMFUL
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     --gIndenter;
@@ -112,7 +112,7 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED // JMI 0.9.67
 //   // sanity check // NO JMI 0.9.67
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     wholeNotes != K_WHOLE_NOTES_UNKNOWN_,
 //     "wholeNotes == K_WHOLE_NOTES_UNKNOWN_");
 //
@@ -120,7 +120,7 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
 //     infinitelyDottesLonga (8, 1);
 //
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     wholeNotes < infinitelyDottesLonga,
 //     "wholeNotes >= infinitelyDottesLonga");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -157,7 +157,7 @@ void msrMeasureElement::incrementMeasureElementSoundingWholeNotesBy (
 //     if (wholeNotes == mfWholeNotes (114, 1)) abort (); // JMI 0.9.67 HARMFUL
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     --gIndenter;
@@ -167,7 +167,7 @@ void msrMeasureElement::incrementMeasureElementSoundingWholeNotesBy (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED // JMI 0.9.67
 //   // sanity check // NO JMI 0.9.67
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     wholeNotes != K_WHOLE_NOTES_UNKNOWN_,
 //     "wholeNotes == K_WHOLE_NOTES_UNKNOWN_");
 //
@@ -175,7 +175,7 @@ void msrMeasureElement::incrementMeasureElementSoundingWholeNotesBy (
 //     infinitelyDottesLonga (8, 1);
 //
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     wholeNotes < infinitelyDottesLonga,
 //     "wholeNotes >= infinitelyDottesLonga");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -237,7 +237,7 @@ void msrMeasureElement::setMeasureElementPositionInMeasure (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -245,7 +245,7 @@ void msrMeasureElement::setMeasureElementPositionInMeasure (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -316,7 +316,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -324,7 +324,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     voicePosition != K_POSITION_IN_MEASURE_UNKNOWN_,
     "voicePosition == K_POSITION_IN_MEASURE_UNKNOWN_");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -349,7 +349,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -382,7 +382,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //       std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -410,7 +410,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //       std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -418,7 +418,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     voiceMoment != mfMoment::K_MOMENT_UNKNOWN_,
 //     "voiceMoment == mfMoment::K_MOMENT_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -436,7 +436,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
       "% ==> msrMeasureElement::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -454,7 +454,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
             "% ==> Launching msrMeasureElement::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -472,7 +472,7 @@ void msrMeasureElement::acceptOut (basevisitor* v)
       "% ==> msrMeasureElement::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -490,7 +490,7 @@ void msrMeasureElement::acceptOut (basevisitor* v)
             "% ==> Launching msrMeasureElement::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

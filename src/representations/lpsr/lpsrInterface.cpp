@@ -45,7 +45,7 @@ void displayLpsrScore (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theLpsrScore != nullptr,
     "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -93,7 +93,7 @@ void displayLpsrScoreFull (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theLpsrScore != nullptr,
     "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -146,7 +146,7 @@ void displayLpsrScoreSummary (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theLpsrScore != nullptr,
     "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -200,7 +200,7 @@ void displayLpsrScoreNames (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theLpsrScore != nullptr,
     "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -253,7 +253,7 @@ void displayLpsrScoreFlatView (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theLpsrScore != nullptr,
     "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -306,7 +306,7 @@ void displayLpsrScoreSlices (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theLpsrScore != nullptr,
     "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED

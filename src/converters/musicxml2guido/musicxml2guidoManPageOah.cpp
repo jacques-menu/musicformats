@@ -70,7 +70,7 @@ void xml2gmnManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a xml2gmnManPageGenerateAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -88,7 +88,7 @@ void xml2gmnManPageGenerateAtom::acceptIn (basevisitor* v)
       ".\\\" ==> xml2gmnManPageGenerateAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -106,7 +106,7 @@ void xml2gmnManPageGenerateAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching xml2gmnManPageGenerateAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -124,7 +124,7 @@ void xml2gmnManPageGenerateAtom::acceptOut (basevisitor* v)
       ".\\\" ==> xml2gmnManPageGenerateAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -142,7 +142,7 @@ void xml2gmnManPageGenerateAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching xml2gmnManPageGenerateAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -160,7 +160,7 @@ void xml2gmnManPageGenerateAtom::browseData (basevisitor* v)
       ".\\\" ==> xml2gmnManPageGenerateAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -338,7 +338,7 @@ void xml2gmnManPageOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> xml2gmnManPageOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -356,7 +356,7 @@ void xml2gmnManPageOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching xml2gmnManPageOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -374,7 +374,7 @@ void xml2gmnManPageOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> xml2gmnManPageOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -392,7 +392,7 @@ void xml2gmnManPageOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching xml2gmnManPageOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -410,7 +410,7 @@ void xml2gmnManPageOahGroup::browseData (basevisitor* v)
       ".\\\" ==> xml2gmnManPageOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -454,7 +454,7 @@ S_xml2gmnManPageOahGroup createGlobalXml2gmnManPageOahGroupHandler (
       "Creating global xml2gmnManPage OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

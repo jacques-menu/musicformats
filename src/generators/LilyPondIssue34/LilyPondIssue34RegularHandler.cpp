@@ -115,7 +115,7 @@ void LilyPondIssue34RegularHandler::createRegularHandlerGroups ()
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -226,7 +226,7 @@ void LilyPondIssue34RegularHandler::createRegularHandlerGroups ()
       "\" have been created";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1468,7 +1468,7 @@ void LilyPondIssue34RegularHandler::checkOptionsAndArguments () const
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

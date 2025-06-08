@@ -31,7 +31,7 @@ S_mfcPassComponent createBsr2brailleComponent ()
         "Creating the bsr2braille pass component";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

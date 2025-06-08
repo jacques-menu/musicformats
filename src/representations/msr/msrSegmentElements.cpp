@@ -65,7 +65,7 @@ msrSegmentElement::~msrSegmentElement ()
 //       std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -73,7 +73,7 @@ msrSegmentElement::~msrSegmentElement ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     wholeNotes != K_WHOLE_NOTES_UNKNOWN_,
 //     "wholeNotes == K_WHOLE_NOTES_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -91,7 +91,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
       "% ==> msrSegmentElement::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -109,7 +109,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
             "% ==> Launching msrSegmentElement::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -127,7 +127,7 @@ void msrSegmentElement::acceptOut (basevisitor* v)
       "% ==> msrSegmentElement::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -145,7 +145,7 @@ void msrSegmentElement::acceptOut (basevisitor* v)
             "% ==> Launching msrSegmentElement::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

@@ -94,7 +94,7 @@ Usage: xml2brl [[option]* [MusicXMLFile|-] [[option]*
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -160,7 +160,7 @@ void xml2brlInsiderHandler::createTheXml2brlPrefixes ()
       "Creating the xml2brl prefixes";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -182,7 +182,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -292,7 +292,7 @@ void xml2brlInsiderHandler::checkOptionsAndArguments () const
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -313,7 +313,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -407,7 +407,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -473,7 +473,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -505,7 +505,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -577,7 +577,7 @@ void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> xml2brlInsiderOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -595,7 +595,7 @@ void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching xml2brlInsiderOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -613,7 +613,7 @@ void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> xml2brlInsiderOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -631,7 +631,7 @@ void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching xml2brlInsiderOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -649,7 +649,7 @@ void xml2brlInsiderOahGroup::browseData (basevisitor* v)
       ".\\\" ==> xml2brlInsiderOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -758,7 +758,7 @@ void xml2brlInsiderOahGroup::initializeXml2brlInsiderOahGroup ()
       "\" group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -782,7 +782,7 @@ void xml2brlInsiderOahGroup::createInsiderQuitSubGroup ()
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -891,7 +891,7 @@ S_xml2brlInsiderOahGroup createGlobalXml2brlOahGroup (
       "Creating global xml2brl OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

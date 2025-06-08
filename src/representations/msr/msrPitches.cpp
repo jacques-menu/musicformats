@@ -1559,7 +1559,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
           */
       }
@@ -1611,7 +1611,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
             msrInternalError (
               gServiceRunData->getInputSourceName (),
               inputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -1664,7 +1664,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
             msrInternalError (
               gServiceRunData->getInputSourceName (),
               inputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -1719,7 +1719,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
             msrInternalError (
               gServiceRunData->getInputSourceName (),
               inputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -1772,7 +1772,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
             msrInternalError (
               gServiceRunData->getInputSourceName (),
               inputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -1825,7 +1825,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
             msrInternalError (
               gServiceRunData->getInputSourceName (),
               inputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -1878,7 +1878,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
             msrInternalError (
               gServiceRunData->getInputSourceName (),
               inputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -1931,7 +1931,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
             msrInternalError (
               gServiceRunData->getInputSourceName (),
               inputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -2060,7 +2060,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
           msrInternalError (
             gServiceRunData->getInputSourceName (),
             inputLineNumber,
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
@@ -2080,7 +2080,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
           msrInternalError (
             gServiceRunData->getInputSourceName (),
             inputLineNumber,
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
@@ -2101,7 +2101,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
           */
       }
@@ -2241,7 +2241,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
           msrInternalError (
             gServiceRunData->getInputSourceName (),
             inputLineNumber,
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
@@ -2261,7 +2261,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
@@ -2282,7 +2282,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
           */
       }

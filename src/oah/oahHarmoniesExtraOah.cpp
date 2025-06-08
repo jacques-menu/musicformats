@@ -71,7 +71,7 @@ void extraDisplayAllHarmoniesStructuresAtom::applyValueLessAtom (std::ostream& o
       "==> option '" << fetchNames () << "' is a extraDisplayAllHarmoniesStructuresAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -106,7 +106,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesStructuresAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -124,7 +124,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching extraDisplayAllHarmoniesStructuresAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -142,7 +142,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesStructuresAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -160,7 +160,7 @@ void extraDisplayAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching extraDisplayAllHarmoniesStructuresAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -178,7 +178,7 @@ void extraDisplayAllHarmoniesStructuresAtom::browseData (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesStructuresAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -280,7 +280,7 @@ void extraDisplayAllHarmoniesContentsAtom::applyAtomWithValue (
       "==> oahAtom is of type 'extraDisplayAllHarmoniesContentsAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -297,7 +297,7 @@ void extraDisplayAllHarmoniesContentsAtom::applyAtomWithValue (
       ", theString = \"" << theString << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -384,7 +384,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesContentsAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -402,7 +402,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching extraDisplayAllHarmoniesContentsAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -420,7 +420,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesContentsAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -438,7 +438,7 @@ void extraDisplayAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching extraDisplayAllHarmoniesContentsAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -456,7 +456,7 @@ void extraDisplayAllHarmoniesContentsAtom::browseData (basevisitor* v)
       ".\\\" ==> extraDisplayAllHarmoniesContentsAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -562,7 +562,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       "==> oahAtom is of type 'extraDisplayHarmonyDetailsAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -578,7 +578,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       ", theString = \"" << theString << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -609,7 +609,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       '\'';
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -654,7 +654,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
       "--> harmonyName = \"" << harmonyName << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -747,7 +747,7 @@ void extraDisplayHarmonyDetailsAtom::acceptIn (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyDetailsAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -765,7 +765,7 @@ void extraDisplayHarmonyDetailsAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching extraDisplayHarmonyDetailsAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -783,7 +783,7 @@ void extraDisplayHarmonyDetailsAtom::acceptOut (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyDetailsAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -801,7 +801,7 @@ void extraDisplayHarmonyDetailsAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching extraDisplayHarmonyDetailsAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -819,7 +819,7 @@ void extraDisplayHarmonyDetailsAtom::browseData (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyDetailsAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -904,7 +904,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       "==> oahAtom is of type 'extraDisplayHarmonyAnalysisAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -921,7 +921,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       ", theString = \"" << theString << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -954,7 +954,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       '\'';
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1017,7 +1017,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
       "--> inversion: " << inversion;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1125,7 +1125,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptIn (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyAnalysisAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1143,7 +1143,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching extraDisplayHarmonyAnalysisAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1161,7 +1161,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptOut (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyAnalysisAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1179,7 +1179,7 @@ void extraDisplayHarmonyAnalysisAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching extraDisplayHarmonyAnalysisAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1197,7 +1197,7 @@ void extraDisplayHarmonyAnalysisAtom::browseData (basevisitor* v)
       ".\\\" ==> extraDisplayHarmonyAnalysisAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1409,7 +1409,7 @@ void harmoniesExtraOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> harmoniesExtraOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1427,7 +1427,7 @@ void harmoniesExtraOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching harmoniesExtraOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1445,7 +1445,7 @@ void harmoniesExtraOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> harmoniesExtraOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1463,7 +1463,7 @@ void harmoniesExtraOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching harmoniesExtraOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1481,7 +1481,7 @@ void harmoniesExtraOahGroup::browseData (basevisitor* v)
       ".\\\" ==> harmoniesExtraOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1537,7 +1537,7 @@ S_harmoniesExtraOahGroup createGlobalHarmoniesExtraOahGroup ()
       "Creating global extra OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

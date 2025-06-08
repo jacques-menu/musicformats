@@ -61,12 +61,12 @@ mfPositionInMeasure::mfPositionInMeasure (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     numerator >= 0,
 //     "mfPositionInMeasure numerator '" + std::to_string (numerator) + "' should be positive or null");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     denominator > 0,
     "mfPositionInMeasure denominator '" + std::to_string (denominator) + "' should be positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -116,7 +116,7 @@ mfPositionInMeasure::mfPositionInMeasure (const std::string& theString)
         "--> denominator = \"" << denominator << "\"";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -137,7 +137,7 @@ mfPositionInMeasure::mfPositionInMeasure (const std::string& theString)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         fDenominator > 0,
         "fDenominator '" + denominator + "' is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -155,7 +155,7 @@ mfPositionInMeasure::mfPositionInMeasure (const std::string& theString)
 //    msrWarning ( //  JMI
       gServiceRunData->getInputSourceName (),
       0, // JMI inputLineNumber, ??? 0.9.66
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 

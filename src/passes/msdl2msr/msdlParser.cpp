@@ -302,7 +302,7 @@ void msdlParser::displayTokenKindsSetsStack (const std::string& context)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         tokenKindsSet != nullptr,
         "tokenKindsSet is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -362,7 +362,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const std::string& context)
       " [" << context << ']';
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -425,7 +425,7 @@ void msdlParser::fetchNextToken ()
       ", fCurrentToken: " << currentTokenAsString ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -453,7 +453,7 @@ Bool msdlParser::checkMandatoryTokenKind (
       " [" << context << ']';
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -522,7 +522,7 @@ Bool msdlParser::checkMandatoryTokenKind (
       ", result: " << result;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -553,7 +553,7 @@ Bool msdlParser::checkMandatoryTokenKindsSet (
       ", tokenKindsSet: " << tokenKindsSet->asString ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -620,7 +620,7 @@ Bool msdlParser::checkMandatoryTokenKindsSet (
       ", result: " << result;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -650,7 +650,7 @@ Bool msdlParser::checkOptionalTokenKind (
   //    " context: " << context;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -737,7 +737,7 @@ Bool msdlParser::checkOptionalTokenKind (
       ", result: " << result;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -768,7 +768,7 @@ Bool msdlParser::checkOptionalTokenKindsSet (
       ", tokenKindsSet: " << tokenKindsSet->asString ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -839,7 +839,7 @@ Bool msdlParser::checkOptionalTokenKindsSet (
       ", result: " << result;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -899,7 +899,7 @@ void msdlParser::createStaffIfNeeded (const mfInputLineNumber& inputLineNumber)
     // create the staff
     fCurrentStaff =
       msrStaff::create (
-        __LINE__,
+        mfInputLineNumber (__LINE__),
         msrStaffKind::kStaffKindRegular,
         ++fCurrentStaffNumber,
         fCurrentPart);
@@ -1013,7 +1013,7 @@ void msdlParser::createIdentificationIfNeeded (const mfInputLineNumber& inputLin
         ", RunDate: " << RunDate;
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1053,7 +1053,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         gGlobalLpsr2lilypondOahGroup->
         getFixedOctaveEntrySemiTonesPitchAndOctave () != nullptr,
        "gGlobalLpsr2lilypondOahGroup->getFixedOctaveEntrySemiTonesPitchAndOctave () is NULL");
@@ -1194,7 +1194,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
       std::endl << std::endl;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1226,7 +1226,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
       std::endl << std::endl;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1277,7 +1277,7 @@ std::string msdlParser::lilypondOctaveInFixedEntryMode (
       absoluteOctavesDifference;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1407,7 +1407,7 @@ void msdlParser::parse ()
         "==> parse()";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1418,7 +1418,7 @@ void msdlParser::parse ()
 
     // are we at the and of the input?
     if (checkMandatoryTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::k_TokenEOF,
       "Specification")
     ) {
@@ -1498,7 +1498,7 @@ void msdlParser::Specification (S_msdlTokenKindsSet stopperTokensSet)
   // the optional Identification section
   if (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fIdentificationFIRST,
       "Specification")
   ) {
@@ -1513,7 +1513,7 @@ void msdlParser::Specification (S_msdlTokenKindsSet stopperTokensSet)
   // the optional PitchesLanguage section
   if (
     checkOptionalTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::kTokenPitches,
       "Specification")
   ) {
@@ -1527,7 +1527,7 @@ void msdlParser::Specification (S_msdlTokenKindsSet stopperTokensSet)
   // the optional Anacrusis section
   if (
     checkOptionalTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::kTokenAnacrusis,
       "Specification")
   ) {
@@ -1538,7 +1538,7 @@ void msdlParser::Specification (S_msdlTokenKindsSet stopperTokensSet)
   // the mandatory Structure section
   if (
     checkMandatoryTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fStructureFIRST,
       "Specification")
   ) {
@@ -1589,7 +1589,7 @@ void msdlParser::Identification (S_msdlTokenKindsSet stopperTokensSet)
   // there can be a title, a composer and an opus
   while (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fIdentificationFIRST,
       "Identification")
   ) {
@@ -1627,7 +1627,7 @@ void msdlParser::Identification (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1667,7 +1667,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
   fetchNextToken ();
 
   if (checkMandatoryTokenKind (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     msdlTokenKind::kTokenString,
     "Title")
   ) {
@@ -1683,7 +1683,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
       ", title: \"" << title << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1717,7 +1717,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1757,7 +1757,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
   fetchNextToken ();
 
   if (checkMandatoryTokenKind (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     msdlTokenKind::kTokenString,
     "Composer")
   ) {
@@ -1774,7 +1774,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
       ", composer: \"" << composer << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1807,7 +1807,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
       ", fCurrentToken: " << currentTokenAsString ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1847,7 +1847,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
   fetchNextToken ();
 
   if (checkMandatoryTokenKind (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     msdlTokenKind::kTokenString,
     "Opus")
   ) {
@@ -1864,7 +1864,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
       ", opus: \"" << opus << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1898,7 +1898,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1960,7 +1960,7 @@ void msdlParser::Identifier (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1998,7 +1998,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
 
   if (
     checkOptionalTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::kTokenPitches,
       "Pitches")
   ) {
@@ -2007,7 +2007,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
     fetchNextToken ();
 
     if (checkMandatoryTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::kTokenName,
       "Pitches")
     ) {
@@ -2025,7 +2025,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -2047,7 +2047,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -2074,7 +2074,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2112,7 +2112,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
 
   if (
     checkOptionalTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::kTokenOctaves,
       "Octaves")
   ) {
@@ -2121,7 +2121,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
     fetchNextToken ();
 
     if (checkMandatoryTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::kTokenName,
       "Octaves")
     ) {
@@ -2139,7 +2139,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -2161,7 +2161,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -2188,7 +2188,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2242,7 +2242,7 @@ void msdlParser::PitchesLanguage (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2296,7 +2296,7 @@ void msdlParser::PitchesOctaveEntry (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2334,7 +2334,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
 
   if (
     checkOptionalTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::kTokenAnacrusis,
       "Anacrusis")
   ) {
@@ -2348,7 +2348,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
         ", anacrusis: present";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -2375,7 +2375,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2414,7 +2414,7 @@ void msdlParser::Structure (S_msdlTokenKindsSet stopperTokensSet)
   // do the job
   while (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fStructureFIRST,
       "Structure")
   ) {
@@ -2458,7 +2458,7 @@ void msdlParser::Structure (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2501,7 +2501,7 @@ void msdlParser::Book (S_msdlTokenKindsSet stopperTokensSet)
   // do the job
   while (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fBookFIRST,
       "Book")
   ) {
@@ -2542,7 +2542,7 @@ void msdlParser::Book (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2585,7 +2585,7 @@ void msdlParser::Score (S_msdlTokenKindsSet stopperTokensSet)
   // do the job
   while (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fScoreFIRST,
       "Score")
   ) {
@@ -2623,7 +2623,7 @@ void msdlParser::Score (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2666,7 +2666,7 @@ void msdlParser::PartGroup (S_msdlTokenKindsSet stopperTokensSet)
   // do the job
   while (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fPartGroupFIRST,
       "PartGroup")
   ) {
@@ -2701,7 +2701,7 @@ void msdlParser::PartGroup (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2744,7 +2744,7 @@ void msdlParser::Part (S_msdlTokenKindsSet stopperTokensSet)
   // do the job
   while (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fPartFIRST,
       "Part")
   ) {
@@ -2776,7 +2776,7 @@ void msdlParser::Part (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2835,7 +2835,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
         ", musicName: \"" << musicName << "\"";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -2844,7 +2844,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
 
   // there should be a left bracket
   if (checkMandatoryTokenKind (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     msdlTokenKind::kTokenLeftBracket,
     "Music")
   ) {
@@ -2854,7 +2854,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
   // there can be measures
   if (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fMeasuresSequenceFIRST,
       "Music")
   ) {
@@ -2864,7 +2864,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
 
   // there should be a right bracket
   if (checkMandatoryTokenKind (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     msdlTokenKind::kTokenRightBracket,
     "Music")
   ) {
@@ -2888,7 +2888,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
       ", fCurrentToken: " << currentTokenAsString ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2929,7 +2929,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
 
   // there should be a left bracket
   if (checkMandatoryTokenKind (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     msdlTokenKind::kTokenLeftBracket,
     "Fragment")
   ) {
@@ -2938,7 +2938,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
 
   if (
     checkOptionalTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::kTokenMeasure,
       "Fragment")
   ) {
@@ -2946,7 +2946,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
       fMeasuresSequenceFOLLOW);
 
     if (checkMandatoryTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::kTokenName,
       "Fragment")
     ) {
@@ -2964,7 +2964,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -2981,7 +2981,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
 
   // there should be a right bracket
   if (checkMandatoryTokenKind (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     msdlTokenKind::kTokenRightBracket,
     "Fragment")
   ) {
@@ -3006,7 +3006,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3044,7 +3044,7 @@ void msdlParser::MeasuresSequence (S_msdlTokenKindsSet stopperTokensSet)
 
   while (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fMeasuresSequenceFIRST,
       "MeasuresSequence")
   ) {
@@ -3069,7 +3069,7 @@ void msdlParser::MeasuresSequence (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3107,7 +3107,7 @@ void msdlParser::Measure (S_msdlTokenKindsSet stopperTokensSet)
 
   // there should be a '|'
   if (checkMandatoryTokenKind (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     msdlTokenKind::kTokenMeasure,
     "Measure")
   ) {
@@ -3117,7 +3117,7 @@ void msdlParser::Measure (S_msdlTokenKindsSet stopperTokensSet)
   // accept a sequence of notes and bars
   while (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fNoteFIRST
         +
       msdlTokenKind::kTokenFinalBar,
@@ -3150,7 +3150,7 @@ void msdlParser::Measure (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3192,7 +3192,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
   int measureNumber = 1; // TEMP JMI
 
   if (checkMandatoryTokenKind (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     msdlTokenKind::kTokenInteger,
     "MeasureNumber")
   ) {
@@ -3211,7 +3211,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
         ", measureNumber: \"" << measureNumber << "\"";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -3243,7 +3243,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3298,7 +3298,7 @@ void msdlParser::Clef (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3353,7 +3353,7 @@ void msdlParser::Key (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3408,7 +3408,7 @@ void msdlParser::Time (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3449,7 +3449,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
     noteQuarterTonesPitchKind = msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
 
   if (checkMandatoryTokenKind (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     msdlTokenKind::kTokenName,
     "Note")
   ) {
@@ -3466,7 +3466,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
         ", pitchName: \"" << pitchName << "\"";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -3487,7 +3487,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
         "\"";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -3509,7 +3509,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
       ", fCurrentToken: " << currentTokenAsString ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3535,14 +3535,14 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
       ", fCurrentToken: " << currentTokenAsString ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
   if (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fNoteNotesDurationFIRST,
       "Note")
   ) {
@@ -3577,7 +3577,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
       ", note: " << note->asString ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3603,7 +3603,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3641,7 +3641,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
 
   // there should be an indentifier
   if (checkMandatoryTokenKind (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     msdlTokenKind::kTokenName,
     "Pitch")
   ) {
@@ -3658,7 +3658,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
         ", pitchName: \"" << pitchName << "\"";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -3684,7 +3684,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3728,7 +3728,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
 
   while (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fOctaveIndicationFIRST,
       "OctaveIndication")
   ) {
@@ -3758,7 +3758,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
         ", quotesCounter: " << quotesCounter;
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -3795,7 +3795,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
         ", result: " << msrOctaveKindAsString (result);
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -3817,7 +3817,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
       "=================================================================";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3860,7 +3860,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
 
   if (
     checkOptionalTokenKindsSet (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       fNoteNotesDurationFIRST,
       "NoteNotesDuration")
   ) {
@@ -3884,14 +3884,14 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
     }
 
     else if (checkMandatoryTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::kTokenName,
       "NoteNotesDuration")
     ) {
@@ -3915,7 +3915,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -3942,7 +3942,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
 
   while (
     checkOptionalTokenKind (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       msdlTokenKind::kTokenDot,
       "NoteNotesDuration")
   ) {
@@ -3978,7 +3978,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
       ", fCurrentNoteDotsNumber: " << fCurrentNoteDotsNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

@@ -100,7 +100,9 @@ class EXP oahValueLessAtomAlias : public oahValueLessAtom
 
      S_oahValueLessAtom   fOriginalValueLessAtom;
 };
-typedef SMARTP<oahValueLessAtomAlias> S_oahValueLessAtomAlias;
+
+using S_oahValueLessAtomAlias = SMARTP<oahValueLessAtomAlias>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahValueLessAtomAlias& elt);
 
 //______________________________________________________________________________
@@ -177,7 +179,9 @@ class EXP oahValueFittedAtomAlias : public oahValueFittedAtom
 
      S_oahValueFittedAtom fOriginalValueFittedAtom;
 };
-typedef SMARTP<oahValueFittedAtomAlias> S_oahValueFittedAtomAlias;
+
+using S_oahValueFittedAtomAlias = SMARTP<oahValueFittedAtomAlias>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahValueFittedAtomAlias& elt);
 
 //______________________________________________________________________________
@@ -263,7 +267,9 @@ class EXP oahMacroAtom : public oahValueLessAtom
      std::list <S_oahValueLessAtom>
                           fMacroValueLessAtomsList;
 };
-typedef SMARTP<oahMacroAtom> S_oahMacroAtom;
+
+using S_oahMacroAtom = SMARTP<oahMacroAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahMacroAtom& elt);
 
 //______________________________________________________________________________
@@ -319,7 +325,9 @@ class EXP oahOptionsUsageAtom : public oahPureHelpValueLessAtom
 
     void                  print (std::ostream& os) const override;
 };
-typedef SMARTP<oahOptionsUsageAtom> S_oahOptionsUsageAtom;
+
+using S_oahOptionsUsageAtom = SMARTP<oahOptionsUsageAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahOptionsUsageAtom& elt);
 
 //______________________________________________________________________________
@@ -375,7 +383,9 @@ class EXP oahHelpAtom : public oahPureHelpValueLessAtom
 
     void                  printOptionsSummary (std::ostream& os) const;
 };
-typedef SMARTP<oahHelpAtom> S_oahHelpAtom;
+
+using S_oahHelpAtom = SMARTP<oahHelpAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahHelpAtom& elt);
 
 //______________________________________________________________________________
@@ -431,7 +441,9 @@ class EXP oahHelpSummaryAtom : public oahPureHelpValueLessAtom
 
     void                  printOptionsSummary (std::ostream& os) const;
 };
-typedef SMARTP<oahHelpSummaryAtom> S_oahHelpSummaryAtom;
+
+using S_oahHelpSummaryAtom = SMARTP<oahHelpSummaryAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahHelpSummaryAtom& elt);
 
 //______________________________________________________________________________
@@ -487,7 +499,9 @@ class EXP oahAboutAtom : public oahPureHelpValueLessAtom
 
     void                  printAbout (std::ostream& os) const;
 };
-typedef SMARTP<oahAboutAtom> S_oahAboutAtom;
+
+using S_oahAboutAtom = SMARTP<oahAboutAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahAboutAtom& elt);
 
 //______________________________________________________________________________
@@ -558,7 +572,9 @@ class EXP oahVersionAtom : public oahPureHelpValueLessAtom
 
     oahVersionKind        fVersionKind;
 };
-typedef SMARTP<oahVersionAtom> S_oahVersionAtom;
+
+using S_oahVersionAtom = SMARTP<oahVersionAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahVersionAtom& elt);
 
 //______________________________________________________________________________
@@ -614,7 +630,9 @@ class EXP oahLibraryVersionAtom : public oahPureHelpValueLessAtom
 
     void                  printVersion (std::ostream& os) const;
 };
-typedef SMARTP<oahLibraryVersionAtom> S_oahLibraryVersionAtom;
+
+using S_oahLibraryVersionAtom = SMARTP<oahLibraryVersionAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahLibraryVersionAtom& elt);
 
 //______________________________________________________________________________
@@ -670,7 +688,9 @@ class EXP oahHistoryAtom : public oahPureHelpValueLessAtom
 
     void                  printHistory (std::ostream& os) const;
 };
-typedef SMARTP<oahHistoryAtom> S_oahHistoryAtom;
+
+using S_oahHistoryAtom = SMARTP<oahHistoryAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahHistoryAtom& elt);
 
 //______________________________________________________________________________
@@ -726,7 +746,9 @@ class EXP oahLibraryHistoryAtom : public oahPureHelpValueLessAtom
 
     void                  printHistory (std::ostream& os) const;
 };
-typedef SMARTP<oahLibraryHistoryAtom> S_oahLibraryHistoryAtom;
+
+using S_oahLibraryHistoryAtom = SMARTP<oahLibraryHistoryAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahLibraryHistoryAtom& elt);
 
 //______________________________________________________________________________
@@ -783,7 +805,9 @@ class EXP oahContactAtom : public oahPureHelpValueLessAtom
 
     void                  printContact (std::ostream& os) const;
 };
-typedef SMARTP<oahContactAtom> S_oahContactAtom;
+
+using S_oahContactAtom = SMARTP<oahContactAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahContactAtom& elt);
 
 //______________________________________________________________________________
@@ -840,7 +864,9 @@ class EXP oahDisplayPrefixes : public oahPureHelpValueLessAtom
 
     void                  printPrefixes (std::ostream& os) const;
 };
-typedef SMARTP<oahDisplayPrefixes> S_oahDisplayPrefixes;
+
+using S_oahDisplayPrefixes = SMARTP<oahDisplayPrefixes>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahDisplayPrefixes& elt);
 
 //______________________________________________________________________________
@@ -897,7 +923,9 @@ class EXP oahDisplaySingleCharacterOptions : public oahPureHelpValueLessAtom
 
     void                  printSingleCharacterOptions (std::ostream& os) const;
 };
-typedef SMARTP<oahDisplaySingleCharacterOptions> S_oahDisplaySingleCharacterOptions;
+
+using S_oahDisplaySingleCharacterOptions = SMARTP<oahDisplaySingleCharacterOptions>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahDisplaySingleCharacterOptions& elt);
 
 //______________________________________________________________________________
@@ -953,7 +981,9 @@ class EXP oahMusicFormatsTestAtom : public oahPureHelpValueLessAtom
 
     void                  print (std::ostream& os) const override;
 };
-typedef SMARTP<oahMusicFormatsTestAtom> S_oahMusicFormatsTestAtom;
+
+using S_oahMusicFormatsTestAtom = SMARTP<oahMusicFormatsTestAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahMusicFormatsTestAtom& elt);
 
 //______________________________________________________________________________
@@ -1042,7 +1072,9 @@ class EXP oahOnOffAtom : public oahAtomStoringAValue
     std::string           fVariableName;
     mfOnOffKind&          fOnOffKindVariable;
 };
-typedef SMARTP<oahOnOffAtom> S_oahOnOffAtom;
+
+using S_oahOnOffAtom = SMARTP<oahOnOffAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahOnOffAtom& elt);
 
 //______________________________________________________________________________
@@ -1127,7 +1159,9 @@ class EXP oahBooleanAtom : public oahValueLessAtom
     std::string           fVariableName;
     Bool&                 fBooleanVariable;
 };
-typedef SMARTP<oahBooleanAtom> S_oahBooleanAtom;
+
+using S_oahBooleanAtom = SMARTP<oahBooleanAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahBooleanAtom& elt);
 
 //______________________________________________________________________________
@@ -1203,7 +1237,9 @@ class EXP oahTwoBooleansAtom : public oahBooleanAtom
 
     S_oahBooleanAtom      fSecondBooleanAtom;
 };
-typedef SMARTP<oahTwoBooleansAtom> S_oahTwoBooleansAtom;
+
+using S_oahTwoBooleansAtom = SMARTP<oahTwoBooleansAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahTwoBooleansAtom& elt);
 
 //______________________________________________________________________________
@@ -1281,7 +1317,9 @@ class EXP oahThreeBooleansAtom : public oahTwoBooleansAtom
 
     S_oahBooleanAtom      fThirdBooleanAtom;
 };
-typedef SMARTP<oahThreeBooleansAtom> S_oahThreeBooleansAtom;
+
+using S_oahThreeBooleansAtom = SMARTP<oahThreeBooleansAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahThreeBooleansAtom& elt);
 
 //______________________________________________________________________________
@@ -1361,7 +1399,9 @@ class EXP oahFourBooleansAtom : public oahThreeBooleansAtom
 
     S_oahBooleanAtom      fFourthBooleanAtom;
 };
-typedef SMARTP<oahFourBooleansAtom> S_oahFourBooleansAtom;
+
+using S_oahFourBooleansAtom = SMARTP<oahFourBooleansAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahFourBooleansAtom& elt);
 
 //______________________________________________________________________________
@@ -1443,7 +1483,9 @@ class EXP oahFiveBooleansAtom : public oahFourBooleansAtom
 
     S_oahBooleanAtom      fFifthBooleanAtom;
 };
-typedef SMARTP<oahFiveBooleansAtom> S_oahFiveBooleansAtom;
+
+using S_oahFiveBooleansAtom = SMARTP<oahFiveBooleansAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahFiveBooleansAtom& elt);
 
 //______________________________________________________________________________
@@ -1542,7 +1584,9 @@ class EXP oahCombinedBooleansAtom : public oahValueLessAtom
     std::list <S_oahBooleanAtom>
                           fBooleanAtomsList;
 };
-typedef SMARTP<oahCombinedBooleansAtom> S_oahCombinedBooleansAtom;
+
+using S_oahCombinedBooleansAtom = SMARTP<oahCombinedBooleansAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahCombinedBooleansAtom& elt);
 
 //______________________________________________________________________________
@@ -1632,7 +1676,9 @@ class EXP oahIntegerAtom : public oahAtomStoringAValue
 
     int&                  fIntegerVariable;
 };
-typedef SMARTP<oahIntegerAtom> S_oahIntegerAtom;
+
+using S_oahIntegerAtom = SMARTP<oahIntegerAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahIntegerAtom& elt);
 
 //______________________________________________________________________________
@@ -1721,7 +1767,9 @@ class EXP oahTwoIntegersAtom : public oahIntegerAtom
 
     int&                  fIntegerSecondaryVariable;
 };
-typedef SMARTP<oahTwoIntegersAtom> S_oahTwoIntegersAtom;
+
+using S_oahTwoIntegersAtom = SMARTP<oahTwoIntegersAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahTwoIntegersAtom& elt);
 
 //______________________________________________________________________________
@@ -1809,7 +1857,9 @@ class EXP oahFloatAtom : public oahAtomStoringAValue
 
     float&                fFloatVariable;
 };
-typedef SMARTP<oahFloatAtom> S_oahFloatAtom;
+
+using S_oahFloatAtom = SMARTP<oahFloatAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahFloatAtom& elt);
 
 //______________________________________________________________________________
@@ -1897,7 +1947,9 @@ class EXP oahStringAtom : public oahAtomStoringAValue
 
     std::string&          fStringVariable;
 };
-typedef SMARTP<oahStringAtom> S_oahStringAtom;
+
+using S_oahStringAtom = SMARTP<oahStringAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahStringAtom& elt);
 
 //______________________________________________________________________________
@@ -1993,7 +2045,9 @@ class EXP oahFactorizedStringAtom : public oahValueLessAtom
     std::list <std::string>
                           fAtomNamesList;
 };
-typedef SMARTP<oahFactorizedStringAtom> S_oahFactorizedStringAtom;
+
+using S_oahFactorizedStringAtom = SMARTP<oahFactorizedStringAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahFactorizedStringAtom& elt);
 
 //______________________________________________________________________________
@@ -2092,7 +2146,9 @@ class EXP oahDefaultedStringAtom : public oahValueDefaultedAtom
     std::string           fVariableName;
     std::string&          fStringVariable;
 };
-typedef SMARTP<oahDefaultedStringAtom> S_oahDefaultedStringAtom;
+
+using S_oahDefaultedStringAtom = SMARTP<oahDefaultedStringAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahDefaultedStringAtom& elt);
 
 //______________________________________________________________________________
@@ -2207,7 +2263,9 @@ class EXP oahCommonPrefixBooleansAtom : public oahValueLessAtom
     std::list <std::string>
                           fLongNamesSuffixes;
 };
-typedef SMARTP<oahCommonPrefixBooleansAtom> S_oahCommonPrefixBooleansAtom;
+
+using S_oahCommonPrefixBooleansAtom = SMARTP<oahCommonPrefixBooleansAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahCommonPrefixBooleansAtom& elt);
 
 //______________________________________________________________________________
@@ -2297,7 +2355,9 @@ class EXP oahRegexAtom : public oahStringAtom
 
     std::string           fRegexString;
 };
-typedef SMARTP<oahRegexAtom> S_oahRegexAtom;
+
+using S_oahRegexAtom = SMARTP<oahRegexAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahRegexAtom& elt);
 
 //______________________________________________________________________________
@@ -2389,7 +2449,9 @@ class EXP oahRationalAtom : public oahAtomStoringAValue
 
     mfRational&             fRationalVariable;
 };
-typedef SMARTP<oahRationalAtom> S_oahRationalAtom;
+
+using S_oahRationalAtom = SMARTP<oahRationalAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahRationalAtom& elt);
 
 //______________________________________________________________________________
@@ -2434,9 +2496,7 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
 
     void                  setNaturalNumbersSetVariable (
                             std::set <int>& value)
-                              {
-                                fNaturalNumbersSetVariable = value;
-                              }
+                              { fNaturalNumbersSetVariable = value; }
 
     const std::set <int>&       getNaturalNumbersSetVariable () const
                               { return fNaturalNumbersSetVariable; }
@@ -2479,9 +2539,11 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::set <int>&             fNaturalNumbersSetVariable;
+    std::set <int>&       fNaturalNumbersSetVariable;
 };
-typedef SMARTP<oahNaturalNumbersSetElementAtom> S_oahNaturalNumbersSetElementAtom;
+
+using S_oahNaturalNumbersSetElementAtom = SMARTP<oahNaturalNumbersSetElementAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahNaturalNumbersSetElementAtom& elt);
 
 //______________________________________________________________________________
@@ -2573,7 +2635,9 @@ class EXP oahColorRGBAtom : public oahAtomStoringAValue
 
     msrColorRGB&          fColorRGBVariable;
 };
-typedef SMARTP<oahColorRGBAtom> S_oahColorRGBAtom;
+
+using S_oahColorRGBAtom = SMARTP<oahColorRGBAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahColorRGBAtom& elt);
 
 //______________________________________________________________________________
@@ -2659,7 +2723,9 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
 
     std::set <int>&        fIntSetVariable;
 };
-typedef SMARTP<oahIntSetElementAtom> S_oahIntSetElementAtom;
+
+using S_oahIntSetElementAtom = SMARTP<oahIntSetElementAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahIntSetElementAtom& elt);
 
 //______________________________________________________________________________
@@ -2753,7 +2819,9 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
     std::set <std::string>&
                           fStringSetVariable;
 };
-typedef SMARTP<oahStringSetElementAtom> S_oahStringSetElementAtom;
+
+using S_oahStringSetElementAtom = SMARTP<oahStringSetElementAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahStringSetElementAtom& elt);
 
 //______________________________________________________________________________
@@ -2769,11 +2837,11 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<oahStringToIntMapElementAtom> create (
-                            const std::string&          longName,
-                            const std::string&          shortName,
-                            const std::string&          description,
-                            const std::string&          valueSpecification,
-                            const std::string&          variableName,
+                            const std::string&           longName,
+                            const std::string&           shortName,
+                            const std::string&           description,
+                            const std::string&           valueSpecification,
+                            const std::string&           variableName,
                             std::map <std::string, int>& stringToIntMapVariable);
 
   protected:
@@ -2782,11 +2850,11 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           oahStringToIntMapElementAtom (
-                            const std::string&          longName,
-                            const std::string&          shortName,
-                            const std::string&          description,
-                            const std::string&          valueSpecification,
-                            const std::string&          variableName,
+                            const std::string&           longName,
+                            const std::string&           shortName,
+                            const std::string&           description,
+                            const std::string&           valueSpecification,
+                            const std::string&           variableName,
                             std::map <std::string, int>& stringToIntMapVariable);
 
     virtual               ~oahStringToIntMapElementAtom ();
@@ -2841,8 +2909,197 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
     std::map <std::string, int>&
                           fStringToIntMapVariable;
 };
-typedef SMARTP<oahStringToIntMapElementAtom> S_oahStringToIntMapElementAtom;
-EXP std::ostream& operator << (std::ostream& os, const S_oahStringToIntMapElementAtom& elt);
+
+using S_oahStringToIntMapElementAtom = SMARTP<oahStringToIntMapElementAtom>;
+
+EXP std::ostream& operator << (
+  std::ostream& os, const S_oahStringToIntMapElementAtom& elt);
+
+//______________________________________________________________________________
+class EXP oahMeasureNumberToIntMapElementAtom : public oahAtomStoringAValue
+{
+/*
+  an atom controlling a std::string to integer mapping variable
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahMeasureNumberToIntMapElementAtom> create (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::map <mfMeasureNumber, int>&
+                                               measureNumberToIntMapVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahMeasureNumberToIntMapElementAtom (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::map <mfMeasureNumber, int>&
+                                               measureNumberToIntMapVariable);
+
+    virtual               ~oahMeasureNumberToIntMapElementAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    const std::map <mfMeasureNumber, int>&
+                          getMeasureNumberToIntMapVariable () const
+                              { return fMeasureNumberToIntMapVariable; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyAtomWithValue (
+                            const std::string& theString,
+                            std::ostream&      os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
+
+    void                  print (std::ostream& os) const override;
+
+    void                  displayAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    std::map <mfMeasureNumber, int>&
+                          fMeasureNumberToIntMapVariable;
+};
+
+using S_oahMeasureNumberToIntMapElementAtom = SMARTP<oahMeasureNumberToIntMapElementAtom>;
+
+EXP std::ostream& operator << (
+  std::ostream& os, const S_oahMeasureNumberToIntMapElementAtom& elt);
+
+//______________________________________________________________________________
+class EXP oahMeasureNumberToMeasureNumberMapElementAtom : public oahAtomStoringAValue
+{
+/*
+  an atom controlling a std::string to integer mapping variable
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahMeasureNumberToMeasureNumberMapElementAtom> create (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::map <mfMeasureNumber, mfMeasureNumber>&
+                                               measureNumberToMeasureNumberMapVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahMeasureNumberToMeasureNumberMapElementAtom (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::map <mfMeasureNumber, mfMeasureNumber>&
+                                               measureNumberToMeasureNumberMapVariable);
+
+    virtual               ~oahMeasureNumberToMeasureNumberMapElementAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    const std::map <mfMeasureNumber, int>&
+                          getMeasureNumberToMeasureNumberMapVariable () const
+                              { return fMeasureNumberToMeasureNumberMapVariable; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyAtomWithValue (
+                            const std::string& theString,
+                            std::ostream&      os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
+
+    void                  print (std::ostream& os) const override;
+
+    void                  displayAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    std::map <mfMeasureNumber, int>&
+                          fMeasureNumberToMeasureNumberMapVariable;
+};
+
+using S_oahMeasureNumberToMeasureNumberMapElementAtom = SMARTP<oahMeasureNumberToMeasureNumberMapElementAtom>;
+
+EXP std::ostream& operator << (
+  std::ostream& os, const S_oahMeasureNumberToMeasureNumberMapElementAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
@@ -2929,7 +3186,9 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
     std::map <std::string, std::string>&
                           fStringToStringMapVariable;
 };
-typedef SMARTP<oahStringToStringMapElementAtom> S_oahStringToStringMapElementAtom;
+
+using S_oahStringToStringMapElementAtom = SMARTP<oahStringToStringMapElementAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahStringToStringMapElementAtom& elt);
 
 //______________________________________________________________________________
@@ -3017,7 +3276,9 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
     std::multimap <std::string, std::string>&
                           fStringToStringMultiMapVariable;
 };
-typedef SMARTP<oahStringToStringMultiMapElementAtom> S_oahStringToStringMultiMapElementAtom;
+
+using S_oahStringToStringMultiMapElementAtom = SMARTP<oahStringToStringMultiMapElementAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahStringToStringMultiMapElementAtom& elt);
 
 //______________________________________________________________________________
@@ -3118,7 +3379,9 @@ class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue
     std::string           fIntegerVariableName;
     int&                  fIntegerVariable;
 };
-typedef SMARTP<oahStringAndIntegerAtom> S_oahStringAndIntegerAtom;
+
+using S_oahStringAndIntegerAtom = SMARTP<oahStringAndIntegerAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahStringAndIntegerAtom& elt);
 
 //______________________________________________________________________________
@@ -3223,7 +3486,9 @@ class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue
     int&                  fPrimaryIntegerVariable;
     int&                  fSecondaryIntegerVariable;
 };
-typedef SMARTP<oahStringAndTwoIntegersAtom> S_oahStringAndTwoIntegersAtom;
+
+using S_oahStringAndTwoIntegersAtom = SMARTP<oahStringAndTwoIntegersAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahStringAndTwoIntegersAtom& elt);
 
 //______________________________________________________________________________
@@ -3315,7 +3580,9 @@ class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
 
     msrLengthUnitKind&    fLengthUnitKindVariable;
 };
-typedef SMARTP<oahLengthUnitKindAtom> S_oahLengthUnitKindAtom;
+
+using S_oahLengthUnitKindAtom = SMARTP<oahLengthUnitKindAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahLengthUnitKindAtom& elt);
 
 //______________________________________________________________________________
@@ -3407,7 +3674,9 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
 
     msrLength&            fLengthVariable;
 };
-typedef SMARTP<oahLengthAtom> S_oahLengthAtom;
+
+using S_oahLengthAtom = SMARTP<oahLengthAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahLengthAtom& elt);
 
 //______________________________________________________________________________
@@ -3496,7 +3765,9 @@ class EXP oahMidiTempoAtom : public oahAtomStoringAValue
 
     msrMidiTempo&         fMidiTempoVariable;
 };
-typedef SMARTP<oahMidiTempoAtom> S_oahMidiTempoAtom;
+
+using S_oahMidiTempoAtom = SMARTP<oahMidiTempoAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahMidiTempoAtom& elt);
 
 //______________________________________________________________________________
@@ -3584,7 +3855,9 @@ class EXP oahHelpAboutOptionName : public oahPureHelpValueFittedAtom
 
 //    std::string           fValueSpecification;
 };
-typedef SMARTP<oahHelpAboutOptionName> S_oahHelpAboutOptionName;
+
+using S_oahHelpAboutOptionName = SMARTP<oahHelpAboutOptionName>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahHelpAboutOptionName& elt);
 
 //______________________________________________________________________________
@@ -3662,7 +3935,9 @@ class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<oahQueryOptionNameAtom> S_oahQueryOptionNameAtom;
+
+using S_oahQueryOptionNameAtom = SMARTP<oahQueryOptionNameAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahQueryOptionNameAtom& elt);
 
 //______________________________________________________________________________
@@ -3719,7 +3994,9 @@ class EXP oahFindStringResult : public smartable // JMI ???
     std::string           fTheString;
     S_oahElement          fTheElement;
 };
-typedef SMARTP<oahFindStringResult> S_oahFindStringResult;
+
+using S_oahFindStringResult = SMARTP<oahFindStringResult>;
+
 EXP std::ostream& operator << (std::ostream& os, const oahFindStringResult& elt);
 EXP std::ostream& operator << (std::ostream& os, const S_oahFindStringResult& elt);
 
@@ -3798,7 +4075,9 @@ class EXP oahFindStringInHelpAtom : public oahPureHelpValueFittedAtom
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<oahFindStringInHelpAtom> S_oahFindStringInHelpAtom;
+
+using S_oahFindStringInHelpAtom = SMARTP<oahFindStringInHelpAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahFindStringInHelpAtom& elt);
 
 //______________________________________________________________________________
@@ -3876,7 +4155,9 @@ class EXP oahMatchHelpWithPatternAtom : public oahPureHelpValueFittedAtom
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<oahMatchHelpWithPatternAtom> S_oahMatchHelpWithPatternAtom;
+
+using S_oahMatchHelpWithPatternAtom = SMARTP<oahMatchHelpWithPatternAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahMatchHelpWithPatternAtom& elt);
 
 //______________________________________________________________________________
@@ -3954,7 +4235,9 @@ class EXP oahIncludeOptionsAndArgumentsFileAtom : public oahValueFittedAtom
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<oahIncludeOptionsAndArgumentsFileAtom> S_oahIncludeOptionsAndArgumentsFileAtom;
+
+using S_oahIncludeOptionsAndArgumentsFileAtom = SMARTP<oahIncludeOptionsAndArgumentsFileAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_oahIncludeOptionsAndArgumentsFileAtom& elt);
 
 

@@ -148,7 +148,7 @@ std::string wholeNotesAsLilypondString (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -168,7 +168,7 @@ std::string wholeNotesAsLilypondString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -204,7 +204,7 @@ std::string wholeNotesAsLilypondString (
 //     lpsrWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-     __FILE__, __LINE__,
+     __FILE__, mfInputLineNumber (__LINE__),
       message);
 
     std::stringstream s2;
@@ -235,10 +235,10 @@ std::string wholeNotesAsLilypondString (
       std::endl << std::endl;
 
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str (),
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -265,7 +265,7 @@ std::string wholeNotesAsLilypondString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -376,7 +376,7 @@ std::string wholeNotesAsLilypondString (
       lpsrWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-    //    __FILE__, __LINE__,
+    //    __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -394,7 +394,7 @@ std::string wholeNotesAsLilypondString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -413,7 +413,7 @@ std::string wholeNotesAsLilypondString (
         " bringing the faction to be less that 2";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -455,7 +455,7 @@ std::string wholeNotesAsLilypondString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -491,7 +491,7 @@ std::string wholeNotesAsLilypondString (
         "--> setting the multiplying factor";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -559,7 +559,7 @@ std::string wholeNotesAsLilypondString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -618,7 +618,7 @@ std::string wholeNotesAsLilypondString (
       ", numeratorDots" << ": " << numeratorDots;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1373,7 +1373,7 @@ lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
     lpsrError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 

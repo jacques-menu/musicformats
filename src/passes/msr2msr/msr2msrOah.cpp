@@ -88,7 +88,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msrIgnorePartAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -105,7 +105,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
       "--> partName = \"" << partName << "\", ";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -145,7 +145,7 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msrIgnorePartAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -163,7 +163,7 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msrIgnorePartAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -181,7 +181,7 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msrIgnorePartAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -199,7 +199,7 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msrIgnorePartAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -217,7 +217,7 @@ void msrIgnorePartAtom::browseData (basevisitor* v)
       ".\\\" ==> msrIgnorePartAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -418,7 +418,7 @@ void msrKeepPartAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msrKeepPartAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -435,7 +435,7 @@ void msrKeepPartAtom::applyAtomWithValue (
       "--> partName = \"" << partName << "\", ";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -475,7 +475,7 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msrKeepPartAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -493,7 +493,7 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msrKeepPartAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -511,7 +511,7 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msrKeepPartAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -529,7 +529,7 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msrKeepPartAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -547,7 +547,7 @@ void msrKeepPartAtom::browseData (basevisitor* v)
       ".\\\" ==> msrKeepPartAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1060,7 +1060,7 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msr2msrOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1078,7 +1078,7 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msr2msrOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1096,7 +1096,7 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msr2msrOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1114,7 +1114,7 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msr2msrOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1132,7 +1132,7 @@ void msr2msrOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msr2msrOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1294,7 +1294,7 @@ S_msr2msrOahGroup createGlobalMsr2msrOahGroup ()
       "Creating global msr2msr OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

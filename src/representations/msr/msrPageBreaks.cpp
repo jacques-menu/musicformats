@@ -103,7 +103,7 @@ msrPageBreak::msrPageBreak (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -122,7 +122,7 @@ msrPageBreak::~msrPageBreak ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -156,7 +156,7 @@ void msrPageBreak::acceptIn (basevisitor* v)
       "% ==> msrPageBreak::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -174,7 +174,7 @@ void msrPageBreak::acceptIn (basevisitor* v)
             "% ==> Launching msrPageBreak::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -192,7 +192,7 @@ void msrPageBreak::acceptOut (basevisitor* v)
       "% ==> msrPageBreak::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -210,7 +210,7 @@ void msrPageBreak::acceptOut (basevisitor* v)
             "% ==> Launching msrPageBreak::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

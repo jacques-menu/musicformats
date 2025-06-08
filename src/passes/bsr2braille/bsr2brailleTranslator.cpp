@@ -59,7 +59,7 @@ bsr2brailleTranslator::bsr2brailleTranslator (
         gGlobalBrailleGenerationOahGroup->getByteOrderingKind ());
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -98,7 +98,7 @@ bsr2brailleTranslator::bsr2brailleTranslator (
             bsr2brailleInternalError (
               gServiceRunData->getInputSourceName (),
               1, // JMI ???
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               message);
 
             throw bsr2brailleException (message);
@@ -123,7 +123,7 @@ bsr2brailleTranslator::bsr2brailleTranslator (
   } // switch
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fBrailleGenerator != nullptr,
     "fBrailleGenerator is NULL");
 }
@@ -154,7 +154,7 @@ void bsr2brailleTranslator::visitStart (S_bsrScore& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -172,7 +172,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrScore& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -191,7 +191,7 @@ void bsr2brailleTranslator::visitStart (S_bsrSpaces& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -221,7 +221,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrSpaces& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -240,7 +240,7 @@ void bsr2brailleTranslator::visitStart (S_bsrBarLine& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -262,7 +262,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotes& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -280,7 +280,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotes& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -299,7 +299,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotesElement& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -319,7 +319,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotesElement& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -340,7 +340,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPage& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -360,7 +360,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPage& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -384,7 +384,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPageElement& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -404,7 +404,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageElement& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -425,7 +425,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPagination& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -448,7 +448,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPagination& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -469,7 +469,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPageHeading& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -492,7 +492,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageHeading& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -513,7 +513,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMusicHeading& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -556,7 +556,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -569,7 +569,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
       "Generating an EOL after S_bsrMusicHeading";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -594,7 +594,7 @@ void bsr2brailleTranslator::visitStart (S_bsrFootNotes& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -619,7 +619,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrFootNotes& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -640,7 +640,7 @@ void bsr2brailleTranslator::visitStart (S_bsrLine& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -660,7 +660,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLine& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -681,7 +681,7 @@ void bsr2brailleTranslator::visitStart (S_bsrLineContents& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -704,7 +704,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -717,7 +717,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
       "Generating an EOL after S_bsrLineContents";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -745,7 +745,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMeasure& elt)
       ", line " << fCurrentMeasureNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -765,7 +765,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMeasure& elt)
       ", line " << fCurrentMeasureNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -786,7 +786,7 @@ void bsr2brailleTranslator::visitStart (S_bsrNumber& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -809,7 +809,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrNumber& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -830,7 +830,7 @@ void bsr2brailleTranslator::visitStart (S_bsrWords& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -853,7 +853,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrWords& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -874,7 +874,7 @@ void bsr2brailleTranslator::visitStart (S_bsrClef& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -897,7 +897,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrClef& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -918,7 +918,7 @@ void bsr2brailleTranslator::visitStart (S_bsrKey& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -941,7 +941,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrKey& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -961,7 +961,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTimeSignature& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -983,7 +983,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTimeSignature& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1003,7 +1003,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTempo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1025,7 +1025,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTempo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1045,7 +1045,7 @@ void bsr2brailleTranslator::visitStart (S_bsrNote& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1067,7 +1067,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrNote& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

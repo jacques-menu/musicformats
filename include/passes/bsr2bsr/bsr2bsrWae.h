@@ -67,9 +67,9 @@ EXP void bsr2bsrWarning (
 EXP void bsr2bsrInternalError (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message);
 
 
 }

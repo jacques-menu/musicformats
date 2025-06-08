@@ -32,7 +32,7 @@ S_mfcRepresentationComponent getMsdlRepresentationComponent ()
         "Creating the MSDL format component";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

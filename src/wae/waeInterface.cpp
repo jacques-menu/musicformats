@@ -67,9 +67,9 @@ void waeInternalWarning (
 
 void waeErrorWithoutException (
   const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   gWaeHandler->
     waeErrorWithoutException (
@@ -83,9 +83,9 @@ void waeErrorWithoutExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   gWaeHandler->
     waeErrorWithoutExceptionWithInputLocation (
@@ -102,9 +102,9 @@ void waeErrorWithoutExceptionWithInputLocation (
 
 void waeErrorWithException (
   const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message,
   const S_mfException& except)
 {
   waeErrorWithoutException (
@@ -122,9 +122,9 @@ void waeErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message,
   const S_mfException& except)
 {
   waeErrorWithoutExceptionWithInputLocation (
@@ -147,9 +147,9 @@ void waeInternalErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeErrorWithoutExceptionWithInputLocation (
     context,
@@ -166,9 +166,9 @@ void waeInternalErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message,
   const S_mfException& except)
 {
   waeErrorWithoutExceptionWithInputLocation (
@@ -187,9 +187,9 @@ void waeInternalErrorWithExceptionWithInputLocation (
 
 void waeError (
   const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeErrorWithoutException (
     context,
@@ -206,9 +206,9 @@ void waeErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeErrorWithoutExceptionWithInputLocation (
     context,

@@ -68,7 +68,7 @@ msrSegment::msrSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     segmentUpLinkToVoice != nullptr,
     "segmentUpLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -113,7 +113,7 @@ void msrSegment::initializeSegment ()
       "\", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -154,7 +154,7 @@ void msrSegment::setSegmentFirstMeasure (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -190,7 +190,7 @@ void msrSegment::setSegmentLastMeasure (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -262,7 +262,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -270,7 +270,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -302,7 +302,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -310,7 +310,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -342,7 +342,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
         " measure elements in segment to be deep copied";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -370,7 +370,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
         "There are no measures in segment to be deep copied";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -402,7 +402,7 @@ void msrSegment::setSegmentShortestNoteWholeNotes (
       wholeNotes.asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -428,7 +428,7 @@ void msrSegment::setSegmentShortestNoteTupletFactor (
       noteTupletFactor;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -470,7 +470,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -513,7 +513,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -529,7 +529,7 @@ S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
     std::stringstream ss;
 
     ss <<
-      "Creating and appending a measure '" <<
+      "Cascading creating and appending a measure '" <<
       measureNumber <<
       "', to segment " <<
       asString () <<
@@ -539,7 +539,7 @@ S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -579,7 +579,7 @@ S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -610,7 +610,7 @@ S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
 //       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -650,7 +650,7 @@ void msrSegment::setNextMeasureNumberInSegment (
       "' line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -672,7 +672,7 @@ void msrSegment::setNextMeasureNumberInSegment (
         ", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -700,7 +700,7 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -738,7 +738,7 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       musicXMLPrintLayout->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -766,7 +766,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -804,7 +804,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
        clefKeyTimeSignatureGroup->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -833,7 +833,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -870,7 +870,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //        clef->getInputLineNumber (),
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -898,7 +898,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //
 //     abort ();
@@ -937,7 +937,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       clef->getInputLineNumber (),
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -999,7 +999,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       msrInternalError ( // JMI 0.9.64 ???
 //         gServiceRunData->getInputSourceName (),
 //         fInputLineNumber,
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 //   }
@@ -1021,7 +1021,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       "', line " << fInputLineNumber; // JMI 0.9.64
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //
 //     gLog << "THIS:" << std::endl;
@@ -1059,7 +1059,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     msrInternalError ( // JMI 0.9.64 ???
 //       gServiceRunData->getInputSourceName (),
 //       fInputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 //
@@ -1085,7 +1085,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1130,7 +1130,7 @@ void msrSegment::appendTimeSignatureToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1174,7 +1174,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1212,7 +1212,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1253,7 +1253,7 @@ void msrSegment::appendHarmonyToSegment (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1293,7 +1293,7 @@ void msrSegment::appendHarmoniesListToSegment (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1320,7 +1320,7 @@ void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1356,7 +1356,7 @@ void msrSegment::appendFiguredBassToSegment (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1390,7 +1390,7 @@ void msrSegment::cascadeAppendFiguredBassesListToSegment (
     std::stringstream ss;
 
     ss <<
-      "Appending figured basses list \"" <<
+      "Cascading appending figured basses list \"" <<
 //       figuredBasssesList->asString () << // JMI 0.9.67 HARMFUL
       " to segment " << asString () <<
       " in voice \"" <<
@@ -1400,7 +1400,7 @@ void msrSegment::cascadeAppendFiguredBassesListToSegment (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1429,7 +1429,7 @@ void msrSegment::appendFiguredBassToSegmentClone (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1459,7 +1459,7 @@ void msrSegment::appendSegnoToSegment (const S_msrSegno& segno)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1493,7 +1493,7 @@ void msrSegment::appendCodaToSegment (const S_msrCoda& coda)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1528,7 +1528,7 @@ void msrSegment::appendEyeGlassesToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1562,7 +1562,7 @@ void msrSegment::appendPedalToSegment (const S_msrPedal& pedal)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1597,7 +1597,7 @@ void msrSegment::appendDampToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1632,7 +1632,7 @@ void msrSegment::appendDampAllToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1667,7 +1667,7 @@ void msrSegment::appendTranspositionToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1707,7 +1707,7 @@ void msrSegment::appendStaffDetailsToSegment (
       "\" line " << staffDetails->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1769,7 +1769,7 @@ void msrSegment::appendLineBreakToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1804,7 +1804,7 @@ void msrSegment::appendPageBreakToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1839,7 +1839,7 @@ void msrSegment::appendBarNumberCheckToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1876,7 +1876,7 @@ void msrSegment::appendTempoToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1911,7 +1911,7 @@ void msrSegment::appendRehearsalMarkToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1947,7 +1947,7 @@ void msrSegment::appendOctaveShiftToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1983,7 +1983,7 @@ void msrSegment::appendScordaturaToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2020,7 +2020,7 @@ void msrSegment::appendAccordionRegistrationToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2058,7 +2058,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2099,7 +2099,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //       std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2138,7 +2138,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 //
@@ -2176,7 +2176,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //       "\", line " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2199,7 +2199,7 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
     std::stringstream ss;
 
     ss <<
-      "Appending padding note" <<
+      "Cascading appending padding note" <<
       ", forwardStepLength: " <<
       forwardStepLength <<
       ", to segment '" <<
@@ -2211,7 +2211,7 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
       "\", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2237,14 +2237,14 @@ void msrSegment::cascadeAppendMultipleMeasureRestToSegment (
     std::stringstream ss;
 
     ss <<
-      "Appending multiple measure rest " << multipleMeasureRest->asString () <<
+      "Cascading appending multiple measure rest " << multipleMeasureRest->asString () <<
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2294,7 +2294,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       ", line " << measure->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2317,14 +2317,14 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 //     msrInternalError (
       gServiceRunData->getInputSourceName (),
       measure->getInputLineNumber (),
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
     } else {
 //     msrInternalWarning ( // JMI 0.9.73
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       measure->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
     }
   }
@@ -2421,7 +2421,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
       ", line " << measure->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2441,7 +2441,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
 // JMI    msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       measure->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -2469,7 +2469,7 @@ void msrSegment::prependBarLineToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2504,7 +2504,7 @@ void msrSegment::appendBarLineToSegment (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2539,7 +2539,7 @@ void msrSegment::appendBarCheckToSegment (
       "\",";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2568,7 +2568,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
       ", line " << voiceStaffChange->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2637,7 +2637,7 @@ void msrSegment::appendDoubleTremoloToSegment ( // JMI
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2784,7 +2784,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 //       asString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2812,7 +2812,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 //
@@ -2834,7 +2834,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 //       asString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2860,7 +2860,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // }
@@ -2882,7 +2882,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2903,7 +2903,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -2950,7 +2950,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //       ", line " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2980,7 +2980,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 // //     msrInternalError (
 // //       gServiceRunData->getInputSourceName (),
 // //       inputLineNumber,
-// //       __FILE__, __LINE__,
+// //       __FILE__, mfInputLineNumber (__LINE__),
 // //       ss.str ());
 // //   }
 //
@@ -3002,7 +3002,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3073,7 +3073,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //     msrInternalError ( // JMI 0.9.64 ???
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 //
@@ -3119,7 +3119,7 @@ void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3143,7 +3143,7 @@ void msrSegment::acceptIn (basevisitor* v)
       "% ==> msrSegment::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3161,7 +3161,7 @@ void msrSegment::acceptIn (basevisitor* v)
             "% ==> Launching msrSegment::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3179,7 +3179,7 @@ void msrSegment::acceptOut (basevisitor* v)
       "% ==> msrSegment::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3197,7 +3197,7 @@ void msrSegment::acceptOut (basevisitor* v)
             "% ==> Launching msrSegment::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3215,7 +3215,7 @@ void msrSegment::browseData (basevisitor* v)
       "% ==> msrSegment::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3234,7 +3234,7 @@ void msrSegment::browseData (basevisitor* v)
       "% <== msrSegment::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

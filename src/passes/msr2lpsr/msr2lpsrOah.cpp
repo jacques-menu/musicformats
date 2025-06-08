@@ -87,7 +87,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -103,7 +103,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -153,7 +153,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -171,7 +171,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msr2lpsrScoreOutputKindAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -189,7 +189,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -207,7 +207,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msr2lpsrScoreOutputKindAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -225,7 +225,7 @@ void msr2lpsrScoreOutputKindAtom::browseData (basevisitor* v)
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -491,7 +491,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msr2lpsrOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -509,7 +509,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msr2lpsrOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -527,7 +527,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msr2lpsrOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -545,7 +545,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msr2lpsrOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -563,7 +563,7 @@ void msr2lpsrOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msr2lpsrOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -637,7 +637,7 @@ S_msr2lpsrOahGroup createGlobalMsr2lpsrOahGroup ()
       "Creating global msr2lpsr OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

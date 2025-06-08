@@ -1433,10 +1433,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // measure numbers
     // --------------------------------------
 
-    const std::map <std::string, int>&
+    const std::map <mfMeasureNumber, mfMeasureNumber>&
                           getResetMeasureElementMeasureNumberMap () const
                               { return fResetMeasureElementMeasureNumberMap; }
-    const std::map <std::string, int>&
+    const std::map <mfMeasureNumber, int>&
                           getAddEmptyMeasuresAfterMeasureNumberMap () const
                               { return fAddEmptyMeasuresAfterMeasureNumberMap; }
 
@@ -1451,7 +1451,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getBoxAroundAllBarNumbers () const
                               { return fBoxAroundAllBarNumbers; }
 
-    const std::set <std::string>&    getShowNumbersAtMeasureSet () const
+    const std::set <std::string>&
+                          getShowNumbersAtMeasureSet () const
                               { return fShowNumbersAtMeasureSet; }
 
     void                  setBarNumbersSize (float value)
@@ -2124,9 +2125,9 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // measure numbers
     // --------------------------------------
 
-    std::map <std::string, int>
+    std::map <mfMeasureNumber, mfMeasureNumber>
                           fResetMeasureElementMeasureNumberMap;
-    std::map <std::string, int>
+    std::map <mfMeasureNumber, int>
                           fAddEmptyMeasuresAfterMeasureNumberMap;
 
     // bar numbers

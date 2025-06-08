@@ -587,7 +587,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -640,7 +640,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -666,7 +666,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
 			", line " << inputLineNumber;
 
 		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
+			__FILE__, mfInputLineNumber (__LINE__),
 			ss.str ());
 	}
 #endif // MF_TRACE_IS_ENABLED
@@ -735,7 +735,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -758,7 +758,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 			inputLineNumber,
 #endif // MF_USE_WRAPPED_TYPES
 
-			__FILE__, __LINE__,
+			__FILE__, mfInputLineNumber (__LINE__),
 			ss.str ());
 	}
 
@@ -783,7 +783,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 				", line " << inputLineNumber;
 
 			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
+				__FILE__, mfInputLineNumber (__LINE__),
 				ss.str ());
 }
 #endif // MF_TRACE_IS_ENABLED
@@ -818,7 +818,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 				", line " << inputLineNumber;
 
 			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
+				__FILE__, mfInputLineNumber (__LINE__),
 				ss.str ());
 }
 #endif // MF_TRACE_IS_ENABLED
@@ -833,7 +833,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 //       ", line " << inputLineNumber;
 //
 //       mfAssert (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 // 				false,
 // 				ss.str ());
 //   }
@@ -897,7 +897,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -983,7 +983,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1022,7 +1022,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
 			inputLineNumber,
 #endif // MF_USE_WRAPPED_TYPES
 
-  //    __FILE__, __LINE__,
+  //    __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -1077,7 +1077,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1097,7 +1097,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1128,7 +1128,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1160,7 +1160,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1212,7 +1212,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1250,7 +1250,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1307,7 +1307,7 @@ void mxsr2msrSkeletonBuilder::sortfStartedPartGroupsListsVector (
 				ss);
 
 			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
+				__FILE__, mfInputLineNumber (__LINE__),
 				ss.str ());
 		}
 #endif // MF_TRACE_IS_ENABLED
@@ -1338,7 +1338,7 @@ void mxsr2msrSkeletonBuilder::sortStoppedPartGroupsListsVector (
 			--gIndenter;
 
 			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
+				__FILE__, mfInputLineNumber (__LINE__),
 				ss.str ());
 		}
 #endif // MF_TRACE_IS_ENABLED
@@ -1380,7 +1380,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsStartAtIdentity (
 						", line " << inputLineNumber;
 
 					gWaeHandler->waeTrace (
-						__FILE__, __LINE__,
+						__FILE__, mfInputLineNumber (__LINE__),
 						ss.str ());
 				}
 #endif // MF_TRACE_IS_ENABLED
@@ -1432,7 +1432,7 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 					musicxmlError (
 						gServiceRunData->getInputSourceName (),
 						stopInputLineNumber,
-						__FILE__, __LINE__,
+						__FILE__, mfInputLineNumber (__LINE__),
 						ss.str ());
 				}
 
@@ -1451,7 +1451,7 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 							", line " << stopInputLineNumber;
 
 						gWaeHandler->waeTrace (
-							__FILE__, __LINE__,
+							__FILE__, mfInputLineNumber (__LINE__),
 							ss.str ());
 					}
 #endif // MF_TRACE_IS_ENABLED
@@ -1479,7 +1479,7 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 							mxsr2msrInternalError (
 								gServiceRunData->getInputSourceName (),
 								stopInputLineNumber,
-								__FILE__, __LINE__,
+								__FILE__, mfInputLineNumber (__LINE__),
 								ss.str ());
 						}
 
@@ -1580,7 +1580,7 @@ of a score exhibiting overlapping part groups)",
 						musicxmlError (
 							gServiceRunData->getInputSourceName (),
 							stopInputLineNumber,
-							__FILE__, __LINE__,
+							__FILE__, mfInputLineNumber (__LINE__),
 							ss.str ());
 					}
 #endif // MF_TRACE_IS_ENABLED
@@ -1622,7 +1622,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
       "handleBOFPartGroupsNestingBOFAndScorePartsAllocation:";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1687,7 +1687,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 						inputLineNumber,
 #endif // MF_USE_WRAPPED_TYPES
 
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -1732,7 +1732,7 @@ S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1806,7 +1806,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceInStaffIfNotYetDone (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2188,7 +2188,7 @@ void mxsr2msrSkeletonBuilder::handlePendingTupletBeginEventsAfterANoteIfAny (
 					", line " << inputStartLineNumber;
 
 				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
+					__FILE__, mfInputLineNumber (__LINE__),
 					ss.str ());
 			}
 	#endif // MF_TRACE_IS_ENABLED
@@ -2237,7 +2237,7 @@ void mxsr2msrSkeletonBuilder::handlePendingTupletEndEventsAfterANoteIfAny (
 					", line " << inputStartLineNumber;
 
 				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
+					__FILE__, mfInputLineNumber (__LINE__),
 					ss.str ());
 			}
 	#endif // MF_TRACE_IS_ENABLED
@@ -2286,7 +2286,7 @@ void mxsr2msrSkeletonBuilder::handlePendingTupletEndEventsAfterANoteIfAny (
 // 					", line " << inputStartLineNumber;
 //
 // 				gWaeHandler->waeTrace (
-// 					__FILE__, __LINE__,
+// 					__FILE__, mfInputLineNumber (__LINE__),
 // 					ss.str ());
 // 			}
 // 	#endif // MF_TRACE_IS_ENABLED
@@ -2315,7 +2315,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2328,7 +2328,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
       "Analyzing the score partwise";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2347,7 +2347,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2400,7 +2400,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_number& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2422,7 +2422,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_title& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2446,7 +2446,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_opus& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2470,7 +2470,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_number& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2492,7 +2492,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_title& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2523,7 +2523,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_identification& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2540,7 +2540,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_identification& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2557,7 +2557,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2627,7 +2627,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
     musicxmlWarning (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-//      __FILE__, __LINE__,
+//      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -2643,7 +2643,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_rights& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2669,7 +2669,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_source& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2697,7 +2697,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_relation& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2764,7 +2764,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2778,7 +2778,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
       ", " << elt->getValue ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2797,7 +2797,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_encoding& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2814,7 +2814,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_date& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2836,7 +2836,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoder& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2860,7 +2860,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2903,7 +2903,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
             "Setting '-cubase' option";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2933,7 +2933,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_description& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2957,7 +2957,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_supports& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2982,7 +2982,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3012,7 +3012,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_miscellaneous& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3030,7 +3030,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous_field& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3130,7 +3130,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3160,7 +3160,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3207,7 +3207,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_symbol& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3224,7 +3224,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_image& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3241,7 +3241,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3372,7 +3372,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_credit& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3393,7 +3393,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3406,7 +3406,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
       "Analyzing part list";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3425,7 +3425,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3457,7 +3457,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3489,7 +3489,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
     musicxmlError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -3534,7 +3534,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3553,7 +3553,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name_display& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3583,7 +3583,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_group_name_display& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3602,7 +3602,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3623,7 +3623,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
     musicxmlError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       std::string (
       	"<display-text /> is out of context")
       		+
@@ -3644,7 +3644,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_accidental_text& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3663,7 +3663,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_abbreviation& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3682,7 +3682,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3719,7 +3719,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
       musicxmlError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -3739,7 +3739,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3761,7 +3761,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
     musicxmlError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -3778,7 +3778,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3798,7 +3798,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3840,7 +3840,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3857,7 +3857,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3911,7 +3911,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3952,7 +3952,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name_display& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3971,7 +3971,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_name_display& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3990,7 +3990,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4020,7 +4020,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation_display& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4039,7 +4039,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_abbreviation_display& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4058,7 +4058,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_name& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4077,7 +4077,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_abbreviation& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4096,7 +4096,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4111,7 +4111,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 //     ", line " << elt->getInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -4129,7 +4129,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
     ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4146,7 +4146,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4204,7 +4204,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4225,7 +4225,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4239,7 +4239,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
 		musicxmlError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -4261,7 +4261,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
     musicxmlError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -4275,7 +4275,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
       "Analyzing part \"" << fCurrentPartID << "\" -- start";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4313,7 +4313,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4327,7 +4327,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
       "--------------------------------------------";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4353,7 +4353,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
       musicxmlError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -4416,7 +4416,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 // //       ", line " << elt->getInputLineNumber ();
 // //
 // //     gWaeHandler->waeTrace (
-// //       __FILE__, __LINE__,
+// //       __FILE__, mfInputLineNumber (__LINE__),
 // //       ss.str ());
 // //   }
 // // #endif // MF_TRACE_IS_ENABLED
@@ -4447,7 +4447,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 // //       " in part " << fCurrentPart->fetchPartNameForTrace();
 // //
 // //     gWaeHandler->waeTrace (
-// //       __FILE__, __LINE__,
+// //       __FILE__, mfInputLineNumber (__LINE__),
 // //       ss.str ());
 // //   }
 // // #endif // MF_TRACE_IS_ENABLED
@@ -4487,7 +4487,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4504,7 +4504,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
       ", line " << elt->getInputLineNumber ();
 
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
 				false,
 				ss.str ());
   }
@@ -4526,7 +4526,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4551,7 +4551,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4572,7 +4572,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4597,7 +4597,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_print& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4616,7 +4616,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4636,7 +4636,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4675,7 +4675,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4722,7 +4722,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4745,7 +4745,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4777,7 +4777,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 				" ===-->";
 
 			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
+				__FILE__, mfInputLineNumber (__LINE__),
 				ss.str ());
 		}
 #endif // MF_TRACE_IS_ENABLED
@@ -4797,7 +4797,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 					", line " << elt->getInputLineNumber ();
 
 				gWaeHandler->waeTrace (
-					__FILE__, __LINE__,
+					__FILE__, mfInputLineNumber (__LINE__),
 					ss.str ());
 			}
 #endif // MF_TRACE_IS_ENABLED
@@ -4850,7 +4850,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4974,7 +4974,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_multiple_rest& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5046,7 +5046,7 @@ The stop type indicates the first measure where the repeats are *no longer* disp
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5078,7 +5078,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_multiple_rest& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5098,7 +5098,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_multiple_rest& elt)
 //       " ===-->";
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -5116,7 +5116,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure_repeat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5174,7 +5174,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure_repeat& elt)
 		mxsr2msrError (
 			gServiceRunData->getInputSourceName (),
 			elt->getInputLineNumber (),
-			__FILE__, __LINE__,
+			__FILE__, mfInputLineNumber (__LINE__),
 			ss.str ());
 	}
 
@@ -5199,7 +5199,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure_repeat& elt)
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5245,7 +5245,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure_repeat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5263,7 +5263,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_backup& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5283,7 +5283,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_forward& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5304,7 +5304,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_repeat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5336,7 +5336,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_repeat& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 
@@ -5365,7 +5365,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_repeat& elt)
               ", line " << elt->getInputLineNumber ();
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -5392,7 +5392,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5451,7 +5451,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_rest& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5479,7 +5479,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_grace& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5497,7 +5497,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_grace& elt)
 			", line " << elt->getInputLineNumber ();
 
 		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
+			__FILE__, mfInputLineNumber (__LINE__),
 			ss.str ());
 	}
 #endif // MF_TRACE_IS_ENABLED
@@ -5516,7 +5516,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_cue& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5534,7 +5534,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_cue& elt)
 			", line " << elt->getInputLineNumber ();
 
 		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
+			__FILE__, mfInputLineNumber (__LINE__),
 			ss.str ());
 	}
 #endif // MF_TRACE_IS_ENABLED
@@ -5586,7 +5586,7 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 				", line " << fCurrentNoteInputLineNumber;
 
 			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
+				__FILE__, mfInputLineNumber (__LINE__),
 				ss.str ());
 		}
 #endif // MF_TRACE_IS_ENABLE
@@ -5903,7 +5903,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5949,7 +5949,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 				", line " << fCurrentNoteInputLineNumber;
 
 			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
+				__FILE__, mfInputLineNumber (__LINE__),
 				ss.str ());
 
 // 			displayPendingTupletEventsList (
@@ -5977,7 +5977,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 				elt->getInputLineNumber ();
 
 			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
+				__FILE__, mfInputLineNumber (__LINE__),
 				ss.str ());
 		}
 #endif // MF_TRACE_IS_ENABLED
@@ -6014,7 +6014,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
           elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
 			}
 #endif // MF_TRACE_IS_ENABLED
@@ -6045,7 +6045,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
           elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -6107,7 +6107,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_chord& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6125,7 +6125,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_chord& elt)
 			", line " << elt->getInputLineNumber ();
 
 		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
+			__FILE__, mfInputLineNumber (__LINE__),
 			ss.str ());
 	}
 #endif // MF_TRACE_IS_ENABLED
@@ -6144,7 +6144,7 @@ void mxsr2msrSkeletonBuilder:: visitEnd (S_chord& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6162,7 +6162,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6209,7 +6209,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -6226,7 +6226,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6331,7 +6331,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 			", line " << elt->getInputLineNumber ();
 
 		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
+			__FILE__, mfInputLineNumber (__LINE__),
 			ss.str ());
 	}
 #endif // MF_TRACE_IS_ENABLED
@@ -6339,11 +6339,11 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check JMI 0.9.70
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCurrentTupletActualNotes > 0,
     "fCurrentTupletActualNotes is not positive");
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCurrentTupletNormalNotes > 0,
     "fCurrentTupletNormalNotes is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -6382,7 +6382,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 						", line " << elt->getInputLineNumber ();
 
 					gWaeHandler->waeTrace (
-						__FILE__, __LINE__,
+						__FILE__, mfInputLineNumber (__LINE__),
 						ss.str ());
 				}
 #endif // MF_TRACE_IS_ENABLED
@@ -6428,7 +6428,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 						", line " << elt->getInputLineNumber ();
 
 					gWaeHandler->waeTrace (
-						__FILE__, __LINE__,
+						__FILE__, mfInputLineNumber (__LINE__),
 						ss.str ());
 				}
 #endif // MF_TRACE_IS_ENABLED
@@ -6456,7 +6456,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_normal& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6475,7 +6475,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet_normal& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6494,7 +6494,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_actual& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6513,7 +6513,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet_actual& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6532,7 +6532,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_number& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6597,7 +6597,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_number& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<tuplet-number /> out of context");
   }
 }
@@ -6613,7 +6613,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6631,7 +6631,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_type& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<tuplet-type /> out of context");
   }
 
@@ -6646,7 +6646,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_type& elt)
       tupletTypeValue;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6663,7 +6663,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_dot& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6678,7 +6678,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_dot& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<tuplet-dot /> out of context");
   }
 
@@ -6698,7 +6698,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_time_modification& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6718,7 +6718,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_actual_notes& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6738,7 +6738,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_actual_notes& elt)
         fCurrentNoteActualNotes;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -6766,7 +6766,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_actual_notes& elt)
 //         fCurrentMetronomeNoteActualNotes;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -6782,7 +6782,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_actual_notes& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -6798,7 +6798,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_notes& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6819,7 +6819,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_notes& elt)
         fCurrentNoteNormalNotes;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -6849,7 +6849,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_notes& elt)
 //         fCurrentMetronomeNoteNormalNotes;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -6865,7 +6865,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_notes& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -6881,7 +6881,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6898,7 +6898,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_type& elt)
         normalTypeString;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -6931,7 +6931,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_type& elt)
 //         fCurrentMetronomeNoteNormalType;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -6947,7 +6947,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_type& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -6964,7 +6964,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_metronome_note& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6983,7 +6983,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_metronome_note& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7003,7 +7003,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7039,7 +7039,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7090,7 +7090,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7114,7 +7114,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7129,7 +7129,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
       ", line: " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7167,7 +7167,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7196,7 +7196,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7263,7 +7263,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
 // // 				tupletEvent->getTupletTypeKind ();
 //
 // 			gWaeHandler->waeTrace (
-// 				__FILE__, __LINE__,
+// 				__FILE__, mfInputLineNumber (__LINE__),
 // 				ss.str ());
 // 		}
 // #endif // MF_TRACE_IS_ENABLED

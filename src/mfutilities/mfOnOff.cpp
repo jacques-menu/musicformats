@@ -27,7 +27,7 @@ Bool mfOnOffKindAsBool (
     case mfOnOffKind::kMfOnOffUnknown:
       {
         mfError (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           "mfOnOffKind::kMfOnOffUnknown cannot be converted to Bool");
       }
       break;

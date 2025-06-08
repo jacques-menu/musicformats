@@ -354,7 +354,7 @@ void msrNote::initializeNote ()
     --gIndenter;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -461,7 +461,7 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -597,7 +597,7 @@ void msrNote::setNoteKind (msrNoteKind noteKind)
       noteKind;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -627,7 +627,7 @@ S_msrNote msrNote::createNoteNewbornClone (
         fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -635,7 +635,7 @@ S_msrNote msrNote::createNoteNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingPart != nullptr,
     "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -833,7 +833,7 @@ S_msrNote msrNote::createNoteDeepClone (
       std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -842,7 +842,7 @@ S_msrNote msrNote::createNoteDeepClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1372,7 +1372,7 @@ S_msrNote msrNote::createRestNote (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1428,7 +1428,7 @@ S_msrNote msrNote::createSkipNote (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1486,7 +1486,7 @@ S_msrNote msrNote::createSkipNoteWithContext (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1542,7 +1542,7 @@ S_msrNote msrNote::createGraceSkipNote (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1600,7 +1600,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1658,7 +1658,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1717,7 +1717,7 @@ S_msrNote msrNote::createRegularNote (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1747,7 +1747,7 @@ S_msrNote msrNote::createRestFromString (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1771,7 +1771,7 @@ S_msrNote msrNote::createRestFromString (
       regularExpression;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1843,7 +1843,7 @@ S_msrNote msrNote::createRestFromString (
       dotsNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1870,7 +1870,7 @@ S_msrNote msrNote::createRestFromString (
       notesDurationKindFromMslpString;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1908,7 +1908,7 @@ S_msrNote msrNote::createSkipFromString (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1932,7 +1932,7 @@ S_msrNote msrNote::createSkipFromString (
       regularExpression;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2004,7 +2004,7 @@ S_msrNote msrNote::createSkipFromString (
       dotsNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2031,7 +2031,7 @@ S_msrNote msrNote::createSkipFromString (
       notesDurationKindFromMslpString;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2070,7 +2070,7 @@ S_msrNote msrNote::createNoteFromString (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2099,7 +2099,7 @@ S_msrNote msrNote::createNoteFromString (
       regularExpression;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2183,7 +2183,7 @@ S_msrNote msrNote::createNoteFromString (
       dotsNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2231,7 +2231,7 @@ S_msrNote msrNote::createNoteFromString (
       notesDurationKindFromMslpString;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2257,7 +2257,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     semiTonesPitchAndOctave != nullptr,
     "semiTonesPitchAndOctave is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -2308,7 +2308,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2346,7 +2346,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //       "\"";
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2354,7 +2354,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
 //     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -2384,7 +2384,7 @@ void msrNote::setNoteAttachedElementsPositionInMeasure (
       fNoteHarmoniesList.size ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2411,7 +2411,7 @@ void msrNote::setNoteAttachedElementsPositionInMeasure (
       fNoteFiguredBassesList.size ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2498,7 +2498,7 @@ void msrNote::setNoteBelongsToAChord ()
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2519,7 +2519,7 @@ void msrNote::setNoteBelongsToATuplet ()
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2566,7 +2566,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
       "', line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2589,7 +2589,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2609,7 +2609,7 @@ void msrNote::appendBeamToNote (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2640,7 +2640,7 @@ void msrNote::appendArticulationToNote (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2662,7 +2662,7 @@ void msrNote::appendSpannerToNote (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2708,7 +2708,7 @@ void msrNote::appendTechnicalToNote (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2732,7 +2732,7 @@ void msrNote::appendTechnicalWithIntegerToNote (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2757,7 +2757,7 @@ void msrNote::appendTechnicalWithFloatToNote (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2782,7 +2782,7 @@ void msrNote::appendTechnicalWithStringToNote (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2806,7 +2806,7 @@ void msrNote::appendOrnamentToNote (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2856,7 +2856,7 @@ void msrNote::appendGlissandoToNote (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2879,7 +2879,7 @@ void msrNote::appendSlideToNote (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2902,7 +2902,7 @@ void msrNote::appendTieToNote (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2926,7 +2926,7 @@ void msrNote::setGraceNotesGroupBeforeNote (
       ", line " << graceNotesGroupBefore->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2955,7 +2955,7 @@ void msrNote::setGraceNotesGroupAfterNote (
       ", line " << graceNotesGroupAfter->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2982,7 +2982,7 @@ void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesG
       ", line " << afterGraceNotesGroup->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3007,7 +3007,7 @@ void msrNote::setNoteSingleTremolo (
       ", line " << trem->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3031,7 +3031,7 @@ void msrNote::appendDynamicToNote (
       ", line " << dynamic->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3062,7 +3062,7 @@ void msrNote::appendSlurToNote (
       " to note " << asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3086,7 +3086,7 @@ void msrNote::appendLigatureToNote (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3129,7 +3129,7 @@ void msrNote::appendLigatureToNote (
           asShortString ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -3159,7 +3159,7 @@ void msrNote::appendPedalToNote (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3200,7 +3200,7 @@ void msrNote::appendPedalToNote (
 //           asShortString ();
 //
 //         gWaeHandler->waeTrace (
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           ss.str ());
 //       }
 // #endif // MF_TRACE_IS_ENABLED
@@ -3233,7 +3233,7 @@ void msrNote::appendSlashToNote (
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3273,7 +3273,7 @@ void msrNote::appendDalSegnoToNote (
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3336,7 +3336,7 @@ void msrNote::appendScordaturaToNote (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     voicePosition != K_POSITION_IN_MEASURE_UNKNOWN_,
 //     "voicePosition == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3378,7 +3378,7 @@ void msrNote::appendScordaturaToNote (
 //       std::endl;
 
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -3465,7 +3465,7 @@ int msrNote::fetchNoteSlurStopsNumber () const
 //       asShortString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -3473,7 +3473,7 @@ int msrNote::fetchNoteSlurStopsNumber () const
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     fNoteDynamicsList.size () > 0,
 //     "fNoteDynamicsList is empty");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3495,7 +3495,7 @@ int msrNote::fetchNoteSlurStopsNumber () const
 //       asShortString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -3503,7 +3503,7 @@ int msrNote::fetchNoteSlurStopsNumber () const
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     fNoteDynamicsList.size () > 0,
 //     "fNoteDynamicsList is empty");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3529,7 +3529,7 @@ void msrNote::appendSyllableToNote (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3556,7 +3556,7 @@ void msrNote::appendHarmonyToNote (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3592,7 +3592,7 @@ void msrNote::appendHarmonyToNote (
 //       std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -3622,7 +3622,7 @@ void msrNote::acceptIn (basevisitor* v)
       "% ==> msrNote::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3640,7 +3640,7 @@ void msrNote::acceptIn (basevisitor* v)
             "% ==> Launching msrNote::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3658,7 +3658,7 @@ void msrNote::acceptOut (basevisitor* v)
       "% ==> msrNote::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3676,7 +3676,7 @@ void msrNote::acceptOut (basevisitor* v)
             "% ==> Launching msrNote::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3714,7 +3714,7 @@ void msrNote::browseData (basevisitor* v)
 	          "% ==> visiting grace notes groups before notes is inhibited";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -4148,7 +4148,7 @@ void msrNote::browseData (basevisitor* v)
             "% ==> visiting grace notes groups after notes is inhibited";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

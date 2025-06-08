@@ -168,7 +168,7 @@ std::string uncompressMXLFile (
       musicxml2mxsrInternalError (
         gServiceRunData->getInputSourceName (),
         0, // inputLineNumber
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 
@@ -196,7 +196,7 @@ std::string uncompressMXLFile (
         musicxml2mxsrInternalError (
           gServiceRunData->getInputSourceName (),
           0, // inputLineNumber
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           "Cannot close the input stream after 'popen ()'");
       }
 
@@ -321,7 +321,7 @@ std::string uncompressMXLFile (
                 musicxml2mxsrInternalError (
                   gServiceRunData->getInputSourceName (),
                   0, // inputLineNumber
-                  __FILE__, __LINE__,
+                  __FILE__, mfInputLineNumber (__LINE__),
                   ss.str ());
               }
 
@@ -387,7 +387,7 @@ std::string uncompressMXLFile (
       musicxml2mxsrInternalError (
         gServiceRunData->getInputSourceName (),
         0, // inputLineNumber
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -414,7 +414,7 @@ void checkDesiredEncoding (
       musicxml2mxsrError (
         gServiceRunData->getInputSourceName (),
         1, // inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 
@@ -440,7 +440,7 @@ void checkDesiredEncoding (
       musicxml2mxsrError ( // JMI 0.9.67 NOT OK for Windows users ???
         gServiceRunData->getInputSourceName (),
         1, // inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -511,7 +511,7 @@ void checkSXMLFile (
       " encoding";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -553,7 +553,7 @@ SXMLFile createSXMLFileFromFile (
       separator;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -569,7 +569,7 @@ SXMLFile createSXMLFileFromFile (
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -632,7 +632,7 @@ SXMLFile createSXMLFileFromFd (
       separator;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -648,7 +648,7 @@ SXMLFile createSXMLFileFromFd (
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -704,7 +704,7 @@ SXMLFile createSXMLFileFromString (
         "Reading MusicXML data from a string " << buffer.size () << " characters long";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -769,7 +769,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
       separator;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -805,7 +805,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
     musicxml2mxsrError (
       gServiceRunData->getInputSourceName (),
       1, // inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       message);
 
     gLog <<
@@ -878,7 +878,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
       separator;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1008,7 +1008,7 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
       separator;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1067,7 +1067,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
       separator;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1106,7 +1106,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
       musicxml2mxsrError (
         inputSourceName,
         0, // inputLineNumber
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 

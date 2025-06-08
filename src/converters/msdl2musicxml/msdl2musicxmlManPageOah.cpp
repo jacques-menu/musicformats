@@ -70,7 +70,7 @@ void msdl2musicxmlManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a msdl2musicxmlManPageGenerateAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -88,7 +88,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2musicxmlManPageGenerateAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -106,7 +106,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2musicxmlManPageGenerateAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -124,7 +124,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2musicxmlManPageGenerateAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -142,7 +142,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2musicxmlManPageGenerateAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -160,7 +160,7 @@ void msdl2musicxmlManPageGenerateAtom::browseData (basevisitor* v)
       ".\\\" ==> msdl2musicxmlManPageGenerateAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -338,7 +338,7 @@ void msdl2musicxmlManPageOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2musicxmlManPageOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -356,7 +356,7 @@ void msdl2musicxmlManPageOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2musicxmlManPageOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -374,7 +374,7 @@ void msdl2musicxmlManPageOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2musicxmlManPageOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -392,7 +392,7 @@ void msdl2musicxmlManPageOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2musicxmlManPageOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -410,7 +410,7 @@ void msdl2musicxmlManPageOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msdl2musicxmlManPageOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -454,7 +454,7 @@ S_msdl2musicxmlManPageOahGroup createGlobalMsdl2xmlManPageOahGroupHandler (
       "Creating global msdl2musicxmlManPage OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

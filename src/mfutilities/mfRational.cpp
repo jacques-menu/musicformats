@@ -40,7 +40,7 @@ mfRational::mfRational (
   // sanity check
 if (false) // JMI 0.9.70
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     denom > 0,
     "denom '" + std::to_string (denom) + "' is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -89,7 +89,7 @@ mfRational::mfRational (const std::string& theString)
         "--> denominator = \"" << denominator << "\"";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -110,7 +110,7 @@ mfRational::mfRational (const std::string& theString)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         fDenominator > 0,
         "fDenominator '" + denominator + "' is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -128,7 +128,7 @@ mfRational::mfRational (const std::string& theString)
 //    msrWarning ( //  JMI
       gServiceRunData->getInputSourceName (),
       0, // JMI inputLineNumber, ??? 0.9.66
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 

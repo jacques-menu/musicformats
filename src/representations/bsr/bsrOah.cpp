@@ -114,7 +114,7 @@ void bsrFacSimileKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'bsrFacSimileKindAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -132,7 +132,7 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> bsrFacSimileKindAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -150,7 +150,7 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching bsrFacSimileKindAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -168,7 +168,7 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> bsrFacSimileKindAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -186,7 +186,7 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching bsrFacSimileKindAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -204,7 +204,7 @@ void bsrFacSimileKindAtom::browseData (basevisitor* v)
       ".\\\" ==> bsrFacSimileKindAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -352,7 +352,7 @@ void bsrTextsLanguageAtom::applyAtomWithValue (
       "==> oahAtom is of type 'bsrTextsLanguageAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -370,7 +370,7 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
       ".\\\" ==> bsrTextsLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -388,7 +388,7 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching bsrTextsLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -406,7 +406,7 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
       ".\\\" ==> bsrTextsLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -424,7 +424,7 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching bsrTextsLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -442,7 +442,7 @@ void bsrTextsLanguageAtom::browseData (basevisitor* v)
       ".\\\" ==> bsrTextsLanguageAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -825,7 +825,7 @@ void bsrOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> bsrOahGroup::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -843,7 +843,7 @@ void bsrOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching bsrOahGroup::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -861,7 +861,7 @@ void bsrOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> bsrOahGroup::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -879,7 +879,7 @@ void bsrOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching bsrOahGroup::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -897,7 +897,7 @@ void bsrOahGroup::browseData (basevisitor* v)
       ".\\\" ==> bsrOahGroup::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1008,7 +1008,7 @@ S_bsrOahGroup createGlobalBsrOahGroup ()
       "Creating global BSR OAH group";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

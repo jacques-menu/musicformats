@@ -45,7 +45,7 @@ class mfWrappedValueForArithmetic
 
                           mfWrappedValueForArithmetic (T bareValue);
 
-                          mfWrappedValueForArithmetic (const T& bareValue);
+//                           mfWrappedValueForArithmetic (const T& bareValue);
 
                           mfWrappedValueForArithmetic ();
 
@@ -242,23 +242,23 @@ mfWrappedValueForArithmetic <
     fPrintPrefix (printPrefix)
 {}
 
-template <
-  typename           T,
-  const std::string& printPrefix,
-  const std::string& printPostfix,
-  const T&           neutralValue,
-  const std::string& neutralValueString
->
-mfWrappedValueForArithmetic <
-  T,
-  printPrefix,
-   printPostfix,
-  neutralValue,
-  neutralValueString
->::mfWrappedValueForArithmetic (const T& bareValue)
-  : fBareValue (bareValue),
-    fPrintPrefix (printPrefix)
-{}
+// template <
+//   typename           T,
+//   const std::string& printPrefix,
+//   const std::string& printPostfix,
+//   const T&           neutralValue,
+//   const std::string& neutralValueString
+// >
+// mfWrappedValueForArithmetic <
+//   T,
+//   printPrefix,
+//    printPostfix,
+//   neutralValue,
+//   neutralValueString
+// >::mfWrappedValueForArithmetic (const T& bareValue)
+//   : fBareValue (bareValue),
+//     fPrintPrefix (printPrefix)
+// {}
 
 template <
   typename           T,

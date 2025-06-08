@@ -67,7 +67,7 @@ EXP msrGenerationAPIKind msrGenerationAPIKindFromString (
       "\" is no valid generation API kind";
 
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
 				false,
 				ss.str ());
   }
@@ -189,7 +189,7 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
       " with value \"" << theString << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -238,7 +238,7 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msrGenerationAPIKindAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -256,7 +256,7 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msrGenerationAPIKindAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -274,7 +274,7 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msrGenerationAPIKindAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -292,7 +292,7 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msrGenerationAPIKindAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -310,7 +310,7 @@ void msrGenerationAPIKindAtom::browseData (basevisitor* v)
       ".\\\" ==> msrGenerationAPIKindAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

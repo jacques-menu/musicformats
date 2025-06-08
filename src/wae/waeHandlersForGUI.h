@@ -65,7 +65,7 @@ class EXP waeHandlerForGUI : public waeHandler
     void                  waeErrorWithoutException (
                             const std::string& context,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message) override;
 
     void                  waeErrorWithoutExceptionWithInputLocation (
@@ -73,13 +73,13 @@ class EXP waeHandlerForGUI : public waeHandler
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message) override;
 
     void                  waeError (
                             const std::string& context,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message) override;
 
     void                  waeErrorWithInputLocation (
@@ -87,13 +87,13 @@ class EXP waeHandlerForGUI : public waeHandler
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message) override;
 
     void                  waeErrorWithException (
                             const std::string& context,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message,
                             const S_mfException& except) override;
 
@@ -102,7 +102,7 @@ class EXP waeHandlerForGUI : public waeHandler
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message,
                             const S_mfException& except) override;
 
@@ -112,7 +112,7 @@ class EXP waeHandlerForGUI : public waeHandler
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message) override;
 
     void                  waeInternalErrorWithExceptionWithInputLocation (
@@ -120,7 +120,7 @@ class EXP waeHandlerForGUI : public waeHandler
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message,
                             const S_mfException& except) override;
 

@@ -74,17 +74,17 @@ EXP void msrWarning (
 EXP void msrError (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message);
 
 //______________________________________________________________________________
 EXP void msrUnsupported (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message);
 
 //______________________________________________________________________________
 EXP void msrInternalWarning (
@@ -96,9 +96,9 @@ EXP void msrInternalWarning (
 EXP void msrInternalError (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message);
 
 
 }

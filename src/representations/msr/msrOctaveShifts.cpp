@@ -85,7 +85,7 @@ msrOctaveShift::~msrOctaveShift ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -119,7 +119,7 @@ void msrOctaveShift::acceptIn (basevisitor* v)
       "% ==> msrOctaveShift::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -137,7 +137,7 @@ void msrOctaveShift::acceptIn (basevisitor* v)
             "% ==> Launching msrOctaveShift::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -155,7 +155,7 @@ void msrOctaveShift::acceptOut (basevisitor* v)
       "% ==> msrOctaveShift::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -173,7 +173,7 @@ void msrOctaveShift::acceptOut (basevisitor* v)
             "% ==> Launching msrOctaveShift::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

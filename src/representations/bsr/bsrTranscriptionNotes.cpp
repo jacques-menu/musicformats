@@ -74,7 +74,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
       "% ==> bsrTranscriptionNotesElement::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -92,7 +92,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
             "% ==> Launching bsrTranscriptionNotesElement::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -111,7 +111,7 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
       "% ==> bsrTranscriptionNotesElement::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -129,7 +129,7 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
             "% ==> Launching bsrTranscriptionNotesElement::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -214,7 +214,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
       "% ==> bsrTranscriptionNotes::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -232,7 +232,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
             "% ==> Launching bsrTranscriptionNotes::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -251,7 +251,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
       "% ==> bsrTranscriptionNotes::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -269,7 +269,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
             "% ==> Launching bsrTranscriptionNotes::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

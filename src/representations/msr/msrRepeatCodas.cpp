@@ -53,7 +53,7 @@ msrRepeatCoda::msrRepeatCoda (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     repeatCodaSegment != nullptr,
     "repeatCodaSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -63,7 +63,7 @@ msrRepeatCoda::msrRepeatCoda (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     upLinkToRepeat != nullptr,
     "upLinkToRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -86,7 +86,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -94,7 +94,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingRepeat != nullptr,
     "containingRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -129,7 +129,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -137,7 +137,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingRepeat != nullptr,
     "containingRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -186,7 +186,7 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
       "% ==> msrRepeatCoda::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -204,7 +204,7 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
             "% ==> Launching msrRepeatCoda::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -222,7 +222,7 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
       "% ==> msrRepeatCoda::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -240,7 +240,7 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
             "% ==> Launching msrRepeatCoda::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

@@ -96,7 +96,7 @@ msrTransposition::msrTransposition (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -111,7 +111,7 @@ msrTransposition::~msrTransposition ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -166,7 +166,7 @@ void msrTransposition::acceptIn (basevisitor* v)
       "% ==> msrTransposition::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -184,7 +184,7 @@ void msrTransposition::acceptIn (basevisitor* v)
             "% ==> Launching msrTransposition::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -202,7 +202,7 @@ void msrTransposition::acceptOut (basevisitor* v)
       "% ==> msrTransposition::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -220,7 +220,7 @@ void msrTransposition::acceptOut (basevisitor* v)
             "% ==> Launching msrTransposition::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

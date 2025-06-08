@@ -70,7 +70,7 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
       "% ==> msrSingleTremolo::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -88,7 +88,7 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
             "% ==> Launching msrSingleTremolo::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -106,7 +106,7 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
       "% ==> msrSingleTremolo::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -124,7 +124,7 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
             "% ==> Launching msrSingleTremolo::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif

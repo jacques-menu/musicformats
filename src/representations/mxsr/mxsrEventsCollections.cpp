@@ -68,7 +68,7 @@ S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::createAMultipleMeasureRestB
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -89,7 +89,7 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
       ", line " << multipleMeasureRestBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -140,7 +140,7 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
 //       ", line " << eventInputLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -161,7 +161,7 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
 //       ", line " << multipleMeasureRestEndEvent->getEventInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -205,7 +205,7 @@ void mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -220,7 +220,7 @@ void mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt (
       ", line " << multipleMeasureRestEndEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -273,7 +273,7 @@ S_mxsrMeasureRepeatEvent mxsrEventsCollection::createAMeasureRepeatBegin (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -294,7 +294,7 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
       ", line " << measureRepeatBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -345,7 +345,7 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
 //       ", line " << eventInputLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -366,7 +366,7 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
 //       ", line " << measureRepeatEndEvent->getMeasureNumber ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -412,7 +412,7 @@ void mxsrEventsCollection::createAMeasureRepeatEndAndRegisterIt (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -427,7 +427,7 @@ void mxsrEventsCollection::createAMeasureRepeatEndAndRegisterIt (
       ", line " << measureRepeatEndEvent->getMeasureNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -486,7 +486,7 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -546,7 +546,7 @@ void mxsrEventsCollection::registerStaffChangeLanding (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -599,7 +599,7 @@ void mxsrEventsCollection::registerGraceBegin (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -643,7 +643,7 @@ void mxsrEventsCollection::registerGraceEnd (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -688,7 +688,7 @@ S_mxsrCueEvent mxsrEventsCollection::createACueBeginEvent (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -709,7 +709,7 @@ void mxsrEventsCollection::registerCueBeginEvent (
       ", line " << cueBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -754,7 +754,7 @@ S_mxsrCueEvent mxsrEventsCollection::createACueEndEvent (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -775,7 +775,7 @@ void mxsrEventsCollection::registerCueEndEvent (
       ", line " << cueEndEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -821,7 +821,7 @@ S_mxsrChordEvent mxsrEventsCollection::createAChordBeginEvent (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -842,7 +842,7 @@ void mxsrEventsCollection::registerChordBeginEvent (
       ", line " << chordBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -887,7 +887,7 @@ EXP S_mxsrChordEvent mxsrEventsCollection::createAChordEndEvent (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -908,7 +908,7 @@ void mxsrEventsCollection::registerChordEndEvent (
       ", line " << chordEndEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -963,7 +963,7 @@ S_mxsrTupletEvent mxsrEventsCollection::createATupletBeginEvent (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1006,7 +1006,7 @@ S_mxsrTupletEvent mxsrEventsCollection::createATupletEndEvent (
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1027,7 +1027,7 @@ void mxsrEventsCollection::registerTupletBeginEvent (
       ", line " << tupletBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1070,7 +1070,7 @@ void mxsrEventsCollection::registerTupletEndEvent (
       ", line " << tupletEndEvent->getNoteSequentialNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1111,7 +1111,7 @@ void mxsrEventsCollection::sortTheMxsrEventsLists ()
       "--> Sorting the all notes events list";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1358,7 +1358,7 @@ void mxsrEventsCollection::fetchTupletBeginsAtNoteSequentialNumber (
       ", noteSequentialNumber: " << noteSequentialNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1410,7 +1410,7 @@ void mxsrEventsCollection::fetchTupletEndsListAtNoteSequentialNumber (
       ", noteSequentialNumber: " << noteSequentialNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

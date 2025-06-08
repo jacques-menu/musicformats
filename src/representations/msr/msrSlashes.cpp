@@ -52,7 +52,7 @@ msrUseDotsKind msrUseDotsFromString (
       msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -180,7 +180,7 @@ void msrSlash::acceptIn (basevisitor* v)
       "% ==> msrSlash::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -198,7 +198,7 @@ void msrSlash::acceptIn (basevisitor* v)
             "% ==> Launching msrSlash::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -216,7 +216,7 @@ void msrSlash::acceptOut (basevisitor* v)
       "% ==> msrSlash::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -234,7 +234,7 @@ void msrSlash::acceptOut (basevisitor* v)
             "% ==> Launching msrSlash::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif

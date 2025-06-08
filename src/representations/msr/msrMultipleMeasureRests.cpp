@@ -80,7 +80,7 @@ S_msrMultipleMeasureRest msrMultipleMeasureRest::createMultipleMeasureRestNewbor
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -88,7 +88,7 @@ S_msrMultipleMeasureRest msrMultipleMeasureRest::createMultipleMeasureRestNewbor
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -138,7 +138,7 @@ void msrMultipleMeasureRest::setNextMeasureNumber (
       nextMeasureNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -162,7 +162,7 @@ void msrMultipleMeasureRest::setLastMeasurePuristMeasureNumber (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -185,7 +185,7 @@ void msrMultipleMeasureRest::appendMeasureElementToSegmentElement (
   msrInternalError (
     gServiceRunData->getInputSourceName (),
     fInputLineNumber,
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ss.str ());
 }
 
@@ -208,7 +208,7 @@ void msrMultipleMeasureRest::appendMeasureToMultipleMeasureRest (
       "', line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -254,7 +254,7 @@ void msrMultipleMeasureRest::acceptIn (basevisitor* v)
       "% ==> msrMultipleMeasureRest::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -272,7 +272,7 @@ void msrMultipleMeasureRest::acceptIn (basevisitor* v)
             "% ==> Launching msrMultipleMeasureRest::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -290,7 +290,7 @@ void msrMultipleMeasureRest::acceptOut (basevisitor* v)
       "% ==> msrMultipleMeasureRest::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -308,7 +308,7 @@ void msrMultipleMeasureRest::acceptOut (basevisitor* v)
             "% ==> Launching msrMultipleMeasureRest::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -326,7 +326,7 @@ void msrMultipleMeasureRest::browseData (basevisitor* v)
       "% ==> msrMultipleMeasureRest::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -347,7 +347,7 @@ void msrMultipleMeasureRest::browseData (basevisitor* v)
       "% <== msrMultipleMeasureRest::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

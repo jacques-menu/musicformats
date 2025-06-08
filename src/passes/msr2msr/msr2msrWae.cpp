@@ -31,9 +31,9 @@ namespace MusicFormats
 void msr2msrUnsupported (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   if (!
     (
@@ -76,9 +76,9 @@ void msr2msrInternalWarning (
 void msr2msrInternalError (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   gIndenter.resetToZero ();
 
@@ -113,9 +113,9 @@ void msr2msrWarning (
 void msr2msrError (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeErrorWithInputLocation (
     "msr2msr",

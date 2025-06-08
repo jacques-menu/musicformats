@@ -84,7 +84,7 @@ void msrMidiTempo::acceptIn (basevisitor* v)
       "% ==> msrMidiTempo::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -102,7 +102,7 @@ void msrMidiTempo::acceptIn (basevisitor* v)
             "% ==> Launching msrMidiTempo::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -120,7 +120,7 @@ void msrMidiTempo::acceptOut (basevisitor* v)
       "% ==> msrMidiTempo::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -138,7 +138,7 @@ void msrMidiTempo::acceptOut (basevisitor* v)
             "% ==> Launching msrMidiTempo::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif        

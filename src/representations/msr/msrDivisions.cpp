@@ -59,7 +59,7 @@ S_msrDivisions msrDivisions::createDivisionsNewbornClone ()
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -104,7 +104,7 @@ void msrDivisions::initializeDivisions ()
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -199,7 +199,7 @@ int msrDivisions::notesDurationKindAsDivisions (
   msrInternalError (
     gServiceRunData->getInputSourceName (),
     inputLineNumber,
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ss.str ());
 
   return -1; // never reached
@@ -289,7 +289,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
       "divisions" << ": " << divisions;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -317,7 +317,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
       break;
     }
@@ -491,7 +491,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -548,7 +548,7 @@ void msrDivisions::acceptIn (basevisitor* v)
       "% ==> msrDivisions::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -566,7 +566,7 @@ void msrDivisions::acceptIn (basevisitor* v)
             "% ==> Launching msrDivisions::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -584,7 +584,7 @@ void msrDivisions::acceptOut (basevisitor* v)
       "% ==> msrDivisions::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -602,7 +602,7 @@ void msrDivisions::acceptOut (basevisitor* v)
             "% ==> Launching msrDivisions::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

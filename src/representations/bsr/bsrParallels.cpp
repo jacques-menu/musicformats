@@ -56,7 +56,7 @@ bsrParallel::~bsrParallel ()
       fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -73,7 +73,7 @@ void bsrParallel::acceptIn (basevisitor* v)
       "% ==> bsrParallel::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -91,7 +91,7 @@ void bsrParallel::acceptIn (basevisitor* v)
             "% ==> Launching bsrParallel::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -110,7 +110,7 @@ void bsrParallel::acceptOut (basevisitor* v)
       "% ==> bsrParallel::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -128,7 +128,7 @@ void bsrParallel::acceptOut (basevisitor* v)
             "% ==> Launching bsrParallel::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

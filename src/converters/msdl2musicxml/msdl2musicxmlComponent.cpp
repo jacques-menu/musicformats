@@ -58,7 +58,7 @@ S_mfcConverterComponent createMsdl2musicxmlConverterComponent ()
         "Creating the msdl2musicxml component";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

@@ -61,7 +61,7 @@ bsrBarLine::bsrBarLine (
       fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -125,7 +125,7 @@ void bsrBarLine::acceptIn (basevisitor* v)
       "% ==> bsrBarLine::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -143,7 +143,7 @@ void bsrBarLine::acceptIn (basevisitor* v)
             "% ==> Launching bsrBarLine::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -162,7 +162,7 @@ void bsrBarLine::acceptOut (basevisitor* v)
       "% ==> bsrBarLine::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -180,7 +180,7 @@ void bsrBarLine::acceptOut (basevisitor* v)
             "% ==> Launching bsrBarLine::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

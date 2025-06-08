@@ -57,11 +57,11 @@ lpsrPaper::lpsrPaper (
 
   // those always fail, without any consequences... Why??? JMI
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     scaling != nullptr,
 //     "scaling is NULL");
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     pageLayout != nullptr,
 //     "pageLayout is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -130,7 +130,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
       "% ==> lpsrPaper::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -148,7 +148,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
             "% ==> Launching lpsrPaper::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -166,7 +166,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
       "% ==> lpsrPaper::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -184,7 +184,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
             "% ==> Launching lpsrPaper::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -202,7 +202,7 @@ void lpsrPaper::browseData (basevisitor* v)
       "% ==> lpsrPaper::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -227,7 +227,7 @@ void lpsrPaper::browseData (basevisitor* v)
       "% <== lpsrPaper::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

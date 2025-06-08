@@ -112,7 +112,7 @@ void mxsrVoice::pushTupletOntoTupletsStack (
       ", line " << tuplet->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -125,7 +125,7 @@ void mxsrVoice::pushTupletOntoTupletsStack (
   // sanity check JMI 0.9.72
   if (fTupletsStack.empty ()) {
 //     mfAssert (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       tupletNumber == 1,
 //       "tupletNumber is not equal to 1");
   }
@@ -158,7 +158,7 @@ gLog << std::endl << ss.str () << std::endl;
       gLog << std::endl << ss.str () << std::endl << std::endl;
 
 //       mfAssertFalse (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
     }
   }
@@ -183,7 +183,7 @@ S_msrTuplet mxsrVoice::popInnerMostTuplet (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check JMI 0.9.70
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ! fTupletsStack.empty (),
     "fTupletsStack is empty");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -222,7 +222,7 @@ S_msrTuplet mxsrVoice::popInnerMostTuplet (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     displayTupletsStack (
@@ -329,7 +329,7 @@ void mxsrVoice::appendTupletWhereItBelongs (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -416,7 +416,7 @@ void mxsrVoice::handleTupletBegin (
       ", line " << tuplet->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -435,7 +435,7 @@ void mxsrVoice::handleTupletBegin (
         currentNoteVoice->getVoiceName ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -456,7 +456,7 @@ void mxsrVoice::handleTupletBegin (
         currentNoteVoice->getVoiceName ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -504,7 +504,7 @@ void mxsrVoice::handleTupletContinue (
         currentNoteVoice->getVoiceName ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -545,7 +545,7 @@ void mxsrVoice::handleTupletContinue (
     mxsr2msrInternalError (
       gServiceRunData->getInputSourceName (),
       note->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -565,7 +565,7 @@ void mxsrVoice::handleTupletEnd (
       currentNoteVoice->getVoiceName ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -573,7 +573,7 @@ void mxsrVoice::handleTupletEnd (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check JMI 0.9.70
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ! fTupletsStack.empty (),
     "fTupletsStack is empty");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -634,7 +634,7 @@ void mxsrVoice::handleTupletEnd (
 //     mxsr2msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       note->getInputLineNumber (),
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 

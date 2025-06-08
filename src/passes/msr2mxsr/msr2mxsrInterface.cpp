@@ -48,7 +48,7 @@ Sxmlelement translateMsrToMxsr (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theMsrScore != nullptr,
     "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -76,7 +76,7 @@ Sxmlelement translateMsrToMxsr (
       separator;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -126,7 +126,7 @@ Sxmlelement translateMsrToMxsr (
       std::endl << std::endl;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

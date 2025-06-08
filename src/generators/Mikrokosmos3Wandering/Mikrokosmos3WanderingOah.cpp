@@ -210,7 +210,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -228,7 +228,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -246,7 +246,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -264,7 +264,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -282,7 +282,7 @@ void Mikrokosmos3WanderingOahGroup::browseData (basevisitor* v)
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -355,7 +355,7 @@ S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
       "Creating global Mikrokosmos3Wandering OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

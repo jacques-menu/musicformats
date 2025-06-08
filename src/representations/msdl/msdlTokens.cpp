@@ -307,7 +307,7 @@ std::string msdlTokenKindAsMsdlString (
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind);
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -718,7 +718,7 @@ S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
       ", result:" << result->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -916,7 +916,7 @@ EXP S_msdlTokenKindsSet operator+ (
       ", result:" << result->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -943,7 +943,7 @@ EXP S_msdlTokenKindsSet operator+ (
       ", result:" << result->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1632,7 +1632,7 @@ std::string msdlToken::asMsdlString (
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind);
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

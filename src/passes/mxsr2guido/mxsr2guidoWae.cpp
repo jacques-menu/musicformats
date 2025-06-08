@@ -36,9 +36,9 @@ void mxsr2guidoWarning (
 void mxsr2guidoError (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeErrorWithInputLocation (
     "mxsr2guido",
@@ -61,9 +61,9 @@ void mxsr2guidoError (
 void mxsr2guidoInternalError (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeInternalErrorWithInputLocation (
     "mxsr2guido",

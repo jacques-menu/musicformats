@@ -57,7 +57,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
       "% ==> lpsrPartGroupBlock::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -75,7 +75,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
             "% ==> Launching lpsrPartGroupBlock::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -93,7 +93,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
       "% ==> lpsrPartGroupBlock::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -111,7 +111,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
             "% ==> Launching lpsrPartGroupBlock::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -129,7 +129,7 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
       "% ==> lpsrPartGroupBlock::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -152,7 +152,7 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
       "% <== lpsrPartGroupBlock::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

@@ -82,7 +82,7 @@ if (true) // for tests JMI
 
   part->
     finalizePartAndAllItsMeasures (
-      __LINE__);
+      mfInputLineNumber (__LINE__));
 
   if (gMsrOahGroup->getDisplayMsr ()) { // JMI 0.9.67
 /* JMI
@@ -121,14 +121,14 @@ S_msrScore LilyPondIssue34Generator::createTheScore (
   S_msrScore
     theMsrScore =
       msrScore::create (
-        __LINE__,
+        mfInputLineNumber (__LINE__),
         "LilyPond_Issue_34");
 
   // create its identification
   S_msrIdentification
     identification =
       msrIdentification::create (
-        __LINE__);
+        mfInputLineNumber (__LINE__));
 
   // register it in the score
   theMsrScore->
@@ -138,19 +138,19 @@ S_msrScore LilyPondIssue34Generator::createTheScore (
   // set the identification's work title
   identification->
     setIdentificationWorkCreditTypeTitle (
-      __LINE__,
+      mfInputLineNumber (__LINE__),
       "LilyPond_Issue_34");
 
   // append the identification's composer
   identification->
     appendComposer (
-      __LINE__,
+      mfInputLineNumber (__LINE__),
       "Zoltán Kodály");
 
   // set the identification's software
   identification->
     appendSoftware (
-      __LINE__,
+      mfInputLineNumber (__LINE__),
       "MSR "
         +
       msrGenerationAPIKindAsString (generationAPIKind)
@@ -170,7 +170,7 @@ S_msrStaff LilyPondIssue34Generator::createStaffInPart (
   S_msrStaff
     staff =
       msrStaff::create (
-        __LINE__, msrStaffKind::kStaffKindRegular, staffNumber, part);
+        mfInputLineNumber (__LINE__), msrStaffKind::kStaffKindRegular, staffNumber, part);
 
   // append it to the part
   part ->
@@ -196,7 +196,7 @@ S_msrStaff LilyPondIssue34Generator::createAndPopulateUpperStaffInPart (
   S_msrVoice
     upperVoice1 =
       createRegularVoiceInStaff (
-        __LINE__,
+        mfInputLineNumber (__LINE__),
         1,
        upperStaff);
 
@@ -232,7 +232,7 @@ S_msrStaff LilyPondIssue34Generator::createAndPopulateLowerStaffInPart (
   S_msrVoice
     lowerVoice1 =
       createRegularVoiceInStaff (
-        __LINE__,
+        mfInputLineNumber (__LINE__),
         1,
        lowerStaff);
 
@@ -240,7 +240,7 @@ S_msrStaff LilyPondIssue34Generator::createAndPopulateLowerStaffInPart (
   S_msrVoice
     lowerVoice2 =
       createRegularVoiceInStaff (
-        __LINE__,
+        mfInputLineNumber (__LINE__),
         2,
        lowerStaff);
 
@@ -274,7 +274,7 @@ S_msrPart LilyPondIssue34Generator::createPartInScore (
   S_msrPartGroup
     partGroup =
       msrPartGroup::create (
-        __LINE__, 1, 1, "OnlyPartGroup", nullptr, theMsrScore);
+        mfInputLineNumber (__LINE__), 1, 1, "OnlyPartGroup", nullptr, theMsrScore);
 
   // add it to the score
   theMsrScore->
@@ -285,7 +285,7 @@ S_msrPart LilyPondIssue34Generator::createPartInScore (
   S_msrPart
     part =
       msrPart::create (
-        __LINE__,
+        mfInputLineNumber (__LINE__),
         "OnlyPart",
         partGroup);
 
@@ -360,7 +360,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     S_msrMeasure
       measure1 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1number,
           upperVoice1);
 
@@ -369,7 +369,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     measure1->
       appendClefToMeasure (
         msrClef::create (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1,
           msrClefKind::kClefTreble,
           1));
@@ -379,7 +379,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     measure1->
       appendKeyToMeasure (
         msrKey::createTraditional (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
@@ -390,7 +390,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     measure1->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTwoQuartersTime (
-          __LINE__));
+          mfInputLineNumber (__LINE__)));
 
     // append the notes
 
@@ -398,7 +398,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note1 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure1number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave4,
@@ -410,7 +410,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendDynamicToNote (
           msrDynamic::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             msrDynamicKind::kDynamicPP,
             msrPlacementKind::kPlacementBelow));
 
@@ -418,7 +418,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendSlurToNote (
           msrSlur::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // slurNumber
             msrSlurTypeKind::kSlurTypeRegularStart,
             msrLineTypeKind::kLineTypeSolid,
@@ -428,7 +428,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamBegin));
 
@@ -441,7 +441,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note2 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure1number,
             msrQuarterTonesPitchKind::kQTP_G_Natural,
             msrOctaveKind::kOctave4,
@@ -453,7 +453,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note2->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
@@ -466,7 +466,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note3 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure1number,
             msrQuarterTonesPitchKind::kQTP_F_Natural,
             msrOctaveKind::kOctave4,
@@ -478,14 +478,14 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note3->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
       note3->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
@@ -498,7 +498,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note1 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure1number,
             msrQuarterTonesPitchKind::kQTP_E_Natural,
             msrOctaveKind::kOctave4,
@@ -510,7 +510,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamEnd));
 
@@ -531,7 +531,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     S_msrMeasure
       measure2 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure2number,
           upperVoice1);
 
@@ -540,7 +540,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     measure2->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createThreeQuartersTime (
-          __LINE__));
+          mfInputLineNumber (__LINE__)));
 
     // append the notes
 
@@ -548,7 +548,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note1 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure2number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
@@ -560,7 +560,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendSlurToNote (
           msrSlur::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // slurNumber
             msrSlurTypeKind::kSlurTypeRegularStop,
             msrLineTypeKind::kLineTypeSolid));
@@ -574,7 +574,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note2 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure2number,
             msrQuarterTonesPitchKind::kQTP_G_Natural,
             msrOctaveKind::kOctave4,
@@ -586,7 +586,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note2->
         appendDynamicToNote (
           msrDynamic::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             msrDynamicKind::kDynamicMP,
             msrPlacementKind::kPlacementBelow));
 
@@ -594,7 +594,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note2->
         appendSlurToNote (
           msrSlur::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // slurNumber
             msrSlurTypeKind::kSlurTypeRegularStart,
             msrLineTypeKind::kLineTypeSolid,
@@ -604,7 +604,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note2->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamBegin));
 
@@ -617,7 +617,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note3 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure2number,
             msrQuarterTonesPitchKind::kQTP_F_Natural,
             msrOctaveKind::kOctave4,
@@ -629,14 +629,14 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note3->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
       note3->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
@@ -649,7 +649,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note4 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure2number,
             msrQuarterTonesPitchKind::kQTP_E_Natural,
             msrOctaveKind::kOctave4,
@@ -661,7 +661,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note4->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
@@ -674,7 +674,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note5 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure2number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
@@ -686,7 +686,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note5->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamEnd));
 
@@ -707,7 +707,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     S_msrMeasure
       measure3 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure3number,
           upperVoice1);
 
@@ -716,7 +716,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     measure3->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTwoQuartersTime (
-          __LINE__));
+          mfInputLineNumber (__LINE__)));
 
     // append the notes
 
@@ -724,7 +724,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note1 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure3number,
             msrQuarterTonesPitchKind::kQTP_C_Natural,
             msrOctaveKind::kOctave4,
@@ -737,7 +737,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
         note1->
           appendDynamicToNote (
             msrDynamic::create (
-              __LINE__,
+              mfInputLineNumber (__LINE__),
               msrDynamicKind::kDynamicPPP,
               msrPlacementKind::kPlacementBelow));
       }
@@ -746,7 +746,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamBegin));
 
@@ -754,7 +754,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendWedgeToNote (
           msrWedge::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // wedgeNumber
             msrWedgeKind::kWedgeCrescendo,
             msrWedgeNienteKind::kWedgeNienteNo,
@@ -766,7 +766,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrSpanner
         spannerStart =
           msrSpanner::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // spannerNumber
             msrSpannerKind::kSpannerDashes,
             msrSpannerTypeKind::kSpannerTypeStart,
@@ -798,7 +798,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note2 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure3number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
@@ -810,7 +810,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note2->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
@@ -818,7 +818,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note2->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             2, // beamNumber
             msrBeamKind::kBeamBegin));
 
@@ -831,7 +831,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note3 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure3number,
             msrQuarterTonesPitchKind::kQTP_E_Natural,
             msrOctaveKind::kOctave4,
@@ -843,7 +843,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note3->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             2, // beamNumber
             msrBeamKind::kBeamEnd));
 
@@ -851,7 +851,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note3->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamEnd));
 
@@ -864,7 +864,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note4 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure3number,
             msrQuarterTonesPitchKind::kQTP_F_Natural,
             msrOctaveKind::kOctave4,
@@ -876,7 +876,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note4->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamBegin));
 
@@ -889,7 +889,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note5 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure3number,
             msrQuarterTonesPitchKind::kQTP_E_Natural,
             msrOctaveKind::kOctave4,
@@ -901,7 +901,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note5->
         appendWedgeToNote (
           msrWedge::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // wedgeNumber
             msrWedgeKind::kWedgeStop,
             msrWedgeNienteKind::kWedgeNienteNo,
@@ -913,7 +913,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note5->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamEnd));
 
@@ -935,7 +935,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     S_msrMeasure
       measure4 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure4number,
           upperVoice1);
 
@@ -945,7 +945,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note1 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure4number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
@@ -957,7 +957,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendTieToNote (
           msrTie::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             msrTieKind::kTieStart,
             msrPlacementKind::kPlacementBelow));
 
@@ -965,7 +965,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendWedgeToNote (
           msrWedge::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             2, // wedgeNumber
             msrWedgeKind::kWedgeDecrescendo,
             msrWedgeNienteKind::kWedgeNienteNo,
@@ -991,7 +991,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     S_msrMeasure
       measure5 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5number,
           upperVoice1);
 
@@ -1001,7 +1001,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       S_msrNote
         note1 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure5number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
@@ -1013,14 +1013,14 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendTieToNote (
           msrTie::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             msrTieKind::kTieStop));
 
       // append the slur stop to the note
       note1->
         appendSlurToNote (
           msrSlur::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // slurNumber
             msrSlurTypeKind::kSlurTypeRegularStop,
             msrLineTypeKind::kLineTypeSolid));
@@ -1029,7 +1029,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendWedgeToNote (
           msrWedge::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             2, // wedgeNumber
             msrWedgeKind::kWedgeStop,
             msrWedgeNienteKind::kWedgeNienteNo,
@@ -1041,7 +1041,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       note1->
         appendSpannerToNote (
           msrSpanner::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // spannerNumber
             msrSpannerKind::kSpannerDashes,
             msrSpannerTypeKind::kSpannerTypeStop,
@@ -1058,7 +1058,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5));
   }
 }
@@ -1082,7 +1082,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     S_msrMeasure
       measure1 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1number,
           upperVoice1);
 
@@ -1091,7 +1091,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     measure1->
       appendClefToMeasure (
         msrClef::createClefFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "treble",
           1));
 
@@ -1100,7 +1100,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     measure1->
       appendKeyToMeasure (
         msrKey::createTraditional (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -1110,7 +1110,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     measure1->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTimeFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "2/4"));
 
     // append the notes
@@ -1118,7 +1118,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     S_msrNote
       note1 =
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "a'8",
           measure1number);
 
@@ -1126,7 +1126,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     note1->
       appendDynamicToNote (
        msrDynamic::createDynamicFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "pp",
           msrPlacementKind::kPlacementBelow));
 
@@ -1137,21 +1137,21 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     measure1->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "g'8",
           measure1number));
 
     measure1->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "f'8",
           measure1number));
 
     measure1->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "e'8",
           measure1number));
   }
@@ -1168,7 +1168,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     S_msrMeasure
       measure2 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure2number,
           upperVoice1);
 
@@ -1177,7 +1177,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     measure2->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTimeFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "3/4"));
 
     // append the notes
@@ -1185,35 +1185,35 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     measure2->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "d'4",
           measure2number));
 
     measure2->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "g'8",
           measure2number));
 
     measure2->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "f'8",
           measure2number));
 
     measure2->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "e'8",
           measure2number));
 
     measure2->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "d'8",
           measure2number));
   }
@@ -1230,7 +1230,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     S_msrMeasure
       measure3 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure3number,
           upperVoice1);
 
@@ -1239,7 +1239,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     measure3->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTimeFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "2/4"));
 
     // append the notes
@@ -1247,35 +1247,35 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     measure3->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "c'8",
           measure3number));
 
     measure3->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "d'16",
           measure3number));
 
     measure3->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "e'16",
           measure3number));
 
     measure3->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "f'8",
           measure3number));
 
     measure3->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "e'8",
           measure3number));
   }
@@ -1292,7 +1292,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     S_msrMeasure
       measure4 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure4number,
           upperVoice1);
 
@@ -1302,7 +1302,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
       measure4->
         appendNoteToMeasure (
           msrNote::createNoteFromString (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             "d'2",
             measure4number));
     }
@@ -1320,7 +1320,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     S_msrMeasure
       measure5 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5number,
           upperVoice1);
 
@@ -1330,7 +1330,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
       measure5->
         appendNoteToMeasure (
           msrNote::createNoteFromString (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             "d'2",
             measure5number));
     }
@@ -1340,7 +1340,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5));
   }
 */
@@ -1363,7 +1363,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     S_msrMeasure
       measure1 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1number,
           lowerVoice1);
 
@@ -1372,7 +1372,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     measure1->
       appendClefToMeasure (
         msrClef::create (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1,
           msrClefKind::kClefBass,
           2));
@@ -1382,7 +1382,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     measure1->
       appendKeyToMeasure (
         msrKey::createTraditional (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
@@ -1393,7 +1393,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     measure1->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTwoQuartersTime (
-          __LINE__));
+          mfInputLineNumber (__LINE__)));
 
     // append the notes
 
@@ -1401,7 +1401,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       measure1->
         appendNoteToMeasure (
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure1number,
             msrQuarterTonesPitchKind::kQTP_B_Natural,
             msrOctaveKind::kOctave3,
@@ -1414,7 +1414,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note2 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure1number,
             msrQuarterTonesPitchKind::kQTP_D_Natural,
             msrOctaveKind::kOctave4,
@@ -1426,7 +1426,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note2->
         appendDynamicToNote (
           msrDynamic::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             msrDynamicKind::kDynamicPP,
             msrPlacementKind::kPlacementBelow));
 
@@ -1434,7 +1434,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note2->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamBegin));
 
@@ -1442,7 +1442,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note2->
         appendSlurToNote (
           msrSlur::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // slurNumber
             msrSlurTypeKind::kSlurTypeRegularStart,
             msrLineTypeKind::kLineTypeSolid,
@@ -1457,7 +1457,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note3 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure1number,
             msrQuarterTonesPitchKind::kQTP_C_Natural,
             msrOctaveKind::kOctave4,
@@ -1469,7 +1469,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note3->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
@@ -1491,7 +1491,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     S_msrMeasure
       measure2 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure2number,
           lowerVoice1);
 
@@ -1500,7 +1500,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     measure2->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createThreeQuartersTime (
-          __LINE__));
+          mfInputLineNumber (__LINE__)));
 
     // append the notes
 
@@ -1508,7 +1508,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note1 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure2number,
             msrQuarterTonesPitchKind::kQTP_B_Natural,
             msrOctaveKind::kOctave3,
@@ -1520,7 +1520,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note1->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
@@ -1533,7 +1533,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note2 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure2number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave3,
@@ -1545,7 +1545,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note2->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamEnd));
 
@@ -1558,7 +1558,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note3 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure2number,
             msrQuarterTonesPitchKind::kQTP_A_Flat,
             msrOctaveKind::kOctave3,
@@ -1570,7 +1570,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note3->
         appendSlurToNote (
           msrSlur::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // slurNumber
             msrSlurTypeKind::kSlurTypeRegularStop,
             msrLineTypeKind::kLineTypeSolid));
@@ -1584,7 +1584,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note4 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure2number,
             msrQuarterTonesPitchKind::kQTP_C_Natural,
             msrOctaveKind::kOctave4,
@@ -1596,7 +1596,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note4->
         appendDynamicToNote (
           msrDynamic::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             msrDynamicKind::kDynamicMP,
             msrPlacementKind::kPlacementBelow));
 
@@ -1604,7 +1604,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note4->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamBegin));
 
@@ -1617,7 +1617,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note5 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure2number,
             msrQuarterTonesPitchKind::kQTP_B_Flat,
             msrOctaveKind::kOctave3,
@@ -1629,7 +1629,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note5->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
@@ -1651,7 +1651,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     S_msrMeasure
       measure3 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure3number,
           lowerVoice1);
 
@@ -1660,7 +1660,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     measure3->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTwoQuartersTime (
-          __LINE__));
+          mfInputLineNumber (__LINE__)));
 
     // append the notes
 
@@ -1668,7 +1668,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note1 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure3number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave3,
@@ -1680,7 +1680,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note1->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
@@ -1693,7 +1693,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note2 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure3number,
             msrQuarterTonesPitchKind::kQTP_G_Natural,
             msrOctaveKind::kOctave3,
@@ -1705,7 +1705,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note2->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamEnd));
 
@@ -1718,7 +1718,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note3 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure3number,
             msrQuarterTonesPitchKind::kQTP_F_Sharp,
             msrOctaveKind::kOctave3,
@@ -1730,7 +1730,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note3->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamBegin));
 
@@ -1742,7 +1742,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note4 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure3number,
             msrQuarterTonesPitchKind::kQTP_G_Natural,
             msrOctaveKind::kOctave3,
@@ -1754,7 +1754,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note4->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamContinue));
 
@@ -1762,7 +1762,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note4->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             2, // beamNumber
             msrBeamKind::kBeamBegin));
 
@@ -1775,7 +1775,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       S_msrNote
         note5 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure3number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave3,
@@ -1787,7 +1787,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note5->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             2, // beamNumber
             msrBeamKind::kBeamEnd));
 
@@ -1795,7 +1795,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       note5->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamEnd));
 
@@ -1817,7 +1817,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     S_msrMeasure
       measure4 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure4number,
           lowerVoice1);
 
@@ -1826,14 +1826,14 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     measure4->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "b4",
           measure4number));
 
     measure4->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "a4",
           measure4number));
   }
@@ -1849,7 +1849,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     S_msrMeasure
       measure5 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5number,
           lowerVoice1);
 
@@ -1858,7 +1858,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     measure5->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "g2",
           measure5number));
 
@@ -1867,7 +1867,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5));
   }
 }
@@ -1890,7 +1890,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     S_msrMeasure
       measure1 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1number,
           lowerVoice1);
 
@@ -1899,7 +1899,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure1->
       appendClefToMeasure (
         msrClef::createClefFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "bass",
           2));
 
@@ -1908,7 +1908,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure1->
       appendKeyToMeasure (
         msrKey::createTraditional (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -1918,7 +1918,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure1->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTimeFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "2/4"));
 
     // append the notes
@@ -1926,21 +1926,21 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure1->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "b4",
           measure1number));
 
     measure1->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "d'8",
           measure1number));
 
     measure1->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "c'8",
           measure1number));
   }
@@ -1957,7 +1957,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     S_msrMeasure
       measure2 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure2number,
           lowerVoice1);
 
@@ -1966,7 +1966,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure2->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTimeFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "3/4"));
 
     // append the notes
@@ -1974,35 +1974,35 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure2->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "b8",
           measure2number));
 
     measure2->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "a8",
           measure2number));
 
     measure2->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "aes4",
           measure2number));
 
     measure2->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "c'8",
           measure2number));
 
     measure2->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "bes8",
           measure2number));
   }
@@ -2018,7 +2018,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     S_msrMeasure
       measure3 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure3number,
           lowerVoice1);
 
@@ -2027,7 +2027,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure3->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTimeFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "2/4"));
 
     // append the notes
@@ -2035,35 +2035,35 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure3->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "a8",
           measure3number));
 
     measure3->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "g8",
           measure3number));
 
     measure3->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "fis8",
           measure3number));
 
     measure3->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "g16",
           measure3number));
 
     measure3->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "a16",
           measure3number));
   }
@@ -2079,7 +2079,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     S_msrMeasure
       measure4 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure4number,
           lowerVoice1);
 
@@ -2088,7 +2088,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure4->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "b2",
           measure4number));
   }
@@ -2104,7 +2104,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     S_msrMeasure
       measure5 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5number,
           lowerVoice1);
 
@@ -2113,7 +2113,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure5->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "b2",
           measure5number));
 
@@ -2122,7 +2122,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5));
   }
 */
@@ -2145,7 +2145,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     S_msrMeasure
       measure1 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1number,
           lowerVoice2);
 
@@ -2154,7 +2154,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     measure1->
       appendClefToMeasure (
         msrClef::create (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1,
           msrClefKind::kClefBass,
           2));
@@ -2164,7 +2164,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     measure1->
       appendKeyToMeasure (
         msrKey::createTraditional (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
@@ -2175,14 +2175,14 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     measure1->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTwoQuartersTime (
-          __LINE__));
+          mfInputLineNumber (__LINE__)));
 
     // append the notes
 
     measure1->
       appendNoteToMeasure (
         msrNote::createSkipNote (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1number,
           mfWholeNotes (1, 2), // soundingWholeNotes
           mfWholeNotes (1, 2), // displayWholeNotes
@@ -2201,7 +2201,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     S_msrMeasure
       measure2 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure2number,
           lowerVoice2);
 
@@ -2210,14 +2210,14 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     measure2->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createThreeQuartersTime (
-          __LINE__));
+          mfInputLineNumber (__LINE__)));
 
     // append the notes
 
     measure2->
       appendNoteToMeasure (
         msrNote::createSkipNote (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure2number,
           mfWholeNotes (3, 4), // soundingWholeNotes
           mfWholeNotes (2, 4), // displayWholeNotes
@@ -2235,7 +2235,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     S_msrMeasure
       measure3 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure3number,
           lowerVoice2);
 
@@ -2244,14 +2244,14 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     measure3->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTwoQuartersTime (
-          __LINE__));
+          mfInputLineNumber (__LINE__)));
 
     // append the notes
 
     measure3->
       appendNoteToMeasure (
         msrNote::createSkipNote (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure3number,
           mfWholeNotes (1, 2), // soundingWholeNotes
           mfWholeNotes (1, 2), // displayWholeNotes
@@ -2269,7 +2269,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     S_msrMeasure
       measure4 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure4number,
           lowerVoice2);
 
@@ -2279,7 +2279,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
       S_msrNote
         note1 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure4number,
             msrQuarterTonesPitchKind::kQTP_B_Natural,
             msrOctaveKind::kOctave3,
@@ -2291,7 +2291,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
       note1->
         appendTieToNote (
           msrTie::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             msrTieKind::kTieStart,
             msrPlacementKind::kPlacementAbove));
 
@@ -2312,7 +2312,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     S_msrMeasure
       measure5 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5number,
           lowerVoice2);
 
@@ -2322,7 +2322,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
       S_msrNote
         note1 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure5number,
             msrQuarterTonesPitchKind::kQTP_B_Natural,
             msrOctaveKind::kOctave3,
@@ -2334,7 +2334,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
       note1->
         appendTieToNote (
           msrTie::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             msrTieKind::kTieStop));
 
       // append the note to the measure
@@ -2347,7 +2347,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5));
   }
 }
@@ -2369,7 +2369,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     S_msrMeasure
       measure1 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1number,
           lowerVoice2);
 
@@ -2378,7 +2378,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure1->
       appendClefToMeasure (
         msrClef::createClefFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1,
           "bass",
           2));
@@ -2388,7 +2388,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure1->
       appendKeyToMeasure (
         msrKey::createTraditional (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
@@ -2399,7 +2399,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure1->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTimeFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "2/4"));
 
     // append the notes
@@ -2407,7 +2407,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure1->
       appendNoteToMeasure (
         msrNote::createSkipFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "s2",
           measure1number));
   }
@@ -2423,7 +2423,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     S_msrMeasure
       measure2 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure2number,
           lowerVoice2);
 
@@ -2432,7 +2432,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure2->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTimeFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "3/4"));
 
     // append the notes
@@ -2440,7 +2440,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure2->
       appendNoteToMeasure (
         msrNote::createSkipFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "s2.",
           measure2number));
   }
@@ -2456,7 +2456,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     S_msrMeasure
       measure3 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure3number,
           lowerVoice2);
 
@@ -2465,7 +2465,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure3->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTimeFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "2/4"));
 
     // append the notes
@@ -2473,7 +2473,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure3->
       appendNoteToMeasure (
         msrNote::createSkipFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "s2",
           measure3number));
   }
@@ -2489,7 +2489,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     S_msrMeasure
       measure4 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure4number,
           lowerVoice2);
 
@@ -2498,14 +2498,14 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure4->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "b4",
           measure4number));
 
     measure4->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "a4",
           measure4number));
   }
@@ -2521,7 +2521,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     S_msrMeasure
       measure5 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5number,
           lowerVoice2);
 
@@ -2530,7 +2530,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure5->
       appendNoteToMeasure (
         msrNote::createNoteFromString (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           "g2",
           measure5number));
 
@@ -2539,7 +2539,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure5));
   }
 }

@@ -46,9 +46,9 @@ void lpsr2lilypondInternalWarning (
 void lpsr2lilypondError (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeErrorWithInputLocation (
     "lpsr2lilypond",
@@ -71,9 +71,9 @@ void lpsr2lilypondError (
 void lpsr2lilypondInternalError (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeInternalErrorWithInputLocation (
     "lpsr2lilypond",

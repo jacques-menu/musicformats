@@ -60,7 +60,7 @@ void lpsrNewLyricsBlock::acceptIn (basevisitor* v)
       "% ==> lpsrNewLyricsBlock::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -78,7 +78,7 @@ void lpsrNewLyricsBlock::acceptIn (basevisitor* v)
             "% ==> Launching lpsrNewLyricsBlock::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -96,7 +96,7 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
       "% ==> lpsrNewLyricsBlock::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -114,7 +114,7 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
             "% ==> Launching lpsrNewLyricsBlock::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

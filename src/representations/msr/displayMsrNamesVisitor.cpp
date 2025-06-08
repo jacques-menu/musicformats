@@ -82,7 +82,7 @@ void displayMsrNamesVisitor::visitStart (S_msrScore& elt)
       "--> Start visiting msrScore";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -108,7 +108,7 @@ void displayMsrNamesVisitor::visitEnd (S_msrScore& elt)
       "--> End visiting msrScore";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -164,7 +164,7 @@ void displayMsrNamesVisitor::visitStart (S_msrPartGroup& elt)
       "--> Start visiting msrPartGroup";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -222,7 +222,7 @@ void displayMsrNamesVisitor::visitEnd (S_msrPartGroup& elt)
       "--> End visiting msrPartGroup";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -239,7 +239,7 @@ void displayMsrNamesVisitor::visitStart (S_msrPart& elt)
       "--> Start visiting msrPart";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -301,7 +301,7 @@ void displayMsrNamesVisitor::visitEnd (S_msrPart& elt)
       "--> End visiting msrPart";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -318,7 +318,7 @@ void displayMsrNamesVisitor::visitStart (S_msrStaff& elt)
       "--> Start visiting msrStaff";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -375,7 +375,7 @@ void displayMsrNamesVisitor::visitEnd (S_msrStaff& elt)
       "--> End visiting msrStaff";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -394,7 +394,7 @@ void displayMsrNamesVisitor::visitStart (S_msrVoice& elt)
       "--> Start visiting msrVoice";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -440,7 +440,7 @@ void displayMsrNamesVisitor::visitEnd (S_msrVoice& elt)
       "--> End visiting msrVoice";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

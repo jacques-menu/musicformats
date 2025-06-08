@@ -46,7 +46,7 @@ void translateLpsrToLilypond (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theLpsrScore != nullptr,
     "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -74,7 +74,7 @@ void translateLpsrToLilypond (
       separator;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -136,7 +136,7 @@ EXP void translateLpsrToLilypondWithHandler (
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -149,7 +149,7 @@ EXP void translateLpsrToLilypondWithHandler (
         std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -192,7 +192,7 @@ EXP void translateLpsrToLilypondWithHandler (
         std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -202,7 +202,7 @@ EXP void translateLpsrToLilypondWithHandler (
     if (gEarlyOptions.getEarlyTracePasses ()) {
       gWaeHandler->waeTraceToStreamWithoutInputLocation (
         err,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         gLanguage->openingLilypondFileForWriting (outputFileName));
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -265,7 +265,7 @@ EXP void translateLpsrToLilypondWithHandler (
         gLanguage->closingLilypondFile (outputFileName);
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

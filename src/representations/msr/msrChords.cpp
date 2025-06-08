@@ -85,7 +85,7 @@ S_msrChord msrChord::create (const mfInputLineNumber& inputLineNumber)
       ", inputLineNumber  " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -110,7 +110,7 @@ S_msrChord msrChord::create (const mfInputLineNumber& inputLineNumber)
 //       ", inputLineNumber  " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -141,7 +141,7 @@ S_msrChord msrChord::create (
       mfDurationKindAsString (chordGraphicNotesDurationKind);
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -172,7 +172,7 @@ S_msrChord msrChord::create (
 //       mfDurationKindAsString (chordGraphicNotesDurationKind);
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -269,7 +269,7 @@ S_msrChord msrChord::createChordNewbornClone (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -277,7 +277,7 @@ S_msrChord msrChord::createChordNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingPart != nullptr,
     "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -338,7 +338,7 @@ S_msrChord msrChord::createChordNewbornClone (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
 //     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -398,7 +398,7 @@ S_msrChord msrChord::createChordNewbornClone (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -420,7 +420,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //     --gIndenter;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -535,7 +535,7 @@ void msrChord::setChordDisplayWholeNotes (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -560,7 +560,7 @@ void msrChord::setChordGraceNotesGroupLinkBefore (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -586,7 +586,7 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -624,7 +624,7 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
 //       "\"";
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -656,7 +656,7 @@ void msrChord::setChordMembersPositionInMeasure (
       ", fChordNotesVector.size(): " << fChordNotesVector.size ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -713,7 +713,7 @@ void msrChord::appendNoteToChord (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -833,7 +833,7 @@ S_msrNote msrChord::fetchChordFirstNonGraceNote () const
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       fInputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "cannot access the first note of an empty chord");
   }
 
@@ -864,7 +864,7 @@ void msrChord::copyNoteValuesToChord (
       ", line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -906,7 +906,7 @@ void msrChord::copyNoteElementsIfAnyToChord (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     note != nullptr, // JMI 0.9.70
     "chord is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1084,7 +1084,7 @@ void msrChord::copyNoteHarmoniesToChord (
         --gIndenter;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           iss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -1118,7 +1118,7 @@ void msrChord::copyNoteArticulationsListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1206,7 +1206,7 @@ void msrChord::copyNoteTechnicalWithFloatsListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1238,7 +1238,7 @@ void msrChord::copyNoteTechnicalWithStringsListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1270,7 +1270,7 @@ void msrChord::copyNoteOrnamentsListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1302,7 +1302,7 @@ void msrChord::copyNoteSpannersListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1333,7 +1333,7 @@ void msrChord::copyNoteSingleTremoloToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1371,7 +1371,7 @@ void msrChord::copyNoteSlursListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1404,7 +1404,7 @@ void msrChord::copyNoteDynamicsListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1436,7 +1436,7 @@ void msrChord::copyNoteOtherDynamicsListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1470,7 +1470,7 @@ void msrChord::copyNoteWordsListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1501,7 +1501,7 @@ void msrChord::copyNoteStemToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1532,7 +1532,7 @@ void msrChord::copyNoteBeamsListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1583,7 +1583,7 @@ void msrChord::appendNoteBeamsListLinksToChord (
         ", line " << note->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1640,7 +1640,7 @@ void msrChord::copyNoteTiesToChord (
         asString () << asString ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -1666,7 +1666,7 @@ void msrChord::copyNoteTiesToChord (
     --gIndenter;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1695,7 +1695,7 @@ void msrChord::appendNoteSlursListLinksToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1754,7 +1754,7 @@ void msrChord::copyNoteLigaturesListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1786,7 +1786,7 @@ void msrChord::copyNotePedalsListToChord (
         asString () << asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1817,7 +1817,7 @@ void msrChord::copyNoteSlashesListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1850,7 +1850,7 @@ void msrChord::copyNoteWedgesListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1883,7 +1883,7 @@ void msrChord::copyNoteSegnosListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1916,7 +1916,7 @@ void msrChord::copyNoteDalSegnosListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1949,7 +1949,7 @@ void msrChord::copyNoteCodasListToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1983,7 +1983,7 @@ void msrChord::addNoteGraceNotesGroupsLinksToChord (
         "";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -2019,7 +2019,7 @@ void msrChord::addNoteGraceNotesGroupsLinksToChord (
         " to chord " << asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -2061,7 +2061,7 @@ void msrChord::copyNoteOctaveShiftToChord (
         asShortString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -2085,7 +2085,7 @@ void msrChord::appendDalSegnoToChord (
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2117,7 +2117,7 @@ void msrChord::appendArticulationToChord (
       " to chord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2150,7 +2150,7 @@ void msrChord::appendSpannerToChord (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2171,7 +2171,7 @@ void msrChord::setChordSingleTremolo (
       " to chord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2208,7 +2208,7 @@ void msrChord::appendTechnicalToChord (
       " to chord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2245,7 +2245,7 @@ void msrChord::appendTechnicalWithIntegerToChord (
      " to chord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2282,7 +2282,7 @@ void msrChord::appendTechnicalWithFloatToChord (
      " to chord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2319,7 +2319,7 @@ void msrChord::appendTechnicalWithStringToChord (
      " to chord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2351,7 +2351,7 @@ void msrChord::appendOrnamentToChord (
      " to chord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2383,7 +2383,7 @@ void msrChord::appendGlissandoToChord (
       " to chord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2419,7 +2419,7 @@ void msrChord::appendSlideToChord (
       " to chord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2439,7 +2439,7 @@ void msrChord::appendChordSlurLinkToChord (
       " to chord " << asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2459,7 +2459,7 @@ void msrChord::appendStemToChord (
       " to chord " << asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2484,7 +2484,7 @@ void msrChord::appendStemToChord (
 //       msrInternalWarning ( // not internal actually JMI ???
 //         gServiceRunData->getInputSourceName (),
 //         fInputLineNumber,
-//   //      __FILE__, __LINE__,
+//   //      __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
     }
   } // for
@@ -2505,7 +2505,7 @@ void msrChord::appendBeamToChord (const S_msrBeam& beam)
       " to chord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2525,7 +2525,7 @@ void msrChord::appendChordBeamLinkToChord (
       " to chord " << asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2550,7 +2550,7 @@ void msrChord::appendChordBeamLinkToChord (
 //       fMeasureElementPositionInMeasure.asString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2572,7 +2572,7 @@ void msrChord::acceptIn (basevisitor* v)
       "% ==> msrChord::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2590,7 +2590,7 @@ void msrChord::acceptIn (basevisitor* v)
             "% ==> Launching msrChord::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2608,7 +2608,7 @@ void msrChord::acceptOut (basevisitor* v)
       "% ==> msrChord::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2626,7 +2626,7 @@ void msrChord::acceptOut (basevisitor* v)
             "% ==> Launching msrChord::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2663,7 +2663,7 @@ void msrChord::browseData (basevisitor* v)
           "% ==> visiting grace notes groups before chords is inhibited";
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -4634,12 +4634,12 @@ msrChordBeamLink::msrChordBeamLink (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     originalBeam != nullptr,
     "originalBeam is NULL");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     upLinkToChord != nullptr,
     "upLinkToChord is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4663,7 +4663,7 @@ S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4672,7 +4672,7 @@ S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4698,7 +4698,7 @@ void msrChordBeamLink::acceptIn (basevisitor* v)
       "% ==> msrChordBeamLink::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4716,7 +4716,7 @@ void msrChordBeamLink::acceptIn (basevisitor* v)
             "% ==> Launching msrChordBeamLink::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -4734,7 +4734,7 @@ void msrChordBeamLink::acceptOut (basevisitor* v)
       "% ==> msrChordBeamLink::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4752,7 +4752,7 @@ void msrChordBeamLink::acceptOut (basevisitor* v)
             "% ==> Launching msrChordBeamLink::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -4891,12 +4891,12 @@ msrChordSlurLink::msrChordSlurLink (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     originalSlur != nullptr,
     "originalSlur is NULL");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     upLinkToChord != nullptr,
     "upLinkToChord is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4920,7 +4920,7 @@ S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4929,7 +4929,7 @@ S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4955,7 +4955,7 @@ void msrChordSlurLink::acceptIn (basevisitor* v)
       "% ==> msrChordSlurLink::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4973,7 +4973,7 @@ void msrChordSlurLink::acceptIn (basevisitor* v)
             "% ==> Launching msrChordSlurLink::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -4991,7 +4991,7 @@ void msrChordSlurLink::acceptOut (basevisitor* v)
       "% ==> msrChordSlurLink::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5009,7 +5009,7 @@ void msrChordSlurLink::acceptOut (basevisitor* v)
             "% ==> Launching msrChordSlurLink::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -5119,12 +5119,12 @@ msrChordGraceNotesGroupLink::msrChordGraceNotesGroupLink (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     originalGraceNotesGroup != nullptr,
     "originalGraceNotesGroup is NULL");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     upLinkToChord != nullptr,
     "upLinkToChord is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -5148,7 +5148,7 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotes
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5157,7 +5157,7 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotes
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -5183,7 +5183,7 @@ void msrChordGraceNotesGroupLink::acceptIn (basevisitor* v)
       "% ==> msrChordGraceNotesGroupLink::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5201,7 +5201,7 @@ void msrChordGraceNotesGroupLink::acceptIn (basevisitor* v)
             "% ==> Launching msrChordGraceNotesGroupLink::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -5219,7 +5219,7 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
       "% ==> msrChordGraceNotesGroupLink::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5237,7 +5237,7 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
             "% ==> Launching msrChordGraceNotesGroupLink::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

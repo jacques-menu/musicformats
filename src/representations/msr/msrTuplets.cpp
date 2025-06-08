@@ -103,7 +103,7 @@ msrTuplet::msrTuplet (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -123,7 +123,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -183,7 +183,7 @@ void msrTuplet::appendNoteToTuplet (const S_msrNote& note)
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -242,7 +242,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -250,7 +250,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     chord != nullptr,
     "chord is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -308,7 +308,7 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -353,7 +353,7 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -390,7 +390,7 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 //       "' from voice \"" << fVoiceName << "\"";
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -433,7 +433,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       fInputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "cannot access the first note of an empty tuplet");
   }
 
@@ -454,7 +454,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 //       asString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -479,7 +479,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 //       msrInternalError (
 //         gServiceRunData->getInputSourceName (),
 //         fInputLineNumber,
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         "removeFirstNoteFromTuplet () expects a note as the first tuplet element");
 //     }
 //
@@ -525,7 +525,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   */
 //   }
@@ -544,7 +544,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 //
@@ -565,7 +565,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 //       asString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -598,7 +598,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 //       msrInternalError (
 //         gServiceRunData->getInputSourceName (),
 //         fInputLineNumber,
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         "removeLastNoteFromTuplet () expects a note as the last tuplet element");
 //     }
 //   }
@@ -617,7 +617,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 //
@@ -632,7 +632,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 //       result->asShortString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -654,7 +654,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 //       asString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -686,7 +686,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 // //       msrInternalError (
 // //         gServiceRunData->getInputSourceName (),
 // //         fInputLineNumber,
-// //         __FILE__, __LINE__,
+// //         __FILE__, mfInputLineNumber (__LINE__),
 // //         "removeLastNoteFromTuplet () expects a note as the last tuplet element");
 // //     }
 //   }
@@ -705,7 +705,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 //
@@ -720,7 +720,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 //       result->asShortString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -757,7 +757,7 @@ void msrTuplet::setMeasureElementPositionInMeasure (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -788,7 +788,7 @@ void msrTuplet::setTupletMembersPositionInMeasures (
       positionInMeasure.asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -799,7 +799,7 @@ void msrTuplet::setTupletMembersPositionInMeasures (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -870,7 +870,7 @@ void msrTuplet::setTupletMembersPositionInMeasures (
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         fInputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "tuplet member should be a note, a chord or another tuplet");
     }
   } // for
@@ -893,7 +893,7 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
       ", containingTupletFactor: " << containingTupletFactor.asFractionString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -925,7 +925,7 @@ void msrTuplet::acceptIn (basevisitor* v)
       "% ==> msrTuplet::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -943,7 +943,7 @@ void msrTuplet::acceptIn (basevisitor* v)
             "% ==> Launching msrTuplet::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -961,7 +961,7 @@ void msrTuplet::acceptOut (basevisitor* v)
       "% ==> msrTuplet::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -979,7 +979,7 @@ void msrTuplet::acceptOut (basevisitor* v)
             "% ==> Launching msrTuplet::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1061,7 +1061,7 @@ std::string msrTuplet::asString () const
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           "tuplet member should be a note, a chord or another tuplet");
       }
 
@@ -1140,7 +1140,7 @@ std::string msrTuplet::asShortString () const
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           "tuplet member should be a note, a chord or another tuplet");
       }
 
@@ -1455,7 +1455,7 @@ void msrTuplet::finalizeTuplet (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

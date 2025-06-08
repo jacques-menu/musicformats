@@ -393,7 +393,7 @@ msrSyllable::msrSyllable (
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         mfAssert ( // JMI 0.9.70 BABASSE
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           syllableWholeNotes.getNumerator () > 0,
           "syllableWholeNotes "
             +
@@ -451,7 +451,7 @@ msrSyllable::msrSyllable (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity checks
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     syllableUpLinkToStanza != nullptr,
     "syllableUpLinkToStanza is NULL");
 
@@ -467,7 +467,7 @@ msrSyllable::msrSyllable (
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         mfAssert ( // JMI 0.9.70 BABASSE
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           syllableWholeNotes.getNumerator () > 0,
           "syllableWholeNotes "
             +
@@ -534,7 +534,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -542,7 +542,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingPart != nullptr,
     "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -586,7 +586,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -594,7 +594,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingPart != nullptr,
     "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -633,7 +633,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -669,7 +669,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 //       fSyllableMeasureNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -695,7 +695,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
 //           fInputLineNumber,
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           ss.str ());
 //       }
 //       break;
@@ -736,7 +736,7 @@ void msrSyllable::appendSyllableElementToSyllable (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -773,7 +773,7 @@ void msrSyllable::acceptIn (basevisitor* v)
       "% ==> msrSyllable::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -791,7 +791,7 @@ void msrSyllable::acceptIn (basevisitor* v)
             "% ==> Launching msrSyllable::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -809,7 +809,7 @@ void msrSyllable::acceptOut (basevisitor* v)
       "% ==> msrSyllable::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -827,7 +827,7 @@ void msrSyllable::acceptOut (basevisitor* v)
             "% ==> Launching msrSyllable::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -997,7 +997,7 @@ std::string msrSyllable::asString () const
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         fInputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "syllable type has not been set");
       break;
 
@@ -1203,7 +1203,7 @@ void msrSyllable::printFull (std::ostream& os) const
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         fInputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "syllable type has not been set");
       break;
 
@@ -1265,7 +1265,7 @@ msrStanza::msrStanza (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     stanzaUpLinkToVoice != nullptr,
     "stanzaUpLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1300,7 +1300,7 @@ void msrStanza::initializeStanza ()
       "Initializing stanza " << getStanzaName ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1328,7 +1328,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1336,7 +1336,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1384,7 +1384,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1392,7 +1392,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1466,7 +1466,7 @@ void msrStanza::appendSyllableToStanza (
       ", line " << syllable->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1532,7 +1532,7 @@ void msrStanza::appendSyllableToStanza (
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         fInputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "syllable type has not been set");
       break;
   } // switch
@@ -1555,7 +1555,7 @@ void msrStanza::appendSyllableToStanzaClone (
       " to stanza clone " << getStanzaName ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1599,7 +1599,7 @@ void msrStanza::appendSyllableToStanzaClone (
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         fInputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "syllable type has not been set");
       break;
   } // switch
@@ -1645,7 +1645,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1720,7 +1720,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1766,7 +1766,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1816,7 +1816,7 @@ void msrStanza::appendPaddingNoteToStanza ( // JMI USELESS??? 0.9.70
       "\", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1838,7 +1838,7 @@ void msrStanza::acceptIn (basevisitor* v)
       "% ==> msrStanza::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1856,7 +1856,7 @@ void msrStanza::acceptIn (basevisitor* v)
             "% ==> Launching msrStanza::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1874,7 +1874,7 @@ void msrStanza::acceptOut (basevisitor* v)
       "% ==> msrStanza::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1892,7 +1892,7 @@ void msrStanza::acceptOut (basevisitor* v)
             "% ==> Launching msrStanza::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1910,7 +1910,7 @@ void msrStanza::browseData (basevisitor* v)
       "% ==> msrStanza::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1935,7 +1935,7 @@ void msrStanza::browseData (basevisitor* v)
       "% <== msrStanza::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

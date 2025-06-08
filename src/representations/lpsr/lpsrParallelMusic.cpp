@@ -96,7 +96,7 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
       "% ==> lpsrParallelMusicBLock::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -114,7 +114,7 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
             "% ==> Launching lpsrParallelMusicBLock::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -132,7 +132,7 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
       "% ==> lpsrParallelMusicBLock::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -150,7 +150,7 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
             "% ==> Launching lpsrParallelMusicBLock::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -168,7 +168,7 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
       "% ==> lpsrParallelMusicBLock::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -192,7 +192,7 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
       "% <== lpsrParallelMusicBLock::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

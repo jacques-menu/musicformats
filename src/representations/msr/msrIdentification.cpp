@@ -60,7 +60,7 @@ void msrIdentification::setIdentificationWorkNumber (
       "Setting workNumber to \"" << val << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -80,7 +80,7 @@ void msrIdentification::setIdentificationWorkCreditTypeTitle (
       "Setting workCreditTypeTitle to \"" << val << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -100,7 +100,7 @@ void msrIdentification::setIdentificationOpus (
       "Setting opus to \"" << val << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -120,7 +120,7 @@ void msrIdentification::setIdentificationMovementNumber (
       "Setting movementNumber to \"" << val << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -140,7 +140,7 @@ void msrIdentification::setIdentificationMovementTitle (
       "Setting movementTitle to \"" << val << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -160,7 +160,7 @@ void msrIdentification::setIdentificationEncodingDate (
       "Setting encodingDate to \"" << val << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -180,7 +180,7 @@ void msrIdentification::setIdentificationMiscellaneousField (
       "Setting miscellaneousField to \"" << val << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -200,7 +200,7 @@ void msrIdentification::setIdentificationScoreInstrument (
       "Setting scoreInstrument to \"" << val << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -220,7 +220,7 @@ void msrIdentification::appendComposer (
       "Appending composer \"" << value << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -240,7 +240,7 @@ void msrIdentification::appendLyricist (
       "Appending lyricist \"" << value << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -260,7 +260,7 @@ void msrIdentification::appendArranger (
       "Appending arranger \"" << value << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -280,7 +280,7 @@ void msrIdentification::appendPoet (
       "Appending poet \"" << value << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -300,7 +300,7 @@ void msrIdentification::appendTranslator (
       "Appending translator \"" << value << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -320,7 +320,7 @@ void msrIdentification::appendArtist (
       "Appending artist \"" << value << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -340,7 +340,7 @@ void msrIdentification::appendSoftware (
       "Appending software \"" << value << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -360,7 +360,7 @@ void msrIdentification::appendRight (
       "Appending right \"" << value << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -380,7 +380,7 @@ void msrIdentification::appendSource (
       "Appendings source \"" << value << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -400,7 +400,7 @@ void msrIdentification::appendRelation (
       "Appending relation \"" << value << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -567,7 +567,7 @@ void msrIdentification::acceptIn (basevisitor* v)
       "% ==> msrIdentification::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -585,7 +585,7 @@ void msrIdentification::acceptIn (basevisitor* v)
             "% ==> Launching msrIdentification::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -603,7 +603,7 @@ void msrIdentification::acceptOut (basevisitor* v)
       "% ==> msrIdentification::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -621,7 +621,7 @@ void msrIdentification::acceptOut (basevisitor* v)
             "% ==> Launching msrIdentification::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif        

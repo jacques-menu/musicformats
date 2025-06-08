@@ -53,7 +53,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayAllHarmoniesStructures
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -88,7 +88,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayAllHarmoniesStructuresAt
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -107,7 +107,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayAllHarmoniesContentsAt
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -142,7 +142,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayAllHarmoniesContentsAtom
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -161,7 +161,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayHarmonyDetailsAtom& el
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -196,7 +196,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayHarmonyDetailsAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -215,7 +215,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraDisplayHarmonyAnalysisAtom& e
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -250,7 +250,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraDisplayHarmonyAnalysisAtom& elt
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

@@ -14,6 +14,8 @@
 
 #include "exports.h"
 
+#include "mfBasicTypes.h"
+
 #include "mfExceptions.h"
 
 
@@ -22,19 +24,19 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 EXP void mfWarning (
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message);
 
 EXP void mfError (
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message);
 
 EXP void mfInternalWarning (
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message);
 
 
 }

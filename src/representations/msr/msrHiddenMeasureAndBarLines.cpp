@@ -47,7 +47,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -85,7 +85,7 @@ msrHiddenMeasureAndBarLine::~msrHiddenMeasureAndBarLine ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -119,7 +119,7 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
       "% ==> msrHiddenMeasureAndBarLine::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -137,7 +137,7 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
             "% ==> Launching msrHiddenMeasureAndBarLine::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -155,7 +155,7 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
       "% ==> msrHiddenMeasureAndBarLine::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -173,7 +173,7 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
             "% ==> Launching msrHiddenMeasureAndBarLine::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

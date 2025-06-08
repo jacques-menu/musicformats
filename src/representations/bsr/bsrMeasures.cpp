@@ -64,7 +64,7 @@ bsrMeasure::bsrMeasure (
       fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -84,7 +84,7 @@ S_bsrMeasure bsrMeasure::createMeasureNewbornClone ()
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -121,7 +121,7 @@ void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -255,7 +255,7 @@ void bsrMeasure::acceptIn (basevisitor* v)
       "% ==> bsrMeasure::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -273,7 +273,7 @@ void bsrMeasure::acceptIn (basevisitor* v)
             "% ==> Launching bsrMeasure::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -292,7 +292,7 @@ void bsrMeasure::acceptOut (basevisitor* v)
       "% ==> bsrMeasure::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -310,7 +310,7 @@ void bsrMeasure::acceptOut (basevisitor* v)
             "% ==> Launching bsrMeasure::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

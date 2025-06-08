@@ -1763,7 +1763,7 @@ class EXP lpsr2lilypondTranslator :
     // we need to count the measures
     // for option fSeparatorLineEveryNMeasures and bar number checks,
     // since measure numbers can actually be any strings
-    std::string           fCurrentMeasureNumber;
+    mfMeasureNumber       fCurrentMeasureNumber;
     int                   fCurrentVoiceMeasuresCounter;
 
     // notes

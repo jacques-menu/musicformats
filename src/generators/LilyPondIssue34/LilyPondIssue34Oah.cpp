@@ -210,7 +210,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> LilyPondIssue34OahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -228,7 +228,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching LilyPondIssue34OahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -246,7 +246,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> LilyPondIssue34OahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -264,7 +264,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching LilyPondIssue34OahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -282,7 +282,7 @@ void LilyPondIssue34OahGroup::browseData (basevisitor* v)
       ".\\\" ==> LilyPondIssue34OahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -355,7 +355,7 @@ S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ()
       "Creating global LilyPondIssue34 OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

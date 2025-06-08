@@ -79,7 +79,7 @@ class EXP waeHandler : public smartable
     virtual void          waeErrorWithoutException (
                             const std::string& context,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message);
 
     virtual void          waeErrorWithoutExceptionWithInputLocation (
@@ -87,7 +87,7 @@ class EXP waeHandler : public smartable
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message);
 
     // errors with exception
@@ -96,7 +96,7 @@ class EXP waeHandler : public smartable
     virtual void          waeErrorWithException (
                             const std::string& context,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message,
                             const S_mfException& except);
 
@@ -105,7 +105,7 @@ class EXP waeHandler : public smartable
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message,
                             const S_mfException& except);
 
@@ -117,7 +117,7 @@ class EXP waeHandler : public smartable
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message,
                             const S_mfException& except);
 
@@ -127,7 +127,7 @@ class EXP waeHandler : public smartable
     virtual void          waeError (
                             const std::string& context,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message);
 
     virtual void          waeErrorWithInputLocation (
@@ -135,7 +135,7 @@ class EXP waeHandler : public smartable
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message);
 
     // internal errors
@@ -146,7 +146,7 @@ class EXP waeHandler : public smartable
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
+                            const mfInputLineNumber& sourceCodeLineNumber,
                             const std::string& message);
 
 

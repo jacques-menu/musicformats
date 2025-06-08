@@ -534,7 +534,7 @@ void ischemeInput::enrichNameOptionsBlock (
 
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     nameOptionsBlock != nullptr,
     "nameOptionsBlock is NULL");
 
@@ -1355,7 +1355,7 @@ void ischemeChoice::enrichLabelOptionsBlock (
 
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     labelOptionsBlock != nullptr,
     "labelOptionsBlock is NULL");
 
@@ -1854,7 +1854,7 @@ ischemeCaseChoiceStatement::ischemeCaseChoiceStatement (
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     caseChoice != nullptr,
     "caseChoice is NULL");
 
@@ -2057,7 +2057,7 @@ ischemeCaseInputStatement::ischemeCaseInputStatement (
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     caseInput != nullptr,
     "caseInput is NULL");
 

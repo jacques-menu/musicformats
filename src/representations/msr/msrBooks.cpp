@@ -95,7 +95,7 @@ S_msrBook msrBook::createBookNewbornClone ()
       "Creating a newborn clone of a score";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -172,7 +172,7 @@ void msrBook::addBookElementToBook (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       bookElement->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -204,7 +204,7 @@ void msrBook::appendCreditToBook (
       "' to score";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -402,7 +402,7 @@ void msrBook::acceptIn (basevisitor* v)
       "% ==> msrBook::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -420,7 +420,7 @@ void msrBook::acceptIn (basevisitor* v)
             "% ==> Launching msrBook::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -438,7 +438,7 @@ void msrBook::acceptOut (basevisitor* v)
       "% ==> msrBook::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -456,7 +456,7 @@ void msrBook::acceptOut (basevisitor* v)
             "% ==> Launching msrBook::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -474,7 +474,7 @@ void msrBook::browseData (basevisitor* v)
       "% ==> msrBook::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -543,7 +543,7 @@ void msrBook::browseData (basevisitor* v)
       "% <== msrBook::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

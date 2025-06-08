@@ -172,7 +172,7 @@ msrBassFigure::msrBassFigure (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     figureUpLinkToPart != nullptr,
     "figureUpLinkToPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -194,7 +194,7 @@ msrBassFigure::msrBassFigure (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -215,7 +215,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -223,7 +223,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingPart != nullptr,
     "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -252,7 +252,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -260,7 +260,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingPart != nullptr,
     "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -299,7 +299,7 @@ void msrBassFigure::acceptIn (basevisitor* v)
       "% ==> msrBassFigure::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -317,7 +317,7 @@ void msrBassFigure::acceptIn (basevisitor* v)
             "% ==> Launching msrBassFigure::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -335,7 +335,7 @@ void msrBassFigure::acceptOut (basevisitor* v)
       "% ==> msrBassFigure::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -353,7 +353,7 @@ void msrBassFigure::acceptOut (basevisitor* v)
             "% ==> Launching msrBassFigure::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -494,7 +494,7 @@ msrFiguredBass::msrFiguredBass (
 {
 //   // sanity check JMI 0.9.66
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     upLinkToMeasure != nullptr,
 //     "upLinkToMeasure is NULL");
 
@@ -532,7 +532,7 @@ msrFiguredBass::msrFiguredBass (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -554,7 +554,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -562,7 +562,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -597,7 +597,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -605,7 +605,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     containingPart != nullptr,
 //     "containingPart is NULL");
 // ?#endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -640,7 +640,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
       " to note " << note->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -648,7 +648,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     note != nullptr,
     "note is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -662,7 +662,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -700,7 +700,7 @@ void msrFiguredBass::appendFigureToFiguredBass (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -718,7 +718,7 @@ void msrFiguredBass::acceptIn (basevisitor* v)
       "% ==> msrFiguredBass::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -736,7 +736,7 @@ void msrFiguredBass::acceptIn (basevisitor* v)
             "% ==> Launching msrFiguredBass::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -754,7 +754,7 @@ void msrFiguredBass::acceptOut (basevisitor* v)
       "% ==> msrFiguredBass::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -772,7 +772,7 @@ void msrFiguredBass::acceptOut (basevisitor* v)
             "% ==> Launching msrFiguredBass::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

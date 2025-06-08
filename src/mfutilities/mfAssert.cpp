@@ -26,7 +26,7 @@ namespace MusicFormats
 
 void mfAssert (
   const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
+  const mfInputLineNumber& sourceCodeLineNumber,
   Bool               condition,
   const std::string& messageIfFalse)
 {
@@ -67,9 +67,9 @@ void mfAssert (
 }
 
 void mfAssertFalse (
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& messageIfFalse)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       messageIfFalse)
 {
   mfAssert (
     sourceCodeFileName,
@@ -81,12 +81,12 @@ void mfAssertFalse (
 //______________________________________________________________________________
 // assert with input location
 void mfAssertWithInputLocation (
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  Bool               condition,
-  const std::string& inputSourceName,
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  Bool                     condition,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& messageIfFalse)
+  const std::string&       messageIfFalse)
 //   const std::string  measureNumber,
 //   int                scoreMeasuresNumber)
 {

@@ -62,7 +62,7 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
       "% ==> lpsrBookBlockElement::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -80,7 +80,7 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
             "% ==> Launching lpsrBookBlockElement::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -98,7 +98,7 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
       "% ==> lpsrBookBlockElement::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -116,7 +116,7 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
             "% ==> Launching lpsrBookBlockElement::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -134,7 +134,7 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
       "% ==> lpsrBookBlockElement::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -165,7 +165,7 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
       "% <== lpsrBookBlockElement::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -259,7 +259,7 @@ void lpsrScoreBlock::appendPartGroupBlockToScoreBlock (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -286,7 +286,7 @@ void lpsrScoreBlock::appendVoiceUseToParallelMusicBLock (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -311,7 +311,7 @@ void lpsrScoreBlock::appendLyricsUseToParallelMusicBLock (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -331,7 +331,7 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
       "% ==> lpsrScoreBlock::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -349,7 +349,7 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
             "% ==> Launching lpsrScoreBlock::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -367,7 +367,7 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
       "% ==> lpsrScoreBlock::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -385,7 +385,7 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
             "% ==> Launching lpsrScoreBlock::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -403,7 +403,7 @@ void lpsrScoreBlock::browseData (basevisitor* v)
       "% ==> lpsrScoreBlock::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -445,7 +445,7 @@ void lpsrScoreBlock::browseData (basevisitor* v)
       "% <== lpsrScoreBlock::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -518,7 +518,7 @@ void lpsrBookPartBlock::appendPartGroupBlockToBookPartBlock (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -545,7 +545,7 @@ void lpsrBookPartBlock::appendVoiceUseToParallelMusicBLock (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -570,7 +570,7 @@ void lpsrBookPartBlock::appendLyricsUseToParallelMusicBLock (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -590,7 +590,7 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
       "% ==> lpsrBookPartBlock::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -608,7 +608,7 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
             "% ==> Launching lpsrBookPartBlock::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -626,7 +626,7 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
       "% ==> lpsrBookPartBlock::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -644,7 +644,7 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
             "% ==> Launching lpsrBookPartBlock::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -662,7 +662,7 @@ void lpsrBookPartBlock::browseData (basevisitor* v)
       "% ==> lpsrBookPartBlock::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -681,7 +681,7 @@ void lpsrBookPartBlock::browseData (basevisitor* v)
       "% <== lpsrBookPartBlock::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -756,7 +756,7 @@ void lpsrBookBlock::appendPartGroupBlockToBlock (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -784,7 +784,7 @@ void lpsrBookBlock::appendBookBlockElementToBookBlockElementsList (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -807,7 +807,7 @@ void lpsrBookBlock::appendLpsrScoreBlockToBookBlockElementsList (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -830,7 +830,7 @@ void lpsrBookBlock::appendLpsrBookPartBlockToBookBlockElementsList (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -854,7 +854,7 @@ void lpsrBookBlock::appendVoiceUseToParallelMusicBLock (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -879,7 +879,7 @@ void lpsrBookBlock::appendLyricsUseToParallelMusicBLock (
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -899,7 +899,7 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
       "% ==> lpsrBookBlock::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -917,7 +917,7 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
             "% ==> Launching lpsrBookBlock::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -935,7 +935,7 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
       "% ==> lpsrBookBlock::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -953,7 +953,7 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
             "% ==> Launching lpsrBookBlock::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -971,7 +971,7 @@ void lpsrBookBlock::browseData (basevisitor* v)
       "% ==> lpsrBookBlock::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1006,7 +1006,7 @@ void lpsrBookBlock::browseData (basevisitor* v)
       "% <== lpsrBookBlock::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

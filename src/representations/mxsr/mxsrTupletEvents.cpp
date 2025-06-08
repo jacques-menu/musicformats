@@ -117,7 +117,7 @@ mxsrTupletEvent::mxsrTupletEvent (
 			", line " << eventInputLineNumber;
 
 		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
+			__FILE__, mfInputLineNumber (__LINE__),
 			ss.str ());
 	}
 #endif // MF_TRACE_IS_ENABLED
@@ -125,7 +125,7 @@ mxsrTupletEvent::mxsrTupletEvent (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check JMI 0.9.70
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
 #ifdef MF_USE_WRAPPED_TYPES
     tupletNumber.getBareValue () > 0,
 #else

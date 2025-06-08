@@ -72,7 +72,7 @@ void msr2brailleManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a msr2brailleManPageGenerateAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -90,7 +90,7 @@ void msr2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msr2brailleManPageGenerateAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -108,7 +108,7 @@ void msr2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msr2brailleManPageGenerateAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -126,7 +126,7 @@ void msr2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msr2brailleManPageGenerateAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -144,7 +144,7 @@ void msr2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msr2brailleManPageGenerateAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -162,7 +162,7 @@ void msr2brailleManPageGenerateAtom::browseData (basevisitor* v)
       ".\\\" ==> msr2brailleManPageGenerateAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -327,7 +327,7 @@ void msr2brailleManPageOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msr2brailleManPageOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -345,7 +345,7 @@ void msr2brailleManPageOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msr2brailleManPageOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -363,7 +363,7 @@ void msr2brailleManPageOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msr2brailleManPageOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -381,7 +381,7 @@ void msr2brailleManPageOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msr2brailleManPageOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -399,7 +399,7 @@ void msr2brailleManPageOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msr2brailleManPageOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -443,7 +443,7 @@ S_msr2brailleManPageOahGroup createGlobalXml2brailleManPageOahHandler (
       "Creating global xml2blrManPage OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

@@ -65,7 +65,7 @@ msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
       "Creating a print layout ";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -93,7 +93,7 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
       "% ==> msrMusicXMLPrintLayout::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -111,7 +111,7 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
             "% ==> Launching msrMusicXMLPrintLayout::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -129,7 +129,7 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
       "% ==> msrMusicXMLPrintLayout::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -147,7 +147,7 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
             "% ==> Launching msrMusicXMLPrintLayout::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

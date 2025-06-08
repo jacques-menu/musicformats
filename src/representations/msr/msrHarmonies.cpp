@@ -79,7 +79,7 @@ msrHarmonyInterval::msrHarmonyInterval (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -170,7 +170,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -201,7 +201,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -266,7 +266,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       resultRelativeOctave;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1446,7 +1446,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1485,7 +1485,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2639,7 +2639,7 @@ void msrHarmonyInterval::acceptIn (basevisitor* v) {
       "% ==> msrHarmonyInterval::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2669,7 +2669,7 @@ void msrHarmonyInterval::acceptOut (basevisitor* v) {
       "% ==> msrHarmonyInterval::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2851,7 +2851,7 @@ msrModeKind modeKindFromString (
     msrError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -3659,7 +3659,7 @@ msrHarmonyDegree::msrHarmonyDegree (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3674,7 +3674,7 @@ void msrHarmonyDegree::setHarmonyDegreeUpLinkToHarmony (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     UpLinkToHarmony != nullptr,
      "UpLinkToHarmony is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3754,7 +3754,7 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
       "% ==> msrHarmonyDegree::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3772,7 +3772,7 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
             "% ==> Launching msrHarmonyDegree::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3790,7 +3790,7 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
       "% ==> msrHarmonyDegree::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3808,7 +3808,7 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
             "% ==> Launching msrHarmonyDegree::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3926,7 +3926,7 @@ msrHarmonyContents::msrHarmonyContents (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4022,7 +4022,7 @@ msrSemiTonesPitchKind msrHarmonyContents::bassSemiTonesPitchKindForHarmonyInvers
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -4148,7 +4148,7 @@ void msrHarmonyContents::acceptIn (basevisitor* v) {
       "% ==> msrHarmonyContents::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4178,7 +4178,7 @@ void msrHarmonyContents::acceptOut (basevisitor* v) {
       "% ==> msrHarmonyContents::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4401,7 +4401,7 @@ msrHarmony::msrHarmony (
         msrError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -4420,7 +4420,7 @@ msrHarmony::msrHarmony (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4442,7 +4442,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4450,7 +4450,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4495,7 +4495,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4503,7 +4503,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4550,7 +4550,7 @@ void msrHarmony::setHarmonySoundingWholeNotes (
       ", context: " << context;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4574,7 +4574,7 @@ void msrHarmony::setHarmonyDisplayWholeNotes (
       ", context: " << context;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4588,7 +4588,7 @@ void msrHarmony::setHarmonyDisplayWholeNotes (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4627,7 +4627,7 @@ void msrHarmony::setHarmonyTupletFactor (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4648,7 +4648,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
       " to note " << note->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4656,7 +4656,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     note != nullptr,
     "note is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4674,7 +4674,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //      "setMeasureElementPositionInMeasure(): measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4712,7 +4712,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     fHarmonyUpLinkToNote != nullptr,
 //     "fHarmonyUpLinkToNote is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4728,7 +4728,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
 //     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4759,7 +4759,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
       " frame to " << frame->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4798,7 +4798,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 //       std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -4830,7 +4830,7 @@ void msrHarmony::acceptIn (basevisitor* v)
       "% ==> msrHarmony::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4848,7 +4848,7 @@ void msrHarmony::acceptIn (basevisitor* v)
             "% ==> Launching msrHarmony::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -4866,7 +4866,7 @@ void msrHarmony::acceptOut (basevisitor* v)
       "% ==> msrHarmony::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4884,7 +4884,7 @@ void msrHarmony::acceptOut (basevisitor* v)
             "% ==> Launching msrHarmony::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -6036,7 +6036,7 @@ msrHarmonyStructure::msrHarmonyStructure (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6938,7 +6938,7 @@ void msrHarmonyStructure::acceptIn (basevisitor* v) {
       "% ==> msrHarmonyStructure::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6968,7 +6968,7 @@ void msrHarmonyStructure::acceptOut (basevisitor* v) {
       "% ==> msrHarmonyStructure::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7020,7 +7020,7 @@ S_msrHarmonyInterval msrHarmonyStructure::bassHarmonyIntervalForHarmonyInversion
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -7054,7 +7054,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       harmonyStructureIntervalsSize;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7081,7 +7081,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
         --gIndenter;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7105,7 +7105,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
         --gIndenter;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7135,7 +7135,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
         --gIndenter;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7159,7 +7159,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
         --gIndenter;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED

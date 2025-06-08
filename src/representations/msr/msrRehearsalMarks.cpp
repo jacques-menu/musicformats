@@ -91,7 +91,7 @@ msrRehearsalMark::~msrRehearsalMark ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -125,7 +125,7 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
       "% ==> msrRehearsalMark::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -143,7 +143,7 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
             "% ==> Launching msrRehearsalMark::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -161,7 +161,7 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
       "% ==> msrRehearsalMark::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -179,7 +179,7 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
             "% ==> Launching msrRehearsalMark::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

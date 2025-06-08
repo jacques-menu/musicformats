@@ -76,7 +76,7 @@ msrRepeatCommonPart::msrRepeatCommonPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     upLinkToRepeat != nullptr,
     "upLinkToRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -104,7 +104,7 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -112,7 +112,7 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     segment != nullptr,
     "segment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -126,7 +126,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
   const std::string& context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -138,7 +138,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -146,7 +146,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     repeat != nullptr,
     "repeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -171,7 +171,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -179,7 +179,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     measureRepeat != nullptr,
     "measureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -197,14 +197,14 @@ void msrRepeatCommonPart::cascadeAppendMultipleMeasureRestToRepeatCommonPart (
     std::stringstream ss;
 
     ss <<
-      "Appending multiple measure rest " <<
+      "Cascading appending multiple measure rest " <<
       multipleMeasureRests->asString () <<
       " to repeat common part " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -212,7 +212,7 @@ void msrRepeatCommonPart::cascadeAppendMultipleMeasureRestToRepeatCommonPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     multipleMeasureRests != nullptr,
     "multipleMeasureRests is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -226,7 +226,7 @@ void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
   const std::string&     context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -237,7 +237,7 @@ void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -245,7 +245,7 @@ void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     voiceElement != nullptr,
     "voiceElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -323,7 +323,7 @@ S_msrNote msrRepeatCommonPart::fetchRepeatCommonPartFirstNonGraceNote () const
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -344,7 +344,7 @@ void msrRepeatCommonPart::acceptIn (basevisitor* v)
       "% ==> msrRepeatCommonPart::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -362,7 +362,7 @@ void msrRepeatCommonPart::acceptIn (basevisitor* v)
             "% ==> Launching msrRepeatCommonPart::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -380,7 +380,7 @@ void msrRepeatCommonPart::acceptOut (basevisitor* v)
       "% ==> msrRepeatCommonPart::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -398,7 +398,7 @@ void msrRepeatCommonPart::acceptOut (basevisitor* v)
             "% ==> Launching msrRepeatCommonPart::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -625,7 +625,7 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -633,7 +633,7 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     segment != nullptr,
     "segment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -657,7 +657,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -665,7 +665,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     repeat != nullptr,
     "repeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -690,7 +690,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -698,7 +698,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     measureRepeat != nullptr,
     "measureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -716,14 +716,14 @@ void msrRepeatEnding::cascadeAppendMultipleMeasureRestToRepeatEnding (
     std::stringstream ss;
 
     ss <<
-      "Appending multiple measure rest " <<
+      "Cascading appending multiple measure rest " <<
       multipleMeasureRests->asShortString () <<
       " to repeat ending " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -731,7 +731,7 @@ void msrRepeatEnding::cascadeAppendMultipleMeasureRestToRepeatEnding (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     multipleMeasureRests != nullptr,
     "multipleMeasureRests is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -755,7 +755,7 @@ void msrRepeatEnding::appendVoiceElementToRepeatEnding (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -763,7 +763,7 @@ void msrRepeatEnding::appendVoiceElementToRepeatEnding (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     voiceElement != nullptr,
     "voiceElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -781,7 +781,7 @@ void msrRepeatEnding::acceptIn (basevisitor* v)
       "% ==> msrRepeatEnding::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -799,7 +799,7 @@ void msrRepeatEnding::acceptIn (basevisitor* v)
             "% ==> Launching msrRepeatEnding::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -817,7 +817,7 @@ void msrRepeatEnding::acceptOut (basevisitor* v)
       "% ==> msrRepeatEnding::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -835,7 +835,7 @@ void msrRepeatEnding::acceptOut (basevisitor* v)
             "% ==> Launching msrRepeatEnding::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1104,7 +1104,7 @@ msrRepeat::msrRepeat (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     upLinkToVoice != nullptr,
     "upLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1127,14 +1127,14 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
   const S_msrVoice& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
       "Creating a newborn clone of a repeat";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1142,7 +1142,7 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1166,13 +1166,13 @@ void msrRepeat::setRepeatCommonPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     repeatCommonPart != nullptr,
     "repeatCommonPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1184,7 +1184,7 @@ void msrRepeat::setRepeatCommonPart (
         "elements");
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1203,25 +1203,24 @@ void msrRepeat::addRepeatEndingToRepeat (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     repeatEnding != nullptr,
     "repeatEnding is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
       "Adding ending '" <<
       repeatEnding->asString () <<
       "' to repeat" <<
-      "' to repeat '" <<
       asShortString () <<
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1256,7 +1255,7 @@ void msrRepeat::addRepeatEndingToRepeat (
             msrError (
               gServiceRunData->getInputSourceName (),
               fInputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -1279,7 +1278,7 @@ void msrRepeat::addRepeatEndingToRepeat (
             msrError (
               gServiceRunData->getInputSourceName (),
               fInputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -1300,7 +1299,7 @@ void msrRepeat::addRepeatEndingToRepeat (
             msrInternalError (
               gServiceRunData->getInputSourceName (),
               fInputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -1317,7 +1316,7 @@ void msrRepeat::addRepeatEndingToRepeat (
             msrInternalWarning (
               gServiceRunData->getInputSourceName (),
               fInputLineNumber,
-//               __FILE__, __LINE__,
+//               __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -1336,7 +1335,7 @@ void msrRepeat::addRepeatEndingToRepeat (
             msrError (
               gServiceRunData->getInputSourceName (),
               fInputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
       } // switch
@@ -1365,7 +1364,7 @@ void msrRepeat::appendSegmentToRepeat (
   const std::string& context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1400,7 +1399,7 @@ void msrRepeat::appendSegmentToRepeat (
         msrError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -1434,7 +1433,7 @@ void msrRepeat::appendSegmentToRepeat (
         msrError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -1455,7 +1454,7 @@ void msrRepeat::appendRepeatToRepeat (
   const std::string& context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1490,7 +1489,7 @@ void msrRepeat::appendRepeatToRepeat (
         msrError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -1524,7 +1523,7 @@ void msrRepeat::appendRepeatToRepeat (
         msrError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -1580,7 +1579,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
         msrError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -1614,7 +1613,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
         msrError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -1639,7 +1638,7 @@ void msrRepeat::cascadeAppendMultipleMeasureRestToRepeat (
     std::stringstream ss;
 
     ss <<
-      "Appending multiple measure rest " <<
+      "Cascading appending multiple measure rest " <<
       multipleMeasureRests->asString () <<
       " to repeat " <<
       asShortString () <<
@@ -1669,7 +1668,7 @@ void msrRepeat::cascadeAppendMultipleMeasureRestToRepeat (
         msrError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -1703,7 +1702,7 @@ void msrRepeat::cascadeAppendMultipleMeasureRestToRepeat (
         msrError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -1741,7 +1740,7 @@ void msrRepeat::acceptIn (basevisitor* v)
       "% ==> msrRepeat::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1759,7 +1758,7 @@ void msrRepeat::acceptIn (basevisitor* v)
             "% ==> Launching msrRepeat::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1777,7 +1776,7 @@ void msrRepeat::acceptOut (basevisitor* v)
       "% ==> msrRepeat::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1795,7 +1794,7 @@ void msrRepeat::acceptOut (basevisitor* v)
             "% ==> Launching msrRepeat::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

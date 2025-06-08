@@ -38,12 +38,12 @@ msrTupletFactor::msrTupletFactor (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check JMI 0.9.70
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fTupletActualNotes > 0,
     "fTupletActualNotes is not positive");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fTupletNormalNotes > 0,
     "fTupletNormalNotes is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -58,12 +58,12 @@ msrTupletFactor::msrTupletFactor (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check JMI 0.9.70
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fTupletActualNotes > 0,
     "fTupletActualNotes is not positive");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fTupletNormalNotes > 0,
     "fTupletNormalNotes is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED

@@ -142,7 +142,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2));
 #endif // MF_TRACE_IS_ENABLED
 
@@ -178,7 +178,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
 #endif // MF_TRACE_IS_ENABLED
 
@@ -216,7 +216,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
 #endif // MF_TRACE_IS_ENABLED
 
@@ -353,7 +353,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
       ", insiderOption: " << insiderOption;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

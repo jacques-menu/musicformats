@@ -46,7 +46,7 @@ msrUseSymbolsKind msrUseSymbolsKindFromString (
       msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }

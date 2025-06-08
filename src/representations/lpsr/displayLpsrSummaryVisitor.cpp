@@ -102,7 +102,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrScore& elt)
       "--> Start visiting msrScore";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -128,7 +128,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrScore& elt)
       "--> End visiting msrScore";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -276,7 +276,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrPartGroup& elt)
       "--> Start visiting msrPartGroup";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -360,7 +360,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrPartGroup& elt)
       "--> End visiting msrPartGroup";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -377,7 +377,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrPart& elt)
       "--> Start visiting msrPart";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -447,7 +447,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrPart& elt)
       "--> End visiting msrPart";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -464,7 +464,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrStaff& elt)
       "--> Start visiting msrStaff";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -521,7 +521,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrStaff& elt)
       "--> End visiting msrStaff";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -540,7 +540,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrVoice& elt)
       "--> Start visiting msrVoice";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -600,7 +600,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrVoice& elt)
       "--> End visiting msrVoice";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -617,7 +617,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrStanza& elt)
       "--> Start visiting msrStanza";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -652,7 +652,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrStanza& elt)
       "--> End visiting msrStanza";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -669,7 +669,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrSyllable& elt)
       "--> Start visiting msrSyllable";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -685,7 +685,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrSyllable& elt)
       "--> End visiting msrSyllable";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -702,7 +702,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrClef& elt)
       "--> Start visiting msrClef";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -724,7 +724,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrClef& elt)
       "--> End visiting msrClef";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -741,7 +741,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrKey& elt)
       "--> Start visiting msrKey";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -763,7 +763,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrKey& elt)
       "--> End visiting msrKey";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -780,7 +780,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrTimeSignature& elt)
       "--> Start visiting msrTimeSignature";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -803,7 +803,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrTimeSignature& elt)
     std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -821,7 +821,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrTempo& elt)
        std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -843,7 +843,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrTempo& elt)
     std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -860,7 +860,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrSegment& elt)
       "--> Start visiting msrSegment";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -876,7 +876,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrSegment& elt)
       "--> End visiting msrSegment";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -893,7 +893,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrArticulation& elt)
       "--> Start visiting msrArticulation";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -909,7 +909,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrArticulation& elt)
       "--> End visiting msrArticulation";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -926,7 +926,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrDynamic& elt)
       "--> Start visiting msrDynamic";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -942,7 +942,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrDynamic& elt)
       "--> End visiting msrDynamic";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -959,7 +959,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrCrescDecresc& elt)
       "--> Start visiting msrCrescDecresc" << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -975,7 +975,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrCrescDecresc& elt)
       "--> End visiting msrCrescDecresc" << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -992,7 +992,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrWedge& elt)
       "--> Start visiting msrWedge" << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1008,7 +1008,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrWedge& elt)
       "--> End visiting msrWedge" << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1025,7 +1025,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrGraceNotesGroup& elt)
       "--> Start visiting msrGraceNotesGroup" << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1041,7 +1041,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrGraceNotesGroup& elt)
       "--> End visiting msrGraceNotesGroup" << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1061,7 +1061,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrNote& elt)
       " msrNote";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1115,7 +1115,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrNote& elt)
       " msrNote";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1159,7 +1159,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrStem& elt)
       "--> Start visiting msrStem" << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1175,7 +1175,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrStem& elt)
       "--> End visiting msrStem";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1192,7 +1192,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrBeam& elt)
       "--> Start visiting msrBeam" << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1208,7 +1208,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrBeam& elt)
       "--> End visiting msrBeam";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1225,7 +1225,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrChord& elt)
       "--> Start visiting msrChord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1243,7 +1243,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrChord& elt)
       "--> End visiting msrChord";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1260,7 +1260,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrTuplet& elt)
       "--> Start visiting msrTuplet";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1278,7 +1278,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrTuplet& elt)
       "--> End visiting msrTuplet";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1295,7 +1295,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrSlur& elt)
       "--> Start visiting msrSlur";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1311,7 +1311,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrSlur& elt)
       "--> End visiting msrSlur";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1328,7 +1328,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrBarLine& elt)
       "--> Start visiting msrBarLine";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1344,7 +1344,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrBarLine& elt)
       "--> End visiting msrBarLine";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1361,7 +1361,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrBarNumberCheck& elt)
       "--> Start visiting msrBarNumberCheck";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1377,7 +1377,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrBarNumberCheck& elt)
       "--> End visiting msrBarNumberCheck";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1394,7 +1394,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrLineBreak& elt)
       "--> Start visiting msrLineBreak";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1410,7 +1410,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrLineBreak& elt)
       "--> End visiting msrLineBreak";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1427,7 +1427,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrRepeat& elt)
       "--> Start visiting msrRepeat";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1443,7 +1443,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrRepeat& elt)
       "--> End visiting msrRepeat";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1460,7 +1460,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrScaling& elt)
       "--> Start visiting msrScaling";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1479,7 +1479,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrScaling& elt)
       "--> End visiting msrScaling";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1496,7 +1496,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrPageLayout& elt)
       "--> Start visiting msrPageLayout";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1514,7 +1514,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrPageLayout& elt)
       "--> End visiting msrPageLayout";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1531,7 +1531,7 @@ void displayLpsrSummaryVisitor::visitStart (S_msrMidiTempo& elt)
       "--> Start visiting msrMidiTempo";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1547,7 +1547,7 @@ void displayLpsrSummaryVisitor::visitEnd (S_msrMidiTempo& elt)
       "--> End visiting msrMidiTempo";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

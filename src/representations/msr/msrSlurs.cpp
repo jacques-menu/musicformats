@@ -144,7 +144,7 @@ void msrSlur::acceptIn (basevisitor* v)
       "% ==> msrSlur::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -162,7 +162,7 @@ void msrSlur::acceptIn (basevisitor* v)
             "% ==> Launching msrSlur::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -180,7 +180,7 @@ void msrSlur::acceptOut (basevisitor* v)
       "% ==> msrSlur::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -198,7 +198,7 @@ void msrSlur::acceptOut (basevisitor* v)
             "% ==> Launching msrSlur::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif

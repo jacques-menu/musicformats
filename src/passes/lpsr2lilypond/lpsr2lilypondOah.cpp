@@ -117,7 +117,7 @@ void lilypondScoreOutputKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondScoreOutputKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -135,7 +135,7 @@ void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondScoreOutputKindAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -153,7 +153,7 @@ void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondScoreOutputKindAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -171,7 +171,7 @@ void lilypondScoreOutputKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondScoreOutputKindAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -189,7 +189,7 @@ void lilypondScoreOutputKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondScoreOutputKindAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -207,7 +207,7 @@ void lilypondScoreOutputKindAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondScoreOutputKindAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -367,7 +367,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondTransposePartNameAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -402,7 +402,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       "'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -442,7 +442,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       "--> destinationPitchName = \"" << destinationPitchName << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -484,7 +484,7 @@ void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondTransposePartNameAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -502,7 +502,7 @@ void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondTransposePartNameAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -520,7 +520,7 @@ void lilypondTransposePartNameAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondTransposePartNameAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -538,7 +538,7 @@ void lilypondTransposePartNameAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondTransposePartNameAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -556,7 +556,7 @@ void lilypondTransposePartNameAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondTransposePartNameAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -775,7 +775,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondTransposePartIDAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -807,7 +807,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       "'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -847,7 +847,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       "--> destinationPitchName = \"" << destinationPitchName << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -889,7 +889,7 @@ void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondTransposePartIDAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -907,7 +907,7 @@ void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondTransposePartIDAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -925,7 +925,7 @@ void lilypondTransposePartIDAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondTransposePartIDAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -943,7 +943,7 @@ void lilypondTransposePartIDAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondTransposePartIDAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -961,7 +961,7 @@ void lilypondTransposePartIDAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondTransposePartIDAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1242,7 +1242,7 @@ void lilypondAbsoluteOctaveEntryAtom::applyValueLessAtom (std::ostream& os)
       "' is a lilypondAbsoluteOctaveEntryAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1264,7 +1264,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1282,7 +1282,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondAbsoluteOctaveEntryAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1300,7 +1300,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1318,7 +1318,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondAbsoluteOctaveEntryAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1336,7 +1336,7 @@ void lilypondAbsoluteOctaveEntryAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1452,7 +1452,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondRelativeOctaveEntryAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1521,7 +1521,7 @@ void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1539,7 +1539,7 @@ void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondRelativeOctaveEntryAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1557,7 +1557,7 @@ void lilypondRelativeOctaveEntryAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1575,7 +1575,7 @@ void lilypondRelativeOctaveEntryAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondRelativeOctaveEntryAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1593,7 +1593,7 @@ void lilypondRelativeOctaveEntryAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1740,7 +1740,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondFixedOctaveEntryAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1770,7 +1770,7 @@ void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondFixedOctaveEntryAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1788,7 +1788,7 @@ void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondFixedOctaveEntryAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1806,7 +1806,7 @@ void lilypondFixedOctaveEntryAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondFixedOctaveEntryAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1824,7 +1824,7 @@ void lilypondFixedOctaveEntryAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondFixedOctaveEntryAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1842,7 +1842,7 @@ void lilypondFixedOctaveEntryAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondFixedOctaveEntryAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1988,7 +1988,7 @@ void lilypondDurationsGenerationKindAtom::setImplicitVariable (std::ostream& os)
       "; which is of type 'lilypondDurationsGenerationKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2020,7 +2020,7 @@ void lilypondDurationsGenerationKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondDurationsGenerationKindAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2038,7 +2038,7 @@ void lilypondDurationsGenerationKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondDurationsGenerationKindAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2056,7 +2056,7 @@ void lilypondDurationsGenerationKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondDurationsGenerationKindAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2074,7 +2074,7 @@ void lilypondDurationsGenerationKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondDurationsGenerationKindAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2092,7 +2092,7 @@ void lilypondDurationsGenerationKindAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondDurationsGenerationKindAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2244,7 +2244,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondAccidentalStyleKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2260,7 +2260,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondAccidentalStyleKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2309,7 +2309,7 @@ void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondAccidentalStyleKindAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2327,7 +2327,7 @@ void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondAccidentalStyleKindAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2345,7 +2345,7 @@ void lilypondAccidentalStyleKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondAccidentalStyleKindAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2363,7 +2363,7 @@ void lilypondAccidentalStyleKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondAccidentalStyleKindAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2381,7 +2381,7 @@ void lilypondAccidentalStyleKindAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondAccidentalStyleKindAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2529,7 +2529,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondChordsDisplayAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2580,7 +2580,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondChordsDisplayAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2666,7 +2666,7 @@ void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondChordsDisplayAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2684,7 +2684,7 @@ void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondChordsDisplayAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2702,7 +2702,7 @@ void lilypondChordsDisplayAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondChordsDisplayAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2720,7 +2720,7 @@ void lilypondChordsDisplayAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondChordsDisplayAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2738,7 +2738,7 @@ void lilypondChordsDisplayAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondChordsDisplayAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2944,7 +2944,7 @@ void lilypondLyricsNotesDurationsKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondLyricsNotesDurationsKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2960,7 +2960,7 @@ void lilypondLyricsNotesDurationsKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondLyricsNotesDurationsKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3009,7 +3009,7 @@ void lilypondLyricsNotesDurationsKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondLyricsNotesDurationsKindAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3027,7 +3027,7 @@ void lilypondLyricsNotesDurationsKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondLyricsNotesDurationsKindAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3045,7 +3045,7 @@ void lilypondLyricsNotesDurationsKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondLyricsNotesDurationsKindAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3063,7 +3063,7 @@ void lilypondLyricsNotesDurationsKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondLyricsNotesDurationsKindAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3081,7 +3081,7 @@ void lilypondLyricsNotesDurationsKindAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondLyricsNotesDurationsKindAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3232,7 +3232,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondDynamicsTextSpannersStyleKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3248,7 +3248,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondDynamicsTextSpannersStyleKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3297,7 +3297,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3315,7 +3315,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lilypondDynamicsTextSpannersStyleKindAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3333,7 +3333,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptOut (basevisitor* v)
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3351,7 +3351,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lilypondDynamicsTextSpannersStyleKindAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3369,7 +3369,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::browseData (basevisitor* v)
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4464,7 +4464,7 @@ R"(Generate LilyPond code to show the measure number at measure MEASURE_NUMBER.)
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringToIntMapElementAtom::create (
+      oahMeasureNumberToIntMapElementAtom::create (
         "reset-measure-number", "rmn",
 R"(Generate a '\set Score.currentBarNumber = #NEW' command
 at the beginning of measure OLD in the LilyPond code.
@@ -5829,7 +5829,7 @@ void lpsr2lilypondOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> lpsr2lilypondOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5847,7 +5847,7 @@ void lpsr2lilypondOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching lpsr2lilypondOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -5865,7 +5865,7 @@ void lpsr2lilypondOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> lpsr2lilypondOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5883,7 +5883,7 @@ void lpsr2lilypondOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching lpsr2lilypondOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -5901,7 +5901,7 @@ void lpsr2lilypondOahGroup::browseData (basevisitor* v)
       ".\\\" ==> lpsr2lilypondOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6312,7 +6312,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
     os << " empty";
   }
   else {
-    std::map <std::string, int>::const_iterator
+    std::map <mfMeasureNumber, int>::const_iterator
       iBegin = fResetMeasureElementMeasureNumberMap.begin (),
       iEnd   = fResetMeasureElementMeasureNumberMap.end (),
       i      = iBegin;
@@ -6946,7 +6946,7 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
     gLog << "[EMPTY]";
   }
   else {
-    std::map <std::string, int>::const_iterator
+    std::map <mfMeasureNumber, int>::const_iterator
       iBegin = fResetMeasureElementMeasureNumberMap.begin (),
       iEnd   = fResetMeasureElementMeasureNumberMap.end (),
       i      = iBegin;
@@ -7296,7 +7296,7 @@ S_lpsr2lilypondOahGroup createGlobalLpsr2lilypondOahGroup ()
       "Initializing LilyPond OAH handling";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7371,7 +7371,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondBreakPageAfterMeasureNumberAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7387,7 +7387,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
       "==> oahAtom is of type 'lilypondBreakPageAfterMeasureNumberAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

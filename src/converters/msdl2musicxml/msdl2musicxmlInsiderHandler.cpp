@@ -87,7 +87,7 @@ Usage: msdl2musicxml [option]* [MSDLFile] [option]*
       "\" regular options handler";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -147,7 +147,7 @@ void msdl2musicxmlInsiderHandler::createTheMsdl2xmlPrefixes ()
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -169,7 +169,7 @@ void msdl2musicxmlInsiderHandler::createTheMsdl2xmlOptionGroups (
       "\" insider option groups";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -243,7 +243,7 @@ void msdl2musicxmlInsiderHandler::checkOptionsAndArguments () const
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -337,7 +337,7 @@ void msdl2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msdl2musicxmlInsiderOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -355,7 +355,7 @@ void msdl2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdl2musicxmlInsiderOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -373,7 +373,7 @@ void msdl2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msdl2musicxmlInsiderOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -391,7 +391,7 @@ void msdl2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdl2musicxmlInsiderOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -409,7 +409,7 @@ void msdl2musicxmlInsiderOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msdl2musicxmlInsiderOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -512,7 +512,7 @@ void msdl2musicxmlInsiderOahGroup::initializeMsdl2xmlInsiderOahGroup ()
       "\" group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -602,7 +602,7 @@ S_msdl2musicxmlInsiderOahGroup createGlobalMsdl2xmlOahGroup ()
       "Creating global msdl2xm OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

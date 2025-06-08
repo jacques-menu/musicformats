@@ -67,7 +67,7 @@ msrXMLLangKind msrXMLLangKindFromString (
       msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -363,7 +363,7 @@ void msrPageLayout::setOddMarginsGroup (
     msrError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -384,7 +384,7 @@ void msrPageLayout::setEvenMarginsGroup (
     msrError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -405,7 +405,7 @@ void msrPageLayout::setBothMarginsGroup (
     msrError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -495,7 +495,7 @@ void msrPageLayout::acceptIn (basevisitor* v)
       "% ==> msrPageLayout::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -513,7 +513,7 @@ void msrPageLayout::acceptIn (basevisitor* v)
             "% ==> Launching msrPageLayout::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -531,7 +531,7 @@ void msrPageLayout::acceptOut (basevisitor* v)
       "% ==> msrPageLayout::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -549,7 +549,7 @@ void msrPageLayout::acceptOut (basevisitor* v)
             "% ==> Launching msrPageLayout::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif
@@ -700,7 +700,7 @@ void msrSystemLayout::acceptIn (basevisitor* v)
       "% ==> msrSystemLayout::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -718,7 +718,7 @@ void msrSystemLayout::acceptIn (basevisitor* v)
             "% ==> Launching msrSystemLayout::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -736,7 +736,7 @@ void msrSystemLayout::acceptOut (basevisitor* v)
       "% ==> msrSystemLayout::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -754,7 +754,7 @@ void msrSystemLayout::acceptOut (basevisitor* v)
             "% ==> Launching msrSystemLayout::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif
@@ -890,7 +890,7 @@ void msrSystemDividers::acceptIn (basevisitor* v)
       "% ==> msrSystemDividers::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -908,7 +908,7 @@ void msrSystemDividers::acceptIn (basevisitor* v)
             "% ==> Launching msrSystemDividers::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -926,7 +926,7 @@ void msrSystemDividers::acceptOut (basevisitor* v)
       "% ==> msrSystemDividers::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -944,7 +944,7 @@ void msrSystemDividers::acceptOut (basevisitor* v)
             "% ==> Launching msrSystemDividers::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif
@@ -1034,7 +1034,7 @@ void msrStaffLayout::acceptIn (basevisitor* v)
       "% ==> msrStaffLayout::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1052,7 +1052,7 @@ void msrStaffLayout::acceptIn (basevisitor* v)
             "% ==> Launching msrStaffLayout::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1070,7 +1070,7 @@ void msrStaffLayout::acceptOut (basevisitor* v)
       "% ==> msrStaffLayout::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1088,7 +1088,7 @@ void msrStaffLayout::acceptOut (basevisitor* v)
             "% ==> Launching msrStaffLayout::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif
@@ -1181,7 +1181,7 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
       "% ==> msrMeasureLayout::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1199,7 +1199,7 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
             "% ==> Launching msrMeasureLayout::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1217,7 +1217,7 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
       "% ==> msrMeasureLayout::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1235,7 +1235,7 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
             "% ==> Launching msrMeasureLayout::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif
@@ -1319,7 +1319,7 @@ msrLineWidth::msrLineWidth (
       "Creating a print layout ";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1341,7 +1341,7 @@ void msrLineWidth::acceptIn (basevisitor* v)
       "% ==> msrLineWidth::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1359,7 +1359,7 @@ void msrLineWidth::acceptIn (basevisitor* v)
             "% ==> Launching msrLineWidth::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1377,7 +1377,7 @@ void msrLineWidth::acceptOut (basevisitor* v)
       "% ==> msrLineWidth::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1395,7 +1395,7 @@ void msrLineWidth::acceptOut (basevisitor* v)
             "% ==> Launching msrLineWidth::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif
@@ -1499,7 +1499,7 @@ msrNoteSize::msrNoteSize (
       "Creating a print layout ";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1521,7 +1521,7 @@ void msrNoteSize::acceptIn (basevisitor* v)
       "% ==> msrNoteSize::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1539,7 +1539,7 @@ void msrNoteSize::acceptIn (basevisitor* v)
             "% ==> Launching msrNoteSize::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1557,7 +1557,7 @@ void msrNoteSize::acceptOut (basevisitor* v)
       "% ==> msrNoteSize::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1575,7 +1575,7 @@ void msrNoteSize::acceptOut (basevisitor* v)
             "% ==> Launching msrNoteSize::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif
@@ -1666,7 +1666,7 @@ msrDistance::msrDistance (
       "Creating a print layout ";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1688,7 +1688,7 @@ void msrDistance::acceptIn (basevisitor* v)
       "% ==> msrDistance::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1706,7 +1706,7 @@ void msrDistance::acceptIn (basevisitor* v)
             "% ==> Launching msrDistance::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1724,7 +1724,7 @@ void msrDistance::acceptOut (basevisitor* v)
       "% ==> msrDistance::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1742,7 +1742,7 @@ void msrDistance::acceptOut (basevisitor* v)
             "% ==> Launching msrDistance::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif
@@ -1833,7 +1833,7 @@ msrGlyph::msrGlyph (
       "Creating a print layout ";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1855,7 +1855,7 @@ void msrGlyph::acceptIn (basevisitor* v)
       "% ==> msrGlyph::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1873,7 +1873,7 @@ void msrGlyph::acceptIn (basevisitor* v)
             "% ==> Launching msrGlyph::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1891,7 +1891,7 @@ void msrGlyph::acceptOut (basevisitor* v)
       "% ==> msrGlyph::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1909,7 +1909,7 @@ void msrGlyph::acceptOut (basevisitor* v)
             "% ==> Launching msrGlyph::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif
@@ -2000,7 +2000,7 @@ msrOtherAppearance::msrOtherAppearance (
       "Creating a print layout ";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2022,7 +2022,7 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
       "% ==> msrOtherAppearance::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2040,7 +2040,7 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
             "% ==> Launching msrOtherAppearance::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2058,7 +2058,7 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
       "% ==> msrOtherAppearance::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2076,7 +2076,7 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
             "% ==> Launching msrOtherAppearance::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif
@@ -2161,7 +2161,7 @@ msrAppearance::msrAppearance (
       "Creating an appearance";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2180,7 +2180,7 @@ void msrAppearance::acceptIn (basevisitor* v)
       "% ==> msrAppearance::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2198,7 +2198,7 @@ void msrAppearance::acceptIn (basevisitor* v)
             "% ==> Launching msrAppearance::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2216,7 +2216,7 @@ void msrAppearance::acceptOut (basevisitor* v)
       "% ==> msrAppearance::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2234,7 +2234,7 @@ void msrAppearance::acceptOut (basevisitor* v)
             "% ==> Launching msrAppearance::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif

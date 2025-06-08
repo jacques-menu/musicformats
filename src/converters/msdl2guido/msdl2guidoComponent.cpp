@@ -59,7 +59,7 @@ S_mfcConverterComponent createMsdl2guidoConverterComponent ()
         "Creating the msdl2guido component";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

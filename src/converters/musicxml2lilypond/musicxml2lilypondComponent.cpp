@@ -65,7 +65,7 @@ EXP S_mfcConverterComponent createMusicxml2lilypondConverterComponent ()
         "Creating the musicxml2lilypond component";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

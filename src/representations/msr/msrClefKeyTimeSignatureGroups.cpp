@@ -87,7 +87,7 @@ msrClefKeyTimeSignatureOrderKind msrClefKeyTimeSignatureOrderKindFromString (
     msrError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -243,7 +243,7 @@ msrClefKeyTimeSignatureGroup::msrClefKeyTimeSignatureGroup (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -263,7 +263,7 @@ S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::createClefKeyTimeSi
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -296,7 +296,7 @@ S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::createClefKeyTimeSi
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -325,7 +325,7 @@ void msrClefKeyTimeSignatureGroup::setClef (const S_msrClef& clef)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     clef != nullptr,
     "clef is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -339,7 +339,7 @@ void msrClefKeyTimeSignatureGroup::setClef (const S_msrClef& clef)
       clef->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -365,7 +365,7 @@ void msrClefKeyTimeSignatureGroup::setKey (const S_msrKey& key)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     key != nullptr,
     "key is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -379,7 +379,7 @@ void msrClefKeyTimeSignatureGroup::setKey (const S_msrKey& key)
       key->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -406,7 +406,7 @@ void msrClefKeyTimeSignatureGroup::setTimeSignature (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     timeSignature != nullptr,
     "timeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -420,7 +420,7 @@ void msrClefKeyTimeSignatureGroup::setTimeSignature (
       timeSignature->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -477,7 +477,7 @@ void msrClefKeyTimeSignatureGroup::acceptIn (basevisitor* v)
       "% ==> msrClefKeyTimeSignatureGroup::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -495,7 +495,7 @@ void msrClefKeyTimeSignatureGroup::acceptIn (basevisitor* v)
             "% ==> Launching msrClefKeyTimeSignatureGroup::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -513,7 +513,7 @@ void msrClefKeyTimeSignatureGroup::acceptOut (basevisitor* v)
       "% ==> msrClefKeyTimeSignatureGroup::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -531,7 +531,7 @@ void msrClefKeyTimeSignatureGroup::acceptOut (basevisitor* v)
             "% ==> Launching msrClefKeyTimeSignatureGroup::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -549,7 +549,7 @@ void msrClefKeyTimeSignatureGroup::browseData (basevisitor* v)
       "% ==> msrClefKeyTimeSignatureGroup::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -563,7 +563,7 @@ void msrClefKeyTimeSignatureGroup::browseData (basevisitor* v)
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -582,7 +582,7 @@ void msrClefKeyTimeSignatureGroup::browseData (basevisitor* v)
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;

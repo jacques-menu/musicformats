@@ -176,7 +176,7 @@ void msdlScanner::populateInputString (std::istream& inputStream)
       "Populating the input std::string";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -209,7 +209,7 @@ void msdlScanner::populateInputString (std::istream& inputStream)
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -259,7 +259,7 @@ char msdlScanner::fetchNextCharacter ()
       fCurrentPositionInLine;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -289,7 +289,7 @@ char msdlScanner::fetchNextCharacter ()
       currentCharacterAsString ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -315,7 +315,7 @@ void msdlScanner::handleEndOfLine (const std::string& context)
       ", fCurrentPositionInLine: " << fCurrentPositionInLine;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -338,7 +338,7 @@ void msdlScanner::handleEndOfLine (const std::string& context)
       std::endl << std::endl;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -624,7 +624,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
         fCurrentToken.asString ();
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -671,7 +671,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
         "--- fetchNextToken(): onceMore: " << onceMore;
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -796,7 +796,7 @@ void msdlScanner::handlePercent ()
             fCurrentPositionInInput;
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -884,7 +884,7 @@ void msdlScanner::handleSlash ()
             fCurrentPositionInInput;
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -962,7 +962,7 @@ void msdlScanner::acceptAName ()
       nameStartPositionInInput;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1006,7 +1006,7 @@ void msdlScanner::acceptAName ()
       ", nameString: \"" << nameString << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1027,7 +1027,7 @@ void msdlScanner::acceptAName ()
       ", keyWordKind: \"" << msdlKeywordKindAsString (keyWordKind) << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1130,7 +1130,7 @@ void msdlScanner::acceptAName ()
       "Accepting a name, found: \"" << nameString << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1158,7 +1158,7 @@ void msdlScanner::acceptAnInteger ()
       integerStartPositionInInput;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1213,7 +1213,7 @@ void msdlScanner::acceptAnInteger ()
       "Accepting an integer, found: \"" << integerString << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1241,7 +1241,7 @@ void msdlScanner::acceptAString ()
       ", stringStartPositionInInput: " << stringStartPositionInInput;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1278,7 +1278,7 @@ void msdlScanner::acceptAString ()
       fCurrentPositionInLine;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1428,7 +1428,7 @@ void msdlScanner::acceptAString ()
       "Accepting a std::string, found: \"" << theString << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1452,7 +1452,7 @@ std::string msdlScanner::currentLocationAsString () const
       ", fCurrentPositionInInput:" << fCurrentPositionInInput;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1494,7 +1494,7 @@ std::string msdlScanner::currentLocationAsString () const
       "|";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1630,7 +1630,7 @@ void msdlScanner::scanAllTheInputAtOnce (
       "<== scanAllTheInputAtOnce()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1654,7 +1654,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
       msdlKeywordsLanguageKindAsString (keywordsConversionLanguage);
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1762,7 +1762,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
       "<== translateAllTheInputToKeywordsLanguage()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1782,7 +1782,7 @@ void msdlScanner::scanWholeInputAtOnce ()
       "==> scanWholeInputAtOnce()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

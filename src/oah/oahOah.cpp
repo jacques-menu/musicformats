@@ -83,7 +83,7 @@ void languageOahAtom::applyAtomWithValue (
       "' which is a languageOahAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -105,7 +105,7 @@ void languageOahAtom::acceptIn (basevisitor* v)
       ".\\\" ==> languageOahAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -123,7 +123,7 @@ void languageOahAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching languageOahAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -141,7 +141,7 @@ void languageOahAtom::acceptOut (basevisitor* v)
       ".\\\" ==> languageOahAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -159,7 +159,7 @@ void languageOahAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching languageOahAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -177,7 +177,7 @@ void languageOahAtom::browseData (basevisitor* v)
       ".\\\" ==> languageOahAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -277,7 +277,7 @@ void insiderOahAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a insiderOahAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -299,7 +299,7 @@ void insiderOahAtom::acceptIn (basevisitor* v)
       ".\\\" ==> insiderOahAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -317,7 +317,7 @@ void insiderOahAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching insiderOahAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -335,7 +335,7 @@ void insiderOahAtom::acceptOut (basevisitor* v)
       ".\\\" ==> insiderOahAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -353,7 +353,7 @@ void insiderOahAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching insiderOahAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -371,7 +371,7 @@ void insiderOahAtom::browseData (basevisitor* v)
       ".\\\" ==> insiderOahAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -464,7 +464,7 @@ void regularOahAtom::applyValueLessAtom (std::ostream& os)
       "==> option '" << fetchNames () << "' is a regularOahAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -486,7 +486,7 @@ void regularOahAtom::acceptIn (basevisitor* v)
       ".\\\" ==> regularOahAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -504,7 +504,7 @@ void regularOahAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching regularOahAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -522,7 +522,7 @@ void regularOahAtom::acceptOut (basevisitor* v)
       ".\\\" ==> regularOahAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -540,7 +540,7 @@ void regularOahAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching regularOahAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -558,7 +558,7 @@ void regularOahAtom::browseData (basevisitor* v)
       ".\\\" ==> regularOahAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -668,7 +668,7 @@ void passIDOahAtom::applyAtomWithValue (
       "' which is a passIDOahAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -690,7 +690,7 @@ void passIDOahAtom::acceptIn (basevisitor* v)
       ".\\\" ==> passIDOahAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -708,7 +708,7 @@ void passIDOahAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching passIDOahAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -726,7 +726,7 @@ void passIDOahAtom::acceptOut (basevisitor* v)
       ".\\\" ==> passIDOahAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -744,7 +744,7 @@ void passIDOahAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching passIDOahAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -762,7 +762,7 @@ void passIDOahAtom::browseData (basevisitor* v)
       ".\\\" ==> passIDOahAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1303,7 +1303,7 @@ void oahOahGroup::acceptIn (basevisitor* v)
       "% ==> oahOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1321,7 +1321,7 @@ void oahOahGroup::acceptIn (basevisitor* v)
             "% ==> Launching oahOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1339,7 +1339,7 @@ void oahOahGroup::acceptOut (basevisitor* v)
       "% ==> oahOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1357,7 +1357,7 @@ void oahOahGroup::acceptOut (basevisitor* v)
             "% ==> Launching oahOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1375,7 +1375,7 @@ void oahOahGroup::browseData (basevisitor* v)
       "% ==> oahOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1486,7 +1486,7 @@ S_oahOahGroup createGlobalOahOahGroup (
       "Creating global global OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

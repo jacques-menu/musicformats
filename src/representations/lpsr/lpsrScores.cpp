@@ -100,12 +100,12 @@ lpsrScore::lpsrScore (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theMsrScore != nullptr,
     "theMsrScore is NULL");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     multiComponent != nullptr,
     "multiComponent is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -527,7 +527,7 @@ R"(
       "Including LilyJazz definition file '" << schemeModulesName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -580,7 +580,7 @@ R"(
       "Including Jianpu definition file '" << schemeModulesName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -632,7 +632,7 @@ R"(
       "Using Scheme modules '" << schemeModulesName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -699,7 +699,7 @@ R"(
       "Including Jianpu definition file '" << schemeModulesName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -766,7 +766,7 @@ tongue =
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -827,7 +827,7 @@ editorialAccidental =
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -885,7 +885,7 @@ ffffff = #(make-dynamic-script "ffffff")
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -991,7 +991,7 @@ tupletsCurvedBrackets = {
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1051,7 +1051,7 @@ after =
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1169,7 +1169,7 @@ tempoNotesRelationship =
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1367,7 +1367,7 @@ glissandoTextOff = \revert Glissando.stencil
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1441,7 +1441,7 @@ otherDynamic =
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1767,7 +1767,7 @@ schleifer =
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1844,7 +1844,7 @@ scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1912,7 +1912,7 @@ damp = \markup {
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1974,7 +1974,7 @@ dampAll = \markup
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2041,7 +2041,7 @@ whiteNoteHeads =
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2101,7 +2101,7 @@ boxAroundNextBarNumber = {
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2201,7 +2201,7 @@ R"(
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2283,7 +2283,7 @@ R"(
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2347,7 +2347,7 @@ R"(
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2480,7 +2480,7 @@ R"(
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2601,7 +2601,7 @@ R"(
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2699,7 +2699,7 @@ R"(
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2780,7 +2780,7 @@ R"(
       "Creating Scheme function '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2864,7 +2864,7 @@ R"(
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2907,7 +2907,7 @@ R"(
       "Creating Scheme functions for '" << schemeFunctionName << "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2963,7 +2963,7 @@ void lpsrScore::acceptIn (basevisitor* v)
       "% ==> lpsrScore::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2981,7 +2981,7 @@ void lpsrScore::acceptIn (basevisitor* v)
             "% ==> Launching lpsrScore::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2999,7 +2999,7 @@ void lpsrScore::acceptOut (basevisitor* v)
       "% ==> lpsrScore::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3017,7 +3017,7 @@ void lpsrScore::acceptOut (basevisitor* v)
             "% ==> Launching lpsrScore::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -3035,7 +3035,7 @@ void lpsrScore::browseData (basevisitor* v)
       "% ==> lpsrScore::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3146,7 +3146,7 @@ void lpsrScore::browseData (basevisitor* v)
       "% <== lpsrScore::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3163,7 +3163,7 @@ void lpsrScore::printFull (std::ostream& os) const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fEmbeddedMsrScore != nullptr,
     "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3381,7 +3381,7 @@ void lpsrScore::printSummary (std::ostream& os) const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fEmbeddedMsrScore != nullptr,
     "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3599,7 +3599,7 @@ void lpsrScore::printNames (std::ostream& os) const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fEmbeddedMsrScore != nullptr,
     "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3817,7 +3817,7 @@ void lpsrScore::printFlatView (std::ostream& os) const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fEmbeddedMsrScore != nullptr,
     "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4035,7 +4035,7 @@ void lpsrScore::printSlices (std::ostream& os) const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fEmbeddedMsrScore != nullptr,
     "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4251,7 +4251,7 @@ void lpsrScore::print (std::ostream& os) const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fEmbeddedMsrScore != nullptr,
     "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED

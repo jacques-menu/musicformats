@@ -94,7 +94,7 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
 
   if (fIndentation < 0) {
     mfAssert (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       false,
       "indentation has become negative at " + std::to_string (fIndentation));
   }
@@ -151,7 +151,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int n)
 
   if (fIndentation < 0) {
     mfAssert (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       false,
       "indentation has become negative at " + std::to_string (fIndentation));
   }
@@ -182,7 +182,7 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
 
   if (false && fIndentation < 0) {
     mfAssert (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       false,
       "indentation has become negative at " + std::to_string (fIndentation));
   }
@@ -213,7 +213,7 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
 
   if (fIndentation < 0) {
     mfAssert (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       false,
       "indentation has become negative at " + std::to_string (fIndentation));
   }

@@ -96,7 +96,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msdlKeywordsLanguageAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -112,7 +112,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msdlKeywordsLanguageAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -160,7 +160,7 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msdlKeywordsLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -178,7 +178,7 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdlKeywordsLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -196,7 +196,7 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msdlKeywordsLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -214,7 +214,7 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdlKeywordsLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -232,7 +232,7 @@ void msdlKeywordsLanguageAtom::browseData (basevisitor* v)
       ".\\\" ==> msdlKeywordsLanguageAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -431,7 +431,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -449,7 +449,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahDisplayMsdlKeywordsInLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -467,7 +467,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -485,7 +485,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahDisplayMsdlKeywordsInLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -503,7 +503,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::browseData (basevisitor* v)
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -664,7 +664,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -682,7 +682,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching oahDisplayMsdlTokensInLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -700,7 +700,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -718,7 +718,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching oahDisplayMsdlTokensInLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -736,7 +736,7 @@ void oahDisplayMsdlTokensInLanguageAtom::browseData (basevisitor* v)
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -845,7 +845,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msdlCommentsTypeAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -861,7 +861,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msdlCommentsTypeAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -909,7 +909,7 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msdlCommentsTypeAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -927,7 +927,7 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdlCommentsTypeAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -945,7 +945,7 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msdlCommentsTypeAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -963,7 +963,7 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdlCommentsTypeAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -981,7 +981,7 @@ void msdlCommentsTypeAtom::browseData (basevisitor* v)
       ".\\\" ==> msdlCommentsTypeAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1129,7 +1129,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msdlUserLanguageAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1145,7 +1145,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msdlUserLanguageAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1195,7 +1195,7 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msdlUserLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1213,7 +1213,7 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdlUserLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1231,7 +1231,7 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msdlUserLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1249,7 +1249,7 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdlUserLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1267,7 +1267,7 @@ void msdlUserLanguageAtom::browseData (basevisitor* v)
       ".\\\" ==> msdlUserLanguageAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1418,7 +1418,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msdlPitchesLanguageAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1434,7 +1434,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
       "==> oahAtom is of type 'msdlPitchesLanguageAtom'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1484,7 +1484,7 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
       ".\\\" ==> msdlPitchesLanguageAtom::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1502,7 +1502,7 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdlPitchesLanguageAtom::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1520,7 +1520,7 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
       ".\\\" ==> msdlPitchesLanguageAtom::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1538,7 +1538,7 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdlPitchesLanguageAtom::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1556,7 +1556,7 @@ void msdlPitchesLanguageAtom::browseData (basevisitor* v)
       ".\\\" ==> msdlPitchesLanguageAtom::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1915,7 +1915,7 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msdlInputOahGroup::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1933,7 +1933,7 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msdlInputOahGroup::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1951,7 +1951,7 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msdlInputOahGroup::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1969,7 +1969,7 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msdlInputOahGroup::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1987,7 +1987,7 @@ void msdlInputOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msdlInputOahGroup::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2068,7 +2068,7 @@ S_msdlInputOahGroup createGlobalMsdlInputOahGroup (
       "Creating global MSDR OAH group";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

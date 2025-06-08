@@ -84,7 +84,7 @@ void msrTempoNote::acceptIn (basevisitor* v)
       "% ==> msrTempoNote::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -102,7 +102,7 @@ void msrTempoNote::acceptIn (basevisitor* v)
             "% ==> Launching msrTempoNote::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -120,7 +120,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
       "% ==> msrTempoNote::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -138,7 +138,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
             "% ==> Launching msrTempoNote::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -285,7 +285,7 @@ msrTempoTuplet::msrTempoTuplet (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -384,7 +384,7 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -417,7 +417,7 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -462,7 +462,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -503,7 +503,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -519,7 +519,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -591,7 +591,7 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
       "% ==> msrTempoTuplet::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -609,7 +609,7 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
             "% ==> Launching msrTempoTuplet::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -627,7 +627,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
       "% ==> msrTempoTuplet::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -645,7 +645,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
             "% ==> Launching msrTempoTuplet::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -702,7 +702,7 @@ std::string msrTempoTuplet::asString () const
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           "tempoTuplet member should be a note, a chord or another tempoTuplet");
       }
 
@@ -771,7 +771,7 @@ std::string msrTempoTuplet::asString () const
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           "tempoTuplet member should be a note, a chord or another tempoTuplet");
       }
 
@@ -911,7 +911,7 @@ void msrTempoNotesRelationshipElements::addElementToTempoNotesRelationshipElemen
       "' to tempo relationship";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -929,7 +929,7 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
       "% ==> msrTempoNotesRelationshipElements::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -947,7 +947,7 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
             "% ==> Launching msrTempoNotesRelationshipElements::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -965,7 +965,7 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
       "% ==> msrTempoNotesRelationshipElements::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -983,7 +983,7 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
             "% ==> Launching msrTempoNotesRelationshipElements::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1282,7 +1282,7 @@ msrTempo::msrTempo (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     tempoWords != nullptr,
     "tempoWords is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1390,7 +1390,7 @@ msrTempo::~msrTempo ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1424,7 +1424,7 @@ void msrTempo::acceptIn (basevisitor* v)
       "% ==> msrTempo::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1442,7 +1442,7 @@ void msrTempo::acceptIn (basevisitor* v)
             "% ==> Launching msrTempo::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1460,7 +1460,7 @@ void msrTempo::acceptOut (basevisitor* v)
       "% ==> msrTempo::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1478,7 +1478,7 @@ void msrTempo::acceptOut (basevisitor* v)
             "% ==> Launching msrTempo::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

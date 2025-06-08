@@ -87,7 +87,7 @@ Usage: msr2musicxml [[option]* [MusicXMLFile|-] [[option]*
       "\" regular options handler";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -147,7 +147,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlPrefixes ()
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -169,7 +169,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
       "\" insider option groups";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -243,7 +243,7 @@ void msr2musicxmlInsiderHandler::checkOptionsAndArguments () const
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -264,7 +264,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -358,7 +358,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -377,7 +377,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -470,7 +470,7 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
       ".\\\" ==> msr2musicxmlInsiderOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -488,7 +488,7 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
             ".\\\" ==> Launching msr2musicxmlInsiderOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -506,7 +506,7 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
       ".\\\" ==> msr2musicxmlInsiderOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -524,7 +524,7 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
             ".\\\" ==> Launching msr2musicxmlInsiderOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -542,7 +542,7 @@ void msr2musicxmlInsiderOahGroup::browseData (basevisitor* v)
       ".\\\" ==> msr2musicxmlInsiderOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -688,7 +688,7 @@ S_msr2musicxmlInsiderOahGroup createGlobalMsr2musicxmlOahGroup ()
       "Creating global msr2musicxml OAH group";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

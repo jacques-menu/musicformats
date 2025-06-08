@@ -46,7 +46,7 @@ msrJustifyKind msrJustifyKindFromString (
       msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -107,7 +107,7 @@ msrHorizontalAlignmentKind msrHorizontalAlignmentKindFromString (
       msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -168,7 +168,7 @@ msrVerticalAlignmentKind msrVerticalAlignmentKindFromString (
       msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }

@@ -69,7 +69,7 @@ oahRegularHandler::oahRegularHandler (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -96,7 +96,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -137,7 +137,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     group != nullptr,
     "group is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -154,7 +154,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -181,7 +181,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     group != nullptr,
     "group is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -198,7 +198,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -245,7 +245,7 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
       --gIndenter;
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

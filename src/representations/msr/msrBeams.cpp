@@ -96,7 +96,7 @@ msrBeam::msrBeam (
       this->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -115,7 +115,7 @@ void msrBeam::acceptIn (basevisitor* v)
       "% ==> msrBeam::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -133,7 +133,7 @@ void msrBeam::acceptIn (basevisitor* v)
             "% ==> Launching msrBeam::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -151,7 +151,7 @@ void msrBeam::acceptOut (basevisitor* v)
       "% ==> msrBeam::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -169,7 +169,7 @@ void msrBeam::acceptOut (basevisitor* v)
             "% ==> Launching msrBeam::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif

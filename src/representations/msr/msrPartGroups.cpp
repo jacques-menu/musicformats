@@ -116,7 +116,7 @@ msrPartGroup::msrPartGroup (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fPartGroupUpLinkToScore != nullptr,
     "fPartGroupUpLinkToScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -167,7 +167,7 @@ msrPartGroup::msrPartGroup (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -191,7 +191,7 @@ msrPartGroup::msrPartGroup (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fPartGroupUpLinkToScore != nullptr,
     "fPartGroupUpLinkToScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -244,7 +244,7 @@ msrPartGroup::msrPartGroup (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -268,7 +268,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
       fetchPartGroupInformationForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -279,7 +279,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingartGroupClone != nullptr,
     "containingartGroupClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -288,7 +288,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     scoreClone != nullptr,
     "scoreClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -331,7 +331,7 @@ void msrPartGroup::setPartGroupUpLinkToContainingPartGroup (
       containingPartGroup->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -346,7 +346,7 @@ void msrPartGroup::setPartGroupUpLinkToContainingPartGroup (
     " to itself";
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     this != containingPartGroup,
     ss.str ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -458,7 +458,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //     msrInternalError(
 //       gServiceRunData->getInputSourceName (),
 //       fInputLineNumber, // inputLineNumber // TEMP JMI 0.9.63
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -471,7 +471,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     partMusicXMLID.size () > 0,
 //     "partMusicXMLID is empty");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -513,7 +513,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //       asString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -572,7 +572,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //     --gIndenter;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -594,7 +594,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
       " to part group " << asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -637,7 +637,7 @@ void msrPartGroup::removePartFromPartGroup (
       " from part group " << asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -685,7 +685,7 @@ void msrPartGroup::removePartFromPartGroup (
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   } // for
@@ -706,7 +706,7 @@ void msrPartGroup::prependNestedGroupToPartGroup (
       " to part group " << asString ()  << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -723,7 +723,7 @@ void msrPartGroup::prependNestedGroupToPartGroup (
     " to itself";
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     this != nestedPartGroup,
     ss.str ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -752,7 +752,7 @@ void msrPartGroup::prependNestedGroupToPartGroup (
               ", line " << nestedPartGroup->getInputLineNumber ();
 
               mfAssert (
-                __FILE__, __LINE__,
+                __FILE__, mfInputLineNumber (__LINE__),
                 false,
                 ss.str ());
             }
@@ -779,7 +779,7 @@ void msrPartGroup::appendNestedPartGroupToPartGroup (
       " to part group " << asString ()  << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -796,7 +796,7 @@ void msrPartGroup::appendNestedPartGroupToPartGroup (
     " to itself";
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     this != nestedPartGroup,
     ss.str ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -825,7 +825,7 @@ void msrPartGroup::appendNestedPartGroupToPartGroup (
               ", line " << nestedPartGroup->getInputLineNumber ();
 
               mfAssert (
-                __FILE__, __LINE__,
+                __FILE__, mfInputLineNumber (__LINE__),
                 false,
                 ss.str ());
             }
@@ -935,7 +935,7 @@ void msrPartGroup::displayPartGroupElementsListFull (
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -1020,7 +1020,7 @@ void msrPartGroup::displayPartGroupElementsList (
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -1063,7 +1063,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
       "<=- fetchPartFromPartGroupByItsPartID(" << partMusicXMLID << ")";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1121,7 +1121,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   } // for
@@ -1171,7 +1171,7 @@ void msrPartGroup::collectPartGroupPartsList (
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   } // for
@@ -1216,7 +1216,7 @@ void msrPartGroup::collectPartGroupParts (
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         1, // inputLineNumber
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   } // for
@@ -1243,7 +1243,7 @@ void msrPartGroup::acceptIn (basevisitor* v)
       "% ==> msrPartGroup::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1261,7 +1261,7 @@ void msrPartGroup::acceptIn (basevisitor* v)
             "% ==> Launching msrPartGroup::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1279,7 +1279,7 @@ void msrPartGroup::acceptOut (basevisitor* v)
       "% ==> msrPartGroup::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1297,7 +1297,7 @@ void msrPartGroup::acceptOut (basevisitor* v)
             "% ==> Launching msrPartGroup::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1315,7 +1315,7 @@ void msrPartGroup::browseData (basevisitor* v)
       "% ==> msrPartGroup::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1334,7 +1334,7 @@ void msrPartGroup::browseData (basevisitor* v)
       "% <== msrPartGroup::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

@@ -21,9 +21,9 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 void mfWarning (
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeWarning (
     "MF",
@@ -33,9 +33,9 @@ void mfWarning (
 }
 
 void mfError (
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeError (
     "MF",
@@ -55,9 +55,9 @@ void mfError (
 
 //______________________________________________________________________________
 void mfInternalWarning (
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeInternalWarning (
     "MF",

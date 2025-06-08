@@ -500,7 +500,7 @@ std::string msdlKeywordKindAsMsdlString (
       ", keywordKind: \"" << msdlKeywordKindAsString (keywordKind) << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -562,7 +562,7 @@ std::string msdlKeywordKindAsMsdlString (
       ", result: \"" << result << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -673,7 +673,7 @@ msdlKeywordKind msdlKeywordKindFromString (
       ", theString: \"" << theString << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -736,7 +736,7 @@ msdlKeywordKind msdlKeywordKindFromString (
       ", result: \"" << msdlKeywordKindAsString (result) << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -842,7 +842,7 @@ void initializeMSDLKeywords ()
         "Initializing MSDL keywords";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

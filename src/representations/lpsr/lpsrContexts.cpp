@@ -110,7 +110,7 @@ void lpsrContext::acceptIn (basevisitor* v)
       "% ==> lpsrContext::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -128,7 +128,7 @@ void lpsrContext::acceptIn (basevisitor* v)
             "% ==> Launching lpsrContext::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -146,7 +146,7 @@ void lpsrContext::acceptOut (basevisitor* v)
       "% ==> lpsrContext::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -164,7 +164,7 @@ void lpsrContext::acceptOut (basevisitor* v)
             "% ==> Launching lpsrContext::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -259,7 +259,7 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
       "% ==> lpsrChordNamesContext::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -277,7 +277,7 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
             "% ==> Launching lpsrChordNamesContext::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -295,7 +295,7 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
       "% ==> lpsrChordNamesContext::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -313,7 +313,7 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
             "% ==> Launching lpsrChordNamesContext::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -436,7 +436,7 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
       "% ==> lpsrFiguredBassContext::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -454,7 +454,7 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
             "% ==> Launching lpsrFiguredBassContext::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -472,7 +472,7 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
       "% ==> lpsrFiguredBassContext::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -490,7 +490,7 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
             "% ==> Launching lpsrFiguredBassContext::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

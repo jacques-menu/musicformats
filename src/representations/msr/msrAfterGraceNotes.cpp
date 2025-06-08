@@ -51,7 +51,7 @@ msrAfterGraceNotesGroupContents::msrAfterGraceNotesGroupContents (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     afterGraceNotesGroupContentsUpLinkToVoice != nullptr,
     "afterGraceNotesGroupContentsUpLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -88,7 +88,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
       "Creating a newborn clone of after grace notes group";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -96,7 +96,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -132,7 +132,7 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
       "% ==> msrAfterGraceNotesGroupContents::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -150,7 +150,7 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
             "% ==> Launching msrAfterGraceNotesGroupContents::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -168,7 +168,7 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
       "% ==> msrAfterGraceNotesGroupContents::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -186,7 +186,7 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
             "% ==> Launching msrAfterGraceNotesGroupContents::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -305,7 +305,7 @@ msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     afterGraceNotesGroupUpLinkToVoice != nullptr,
     "afterGraceNotesGroupUpLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -358,7 +358,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -366,12 +366,12 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     noteClone != nullptr,
     "noteClone is NULL");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -405,7 +405,7 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
       "% ==> msrAfterGraceNotesGroup::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -423,7 +423,7 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
             "% ==> Launching msrAfterGraceNotesGroup::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -441,7 +441,7 @@ void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
       "% ==> msrAfterGraceNotesGroup::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -459,7 +459,7 @@ void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
             "% ==> Launching msrAfterGraceNotesGroup::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

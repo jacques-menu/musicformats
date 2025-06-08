@@ -76,7 +76,7 @@ msrMeasure::msrMeasure (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     measureUpLinkToSegment != nullptr,
     "measureUpLinkToSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -124,7 +124,7 @@ void msrMeasure::initializeMeasure ()
       ']';
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -277,7 +277,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingSegment != nullptr,
     "containingSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -302,7 +302,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -310,7 +310,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingSegment != nullptr,
     "containingSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -392,7 +392,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -400,7 +400,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingSegment != nullptr,
     "containingSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -486,7 +486,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         "\"";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -534,7 +534,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
             ", line " << fInputLineNumber;
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -572,7 +572,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         "\"";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -608,7 +608,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -616,7 +616,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingSegment != nullptr,
     "containingSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -685,7 +685,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
         "\"";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -735,7 +735,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
             ", line " << fInputLineNumber;
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -775,7 +775,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
         "\"";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -803,7 +803,7 @@ void msrMeasure::setMeasureShortestNoteWholeNotes (
       duration.asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -829,7 +829,7 @@ void msrMeasure::setMeasureShortestNoteTupletFactor (
       noteTupletFactor;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -860,7 +860,7 @@ void msrMeasure::setMeasureEndRegularKind (
         ", line " << fInputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -890,7 +890,7 @@ void msrMeasure::setMeasureRepeatContextKind (
         ", line " << fInputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -920,7 +920,7 @@ void msrMeasure::setMeasureNumber (
         ", line " << fInputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -950,7 +950,7 @@ void msrMeasure::setMeasureOrdinalNumberInVoice (
         ", line " << fInputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -980,7 +980,7 @@ void msrMeasure::setMeasurePuristNumber (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1006,7 +1006,7 @@ void msrMeasure::setMeasurePuristNumber (
 //         std::endl;
 //
 //        gWaeHandler->waeTrace (
-//          __FILE__, __LINE__,
+//          __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //      }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1021,7 +1021,7 @@ void msrMeasure::appendMeasureElementToMeasure (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     measureElement != nullptr,
     "appendMeasureElementToMeasure(): measureElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1047,7 +1047,7 @@ void msrMeasure::appendMeasureElementToMeasure (
       ", line " << measureElement->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1083,14 +1083,14 @@ void msrMeasure::appendMeasureElementToMeasure (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     measureElementSoundingWholeNotes.getNumerator () >= 0,
     "measureElementSoundingWholeNotes numerator '" +
       std::to_string (measureElementSoundingWholeNotes.getNumerator ()) +
       "' should be positive or null");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     measureElementSoundingWholeNotes.getDenominator () > 0,
     "measureElementSoundingWholeNotes denominator '" +
       std::to_string (measureElementSoundingWholeNotes.getDenominator ()) +
@@ -1151,7 +1151,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1165,7 +1165,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     upLinkToMeasure != nullptr,
 //     "upLinkToMeasure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1223,7 +1223,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       ", line " << elem->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     ss <<
@@ -1241,7 +1241,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
     --gIndenter;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     displayMeasure (
@@ -1260,7 +1260,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
         ", inserting elem at the end";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1294,7 +1294,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
         lastMeasureElement;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1320,7 +1320,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
             " is a final barLine, inserting elem before it";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1358,7 +1358,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
             " is a barLine, but not a final one, inserting elem after it";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1384,7 +1384,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
           " is no barLine, inserting elem after it";
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -1447,7 +1447,7 @@ void msrMeasure::insertElementAtPositionInMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1500,7 +1500,7 @@ void msrMeasure::insertElementAtPositionInMeasure (
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -1533,7 +1533,7 @@ void msrMeasure::insertElementAtPositionInMeasure (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -1586,7 +1586,7 @@ void msrMeasure::setNextMeasureNumber (const mfMeasureNumber& nextMeasureNumber)
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1613,7 +1613,7 @@ void msrMeasure::setMeasureIsFirstInVoice ()
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1658,7 +1658,7 @@ void msrMeasure::setMeasureIsFirstInVoice ()
 //       ", line " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1696,7 +1696,7 @@ void msrMeasure::setMeasureIsFirstInVoice ()
 //         ", line " << inputLineNumber;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1736,7 +1736,7 @@ void msrMeasure::setMeasureIsFirstInVoice ()
 //       ", line " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1771,7 +1771,7 @@ void msrMeasure::setFullMeasureWholeNotesDuration (
       wholeNotes.asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1806,7 +1806,7 @@ void msrMeasure::setMeasureCurrentPositionInMeasure (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1814,14 +1814,14 @@ void msrMeasure::setMeasureCurrentPositionInMeasure (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     positionInMeasure.getNumerator () >= 0,
     "mfPositionInMeasure numerator '" +
       std::to_string (positionInMeasure.getNumerator ()) +
       "' should be positive or null");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     positionInMeasure.getDenominator () > 0,
     "mfPositionInMeasure denominator '" +
       std::to_string (positionInMeasure.getDenominator ()) +
@@ -1843,7 +1843,7 @@ void msrMeasure::incrementMeasureCurrentPositionInMeasure (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   //  sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     wholeNotesDelta.getNumerator () > 0,
     "wholeNotesDelta.getNumerator () " +
       std::to_string (wholeNotesDelta.getNumerator ()) +
@@ -1878,7 +1878,7 @@ void msrMeasure::incrementMeasureCurrentPositionInMeasure (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1935,7 +1935,7 @@ void msrMeasure::setMeasureKind (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1995,7 +1995,7 @@ void msrMeasure::setMeasureKind (
         --gIndenter;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           iss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -2035,7 +2035,7 @@ void msrMeasure::setMeasureKind (
         --gIndenter;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           iss.str ());
 
         abort();
@@ -2065,7 +2065,7 @@ void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2098,7 +2098,7 @@ void msrMeasure::appendClefKeyTimeSignatureGroupToMeasure (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2136,7 +2136,7 @@ void msrMeasure::appendClefToMeasure (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2165,7 +2165,7 @@ void msrMeasure::appendKeyToMeasure (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2182,7 +2182,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     timeSignature != nullptr,
     "timeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -2203,7 +2203,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2230,7 +2230,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     timeSignature != nullptr,
     "timeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -2256,7 +2256,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2297,7 +2297,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
             ", line " << fInputLineNumber;
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2323,7 +2323,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
             " full measure whole notes ";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -2349,7 +2349,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
           " is senza misura";
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -2370,7 +2370,7 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     timeSignature != nullptr,
     "timeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -2404,7 +2404,7 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2441,7 +2441,7 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2485,7 +2485,7 @@ void msrMeasure::appendTranspositionToMeasure (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2552,7 +2552,7 @@ void msrMeasure::appendBarLineToMeasure (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2683,7 +2683,7 @@ void msrMeasure::appendNoteToMeasureAtPosition (
       ", line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2753,7 +2753,7 @@ void msrMeasure::appendNoteToMeasureAtPosition (
         msrInternalWarning (
           gServiceRunData->getInputSourceName (),
           note->getInputLineNumber (),
-    //      __FILE__, __LINE__,
+    //      __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -2844,7 +2844,7 @@ void msrMeasure::appendNoteToMeasure (
       ", line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2979,7 +2979,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
       ", line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3042,7 +3042,7 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3110,7 +3110,7 @@ void msrMeasure::accountForTupletMemberNoteNotesDurationInMeasure ( // JMI 0.9.6
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3159,7 +3159,7 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3221,7 +3221,7 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
       ", line " << tuplet->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3272,7 +3272,7 @@ void msrMeasure::appendDoubleTremoloToMeasure (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3309,7 +3309,7 @@ void msrMeasure::appendHarmonyToMeasureWithoutPadUp (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3349,7 +3349,7 @@ void msrMeasure::appendHarmonyToMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3400,7 +3400,7 @@ void msrMeasure::appendHarmoniesListToMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3445,7 +3445,7 @@ void msrMeasure::appendHarmonyToMeasureClone (
       ", line " << harmony->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3481,7 +3481,7 @@ void msrMeasure::appendFiguredBassToMeasureWithoutPadUp (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3519,7 +3519,7 @@ void msrMeasure::appendFiguredBassToMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3549,7 +3549,7 @@ void msrMeasure::cascadeAppendFiguredBassesListToMeasure (
     std::stringstream ss;
 
     ss <<
-      "Appending figured basses list " << // JMI 0.9.67 figuredBasssesList HARMFUL <<
+      "Cascading appending figured basses list " << // JMI 0.9.67 figuredBasssesList HARMFUL <<
       " to measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -3564,7 +3564,7 @@ void msrMeasure::cascadeAppendFiguredBassesListToMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3608,7 +3608,7 @@ void msrMeasure::appendFiguredBassToMeasureClone (
       ", line " << figuredBass->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3646,7 +3646,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3706,7 +3706,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     positionInMeasureToPadUpTo.getNumerator () >= 0,
 //     "positionInMeasureToPadUpTo.getNumerator () is negative in padUpToPositionInMeasureInMeasure()");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3806,7 +3806,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //     msrWarning (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//  //     __FILE__, __LINE__,
+//  //     __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str (),
 //   }
 // }
@@ -3848,7 +3848,7 @@ void msrMeasure::padUpToPositionInMeasure (
       "\", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3856,7 +3856,7 @@ void msrMeasure::padUpToPositionInMeasure (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     positionInMeasureToPadUpTo != K_POSITION_IN_MEASURE_UNKNOWN_,
     "positionInMeasureToPadUpTo == K_POSITION_IN_MEASURE_UNKNOWN_");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3892,7 +3892,7 @@ void msrMeasure::padUpToPositionInMeasure (
         fMeasureCurrentPositionInMeasure.asFractionString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
    }
 #endif // MF_TRACE_IS_ENABLED
@@ -3919,7 +3919,7 @@ void msrMeasure::padUpToPositionInMeasure (
         fMeasureCurrentPositionInMeasure.asFractionString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
    }
 #endif // MF_TRACE_IS_ENABLED
@@ -3969,7 +3969,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       "\", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4009,7 +4009,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         ", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
    }
 #endif // MF_TRACE_IS_ENABLED
@@ -4051,7 +4051,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         fMeasureCurrentPositionInMeasure.asFractionString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
    }
 #endif // MF_TRACE_IS_ENABLED
@@ -4089,7 +4089,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         msrInternalWarning ( // JMI 0.9.70
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-    //       __FILE__, __LINE__,
+    //       __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -4116,7 +4116,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         " since the latter is already at the desired measure position";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -4140,7 +4140,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     backupStepLength.getNumerator () >= 0,
 //     "backupStepLength.getNumerator () is negative");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -4177,7 +4177,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 //       "\", line " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -4212,7 +4212,7 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4328,7 +4328,7 @@ void msrMeasure::appendStaffDetailsToMeasure (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4395,7 +4395,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 //       fMeasureLastHandledNote->asShortString ();
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -4456,7 +4456,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 //       std::endl << std::endl;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -4476,7 +4476,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 //   msrInternalError (
 //     gServiceRunData->getInputSourceName (),
 //     inputLineNumber,
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     ss.str ());
 // }
 
@@ -4568,12 +4568,12 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 // //   msrInternalError (
 // //     gServiceRunData->getInputSourceName (),
 // //     inputLineNumber,
-// //     __FILE__, __LINE__,
+// //     __FILE__, mfInputLineNumber (__LINE__),
 // //     ss.str ());
 //   mxsr2msrInternalError (
 //     gServiceRunData->getInputSourceName (),
 //     inputLineNumber,
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     ss.str ());
 // }
 
@@ -4592,7 +4592,7 @@ void msrMeasure::appendNoteToMeasureNotesFlatList (
       this->asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4635,7 +4635,7 @@ void msrMeasure::setMeasurePuristNumberFromVoice ()
         ", line " << fInputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -4674,7 +4674,7 @@ void msrMeasure::determineMeasureKind (
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -4771,7 +4771,7 @@ if (false)
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -4895,13 +4895,13 @@ void msrMeasure::handleEmptyMeasure (
         ", inputLineNumber: " << inputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
 //   mfAssertFalse ( // JMI for debug
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     "handleEmptyMeasure()");
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -4925,7 +4925,7 @@ void msrMeasure::handleEmptyMeasure (
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     else
       msrInternalWarning (
@@ -4971,7 +4971,7 @@ void msrMeasure::handleRegularMeasure (
       ", fMeasureEndRegularKind: " << fMeasureEndRegularKind;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5012,7 +5012,7 @@ void msrMeasure::handleIncompleteMeasure (
         ", fMeasureEndRegularKind: " << fMeasureEndRegularKind;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -5037,7 +5037,7 @@ void msrMeasure::handleIncompleteMeasure (
       std::endl;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -5113,7 +5113,7 @@ void msrMeasure::handleIncompleteMeasure (
 //           msrInternalWarning (
 //             gServiceRunData->getInputSourceName (),
 //             inputLineNumber,
-//      //       __FILE__, __LINE__,
+//      //       __FILE__, mfInputLineNumber (__LINE__),
 //             ss.str ());
         }
 
@@ -5188,7 +5188,7 @@ void msrMeasure::handleOverflowingMeasure (
       asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5232,7 +5232,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     regularPart != nullptr,
     "regularPart is NULL");
 
@@ -5276,7 +5276,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5301,7 +5301,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 //       ", fMeasureOrdinalNumberInVoice: " << fMeasureOrdinalNumberInVoice;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -5359,7 +5359,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 //           std::endl;
 //
 //         gWaeHandler->waeTrace (
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           ss.str ());
 //       }
 // #endif // MF_TRACE_IS_ENABLED
@@ -5444,7 +5444,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str (),
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -5476,7 +5476,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -5596,7 +5596,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 //     --gIndenter;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       iss.str (),
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -5631,7 +5631,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -5672,7 +5672,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -5706,7 +5706,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5758,7 +5758,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
         fetchVoiceUpLinkToPart ();
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     harmoniesPart != nullptr,
     "harmoniesPart is NULL");
 
@@ -5841,7 +5841,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
     --gIndenter;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       iss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5870,7 +5870,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
         "\", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -5905,7 +5905,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
 //     msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
 //     // compute currentHarmony's future sounding whole notes
@@ -5932,7 +5932,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -5948,7 +5948,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
 //       msrInternalWarning
 //         gServiceRunData->getInputSourceName (),
 //         inputLineNumber,
-// //  JMI             __FILE__, __LINE__,
+// //  JMI             __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //     }
 //     else {
@@ -5977,7 +5977,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
         "\", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -6014,7 +6014,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6047,7 +6047,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
         ", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -6086,7 +6086,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
           ", line " << measureElement->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -6152,7 +6152,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
               msrInternalError (
                 gServiceRunData->getInputSourceName (),
                 measureElement->getInputLineNumber (),
-                __FILE__, __LINE__,
+                __FILE__, mfInputLineNumber (__LINE__),
                 ss.str ());
             }
         } // switch
@@ -6181,7 +6181,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
           ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -6193,7 +6193,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
             fetchVoiceUpLinkToPart ();
 
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         regularPart != nullptr,
         "regularPart is NULL");
 
@@ -6233,7 +6233,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
           ", fMeasureOrdinalNumberInVoice: " << fMeasureOrdinalNumberInVoice;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -6280,7 +6280,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str (),
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -6327,7 +6327,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str (),
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -6388,7 +6388,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
       positionInMeasureToPadUpTo.asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6419,7 +6419,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
         "\", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -6504,7 +6504,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
       positionInMeasuresDelta;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6541,7 +6541,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         "\", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -6591,7 +6591,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         "\", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -6607,7 +6607,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
       msrInternalWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-//  JMI             __FILE__, __LINE__,
+//  JMI             __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
     else {
@@ -6666,7 +6666,7 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
     --gIndenter;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6715,7 +6715,7 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
       measureOverflowWholeNotes;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6758,7 +6758,7 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
         "\", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -6774,7 +6774,7 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
       msrInternalWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-//  JMI             __FILE__, __LINE__,
+//  JMI             __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
     else {
@@ -6815,7 +6815,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6848,7 +6848,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -6908,7 +6908,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
               --gIndenter;
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
   #endif // MF_TRACE_IS_ENABLED
@@ -6955,7 +6955,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
               std::endl;
 
             gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
   #endif // MF_TRACE_IS_ENABLED
@@ -7027,7 +7027,7 @@ void msrMeasure::finalizeMeasureInHarmonyVoice (
         fetchVoiceUpLinkToPart ();
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     harmoniesPart != nullptr,
     "harmoniesPart is NULL");
 
@@ -7046,7 +7046,7 @@ void msrMeasure::finalizeMeasureInHarmonyVoice (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7078,7 +7078,7 @@ void msrMeasure::finalizeMeasureInHarmonyVoice (
       harmoniesPartNumberOfMeasures;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7144,7 +7144,7 @@ void msrMeasure::finalizeMeasureInFiguredBassVoice (
         fetchVoiceUpLinkToPart ();
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     figuredBassPart != nullptr,
     "figuredBassPart is NULL");
 
@@ -7163,7 +7163,7 @@ void msrMeasure::finalizeMeasureInFiguredBassVoice (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7195,7 +7195,7 @@ void msrMeasure::finalizeMeasureInFiguredBassVoice (
       figuredBassPartNumberOfMeasures;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7300,7 +7300,7 @@ void msrMeasure::finalizeMeasure (
           --gIndenter;
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 
@@ -7308,7 +7308,7 @@ void msrMeasure::finalizeMeasure (
         msrInternalWarning (
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
-    //       __FILE__, __LINE__,
+    //       __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7342,7 +7342,7 @@ void msrMeasure::finalizeMeasure (
         std::endl;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -7505,7 +7505,7 @@ void msrMeasure::finalizeMeasureClone (
       std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7566,7 +7566,7 @@ void msrMeasure::finalizeMeasureClone (
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7658,7 +7658,7 @@ void msrMeasure::finalizeMeasureClone (
       msrInternalWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-   //      __FILE__, __LINE__,
+   //      __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
 
       if (getFullMeasureWholeNotesDuration ().getNumerator () == 0) { // JMI
@@ -7674,7 +7674,7 @@ void msrMeasure::finalizeMeasureClone (
         msrInternalWarning (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-     //      __FILE__, __LINE__,
+     //      __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -7754,7 +7754,7 @@ void msrMeasure::acceptIn (basevisitor* v)
       "% ==> msrMeasure::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7772,7 +7772,7 @@ void msrMeasure::acceptIn (basevisitor* v)
             "% ==> Launching msrMeasure::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -7790,7 +7790,7 @@ void msrMeasure::acceptOut (basevisitor* v)
       "% ==> msrMeasure::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7808,7 +7808,7 @@ void msrMeasure::acceptOut (basevisitor* v)
             "% ==> Launching msrMeasure::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -7826,7 +7826,7 @@ void msrMeasure::browseData (basevisitor* v)
       "% ==> msrMeasure::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7849,7 +7849,7 @@ void msrMeasure::browseData (basevisitor* v)
       "% <== msrMeasure::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8588,7 +8588,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -8639,7 +8639,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -8655,7 +8655,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //       msrInternalWarning (
 //         gServiceRunData->getInputSourceName (),
 //         inputLineNumber,
-// //  JMI             __FILE__, __LINE__,
+// //  JMI             __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str (),
 //     }
 //     else {

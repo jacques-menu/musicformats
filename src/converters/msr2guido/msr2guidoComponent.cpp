@@ -61,7 +61,7 @@ S_mfcConverterComponent createMsr2guidoConverterComponent ()
         "Creating the Msr2guido component";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

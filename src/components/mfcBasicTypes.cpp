@@ -100,7 +100,7 @@ void crackVersionNumber ( // JMI ??? 0.9.66
         "--> minorNumberValue = \"" << minorNumberValue << "\"";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -145,7 +145,7 @@ void crackVersionNumber ( // JMI ??? 0.9.66
         ss << std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -167,7 +167,7 @@ void crackVersionNumber ( // JMI ??? 0.9.66
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -369,7 +369,7 @@ mfcVersionNumber::mfcVersionNumber (
       ", preRelease:" << preRelease;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -431,7 +431,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
     ss << std::endl;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -464,7 +464,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
         "--> preReleaseValue = \"" << preReleaseValue << "\"";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -835,7 +835,7 @@ S_mfcVersionsHistory mfcVersionsHistory::create ()
       "Creating mfcVersionsHistory";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -857,7 +857,7 @@ mfcVersionsHistory::mfcVersionsHistory ()
       "Constructing mfcVersionsHistory";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -879,7 +879,7 @@ void mfcVersionsHistory::appendVersionToHistory (
       " to history";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -892,7 +892,7 @@ S_mfcVersion mfcVersionsHistory::fetchMostRecentVersion () const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fVersionsList.size () > 0,
     "fVersionsList is empty");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -976,7 +976,7 @@ S_mfcComponent mfcComponent::create (
       ", componentName: " << componentName;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1004,7 +1004,7 @@ mfcComponent::mfcComponent (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1035,7 +1035,7 @@ void mfcComponent::appendVersionToComponent (
       fComponentName;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1151,7 +1151,7 @@ S_mfcOahComponent mfcOahComponent::create (
       ", formatName: " << formatName;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1179,7 +1179,7 @@ mfcOahComponent::mfcOahComponent (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1213,7 +1213,7 @@ S_mfcRepresentationComponent mfcRepresentationComponent::create (
       ", formatName: " << formatName;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1241,7 +1241,7 @@ mfcRepresentationComponent::mfcRepresentationComponent (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1275,7 +1275,7 @@ S_mfcPassComponent mfcPassComponent::create (
       ", passName: " << passName;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1303,7 +1303,7 @@ mfcPassComponent::mfcPassComponent (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1378,7 +1378,7 @@ S_mfcMultiComponent mfcMultiComponent::create (
       ", multiComponentName: " << multiComponentName;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1415,7 +1415,7 @@ mfcMultiComponent::mfcMultiComponent (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1451,7 +1451,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1459,7 +1459,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     format != nullptr,
     "format is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1519,7 +1519,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
       " to multi-component \"" << fComponentName << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1527,7 +1527,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     pass != nullptr,
     "pass is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1982,7 +1982,7 @@ S_mfcGeneratorComponent mfcGeneratorComponent::create (
       ", generatorName: " << generatorName;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2018,7 +2018,7 @@ mfcGeneratorComponent::mfcGeneratorComponent (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2056,7 +2056,7 @@ S_mfcConverterComponent mfcConverterComponent::create (
       ", converterName: " << converterName;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2092,7 +2092,7 @@ mfcConverterComponent::mfcConverterComponent (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2130,7 +2130,7 @@ S_mfcLibraryComponent mfcLibraryComponent::create (
       ", libraryVersionsName: " << libraryVersionsName;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2166,7 +2166,7 @@ mfcLibraryComponent::mfcLibraryComponent (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2193,7 +2193,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2201,7 +2201,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     converter != nullptr,
     "converter is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED

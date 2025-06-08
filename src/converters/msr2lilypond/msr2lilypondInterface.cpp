@@ -71,7 +71,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
       "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -131,7 +131,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
         std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -144,7 +144,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -186,7 +186,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -200,7 +200,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -262,7 +262,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation ( // JMI 0.9.67
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED

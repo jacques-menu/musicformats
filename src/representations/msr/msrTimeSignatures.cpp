@@ -179,7 +179,7 @@ msrTimeSignatureItem::msrTimeSignatureItem (
       ", line: " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -284,7 +284,7 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
       "% ==> msrTimeSignatureItem::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -302,7 +302,7 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
             "% ==> Launching msrTimeSignatureItem::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -320,7 +320,7 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
       "% ==> msrTimeSignatureItem::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -338,7 +338,7 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
             "% ==> Launching msrTimeSignatureItem::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -365,7 +365,7 @@ std::string msrTimeSignatureItem::asString () const
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         fInputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "time signature item beats numbers vector is empty");
         */
       ss <<
@@ -418,7 +418,7 @@ std::string msrTimeSignatureItem::asString () const
 //       msrInternalError (
 //         gServiceRunData->getInputSourceName (),
 //         fInputLineNumber,
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         "time signature item beats numbers vector is empty");
 //         */
 //       ss <<
@@ -866,7 +866,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -890,7 +890,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       regularExpression;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -957,7 +957,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -988,7 +988,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       integerValue;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1027,7 +1027,7 @@ msrTimeSignature::~msrTimeSignature ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1158,7 +1158,7 @@ mfWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
           msrInternalError (
             gServiceRunData->getInputSourceName (),
             fInputLineNumber,
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             "time signature items vector is empty");
         }
       }
@@ -1188,7 +1188,7 @@ void msrTimeSignature::acceptIn (basevisitor* v)
       "% ==> msrTimeSignature::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1206,7 +1206,7 @@ void msrTimeSignature::acceptIn (basevisitor* v)
             "% ==> Launching msrTimeSignature::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1224,7 +1224,7 @@ void msrTimeSignature::acceptOut (basevisitor* v)
       "% ==> msrTimeSignature::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1242,7 +1242,7 @@ void msrTimeSignature::acceptOut (basevisitor* v)
             "% ==> Launching msrTimeSignature::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1294,7 +1294,7 @@ std::string msrTimeSignature::asString () const
           msrInternalError (
             gServiceRunData->getInputSourceName (),
             fInputLineNumber,
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             "time  items vector is empty");
         }
       }
@@ -1373,7 +1373,7 @@ std::string msrTimeSignature::asShortString () const
 //       msrInternalError (
 //         gServiceRunData->getInputSourceName (),
 //         fInputLineNumber,
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         "time  items vector is empty");
 //     }
 //   }

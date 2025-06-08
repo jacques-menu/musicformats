@@ -104,7 +104,7 @@ S_msrSlide msrSlide::createSlideNewbornClone ()
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -131,7 +131,7 @@ void msrSlide::acceptIn (basevisitor* v)
       "% ==> msrSlide::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -149,7 +149,7 @@ void msrSlide::acceptIn (basevisitor* v)
             "% ==> Launching msrSlide::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -167,7 +167,7 @@ void msrSlide::acceptOut (basevisitor* v)
       "% ==> msrSlide::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -185,7 +185,7 @@ void msrSlide::acceptOut (basevisitor* v)
             "% ==> Launching msrSlide::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif

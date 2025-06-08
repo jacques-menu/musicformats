@@ -53,12 +53,12 @@ mfWholeNotes::mfWholeNotes (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     numerator >= 0,
 //     "mfWholeNotes numerator '" + std::to_string (numerator) + "' should be positive or null");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     denominator > 0,
     "mfWholeNotes denominator '" + std::to_string (denominator) + "' should be positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -107,7 +107,7 @@ mfWholeNotes::mfWholeNotes (const std::string& theString)
         "--> denominator = \"" << denominator << "\"";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -128,7 +128,7 @@ mfWholeNotes::mfWholeNotes (const std::string& theString)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         fDenominator > 0,
         "fDenominator '" + denominator + "' is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -146,7 +146,7 @@ mfWholeNotes::mfWholeNotes (const std::string& theString)
 //    msrWarning ( //  JMI
       gServiceRunData->getInputSourceName (),
       0, // JMI inputLineNumber, ??? 0.9.66
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -478,7 +478,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -498,7 +498,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -527,7 +527,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
 //     msrWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-     __FILE__, __LINE__,
+     __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     return "WholeNotesAndDotsNumber_???";
@@ -549,7 +549,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -576,7 +576,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -643,7 +643,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
       msrWarning (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-    //    __FILE__, __LINE__,
+    //    __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -661,7 +661,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -680,7 +680,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
         " bringing the faction to be less that 2";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -722,7 +722,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -740,7 +740,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
         "--> taking the dots into account";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -771,7 +771,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
         "--> setting the multiplying factor";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -839,7 +839,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -898,7 +898,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
       ", numeratorDots" << ": " << numeratorDots;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1026,7 +1026,7 @@ mfDurationKind mfDurationKindFromMusicXMLGraphicNoteType (
     msrError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -1138,7 +1138,7 @@ mfDurationKind mfDurationKindFromString (
     msrError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -1165,7 +1165,7 @@ EXP mfWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
       ", result: " << result;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1193,7 +1193,7 @@ EXP mfWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
       ", increment: " << increment;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1571,7 +1571,7 @@ EXP void checkNoteDurationKindAndWholeNotesDurationConsistency (
 //     msrWarning (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-// //       __FILE__, __LINE__,
+// //       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
   }
 }
@@ -1615,7 +1615,7 @@ mfWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
       ", result: " << result;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1643,7 +1643,7 @@ mfWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
       ", increment: " << increment;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1677,7 +1677,7 @@ mfWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1701,7 +1701,7 @@ mfWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1883,7 +1883,7 @@ mfWholeNotes mfDottedNotesDuration::dottedNotesDurationAsWholeNotes (
       ", result: " << result;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1911,7 +1911,7 @@ mfWholeNotes mfDottedNotesDuration::dottedNotesDurationAsWholeNotes (
       ", increment: " << increment;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1945,7 +1945,7 @@ mfWholeNotes mfDottedNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1969,7 +1969,7 @@ mfWholeNotes mfDottedNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

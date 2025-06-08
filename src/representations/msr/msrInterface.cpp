@@ -50,7 +50,7 @@ S_msrBook createBook ()
   S_msrBook
     theMsrBook =
       msrBook::create (
-        __LINE__,
+        mfInputLineNumber (__LINE__),
         "msrBook::create()");
 
   return theMsrBook;
@@ -63,14 +63,14 @@ S_msrScore createScore ()
   S_msrScore
     theMsrScore =
       msrScore::create (
-        __LINE__,
+        mfInputLineNumber (__LINE__),
         "msrScore::create()");
 
   // create its identification
   S_msrIdentification
     identification =
       msrIdentification::create (
-        __LINE__);
+        mfInputLineNumber (__LINE__));
 
   theMsrScore->
     setIdentification (
@@ -79,19 +79,19 @@ S_msrScore createScore ()
   // set the identification's work title
   identification->
     setIdentificationWorkCreditTypeTitle (
-      __LINE__,
+      mfInputLineNumber (__LINE__),
       "Mikrokosmos III Wandering");
 
   // append the identification's composer
   identification->
     appendComposer (
-      __LINE__,
+      mfInputLineNumber (__LINE__),
       "Zoltán Kodály");
 
   // set the identification's software
   identification->
     appendSoftware (
-      __LINE__,
+      mfInputLineNumber (__LINE__),
       "MSDL converter"); // JMI
 
   return theMsrScore;
@@ -105,7 +105,7 @@ void displayMsrScore (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theMsrScore != nullptr,
     "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -168,7 +168,7 @@ void displayMsrScoreFull (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theMsrScore != nullptr,
     "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -234,7 +234,7 @@ void displayMsrScoreSummary (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theMsrScore != nullptr,
     "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -285,7 +285,7 @@ void displayMsrScoreNames (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theMsrScore != nullptr,
     "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -337,7 +337,7 @@ void displayMsrScoreVoicesFlatView (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theMsrScore != nullptr,
     "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -389,7 +389,7 @@ void displayMsrScoreMeasuresSlices (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     theMsrScore != nullptr,
     "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -456,7 +456,7 @@ S_msrPart createPartInScore (
   S_msrPartGroup
     partGroup =
       msrPartGroup::create (
-        __LINE__, 1, 1, "OnlyPartGroup", nullptr, theMsrScore);
+        mfInputLineNumber (__LINE__), 1, 1, "OnlyPartGroup", nullptr, theMsrScore);
 
   // add it to the score
   theMsrScore->
@@ -467,7 +467,7 @@ S_msrPart createPartInScore (
   S_msrPart
     part =
       msrPart::create (
-        __LINE__,
+        mfInputLineNumber (__LINE__),
         "OnlyPart",
         partGroup);
 
@@ -494,7 +494,7 @@ S_msrStaff createStaffInPart (
   S_msrStaff
     staff =
       msrStaff::create (
-        __LINE__,
+        mfInputLineNumber (__LINE__),
         msrStaffKind::kStaffKindRegular,
         staffNumber,
         part);
@@ -557,7 +557,7 @@ S_msrMeasure createMeasureInVoice (
     S_msrMeasure
       measure1 =
         createMeasureInVoice (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           measure1number,
           upperVoice1);
 
@@ -566,7 +566,7 @@ S_msrMeasure createMeasureInVoice (
     measure1->
       appendClefToMeasure (
         msrClef::create (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           ???measure???,
           msrClefKind::kClefTreble,
           1));
@@ -576,7 +576,7 @@ S_msrMeasure createMeasureInVoice (
     measure1->
       appendKeyToMeasure (
         msrKey::createTraditional (
-          __LINE__,
+          mfInputLineNumber (__LINE__),
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -586,7 +586,7 @@ S_msrMeasure createMeasureInVoice (
     measure1->
       appendTimeSignatureToMeasure (
         msrTimeSignature::createTwoQuartersTime (
-          __LINE__));
+          mfInputLineNumber (__LINE__)));
 
     // append the notes
 
@@ -594,7 +594,7 @@ S_msrMeasure createMeasureInVoice (
       S_msrNote
         note1 =
           msrNote::createRegularNote (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             measure1number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave4,
@@ -606,7 +606,7 @@ S_msrMeasure createMeasureInVoice (
       note1->
         appendDynamicToNote (
           msrDynamic::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             msrDynamicKind::kDynamicPP,
             msrPlacementKind::kPlacementBelow));
 
@@ -614,7 +614,7 @@ S_msrMeasure createMeasureInVoice (
       note1->
         appendSlurToNote (
           msrSlur::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // slurNumber
             msrSlurTypeKind::kSlurTypeRegularStart,
             msrLineTypeKind::kLineTypeSolid,
@@ -624,7 +624,7 @@ S_msrMeasure createMeasureInVoice (
       note1->
         appendBeamToNote (
           msrBeam::create (
-            __LINE__,
+            mfInputLineNumber (__LINE__),
             1, // beamNumber
             msrBeamKind::kBeamBegin));
 

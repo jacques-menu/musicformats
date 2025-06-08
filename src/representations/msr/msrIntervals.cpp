@@ -4422,7 +4422,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
         msrUnsupported (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
   } // switch
@@ -7314,7 +7314,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
         msrUnsupported (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
   } // switch

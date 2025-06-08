@@ -92,7 +92,7 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
       ", line: " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -134,7 +134,7 @@ void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -155,7 +155,7 @@ void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -175,7 +175,7 @@ void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -193,7 +193,7 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
       "% ==> msrHumdrumScotKeyItem::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -211,7 +211,7 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
             "% ==> Launching msrHumdrumScotKeyItem::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -229,7 +229,7 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
       "% ==> msrHumdrumScotKeyItem::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -247,7 +247,7 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
             "% ==> Launching msrHumdrumScotKeyItem::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -469,7 +469,7 @@ msrKey::~msrKey ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -598,7 +598,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -620,7 +620,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       regularExpression;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -668,7 +668,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     msrError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -713,7 +713,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -721,7 +721,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
   // create the traditional key
   result =
     msrKey::createTraditional (
-      __LINE__,
+      mfInputLineNumber (__LINE__),
       gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       keyQuarterTonesTonicPitchKind,
       keyModeKind,
@@ -740,7 +740,7 @@ void msrKey::acceptIn (basevisitor* v)
       "% ==> msrKey::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -758,7 +758,7 @@ void msrKey::acceptIn (basevisitor* v)
             "% ==> Launching msrKey::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -776,7 +776,7 @@ void msrKey::acceptOut (basevisitor* v)
       "% ==> msrKey::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -794,7 +794,7 @@ void msrKey::acceptOut (basevisitor* v)
             "% ==> Launching msrKey::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

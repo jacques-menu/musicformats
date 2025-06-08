@@ -229,7 +229,7 @@ S_mnx2mnxsrOptionsBlock mnx2mnxsrDriver::optionsBlocksStackTop () const
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fOptionsBlocksStack.size (),
     "optionsBlocksStackTop(): fOptionsBlocksStack is empty");
 
@@ -241,7 +241,7 @@ void mnx2mnxsrDriver::optionsBlocksStackPop (
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ! fOptionsBlocksStack.empty (),
     "optionsBlocksStackPop(): fOptionsBlocksStack is empty");
 
@@ -299,7 +299,7 @@ void mnx2mnxsrDriver::registerOptionInCurrentOptionsBlock (
 
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     currentOptionsBlock != nullptr,
     "currentOptionsBlock is NULL");
 
@@ -376,7 +376,7 @@ S_mnx2mnxsrCaseChoiceStatement mnx2mnxsrDriver::caseChoiceStatementsStackTop () 
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCaseChoiceStatementsStack.size (),
     "caseChoiceStatementsStackTop(): fCaseChoiceStatementsStack is empty");
 
@@ -387,7 +387,7 @@ void mnx2mnxsrDriver::caseChoiceStatementsStackPop ()
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ! fCaseChoiceStatementsStack.empty (),
     "caseChoiceStatementsStackPop(): fCaseChoiceStatementsStack is empty");
 
@@ -456,7 +456,7 @@ S_mnx2mnxsrCaseInputStatement mnx2mnxsrDriver::caseInputStatementsStackTop () co
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCaseInputStatementsStack.size (),
     "caseInputStatementsStackTop(): fCaseInputStatementsStack is empty");
 
@@ -467,7 +467,7 @@ void mnx2mnxsrDriver::caseInputStatementsStackPop ()
 {
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ! fCaseInputStatementsStack.empty (),
     "caseInputStatementsStackPop(): fCaseInputStatementsStack is empty");
 
@@ -785,7 +785,7 @@ mfMusicformatsErrorKind mnx2mnxsrDriver::launchMnx2mnxsrService_Pass2 ()
       mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fOptionsBlocksStack.size () == 1,
     "fOptionsBlocksStack should contain only the main options block after parsing");
 
@@ -800,7 +800,7 @@ mfMusicformatsErrorKind mnx2mnxsrDriver::launchMnx2mnxsrService_Pass2 ()
 
   // sanity checks
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCaseChoiceStatementsStack.empty (),
     "fCaseChoiceStatementsStack should be empty after parsing");
 

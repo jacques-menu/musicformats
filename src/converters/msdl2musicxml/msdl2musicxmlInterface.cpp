@@ -107,7 +107,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -169,7 +169,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_1));
 #endif // MF_TRACE_IS_ENABLED
 
@@ -306,7 +306,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
       ", insiderOption: " << insiderOption;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -415,7 +415,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
   if (gEarlyOptions.getEarlyTracePasses ()) {
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       gLanguage->openingMusicXMLFileForWriting (inputFileName));
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -460,7 +460,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
   if (gEarlyOptions.getEarlyTracePasses ()) {
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       gLanguage->openingMusicXMLFileForWriting (inputFileName));
   }
 #endif // MF_TRACE_IS_ENABLED

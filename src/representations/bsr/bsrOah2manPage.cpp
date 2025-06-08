@@ -52,7 +52,7 @@ void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -86,7 +86,7 @@ void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -105,7 +105,7 @@ void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -139,7 +139,7 @@ void bsrOah2manPage::visitEnd (S_bsrTextsLanguageAtom& elt)
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

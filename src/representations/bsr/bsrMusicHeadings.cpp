@@ -96,7 +96,7 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
       "% ==> bsrMusicHeading::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -114,7 +114,7 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
             "% ==> Launching bsrMusicHeading::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -133,7 +133,7 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
       "% ==> bsrMusicHeading::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -151,7 +151,7 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
             "% ==> Launching bsrMusicHeading::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -170,7 +170,7 @@ void bsrMusicHeading::browseData (basevisitor* v)
       "% ==> bsrScore::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -202,7 +202,7 @@ void bsrMusicHeading::browseData (basevisitor* v)
       "% <== bsrScore::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

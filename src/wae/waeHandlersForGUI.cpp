@@ -90,9 +90,9 @@ void waeHandlerForGUI::waeInternalWarning (
 //______________________________________________________________________________
 void waeHandlerForGUI::waeErrorWithoutException (
   const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
     if (gOahOahGroup->getDisplaySourceCodePositions ()) {
@@ -120,9 +120,9 @@ void waeHandlerForGUI::waeErrorWithoutExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
     if (gOahOahGroup->getDisplaySourceCodePositions ()) {
@@ -151,9 +151,9 @@ void waeHandlerForGUI::waeErrorWithoutExceptionWithInputLocation (
 
 void waeHandlerForGUI::waeError (
   const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeErrorWithoutException (
     context,
@@ -168,9 +168,9 @@ void waeHandlerForGUI::waeErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeErrorWithoutExceptionWithInputLocation (
     context,
@@ -185,9 +185,9 @@ void waeHandlerForGUI::waeErrorWithInputLocation (
 
 void waeHandlerForGUI::waeErrorWithException (
   const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message,
   const S_mfException& except)
 {
   waeErrorWithoutException (
@@ -205,9 +205,9 @@ void waeHandlerForGUI::waeErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message,
   const S_mfException& except)
 {
   waeErrorWithoutExceptionWithInputLocation (
@@ -228,9 +228,9 @@ void waeHandlerForGUI::waeInternalErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message)
 {
   waeErrorWithoutExceptionWithInputLocation (
     context,
@@ -247,9 +247,9 @@ void waeHandlerForGUI::waeInternalErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
+  const std::string&       sourceCodeFileName,
+  const mfInputLineNumber& sourceCodeLineNumber,
+  const std::string&       message,
   const S_mfException& except)
 {
   waeErrorWithoutExceptionWithInputLocation (

@@ -115,7 +115,11 @@ std::string mfMeasureNumberAsString (
     result = "K_MEASURE_NUMBER_UNKNOWN_";
   }
   else {
+#ifndef MF_USE_WRAPPED_TYPES
     result = measureNumber;
+#else
+    result = measureNumber.getBareValue ();
+#endif // MF_USE_WRAPPED_TYPES
   }
 
   return result;

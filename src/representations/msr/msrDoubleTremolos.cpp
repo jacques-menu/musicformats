@@ -137,7 +137,7 @@ msrDoubleTremolo::~msrDoubleTremolo ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     measure != nullptr,
 //     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -173,7 +173,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
       "Creating a newborn clone of a double tremolo";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -181,12 +181,12 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     doubleTremoloFirstElement != nullptr,
     "doubleTremoloFirstElement is NULL");
 
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     doubleTremoloSecondElement != nullptr,
     "doubleTremoloSecondElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -253,7 +253,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
 //     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -309,7 +309,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
 //           fInputLineNumber,
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           "notes double tremolo first element should be a note");
 //       }
 //       break;
@@ -329,7 +329,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
 //           fInputLineNumber,
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           "chords double tremolo first element should be a chord");
 //       }
 //       break;
@@ -348,7 +348,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -426,7 +426,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       note->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -449,7 +449,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       "', line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -468,7 +468,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -510,7 +510,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       "', line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -542,7 +542,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
     msrInternalError (
       gServiceRunData->getInputSourceName (),
       note->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -566,7 +566,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -620,7 +620,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         chord->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -642,7 +642,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
       asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -687,7 +687,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
       msrInternalError (
         gServiceRunData->getInputSourceName (),
         chord->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -715,7 +715,7 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
       "% ==> msrDoubleTremolo::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -733,7 +733,7 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
             "% ==> Launching msrDoubleTremolo::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -751,7 +751,7 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
       "% ==> msrDoubleTremolo::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -769,7 +769,7 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
             "% ==> Launching msrDoubleTremolo::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -874,7 +874,7 @@ std::string msrDoubleTremolo::asString () const
           msrInternalError (
             gServiceRunData->getInputSourceName (),
             fInputLineNumber,
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             "notes double tremolo first element should be a note");
         }
         break;
@@ -891,7 +891,7 @@ std::string msrDoubleTremolo::asString () const
           msrInternalError (
             gServiceRunData->getInputSourceName (),
             fInputLineNumber,
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             "chords double tremolo first element should be a chord");
         }
         break;
@@ -915,7 +915,7 @@ std::string msrDoubleTremolo::asString () const
           msrInternalError (
             gServiceRunData->getInputSourceName (),
             fInputLineNumber,
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             "notes double tremolo second element should be a note");
         }
         break;
@@ -932,7 +932,7 @@ std::string msrDoubleTremolo::asString () const
           msrInternalError (
             gServiceRunData->getInputSourceName (),
             fInputLineNumber,
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             "chords double tremolo second element should be a chord");
         }
         break;

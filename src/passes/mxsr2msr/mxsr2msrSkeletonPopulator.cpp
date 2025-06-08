@@ -908,7 +908,7 @@ void mxsr2msrSkeletonPopulator::checkStep (
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -924,7 +924,7 @@ void mxsr2msrSkeletonPopulator::checkStep (
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
   }
 }
@@ -956,7 +956,7 @@ void mxsr2msrSkeletonPopulator::populatePartsMapFromScore ()
     mxsr2msrInternalError (
       gServiceRunData->getInputSourceName (),
       1, // inputLineNumber
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -981,7 +981,7 @@ void mxsr2msrSkeletonPopulator::populatePartsMapFromScore ()
 //           ", line " << staff->getInputLineNumber ();
 //
 //         gWaeHandler->waeTrace (
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           ss.str ());
 //       }
 //   #endif // MF_TRACE_IS_ENABLED
@@ -1074,7 +1074,7 @@ void mxsr2msrSkeletonPopulator::displayPartsMap () const
 //       " parts";
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1108,7 +1108,7 @@ void mxsr2msrSkeletonPopulator::displayPartsMap () const
 //         ", line " << staff->getInputLineNumber ();
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1130,7 +1130,7 @@ void mxsr2msrSkeletonPopulator::displayPartsMap () const
 //       mxsr2msrError (
 //         gServiceRunData->getInputSourceName (),
 //         part->getInputLineNumber (),
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 //     catch (std::exception& e) {
@@ -1183,7 +1183,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1210,7 +1210,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
         partStavesMapSize, "stave", "staves");
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1251,7 +1251,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
             "\"";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1419,7 +1419,7 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1444,7 +1444,7 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
   catch (mxsr2msrException& e) {
@@ -1477,7 +1477,7 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
     mxsr2msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1491,7 +1491,7 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
       theMsrVoice->getVoiceName ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1561,7 +1561,7 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestBegin ()
       ", line " << fCurrentNoteInputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1652,7 +1652,7 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestEnd ()
       ", line " << fCurrentNoteInputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     displayGatheredNoteInformations (
@@ -1666,7 +1666,7 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestEnd ()
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check JMI 0.9.70
 //       mfAssert (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         fCurrentRecipientMxsrVoice->fetchInnerMostTuplet () != nullptr,
 //         "fetchInnerMostTuplet () is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1795,7 +1795,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatBegin ()
       ", line " << fCurrentNoteInputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1830,7 +1830,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
       ", line " << fCurrentNoteInputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     displayGatheredNoteInformations (
@@ -1844,7 +1844,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check JMI 0.9.70
 //       mfAssert (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         fCurrentRecipientMxsrVoice->fetchInnerMostTuplet () != nullptr,
 //         "fetchInnerMostTuplet () is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1975,7 +1975,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
 //       ", line " << fCurrentNoteInputStartLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2004,7 +2004,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
 //       ", line " << fCurrentNoteInputStartLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2012,7 +2012,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
 // // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 // //       // sanity check JMI 0.9.70
 // //       mfAssert (
-// //         __FILE__, __LINE__,
+// //         __FILE__, mfInputLineNumber (__LINE__),
 // //        fCurrentRecipientMxsrVoice->fetchInnerMostTuplet () != nullptr,
 // //         "fetchInnerMostTuplet () is NULL");
 // // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -2107,7 +2107,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_millimeters& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2126,7 +2126,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tenths& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2145,7 +2145,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_scaling& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2167,7 +2167,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_scaling& elt)
       " tenths for " <<  fCurrentMillimeters;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2189,7 +2189,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_layout& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2213,7 +2213,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_system_layout& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2249,7 +2249,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_margins& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2258,7 +2258,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_margins& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<system-margins /> is out of context");
   }
 
@@ -2276,7 +2276,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_distance& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2295,7 +2295,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_distance& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<system-distance /> is out of context");
   }
 }
@@ -2311,7 +2311,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_top_system_distance& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2330,7 +2330,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_top_system_distance& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<top-system-distance /> is out of context");
   }
 }
@@ -2346,7 +2346,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_system_margins& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2355,7 +2355,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_system_margins& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<system-margins /> is out of context");
   }
 
@@ -2374,7 +2374,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_dividers& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2404,7 +2404,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_left_divider& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2432,7 +2432,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_right_divider& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2461,7 +2461,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notations& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2480,7 +2480,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_notation& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2500,7 +2500,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_layout& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2524,7 +2524,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_page_layout& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2552,7 +2552,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_height& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2570,7 +2570,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_height& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<page-height /> is out of context");
   }
 }
@@ -2586,7 +2586,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_width& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2604,7 +2604,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_width& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<page-width /> is out of context");
   }
 }
@@ -2620,7 +2620,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_margins& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2648,7 +2648,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_margins& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -2656,7 +2656,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_margins& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<page-margins /> is out of context");
   }
 
@@ -2701,7 +2701,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_page_margins& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2726,7 +2726,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_left_margin& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2759,7 +2759,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_left_margin& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<left-margin /> is out of context");
   }
 }
@@ -2808,7 +2808,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_right_margin& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<right-margin /> is out of context");
   }
 }
@@ -2827,7 +2827,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_top_margin& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2847,7 +2847,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_top_margin& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<top-margin /> is out of context");
   }
 }
@@ -2866,7 +2866,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bottom_margin& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2886,7 +2886,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bottom_margin& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<bottom-margin /> is out of context");
   }
 }
@@ -2903,7 +2903,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_layout& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2952,7 +2952,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_layout& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2974,7 +2974,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_distance& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2993,7 +2993,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_distance& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<staff-distance /> is out of context");
   }
 }
@@ -3012,7 +3012,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_layout& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3036,7 +3036,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure_layout& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3058,7 +3058,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_distance& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3077,7 +3077,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_distance& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<measure-distance /> is out of context");
   }
 }
@@ -3094,7 +3094,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_appearance& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3123,7 +3123,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_appearance& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3145,7 +3145,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3212,7 +3212,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3241,7 +3241,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -3250,7 +3250,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<line-width /> is out of context");
   }
 }
@@ -3266,7 +3266,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3305,7 +3305,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3332,7 +3332,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -3341,7 +3341,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<note-size /> is out of context");
   }
 }
@@ -3357,7 +3357,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3390,7 +3390,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3419,7 +3419,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -3427,7 +3427,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<distance /> is out of context");
   }
 }
@@ -3443,7 +3443,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3500,7 +3500,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -3527,7 +3527,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -3535,7 +3535,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<glyph /> is out of context");
   }
 }
@@ -3551,7 +3551,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_appearance& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3563,7 +3563,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_appearance& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<other-appearance /> is out of context");
   }
 }
@@ -3582,7 +3582,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3620,7 +3620,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
         " -- start";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3679,7 +3679,7 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
         ", line " << inputLineNumber << " ===-->";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -3728,7 +3728,7 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
       std::endl;
 
     gWaeHandler->waeTraceWithoutInputLocation ( // JMI 0.9.71 without CODE location ???
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3801,7 +3801,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3822,7 +3822,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
       "--------------------------------------------";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3831,7 +3831,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCurrentNoteVoiceNumber != K_VOICE_NUMBER_UNKNOWN_, // JMI 0.9.72 ???
     "fCurrentNoteVoiceNumber is unknown");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -3957,7 +3957,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_attributes& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3980,7 +3980,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_attributes& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4016,7 +4016,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4031,7 +4031,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "divisions per quarter note should be between 1 and 16383");
   }
 
@@ -4057,7 +4057,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4081,7 +4081,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_clef& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4121,7 +4121,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sign& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4140,7 +4140,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4159,7 +4159,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_clef_octave_change& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4176,7 +4176,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_clef_octave_change& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -4192,7 +4192,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4242,7 +4242,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -4310,7 +4310,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -4344,7 +4344,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
           mxsr2msrError (
             gServiceRunData->getInputSourceName (),
             elt->getInputLineNumber (),
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
     } // switch
@@ -4376,7 +4376,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
           mxsr2msrError (
             gServiceRunData->getInputSourceName (),
             elt->getInputLineNumber (),
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
     } // switch
@@ -4405,7 +4405,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -4436,7 +4436,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
         ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -4483,7 +4483,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
     catch (std::exception& e) {
@@ -4509,7 +4509,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4555,7 +4555,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_cancel& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4574,7 +4574,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fifths& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4595,7 +4595,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mode& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4641,7 +4641,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mode& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -4657,7 +4657,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_step& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4666,7 +4666,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_step& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "Humdrum/Scot key step found while another one is being handled");
   }
 
@@ -4712,7 +4712,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_alter& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4721,7 +4721,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_alter& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "Humdrum/Scot key alter found while no key step is being handled");
   }
 
@@ -4743,7 +4743,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_alter& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -4767,7 +4767,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_octave& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4808,7 +4808,7 @@ If the cancel attribute is
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -4838,7 +4838,7 @@ If the cancel attribute is
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -4859,7 +4859,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_key& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4911,7 +4911,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_key& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
     catch (std::exception& e) {
@@ -5017,7 +5017,7 @@ S_msrKey mxsr2msrSkeletonPopulator::handleTraditionalKey (
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
       }
   } // switch
@@ -5071,7 +5071,7 @@ S_msrKey mxsr2msrSkeletonPopulator::handleHumdrumScotKey (
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "Humdrum/Scot key is empty");
 
   // return it
@@ -5090,7 +5090,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5130,7 +5130,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -5151,7 +5151,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beats& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5180,7 +5180,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5231,7 +5231,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "beat type doesn't contain any beats numbers");
   }
 
@@ -5262,7 +5262,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_senza_misura& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5282,7 +5282,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_interchangeable& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5319,7 +5319,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_interchangeable& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -5356,7 +5356,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_interchangeable& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -5375,7 +5375,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time_relation& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5420,7 +5420,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time_relation& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -5437,7 +5437,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5469,7 +5469,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           "time is empty");
 
     } // switch
@@ -5508,7 +5508,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
     catch (std::exception& e) {
@@ -5544,7 +5544,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_score_instrument& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5563,7 +5563,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instrument_name& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5586,7 +5586,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_solo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5609,7 +5609,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instruments& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5670,7 +5670,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_transpose& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5694,7 +5694,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_diatonic& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5713,7 +5713,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_chromatic& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5732,7 +5732,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_change& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5751,7 +5751,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_double& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5777,7 +5777,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5875,7 +5875,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
     catch (std::exception& e) {
@@ -5899,7 +5899,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_direction& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5933,7 +5933,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_direction& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -5958,7 +5958,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_direction& elt)
             fCurrentMetronomeTempo->asString ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -6004,7 +6004,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_direction_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6013,7 +6013,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_direction_type& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<direction-type /> is out of context");
   }
 
@@ -6031,7 +6031,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_direction_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6207,7 +6207,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_offset& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6244,7 +6244,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_offset& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -6268,7 +6268,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_offset& elt)
        "\" whole notes";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -6290,7 +6290,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_direction& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6319,7 +6319,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sound& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6364,7 +6364,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_sound& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6382,7 +6382,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6436,7 +6436,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
 //       mxsr2msrWarning (
 //         gServiceRunData->getInputSourceName (),
 //         elt->getInputLineNumber (),
-//    //     __FILE__, __LINE__,
+//    //     __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 //
@@ -6469,7 +6469,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -6491,7 +6491,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
         ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -6512,7 +6512,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6577,7 +6577,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -6606,7 +6606,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -6682,7 +6682,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -6750,7 +6750,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -6791,7 +6791,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -6831,7 +6831,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -6870,7 +6870,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -6912,7 +6912,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -6950,7 +6950,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -6991,7 +6991,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7033,7 +7033,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7065,7 +7065,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7083,7 +7083,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7121,7 +7121,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7139,7 +7139,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7172,7 +7172,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7228,7 +7228,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_registration& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7263,7 +7263,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_high& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7318,7 +7318,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_low& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7339,7 +7339,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_accordion_registration& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7383,7 +7383,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7409,7 +7409,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -7465,7 +7465,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7496,7 +7496,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -7512,7 +7512,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit_dot& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7529,7 +7529,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit_dot& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -7545,7 +7545,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_per_minute& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7564,7 +7564,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_note& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7583,7 +7583,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7608,7 +7608,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_dot& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7660,7 +7660,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_beam& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -7698,7 +7698,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentMetronomeBeamsToMetronomeNote (
       tempoNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7722,7 +7722,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentMetronomeBeamsToMetronomeNote (
         " to tempoNote " << tempoNote->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -7746,7 +7746,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_note& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7839,7 +7839,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_relation& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7861,7 +7861,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_relation& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -7877,7 +7877,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7909,7 +7909,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       else {
@@ -7954,7 +7954,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -7981,7 +7981,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           "metronome tuplet show-number \"" + tupletShowNumber + "\" is unknown");
       }
     }
@@ -8000,7 +8000,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
       fCurrentTempoTupletShowNumberKind;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8019,7 +8019,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_dot& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8038,7 +8038,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_tuplet& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8115,7 +8115,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8151,7 +8151,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -8216,7 +8216,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
       fCurrentMetronomeTempo->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8248,7 +8248,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
             fCurrentMetronomeTempo->asString ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -8308,7 +8308,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staves& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8326,7 +8326,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8344,7 +8344,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
       ", line " << elt->getInputLineNumber ();
 
     mfAssert(
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       false,
       ss.str ());
   }
@@ -8370,7 +8370,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
     catch (std::exception& e) {
@@ -8387,7 +8387,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
       staff->getStaffPathLikeName();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8429,7 +8429,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -8446,7 +8446,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8485,7 +8485,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -8528,7 +8528,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -8544,7 +8544,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
       fStaffDetailsStaffNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8584,7 +8584,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8629,7 +8629,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_type& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -8645,7 +8645,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_lines& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8664,7 +8664,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_tuning& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8689,7 +8689,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_step& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8723,7 +8723,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_step& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -8739,7 +8739,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_octave& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8769,7 +8769,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_octave& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -8785,7 +8785,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_alter& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8807,7 +8807,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_alter& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -8828,7 +8828,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_alter& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -8866,7 +8866,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_tuning& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
   catch (mxsr2msrException& e) {
@@ -8958,7 +8958,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8972,7 +8972,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
       ", line " << elt->getInputLineNumber () << " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9014,7 +9014,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -9051,7 +9051,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_backup& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9070,7 +9070,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9088,7 +9088,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9150,7 +9150,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_forward& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9196,7 +9196,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9229,7 +9229,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9250,7 +9250,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
       ", line " << elt->getInputLineNumber ();
 
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         false,
         ss.str ());
   }
@@ -9266,7 +9266,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
       ", line " << elt->getInputLineNumber ();
 
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         false,
         ss.str ());
   }
@@ -9280,7 +9280,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     voiceToBeForwardedTo != nullptr,
     "voiceToBeForwardedTo is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -9295,7 +9295,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
       fCurrentForwardDuration;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9348,7 +9348,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9389,7 +9389,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -9405,7 +9405,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -9534,7 +9534,7 @@ The values of start, stop, and continue refer to how an
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9634,7 +9634,7 @@ The values of start, stop, and continue refer to how an
 //               mxsr2msrWarning (
 //                 gServiceRunData->getInputSourceName (),
 //                 elt->getInputLineNumber (),
-//         //        __FILE__, __LINE__,
+//         //        __FILE__, mfInputLineNumber (__LINE__),
 //                 ss.str (),
 //             }
         } // switch
@@ -9735,7 +9735,7 @@ The values of start, stop, and continue refer to how an
             mxsr2msrError (
               gServiceRunData->getInputSourceName (),
               elt->getInputLineNumber (),
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
         }
@@ -9766,7 +9766,7 @@ The values of start, stop, and continue refer to how an
           mxsr2msrError (
             gServiceRunData->getInputSourceName (),
             elt->getInputLineNumber (),
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             "slur line-type \"" + slurLineType + "\" is unknown");
         }
       }
@@ -9789,7 +9789,7 @@ The values of start, stop, and continue refer to how an
             slurLineTypeKind);
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -9841,7 +9841,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9884,7 +9884,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -9923,7 +9923,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -9953,7 +9953,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "ligature line-type \"" + ligatureLineTypeValue + "\" is unknown");
     }
   }
@@ -10042,7 +10042,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
               mxsr2msrWarning (
                 gServiceRunData->getInputSourceName (),
                 elt->getInputLineNumber (),
-           //     __FILE__, __LINE__,
+           //     __FILE__, mfInputLineNumber (__LINE__),
                 ss.str ());
             }
 
@@ -10068,7 +10068,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
             mxsr2msrWarning (
               gServiceRunData->getInputSourceName (),
               elt->getInputLineNumber (),
-         //     __FILE__, __LINE__,
+         //     __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 
@@ -10093,7 +10093,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
             mxsr2msrWarning (
               gServiceRunData->getInputSourceName (),
               elt->getInputLineNumber (),
-         //     __FILE__, __LINE__,
+         //     __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
 
@@ -10131,7 +10131,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10168,7 +10168,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -10197,7 +10197,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -10227,7 +10227,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "wedge line-type \"" + wedgeLineType + "\" is unknown");
     }
   }
@@ -10254,7 +10254,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10291,7 +10291,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10321,7 +10321,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
         ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -10350,7 +10350,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
           "\" by default";
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -10368,7 +10368,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
         "\", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -10412,7 +10412,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_syllabic& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10443,7 +10443,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_syllabic& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -10465,7 +10465,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_text& elt)
       ", line " << inputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10492,7 +10492,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_text& elt)
       ", line " << inputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10537,7 +10537,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_elision& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10569,7 +10569,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_elision& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10604,7 +10604,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_extend& elt)
       ", line " << inputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10644,7 +10644,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_extend& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         inputStartLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -10781,7 +10781,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
       ", line " << inputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10864,7 +10864,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
       std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -10874,7 +10874,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check JMI 0.9.70
 //   mfAssert (
-//     __FILE__, __LINE__,
+//     __FILE__, mfInputLineNumber (__LINE__),
 //     fCurrentRecipientMsrVoice != nullptr,
 //     "fCurrentRecipientMsrVoice is null");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -10908,7 +10908,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
         ", line " << inputStartLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
 
       displayGatheredLyricInformations (
@@ -10943,7 +10943,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
         ", line " << inputStartLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
 
       displayGatheredLyricInformations (
@@ -10984,7 +10984,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -11007,7 +11007,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       fCurrentPart->fetchPartNameForTrace () << "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -11040,7 +11040,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       std::endl;
 
     gWaeHandler->waeTraceWithoutInputLocation ( // JMI 0.9.71 without CODE location ???
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -11085,7 +11085,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -11117,7 +11117,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       " ===-->";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -11204,7 +11204,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -11292,7 +11292,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
           fCurrentPart;
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
   #endif // MF_TRACE_IS_ENABLED
@@ -11315,7 +11315,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
         mxsr2msrInternalError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -11411,7 +11411,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
             fCurrentPart->fetchPartNameForTrace ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
   #endif // MF_TRACE_IS_ENABLED
@@ -11467,7 +11467,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
           fCurrentPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -11502,7 +11502,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_print& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -11596,7 +11596,7 @@ Staff spacing between multiple staves is measured in
             "line: " << elt->getInputLineNumber ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -11625,7 +11625,7 @@ Staff spacing between multiple staves is measured in
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -11675,7 +11675,7 @@ Staff spacing between multiple staves is measured in
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -11713,7 +11713,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_print& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -11757,7 +11757,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_numbering& elt)
        ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -11777,7 +11777,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barline& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -11826,7 +11826,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barline& elt)
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-     //     __FILE__, __LINE__,
+     //     __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -11847,7 +11847,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bar_style& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -11907,7 +11907,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bar_style& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "bar-style \"" + barStyle + "\" is unknown");
   }
 
@@ -11926,7 +11926,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_segno& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -11956,7 +11956,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_segno& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -11972,7 +11972,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_coda& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -12001,7 +12001,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_coda& elt)
           mxsr2msrError (
             gServiceRunData->getInputSourceName (),
             elt->getInputLineNumber (),
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
     } // switch
@@ -12031,7 +12031,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_coda& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -12047,7 +12047,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_eyeglasses& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -12071,7 +12071,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_eyeglasses& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -12087,7 +12087,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -12118,7 +12118,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -12145,7 +12145,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -12175,7 +12175,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -12201,7 +12201,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -12218,7 +12218,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ending& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -12270,7 +12270,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ending& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -12299,7 +12299,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_repeat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -12330,7 +12330,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_repeat& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -12374,7 +12374,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_repeat& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -12400,7 +12400,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -12432,7 +12432,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
       fCurrentPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -12512,7 +12512,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -12535,7 +12535,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -12651,7 +12651,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -12712,7 +12712,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-     //     __FILE__, __LINE__,
+     //     __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
         break;
     } // switch
@@ -12730,7 +12730,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
     mxsr2msrInternalError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -12751,7 +12751,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
       mxsr2msrInternalError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
       }
       break;
@@ -12782,7 +12782,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -12890,7 +12890,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -12917,7 +12917,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_step& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -12944,7 +12944,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_alter& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -12965,7 +12965,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_alter& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -12981,7 +12981,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13020,7 +13020,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13040,7 +13040,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13063,7 +13063,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
         fCurrentDivisionsPerQuarterNote;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -13083,7 +13083,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
         fCurrentNoteSoundingWholeNotesFromNotesDuration;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -13106,7 +13106,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
         fCurrentDivisionsPerQuarterNote;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -13126,7 +13126,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
         fCurrentFiguredBassSoundingWholeNotes;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -13143,7 +13143,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -13161,7 +13161,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instrument& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13208,7 +13208,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_dot& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13227,7 +13227,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13262,7 +13262,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_type& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
             "note type size \"" + noteTypeSize + "\" is unknown");
       }
     }
@@ -13296,7 +13296,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notehead& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13366,7 +13366,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notehead& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -13391,7 +13391,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notehead& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -13417,7 +13417,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notehead& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -13437,7 +13437,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental& elt) // JMI
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13529,7 +13529,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental& elt) // JMI
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -13560,7 +13560,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental& elt) // JMI
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -13591,7 +13591,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental& elt) // JMI
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -13609,7 +13609,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stem& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13659,7 +13659,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stem& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -13682,7 +13682,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beam& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13718,7 +13718,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beam& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -13737,7 +13737,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beam& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -13770,7 +13770,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_style& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13789,7 +13789,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_repeat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13838,7 +13838,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13924,7 +13924,7 @@ The <measure-repeat> element specifies a notation style for repetitions.
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13951,7 +13951,7 @@ The <measure-repeat> element specifies a notation style for repetitions.
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -13971,7 +13971,7 @@ The <measure-repeat> element specifies a notation style for repetitions.
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -14009,7 +14009,7 @@ The <multiple-rest> element indicates multiple rests that span several measures.
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14051,7 +14051,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_multiple_rest& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14068,7 +14068,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14091,7 +14091,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -14123,7 +14123,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -14142,7 +14142,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14167,7 +14167,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
           "slash type size \"" + slashTypeSize + "\" is unknown");
     }
   }
@@ -14186,7 +14186,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14203,7 +14203,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_dot& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14222,7 +14222,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_slash& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14250,7 +14250,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_articulations& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14267,7 +14267,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accent& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14306,7 +14306,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_breath_mark& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14345,7 +14345,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_caesura& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14384,7 +14384,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_spiccato& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14423,7 +14423,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staccato& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14462,7 +14462,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staccatissimo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14501,7 +14501,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stress& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14540,7 +14540,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_unstress& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14579,7 +14579,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_detached_legato& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14618,7 +14618,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_strong_accent& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14658,7 +14658,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tenuto& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14699,7 +14699,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_doit& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14738,7 +14738,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_falloff& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14777,7 +14777,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_plop& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14816,7 +14816,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_scoop& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14855,7 +14855,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_articulations& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14875,7 +14875,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_arpeggiate& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14914,7 +14914,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_arpeggiate& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -14945,7 +14945,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_non_arpeggiate& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -14986,7 +14986,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_non_arpeggiate& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -15021,7 +15021,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_technical& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15040,7 +15040,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_technical& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15059,7 +15059,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_arrow& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15096,7 +15096,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bend_alter& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15115,7 +15115,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bend& elt) // JMI
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15132,7 +15132,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_bend& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15171,7 +15171,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_double_tongue& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15208,7 +15208,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_down_bow& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15245,7 +15245,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fingering& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15290,7 +15290,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fingering& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -15306,7 +15306,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fingernails& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15343,7 +15343,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fret& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15387,7 +15387,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fret& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -15403,7 +15403,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_hammer_on& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15431,7 +15431,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_hammer_on& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -15470,7 +15470,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_handbell& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15511,7 +15511,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harmonic& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15559,7 +15559,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_heel& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15596,7 +15596,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_hole& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15633,7 +15633,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_open_string& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15670,7 +15670,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_technical& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15711,7 +15711,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pluck& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15752,7 +15752,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pull_off& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15780,7 +15780,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pull_off& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -15819,7 +15819,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_snap_pizzicato& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15856,7 +15856,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stopped& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15893,7 +15893,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_string& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -15968,7 +15968,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_string& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -15984,7 +15984,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tap& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16021,7 +16021,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_thumb_position& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16058,7 +16058,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_toe& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16095,7 +16095,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_triple_tongue& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16132,7 +16132,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_up_bow& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16170,7 +16170,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fermata& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16203,7 +16203,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fermata& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -16233,7 +16233,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fermata& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -16261,7 +16261,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ornaments& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16278,7 +16278,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16314,7 +16314,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -16343,7 +16343,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -16410,7 +16410,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -16438,7 +16438,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
             singleTremoloPlacementKind);
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -16475,7 +16475,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
               doubleTremoloPlacementKind);
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -16499,7 +16499,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 */
@@ -16516,7 +16516,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
             ", line " << elt->getInputLineNumber ();
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -16533,7 +16533,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -16551,7 +16551,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_trill_mark& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16592,7 +16592,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_dashes& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16626,7 +16626,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_dashes& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -16698,7 +16698,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wavy_line& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16730,7 +16730,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wavy_line& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -16812,7 +16812,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_turn& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16851,7 +16851,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_inverted_turn& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16890,7 +16890,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_delayed_turn& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16929,7 +16929,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_delayed_inverted_turn& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -16968,7 +16968,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_vertical_turn& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17007,7 +17007,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mordent& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17046,7 +17046,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_inverted_mordent& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17085,7 +17085,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_schleifer& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17124,7 +17124,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_shake& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17163,7 +17163,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental_mark& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17336,7 +17336,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental_mark& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -17378,7 +17378,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_ornaments& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17396,7 +17396,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_f& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17439,7 +17439,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ff& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17482,7 +17482,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fff& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17525,7 +17525,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffff& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17568,7 +17568,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fffff& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17611,7 +17611,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffffff& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17655,7 +17655,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_p& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17698,7 +17698,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17741,7 +17741,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17784,7 +17784,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17827,7 +17827,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppppp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17870,7 +17870,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppppp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17914,7 +17914,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mf& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17957,7 +17957,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18001,7 +18001,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18045,7 +18045,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fz& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18089,7 +18089,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pf& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18133,7 +18133,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rf& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18177,7 +18177,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sf& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18221,7 +18221,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rfz& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18265,7 +18265,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfz& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18309,7 +18309,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18353,7 +18353,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfpp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18397,7 +18397,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sffz& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18441,7 +18441,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfzp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18485,7 +18485,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_n& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18529,7 +18529,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_dynamics& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18695,7 +18695,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sostenuto_pedal& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18736,7 +18736,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_grace& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18762,7 +18762,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_grace& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "grace slash \"" + slashString + "\" unknown, should be 'yes' or 'no'");
     }
   }
@@ -18803,7 +18803,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_cue& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18826,7 +18826,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_chord& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18846,7 +18846,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time_modification& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18868,7 +18868,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_actual_notes& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18887,7 +18887,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_actual_notes& elt)
         fCurrentNoteActualNotes;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -18915,7 +18915,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_actual_notes& elt)
         fCurrentMetronomeNoteActualNotes;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -18931,7 +18931,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_actual_notes& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -18947,7 +18947,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_notes& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -18966,7 +18966,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_notes& elt)
         fCurrentNoteNormalNotes;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -18996,7 +18996,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_notes& elt)
         fCurrentMetronomeNoteNormalNotes;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -19012,7 +19012,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_notes& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -19028,7 +19028,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19045,7 +19045,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
         normalTypeString;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -19078,7 +19078,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
         fCurrentMetronomeNoteNormalType;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -19095,7 +19095,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -19112,7 +19112,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19145,7 +19145,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 //           ", line " << elt->getInputLineNumber ();
 //
 //         gWaeHandler->waeTrace (
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           ss.str ());
 //       }
 // #endif // MF_TRACE_IS_ENABLED
@@ -19163,7 +19163,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 //           ", line " << elt->getInputLineNumber ();
 //
 //         gWaeHandler->waeTrace (
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           ss.str ());
 //       }
 // #endif // MF_TRACE_IS_ENABLED
@@ -19181,7 +19181,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -19197,7 +19197,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -19226,7 +19226,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       else {
@@ -19272,7 +19272,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           "tuplet show-number \"" + tupletShowNumber + "\" is unknown");
       }
     }
@@ -19299,7 +19299,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           "tuplet show-type \"" + tupletShowType + "\" is unknown");
       }
     }
@@ -19328,7 +19328,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -19364,7 +19364,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19388,7 +19388,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_actual& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19407,7 +19407,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet_actual& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19426,7 +19426,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_normal& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19445,7 +19445,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet_normal& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19464,7 +19464,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_number& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19482,7 +19482,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_number& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<tuplet-number /> out of context");
   }
 
@@ -19497,7 +19497,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_number& elt)
       tupletNumberValue;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19514,7 +19514,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19532,7 +19532,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_type& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<tuplet-type /> out of context");
   }
 
@@ -19547,7 +19547,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_type& elt)
       tupletTypeValue;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19564,7 +19564,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_dot& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19579,7 +19579,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_dot& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       "<tuplet-dot /> out of context");
   }
 
@@ -19598,7 +19598,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19631,7 +19631,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -19660,7 +19660,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "glissando line-type \"" + glissandoLineType + "\" is unknown");
     }
   }
@@ -19676,7 +19676,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
       "glissandoTextValue: " << glissandoTextValue;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19702,7 +19702,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
       " to the glissandos pending list";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19722,7 +19722,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19755,7 +19755,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -19784,7 +19784,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "slide line-type \"" + slideLineType + "\" is unknown");
     }
   }
@@ -19802,7 +19802,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
       slideLineTypeKind;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19828,7 +19828,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
       " to the slides pending list";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19848,7 +19848,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rest& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19908,7 +19908,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rest& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "rest measure \"" + restMeasure + "\" is unknown");
     }
   }
@@ -19926,7 +19926,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_display_step& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19958,7 +19958,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_display_octave& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -19997,7 +19997,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_unpitched& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20024,7 +20024,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_unpitched& elt)
 //       ", line " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -20045,7 +20045,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_unpitched& elt)
 //       ", line " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -20108,7 +20108,7 @@ void mxsr2msrSkeletonPopulator::copyNoteGraceNotesGroupsToChord (
         " to chord " << chord->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20134,7 +20134,7 @@ void mxsr2msrSkeletonPopulator::copyNoteGraceNotesGroupsToChord (
         " to chord " << chord->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20170,7 +20170,7 @@ S_msrTuplet mxsr2msrSkeletonPopulator::createATuplet (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check JMI 0.9.70
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     tupletNumber > 0,
     "tupletNumber is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -20215,7 +20215,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentArticulationsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20235,7 +20235,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentArticulationsToCurrentNote ()
         " to note " << fCurrentNote->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20261,7 +20261,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentTechnicalsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20281,7 +20281,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentTechnicalsToCurrentNote ()
         " to note " << fCurrentNote->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20306,7 +20306,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentTechnicalWithIntegersToCurrentNote 
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20326,7 +20326,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentTechnicalWithIntegersToCurrentNote 
         " to note " << fCurrentNote->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20351,7 +20351,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentTechnicalWithFloatsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20371,7 +20371,7 @@ if (gTraceOahGroup->getTraceTechnicals ()) {
         " to note " << fCurrentNote->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20396,7 +20396,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentTechnicalWithStringsToCurrentNote (
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20416,7 +20416,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentTechnicalWithStringsToCurrentNote (
         " to note " << fCurrentNote->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20441,7 +20441,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentOrnamentsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20462,7 +20462,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentOrnamentsToCurrentNote ()
         std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20492,7 +20492,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentSpannersToNote (
         std::endl;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20554,7 +20554,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentSpannersToNote (
           " to note " << fCurrentNote->asString ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -20581,7 +20581,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentSpannersToNote (
 //             std::endl;
 //
 //           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
+//             __FILE__, mfInputLineNumber (__LINE__),
 //             ss.str (),
 //         }
 // #endif // MF_TRACE_IS_ENABLED
@@ -20614,7 +20614,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentSingleTremoloToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20645,7 +20645,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentArticulationsToChord ( // JMI
         chord->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20660,7 +20660,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentArticulationsToChord ( // JMI
           " to chord " << chord;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -20686,7 +20686,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentOrnamentsToChord ( // JMI
         chord->asString ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20701,7 +20701,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentOrnamentsToChord ( // JMI
           chord;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -20729,7 +20729,7 @@ void mxsr2msrSkeletonPopulator::attachPendingTemposToVoice (
         "\"";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20761,7 +20761,7 @@ void mxsr2msrSkeletonPopulator::attachPendingTemposToPart (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20793,7 +20793,7 @@ void mxsr2msrSkeletonPopulator::attachPendingTemposToPart (
 //         "\"";
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -20828,7 +20828,7 @@ void mxsr2msrSkeletonPopulator::attachPendingBarLinesToPart (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20864,7 +20864,7 @@ void mxsr2msrSkeletonPopulator::attachPendingRehearsalMarksToPart (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20895,7 +20895,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLineBreaksToPart (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20928,7 +20928,7 @@ void mxsr2msrSkeletonPopulator::attachPendingPageBreaksToPart (
       "\"";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20960,7 +20960,7 @@ void mxsr2msrSkeletonPopulator::attachPendingTiesToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -20989,7 +20989,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSegnosToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21018,7 +21018,7 @@ void mxsr2msrSkeletonPopulator::attachPendingDalSegnosToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21047,7 +21047,7 @@ void mxsr2msrSkeletonPopulator::attachPendingDalSegnosToChord (
       chord->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21077,7 +21077,7 @@ void mxsr2msrSkeletonPopulator::attachPendingCodasToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21106,7 +21106,7 @@ void mxsr2msrSkeletonPopulator::attachPendingCrescDecrescsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21135,7 +21135,7 @@ void mxsr2msrSkeletonPopulator::attachPendingEyeGlassesToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21164,7 +21164,7 @@ void mxsr2msrSkeletonPopulator::attachPendingDampsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21193,7 +21193,7 @@ void mxsr2msrSkeletonPopulator::attachPendingDampAllsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21222,7 +21222,7 @@ void mxsr2msrSkeletonPopulator::attachPendingOctaveShiftsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21251,7 +21251,7 @@ void mxsr2msrSkeletonPopulator::attachPendingScordaturasToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21282,7 +21282,7 @@ void mxsr2msrSkeletonPopulator::attachPendingDynamicsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21350,7 +21350,7 @@ void mxsr2msrSkeletonPopulator::attachPendingOtherDynamicsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21418,7 +21418,7 @@ void mxsr2msrSkeletonPopulator::attachPendingWordsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21486,7 +21486,7 @@ void mxsr2msrSkeletonPopulator::attachPendingBeamsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21554,7 +21554,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlursToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21622,7 +21622,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLigaturesToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21709,7 +21709,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLigaturesToCurrentNote ()
           ligature->asString ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -21729,7 +21729,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLigaturesToCurrentNote ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 // sanity check
 //         mfAssert (
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           noteMeasure != nullptr,
 //           "attachPendingLigaturesToNote (): noteMeasure is NULL",
 // #endif // MF_TRACE_IS_ENABLED
@@ -21742,7 +21742,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLigaturesToCurrentNote ()
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //         mfAssert (
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           noteSegment != nullptr,
 //           "noteSegment is NULL",
 // #endif // MF_TRACE_IS_ENABLED
@@ -21756,7 +21756,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLigaturesToCurrentNote ()
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //         sanity check
 //         mfAssert (
-//           __FILE__, __LINE__,
+//           __FILE__, mfInputLineNumber (__LINE__),
 //           noteVoice != nullptr,
 //           "noteVoice is NULL",
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -21810,7 +21810,7 @@ void mxsr2msrSkeletonPopulator::attachPendingPedalsToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21874,7 +21874,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlashesToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21938,7 +21938,7 @@ void mxsr2msrSkeletonPopulator::attachPendingWedgesToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -22000,7 +22000,7 @@ void mxsr2msrSkeletonPopulator::attachPendingGlissandosToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -22060,7 +22060,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
       fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -22315,7 +22315,7 @@ void mxsr2msrSkeletonPopulator::attachPendingStaffLevelElementsIfAnyToCurrentNot
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -22478,7 +22478,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
             mxsr2msrError (
               gServiceRunData->getInputSourceName (),
               inputLineNumber,
-              __FILE__, __LINE__,
+              __FILE__, mfInputLineNumber (__LINE__),
               ss.str ());
           }
           break;
@@ -22535,7 +22535,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 //     mxsr2msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 
@@ -22561,7 +22561,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
         fCurrentNoteSoundingWholeNotes;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
 
       if (
@@ -22578,11 +22578,11 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
           fCurrentNoteSoundingWholeNotes.getNumerator () * fCurrentNoteActualNotes;
 
   //       mfAssert (
-  //         __FILE__, __LINE__,
+  //         __FILE__, mfInputLineNumber (__LINE__),
   //         false, // JMI 0.9.70
   //         ss.str ());
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
     }
@@ -22675,7 +22675,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
   		mfVoiceNumberAsString (fCurrentNoteVoiceNumber);
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -22705,7 +22705,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteWithCurrentInformations (
        " into";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     displayStaffAndVoiceInformation (
@@ -23074,7 +23074,7 @@ On a given note, there can be the following events:
 //     mxsr2msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
 
@@ -23091,7 +23091,7 @@ On a given note, there can be the following events:
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -23192,7 +23192,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
       mfStaffNumberAsString (fCurrentRecipientStaffNumber);
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif
@@ -23217,7 +23217,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
         "\n\n";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -23245,7 +23245,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
 
 //       mfAssert (
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
 //         false,
         ss.str ());
     }
@@ -23260,7 +23260,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
         fCurrentNoteInputStartLineNumber;
 
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         false,
         ss.str ());
     }
@@ -23282,7 +23282,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
       eventInputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -23352,7 +23352,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 // 				", line " << eventInputStartLineNumber;
 //
 // 			gWaeHandler->waeTrace (
-// 				__FILE__, __LINE__,
+// 				__FILE__, mfInputLineNumber (__LINE__),
 // 				ss.str ());
 // 		}
 #endif // MF_TRACE_IS_ENABLE
@@ -23370,7 +23370,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 
 //       mfAssert (
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
 //         false,
         ss.str ());
     }
@@ -23386,7 +23386,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 
 //       mfAssert (
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
 //         false,
         ss.str ());
     }
@@ -23416,7 +23416,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
        inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
     catch (std::exception& e) {
@@ -23446,7 +23446,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
        inputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
     catch (std::exception& e) {
@@ -23488,7 +23488,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -23521,7 +23521,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
       mfStaffNumberAsString (fCurrentRecipientStaffNumber);
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif
@@ -23553,7 +23553,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
         "\n\n";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -23575,7 +23575,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
         fCurrentNoteSequentialNumber;
 
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         false,
         ss.str ());
     }
@@ -23590,7 +23590,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
         fCurrentNoteInputStartLineNumber;
 
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         false,
         ss.str ());
     }
@@ -23612,7 +23612,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
       eventInputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -23636,7 +23636,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
         ", line " << fCurrentNoteInputStartLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -23688,7 +23688,7 @@ void mxsr2msrSkeletonPopulator::handleGraceEndEventIfAny ()
       mfStaffNumberAsString (fCurrentRecipientStaffNumber);
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif
@@ -23720,7 +23720,7 @@ void mxsr2msrSkeletonPopulator::handleGraceEndEventIfAny ()
         "\n\n";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -23742,7 +23742,7 @@ void mxsr2msrSkeletonPopulator::handleGraceEndEventIfAny ()
         fCurrentNoteSequentialNumber;
 
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         false,
         ss.str ());
     }
@@ -23757,7 +23757,7 @@ void mxsr2msrSkeletonPopulator::handleGraceEndEventIfAny ()
         fCurrentNoteInputStartLineNumber;
 
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         false,
         ss.str ());
     }
@@ -23779,7 +23779,7 @@ void mxsr2msrSkeletonPopulator::handleGraceEndEventIfAny ()
       eventInputEndLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -23848,7 +23848,7 @@ void mxsr2msrSkeletonPopulator::handleChordBegin ()
       ", line " << fCurrentNoteInputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -23955,7 +23955,7 @@ void mxsr2msrSkeletonPopulator::handleChordEnd ()
       ", line " << fCurrentNoteInputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     displayGatheredNoteInformations (
@@ -23969,7 +23969,7 @@ void mxsr2msrSkeletonPopulator::handleChordEnd ()
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check JMI 0.9.70
 //       mfAssert (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         fCurrentRecipientMxsrVoice->fetchInnerMostTuplet () != nullptr,
 //         "fetchInnerMostTuplet () is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -24022,7 +24022,7 @@ void mxsr2msrSkeletonPopulator::handleTupletBeginEventsIfAny ()
         ", line " << fCurrentNoteInputStartLineNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif
@@ -24070,7 +24070,7 @@ void mxsr2msrSkeletonPopulator:: handleTupletBegin (
       tupletBeginEvent;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     displayGatheredTupletInformations (
@@ -24109,7 +24109,7 @@ void mxsr2msrSkeletonPopulator::handleTupletEndEventsIfAny ()
       ", line " << fCurrentNoteInputStartLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -24164,7 +24164,7 @@ void mxsr2msrSkeletonPopulator:: handleTupletEnd (
       ", fCurrentNote: " << fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -24190,7 +24190,7 @@ void mxsr2msrSkeletonPopulator:: handleTupletEnd (
           ", line " << tupletEndEvent->getEventInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif
@@ -24224,7 +24224,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -24281,7 +24281,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCurrentNoteMxsrVoice != nullptr,
     "fCurrentNoteMxsrVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -24298,7 +24298,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCurrentRecipientMxsrVoice != nullptr,
     "fCurrentRecipientMxsrVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -24319,7 +24319,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
       mfStaffNumberAsString (fCurrentRecipientStaffNumber);
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif
@@ -24367,7 +24367,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     displayStaffAndVoiceInformation (
@@ -24408,7 +24408,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
           ", fCurrentNote" << fCurrentNote->asString ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
 
         displayPendingHarmoniesList ("mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)");
@@ -24624,7 +24624,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
       fCurrentOuterMostTupletRelativeOffset.asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     displayPendingHarmoniesList ("handlePendingSingleHarmony() 1");
@@ -24710,7 +24710,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
       ss << std::endl;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
 
   //     displayPendingHarmoniesList ("handlePendingSingleHarmony() 4");
@@ -24803,7 +24803,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       fCurrentOuterMostTupletRelativeOffset.asString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     displayPendingHarmoniesList ("handlePendingMultipleHarmonies() 1");
@@ -24823,7 +24823,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       ", line " << fCurrentNote->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -24873,7 +24873,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
         ", line " << currentHarmony->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -24916,7 +24916,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
           ", line " << currentHarmony->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -24970,7 +24970,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       ", line " << lastHarmony->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -25012,7 +25012,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       ", line " << lastHarmony->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -25163,7 +25163,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
       ", line " << fCurrentNote->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
     displayPendingFiguredBassesList ("handlePendingMultipleFiguredBasses() 1");
@@ -25194,7 +25194,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
         ", line " << currentFiguredBass->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -25265,7 +25265,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
       regularNote->asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -25396,7 +25396,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
             std::endl;
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -25426,7 +25426,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
             std::endl;
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -25453,7 +25453,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
             std::endl;
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -25496,7 +25496,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
         fCurrentNoteVoiceNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -25574,7 +25574,7 @@ void mxsr2msrSkeletonPopulator::handleARestInAMeasure (
       rest->asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -25665,7 +25665,7 @@ void mxsr2msrSkeletonPopulator::handleARestInAMeasure (
         fCurrentNoteVoiceNumber;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -25826,7 +25826,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
         fCurrentRecipientMsrVoice->getVoiceName () << "\"";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -25893,7 +25893,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
       "\", line " << graceNote->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26016,7 +26016,7 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
         " has lyrics attached to it" << " ***";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -26187,7 +26187,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChord (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fCurrentNoteVoiceNumber != K_VOICE_NUMBER_UNKNOWN_,
     "fCurrentNoteVoiceNumber is unknown");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -26205,7 +26205,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChord (
       ", line " << newChodeNoteInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26320,7 +26320,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChord (
           mxsr2msrInternalError (
             gServiceRunData->getInputSourceName (),
             newChodeNoteInputLineNumber,
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
       }
@@ -26409,7 +26409,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInATuplet (
       ", line " << noteInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26460,7 +26460,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInATuplet (
 //             ", line " << noteInputLineNumber;
 //
 //           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
+//             __FILE__, mfInputLineNumber (__LINE__),
 //             ss.str ());
 //         }
 // #endif // MF_TRACE_IS_ENABLED
@@ -26477,7 +26477,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInATuplet (
 //             tuplet->asString ();
 //
 //           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
+//             __FILE__, mfInputLineNumber (__LINE__),
 //             ss.str ());
 //         }
 // #endif // MF_TRACE_IS_ENABLED
@@ -26546,7 +26546,7 @@ void mxsr2msrSkeletonPopulator::handleARestInATuplet (
       ", line " << noteInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26599,7 +26599,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChordInATuplet (
       fCurrentRecipientMxsrVoice->fetchTupletsStackSize ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26617,7 +26617,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChordInATuplet (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check JMI 0.9.70
       mfAssert (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         currentTuplet != nullptr,
         "currentTuplet is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -26636,7 +26636,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChordInATuplet (
       mxsr2msrInternalError (
         gServiceRunData->getInputSourceName (),
         newChordNoteInputLineNumber,
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 
@@ -26664,7 +26664,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChordInATuplet (
       fCurrentRecipientMsrVoice->getVoiceName ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26714,7 +26714,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteInAChord (
       graceNote->asShortString ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26723,7 +26723,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteInAChord (
 //     mxsr2msrError (
 //       gServiceRunData->getInputSourceName (),
 //       graceNoteInputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       "a rest cannot belong to a chord in a grace notes group");
 //   }
 
@@ -26740,7 +26740,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteInAChord (
       ", line " << graceNoteInputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26778,7 +26778,7 @@ void mxsr2msrSkeletonPopulator::handleImplicitInitialForwardRepeat (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26812,7 +26812,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
       "\", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26846,7 +26846,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
       "\", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26883,7 +26883,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
       "\", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26900,7 +26900,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
       fCurrentPart;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26916,7 +26916,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
       ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26944,7 +26944,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
       ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26961,7 +26961,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
       fCurrentPart;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -26981,7 +26981,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
       ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27016,7 +27016,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
       ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27033,7 +27033,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
       fCurrentPart;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27053,7 +27053,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
       ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27077,7 +27077,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rehearsal& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27159,7 +27159,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rehearsal& elt)
       fCurrentPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27188,7 +27188,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harmony& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27240,7 +27240,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27268,7 +27268,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root_step& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27296,7 +27296,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root_alter& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27317,7 +27317,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root_alter& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -27333,7 +27333,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_function& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27352,7 +27352,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27449,7 +27449,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "harmony kind \"" + kindValue + "\" os unknown");
     }
     else {
@@ -27498,7 +27498,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
       }
   }
@@ -27525,7 +27525,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
       }
   }
@@ -27552,7 +27552,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
       }
   }
@@ -27570,7 +27570,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_inversion& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27594,7 +27594,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27611,7 +27611,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass_step& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27639,7 +27639,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass_alter& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27660,7 +27660,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass_alter& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -27676,7 +27676,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27704,7 +27704,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_value& elt)
        ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27723,7 +27723,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_alter& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27744,7 +27744,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_alter& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -27760,7 +27760,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_type& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27784,7 +27784,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_type& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         "harmony degree-type \"" + degreeType + "\" is unknown");
   }
 }
@@ -27800,7 +27800,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_degree& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27830,7 +27830,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -27896,7 +27896,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
         elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -27978,7 +27978,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
       --gIndenter;
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -28133,7 +28133,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28146,7 +28146,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -28205,7 +28205,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -28225,7 +28225,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame_strings& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28244,7 +28244,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame_frets& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28263,7 +28263,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_first_fret& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28290,7 +28290,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame_note& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28314,7 +28314,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barre& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28339,7 +28339,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barre& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -28357,7 +28357,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_frame_note& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28389,7 +28389,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_frame& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28434,7 +28434,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figured_bass& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28465,7 +28465,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figured_bass& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
   }
@@ -28494,7 +28494,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figure& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28511,7 +28511,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_prefix& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28552,7 +28552,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_prefix& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 
@@ -28569,7 +28569,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figure_number& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28601,7 +28601,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_suffix& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28645,7 +28645,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_suffix& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -28661,7 +28661,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figure& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28692,7 +28692,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figured_bass& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28707,7 +28707,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figured_bass& elt)
       ", line " << elt->getInputLineNumber () << ":";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28761,7 +28761,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harp_pedals& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28837,7 +28837,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harp_pedals& elt)
       "Creating harp pedals tuning:";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28863,7 +28863,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_tuning& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28880,7 +28880,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_step& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28908,7 +28908,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_alter& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28929,7 +28929,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_alter& elt)
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 }
@@ -28945,7 +28945,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_pedal_tuning& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -28996,7 +28996,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damp& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29024,7 +29024,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damp_all& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29053,7 +29053,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_capo& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29072,7 +29072,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_size& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29092,7 +29092,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_details& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29121,7 +29121,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_details& elt)
       fCurrentStaffDetailsStaffSize;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29159,7 +29159,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_details& elt)
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
     catch (std::exception& e) {
@@ -29187,7 +29187,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_scordatura& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29229,7 +29229,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accord& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29266,7 +29266,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_accord& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29301,7 +29301,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_scordatura& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29325,7 +29325,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instrument_sound& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29343,7 +29343,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_virtual_instrument& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29361,7 +29361,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_device& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29383,7 +29383,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -29765,7 +29765,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
+//         __FILE__, mfInputLineNumber (__LINE__),
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -29851,7 +29851,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //     mxsr2msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
-//       __FILE__, __LINE__,
+//       __FILE__, mfInputLineNumber (__LINE__),
 //       "fRemainingMultipleMeasureRestMeasuresNumber problem");
 //   }
 //

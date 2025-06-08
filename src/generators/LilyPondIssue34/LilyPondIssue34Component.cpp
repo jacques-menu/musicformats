@@ -93,7 +93,7 @@ S_mfcGeneratorComponent createLilyPondIssue34GeneratorComponent ()
         "Creating the LilyPondIssue34 component";
 
       gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED

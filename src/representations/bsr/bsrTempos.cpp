@@ -319,7 +319,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
               bsrInternalError (
                 gServiceRunData->getInputSourceName (),
                 fInputLineNumber,
-                __FILE__, __LINE__,
+                __FILE__, mfInputLineNumber (__LINE__),
                 ss.str ());
             }
           }
@@ -395,7 +395,7 @@ void bsrTempo::acceptIn (basevisitor* v)
       "% ==> bsrTempo::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -413,7 +413,7 @@ void bsrTempo::acceptIn (basevisitor* v)
             "% ==> Launching bsrTempo::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -432,7 +432,7 @@ void bsrTempo::acceptOut (basevisitor* v)
       "% ==> bsrTempo::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -450,7 +450,7 @@ void bsrTempo::acceptOut (basevisitor* v)
             "% ==> Launching bsrTempo::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED

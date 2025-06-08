@@ -233,7 +233,7 @@ void bsrAsciiBrailleGenerator::generateCodeForBrailleCell (
         bsr2brailleInternalError (
           gServiceRunData->getInputSourceName (),
           -901, // inputLineNumber, TICINO JMI
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -419,7 +419,7 @@ void bsrUTF8BrailleGenerator::generateCodeForBrailleCell (
         bsr2brailleInternalError (
           gServiceRunData->getInputSourceName (),
           -901, // TICINO inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -764,7 +764,7 @@ Octal Escape Sequence  \342\240\203*/
         bsr2brailleInternalError (
           gServiceRunData->getInputSourceName (),
           -902, // TICINO inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;
@@ -988,7 +988,7 @@ Octal Escape Sequence  \342\240\203
         bsr2brailleInternalError (
           gServiceRunData->getInputSourceName (),
           -903, // TICINO inputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
       break;

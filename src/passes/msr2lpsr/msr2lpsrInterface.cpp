@@ -64,7 +64,7 @@ S_lpsrScore translateMsrToLpsr (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     originalMsrScore != nullptr,
     "originalMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -92,7 +92,7 @@ S_lpsrScore translateMsrToLpsr (
       separator;
 
     gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED

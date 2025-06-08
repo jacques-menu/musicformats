@@ -57,7 +57,7 @@ msrBeatRepeatElement::msrBeatRepeatElement (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     upLinkToBeatRepeat != nullptr,
     "upLinkToBeatRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -84,7 +84,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -92,7 +92,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     segment != nullptr,
     "segment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -116,7 +116,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -124,7 +124,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     beatRepeat != nullptr,
     "beatRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -148,7 +148,7 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -156,7 +156,7 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     voiceElement != nullptr,
     "voiceElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -234,7 +234,7 @@ S_msrNote msrBeatRepeatElement::fetchBeatRepeatElementFirstNonGraceNote () const
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           fInputLineNumber,
-          __FILE__, __LINE__,
+          __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
 
@@ -255,7 +255,7 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
       "% ==> msrBeatRepeatElement::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -273,7 +273,7 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
             "% ==> Launching msrBeatRepeatElement::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -291,7 +291,7 @@ void msrBeatRepeatElement::acceptOut (basevisitor* v)
       "% ==> msrBeatRepeatElement::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -309,7 +309,7 @@ void msrBeatRepeatElement::acceptOut (basevisitor* v)
             "% ==> Launching msrBeatRepeatElement::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -498,7 +498,7 @@ msrBeatRepeatPattern::msrBeatRepeatPattern (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     upLinkToBeatRepeat != nullptr,
     "upLinkToBeatRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -524,7 +524,7 @@ void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
         "measures");
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -532,7 +532,7 @@ void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     beatRepeatPatternSegment != nullptr,
     "beatRepeatPatternSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -567,7 +567,7 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
       "% ==> msrBeatRepeatPattern::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -585,7 +585,7 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
             "% ==> Launching msrBeatRepeatPattern::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -603,7 +603,7 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
       "% ==> msrBeatRepeatPattern::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -621,7 +621,7 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
             "% ==> Launching msrBeatRepeatPattern::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -639,7 +639,7 @@ void msrBeatRepeatPattern::browseData (basevisitor* v)
       "% ==> msrBeatRepeatPattern::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -737,7 +737,7 @@ msrBeatRepeatReplicas::msrBeatRepeatReplicas (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     upLinkToBeatRepeat != nullptr,
     "upLinkToBeatRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -763,7 +763,7 @@ void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
         "measures");
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -771,7 +771,7 @@ void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     beatRepeatReplicasSegment != nullptr,
     "beatRepeatReplicasSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -806,7 +806,7 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
       "% ==> msrBeatRepeatReplicas::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -824,7 +824,7 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
             "% ==> Launching msrBeatRepeatReplicas::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -842,7 +842,7 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
       "% ==> msrBeatRepeatReplicas::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -860,7 +860,7 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
             "% ==> Launching msrBeatRepeatReplicas::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -878,7 +878,7 @@ void msrBeatRepeatReplicas::browseData (basevisitor* v)
       "% ==> msrBeatRepeatReplicas::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -982,7 +982,7 @@ msrBeatRepeat::msrBeatRepeat (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     beatRepeatMeasuresNumber > 0,
     "beatRepeatMeasuresNumber is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -992,7 +992,7 @@ msrBeatRepeat::msrBeatRepeat (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     beatRepeatSlashesNumber > 0,
     "beatRepeatSlashesNumber is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1022,7 +1022,7 @@ S_msrBeatRepeat msrBeatRepeat::createABeatRepeatNewbornClone (
       "'";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1030,7 +1030,7 @@ S_msrBeatRepeat msrBeatRepeat::createABeatRepeatNewbornClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1062,7 +1062,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
         "measures");
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1070,7 +1070,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     beatRepeatPattern != nullptr,
     "beatRepeatPattern is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1098,7 +1098,7 @@ void msrBeatRepeat::setBeatRepeatReplicas (
         "measures");
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1106,7 +1106,7 @@ void msrBeatRepeat::setBeatRepeatReplicas (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     beatRepeatReplicas != nullptr,
     "beatRepeatReplicas is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1126,7 +1126,7 @@ int msrBeatRepeat::fetchBeatRepeatReplicasNumber () const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     patternMeasuresNumber > 0,
     "patternMeasuresNumber is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1142,7 +1142,7 @@ int msrBeatRepeat::fetchBeatRepeatPatternMeasuresNumber () const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fBeatRepeatPattern != nullptr,
     "fBeatRepeatPattern is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1157,7 +1157,7 @@ int msrBeatRepeat::fetchBeatRepeatReplicasMeasuresNumber () const
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     fBeatRepeatReplicas != nullptr,
     "fBeatRepeatReplicas is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
@@ -1177,7 +1177,7 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
       "% ==> msrBeatRepeat::acceptIn ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1195,7 +1195,7 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
             "% ==> Launching msrBeatRepeat::visitStart ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1213,7 +1213,7 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
       "% ==> msrBeatRepeat::acceptOut ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1231,7 +1231,7 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
             "% ==> Launching msrBeatRepeat::visitEnd ()";
 
           gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
+            __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -1249,7 +1249,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
       "% ==> msrBeatRepeat::browseData ()";
 
     gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
+      __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1277,7 +1277,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
         "% ==> visiting measures repeat replicas is inhibited";
 
       gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
+        __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1307,7 +1307,7 @@ void msrBeatRepeat::appendMeasureElementToSegmentElement (
   msrInternalError (
     gServiceRunData->getInputSourceName (),
     fInputLineNumber,
-    __FILE__, __LINE__,
+    __FILE__, mfInputLineNumber (__LINE__),
     ss.str ());
 }
 
