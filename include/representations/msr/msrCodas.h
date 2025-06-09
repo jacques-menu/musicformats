@@ -42,12 +42,12 @@ class EXP msrCoda : public msrMeasureElement
     static SMARTP<msrCoda> create (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            int                 staffNumber,
+                            const mfStaffNumber& staffNumber,
                             msrCodaKind         codaKind);
 
     static SMARTP<msrCoda> create (
                             const mfInputLineNumber& inputLineNumber,
-                            int                 staffNumber,
+                            const mfStaffNumber& staffNumber,
                             msrCodaKind         codaKind);
 
   protected:
@@ -58,7 +58,7 @@ class EXP msrCoda : public msrMeasureElement
                           msrCoda (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            int                 staffNumber,
+                            const mfStaffNumber& staffNumber,
                             msrCodaKind         codaKind);
 
     virtual               ~msrCoda ();
@@ -68,7 +68,7 @@ class EXP msrCoda : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    int                   getStaffNumber () const
+    mfStaffNumber         getStaffNumber () const
                               { return fStaffNumber; }
 
     msrCodaKind           getCodaKind () const
@@ -103,7 +103,7 @@ class EXP msrCoda : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    int                   fStaffNumber;
+    mfStaffNumber         fStaffNumber;
 
     msrCodaKind           fCodaKind;
 };

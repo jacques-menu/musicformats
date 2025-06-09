@@ -61,7 +61,7 @@ std::ostream& operator << (std::ostream& os, const msrCodaKind& elt)
 S_msrCoda msrCoda::create (
   const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  int                 staffNumber,
+  const mfStaffNumber& staffNumber,
   msrCodaKind         codaKind)
 {
   msrCoda* obj =
@@ -76,7 +76,7 @@ S_msrCoda msrCoda::create (
 
 S_msrCoda msrCoda::create (
   const mfInputLineNumber& inputLineNumber,
-  int                 staffNumber,
+  const mfStaffNumber& staffNumber,
   msrCodaKind         codaKind)
 {
   return
@@ -90,7 +90,7 @@ S_msrCoda msrCoda::create (
 msrCoda::msrCoda (
   const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  int                 staffNumber,
+  const mfStaffNumber& staffNumber,
   msrCodaKind         codaKind)
     : msrMeasureElement (
         inputLineNumber)

@@ -474,7 +474,7 @@ class EXP msrStaffLayout : public msrElement
 
     static SMARTP<msrStaffLayout> create (
                             const mfInputLineNumber& inputLineNumber,
-                            int staffNumber);
+                            const mfStaffNumber& staffNumber);
 
   protected:
 
@@ -483,7 +483,7 @@ class EXP msrStaffLayout : public msrElement
 
                           msrStaffLayout (
                             const mfInputLineNumber& inputLineNumber,
-                            int staffNumber);
+                            const mfStaffNumber& staffNumber);
 
     virtual               ~msrStaffLayout ();
 
@@ -495,7 +495,7 @@ class EXP msrStaffLayout : public msrElement
     // staff number
     void                  setStaffNumber (int val)
                               { fStaffNumber = val; }
-    int                   getStaffNumber () const
+    mfStaffNumber         getStaffNumber () const
                               { return fStaffNumber; }
 
     // staff distance
@@ -534,7 +534,7 @@ class EXP msrStaffLayout : public msrElement
     // ------------------------------------------------------
 
     // staff number
-    int                   fStaffNumber;
+    mfStaffNumber         fStaffNumber;
 
     // staff distance
     S_msrLength           fStaffDistance;

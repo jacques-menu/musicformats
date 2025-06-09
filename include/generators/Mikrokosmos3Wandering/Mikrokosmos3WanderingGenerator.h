@@ -67,7 +67,7 @@ class EXP Mikrokosmos3WanderingGenerator : public smartable
 
     // the staves
     S_msrStaff            createStaffInPart (
-                            int staffNumber,
+                            const mfStaffNumber& staffNumber,
                             const S_msrPart& part);
 
     S_msrStaff            createAndPopulateLowerStaffInPart (

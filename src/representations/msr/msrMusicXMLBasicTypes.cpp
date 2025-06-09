@@ -1003,7 +1003,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSystemDividers& elt)
 //______________________________________________________________________________
 S_msrStaffLayout msrStaffLayout::create (
   const mfInputLineNumber& inputLineNumber,
-  int staffNumber)
+  const mfStaffNumber& staffNumber)
 {
   msrStaffLayout* obj =
     new msrStaffLayout (
@@ -1015,7 +1015,7 @@ S_msrStaffLayout msrStaffLayout::create (
 
 msrStaffLayout::msrStaffLayout (
   const mfInputLineNumber& inputLineNumber,
-  int staffNumber)
+  const mfStaffNumber& staffNumber)
     : msrElement (inputLineNumber)
 {
   fStaffNumber = staffNumber;

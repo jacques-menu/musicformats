@@ -162,7 +162,7 @@ S_msrScore LilyPondIssue34Generator::createTheScore (
 
 //------------------------------------------------------------------------
 S_msrStaff LilyPondIssue34Generator::createStaffInPart (
-  int              staffNumber,
+  const mfStaffNumber& staffNumber,
   const S_msrPart& part)
 //------------------------------------------------------------------------
 {

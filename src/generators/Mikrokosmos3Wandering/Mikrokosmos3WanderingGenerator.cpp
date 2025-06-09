@@ -163,7 +163,7 @@ S_msrScore Mikrokosmos3WanderingGenerator::createTheScore (
 
 //------------------------------------------------------------------------
 S_msrStaff Mikrokosmos3WanderingGenerator::createStaffInPart (
-  int              staffNumber,
+  const mfStaffNumber& staffNumber,
   const S_msrPart& part)
 //------------------------------------------------------------------------
 {

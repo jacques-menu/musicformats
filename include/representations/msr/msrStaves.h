@@ -38,12 +38,12 @@ class EXP msrStaff : public msrElement
     static SMARTP<msrStaff> create (
                             const mfInputLineNumber& inputLineNumber,
                             msrStaffKind     staffKind,
-                            int              staffNumber);
+                            const mfStaffNumber& staffNumber);
 
     static SMARTP<msrStaff> create (
                             const mfInputLineNumber& inputLineNumber,
                             msrStaffKind     staffKind,
-                            int              staffNumber,
+                            const mfStaffNumber& staffNumber,
                             const S_msrPart& staffUpLinkToPart);
 
     SMARTP<msrStaff> createStaffNewbornClone (
@@ -57,7 +57,7 @@ class EXP msrStaff : public msrElement
                           msrStaff (
                             const mfInputLineNumber& inputLineNumber,
                             msrStaffKind     staffKind,
-                            int              staffNumber);
+                            const mfStaffNumber& staffNumber);
 
     virtual               ~msrStaff ();
 
@@ -94,7 +94,10 @@ class EXP msrStaff : public msrElement
 
     // staff number and names
 
-    int                   getStaffNumber () const
+    void                  setStaffNumber (const mfStaffNumber& staffNumber)
+                              { fStaffNumber = staffNumber; }
+
+    mfStaffNumber         getStaffNumber () const
                               { return fStaffNumber; }
 
     std::string           getStaffInstrumentName () const
@@ -261,7 +264,7 @@ class EXP msrStaff : public msrElement
 
     S_msrVoice            fetchRegularVoiceFromStaffByItsNumber (
                             const mfInputLineNumber& inputLineNumber,
-                            int voiceNumber);
+                            const mfVoiceNumber& voiceNumber);
 
     S_msrVoice            fetchFirstRegularVoiceFromStaff (
                             const mfInputLineNumber& inputLineNumber);
@@ -430,7 +433,7 @@ class EXP msrStaff : public msrElement
     msrStaffKind          fStaffKind;
 
     // staff number
-    int                   fStaffNumber;
+    mfStaffNumber         fStaffNumber;
 
     // staff instrument name
     std::string           fStaffInstrumentName;
@@ -535,7 +538,7 @@ class EXP msrStaff : public msrElement
 
     void                  registerVoiceByItsNumber (
                             const mfInputLineNumber& inputLineNumber,
-                            int               staffNumber,
+                            const mfStaffNumber& staffNumber,
                             const S_msrVoice& voice);
 
     void                  registerRegularVoiceByItsNumber (
@@ -589,7 +592,9 @@ class EXP msrStaff : public msrElement
 
     S_msrTransposition    fStaffCurrentTransposition;
 };
-typedef SMARTP<msrStaff> S_msrStaff;
+
+using S_msrStaff = SMARTP<msrStaff>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrStaff& elt);
 
 

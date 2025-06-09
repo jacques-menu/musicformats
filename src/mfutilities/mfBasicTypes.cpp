@@ -33,6 +33,25 @@ const std::string
   kInputLineNumberPrefix             ("line_"),
   kInputLineNumberDefaultValueString ("*line_Unknown*");
 
+EXP extern std::string mfInputLineNumberAsString (
+  const mfInputLineNumber& inputLineNumber)
+{
+  std::string result;
+
+  if (inputLineNumber == K_MF_INPUT_LINE_UNKNOWN_) {
+    result = "K_MF_INPUT_LINE_UNKNOWN_";
+  }
+  else {
+#ifndef MF_USE_WRAPPED_TYPES
+    result = inputLineNumber;
+#else
+    result = inputLineNumber.getBareValue ();
+#endif // MF_USE_WRAPPED_TYPES
+  }
+
+  return result;
+}
+
 //______________________________________________________________________________
 // input locations
 
@@ -53,7 +72,7 @@ EXP extern const int K_PART_HARMONIES_STAFF_NUMBER = 10;
 
 EXP extern const int K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
 
-std::string mfStaffNumberAsString (int staffNumber)
+std::string mfStaffNumberAsString (const mfStaffNumber& staffNumber)
 {
   std::string result;
 
@@ -61,7 +80,37 @@ std::string mfStaffNumberAsString (int staffNumber)
     result = "K_STAFF_NUMBER_UNKNOWN_";
   }
   else {
-    result = std::to_string (staffNumber);
+#ifndef MF_USE_WRAPPED_TYPES
+    result = staffNumber;
+#else
+    result = staffNumber.getBareValue ();
+#endif // MF_USE_WRAPPED_TYPES
+  }
+
+  return result;
+}
+
+int mfStaffNumberAsInteger (const mfStaffNumber& staffNumber)
+{
+  int result;
+
+  if (staffNumber == K_STAFF_NUMBER_UNKNOWN_) {
+    result = K_STAFF_NUMBER_UNKNOWN_;
+  }
+  else {
+#ifndef MF_USE_WRAPPED_TYPES
+    result = staffNumber;
+#else
+    // information is lost if there are non numerice characters... JMI 0.9.75
+    std::stringstream ss;
+
+    int intStaffNumber;
+
+    ss << staffNumber;
+    ss >> intStaffNumber;
+
+    result = intStaffNumber;
+#endif // MF_USE_WRAPPED_TYPES
   }
 
   return result;
@@ -82,7 +131,7 @@ EXP extern const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER = 20;
 EXP extern const int K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
 EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER = 40;
 
-std::string mfVoiceNumberAsString (int voiceNumber)
+std::string mfVoiceNumberAsString (const mfVoiceNumber& voiceNumber)
 {
   std::string result;
 
@@ -90,7 +139,7 @@ std::string mfVoiceNumberAsString (int voiceNumber)
     result = "K_VOICE_NUMBER_UNKNOWN_";
   }
   else {
-    result = std::to_string (voiceNumber);
+    result = std::to_string (voiceNumber.getBareValue ());
   }
 
   return result;
@@ -136,7 +185,7 @@ const std::string
   K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_",
   K_STANZA_NAME_UNKNOWN_ = "K_STANZA_NAME_UNKNOWN_";
 
-std::string mfStanzaNumberAsString (std::string stanzaNumber)
+std::string mfStanzaNumberAsString (const mfStanzaNumber& stanzaNumber)
 {
   std::string result;
 
@@ -144,7 +193,11 @@ std::string mfStanzaNumberAsString (std::string stanzaNumber)
     result = "K_STANZA_NAME_UNKNOWN_";
   }
   else {
+#ifndef MF_USE_WRAPPED_TYPES
     result = stanzaNumber;
+#else
+    result = stanzaNumber.getBareValue ();
+#endif // MF_USE_WRAPPED_TYPES
   }
 
   return result;

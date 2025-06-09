@@ -472,7 +472,7 @@ EXP extern const int K_PART_HARMONIES_STAFF_NUMBER;
 
 EXP extern const int K_PART_FIGURED_BASS_STAFF_NUMBER;
 
-EXP extern std::string mfStaffNumberAsString (int staffNumber);
+EXP extern std::string mfStaffNumberAsString (const mfStaffNumber& staffNumber);
 
 //______________________________________________________________________________
 // voice numbers
@@ -489,7 +489,7 @@ EXP extern const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER;
 EXP extern const int K_PART_FIGURED_BASS_VOICE_NUMBER;
 EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
 
-EXP extern std::string mfVoiceNumberAsString (int voiceNumber);
+EXP extern std::string mfVoiceNumberAsString (const mfVoiceNumber& voiceNumber);
 
 //______________________________________________________________________________
 // measure numbers

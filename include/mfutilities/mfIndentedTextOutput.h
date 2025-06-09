@@ -251,7 +251,7 @@ Usage:
   mfIndentedStringStream iss;
 
   iss <<
-    1 << 2 << 3 << std::endl << // no std::endl here!
+    1 << 2 << 3 << std::endl <<
     5 << 6 << std::endl <<
     7 << 8 << std::endl;
 */

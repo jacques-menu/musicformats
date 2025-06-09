@@ -487,7 +487,7 @@ if (false) { // JMI TEMP
 
 //_______________________________________________________________________________
 S_msrStaff createStaffInPart (
-  int              staffNumber,
+  const mfStaffNumber& staffNumber,
   const S_msrPart& part)
 {
   // create the staff

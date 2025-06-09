@@ -71,7 +71,7 @@ S_msrPart createPartInScore (
 // staves
 // ------------------------------------------------------
 S_msrStaff createStaffInPart (
-  int staffNumber,
+  const mfStaffNumber& staffNumber,
   S_msrPart part);
 
 // voices

@@ -1406,7 +1406,7 @@ void mxsr2msrSkeletonPopulator::displayCurrentPartStaffMxsrVoicesMap () const
 S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
   const mfInputLineNumber& inputLineNumber)
 {
-  int staffNumber = 1;
+  const mfStaffNumber& staffNumber = 1;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -2917,7 +2917,7 @@ From DalSegno.xml: JMI there is no <staff-distance /> ...
 */
 
   // number
-  int staffNumber = elt->getAttributeIntValue ("number", 0);
+  const mfStaffNumber& staffNumber = elt->getAttributeIntValue ("number", 0);
 
   // create a staff layout
   fCurrentStaffLayout =

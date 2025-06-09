@@ -40,11 +40,11 @@ class EXP msrSegno : public msrMeasureElement
     static SMARTP<msrSegno> create (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            int                 staffNumber);
+                            const mfStaffNumber& staffNumber);
 
     static SMARTP<msrSegno> create (
                             const mfInputLineNumber& inputLineNumber,
-                            int                 staffNumber);
+                            const mfStaffNumber& staffNumber);
 
   protected:
 
@@ -54,7 +54,7 @@ class EXP msrSegno : public msrMeasureElement
                           msrSegno (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            int                 staffNumber);
+                            const mfStaffNumber& staffNumber);
 
     virtual               ~msrSegno ();
 
@@ -63,7 +63,7 @@ class EXP msrSegno : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    int                   getStaffNumber () const
+    mfStaffNumber         getStaffNumber () const
                               { return fStaffNumber; }
 
   public:
@@ -95,9 +95,11 @@ class EXP msrSegno : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    int                   fStaffNumber;
+    mfStaffNumber         fStaffNumber;
 };
-typedef SMARTP<msrSegno> S_msrSegno;
+
+using S_msrSegno = SMARTP<msrSegno>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrSegno& elt);
 
 //______________________________________________________________________________
@@ -113,13 +115,13 @@ class EXP msrDalSegno : public msrMeasureElement
                             const S_msrMeasure& upLinkToMeasure,
                             msrDalSegnoKind     dalSegnoKind,
                             const std::string&  dalSegnoString,
-                            int                 staffNumber);
+                            const mfStaffNumber& staffNumber);
 
     static SMARTP<msrDalSegno> create (
                             const mfInputLineNumber& inputLineNumber,
                             msrDalSegnoKind     dalSegnoKind,
                             const std::string&  dalSegnoString,
-                            int                 staffNumber);
+                            const mfStaffNumber& staffNumber);
 
   protected:
 
@@ -131,7 +133,7 @@ class EXP msrDalSegno : public msrMeasureElement
                             const S_msrMeasure& upLinkToMeasure,
                             msrDalSegnoKind     dalSegnoKind,
                             const std::string&  dalSegnoString,
-                            int                 staffNumber);
+                            const mfStaffNumber& staffNumber);
 
     virtual               ~msrDalSegno ();
 
@@ -146,7 +148,7 @@ class EXP msrDalSegno : public msrMeasureElement
     std::string           getDalSegnoString () const
                               { return fDalSegnoString; }
 
-    int                   getStaffNumber () const
+    mfStaffNumber         getStaffNumber () const
                               { return fStaffNumber; }
 
   public:
@@ -182,9 +184,11 @@ class EXP msrDalSegno : public msrMeasureElement
 
     std::string           fDalSegnoString;
 
-    int                   fStaffNumber;
+    mfStaffNumber         fStaffNumber;
 };
-typedef SMARTP<msrDalSegno> S_msrDalSegno;
+
+using S_msrDalSegno = SMARTP<msrDalSegno> ;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrDalSegno& elt);
 
 

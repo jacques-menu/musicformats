@@ -55,7 +55,7 @@ int msrStaff::sStaffMaxRegularVoices = 4; // JMI TEMP MOD 0.9.70
 S_msrStaff msrStaff::create (
   const mfInputLineNumber& inputLineNumber,
   msrStaffKind     staffKind,
-  int              staffNumber)
+  const mfStaffNumber& staffNumber)
 {
   msrStaff* obj =
     new msrStaff (
@@ -69,7 +69,7 @@ S_msrStaff msrStaff::create (
 S_msrStaff msrStaff::create (
   const mfInputLineNumber& inputLineNumber,
   msrStaffKind     staffKind,
-  int              staffNumber,
+  const mfStaffNumber& staffNumber,
   const S_msrPart& staffUpLinkToPart)
 {
   msrStaff* obj =
@@ -88,7 +88,7 @@ S_msrStaff msrStaff::create (
 msrStaff::msrStaff (
   const mfInputLineNumber& inputLineNumber,
   msrStaffKind     staffKind,
-  int              staffNumber)
+  const mfStaffNumber& staffNumber)
     : msrElement (inputLineNumber)
 {
   // set staff kind and number
@@ -987,7 +987,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 
 void msrStaff::registerVoiceByItsNumber (
   const mfInputLineNumber& inputLineNumber,
-  int               staffNumber,
+  const mfStaffNumber& staffNumber,
   const S_msrVoice& voice)
 {
   int voiceNumber = voice->getVoiceNumber ();
@@ -1250,7 +1250,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
 
 S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
   const mfInputLineNumber& inputLineNumber,
-  int voiceNumber)
+  const mfVoiceNumber& voiceNumber)
 {
   S_msrVoice result; // JMI avoid repetitive messages! 0.9.66
 

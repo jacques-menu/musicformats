@@ -1241,7 +1241,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt)
 //______________________________________________________________________________
 S_msrStanza msrStanza::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& stanzaNumber,
+  const mfStanzaNumber& stanzaNumber,
   const S_msrVoice&  stanzaUpLinkToVoice)
 {
   msrStanza* obj =
@@ -1255,7 +1255,7 @@ S_msrStanza msrStanza::create (
 
 msrStanza::msrStanza (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& stanzaNumber,
+  const mfStanzaNumber& stanzaNumber,
   const S_msrVoice&  stanzaUpLinkToVoice)
     : msrElement (inputLineNumber)
 {

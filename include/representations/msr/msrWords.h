@@ -120,7 +120,10 @@ class EXP msrWords : public msrElement
     msrXMLLangKind        getWordsXMLLangKind () const
                               { return fWordsXMLLangKind; }
 
-    int                   getWordsStaffNumber () const
+    void                  setWordsStaffNumber (const mfStaffNumber& wordsStaffNumber)
+                              { fWordsStaffNumber = wordsStaffNumber; }
+
+    mfStaffNumber         getWordsStaffNumber () const
                               { return fWordsStaffNumber; }
 
   public:
@@ -182,9 +185,11 @@ class EXP msrWords : public msrElement
 
     msrXMLLangKind        fWordsXMLLangKind;
 
-    int                   fWordsStaffNumber;
+    mfStaffNumber         fWordsStaffNumber;
 };
-typedef SMARTP<msrWords> S_msrWords;
+
+using S_msrWords = SMARTP<msrWords>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrWords& elt);
 EXP mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const S_msrWords& elt);
 

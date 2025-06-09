@@ -395,10 +395,10 @@ class EXP msrHarmony : public msrMeasureElement
 
     // staff
     void                  setHarmoniesStaffNumber (
-                            int staffNumber)
+                            const mfStaffNumber& staffNumber)
                               { fHarmoniesStaffNumber = staffNumber; }
 
-    int                   getHarmoniesStaffNumber () const
+    mfStaffNumber         getHarmoniesStaffNumber () const
                              { return fHarmoniesStaffNumber; }
 
     // tuplet factor
@@ -496,7 +496,7 @@ class EXP msrHarmony : public msrMeasureElement
                           fHarmonyDegreesList;
 
     // staff
-    int                   fHarmoniesStaffNumber;
+    mfStaffNumber         fHarmoniesStaffNumber;
 
     // tuplet factor
     msrTupletFactor       fHarmonyTupletFactor;

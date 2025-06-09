@@ -1728,7 +1728,7 @@ void msr2mxsrTranslator::visitStart (S_msrStaffLayout& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // number
-  int staffNumber = elt->getStaffNumber ();
+  const mfStaffNumber& staffNumber = elt->getStaffNumber ();
 
   // create a staff layout element
   Sxmlelement
@@ -1738,7 +1738,14 @@ void msr2mxsrTranslator::visitStart (S_msrStaffLayout& elt)
   // set its "number" attribute if relevant
   // (it is 0 inside the <defaults /> element)
   if (staffNumber > 0) {
-    staffLayoutElement->add (createMxmlIntegerAttribute ("number", staffNumber));
+    staffLayoutElement->add (
+// #ifndef MF_USE_WRAPPED_TYPES
+      createMxmlIntegerAttribute (
+        "number",
+        mfStaffNumberAsInteger (staffNumber)));
+// #else
+//       createMxmlIntegerAttribute ("number", staffNumber.getBareValue ()));
+// #endif // MF_USE_WRAPPED_TYPES
   }
 
   // distance
@@ -7059,7 +7066,12 @@ void msr2mxsrTranslator::appendNoteLyricsToNote (
         lyricElement->add (
           createMxmlAttribute (
             "number",
-            syllable->getSyllableStanzaNumber ()));
+// #ifndef MF_USE_WRAPPED_TYPES
+            mfStanzaNumberAsString (
+              syllable->getSyllableStanzaNumber ())));
+// #else
+//             syllable->getSyllableStanzaNumber ().getBareValue ()));
+// #endif // MF_USE_WRAPPED_TYPES
 
         // append a syllabic element to the lyric element if relevant
         if (syllabicString.size ()) {

@@ -269,10 +269,10 @@ class EXP msrSyllable : public msrElement
 
     // stanza number
     void                  setSyllableStanzaNumber (
-                            const std::string& stanzaNumber)
+                            const mfStanzaNumber& stanzaNumber)
                               { fSyllableStanzaNumber = stanzaNumber; }
 
-    const std::string&    getSyllableStanzaNumber () const
+    const mfStanzaNumber& getSyllableStanzaNumber () const
                               { return fSyllableStanzaNumber; }
 
     // syllable whole notes
@@ -359,7 +359,7 @@ class EXP msrSyllable : public msrElement
     msrSyllableExtendKind fSyllableExtendKind;
 
     // stanza number, may contain non-digits
-    std::string           fSyllableStanzaNumber;
+    mfStanzaNumber        fSyllableStanzaNumber;
 
     // syllable whole notes
     mfWholeNotes          fSyllableWholeNotes;
@@ -371,7 +371,9 @@ class EXP msrSyllable : public msrElement
     std::list <msrSyllableElement>
                           fSyllableElementsList;
 };
-typedef SMARTP<msrSyllable> S_msrSyllable;
+
+using S_msrSyllable = SMARTP<msrSyllable>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt);
 
 //______________________________________________________________________________
@@ -384,7 +386,7 @@ class EXP msrStanza : public msrElement
 
     static SMARTP<msrStanza> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& stanzaNumber,
+                            const mfStanzaNumber& stanzaNumber,
                             const S_msrVoice&  stanzaUpLinkToVoice);
 
     SMARTP<msrStanza> createStanzaNewbornClone (
@@ -400,7 +402,7 @@ class EXP msrStanza : public msrElement
 
                           msrStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& stanzaNumber,
+                            const mfStanzaNumber& stanzaNumber,
                             const S_msrVoice&  stanzaUpLinkToVoice);
 
   public:
@@ -420,7 +422,7 @@ class EXP msrStanza : public msrElement
     // ------------------------------------------------------
 
     // number
-    std::string           getStanzaNumber () const
+    mfStanzaNumber        getStanzaNumber () const
                               { return fStanzaNumber; }
 
     // path-like name
@@ -552,7 +554,7 @@ class EXP msrStanza : public msrElement
     // number
     // The lyric number indicates multiple lines,
     // though a name can be used as well (as in Finale's verse/chorus/section specification)
-    std::string           fStanzaNumber;
+    mfStanzaNumber        fStanzaNumber;
 
    // path-like name
     std::string           fStanzaPathLikeName;
@@ -569,7 +571,9 @@ class EXP msrStanza : public msrElement
     // position in measure
     mfPositionInMeasure   fStanzaMeasureCurrentPositionInMeasure;
 };
-typedef SMARTP<msrStanza> S_msrStanza;
+
+using S_msrStanza = SMARTP<msrStanza>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrStanza& elt);
 
 

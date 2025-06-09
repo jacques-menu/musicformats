@@ -69,6 +69,9 @@ EXP extern const std::string
     >;
 #endif // MF_USE_WRAPPED_TYPES
 
+EXP extern std::string mfInputLineNumberAsString (
+  const mfInputLineNumber& inputLineNumber);
+
 //______________________________________________________________________________
 // input location ranges
 
@@ -112,7 +115,11 @@ EXP extern const int K_PART_FIGURED_BASS_STAFF_NUMBER;
     >;
 #endif // MF_USE_WRAPPED_TYPES
 
-EXP extern std::string mfStaffNumberAsString (int staffNumber);
+EXP extern std::string mfStaffNumberAsString (
+  const mfStaffNumber& staffNumber);
+
+EXP extern int mfStaffNumberAsInteger (
+  const mfStaffNumber& staffNumber);
 
 //______________________________________________________________________________
 // voice numbers
@@ -142,7 +149,8 @@ EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
     >;
 #endif // MF_USE_WRAPPED_TYPES
 
-EXP extern std::string mfVoiceNumberAsString (int voiceNumber);
+EXP extern std::string mfVoiceNumberAsString (
+  const mfVoiceNumber& voiceNumber);
 
 //______________________________________________________________________________
 // measure numbers
@@ -193,9 +201,8 @@ EXP extern const std::string
     >;
 #endif // MF_USE_WRAPPED_TYPES
 
-EXP extern std::string mfStanzaNumberAsString (std::string stanzaNumber);
-
-EXP extern std::string mfStanzaNumberAsString (std::string stanzaNumber);
+EXP extern std::string mfStanzaNumberAsString (
+  const mfStanzaNumber& stanzaNumber);
 
 
 //______________________________________________________________________________

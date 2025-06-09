@@ -4493,7 +4493,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int staffNumber = int(*elt);
+  const mfStaffNumber& staffNumber = int(*elt);
 
   // the staff number should be positive
   if (staffNumber <= 0) {

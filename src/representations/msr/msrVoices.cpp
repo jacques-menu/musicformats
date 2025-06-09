@@ -395,7 +395,7 @@ void msrVoice::setRegularVoiceStaffSequentialNumber (
 
 void msrVoice::setVoiceNamesFromNumber (
   const mfInputLineNumber& inputLineNumber,
-  int voiceNumber)
+  const mfVoiceNumber& voiceNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -665,7 +665,7 @@ void msrVoice::initializeVoice (
 }
 
 void msrVoice::changeVoiceIdentity ( // after a deep clone is created
-  int voiceNumber)
+  const mfVoiceNumber& voiceNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -1908,7 +1908,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 
 S_msrStanza msrVoice::addStanzaToVoiceByItsNumber (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& stanzaNumber)
+  const mfStanzaNumber& stanzaNumber)
 {
   if (fVoiceStanzasMap.count (stanzaNumber)) {
     std::stringstream ss;
@@ -1945,7 +1945,7 @@ S_msrStanza msrVoice::addStanzaToVoiceByItsNumber (
 void msrVoice::addStanzaToVoice (const S_msrStanza& stanza)
 {
   // get stanza number
-  std::string stanzaNumber =
+  const mfStanzaNumber& stanzaNumber =
     stanza->getStanzaNumber ();
 
   // register stanza in this voice
@@ -1971,7 +1971,7 @@ void msrVoice::addStanzaToVoice (const S_msrStanza& stanza)
 void msrVoice::addStanzaToVoiceWithoutCatchUp (const S_msrStanza& stanza)
 {
   // get stanza number
-  std::string stanzaNumber =
+  const mfStanzaNumber& stanzaNumber =
     stanza->getStanzaNumber ();
 
   // register stanza in this voice
@@ -1996,7 +1996,7 @@ void msrVoice::addStanzaToVoiceWithoutCatchUp (const S_msrStanza& stanza)
 
 S_msrStanza msrVoice::createStanzaInVoiceIfNotYetDone (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& stanzaNumber,
+  const mfStanzaNumber& stanzaNumber,
   const std::string& stanzaName) // JMI
 {
   S_msrStanza stanza;
@@ -2038,7 +2038,7 @@ S_msrStanza msrVoice::createStanzaInVoiceIfNotYetDone (
 
 S_msrStanza msrVoice::fetchStanzaInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& stanzaNumber,
+  const mfStanzaNumber& stanzaNumber,
   const std::string& stanzaName) // JMI
 {
   S_msrStanza stanza;
@@ -3878,7 +3878,7 @@ void msrVoice::prependAfterGraceNotesToVoice (
 
 void msrVoice::appendSyllableToVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&   stanzaNumber,
+  const mfStanzaNumber& stanzaNumber,
   const std::string&   stanzaName,
   const S_msrSyllable& syllable)
 {

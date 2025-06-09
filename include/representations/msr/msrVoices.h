@@ -34,7 +34,7 @@ namespace MusicFormats
 // PRE-declarations for class mutual dependencies
 
 class   msrClefKeyTimeSignatureGroup;
-typedef SMARTP<msrClefKeyTimeSignatureGroup> S_msrClefKeyTimeSignatureGroup;
+using S_msrClefKeyTimeSignatureGroup = SMARTP<msrClefKeyTimeSignatureGroup>;
 
 // voice kinds
 //______________________________________________________________________________
@@ -184,10 +184,10 @@ class EXP msrVoice : public msrElement
 
     // voice numbers
 
-    void                  setVoiceNumber (int voiceNumber)
+    void                  setVoiceNumber (const mfVoiceNumber& voiceNumber)
                               { fVoiceNumber = voiceNumber; }
 
-    int                   getVoiceNumber () const
+    mfVoiceNumber         getVoiceNumber () const
                               { return fVoiceNumber; }
 
     void                  setRegularVoiceOrdinalNumberInPart (int voiceOrdinalNumber)
@@ -211,7 +211,7 @@ class EXP msrVoice : public msrElement
 
     void                  setVoiceNamesFromNumber (
                             const mfInputLineNumber& inputLineNumber,
-                            int voiceNumber);
+                            const mfVoiceNumber& voiceNumber);
 
     std::string           getVoiceName () const
                               { return fVoiceName; }
@@ -379,7 +379,7 @@ class EXP msrVoice : public msrElement
     // partGroupSequentialNumber
 
     void                  changeVoiceIdentity ( // after a deep clone
-                            int voiceNumber);
+                            const mfVoiceNumber& voiceNumber);
 
     // print layout MusicXML specific??? JMI
      void                 appendMusicXMLPrintLayoutToVoice (
@@ -586,7 +586,7 @@ class EXP msrVoice : public msrElement
 
     void                  appendSyllableToVoice ( // JMI
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&   stanzaNumber,
+                            const mfStanzaNumber& stanzaNumber,
                             const std::string&   stanzaName,
                             const S_msrSyllable& syllable);
 
@@ -842,7 +842,7 @@ class EXP msrVoice : public msrElement
 
     S_msrStanza           addStanzaToVoiceByItsNumber (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& stanzaNumber);
+                            const mfStanzaNumber& stanzaNumber);
 
     void                  addStanzaToVoiceWithoutCatchUp ( // JMI
                             const S_msrStanza& stanza);
@@ -852,12 +852,12 @@ class EXP msrVoice : public msrElement
 
     S_msrStanza           createStanzaInVoiceIfNotYetDone (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& stanzaNumber,
+                            const mfStanzaNumber& stanzaNumber,
                             const std::string& stanzaName);
 
     S_msrStanza           fetchStanzaInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& stanzaNumber,
+                            const mfStanzaNumber& stanzaNumber,
                             const std::string& stanzaName);
 
     // strings
@@ -1151,7 +1151,7 @@ class EXP msrVoice : public msrElement
 
     // voice numbers in MusicXML may be greater than 4
     // and there can be holes
-    int                   fVoiceNumber;
+    mfVoiceNumber         fVoiceNumber;
 
 
     // the handling of tuplets in mxsr2msrTranslator.cpp

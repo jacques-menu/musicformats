@@ -67,7 +67,7 @@ std::ostream& operator << (std::ostream& os, const msrDalSegnoKind& elt)
 S_msrSegno msrSegno::create (
   const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  int                 staffNumber)
+  const mfStaffNumber& staffNumber)
 {
   msrSegno* obj =
     new msrSegno (
@@ -80,7 +80,7 @@ S_msrSegno msrSegno::create (
 
 S_msrSegno msrSegno::create (
   const mfInputLineNumber& inputLineNumber,
-  int                 staffNumber)
+  const mfStaffNumber& staffNumber)
 {
   return
     msrSegno::create (
@@ -92,7 +92,7 @@ S_msrSegno msrSegno::create (
 msrSegno::msrSegno (
   const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  int                 staffNumber)
+  const mfStaffNumber& staffNumber)
     : msrMeasureElement (
         inputLineNumber)
 {
@@ -242,7 +242,7 @@ S_msrDalSegno msrDalSegno::create (
   const S_msrMeasure& upLinkToMeasure,
   msrDalSegnoKind     dalSegnoKind,
   const std::string&  dalSegnoString,
-  int                 staffNumber)
+  const mfStaffNumber& staffNumber)
 {
   msrDalSegno* obj =
     new msrDalSegno (
@@ -259,7 +259,7 @@ S_msrDalSegno msrDalSegno::create (
   const mfInputLineNumber& inputLineNumber,
   msrDalSegnoKind     dalSegnoKind,
   const std::string&  dalSegnoString,
-  int                 staffNumber)
+  const mfStaffNumber& staffNumber)
 {
   return
     msrDalSegno::create (
@@ -275,7 +275,7 @@ msrDalSegno::msrDalSegno (
   const S_msrMeasure& upLinkToMeasure,
   msrDalSegnoKind     dalSegnoKind,
   const std::string&  dalSegnoString,
-  int                 staffNumber)
+  const mfStaffNumber& staffNumber)
     : msrMeasureElement (
         inputLineNumber)
 {
