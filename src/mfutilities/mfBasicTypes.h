@@ -152,6 +152,9 @@ EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
 EXP extern std::string mfVoiceNumberAsString (
   const mfVoiceNumber& voiceNumber);
 
+EXP extern int mfVoiceNumberAsInteger (
+  const mfVoiceNumber& staffNumber);
+
 //______________________________________________________________________________
 // measure numbers
 

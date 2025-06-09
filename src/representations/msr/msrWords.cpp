@@ -39,7 +39,7 @@ S_msrWords msrWords::create (
   const S_msrFontSize&       wordsFontSize,
   msrFontWeightKind          wordsFontWeightKind,
   msrXMLLangKind             wordsXMLLangKind,
-  int                        wordsStaffNumber)
+  const mfStaffNumber&       wordsStaffNumber)
 {
   msrWords* obj =
     new msrWords (
@@ -69,7 +69,7 @@ msrWords::msrWords (
   const S_msrFontSize&       wordsFontSize,
   msrFontWeightKind          wordsFontWeightKind,
   msrXMLLangKind             wordsXMLLangKind,
-  int                        wordsStaffNumber)
+  const mfStaffNumber&       wordsStaffNumber)
     : msrElement (inputLineNumber)
 {
   fWordsPlacementKind = wordsPlacementKind;

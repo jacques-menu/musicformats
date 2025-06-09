@@ -5235,11 +5235,13 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       noteVoice =
         theMsrNote->fetchNoteUpLinkToVoice ();
 
-    int
+    mfStaffNumber
       noteStaffNumber =
         theMsrNote->
           fetchUpLinkToNoteToStaff ()->
-            getStaffNumber (),
+            getStaffNumber ();
+
+    mfStaffNumber
       previousMSRNoteStaffNumber =
         fPreviousMSRNoteStaff->
           getStaffNumber ();
@@ -5325,21 +5327,25 @@ void msr2mxsrTranslator::appendAForwardToMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int
+  mfStaffNumber
     noteStaffNumber =
       theMsrNote->
         fetchUpLinkToNoteToStaff ()->
-          getStaffNumber (),
+          getStaffNumber ();
+
+  mfVoiceNumber
     noteVoiceNumber =
       theMsrNote->
         fetchNoteUpLinkToVoice ()->
           getVoiceNumber ();
 
   if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
-    int
+    mfStaffNumber
       previousMSRNoteStaffNumber =
         fPreviousMSRNoteStaff->
-          getStaffNumber (),
+          getStaffNumber ();
+
+    mfVoiceNumber
       previousMSRNoteVoiceNumber =
         fPreviousMSRNoteVoice->
           getVoiceNumber ();
@@ -5373,11 +5379,15 @@ void msr2mxsrTranslator::appendAForwardToMeasure (
 
   // append a voice sub-element to it
   forwardElement->push (
-    createMxmlIntegerElement (k_voice, noteVoiceNumber));
+    createMxmlIntegerElement (
+      k_voice,
+      mfVoiceNumberAsInteger (noteVoiceNumber)));
 
   // append a staff sub-element to it
   forwardElement->push (
-    createMxmlIntegerElement (k_staff, noteStaffNumber));
+    createMxmlIntegerElement (
+      k_staff,
+      mfStaffNumberAsInteger (noteStaffNumber)));
 
   // append it to the current measure element
   appendOtherMusicXMLElementToMeasure (forwardElement);
@@ -5424,19 +5434,25 @@ void msr2mxsrTranslator::appendABackupOrForwardToMeasureIfNeeded (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int
+  mfStaffNumber
     noteStaffNumber =
       theMsrNote->
         fetchUpLinkToNoteToStaff ()->
-          getStaffNumber (),
+          getStaffNumber ();
+
+  mfVoiceNumber
     noteVoiceNumber =
       theMsrNote->
         fetchNoteUpLinkToVoice ()->
-          getVoiceNumber (),
+          getVoiceNumber ();
+
+  mfStaffNumber
     previousMSRNoteStaffNumber =
       fPreviousMSRNoteStaff
         ? fPreviousMSRNoteStaff->getStaffNumber ()
-        : 0,
+        : 0;
+
+  mfVoiceNumber
     previousMSRNoteVoiceNumber =
       fPreviousMSRNoteVoice
         ? fPreviousMSRNoteVoice->getVoiceNumber ()
@@ -6843,7 +6859,7 @@ void msr2mxsrTranslator::appendStaffToNoteIfRelevant (
 
   // append the staff attribute if relevant
   if (noteStaff) {
-    int
+    mfStaffNumber
       noteStaffNumber =
         noteStaff->
           getStaffNumber ();
@@ -6852,7 +6868,7 @@ void msr2mxsrTranslator::appendStaffToNoteIfRelevant (
       fCurrentNoteElement->push (
         createMxmlIntegerElement (
           k_staff,
-          noteStaffNumber));
+          mfStaffNumberAsInteger (noteStaffNumber)));
     }
   }
 }
@@ -6901,7 +6917,7 @@ void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
 
   // append the voice attribute if relevant
   if (noteVoice) {
-    int
+    mfVoiceNumber
       noteVoiceNumber =
         noteVoice->
           getVoiceNumber ();
@@ -6910,7 +6926,7 @@ void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
       fCurrentNoteElement->push (
         createMxmlIntegerElement (
           k_voice,
-          noteVoiceNumber));
+          mfVoiceNumberAsInteger (noteVoiceNumber)));
     }
   }
 }

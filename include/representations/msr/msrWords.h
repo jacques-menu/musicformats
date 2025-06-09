@@ -64,7 +64,7 @@ class EXP msrWords : public msrElement
                             const S_msrFontSize&       wordsFontSize,
                             msrFontWeightKind          wordsFontWeightKind,
                             msrXMLLangKind             wordsXMLLangKind,
-                            int                        wordsStaffNumber);
+                            const mfStaffNumber&       wordsStaffNumber);
 
   protected:
 
@@ -82,7 +82,7 @@ class EXP msrWords : public msrElement
                             const S_msrFontSize&       wordsFontSize,
                             msrFontWeightKind          wordsFontWeightKind,
                             msrXMLLangKind             wordsXMLLangKind,
-                            int                        wordsStaffNumber);
+                            const mfStaffNumber&       wordsStaffNumber);
 
     virtual               ~msrWords ();
 

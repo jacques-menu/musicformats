@@ -101,15 +101,15 @@ int mfStaffNumberAsInteger (const mfStaffNumber& staffNumber)
 #ifndef MF_USE_WRAPPED_TYPES
     result = staffNumber;
 #else
-    // information is lost if there are non numerice characters... JMI 0.9.75
-    std::stringstream ss;
-
-    int intStaffNumber;
-
-    ss << staffNumber;
-    ss >> intStaffNumber;
-
-    result = intStaffNumber;
+//     std::stringstream ss;
+//
+//     int intStaffNumber;
+//
+//     ss << staffNumber;
+//     ss >> intStaffNumber;
+//
+//     result = intStaffNumber;
+    result = staffNumber.getBareValue ();
 #endif // MF_USE_WRAPPED_TYPES
   }
 
@@ -140,6 +140,32 @@ std::string mfVoiceNumberAsString (const mfVoiceNumber& voiceNumber)
   }
   else {
     result = std::to_string (voiceNumber.getBareValue ());
+  }
+
+  return result;
+}
+
+int mfVoiceNumberAsInteger (const mfVoiceNumber& voiceNumber)
+{
+  int result;
+
+  if (voiceNumber == K_VOICE_NUMBER_UNKNOWN_) {
+    result = K_VOICE_NUMBER_UNKNOWN_;
+  }
+  else {
+#ifndef MF_USE_WRAPPED_TYPES
+    result = voiceNumber;
+#else
+//     std::stringstream ss;
+//
+//     int intVoiceNumber;
+//
+//     ss << voiceNumber;
+//     ss >> intVoiceNumber;
+//
+//     result = intVoiceNumber;
+    result = voiceNumber.getBareValue ();
+#endif // MF_USE_WRAPPED_TYPES
   }
 
   return result;
