@@ -20,7 +20,7 @@
 
 #include "visitor.h"
 
-// #include "mfConstants.h"
+#include "mfConstants.h"
 #include "mfStringsHandling.h"
 
 #include "oahAtomsCollection.h"

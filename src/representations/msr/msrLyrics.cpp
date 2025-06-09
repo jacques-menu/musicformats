@@ -153,9 +153,9 @@ std::ostream& operator << (std::ostream& os, const msrSyllableExtendKind& elt)
 
 //______________________________________________________________________________
 S_msrSyllableElement msrSyllableElement::create (
-  int                    inputStartLineNumber,
-  msrSyllableElementKind syllableElementKind,
-  const std::string&     syllableElementContents)
+  const mfInputLineNumber& inputStartLineNumber,
+  msrSyllableElementKind   syllableElementKind,
+  const std::string&       syllableElementContents)
 {
   msrSyllableElement* obj =
     new msrSyllableElement (
@@ -167,9 +167,9 @@ S_msrSyllableElement msrSyllableElement::create (
 }
 
 msrSyllableElement::msrSyllableElement (
-  int                    inputStartLineNumber,
-  msrSyllableElementKind syllableElementKind,
-  const std::string&     syllableElementContents)
+  const mfInputLineNumber& inputStartLineNumber,
+  msrSyllableElementKind   syllableElementKind,
+  const std::string&       syllableElementContents)
 {
   fInputLineNumber = inputStartLineNumber;
 

@@ -166,7 +166,6 @@ class EXP bsr2bsrFinalizer :
     // measures
     // ------------------------------------------------------
 
-    std::string               fCurrentMeasureNumber;
     S_bsrMeasure              fCurrentMeasure;
 
     // options

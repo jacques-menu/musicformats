@@ -500,7 +500,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrHarmony&  harmony);
 
     void                  appendHarmoniesListToMeasure (
-                            int                             inputLineNumber,
+                            const mfInputLineNumber&        inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
                             const mfPositionInMeasure&      positionInMeasureToAppendAt);
 

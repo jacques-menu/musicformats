@@ -482,7 +482,7 @@ void msrVoice::initializeVoice (
   ++gIndenter;
 
   // compute voice number
-  int voiceNumber =
+  mfVoiceNumber voiceNumber =
     gMsrOahGroup->getCreateVoicesStaffRelativeNumbers ()
       ? fRegularVoiceStaffSequentialNumber
       : fVoiceNumber;
@@ -2714,7 +2714,7 @@ void msrVoice::cascadeAppendHarmonyToVoice (
 }
 
 void msrVoice::appendHarmoniesListToVoice (
-  int                             inputLineNumber,
+  const mfInputLineNumber&        inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
   const mfPositionInMeasure&      positionInMeasureToAppendAt)
 {
@@ -7305,7 +7305,7 @@ void msrVoice::cascadeCreateAMeasureRepeatAndAppendItToVoice (
 }
 
 void msrVoice::cascadeAppendMultipleMeasureRestToVoice (
-  int                             inputLineNumber,
+  const mfInputLineNumber&        inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRest)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -8114,7 +8114,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
 
 void msrVoice::appendEmptyMeasuresToVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& previousMeasureNumber, // JMI ???
+  const mfInputLineNumber&        previousMeasureNumber, // JMI ???
   int                emptyMeasuresNumber)
 {
   // create a multiple measure rests

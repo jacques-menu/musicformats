@@ -16,6 +16,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfBool.h"
+#include "mfConstants.h"
 
 #include "languages.h"
 

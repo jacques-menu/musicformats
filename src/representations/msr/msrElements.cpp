@@ -53,7 +53,7 @@ SMARTP<msrElement> msrElement::createDeepClone ()
 // set and get
 // ------------------------------------------------------
 
-int msrElement::getInputLineNumber () const
+mfInputLineNumber msrElement::getInputLineNumber () const
 {
   return fInputLineNumber;
 }

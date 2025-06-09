@@ -1,4 +1,5 @@
 /*
+/*
   MusicFormats Library
   Copyright (C) Jacques Menu 2016-2025
 
@@ -9,23 +10,19 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfConstants___
-#define ___mfConstants___
-
 #include <string>
 
-#include "exports.h"
-
-// #include "mfMoments.h"
-// #include "mfDurationsAndPositionInMeasures.h"
+// #include "mfConstants.h"
 
 
 namespace MusicFormats
 {
 
+//______________________________________________________________________________
+// names lists max length
+
+// EXP extern const int K_MF_NAMES_LIST_MAX_LENGTH = 50;
+
 
 
 }
-
-
-#endif // ___mfConstants___

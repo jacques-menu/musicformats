@@ -3592,7 +3592,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
         // don't generate bar information for the last measure in the score
-        std::string
+        mfMeasureNumber
           scoreLastMeasureNumber =
             elt->fetchMeasureUpLinkToScore ()->getScoreLastMeasureNumber ();
 //         gLog << // JMI 0.9.71

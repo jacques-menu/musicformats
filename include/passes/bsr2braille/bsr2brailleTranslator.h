@@ -155,7 +155,6 @@ class EXP bsr2brailleTranslator :
     // measures
     // ------------------------------------------------------
 
-    std::string               fCurrentMeasureNumber;
     S_msrMeasure              fCurrentMeasureClone;
 
     // the braille generator used

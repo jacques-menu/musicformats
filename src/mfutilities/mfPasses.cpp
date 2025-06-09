@@ -13,6 +13,7 @@
 
 #include "mfBasicTypes.h"
 
+#include "mfConstants.h"
 #include "mfIndentedTextOutput.h"
 #include "mfPasses.h"
 

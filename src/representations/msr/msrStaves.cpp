@@ -666,9 +666,9 @@ void msrStaff::setNextMeasureNumberInStaff (
 
 S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
   const mfInputLineNumber& inputLineNumber,
-  int                   voiceNumber,
-  const std::string&    currentMeasureNumber,
-  const S_msrPartGroup& partUpLinkToPartGroup)
+  const mfVoiceNumber&     voiceNumber,
+  const mfMeasureNumber&   currentMeasureNumber,
+  const S_msrPartGroup&    partUpLinkToPartGroup)
 {
   ++fStaffRegularVoicesCounter;
 
@@ -990,7 +990,7 @@ void msrStaff::registerVoiceByItsNumber (
   const mfStaffNumber& staffNumber,
   const S_msrVoice& voice)
 {
-  int voiceNumber = voice->getVoiceNumber ();
+  mfVoiceNumber voiceNumber = voice->getVoiceNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -1273,7 +1273,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
 #endif // MF_TRACE_IS_ENABLED
 
   // search list ??? JMI
-  for (std::pair <int, S_msrVoice> thePair : fStaffRegularVoicesMap) {
+  for (std::pair <mfVoiceNumber, S_msrVoice> thePair : fStaffRegularVoicesMap) {
 #ifdef MF_TRACE_IS_ENABLED
     int        number = thePair.first;
 #endif // MF_TRACE_IS_ENABLED
@@ -1549,7 +1549,7 @@ void msrStaff::registerVoiceInStaff (
   } // switch
 
   // register the voice by it's number
-  int voiceNumber = voice->getVoiceNumber ();
+  mfVoiceNumber voiceNumber = voice->getVoiceNumber ();
 
   switch (voiceKind) { // JMI merge with previous switch?
     case msrVoiceKind::kVoiceKindRegular:
@@ -1667,7 +1667,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
     voice);
 
   // register the voice in staff by it's number
-  int voiceNumber = voice->getVoiceNumber ();
+  mfVoiceNumber voiceNumber = voice->getVoiceNumber ();
 
   switch (voiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -1738,7 +1738,7 @@ void msrStaff::registerVoiceInStaffClone (
 #endif // MF_TRACE_IS_ENABLED
 
   // register the voice in staff clone by it's number
-  int voiceNumber = voice->getVoiceNumber ();
+  mfVoiceNumber voiceNumber = voice->getVoiceNumber ();
 
   switch (voiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -2723,7 +2723,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
 
 void msrStaff::appendEmptyMeasuresToStaff (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& previousMeasureNumber,
+  const mfInputLineNumber&        previousMeasureNumber,
   int           emptyMeasuresNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3942,7 +3942,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    int voiceNumber = 0;
+    mfVoiceNumber voiceNumber = 0;
 
     for (S_msrVoice voice : fStaffRegularVoicesList) {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -3991,8 +3991,8 @@ void msrStaff::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    for (std::pair <int, S_msrVoice> thePair : fStaffAllVoicesMap) {
-      int        voiceNumber = thePair.first;
+    for (std::pair <mfVoiceNumber, S_msrVoice> thePair : fStaffAllVoicesMap) {
+      mfVoiceNumber voiceNumber = thePair.first;
       S_msrVoice voice = thePair.second;
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -4038,8 +4038,8 @@ void msrStaff::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    for (std::pair <int, S_msrVoice> thePair : fStaffRegularVoicesMap) {
-      int        voiceNumber = thePair.first;
+    for (std::pair <mfVoiceNumber, S_msrVoice> thePair : fStaffRegularVoicesMap) {
+      mfVoiceNumber voiceNumber = thePair.first;
       S_msrVoice voice = thePair.second;
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED

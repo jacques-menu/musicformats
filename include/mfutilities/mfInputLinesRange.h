@@ -22,8 +22,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// typedef int mfInputLineNumber;
-
 /*
   We want to disambiguate the various uses of some basic type in parameters,
   to help fix nasty bugs in which the wrong expression is supplied...
@@ -43,9 +41,6 @@ class explicit_t
 
     explicit_t (const T& c) : value (c) {}
 };
-
-// typedef explicit_t <int> mfInputLineNumber;
-// typedef explicit_t <int> mfStaffNumber;
 
 template<typename T>
 std::ostream& operator << (std::ostream& os, const explicit_t <T> elt)
@@ -77,10 +72,10 @@ public:
     // ------------------------------------------------------
 
     int                   getInputStartLineNumber () const
-                              { return fInputLineNumber; }
+                              { return fInputStartLineNumber; }
 
     void                  setInputStartLineNumber (int value)
-                              { fInputLineNumber = value; }
+                              { fInputStartLineNumber = value; }
 
     int                   getInputEndLineNumber () const
                               { return fInputEndLineNumber; }
@@ -109,7 +104,7 @@ public:
     // private fields
     // ------------------------------------------------------
 
-    int                  fInputLineNumber;
+    int                  fInputStartLineNumber;
     int                  fInputEndLineNumber;
 };
 

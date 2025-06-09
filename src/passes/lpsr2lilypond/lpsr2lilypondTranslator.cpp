@@ -1654,8 +1654,9 @@ std::string lpsr2lilypondTranslator::notesDurationKindAsLilypondString (
 std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
   const S_msrNote& note)
 {
-  int noteInputLineNumber =
-    note->getInputLineNumber ();
+  mfInputLineNumber
+    noteInputLineNumber =
+      note->getInputLineNumber ();
 
   std::stringstream ss;
 
@@ -21110,7 +21111,7 @@ void lpsr2lilypondTranslator::generateNoteBeamsAfterNote (
       >
 */
 
-      int inputStartLineNumber = beam->getInputLineNumber ();
+      mfInputLineNumber inputStartLineNumber = beam->getInputLineNumber ();
 
       int beamNumber = beam->getBeamNumber ();
 
@@ -25288,8 +25289,9 @@ void lpsr2lilypondTranslator::generateCodeAfterChordEnd (
   }
 
   else {
-    int chordInputLineNumber =
-      chord->getInputLineNumber ();
+    mfInputLineNumber
+      chordInputLineNumber =
+        chord->getInputLineNumber ();
 
     // generate the chord duration if relevant
     mfWholeNotes
@@ -26011,8 +26013,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (fOnGoingGraceNotesGroup) {
-    int chordInputLineNumber =
-      elt->getInputLineNumber ();
+    mfInputLineNumber
+      chordInputLineNumber =
+        elt->getInputLineNumber ();
 
     if (gTraceOahGroup->getTraceNotes ()) {
         std::stringstream ss;

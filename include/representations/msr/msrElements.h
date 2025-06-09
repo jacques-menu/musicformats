@@ -56,7 +56,7 @@ class EXP msrElement : public smartable
     // set and get
     // ------------------------------------------------------
 
-    int                   getInputLineNumber () const;
+    mfInputLineNumber     getInputLineNumber () const;
 
   public:
 
@@ -100,7 +100,7 @@ class EXP msrElement : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    int                   fInputLineNumber;
+    mfInputLineNumber     fInputLineNumber;
 };
 typedef SMARTP<msrElement> S_msrElement;
 EXP std::ostream& operator << (std::ostream& os, const S_msrElement& elt);

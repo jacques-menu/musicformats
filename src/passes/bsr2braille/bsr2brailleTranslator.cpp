@@ -730,9 +730,6 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrMeasure& elt)
 {
-  fCurrentMeasureNumber =
-    elt->getInputLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gBsrOahGroup->getTraceBsrVisitors ()) {
     std::stringstream ss;
@@ -742,7 +739,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMeasure& elt)
       "% --> Start visiting bsrMeasure '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << fCurrentMeasureNumber;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -762,7 +759,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMeasure& elt)
       "% --> End visiting bsrMeasure '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << fCurrentMeasureNumber;
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),

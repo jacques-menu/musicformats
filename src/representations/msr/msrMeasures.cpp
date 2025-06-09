@@ -3377,7 +3377,7 @@ void msrMeasure::appendHarmonyToMeasure (
 }
 
 void msrMeasure::appendHarmoniesListToMeasure (
-  int                             inputLineNumber,
+  const mfInputLineNumber&        inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
   const mfPositionInMeasure&      positionInMeasureToAppendAt)
 {

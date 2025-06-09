@@ -539,7 +539,7 @@ class EXP msrVoice : public msrElement
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  appendHarmoniesListToVoice (
-                            int                             inputLineNumber,
+                            const mfInputLineNumber&        inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
                             const mfPositionInMeasure&      positionInMeasureToAppendAt);
 
@@ -758,7 +758,7 @@ class EXP msrVoice : public msrElement
                             msrUseSymbolsKind multipleMeasureRestUseSymbolsKind);
 
     void                  cascadeAppendMultipleMeasureRestToVoice (
-                            int                             inputLineNumber,
+                            const mfInputLineNumber&        inputLineNumber,
                             const S_msrMultipleMeasureRest& multipleMeasureRest);
 
     void                  replicateLastAppendedMeasureInVoice (
@@ -767,7 +767,7 @@ class EXP msrVoice : public msrElement
 
     void                  appendEmptyMeasuresToVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& previousMeasureNumber,
+                            const mfInputLineNumber&        previousMeasureNumber,
                             int                emptyMeasuresNumber);
 
     void                  appendPendingMultipleMeasureRestsToVoice (

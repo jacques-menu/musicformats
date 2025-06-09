@@ -552,9 +552,6 @@ void bsr2bsrFinalizer::visitStart (S_bsrMeasure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentMeasureNumber =
-    elt->getInputLineNumber ();
-
   fCurrentMeasure =
     elt->createMeasureNewbornClone ();
 

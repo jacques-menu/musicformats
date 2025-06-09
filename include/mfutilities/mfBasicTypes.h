@@ -72,6 +72,9 @@ EXP extern const std::string
 EXP extern std::string mfInputLineNumberAsString (
   const mfInputLineNumber& inputLineNumber);
 
+EXP extern int mfInputLineNumberAsInteger (
+  const mfInputLineNumber& inputLineNumber);
+
 //______________________________________________________________________________
 // input location ranges
 
@@ -206,13 +209,6 @@ EXP extern const std::string
 
 EXP extern std::string mfStanzaNumberAsString (
   const mfStanzaNumber& stanzaNumber);
-
-
-//______________________________________________________________________________
-// names lists max length
-
-EXP extern const int K_MF_NAMES_LIST_MAX_LENGTH;
-
 
 // //______________________________________________________________________________
 // enum class mfDurationKind {

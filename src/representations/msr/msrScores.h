@@ -177,17 +177,19 @@ class EXP msrScore : public msrBookElement
 
     // measures
     void                  setScoreFirstMeasureNumber (
-                            const std::string& measureNumber)
+                            const mfMeasureNumber& measureNumber)
                               { fScoreFirstMeasureNumber = measureNumber; }
 
-    const std::string&    getScoreFirstMeasureNumber () const
+    const mfMeasureNumber&
+                          getScoreFirstMeasureNumber () const
                               { return fScoreFirstMeasureNumber; }
 
     void                  setScoreLastMeasureNumber (
-                             const std::string& measureNumber)
+                             const mfMeasureNumber& measureNumber)
                               { fScoreLastMeasureNumber = measureNumber; }
 
-    const std::string&    getScoreLastMeasureNumber () const
+    const mfMeasureNumber&
+                          getScoreLastMeasureNumber () const
                               { return fScoreLastMeasureNumber; }
 
     void                  setScoreMeasuresNumber (
@@ -423,8 +425,8 @@ class EXP msrScore : public msrBookElement
 
     // measures
 
-    std::string           fScoreFirstMeasureNumber;
-    std::string           fScoreLastMeasureNumber;
+    mfMeasureNumber       fScoreFirstMeasureNumber;
+    mfMeasureNumber       fScoreLastMeasureNumber;
 
     int                   fScoreMeasuresNumber;
 

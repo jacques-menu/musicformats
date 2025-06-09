@@ -1310,7 +1310,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // ------------------------------------------------------
 
     // we use a pointer to the current part staves map
-    std::map <int, S_msrStaff>*
+    std::map <mfStaffNumber, S_msrStaff>*
                               fCurrentPartStavesMapPtr;
 
     std::map <std::pair <int, int>, S_msrVoice>
@@ -1346,7 +1346,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     // we need a fast access to the staves and voices
     // indexes are staff number and voice number
-    std::map <int, std::map <int, S_msrVoice>>
+    std::map <mfStaffNumber, std::map <mfVoiceNumber, S_msrVoice>>
                               fCurrentPartStaffMsrVoicesMap;
 
 		void											displayCurrentPartStaffMsrVoicesMap (
@@ -1355,7 +1355,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     // we need a fast access to the voices and their handlers
     // indexes are staff number and voice number
-    std::map <int, std::map <int, S_mxsrVoice>>
+    std::map <mfStaffNumber, std::map <mfVoiceNumber, S_mxsrVoice>>
                               fCurrentPartStaffMxsrVoicesMapMap;
 
     // denormalization for speed
@@ -1402,7 +1402,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // since measure numbers are actually strings
     int                       fPartMeasuresCounter;
 
-    std::string               fCurrentMeasureNumber;
+    std::string               fCurrentMusicXMLMeasureNumber;
 
     // measure end line number
     int                       fPreviousMeasureInputLineNumber;
@@ -2231,7 +2231,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // repeats handling
     // ------------------------------------------------------
 
-    std::string               fCurrentRepeatStartMeasureNumber;
+    mfMeasureNumber           fCurrentRepeatStartMeasureNumber;
     S_msrBarLine              fCurrentRepeatEndingStartBarLine;
 
     void                      handleImplicitInitialForwardRepeat (

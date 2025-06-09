@@ -1646,8 +1646,8 @@ void msrPart::cascadeHandleRepeatStartInPart (
 
 void msrPart::cascadeHandleRepeatEndInPart (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
-  int                repeatTimes)
+  const mfMeasureNumber&   measureNumber,
+  int                      repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
@@ -1919,7 +1919,7 @@ void msrPart::replicateLastAppendedMeasureInPart (
 
 void msrPart::appendEmptyMeasuresToPart (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& previousMeasureNumber,
+  const mfInputLineNumber&        previousMeasureNumber,
   int                measureRestsNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2387,7 +2387,7 @@ void msrPart::registerVoiceInPartVoicesList (
 // void msrPart::registerVoiceInRegularVoicesMap (
 //   const S_msrVoice& voice)
 // {
-//   int voiceNumber = voice->getVoiceNumber ();
+//   mfVoiceNumber voiceNumber = voice->getVoiceNumber ();
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
@@ -2441,7 +2441,7 @@ void msrPart::registerVoiceInPartVoicesList (
 // void msrPart::registerVoiceInRegularVoicesMap (
 //   const S_msrVoice& voice)
 // {
-//   int voiceNumber = voice->getVoiceNumber ();
+//   mfVoiceNumber voiceNumber = voice->getVoiceNumber ();
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
@@ -2506,7 +2506,7 @@ void msrPart::registerVoiceInPartVoicesList (
 
 S_msrVoice msrPart::createPartHarmoniesVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& currentMeasureNumber)
+  const mfMeasureNumber&   currentMeasureNumber)
 {
   if (fPartHarmoniesVoice) {
     std::stringstream ss;
@@ -2624,7 +2624,7 @@ void msrPart::appendHarmonyToPart (
 }
 
 void msrPart::appendHarmoniesListToPart (
-  int                             inputLineNumber,
+  const mfInputLineNumber&        inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
   const mfPositionInMeasure&      positionInMeasureToAppendAt)
 {
@@ -2684,7 +2684,7 @@ void msrPart::cascadeAppendFiguredBassesListToPart (
 
 S_msrVoice msrPart::createPartFiguredBassVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& currentMeasureNumber)
+  const mfMeasureNumber&   currentMeasureNumber)
 {
   if (fPartFiguredBassVoice) {
     std::stringstream ss;

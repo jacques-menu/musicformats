@@ -471,8 +471,8 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  cascadeHandleRepeatEndInPart (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& measureNumber,
-                            int                repeatTimes);
+                            const mfMeasureNumber&   measureNumber,
+                            int                      repeatTimes);
 
     void                  cascadeHandleRepeatEndingStartInPart (
                             const mfInputLineNumber& inputLineNumber);
@@ -513,7 +513,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  appendEmptyMeasuresToPart (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& previousMeasureNumber,
+                            const mfInputLineNumber&        previousMeasureNumber,
                             int                measureRestsNumber);
 
     void                  appendMultipleMeasureRestCloneToPart (
@@ -548,7 +548,7 @@ class EXP msrPart : public msrPartGroupElement
 
     S_msrVoice            createPartHarmoniesVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& currentMeasureNumber);
+                            const mfMeasureNumber&   currentMeasureNumber);
 
     void                  appendHarmonyToPart (
                             const mfInputLineNumber& inputLineNumber,
@@ -556,7 +556,7 @@ class EXP msrPart : public msrPartGroupElement
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  appendHarmoniesListToPart (
-                            int                             inputLineNumber,
+                            const mfInputLineNumber&        inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
                             const mfPositionInMeasure&      positionInMeasureToAppendAt);
 
@@ -564,7 +564,7 @@ class EXP msrPart : public msrPartGroupElement
 
     S_msrVoice            createPartFiguredBassVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& currentMeasureNumber);
+                            const mfMeasureNumber&   currentMeasureNumber);
 
     void                  appendFiguredBassToPart (
                             const mfInputLineNumber& inputLineNumber,

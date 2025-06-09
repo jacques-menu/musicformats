@@ -75,9 +75,9 @@ class EXP msrSyllableElement : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrSyllableElement> create (
-                            int                    inputStartLineNumber,
-                            msrSyllableElementKind syllableElementKind,
-                            const std::string&     syllableElementContents);
+                            const mfInputLineNumber& inputStartLineNumber,
+                            msrSyllableElementKind   syllableElementKind,
+                            const std::string&       syllableElementContents);
 
   public:
 
@@ -85,9 +85,9 @@ class EXP msrSyllableElement : public smartable
     // ------------------------------------------------------
 
                           msrSyllableElement (
-                            int                    inputStartLineNumber,
-                            msrSyllableElementKind syllableElementKind,
-                            const std::string&     syllableElementContents);
+                            const mfInputLineNumber& inputStartLineNumber,
+                            msrSyllableElementKind   syllableElementKind,
+                            const std::string&       syllableElementContents);
 
     virtual               ~msrSyllableElement ();
 
@@ -96,7 +96,7 @@ class EXP msrSyllableElement : public smartable
     // set and get
     // ------------------------------------------------------
 
-    int                   getInputLineNumber () const
+    mfInputLineNumber     getInputLineNumber () const
                               { return fInputLineNumber; }
 
     msrSyllableElementKind
@@ -136,7 +136,7 @@ class EXP msrSyllableElement : public smartable
     // private fields
     // ------------------------------------------------------
 
-    int                   fInputLineNumber;
+    mfInputLineNumber     fInputLineNumber;
 
     // texts list
     msrSyllableElementKind

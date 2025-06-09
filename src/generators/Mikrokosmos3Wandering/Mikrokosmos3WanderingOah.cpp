@@ -20,6 +20,8 @@
 
 #include "mfPreprocessorSettings.h"
 
+#include "mfConstants.h"
+
 #include "oahOah.h"
 #include "msrOah.h"
 

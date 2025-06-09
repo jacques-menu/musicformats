@@ -52,6 +52,28 @@ EXP extern std::string mfInputLineNumberAsString (
   return result;
 }
 
+EXP extern int mfInputLineNumberAsInteger (
+  const mfInputLineNumber& inputLineNumber);
+
+int mfInputLineNumberAsInteger (
+  const mfInputLineNumber& inputLineNumber)
+{
+  int result;
+
+  if (inputLineNumber == K_MF_INPUT_LINE_UNKNOWN_) {
+    result = K_MF_INPUT_LINE_UNKNOWN_;
+  }
+  else {
+#ifndef MF_USE_WRAPPED_TYPES
+    result = inputLineNumber;
+#else
+    result = inputLineNumber.getBareValue ();
+#endif // MF_USE_WRAPPED_TYPES
+  }
+
+  return result;
+}
+
 //______________________________________________________________________________
 // input locations
 
@@ -228,11 +250,6 @@ std::string mfStanzaNumberAsString (const mfStanzaNumber& stanzaNumber)
 
   return result;
 }
-
-//______________________________________________________________________________
-// names lists max length
-
-EXP extern const int K_MF_NAMES_LIST_MAX_LENGTH = 50;
 
 //______________________________________________________________________________
 void testMfBasicTypes ()

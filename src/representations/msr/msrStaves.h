@@ -118,11 +118,11 @@ class EXP msrStaff : public msrElement
 
     // staff voices
 
-    const std::map <int, S_msrVoice>&
+    const std::map <mfVoiceNumber, S_msrVoice>&
                           getStaffAllVoicesMap () const
                               { return fStaffAllVoicesMap; }
 
-    const std::map <int, S_msrVoice>&
+    const std::map <mfVoiceNumber, S_msrVoice>&
                           getStaffRegularVoicesMap () const
                               { return fStaffRegularVoicesMap; }
 
@@ -250,9 +250,9 @@ class EXP msrStaff : public msrElement
 
     S_msrVoice            createRegularVoiceInStaffByItsNumber (
                             const mfInputLineNumber& inputLineNumber,
-                            int                   voiceNumber,
-                            const std::string&    currentMeasureNumber,
-                            const S_msrPartGroup& partUpLinkToPartGroup);
+                            const mfVoiceNumber&     voiceNumber,
+                            const mfMeasureNumber&   currentMeasureNumber,
+                            const S_msrPartGroup&    partUpLinkToPartGroup);
 
     void                  registerVoiceInStaff (
                             const mfInputLineNumber& inputLineNumber,
@@ -341,7 +341,7 @@ class EXP msrStaff : public msrElement
 
     void                  appendEmptyMeasuresToStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& previousMeasureNumber,
+                            const mfInputLineNumber&        previousMeasureNumber,
                             int                emptyMeasuresNumber);
 
     void                  appendMultipleMeasureRestCloneToStaff (
@@ -457,11 +457,11 @@ class EXP msrStaff : public msrElement
 
     // the mapping of all the voices in the staff,
     // including harmonies and figured bass voices
-    std::map <int, S_msrVoice>
+    std::map <mfVoiceNumber, S_msrVoice>
                           fStaffAllVoicesMap;
 
     // the mapping of voice numbers to regular voices
-    std::map <int, S_msrVoice>
+    std::map <mfVoiceNumber, S_msrVoice>
                           fStaffRegularVoicesMap;
 
     // part shortest note
