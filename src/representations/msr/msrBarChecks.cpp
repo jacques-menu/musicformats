@@ -117,9 +117,9 @@ msrBarCheck::msrBarCheck (
 
 msrBarCheck::msrBarCheck (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&  nextBarOriginalNumber,
-  int                 nextBarPuristNumber,
-  const S_msrMeasure& upLinkToMeasure)
+  const mfMeasureNumber&   nextBarOriginalNumber,
+  int                      nextBarPuristNumber,
+  const S_msrMeasure&      upLinkToMeasure)
     : msrMeasureElement (
         inputLineNumber)
 {

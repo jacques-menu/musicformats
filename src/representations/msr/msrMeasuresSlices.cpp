@@ -291,8 +291,8 @@ std::ostream& operator << (std::ostream& os, const S_msrSimultaneousNotesChunk& 
 
 //______________________________________________________________________________
 S_msrMeasuresSlice msrMeasuresSlice::create (
-  const std::string& measureNumber,
-  int                puristMeasureNumber)
+  const mrMeasureNumber& measureNumber,
+  int                    puristMeasureNumber)
 {
   msrMeasuresSlice* obj =
     new msrMeasuresSlice (
@@ -303,8 +303,8 @@ S_msrMeasuresSlice msrMeasuresSlice::create (
 }
 
 msrMeasuresSlice::msrMeasuresSlice (
-  const std::string& measureNumber,
-  int                puristMeasureNumber)
+  const mrMeasureNumber& measureNumber,
+  int                    puristMeasureNumber)
 {
   fSliceMeasureNumber = measureNumber;
 

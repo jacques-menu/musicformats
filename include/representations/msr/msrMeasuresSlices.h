@@ -14,6 +14,8 @@
 
 #include "smartpointer.h"
 
+// #include "mfBasicTypes.h"
+
 #include "msrNotes.h"
 
 
@@ -186,8 +188,8 @@ class EXP msrMeasuresSlice : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrMeasuresSlice> create (
-                            const std::string& measureNumber,
-                            int                puristMeasureNumber);
+                            const mfMeasureNumber& measureNumber,
+                            int                    puristMeasureNumber);
 
     SMARTP<msrMeasuresSlice> createMeasuresSliceShallowCopy ();
 
@@ -197,8 +199,8 @@ class EXP msrMeasuresSlice : public smartable
   protected:
 
                           msrMeasuresSlice (
-                            const std::string& measureNumber,
-                            int                puristMeasureNumber);
+                            const mfMeasureNumber& measureNumber,
+                            int                    puristMeasureNumber);
 
     virtual               ~msrMeasuresSlice ();
 
@@ -207,7 +209,7 @@ class EXP msrMeasuresSlice : public smartable
     // set and get
     // ------------------------------------------------------
 
-    std::string           getSliceMeasureNumber () const
+    mfMeasureNumber       getSliceMeasureNumber () const
                               { return fSliceMeasureNumber; }
 
     int                   getSlicePuristMeasureNumber () const
@@ -273,7 +275,7 @@ class EXP msrMeasuresSlice : public smartable
     // ------------------------------------------------------
 
     int                   fSlicePuristMeasureNumber;
-    std::string           fSliceMeasureNumber;
+    mfMeasureNumber       fSliceMeasureNumber;
 
     // the measures in the slice
     std::vector <S_msrMeasure>

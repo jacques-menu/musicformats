@@ -34,7 +34,7 @@ class EXP msdrLayer : public smartable
 
     static SMARTP<msdrLayer> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& layerNumber);
+                            const std::string&       layerNumber);
 
     SMARTP<msdrLayer> createMusicNewbornClone ();
 
@@ -46,7 +46,7 @@ class EXP msdrLayer : public smartable
     // for regular voices
                           msdrLayer (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& layerNumber);
+                            const std::string&       layerNumber);
 
                           msdrLayer ();
 
@@ -70,7 +70,7 @@ class EXP msdrLayer : public smartable
                               { return fLayerNumber; }
 
     // input line number
-    int                   getInputLineNumber () const
+    mfInputLineNumber     getInputLineNumber () const
                               { return fInputLineNumber; }
 
     // music measures vector
@@ -146,7 +146,7 @@ class EXP msdrLayer : public smartable
     std::string           fLayerNumber;
 
     // input line number
-    int                   fInputLineNumber;
+    mfInputLineNumber     fInputLineNumber;
 
     // measures elements list
     std::list <S_msrMeasureElement>

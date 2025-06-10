@@ -39,9 +39,9 @@ class EXP msrBarCheck : public msrMeasureElement
 
     static SMARTP<msrBarCheck> createWithNextBarPuristNumber (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfMeasureNumber&    nextBarOriginalNumber,
-                            int                       nextBarPuristNumber,
-                            const S_msrMeasure&       upLinkToMeasure);
+                            const mfMeasureNumber&   nextBarOriginalNumber,
+                            int                      nextBarPuristNumber,
+                            const S_msrMeasure&      upLinkToMeasure);
 
   protected:
 
@@ -56,9 +56,9 @@ class EXP msrBarCheck : public msrMeasureElement
 
                           msrBarCheck (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfMeasureNumber&  nextBarOriginalNumber,
-                            int                 nextBarPuristNumber,
-                            const S_msrMeasure& upLinkToMeasure);
+                            const mfMeasureNumber&   nextBarOriginalNumber,
+                            int                      nextBarPuristNumber,
+                            const S_msrMeasure&      upLinkToMeasure);
 
     virtual               ~msrBarCheck ();
 
