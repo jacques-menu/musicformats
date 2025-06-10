@@ -4562,7 +4562,7 @@ std::string msrNote::noteComplementsAsString () const
   ss <<
     ", measureElementMeasureNumber: ";
   if (fMeasureElementUpLinkToMeasure) {
-    std::string
+    mfMeasureNumber
       measureNumber =
         fMeasureElementUpLinkToMeasure->
           getMeasureNumber ();
@@ -6148,7 +6148,7 @@ void msrNote::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fNoteUpLinkToMeasureMeasureNumber" << ": ";
   if (fMeasureElementUpLinkToMeasure) {
-    std::string
+    mfMeasureNumber
       measureNumber =
         fMeasureElementUpLinkToMeasure->
           getMeasureNumber ();

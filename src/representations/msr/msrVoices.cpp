@@ -1280,9 +1280,9 @@ void msrVoice::setVoiceLastAppendedMeasure (
   fVoiceLastAppendedMeasure = measure;
 }
 
-void msrVoice::setNextMeasureNumberInVoice (
+void msrVoice::cascadeNetNextMeasureNumberInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& nextMeasureNumber)
+  const mfMeasureNumber&   nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {

@@ -393,9 +393,9 @@ class EXP msrVoice : public msrElement
                             const mfMeasureNumber& measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
-    void                  setNextMeasureNumberInVoice (
+    void                  cascadeNetNextMeasureNumberInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& nextMeasureNumber);
+                            const mfMeasureNumber&   nextMeasureNumber);
 
     // forward
 

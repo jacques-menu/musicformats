@@ -291,7 +291,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSimultaneousNotesChunk& 
 
 //______________________________________________________________________________
 S_msrMeasuresSlice msrMeasuresSlice::create (
-  const mrMeasureNumber& measureNumber,
+  const mfMeasureNumber& measureNumber,
   int                    puristMeasureNumber)
 {
   msrMeasuresSlice* obj =
@@ -303,7 +303,7 @@ S_msrMeasuresSlice msrMeasuresSlice::create (
 }
 
 msrMeasuresSlice::msrMeasuresSlice (
-  const mrMeasureNumber& measureNumber,
+  const mfMeasureNumber& measureNumber,
   int                    puristMeasureNumber)
 {
   fSliceMeasureNumber = measureNumber;
@@ -334,8 +334,8 @@ S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
   S_msrMeasuresSlice
     shallowCopy =
       msrMeasuresSlice::create (
-      fSliceMeasureNumber,
-      fSlicePuristMeasureNumber);
+        fSliceMeasureNumber,
+        fSlicePuristMeasureNumber);
 
   // populate it
   for (
@@ -1124,11 +1124,11 @@ msrMeasuresSlicesSequence::msrMeasuresSlicesSequence (
   fMeasuresOrigin = measuresOrigin;
 
   for (int i = 1; i <= measuresNumber; ++i) {
-    fMeasuresSlicesVector.push_back (
-      msrMeasuresSlice::create (
-        __FILE__, // JMI
-        mfInputLineNumber (__LINE__)) // JMI
-      );
+//     fMeasuresSlicesVector.push_back (
+//       msrMeasuresSlice::create (
+//         fSliceMeasureNumber,
+//         fSlicePuristMeasureNumber) // JMI ??? 0.9.75 MISSING
+//       );
   } // for
 }
 

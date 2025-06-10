@@ -11140,7 +11140,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
   if (fPartMeasuresCounter > 1) { // JMI 0.9.71
 //     if (fCurrentPart) {
       fCurrentPart->
-        setNextMeasureNumberInPart (
+        cascadeNetNextMeasureNumberInPart (
           elt->getInputLineNumber (),
           fCurrentMeasureNumber);
 //     }
@@ -29862,7 +29862,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //
 //     if (fRemainingMultipleMeasureRestMeasuresNumber == 1) {
 //       fCurrentPart-> // JMI ??? BOF
-//         setNextMeasureNumberInPart (
+//         cascadeNetNextMeasureNumberInPart (
 //           inputLineNumber,
 //           fCurrentMeasureNumber);
 //     }

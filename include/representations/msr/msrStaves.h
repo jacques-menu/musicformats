@@ -280,9 +280,9 @@ class EXP msrStaff : public msrElement
                             const mfMeasureNumber& measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
-    void                  setNextMeasureNumberInStaff (
+    void                  cascadeNetNextMeasureNumberInStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& nextMeasureNumber);
+                            const mfMeasureNumber&   nextMeasureNumber);
 
     // measure repeats
 
@@ -303,17 +303,16 @@ class EXP msrStaff : public msrElement
 
     void                  cascadeHandleRepeatEndInStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& measureNumber,
-                            int                repeatTimes);
+                            const mfMeasureNumber&   measureNumber,
+                            int                      repeatTimes);
 
     void                  cascadeHandleRepeatEndingStartInStaff (
                             const mfInputLineNumber& inputLineNumber);
 
     void                  cascadeHandleRepeatEndingEndInStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& repeatEndingNumber, // may be "1, 2"
-                            msrRepeatEndingKind
-                                               repeatEndingKind);
+                            const std::string&       repeatEndingNumber, // may be "1, 2"
+                            msrRepeatEndingKind      repeatEndingKind);
 
 /* JMI
     void                  finalizeRepeatEndInStaff (

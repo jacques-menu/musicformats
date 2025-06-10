@@ -607,9 +607,9 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
   }
 }
 
-void msrStaff::setNextMeasureNumberInStaff (
+void msrStaff::cascadeNetNextMeasureNumberInStaff (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& nextMeasureNumber)
+  const mfMeasureNumber&   nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -656,7 +656,7 @@ void msrStaff::setNextMeasureNumberInStaff (
 #endif // MF_TRACE_IS_ENABLED
 
     voice->
-      setNextMeasureNumberInVoice (
+      cascadeNetNextMeasureNumberInVoice (
         inputLineNumber,
         nextMeasureNumber);
   } // for
@@ -2451,8 +2451,8 @@ void msrStaff::cascadeHandleRepeatStartInStaff (
 
 void msrStaff::cascadeHandleRepeatEndInStaff (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
-  int           repeatTimes)
+  const mfMeasureNumber&   measureNumber,
+  int                      repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
@@ -2519,9 +2519,8 @@ void msrStaff::cascadeHandleRepeatEndingStartInStaff (
 
 void msrStaff::cascadeHandleRepeatEndingEndInStaff (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&    repeatEndingNumber, // may be "1, 2"
-  msrRepeatEndingKind
-                    repeatEndingKind)
+  const std::string&       repeatEndingNumber, // may be "1, 2"
+  msrRepeatEndingKind      repeatEndingKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {

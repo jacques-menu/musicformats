@@ -2259,16 +2259,18 @@ void msrSegment::cascadeAppendMultipleMeasureRestToSegment (
 
 void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 {
-  std::string measureNumber =
-    measure->getMeasureNumber ();
+  mfMeasureNumber
+    measureNumber =
+      measure->getMeasureNumber ();
 
   size_t segmentElementsListSize =
     fSegmentMeasuresList.size ();
 
-  std::string segmentLastMeasureNumber =
-    segmentElementsListSize == 0
-      ? "???"
-      : fSegmentLastMeasure->getMeasureNumber ();
+  mfMeasureNumber
+    segmentLastMeasureNumber =
+        segmentElementsListSize == 0
+          ? mfMeasureNumber ("???")
+          : fSegmentLastMeasure->getMeasureNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresBasics ()) {
@@ -2383,16 +2385,18 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 
 void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
 {
-  std::string measureNumber =
-    measure->getMeasureNumber ();
+  mfMeasureNumber
+    measureNumber =
+      measure->getMeasureNumber ();
 
   size_t segmentElementsListSize =
     fSegmentElementsList.size ();
 
-  std::string segmentLastMeasureNumber =
-    segmentElementsListSize == 0
-      ? ""
-      : fSegmentLastMeasure->getMeasureNumber ();
+  mfMeasureNumber
+     segmentLastMeasureNumber =
+        segmentElementsListSize == 0
+          ? mfMeasureNumber ("")
+          : fSegmentLastMeasure->getMeasureNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresBasics ()) {

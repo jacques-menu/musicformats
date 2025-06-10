@@ -820,7 +820,7 @@ void msrPart::cascadeCreateAMeasureAndAppendItInPart (
   --gIndenter;
 }
 
-void msrPart::setNextMeasureNumberInPart (
+void msrPart::cascadeNetNextMeasureNumberInPart (
   const mfInputLineNumber& inputLineNumber,
   const mfMeasureNumber&   nextMeasureNumber)
 {
@@ -846,7 +846,7 @@ void msrPart::setNextMeasureNumberInPart (
   // set next measure number in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      setNextMeasureNumberInStaff (
+      cascadeNetNextMeasureNumberInStaff (
         inputLineNumber,
         nextMeasureNumber);
   } // for
@@ -2032,8 +2032,8 @@ void msrPart::appendBarLineToPart (
 
 S_msrStaff msrPart::addRegularStaffToPartByItsNumber (
   const mfInputLineNumber& inputLineNumber,
-  msrStaffKind staffKind,
-  int          staffNumber)
+  msrStaffKind             staffKind,
+  const mfStaffNumber&     staffNumber)
 {
   if (fPartStavesMap.count (staffNumber)) {
     std::stringstream ss;
@@ -2258,7 +2258,7 @@ void msrPart::sortStavesByIncreasingNumber ()
 }
 
 S_msrStaff msrPart::fetchStaffFromPart (
-  mfStaffNumber staffNumber)
+  const mfStaffNumber& staffNumber)
 {
   S_msrStaff result;
 
@@ -2318,7 +2318,7 @@ void msrPart::registerVoiceInPartVoicesList (
 // #endif // MF_TRACE_IS_ENABLED
 //
 //   // fetch the voices map for staff staffNumber
-//   std::map <int, std::map <int, S_msrVoice>>::iterator
+//   std::map <int, std::map <mfVoiceNumber, S_msrVoice>>::iterator
 //     partStaffIterator =
 //       fPartStavesVoicesMapMap.find (staffNumber);
 //
@@ -2338,7 +2338,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //   }
 //
 //   // fetch the voice for voiceNumber in the staff
-//   std::map <int, S_msrVoice>::iterator
+//   std::map <mfVoiceNumber, S_msrVoice>::iterator
 //     partStaffVoiceIterator =
 //       (*partStaffIterator).second.find (voiceNumber);
 //
@@ -3022,12 +3022,12 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 #endif // MF_TRACE_IS_ENABLED
 
   for (S_msrStaff staff : fPartAllStavesList) {
-    std::map <int, S_msrVoice>
+    std::map <mfVoiceNumber, S_msrVoice>
       staffAllVoicesMap =
         staff->
           getStaffAllVoicesMap ();
 
-    for (std::pair <int, S_msrVoice> thePair : staffAllVoicesMap) {
+    for (std::pair <mfVoiceNumber, S_msrVoice> thePair : staffAllVoicesMap) {
       S_msrVoice voice = thePair.second;
 
       if (voice != graceNotesGroupOriginVoice) {
@@ -3149,18 +3149,18 @@ void msrPart::displayPartStavesMap (
     ++gIndenter;
 
     for (
-      std::pair <int, S_msrStaff> primaryPair : fPartStavesMap
+      std::pair <mfStaffNumber, S_msrStaff> primaryPair : fPartStavesMap
     ) {
-      int
+      mfStaffNumber
         staffNumber = primaryPair.first;
 
       S_msrStaff
         staff = primaryPair.second;
 
       for (
-        std::pair <int, S_msrVoice> secondaryPair : staff->getStaffAllVoicesMap ()
+        std::pair <mfVoiceNumber, S_msrVoice> secondaryPair : staff->getStaffAllVoicesMap ()
       ) {
-        int
+        mfVoiceNumber
           voiceNumber = secondaryPair.first;
 
         S_msrVoice

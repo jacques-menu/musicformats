@@ -149,6 +149,7 @@ class EXP mfWrappedValueWithDefault
     std::string           asString () const;
 
     void                  print (std::ostream& os) const;
+    void                  print (mfIndentedStringStream& iss) const;
 
   private:
 
@@ -376,6 +377,24 @@ void mfWrappedValueWithDefault <
 >::print (std::ostream& os) const
 {
   os << asString ();
+}
+
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
+void mfWrappedValueWithDefault <
+  T,
+  printPrefix,
+  printPostfix,
+  neutralValue,
+  neutralValueString
+>::print (mfIndentedStringStream& iss) const
+{
+  iss << asString ();
 }
 
 // operator <<

@@ -359,7 +359,7 @@ class EXP msrPart : public msrPartGroupElement
                             const mfMeasureNumber& measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
-    void                  setNextMeasureNumberInPart (
+    void                  cascadeNetNextMeasureNumberInPart (
                             const mfInputLineNumber& inputLineNumber,
                             const mfMeasureNumber&   nextMeasureNumber);
 
@@ -407,7 +407,8 @@ class EXP msrPart : public msrPartGroupElement
     void                  addStaffToPartCloneByItsNumber (
                             const S_msrStaff& staff);
 
-    S_msrStaff            fetchStaffFromPart (const mfStaffNumber& staffNumber);
+    S_msrStaff            fetchStaffFromPart (
+                            const mfStaffNumber& staffNumber);
 
     void                  sortStavesByIncreasingNumber ();
 
