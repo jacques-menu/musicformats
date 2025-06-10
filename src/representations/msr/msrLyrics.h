@@ -165,7 +165,7 @@ class EXP msrSyllable : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const mfStanzaNumber&  syllableStanzaNumber,
                             const mfWholeNotes&    syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor);
 
@@ -174,7 +174,7 @@ class EXP msrSyllable : public msrElement
                             const S_msrMeasure&    upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const mfStanzaNumber&  syllableStanzaNumber,
                             const mfWholeNotes&    syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             const S_msrStanza&     syllableUpLinkToStanza);
@@ -183,7 +183,7 @@ class EXP msrSyllable : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const mfStanzaNumber&  syllableStanzaNumber,
                             const mfWholeNotes&    syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             const S_msrStanza&     syllableUpLinkToStanza);
@@ -203,7 +203,7 @@ class EXP msrSyllable : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const mfStanzaNumber&  syllableStanzaNumber,
                             const mfWholeNotes&    syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor);
 
@@ -212,7 +212,7 @@ class EXP msrSyllable : public msrElement
                             const S_msrMeasure&    upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const mfStanzaNumber&  syllableStanzaNumber,
                             const mfWholeNotes&    syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             const S_msrStanza&     syllableUpLinkToStanza);

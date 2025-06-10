@@ -1967,7 +1967,8 @@ void msrMeasure::setMeasureKind (
     case msrMeasureKind::kMeasureKindOverFlowing:
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceMeasuresDetails ()) {
-        mfIndentedStringStream iss;
+//         mfIndentedStringStream iss;
+        std::stringstream iss;
 
         iss <<
           "!!! Setting the measure kind of measure " <<

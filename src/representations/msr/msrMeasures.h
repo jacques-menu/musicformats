@@ -919,7 +919,7 @@ class EXP msrMeasure : public msrSegmentElement
     std::string           fMeasureFinalizationContext;
 };
 
-using S_msrMeasure = SMARTP<msrMeasure> ;
+using S_msrMeasure = SMARTP<msrMeasure>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt);
 

@@ -104,10 +104,12 @@ class EXP msrBarCheck : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    mfMeasureNumber           fNextBarOriginalNumber;
+    mfMeasureNumber       fNextBarOriginalNumber;
     int                   fNextBarPuristNumber;
 };
-typedef SMARTP<msrBarCheck> S_msrBarCheck;
+
+using S_msrBarCheck = SMARTP<msrBarCheck>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrBarCheck& elt);
 
 

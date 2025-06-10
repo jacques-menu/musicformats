@@ -1326,7 +1326,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
 S_msrNote msrNote::createRestNote (
 	const mfInputLineNumber& inputLineNumber,
-	const std::string&  noteMeasureNumber,
+	const mfMeasureNumber& noteMeasureNumber,
 	const mfWholeNotes& soundingWholeNotes,
 	const mfWholeNotes& displayWholeNotes,
 	int                 dotsNumber)
@@ -1382,7 +1382,7 @@ S_msrNote msrNote::createRestNote (
 
 S_msrNote msrNote::createSkipNote (
 	const mfInputLineNumber& inputLineNumber,
-	const std::string&  noteMeasureNumber,
+	const mfMeasureNumber& noteMeasureNumber,
 	const mfWholeNotes& soundingWholeNotes,
 	const mfWholeNotes& displayWholeNotes,
 	int                 dotsNumber)
@@ -1438,7 +1438,7 @@ S_msrNote msrNote::createSkipNote (
 
 S_msrNote msrNote::createSkipNoteWithContext (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&  noteMeasureNumber,
+  const mfMeasureNumber& noteMeasureNumber,
   const mfWholeNotes& soundingWholeNotes,
   const mfWholeNotes& displayWholeNotes,
   int                 dotsNumber,
@@ -1495,11 +1495,11 @@ S_msrNote msrNote::createSkipNoteWithContext (
 }
 
 S_msrNote msrNote::createGraceSkipNote (
-	const mfInputLineNumber& inputLineNumber,
-	const std::string&  noteMeasureNumber,
-	const mfWholeNotes& soundingWholeNotes,
-	const mfWholeNotes& displayWholeNotes,
-	int                 dotsNumber)
+  const mfInputLineNumber& inputLineNumber,
+  const mfMeasureNumber&   noteMeasureNumber,
+  const mfWholeNotes&      soundingWholeNotes,
+  const mfWholeNotes&      displayWholeNotes,
+  int                      dotsNumber)
 {
   msrNote * obj =
     new msrNote (
@@ -1553,7 +1553,7 @@ S_msrNote msrNote::createGraceSkipNote (
 //________________________________________________________________________
 S_msrNote msrNote::createRestNoteWithOctave (
 	const mfInputLineNumber& inputLineNumber,
-	const std::string&  noteMeasureNumber,
+	const mfMeasureNumber& noteMeasureNumber,
 	msrOctaveKind       noteOctave,
 	const mfWholeNotes& soundingWholeNotes,
 	const mfWholeNotes& displayWholeNotes,
@@ -1611,7 +1611,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
 //________________________________________________________________________
 S_msrNote msrNote::createSkipNoteWithOctave (
 	const mfInputLineNumber& inputLineNumber,
-	const std::string&  noteMeasureNumber,
+	const mfMeasureNumber& noteMeasureNumber,
 	msrOctaveKind       noteOctave,
 	const mfWholeNotes& soundingWholeNotes,
 	const mfWholeNotes& displayWholeNotes,

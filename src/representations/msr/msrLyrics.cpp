@@ -308,7 +308,7 @@ S_msrSyllable msrSyllable::create (
   const mfInputLineNumber& inputLineNumber,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
-  const std::string&     syllableStanzaNumber,
+  const mfStanzaNumber&  syllableStanzaNumber,
   const mfWholeNotes&    syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor)
 {
@@ -329,7 +329,7 @@ S_msrSyllable msrSyllable::create (
   const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
-  const std::string&     syllableStanzaNumber,
+  const mfStanzaNumber&  syllableStanzaNumber,
   const mfWholeNotes&    syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
@@ -352,7 +352,7 @@ S_msrSyllable msrSyllable::create (
   const mfInputLineNumber& inputLineNumber,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
-  const std::string&     syllableStanzaNumber,
+  const mfStanzaNumber&  syllableStanzaNumber,
   const mfWholeNotes&    syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
@@ -373,7 +373,7 @@ msrSyllable::msrSyllable (
   const mfInputLineNumber& inputLineNumber,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
-  const std::string&     syllableStanzaNumber,
+  const mfStanzaNumber&  syllableStanzaNumber,
   const mfWholeNotes&    syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor)
     : msrElement (
@@ -441,7 +441,7 @@ msrSyllable::msrSyllable (
   const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
-  const std::string&     syllableStanzaNumber,
+  const mfStanzaNumber&  syllableStanzaNumber,
   const mfWholeNotes&    syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
@@ -1283,14 +1283,14 @@ void msrStanza::initializeStanza ()
   fStanzaName =
     fStanzaUpLinkToVoice->getVoiceName () +
     "_Stanza_" +
-    fStanzaNumber;
+    mfStanzaNumberAsString (fStanzaNumber);
 
   fStanzaPathLikeName =
     fStanzaUpLinkToVoice->getVoicePathLikeName () +
     "_Stanza_" +
       mfStringNumbersToEnglishWords (
         mfMakeSingleWordFromString (
-          fStanzaNumber));
+          mfStanzaNumberAsString (fStanzaNumber)));
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {

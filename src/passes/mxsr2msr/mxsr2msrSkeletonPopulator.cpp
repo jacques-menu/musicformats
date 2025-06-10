@@ -10302,13 +10302,13 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
     fCurrentStanzaNumber =
       elt->getAttributeValue ("number");
 
-    if (fCurrentStanzaNumber.empty ()) {
+    if (mfStanzaNumberAsString (fCurrentStanzaNumber).empty ()) {
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
         "lyric number is empty, using \"1\" by default");
 
-      fCurrentStanzaNumber = "1";
+      fCurrentStanzaNumber = mfStanzaNumber ("1");
     }
 
 #ifdef MF_TRACE_IS_ENABLED

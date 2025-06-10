@@ -18,6 +18,7 @@
 #include "exports.h"
 
 #include "mfBool.h"
+#include "mfIndentedTextOutput.h"
 
 
 namespace MusicFormats
@@ -399,6 +400,27 @@ std::ostream& operator << (
 {
   elt.print (os);
   return os;
+}
+
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
+mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss,
+  const mfWrappedValueWithDefault <
+    T,
+    printPrefix,
+    printPostfix,
+    neutralValue,
+    neutralValueString
+  >& elt)
+{
+  elt.print (iss);
+  return iss;
 }
 
 

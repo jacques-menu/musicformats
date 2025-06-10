@@ -24,6 +24,9 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+EXP extern const std::string K_MF_EMPTY_STRING;
+
+//______________________________________________________________________________
 // names lists max length
 
 constexpr int K_MF_NAMES_LIST_MAX_LENGTH = 50;

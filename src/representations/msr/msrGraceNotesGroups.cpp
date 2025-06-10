@@ -16,6 +16,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
+// #include "mfBasicTypes.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -252,8 +253,8 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
         skip =
           msrNote::createGraceSkipNote (
             note->getInputLineNumber (),
-            "",                             // will be set afterwards 0.9.67
-            note->getMeasureElementSoundingWholeNotes (), // 0/1 JMI 0.9.66
+            mfMeasureNumber ("K_MEASURE_NUMBER_UNKNOWN_"), // will be set afterwards 0.9.75
+            note->getMeasureElementSoundingWholeNotes (),   // 0/1 JMI 0.9.66
             note->getNoteDisplayWholeNotes (),
             note->getNoteDotsNumber ());
 
@@ -275,7 +276,9 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
         skip =
           msrNote::createGraceSkipNote (
             chordFirstNote->getInputLineNumber (),
-            chordFirstNote->getMeasureElementUpLinkToMeasure ()->getMeasureNumber (),
+            chordFirstNote->
+              getMeasureElementUpLinkToMeasure ()->
+                getMeasureNumber (),
             chordFirstNote->getMeasureElementSoundingWholeNotes (), // 0/1 JMI 0.9.66
             chordFirstNote->getNoteDisplayWholeNotes (),
             chordFirstNote->getNoteDotsNumber ());

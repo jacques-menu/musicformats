@@ -2073,7 +2073,7 @@ class EXP mxsr2msrSkeletonPopulator :
     msrSyllableExtendKind     fCurrentSyllableExtendKind;
     std::string               fCurrentSyllableElision;
 
-    std::string               fCurrentStanzaNumber;
+    mfStanzaNumber            fCurrentStanzaNumber;
     std::string               fCurrentStanzaName;
 
     std::list <S_msrSyllable> fCurrentNoteSyllablesList;

@@ -6868,7 +6868,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
     fCurrentStanzaNumber =
       elt->getAttributeValue ("number");
 
-    if (fCurrentStanzaNumber.empty ()) {
+    if (mfStanzaNumberAsString (fCurrentStanzaNumber).empty ()) {
       musicxmlWarning (
         gServiceRunData->getInputSourceName (),
         elt->getInputLineNumber (),
@@ -6879,7 +6879,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
         		+
           std::to_string (elt->getInputLineNumber ()));
 
-      fCurrentStanzaNumber = "1";
+      fCurrentStanzaNumber = mfStanzaNumber ("1");
     }
 
     else {

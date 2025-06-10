@@ -4278,11 +4278,11 @@ S_msrHarmony msrHarmony::create (
   const std::string&       harmonyFunctionText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const mfWholeNotes&     harmonySoundingWholeNotes,
-  const mfWholeNotes&     harmonyDisplayWholeNotes,
-  int                      harmoniesStaffNumber,
+  const mfWholeNotes&      harmonySoundingWholeNotes,
+  const mfWholeNotes&      harmonyDisplayWholeNotes,
+  const mfStaffNumber&     harmoniesStaffNumber,
   const msrTupletFactor&   harmonyTupletFactor,
-  const mfWholeNotes&     harmonyWholeNotesOffset)
+  const mfWholeNotes&      harmonyWholeNotesOffset)
 {
   msrHarmony* o =
     new msrHarmony (
@@ -4312,11 +4312,11 @@ msrHarmony::msrHarmony (
   const std::string&       harmonyFunctionText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const mfWholeNotes&     harmonySoundingWholeNotes,
-  const mfWholeNotes&     harmonyDisplayWholeNotes,
-  int                      harmoniesStaffNumber,
+  const mfWholeNotes&      harmonySoundingWholeNotes,
+  const mfWholeNotes&      harmonyDisplayWholeNotes,
+  const mfStaffNumber&     harmoniesStaffNumber,
   const msrTupletFactor&   harmonyTupletFactor,
-  const mfWholeNotes&     harmonyWholeNotesOffset)
+  const mfWholeNotes&      harmonyWholeNotesOffset)
     : msrMeasureElement (
         inputLineNumber),
       fHarmonyTupletFactor (

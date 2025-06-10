@@ -21,10 +21,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// the empty string
-const std::string K_MF_EMPTY_STRING ("");
-
-//______________________________________________________________________________
 // input line numbers
 
 const int K_MF_INPUT_LINE_UNKNOWN_ = -1;

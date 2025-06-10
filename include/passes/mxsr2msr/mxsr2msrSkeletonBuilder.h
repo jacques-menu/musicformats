@@ -870,7 +870,7 @@ class EXP mxsr2msrSkeletonBuilder :
     // lyrics handling
     // ------------------------------------------------------
 
-    std::string               fCurrentStanzaNumber;
+    mfStanzaNumber            fCurrentStanzaNumber;
     std::string               fCurrentStanzaName;
 
 

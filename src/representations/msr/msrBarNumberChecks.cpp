@@ -20,7 +20,6 @@
 #include "mfAssert.h"
 
 #include "msrBarNumberChecks.h"
-
 #include "msrMeasureConstants.h"
 
 #include "oahOah.h"
@@ -36,9 +35,9 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrBarNumberCheck msrBarNumberCheck::create (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure,
-  const std::string&  nextBarOriginalNumber,
-  int                 nextBarPuristNumber)
+  const S_msrMeasure&      upLinkToMeasure,
+  const mfMeasureNumber&   nextBarOriginalNumber,
+  int                      nextBarPuristNumber)
 {
   msrBarNumberCheck* obj =
     new msrBarNumberCheck (
@@ -52,8 +51,8 @@ S_msrBarNumberCheck msrBarNumberCheck::create (
 
 S_msrBarNumberCheck msrBarNumberCheck::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& nextBarOriginalNumber,
-  int                nextBarPuristNumber)
+  const mfMeasureNumber&   nextBarOriginalNumber,
+  int                      nextBarPuristNumber)
 {
   return
     msrBarNumberCheck::create (
@@ -65,9 +64,9 @@ S_msrBarNumberCheck msrBarNumberCheck::create (
 
 msrBarNumberCheck::msrBarNumberCheck (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure,
-  const std::string&  nextBarOriginalNumber,
-  int                 nextBarPuristNumber)
+  const S_msrMeasure&      upLinkToMeasure,
+  const mfMeasureNumber&   nextBarOriginalNumber,
+  int                      nextBarPuristNumber)
     : msrMeasureElement (
         inputLineNumber)
 {

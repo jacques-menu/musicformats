@@ -291,11 +291,11 @@ class EXP msrHarmony : public msrMeasureElement
                             const std::string&       harmonyFunctionText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-                            const mfWholeNotes&     harmonySoundingWholeNotes,
-                            const mfWholeNotes&     harmonyDisplayWholeNotes,
-                            int                      harmoniesStaffNumber,
+                            const mfWholeNotes&      harmonySoundingWholeNotes,
+                            const mfWholeNotes&      harmonyDisplayWholeNotes,
+                            const mfStaffNumber&     harmoniesStaffNumber,
                             const msrTupletFactor&   harmonyTupletFactor,
-                            const mfWholeNotes&     harmonyWholeNotesOffset);
+                            const mfWholeNotes&      harmonyWholeNotesOffset);
 
     SMARTP<msrHarmony> createHarmonyNewbornClone (
                             const S_msrVoice& containingVoice);
@@ -317,11 +317,11 @@ class EXP msrHarmony : public msrMeasureElement
                             const std::string&       harmonyFunctionText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-                            const mfWholeNotes&     harmonySoundingWholeNotes,
-                            const mfWholeNotes&     harmonyDisplayWholeNotes,
-                            int                      harmoniesStaffNumber,
+                            const mfWholeNotes&      harmonySoundingWholeNotes,
+                            const mfWholeNotes&      harmonyDisplayWholeNotes,
+                            const mfStaffNumber&     harmoniesStaffNumber,
                             const msrTupletFactor&   harmonyTupletFactor,
-                            const mfWholeNotes&     harmonyWholeNotesOffset);
+                            const mfWholeNotes&      harmonyWholeNotesOffset);
 
     virtual               ~msrHarmony ();
 

@@ -14,7 +14,8 @@
 
 #include "exports.h"
 
-// // #include "mfConstants.h"
+#include "mfConstants.h"
+
 // #include "mfDurationsAndPositionInMeasures.h"
 #include "mfWrappedRange.h"
 #include "mfWrappedValueForArithmetic.h"
@@ -43,9 +44,6 @@ namespace MusicFormats
 
 #define MF_USE_WRAPPED_TYPES
 
-
-//______________________________________________________________________________
-EXP extern const std::string K_MF_EMPTY_STRING;
 
 //______________________________________________________________________________
 // input line numbers

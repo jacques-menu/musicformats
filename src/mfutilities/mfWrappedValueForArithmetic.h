@@ -20,6 +20,7 @@
 
 #include "mfBool.h"
 // #include "mfConstants.h"
+#include "mfIndentedTextOutput.h"
 
 
 namespace MusicFormats
@@ -683,7 +684,7 @@ template <
   const std::string& neutralValueString
 >
 std::ostream& operator << (
-  std::ostream&                                                     os,
+  std::ostream& os,
   const mfWrappedValueForArithmetic <
     T,
     printPrefix,
@@ -694,6 +695,27 @@ std::ostream& operator << (
 {
   elt.print (os);
   return os;
+}
+
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
+mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss,
+  const mfWrappedValueForArithmetic <
+    T,
+    printPrefix,
+    printPostfix,
+    neutralValue,
+    neutralValueString
+  >& elt)
+{
+  elt.print (iss);
+  return iss;
 }
 
 

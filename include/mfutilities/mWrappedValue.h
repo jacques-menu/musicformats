@@ -289,6 +289,19 @@ std::ostream& operator << (
   return os;
 }
 
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix
+>
+mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss,
+  const mfWrappedValue <T, printPrefix, printPostfix>& elt)
+{
+  elt.print (iss);
+  return iss;
+}
+
 
 }
 

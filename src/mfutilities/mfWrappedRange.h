@@ -19,6 +19,7 @@
 #include "exports.h"
 
 #include "mfBool.h"
+#include "mfIndentedTextOutput.h"
 
 
 namespace MusicFormats
@@ -143,11 +144,23 @@ template <
   const std::string& printSeparator
 >
 std::ostream& operator << (
-  std::ostream&                             os,
+  std::ostream& os,
   const mfWrappedRange <T, printSeparator>& elt)
 {
   elt.print (os);
   return os;
+}
+
+template <
+  typename           T,
+  const std::string& printSeparator
+>
+mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss,
+  const mfWrappedRange <T, printSeparator>& elt)
+{
+  elt.print (iss);
+  return iss;
 }
 
 

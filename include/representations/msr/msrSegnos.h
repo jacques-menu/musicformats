@@ -187,7 +187,7 @@ class EXP msrDalSegno : public msrMeasureElement
     mfStaffNumber         fStaffNumber;
 };
 
-using S_msrDalSegno = SMARTP<msrDalSegno> ;
+using S_msrDalSegno = SMARTP<msrDalSegno>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrDalSegno& elt);
 

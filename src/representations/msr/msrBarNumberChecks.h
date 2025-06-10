@@ -14,9 +14,9 @@
 
 #include <list>
 
-#include "msrMeasureElements.h"
-
 #include "msrTypesForwardDeclarations.h"
+
+#include "msrMeasures.h"
 
 
 namespace MusicFormats
@@ -97,7 +97,9 @@ class EXP msrBarNumberCheck : public msrMeasureElement
     mfMeasureNumber       fNextBarOriginalNumber;
     int                   fNextBarPuristNumber;
 };
-typedef SMARTP<msrBarNumberCheck> S_msrBarNumberCheck;
+
+using S_msrBarNumberCheck = SMARTP<msrBarNumberCheck>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrBarNumberCheck& elt);
 
 

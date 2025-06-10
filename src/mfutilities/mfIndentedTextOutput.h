@@ -238,7 +238,8 @@ Usage:
     mfIndentedOStreamBuf  fIndentedOStreamBuf;
 
 };
-typedef SMARTP<mfIndentedOstream> S_mfIndentedOstream;
+
+using S_mfIndentedOstream = SMARTP<mfIndentedOstream>;
 
 //______________________________________________________________________________
 class EXP mfIndentedStringStream: public smartable
@@ -293,7 +294,8 @@ Usage:
 
     std::stringstream     fStringstream;
 };
-typedef SMARTP<mfIndentedStringStream> S_mfIndentedStringStream;
+
+using S_mfIndentedStringStream = SMARTP<mfIndentedStringStream>;
 
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const char theChar);
