@@ -1402,7 +1402,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // since measure numbers are actually strings
     int                       fPartMeasuresCounter;
 
-    std::string               fCurrentMusicXMLMeasureNumber;
+    mfMeasureNumber           fCurrentMeasureNumber;
 
     // measure end line number
     int                       fPreviousMeasureInputLineNumber;

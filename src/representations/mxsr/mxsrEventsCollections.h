@@ -170,11 +170,11 @@ class EXP mxsrEventsCollection : public smartable
 
     S_mxsrMultipleMeasureRestEvent
                           fetchMultipleMeasureRestBeginAtBareMeasureNumber (
-                            const std::string& musicXMLMeasureNumber) const;
+                            const mfMeasureNumber& measureNumber) const;
 
     S_mxsrMultipleMeasureRestEvent
                           fetchMultipleMeasureRestEndAtBareMeasureNumber (
-                            const std::string& musicXMLMeasureNumber) const;
+                            const mfMeasureNumber& measureNumber) const;
 
     // measure repeat events
     // ------------------------------------------------------
@@ -210,11 +210,11 @@ class EXP mxsrEventsCollection : public smartable
 
     S_mxsrMeasureRepeatEvent
                           fetchMeasureRepeatBeginAtBareMeasureNumber (
-                            const std::string& musicXMLMeasureNumber) const;
+                            const mfMeasureNumber& measureNumber) const;
 
     S_mxsrMeasureRepeatEvent
                           fetchMeasureRepeatEndAtBareMeasureNumber (
-                            const std::string& musicXMLMeasureNumber) const;
+                            const mfMeasureNumber& measureNumber) const;
 
     // staff change events
     // ------------------------------------------------------

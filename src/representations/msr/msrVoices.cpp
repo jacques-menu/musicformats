@@ -1640,7 +1640,7 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
 S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
   const mfInputLineNumber& inputLineNumber,
   int                    previousMeasureEndInputLineNumber,
-  const std::string&     measureNumber,
+  const mfMeasureNumber& measureNumber,
   msrMeasureImplicitKind measureImplicitKind)
 {
   S_msrMeasure result;
@@ -2866,7 +2866,7 @@ void msrVoice::appendFiguredBassToVoice (
 }
 
 void msrVoice::cascadeAppendFiguredBassesListToVoice (
-  int                                 inputLineNumber,
+  const mfInputLineNumber&            inputLineNumber,
   const std::list <S_msrFiguredBass>& figuredBasssesList,
   const mfPositionInMeasure&          positionInMeasureToAppendAt)
 {
@@ -4896,9 +4896,9 @@ void msrVoice::appendRepeatToInitialVoiceElements (
 }
 
 // void msrVoice::cascadeAppendMultipleMeasureRestToInitialVoiceElements (
-//   int                              inputLineNumber,
+//   const mfInputLineNumber&        inputLineNumber,
 //   const S_msrMultipleMeasureRest& multipleMeasureRest,
-//   const std::string&               context)
+//   const std::string&              context)
 // {
 //   // append multipleMeasureRest to the list of initial elements
 // #ifdef MF_TRACE_IS_ENABLED

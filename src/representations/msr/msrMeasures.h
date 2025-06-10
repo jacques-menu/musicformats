@@ -527,7 +527,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrFiguredBass& figuredBass);
 
     void                  cascadeAppendFiguredBassesListToMeasure (
-                            int                                 inputLineNumber,
+                            const mfInputLineNumber&            inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
                             const mfPositionInMeasure&          positionInMeasureToAppendAt);
 

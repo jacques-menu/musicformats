@@ -390,7 +390,7 @@ class EXP msrVoice : public msrElement
     S_msrMeasure          cascadeCreateAMeasureAndAppendItInVoice (
                             const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
-                            const std::string&     measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
     void                  setNextMeasureNumberInVoice (
@@ -554,7 +554,7 @@ class EXP msrVoice : public msrElement
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  cascadeAppendFiguredBassesListToVoice (
-                            int                                 inputLineNumber,
+                            const mfInputLineNumber&            inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
                             const mfPositionInMeasure&          positionInMeasureToAppendAt);
 
@@ -1023,9 +1023,9 @@ class EXP msrVoice : public msrElement
     // multiple measure rests
 
 //     void                  cascadeAppendMultipleMeasureRestToInitialVoiceElements (
-//                             int                              inputLineNumber,
+//                             const mfInputLineNumber&        inputLineNumber,
 //                             const S_msrMultipleMeasureRest& multipleMeasureRest,
-//                             const std::string&               context);
+//                             const std::string&              context);
 
     // measure repeats
 

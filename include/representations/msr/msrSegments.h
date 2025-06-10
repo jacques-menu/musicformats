@@ -169,7 +169,7 @@ class EXP msrSegment : public msrVoiceElement
     S_msrMeasure          cascadeCreateAMeasureAndAppendItInSegment (
                             const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
-                            const std::string&     measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
     void                  setNextMeasureNumberInSegment (
@@ -187,7 +187,7 @@ class EXP msrSegment : public msrVoiceElement
     void                  cascadeCreateAMeasureRepeatAndAppendItToSegment (
                             const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
-                            const std::string&     measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
     // multiple measure rests
@@ -298,7 +298,7 @@ class EXP msrSegment : public msrVoiceElement
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  cascadeAppendFiguredBassesListToSegment (
-                            int                                 inputLineNumber,
+                            const mfInputLineNumber&            inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
                             const mfPositionInMeasure&          positionInMeasureToAppendAt);
 

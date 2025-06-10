@@ -521,7 +521,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
 S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
   const mfInputLineNumber& inputLineNumber,
   int                    previousMeasureEndInputLineNumber,
-  const std::string&     measureNumber,
+  const mfMeasureNumber& measureNumber,
   msrMeasureImplicitKind measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1380,7 +1380,7 @@ void msrSegment::appendFiguredBassToSegment (
 }
 
 void msrSegment::cascadeAppendFiguredBassesListToSegment (
-  int                                 inputLineNumber,
+  const mfInputLineNumber&            inputLineNumber,
   const std::list <S_msrFiguredBass>& figuredBasssesList,
   const mfPositionInMeasure&          positionInMeasureToAppendAt)
 {

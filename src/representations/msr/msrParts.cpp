@@ -780,7 +780,7 @@ std::string msrPart::fetchPartNameForTrace () const
 void msrPart::cascadeCreateAMeasureAndAppendItInPart (
   const mfInputLineNumber& inputLineNumber,
   int                    previousMeasureEndInputLineNumber,
-  const std::string&     measureNumber,
+  const mfMeasureNumber& measureNumber,
   msrMeasureImplicitKind measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -822,7 +822,7 @@ void msrPart::cascadeCreateAMeasureAndAppendItInPart (
 
 void msrPart::setNextMeasureNumberInPart (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& nextMeasureNumber)
+  const mfMeasureNumber&   nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -1917,10 +1917,10 @@ void msrPart::replicateLastAppendedMeasureInPart (
   } // for
 }
 
-void msrPart::appendEmptyMeasuresToPart (
+void msrPart::cascadeAppendEmptyMeasuresToPart (
   const mfInputLineNumber& inputLineNumber,
-  const mfInputLineNumber&        previousMeasureNumber,
-  int                measureRestsNumber)
+  const mfMeasureNumber&   previousMeasureNumber,
+  int                      measureRestsNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -1945,7 +1945,7 @@ void msrPart::appendEmptyMeasuresToPart (
   // add multiple rest to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      appendEmptyMeasuresToStaff (
+      cascadeAppendEmptyMeasuresToStaff (
         inputLineNumber,
         previousMeasureNumber,
         measureRestsNumber);
@@ -2652,7 +2652,7 @@ void msrPart::appendHarmoniesListToPart (
 }
 
 void msrPart::cascadeAppendFiguredBassesListToPart (
-  int                                 inputLineNumber,
+  const mfInputLineNumber&            inputLineNumber,
   const std::list <S_msrFiguredBass>& figuredBasssesList,
   const mfPositionInMeasure&          positionInMeasureToAppendAt)
 {

@@ -39,12 +39,12 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrGraceNotesGroup msrGraceNotesGroup::create (
   const mfInputLineNumber& inputLineNumber,
-  msrGraceNotesGroupKind graceNotesGroupKind,
-  Bool                   graceNotesGroupIsSlashed,
-  Bool                   graceNotesGroupIsBeamed,
-  Bool                   graceNotesGroupIsTied,
-  Bool                   graceNotesGroupIsSlurred,
-  const std::string&     graceNotesGroupMeasureNumber)
+  msrGraceNotesGroupKind   graceNotesGroupKind,
+  Bool                     graceNotesGroupIsSlashed,
+  Bool                     graceNotesGroupIsBeamed,
+  Bool                     graceNotesGroupIsTied,
+  Bool                     graceNotesGroupIsSlurred,
+  const mfMeasureNumber&   graceNotesGroupMeasureNumber)
 {
   msrGraceNotesGroup* obj =
     new msrGraceNotesGroup (
@@ -61,12 +61,12 @@ S_msrGraceNotesGroup msrGraceNotesGroup::create (
 
 msrGraceNotesGroup::msrGraceNotesGroup (
   const mfInputLineNumber& inputLineNumber,
-  msrGraceNotesGroupKind graceNotesGroupKind,
-  Bool                   graceNotesGroupIsSlashed,
-  Bool                   graceNotesGroupIsBeamed,
-  Bool                   graceNotesGroupIsTied,
-  Bool                   graceNotesGroupIsSlurred,
-  const std::string&     graceNotesGroupMeasureNumber)
+  msrGraceNotesGroupKind   graceNotesGroupKind,
+  Bool                     graceNotesGroupIsSlashed,
+  Bool                     graceNotesGroupIsBeamed,
+  Bool                     graceNotesGroupIsTied,
+  Bool                     graceNotesGroupIsSlurred,
+  const mfMeasureNumber&   graceNotesGroupMeasureNumber)
     : msrElement (inputLineNumber)
 {
 

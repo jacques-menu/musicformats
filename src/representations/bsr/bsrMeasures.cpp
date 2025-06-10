@@ -45,7 +45,7 @@ S_bsrMeasure bsrMeasure::create (
 
 bsrMeasure::bsrMeasure (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& printMeasureNumber)
+  const mfMeasureNumber&   printMeasureNumber)
     : bsrLineContentsElement (inputLineNumber)
 {
   fPrintMeasureNumber = printMeasureNumber;

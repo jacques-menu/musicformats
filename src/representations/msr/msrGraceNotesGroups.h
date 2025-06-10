@@ -43,12 +43,12 @@ class EXP msrGraceNotesGroup : public msrElement
 
     static SMARTP<msrGraceNotesGroup> create (
                             const mfInputLineNumber& inputLineNumber,
-                            msrGraceNotesGroupKind graceNotesGroupKind,
-                            Bool                   graceNotesGroupIsSlashed,
-                            Bool                   graceNotesGroupIsBeamed,
-                            Bool                   graceNotesGroupIsTied,
-                            Bool                   graceNotesGroupIsSlurred,
-                            const std::string&     graceNotesGroupMeasureNumber);
+                            msrGraceNotesGroupKind   graceNotesGroupKind,
+                            Bool                     graceNotesGroupIsSlashed,
+                            Bool                     graceNotesGroupIsBeamed,
+                            Bool                     graceNotesGroupIsTied,
+                            Bool                     graceNotesGroupIsSlurred,
+                            const mfMeasureNumber&   graceNotesGroupMeasureNumber);
 
     SMARTP<msrGraceNotesGroup> createGraceNotesGroupNewbornClone ();
 
@@ -63,12 +63,12 @@ class EXP msrGraceNotesGroup : public msrElement
 
                           msrGraceNotesGroup (
                             const mfInputLineNumber& inputLineNumber,
-                            msrGraceNotesGroupKind graceNotesGroupKind,
-                            Bool                   graceNotesGroupIsSlashed,
-                            Bool                   graceNotesGroupIsBeamed,
-                            Bool                   graceNotesGroupIsTied,
-                            Bool                   graceNotesGroupIsSlurred,
-                            const std::string&     graceNotesGroupMeasureNumber);
+                            msrGraceNotesGroupKind   graceNotesGroupKind,
+                            Bool                     graceNotesGroupIsSlashed,
+                            Bool                     graceNotesGroupIsBeamed,
+                            Bool                     graceNotesGroupIsTied,
+                            Bool                     graceNotesGroupIsSlurred,
+                            const mfMeasureNumber&   graceNotesGroupMeasureNumber);
 
     virtual               ~msrGraceNotesGroup ();
 
@@ -124,10 +124,10 @@ class EXP msrGraceNotesGroup : public msrElement
                               { return fGraceNotesGroupIsFollowedByNotes; }
 
     void                  setGraceNotesGroupMeasureNumber (
-                            const std::string& measureNumber)
+                            const mfMeasureNumber& measureNumber)
                               { fGraceNotesGroupMeasureNumber = measureNumber; }
 
-    std::string           getGraceNotesGroupMeasureNumber () const
+    mfMeasureNumber       getGraceNotesGroupMeasureNumber () const
                               { return fGraceNotesGroupMeasureNumber; }
 
     // measure positions
@@ -199,7 +199,7 @@ class EXP msrGraceNotesGroup : public msrElement
     // other than the one containing these grace notes:
     // the measure number is needed to create the first measure
     // in case the grace notes are at the beginning of the voice
-    std::string           fGraceNotesGroupMeasureNumber; // JMI ???
+    mfMeasureNumber       fGraceNotesGroupMeasureNumber; // JMI ??? 0.9.75
 };
 typedef SMARTP<msrGraceNotesGroup> S_msrGraceNotesGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_msrGraceNotesGroup& elt);

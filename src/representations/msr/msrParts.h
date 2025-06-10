@@ -356,12 +356,12 @@ class EXP msrPart : public msrPartGroupElement
     void                  cascadeCreateAMeasureAndAppendItInPart (
                             const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
-                            const std::string&     measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
     void                  setNextMeasureNumberInPart (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& nextMeasureNumber);
+                            const mfMeasureNumber&   nextMeasureNumber);
 
     // clef, key, time signature
 
@@ -511,10 +511,10 @@ class EXP msrPart : public msrPartGroupElement
                             const mfInputLineNumber& inputLineNumber,
                             int replicatasNumber);
 
-    void                  appendEmptyMeasuresToPart (
+    void                  cascadeAppendEmptyMeasuresToPart (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfInputLineNumber&        previousMeasureNumber,
-                            int                measureRestsNumber);
+                            const mfMeasureNumber&   previousMeasureNumber,
+                            int                      measureRestsNumber);
 
     void                  appendMultipleMeasureRestCloneToPart (
                             const mfInputLineNumber& inputLineNumber,
@@ -530,14 +530,14 @@ class EXP msrPart : public msrPartGroupElement
     void                  cascadeCreateAMeasureRepeatAndAppendItToPart (
                             const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
-                            const std::string&     measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
     void                  appendPendingMeasureRepeatToPart (
                             const mfInputLineNumber& inputLineNumber);
 
 //     void                  appendMeasureRepeatCloneToPart ( JMI UNUSED 0.9.66
-//                             int                              inputLineNumber,
+//                             const mfInputLineNumber&        inputLineNumber,
 //                             const S_msrMultipleMeasureRest& multipleMeasureRests);
 
     // frames
@@ -572,7 +572,7 @@ class EXP msrPart : public msrPartGroupElement
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  cascadeAppendFiguredBassesListToPart (
-                            int                                 inputLineNumber,
+                            const mfInputLineNumber&            inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
                             const mfPositionInMeasure&          positionInMeasureToAppendAt);
 

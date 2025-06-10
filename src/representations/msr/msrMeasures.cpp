@@ -3540,7 +3540,7 @@ void msrMeasure::appendFiguredBassToMeasure (
 }
 
 void msrMeasure::cascadeAppendFiguredBassesListToMeasure (
-  int                                 inputLineNumber,
+  const mfInputLineNumber&            inputLineNumber,
   const std::list <S_msrFiguredBass>& figuredBasssesList,
   const mfPositionInMeasure&          positionInMeasureToAppendAt)
 {

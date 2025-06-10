@@ -257,11 +257,11 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // measures
     // --------------------------------------
 
-    const std::map <std::string,int>&
+    const std::map <mfMeasureNumber, int>&
                           getMeasuresToBeReplicatedStringToIntMap () const
                               { return fMeasuresToBeReplicatedStringToIntMap; }
 
-    const std::map <std::string,int>&
+    const std::map <mfMeasureNumber, int>&
                           getAddEmptyMeasuresStringToIntMap () const
                               { return fAddEmptyMeasuresStringToIntMap; }
 
@@ -719,10 +719,10 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // measures
     // --------------------------------------
 
-    std::map <std::string,int>
+    std::map <mfMeasureNumber, int>
                           fMeasuresToBeReplicatedStringToIntMap;
 
-    std::map <std::string,int>
+    std::map <mfMeasureNumber, int>
                           fAddEmptyMeasuresStringToIntMap;
 
     // notes

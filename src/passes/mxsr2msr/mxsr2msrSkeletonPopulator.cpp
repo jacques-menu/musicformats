@@ -138,7 +138,7 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
 
   // measures handling
   fPartMeasuresCounter = 0;
-  fCurrentMusicXMLMeasureNumber = "K_MEASURE_NUMBER_UNKNOWN_";
+//   fCurrentMusicXMLMeasureNumber = "K_MEASURE_NUMBER_UNKNOWN_";
 
   fPreviousMeasureInputLineNumber = -1;
 
@@ -1515,7 +1515,7 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestBeginEventIfAny ()
   fCurrentMultipleMeasureRestBegin =
     fKnownEventsCollection.
       fetchMultipleMeasureRestBeginAtBareMeasureNumber (
-        fCurrentMusicXMLMeasureNumber);
+        fCurrentMeasureNumber);
 
   if (fCurrentMultipleMeasureRestBegin) {
     switch (fCurrentMultipleMeasureRestBegin->getMultipleMeasureRestEventKind ()) {
@@ -1550,8 +1550,8 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestBegin ()
 
     ss <<
       "Creating a MultipleMeasureRest" <<
-      ", fCurrentMusicXMLMeasureNumber: " <<
-      fCurrentMusicXMLMeasureNumber <<
+      ", fCurrentMeasureNumber: " <<
+      fCurrentMeasureNumber <<
       ", fCurrentMultipleMeasureRestMeasuresNumber: " <<
       fCurrentMultipleMeasureRestMeasuresNumber <<
       ", fCurrentMeasureRepeatSlashesNumber: " <<
@@ -1606,7 +1606,7 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestEndEventIfAny ()
   fCurrentMultipleMeasureRestEnd =
     fKnownEventsCollection.
       fetchMultipleMeasureRestEndAtBareMeasureNumber (
-        fCurrentMusicXMLMeasureNumber);
+        fCurrentMeasureNumber);
 
   if (fCurrentMultipleMeasureRestEnd) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1710,7 +1710,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatBeginEventIfAny ()
   fCurrentMeasureRepeatBegin =
     fKnownEventsCollection.
       fetchMeasureRepeatBeginAtBareMeasureNumber (
-        fCurrentMusicXMLMeasureNumber);
+        fCurrentMeasureNumber);
 
   if (fCurrentMeasureRepeatBegin) {
     switch (fCurrentMeasureRepeatBegin->getMeasureRepeatEventKind ()) {
@@ -1741,7 +1741,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEndEventIfAny ()
   fCurrentMeasureRepeatEnd =
     fKnownEventsCollection.
       fetchMeasureRepeatEndAtBareMeasureNumber (
-        fCurrentMusicXMLMeasureNumber);
+        fCurrentMeasureNumber);
 
   if (fCurrentMeasureRepeatEnd) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1784,8 +1784,8 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatBegin ()
 
     ss <<
       "Creating a MeasureRepeat" <<
-      ", fCurrentMusicXMLMeasureNumber: " <<
-      fCurrentMusicXMLMeasureNumber <<
+      ", fCurrentMeasureNumber: " <<
+      fCurrentMeasureNumber <<
       ", fCurrentNoteStaffNumber: " <<
       fCurrentNoteStaffNumber <<
       ", fCurrentNoteVoiceNumber: " <<
@@ -1889,7 +1889,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
 //   fCurrentMeasureRepeatBegin =
 //     fKnownEventsCollection.
 //       fetchMeasureRepeatBeginAtBareMeasureNumber (
-//         fCurrentMusicXMLMeasureNumber);
+//         fCurrentMeasureNumber);
 //
 //   if (fCurrentMeasureRepeatBegin) {
 //     switch (fCurrentMeasureRepeatBegin->getMeasureRepeatEventKind ()) {
@@ -1920,7 +1920,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
 //   fCurrentMeasureRepeatEnd =
 //     fKnownEventsCollection.
 //       fetchMeasureRepeatEndAtBareMeasureNumber (
-//         fCurrentMusicXMLMeasureNumber);
+//         fCurrentMeasureNumber);
 //
 //   if (fCurrentMeasureRepeatEnd) {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -3653,7 +3653,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 
   // measures
   fPartMeasuresCounter = 0;
-  fCurrentMusicXMLMeasureNumber = "K_MEASURE_NUMBER_UNKNOWN_";
+//   fCurrentMusicXMLMeasureNumber = "K_MEASURE_NUMBER_UNKNOWN_";
 
   fPreviousMeasureInputLineNumber = -1;
 
@@ -11000,8 +11000,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       "==> visitStart (S_measure" <<
       ", fPartMeasuresCounter: " <<
       fPartMeasuresCounter <<
-      ", fCurrentMusicXMLMeasureNumber: " <<
-        fCurrentMusicXMLMeasureNumber <<
+      ", fCurrentMeasureNumber: " <<
+        fCurrentMeasureNumber <<
       ", line " << elt->getInputLineNumber () <<
       ", in part \"" <<
       fCurrentPart->fetchPartNameForTrace () << "\"";
@@ -11013,8 +11013,12 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // number
-  fCurrentMusicXMLMeasureNumber =
-    elt->getAttributeValue ("number");
+  std::string
+    musicXMLMeasureNumber =
+      elt->getAttributeValue ("number");
+
+  fCurrentMeasureNumber =
+    mfMeasureNumber (musicXMLMeasureNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -11030,7 +11034,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       fCurrentPart-> fetchPartNameForTrace () <<
       std::endl <<
       "      " <<
-      "fCurrentMusicXMLMeasureNumber " << fCurrentMusicXMLMeasureNumber <<
+      "fCurrentMeasureNumber " << fCurrentMeasureNumber <<
       ", line " <<
       elt->getInputLineNumber () <<
       std::endl <<
@@ -11109,7 +11113,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       "<!--=== " <<
       "partName \"" << fCurrentPart->getPartName () << "\"" <<
       ", partMusicXMLID: \"" << fCurrentPart->getPartMusicXMLID () << "\"" <<
-      ", fCurrentMusicXMLMeasureNumber: \"" << fCurrentMusicXMLMeasureNumber << "\"" <<
+      ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber << "\"" <<
       ", measureImplicitKind: " << measureImplicitKind <<
       ", nonControllingString: \"" << nonControllingString << "\"" <<
       ", widthValue: " << widthValue <<
@@ -11129,7 +11133,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 
   serviceRunData->
     setCurrentMeasureNumber (
-      fCurrentMusicXMLMeasureNumber);
+      fCurrentMeasureNumber);
 
   // set next measure number in current part' previous measure
   // if this measure is not the first one
@@ -11138,7 +11142,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       fCurrentPart->
         setNextMeasureNumberInPart (
           elt->getInputLineNumber (),
-          fCurrentMusicXMLMeasureNumber);
+          fCurrentMeasureNumber);
 //     }
 //     else {
 //       // JMI ???
@@ -11159,7 +11163,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
     cascadeCreateAMeasureAndAppendItInPart (
       elt->getInputLineNumber (),
       fPreviousMeasureInputLineNumber,
-      fCurrentMusicXMLMeasureNumber,
+      fCurrentMeasureNumber,
       measureImplicitKind);
 
   fPreviousMeasureInputLineNumber = elt->getInputLineNumber ();
@@ -11214,7 +11218,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
   if (gGlobalMxsr2msrOahGroup->getTraceForward ()) {
     gLog <<
       "visitEnd (S_measure& elt)" <<
-      ", fCurrentMusicXMLMeasureNumber: " << fCurrentMusicXMLMeasureNumber <<
+      ", fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
   //     ", fAForwardHasJustBeenHandled: " << fAForwardHasJustBeenHandled <<
       ", fForwardedToVoicesList.empty (): " << fForwardedToVoicesList.empty () <<
       std::endl;
@@ -11386,19 +11390,20 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 // BOFFF...
 
     // should this measure be replicated?
-    const std::map <std::string,int>&
+    const std::map <mfMeasureNumber, int>&
       measuresToBeReplicatedStringToIntMap =
-        gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedStringToIntMap ();
+        gGlobalMxsr2msrOahGroup->
+          getMeasuresToBeReplicatedStringToIntMap ();
 
     if (false && ! measuresToBeReplicatedStringToIntMap.empty ()) { // JMI 0.9.72 ???
       // should we add empty measures after current measures?
-      std::map <std::string,int>::const_iterator
+      std::map <mfMeasureNumber, int>::const_iterator
         it =
           measuresToBeReplicatedStringToIntMap.find (
-            fCurrentMusicXMLMeasureNumber);
+            fCurrentMeasureNumber);
 
       if (it != measuresToBeReplicatedStringToIntMap.end ()) {
-        // fCurrentMusicXMLMeasureNumber is to be replicated,
+        // fCurrentMeasureNumber is to be replicated,
   #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
           std::stringstream ss;
@@ -11406,7 +11411,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
           ss <<
             std::endl <<
             "Replicating meaure " <<
-            fCurrentMusicXMLMeasureNumber <<
+            fCurrentMeasureNumber <<
             " in part " <<
             fCurrentPart->fetchPartNameForTrace ();
 
@@ -11432,19 +11437,19 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 // BOFFF...
 
   // should empty measures be added after this one?
-  const std::map <std::string,int>&
+  const std::map <mfMeasureNumber, int>&
     addEmptyMeasuresStringToIntMap =
       gGlobalMxsr2msrOahGroup->getAddEmptyMeasuresStringToIntMap ();
 
   // should we add empty measures after current measures?
   if (false && ! addEmptyMeasuresStringToIntMap.empty ()) {
-    std::map <std::string,int>::const_iterator
+    std::map <mfMeasureNumber, int>::const_iterator
       it =
         addEmptyMeasuresStringToIntMap.find (
-          fCurrentMusicXMLMeasureNumber);
+          fCurrentMeasureNumber);
 
     if (it != addEmptyMeasuresStringToIntMap.end ()) {
-      // fCurrentMusicXMLMeasureNumber is present in the map,
+      // fCurrentMeasureNumber is present in the map,
       // fetch the number of empty measures to add
       std::stringstream ss;
 
@@ -11473,9 +11478,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
       fCurrentPart->
-        appendEmptyMeasuresToPart (
+        cascadeAppendEmptyMeasuresToPart (
           elt->getInputLineNumber (),
-          fCurrentMusicXMLMeasureNumber,
+          fCurrentMeasureNumber,
           measuresToBeAdded);
     }
     else {
@@ -23635,19 +23640,13 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
     // till the note following it, to which it will be attached
     fPendingGraceNotesGroup =
       msrGraceNotesGroup::create (
-
-#ifdef MF_USE_WRAPPED_TYPES
-        eventInputStartLineNumber.getBareValue (),
-#else
         eventInputStartLineNumber,
-#endif // MF_USE_WRAPPED_TYPES
-
         msrGraceNotesGroupKind::kGraceNotesGroupBefore, // default value
         fCurrentGraceNotesGroupIsSlashed,
         fCurrentGraceNotesGroupIsBeamed,
         fCurrentGraceNotesGroupIsTied,
         fCurrentGraceNotesGroupIsSlurred,
-        fCurrentMusicXMLMeasureNumber);
+        fCurrentMeasureNumber);
   }
 }
 
@@ -25830,7 +25829,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
         fCurrentGraceNotesGroupIsBeamed,
         fCurrentGraceNotesGroupIsTied,
         fCurrentGraceNotesGroupIsSlurred,
-        fCurrentMusicXMLMeasureNumber);
+        fCurrentMeasureNumber);
 
     // should all grace notes be slurred?
     if (gGlobalMxsr2msrOahGroup->getSlurAllGraceNotes ()) {
@@ -25933,8 +25932,9 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
 //______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
 {
-  int currentNoteInputLineNumber =
-    fCurrentNote->getInputLineNumber ();
+  mfInputLineNumber
+    currentNoteInputLineNumber =
+      fCurrentNote->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
@@ -26147,8 +26147,9 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
 void mxsr2msrSkeletonPopulator::handleARegularNoteInAChord (
   const S_msrNote& regularNote)
 {
-  int newChodeNoteInputLineNumber =
-    regularNote->getInputLineNumber ();
+  mfInputLineNumber
+    newChodeNoteInputLineNumber =
+      regularNote->getInputLineNumber ();
 
   // set regularNote kind as a chord member
   regularNote->
@@ -26361,8 +26362,9 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChord (
 void mxsr2msrSkeletonPopulator::handleARegularNoteInATuplet (
   const S_msrNote& regularNote)
 {
-  int noteInputLineNumber =
-    regularNote->getInputLineNumber ();
+  mfInputLineNumber
+    noteInputLineNumber =
+      regularNote->getInputLineNumber ();
 
  // register regularNote as a tuplet member
  if (fCurrentNoteIsUnpitched) {
@@ -26498,8 +26500,9 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInATuplet (
 void mxsr2msrSkeletonPopulator::handleARestInATuplet (
   const S_msrNote& rest)
 {
-  int noteInputLineNumber =
-    rest->getInputLineNumber ();
+  mfInputLineNumber
+    noteInputLineNumber =
+      rest->getInputLineNumber ();
 
  // register rest as a tuplet member
  if (fCurrentNoteIsUnpitched) {
@@ -26558,8 +26561,9 @@ void mxsr2msrSkeletonPopulator::handleARestInATuplet (
 void mxsr2msrSkeletonPopulator::handleARegularNoteInAChordInATuplet (
   const S_msrNote& newChordNote)
 {
-  int newChordNoteInputLineNumber =
-    newChordNote->getInputLineNumber ();
+  mfInputLineNumber
+    newChordNoteInputLineNumber =
+      newChordNote->getInputLineNumber ();
 
   // set new note kind as a chord or grace chord member JMI ???
   newChordNote->
@@ -26682,8 +26686,9 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChordInATuplet (
 void mxsr2msrSkeletonPopulator::handleAGraceNoteInAChord (
   const S_msrNote& graceNote)
 {
-  int graceNoteInputLineNumber =
-    graceNote->getInputLineNumber ();
+  mfInputLineNumber
+    graceNoteInputLineNumber =
+      graceNote->getInputLineNumber ();
 
   // set new note kind as a grace chord member
   graceNote->
@@ -26774,7 +26779,7 @@ void mxsr2msrSkeletonPopulator::handleImplicitInitialForwardRepeat (
 #endif // MF_TRACE_IS_ENABLED
 
   // remember repeat start measure number
-  fCurrentRepeatStartMeasureNumber = fCurrentMusicXMLMeasureNumber; // JMI 0.9.75
+  fCurrentRepeatStartMeasureNumber = fCurrentMeasureNumber; // JMI 0.9.75
 
   // prepare for repeat in current part
   fCurrentPart->
@@ -26797,7 +26802,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
     ss <<
       "Handling a repeat start in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
-      ", fCurrentMusicXMLMeasureNumber: \"" << fCurrentMusicXMLMeasureNumber <<
+      ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
       "\", line " << barLine->getInputLineNumber ();
 
@@ -26808,7 +26813,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
 #endif // MF_TRACE_IS_ENABLED
 
   // remember repeat start measure number
-  fCurrentRepeatStartMeasureNumber = barLine->getInputLineNumber ();
+//   fCurrentRepeatStartMeasureNumber = barLine->getInputLineNumber (); // JMI 0.9.75
 
   // prepare for repeat in current part
   fCurrentPart->
@@ -26831,7 +26836,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
     ss <<
       "Handling a repeat end in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
-      ", fCurrentMusicXMLMeasureNumber: \"" << fCurrentMusicXMLMeasureNumber <<
+      ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
       "\", line " << barLine->getInputLineNumber ();
 
@@ -26852,7 +26857,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
       barLine->getBarLineTimes ());
 
   // forget about the current repeat start barLine
-  fCurrentRepeatStartMeasureNumber = "";
+//   fCurrentRepeatStartMeasureNumber = "";
 
   ++fRepeatEndCounter;
 }
@@ -26868,7 +26873,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
     ss <<
       "Handling a repeat ending start in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
-      ", fCurrentMusicXMLMeasureNumber: \"" << fCurrentMusicXMLMeasureNumber <<
+      ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
       "\", line " << barLine->getInputLineNumber ();
 
@@ -29859,7 +29864,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //       fCurrentPart-> // JMI ??? BOF
 //         setNextMeasureNumberInPart (
 //           inputLineNumber,
-//           fCurrentMusicXMLMeasureNumber);
+//           fCurrentMeasureNumber);
 //     }
 //   }
 //

@@ -158,7 +158,7 @@ bool lpsrPartBlock::compareChordNamesContextWithOtherElement (
         chordNamesContext->
           getContextVoice ();
 
-    int
+    mfStaffNumber
       chordNamesContextStaffNumber =
         chordNamesVoice->
           getVoiceUpLinkToStaff ()->
@@ -193,7 +193,7 @@ bool lpsrPartBlock::compareChordNamesContextWithOtherElement (
         secondChordNamesContext->
           getContextVoice ();
 
-    int
+    mfStaffNumber
       chordNamesContextStaffNumber =
         chordNamesVoice->
           getVoiceUpLinkToStaff ()->

@@ -169,7 +169,7 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     static SMARTP<msrNote> createNoteFromSemiTonesPitchAndOctave (
-                            int                                 inputLineNumber,
+                            const mfInputLineNumber&            inputLineNumber,
                             const S_msrSemiTonesPitchAndOctave& semiTonesPitchAndOctave);
 
   protected:

@@ -277,7 +277,7 @@ class EXP msrStaff : public msrElement
     void                  cascadeCreateAMeasureAndAppendItInStaff (
                             const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
-                            const std::string&     measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
     void                  setNextMeasureNumberInStaff (
@@ -339,10 +339,10 @@ class EXP msrStaff : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             int replicatasNumber);
 
-    void                  appendEmptyMeasuresToStaff (
+    void                  cascadeAppendEmptyMeasuresToStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfInputLineNumber&        previousMeasureNumber,
-                            int                emptyMeasuresNumber);
+                            const mfMeasureNumber&   previousMeasureNumber,
+                            int                      emptyMeasuresNumber);
 
     void                  appendMultipleMeasureRestCloneToStaff (
                             const mfInputLineNumber& inputLineNumber,

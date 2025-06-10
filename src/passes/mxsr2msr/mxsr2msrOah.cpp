@@ -1132,7 +1132,7 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringToIntMapElementAtom::create (
+      oahMeasureNumberToIntMapElementAtom::create (
         "replicate-msr-measure", "rmmeas",
 R"###(Replicate an MSR mesure according to SPECIFICATION.
 SPECIFICATION should be of the form 'MEASURE_NUMBER:NUMBER_OF_MEASURES_TO_ADD',
@@ -1154,7 +1154,7 @@ This option can be used any number of times.)###",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringToIntMapElementAtom::create (
+      oahMeasureNumberToIntMapElementAtom::create (
         "add-empty-msr-measures", "aemmeas",
 R"###(Add empty MSR mesures according to SPECIFICATION.
 SPECIFICATION should be of the form 'MEASURE_NUMBER:NUMBER_OF_MEASURES_TO_ADD',
@@ -2436,8 +2436,6 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
     std::endl;
 
   ++gIndenter;
-
-//     std::map <std::string,int>       fAddEmptyMeasuresStringToIntMap;
 
 /* JMI
   gLog << std::left <<

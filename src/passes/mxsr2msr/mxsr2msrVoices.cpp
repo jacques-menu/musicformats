@@ -471,7 +471,7 @@ void mxsrVoice::handleTupletBegin (
 
   // append endingTuplet where it belongs in fCurrentRecipientMxsrVoice->
   appendTupletWhereItBelongs (
-    currentNoteVoice->getVoiceNumber (),
+    currentNoteVoice->getInputLineNumber (), // JMI 0.9.75
     tuplet,
     "handleTupletBegin()");
 

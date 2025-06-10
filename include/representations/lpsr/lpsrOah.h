@@ -628,7 +628,7 @@ class EXP lpsrOahGroup : public oahGroup
                               { return fReplicateEmptyMeasureReplicas; }
 
     // add empty measures
-// JMI    std::map <std::string,int>       getAddEmptyMeasuresStringToIntMap () const;
+// JMI    std::map <std::string, int>       getAddEmptyMeasuresStringToIntMap () const;
 
     // tempos
     // --------------------------------------
@@ -860,7 +860,7 @@ class EXP lpsrOahGroup : public oahGroup
     int                   fReplicateEmptyMeasureReplicas;
 
     // add empty measures
-// JMI    std::map <std::string,int>       fAddEmptyMeasuresStringToIntMap;
+// JMI    std::map <std::string, int>       fAddEmptyMeasuresStringToIntMap;
 
     // tempos
     // --------------------------------------

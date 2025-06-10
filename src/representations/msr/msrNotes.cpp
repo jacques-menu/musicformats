@@ -2251,7 +2251,7 @@ S_msrNote msrNote::createNoteFromString (
 
 //________________________________________________________________________
 S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
-  int                                 inputLineNumber,
+  const mfInputLineNumber&            inputLineNumber,
   const S_msrSemiTonesPitchAndOctave& semiTonesPitchAndOctave)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
