@@ -533,7 +533,7 @@ S_msrVoice createRegularVoiceInStaff (
 //_______________________________________________________________________________
 S_msrMeasure createMeasureInVoice (
   const mfInputLineNumber& inputLineNumber,
-  std::string       measureNumber,
+  const mfMeasureNumber& measureNumber,
   const S_msrVoice& voice)
 {
   return

@@ -423,7 +423,7 @@ void msrVoice::setVoiceNamesFromNumber (
       fVoicePathLikeName =
         fVoiceUpLinkToStaff->getStaffPathLikeName () +
         "_Voice_" +
-        mfIntToEnglishWord (voiceNumber);
+        mfIntToEnglishWord (mfVoiceNumberAsInteger (voiceNumber));
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
@@ -437,7 +437,7 @@ void msrVoice::setVoiceNamesFromNumber (
       fVoicePathLikeName =
         fVoiceUpLinkToStaff->getStaffPathLikeName () +
         "_HARMONIES_Voice" +
-        mfIntToEnglishWord (voiceNumber);
+        mfIntToEnglishWord (mfVoiceNumberAsInteger (voiceNumber));
       break;
 
     case msrVoiceKind::kVoiceKindFiguredBass:
@@ -448,7 +448,7 @@ void msrVoice::setVoiceNamesFromNumber (
       fVoicePathLikeName =
         fVoiceUpLinkToStaff->getStaffPathLikeName () +
         "_FIGURED_BASS_Voice" +
-        mfIntToEnglishWord (voiceNumber);
+        mfIntToEnglishWord (mfVoiceNumberAsInteger (voiceNumber));
       break;
   } // switch
 
@@ -1791,7 +1791,7 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
 
 S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& currentMeasureNumber)
+  const mfMeasureNumber&   currentMeasureNumber)
 {
   if (fRegularVoiceForwardLinkToHarmoniesVoice) {
     std::stringstream ss;
@@ -1852,7 +1852,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 
 // S_msrVoice msrVoice::createRegularVoiceFiguredBassVoice (
 //   const mfInputLineNumber& inputLineNumber,
-//   const std::string& currentMeasureNumber)
+//   const mfMeasureNumber&   currentMeasureNumber)
 // {
 //   if (fRegularVoiceForwardLinkToFiguredBassVoice) {
 //     std::stringstream ss;
@@ -5448,7 +5448,7 @@ void msrVoice::handleRepeatStartInVoice (
 
 void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
+  const mfMeasureNumber& measureNumber,
   int                repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5619,7 +5619,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 
 void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
+  const mfMeasureNumber& measureNumber,
   int                repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5802,7 +5802,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 
 void msrVoice::handleVoiceLevelRepeatEndWithStart (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
+  const mfMeasureNumber& measureNumber,
   int                repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5955,7 +5955,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 
 void msrVoice::handleNestedRepeatEndInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
+  const mfMeasureNumber& measureNumber,
   int                repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6054,8 +6054,8 @@ void msrVoice::handleNestedRepeatEndInVoice (
 
 void msrVoice::handleRepeatEndInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
-  int                repeatTimes)
+  const mfMeasureNumber&    measureNumber,
+  int                       repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -7030,7 +7030,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
 /* JMI
 void msrVoice::finalizeRepeatEndInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
+  const mfMeasureNumber& measureNumber,
   int                repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -8114,8 +8114,8 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
 
 void msrVoice::appendEmptyMeasuresToVoice (
   const mfInputLineNumber& inputLineNumber,
-  const mfInputLineNumber&        previousMeasureNumber, // JMI ???
-  int                emptyMeasuresNumber)
+  const mfMeasureNumber&   previousMeasureNumber,
+  int                      emptyMeasuresNumber)
 {
   // create a multiple measure rests
 #ifdef MF_TRACE_IS_ENABLED

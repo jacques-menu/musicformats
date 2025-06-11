@@ -169,7 +169,7 @@ class EXP waeHandler : public smartable
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& message);
-//                             const std::string&  measureNumber,
+//                             const mfMeasureNumber& measureNumber,
 //                             int                scoreMeasuresNumber);
 
     virtual void          waeTraceToStreamWithoutInputLocation (
@@ -185,7 +185,7 @@ class EXP waeHandler : public smartable
                             const std::string& inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& message);
-//                             const std::string&  measureNumber,
+//                             const mfMeasureNumber& measureNumber,
 //                             int                scoreMeasuresNumber);
 #endif // MF_TRACE_IS_ENABLED
 

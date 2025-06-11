@@ -254,7 +254,7 @@ void msrStaff::copyStuffFromUpLinkToPartToStaff ()
       fStaffPathLikeName =
         fStaffUpLinkToPart->getPartPathLikeName () +
         "_Staff_" +
-        mfIntToEnglishWord (fStaffNumber);
+        mfIntToEnglishWord (mfStaffNumberAsInteger (fStaffNumber));
       break;
 
     case msrStaffKind::kStaffKindTablature:
@@ -723,7 +723,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
   }
 
   // is this voice number already in the regular voices map?
-  std::map <int, S_msrVoice>::const_iterator
+  std::map <mfVoiceNumber, S_msrVoice>::const_iterator
     it =
       fStaffRegularVoicesMap.find (voiceNumber);
 
@@ -1275,7 +1275,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
   // search list ??? JMI
   for (std::pair <mfVoiceNumber, S_msrVoice> thePair : fStaffRegularVoicesMap) {
 #ifdef MF_TRACE_IS_ENABLED
-    int        number = thePair.first;
+    mfVoiceNumber number = thePair.first;
 #endif // MF_TRACE_IS_ENABLED
     S_msrVoice voice = thePair.second;
 
@@ -2559,7 +2559,7 @@ void msrStaff::cascadeHandleRepeatEndingEndInStaff (
 /* JMI
 void msrStaff::finalizeRepeatEndInStaff (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
+  const mfMeasureNumber& measureNumber,
   int           repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3720,7 +3720,7 @@ void msrStaff::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::map <int, S_msrVoice>::const_iterator
+    std::map <mfVoiceNumber, S_msrVoice>::const_iterator
       iBegin = fStaffAllVoicesMap.begin (),
       iEnd   = fStaffAllVoicesMap.end (),
       i      = iBegin;
@@ -4154,7 +4154,7 @@ void msrStaff::printFull (std::ostream& os) const
 
   // print the  voices
   if (! fStaffAllVoicesMap.empty ()) {
-    std::map <int, S_msrVoice>::const_iterator
+    std::map <mfVoiceNumber, S_msrVoice>::const_iterator
       iBegin = fStaffAllVoicesMap.begin (),
       iEnd   = fStaffAllVoicesMap.end (),
       i      = iBegin;
@@ -4270,7 +4270,7 @@ void msrStaff::printSlices (std::ostream& os) const
   ++gIndenter;
 
 //   if (! fStaffAllVoicesMap.empty ()) {
-//     std::map <int, S_msrVoice>::const_iterator
+//     std::map <mfVoiceNumber, S_msrVoice>::const_iterator
 //       iBegin = fStaffAllVoicesMap.begin (),
 //       iEnd   = fStaffAllVoicesMap.end (),
 //       i      = iBegin;

@@ -197,7 +197,7 @@ class EXP msrPart : public msrPartGroupElement
     // measure number
 
 //     void                  setPartFirstMeasureNumber (
-//                             const std::string& measureNumber)
+//                             const mfMeasureNumber& measureNumber)
 //                               { fPartFirstMeasureNumber = measureNumber; }
 
     const mfMeasureNumber&
@@ -486,7 +486,7 @@ class EXP msrPart : public msrPartGroupElement
     /* JMI ???
     void                  finalizeRepeatEndInPart (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             int    repeatTimes);
                             */
 

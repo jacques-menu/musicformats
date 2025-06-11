@@ -46,7 +46,7 @@ void waeHandler::waeWarning (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string& message)
-//   const std::string  measureNumber,
+//   const mfMeasureNumber& measureNumber,
 //   int                scoreMeasuresNumber)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
@@ -103,7 +103,7 @@ void waeHandler::waeInternalWarning (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string& message)
-//   const std::string  measureNumber,
+//   const mfMeasureNumber& measureNumber,
 //   int                scoreMeasuresNumber)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
@@ -161,7 +161,7 @@ void waeHandler::waeErrorWithoutException (
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message)
-//   const std::string  measureNumber,
+//   const mfMeasureNumber& measureNumber,
 //   int                scoreMeasuresNumber)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
@@ -224,7 +224,7 @@ void waeHandler::waeErrorWithoutExceptionWithInputLocation (
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message)
-//   const std::string  measureNumber,
+//   const mfMeasureNumber& measureNumber,
 //   int                scoreMeasuresNumber)
 {
   if (! gEarlyOptions.getEarlyQuietOption ()) {
@@ -489,7 +489,7 @@ void waeHandler::waeTraceToStream (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string& message)
-//   const std::string  measureNumber,
+//   const mfMeasureNumber& measureNumber,
 //   int                scoreMeasuresNumber)
 {
   // should the current pass be traced?
@@ -610,7 +610,7 @@ void waeHandler::waeTrace (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string& message)
-//   const std::string  measureNumber,
+//   const mfMeasureNumber& measureNumber,
 //   int                scoreMeasuresNumber)
 {
   this->waeTraceToStream (

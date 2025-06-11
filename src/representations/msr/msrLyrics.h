@@ -244,7 +244,7 @@ class EXP msrSyllable : public msrElement
 
     // measure numbers
 //     void                  setSyllableMeasureNumber (
-//                             const std::string& measureNumber);
+//                             const mfMeasureNumber& measureNumber);
 
     void                  setSyllableMeasurePuristNumber (int measureNumber)
                               { fSyllableMeasurePuristNumber = measureNumber; }
@@ -502,11 +502,11 @@ class EXP msrStanza : public msrElement
 
     S_msrSyllable         appendBarNumberCheckSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& nextMeasureNumber);
+                            const mfMeasureNumber& nextMeasureNumber);
 
     S_msrSyllable         appendBarcheckSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& nextMeasureNumber);
+                            const mfMeasureNumber& nextMeasureNumber);
 */
 
     S_msrSyllable         appendLineBreakSyllableToStanza (

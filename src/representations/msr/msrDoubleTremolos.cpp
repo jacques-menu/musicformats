@@ -700,7 +700,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
 }
 
 void msrDoubleTremolo::setDoubleTremoloMeasureNumber (
-  const std::string& measureNumber)
+  const mfMeasureNumber& measureNumber)
 {
 //   fDoubleTremoloUpLinkToMeasure->getMeasureNumber () =  measureNumber;
 }

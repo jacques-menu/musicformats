@@ -87,7 +87,7 @@ void mfAssertWithInputLocation (
   const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       messageIfFalse)
-//   const std::string  measureNumber,
+//   const mfMeasureNumber& measureNumber,
 //   int                scoreMeasuresNumber)
 {
   if (! condition) {

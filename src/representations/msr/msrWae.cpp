@@ -92,7 +92,7 @@ void msrWarning (
   const std::string& inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string& message)
-//   const std::string  measureNumber,
+//   const mfMeasureNumber& measureNumber,
 //   int                scoreMeasuresNumber)
 {
   waeWarning (

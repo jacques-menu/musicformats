@@ -74,7 +74,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
                               { return fMeasuresList; }
 
     void                  setNextMeasureNumber (
-                            const std::string& nextMeasureNumber);
+                            const mfMeasureNumber& nextMeasureNumber);
 
     std::string           getNextMeasureNumber () const
                               { return fNextMeasureNumber; }

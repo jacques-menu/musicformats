@@ -174,7 +174,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  setNextMeasureNumberInSegment (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& nextMeasureNumber);
+                            const mfMeasureNumber& nextMeasureNumber);
 
     void                  appendMeasureToSegment (
                             const S_msrMeasure& measure);

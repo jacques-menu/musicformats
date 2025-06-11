@@ -1512,10 +1512,10 @@ class EXP mxsr2msrSkeletonPopulator :
     // notes handling
     // ------------------------------------------------------
 
-    int                       fCurrentNoteStaffNumber;
-    int                       fPreviousNoteStaffNumber;
+    int                       fCurrentNoteMusicXMLStaffNumber;
+    int                       fPreviousNoteMusicXMLStaffNumber;
 
-    int                       fCurrentNoteVoiceNumber; // used throughout
+    int                       fCurrentNoteMusicXMLVoiceNumber; // used throughout
 
     S_msrNote                 fCurrentNote;
 
@@ -2615,8 +2615,8 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fCurrentForwardDuration;
     Bool                      fOnGoingForward;
 
-    int                       fCurrentForwardStaffNumber;
-    int                       fCurrentForwardVoiceNumber;
+    int                       fCurrentMusicXMLForwardStaffNumber;
+    int                       fCurrentMusicXMLForwardVoiceNumber;
 
 //     Bool                      fAForwardHasJustBeenHandled;
     std::list <S_msrVoice>    fForwardedToVoicesList;

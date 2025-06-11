@@ -62,7 +62,7 @@ class EXP msrNote : public msrTupletElement
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&        upLinkToMeasure,
 
-//                             const std::string&         noteMeasureNumber, JMI 0.9.66
+//                             const mfMeasureNumber& noteMeasureNumber, JMI 0.9.66
 
                             msrNoteKind                noteKind,
 
@@ -143,7 +143,7 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createRegularNote (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       noteMeasureNumber,
+                            const mfMeasureNumber&   noteMeasureNumber,
                             msrQuarterTonesPitchKind quarterTonesPitchKind,
                             msrOctaveKind            noteOctaveKind,
                             const mfWholeNotes&      soundingWholeNotes,
@@ -153,17 +153,17 @@ class EXP msrNote : public msrTupletElement
     static SMARTP<msrNote> createRestFromString (
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& restString,
-                            const std::string& restMeasureNumber);
+                            const mfMeasureNumber& restMeasureNumber);
 
     static SMARTP<msrNote> createSkipFromString (
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& skipString,
-                            const std::string& skipMeasureNumber);
+                            const mfMeasureNumber& skipMeasureNumber);
 
     static SMARTP<msrNote> createNoteFromString (
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& noteString,
-                            const std::string& noteMeasureNumber);
+                            const mfMeasureNumber& noteMeasureNumber);
 
     // creation from the options
     // ------------------------------------------------------
@@ -181,7 +181,7 @@ class EXP msrNote : public msrTupletElement
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&        upLinkToMeasure,
 
-//                             const std::string&         noteMeasureNumber, JMI 0.9.66
+//                             const mfMeasureNumber& noteMeasureNumber, JMI 0.9.66
 
                             msrNoteKind                noteKind,
 

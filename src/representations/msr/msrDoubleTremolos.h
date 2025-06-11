@@ -180,7 +180,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // measure number
 
     void                  setDoubleTremoloMeasureNumber (
-                            const std::string& measureNumber);
+                            const mfMeasureNumber& measureNumber);
 
   public:
 
@@ -190,7 +190,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // tremolo first note
 
     void                  setDoubleTremoloFirstNoteMeasureNumber (
-                            const std::string& measureNumber);
+                            const mfMeasureNumber& measureNumber);
 
   public:
 

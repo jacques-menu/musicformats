@@ -91,7 +91,7 @@ class EXP Mikrokosmos3WanderingGenerator : public smartable
     // the measures
     S_msrMeasure          createMeasureInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             const S_msrVoice&    voice);
 
     // populating the upper voice

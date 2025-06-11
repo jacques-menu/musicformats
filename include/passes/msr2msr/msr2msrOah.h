@@ -254,14 +254,23 @@ class EXP msr2msrOahGroup : public oahGroup
                           getIgnoreMsrVoicesSetAtom () const
                               { return fIgnoreMsrVoicesSetAtom; }
 
-    const std::set <std::string>&    getKeepMsrVoicesSet () const
+    const std::set <std::string>&
+                          getKeepMsrVoicesSet () const
                               { return fKeepMsrVoicesSet; }
     S_oahStringSetElementAtom
                           getKeepMsrVoicesSetAtom () const
                               { return fKeepMsrVoicesSetAtom; }
 
     // page and line breaks
-    const std::set <std::string>&    getInserPageBreakAfterMeasureSet () const
+    const std::set <mfMeasureNumber>&
+                          getInserLineBreakAfterMeasureSet () const
+                              { return fInserLineBreakAfterMeasureSet; }
+    S_oahStringSetElementAtom
+                          getInserLineBreakAfterMeasureAtom () const
+                              { return fInserLineBreakAfterMeasureAtom; }
+
+    const std::set <mfMeasureNumber>&
+                          getInserPageBreakAfterMeasureSet () const
                               { return fInserPageBreakAfterMeasureSet; }
     S_oahStringSetElementAtom
                           getInserPageBreakAfterMeasureAtom () const
@@ -363,14 +372,15 @@ class EXP msr2msrOahGroup : public oahGroup
                           fKeepMsrVoicesSetAtom;
 
     // breaks
-    std::set <std::string>
+    std::set <mfMeasureNumber>
+                          fInserLineBreakAfterMeasureSet;
+    S_oahStringSetElementAtom
+                          fInserLineBreakAfterMeasureAtom;
+
+    std::set <mfMeasureNumber>
                           fInserPageBreakAfterMeasureSet;
     S_oahStringSetElementAtom
                           fInserPageBreakAfterMeasureAtom;
-
-    std::set <std::string> fInserLineBreakAfterMeasureSet;
-    S_oahStringSetElementAtom
-                          fInserLineBreakAfterMeasureAtom;
 
     // compress
     Bool                  fCoalesceEmptyMeasures;

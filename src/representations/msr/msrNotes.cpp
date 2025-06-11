@@ -50,7 +50,7 @@ S_msrNote msrNote::create (
   const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&        upLinkToMeasure,
 
-//   const std::string&         noteMeasureNumber, // JMI 0.9.66
+//   const mfMeasureNumber& noteMeasureNumber, // JMI 0.9.66
 
   msrNoteKind                noteKind,
 
@@ -112,7 +112,7 @@ msrNote::msrNote (
   const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&        upLinkToMeasure,
 
-//   const std::string&         noteMeasureNumber, // JMI 0.9.66
+//   const mfMeasureNumber& noteMeasureNumber, // JMI 0.9.66
 
   msrNoteKind                noteKind,
 
@@ -1669,7 +1669,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 //________________________________________________________________________
 S_msrNote msrNote::createRegularNote (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&       noteMeasureNumber,
+  const mfMeasureNumber&   noteMeasureNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind,
   msrOctaveKind            noteOctaveKind,
   const mfWholeNotes&      soundingWholeNotes,

@@ -658,7 +658,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 // }
 
 // void msrSyllable::setSyllableMeasureNumber (
-//   const std::string& measureNumber)
+//   const mfMeasureNumber& measureNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceLyrics ()) {

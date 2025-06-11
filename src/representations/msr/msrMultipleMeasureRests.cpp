@@ -126,7 +126,7 @@ mfWholeNotes msrMultipleMeasureRest::fetchMultipleMeasureRestMeasureSoundingNote
 }
 
 void msrMultipleMeasureRest::setNextMeasureNumber (
-  const std::string& nextMeasureNumber)
+  const mfMeasureNumber& nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {

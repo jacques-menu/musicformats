@@ -126,6 +126,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLineD
 
 //________________________________________________________________________
 msr2msrTranslator::msr2msrTranslator ()
+  : fCurrentMeasureNumber (K_MEASURE_NUMBER_UNKNOWN_)
 {};
 
 msr2msrTranslator::~msr2msrTranslator ()
@@ -2236,7 +2237,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 
   // is fCurrentMeasureNumber in the parts ignore IDs set?
   if (! gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().empty ()) {
-    std::set <std::string>::iterator
+    std::set <mfMeasureNumber>::iterator
       it =
         gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().find (
           fCurrentMeasureNumber);

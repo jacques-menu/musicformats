@@ -451,13 +451,13 @@ class EXP msrVoice : public msrElement
 
     S_msrVoice            createRegularVoiceHarmoniesVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& currentMeasureNumber);
+                            const mfMeasureNumber&   currentMeasureNumber);
 
     // figured bass
 
 //     S_msrVoice            createRegularVoiceFiguredBassVoice (
 //                             const mfInputLineNumber& inputLineNumber,
-//                             const std::string& currentMeasureNumber);
+//                             const mfMeasureNumber&   currentMeasureNumber);
 
     // transposition
 
@@ -691,8 +691,8 @@ class EXP msrVoice : public msrElement
 
     void                  handleRepeatEndInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& measureNumber,
-                            int                repeatTimes);
+                            const mfMeasureNumber&    measureNumber,
+                            int                       repeatTimes);
 
     void                  handleRepeatEndingStartInVoice (
                             const mfInputLineNumber& inputLineNumber);
@@ -725,7 +725,7 @@ class EXP msrVoice : public msrElement
 /* JMI
     void                  finalizeRepeatEndInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             int                repeatTimes);
                             */
 
@@ -767,8 +767,8 @@ class EXP msrVoice : public msrElement
 
     void                  appendEmptyMeasuresToVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfInputLineNumber&        previousMeasureNumber,
-                            int                emptyMeasuresNumber);
+                            const mfMeasureNumber&   previousMeasureNumber,
+                            int                      emptyMeasuresNumber);
 
     void                  appendPendingMultipleMeasureRestsToVoice (
                             const mfInputLineNumber& inputLineNumber);
@@ -953,17 +953,17 @@ class EXP msrVoice : public msrElement
 
     void                  handleVoiceLevelRepeatEndWithoutStart (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             int                repeatTimes);
 
     void                  handleVoiceLevelContainingRepeatEndWithoutStart (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             int                repeatTimes);
 
     void                  handleVoiceLevelRepeatEndWithStart (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             int                repeatTimes);
 
     void                  handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
@@ -981,7 +981,7 @@ class EXP msrVoice : public msrElement
 
     void                  handleNestedRepeatEndInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             int                repeatTimes);
 
     void                  moveVoiceInitialElementsToRepeatCommonPart (

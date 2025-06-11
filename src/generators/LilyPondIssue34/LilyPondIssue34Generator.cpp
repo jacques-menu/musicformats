@@ -330,7 +330,7 @@ S_msrVoice LilyPondIssue34Generator::createRegularVoiceInStaff (
 //------------------------------------------------------------------------
 S_msrMeasure LilyPondIssue34Generator::createMeasureInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
+  const mfMeasureNumber& measureNumber,
   const S_msrVoice&    voice)
 //------------------------------------------------------------------------
 {

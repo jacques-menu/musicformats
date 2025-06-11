@@ -331,7 +331,7 @@ S_msrVoice Mikrokosmos3WanderingGenerator::createRegularVoiceInStaff (
 //------------------------------------------------------------------------
 S_msrMeasure Mikrokosmos3WanderingGenerator::createMeasureInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
+  const mfMeasureNumber& measureNumber,
   const S_msrVoice&    voice)
 //------------------------------------------------------------------------
 {

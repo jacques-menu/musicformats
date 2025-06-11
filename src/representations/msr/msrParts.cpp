@@ -1751,7 +1751,7 @@ void msrPart::cascadeHandleRepeatEndingEndInPart (
 /* JMI
 void msrPart::finalizeRepeatEndInPart (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber,
+  const mfMeasureNumber& measureNumber,
   int    repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED

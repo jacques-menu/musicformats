@@ -32,7 +32,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msdrMeasure msdrMeasure::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber)
+  const mfMeasureNumber& measureNumber)
 {
   msdrMeasure* obj =
     new msdrMeasure (
@@ -44,7 +44,7 @@ S_msdrMeasure msdrMeasure::create (
 
 msdrMeasure::msdrMeasure (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& measureNumber)
+  const mfMeasureNumber& measureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {

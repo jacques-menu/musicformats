@@ -317,7 +317,7 @@ class EXP msrStaff : public msrElement
 /* JMI
     void                  finalizeRepeatEndInStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& measureNumber,
+                            const mfMeasureNumber& measureNumber,
                             int                repeatTimes);
     */
 
