@@ -157,7 +157,11 @@ std::string mfVoiceNumberAsString (const mfVoiceNumber& voiceNumber)
     result = "K_VOICE_NUMBER_UNKNOWN_";
   }
   else {
+#ifndef MF_USE_WRAPPED_TYPES
+    result = voiceNumber;
+#else
     result = std::to_string (voiceNumber.getBareValue ());
+#endif // MF_USE_WRAPPED_TYPES
   }
 
   return result;
@@ -174,14 +178,6 @@ int mfVoiceNumberAsInteger (const mfVoiceNumber& voiceNumber)
 #ifndef MF_USE_WRAPPED_TYPES
     result = voiceNumber;
 #else
-//     std::stringstream ss;
-//
-//     int intVoiceNumber;
-//
-//     ss << voiceNumber;
-//     ss >> intVoiceNumber;
-//
-//     result = intVoiceNumber;
     result = voiceNumber.getBareValue ();
 #endif // MF_USE_WRAPPED_TYPES
   }
