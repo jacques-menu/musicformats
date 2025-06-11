@@ -185,7 +185,7 @@ class mfWrappedValueForArithmetic
                               neutralValue,
                               neutralValueString
                             >&
-                              otherWrappedValueForArithmetic) const;
+                              mfWrappedValueForArithmetic);
 
     mfWrappedValueForArithmetic
                           operator -= (
@@ -196,7 +196,7 @@ class mfWrappedValueForArithmetic
                               neutralValue,
                               neutralValueString
                             >&
-                              otherWrappedValueForArithmetic) const;
+                              mfWrappedValueForArithmetic);
 
     mfWrappedValueForArithmetic
                           operator ++ (void);
@@ -546,9 +546,11 @@ mfWrappedValueForArithmetic <
   neutralValue,
   neutralValueString
 >::operator += (
-    const mfWrappedValueForArithmetic& otherWrappedValue) const
+    mfWrappedValueForArithmetic& otherValue)
 {
-  return mfWrappedValueForArithmetic (fBareValue += otherWrappedValue.fBareValue);
+  return
+    mfWrappedValueForArithmetic (
+      fBareValue += otherValue.fBareValue);
 }
 
 // operator -=
@@ -573,9 +575,11 @@ mfWrappedValueForArithmetic <
   neutralValue,
   neutralValueString
 >::operator -= (
-    const mfWrappedValueForArithmetic& otherWrappedValue) const
+    mfWrappedValueForArithmetic& otherValue)
 {
-  return mfWrappedValueForArithmetic (fBareValue -= otherWrappedValue.fBareValue);
+  return
+    mfWrappedValueForArithmetic (
+      fBareValue -= otherValue.fBareValue);
 }
 
 // increment/decrement operators
