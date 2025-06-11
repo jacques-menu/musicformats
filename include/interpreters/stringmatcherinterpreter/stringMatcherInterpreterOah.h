@@ -146,7 +146,7 @@ class EXP stringMatcherInterpreterOahGroup : public oahGroup
                           getInputSourcesSet () const
                               { return fInputSourcesSet; }
 
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getInputSourcesSetAtom () const
                               { return fInputSourcesSetAtom; }
 
@@ -154,7 +154,7 @@ class EXP stringMatcherInterpreterOahGroup : public oahGroup
                           getSelectChoiceToLabelsMultiMap () const
                               { return fSelectChoiceToLabelsMultiMap; }
 
-    S_oahStringToStringMultiMapElementAtom
+    S_oahStringToStringMultiMapAtom
                           getSelectChoiceToLabelsMultiMapAtom () const
                               { return fSelectChoiceToLabelsMultiMapAtom; }
 
@@ -228,13 +228,13 @@ class EXP stringMatcherInterpreterOahGroup : public oahGroup
 
     // input sources
     std::set <std::string> fInputSourcesSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fInputSourcesSetAtom;
 
     // select statement
     std::multimap <std::string, std::string>
                           fSelectChoiceToLabelsMultiMap;
-    S_oahStringToStringMultiMapElementAtom
+    S_oahStringToStringMultiMapAtom
                           fSelectChoiceToLabelsMultiMapAtom;
 };
 typedef SMARTP<stringMatcherInterpreterOahGroup> S_stringMatcherInterpreterOahGroup;

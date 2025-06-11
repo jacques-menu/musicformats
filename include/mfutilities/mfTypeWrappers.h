@@ -25,7 +25,7 @@ namespace MusicFormats
 
 /*
   Built-in types such a int and std::string
-  don't bear any application-specific semantics by themselve.
+  don't bear any application-specific semantics by themselves.
 
   The lack of type distinction between an int staff number and an int voice number
   easily lead to potential assignment and parameter passing errors.

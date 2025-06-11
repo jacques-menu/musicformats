@@ -516,7 +516,7 @@ EXP extern const mfWholeNotes K_WHOLE_NOTES_ZERO;
 //   using mfWholeNotes = mfWholeNotes;
 // #else
 //   using mfWholeNotes =
-//     mfWrappedValueWithDefault <
+//     mfWrappedValueForArithmetic <
 //       mfWholeNotes,
 //       kWholeNotePrefix,
 //       K_MF_EMPTY_STRING,

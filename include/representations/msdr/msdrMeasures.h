@@ -63,13 +63,13 @@ class EXP msdrMeasure : public smartable
     // set and get
     // ------------------------------------------------------
 
-    // measure number
-    std::string           getMeasureNumber () const
-                              { return fMeasureNumber; }
-
     // input line number
     mfInputLineNumber     getInputLineNumber () const
                               { return fInputLineNumber; }
+
+    // measure number
+    mfMeasureNumber       getMeasureNumber () const
+                              { return fMeasureNumber; }
 
     // music measures vector
     const std::vector <S_msdrLayer>&
@@ -125,11 +125,11 @@ class EXP msdrMeasure : public smartable
     // private fields
     // ------------------------------------------------------
 
-    // measure number
-    std::string           fMeasureNumber;
-
     // input line number
     mfInputLineNumber     fInputLineNumber;
+
+    // measure number
+    mfMeasureNumber       fMeasureNumber;
 
     // measures elements list
     std::list <S_msdrLayer>
@@ -152,7 +152,9 @@ class EXP msdrMeasure : public smartable
     // voice finalization
     Bool                  fMeasureHasBeenFinalized;
 };
-typedef SMARTP<msdrMeasure> S_msdrMeasure;
+
+using S_msdrMeasure = SMARTP<msdrMeasure>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msdrMeasure& elt);
 
 

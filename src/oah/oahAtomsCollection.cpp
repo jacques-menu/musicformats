@@ -8374,7 +8374,7 @@ std::ostream& operator << (std::ostream& os, const S_oahRationalAtom& elt)
 }
 
 //______________________________________________________________________________
-S_oahNaturalNumbersSetElementAtom oahNaturalNumbersSetElementAtom::create (
+S_oahNaturalNumbersSetAtom oahNaturalNumbersSetAtom::create (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -8382,8 +8382,8 @@ S_oahNaturalNumbersSetElementAtom oahNaturalNumbersSetElementAtom::create (
   const std::string& variableName,
   std::set <int>&     naturalNumbersSetVariable)
 {
-  oahNaturalNumbersSetElementAtom* obj = new
-    oahNaturalNumbersSetElementAtom (
+  oahNaturalNumbersSetAtom* obj = new
+    oahNaturalNumbersSetAtom (
       longName,
       shortName,
       description,
@@ -8394,7 +8394,7 @@ S_oahNaturalNumbersSetElementAtom oahNaturalNumbersSetElementAtom::create (
   return obj;
 }
 
-oahNaturalNumbersSetElementAtom::oahNaturalNumbersSetElementAtom (
+oahNaturalNumbersSetAtom::oahNaturalNumbersSetAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -8411,10 +8411,10 @@ oahNaturalNumbersSetElementAtom::oahNaturalNumbersSetElementAtom (
       naturalNumbersSetVariable)
 {}
 
-oahNaturalNumbersSetElementAtom::~oahNaturalNumbersSetElementAtom ()
+oahNaturalNumbersSetAtom::~oahNaturalNumbersSetAtom ()
 {}
 
-void oahNaturalNumbersSetElementAtom::applyAtomWithValue (
+void oahNaturalNumbersSetAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -8426,14 +8426,14 @@ void oahNaturalNumbersSetElementAtom::applyAtomWithValue (
   fSelected = true;
 }
 
-void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
+void oahNaturalNumbersSetAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahNaturalNumbersSetElementAtom::acceptIn ()";
+      ".\\\" ==> oahNaturalNumbersSetAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -8441,17 +8441,17 @@ void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahNaturalNumbersSetElementAtom>*
+  if (visitor<S_oahNaturalNumbersSetAtom>*
     p =
-      dynamic_cast<visitor<S_oahNaturalNumbersSetElementAtom>*> (v)) {
-        S_oahNaturalNumbersSetElementAtom elem = this;
+      dynamic_cast<visitor<S_oahNaturalNumbersSetAtom>*> (v)) {
+        S_oahNaturalNumbersSetAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahNaturalNumbersSetElementAtom::visitStart ()";
+            ".\\\" ==> Launching oahNaturalNumbersSetAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -8462,14 +8462,14 @@ void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
+void oahNaturalNumbersSetAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahNaturalNumbersSetElementAtom::acceptOut ()";
+      ".\\\" ==> oahNaturalNumbersSetAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -8477,17 +8477,17 @@ void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahNaturalNumbersSetElementAtom>*
+  if (visitor<S_oahNaturalNumbersSetAtom>*
     p =
-      dynamic_cast<visitor<S_oahNaturalNumbersSetElementAtom>*> (v)) {
-        S_oahNaturalNumbersSetElementAtom elem = this;
+      dynamic_cast<visitor<S_oahNaturalNumbersSetAtom>*> (v)) {
+        S_oahNaturalNumbersSetAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahNaturalNumbersSetElementAtom::visitEnd ()";
+            ".\\\" ==> Launching oahNaturalNumbersSetAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -8498,14 +8498,14 @@ void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahNaturalNumbersSetElementAtom::browseData (basevisitor* v)
+void oahNaturalNumbersSetAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahNaturalNumbersSetElementAtom::browseData ()";
+      ".\\\" ==> oahNaturalNumbersSetAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -8514,7 +8514,7 @@ void oahNaturalNumbersSetElementAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahNaturalNumbersSetElementAtom::asShortNamedOptionString () const
+std::string oahNaturalNumbersSetAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -8539,7 +8539,7 @@ std::string oahNaturalNumbersSetElementAtom::asShortNamedOptionString () const
   return ss.str ();
 }
 
-std::string oahNaturalNumbersSetElementAtom::asActualLongNamedOptionString () const
+std::string oahNaturalNumbersSetAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -8564,12 +8564,12 @@ std::string oahNaturalNumbersSetElementAtom::asActualLongNamedOptionString () co
   return ss.str ();
 }
 
-void oahNaturalNumbersSetElementAtom::print (std::ostream& os) const
+void oahNaturalNumbersSetAtom::print (std::ostream& os) const
 {
   constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "NaturalNumbersSetElementAtom:" <<
+    "NaturalNumbersSetAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -8611,7 +8611,7 @@ void oahNaturalNumbersSetElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahNaturalNumbersSetElementAtom::displayAtomWithVariableOptionsValues (
+void oahNaturalNumbersSetAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -8654,7 +8654,7 @@ void oahNaturalNumbersSetElementAtom::displayAtomWithVariableOptionsValues (
   }
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahNaturalNumbersSetElementAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahNaturalNumbersSetAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -8894,7 +8894,7 @@ std::ostream& operator << (std::ostream& os, const S_oahColorRGBAtom& elt)
 }
 
 //______________________________________________________________________________
-S_oahIntSetElementAtom oahIntSetElementAtom::create (
+S_oahIntSetAtom oahIntSetAtom::create (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -8902,8 +8902,8 @@ S_oahIntSetElementAtom oahIntSetElementAtom::create (
   const std::string& variableName,
   std::set <int>&    intSetVariable)
 {
-  oahIntSetElementAtom* obj = new
-    oahIntSetElementAtom (
+  oahIntSetAtom* obj = new
+    oahIntSetAtom (
       longName,
       shortName,
       description,
@@ -8914,7 +8914,7 @@ S_oahIntSetElementAtom oahIntSetElementAtom::create (
   return obj;
 }
 
-oahIntSetElementAtom::oahIntSetElementAtom (
+oahIntSetAtom::oahIntSetAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -8933,10 +8933,10 @@ oahIntSetElementAtom::oahIntSetElementAtom (
   fMultipleOccurrencesAllowed = true;
 }
 
-oahIntSetElementAtom::~oahIntSetElementAtom ()
+oahIntSetAtom::~oahIntSetAtom ()
 {}
 
-void oahIntSetElementAtom::applyAtomWithValue (
+void oahIntSetAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -8950,7 +8950,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
     ss <<
       "Handling atom '" <<
       fetchNames () <<
-      "' of type 'oahIntSetElementAtom'" <<
+      "' of type 'oahIntSetAtom'" <<
       " with value \"" << theString << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -9030,14 +9030,14 @@ void oahIntSetElementAtom::applyAtomWithValue (
   fSelected = true;
 }
 
-void oahIntSetElementAtom::acceptIn (basevisitor* v)
+void oahIntSetAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahIntSetElementAtom::acceptIn ()";
+      ".\\\" ==> oahIntSetAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -9045,17 +9045,17 @@ void oahIntSetElementAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahIntSetElementAtom>*
+  if (visitor<S_oahIntSetAtom>*
     p =
-      dynamic_cast<visitor<S_oahIntSetElementAtom>*> (v)) {
-        S_oahIntSetElementAtom elem = this;
+      dynamic_cast<visitor<S_oahIntSetAtom>*> (v)) {
+        S_oahIntSetAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahIntSetElementAtom::visitStart ()";
+            ".\\\" ==> Launching oahIntSetAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -9066,14 +9066,14 @@ void oahIntSetElementAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahIntSetElementAtom::acceptOut (basevisitor* v)
+void oahIntSetAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahIntSetElementAtom::acceptOut ()";
+      ".\\\" ==> oahIntSetAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -9081,17 +9081,17 @@ void oahIntSetElementAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahIntSetElementAtom>*
+  if (visitor<S_oahIntSetAtom>*
     p =
-      dynamic_cast<visitor<S_oahIntSetElementAtom>*> (v)) {
-        S_oahIntSetElementAtom elem = this;
+      dynamic_cast<visitor<S_oahIntSetAtom>*> (v)) {
+        S_oahIntSetAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahIntSetElementAtom::visitEnd ()";
+            ".\\\" ==> Launching oahIntSetAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -9102,14 +9102,14 @@ void oahIntSetElementAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahIntSetElementAtom::browseData (basevisitor* v)
+void oahIntSetAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahIntSetElementAtom::browseData ()";
+      ".\\\" ==> oahIntSetAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -9118,7 +9118,7 @@ void oahIntSetElementAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahIntSetElementAtom::asShortNamedOptionString () const
+std::string oahIntSetAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -9143,7 +9143,7 @@ std::string oahIntSetElementAtom::asShortNamedOptionString () const
   return ss.str ();
 }
 
-std::string oahIntSetElementAtom::asActualLongNamedOptionString () const
+std::string oahIntSetAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -9168,12 +9168,12 @@ std::string oahIntSetElementAtom::asActualLongNamedOptionString () const
   return ss.str ();
 }
 
-void oahIntSetElementAtom::print (std::ostream& os) const
+void oahIntSetAtom::print (std::ostream& os) const
 {
   constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "IntSetElementAtom:" <<
+    "IntSetAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -9206,7 +9206,7 @@ void oahIntSetElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahIntSetElementAtom::displayAtomWithVariableOptionsValues (
+void oahIntSetAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -9236,7 +9236,7 @@ void oahIntSetElementAtom::displayAtomWithVariableOptionsValues (
   }
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahIntSetElementAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahIntSetAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -9249,7 +9249,7 @@ std::ostream& operator << (std::ostream& os, const S_oahIntSetElementAtom& elt)
 }
 
 //______________________________________________________________________________
-S_oahStringSetElementAtom oahStringSetElementAtom::create (
+S_oahStringSetAtom oahStringSetAtom::create (
   const std::string&     longName,
   const std::string&     shortName,
   const std::string&     description,
@@ -9257,8 +9257,8 @@ S_oahStringSetElementAtom oahStringSetElementAtom::create (
   const std::string&     variableName,
   std::set <std::string>& stringSetVariable)
 {
-  oahStringSetElementAtom* obj = new
-    oahStringSetElementAtom (
+  oahStringSetAtom* obj = new
+    oahStringSetAtom (
       longName,
       shortName,
       description,
@@ -9269,7 +9269,7 @@ S_oahStringSetElementAtom oahStringSetElementAtom::create (
   return obj;
 }
 
-oahStringSetElementAtom::oahStringSetElementAtom (
+oahStringSetAtom::oahStringSetAtom (
   const std::string&     longName,
   const std::string&     shortName,
   const std::string&     description,
@@ -9288,10 +9288,10 @@ oahStringSetElementAtom::oahStringSetElementAtom (
   fMultipleOccurrencesAllowed = true;
 }
 
-oahStringSetElementAtom::~oahStringSetElementAtom ()
+oahStringSetAtom::~oahStringSetAtom ()
 {}
 
-void oahStringSetElementAtom::applyAtomWithValue (
+void oahStringSetAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -9300,7 +9300,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'oahStringSetElementAtom'";
+      "==> oahAtom is of type 'oahStringSetAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -9349,14 +9349,14 @@ void oahStringSetElementAtom::applyAtomWithValue (
   fSelected = true;
 }
 
-void oahStringSetElementAtom::acceptIn (basevisitor* v)
+void oahStringSetAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringSetElementAtom::acceptIn ()";
+      ".\\\" ==> oahStringSetAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -9364,17 +9364,17 @@ void oahStringSetElementAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahStringSetElementAtom>*
+  if (visitor<S_oahStringSetAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringSetElementAtom>*> (v)) {
-        S_oahStringSetElementAtom elem = this;
+      dynamic_cast<visitor<S_oahStringSetAtom>*> (v)) {
+        S_oahStringSetAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahStringSetElementAtom::visitStart ()";
+            ".\\\" ==> Launching oahStringSetAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -9385,14 +9385,14 @@ void oahStringSetElementAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahStringSetElementAtom::acceptOut (basevisitor* v)
+void oahStringSetAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringSetElementAtom::acceptOut ()";
+      ".\\\" ==> oahStringSetAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -9400,17 +9400,17 @@ void oahStringSetElementAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahStringSetElementAtom>*
+  if (visitor<S_oahStringSetAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringSetElementAtom>*> (v)) {
-        S_oahStringSetElementAtom elem = this;
+      dynamic_cast<visitor<S_oahStringSetAtom>*> (v)) {
+        S_oahStringSetAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahStringSetElementAtom::visitEnd ()";
+            ".\\\" ==> Launching oahStringSetAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -9421,14 +9421,14 @@ void oahStringSetElementAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahStringSetElementAtom::browseData (basevisitor* v)
+void oahStringSetAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringSetElementAtom::browseData ()";
+      ".\\\" ==> oahStringSetAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -9437,7 +9437,7 @@ void oahStringSetElementAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahStringSetElementAtom::asShortNamedOptionString () const
+std::string oahStringSetAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -9462,7 +9462,7 @@ std::string oahStringSetElementAtom::asShortNamedOptionString () const
   return ss.str ();
 }
 
-std::string oahStringSetElementAtom::asActualLongNamedOptionString () const
+std::string oahStringSetAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -9487,12 +9487,12 @@ std::string oahStringSetElementAtom::asActualLongNamedOptionString () const
   return ss.str ();
 }
 
-void oahStringSetElementAtom::print (std::ostream& os) const
+void oahStringSetAtom::print (std::ostream& os) const
 {
   constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "StringSetElementAtom:" <<
+    "StringSetAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -9524,7 +9524,7 @@ void oahStringSetElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringSetElementAtom::displayAtomWithVariableOptionsValues (
+void oahStringSetAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -9555,7 +9555,7 @@ void oahStringSetElementAtom::displayAtomWithVariableOptionsValues (
   }
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahStringSetElementAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahStringSetAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -9568,7 +9568,7 @@ std::ostream& operator << (std::ostream& os, const S_oahStringSetElementAtom& el
 }
 
 //______________________________________________________________________________
-S_oahMeasureNumberSetElementAtom oahMeasureNumberSetElementAtom::create (
+S_oahMeasureNumberSetAtom oahMeasureNumberSetAtom::create (
   const std::string&          longName,
   const std::string&          shortName,
   const std::string&          description,
@@ -9576,8 +9576,8 @@ S_oahMeasureNumberSetElementAtom oahMeasureNumberSetElementAtom::create (
   const std::string&          variableName,
   std::set <mfMeasureNumber>& measureNumberSetVariable)
 {
-  oahMeasureNumberSetElementAtom* obj = new
-    oahMeasureNumberSetElementAtom (
+  oahMeasureNumberSetAtom* obj = new
+    oahMeasureNumberSetAtom (
       longName,
       shortName,
       description,
@@ -9588,7 +9588,7 @@ S_oahMeasureNumberSetElementAtom oahMeasureNumberSetElementAtom::create (
   return obj;
 }
 
-oahMeasureNumberSetElementAtom::oahMeasureNumberSetElementAtom (
+oahMeasureNumberSetAtom::oahMeasureNumberSetAtom (
   const std::string&          longName,
   const std::string&          shortName,
   const std::string&          description,
@@ -9607,10 +9607,10 @@ oahMeasureNumberSetElementAtom::oahMeasureNumberSetElementAtom (
   fMultipleOccurrencesAllowed = true;
 }
 
-oahMeasureNumberSetElementAtom::~oahMeasureNumberSetElementAtom ()
+oahMeasureNumberSetAtom::~oahMeasureNumberSetAtom ()
 {}
 
-void oahMeasureNumberSetElementAtom::applyAtomWithValue (
+void oahMeasureNumberSetAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -9624,7 +9624,7 @@ void oahMeasureNumberSetElementAtom::applyAtomWithValue (
     ss <<
       "Handling atom '" <<
       fetchNames () <<
-      "' of type 'oahMeasureNumberSetElementAtom'" <<
+      "' of type 'oahMeasureNumberSetAtom'" <<
       " with value \"" << theString << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -9706,14 +9706,14 @@ void oahMeasureNumberSetElementAtom::applyAtomWithValue (
   fSelected = true;
 }
 
-void oahMeasureNumberSetElementAtom::acceptIn (basevisitor* v)
+void oahMeasureNumberSetAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMeasureNumberSetElementAtom::acceptIn ()";
+      ".\\\" ==> oahMeasureNumberSetAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -9721,17 +9721,17 @@ void oahMeasureNumberSetElementAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahMeasureNumberSetElementAtom>*
+  if (visitor<S_oahMeasureNumberSetAtom>*
     p =
-      dynamic_cast<visitor<S_oahMeasureNumberSetElementAtom>*> (v)) {
-        S_oahMeasureNumberSetElementAtom elem = this;
+      dynamic_cast<visitor<S_oahMeasureNumberSetAtom>*> (v)) {
+        S_oahMeasureNumberSetAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahMeasureNumberSetElementAtom::visitStart ()";
+            ".\\\" ==> Launching oahMeasureNumberSetAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -9742,14 +9742,14 @@ void oahMeasureNumberSetElementAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahMeasureNumberSetElementAtom::acceptOut (basevisitor* v)
+void oahMeasureNumberSetAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMeasureNumberSetElementAtom::acceptOut ()";
+      ".\\\" ==> oahMeasureNumberSetAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -9757,17 +9757,17 @@ void oahMeasureNumberSetElementAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahMeasureNumberSetElementAtom>*
+  if (visitor<S_oahMeasureNumberSetAtom>*
     p =
-      dynamic_cast<visitor<S_oahMeasureNumberSetElementAtom>*> (v)) {
-        S_oahMeasureNumberSetElementAtom elem = this;
+      dynamic_cast<visitor<S_oahMeasureNumberSetAtom>*> (v)) {
+        S_oahMeasureNumberSetAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahMeasureNumberSetElementAtom::visitEnd ()";
+            ".\\\" ==> Launching oahMeasureNumberSetAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -9778,14 +9778,14 @@ void oahMeasureNumberSetElementAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahMeasureNumberSetElementAtom::browseData (basevisitor* v)
+void oahMeasureNumberSetAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMeasureNumberSetElementAtom::browseData ()";
+      ".\\\" ==> oahMeasureNumberSetAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -9794,7 +9794,7 @@ void oahMeasureNumberSetElementAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahMeasureNumberSetElementAtom::asShortNamedOptionString () const
+std::string oahMeasureNumberSetAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -9819,7 +9819,7 @@ std::string oahMeasureNumberSetElementAtom::asShortNamedOptionString () const
   return ss.str ();
 }
 
-std::string oahMeasureNumberSetElementAtom::asActualLongNamedOptionString () const
+std::string oahMeasureNumberSetAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -9844,12 +9844,12 @@ std::string oahMeasureNumberSetElementAtom::asActualLongNamedOptionString () con
   return ss.str ();
 }
 
-void oahMeasureNumberSetElementAtom::print (std::ostream& os) const
+void oahMeasureNumberSetAtom::print (std::ostream& os) const
 {
   constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "IntSetElementAtom:" <<
+    "IntSetAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -9882,7 +9882,7 @@ void oahMeasureNumberSetElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahMeasureNumberSetElementAtom::displayAtomWithVariableOptionsValues (
+void oahMeasureNumberSetAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -9912,7 +9912,7 @@ void oahMeasureNumberSetElementAtom::displayAtomWithVariableOptionsValues (
   }
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahMeasureNumberSetElementAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahMeasureNumberSetAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -9925,7 +9925,7 @@ std::ostream& operator << (std::ostream& os, const S_oahMeasureNumberSetElementA
 }
 
 //______________________________________________________________________________
-S_oahStringToIntMapElementAtom oahStringToIntMapElementAtom::create (
+S_oahStringToIntMapAtom oahStringToIntMapAtom::create (
   const std::string&           longName,
   const std::string&           shortName,
   const std::string&           description,
@@ -9933,8 +9933,8 @@ S_oahStringToIntMapElementAtom oahStringToIntMapElementAtom::create (
   const std::string&           variableName,
   std::map <std::string, int>& stringToIntMapVariable)
 {
-  oahStringToIntMapElementAtom* obj = new
-    oahStringToIntMapElementAtom (
+  oahStringToIntMapAtom* obj = new
+    oahStringToIntMapAtom (
       longName,
       shortName,
       description,
@@ -9945,7 +9945,7 @@ S_oahStringToIntMapElementAtom oahStringToIntMapElementAtom::create (
   return obj;
 }
 
-oahStringToIntMapElementAtom::oahStringToIntMapElementAtom (
+oahStringToIntMapAtom::oahStringToIntMapAtom (
   const std::string&           longName,
   const std::string&           shortName,
   const std::string&           description,
@@ -9964,10 +9964,10 @@ oahStringToIntMapElementAtom::oahStringToIntMapElementAtom (
   fMultipleOccurrencesAllowed = true;
 }
 
-oahStringToIntMapElementAtom::~oahStringToIntMapElementAtom ()
+oahStringToIntMapAtom::~oahStringToIntMapAtom ()
 {}
 
-void oahStringToIntMapElementAtom::applyAtomWithValue (
+void oahStringToIntMapAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -9976,7 +9976,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'oahStringToIntMapElementAtom'";
+      "==> oahAtom is of type 'oahStringToIntMapAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -9992,7 +9992,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'oahStringToIntMapElementAtom'";
+      "==> oahAtom is of type 'oahStringToIntMapAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10087,14 +10087,14 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
   fSelected = true;
 }
 
-void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
+void oahStringToIntMapAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringToIntMapElementAtom::acceptIn ()";
+      ".\\\" ==> oahStringToIntMapAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10102,17 +10102,17 @@ void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahStringToIntMapElementAtom>*
+  if (visitor<S_oahStringToIntMapAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringToIntMapElementAtom>*> (v)) {
-        S_oahStringToIntMapElementAtom elem = this;
+      dynamic_cast<visitor<S_oahStringToIntMapAtom>*> (v)) {
+        S_oahStringToIntMapAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahStringToIntMapElementAtom::visitStart ()";
+            ".\\\" ==> Launching oahStringToIntMapAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -10123,14 +10123,14 @@ void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
+void oahStringToIntMapAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringToIntMapElementAtom::acceptOut ()";
+      ".\\\" ==> oahStringToIntMapAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10138,17 +10138,17 @@ void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahStringToIntMapElementAtom>*
+  if (visitor<S_oahStringToIntMapAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringToIntMapElementAtom>*> (v)) {
-        S_oahStringToIntMapElementAtom elem = this;
+      dynamic_cast<visitor<S_oahStringToIntMapAtom>*> (v)) {
+        S_oahStringToIntMapAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahStringToIntMapElementAtom::visitEnd ()";
+            ".\\\" ==> Launching oahStringToIntMapAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -10159,14 +10159,14 @@ void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahStringToIntMapElementAtom::browseData (basevisitor* v)
+void oahStringToIntMapAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringToIntMapElementAtom::browseData ()";
+      ".\\\" ==> oahStringToIntMapAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10175,7 +10175,7 @@ void oahStringToIntMapElementAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahStringToIntMapElementAtom::asShortNamedOptionString () const
+std::string oahStringToIntMapAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -10200,7 +10200,7 @@ std::string oahStringToIntMapElementAtom::asShortNamedOptionString () const
   return ss.str ();
 }
 
-std::string oahStringToIntMapElementAtom::asActualLongNamedOptionString () const
+std::string oahStringToIntMapAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -10225,7 +10225,7 @@ std::string oahStringToIntMapElementAtom::asActualLongNamedOptionString () const
   return ss.str ();
 }
 
-void oahStringToIntMapElementAtom::print (std::ostream& os) const
+void oahStringToIntMapAtom::print (std::ostream& os) const
 {
   constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -10263,7 +10263,7 @@ void oahStringToIntMapElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringToIntMapElementAtom::displayAtomWithVariableOptionsValues (
+void oahStringToIntMapAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -10300,7 +10300,7 @@ void oahStringToIntMapElementAtom::displayAtomWithVariableOptionsValues (
 }
 
 std::ostream& operator << (
-  std::ostream& os, const S_oahStringToIntMapElementAtom& elt)
+  std::ostream& os, const S_oahStringToIntMapAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -10313,7 +10313,7 @@ std::ostream& operator << (
 }
 
 //______________________________________________________________________________
-S_oahMeasureNumberToIntMapElementAtom oahMeasureNumberToIntMapElementAtom::create (
+S_oahMeasureNumberToIntMapAtom oahMeasureNumberToIntMapAtom::create (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -10322,8 +10322,8 @@ S_oahMeasureNumberToIntMapElementAtom oahMeasureNumberToIntMapElementAtom::creat
   std::map <mfMeasureNumber, int>&
                      measureNumberToIntMapVariable)
 {
-  oahMeasureNumberToIntMapElementAtom* obj = new
-    oahMeasureNumberToIntMapElementAtom (
+  oahMeasureNumberToIntMapAtom* obj = new
+    oahMeasureNumberToIntMapAtom (
       longName,
       shortName,
       description,
@@ -10334,7 +10334,7 @@ S_oahMeasureNumberToIntMapElementAtom oahMeasureNumberToIntMapElementAtom::creat
   return obj;
 }
 
-oahMeasureNumberToIntMapElementAtom::oahMeasureNumberToIntMapElementAtom (
+oahMeasureNumberToIntMapAtom::oahMeasureNumberToIntMapAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -10354,10 +10354,10 @@ oahMeasureNumberToIntMapElementAtom::oahMeasureNumberToIntMapElementAtom (
   fMultipleOccurrencesAllowed = true;
 }
 
-oahMeasureNumberToIntMapElementAtom::~oahMeasureNumberToIntMapElementAtom ()
+oahMeasureNumberToIntMapAtom::~oahMeasureNumberToIntMapAtom ()
 {}
 
-void oahMeasureNumberToIntMapElementAtom::applyAtomWithValue (
+void oahMeasureNumberToIntMapAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -10366,7 +10366,7 @@ void oahMeasureNumberToIntMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'oahMeasureNumberToIntMapElementAtom'";
+      "==> oahAtom is of type 'oahMeasureNumberToIntMapAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10382,7 +10382,7 @@ void oahMeasureNumberToIntMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'oahMeasureNumberToIntMapElementAtom'";
+      "==> oahAtom is of type 'oahMeasureNumberToIntMapAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10477,14 +10477,14 @@ void oahMeasureNumberToIntMapElementAtom::applyAtomWithValue (
   fSelected = true;
 }
 
-void oahMeasureNumberToIntMapElementAtom::acceptIn (basevisitor* v)
+void oahMeasureNumberToIntMapAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMeasureNumberToIntMapElementAtom::acceptIn ()";
+      ".\\\" ==> oahMeasureNumberToIntMapAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10492,17 +10492,17 @@ void oahMeasureNumberToIntMapElementAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahMeasureNumberToIntMapElementAtom>*
+  if (visitor<S_oahMeasureNumberToIntMapAtom>*
     p =
-      dynamic_cast<visitor<S_oahMeasureNumberToIntMapElementAtom>*> (v)) {
-        S_oahMeasureNumberToIntMapElementAtom elem = this;
+      dynamic_cast<visitor<S_oahMeasureNumberToIntMapAtom>*> (v)) {
+        S_oahMeasureNumberToIntMapAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahMeasureNumberToIntMapElementAtom::visitStart ()";
+            ".\\\" ==> Launching oahMeasureNumberToIntMapAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -10513,14 +10513,14 @@ void oahMeasureNumberToIntMapElementAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahMeasureNumberToIntMapElementAtom::acceptOut (basevisitor* v)
+void oahMeasureNumberToIntMapAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMeasureNumberToIntMapElementAtom::acceptOut ()";
+      ".\\\" ==> oahMeasureNumberToIntMapAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10528,17 +10528,17 @@ void oahMeasureNumberToIntMapElementAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahMeasureNumberToIntMapElementAtom>*
+  if (visitor<S_oahMeasureNumberToIntMapAtom>*
     p =
-      dynamic_cast<visitor<S_oahMeasureNumberToIntMapElementAtom>*> (v)) {
-        S_oahMeasureNumberToIntMapElementAtom elem = this;
+      dynamic_cast<visitor<S_oahMeasureNumberToIntMapAtom>*> (v)) {
+        S_oahMeasureNumberToIntMapAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahMeasureNumberToIntMapElementAtom::visitEnd ()";
+            ".\\\" ==> Launching oahMeasureNumberToIntMapAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -10549,14 +10549,14 @@ void oahMeasureNumberToIntMapElementAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahMeasureNumberToIntMapElementAtom::browseData (basevisitor* v)
+void oahMeasureNumberToIntMapAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMeasureNumberToIntMapElementAtom::browseData ()";
+      ".\\\" ==> oahMeasureNumberToIntMapAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10565,7 +10565,7 @@ void oahMeasureNumberToIntMapElementAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahMeasureNumberToIntMapElementAtom::asShortNamedOptionString () const
+std::string oahMeasureNumberToIntMapAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -10590,7 +10590,7 @@ std::string oahMeasureNumberToIntMapElementAtom::asShortNamedOptionString () con
   return ss.str ();
 }
 
-std::string oahMeasureNumberToIntMapElementAtom::asActualLongNamedOptionString () const
+std::string oahMeasureNumberToIntMapAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -10615,7 +10615,7 @@ std::string oahMeasureNumberToIntMapElementAtom::asActualLongNamedOptionString (
   return ss.str ();
 }
 
-void oahMeasureNumberToIntMapElementAtom::print (std::ostream& os) const
+void oahMeasureNumberToIntMapAtom::print (std::ostream& os) const
 {
   constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -10653,7 +10653,7 @@ void oahMeasureNumberToIntMapElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahMeasureNumberToIntMapElementAtom::displayAtomWithVariableOptionsValues (
+void oahMeasureNumberToIntMapAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -10690,7 +10690,7 @@ void oahMeasureNumberToIntMapElementAtom::displayAtomWithVariableOptionsValues (
 }
 
 std::ostream& operator << (
-  std::ostream& os, const S_oahMeasureNumberToIntMapElementAtom& elt)
+  std::ostream& os, const S_oahMeasureNumberToIntMapAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -10703,7 +10703,7 @@ std::ostream& operator << (
 }
 
 //______________________________________________________________________________
-S_oahMeasureNumberToMeasureNumberMapElementAtom oahMeasureNumberToMeasureNumberMapElementAtom::create (
+S_oahMeasureNumberToMeasureNumberMapAtom oahMeasureNumberToMeasureNumberMapAtom::create (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -10712,8 +10712,8 @@ S_oahMeasureNumberToMeasureNumberMapElementAtom oahMeasureNumberToMeasureNumberM
   std::map <mfMeasureNumber, mfMeasureNumber>&
                      measureNumberToMeasureNumberMapVariable)
 {
-  oahMeasureNumberToMeasureNumberMapElementAtom* obj = new
-    oahMeasureNumberToMeasureNumberMapElementAtom (
+  oahMeasureNumberToMeasureNumberMapAtom* obj = new
+    oahMeasureNumberToMeasureNumberMapAtom (
       longName,
       shortName,
       description,
@@ -10724,7 +10724,7 @@ S_oahMeasureNumberToMeasureNumberMapElementAtom oahMeasureNumberToMeasureNumberM
   return obj;
 }
 
-oahMeasureNumberToMeasureNumberMapElementAtom::oahMeasureNumberToMeasureNumberMapElementAtom (
+oahMeasureNumberToMeasureNumberMapAtom::oahMeasureNumberToMeasureNumberMapAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -10744,10 +10744,10 @@ oahMeasureNumberToMeasureNumberMapElementAtom::oahMeasureNumberToMeasureNumberMa
   fMultipleOccurrencesAllowed = true;
 }
 
-oahMeasureNumberToMeasureNumberMapElementAtom::~oahMeasureNumberToMeasureNumberMapElementAtom ()
+oahMeasureNumberToMeasureNumberMapAtom::~oahMeasureNumberToMeasureNumberMapAtom ()
 {}
 
-void oahMeasureNumberToMeasureNumberMapElementAtom::applyAtomWithValue (
+void oahMeasureNumberToMeasureNumberMapAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -10756,7 +10756,7 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'oahMeasureNumberToMeasureNumberMapElementAtom'";
+      "==> oahAtom is of type 'oahMeasureNumberToMeasureNumberMapAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10772,7 +10772,7 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'oahMeasureNumberToMeasureNumberMapElementAtom'";
+      "==> oahAtom is of type 'oahMeasureNumberToMeasureNumberMapAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10867,14 +10867,14 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::applyAtomWithValue (
   fSelected = true;
 }
 
-void oahMeasureNumberToMeasureNumberMapElementAtom::acceptIn (basevisitor* v)
+void oahMeasureNumberToMeasureNumberMapAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMeasureNumberToMeasureNumberMapElementAtom::acceptIn ()";
+      ".\\\" ==> oahMeasureNumberToMeasureNumberMapAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10882,17 +10882,17 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahMeasureNumberToMeasureNumberMapElementAtom>*
+  if (visitor<S_oahMeasureNumberToMeasureNumberMapAtom>*
     p =
-      dynamic_cast<visitor<S_oahMeasureNumberToMeasureNumberMapElementAtom>*> (v)) {
-        S_oahMeasureNumberToMeasureNumberMapElementAtom elem = this;
+      dynamic_cast<visitor<S_oahMeasureNumberToMeasureNumberMapAtom>*> (v)) {
+        S_oahMeasureNumberToMeasureNumberMapAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahMeasureNumberToMeasureNumberMapElementAtom::visitStart ()";
+            ".\\\" ==> Launching oahMeasureNumberToMeasureNumberMapAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -10903,14 +10903,14 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahMeasureNumberToMeasureNumberMapElementAtom::acceptOut (basevisitor* v)
+void oahMeasureNumberToMeasureNumberMapAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMeasureNumberToMeasureNumberMapElementAtom::acceptOut ()";
+      ".\\\" ==> oahMeasureNumberToMeasureNumberMapAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10918,17 +10918,17 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahMeasureNumberToMeasureNumberMapElementAtom>*
+  if (visitor<S_oahMeasureNumberToMeasureNumberMapAtom>*
     p =
-      dynamic_cast<visitor<S_oahMeasureNumberToMeasureNumberMapElementAtom>*> (v)) {
-        S_oahMeasureNumberToMeasureNumberMapElementAtom elem = this;
+      dynamic_cast<visitor<S_oahMeasureNumberToMeasureNumberMapAtom>*> (v)) {
+        S_oahMeasureNumberToMeasureNumberMapAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahMeasureNumberToMeasureNumberMapElementAtom::visitEnd ()";
+            ".\\\" ==> Launching oahMeasureNumberToMeasureNumberMapAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -10939,14 +10939,14 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahMeasureNumberToMeasureNumberMapElementAtom::browseData (basevisitor* v)
+void oahMeasureNumberToMeasureNumberMapAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMeasureNumberToMeasureNumberMapElementAtom::browseData ()";
+      ".\\\" ==> oahMeasureNumberToMeasureNumberMapAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10955,7 +10955,7 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahMeasureNumberToMeasureNumberMapElementAtom::asShortNamedOptionString () const
+std::string oahMeasureNumberToMeasureNumberMapAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -10980,7 +10980,7 @@ std::string oahMeasureNumberToMeasureNumberMapElementAtom::asShortNamedOptionStr
   return ss.str ();
 }
 
-std::string oahMeasureNumberToMeasureNumberMapElementAtom::asActualLongNamedOptionString () const
+std::string oahMeasureNumberToMeasureNumberMapAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -11005,7 +11005,7 @@ std::string oahMeasureNumberToMeasureNumberMapElementAtom::asActualLongNamedOpti
   return ss.str ();
 }
 
-void oahMeasureNumberToMeasureNumberMapElementAtom::print (std::ostream& os) const
+void oahMeasureNumberToMeasureNumberMapAtom::print (std::ostream& os) const
 {
   constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -11043,7 +11043,7 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::print (std::ostream& os) con
   --gIndenter;
 }
 
-void oahMeasureNumberToMeasureNumberMapElementAtom::displayAtomWithVariableOptionsValues (
+void oahMeasureNumberToMeasureNumberMapAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -11080,7 +11080,7 @@ void oahMeasureNumberToMeasureNumberMapElementAtom::displayAtomWithVariableOptio
 }
 
 std::ostream& operator << (
-  std::ostream& os, const S_oahMeasureNumberToMeasureNumberMapElementAtom& elt)
+  std::ostream& os, const S_oahMeasureNumberToMeasureNumberMapAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -11093,7 +11093,7 @@ std::ostream& operator << (
 }
 
 //______________________________________________________________________________
-S_oahStringToStringMapElementAtom oahStringToStringMapElementAtom::create (
+S_oahStringToStringMapAtom oahStringToStringMapAtom::create (
   const std::string&                  longName,
   const std::string&                  shortName,
   const std::string&                  description,
@@ -11101,8 +11101,8 @@ S_oahStringToStringMapElementAtom oahStringToStringMapElementAtom::create (
   const std::string&                  variableName,
   std::map <std::string, std::string>& stringToStringMapVariable)
 {
-  oahStringToStringMapElementAtom* obj = new
-    oahStringToStringMapElementAtom (
+  oahStringToStringMapAtom* obj = new
+    oahStringToStringMapAtom (
       longName,
       shortName,
       description,
@@ -11113,7 +11113,7 @@ S_oahStringToStringMapElementAtom oahStringToStringMapElementAtom::create (
   return obj;
 }
 
-oahStringToStringMapElementAtom::oahStringToStringMapElementAtom (
+oahStringToStringMapAtom::oahStringToStringMapAtom (
   const std::string&                  longName,
   const std::string&                  shortName,
   const std::string&                  description,
@@ -11132,10 +11132,10 @@ oahStringToStringMapElementAtom::oahStringToStringMapElementAtom (
   fMultipleOccurrencesAllowed = true;
 }
 
-oahStringToStringMapElementAtom::~oahStringToStringMapElementAtom ()
+oahStringToStringMapAtom::~oahStringToStringMapAtom ()
 {}
 
-void oahStringToStringMapElementAtom::applyAtomWithValue (
+void oahStringToStringMapAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -11144,7 +11144,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'oahStringToStringMapElementAtom'";
+      "==> oahAtom is of type 'oahStringToStringMapAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -11160,7 +11160,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'oahStringToStringMapElementAtom'";
+      "==> oahAtom is of type 'oahStringToStringMapAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -11249,14 +11249,14 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
   fSelected = true;
 }
 
-void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
+void oahStringToStringMapAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringToStringMapElementAtom::acceptIn ()";
+      ".\\\" ==> oahStringToStringMapAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -11264,17 +11264,17 @@ void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahStringToStringMapElementAtom>*
+  if (visitor<S_oahStringToStringMapAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringToStringMapElementAtom>*> (v)) {
-        S_oahStringToStringMapElementAtom elem = this;
+      dynamic_cast<visitor<S_oahStringToStringMapAtom>*> (v)) {
+        S_oahStringToStringMapAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahStringToStringMapElementAtom::visitStart ()";
+            ".\\\" ==> Launching oahStringToStringMapAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -11285,14 +11285,14 @@ void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
+void oahStringToStringMapAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringToStringMapElementAtom::acceptOut ()";
+      ".\\\" ==> oahStringToStringMapAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -11300,17 +11300,17 @@ void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahStringToStringMapElementAtom>*
+  if (visitor<S_oahStringToStringMapAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringToStringMapElementAtom>*> (v)) {
-        S_oahStringToStringMapElementAtom elem = this;
+      dynamic_cast<visitor<S_oahStringToStringMapAtom>*> (v)) {
+        S_oahStringToStringMapAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahStringToStringMapElementAtom::visitEnd ()";
+            ".\\\" ==> Launching oahStringToStringMapAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -11321,14 +11321,14 @@ void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahStringToStringMapElementAtom::browseData (basevisitor* v)
+void oahStringToStringMapAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringToStringMapElementAtom::browseData ()";
+      ".\\\" ==> oahStringToStringMapAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -11337,7 +11337,7 @@ void oahStringToStringMapElementAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahStringToStringMapElementAtom::asShortNamedOptionString () const
+std::string oahStringToStringMapAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -11362,7 +11362,7 @@ std::string oahStringToStringMapElementAtom::asShortNamedOptionString () const
   return ss.str ();
 }
 
-std::string oahStringToStringMapElementAtom::asActualLongNamedOptionString () const
+std::string oahStringToStringMapAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -11387,7 +11387,7 @@ std::string oahStringToStringMapElementAtom::asActualLongNamedOptionString () co
   return ss.str ();
 }
 
-void oahStringToStringMapElementAtom::print (std::ostream& os) const
+void oahStringToStringMapAtom::print (std::ostream& os) const
 {
   constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -11424,7 +11424,7 @@ void oahStringToStringMapElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringToStringMapElementAtom::displayAtomWithVariableOptionsValues (
+void oahStringToStringMapAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -11460,7 +11460,7 @@ void oahStringToStringMapElementAtom::displayAtomWithVariableOptionsValues (
   }
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahStringToStringMapElementAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahStringToStringMapAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -11473,7 +11473,7 @@ std::ostream& operator << (std::ostream& os, const S_oahStringToStringMapElement
 }
 
 //______________________________________________________________________________
-S_oahStringToStringMultiMapElementAtom oahStringToStringMultiMapElementAtom::create (
+S_oahStringToStringMultiMapAtom oahStringToStringMultiMapAtom::create (
   const std::string&                       longName,
   const std::string&                       shortName,
   const std::string&                       description,
@@ -11481,8 +11481,8 @@ S_oahStringToStringMultiMapElementAtom oahStringToStringMultiMapElementAtom::cre
   const std::string&                       variableName,
   std::multimap <std::string, std::string>& stringToStringMultiMapVariable)
 {
-  oahStringToStringMultiMapElementAtom* obj = new
-    oahStringToStringMultiMapElementAtom (
+  oahStringToStringMultiMapAtom* obj = new
+    oahStringToStringMultiMapAtom (
       longName,
       shortName,
       description,
@@ -11493,7 +11493,7 @@ S_oahStringToStringMultiMapElementAtom oahStringToStringMultiMapElementAtom::cre
   return obj;
 }
 
-oahStringToStringMultiMapElementAtom::oahStringToStringMultiMapElementAtom (
+oahStringToStringMultiMapAtom::oahStringToStringMultiMapAtom (
   const std::string&                       longName,
   const std::string&                       shortName,
   const std::string&                       description,
@@ -11512,10 +11512,10 @@ oahStringToStringMultiMapElementAtom::oahStringToStringMultiMapElementAtom (
   fMultipleOccurrencesAllowed = true;
 }
 
-oahStringToStringMultiMapElementAtom::~oahStringToStringMultiMapElementAtom ()
+oahStringToStringMultiMapAtom::~oahStringToStringMultiMapAtom ()
 {}
 
-void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
+void oahStringToStringMultiMapAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -11524,7 +11524,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'oahStringToStringMultiMapElementAtom'";
+      "==> oahAtom is of type 'oahStringToStringMultiMapAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -11540,7 +11540,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'oahStringToStringMultiMapElementAtom'";
+      "==> oahAtom is of type 'oahStringToStringMultiMapAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -11630,14 +11630,14 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
   fSelected = true;
 }
 
-void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
+void oahStringToStringMultiMapAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringToStringMultiMapElementAtom::acceptIn ()";
+      ".\\\" ==> oahStringToStringMultiMapAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -11645,17 +11645,17 @@ void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahStringToStringMultiMapElementAtom>*
+  if (visitor<S_oahStringToStringMultiMapAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringToStringMultiMapElementAtom>*> (v)) {
-        S_oahStringToStringMultiMapElementAtom elem = this;
+      dynamic_cast<visitor<S_oahStringToStringMultiMapAtom>*> (v)) {
+        S_oahStringToStringMultiMapAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahStringToStringMultiMapElementAtom::visitStart ()";
+            ".\\\" ==> Launching oahStringToStringMultiMapAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -11666,14 +11666,14 @@ void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
+void oahStringToStringMultiMapAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringToStringMultiMapElementAtom::acceptOut ()";
+      ".\\\" ==> oahStringToStringMultiMapAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -11681,17 +11681,17 @@ void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahStringToStringMultiMapElementAtom>*
+  if (visitor<S_oahStringToStringMultiMapAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringToStringMultiMapElementAtom>*> (v)) {
-        S_oahStringToStringMultiMapElementAtom elem = this;
+      dynamic_cast<visitor<S_oahStringToStringMultiMapAtom>*> (v)) {
+        S_oahStringToStringMultiMapAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahStringToStringMultiMapElementAtom::visitEnd ()";
+            ".\\\" ==> Launching oahStringToStringMultiMapAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -11702,14 +11702,14 @@ void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahStringToStringMultiMapElementAtom::browseData (basevisitor* v)
+void oahStringToStringMultiMapAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahStringToStringMultiMapElementAtom::browseData ()";
+      ".\\\" ==> oahStringToStringMultiMapAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -11718,7 +11718,7 @@ void oahStringToStringMultiMapElementAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahStringToStringMultiMapElementAtom::asShortNamedOptionString () const
+std::string oahStringToStringMultiMapAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -11743,7 +11743,7 @@ std::string oahStringToStringMultiMapElementAtom::asShortNamedOptionString () co
   return ss.str ();
 }
 
-std::string oahStringToStringMultiMapElementAtom::asActualLongNamedOptionString () const
+std::string oahStringToStringMultiMapAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -11768,7 +11768,7 @@ std::string oahStringToStringMultiMapElementAtom::asActualLongNamedOptionString 
   return ss.str ();
 }
 
-void oahStringToStringMultiMapElementAtom::print (std::ostream& os) const
+void oahStringToStringMultiMapAtom::print (std::ostream& os) const
 {
   constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -11805,7 +11805,7 @@ void oahStringToStringMultiMapElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringToStringMultiMapElementAtom::displayAtomWithVariableOptionsValues (
+void oahStringToStringMultiMapAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -11841,7 +11841,7 @@ void oahStringToStringMultiMapElementAtom::displayAtomWithVariableOptionsValues 
   }
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahStringToStringMultiMapElementAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahStringToStringMultiMapAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -12210,6 +12210,375 @@ void oahStringAndIntegerAtom::displayAtomWithVariableOptionsValues (
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahStringAndIntegerAtom& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
+S_oahMeasureNumberAndIntegerAtom oahMeasureNumberAndIntegerAtom::create (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& measureNumberVariableName,
+  mfMeasureNumber&   measureNumberVariable,
+  const std::string& integerVariableName,
+  int&               integerVariable)
+{
+  oahMeasureNumberAndIntegerAtom* obj = new
+    oahMeasureNumberAndIntegerAtom (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      measureNumberVariableName,
+      measureNumberVariable,
+      integerVariableName,
+      integerVariable);
+  assert (obj != nullptr);
+  return obj;
+}
+
+oahMeasureNumberAndIntegerAtom::oahMeasureNumberAndIntegerAtom (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& measureNumberVariableName,
+  mfMeasureNumber&   measureNumberVariable,
+  const std::string& integerVariableName,
+  int&               integerVariable)
+  : oahAtomStoringAValue (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      measureNumberVariableName),
+    fMeasureNumberVariableName (
+      measureNumberVariableName),
+    fMeasureNumberVariable (
+      measureNumberVariable),
+    fIntegerVariableName (
+      integerVariableName),
+    fIntegerVariable (
+      integerVariable)
+{
+  fMultipleOccurrencesAllowed = true;
+}
+
+oahMeasureNumberAndIntegerAtom::~oahMeasureNumberAndIntegerAtom ()
+{}
+
+void oahMeasureNumberAndIntegerAtom::applyAtomWithValue (
+  const std::string& theString,
+  std::ostream&      os)
+{
+  // theString contains the string and integer values
+
+  // check whether it is well-formed
+  std::string regularExpression (
+    "(.+)"           // string
+    "[[:space:]]+"
+    ":"
+    "[[:space:]]+"
+    "([[:digit:]]+)" // int
+    );
+
+  std::regex e (regularExpression);
+  std::smatch sm;
+
+  regex_match (theString, sm, e);
+
+  size_t smSize = sm.size ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "There are " << smSize << " matches" <<
+      " for integer string \"" << theString <<
+      "\" with std::regex \"" << regularExpression <<
+      "\"" <<
+      std::endl;
+
+    for (unsigned i = 0; i < smSize; ++i) {
+      gLog <<
+        '[' << sm [i] << "] ";
+    } // for
+
+    gLog << std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (smSize == 3) {
+    fMeasureNumberVariable = mfMeasureNumber (sm [ 1 ]);
+
+    // leave the low level details to the STL...
+    int integerValue;
+    {
+      std::stringstream ss;
+      ss << sm [ 2 ];
+      ss >> integerValue;
+    }
+
+    fIntegerVariable = integerValue;
+  }
+
+  else {
+    std::stringstream ss;
+
+    ss <<
+      "integer value \"" << theString <<
+      "\" for option '" << fetchNames () <<
+      "' is ill-formed";
+
+    oahError (ss.str ());
+  }
+
+  fSelected = true;
+}
+
+void oahMeasureNumberAndIntegerAtom::setIntegerVariable (int value)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting option '" <<
+      fetchNames () <<
+      "' integer variable to '" <<
+      value <<
+      '\'';
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fIntegerVariable = value;
+
+  fSelected = true;
+}
+
+void oahMeasureNumberAndIntegerAtom::setMeasureNumberVariable (
+  const mfMeasureNumber& value)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting option '" <<
+      fetchNames () <<
+      "' string variable to \"" <<
+      value <<
+      "\"";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fMeasureNumberVariable = value;
+
+  fSelected = true;
+}
+
+void oahMeasureNumberAndIntegerAtom::acceptIn (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahMeasureNumberAndIntegerAtom::acceptIn ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahMeasureNumberAndIntegerAtom>*
+    p =
+      dynamic_cast<visitor<S_oahMeasureNumberAndIntegerAtom>*> (v)) {
+        S_oahMeasureNumberAndIntegerAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahMeasureNumberAndIntegerAtom::visitStart ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, mfInputLineNumber (__LINE__),
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitStart (elem);
+  }
+}
+
+void oahMeasureNumberAndIntegerAtom::acceptOut (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahMeasureNumberAndIntegerAtom::acceptOut ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahMeasureNumberAndIntegerAtom>*
+    p =
+      dynamic_cast<visitor<S_oahMeasureNumberAndIntegerAtom>*> (v)) {
+        S_oahMeasureNumberAndIntegerAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahMeasureNumberAndIntegerAtom::visitEnd ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, mfInputLineNumber (__LINE__),
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitEnd (elem);
+  }
+}
+
+void oahMeasureNumberAndIntegerAtom::browseData (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahMeasureNumberAndIntegerAtom::browseData ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+std::string oahMeasureNumberAndIntegerAtom::asShortNamedOptionString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    '-' << fShortName << ' ' <<
+    "\"" <<
+    fMeasureNumberVariable <<
+    "\" " <<
+    fIntegerVariable;
+
+  return ss.str ();
+}
+
+std::string oahMeasureNumberAndIntegerAtom::asActualLongNamedOptionString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    '-' << fLongName << ' ' <<
+    "\"" <<
+    fMeasureNumberVariable <<
+    "\" " <<
+    fIntegerVariable;
+
+  return ss.str ();
+}
+
+void oahMeasureNumberAndIntegerAtom::print (std::ostream& os) const
+{
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "MeasureNumberAndIntegerAtom:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  printAtomWithVariableEssentials (
+    os, fieldWidth);
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "MeasureNumberVariable" << ": " <<
+    "\"" << fMeasureNumberVariableName << "\"" <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "MeasureNumberVariable" << ": " <<
+    "\"" << fMeasureNumberVariable << "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "integerVariableName" << ": " <<
+    fIntegerVariableName <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "integerVariable" << ": " <<
+    fIntegerVariable <<
+    std::endl;
+
+  --gIndenter;
+}
+
+void oahMeasureNumberAndIntegerAtom::displayAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
+    fMeasureNumberVariableName <<
+    ": " <<
+    "\"" << fMeasureNumberVariable << "\"" <<
+    std::endl <<
+
+    std::setw (valueFieldWidth) <<
+    fIntegerVariableName <<
+    ": " <<
+    "\"" << fIntegerVariable << "\"";
+
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+      os <<
+        ", early";
+      break;
+  } // switch
+  if (fSelected) {
+    os <<
+      ", selected";
+  }
+
+  os << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_oahMeasureNumberAndIntegerAtom& elt)
 {
   if (elt) {
     elt->print (os);

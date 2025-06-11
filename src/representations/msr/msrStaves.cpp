@@ -3168,7 +3168,7 @@ bool msrStaff::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
   const S_msrStaff& first,
   const S_msrStaff& second)
 {
-  int
+  mfStaffNumber
     firstStaffNumber =
       first->fStaffNumber,
     secondStaffNumber =
@@ -3529,7 +3529,7 @@ void msrStaff::browseData (basevisitor* v)
     // cascade it to all voices
     for (S_msrVoice voice : fStaffAllVoicesList) {
       // get the  set of voices to ignore
-      S_oahStringSetElementAtom
+      S_oahStringSetAtom
         ignoreMsrVoicesSetAtom =
           gGlobalMsr2msrOahGroup->
             getIgnoreMsrVoicesSetAtom ();;
@@ -3540,7 +3540,7 @@ void msrStaff::browseData (basevisitor* v)
             getSelected ();;
 
       // get the  set of voices to keep
-      S_oahStringSetElementAtom
+      S_oahStringSetAtom
         keepMsrVoicesSetAtom =
           gGlobalMsr2msrOahGroup->
             getKeepMsrVoicesSetAtom ();;
@@ -3941,7 +3941,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    mfVoiceNumber voiceNumber = 0;
+    mfVoiceNumber voiceNumber (0);
 
     for (S_msrVoice voice : fStaffRegularVoicesList) {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED

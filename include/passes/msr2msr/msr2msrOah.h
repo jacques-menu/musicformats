@@ -250,14 +250,14 @@ class EXP msr2msrOahGroup : public oahGroup
     // voices
     const std::set <std::string>&    getIgnoreMsrVoicesSet () const
                               { return fIgnoreMsrVoicesSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getIgnoreMsrVoicesSetAtom () const
                               { return fIgnoreMsrVoicesSetAtom; }
 
     const std::set <std::string>&
                           getKeepMsrVoicesSet () const
                               { return fKeepMsrVoicesSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getKeepMsrVoicesSetAtom () const
                               { return fKeepMsrVoicesSetAtom; }
 
@@ -265,14 +265,14 @@ class EXP msr2msrOahGroup : public oahGroup
     const std::set <mfMeasureNumber>&
                           getInserLineBreakAfterMeasureSet () const
                               { return fInserLineBreakAfterMeasureSet; }
-    S_oahStringSetElementAtom
+    S_oahMeasureNumberSetAtom
                           getInserLineBreakAfterMeasureAtom () const
                               { return fInserLineBreakAfterMeasureAtom; }
 
     const std::set <mfMeasureNumber>&
                           getInserPageBreakAfterMeasureSet () const
                               { return fInserPageBreakAfterMeasureSet; }
-    S_oahStringSetElementAtom
+    S_oahMeasureNumberSetAtom
                           getInserPageBreakAfterMeasureAtom () const
                               { return fInserPageBreakAfterMeasureAtom; }
 
@@ -352,34 +352,34 @@ class EXP msr2msrOahGroup : public oahGroup
     // staves
     std::set <std::string>
                           fIgnoreMsrStavesSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fIgnoreMsrStavesSetAtom;
 
     std::set <std::string>
                           fKeepMsrStavesSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fKeepMsrStavesSetAtom;
 
     // voices
     std::set <std::string>
                           fIgnoreMsrVoicesSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fIgnoreMsrVoicesSetAtom;
 
     std::set <std::string>
                           fKeepMsrVoicesSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fKeepMsrVoicesSetAtom;
 
     // breaks
     std::set <mfMeasureNumber>
                           fInserLineBreakAfterMeasureSet;
-    S_oahStringSetElementAtom
+    S_oahMeasureNumberSetAtom
                           fInserLineBreakAfterMeasureAtom;
 
     std::set <mfMeasureNumber>
                           fInserPageBreakAfterMeasureSet;
-    S_oahStringSetElementAtom
+    S_oahMeasureNumberSetAtom
                           fInserPageBreakAfterMeasureAtom;
 
     // compress

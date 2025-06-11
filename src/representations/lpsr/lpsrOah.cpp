@@ -1986,7 +1986,7 @@ R"()",
 
   // auto-voices
 
-  fReplicateEmptyMeasureNumber = "";
+  fReplicateEmptyMeasureNumber = mfMeasureNumber (K_MEASURE_NUMBER_UNKNOWN_);
 
   subGroup->
     appendAtomToSubGroup (
@@ -2014,12 +2014,12 @@ R"()",
 
   // replicate empty measure
 
-  fReplicateEmptyMeasureNumber = "";
+  fReplicateEmptyMeasureNumber = mfMeasureNumber (K_MEASURE_NUMBER_UNKNOWN_);
   fReplicateEmptyMeasureReplicas = 0;
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringAndIntegerAtom::create (
+      oahMeasureNumberAndIntegerAtom::create (
         "replicate-empty-lpsr-measure", "rem",
 R"###(Replicate an empty LPSR mesure, adding empty others according to SPECIFICATION.
 SPECIFICATION should be of the form 'MEASURE_NUMBER:REPLICATES',

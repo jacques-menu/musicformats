@@ -199,21 +199,25 @@ message (STATUS "-----> MF_CLI_SAMPLES_DIR: ${MF_CLI_SAMPLES_DIR}")
 # message (STATUS "-----> MF_CLI_SERVICES_DIR: ${MF_CLI_SERVICES_DIR}")
 
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mfutilities languages oah wae manpage)
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mfutilities)
 
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} formats/musicxml formats/guido)
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/guido representations/msr representations/lpsr representations/mxsr representations/bsr representations/braille)
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/guido representations/mxsr representations/msr representations/lpsr)
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} passes/mxsr2guido passes/mxsr2musicxml passes/musicxml2mxsr passes/mxsr2msr passes/msr2msr passes/msr2lpsr passes/lpsr2lilypond passes/msr2bsr passes/bsr2bsr passes/bsr2braille passes/msr2mxsr passes/mxsr2musicxml)
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} passes/mxsr2guido passes/mxsr2musicxml passes/musicxml2mxsr passes/mxsr2msr passes/msr2msr passes/msr2lpsr passes/lpsr2lilypond passes/msr2bsr passes/bsr2bsr passes/msr2mxsr passes/mxsr2musicxml)
+
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} languages oah wae manpage)
 
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} generators/Mikrokosmos3Wandering generators/LilyPondIssue34)
 
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} converters/musicxml2guido converters/musicxml2lilypond converters/msr2lilypond converters/musicxml2musicxml converters/msr2musicxml converters/msr2guido)
+
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} interpreters/stringmatcherinterpreter interpreters/mfslinterpreter interpreters/ischemeinterpreter)
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} converters/musicxml2guido converters/musicxml2lilypond converters/msr2lilypond converters/musicxml2braille converters/msr2braille converters/musicxml2musicxml converters/msr2musicxml converters/msr2guido)
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/msdl representations/msdr passes/msdl2msr passes/msdl2msr converters/msdl2guido converters/msdl2lilypond converters/msdl2musicxml converters/msdlconverter)
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/msdl representations/msdr passes/msdl2msr passes/msdl2msr converters/msdl2braille converters/msdl2guido converters/msdl2lilypond converters/msdl2musicxml converters/msdlconverter)
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS}  representations/bsr representations/braille passes/bsr2braille converters/musicxml2braille converters/msr2braille  converters/msdl2braille)
 
 # set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/mnxsr passes/mnxsr2msr passes/mnx2mnxsr)
 

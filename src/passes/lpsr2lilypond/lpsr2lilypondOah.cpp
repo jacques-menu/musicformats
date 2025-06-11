@@ -4448,7 +4448,7 @@ This option is an alias for '-all-bar-numbers, -abn'.)",
   // --------------------------------------
 
   fShowMeasureNumbersAtMeasureAtom =
-    oahMeasureNumberSetElementAtom::create (
+    oahMeasureNumberSetAtom::create (
       "show-lilypond-measure-number-at", "slmna",
 R"(Generate LilyPond code to show the measure number at measure MEASURE_NUMBER.)",
       "MEASURE_NUMBER",
@@ -4464,7 +4464,7 @@ R"(Generate LilyPond code to show the measure number at measure MEASURE_NUMBER.)
 
   subGroup->
     appendAtomToSubGroup (
-      oahMeasureNumberToMeasureNumberMapElementAtom::create (
+      oahMeasureNumberToMeasureNumberMapAtom::create (
         "reset-measure-number", "rmn",
 R"(Generate a '\set Score.currentBarNumber = #NEW' command
 at the beginning of measure OLD in the LilyPond code.
@@ -4500,9 +4500,9 @@ R"(Generate LilyPond code to show a box around all bar numbers.)",
   // generate a box around bar number
   // --------------------------------------
 
-  S_oahMeasureNumberSetElementAtom
+  S_oahMeasureNumberSetAtom
     generateABoxAroundBarNumberAtom =
-      oahMeasureNumberSetElementAtom::create (
+      oahMeasureNumberSetAtom::create (
         "generate-a-box-around-bar-number", "gababn",
 R"(Generate a box around LilyPond bar number BAR_NUMBER, // purist JMI ???
 where BAR_NUMBER is an integer.
@@ -4596,7 +4596,7 @@ and don't generate an empty \myPageBreak.)",
 /* JMI
   subGroup->
     appendAtomToSubGroup (
-      oahStringsSetElementAtom::create (
+      oahStringsSetAtom::create (
         "break-page-after-measure-number", "bpamn",
 R"(Generate a '\pageBreak' command after measure NUMBER in the LilyPond code.
 NUMBER is a MusicXML measure number (a string), to be found in the latter.
@@ -4648,7 +4648,7 @@ Nothing special is done by default.)",
 /* JMI
   subGroup->
     appendAtomToSubGroup (
-      oahStringsSetElementAtom::create (
+      oahStringsSetAtom::create (
         "break-line-after-measure-number", "blamn",
 R"(Generate a '\break' command after measure NUMBER in the LilyPond code.
 NUMBER is a MusicXML measure number (a string), to be found in the latter.

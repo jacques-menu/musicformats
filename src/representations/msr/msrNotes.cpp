@@ -1728,8 +1728,8 @@ S_msrNote msrNote::createRegularNote (
 //________________________________________________________________________
 S_msrNote msrNote::createRestFromString (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& restString,
-  const std::string& restMeasureNumber)
+  const std::string&       restString,
+  const mfMeasureNumber&   restMeasureNumber)
 {
   // handling restString à la LilyPond, such as "r4.."
 
@@ -1889,8 +1889,8 @@ S_msrNote msrNote::createRestFromString (
 //________________________________________________________________________
 S_msrNote msrNote::createSkipFromString (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& skipString,
-  const std::string& skipMeasureNumber)
+  const std::string&       skipString,
+  const mfMeasureNumber&   skipMeasureNumber)
 {
   // handling skipString à la LilyPond, such as "s4.."
 
@@ -2051,8 +2051,8 @@ S_msrNote msrNote::createSkipFromString (
 //________________________________________________________________________
 S_msrNote msrNote::createNoteFromString (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& noteString,
-  const std::string& noteMeasureNumber)
+  const std::string&       noteString,
+  const mfMeasureNumber&   noteMeasureNumber)
 {
   // handling noteString à la LilyPond, such as "bes,4.."
 

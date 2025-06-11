@@ -1874,6 +1874,60 @@ void mfDisplayStringSet (
   os << std::endl;
 }
 
+void displayMeasureNumberSet (
+  const std::string&                title,
+  const std::set <mfMeasureNumber>& stringSet,
+  std::ostream&                     os)
+{
+  // print the title
+  os << title << ":";
+
+  // print the set elements if any
+  size_t stringSetSize =
+    stringSet.size ();
+
+  if (stringSetSize) {
+    os << std::endl;
+
+    ++gIndenter;
+
+    size_t nextToLast =
+      stringSetSize - 1;
+
+    size_t count = 0;
+
+    for (
+      std::set <mfMeasureNumber>::const_iterator
+        i = stringSet.begin (),
+        iEnd = stringSet.end ();
+      i != iEnd;
+      ++i
+    ) {
+      mfMeasureNumber theString = (*i);
+
+      ++count;
+
+      os << "\"" << theString << "\"";
+
+      if (++i == iEnd) break;
+
+      if (count == nextToLast) {
+        os << " and ";
+      }
+      else if (count != stringSetSize) {
+        os << ", ";
+      }
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os << " empty";
+  }
+
+  os << std::endl;
+}
+
 //______________________________________________________________________________
 Bool mfFetchValueFromStringToStringMap (
   const std::string&                        theKey,

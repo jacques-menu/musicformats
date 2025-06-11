@@ -3991,7 +3991,7 @@ R"()",
 
     traceAndDisplaySubGroup->
       appendAtomToSubGroup (
-        oahNaturalNumbersSetElementAtom::create (
+        oahNaturalNumbersSetAtom::create (
           "trace-detailed", "tdetail",
 R"('measureNumbersSet' has a form such as '0,2-14,^8-10',
 where '^' excludes the corresponding numbers interval

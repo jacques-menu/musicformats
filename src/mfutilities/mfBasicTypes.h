@@ -58,7 +58,7 @@ EXP extern const std::string
   using mfInputLineNumber = int;
 #else
   using mfInputLineNumber =
-    mfWrappedValueWithDefault <
+    mfWrappedValueForArithmetic <
       int,
       kInputLineNumberPrefix,
       K_MF_EMPTY_STRING,
@@ -107,7 +107,7 @@ EXP extern const int K_PART_FIGURED_BASS_STAFF_NUMBER;
   using mfStaffNumber = int;
 #else
   using mfStaffNumber =
-    mfWrappedValueWithDefault <
+    mfWrappedValueForArithmetic <
       int,
       kStaffNumberPrefix,
       K_MF_EMPTY_STRING,
@@ -141,7 +141,7 @@ EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
   using mfVoiceNumber = int;
 #else
   using mfVoiceNumber =
-    mfWrappedValueWithDefault <
+    mfWrappedValueForArithmetic <
       int,
       kVoiceNumberPrefix,
       K_MF_EMPTY_STRING,

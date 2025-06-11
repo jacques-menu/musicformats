@@ -204,17 +204,17 @@ class EXP mxsr2msrOahGroup : public oahGroup
                               { return fMusicXMLPartsKeepNameSet; }
 
     // for checkOptionsConsistency()
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getIgnoreMusicXMLPartIDAtom () const
                               { return fIgnoreMusicXMLPartIDAtom; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getKeepMusicXMLPartIDAtom () const
                               { return fKeepMusicXMLPartIDAtom; }
 
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getIgnoreMusicXMLPartNameAtom () const
                               { return fIgnoreMusicXMLPartNameAtom; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getKeepMusicXMLPartNameAtom () const
                               { return fKeepMusicXMLPartNameAtom; }
 
@@ -313,28 +313,28 @@ class EXP mxsr2msrOahGroup : public oahGroup
     const std::set <std::string>&
                           getBoldWordsSet () const
                               { return fBoldWordsSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getBoldWordsAtom () const
                               { return fBoldWordsAtom; }
 
     const std::set <std::string>&
                           getItalicWordsSet () const
                               { return fItalicWordsSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getItalicWordsAtom () const
                               { return fItalicWordsAtom; }
 
     const std::set <std::string>&
                           getWordsToBePlacedAboveSet () const
                               { return fWordsToBePlacedAboveSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getWordsToBePlacedAboveAtom () const
                               { return fWordsToBePlacedAboveAtom; }
 
     const std::set <std::string>&
                           getWordsToBePlacedBelowSet () const
                               { return fWordsToBePlacedBelowSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getWordsToBePlacedBelowAtom () const
                               { return fWordsToBePlacedBelowAtom; }
 
@@ -344,62 +344,62 @@ class EXP mxsr2msrOahGroup : public oahGroup
     const std::set <std::string>&
                           getWordsToRehearsalMarkSet () const
                               { return fWordsToRehearsalMarkSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getWordsToRehearsalMarkAtom () const
                               { return fWordsToRehearsalMarkAtom; }
 
     const std::set <std::string>&
                           getWordsToSegnoSet () const
                               { return fWordsToSegnoSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getWordsToSegnoAtom () const
                               { return fWordsToSegnoAtom; }
 
     const std::set <std::string>&    getWordsToDalSegnoSet () const
                               { return fWordsToDalSegnoSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getWordsToDalSegnoAtom () const
                               { return fWordsToDalSegnoAtom; }
 
     const std::set <std::string>&
                           getWordsToDalSegnoAlFineSet () const
                               { return fWordsToDalSegnoAlFineSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getWordsToDalSegnoAlFineAtom () const
                               { return fWordsToDalSegnoAlFineAtom; }
 
     const std::set <std::string>&
                           getWordsToDalSegnoAlCodaSet () const
                               { return fWordsToDalSegnoAlCodaSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getWordsToSegnoAlCodaAtom () const
                               { return fWordsToDalSegnoAlCodaAtom; }
 
     const std::set <std::string>&
                           getWordsToCodaFirstSet () const
                               { return fWordsToCodaFirstSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getWordsToCodFirstaAtom () const
                               { return fWordsToCodaFirstAtom; }
 
     const std::set <std::string>&
                           getWordsToCodaSecondSet () const
                               { return fWordsToCodaSecondSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getWordsToCodaSecondAtom () const
                               { return fWordsToCodaSecondAtom; }
 
     const std::set <std::string>&
                           getWordsToCrescSet () const
                               { return fWordsToCrescSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getWordsToCrescAtom () const
                               { return fWordsToCrescAtom; }
 
     const std::set <std::string>&
                           getWordsToDecrescSet () const
                               { return fWordsToDecrescSet; }
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getWordsToDecrescAtom () const
                               { return fWordsToDecrescAtom; }
 
@@ -654,14 +654,14 @@ class EXP mxsr2msrOahGroup : public oahGroup
                           fMusicXMLPartsKeepNameSet;
 
      // for checkOptionsConsistency()
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fIgnoreMusicXMLPartIDAtom;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fKeepMusicXMLPartIDAtom;
 
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fIgnoreMusicXMLPartNameAtom;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fKeepMusicXMLPartNameAtom;
 
     // staves
@@ -671,9 +671,9 @@ class EXP mxsr2msrOahGroup : public oahGroup
     std::set <int>        fMusicXMLStavesKeepNumberSet;
 
      // for checkOptionsConsistency()
-    S_oahIntSetElementAtom
+    S_oahIntSetAtom
                           fIgnoreStaffNumberAtom;
-    S_oahIntSetElementAtom
+    S_oahIntSetAtom
                           fKeepStaffNumberAtom;
 
     // voices
@@ -683,9 +683,9 @@ class EXP mxsr2msrOahGroup : public oahGroup
     std::set <int>        fMusicXMLVoicesKeepNumberSet;
 
      // for checkOptionsConsistency()
-    S_oahIntSetElementAtom
+    S_oahIntSetAtom
                           fIgnoreVoiceNumberAtom;
-    S_oahIntSetElementAtom
+    S_oahIntSetAtom
                           fKeepVoiceNumberAtom;
 
     // clefs, keys, time signatures
@@ -758,21 +758,21 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     std::set <std::string>
                           fBoldWordsSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fBoldWordsAtom;
 
     std::set <std::string>
                           fItalicWordsSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fItalicWordsAtom;
 
     std::set <std::string>
                           fWordsToBePlacedAboveSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToBePlacedAboveAtom;
 
     std::set <std::string> fWordsToBePlacedBelowSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToBePlacedBelowAtom;
 
     Bool                  fAddMsrWordsFromTheMusicXMLLyrics;
@@ -783,44 +783,44 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     std::set <std::string>
                           fWordsToTemposSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToTempoAtom;
 
     std::set <std::string>
                           fWordsToRehearsalMarkSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToRehearsalMarkAtom;
 
     std::set <std::string> fWordsToSegnoSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToSegnoAtom;
 
     std::set <std::string> fWordsToDalSegnoSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToDalSegnoAtom;
 
     std::set <std::string> fWordsToDalSegnoAlFineSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToDalSegnoAlFineAtom;
 
     std::set <std::string> fWordsToDalSegnoAlCodaSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToDalSegnoAlCodaAtom;
 
     std::set <std::string> fWordsToCodaFirstSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToCodaFirstAtom;
 
     std::set <std::string> fWordsToCodaSecondSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToCodaSecondAtom;
 
     std::set <std::string> fWordsToCrescSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToCrescAtom;
 
     std::set <std::string> fWordsToDecrescSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fWordsToDecrescAtom;
 
     // ties

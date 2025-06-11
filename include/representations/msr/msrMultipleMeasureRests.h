@@ -76,7 +76,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     void                  setNextMeasureNumber (
                             const mfMeasureNumber& nextMeasureNumber);
 
-    std::string           getNextMeasureNumber () const
+    mfMeasureNumber       getNextMeasureNumber () const
                               { return fNextMeasureNumber; }
 
     void                  setLastMeasurePuristMeasureNumber (
@@ -142,7 +142,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
 
     int                   fLastMeasurePuristNumber;
 
-    std::string           fNextMeasureNumber;
+    mfMeasureNumber       fNextMeasureNumber;
 };
 typedef SMARTP<msrMultipleMeasureRest> S_msrMultipleMeasureRest;
 EXP std::ostream& operator << (std::ostream& os, const S_msrMultipleMeasureRest& elt);

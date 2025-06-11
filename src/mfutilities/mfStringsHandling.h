@@ -396,6 +396,11 @@ void mfDisplayStringSet (
   const std::set <std::string>& stringSet,
   std::ostream&                os);
 
+void displayMeasureNumberSet (
+  const std::string&                title,
+  const std::set <mfMeasureNumber>& stringSet,
+  std::ostream&                     os);
+
 //______________________________________________________________________________
 Bool mfFetchValueFromStringToStringMap (
   const std::string&                        theKey,

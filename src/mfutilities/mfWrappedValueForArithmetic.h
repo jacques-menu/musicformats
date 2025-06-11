@@ -178,7 +178,7 @@ class mfWrappedValueForArithmetic
 
     mfWrappedValueForArithmetic
                           operator += (
-                            const mfWrappedValueForArithmetic <
+                            mfWrappedValueForArithmetic <
                               T,
                               printPrefix,
                               printPostfix,
@@ -189,7 +189,7 @@ class mfWrappedValueForArithmetic
 
     mfWrappedValueForArithmetic
                           operator -= (
-                            const mfWrappedValueForArithmetic <
+                            mfWrappedValueForArithmetic <
                               T,
                               printPrefix,
                               printPostfix,
@@ -210,6 +210,8 @@ class mfWrappedValueForArithmetic
     std::string           asString () const;
 
     void                  print (std::ostream& os) const;
+
+    void                  print (mfIndentedStringStream& iss) const;
 
   private:
 
@@ -671,6 +673,24 @@ void mfWrappedValueForArithmetic <
 >::print (std::ostream& os) const
 {
   os << asString ();
+}
+
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
+void mfWrappedValueForArithmetic <
+  T,
+  printPrefix,
+  printPostfix,
+  neutralValue,
+  neutralValueString
+>::print (mfIndentedStringStream& iss) const
+{
+  iss << asString ();
 }
 
 // operator <<

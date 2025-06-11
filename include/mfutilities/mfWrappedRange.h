@@ -67,6 +67,7 @@ class EXP mfWrappedRange
     std::string           asString () const;
 
     void                  print (std::ostream& os) const;
+    void                  print (mfIndentedStringStream& iss) const;
 
   private:
 
@@ -134,6 +135,15 @@ template <
 void mfWrappedRange <T, printSeparator>::print (std::ostream& os) const
 {
   os << asString ();
+}
+
+template <
+  typename           T,
+  const std::string& printSeparator
+>
+void mfWrappedRange <T, printSeparator>::print (mfIndentedStringStream& iss) const
+{
+  iss << asString ();
 }
 
 // operator <<

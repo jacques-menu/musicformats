@@ -152,18 +152,18 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createRestFromString (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& restString,
-                            const mfMeasureNumber& restMeasureNumber);
+                            const std::string&       restString,
+                            const mfMeasureNumber&   restMeasureNumber);
 
     static SMARTP<msrNote> createSkipFromString (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& skipString,
-                            const mfMeasureNumber& skipMeasureNumber);
+                            const std::string&       skipString,
+                            const mfMeasureNumber&   skipMeasureNumber);
 
     static SMARTP<msrNote> createNoteFromString (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& noteString,
-                            const mfMeasureNumber& noteMeasureNumber);
+                            const std::string&       noteString,
+                            const mfMeasureNumber&   noteMeasureNumber);
 
     // creation from the options
     // ------------------------------------------------------

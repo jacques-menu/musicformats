@@ -66,9 +66,9 @@ class EXP basicOah2manPage : virtual public oah2manPage,
 
   public                      visitor<S_oahDefaultedStringAtom>,
 
-  public                      visitor<oahNaturalNumbersSetElementAtom>,
+  public                      visitor<oahNaturalNumbersSetAtom>,
 
-  public                      visitor<S_oahStringSetElementAtom>,
+  public                      visitor<S_oahStringSetAtom>,
 
   public                      visitor<S_oahColorRGBAtom>,
 
@@ -153,11 +153,11 @@ class EXP basicOah2manPage : virtual public oah2manPage,
     virtual void              visitStart (S_oahDefaultedStringAtom& elt);
     virtual void              visitEnd   (S_oahDefaultedStringAtom& elt);
 
-    virtual void              visitStart (S_oahNaturalNumbersSetElementAtom& elt);
-    virtual void              visitEnd   (S_oahNaturalNumbersSetElementAtom& elt);
+    virtual void              visitStart (S_oahNaturalNumbersSetAtom& elt);
+    virtual void              visitEnd   (S_oahNaturalNumbersSetAtom& elt);
 
-    virtual void              visitStart (S_oahStringSetElementAtom& elt);
-    virtual void              visitEnd   (S_oahStringSetElementAtom& elt);
+    virtual void              visitStart (S_oahStringSetAtom& elt);
+    virtual void              visitEnd   (S_oahStringSetAtom& elt);
 
     virtual void              visitStart (S_oahColorRGBAtom& elt);
     virtual void              visitEnd   (S_oahColorRGBAtom& elt);

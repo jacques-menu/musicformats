@@ -146,7 +146,7 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
                           getInputSourcesSet () const
                               { return fInputSourcesSet; }
 
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           getInputSourcesSetAtom () const
                               { return fInputSourcesSetAtom; }
 
@@ -154,7 +154,7 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
                           getSelectChoiceToLabelsMultiMap () const
                               { return fSelectChoiceToLabelsMultiMap; }
 
-    S_oahStringToStringMultiMapElementAtom
+    S_oahStringToStringMultiMapAtom
                           getSelectChoiceToLabelsMultiMapAtom () const
                               { return fSelectChoiceToLabelsMultiMapAtom; }
 
@@ -229,13 +229,13 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
     // input sources
     std::set <std::string>
                           fInputSourcesSet;
-    S_oahStringSetElementAtom
+    S_oahStringSetAtom
                           fInputSourcesSetAtom;
 
     // select statement
     std::multimap <std::string, std::string>
                           fSelectChoiceToLabelsMultiMap;
-    S_oahStringToStringMultiMapElementAtom
+    S_oahStringToStringMultiMapAtom
                           fSelectChoiceToLabelsMultiMapAtom;
 };
 typedef SMARTP<ischemeInterpreterOahGroup> S_ischemeInterpreterOahGroup;

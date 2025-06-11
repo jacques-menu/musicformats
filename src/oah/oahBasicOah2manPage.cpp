@@ -1025,7 +1025,7 @@ void basicOah2manPage::visitEnd (S_oahDefaultedStringAtom& elt)
 }
 
 //________________________________________________________________________
-void basicOah2manPage::visitStart (S_oahNaturalNumbersSetElementAtom& elt)
+void basicOah2manPage::visitStart (S_oahNaturalNumbersSetAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
@@ -1033,7 +1033,7 @@ void basicOah2manPage::visitStart (S_oahNaturalNumbersSetElementAtom& elt)
 
     ss <<
       std::endl <<
-      ".\\\" --> Start visiting oahNaturalNumbersSetElementAtom '" <<
+      ".\\\" --> Start visiting oahNaturalNumbersSetAtom '" <<
       elt->asString () <<
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
@@ -1045,7 +1045,7 @@ void basicOah2manPage::visitStart (S_oahNaturalNumbersSetElementAtom& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void basicOah2manPage::visitEnd (S_oahNaturalNumbersSetElementAtom& elt)
+void basicOah2manPage::visitEnd (S_oahNaturalNumbersSetAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
@@ -1053,7 +1053,7 @@ void basicOah2manPage::visitEnd (S_oahNaturalNumbersSetElementAtom& elt)
 
     ss <<
       std::endl <<
-      ".\\\" --> End visiting oahNaturalNumbersSetElementAtom" <<
+      ".\\\" --> End visiting oahNaturalNumbersSetAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -1065,7 +1065,7 @@ void basicOah2manPage::visitEnd (S_oahNaturalNumbersSetElementAtom& elt)
 
 /* JMI
 //________________________________________________________________________
-void basicOah2manPage::visitStart (S_oahStringsSetElementAtom& elt)
+void basicOah2manPage::visitStart (S_oahStringsSetAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
@@ -1073,7 +1073,7 @@ void basicOah2manPage::visitStart (S_oahStringsSetElementAtom& elt)
 
     ss <<
       std::endl <<
-      ".\\\" --> Start visiting oahStringsSetElementAtom '" <<
+      ".\\\" --> Start visiting oahStringsSetAtom '" <<
       elt->asString () <<
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
@@ -1085,7 +1085,7 @@ void basicOah2manPage::visitStart (S_oahStringsSetElementAtom& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void basicOah2manPage::visitEnd (S_oahStringsSetElementAtom& elt)
+void basicOah2manPage::visitEnd (S_oahStringsSetAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
@@ -1093,7 +1093,7 @@ void basicOah2manPage::visitEnd (S_oahStringsSetElementAtom& elt)
 
     ss <<
       std::endl <<
-      ".\\\" --> End visiting oahStringsSetElementAtom" <<
+      ".\\\" --> End visiting oahStringsSetAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -1105,7 +1105,7 @@ void basicOah2manPage::visitEnd (S_oahStringsSetElementAtom& elt)
 */
 
 //________________________________________________________________________
-void basicOah2manPage::visitStart (S_oahStringSetElementAtom& elt)
+void basicOah2manPage::visitStart (S_oahStringSetAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
@@ -1113,7 +1113,7 @@ void basicOah2manPage::visitStart (S_oahStringSetElementAtom& elt)
 
     ss <<
       std::endl <<
-      ".\\\" --> Start visiting oahStringSetElementAtom '" <<
+      ".\\\" --> Start visiting oahStringSetAtom '" <<
       elt->asString () <<
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
@@ -1125,7 +1125,7 @@ void basicOah2manPage::visitStart (S_oahStringSetElementAtom& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void basicOah2manPage::visitEnd (S_oahStringSetElementAtom& elt)
+void basicOah2manPage::visitEnd (S_oahStringSetAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
@@ -1133,7 +1133,7 @@ void basicOah2manPage::visitEnd (S_oahStringSetElementAtom& elt)
 
     ss <<
       std::endl <<
-      ".\\\" --> End visiting oahStringSetElementAtom" <<
+      ".\\\" --> End visiting oahStringSetAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (

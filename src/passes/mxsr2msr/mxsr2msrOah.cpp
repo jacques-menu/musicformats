@@ -797,7 +797,7 @@ R"()",
   // --------------------------------------
 
   fIgnoreMusicXMLPartIDAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "ignore-musicxml-part-with-id", "igmxmlpartwithid",
 R"(Ignore the part with ID PART_ID, which is a std::string.
 There can be several occurrences of this option.
@@ -815,7 +815,7 @@ This option is incompatible with '-mkpi, -msr-keep-musicxml-part-with-id'.)",
   // --------------------------------------
 
   fIgnoreMusicXMLPartNameAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "ignore-musicxml-part-with-name", "igmxmlpartwithname",
 R"(Ignore the part named PART_NAME, which is a std::string.
 There can be several occurrences of this option.
@@ -833,7 +833,7 @@ This option is incompatible with '-mkpn, -msr-keep-musicxml-part-with-name'.)",
   // --------------------------------------
 
   fKeepMusicXMLPartIDAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "keep-musicxml-part-with-id", "kmxmlpartwithid",
 R"(Keep the part with ID PART_ID, which is a std::string.
 There can be several occurrences of this option.
@@ -851,7 +851,7 @@ This option is incompatible with '-mopi, -msr-ignore-musicxml-part-with-id'.)",
   // --------------------------------------
 
   fKeepMusicXMLPartNameAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "keep-musicxml-part-with-name", "kmxmlpartwithname",
 R"(Keep the part named PART_NAME, which is a std::string.
 There can be several occurrences of this option.
@@ -882,7 +882,7 @@ R"()",
   // --------------------------------------
 
   fIgnoreStaffNumberAtom =
-    oahIntSetElementAtom::create (
+    oahIntSetAtom::create (
       "ignore-musicxml-staff-number", "imxmlsn",
 R"(Ignore the staff numbered STAFF_NUMBER, which is an integer.
 There can be several occurrences of this option.
@@ -900,7 +900,7 @@ This option is incompatible with '-mkpn, -msr-keep-musicxml-staff-number'.)",
   // --------------------------------------
 
   fKeepStaffNumberAtom =
-    oahIntSetElementAtom::create (
+    oahIntSetAtom::create (
       "keep-musicxml-staff-number", "kmxmlsn",
 R"(Keep the staff numbered STAFF_NUMBER, which is an integer.
 There can be several occurrences of this option.
@@ -931,7 +931,7 @@ R"()",
   // --------------------------------------
 
   fIgnoreVoiceNumberAtom =
-    oahIntSetElementAtom::create (
+    oahIntSetAtom::create (
       "ignore-musicxml-voice-number", "imxmlvn",
 R"(Ignore the voice numbered VOICE_NUMBER, which is an integer.
 There can be several occurrences of this option.
@@ -949,7 +949,7 @@ This option is incompatible with '-mkpn, -msr-keep-musicxml-voice-number'.)",
   // --------------------------------------
 
   fKeepVoiceNumberAtom =
-    oahIntSetElementAtom::create (
+    oahIntSetAtom::create (
       "keep-musicxml-voice-number", "kmxmlvn",
 R"(Keep the voice numbered VOICE_NUMBER, which is an integer.
 There can be several occurrences of this option.
@@ -1132,7 +1132,7 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      oahMeasureNumberToIntMapElementAtom::create (
+      oahMeasureNumberToIntMapAtom::create (
         "replicate-msr-measure", "rmmeas",
 R"###(Replicate an MSR mesure according to SPECIFICATION.
 SPECIFICATION should be of the form 'MEASURE_NUMBER:NUMBER_OF_MEASURES_TO_ADD',
@@ -1154,7 +1154,7 @@ This option can be used any number of times.)###",
 
   subGroup->
     appendAtomToSubGroup (
-      oahMeasureNumberToIntMapElementAtom::create (
+      oahMeasureNumberToIntMapAtom::create (
         "add-empty-msr-measures", "aemmeas",
 R"###(Add empty MSR mesures according to SPECIFICATION.
 SPECIFICATION should be of the form 'MEASURE_NUMBER:NUMBER_OF_MEASURES_TO_ADD',
@@ -1578,7 +1578,7 @@ R"(Ignore '<words />' in MusicXML data.)",
   // convert words to bold
 
   fBoldWordsAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "convert-musicxml-words-to-bold", "bold-words",
 R"(Convert MusicXML words STRING to bold.
 There can be several occurrences of this option.)",
@@ -1593,7 +1593,7 @@ There can be several occurrences of this option.)",
   // convert words to italic
 
   fItalicWordsAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "convert-musicxml-words-to-italic", "italic-words",
 R"(Convert MusicXML words STRING to italic.
 There can be several occurrences of this option.)",
@@ -1608,7 +1608,7 @@ There can be several occurrences of this option.)",
   // place words above
 
   fWordsToBePlacedAboveAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "place-musicxml-words-above", "words-above",
 R"(Place MusicXML words STRING above the staff.
 There can be several occurrences of this option.)",
@@ -1623,7 +1623,7 @@ There can be several occurrences of this option.)",
   // place words below
 
   fWordsToBePlacedBelowAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "place-musicxml-words-below", "words-below",
 R"(Place MusicXML words STRING below the staff.
 There can be several occurrences of this option.)",
@@ -1638,7 +1638,7 @@ There can be several occurrences of this option.)",
   // convert MusicXML words to MSR tempos
 
   fWordsToTempoAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "convert-musicxml-words-to-msr-tempo", "words-to-tempo",
 R"(Convert MusicXML words STRING to an MSR tempo.
 There can be several occurrences of this option.)",
@@ -1654,7 +1654,7 @@ There can be several occurrences of this option.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringSetElementAtom::create (
+      oahStringSetAtom::create (
         "convert-musicxml-words-to-msr-rehearsal-mark", "words-to-rehearsalMark",
 R"(Convert MusicXML words STRING to an MSR rehearsal mark.
 There can be several occurrences of this option.)",
@@ -1666,7 +1666,7 @@ There can be several occurrences of this option.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringSetElementAtom::create (
+      oahStringSetAtom::create (
         "convert-musicxml-words-to-msr-segno", "words-to-segno",
 R"(Convert MusicXML words STRING to an MSR segno.
 There can be several occurrences of this option.)",
@@ -1678,7 +1678,7 @@ There can be several occurrences of this option.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringSetElementAtom::create (
+      oahStringSetAtom::create (
         "convert-musicxml-words-to-msr-dal-segno", "words-to-dal-segno",
 R"(Convert MusicXML words STRING to an MSR dal segno.
 There can be several occurrences of this option.)",
@@ -1690,7 +1690,7 @@ There can be several occurrences of this option.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringSetElementAtom::create (
+      oahStringSetAtom::create (
         "convert-musicxml-words-to-msr-dal_segno-al-fine", "words-to-dal_segno-al-fine",
 R"(Convert MusicXML words STRING to an MSR dal segno al fine.
 There can be several occurrences of this option.)",
@@ -1702,7 +1702,7 @@ There can be several occurrences of this option.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringSetElementAtom::create (
+      oahStringSetAtom::create (
         "convert-musicxml-words-to-msr-dal_segno-al-coda", "words-to-dal_segno-al-coda",
 R"(Convert MusicXML words STRING to an MSR dal segno al coda.
 There can be several occurrences of this option.)",
@@ -1714,7 +1714,7 @@ There can be several occurrences of this option.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringSetElementAtom::create (
+      oahStringSetAtom::create (
         "convert-musicxml-words-to-msr-coda-first", "words-to-coda-first",
 R"(Convert MusicXML words STRING to an MSR coda first.
 There can be several occurrences of this option.)",
@@ -1724,7 +1724,7 @@ There can be several occurrences of this option.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringSetElementAtom::create (
+      oahStringSetAtom::create (
         "convert-musicxml-words-to-msr-coda-second", "words-to-coda-second",
 R"(Convert MusicXML words STRING to an MSR coda second.
 There can be several occurrences of this option.)",
@@ -1736,7 +1736,7 @@ There can be several occurrences of this option.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringSetElementAtom::create (
+      oahStringSetAtom::create (
         "convert-musicxml-words-to-msr-cresc", "words-to-cresc",
 R"(Convert MusicXML words STRING to an MSR cresc.
 There can be several occurrences of this option.)",
@@ -1748,7 +1748,7 @@ There can be several occurrences of this option.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringSetElementAtom::create (
+      oahStringSetAtom::create (
         "convert-musicxml-words-to-msr-decresc", "words-to-decresc",
 R"(Convert MusicXML words STRING to an MSR decresc.
 There can be several occurrences of this option.)",

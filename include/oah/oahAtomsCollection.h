@@ -2455,7 +2455,7 @@ using S_oahRationalAtom = SMARTP<oahRationalAtom>;
 EXP std::ostream& operator << (std::ostream& os, const S_oahRationalAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
+class EXP oahNaturalNumbersSetAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a set of natural number variables
@@ -2466,7 +2466,7 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahNaturalNumbersSetElementAtom> create (
+    static SMARTP<oahNaturalNumbersSetAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -2479,7 +2479,7 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahNaturalNumbersSetElementAtom (
+                          oahNaturalNumbersSetAtom (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -2487,7 +2487,7 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
                             const std::string& variableName,
                             std::set <int>&     naturalNumbersSetVariable);
 
-    virtual               ~oahNaturalNumbersSetElementAtom ();
+    virtual               ~oahNaturalNumbersSetAtom ();
 
   public:
 
@@ -2542,9 +2542,9 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
     std::set <int>&       fNaturalNumbersSetVariable;
 };
 
-using S_oahNaturalNumbersSetElementAtom = SMARTP<oahNaturalNumbersSetElementAtom>;
+using S_oahNaturalNumbersSetAtom = SMARTP<oahNaturalNumbersSetAtom>;
 
-EXP std::ostream& operator << (std::ostream& os, const S_oahNaturalNumbersSetElementAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahNaturalNumbersSetAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahColorRGBAtom : public oahAtomStoringAValue
@@ -2641,7 +2641,7 @@ using S_oahColorRGBAtom = SMARTP<oahColorRGBAtom>;
 EXP std::ostream& operator << (std::ostream& os, const S_oahColorRGBAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahIntSetElementAtom : public oahAtomStoringAValue
+class EXP oahIntSetAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a set of integer variables
@@ -2652,7 +2652,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahIntSetElementAtom> create (
+    static SMARTP<oahIntSetAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -2665,7 +2665,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahIntSetElementAtom (
+                          oahIntSetAtom (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -2673,7 +2673,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
                             const std::string& variableName,
                             std::set <int>&    intSetVariable);
 
-    virtual               ~oahIntSetElementAtom ();
+    virtual               ~oahIntSetAtom ();
 
   public:
 
@@ -2724,12 +2724,12 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
     std::set <int>&       fIntSetVariable;
 };
 
-using S_oahIntSetElementAtom = SMARTP<oahIntSetElementAtom>;
+using S_oahIntSetAtom = SMARTP<oahIntSetAtom>;
 
-EXP std::ostream& operator << (std::ostream& os, const S_oahIntSetElementAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahIntSetAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahStringSetElementAtom : public oahAtomStoringAValue
+class EXP oahStringSetAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a set of std::string variables
@@ -2740,7 +2740,7 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahStringSetElementAtom> create (
+    static SMARTP<oahStringSetAtom> create (
                             const std::string&     longName,
                             const std::string&     shortName,
                             const std::string&     description,
@@ -2753,7 +2753,7 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahStringSetElementAtom (
+                          oahStringSetAtom (
                             const std::string&     longName,
                             const std::string&     shortName,
                             const std::string&     description,
@@ -2761,7 +2761,7 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
                             const std::string&     variableName,
                             std::set <std::string>& stringSetVariable);
 
-    virtual               ~oahStringSetElementAtom ();
+    virtual               ~oahStringSetAtom ();
 
   public:
 
@@ -2820,12 +2820,12 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
                           fStringSetVariable;
 };
 
-using S_oahStringSetElementAtom = SMARTP<oahStringSetElementAtom>;
+using S_oahStringSetAtom = SMARTP<oahStringSetAtom>;
 
-EXP std::ostream& operator << (std::ostream& os, const S_oahStringSetElementAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahStringSetAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahMeasureNumberSetElementAtom : public oahAtomStoringAValue
+class EXP oahMeasureNumberSetAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a set of integer variables
@@ -2836,7 +2836,7 @@ class EXP oahMeasureNumberSetElementAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahMeasureNumberSetElementAtom> create (
+    static SMARTP<oahMeasureNumberSetAtom> create (
                             const std::string&          longName,
                             const std::string&          shortName,
                             const std::string&          description,
@@ -2849,7 +2849,7 @@ class EXP oahMeasureNumberSetElementAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahMeasureNumberSetElementAtom (
+                          oahMeasureNumberSetAtom (
                             const std::string&          longName,
                             const std::string&          shortName,
                             const std::string&          description,
@@ -2857,7 +2857,7 @@ class EXP oahMeasureNumberSetElementAtom : public oahAtomStoringAValue
                             const std::string&          variableName,
                             std::set <mfMeasureNumber>& measureNumberSetVariable);
 
-    virtual               ~oahMeasureNumberSetElementAtom ();
+    virtual               ~oahMeasureNumberSetAtom ();
 
   public:
 
@@ -2910,12 +2910,12 @@ class EXP oahMeasureNumberSetElementAtom : public oahAtomStoringAValue
                           fMeasureNumberSetVariable;
 };
 
-using S_oahMeasureNumberSetElementAtom = SMARTP<oahMeasureNumberSetElementAtom>;
+using S_oahMeasureNumberSetAtom = SMARTP<oahMeasureNumberSetAtom>;
 
-EXP std::ostream& operator << (std::ostream& os, const S_oahMeasureNumberSetElementAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahMeasureNumberSetAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
+class EXP oahStringToIntMapAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a std::string to integer mapping variable
@@ -2926,7 +2926,7 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahStringToIntMapElementAtom> create (
+    static SMARTP<oahStringToIntMapAtom> create (
                             const std::string&           longName,
                             const std::string&           shortName,
                             const std::string&           description,
@@ -2939,7 +2939,7 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahStringToIntMapElementAtom (
+                          oahStringToIntMapAtom (
                             const std::string&           longName,
                             const std::string&           shortName,
                             const std::string&           description,
@@ -2947,7 +2947,7 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
                             const std::string&           variableName,
                             std::map <std::string, int>& stringToIntMapVariable);
 
-    virtual               ~oahStringToIntMapElementAtom ();
+    virtual               ~oahStringToIntMapAtom ();
 
   public:
 
@@ -3000,13 +3000,13 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
                           fStringToIntMapVariable;
 };
 
-using S_oahStringToIntMapElementAtom = SMARTP<oahStringToIntMapElementAtom>;
+using S_oahStringToIntMapAtom = SMARTP<oahStringToIntMapAtom>;
 
 EXP std::ostream& operator << (
-  std::ostream& os, const S_oahStringToIntMapElementAtom& elt);
+  std::ostream& os, const S_oahStringToIntMapAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahMeasureNumberToIntMapElementAtom : public oahAtomStoringAValue
+class EXP oahMeasureNumberToIntMapAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a std::string to integer mapping variable
@@ -3017,7 +3017,7 @@ class EXP oahMeasureNumberToIntMapElementAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahMeasureNumberToIntMapElementAtom> create (
+    static SMARTP<oahMeasureNumberToIntMapAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -3031,7 +3031,7 @@ class EXP oahMeasureNumberToIntMapElementAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahMeasureNumberToIntMapElementAtom (
+                          oahMeasureNumberToIntMapAtom (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -3040,7 +3040,7 @@ class EXP oahMeasureNumberToIntMapElementAtom : public oahAtomStoringAValue
                             std::map <mfMeasureNumber, int>&
                                                measureNumberToIntMapVariable);
 
-    virtual               ~oahMeasureNumberToIntMapElementAtom ();
+    virtual               ~oahMeasureNumberToIntMapAtom ();
 
   public:
 
@@ -3093,13 +3093,13 @@ class EXP oahMeasureNumberToIntMapElementAtom : public oahAtomStoringAValue
                           fMeasureNumberToIntMapVariable;
 };
 
-using S_oahMeasureNumberToIntMapElementAtom = SMARTP<oahMeasureNumberToIntMapElementAtom>;
+using S_oahMeasureNumberToIntMapAtom = SMARTP<oahMeasureNumberToIntMapAtom>;
 
 EXP std::ostream& operator << (
-  std::ostream& os, const S_oahMeasureNumberToIntMapElementAtom& elt);
+  std::ostream& os, const S_oahMeasureNumberToIntMapAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahMeasureNumberToMeasureNumberMapElementAtom : public oahAtomStoringAValue
+class EXP oahMeasureNumberToMeasureNumberMapAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a std::string to integer mapping variable
@@ -3110,7 +3110,7 @@ class EXP oahMeasureNumberToMeasureNumberMapElementAtom : public oahAtomStoringA
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahMeasureNumberToMeasureNumberMapElementAtom> create (
+    static SMARTP<oahMeasureNumberToMeasureNumberMapAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -3124,7 +3124,7 @@ class EXP oahMeasureNumberToMeasureNumberMapElementAtom : public oahAtomStoringA
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahMeasureNumberToMeasureNumberMapElementAtom (
+                          oahMeasureNumberToMeasureNumberMapAtom (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -3133,7 +3133,7 @@ class EXP oahMeasureNumberToMeasureNumberMapElementAtom : public oahAtomStoringA
                             std::map <mfMeasureNumber, mfMeasureNumber>&
                                                measureNumberToMeasureNumberMapVariable);
 
-    virtual               ~oahMeasureNumberToMeasureNumberMapElementAtom ();
+    virtual               ~oahMeasureNumberToMeasureNumberMapAtom ();
 
   public:
 
@@ -3186,13 +3186,13 @@ class EXP oahMeasureNumberToMeasureNumberMapElementAtom : public oahAtomStoringA
                           fMeasureNumberToMeasureNumberMapVariable;
 };
 
-using S_oahMeasureNumberToMeasureNumberMapElementAtom = SMARTP<oahMeasureNumberToMeasureNumberMapElementAtom>;
+using S_oahMeasureNumberToMeasureNumberMapAtom = SMARTP<oahMeasureNumberToMeasureNumberMapAtom>;
 
 EXP std::ostream& operator << (
-  std::ostream& os, const S_oahMeasureNumberToMeasureNumberMapElementAtom& elt);
+  std::ostream& os, const S_oahMeasureNumberToMeasureNumberMapAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
+class EXP oahStringToStringMapAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a std::string to std::string mapping variable
@@ -3203,7 +3203,7 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahStringToStringMapElementAtom> create (
+    static SMARTP<oahStringToStringMapAtom> create (
                             const std::string&                  longName,
                             const std::string&                  shortName,
                             const std::string&                  description,
@@ -3216,7 +3216,7 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahStringToStringMapElementAtom (
+                          oahStringToStringMapAtom (
                             const std::string&                  longName,
                             const std::string&                  shortName,
                             const std::string&                  description,
@@ -3224,7 +3224,7 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
                             const std::string&                  variableName,
                             std::map <std::string, std::string>& stringToStringMapVariable);
 
-    virtual               ~oahStringToStringMapElementAtom ();
+    virtual               ~oahStringToStringMapAtom ();
 
   public:
 
@@ -3277,12 +3277,12 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
                           fStringToStringMapVariable;
 };
 
-using S_oahStringToStringMapElementAtom = SMARTP<oahStringToStringMapElementAtom>;
+using S_oahStringToStringMapAtom = SMARTP<oahStringToStringMapAtom>;
 
-EXP std::ostream& operator << (std::ostream& os, const S_oahStringToStringMapElementAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahStringToStringMapAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
+class EXP oahStringToStringMultiMapAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a std::string to std::string multiple mapping variable
@@ -3293,7 +3293,7 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahStringToStringMultiMapElementAtom> create (
+    static SMARTP<oahStringToStringMultiMapAtom> create (
                             const std::string&                       longName,
                             const std::string&                       shortName,
                             const std::string&                       description,
@@ -3306,7 +3306,7 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahStringToStringMultiMapElementAtom (
+                          oahStringToStringMultiMapAtom (
                             const std::string&                       longName,
                             const std::string&                       shortName,
                             const std::string&                       description,
@@ -3314,7 +3314,7 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
                             const std::string&                       variableName,
                             std::multimap <std::string, std::string>& stringToStringMultiMapVariable);
 
-    virtual               ~oahStringToStringMultiMapElementAtom ();
+    virtual               ~oahStringToStringMultiMapAtom ();
 
   public:
 
@@ -3367,9 +3367,9 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
                           fStringToStringMultiMapVariable;
 };
 
-using S_oahStringToStringMultiMapElementAtom = SMARTP<oahStringToStringMultiMapElementAtom>;
+using S_oahStringToStringMultiMapAtom = SMARTP<oahStringToStringMultiMapAtom>;
 
-EXP std::ostream& operator << (std::ostream& os, const S_oahStringToStringMultiMapElementAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahStringToStringMultiMapAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue
@@ -3473,6 +3473,109 @@ class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue
 using S_oahStringAndIntegerAtom = SMARTP<oahStringAndIntegerAtom>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_oahStringAndIntegerAtom& elt);
+
+//______________________________________________________________________________
+class EXP oahMeasureNumberAndIntegerAtom : public oahAtomStoringAValue
+{
+/*
+  an atom controlling a std::string and an integer variables
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahMeasureNumberAndIntegerAtom> create (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& measureNumberVariableName,
+                            mfMeasureNumber&   measureNumberVariable,
+                            const std::string& integerVariableName,
+                            int&               integerVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahMeasureNumberAndIntegerAtom (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& measureNumberVariableName,
+                            mfMeasureNumber&   measureNumberVariable,
+                            const std::string& integerVariableName,
+                            int&               integerVariable);
+
+    virtual               ~oahMeasureNumberAndIntegerAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    void                  setMeasureNumberVariable (const mfMeasureNumber& value);
+
+    mfMeasureNumber       getMeasureNumberVariable () const
+                              { return fMeasureNumberVariable; }
+
+    void                  setIntegerVariable (int value);
+
+    int                   getIntegerVariable () const
+                              { return fIntegerVariable; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyAtomWithValue (
+                            const std::string& theString,
+                            std::ostream&      os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
+
+    void                  print (std::ostream& os) const override;
+
+    void                  displayAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    std::string           fMeasureNumberVariableName;
+    mfMeasureNumber&      fMeasureNumberVariable;
+
+    std::string           fIntegerVariableName;
+    int&                  fIntegerVariable;
+};
+
+using S_oahMeasureNumberAndIntegerAtom = SMARTP<oahMeasureNumberAndIntegerAtom>;
+
+EXP std::ostream& operator << (std::ostream& os, const S_oahMeasureNumberAndIntegerAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue

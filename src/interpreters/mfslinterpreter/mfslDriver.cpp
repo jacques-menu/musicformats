@@ -1067,7 +1067,7 @@ void mfslDriver::finalSemanticsCheck ()
   } // for
 
   // are there pending 'select' options?
-  S_oahStringToStringMultiMapElementAtom
+  S_oahStringToStringMultiMapAtom
     selectChoiceToLabelsMultiMapAtom =
       gGlobalMfslInterpreterOahGroup->
         getSelectChoiceToLabelsMultiMapAtom ();

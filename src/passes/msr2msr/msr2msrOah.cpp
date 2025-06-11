@@ -775,7 +775,7 @@ R"()",
   // --------------------------------------
 
   fIgnoreMsrStavesSetAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "ignore-msr-staff", "ims",
 R"(Ignore staff STAFF_NAME in the MSR data
 when creating a new MSR from an existing one.
@@ -794,7 +794,7 @@ When this option is used, any staff not explicitly ignored is kept.)",
   // --------------------------------------
 
   fKeepMsrStavesSetAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "keep-msr-staff", "kms",
 R"(Keep staff STAFF_NAME in the MSR data
 when creating a new MSR from an existing one.
@@ -828,7 +828,7 @@ R"()",
   // --------------------------------------
 
   fIgnoreMsrVoicesSetAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "ignore-msr-voice", "imv",
 R"(Ignore voice VOICE_NAME in the MSR data
 when creating a new MSR from an existing one.
@@ -847,7 +847,7 @@ When this option is used, any voice not explicitly ignored is kept.)",
   // --------------------------------------
 
   fKeepMsrVoicesSetAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "keep-msr-voice", "kmv",
 R"(Keep voice VOICE_NAME in the MSR data
 when creating a new MSR from an existing one.
@@ -881,7 +881,7 @@ R"()",
   // --------------------------------------
 
   fInserPageBreakAfterMeasureAtom =
-    oahStringSetElementAtom::create (
+    oahMeasureNumberSetAtom::create (
       "insert-page-break-after-measure", "ipbam",
 R"(Insert a page break after measure MEASURE_NUMBER
 when creating a new MSR from an existing one.
@@ -898,7 +898,7 @@ There can be several occurrences of this option.)",
   // --------------------------------------
 
   fInserLineBreakAfterMeasureAtom =
-    oahStringSetElementAtom::create (
+    oahMeasureNumberSetAtom::create (
       "insert-line-break-after-measure", "ilbam",
 R"(Insert a line break after measure MEASURE_NUMBER
 when creating a new MSR from an existing one.
@@ -1214,12 +1214,12 @@ void msr2msrOahGroup::displayMsr2msrOahValues (int valueFieldWidth)
 
   ++gIndenter;
 
-  mfDisplayStringSet (
+  displayMeasureNumberSet (
     "fInserPageBreakAfterMeasureSet",
     fInserPageBreakAfterMeasureSet,
     gLog);
 
-  mfDisplayStringSet (
+  displayMeasureNumberSet (
     "fInserLineBreakAfterMeasureSet",
     fInserLineBreakAfterMeasureSet,
     gLog);

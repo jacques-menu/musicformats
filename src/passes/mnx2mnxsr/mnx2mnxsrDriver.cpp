@@ -1067,7 +1067,7 @@ void mnx2mnxsrDriver::finalSemanticsCheck ()
   } // for
 
   // are there pending 'select' options?
-  S_oahStringToStringMultiMapElementAtom
+  S_oahStringToStringMultiMapAtom
     selectChoiceToLabelsMultiMapAtom =
       gGlobalMnx2mnxsrInterpreterOahGroup->
         getSelectChoiceToLabelsMultiMapAtom ();

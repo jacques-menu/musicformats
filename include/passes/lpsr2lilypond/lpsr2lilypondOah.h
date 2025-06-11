@@ -2138,7 +2138,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     std::set <mfMeasureNumber>
                           fShowMeasureNumbersAtMeasureSet;
-    S_oahMeasureNumberSetElementAtom
+    S_oahMeasureNumberSetAtom
                           fShowMeasureNumbersAtMeasureAtom;
 
     float                 fBarNumbersSize;

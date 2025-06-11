@@ -136,7 +136,7 @@ This option implies the '-display-service-and-input, -dsai' option.)",
   // input
 
   fInputSourcesSetAtom =
-    oahStringSetElementAtom::create (
+    oahStringSetAtom::create (
       "input", "",
 R"(Use INPUT_SOURCE_NAME as input to launch the service.
 This option overrides the 'input' value(s) specified in the script.
@@ -156,7 +156,7 @@ in which case the service will be run several times.)",
   // select
 
   fSelectChoiceToLabelsMultiMapAtom =
-    oahStringToStringMultiMapElementAtom::create (
+    oahStringToStringMultiMapAtom::create (
       "select", "sel",
 R"(Select LABEL for choice CHOICE.
 The service will be run using the corresponding options block(s).

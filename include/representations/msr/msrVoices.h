@@ -1204,7 +1204,8 @@ class EXP msrVoice : public msrElement
 
     // current measure number
 
-    const std::string     getVoiceCurrentMeasureNumber () const
+    const mfMeasureNumber&
+                          getVoiceCurrentMeasureNumber () const
                               { return fVoiceCurrentMeasureNumber; }
 
     // ordinal measure number
@@ -1349,7 +1350,7 @@ class EXP msrVoice : public msrElement
 
     // measures
 
-    std::string           fVoiceCurrentMeasureNumber;
+    mfMeasureNumber       fVoiceCurrentMeasureNumber;
 
     int                   fVoiceCurrentMeasureOrdinalNumber;
 

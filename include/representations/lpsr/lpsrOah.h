@@ -109,7 +109,9 @@ class EXP lpsrPitchesLanguageAtom : public oahAtomStoringAValue
     msrQuarterTonesPitchesLanguageKind&
                           fMsrQuarterTonesPitchesLanguageKindVariable;
 };
-typedef SMARTP<lpsrPitchesLanguageAtom> S_lpsrPitchesLanguageAtom;
+
+using S_lpsrPitchesLanguageAtom = SMARTP<lpsrPitchesLanguageAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrPitchesLanguageAtom& elt);
 
 //______________________________________________________________________________
@@ -197,7 +199,9 @@ class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
     lpsrChordsLanguageKind&
                           fLpsrChordsLanguageKindVariable;
 };
-typedef SMARTP<lpsrChordsLanguageAtom> S_lpsrChordsLanguageAtom;
+
+using S_lpsrChordsLanguageAtom = SMARTP<lpsrChordsLanguageAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrChordsLanguageAtom& elt);
 
 //______________________________________________________________________________
@@ -280,7 +284,9 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
 
     std::map <std::string, std::string>&  fStringToStringMapVariable;
 };
-typedef SMARTP<lpsrStaffInstrumentNameAtom> S_lpsrStaffInstrumentNameAtom;
+
+using S_lpsrStaffInstrumentNameAtom = SMARTP<lpsrStaffInstrumentNameAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrStaffInstrumentNameAtom& elt);
 
 //______________________________________________________________________________
@@ -368,7 +374,9 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
     S_msrSemiTonesPitchAndOctave&
                           fSemiTonesPitchAndOctaveVariable;
 };
-typedef SMARTP<lpsrTransposeAtom> S_lpsrTransposeAtom;
+
+using S_lpsrTransposeAtom = SMARTP<lpsrTransposeAtom>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrTransposeAtom& elt);
 
 //______________________________________________________________________________
@@ -619,7 +627,7 @@ class EXP lpsrOahGroup : public oahGroup
     // --------------------------------------
 
     // replicate empty measure JMI ???
-    std::string           getReplicateEmptyMeasureNumber () const
+    mfMeasureNumber       getReplicateEmptyMeasureNumber () const
                               { return fReplicateEmptyMeasureNumber; }
 
     void                  setReplicateEmptyMeasureReplicas ()
@@ -855,8 +863,10 @@ class EXP lpsrOahGroup : public oahGroup
     // measures
     // --------------------------------------
 
-    // replicate empty measure JMI ???
-    std::string           fReplicateEmptyMeasureNumber;
+    // replicate empty measure number JMI ???
+    mfMeasureNumber       fReplicateEmptyMeasureNumber;
+
+    // replicate empty measure replicas JMI ???
     int                   fReplicateEmptyMeasureReplicas;
 
     // add empty measures
@@ -900,7 +910,9 @@ class EXP lpsrOahGroup : public oahGroup
     S_msrSemiTonesPitchAndOctave
                           fTranspositionSemiTonesPitchAndOctave;
 };
-typedef SMARTP<lpsrOahGroup> S_lpsrOahGroup;
+
+using S_lpsrOahGroup = SMARTP<lpsrOahGroup>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrOahGroup& elt);
 
 //______________________________________________________________________________

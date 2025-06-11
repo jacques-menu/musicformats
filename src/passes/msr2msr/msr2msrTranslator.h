@@ -694,7 +694,7 @@ class EXP msr2msrTranslator :
     // measures
     // ------------------------------------------------------
 
-    mfMeasureNumber&          fCurrentMeasureNumber;
+    mfMeasureNumber           fCurrentMeasureNumber;
     S_msrMeasure              fCurrentMeasureClone;
 
     // multiple measure rests compression
