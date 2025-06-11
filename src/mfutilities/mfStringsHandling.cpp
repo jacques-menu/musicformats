@@ -486,54 +486,6 @@ std::string mfStringNumbersToEnglishWords (std::string theString)
 };
 
 //______________________________________________________________________________
-// std::string mfInputLineNumberAsString (
-//   mfInputLineNumber inputLineNumber)
-// {
-//   std::stringstream ss;
-//
-//   ss <<
-//     "input line L" << inputLineNumber;
-//
-//   return ss.str ();
-// }
-
-std::string mfInputLineNumberAsString (
-  const mfInputLineNumber& inputLineNumber)
-{
-  std::stringstream ss;
-
-  ss <<
-    "input line L" << inputLineNumber;
-
-  return ss.str ();
-}
-
-// std::string mfInputLineNumbersAsString (
-//   int inputStartLineNumber,
-//   const mfInputLineNumber& inputLineNumber)
-// {
-//   std::stringstream ss;
-//
-//   if (inputLineNumber == inputStartLineNumber) {
-//     ss <<
-//       "input line L" << inputStartLineNumber;
-//   }
-//
-//   else {
-//     if (inputLineNumber == 0) {
-//       ss <<
-//         "input line " << inputStartLineNumber;
-//     }
-//     else {
-//       ss <<
-//         "input lines L" << inputStartLineNumber << '-' << inputLineNumber;
-//     }
-//   }
-//
-//   return ss.str ();
-// }
-
-//______________________________________________________________________________
 int consumeDecimalNumber (
   std::string::const_iterator  theStringIterator,
   std::string::const_iterator& remainingStringIterator,
