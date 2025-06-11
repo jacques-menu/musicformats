@@ -42,7 +42,7 @@ namespace MusicFormats
   which minimizes re-compilations should the setting change
 */
 
-#define MF_USE_WRAPPED_TYPES
+// #define MF_USE_WRAPPED_TYPES
 
 
 //______________________________________________________________________________
