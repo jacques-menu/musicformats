@@ -418,7 +418,7 @@ void msrVoice::setVoiceNamesFromNumber (
       fVoiceName =
         fVoiceUpLinkToStaff->getStaffPathLikeName () +
         "_Voice_" +
-        std::to_string (voiceNumber);
+        mfVoiceNumberAsString (voiceNumber);
 
       fVoicePathLikeName =
         fVoiceUpLinkToStaff->getStaffPathLikeName () +
@@ -987,7 +987,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
     fVoiceContainsMeasureRepeats;
 
   // stanzas
-  for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+  for (std::pair <mfStanzaNumber, S_msrStanza> thePair : fVoiceStanzasMap) {
     S_msrStanza stanza = thePair.second;
 
     deepClone->
@@ -1036,17 +1036,19 @@ bool msrVoice::compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
   const S_msrVoice& first,
   const S_msrVoice& second)
 {
-  int
+  mfVoiceNumber
     firstVoiceNumber =
       first->fVoiceNumber,
     secondVoiceNumber =
       second->fVoiceNumber;
 
   if (firstVoiceNumber > K_VOICE_HARMONIES_VOICE_BASE_NUMBER) {
-    firstVoiceNumber -= K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1;
+//     firstVoiceNumber -= K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1; // JMI 0.9.75
+    firstVoiceNumber = firstVoiceNumber - (K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1);
   }
   if (secondVoiceNumber > K_VOICE_HARMONIES_VOICE_BASE_NUMBER) {
-    secondVoiceNumber -= K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1;
+//     secondVoiceNumber -= K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1; // JMI 0.9.75
+    secondVoiceNumber = secondVoiceNumber - (K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1);
   }
 
   bool result =
@@ -1117,17 +1119,19 @@ bool msrVoice::compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
   const S_msrVoice& first,
   const S_msrVoice& second)
 {
-  int
+  mfVoiceNumber
     firstVoiceNumber =
       first->fVoiceNumber,
     secondVoiceNumber =
       second->fVoiceNumber;
 
   if (firstVoiceNumber > K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) {
-    firstVoiceNumber -= K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
+//     firstVoiceNumber -= K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
+    firstVoiceNumber = firstVoiceNumber - (K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1);
   }
   if (secondVoiceNumber > K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) {
-    secondVoiceNumber -= K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
+//     secondVoiceNumber -= K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
+    secondVoiceNumber = secondVoiceNumber - (K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1);
   }
 
   bool result =
@@ -1809,8 +1813,9 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
   }
 
   // create the voice harmonies voice
-  int regularVoiceHarmoniesVoiceNumber =
-    K_VOICE_HARMONIES_VOICE_BASE_NUMBER + fVoiceNumber;
+  mfVoiceNumber
+    regularVoiceHarmoniesVoiceNumber =
+      fVoiceNumber + K_VOICE_HARMONIES_VOICE_BASE_NUMBER; // JMI 0.9.75
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -1945,8 +1950,9 @@ S_msrStanza msrVoice::addStanzaToVoiceByItsNumber (
 void msrVoice::addStanzaToVoice (const S_msrStanza& stanza)
 {
   // get stanza number
-  const mfStanzaNumber& stanzaNumber =
-    stanza->getStanzaNumber ();
+  const mfStanzaNumber&
+    stanzaNumber =
+      stanza->getStanzaNumber ();
 
   // register stanza in this voice
 #ifdef MF_TRACE_IS_ENABLED
@@ -2038,8 +2044,8 @@ S_msrStanza msrVoice::createStanzaInVoiceIfNotYetDone (
 
 S_msrStanza msrVoice::fetchStanzaInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const mfStanzaNumber& stanzaNumber,
-  const std::string& stanzaName) // JMI
+  const mfStanzaNumber&    stanzaNumber,
+  const std::string&       stanzaName)
 {
   S_msrStanza stanza;
 
@@ -2991,7 +2997,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //
 //   // pad up the voice's stanzas // JMI ???
 //   if (! fVoiceStanzasMap.empty ()) {
-//     for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+//     for (std::pair <mfStanzaNumber, S_msrStanza> thePair : fVoiceStanzasMap) {
 //       S_msrStanza stanza = thePair.second;
 //
 //       stanza->
@@ -3087,7 +3093,7 @@ void msrVoice::cascadeAppendPaddingNoteToVoice (
 
   // pad up the voice's stanzas JMI USELESS??? 0.9.70
   if (! fVoiceStanzasMap.empty ()) {
-    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <mfStanzaNumber, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       stanza->
@@ -3981,7 +3987,7 @@ void msrVoice::appendLineBreakToVoice  (
 
   // cascade this lineBreak to the voice stanzas if any
   if (! fVoiceStanzasMap.empty ()) {
-    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <mfStanzaNumber, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       stanza->
@@ -4014,7 +4020,7 @@ void msrVoice::appendPageBreakToVoice (
 
   // cascade this pageBreak to the voice stanzas if any
   if (! fVoiceStanzasMap.empty ()) {
-    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <mfStanzaNumber, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       stanza->
@@ -8057,7 +8063,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
   const mfInputLineNumber& inputLineNumber,
   int replicatasNumber)
 {
-  std::string
+  mfMeasureNumber
     voiceLastAppendedMeasureMeasureNumber =
       fVoiceLastAppendedMeasure->
         getMeasureNumber ();
@@ -8073,8 +8079,8 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
     // change its contents
     lastAppendedMeasureClone->
       setMeasureNumber (
-        voiceLastAppendedMeasureMeasureNumber +
-          '.' +
+        mfMeasureNumberAsString (voiceLastAppendedMeasureMeasureNumber) +
+          '.' + // JMI 0.9.75
           std::to_string (i) +
           " (replicated)");
 
@@ -10806,7 +10812,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
     case msrVoiceKind::kVoiceKindRegular:
       // append a measure end syllable to the voice stanzas if any
       if (! fVoiceStanzasMap.empty ()) {
-        for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+        for (std::pair <mfStanzaNumber, S_msrStanza> thePair : fVoiceStanzasMap) {
           S_msrStanza stanza = thePair.second;
 
           // fetch the part
@@ -11537,7 +11543,7 @@ void msrVoice::browseData (basevisitor* v)
 
   // browse the voice stanzas
   if (! fVoiceStanzasMap.empty ()) {
-    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <mfStanzaNumber, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       if (stanza->getStanzaTextPresent ()) {
@@ -11827,7 +11833,7 @@ void msrVoice::print (std::ostream& os) const
 
     ++gIndenter;
 
-    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <mfStanzaNumber, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       os << stanza;
@@ -12219,7 +12225,7 @@ void msrVoice::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <mfStanzaNumber, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       os << stanza;

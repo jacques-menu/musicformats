@@ -1514,7 +1514,7 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestBeginEventIfAny ()
 
   fCurrentMultipleMeasureRestBegin =
     fKnownEventsCollection.
-      fetchMultipleMeasureRestBeginAtBareMeasureNumber (
+      fetchMultipleMeasureRestBeginAtMeasureNumber (
         fCurrentMeasureNumber);
 
   if (fCurrentMultipleMeasureRestBegin) {
@@ -1605,7 +1605,7 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestEndEventIfAny ()
 {
   fCurrentMultipleMeasureRestEnd =
     fKnownEventsCollection.
-      fetchMultipleMeasureRestEndAtBareMeasureNumber (
+      fetchMultipleMeasureRestEndAtMeasureNumber (
         fCurrentMeasureNumber);
 
   if (fCurrentMultipleMeasureRestEnd) {
@@ -1692,11 +1692,6 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestEnd ()
   }
 }
 
-
-
-
-
-
 //______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::handleMeasureRepeatBeginEventIfAny ()
 {
@@ -1709,7 +1704,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatBeginEventIfAny ()
 
   fCurrentMeasureRepeatBegin =
     fKnownEventsCollection.
-      fetchMeasureRepeatBeginAtBareMeasureNumber (
+      fetchMeasureRepeatBeginAtMeasureNumber (
         fCurrentMeasureNumber);
 
   if (fCurrentMeasureRepeatBegin) {
@@ -1740,7 +1735,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEndEventIfAny ()
 {
   fCurrentMeasureRepeatEnd =
     fKnownEventsCollection.
-      fetchMeasureRepeatEndAtBareMeasureNumber (
+      fetchMeasureRepeatEndAtMeasureNumber (
         fCurrentMeasureNumber);
 
   if (fCurrentMeasureRepeatEnd) {
@@ -1888,7 +1883,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
 //
 //   fCurrentMeasureRepeatBegin =
 //     fKnownEventsCollection.
-//       fetchMeasureRepeatBeginAtBareMeasureNumber (
+//       fetchMeasureRepeatBeginAtMeasureNumber (
 //         fCurrentMeasureNumber);
 //
 //   if (fCurrentMeasureRepeatBegin) {
@@ -1919,7 +1914,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
 // {
 //   fCurrentMeasureRepeatEnd =
 //     fKnownEventsCollection.
-//       fetchMeasureRepeatEndAtBareMeasureNumber (
+//       fetchMeasureRepeatEndAtMeasureNumber (
 //         fCurrentMeasureNumber);
 //
 //   if (fCurrentMeasureRepeatEnd) {
@@ -22031,7 +22026,7 @@ void mxsr2msrSkeletonPopulator::attachPendingGlissandosToCurrentNote ()
 
 #ifdef MF_TRACE_IS_ENABLED
         // get the voice's stanzas map
-        const std::map <std::string, S_msrStanza>&
+        const std::map <mfStanzaNumber, S_msrStanza>&
           voiceStanzasMap =
             theMsrVoice->
               getVoiceStanzasMap ();
@@ -22090,7 +22085,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
             fCurrentRecipientMsrVoice;
 
         // get the voice's stanzas map
-        const std::map <std::string, S_msrStanza>&
+        const std::map <mfStanzaNumber, S_msrStanza>&
           voiceStanzasMap =
             theMsrVoice->
               getVoiceStanzasMap ();
@@ -22123,7 +22118,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
 #endif // MF_TRACE_IS_ENABLED
 
             for (
-              std::map <std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+              std::map <mfStanzaNumber, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
               i != voiceStanzasMap.end ();
               ++i
             ) {
@@ -26078,12 +26073,12 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
 
     if (! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)) {
       // get the current note voice's stanzas map
-      const std::map <std::string, S_msrStanza>&
+      const std::map <mfStanzaNumber, S_msrStanza>&
         voiceStanzasMap =
           fCurrentRecipientMsrVoice->
             getVoiceStanzasMap ();
 
-      for (std::pair <std::string, S_msrStanza> thePair : voiceStanzasMap) {
+      for (std::pair <mfStanzaNumber, S_msrStanza> thePair : voiceStanzasMap) {
         S_msrStanza stanza = thePair.second;
 
         // choose the syllable kind
@@ -29770,13 +29765,13 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //         ! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)
 //       ) {
 //         // get the current note voice's stanzas map
-//         const std::map <std::string, S_msrStanza>&
+//         const std::map <mfStanzaNumber, S_msrStanza>&
 //           voiceStanzasMap =
 //             fCurrentRecipientMsrVoice->
 //               getVoiceStanzasMap ();
 //
 //         for (
-//           std::map <std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+//           std::map <mfStanzaNumber, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
 //           i != voiceStanzasMap.end ();
 //           ++i
 //         ) {

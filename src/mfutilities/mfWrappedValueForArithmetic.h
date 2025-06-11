@@ -152,6 +152,9 @@ class mfWrappedValueForArithmetic
     // ------------------------------------------------------
 
     mfWrappedValueForArithmetic
+                          operator + (T& T_Value) const;
+
+    mfWrappedValueForArithmetic
                           operator + (
                             const mfWrappedValueForArithmetic <
                               T,
@@ -161,6 +164,9 @@ class mfWrappedValueForArithmetic
                               neutralValueString
                             >&
                               otherWrappedValueForArithmetic) const;
+
+    mfWrappedValueForArithmetic
+                          operator - (T& T_Value) const;
 
     mfWrappedValueForArithmetic
                           operator - (
@@ -177,6 +183,9 @@ class mfWrappedValueForArithmetic
     // ------------------------------------------------------
 
     mfWrappedValueForArithmetic
+                          operator += (T& T_Value);
+
+    mfWrappedValueForArithmetic
                           operator += (
                             mfWrappedValueForArithmetic <
                               T,
@@ -186,6 +195,9 @@ class mfWrappedValueForArithmetic
                               neutralValueString
                             >&
                               mfWrappedValueForArithmetic);
+
+    mfWrappedValueForArithmetic
+                          operator -= (T& T_Value);
 
     mfWrappedValueForArithmetic
                           operator -= (
@@ -488,6 +500,31 @@ mfWrappedValueForArithmetic <
    printPostfix,
   neutralValue,
   neutralValueString
+>::operator + (T& T_Value) const
+{
+  return mfWrappedValueForArithmetic (fBareValue + T_Value);
+}
+
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
+mfWrappedValueForArithmetic <
+  T,
+  printPrefix,
+   printPostfix,
+  neutralValue,
+  neutralValueString
+>
+mfWrappedValueForArithmetic <
+  T,
+  printPrefix,
+   printPostfix,
+  neutralValue,
+  neutralValueString
 >::operator + (
     const mfWrappedValueForArithmetic& otherWrappedValue) const
 {
@@ -495,6 +532,31 @@ mfWrappedValueForArithmetic <
 }
 
 // operator -
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
+mfWrappedValueForArithmetic <
+  T,
+  printPrefix,
+   printPostfix,
+  neutralValue,
+  neutralValueString
+>
+mfWrappedValueForArithmetic <
+  T,
+  printPrefix,
+   printPostfix,
+  neutralValue,
+  neutralValueString
+>::operator - (T& T_Value) const
+{
+  return mfWrappedValueForArithmetic (fBareValue - T_Value);
+}
+
 template <
   typename           T,
   const std::string& printPrefix,
@@ -546,11 +608,68 @@ mfWrappedValueForArithmetic <
   neutralValue,
   neutralValueString
 >::operator += (
+    T& T_Value)
+{
+  return
+    mfWrappedValueForArithmetic (
+      fBareValue += T_Value);
+}
+
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
+mfWrappedValueForArithmetic <
+  T,
+  printPrefix,
+   printPostfix,
+  neutralValue,
+  neutralValueString
+>
+mfWrappedValueForArithmetic <
+  T,
+  printPrefix,
+   printPostfix,
+  neutralValue,
+  neutralValueString
+>::operator += (
     mfWrappedValueForArithmetic& otherValue)
 {
   return
     mfWrappedValueForArithmetic (
       fBareValue += otherValue.fBareValue);
+}
+
+// operator -=
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
+mfWrappedValueForArithmetic <
+  T,
+  printPrefix,
+   printPostfix,
+  neutralValue,
+  neutralValueString
+>
+mfWrappedValueForArithmetic <
+  T,
+  printPrefix,
+   printPostfix,
+  neutralValue,
+  neutralValueString
+>::operator -= (
+    T& T_Value)
+{
+  return
+    mfWrappedValueForArithmetic (
+      fBareValue -= T_Value);
 }
 
 // operator -=

@@ -236,7 +236,7 @@ class EXP msrVoice : public msrElement
 
     // stanzas
 
-    const std::map <std::string, S_msrStanza>&
+    const std::map <mfStanzaNumber, S_msrStanza>&
                           getVoiceStanzasMap () const
                               { return fVoiceStanzasMap; }
 
@@ -857,8 +857,8 @@ class EXP msrVoice : public msrElement
 
     S_msrStanza           fetchStanzaInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfStanzaNumber& stanzaNumber,
-                            const std::string& stanzaName);
+                            const mfStanzaNumber&    stanzaNumber,
+                            const std::string&       stanzaName);
 
     // strings
 
@@ -1106,7 +1106,7 @@ class EXP msrVoice : public msrElement
 
      // stanzas
 
-    std::map <std::string, S_msrStanza>
+    std::map <mfStanzaNumber, S_msrStanza>
                           fVoiceStanzasMap;
 
     // measures

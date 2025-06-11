@@ -201,8 +201,10 @@ class EXP waeHandler : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    std::set <int>         fWarningsInputLineNumbers;
-    std::set <int>         fErrorsInputLineNumbers;
+    std::set <mfInputLineNumber>
+                          fWarningsInputLineNumbers;
+    std::set <mfInputLineNumber>
+                          fErrorsInputLineNumbers;
 };
 typedef SMARTP<waeHandler> S_waeHandler;
 EXP std::ostream& operator << (std::ostream& os, const S_waeHandler& elt);

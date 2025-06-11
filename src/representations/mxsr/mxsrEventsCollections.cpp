@@ -1127,14 +1127,14 @@ void mxsrEventsCollection::sortTheMxsrEventsLists ()
 }
 
 //________________________________________________________________________
-S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::fetchMultipleMeasureRestBeginAtmusicXMLMeasureNumber (
-  const std::string& musicXMLMeasureNumber) const
+S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::fetchMultipleMeasureRestBeginAtMeasureNumber (
+    const mfMeasureNumber& measureNumber) const
 {
   S_mxsrMultipleMeasureRestEvent result;
 
-  std::map <std::string, S_mxsrMultipleMeasureRestEvent>::const_iterator
+  std::map <mfMeasureNumber, S_mxsrMultipleMeasureRestEvent>::const_iterator
     it =
-      fMultipleMeasureRestBeginsMap.find (musicXMLMeasureNumber);
+      fMultipleMeasureRestBeginsMap.find (measureNumber);
 
   if (it != fMultipleMeasureRestBeginsMap.end ()) {
     result = (*it).second;
@@ -1143,14 +1143,14 @@ S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::fetchMultipleMeasureRestBeg
   return result;
 }
 
-S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::fetchMultipleMeasureRestEndAtmusicXMLMeasureNumber (
-  const std::string& musicXMLMeasureNumber) const
+S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::fetchMultipleMeasureRestEndAtMeasureNumber (
+    const mfMeasureNumber& measureNumber) const
 {
   S_mxsrMultipleMeasureRestEvent result;
 
-  std::map <std::string, S_mxsrMultipleMeasureRestEvent>::const_iterator
+  std::map <mfMeasureNumber, S_mxsrMultipleMeasureRestEvent>::const_iterator
     it =
-      fMultipleMeasureRestEndsMap.find (musicXMLMeasureNumber);
+      fMultipleMeasureRestEndsMap.find (measureNumber);
 
   if (it != fMultipleMeasureRestEndsMap.end ()) {
     result = (*it).second;
@@ -1160,14 +1160,14 @@ S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::fetchMultipleMeasureRestEnd
 }
 
 //________________________________________________________________________
-S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatBeginAtmusicXMLMeasureNumber (
-  const std::string& musicXMLMeasureNumber) const
+S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatBeginAtMeasureNumber (
+  const mfMeasureNumber& measureNumber) const
 {
   S_mxsrMeasureRepeatEvent result;
 
-  std::map <std::string, S_mxsrMeasureRepeatEvent>::const_iterator
+  std::map <mfMeasureNumber, S_mxsrMeasureRepeatEvent>::const_iterator
     it =
-      fMeasureRepeatBeginsMap.find (musicXMLMeasureNumber);
+      fMeasureRepeatBeginsMap.find (measureNumber);
 
   if (it != fMeasureRepeatBeginsMap.end ()) {
     result = (*it).second;
@@ -1176,14 +1176,14 @@ S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatBeginAtmusicXML
   return result;
 }
 
-S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatEndAtmusicXMLMeasureNumber (
-  const std::string& musicXMLMeasureNumber) const
+S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatEndAtMeasureNumber (
+  const mfMeasureNumber& measureNumber) const
 {
   S_mxsrMeasureRepeatEvent result;
 
-  std::map <std::string, S_mxsrMeasureRepeatEvent>::const_iterator
+  std::map <mfMeasureNumber, S_mxsrMeasureRepeatEvent>::const_iterator
     it =
-      fMeasureRepeatEndsMap.find (musicXMLMeasureNumber);
+      fMeasureRepeatEndsMap.find (measureNumber);
 
   if (it != fMeasureRepeatEndsMap.end ()) {
     result = (*it).second;
@@ -1524,15 +1524,18 @@ void mxsrEventsCollection::printMultipleMeasureRestEvents (std::ostream& os) con
 
   ++gIndenter;
 
-  for (std::pair <std::string, S_mxsrMultipleMeasureRestEvent> thePair : fMultipleMeasureRestBeginsMap) {
-    std::string
-      musicXMLMeasureNumber = thePair.first;
+  for (
+    std::pair <mfMeasureNumber, S_mxsrMultipleMeasureRestEvent> thePair :
+      fMultipleMeasureRestBeginsMap
+  ) {
+    mfMeasureNumber
+      measureNumber = thePair.first;
 
     S_mxsrMultipleMeasureRestEvent
       multipleMeasureRestEvent = thePair.second;
 
     os <<
-      "Measure " << musicXMLMeasureNumber <<
+      "Measure " << measureNumber <<
       ':' <<
       std::endl;
 
@@ -1558,15 +1561,18 @@ void mxsrEventsCollection::printMultipleMeasureRestEvents (std::ostream& os) con
 
   ++gIndenter;
 
-  for (std::pair <std::string, S_mxsrMultipleMeasureRestEvent> thePair : fMultipleMeasureRestEndsMap) {
-    std::string
-      musicXMLMeasureNumber = thePair.first;
+  for (
+    std::pair <mfMeasureNumber, S_mxsrMultipleMeasureRestEvent> thePair :
+      fMultipleMeasureRestEndsMap
+  ) {
+    mfMeasureNumber
+      measureNumber = thePair.first;
 
     S_mxsrMultipleMeasureRestEvent
       multipleMeasureRestEvent = thePair.second;
 
     os <<
-      "Note " << musicXMLMeasureNumber <<
+      "Note " << measureNumber <<
       ':' <<
       std::endl;
 
@@ -1594,15 +1600,17 @@ void mxsrEventsCollection::prinMeasureRepeatEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <std::string, S_mxsrMeasureRepeatEvent> thePair : fMeasureRepeatBeginsMap) {
-    std::string
-      musicXMLMeasureNumber = thePair.first;
+  for (std::pair <mfMeasureNumber, S_mxsrMeasureRepeatEvent> thePair :
+    fMeasureRepeatBeginsMap
+  ) {
+    mfMeasureNumber
+      measureNumber = thePair.first;
 
     S_mxsrMeasureRepeatEvent
       measureRepeatEvent = thePair.second;
 
     os <<
-      "Measure " << musicXMLMeasureNumber <<
+      "Measure " << measureNumber <<
       ':' <<
       std::endl;
 
@@ -1628,15 +1636,18 @@ void mxsrEventsCollection::prinMeasureRepeatEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <std::string, S_mxsrMeasureRepeatEvent> thePair : fMeasureRepeatEndsMap) {
-    std::string
-      musicXMLMeasureNumber = thePair.first;
+  for (
+    std::pair <mfMeasureNumber, S_mxsrMeasureRepeatEvent> thePair :
+      fMeasureRepeatEndsMap
+  ) {
+    mfMeasureNumber
+      measureNumber = thePair.first;
 
     S_mxsrMeasureRepeatEvent
       measureRepeatEvent = thePair.second;
 
     os <<
-      "Note " << musicXMLMeasureNumber <<
+      "Note " << measureNumber <<
       ':' <<
       std::endl;
 

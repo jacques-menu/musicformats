@@ -169,11 +169,11 @@ class EXP mxsrEventsCollection : public smartable
                             const mfInputLineNumber& eventInputLineNumber);
 
     S_mxsrMultipleMeasureRestEvent
-                          fetchMultipleMeasureRestBeginAtBareMeasureNumber (
+                          fetchMultipleMeasureRestBeginAtMeasureNumber (
                             const mfMeasureNumber& measureNumber) const;
 
     S_mxsrMultipleMeasureRestEvent
-                          fetchMultipleMeasureRestEndAtBareMeasureNumber (
+                          fetchMultipleMeasureRestEndAtMeasureNumber (
                             const mfMeasureNumber& measureNumber) const;
 
     // measure repeat events
@@ -209,11 +209,11 @@ class EXP mxsrEventsCollection : public smartable
                             const mfInputLineNumber& eventInputLineNumber);
 
     S_mxsrMeasureRepeatEvent
-                          fetchMeasureRepeatBeginAtBareMeasureNumber (
+                          fetchMeasureRepeatBeginAtMeasureNumber (
                             const mfMeasureNumber& measureNumber) const;
 
     S_mxsrMeasureRepeatEvent
-                          fetchMeasureRepeatEndAtBareMeasureNumber (
+                          fetchMeasureRepeatEndAtMeasureNumber (
                             const mfMeasureNumber& measureNumber) const;
 
     // staff change events
@@ -426,11 +426,8 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be only one measure repeat begin and one measure repeat end
-    // per measure, hence two maps,
-    // indexed by bare measure number, i.e. an std::string,
-    // since using mfMeasureNumber as indexed would imply useless copies
-    // into the map indexes
-    std::map <std::string, S_mxsrMultipleMeasureRestEvent>
+    // per measure, hence two maps, indexed by bare measure number
+    std::map <mfMeasureNumber, S_mxsrMultipleMeasureRestEvent>
                           fMultipleMeasureRestBeginsMap,
                           fMultipleMeasureRestEndsMap;
 
@@ -438,11 +435,8 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be only one measure repeat begin and one measure repeat end
-    // per measure, hence two maps,
-    // indexed by bare measure number, i.e. an std::string,
-    // since using mfMeasureNumber as indexed would imply useless copies
-    // into the map indexes
-    std::map <std::string, S_mxsrMeasureRepeatEvent>
+    // per measure, hence two maps, indexed by bare measure number
+    std::map <mfMeasureNumber, S_mxsrMeasureRepeatEvent>
                           fMeasureRepeatBeginsMap,
                           fMeasureRepeatEndsMap;
 

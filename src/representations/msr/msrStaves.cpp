@@ -3175,10 +3175,12 @@ bool msrStaff::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
       second->fStaffNumber;
 
   if (firstStaffNumber > K_PART_FIGURED_BASS_STAFF_NUMBER) {
-    firstStaffNumber -= K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
+//     firstStaffNumber -= K_PART_FIGURED_BASS_STAFF_NUMBER + 1; // JMI 0.9.75
+    firstStaffNumber = firstStaffNumber - (K_PART_FIGURED_BASS_STAFF_NUMBER + 1);
   }
   if (secondStaffNumber > K_PART_FIGURED_BASS_STAFF_NUMBER) {
-    secondStaffNumber -= K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
+//     secondStaffNumber -= mfStaffNumber (K_PART_FIGURED_BASS_STAFF_NUMBER + 1); // JMI 0.9.75
+    secondStaffNumber = secondStaffNumber - (K_PART_FIGURED_BASS_STAFF_NUMBER + 1) ;
   }
 
   bool result =
