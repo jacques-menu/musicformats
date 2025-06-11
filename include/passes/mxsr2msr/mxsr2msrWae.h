@@ -41,9 +41,9 @@ EXP void mxsr2msrWarningWithoutInputLocation (
   const std::string& message);
 
 EXP void mxsr2msrWarning (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& message);
+  const std::string&       message);
 
 // internal warnings
 
