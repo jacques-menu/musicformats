@@ -2,7 +2,7 @@
 # and create an artifact for them
 
 # --------------------------------------------------------------------------
-name: Build PDF documentation files
+name: Create PDF documentation files
 
 # Controls when the action will run.
 on:
