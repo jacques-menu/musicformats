@@ -25,7 +25,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 // notes sequential numbers
 
-EXP extern constexpr K_MF_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_ = -1;
+constexpr int K_MXSR_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_ = -1;
 
 #ifndef MF_USE_WRAPPED_TYPES
   using mxsrNoteSequentialNumber = int;
@@ -49,7 +49,7 @@ EXP extern int mxsrNoteSequentialNumberAsInteger (
 //______________________________________________________________________________
 // MXSR events sequential numbers
 
-EXP extern constexpr K_MF_MXSR_EVENTS_SEQUENTIAL_NUMBER_UNKNOWN_ = -1;
+constexpr int K_MXSR_EVENTS_SEQUENTIAL_NUMBER_UNKNOWN_ = -1;
 
 #ifndef MF_USE_WRAPPED_TYPES
   using mxsrEventSequentialNumber = int;

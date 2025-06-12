@@ -28,8 +28,8 @@ std::string mxsrNoteSequentialNumberAsString (
 {
   std::string result;
 
-  if (noteSequentialNumber == K_MF_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_) {
-    result = "K_MF_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_";
+  if (noteSequentialNumber == K_MXSR_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_) {
+    result = "K_MXSR_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_";
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
@@ -47,8 +47,8 @@ int mxsrNoteSequentialNumberAsInteger (
 {
   int result;
 
-  if (noteSequentialNumber == K_MF_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_) {
-    result = K_MF_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_;
+  if (noteSequentialNumber == K_MXSR_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_) {
+    result = K_MXSR_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_;
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
@@ -61,8 +61,6 @@ int mxsrNoteSequentialNumberAsInteger (
   return result;
 }
 
-
-
 //______________________________________________________________________________
 // MXSR events sequential numbers
 
@@ -71,8 +69,8 @@ std::string mxsrEventSequentialNumberAsString (
 {
   std::string result;
 
-  if (noteSequentialNumber == K_MF_MXSR_EVENTS_SEQUENTIAL_NUMBER_UNKNOWN_) {
-    result = "K_MF_MXSR_EVENTS_NUMBER_UNKNOWN_";
+  if (noteSequentialNumber == K_MXSR_EVENTS_SEQUENTIAL_NUMBER_UNKNOWN_) {
+    result = "K_MXSR_EVENTS_SEQUENTIAL_NUMBER_UNKNOWN_";
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
@@ -90,8 +88,8 @@ int mxsrEventSequentialNumberAsInteger (
 {
   int result;
 
-  if (noteSequentialNumber == K_MF_MXSR_EVENTS_NUMBER_UNKNOWN_) {
-    result = K_MF_MXSR_EVENTS_NUMBER_UNKNOWN_;
+  if (noteSequentialNumber == K_MXSR_EVENTS_SEQUENTIAL_NUMBER_UNKNOWN_) {
+    result = K_MXSR_EVENTS_SEQUENTIAL_NUMBER_UNKNOWN_;
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
