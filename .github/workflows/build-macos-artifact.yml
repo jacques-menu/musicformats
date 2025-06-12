@@ -75,7 +75,7 @@ jobs:
       # --------------------------------------------------------------------------
       - name: Build MusicFormats for MacOS
         run:
-          cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
+          date ; cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
 
       # --------------------------------------------------------------------------

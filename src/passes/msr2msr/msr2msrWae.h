@@ -54,7 +54,7 @@ typedef SMARTP<msr2msrUnsupportedException> S_msr2msrUnsupportedException;
 
 //______________________________________________________________________________
 EXP void msr2msrUnsupported (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
@@ -62,12 +62,12 @@ EXP void msr2msrUnsupported (
 
 //______________________________________________________________________________
 EXP void msr2msrInternalWarning (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& message);
+  const std::string&       message);
 
 EXP void msr2msrInternalError (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
@@ -75,12 +75,12 @@ EXP void msr2msrInternalError (
 
 //______________________________________________________________________________
 EXP void msr2msrWarning (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& message);
+  const std::string&       message);
 
 EXP void msr2msrError (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,

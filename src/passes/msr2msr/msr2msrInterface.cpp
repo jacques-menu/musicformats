@@ -232,6 +232,8 @@ S_msrScore translateMsrToMsr (
       gMsrOahGroup,
       gLanguage->displayTheSlicesOfTheSecondMSR ());
   }
+
+  return resultingNewMsrScore; // JMI 0.9.75
 }
 
 //_______________________________________________________________________________

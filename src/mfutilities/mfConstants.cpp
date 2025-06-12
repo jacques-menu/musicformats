@@ -1,5 +1,4 @@
 /*
-/*
   MusicFormats Library
   Copyright (C) Jacques Menu 2016-2025
 

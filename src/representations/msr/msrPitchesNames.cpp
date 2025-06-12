@@ -1883,7 +1883,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromString (
     result =
       msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
 
-  std::map <msrQuarterTonesPitchKind, std::string>* pitchesNamesMapPTR;
+  std::map <msrQuarterTonesPitchKind, std::string>* pitchesNamesMapPTR = nullptr;
 
   // select the relevant pitch names map
   switch (languageKind) {

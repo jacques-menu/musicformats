@@ -153,7 +153,7 @@ EXP extern std::string mfVoiceNumberAsString (
   const mfVoiceNumber& voiceNumber);
 
 EXP extern int mfVoiceNumberAsInteger (
-  const mfVoiceNumber& staffNumber);
+  const mfVoiceNumber& voiceNumber);
 
 //______________________________________________________________________________
 // measure numbers

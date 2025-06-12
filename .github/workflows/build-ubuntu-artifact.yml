@@ -46,7 +46,7 @@ jobs:
       # --------------------------------------------------------------------------
       - name: Build MusicFormats for Ubuntu
         run:
-          cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
+          date ; cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
 
 #       # --------------------------------------------------------------------------
