@@ -6434,7 +6434,8 @@ void msr2mxsrTranslator::appendNoteTupletIfRelevant (
           tupletElement->add (
             createMxmlIntegerAttribute (
               "number",
-              noteShortcutUpLinkToTuplet->getTupletNumber ()));
+              mfTupletNumberAsInteger (
+                noteShortcutUpLinkToTuplet->getTupletNumber ())));
 
           // set its "type" attribute
           tupletElement->add (

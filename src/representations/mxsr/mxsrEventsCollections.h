@@ -72,11 +72,11 @@ class EXP mxsrEventsCollection : public smartable
                               { return fThereIsAnImplicitInitialForwardRepeat; }
 
     // staff change events
-    const std::map <int, S_mxsrStaffChangeEvent>&
+    const std::map <mxsrNoteSequentialNumber, S_mxsrStaffChangeEvent>&
                           getStaffChangeTakeOffsMap () const
                               { return fStaffChangeTakeOffsMap; }
 
-    const std::map <int, S_mxsrStaffChangeEvent>&
+    const std::map <mxsrNoteSequentialNumber, S_mxsrStaffChangeEvent>&
                           getStaffChangeLandingsMap () const
                               { return fStaffChangeLandingsMap; }
 
@@ -94,29 +94,29 @@ class EXP mxsrEventsCollection : public smartable
                               { return fGraceEndsMap; }
 
     // cue events
-    const std::map <int, S_mxsrCueEvent>&
+    const std::map <mxsrNoteSequentialNumber, S_mxsrCueEvent>&
                           getCueBeginsMap () const
                               { return fCueBeginsMap; }
 
-    const std::map <int, S_mxsrCueEvent>&
+    const std::map <mxsrNoteSequentialNumber, S_mxsrCueEvent>&
                           getCueEndsMap () const
                               { return fCueEndsMap; }
 
     // chord events
-    const std::map <int, S_mxsrChordEvent>&
+    const std::map <mxsrNoteSequentialNumber, S_mxsrChordEvent>&
                           getChordBeginsMap () const
                               { return fChordBeginsMap; }
 
-    const std::map <int, S_mxsrChordEvent>&
+    const std::map <mxsrNoteSequentialNumber, S_mxsrChordEvent>&
                           getChordEndsMap () const
                               { return fChordEndsMap; }
 
     // tuplet events
-    const std::multimap <int, S_mxsrTupletEvent>&
+    const std::multimap <mxsrNoteSequentialNumber, S_mxsrTupletEvent>&
                           getTupletBeginsMultiMap () const
                               { return fTupletBeginsMultiMap; }
 
-    const std::multimap <int, S_mxsrTupletEvent>&
+    const std::multimap <mxsrNoteSequentialNumber, S_mxsrTupletEvent>&
                           getTupletEndsMultiMap () const
                               { return fTupletEndsMultiMap; }
 
@@ -340,7 +340,7 @@ class EXP mxsrEventsCollection : public smartable
                             S_mxsrTupletEvent tupletEndEvent);
 
     S_mxsrTupletEvent     fetchTupletBeginForTupletNumber (
-                            int tupletBareNumber);
+                            const mfTupletNumber& tupletNumber);
 
     void                  fetchTupletBeginsAtNoteSequentialNumber (
                             int                            noteSequentialNumber,
@@ -417,7 +417,7 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be only one measure repeat begin and one measure repeat end
-    // per measure, hence two maps, indexed by bare measure number
+    // per measure, hence two maps, indexed by measure number
     std::map <mfMeasureNumber, S_mxsrMultipleMeasureRestEvent>
                           fMultipleMeasureRestBeginsMap,
                           fMultipleMeasureRestEndsMap;
@@ -426,7 +426,7 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be only one measure repeat begin and one measure repeat end
-    // per measure, hence two maps, indexed by bare measure number
+    // per measure, hence two maps, indexed by measure number
     std::map <mfMeasureNumber, S_mxsrMeasureRepeatEvent>
                           fMeasureRepeatBeginsMap,
                           fMeasureRepeatEndsMap;
@@ -435,8 +435,8 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be two staff changes per note,
-    // hence these two maps, indexed by note bare sequential number
-    std::map <int, S_mxsrStaffChangeEvent>
+    // hence these two maps, indexed by note sequential number
+    std::map <mxsrNoteSequentialNumber, S_mxsrStaffChangeEvent>
                           fStaffChangeTakeOffsMap,
                           fStaffChangeLandingsMap;
 
@@ -447,7 +447,7 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be only one grace note begin and one chord end per note,
-    // hence these two maps, indexed by note bare sequential number
+    // hence these two maps, indexed by note sequential number
     std::map <mxsrNoteSequentialNumber, S_mxsrGraceEvent>
                           fGraceBeginsMap,
                           fGraceEndsMap;
@@ -456,8 +456,8 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be only one cue note begin and one chord end per note,
-    // hence these two maps, indexed by note bare sequential number
-    std::map <int, S_mxsrCueEvent>
+    // hence these two maps, indexed by note sequential number
+    std::map <mxsrNoteSequentialNumber, S_mxsrCueEvent>
                           fCueBeginsMap,
                           fCueEndsMap;
 
@@ -465,8 +465,8 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be only one chord begin and one chord end per note,
-    // hence these two maps, indexed by note bare sequential number
-    std::map <int, S_mxsrChordEvent>
+    // hence these two maps, indexed by note sequential number
+    std::map <mxsrNoteSequentialNumber, S_mxsrChordEvent>
                           fChordBeginsMap,
                           fChordEndsMap;
 
@@ -474,14 +474,14 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be several tuplet start and/or stop events per note,
-    // hence these two multimaps, indexed by note bare sequential number
-    std::multimap <int, S_mxsrTupletEvent>
+    // hence these two multimaps, indexed by note sequential number
+    std::multimap <mxsrNoteSequentialNumber, S_mxsrTupletEvent>
                           fTupletBeginsMultiMap,
                           fTupletEndsMultiMap;
 
     // we need to fetch a tuplet event by its tuplet number,
     // hence the two maps, indexed by tuplet number
-    std::map <int, S_mxsrTupletEvent>
+    std::map <mfTupletNumber, S_mxsrTupletEvent>
                           fTupletBeginNumbersMap,
                           fTupletEndNumbersMap;
 };

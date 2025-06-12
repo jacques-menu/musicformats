@@ -14,6 +14,8 @@
 
 #include <list>
 
+#include "mfBasicTypes.h"
+
 #include "msrTemposEnumTypes.h"
 
 #include "msrBeams.h"

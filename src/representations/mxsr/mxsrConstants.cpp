@@ -30,7 +30,7 @@ const std::string
   K_MXSR_NOTE_SEQUENTIAL_NUMBER_PREFIX (
     "note_seq_num_");
 
-std::string mfNoteSequentialNumberAsString (int noteSequentialNumber)
+std::string mxsrNoteSequentialNumberAsString (int noteSequentialNumber)
 {
   std::string result;
 

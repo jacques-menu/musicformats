@@ -1132,7 +1132,7 @@ S_mxsrStaffChangeEvent mxsrEventsCollection::fetchStaffChangeTakeOffAtNoteSequen
 {
   S_mxsrStaffChangeEvent result;
 
-  std::map <int, S_mxsrStaffChangeEvent>::const_iterator it;
+  std::map <mxsrNoteSequentialNumber, S_mxsrStaffChangeEvent>::const_iterator it;
 
   it = fStaffChangeTakeOffsMap.find (noteSequentialNumber);
 
@@ -1148,7 +1148,7 @@ S_mxsrStaffChangeEvent mxsrEventsCollection::fetchStaffChangeLandingAtNoteSequen
 {
   S_mxsrStaffChangeEvent result;
 
-  std::map <int, S_mxsrStaffChangeEvent>::const_iterator it;
+  std::map <mxsrNoteSequentialNumber, S_mxsrStaffChangeEvent>::const_iterator it;
 
   it = fStaffChangeLandingsMap.find (noteSequentialNumber);
 
@@ -1198,7 +1198,7 @@ S_mxsrCueEvent mxsrEventsCollection::fetchCueBeginAtNoteSequentialNumber (
 {
   S_mxsrCueEvent result;
 
-  std::map <int, S_mxsrCueEvent>::const_iterator it;
+  std::map <mxsrNoteSequentialNumber, S_mxsrCueEvent>::const_iterator it;
 
   it = fCueBeginsMap.find (noteSequentialNumber);
 
@@ -1214,7 +1214,7 @@ S_mxsrCueEvent mxsrEventsCollection::fetchCueEndAtNoteSequentialNumber (
 {
   S_mxsrCueEvent result;
 
-  std::map <int, S_mxsrCueEvent>::const_iterator it;
+  std::map <mxsrNoteSequentialNumber, S_mxsrCueEvent>::const_iterator it;
 
   it = fCueEndsMap.find (noteSequentialNumber);
 
@@ -1231,7 +1231,7 @@ S_mxsrChordEvent mxsrEventsCollection::fetchChordBeginAtNoteSequentialNumber (
 {
   S_mxsrChordEvent result;
 
-  std::map <int, S_mxsrChordEvent>::const_iterator
+  std::map <mxsrNoteSequentialNumber, S_mxsrChordEvent>::const_iterator
     it =
       fChordBeginsMap.find (noteSequentialNumber);
 
@@ -1247,7 +1247,7 @@ S_mxsrChordEvent mxsrEventsCollection::fetchChordEndAtNoteSequentialNumber (
 {
   S_mxsrChordEvent result;
 
-  std::map <int, S_mxsrChordEvent>::const_iterator
+  std::map <mxsrNoteSequentialNumber, S_mxsrChordEvent>::const_iterator
     it =
       fChordEndsMap.find (noteSequentialNumber);
 
@@ -1260,17 +1260,17 @@ S_mxsrChordEvent mxsrEventsCollection::fetchChordEndAtNoteSequentialNumber (
 
 //________________________________________________________________________
 S_mxsrTupletEvent mxsrEventsCollection::fetchTupletBeginForTupletNumber (
-  int tupletBareNumber)
+  const mfTupletNumber& tupletNumber)
 {
   S_mxsrTupletEvent result;
 
-  result = fTupletBeginNumbersMap [tupletBareNumber];
+  result = fTupletBeginNumbersMap [tupletNumber];
 
 //   for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletBeginsMultiMap) {
 //     S_mxsrTupletEvent
 //       tupletBeginEvent = thePair.second;
 //
-//     if (tupletBeginEvent->tupletEventIsFortupletBareNumber (tupletBareNumber)) {
+//     if (tupletBeginEvent->tupletEventIsFortupletBareNumber (tupletNumber)) {
 //       result = tupletBeginEvent;
 //       break;
 //     }
@@ -1300,15 +1300,15 @@ void mxsrEventsCollection::fetchTupletBeginsAtNoteSequentialNumber (
   // see https://cplusplus.com/reference/map/multimap/equal_range/
 
   std::pair <
-    std::multimap <int, S_mxsrTupletEvent>::const_iterator,
-    std::multimap <int, S_mxsrTupletEvent>::const_iterator
+    std::multimap <mxsrNoteSequentialNumber, S_mxsrTupletEvent>::const_iterator,
+    std::multimap <mxsrNoteSequentialNumber, S_mxsrTupletEvent>::const_iterator
   > iteratorsPair;
 
   iteratorsPair = fTupletBeginsMultiMap.equal_range (
     noteSequentialNumber);
 
   for (
-    std::multimap <int, S_mxsrTupletEvent>::const_iterator it =
+    std::multimap <mxsrNoteSequentialNumber, S_mxsrTupletEvent>::const_iterator it =
       iteratorsPair.first;
     it != iteratorsPair.second;
     ++it
@@ -1350,15 +1350,15 @@ void mxsrEventsCollection::fetchTupletEndsListAtNoteSequentialNumber (
 #endif // MF_TRACE_IS_ENABLED
 
   std::pair <
-    std::multimap <int, S_mxsrTupletEvent>::const_iterator,
-    std::multimap <int, S_mxsrTupletEvent>::const_iterator
+    std::multimap <mxsrNoteSequentialNumber, S_mxsrTupletEvent>::const_iterator,
+    std::multimap <mxsrNoteSequentialNumber, S_mxsrTupletEvent>::const_iterator
   > iteratorsPair;
 
   iteratorsPair = fTupletEndsMultiMap.equal_range (
     noteSequentialNumber);
 
   for (
-    std::multimap <int, S_mxsrTupletEvent>::const_iterator it =
+    std::multimap <mxsrNoteSequentialNumber, S_mxsrTupletEvent>::const_iterator it =
       iteratorsPair.first;
     it != iteratorsPair.second;
     ++it
@@ -1637,15 +1637,16 @@ void mxsrEventsCollection::printStaffChangeEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrStaffChangeEvent> thePair : fStaffChangeTakeOffsMap) {
-    int
-      eventBareSequentialNumber = thePair.first;
+  for (std::pair <mxsrNoteSequentialNumber, S_mxsrStaffChangeEvent> thePair : fStaffChangeTakeOffsMap
+  ) {
+    mxsrNoteSequentialNumber
+      eventSequentialNumber = thePair.first;
 
     S_mxsrStaffChangeEvent
       staffChangeEvent = thePair.second;
 
     os <<
-      "Note " << eventBareSequentialNumber <<
+      "Note " << eventSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -1671,15 +1672,16 @@ void mxsrEventsCollection::printStaffChangeEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrStaffChangeEvent> thePair : fStaffChangeLandingsMap) {
-    int
-      eventBareSequentialNumber = thePair.first;
+  for (std::pair <mxsrNoteSequentialNumber, S_mxsrStaffChangeEvent> thePair : fStaffChangeLandingsMap
+  ) {
+    mxsrNoteSequentialNumber
+      eventSequentialNumber = thePair.first;
 
     S_mxsrStaffChangeEvent
       staffChangeEvent = thePair.second;
 
     os <<
-      "Note " << eventBareSequentialNumber <<
+      "Note " << eventSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -1709,13 +1711,13 @@ void mxsrEventsCollection::printGraceEvents (std::ostream& os) const
 
   for (std::pair <mxsrNoteSequentialNumber, S_mxsrGraceEvent> thePair : fGraceBeginsMap) {
     mxsrNoteSequentialNumber
-      eventBareSequentialNumber = thePair.first;
+      eventSequentialNumber = thePair.first;
 
     S_mxsrGraceEvent
       graceEvent = thePair.second;
 
     os <<
-      "Note " << eventBareSequentialNumber <<
+      "Note " << eventSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -1743,13 +1745,13 @@ void mxsrEventsCollection::printGraceEvents (std::ostream& os) const
 
   for (std::pair <mxsrNoteSequentialNumber, S_mxsrGraceEvent> thePair : fGraceEndsMap) {
     mxsrNoteSequentialNumber
-      eventBareSequentialNumber = thePair.first;
+      eventSequentialNumber = thePair.first;
 
     S_mxsrGraceEvent
       graceEvent = thePair.second;
 
     os <<
-      "Note " << eventBareSequentialNumber <<
+      "Note " << eventSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -1779,13 +1781,13 @@ void mxsrEventsCollection::printCueEvents (std::ostream& os) const
 
   for (std::pair <int, S_mxsrCueEvent> thePair : fCueBeginsMap) {
     int
-      eventBareSequentialNumber = thePair.first;
+      eventSequentialNumber = thePair.first;
 
     S_mxsrCueEvent
       cueEvent = thePair.second;
 
     os <<
-      "Note " << eventBareSequentialNumber <<
+      "Note " << eventSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -1813,13 +1815,13 @@ void mxsrEventsCollection::printCueEvents (std::ostream& os) const
 
   for (std::pair <int, S_mxsrCueEvent> thePair : fCueEndsMap) {
     int
-      eventBareSequentialNumber = thePair.first;
+      eventSequentialNumber = thePair.first;
 
     S_mxsrCueEvent
       cueEvent = thePair.second;
 
     os <<
-      "Note " << eventBareSequentialNumber <<
+      "Note " << eventSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -1850,13 +1852,13 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 
   for (std::pair <int, S_mxsrChordEvent> thePair : fChordBeginsMap) {
     int
-      eventBareSequentialNumber = thePair.first;
+      eventSequentialNumber = thePair.first;
 
     S_mxsrChordEvent
       chordEvent = thePair.second;
 
     os <<
-      "Note " << eventBareSequentialNumber <<
+      "Note " << eventSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -1884,13 +1886,13 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 
   for (std::pair <int, S_mxsrChordEvent> thePair : fChordEndsMap) {
     int
-      eventBareSequentialNumber = thePair.first;
+      eventSequentialNumber = thePair.first;
 
     S_mxsrChordEvent
       chordEvent = thePair.second;
 
     os <<
-      "Note " << eventBareSequentialNumber <<
+      "Note " << eventSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -1924,11 +1926,11 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
       tupletEvent = thePair.second;
 
     mxsrEventSequentialNumber
-      eventBareSequentialNumber =
+      eventSequentialNumber =
         tupletEvent->getEventSequentialNumber ();
 
     os <<
-      "Note " << eventBareSequentialNumber <<
+      "Note " << eventSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -1959,11 +1961,11 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
       tupletEvent = thePair.second;
 
     mxsrEventSequentialNumber
-      eventBareSequentialNumber =
+      eventSequentialNumber =
         tupletEvent->getEventSequentialNumber ();
 
     os <<
-      "Note " << eventBareSequentialNumber <<
+      "Note " << eventSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -1987,15 +1989,15 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletBeginNumbersMap) {
-    int
-      tupletBareNumber = thePair.first;
+  for (std::pair <mfTupletNumber, S_mxsrTupletEvent> thePair : fTupletBeginNumbersMap) {
+    mfTupletNumber
+      tupletNumber = thePair.first;
 
     S_mxsrTupletEvent
       tupletEvent = thePair.second;
 
     os <<
-      "Tuplet begin event " << tupletBareNumber <<
+      "Tuplet begin event " << tupletNumber <<
       ':' <<
       std::endl;
 
@@ -2031,11 +2033,11 @@ void mxsrEventsCollection::printTupletEventsList (
 
   for (S_mxsrTupletEvent tupletEvent : tupletEventsList) {
     mxsrEventSequentialNumber
-      eventBareSequentialNumber =
+      eventSequentialNumber =
         tupletEvent->getEventSequentialNumber ();
 
     os <<
-      "Note " <<  eventBareSequentialNumber <<
+      "Note " <<  eventSequentialNumber <<
       ':' <<
       std::endl;
 

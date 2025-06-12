@@ -26,8 +26,8 @@ namespace MusicFormats
 const int K_MF_INPUT_LINE_UNKNOWN_ = -1;
 
 const std::string
-  kInputLineNumberPrefix             ("line_"),
-  kInputLineNumberDefaultValueString ("*line_Unknown*");
+  kMfInputLineNumberPrefix             ("line_"),
+  kMfInputLineNumberDefaultValueString ("*line_Unknown*");
 
 EXP extern std::string mfInputLineNumberAsString (
   const mfInputLineNumber& inputLineNumber)
@@ -74,28 +74,28 @@ int mfInputLineNumberAsInteger (
 // input locations
 
 const std::string
-  kInputLocationRangePrefix (".."),
-  kInputLocationDefaultValueString ("*location_Unknown*");
+  kMfInputLocationRangePrefix (".."),
+  kMfInputLocationDefaultValueString ("*location_Unknown*");
 
 //______________________________________________________________________________
 // staff numbers
 
-const int K_STAFF_NUMBER_UNKNOWN_ = -99;
+const int K_MF_STAFF_NUMBER_UNKNOWN_ = -99;
 
 const std::string
-  kStaffNumberPrefix ("staff_"),
-  kStaffNumberDefaultValueString ("*staff_Unknown*");
+  kMfStaffNumberPrefix ("staff_"),
+  kMfStaffNumberDefaultValueString ("*staff_Unknown*");
 
-EXP extern const int K_PART_HARMONIES_STAFF_NUMBER = 10;
+EXP extern const int K_MF_PART_HARMONIES_STAFF_NUMBER = 10;
 
-EXP extern const int K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
+EXP extern const int K_MF_PART_FIGURED_BASS_STAFF_NUMBER = 20;
 
 std::string mfStaffNumberAsString (const mfStaffNumber& staffNumber)
 {
   std::string result;
 
-  if (staffNumber == K_STAFF_NUMBER_UNKNOWN_) {
-    result = "K_STAFF_NUMBER_UNKNOWN_";
+  if (staffNumber == K_MF_STAFF_NUMBER_UNKNOWN_) {
+    result = "K_MF_STAFF_NUMBER_UNKNOWN_";
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
@@ -112,8 +112,8 @@ int mfStaffNumberAsInteger (const mfStaffNumber& staffNumber)
 {
   int result;
 
-  if (staffNumber == K_STAFF_NUMBER_UNKNOWN_) {
-    result = K_STAFF_NUMBER_UNKNOWN_;
+  if (staffNumber == K_MF_STAFF_NUMBER_UNKNOWN_) {
+    result = K_MF_STAFF_NUMBER_UNKNOWN_;
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
@@ -137,24 +137,24 @@ int mfStaffNumberAsInteger (const mfStaffNumber& staffNumber)
 //______________________________________________________________________________
 // voice numbers
 
-const int K_VOICE_NUMBER_UNKNOWN_ = -96;
+const int K_MF_VOICE_NUMBER_UNKNOWN_ = -96;
 
 const std::string
-  kVoiceNumberPrefix ("voice_"),
-  kVoiceNumberDefaultValueString ("*voice_Unknown*");
+  kMfVoiceNumberPrefix ("voice_"),
+  kMfVoiceNumberDefaultValueString ("*voice_Unknown*");
 
-EXP extern const int K_PART_HARMONIES_VOICE_NUMBER = 11;
-EXP extern const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER = 20;
+EXP extern const int K_MF_PART_HARMONIES_VOICE_NUMBER = 11;
+EXP extern const int K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER = 20;
 
-EXP extern const int K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
-EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER = 40;
+EXP extern const int K_MF_PART_FIGURED_BASS_VOICE_NUMBER = 21;
+EXP extern const int K_MF_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER = 40;
 
 std::string mfVoiceNumberAsString (const mfVoiceNumber& voiceNumber)
 {
   std::string result;
 
-  if (voiceNumber == K_VOICE_NUMBER_UNKNOWN_) {
-    result = "K_VOICE_NUMBER_UNKNOWN_";
+  if (voiceNumber == K_MF_VOICE_NUMBER_UNKNOWN_) {
+    result = "K_MF_VOICE_NUMBER_UNKNOWN_";
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
@@ -171,8 +171,8 @@ int mfVoiceNumberAsInteger (const mfVoiceNumber& voiceNumber)
 {
   int result;
 
-  if (voiceNumber == K_VOICE_NUMBER_UNKNOWN_) {
-    result = K_VOICE_NUMBER_UNKNOWN_;
+  if (voiceNumber == K_MF_VOICE_NUMBER_UNKNOWN_) {
+    result = K_MF_VOICE_NUMBER_UNKNOWN_;
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
@@ -188,20 +188,20 @@ int mfVoiceNumberAsInteger (const mfVoiceNumber& voiceNumber)
 //______________________________________________________________________________
 // measure numbers
 
-const std::string K_MEASURE_NUMBER_UNKNOWN_ =
-  "K_MEASURE_NUMBER_UNKNOWN_";
+const std::string K_MF_MEASURE_NUMBER_UNKNOWN_ =
+  "K_MF_MEASURE_NUMBER_UNKNOWN_";
 
 const std::string
-  kMeasureNumberPrefix ("measure_"),
-  kMeasureNumberDefaultValueString ("*measure_Unknown*");
+  kMfMeasureNumberPrefix ("measure_"),
+  kMfMeasureNumberDefaultValueString ("*measure_Unknown*");
 
 std::string mfMeasureNumberAsString (
   const mfMeasureNumber& measureNumber)
 {
   std::string result;
 
-  if (measureNumber == K_MEASURE_NUMBER_UNKNOWN_) {
-    result = "K_MEASURE_NUMBER_UNKNOWN_";
+  if (measureNumber == K_MF_MEASURE_NUMBER_UNKNOWN_) {
+    result = "K_MF_MEASURE_NUMBER_UNKNOWN_";
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
@@ -217,18 +217,18 @@ std::string mfMeasureNumberAsString (
 //______________________________________________________________________________
 // tuplet numbers
 
-const int K_TUPLET_NUMBER_UNKNOWN_ = 0;
+const int K_MF_TUPLET_NUMBER_UNKNOWN_ = 0;
 
 const std::string
-  kTupletNumberPrefix ("tuplet_"),
-  kTupletNumberDefaultValueString ("*tuplet_Unknown*");
+  kMfTupletNumberPrefix ("tuplet_"),
+  kMfTupletNumberDefaultValueString ("*tuplet_Unknown*");
 
 std::string mfTupletNumberAsString (const mfTupletNumber& tupletNumber)
 {
   std::string result;
 
-  if (tupletNumber == K_TUPLET_NUMBER_UNKNOWN_) {
-    result = "K_TUPLET_NUMBER_UNKNOWN_";
+  if (tupletNumber == K_MF_TUPLET_NUMBER_UNKNOWN_) {
+    result = "K_MF_TUPLET_NUMBER_UNKNOWN_";
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
@@ -245,8 +245,8 @@ int mfTupletNumberAsInteger (const mfTupletNumber& tupletNumber)
 {
   int result;
 
-  if (tupletNumber == K_TUPLET_NUMBER_UNKNOWN_) {
-    result = K_TUPLET_NUMBER_UNKNOWN_;
+  if (tupletNumber == K_MF_TUPLET_NUMBER_UNKNOWN_) {
+    result = K_MF_TUPLET_NUMBER_UNKNOWN_;
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
@@ -263,19 +263,19 @@ int mfTupletNumberAsInteger (const mfTupletNumber& tupletNumber)
 // lyrics
 
 const std::string
-  kStanzaNumberPrefix ("stanza_"),
-  kStanzaNumberDefaultValueString ("*stanza_Unknown*");
+  kMfStanzaNumberPrefix ("stanza_"),
+  kMfStanzaNumberDefaultValueString ("*stanza_Unknown*");
 
 const std::string
-  K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_",
-  K_STANZA_NAME_UNKNOWN_ = "K_STANZA_NAME_UNKNOWN_";
+  K_MF_STANZA_NUMBER_UNKNOWN_ = "K_MF_STANZA_NUMBER_UNKNOWN_",
+  K_MF_STANZA_NAME_UNKNOWN_ = "K_MF_STANZA_NAME_UNKNOWN_";
 
 std::string mfStanzaNumberAsString (const mfStanzaNumber& stanzaNumber)
 {
   std::string result;
 
-  if (stanzaNumber == K_STANZA_NUMBER_UNKNOWN_) {
-    result = "K_STANZA_NAME_UNKNOWN_";
+  if (stanzaNumber == K_MF_STANZA_NUMBER_UNKNOWN_) {
+    result = "K_MF_STANZA_NAME_UNKNOWN_";
   }
   else {
 #ifndef MF_USE_WRAPPED_TYPES
@@ -324,7 +324,7 @@ void testMfBasicTypes ()
 
   {
     // start the clock
-    clock_t startClock = clock ();
+    clockt startClock = clock ();
 
     constexpr int iterationsNumber = 10000000;
     int total = 0;
@@ -332,10 +332,10 @@ void testMfBasicTypes ()
       total += i;
     } // for
 
-    clock_t endClock = clock ();
+    clockt endClock = clock ();
 
     // print the time spent
-    clock_t
+    clockt
       timeSpentInClocks =
         endClock - startClock;
 
@@ -349,7 +349,7 @@ void testMfBasicTypes ()
 
   {
     // start the clock
-    clock_t startClock = clock ();
+    clockt startClock = clock ();
 
     constexpr int iterationsNumber = 10000000;
     int total = 0;
@@ -364,10 +364,10 @@ void testMfBasicTypes ()
 
     } // for
 
-    clock_t endClock = clock ();
+    clockt endClock = clock ();
 
     // print the time spent
-    clock_t
+    clockt
       timeSpentInClocks =
         endClock - startClock;
 
