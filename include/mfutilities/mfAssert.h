@@ -26,10 +26,10 @@ namespace MusicFormats
 // assert
 
 EXP void mfAssert (
-  const std::string& sourceCodeFileName,
+  const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
-  Bool               condition,
-  const std::string& messageIfFalse);
+  Bool                     condition,
+  const std::string&       messageIfFalse);
 
 EXP void mfAssertFalse (
   const std::string&       sourceCodeFileName,

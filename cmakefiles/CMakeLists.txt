@@ -116,7 +116,8 @@ endif ()
 #===============================================================
 
 if (APPLE)
-	set (CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libc++")
+	set (CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libstdc++")
+	  # NOT libc++!, otherwise cxx11 ld errors occur on Windows and Linux...
 	set (CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LANGUAGE_STANDARD "gnu++${CMAKE_CXX_STANDARD}")
 	if ( IOS )
 		message (STATUS "Generates project for iOS - Use -DIOS=no to change.")
