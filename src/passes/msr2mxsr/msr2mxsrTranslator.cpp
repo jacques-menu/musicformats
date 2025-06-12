@@ -1739,13 +1739,9 @@ void msr2mxsrTranslator::visitStart (S_msrStaffLayout& elt)
   // (it is 0 inside the <defaults /> element)
   if (staffNumber > 0) {
     staffLayoutElement->add (
-// #ifndef MF_USE_WRAPPED_TYPES
       createMxmlIntegerAttribute (
         "number",
         mfStaffNumberAsInteger (staffNumber)));
-// #else
-//       createMxmlIntegerAttribute ("number", staffNumber.getBareValue ()));
-// #endif // MF_USE_WRAPPED_TYPES
   }
 
   // distance
@@ -3423,11 +3419,9 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
     fCurrentMeasureElement = createMxmlelement (k_measure, "");
     // set its "number" attribute
     fCurrentMeasureElement->add (
-#ifdef MF_USE_WRAPPED_TYPES
-      createMxmlAttribute ("number", fCurrentMeasureNumber.getBareValue ()));
-#else
-      createMxmlAttribute ("number", fCurrentMeasureNumber));
-#endif // MF_USE_WRAPPED_TYPES
+      createMxmlAttribute (
+        "number",
+        mfMeasureNumberAsString (fCurrentMeasureNumber)));
 
     // append it to the current part element
     fCurrentPartElement->push (fCurrentMeasureElement);
@@ -7082,12 +7076,8 @@ void msr2mxsrTranslator::appendNoteLyricsToNote (
         lyricElement->add (
           createMxmlAttribute (
             "number",
-// #ifndef MF_USE_WRAPPED_TYPES
             mfStanzaNumberAsString (
               syllable->getSyllableStanzaNumber ())));
-// #else
-//             syllable->getSyllableStanzaNumber ().getBareValue ()));
-// #endif // MF_USE_WRAPPED_TYPES
 
         // append a syllabic element to the lyric element if relevant
         if (syllabicString.size ()) {

@@ -16,7 +16,6 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -38,14 +37,14 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrTuplet msrTuplet::create (
   const mfInputLineNumber& inputLineNumber,
-  int                     tupletNumber,
-  const msrTupletFactor&  tupletFactor,
-  msrTupletBracketKind    tupletBracketKind,
-  msrTupletLineShapeKind  tupletLineShapeKind,
-  msrTupletTypeKind       tupletTypeKind,
-  msrTupletShowNumberKind tupletShowNumberKind,
-  msrTupletShowTypeKind   tupletShowTypeKind,
-  msrPlacementKind        tupletBracketPlacementKind)
+  const mfTupletNumber&    tupletNumber,
+  const msrTupletFactor&   tupletFactor,
+  msrTupletBracketKind     tupletBracketKind,
+  msrTupletLineShapeKind   tupletLineShapeKind,
+  msrTupletTypeKind        tupletTypeKind,
+  msrTupletShowNumberKind  tupletShowNumberKind,
+  msrTupletShowTypeKind    tupletShowTypeKind,
+  msrPlacementKind         tupletBracketPlacementKind)
 {
   msrTuplet* obj =
     new msrTuplet (
@@ -64,14 +63,14 @@ S_msrTuplet msrTuplet::create (
 
 msrTuplet::msrTuplet (
   const mfInputLineNumber& inputLineNumber,
-  int                     tupletNumber,
-  const msrTupletFactor&  tupletFactor,
-  msrTupletBracketKind    tupletBracketKind,
-  msrTupletLineShapeKind  tupletLineShapeKind,
-  msrTupletTypeKind       tupletTypeKind,
-  msrTupletShowNumberKind tupletShowNumberKind,
-  msrTupletShowTypeKind   tupletShowTypeKind,
-  msrPlacementKind        tupletBracketPlacementKind)
+  const mfTupletNumber&    tupletNumber,
+  const msrTupletFactor&   tupletFactor,
+  msrTupletBracketKind     tupletBracketKind,
+  msrTupletLineShapeKind   tupletLineShapeKind,
+  msrTupletTypeKind        tupletTypeKind,
+  msrTupletShowNumberKind  tupletShowNumberKind,
+  msrTupletShowTypeKind    tupletShowTypeKind,
+  msrPlacementKind         tupletBracketPlacementKind)
     : msrTupletElement (
         inputLineNumber)
 {

@@ -24,7 +24,6 @@
 #include "mfDurationsAndPositionInMeasures.h"
 
 #include "mfAssert.h"
-// #include "mfConstants.h"
 #include "mfServices.h"
 
 #include "mfDurationsAndPositionInMeasures.h"

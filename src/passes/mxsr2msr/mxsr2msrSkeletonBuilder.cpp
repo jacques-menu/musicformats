@@ -19,7 +19,6 @@
 #include "mxsr2msrWae.h"
 
 #include "mfAssert.h"
-// #include "mfConstants.h"
 
 #include "mfStringsHandling.h"
 
@@ -4517,11 +4516,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
 
 	fPreviousMeasureNumber = fCurrentMeasureNumber;
 
-#ifdef MF_USE_WRAPPED_TYPES
-  fCurrentMeasureNumber.setBareValue (elt->getAttributeValue ("number"));
-#else
-  fCurrentMeasureNumber = elt->getAttributeValue ("number");
-#endif // MF_USE_WRAPPED_TYPES
+  fCurrentMeasureNumber.setBareValue (elt->getAttributeValue ("number")); // JMI 0.9.75
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {

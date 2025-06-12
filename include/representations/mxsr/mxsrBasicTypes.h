@@ -14,8 +14,6 @@
 
 #include "exports.h"
 
-// #include "mfBasicTypes.h"
-// #include "mfConstants.h"
 #include "mfWrappedValueForArithmetic.h"
 
 #include "mxsrConstants.h"
@@ -41,7 +39,7 @@ namespace MusicFormats
 #endif // MF_USE_WRAPPED_TYPES
 
 
-// events sequential numbers
+// MXSR events sequential numbers
 //______________________________________________________________________________
 
 #ifndef MF_USE_WRAPPED_TYPES
@@ -54,28 +52,6 @@ namespace MusicFormats
       K_MF_EMPTY_STRING,
       K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE,
       K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING
-    >;
-#endif // MF_USE_WRAPPED_TYPES
-
-
-// tuplets numbers
-//______________________________________________________________________________
-
-// uncomment the following line for short-term tests
-// with only tuplet numbers being wrapped (they're not too frequent in the code)
-
-#undef MF_USE_WRAPPED_TYPES
-
-#ifndef MF_USE_WRAPPED_TYPES
-  using mxsrTupletNumber = int;
-#else
-  using mxsrTupletNumber =
-    mfWrappedValueForArithmetic <
-      int,
-      K_MXSR_TUPLET_NUMBER_PREFIX,
-      K_MF_EMPTY_STRING,
-      K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE,
-      K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING
     >;
 #endif // MF_USE_WRAPPED_TYPES
 

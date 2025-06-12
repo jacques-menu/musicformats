@@ -11,8 +11,6 @@
 
 #include "xml_tree_browser.h"
 #include "mfAssert.h"
-// #include "mfConstants.h"
-// #include "mfMusicformatsErrors.h"
 #include "mfStringsHandling.h"
 
 #include "msrLineBreaks.h"
@@ -1583,13 +1581,7 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestBegin ()
   fCurrentMultipleMeasureRest =
     msrMultipleMeasureRest::create (
       fCurrentMultipleMeasureRestBegin->
-
-#ifdef MF_USE_WRAPPED_TYPES
-        getEventInputLineNumber ().getBareValue (),
-#else
         getEventInputLineNumber (),
-#endif // MF_USE_WRAPPED_TYPES
-
       fCurrentMultipleMeasureRestBegin->
         getMultipleMeasureRestNumber (),
       fCurrentMultipleMeasureRestBegin->
@@ -1798,12 +1790,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatBegin ()
   fCurrentMeasureRepeat =
     msrMeasureRepeat::create (
       fCurrentMeasureRepeatBegin->
-
-#ifdef MF_USE_WRAPPED_TYPES
-        getEventInputLineNumber ().getBareValue (),
-#else
         getEventInputLineNumber (),
-#endif // MF_USE_WRAPPED_TYPES
 
       fCurrentMeasureRepeatMeasuresNumber,
       fCurrentMeasureRepeatSlashesNumber);
@@ -20148,7 +20135,7 @@ void mxsr2msrSkeletonPopulator::copyNoteGraceNotesGroupsToChord (
 //______________________________________________________________________________
 S_msrTuplet mxsr2msrSkeletonPopulator::createATuplet (
   const mfInputLineNumber& inputLineNumber,
-  const mxsrTupletNumber&  tupletNumber,
+  const mfTupletNumber&  tupletNumber,
   const msrTupletFactor&   tupletFactor)
 {
   // create the tuplet
@@ -20178,19 +20165,8 @@ S_msrTuplet mxsr2msrSkeletonPopulator::createATuplet (
   const S_msrTuplet&
     tuplet =
       msrTuplet::create (
-
-#ifdef MF_USE_WRAPPED_TYPES
-        inputLineNumber.getBareValue (),
-#else
         inputLineNumber,
-#endif // MF_USE_WRAPPED_TYPES
-
-#ifdef MF_USE_WRAPPED_TYPES
-        tupletNumber.getBareValue (),
-#else
         tupletNumber,
-#endif // MF_USE_WRAPPED_TYPES
-
         tupletFactor,
         fCurrentTupletBracketKind,
         fCurrentTupletLineShapeKind,
@@ -23396,11 +23372,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
     S_msrStaff takeOffStaff;
     try {
       takeOffStaff =
-#ifdef MF_USE_WRAPPED_TYPES
-        fCurrentPartStavesMapPtr->at (takeOffStaffNumber.getBareValue ());
-#else
         fCurrentPartStavesMapPtr->at (takeOffStaffNumber);
-#endif // MF_USE_WRAPPED_TYPES
     } // try
 
     catch (std::out_of_range& e) {
@@ -23840,12 +23812,7 @@ void mxsr2msrSkeletonPopulator::handleChordBegin ()
   fCurrentChord =
     msrChord::create (
       fCurrentNoteChordBegin->
-
-#ifdef MF_USE_WRAPPED_TYPES
-        getEventInputLineNumber ().getBareValue ());
-#else
         getEventInputLineNumber ());
-#endif // MF_USE_WRAPPED_TYPES
 
   // append current chord where it belongs
   if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
@@ -24066,13 +24033,7 @@ void mxsr2msrSkeletonPopulator:: handleTupletBegin (
     S_msrTuplet
       tuplet =
         createATuplet (
-
-#ifdef MF_USE_WRAPPED_TYPES
-          tupletBeginEvent->getEventInputLineNumber ().getBareValue (),
-#else
           tupletBeginEvent->getEventInputLineNumber (),
-#endif // MF_USE_WRAPPED_TYPES
-
           tupletBeginEvent->getTupletNumber (),
           tupletBeginEvent->getTupletFactor ());
 
@@ -24182,12 +24143,7 @@ void mxsr2msrSkeletonPopulator:: handleTupletEnd (
       S_mxsrTupletEvent
         correspondingTupleBegintEvent =
           fKnownEventsCollection.fetchTupletBeginForTupletNumber (
-
-#ifdef MF_USE_WRAPPED_TYPES
-            tupletEndEvent->getTupletNumber ().getBareValue ());
-#else
             tupletEndEvent->getTupletNumber ());
-#endif // MF_USE_WRAPPED_TYPES
 
       fCurrentRecipientMxsrVoice->handleTupletEnd (
         fCurrentNote,

@@ -12,7 +12,6 @@
 #include <sstream>
 #include <iomanip>      // setw()), set::precision(), ...
 
-// #include "mfConstants.h"
 #include "mfIndentedTextOutput.h"
 #include "mfStringsHandling.h"
 

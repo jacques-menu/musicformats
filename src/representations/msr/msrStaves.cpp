@@ -14,10 +14,8 @@
 #include "visitor.h"
 
 #include "mfPreprocessorSettings.h"
-// #include "mfConstants.h"
 
 #include "mfAssert.h"
-// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 

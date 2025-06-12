@@ -49,7 +49,7 @@ std::ostream& operator << (std::ostream& os, const mxsrTupletEventKind& elt)
 //________________________________________________________________________
 S_mxsrTupletEvent mxsrTupletEvent::create (
   mxsrTupletEventKind              tupletEventKind,
-  const mxsrTupletNumber&          tupletNumber,
+  const mfTupletNumber&          tupletNumber,
   const msrTupletFactor&           tupletFactor,
   const mxsrNoteSequentialNumber&  noteSequentialNumber,
   const mfStaffNumber&             noteStaffNumber,
@@ -73,7 +73,7 @@ S_mxsrTupletEvent mxsrTupletEvent::create (
 
 mxsrTupletEvent::mxsrTupletEvent (
   mxsrTupletEventKind              tupletEventKind,
-  const mxsrTupletNumber&          tupletNumber,
+  const mfTupletNumber&          tupletNumber,
   const msrTupletFactor&           tupletFactor,
   const mxsrNoteSequentialNumber&  noteSequentialNumber,
   const mfStaffNumber&             noteStaffNumber,
@@ -126,11 +126,7 @@ mxsrTupletEvent::mxsrTupletEvent (
   // sanity check JMI 0.9.70
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-#ifdef MF_USE_WRAPPED_TYPES
-    tupletNumber.getBareValue () > 0,
-#else
     tupletNumber > 0,
-#endif // MF_USE_WRAPPED_TYPES
     "tupletNumber is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 

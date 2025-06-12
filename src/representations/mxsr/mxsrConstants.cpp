@@ -72,33 +72,5 @@ std::string mfEventSequentialNumberAsString (int eventSequentialNumber)
   return result;
 }
 
-// tuplets numbers
-//______________________________________________________________________________
-
-const int
-  K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE = 0;
-
-const std::string
-  K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING (
-  "tuplet_num_0 (default_value)");
-
-const std::string
-  K_MXSR_TUPLET_NUMBER_PREFIX (
-    "tuplet_num_");
-
-std::string mfTupletSequentialNumberAsString (int tupletSequentialNumber)
-{
-  std::string result;
-
-  if (tupletSequentialNumber == K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE) {
-    result = K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING;
-  }
-  else {
-    result = std::to_string (tupletSequentialNumber);
-  }
-
-  return result;
-}
-
 
 }

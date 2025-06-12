@@ -16,7 +16,6 @@
 
 #include "mfConstants.h"
 
-// #include "mfDurationsAndPositionInMeasures.h"
 #include "mfWrappedRange.h"
 #include "mfWrappedValueForArithmetic.h"
 #include "mfWrappedValueWithDefault.h"
@@ -42,7 +41,7 @@ namespace MusicFormats
   which minimizes re-compilations should the setting change
 */
 
-// #define MF_USE_WRAPPED_TYPES
+#define MF_USE_WRAPPED_TYPES
 
 
 //______________________________________________________________________________
@@ -154,7 +153,7 @@ EXP extern std::string mfVoiceNumberAsString (
   const mfVoiceNumber& voiceNumber);
 
 EXP extern int mfVoiceNumberAsInteger (
-  const mfVoiceNumber& staffNumber);
+  const mfVoiceNumber& voiceNumber);
 
 //______________________________________________________________________________
 // measure numbers
@@ -180,6 +179,34 @@ EXP extern const std::string
 
 EXP extern std::string mfMeasureNumberAsString (
   const mfMeasureNumber& measureNumber);
+
+//______________________________________________________________________________
+// tuplet numbers
+
+EXP extern const int K_TUPLET_NUMBER_UNKNOWN_;
+
+EXP extern const std::string
+  kTupletNumberPrefix,
+  kTupletNumberDefaultValueString;
+
+#ifndef MF_USE_WRAPPED_TYPES
+  using mfTupletNumber = int;
+#else
+  using mfTupletNumber =
+    mfWrappedValueForArithmetic <
+      int,
+      kTupletNumberPrefix,
+      K_MF_EMPTY_STRING,
+      K_TUPLET_NUMBER_UNKNOWN_,
+      kTupletNumberDefaultValueString
+    >;
+#endif // MF_USE_WRAPPED_TYPES
+
+EXP extern std::string mfTupletNumberAsString (
+  const mfTupletNumber& tupletNumber);
+
+EXP extern int mfTupletNumberAsInteger (
+  const mfTupletNumber& tupletNumber);
 
 //______________________________________________________________________________
 // lyrics
@@ -208,37 +235,6 @@ EXP extern const std::string
 EXP extern std::string mfStanzaNumberAsString (
   const mfStanzaNumber& stanzaNumber);
 
-// //______________________________________________________________________________
-// enum class mfDurationKind {
-//   kDuration_UNKNOWN_,
-//
-//   // from longest to shortest for the algorithms
-//   kDurationMaxima, kDurationLonga, kDurationBreve,
-//   kDurationWhole, kDurationHalf,
-//   kDurationQuarter,
-//   kDurationEighth, kDuration16th, kDuration32nd, kDuration64th,
-//   kDuration128th, kDuration256th, kDuration512th, kDuration1024th
-// };
-//
-// std::string mfDurationKindAsString (mfDurationKind notesDurationKind);
-//
-// std::ostream& operator << (std::ostream& os, const mfDurationKind& elt);
-//
-// EXP mfDurationKind mfDurationKindFromMusicXMLGraphicNoteType (
-//   const mfInputLineNumber& inputLineNumber,
-//   const std::string& durationString);
-//
-// EXP mfDurationKind mfDurationKindFromInteger (
-//   const mfInputLineNumber& inputLineNumber,
-//   int durationInteger);
-//
-// EXP mfDurationKind mfDurationKindFromString (
-//   const mfInputLineNumber& inputLineNumber,
-//   const std::string& durationString);
-//
-// std::string mfDurationKindAsMusicXMLType (mfDurationKind notesDurationKind);
-
-
 //______________________________________________________________________________
 
 void testMfBasicTypes ();
@@ -248,22 +244,5 @@ void testMfBasicTypes ();
 
 
 #endif // ___mfBasicTypes___
-
-
-/*
-  There are still error messages on Linux and Windows at link time
-  regarding some methods being undefined due to the wrapped types
-  instantiations below, such as:
-
-Linux:
-
-/usr/bin/ld: lib/liblibmusicformats.so: undefined reference to `MusicFormats::mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, MusicFormats::mfWrappedValueWithDefault<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, MusicFormats::kMeasureNumberPrefix[abi:cxx11], MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MEASURE_NUMBER_UNKNOWN_, MusicFormats::kMeasureNumberDefaultValueString[abi:cxx11]> const&, int, MusicFormats::mfWrappedValueWithDefault<int, MusicFormats::kInputLineNumberPrefix, MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MF_INPUT_LINE_UNKNOWN_, MusicFormats::kInputLineNumberDefaultValueString> const&)'
-
-
-Windows:
-
-C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe: CMakeFiles/musicformats.dir/objects.a(mxsr2msrSkeletonBuilder.cpp.obj):mxsr2msrSkeletonBuilder.cpp:(.text+0x21cc1): undefined reference to `MusicFormats::mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, MusicFormats::mfWrappedValueWithDefault<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, MusicFormats::kMeasureNumberPrefix[abi:cxx11], MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MEASURE_NUMBER_UNKNOWN_, MusicFormats::kMeasureNumberDefaultValueString[abi:cxx11]> const&, int, MusicFormats::mfWrappedValueWithDefault<int, MusicFormats::kInputLineNumberPrefix, MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MF_INPUT_LINE_UNKNOWN_, MusicFormats::kInputLineNumberDefaultValueString> const&)'
-2025-02-23T16:44:36.0862400Z       |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
 
 

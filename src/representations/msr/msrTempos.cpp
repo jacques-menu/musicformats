@@ -236,12 +236,12 @@ std::ostream& operator << (std::ostream& os, const S_msrTempoNote& elt)
 
 //______________________________________________________________________________
 S_msrTempoTuplet msrTempoTuplet::create (
-  const mfInputLineNumber& inputLineNumber,
-  int                          tempoTupletNumber,
+  const mfInputLineNumber&     inputLineNumber,
+  const mfTupletNumber&        tempoTupletNumber,
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
   const msrTupletFactor&       tempoTupletFactor,
-  const mfWholeNotes&         memberNotesDisplayWholeNotes)
+  const mfWholeNotes&          memberNotesDisplayWholeNotes)
 {
   msrTempoTuplet* obj =
     new msrTempoTuplet (
@@ -256,12 +256,12 @@ S_msrTempoTuplet msrTempoTuplet::create (
 }
 
 msrTempoTuplet::msrTempoTuplet (
-  const mfInputLineNumber& inputLineNumber,
-  int                          tempoTupletNumber,
+  const mfInputLineNumber&     inputLineNumber,
+  const mfTupletNumber&        tempoTupletNumber,
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
   const msrTupletFactor&       tempoTupletFactor,
-  const mfWholeNotes&         memberNotesDisplayWholeNotes)
+  const mfWholeNotes&          memberNotesDisplayWholeNotes)
     : msrElement (inputLineNumber)
 {
   fTempoTupletNumber = tempoTupletNumber;

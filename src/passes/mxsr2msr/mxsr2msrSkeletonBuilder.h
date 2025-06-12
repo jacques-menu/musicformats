@@ -794,8 +794,8 @@ class EXP mxsr2msrSkeletonBuilder :
     int                       fCurrentNoteNormalNotes;
 
     // nested tuplets are numbered 1, 2, ...
-    int                       fCurrentTupletNumber;
-//     int                       fPreviousTupletNumber;
+    mfTupletNumber            fCurrentTupletNumber;
+//     mfTupletNumber                       fPreviousTupletNumber;
 
     msrTupletTypeKind         fTupletTypeKind;
 

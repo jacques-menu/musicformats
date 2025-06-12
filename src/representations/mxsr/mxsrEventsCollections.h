@@ -12,21 +12,14 @@
 #ifndef ___mxsrEventsCollections___
 #define ___mxsrEventsCollections___
 
-// #include <iomanip>
-// #include <string>
 #include <list>
 #include <map>
 
 #include "exports.h"
 #include "smartpointer.h"
 
-// #include "mfBasicTypes.h"
-// #include "mfBool.h"
-// #include "mfIndentedTextOutput.h"
-// #include "mfWrappedValueForArithmetic.h"
 #include "mfStringsHandling.h"
 
-// #include "mxsrBasicTypes.h"
 #include "mxsrChordEvents.h"
 #include "mxsrCueEvents.h"
 #include "mxsrGraceEvents.h"
@@ -35,8 +28,6 @@
 #include "mxsrNoteEvents.h"
 #include "mxsrStaffChangeEvents.h"
 #include "mxsrTupletEvents.h"
-
-// #include "msrTupletFactors.h"
 
 
 using namespace MusicXML2;
@@ -327,7 +318,7 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     S_mxsrTupletEvent     createATupletBeginEvent (
-                            const mxsrTupletNumber&         tupletNumber,
+                            const mfTupletNumber&         tupletNumber,
                             const msrTupletFactor&          tupletFactor,
                             const mxsrNoteSequentialNumber& noteSequentialNumber,
                             const mfStaffNumber&            noteStaffNumber,
@@ -338,7 +329,7 @@ class EXP mxsrEventsCollection : public smartable
                             S_mxsrTupletEvent tupletBeginEvent);
 
     S_mxsrTupletEvent     createATupletEndEvent (
-                            const mxsrTupletNumber&         tupletNumber,
+                            const mfTupletNumber&         tupletNumber,
                             const msrTupletFactor&          tupletFactor,
                             const mxsrNoteSequentialNumber& noteSequentialNumber,
                             const mfStaffNumber&            noteStaffNumber,

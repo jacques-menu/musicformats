@@ -19,7 +19,6 @@
 
 #include "mfBool.h"
 
-// #include "mfDurationsAndPositionInMeasures.h"
 #include "mfPositionInMeasure.h"
 
 
@@ -132,23 +131,6 @@ EXP extern const mfMoment K_MOMENT_UNKNOWN_;
 EXP extern const std::string
   kMomentPrefix,
   kMomentDefaultValueString;
-
-
-// moments
-//______________________________________________________________________________
-
-// #ifndef MF_USE_WRAPPED_TYPES
-//   using mfMoment = mfMoment;
-// #else
-//   using mfMoment =
-//     mfWrappedValueWithDefault <
-//       mfMoment,
-//       kMomentPrefix,
-//       K_MF_EMPTY_STRING,
-//       K_MOMENT_UNKNOWN_,
-//       kMomentDefaultValueString
-//     >;
-// #endif // MF_USE_WRAPPED_TYPES
 
 
 

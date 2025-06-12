@@ -16,7 +16,6 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-// #include "mfConstants.h"
 #include "mfStringsHandling.h"
 #include "mfServices.h"
 

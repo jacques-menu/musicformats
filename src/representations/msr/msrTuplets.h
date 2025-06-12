@@ -35,14 +35,14 @@ class EXP msrTuplet : public msrTupletElement
 
     static S_msrTuplet    create (
                             const mfInputLineNumber& inputLineNumber,
-                            int                     tupletNumber,
-                            const msrTupletFactor&  tupletFactor,
-                            msrTupletBracketKind    tupletBracketKind,
-                            msrTupletLineShapeKind  tupletLineShapeKind,
-                            msrTupletTypeKind       tupletTypeKind,
-                            msrTupletShowNumberKind tupletShowNumberKind,
-                            msrTupletShowTypeKind   tupletShowTypeKind,
-                            msrPlacementKind        tupletBracketPlacementKind);
+                            const mfTupletNumber&    tupletNumber,
+                            const msrTupletFactor&   tupletFactor,
+                            msrTupletBracketKind     tupletBracketKind,
+                            msrTupletLineShapeKind   tupletLineShapeKind,
+                            msrTupletTypeKind        tupletTypeKind,
+                            msrTupletShowNumberKind  tupletShowNumberKind,
+                            msrTupletShowTypeKind    tupletShowTypeKind,
+                            msrPlacementKind         tupletBracketPlacementKind);
 
     // cloning
     // ------------------------------------------------------
@@ -58,14 +58,14 @@ class EXP msrTuplet : public msrTupletElement
 
                           msrTuplet (
                             const mfInputLineNumber& inputLineNumber,
-                            int                     tupletNumber,
-                            const msrTupletFactor&  tupletFactor,
-                            msrTupletBracketKind    tupletBracketKind,
-                            msrTupletLineShapeKind  tupletLineShapeKind,
-                            msrTupletTypeKind       tupletTypeKind,
-                            msrTupletShowNumberKind tupletShowNumberKind,
-                            msrTupletShowTypeKind   tupletShowTypeKind,
-                            msrPlacementKind        tupletBracketPlacementKind);
+                            const mfTupletNumber&    tupletNumber,
+                            const msrTupletFactor&   tupletFactor,
+                            msrTupletBracketKind     tupletBracketKind,
+                            msrTupletLineShapeKind   tupletLineShapeKind,
+                            msrTupletTypeKind        tupletTypeKind,
+                            msrTupletShowNumberKind  tupletShowNumberKind,
+                            msrTupletShowTypeKind    tupletShowTypeKind,
+                            msrPlacementKind         tupletBracketPlacementKind);
 
     virtual               ~msrTuplet ();
 
@@ -75,7 +75,7 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
     // number
-    int                   getTupletNumber () const
+    mfTupletNumber        getTupletNumber () const
                               { return fTupletNumber; };
 
     // tuplet factor
@@ -211,7 +211,7 @@ class EXP msrTuplet : public msrTupletElement
     msrTupletInKind       fTupletKind;
 
     // number
-    int                   fTupletNumber;
+    mfTupletNumber        fTupletNumber;
 
     // appearance
     msrTupletBracketKind  fTupletBracketKind;

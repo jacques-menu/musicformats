@@ -16,7 +16,6 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-// #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"

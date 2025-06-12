@@ -9,7 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include "mfConstants.h"
 #include "mfStringsHandling.h"
 
 #include "mxsr2msrPartGroups.h"

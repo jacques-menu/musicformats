@@ -42,17 +42,6 @@ EXP extern const std::string
   K_MXSR_EVENT_SEQUENTIAL_NUMBER_PREFIX,
   K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING;
 
-// tuplets numbers
-//______________________________________________________________________________
-
-EXP extern const int K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE;
-
-EXP extern const std::string K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING;
-
-EXP extern const std::string
-  K_MXSR_TUPLET_NUMBER_PREFIX,
-  K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING;
-
 
 }
 

@@ -115,12 +115,12 @@ class EXP msrTempoTuplet : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrTempoTuplet> create (
-                            const mfInputLineNumber& inputLineNumber,
-                            int                          tempoTupletNumber,
+                            const mfInputLineNumber&     inputLineNumber,
+                            const mfTupletNumber&        tempoTupletNumber,
                             msrTempoTupletBracketKind    tempoTupletBracketKind,
                             msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
                             const msrTupletFactor&       tempoTupletFactor,
-                            const mfWholeNotes&     memberNotesDisplayWholeNotes);
+                            const mfWholeNotes&          memberNotesDisplayWholeNotes);
 
   protected:
 
@@ -128,12 +128,12 @@ class EXP msrTempoTuplet : public msrElement
     // ------------------------------------------------------
 
                           msrTempoTuplet (
-                            const mfInputLineNumber& inputLineNumber,
-                            int                          tempoTupletNumber,
+                            const mfInputLineNumber&     inputLineNumber,
+                            const mfTupletNumber&        tempoTupletNumber,
                             msrTempoTupletBracketKind    tempoTupletBracketKind,
                             msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
                             const msrTupletFactor&       tempoTupletFactor,
-                            const mfWholeNotes&     memberNotesDisplayWholeNotes);
+                            const mfWholeNotes&          memberNotesDisplayWholeNotes);
 
     virtual               ~msrTempoTuplet ();
 
@@ -142,7 +142,7 @@ class EXP msrTempoTuplet : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    int                   getTempoTupletNumber () const
+    mfTupletNumber        getTempoTupletNumber () const
                               { return fTempoTupletNumber; }
 
     msrTempoTupletBracketKind
@@ -215,7 +215,7 @@ class EXP msrTempoTuplet : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    int                   fTempoTupletNumber;
+    mfTupletNumber        fTempoTupletNumber;
 
     msrTempoTupletBracketKind
                           fTempoTupletBracketKind;

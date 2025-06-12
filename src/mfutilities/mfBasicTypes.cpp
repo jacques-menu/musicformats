@@ -215,6 +215,51 @@ std::string mfMeasureNumberAsString (
 }
 
 //______________________________________________________________________________
+// tuplet numbers
+
+const int K_TUPLET_NUMBER_UNKNOWN_ = 0;
+
+const std::string
+  kTupletNumberPrefix ("tuplet_"),
+  kTupletNumberDefaultValueString ("*tuplet_Unknown*");
+
+std::string mfTupletNumberAsString (const mfTupletNumber& tupletNumber)
+{
+  std::string result;
+
+  if (tupletNumber == K_TUPLET_NUMBER_UNKNOWN_) {
+    result = "K_TUPLET_NUMBER_UNKNOWN_";
+  }
+  else {
+#ifndef MF_USE_WRAPPED_TYPES
+    result = tupletNumber;
+#else
+    result = std::to_string (tupletNumber.getBareValue ());
+#endif // MF_USE_WRAPPED_TYPES
+  }
+
+  return result;
+}
+
+int mfTupletNumberAsInteger (const mfTupletNumber& tupletNumber)
+{
+  int result;
+
+  if (tupletNumber == K_TUPLET_NUMBER_UNKNOWN_) {
+    result = K_TUPLET_NUMBER_UNKNOWN_;
+  }
+  else {
+#ifndef MF_USE_WRAPPED_TYPES
+    result = tupletNumber;
+#else
+    result = tupletNumber.getBareValue ();
+#endif // MF_USE_WRAPPED_TYPES
+  }
+
+  return result;
+}
+
+//______________________________________________________________________________
 // lyrics
 
 const std::string

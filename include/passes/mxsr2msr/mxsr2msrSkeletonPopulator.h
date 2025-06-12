@@ -1433,10 +1433,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
     Bool                      fCurrentMeasureBelongsToAMultipleMeasureRest;
 
-    S_msrMultipleMeasureRest  createMultipleMeasureRest (
-                                const mfInputLineNumber& inputLineNumber,
-                                int tupletNumber);
-
     void                      handleMultipleMeasureRestBeginEventIfAny ();
 
     void                      handleMultipleMeasureRestEndEventIfAny ();
@@ -1478,10 +1474,6 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handleMeasureRepeatBegin ();
 
     void                      handleMeasureRepeatEnd ();
-
-    S_msrMeasureRepeat        createMeasureRepeat (
-                                const mfInputLineNumber& inputLineNumber,
-                                int tupletNumber);
 
 //     void                      finalizeCurrentMeasureRepeat (
 //                                 const mfInputLineNumber& inputLineNumber);
@@ -1625,10 +1617,10 @@ class EXP mxsr2msrSkeletonPopulator :
 
     int                       fCurrentNoteActualNotes;
     int                       fCurrentNoteNormalNotes;
-    mfDurationKind      fCurrentNoteNormalTypeNotesDuration;
+    mfDurationKind            fCurrentNoteNormalTypeNotesDuration;
 
     // nested tuplets are numbered 1, 2, ...
-    int                       fPreviousTupletNumber;
+    mfTupletNumber            fPreviousTupletNumber;
 
     Bool                      fOnGoingTupletActual;
     int                       fCurrentTupletActualNumber;
@@ -1641,7 +1633,7 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fCurrentTupletNormalDotsNumber;
 
     msrTupletTypeKind         fCurrentTupletTypeKind;
-    int                       fCurrentTempoTupletNumber;
+    mfTupletNumber            fCurrentTempoTupletNumber;
     msrTupletBracketKind      fCurrentTupletBracketKind;
     msrTupletShowNumberKind   fCurrentTupletShowNumberKind;
     msrTupletShowTypeKind     fCurrentTupletShowTypeKind;
@@ -1679,7 +1671,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     S_msrTuplet               createATuplet (
                                 const mfInputLineNumber& inputLineNumber,
-                                const mxsrTupletNumber&  tupletNumber,
+                                const mfTupletNumber&  tupletNumber,
                                 const msrTupletFactor&   tupletFactor);
 
     void                      handleTupletBeginEventsIfAny ();
@@ -1691,19 +1683,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      handleTupletEnd (
                                 S_mxsrTupletEvent tupletEndEvent);
-
-//     void                      handleTupletBegin (
-//                                 const S_msrVoice& currentNoteVoice,
-//                                 int               tupletNumber);
-//
-//     void                      handleTupletContinue (
-//                                 const S_msrNote&  note,
-//                                 const S_msrVoice& currentNoteVoice);
-//
-//     void                      handleTupletEnd (
-//                                 const S_msrNote&  note,
-//                                 const S_msrVoice& currentNoteVoice);
-//
 
     // cue notes
     // ------------------------------------------------------
@@ -1970,7 +1949,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     mfWholeNotes              fCurrentMetronomeNoteWholeNotesFromMetronomeType;
 
-    int                       fCurrentMetronomeTupletNumber;
+    mfTupletNumber            fCurrentMetronomeTupletNumber;
     S_msrTempoTuplet          fCurrentMetronomeTuplet;
     Bool                      fOnGoingMetronomeTuplet;
 

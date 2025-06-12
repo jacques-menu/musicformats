@@ -25,7 +25,6 @@
 #include "oahOah.h"
 #include "msrOah.h"
 
-// #include "mfConstants.h"
 
 #include "LilyPondIssue34Oah.h"
 

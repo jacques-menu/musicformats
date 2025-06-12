@@ -19,12 +19,6 @@
 // OAH
 #include "oahOah.h"
 
-// MSR
-// #include "msr.h"
-
-// LPSR
-// #include "lpsr.h"
-
 // MXSR
 #include "msrOah.h"
 #include "msr2msrOah.h"
@@ -166,17 +160,17 @@ void ischemeInterpreterRegularHandler::createInformationsRegularGroup ()
   // atoms from the insider handler
 
   registerAtomInRegularSubgroup ("about", subGroup);
-  
+
   registerAtomInRegularSubgroup ("version", subGroup);
   registerAtomInRegularSubgroup ("version-full", subGroup);
-  
+
   registerAtomInRegularSubgroup ("history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("contact", subGroup);
-  
+
   registerAtomInRegularSubgroup ("music-formats-test", subGroup);
   registerAtomInRegularSubgroup ("display-prefixes", subGroup);
   registerAtomInRegularSubgroup ("display-single-character-options", subGroup);

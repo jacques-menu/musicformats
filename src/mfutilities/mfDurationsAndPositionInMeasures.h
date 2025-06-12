@@ -17,10 +17,7 @@
 
 #include "mfBasicTypes.h"
 
-// #include "mfBool.h"
 #include "mfIndentedTextOutput.h"
-// #include "mfMoments.h"
-// #include "mfPositionInMeasure.h"
 #include "mfRational.h"
 
 
@@ -511,19 +508,6 @@ EXP extern const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_;
 EXP extern const mfWholeNotes K_WHOLE_NOTES_UNKNOWN_;
 
 EXP extern const mfWholeNotes K_WHOLE_NOTES_ZERO;
-
-// #ifndef MF_USE_WRAPPED_TYPES
-//   using mfWholeNotes = mfWholeNotes;
-// #else
-//   using mfWholeNotes =
-//     mfWrappedValueForArithmetic <
-//       mfWholeNotes,
-//       kWholeNotePrefix,
-//       K_MF_EMPTY_STRING,
-//       K_WHOLE_NOTES_UNKNOWN_,
-//       kWholeNoteDefaultValueString
-//     >;
-// #endif // MF_USE_WRAPPED_TYPES
 
 EXP extern const std::string
   kWholeNotePrefix,

@@ -19,7 +19,6 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
-// #include "mfConstants.h"
 #include "mfServices.h"
 
 #include "msr2bsrComponent.h"

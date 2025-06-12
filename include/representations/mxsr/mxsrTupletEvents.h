@@ -47,7 +47,7 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
     static SMARTP<mxsrTupletEvent>
                           create (
                             mxsrTupletEventKind              tupletEventKind,
-                            const mxsrTupletNumber&          tupletNumber,
+                            const mfTupletNumber&          tupletNumber,
                             const msrTupletFactor&           tupletFactor,
                             const mxsrNoteSequentialNumber&  noteSequentialNumber,
                             const mfStaffNumber&             noteStaffNumber,
@@ -62,7 +62,7 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
 
                           mxsrTupletEvent (
                             mxsrTupletEventKind              tupletEventKind,
-                            const mxsrTupletNumber&          tupletNumber,
+                            const mfTupletNumber&          tupletNumber,
                             const msrTupletFactor&           tupletFactor,
                             const mxsrNoteSequentialNumber&  noteSequentialNumber,
                             const mfStaffNumber&             noteStaffNumber,
@@ -80,7 +80,7 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
     mxsrTupletEventKind   getTupletEventKind () const
                               { return fTupletEventKind; }
 
-    const mxsrTupletNumber&
+    const mfTupletNumber&
                           getTupletNumber () const
                               { return fTupletNumber; }
 
@@ -93,7 +93,8 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
     // public services
     // ------------------------------------------------------
 
-    Bool                  tupletEventIsForTupletNumber (int tupletNumber)
+    Bool                  tupletEventIsForTupletNumber (
+                            const mfTupletNumber& tupletNumber)
                               { return fTupletNumber == tupletNumber; }
 
 
@@ -120,7 +121,7 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
 
     mxsrTupletEventKind   fTupletEventKind;
 
-    mxsrTupletNumber      fTupletNumber;
+    mfTupletNumber        fTupletNumber;
     msrTupletFactor       fTupletFactor;
 };
 

@@ -16,9 +16,6 @@
 
 #include "exports.h"
 
-// #include "mfMoments.h"
-// #include "mfDurationsAndPositionInMeasures.h"
-
 
 namespace MusicFormats
 {

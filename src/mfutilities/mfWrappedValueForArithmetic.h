@@ -19,7 +19,6 @@
 #include "exports.h"
 
 #include "mfBool.h"
-// #include "mfConstants.h"
 #include "mfIndentedTextOutput.h"
 
 

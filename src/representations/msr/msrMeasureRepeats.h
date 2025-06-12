@@ -12,9 +12,6 @@
 #ifndef ___msrMeasureRepeats___
 #define ___msrMeasureRepeats___
 
-// // #include "mfInputLinesRange.h"
-#include "mfBasicTypes.h"
-
 #include "msrElements.h"
 #include "msrSegmentElements.h"
 
