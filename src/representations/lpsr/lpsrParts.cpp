@@ -163,11 +163,11 @@ bool lpsrPartBlock::compareChordNamesContextWithOtherElement (
         chordNamesVoice->
           getVoiceUpLinkToStaff ()->
             getStaffNumber (),
-      secondStaffBlockStaffNumber =
+      secondStaffBlockMfStaffNumber =
         secondStaffBlock->
           getStaff ()->getStaffNumber ();
 
-    if (chordNamesContextStaffNumber == secondStaffBlockStaffNumber) {
+    if (chordNamesContextStaffNumber == secondStaffBlockMfStaffNumber) {
       // chord names should precede the staff
       result = true;
     }
@@ -175,7 +175,7 @@ bool lpsrPartBlock::compareChordNamesContextWithOtherElement (
       result =
         chordNamesContextStaffNumber
           <
-        secondStaffBlockStaffNumber;
+        secondStaffBlockMfStaffNumber;
     }
   }
 

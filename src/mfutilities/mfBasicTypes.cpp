@@ -324,7 +324,7 @@ void testMfBasicTypes ()
 
   {
     // start the clock
-    clockt startClock = clock ();
+    clock_t startClock = clock ();
 
     constexpr int iterationsNumber = 10000000;
     int total = 0;
@@ -332,10 +332,10 @@ void testMfBasicTypes ()
       total += i;
     } // for
 
-    clockt endClock = clock ();
+    clock_t endClock = clock ();
 
     // print the time spent
-    clockt
+    clock_t
       timeSpentInClocks =
         endClock - startClock;
 
@@ -349,7 +349,7 @@ void testMfBasicTypes ()
 
   {
     // start the clock
-    clockt startClock = clock ();
+    clock_t startClock = clock ();
 
     constexpr int iterationsNumber = 10000000;
     int total = 0;
@@ -364,10 +364,10 @@ void testMfBasicTypes ()
 
     } // for
 
-    clockt endClock = clock ();
+    clock_t endClock = clock ();
 
     // print the time spent
-    clockt
+    clock_t
       timeSpentInClocks =
         endClock - startClock;
 

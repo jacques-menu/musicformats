@@ -92,14 +92,14 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   populatePartsMapFromScore ();
 
   // staff handling
-  fPreviousNoteMusicXMLStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
-  fCurrentNoteMusicXMLStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fPreviousNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+  fCurrentNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   // staff changes handling
-  fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentRecipientStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   // staff details handling
-  fStaffDetailsStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fStaffDetailsStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   fCurrentStaffTypeKind =
     msrStaffTypeKind::kStaffTypeRegular;
@@ -132,11 +132,11 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
     msrOctaveKind::kOctave_UNKNOWN_;
 
   // voice handling
-  fCurrentNoteMusicXMLVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
+  fCurrentNoteMusicXMLVoiceNumber = K_MF_VOICE_NUMBER_UNKNOWN_;
 
   // measures handling
   fPartMeasuresCounter = 0;
-//   fCurrentMusicXMLMeasureNumber = "K_MEASURE_NUMBER_UNKNOWN_";
+//   fCurrentMusicXMLMeasureNumber = "K_MF_MEASURE_NUMBER_UNKNOWN_";
 
   fPreviousMeasureInputLineNumber = -1;
 
@@ -144,7 +144,7 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fCurrentAttributesInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_; // JMI 0.9.68
 
   // clef handling
-  fCurrentClefStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentClefStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
   fCurrentClefSign = "";
   fCurrentClefLine = -1;
   fCurrentClefOctaveChange = -97;
@@ -152,7 +152,7 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   // key handling
   fCurrentKeyKind = msrKeyKind::kKeyTraditional;
 
-  fCurrentKeyStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentKeyStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
   fCurrentKeyFifths = -1;
   fCurrentKeyCancelFifths = -37;
   fCurrentModeKind = msrModeKind::kMode_UNKNOWN_;
@@ -215,12 +215,12 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fCurrentMetronomeTupletNumber = -1;
 
   // time handling
-  fCurrentTimeStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentTimeStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
   fCurrentTimeSignatureBeats = "";
 
   // lyrics handling
-  fCurrentStanzaNumber = K_STANZA_NUMBER_UNKNOWN_;
-  fCurrentStanzaName = K_STANZA_NAME_UNKNOWN_;
+  fCurrentStanzaNumber = K_MF_STANZA_NUMBER_UNKNOWN_;
+  fCurrentStanzaName = K_MF_STANZA_NAME_UNKNOWN_;
 
   fCurrentSyllabic = "";
 
@@ -256,7 +256,7 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fCurrentHarmonyDegreeAlterationKind =
     msrAlterationKind::kAlteration_UNKNOWN_;
 
-  fCurrentHarmoniesStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentHarmoniesStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   fCurrentHarmonyWholeNotesOffset = K_WHOLE_NOTES_ZERO;
 
@@ -355,8 +355,8 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   // forward handling
   fCurrentForwardDuration = 1;
 
-  fCurrentMusicXMLForwardStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
-  fCurrentMusicXMLForwardVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
+  fCurrentMusicXMLForwardStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+  fCurrentMusicXMLForwardVoiceNumber = K_MF_VOICE_NUMBER_UNKNOWN_;
 }
 
 mxsr2msrSkeletonPopulator::~mxsr2msrSkeletonPopulator ()
@@ -3611,16 +3611,16 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   fCurrentTimeSignature = nullptr;
 
   // staff numbers
-  fCurrentNoteMusicXMLStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 //   fCurrentNoteMusicXMLStaffNumber = 1; // JMI 0.9.71 default voice number
 
-  fPreviousNoteMusicXMLStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fPreviousNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   // staff changes handling
-  fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentRecipientStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   // voice numbers
-//   fCurrentNoteMusicXMLVoiceNumber = K_STAFF_NUMBER_UNKNOWN_;
+//   fCurrentNoteMusicXMLVoiceNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
   fCurrentNoteMusicXMLVoiceNumber = 1; // JMI 0.9.71 default voice number
 
 //   // get this part's staves map
@@ -3635,7 +3635,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 
   // measures
   fPartMeasuresCounter = 0;
-//   fCurrentMusicXMLMeasureNumber = "K_MEASURE_NUMBER_UNKNOWN_";
+//   fCurrentMusicXMLMeasureNumber = "K_MF_MEASURE_NUMBER_UNKNOWN_";
 
   fPreviousMeasureInputLineNumber = -1;
 
@@ -3814,7 +3814,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    fCurrentNoteMusicXMLVoiceNumber != K_VOICE_NUMBER_UNKNOWN_, // JMI 0.9.72 ???
+    fCurrentNoteMusicXMLVoiceNumber != K_MF_VOICE_NUMBER_UNKNOWN_, // JMI 0.9.72 ???
     "fCurrentNoteMusicXMLVoiceNumber is unknown");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
@@ -9089,15 +9089,15 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
       backupStepLength);
 
 //   // reset notes staff numbers // JMI 0.9.68
-//   fPreviousNoteMusicXMLStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
-//   fCurrentNoteMusicXMLStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+//   fPreviousNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+//   fCurrentNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   // handle the backup right now:
 //   handleBackup (
 //     elt->getInputLineNumber ());
 
   // staff changes handling
-  fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentRecipientStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 //   fCurrentRecipientStaffNumber = 1; // default value
 
 //   // chords handling
@@ -9223,7 +9223,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
       forwardStepLength);
 
   // the staff number if any should be positive
-  if (fCurrentMusicXMLForwardStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
+  if (fCurrentMusicXMLForwardStaffNumber == K_MF_STAFF_NUMBER_UNKNOWN_) {
     std::stringstream ss;
 
     ss <<
@@ -9238,7 +9238,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   }
 
   // the voice number if any should be positive
-  if (fCurrentMusicXMLForwardVoiceNumber == K_VOICE_NUMBER_UNKNOWN_) {
+  if (fCurrentMusicXMLForwardVoiceNumber == K_MF_VOICE_NUMBER_UNKNOWN_) {
     std::stringstream ss;
 
     ss <<
@@ -9290,7 +9290,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 //       forwardStepLength);
 
   // staff changes handling
-//   fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+//   fCurrentRecipientStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
   fCurrentRecipientStaffNumber = fCurrentMusicXMLForwardStaffNumber;
 
 //   // chords handling
@@ -10328,7 +10328,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
 
         ss <<
           "Lyric name is empty, using \"" <<
-          K_STANZA_NAME_UNKNOWN_ <<
+          K_MF_STANZA_NAME_UNKNOWN_ <<
           "\" by default";
 
         gWaeHandler->waeTrace (
@@ -10337,7 +10337,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      fCurrentStanzaName = K_STANZA_NAME_UNKNOWN_;
+      fCurrentStanzaName = K_MF_STANZA_NAME_UNKNOWN_;
     }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -11238,9 +11238,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 
   // take finalization actions if relevant 0.9.70
   if (
-    fCurrentNoteMusicXMLStaffNumber != K_STAFF_NUMBER_UNKNOWN_
+    fCurrentNoteMusicXMLStaffNumber != K_MF_STAFF_NUMBER_UNKNOWN_
       &&
-    fCurrentNoteMusicXMLStaffNumber != K_STAFF_NUMBER_UNKNOWN_
+    fCurrentNoteMusicXMLStaffNumber != K_MF_STAFF_NUMBER_UNKNOWN_
   ) {
     // fetch the voice
     S_msrVoice
@@ -11473,7 +11473,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
   // staff changes handling
   // a new measure knows nothing about staff changes in the previous one if any
   // a new sequence of staff changes will start on its first note's staff
-//   fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+//   fCurrentRecipientStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
   fCurrentRecipientStaffNumber = 1; // default value
 }
 
@@ -12788,8 +12788,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 
   // lyrics
 
-  fCurrentStanzaNumber = K_STANZA_NUMBER_UNKNOWN_;
-  fCurrentStanzaName = K_STANZA_NAME_UNKNOWN_;
+  fCurrentStanzaNumber = K_MF_STANZA_NUMBER_UNKNOWN_;
+  fCurrentStanzaName = K_MF_STANZA_NAME_UNKNOWN_;
 
   fCurrentSyllabic = "";
   // don't forget about fCurrentSyllableElementsList here,
@@ -24193,7 +24193,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
-  if (fCurrentRecipientStaffNumber == K_STAFF_NUMBER_UNKNOWN_) { // VITAL
+  if (fCurrentRecipientStaffNumber == K_MF_STAFF_NUMBER_UNKNOWN_) { // VITAL
     // we're at the beginning of a part of right after a <backup /> or <forward />,
     // hence the current recipient staff number
     // it is that of the current note by default
@@ -26130,7 +26130,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChord (
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    fCurrentNoteMusicXMLVoiceNumber != K_VOICE_NUMBER_UNKNOWN_,
+    fCurrentNoteMusicXMLVoiceNumber != K_MF_VOICE_NUMBER_UNKNOWN_,
     "fCurrentNoteMusicXMLVoiceNumber is unknown");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 

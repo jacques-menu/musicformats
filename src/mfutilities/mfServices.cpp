@@ -488,13 +488,13 @@ mfServiceRunData::mfServiceRunData (
   fCurrentPartIDAndName = "???fCurrentPartIDAndName???";
 
   // staves
-  fCurrentStaveNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentStaveNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   // voices
-  fCurrentVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
+  fCurrentVoiceNumber = K_MF_VOICE_NUMBER_UNKNOWN_;
 
   // measure numbers
-  fCurrentMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
+  fCurrentMeasureNumber = K_MF_MEASURE_NUMBER_UNKNOWN_;
   fScoreMeasuresNumber = 0;
 }
 

@@ -539,12 +539,12 @@ void msrVoice::initializeVoice (
 
     case msrVoiceKind::kVoiceKindFiguredBass:
     /* JMI
-      if (fVoiceNumber != K_PART_FIGURED_BASS_VOICE_NUMBER) {
+      if (fVoiceNumber != K_MF_PART_FIGURED_BASS_VOICE_NUMBER) {
         std::stringstream ss;
 
         ss <<
           "figured bass voice number " << fVoiceNumber <<
-          " is not equal to " << K_PART_FIGURED_BASS_VOICE_NUMBER;
+          " is not equal to " << K_MF_PART_FIGURED_BASS_VOICE_NUMBER;
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -1041,13 +1041,13 @@ bool msrVoice::compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
     secondVoiceNumber =
       second->fVoiceNumber;
 
-  if (firstVoiceNumber > K_VOICE_HARMONIES_VOICE_BASE_NUMBER) {
-//     firstVoiceNumber -= K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1; // JMI 0.9.75
-    firstVoiceNumber = firstVoiceNumber - (K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1);
+  if (firstVoiceNumber > K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER) {
+//     firstVoiceNumber -= K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1; // JMI 0.9.75
+    firstVoiceNumber = firstVoiceNumber - (K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1);
   }
-  if (secondVoiceNumber > K_VOICE_HARMONIES_VOICE_BASE_NUMBER) {
-//     secondVoiceNumber -= K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1; // JMI 0.9.75
-    secondVoiceNumber = secondVoiceNumber - (K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1);
+  if (secondVoiceNumber > K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER) {
+//     secondVoiceNumber -= K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1; // JMI 0.9.75
+    secondVoiceNumber = secondVoiceNumber - (K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1);
   }
 
   bool result =
@@ -1064,7 +1064,7 @@ bool msrVoice::compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
 
         case msrVoiceKind::kVoiceKindHarmonies:
           result =
-            secondVoiceNumber - K_VOICE_HARMONIES_VOICE_BASE_NUMBER
+            secondVoiceNumber - K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER
               >
             firstVoiceNumber;
           break;
@@ -1080,7 +1080,7 @@ bool msrVoice::compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
       switch (secondVoiceNumber) {
         case msrVoiceKind::kVoiceKindRegular:
           result =
-            firstVoiceNumber - K_VOICE_HARMONIES_VOICE_BASE_NUMBER
+            firstVoiceNumber - K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER
               >
             secondVoiceNumber;
           break;
@@ -1124,13 +1124,13 @@ bool msrVoice::compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
     secondVoiceNumber =
       second->fVoiceNumber;
 
-  if (firstVoiceNumber > K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) {
-//     firstVoiceNumber -= K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
-    firstVoiceNumber = firstVoiceNumber - (K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1);
+  if (firstVoiceNumber > K_MF_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) {
+//     firstVoiceNumber -= K_MF_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
+    firstVoiceNumber = firstVoiceNumber - (K_MF_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1);
   }
-  if (secondVoiceNumber > K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) {
-//     secondVoiceNumber -= K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
-    secondVoiceNumber = secondVoiceNumber - (K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1);
+  if (secondVoiceNumber > K_MF_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) {
+//     secondVoiceNumber -= K_MF_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
+    secondVoiceNumber = secondVoiceNumber - (K_MF_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1);
   }
 
   bool result =
@@ -1814,7 +1814,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
   // create the voice harmonies voice
   mfVoiceNumber
     regularVoiceHarmoniesVoiceNumber =
-      fVoiceNumber + K_VOICE_HARMONIES_VOICE_BASE_NUMBER; // JMI 0.9.75
+      fVoiceNumber + K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER; // JMI 0.9.75
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -1875,7 +1875,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 //
 //   // create the voice figured bass voice
 //   int regularVoiceFiguredBassVoiceNumber =
-//     K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + fVoiceNumber;
+//     K_MF_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + fVoiceNumber;
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -11576,8 +11576,8 @@ std::string msrVoice::regularVoiceStaffSequentialNumberAsString () const
 {
   std::string result;
 
-  if (fRegularVoiceStaffSequentialNumber == K_PART_FIGURED_BASS_VOICE_NUMBER) {
-    result += " (K_PART_FIGURED_BASS_VOICE_NUMBER)";
+  if (fRegularVoiceStaffSequentialNumber == K_MF_PART_FIGURED_BASS_VOICE_NUMBER) {
+    result += " (K_MF_PART_FIGURED_BASS_VOICE_NUMBER)";
   }
   else {
     // nothing more

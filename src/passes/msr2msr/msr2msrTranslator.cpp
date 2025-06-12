@@ -125,7 +125,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLineD
 
 //________________________________________________________________________
 msr2msrTranslator::msr2msrTranslator ()
-//   : fCurrentMeasureNumber (K_MEASURE_NUMBER_UNKNOWN_)
+//   : fCurrentMeasureNumber (K_MF_MEASURE_NUMBER_UNKNOWN_)
 {};
 
 msr2msrTranslator::~msr2msrTranslator ()

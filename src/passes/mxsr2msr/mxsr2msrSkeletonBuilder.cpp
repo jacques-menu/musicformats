@@ -59,16 +59,16 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
   fCurrentPartGroupSequentialNumber = 0;
 
   // staff handling
-  fCurrentNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
-  fPreviousNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentNoteStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+  fPreviousNoteStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   // voice handling
-  fCurrentNoteVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
-  fPreviousNoteVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
+  fCurrentNoteVoiceNumber = K_MF_VOICE_NUMBER_UNKNOWN_;
+  fPreviousNoteVoiceNumber = K_MF_VOICE_NUMBER_UNKNOWN_;
 
   // measures handling
-  fScoreFirstMeasureBareNumber = K_MEASURE_NUMBER_UNKNOWN_;
-  fScoreLastMeasureBareNumber = K_MEASURE_NUMBER_UNKNOWN_;
+  fScoreFirstMeasureBareNumber = K_MF_MEASURE_NUMBER_UNKNOWN_;
+  fScoreLastMeasureBareNumber = K_MF_MEASURE_NUMBER_UNKNOWN_;
 
   fScoreMeasuresNumber = 0;
   fPartNumberOfMeasures = 0;
@@ -102,8 +102,8 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
   fPreviousNoteBelongsToATuplet = false;
 
   // lyrics handling
-  fCurrentStanzaNumber = K_STANZA_NUMBER_UNKNOWN_; // JMI
-  fCurrentStanzaName = K_STANZA_NAME_UNKNOWN_; // JMI
+  fCurrentStanzaNumber = K_MF_STANZA_NUMBER_UNKNOWN_; // JMI
+  fCurrentStanzaName = K_MF_STANZA_NAME_UNKNOWN_; // JMI
 
   // harmonies handling
   fHarmoniesVoicesCounter = 0;
@@ -4159,11 +4159,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
   fPartNumberOfMeasures = 0;
 
   // staves and voices
-  fCurrentNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
-  fPreviousNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentNoteStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+  fPreviousNoteStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
-  fCurrentNoteVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
-  fPreviousNoteVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
+  fCurrentNoteVoiceNumber = K_MF_VOICE_NUMBER_UNKNOWN_;
+  fPreviousNoteVoiceNumber = K_MF_VOICE_NUMBER_UNKNOWN_;
 }
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
@@ -4543,7 +4543,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
   // take this measure into account
   ++fPartNumberOfMeasures;
 
-  if (fScoreFirstMeasureBareNumber == K_MEASURE_NUMBER_UNKNOWN_) { // JMI 0.9.68
+  if (fScoreFirstMeasureBareNumber == K_MF_MEASURE_NUMBER_UNKNOWN_) { // JMI 0.9.68
   	fScoreFirstMeasureBareNumber = fCurrentMeasureNumber;
 		fScoreLastMeasureBareNumber = fCurrentMeasureNumber;
   }
@@ -5283,8 +5283,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
 		elt->getInputLineNumber ();
 
   // lyrics
-  fCurrentStanzaNumber = K_STANZA_NUMBER_UNKNOWN_;
-  fCurrentStanzaName = K_STANZA_NAME_UNKNOWN_;
+  fCurrentStanzaNumber = K_MF_STANZA_NUMBER_UNKNOWN_;
+  fCurrentStanzaName = K_MF_STANZA_NAME_UNKNOWN_;
 
   fOnGoingNote = true;
 }
@@ -5403,7 +5403,7 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
     fCurrentNoteVoiceNumber == fPreviousNoteVoiceNumber
       &&
     fPreviousNoteIsATakeOffCandidate
-//     fPreviousNoteStaffNumber != K_STAFF_NUMBER_UNKNOWN_ // JMI STAFF_CHANGE 0.9.72
+//     fPreviousNoteStaffNumber != K_MF_STAFF_NUMBER_UNKNOWN_ // JMI STAFF_CHANGE 0.9.72
   ) {
     // yes
 		result = true;
@@ -6914,7 +6914,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 
         ss <<
           "lyric name is empty, using \"" <<
-          K_STANZA_NAME_UNKNOWN_ <<
+          K_MF_STANZA_NAME_UNKNOWN_ <<
           "\" by default" <<
 					", line " << elt->getInputLineNumber ();
 
@@ -6925,7 +6925,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      fCurrentStanzaName = K_STANZA_NAME_UNKNOWN_;
+      fCurrentStanzaName = K_MF_STANZA_NAME_UNKNOWN_;
     }
 
     else {

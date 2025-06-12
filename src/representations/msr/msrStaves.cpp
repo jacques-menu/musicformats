@@ -196,12 +196,12 @@ void msrStaff::initializeStaff ()
 
     case msrStaffKind::kStaffKindFiguredBass:
     /* JMI
-      if (fStaffNumber != K_PART_FIGURED_BASS_STAFF_NUMBER) {
+      if (fStaffNumber != K_MF_PART_FIGURED_BASS_STAFF_NUMBER) {
         std::stringstream ss;
 
         ss <<
           "figured bass staff number " << fStaffNumber <<
-          " is not equal to " << K_PART_FIGURED_BASS_STAFF_NUMBER;
+          " is not equal to " << K_MF_PART_FIGURED_BASS_STAFF_NUMBER;
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -3172,13 +3172,13 @@ bool msrStaff::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
     secondStaffNumber =
       second->fStaffNumber;
 
-  if (firstStaffNumber > K_PART_FIGURED_BASS_STAFF_NUMBER) {
-//     firstStaffNumber -= K_PART_FIGURED_BASS_STAFF_NUMBER + 1; // JMI 0.9.75
-    firstStaffNumber = firstStaffNumber - (K_PART_FIGURED_BASS_STAFF_NUMBER + 1);
+  if (firstStaffNumber > K_MF_PART_FIGURED_BASS_STAFF_NUMBER) {
+//     firstStaffNumber -= K_MF_PART_FIGURED_BASS_STAFF_NUMBER + 1; // JMI 0.9.75
+    firstStaffNumber = firstStaffNumber - (K_MF_PART_FIGURED_BASS_STAFF_NUMBER + 1);
   }
-  if (secondStaffNumber > K_PART_FIGURED_BASS_STAFF_NUMBER) {
-//     secondStaffNumber -= mfStaffNumber (K_PART_FIGURED_BASS_STAFF_NUMBER + 1); // JMI 0.9.75
-    secondStaffNumber = secondStaffNumber - (K_PART_FIGURED_BASS_STAFF_NUMBER + 1) ;
+  if (secondStaffNumber > K_MF_PART_FIGURED_BASS_STAFF_NUMBER) {
+//     secondStaffNumber -= mfStaffNumber (K_MF_PART_FIGURED_BASS_STAFF_NUMBER + 1); // JMI 0.9.75
+    secondStaffNumber = secondStaffNumber - (K_MF_PART_FIGURED_BASS_STAFF_NUMBER + 1) ;
   }
 
   bool result =

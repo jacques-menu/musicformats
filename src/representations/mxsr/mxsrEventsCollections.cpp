@@ -1266,7 +1266,7 @@ S_mxsrTupletEvent mxsrEventsCollection::fetchTupletBeginForTupletNumber (
 
   result = fTupletBeginNumbersMap [tupletNumber];
 
-//   for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletBeginsMultiMap) {
+//   for (std::pair <mxsrNoteSequentialNumber, S_mxsrTupletEvent> thePair : fTupletBeginsMultiMap) {
 //     S_mxsrTupletEvent
 //       tupletBeginEvent = thePair.second;
 //
@@ -1779,8 +1779,8 @@ void mxsrEventsCollection::printCueEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrCueEvent> thePair : fCueBeginsMap) {
-    int
+  for (std::pair <mxsrNoteSequentialNumber, S_mxsrCueEvent> thePair : fCueBeginsMap) {
+    mxsrNoteSequentialNumber
       eventSequentialNumber = thePair.first;
 
     S_mxsrCueEvent
@@ -1813,8 +1813,8 @@ void mxsrEventsCollection::printCueEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrCueEvent> thePair : fCueEndsMap) {
-    int
+  for (std::pair <mxsrNoteSequentialNumber, S_mxsrCueEvent> thePair : fCueEndsMap) {
+    mxsrNoteSequentialNumber
       eventSequentialNumber = thePair.first;
 
     S_mxsrCueEvent
@@ -1850,8 +1850,8 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrChordEvent> thePair : fChordBeginsMap) {
-    int
+  for (std::pair <mxsrNoteSequentialNumber, S_mxsrChordEvent> thePair : fChordBeginsMap) {
+    mxsrNoteSequentialNumber
       eventSequentialNumber = thePair.first;
 
     S_mxsrChordEvent
@@ -1884,8 +1884,8 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrChordEvent> thePair : fChordEndsMap) {
-    int
+  for (std::pair <mxsrNoteSequentialNumber, S_mxsrChordEvent> thePair : fChordEndsMap) {
+    mxsrNoteSequentialNumber
       eventSequentialNumber = thePair.first;
 
     S_mxsrChordEvent
@@ -1921,7 +1921,7 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletBeginsMultiMap) {
+  for (std::pair <mxsrNoteSequentialNumber, S_mxsrTupletEvent> thePair : fTupletBeginsMultiMap) {
     S_mxsrTupletEvent
       tupletEvent = thePair.second;
 
@@ -1956,7 +1956,7 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletEndsMultiMap) {
+  for (std::pair <mxsrNoteSequentialNumber, S_mxsrTupletEvent> thePair : fTupletEndsMultiMap) {
     S_mxsrTupletEvent
       tupletEvent = thePair.second;
 

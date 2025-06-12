@@ -117,7 +117,7 @@ void mxsrVoice::pushTupletOntoTupletsStack (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int
+  mfTupletNumber
     tupletNumber =
       tuplet->getTupletNumber ();
 
@@ -131,7 +131,7 @@ void mxsrVoice::pushTupletOntoTupletsStack (
   }
 
   else {
-    int
+    mfTupletNumber
       innerMostTupletNumber =
         fTupletsStack.back ()->
           getTupletNumber ();

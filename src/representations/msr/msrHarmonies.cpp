@@ -4990,8 +4990,8 @@ std::string msrHarmony::asShortString () const
 //   // print the harmonies staff number
 //   ss <<
 //     ", fHarmoniesStaffNumber: ";
-//   if (fHarmoniesStaffNumber == K_STAFF_NUMBER_UNKNOWN_)
-//     ss << "[K_STAFF_NUMBER_UNKNOWN_]";
+//   if (fHarmoniesStaffNumber == K_MF_STAFF_NUMBER_UNKNOWN_)
+//     ss << "[K_MF_STAFF_NUMBER_UNKNOWN_]";
 //   else
 //     ss << fHarmoniesStaffNumber;
 
@@ -5132,8 +5132,8 @@ std::string msrHarmony::asString () const
   // print the harmonies staff number
   ss <<
     ", fHarmoniesStaffNumber: ";
-  if (fHarmoniesStaffNumber == K_STAFF_NUMBER_UNKNOWN_)
-    ss << "[K_STAFF_NUMBER_UNKNOWN_]";
+  if (fHarmoniesStaffNumber == K_MF_STAFF_NUMBER_UNKNOWN_)
+    ss << "[K_MF_STAFF_NUMBER_UNKNOWN_]";
   else
     ss << fHarmoniesStaffNumber;
 
@@ -5366,7 +5366,7 @@ void msrHarmony::print (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fHarmoniesStaffNumber" << ": ";
-  if (fHarmoniesStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
+  if (fHarmoniesStaffNumber == K_MF_STAFF_NUMBER_UNKNOWN_) {
     os << "[NONE]";
   }
   else {

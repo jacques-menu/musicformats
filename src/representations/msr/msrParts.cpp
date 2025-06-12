@@ -176,7 +176,7 @@ void msrPart::initializePart ()
   fPartMaximumVoiceNumber = 0;
 
   // initialize part's first measure number
-  fPartFirstMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
+  fPartFirstMeasureNumber = K_MF_MEASURE_NUMBER_UNKNOWN_;
 
   // initialize part's number of measures
   fPartNumberOfMeasures = 0;
@@ -216,7 +216,7 @@ void msrPart::setPartCurrentMeasureNumber (
   fPartCurrentMeasureNumber = measureNumber;
 
   // is this the first measure number assigned in this part?
-  if (fPartFirstMeasureNumber == K_MEASURE_NUMBER_UNKNOWN_) {
+  if (fPartFirstMeasureNumber == K_MF_MEASURE_NUMBER_UNKNOWN_) {
     fPartFirstMeasureNumber = fPartCurrentMeasureNumber;
   }
 }
@@ -2115,7 +2115,7 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
 
   // create the staff
   int partHarmoniesStaffNumber =
-    K_PART_HARMONIES_STAFF_NUMBER;
+    K_MF_PART_HARMONIES_STAFF_NUMBER;
 
   S_msrStaff
     staff =
@@ -2167,7 +2167,7 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
 
   // create the staff
   int partFiguredBassStaffNumber =
-    K_PART_FIGURED_BASS_STAFF_NUMBER;
+    K_MF_PART_FIGURED_BASS_STAFF_NUMBER;
 
   S_msrStaff
     staff =
@@ -2526,7 +2526,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
   // create the part harmonies staff
 #ifdef MF_TRACE_IS_ENABLED
   int partHarmoniesStaffNumber =
-    K_PART_HARMONIES_STAFF_NUMBER;
+    K_MF_PART_HARMONIES_STAFF_NUMBER;
 
   if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
@@ -2550,7 +2550,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 
   // create the part harmonies voice
   int partHarmoniesVoiceNumber =
-    K_PART_HARMONIES_VOICE_NUMBER;
+    K_MF_PART_HARMONIES_VOICE_NUMBER;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -2704,7 +2704,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
   // create the part figured bass staff
 #ifdef MF_TRACE_IS_ENABLED
   int partFiguredBassStaffNumber =
-    K_PART_FIGURED_BASS_STAFF_NUMBER;
+    K_MF_PART_FIGURED_BASS_STAFF_NUMBER;
 
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
     std::stringstream ss;
@@ -2728,7 +2728,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 
   // create the figured bass voice
   int partFiguredBassVoiceNumber =
-    K_PART_FIGURED_BASS_VOICE_NUMBER;
+    K_MF_PART_FIGURED_BASS_VOICE_NUMBER;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {

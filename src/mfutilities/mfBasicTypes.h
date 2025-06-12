@@ -50,8 +50,8 @@ namespace MusicFormats
 EXP extern const int K_MF_INPUT_LINE_UNKNOWN_;
 
 EXP extern const std::string
-  kInputLineNumberPrefix,
-  kInputLineNumberDefaultValueString;
+  kMfInputLineNumberPrefix,
+  kMfInputLineNumberDefaultValueString;
 
 #ifndef MF_USE_WRAPPED_TYPES
   using mfInputLineNumber = int;
@@ -59,10 +59,10 @@ EXP extern const std::string
   using mfInputLineNumber =
     mfWrappedValueForArithmetic <
       int,
-      kInputLineNumberPrefix,
+      kMfInputLineNumberPrefix,
       K_MF_EMPTY_STRING,
       K_MF_INPUT_LINE_UNKNOWN_,
-      kInputLineNumberDefaultValueString
+      kMfInputLineNumberDefaultValueString
     >;
 #endif // MF_USE_WRAPPED_TYPES
 
@@ -76,8 +76,8 @@ EXP extern int mfInputLineNumberAsInteger (
 // input location ranges
 
 EXP extern const std::string
-  kInputLocationRangePrefix,
-  kInputLocationDefaultValueString;
+  kMfInputLocationRangePrefix,
+  kMfInputLocationDefaultValueString;
 
 // #ifndef MF_USE_WRAPPED_TYPES
 //   using mfInputLocationRange = int;
@@ -85,22 +85,22 @@ EXP extern const std::string
 //   using mfInputLocationRange =
 //     mfWrappedRange <
 //       mfInputLineNumber,
-//       kInputLocationRangePrefix
+//       kMfInputLocationRangePrefix
 //     >;
 // #endif // MF_USE_WRAPPED_TYPES
 
 //______________________________________________________________________________
 // staff numbers
 
-EXP extern const int K_STAFF_NUMBER_UNKNOWN_;
+EXP extern const int K_MF_STAFF_NUMBER_UNKNOWN_;
 
 EXP extern const std::string
-  kStaffNumberPrefix,
-  kStaffNumberDefaultValueString;
+  kMfStaffNumberPrefix,
+  kMfStaffNumberDefaultValueString;
 
-EXP extern const int K_PART_HARMONIES_STAFF_NUMBER;
+EXP extern const int K_MF_PART_HARMONIES_STAFF_NUMBER;
 
-EXP extern const int K_PART_FIGURED_BASS_STAFF_NUMBER;
+EXP extern const int K_MF_PART_FIGURED_BASS_STAFF_NUMBER;
 
 #ifndef MF_USE_WRAPPED_TYPES
   using mfStaffNumber = int;
@@ -108,10 +108,10 @@ EXP extern const int K_PART_FIGURED_BASS_STAFF_NUMBER;
   using mfStaffNumber =
     mfWrappedValueForArithmetic <
       int,
-      kStaffNumberPrefix,
+      kMfStaffNumberPrefix,
       K_MF_EMPTY_STRING,
-      K_STAFF_NUMBER_UNKNOWN_,
-      kInputLineNumberDefaultValueString
+      K_MF_STAFF_NUMBER_UNKNOWN_,
+      kMfInputLineNumberDefaultValueString
     >;
 #endif // MF_USE_WRAPPED_TYPES
 
@@ -124,17 +124,17 @@ EXP extern int mfStaffNumberAsInteger (
 //______________________________________________________________________________
 // voice numbers
 
-EXP extern const int K_VOICE_NUMBER_UNKNOWN_;
+EXP extern const int K_MF_VOICE_NUMBER_UNKNOWN_;
 
 EXP extern const std::string
-  kVoiceNumberPrefix,
-  kVoiceNumberDefaultValueString;
+  kMfVoiceNumberPrefix,
+  kMfVoiceNumberDefaultValueString;
 
-EXP extern const int K_PART_HARMONIES_VOICE_NUMBER;
-EXP extern const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER;
+EXP extern const int K_MF_PART_HARMONIES_VOICE_NUMBER;
+EXP extern const int K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER;
 
-EXP extern const int K_PART_FIGURED_BASS_VOICE_NUMBER;
-EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
+EXP extern const int K_MF_PART_FIGURED_BASS_VOICE_NUMBER;
+EXP extern const int K_MF_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
 
 #ifndef MF_USE_WRAPPED_TYPES
   using mfVoiceNumber = int;
@@ -142,10 +142,10 @@ EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
   using mfVoiceNumber =
     mfWrappedValueForArithmetic <
       int,
-      kVoiceNumberPrefix,
+      kMfVoiceNumberPrefix,
       K_MF_EMPTY_STRING,
-      K_VOICE_NUMBER_UNKNOWN_,
-      kVoiceNumberDefaultValueString
+      K_MF_VOICE_NUMBER_UNKNOWN_,
+      kMfVoiceNumberDefaultValueString
     >;
 #endif // MF_USE_WRAPPED_TYPES
 
@@ -158,11 +158,11 @@ EXP extern int mfVoiceNumberAsInteger (
 //______________________________________________________________________________
 // measure numbers
 
-EXP extern const std::string K_MEASURE_NUMBER_UNKNOWN_;
+EXP extern const std::string K_MF_MEASURE_NUMBER_UNKNOWN_;
 
 EXP extern const std::string
-  kMeasureNumberPrefix,
-  kMeasureNumberDefaultValueString;
+  kMfMeasureNumberPrefix,
+  kMfMeasureNumberDefaultValueString;
 
 #ifndef MF_USE_WRAPPED_TYPES
   using mfMeasureNumber = std::string;
@@ -170,10 +170,10 @@ EXP extern const std::string
   using mfMeasureNumber =
     mfWrappedValueWithDefault <
       std::string,
-      kMeasureNumberPrefix,
+      kMfMeasureNumberPrefix,
       K_MF_EMPTY_STRING,
-      K_MEASURE_NUMBER_UNKNOWN_,
-      kMeasureNumberDefaultValueString
+      K_MF_MEASURE_NUMBER_UNKNOWN_,
+      kMfMeasureNumberDefaultValueString
     >;
 #endif // MF_USE_WRAPPED_TYPES
 
@@ -181,15 +181,43 @@ EXP extern std::string mfMeasureNumberAsString (
   const mfMeasureNumber& measureNumber);
 
 //______________________________________________________________________________
+// tuplet numbers
+
+EXP extern const int K_MF_TUPLET_NUMBER_UNKNOWN_;
+
+EXP extern const std::string
+  kMfTupletNumberPrefix,
+  kMfTupletNumberDefaultValueString;
+
+#ifndef MF_USE_WRAPPED_TYPES
+  using mfTupletNumber = int;
+#else
+  using mfTupletNumber =
+    mfWrappedValueForArithmetic <
+      int,
+      kMfTupletNumberPrefix,
+      K_MF_EMPTY_STRING,
+      K_MF_TUPLET_NUMBER_UNKNOWN_,
+      kMfTupletNumberDefaultValueString
+    >;
+#endif // MF_USE_WRAPPED_TYPES
+
+EXP extern std::string mfTupletNumberAsString (
+  const mfTupletNumber& tupletNumber);
+
+EXP extern int mfTupletNumberAsInteger (
+  const mfTupletNumber& tupletNumber);
+
+//______________________________________________________________________________
 // lyrics
 
 EXP extern const std::string
-  K_STANZA_NUMBER_UNKNOWN_,
-  K_STANZA_NAME_UNKNOWN_;
+  K_MF_STANZA_NUMBER_UNKNOWN_,
+  K_MF_STANZA_NAME_UNKNOWN_;
 
 EXP extern const std::string
-  kStanzaNumberPrefix,
-  kStanzaNumberDefaultValueString;
+  kMfStanzaNumberPrefix,
+  kMfStanzaNumberDefaultValueString;
 
 #ifndef MF_USE_WRAPPED_TYPES
   using mfStanzaNumber = std::string;
@@ -197,10 +225,10 @@ EXP extern const std::string
   using mfStanzaNumber =
     mfWrappedValueWithDefault <
       std::string,
-      kStanzaNumberPrefix,
+      kMfStanzaNumberPrefix,
       K_MF_EMPTY_STRING,
-      K_STANZA_NUMBER_UNKNOWN_,
-      kStanzaNumberDefaultValueString
+      K_MF_STANZA_NUMBER_UNKNOWN_,
+      kMfStanzaNumberDefaultValueString
     >;
 #endif // MF_USE_WRAPPED_TYPES
 
@@ -216,22 +244,3 @@ void testMfBasicTypes ();
 
 
 #endif // ___mfBasicTypes___
-
-
-/*
-  There are still error messages on Linux and Windows at link time
-  regarding some methods being undefined due to the wrapped types
-  instantiations below, such as:
-
-Linux:
-
-/usr/bin/ld: lib/liblibmusicformats.so: undefined reference to `MusicFormats::mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, MusicFormats::mfWrappedValueWithDefault<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, MusicFormats::kMeasureNumberPrefix[abi:cxx11], MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MEASURE_NUMBER_UNKNOWN_, MusicFormats::kMeasureNumberDefaultValueString[abi:cxx11]> const&, int, MusicFormats::mfWrappedValueWithDefault<int, MusicFormats::kInputLineNumberPrefix, MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MF_INPUT_LINE_UNKNOWN_, MusicFormats::kInputLineNumberDefaultValueString> const&)'
-
-
-Windows:
-
-C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe: CMakeFiles/musicformats.dir/objects.a(mxsr2msrSkeletonBuilder.cpp.obj):mxsr2msrSkeletonBuilder.cpp:(.text+0x21cc1): undefined reference to `MusicFormats::mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, MusicFormats::mfWrappedValueWithDefault<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, MusicFormats::kMeasureNumberPrefix[abi:cxx11], MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MEASURE_NUMBER_UNKNOWN_, MusicFormats::kMeasureNumberDefaultValueString[abi:cxx11]> const&, int, MusicFormats::mfWrappedValueWithDefault<int, MusicFormats::kInputLineNumberPrefix, MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MF_INPUT_LINE_UNKNOWN_, MusicFormats::kInputLineNumberDefaultValueString> const&)'
-2025-02-23T16:44:36.0862400Z       |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-

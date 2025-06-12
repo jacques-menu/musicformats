@@ -2266,7 +2266,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       inputLineNumber,
       gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
-//       K_MEASURE_NUMBER_UNKNOWN_, // JMI ???  // 0.9.66
+//       K_MF_MEASURE_NUMBER_UNKNOWN_, // JMI ???  // 0.9.66
 
       msrNoteKind::kNoteRegularInMeasure, // noteKind
 
@@ -4566,7 +4566,7 @@ std::string msrNote::noteComplementsAsString () const
         fMeasureElementUpLinkToMeasure->
           getMeasureNumber ();
 
-    if (measureNumber == K_MEASURE_NUMBER_UNKNOWN_) {
+    if (measureNumber == K_MF_MEASURE_NUMBER_UNKNOWN_) {
       ss << "[UNKNOWN_MEASURE_NUMBER]";
     }
     else {
@@ -6152,7 +6152,7 @@ void msrNote::printFull (std::ostream& os) const
         fMeasureElementUpLinkToMeasure->
           getMeasureNumber ();
 
-    if (measureNumber == K_MEASURE_NUMBER_UNKNOWN_) {
+    if (measureNumber == K_MF_MEASURE_NUMBER_UNKNOWN_) {
       os << "[UNKNOWN_MEASURE_NUMBER]";
     }
     else {
@@ -6164,7 +6164,7 @@ void msrNote::printFull (std::ostream& os) const
   }
 
 
-//   if (fMeasureElementUpLinkToMeasure->getMeasureNumber () == K_MEASURE_NUMBER_UNKNOWN_) {
+//   if (fMeasureElementUpLinkToMeasure->getMeasureNumber () == K_MF_MEASURE_NUMBER_UNKNOWN_) {
 //     os <<
 //       "[UNKNOWN_MEASURE_NUMBER]";
 //   }

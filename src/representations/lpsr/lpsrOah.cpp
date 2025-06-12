@@ -1986,7 +1986,7 @@ R"()",
 
   // auto-voices
 
-  fReplicateEmptyMeasureNumber = mfMeasureNumber (K_MEASURE_NUMBER_UNKNOWN_);
+  fReplicateEmptyMeasureNumber = mfMeasureNumber (K_MF_MEASURE_NUMBER_UNKNOWN_);
 
   subGroup->
     appendAtomToSubGroup (
@@ -2014,7 +2014,7 @@ R"()",
 
   // replicate empty measure
 
-  fReplicateEmptyMeasureNumber = mfMeasureNumber (K_MEASURE_NUMBER_UNKNOWN_);
+  fReplicateEmptyMeasureNumber = mfMeasureNumber (K_MF_MEASURE_NUMBER_UNKNOWN_);
   fReplicateEmptyMeasureReplicas = 0;
 
   subGroup->

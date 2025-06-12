@@ -252,7 +252,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
         skip =
           msrNote::createGraceSkipNote (
             note->getInputLineNumber (),
-            mfMeasureNumber ("K_MEASURE_NUMBER_UNKNOWN_"), // will be set afterwards 0.9.75
+            mfMeasureNumber ("K_MF_MEASURE_NUMBER_UNKNOWN_"), // will be set afterwards 0.9.75
             note->getMeasureElementSoundingWholeNotes (),   // 0/1 JMI 0.9.66
             note->getNoteDisplayWholeNotes (),
             note->getNoteDotsNumber ());
