@@ -39,9 +39,9 @@ EXP extern std::string mfInputLineNumberAsString (
   }
   else {
 // #ifndef MF_USE_WRAPPED_TYPES
-    result = inputLineNumber;
+//     result = inputLineNumber;
 // #else
-//     result = inputLineNumber.getBareValue ();
+    result = std::to_string (inputLineNumber.getBareValue ());
 // #endif // MF_USE_WRAPPED_TYPES
   }
 
@@ -61,9 +61,9 @@ int mfInputLineNumberAsInteger (
   }
   else {
 // #ifndef MF_USE_WRAPPED_TYPES
-    result = inputLineNumber;
+//     result = inputLineNumber;
 // #else
-//     result = inputLineNumber.getBareValue ();
+    result = inputLineNumber.getBareValue ();
 // #endif // MF_USE_WRAPPED_TYPES
   }
 
@@ -99,9 +99,9 @@ std::string mfStaffNumberAsString (const mfStaffNumber& staffNumber)
   }
   else {
 // #ifndef MF_USE_WRAPPED_TYPES
-    result = staffNumber;
+//     result = staffNumber;
 // #else
-//     result = staffNumber.getBareValue ();
+    result = std::to_string (staffNumber.getBareValue ());
 // #endif // MF_USE_WRAPPED_TYPES
   }
 
@@ -117,7 +117,7 @@ int mfStaffNumberAsInteger (const mfStaffNumber& staffNumber)
   }
   else {
 // #ifndef MF_USE_WRAPPED_TYPES
-    result = staffNumber;
+//     resul// t = staffNumber;
 // #else
 // //     std::stringstream ss;
 // //
@@ -127,7 +127,7 @@ int mfStaffNumberAsInteger (const mfStaffNumber& staffNumber)
 // //     ss >> intStaffNumber;
 // //
 // //     result = intStaffNumber;
-//     result = staffNumber.getBareValue ();
+    result = staffNumber.getBareValue ();
 // #endif // MF_USE_WRAPPED_TYPES
   }
 
@@ -158,9 +158,9 @@ std::string mfVoiceNumberAsString (const mfVoiceNumber& voiceNumber)
   }
   else {
 // #ifndef MF_USE_WRAPPED_TYPES
-    result = voiceNumber;
+//     result = voiceNumber;
 // #else
-//     result = std::to_string (voiceNumber.getBareValue ());
+    result = std::to_string (voiceNumber.getBareValue ());
 // #endif // MF_USE_WRAPPED_TYPES
   }
 
@@ -176,9 +176,9 @@ int mfVoiceNumberAsInteger (const mfVoiceNumber& voiceNumber)
   }
   else {
 // #ifndef MF_USE_WRAPPED_TYPES
-    result = voiceNumber;
+//     result = voiceNumber;
 // #else
-//     result = voiceNumber.getBareValue ();
+    result = voiceNumber.getBareValue ();
 // #endif // MF_USE_WRAPPED_TYPES
   }
 
@@ -205,9 +205,9 @@ std::string mfMeasureNumberAsString (
   }
   else {
 // #ifndef MF_USE_WRAPPED_TYPES
-    result = measureNumber;
+//     result = measureNumber;
 // #else
-//     result = measureNumber.getBareValue ();
+    result = measureNumber.getBareValue ();
 // #endif // MF_USE_WRAPPED_TYPES
   }
 
@@ -232,9 +232,9 @@ std::string mfTupletNumberAsString (const mfTupletNumber& tupletNumber)
   }
   else {
 // #ifndef MF_USE_WRAPPED_TYPES
-    result = tupletNumber;
+//     result = tupletNumber;
 // #else
-//     result = std::to_string (tupletNumber.getBareValue ());
+    result = std::to_string (tupletNumber.getBareValue ());
 // #endif // MF_USE_WRAPPED_TYPES
   }
 
@@ -250,9 +250,9 @@ int mfTupletNumberAsInteger (const mfTupletNumber& tupletNumber)
   }
   else {
 // #ifndef MF_USE_WRAPPED_TYPES
-    result = tupletNumber;
+//     result = tupletNumber;
 // #else
-//     result = tupletNumber.getBareValue ();
+    result = tupletNumber.getBareValue ();
 // #endif // MF_USE_WRAPPED_TYPES
   }
 
@@ -279,9 +279,9 @@ std::string mfStanzaNumberAsString (const mfStanzaNumber& stanzaNumber)
   }
   else {
 // #ifndef MF_USE_WRAPPED_TYPES
-    result = stanzaNumber;
+//     result = stanzaNumber;
 // #else
-//     result = stanzaNumber.getBareValue ();
+    result = stanzaNumber.getBareValue ();
 // #endif // MF_USE_WRAPPED_TYPES
   }
 
@@ -357,9 +357,9 @@ void testMfBasicTypes ()
       mfInputLineNumber inputLineNumber (i);
 
 // #ifdef MF_USE_WRAPPED_TYPES
-//       total += inputLineNumber.getBareValue ();
+      total += inputLineNumber.getBareValue ();
 // #else
-      total += inputLineNumber;
+//       total += inputLineNumber;
 // #endif // MF_USE_WRAPPED_TYPES
 
     } // for
