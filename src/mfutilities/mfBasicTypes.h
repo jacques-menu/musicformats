@@ -53,9 +53,9 @@ EXP extern const std::string
   kMfInputLineNumberPrefix,
   kMfInputLineNumberDefaultValueString;
 
-#ifndef MF_USE_WRAPPED_TYPES
-  using mfInputLineNumber = int;
-#else
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfInputLineNumber = int;
+// #else
   using mfInputLineNumber =
     mfWrappedValueForArithmetic <
       int,
@@ -64,7 +64,7 @@ EXP extern const std::string
       K_MF_INPUT_LINE_UNKNOWN_,
       kMfInputLineNumberDefaultValueString
     >;
-#endif // MF_USE_WRAPPED_TYPES
+// #endif // MF_USE_WRAPPED_TYPES
 
 EXP extern std::string mfInputLineNumberAsString (
   const mfInputLineNumber& inputLineNumber);
@@ -79,7 +79,7 @@ EXP extern const std::string
   kMfInputLocationRangePrefix,
   kMfInputLocationDefaultValueString;
 
-// #ifndef MF_USE_WRAPPED_TYPES
+// // #ifndef MF_USE_WRAPPED_TYPES
 //   using mfInputLocationRange = int;
 // #else
 //   using mfInputLocationRange =
@@ -87,7 +87,7 @@ EXP extern const std::string
 //       mfInputLineNumber,
 //       kMfInputLocationRangePrefix
 //     >;
-// #endif // MF_USE_WRAPPED_TYPES
+// // #endif // MF_USE_WRAPPED_TYPES
 
 //______________________________________________________________________________
 // staff numbers
@@ -102,9 +102,9 @@ EXP extern const int K_MF_PART_HARMONIES_STAFF_NUMBER;
 
 EXP extern const int K_MF_PART_FIGURED_BASS_STAFF_NUMBER;
 
-#ifndef MF_USE_WRAPPED_TYPES
-  using mfStaffNumber = int;
-#else
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfStaffNumber = int;
+// #else
   using mfStaffNumber =
     mfWrappedValueForArithmetic <
       int,
@@ -113,7 +113,7 @@ EXP extern const int K_MF_PART_FIGURED_BASS_STAFF_NUMBER;
       K_MF_STAFF_NUMBER_UNKNOWN_,
       kMfInputLineNumberDefaultValueString
     >;
-#endif // MF_USE_WRAPPED_TYPES
+// #endif // MF_USE_WRAPPED_TYPES
 
 EXP extern std::string mfStaffNumberAsString (
   const mfStaffNumber& staffNumber);
@@ -136,9 +136,9 @@ EXP extern const int K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER;
 EXP extern const int K_MF_PART_FIGURED_BASS_VOICE_NUMBER;
 EXP extern const int K_MF_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
 
-#ifndef MF_USE_WRAPPED_TYPES
-  using mfVoiceNumber = int;
-#else
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfVoiceNumber = int;
+// #else
   using mfVoiceNumber =
     mfWrappedValueForArithmetic <
       int,
@@ -147,7 +147,7 @@ EXP extern const int K_MF_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
       K_MF_VOICE_NUMBER_UNKNOWN_,
       kMfVoiceNumberDefaultValueString
     >;
-#endif // MF_USE_WRAPPED_TYPES
+// #endif // MF_USE_WRAPPED_TYPES
 
 EXP extern std::string mfVoiceNumberAsString (
   const mfVoiceNumber& voiceNumber);
@@ -164,9 +164,9 @@ EXP extern const std::string
   kMfMeasureNumberPrefix,
   kMfMeasureNumberDefaultValueString;
 
-#ifndef MF_USE_WRAPPED_TYPES
-  using mfMeasureNumber = std::string;
-#else
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfMeasureNumber = std::string;
+// #else
   using mfMeasureNumber =
     mfWrappedValueWithDefault <
       std::string,
@@ -175,7 +175,7 @@ EXP extern const std::string
       K_MF_MEASURE_NUMBER_UNKNOWN_,
       kMfMeasureNumberDefaultValueString
     >;
-#endif // MF_USE_WRAPPED_TYPES
+// #endif // MF_USE_WRAPPED_TYPES
 
 EXP extern std::string mfMeasureNumberAsString (
   const mfMeasureNumber& measureNumber);
@@ -189,9 +189,9 @@ EXP extern const std::string
   kMfTupletNumberPrefix,
   kMfTupletNumberDefaultValueString;
 
-#ifndef MF_USE_WRAPPED_TYPES
-  using mfTupletNumber = int;
-#else
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfTupletNumber = int;
+// #else
   using mfTupletNumber =
     mfWrappedValueForArithmetic <
       int,
@@ -200,7 +200,7 @@ EXP extern const std::string
       K_MF_TUPLET_NUMBER_UNKNOWN_,
       kMfTupletNumberDefaultValueString
     >;
-#endif // MF_USE_WRAPPED_TYPES
+// #endif // MF_USE_WRAPPED_TYPES
 
 EXP extern std::string mfTupletNumberAsString (
   const mfTupletNumber& tupletNumber);
@@ -219,9 +219,9 @@ EXP extern const std::string
   kMfStanzaNumberPrefix,
   kMfStanzaNumberDefaultValueString;
 
-#ifndef MF_USE_WRAPPED_TYPES
-  using mfStanzaNumber = std::string;
-#else
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfStanzaNumber = std::string;
+// #else
   using mfStanzaNumber =
     mfWrappedValueWithDefault <
       std::string,
@@ -230,7 +230,7 @@ EXP extern const std::string
       K_MF_STANZA_NUMBER_UNKNOWN_,
       kMfStanzaNumberDefaultValueString
     >;
-#endif // MF_USE_WRAPPED_TYPES
+// #endif // MF_USE_WRAPPED_TYPES
 
 EXP extern std::string mfStanzaNumberAsString (
   const mfStanzaNumber& stanzaNumber);

@@ -32,11 +32,11 @@ std::string mxsrNoteSequentialNumberAsString (
     result = "K_MXSR_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_";
   }
   else {
-#ifndef MF_USE_WRAPPED_TYPES
+// #ifndef MF_USE_WRAPPED_TYPES
     result = noteSequentialNumber;
-#else
-    result = std::to_string (noteSequentialNumber.getBareValue ());
-#endif // MF_USE_WRAPPED_TYPES
+// #else
+//     result = std::to_string (noteSequentialNumber.getBareValue ());
+// #endif // MF_USE_WRAPPED_TYPES
   }
 
   return result;
@@ -51,11 +51,11 @@ int mxsrNoteSequentialNumberAsInteger (
     result = K_MXSR_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_;
   }
   else {
-#ifndef MF_USE_WRAPPED_TYPES
+// #ifndef MF_USE_WRAPPED_TYPES
     result = noteSequentialNumber;
-#else
-    result = noteSequentialNumber.getBareValue ();
-#endif // MF_USE_WRAPPED_TYPES
+// #else
+//     result = noteSequentialNumber.getBareValue ();
+// #endif // MF_USE_WRAPPED_TYPES
   }
 
   return result;
@@ -73,11 +73,11 @@ std::string mxsrEventSequentialNumberAsString (
     result = "K_MXSR_EVENTS_SEQUENTIAL_NUMBER_UNKNOWN_";
   }
   else {
-#ifndef MF_USE_WRAPPED_TYPES
+// #ifndef MF_USE_WRAPPED_TYPES
     result = noteSequentialNumber;
-#else
-    result = std::to_string (noteSequentialNumber.getBareValue ());
-#endif // MF_USE_WRAPPED_TYPES
+// #else
+//     result = std::to_string (noteSequentialNumber.getBareValue ());
+// #endif // MF_USE_WRAPPED_TYPES
   }
 
   return result;
@@ -92,11 +92,11 @@ int mxsrEventSequentialNumberAsInteger (
     result = K_MXSR_EVENTS_SEQUENTIAL_NUMBER_UNKNOWN_;
   }
   else {
-#ifndef MF_USE_WRAPPED_TYPES
+// #ifndef MF_USE_WRAPPED_TYPES
     result = noteSequentialNumber;
-#else
-    result = noteSequentialNumber.getBareValue ();
-#endif // MF_USE_WRAPPED_TYPES
+// #else
+//     result = noteSequentialNumber.getBareValue ();
+// #endif // MF_USE_WRAPPED_TYPES
   }
 
   return result;

@@ -12,8 +12,16 @@
 #
 
 
+# the MusicFormats directory
+export MUSICFORMATS_DIR=${HOME}/JMI_DEVELOPMENT/musicformats-git-dev
+echo "--> MUSICFORMATS_DIR: ${MUSICFORMATS_DIR}"
+echo
+
+ls -sal ${MUSICFORMATS_DIR}
+
+
 # set the MusicFormats variables
-. ./MusicFormatsVariables.zsh
+. ${MUSICFORMATS_DIR}/mfdevtools/SetMusicFormatsVariables.zsh
 
 
 # Write all output to logfile
@@ -23,15 +31,12 @@
 # COPY musicformats-git-dev to a folder with today's date in it's name
 # -------------------------------------------------
 
-VERSION_NUMBER="v0.9.72"
-echo "VERSION_NUMBER: ${VERSION_NUMBER}"
-
-TIME_STAMP=$(date +"%Y_%m_%d__%H_%M")
-echo "TIME_STAMP: ${TIME_STAMP}"
-
 cd /Users/jacquesmenu/JMI_Developpement
+pwd
+echo
 
-DEST_DIR="musicformats-git-dev_${VERSION_NUMBER}_${TIME_STAMP}"
+DEST_DIR="musicformats-git-dev_${MUSICFORMATS_VERSION_NUMBER}_${MUSICFORMATS_VERSION_DATE}"
+echo "--> DEST_DIR: ${DEST_DIR}"
 
 # set -x
 cp -prf musicformats-git-dev ${DEST_DIR}

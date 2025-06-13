@@ -27,9 +27,9 @@ namespace MusicFormats
 
 constexpr int K_MXSR_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_ = -1;
 
-#ifndef MF_USE_WRAPPED_TYPES
-  using mxsrNoteSequentialNumber = int;
-#else
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mxsrNoteSequentialNumber = int;
+// #else
   using mxsrNoteSequentialNumber =
     mfWrappedValueForArithmetic <
       int,
@@ -38,7 +38,7 @@ constexpr int K_MXSR_NOTE_SEQUENTIAL_NUMBER_UNKNOWN_ = -1;
       K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE,
       K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING
     >;
-#endif // MF_USE_WRAPPED_TYPES
+// #endif // MF_USE_WRAPPED_TYPES
 
 EXP extern std::string mxsrNoteSequentialNumberAsString (
   const mxsrNoteSequentialNumber& noteSequentialNumber);
@@ -51,9 +51,9 @@ EXP extern int mxsrNoteSequentialNumberAsInteger (
 
 constexpr int K_MXSR_EVENTS_SEQUENTIAL_NUMBER_UNKNOWN_ = -1;
 
-#ifndef MF_USE_WRAPPED_TYPES
-  using mxsrEventSequentialNumber = int;
-#else
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mxsrEventSequentialNumber = int;
+// #else
   using mxsrEventSequentialNumber =
     mfWrappedValueForArithmetic <
       int,
@@ -62,7 +62,7 @@ constexpr int K_MXSR_EVENTS_SEQUENTIAL_NUMBER_UNKNOWN_ = -1;
       K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE,
       K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING
     >;
-#endif // MF_USE_WRAPPED_TYPES
+// #endif // MF_USE_WRAPPED_TYPES
 
 EXP extern std::string mxsrEventSequentialNumberAsString (
   const mxsrEventSequentialNumber& eventSequentialNumber);
