@@ -301,6 +301,9 @@ message (STATUS "-----> LIBCONTENT: ${LIBCONTENT}")
 
 set (staticlib libmusicformatsstatic)
 
+add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
+  # otherwise cxx11 ld errors occur on Windows and Linux...
+
 if (NOT IOS)
   message (STATUS "-----> NOT IOS, adding SHARED library ${target}")
 	add_library(${target} SHARED ${LIBCONTENT})
