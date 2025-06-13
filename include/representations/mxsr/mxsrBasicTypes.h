@@ -14,6 +14,7 @@
 
 #include "exports.h"
 
+#include "mfConstants.h"
 #include "mfWrappedValueForArithmetic.h"
 
 #include "mxsrConstants.h"
