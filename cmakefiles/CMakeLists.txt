@@ -104,17 +104,15 @@ message (STATUS "-----> UNIX: ${UNIX}")
 
 if (UNIX)
   if (GDB)
-    add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
-      # otherwise cxx11 ld errors occur on Linux
     add_definitions(-Wall -DGCC -ggdb3 -Wno-overloaded-virtual)
   else()
     add_definitions(-Wall -DGCC -O3 -Wno-overloaded-virtual)
   endif()
 endif ()
 
-if (WIN32)
-    add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
-      # otherwise cxx11 ld errors occur on Windows
+if (NOT APPLE)
+  add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
+    # otherwise cxx11 ld errors occur on Windows and Linux
 endif ()
 
 
