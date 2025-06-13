@@ -104,10 +104,17 @@ message (STATUS "-----> UNIX: ${UNIX}")
 
 if (UNIX)
   if (GDB)
+    add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
+      # otherwise cxx11 ld errors occur on Linux
     add_definitions(-Wall -DGCC -ggdb3 -Wno-overloaded-virtual)
   else()
     add_definitions(-Wall -DGCC -O3 -Wno-overloaded-virtual)
   endif()
+endif ()
+
+if (WIN32)
+    add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
+      # otherwise cxx11 ld errors occur on Windows
 endif ()
 
 
@@ -116,8 +123,7 @@ endif ()
 #===============================================================
 
 if (APPLE)
-	set (CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libstdc++")
-	  # NOT libc++!, otherwise cxx11 ld errors occur on Windows and Linux...
+	set (CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libc++")
 	set (CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LANGUAGE_STANDARD "gnu++${CMAKE_CXX_STANDARD}")
 	if ( IOS )
 		message (STATUS "Generates project for iOS - Use -DIOS=no to change.")
@@ -138,12 +144,14 @@ if (APPLE)
 		message (STATUS "Generates debug information on Apple - Use -DAPPLEDEBUG=on to change. .")
     add_definitions(-O0 -g)
   endif()
+endif ()
+
 
 #===============================================================
 # Windows specific part
 #===============================================================
 
-elseif (WIN32)
+if (WIN32)
   add_definitions(-DWINVER=0x0400 -DWIN32)
   if (MSVC)
     add_definitions(-DMSVC)
@@ -300,9 +308,6 @@ message (STATUS "-----> LIBCONTENT: ${LIBCONTENT}")
 #===============================================================
 
 set (staticlib libmusicformatsstatic)
-
-add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
-  # otherwise cxx11 ld errors occur on Windows and Linux...
 
 if (NOT IOS)
   message (STATUS "-----> NOT IOS, adding SHARED library ${target}")
