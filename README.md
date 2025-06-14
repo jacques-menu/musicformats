@@ -19,9 +19,9 @@ which supports the MusicXML (textual) format, both for reading and writing.
 
 To build the library, use:
 
-    `cd <local MusicFormats repository`
+    cd <local MusicFormats repository
 
-    `cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .`
+    cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
 The documentation contains among other things a user guide :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
@@ -37,9 +37,10 @@ https://github.com/jacques-menu/musicformats/releases;
 
 Each .zip archive contains:
   - text files containing the version number and release date;
-  - the executable tools in the bin subdirectory;
-  - binary versions of the library in the lib subdirectory;
-  - the whole set of PDF documentation files.
+  - binary versions of the library in the `lib` subdirectory;
+  - the executable tools in the `bin` subdirectory;
+  - the C++ header files in the `ìnclude`subdirectory;
+  - the MusicFormats user guide PDF file.
 
 These ready-to-use versions can be accessed directly with URLs such as:
   https://github.com/jacques-menu/musicformats/releases/tag/v0.9.70.

@@ -1,8 +1,8 @@
 \version "2.24.4"
 
 % Generated from "MaxBarockAmbitus_ORIGINAL.xml"
-% by xml2ly v0.9.75-dev (built May 30, 2025)
-% on Tuesday 2025-06-03 @ 18:24:07 CEST
+% by xml2ly v0.9.75-dev (built June 13, 2025)
+% on Saturday 2025-06-14 @ 08:24:20 CEST
 
 % The conversion command as supplied was: 
 %  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name MaxBarockAmbitus_ORIGINAL.ly MaxBarockAmbitus_ORIGINAL.xml
@@ -89,7 +89,7 @@
     \column {
       \fill-line {
         #(string-append
-"Score generated from MusicXML data by xml2ly v0.9.75-dev (built May 30, 2025) and LilyPond " (lilypond-version))
+"Score generated from MusicXML data by xml2ly v0.9.75-dev (built June 13, 2025) and LilyPond " (lilypond-version))
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
@@ -208,7 +208,7 @@ Part_POne_Staff_Two_Voice_Five = \absolute {
   c, f,,8 ]
   
   \bar "|."
-   | % 5
+   | % 6
   \barNumberCheck #5
 }
 

@@ -1,13 +1,13 @@
 \version "2.24.4"
 
 % Generated from "HelloWorld.xml"
-% by xml2ly v0.9.75-dev (built May 30, 2025)
-% on Tuesday 2025-06-03 @ 18:24:05 CEST
+% by xml2ly v0.9.75-dev (built June 13, 2025)
+% on Saturday 2025-06-14 @ 08:25:09 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name HelloWorld.ly HelloWorld.xml
+%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos -auto-output-file-name -lilypond-run-date -lilypond-generation-infos HelloWorld.xml
 % or, with short option names:
-%     HelloWorld.ly HelloWorld.xml
+%         HelloWorld.xml
 
 
 % Scheme function(s): "date & time"
@@ -85,7 +85,7 @@
     \column {
       \fill-line {
         #(string-append
-"Score generated from MusicXML data by xml2ly v0.9.75-dev (built May 30, 2025) and LilyPond " (lilypond-version))
+"Score generated from MusicXML data by xml2ly v0.9.75-dev (built June 13, 2025) and LilyPond " (lilypond-version))
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }

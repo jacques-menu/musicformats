@@ -1,5 +1,11 @@
 # Librarie MusicFormats
 
+Statut des versions:
+[![MacOS](https://github.com/jacques-menu/musicformats/actions/workflows/ build-macos-artifact/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/ build-macos-artifact)
+[![Ubuntu](https://github.com/grame-cncm/libmusicxml/actions/workflows/build-ubuntu-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml)
+[![Windows](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml)
+----
+
 La [librarie MusicFormats](https://github.com/jacques-menu/musicformats)
 est un logiciel ouvert mis à disposition sous la licence Mozilla Public License 2.0.
 Elle est dédiée à la conversion de formats de description de partitions musicales
@@ -19,9 +25,9 @@ qui permet la lecture et l'écriture du format MusicXML (textuel).
 
 Pour construire la librarie, utiliser :
 
-    `cd <dépôt MusicFormats local`
+    cd <dépôt MusicFormats local
 
-    `cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .`
+    cmake -S cmakefiles -B build ; cd build ; make ; ls -salR .
 
 La documentation contient entre autres un guide d'utilisation en anglais :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
@@ -40,10 +46,10 @@ Ensuite cliquer sur le lien vers la version voulue, comme v0.9.70, pour accéder
 
 Chaque archive .zip contient:
   - des fichiers texte contenant le numéro et la date de création de la version;
-  - les outils exécutables dans le sous-dossier bin;
-  - des versions binaires de la librairie dans le sous-dossier lib;
-  - un  introduction à MusicXML en PDF;
-  - le guide de l'utilisateur de MusicFormats en PDF.
+  - des versions binaires de la librairie dans le sous-dossier `lib`;
+  - les outils exécutables dans le sous-dossier `bin`;
+  - les fichiers d'entête C++ dans le sous-dossier `ìnclude`;
+  - le guide de l'utilisateur de MusicFormats en format PDF.
 
 Ces versions prêtes à l'emploi peuvent être accédées directement avec des URL comme:
   https://github.com/jacques-menu/musicformats/releases/tag/v0.9.70 .
