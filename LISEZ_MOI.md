@@ -10,8 +10,8 @@ La [librarie MusicFormats](https://github.com/jacques-menu/musicformats)
 est un logiciel ouvert mis à disposition sous la licence Mozilla Public License 2.0.
 Elle est dédiée à la conversion de formats de description de partitions musicales
 comme MusicXML, LilyPond, musique braille et Guido.
-Elle est écrite en C++17. Pour la construire à partir du code source,
-il faut un compilateur C++ et l'outil cmake.
+Elle est écrite en C++20. Pour la construire à partir du code source,
+il faut un compilateur C++ et l'outil `cmake`.
 
 MusicFormats contient des  convertisseurs entre ces formats comme xml2ly.
 Des exemples de l'emploi de la librarie pour generer des fichier ex-nihilo sont fournis.
@@ -44,7 +44,7 @@ On peut aussi aller directement à :
 https://github.com/jacques-menu/musicformats/tags .
 Ensuite cliquer sur le lien vers la version voulue, comme v0.9.70, pour accéder à son contenu.
 
-Chaque archive .zip contient:
+Chaque archive`.zip` contient:
   - des fichiers texte contenant le numéro et la date de création de la version;
   - des versions binaires de la librairie dans le sous-dossier `lib`;
   - les outils exécutables dans le sous-dossier `bin`;

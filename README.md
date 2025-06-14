@@ -6,7 +6,7 @@ The [MusicFormats library](https://github.com/jacques-menu/musicformats) is open
 supplied under the Mozilla Public License 2.0 licence.
 It is dedicated to the conversion of music score formats
 such as MusicXML, LilyPond, braille music and Guido.
-It is written in C++17. Building it from the source code requires a C++ compiler and cmake.
+It is written in C++20. Building it from the source code requires a C++ compiler and `cmake`.
 
 MusicFormats contains converters between these formats such as xml2ly.
 Examples of the use of the library to generate output files from scratch are provided.
@@ -35,7 +35,7 @@ They are in ZIP format and can be downloaded:
 https://github.com/jacques-menu/musicformats/releases;
   - or manually by clicking on the 'Releases' link in the right pane of the repository's main window..
 
-Each .zip archive contains:
+Each `.zip` archive contains:
   - text files containing the version number and release date;
   - binary versions of the library in the `lib` subdirectory;
   - the executable tools in the `bin` subdirectory;
