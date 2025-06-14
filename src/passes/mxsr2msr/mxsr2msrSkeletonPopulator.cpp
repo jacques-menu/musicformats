@@ -9302,7 +9302,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 //   }
 
   // tuplets handling
-  gLog << "fCurrentRecipientMxsrVoice: " << fCurrentRecipientMxsrVoice << std::endl;
+//   gLog << "fCurrentRecipientMxsrVoice: " << fCurrentRecipientMxsrVoice << std::endl;
 
   // there can be a <forward /> markup before any note in the MusicXML data
   if (fCurrentRecipientMxsrVoice) {
