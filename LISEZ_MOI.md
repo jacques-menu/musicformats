@@ -2,7 +2,7 @@
 
 Statut des versions:
 [![MacOS](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact)
-[![Ubuntu](https://github.com/grame-cncm/libmusicxml/actions/workflows/build-ubuntu-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml)
+[![Ubuntu](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml)
 [![Windows](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml)
 ----
 
