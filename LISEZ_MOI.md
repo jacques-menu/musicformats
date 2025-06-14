@@ -1,7 +1,7 @@
 # Librarie MusicFormats
 
 Statut des versions:
-[![MacOS](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact.yml)
+[![MacOS](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact.yml)
 [![Ubuntu](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml)
 [![Windows](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml)
 ----
