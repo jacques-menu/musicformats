@@ -1,5 +1,12 @@
 # MusicFormats library
 
+Versions status:
+
+[![MacOS](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact.yml)
+[![Ubuntu](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml)
+[![Windows](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml)
+----
+
 This information is available in french under the name [LISEZ_MOI.md](https://github.com/jacques-menu/musicformats/blob/master/LISEZ_MOI.md).
 
 The [MusicFormats library](https://github.com/jacques-menu/musicformats) is open source software
