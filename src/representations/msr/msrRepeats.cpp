@@ -58,7 +58,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrRepeatCommonPart msrRepeatCommonPart::create (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& upLinkToRepeat)
+  const S_msrRepeat&       upLinkToRepeat)
 {
   msrRepeatCommonPart* obj =
     new msrRepeatCommonPart (
@@ -70,7 +70,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::create (
 
 msrRepeatCommonPart::msrRepeatCommonPart (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& upLinkToRepeat)
+  const S_msrRepeat&       upLinkToRepeat)
     : msrElement (inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -81,6 +81,32 @@ msrRepeatCommonPart::msrRepeatCommonPart (
     "upLinkToRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a repeat common part";
+
+    ss <<
+      ", upLinkToRepeat: ";
+    if (upLinkToRepeat) {
+      ss <<
+        upLinkToRepeat->asShortString ();
+    }
+    else {
+      ss << "[NULL]";
+    }
+
+    ss <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   fRepeatCommonPartUpLinkToRepeat = upLinkToRepeat;
 }
 
@@ -89,18 +115,18 @@ msrRepeatCommonPart::~msrRepeatCommonPart ()
 
 void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrSegment&  segment,
-  const std::string& context)
+  const S_msrSegment&      segment,
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceSegments ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending segment '" <<
+      "Appending segment " <<
       segment->asString () <<
-      "' to repeat common part '" << asString () <<
-      "' (" << context << ")" <<
+      " to repeat common part " << asString () <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -122,19 +148,19 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
 
 void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& repeat,
-  const std::string& context)
+  const S_msrRepeat&       repeat,
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending repeat '" <<
+      "Appending repeat " <<
     // JMI  repeat->asString () <<
       repeat <<
-      "' to repeat common part '" << asString () <<
-      "' (" << context << ")" <<
+      " to repeat common part " << asString () <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -155,19 +181,19 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
 }
 
 void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&  inputLineNumber,
   const S_msrMeasureRepeat& measureRepeat,
-  const std::string&      context)
+  const std::string&        context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending measures repeat '" <<
+      "Appending measures repeat " <<
       measureRepeat->asString () <<
-      "' to repeat common part '" << asString () <<
-      "' (" << context << ")" <<
+      " to repeat common part " << asString () <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -188,9 +214,9 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
 }
 
 void msrRepeatCommonPart::cascadeAppendMultipleMeasureRestToRepeatCommonPart (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&        inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRests,
-  const std::string&    context)
+  const std::string&              context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -223,17 +249,17 @@ void msrRepeatCommonPart::cascadeAppendMultipleMeasureRestToRepeatCommonPart (
 void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
   const mfInputLineNumber& inputLineNumber,
   const S_msrVoiceElement& voiceElement,
-  const std::string&     context)
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending voice element '" <<
+      "Appending voice element " <<
       voiceElement->asString () <<
-      "' to repeat common part '" << asString () <<
-      "' (" << context << ")" <<
+      " to repeat common part " << asString () <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -316,9 +342,9 @@ S_msrNote msrRepeatCommonPart::fetchRepeatCommonPartFirstNonGraceNote () const
         std::stringstream ss;
 
         ss <<
-          "tuplet first element should be a note, a chord or another tuplet, found instead '" <<
-          element->asShortString () <<
-          "'";
+          "tuplet first element should be a note, " <<
+          "a chord or another tuplet, found instead " <<
+          element->asShortString ();
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -428,10 +454,10 @@ std::string msrRepeatCommonPart::asString () const
 
   ss <<
     "[RepeatCommonPart" <<
-    ", repeat upLink: '" <<
+    ", fRepeatCommonPartUpLinkToRepeat: " <<
     fRepeatCommonPartUpLinkToRepeat->
       asShortString () <<
-    "', line " << fInputLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -447,10 +473,9 @@ void msrRepeatCommonPart::printFull (std::ostream& os) const
   ++gIndenter;
 
   os <<
-    "fRepeatCommonPartUpLinkToRepeat: '" <<
+    "fRepeatCommonPartUpLinkToRepeat: " <<
     fRepeatCommonPartUpLinkToRepeat->
       asShortString () <<
-      '\'' <<
     std::endl << std::endl;
 
   // print the elements
@@ -500,20 +525,19 @@ void msrRepeatCommonPart::print (std::ostream& os) const
 {
   os <<
     "[RepeatCommonPart" <<
-//     ", repeat upLink: '" <<
+//     ", fRepeatCommonPartUpLinkToRepeat: " <<
 //     fRepeatCommonPartUpLinkToRepeat->
 //       asShortString () <<
-    "', line " << fInputLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
 
 /* JMI
   os <<
-    "repeat upLink: '" <<
+    "repeat upLink: " <<
     fRepeatCommonPartUpLinkToRepeat->
       asShortString () <<
-      '\'' <<
     std::endl;
 */
 
@@ -575,9 +599,9 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatCommonPart& elt)
 //______________________________________________________________________________
 S_msrRepeatEnding msrRepeatEnding::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&  repeatEndingNumber, // may be "1, 2"
-  msrRepeatEndingKind repeatEndingKind,
-  const S_msrRepeat&  upLinkToRepeat)
+  const std::string&       repeatEndingNumber, // may be "1, 2"
+  msrRepeatEndingKind      repeatEndingKind,
+  const S_msrRepeat&       upLinkToRepeat)
 {
   msrRepeatEnding* obj =
     new msrRepeatEnding (
@@ -591,11 +615,39 @@ S_msrRepeatEnding msrRepeatEnding::create (
 
 msrRepeatEnding::msrRepeatEnding (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&  repeatEndingNumber, // may be "1, 2"
-  msrRepeatEndingKind repeatEndingKind,
-  const S_msrRepeat&  upLinkToRepeat)
+  const std::string&       repeatEndingNumber, // may be "1, 2"
+  msrRepeatEndingKind      repeatEndingKind,
+  const S_msrRepeat&       upLinkToRepeat)
     : msrElement (inputLineNumber)
 {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a repeat ending" <<
+      ", repeatEndingNumber: " << repeatEndingNumber <<
+      ", repeatEndingKind: " << repeatEndingKind;
+
+    ss <<
+      ", upLinkToRepeat: ";
+    if (upLinkToRepeat) {
+      ss <<
+        upLinkToRepeat->asShortString ();
+    }
+    else {
+      ss << "[NULL]";
+    }
+
+    ss <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   fRepeatEndingNumber = repeatEndingNumber;
 
   fRepeatEndingInternalNumber = 0;
@@ -611,17 +663,17 @@ msrRepeatEnding::~msrRepeatEnding ()
 
 void msrRepeatEnding::appendSegmentToRepeatEnding (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrSegment&  segment,
-  const std::string& context)
+  const S_msrSegment&      segment,
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending segment '" << segment <<
-      "' to repeat ending '" << asString () <<
-      "' (" << context << ")" <<
+      "Appending segment " << segment <<
+      " to repeat ending " << asString () <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -643,17 +695,17 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
 
 void msrRepeatEnding::appendRepeatToRepeatEnding (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& repeat,
-  const std::string& context)
+  const S_msrRepeat&       repeat,
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending repeat '" << repeat <<
-      "' to repeat ending '" << asString () <<
-      "' (" << context << ")" <<
+      "Appending repeat " << repeat <<
+      " to repeat ending " << asString () <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -674,19 +726,19 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
 }
 
 void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&  inputLineNumber,
   const S_msrMeasureRepeat& measureRepeat,
-  const std::string&      context)
+  const std::string&        context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending measures repeat '" <<
+      "Appending measures repeat " <<
       measureRepeat->asShortString () <<
-      "' to repeat ending '" << asString () <<
-      "' (" << context << ")" <<
+      " to repeat ending " << asString () <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -707,7 +759,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
 }
 
 void msrRepeatEnding::cascadeAppendMultipleMeasureRestToRepeatEnding (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&        inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRests,
   const std::string&    context)
 {
@@ -742,16 +794,16 @@ void msrRepeatEnding::cascadeAppendMultipleMeasureRestToRepeatEnding (
 void msrRepeatEnding::appendVoiceElementToRepeatEnding (
   const mfInputLineNumber& inputLineNumber,
   const S_msrVoiceElement& voiceElement,
-  const std::string&     context)
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending voice element '" << voiceElement <<
-      "' to repeat ending '" << asString () <<
-      "' (" << context << ")" <<
+      "Appending voice element " << voiceElement <<
+      " to repeat ending " << asString () <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -865,23 +917,21 @@ std::string msrRepeatEnding::asString () const
 
   ss <<
     "[RepeatEnding" <<
-    ", " <<
-    fRepeatEndingKind <<
-    ", RepeatEndingUpLinkToRepeat: '";
+    ", fRepeatEndingKind: " << fRepeatEndingKind <<
+    ", fRepeatEndingUpLinkToRepeat: ";
 
-//   if (fRepeatEndingUpLinkToRepeat) { JMI 0.9.64
-//     ss <<
-//       fRepeatEndingUpLinkToRepeat->
-//         asShortString ();
-//   }
-//   else {
-//     ss <<
-//       "[NULL]";
-//   }
+  if (fRepeatEndingUpLinkToRepeat) { // JMI 0.9.76
+    ss <<
+      fRepeatEndingUpLinkToRepeat->
+        asShortString ();
+  }
+  else {
+    ss << "[NULL]";
+  }
 
   ss <<
-    ", repeatEndingNumber: " << fRepeatEndingNumber <<
-    ", repeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
+    ", fRepeatEndingNumber: " << fRepeatEndingNumber <<
+    ", fRepeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
     "', line " << fInputLineNumber <<
     ']';
 
@@ -893,7 +943,7 @@ void msrRepeatEnding::printFull (std::ostream& os) const
   os <<
     std::endl <<
     "[RepeatEnding" <<
-    ", repeatEndingKind" << ": " <<
+    ", fRepeatEndingKind: " <<
     msrRepeatEndingKindAsString (
       fRepeatEndingKind) <<
     ", line " << fInputLineNumber <<
@@ -903,10 +953,9 @@ void msrRepeatEnding::printFull (std::ostream& os) const
 
 /* JMI
   os <<
-    "repeat upLink: '" <<
+    "fRepeatEndingUpLinkToRepeat: " <<
     fRepeatEndingUpLinkToRepeat->
       asShortString () <<
-      '\'' <<
     std::endl;
 */
 
@@ -920,7 +969,7 @@ void msrRepeatEnding::printFull (std::ostream& os) const
     "repeatEndingInternalNumber" <<  ": " <<fRepeatEndingInternalNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "repeat upLink" << " : '" <<
+    "repeat upLink" << " : " <<
     fRepeatEndingUpLinkToRepeat->
       asShortString () <<
     '\'' <<
@@ -973,10 +1022,9 @@ void msrRepeatEnding::print (std::ostream& os) const
 {
   os <<
     "[RepeatEnding" <<
-    ", fRepeatEndingKind: " <<
-    fRepeatEndingKind <<
-    ", repeatEndingNumber: " << fRepeatEndingNumber <<
-    ", repeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
+    ", fRepeatEndingKind: " << fRepeatEndingKind <<
+    ", fRepeatEndingNumber: " << fRepeatEndingNumber <<
+    ", fRepeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
     "', line " << fInputLineNumber <<
     std::endl;
 
@@ -994,7 +1042,7 @@ void msrRepeatEnding::print (std::ostream& os) const
     "repeatEndingInternalNumber" <<  ": " <<fRepeatEndingInternalNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "repeat upLink: " << " : '" <<
+    "repeat upLink: " << " : " <<
     fRepeatEndingUpLinkToRepeat->
       asShortString () <<
     '\'' <<
@@ -1004,10 +1052,9 @@ void msrRepeatEnding::print (std::ostream& os) const
 
 / * JMI
   os <<
-    "repeat upLink: '" <<
+    "repeat upLink: " <<
     fRepeatEndingUpLinkToRepeat->
       asShortString () <<
-      '\'' <<
     std::endl;
 * /
 
@@ -1070,7 +1117,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt)
 //______________________________________________________________________________
 S_msrRepeat msrRepeat::create (
   const mfInputLineNumber& inputLineNumber,
-  int repeatTimes)
+  int                      repeatTimes)
 {
   msrRepeat* obj =
     new msrRepeat (
@@ -1083,8 +1130,8 @@ S_msrRepeat msrRepeat::create (
 
 S_msrRepeat msrRepeat::create (
   const mfInputLineNumber& inputLineNumber,
-  int               repeatTimes,
-  const S_msrVoice& upLinkToVoice)
+  int                      repeatTimes,
+  const S_msrVoice&        upLinkToVoice)
 {
   msrRepeat* obj =
     new msrRepeat (
@@ -1097,8 +1144,8 @@ S_msrRepeat msrRepeat::create (
 
 msrRepeat::msrRepeat (
   const mfInputLineNumber& inputLineNumber,
-  int               repeatTimes,
-  const S_msrVoice& upLinkToVoice)
+  int                      repeatTimes,
+  const S_msrVoice&        upLinkToVoice)
     : msrVoiceElement (inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -1108,6 +1155,32 @@ msrRepeat::msrRepeat (
     upLinkToVoice != nullptr,
     "upLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a repeat" <<
+      ", repeatTimes: " << repeatTimes;
+
+    ss <<
+      ", upLinkToVoice: ";
+    if (upLinkToVoice) {
+      ss << upLinkToVoice->asShortString ();
+    }
+    else {
+      ss << "[NULL]";
+    }
+
+    ss <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   fRepeatTimes = repeatTimes;
 
@@ -1176,12 +1249,9 @@ void msrRepeat::setRepeatCommonPart (
     std::stringstream ss;
 
     ss <<
-      "Setting repeat common part containing " <<
-      mfSingularOrPlural (
-        repeatCommonPart->
-          getRepeatCommonPartElementsList ().size (),
-        "element",
-        "elements");
+      "Setting repeat common part to " <<
+      repeatCommonPart->asShortString () <<
+      " in repeat " << asShortString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1213,11 +1283,10 @@ void msrRepeat::addRepeatEndingToRepeat (
     std::stringstream ss;
 
     ss <<
-      "Adding ending '" <<
+      "Adding ending " <<
       repeatEnding->asString () <<
-      "' to repeat" <<
-      asShortString () <<
-      "'";
+      " to repeat" <<
+      asShortString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1248,9 +1317,9 @@ void msrRepeat::addRepeatEndingToRepeat (
             std::stringstream ss;
 
             ss <<
-              "cannot add hooked ending '" <<
+              "cannot add hooked ending " <<
               repeatEnding->asShortString () <<
-              "' right after a repeat has been created";
+              " right after a repeat has been created";
 
             msrError (
               gServiceRunData->getInputSourceName (),
@@ -1271,9 +1340,9 @@ void msrRepeat::addRepeatEndingToRepeat (
             std::stringstream ss;
 
             ss <<
-              "cannot add hooked ending '" <<
+              "cannot add hooked ending " <<
               repeatEnding->asShortString () <<
-              "' after a repeat has been completed";
+              " after a repeat has been completed";
 
             msrError (
               gServiceRunData->getInputSourceName (),
@@ -1328,9 +1397,9 @@ void msrRepeat::addRepeatEndingToRepeat (
             std::stringstream ss;
 
             ss <<
-              "cannot add hookless ending '" <<
+              "cannot add hookless ending " <<
               repeatEnding->asShortString () <<
-              "' after a repeat has been completed";
+              " after a repeat has been completed";
 
             msrError (
               gServiceRunData->getInputSourceName (),
@@ -1360,19 +1429,18 @@ void msrRepeat::addRepeatEndingToRepeat (
 
 void msrRepeat::appendSegmentToRepeat (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrSegment&  segment,
-  const std::string& context)
+  const S_msrSegment&      segment,
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending segment '" <<
+      "Appending segment " <<
       segment->asString () <<
-      "' to repeat '" <<
+      " to repeat " <<
       asShortString () <<
-      '\'' <<
       std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1391,7 +1459,7 @@ void msrRepeat::appendSegmentToRepeat (
         std::stringstream ss;
 
         ss <<
-          "segment '" <<
+          "segment " <<
           segment->asShortString () <<
           "'cannot be added to a just created repeat" <<
           " (" << context << ")";
@@ -1425,7 +1493,7 @@ void msrRepeat::appendSegmentToRepeat (
         std::stringstream ss;
 
         ss <<
-          "segment '" <<
+          "segment " <<
           segment->asShortString () <<
           "'cannot be added to a completed repeat" <<
           '(' << context << ")";
@@ -1450,19 +1518,18 @@ void msrRepeat::appendSegmentToRepeat (
 
 void msrRepeat::appendRepeatToRepeat (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& repeat,
-  const std::string& context)
+  const S_msrRepeat&       repeat,
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending repeat '" <<
+      "Appending repeat " <<
       repeat->asString () <<
-      "' to repeat '" <<
+      " to repeat " <<
       asShortString () <<
-      '\'' <<
       std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1481,7 +1548,7 @@ void msrRepeat::appendRepeatToRepeat (
         std::stringstream ss;
 
         ss <<
-          "repeat '" <<
+          "repeat " <<
           repeat->asShortString () <<
           "'cannot be added to a just created repeat" <<
           " (" << context << ")";
@@ -1515,7 +1582,7 @@ void msrRepeat::appendRepeatToRepeat (
         std::stringstream ss;
 
         ss <<
-          "repeat '" <<
+          "repeat " <<
           repeat->asShortString () <<
           "'cannot be added to a completed repeat" <<
           '(' << context << ")";
@@ -1539,20 +1606,19 @@ void msrRepeat::appendRepeatToRepeat (
 }
 
 void msrRepeat::appendMeasureRepeatToRepeat (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&  inputLineNumber,
   const S_msrMeasureRepeat& measureRepeat,
-  const std::string&      context)
+  const std::string&        context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending measures repeat '" <<
+      "Appending measure repeat " <<
       measureRepeat->asString () <<
-      "' to repeat '" <<
+      " to repeat " <<
       asShortString () <<
-      '\'' <<
       std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1571,7 +1637,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
         std::stringstream ss;
 
         ss <<
-          "measures repeat '" <<
+          "measures repeat " <<
           measureRepeat->asShortString () <<
           "'cannot be added to a just created repeat" <<
           " (" << context << ")";
@@ -1605,7 +1671,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
         std::stringstream ss;
 
         ss <<
-          "measures repeat '" <<
+          "measures repeat " <<
           measureRepeat->asShortString () <<
           "'cannot be added to a completed repeat" <<
           '(' << context << ")";
@@ -1629,9 +1695,9 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 }
 
 void msrRepeat::cascadeAppendMultipleMeasureRestToRepeat (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&        inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRests,
-  const std::string&    context)
+  const std::string&              context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
@@ -1660,7 +1726,7 @@ void msrRepeat::cascadeAppendMultipleMeasureRestToRepeat (
         std::stringstream ss;
 
         ss <<
-          "multiple measure rests '" <<
+          "multiple measure rests " <<
           multipleMeasureRests->asShortString () <<
           "'cannot be added to a just created repeat" <<
           " (" << context << ")";
@@ -1694,7 +1760,7 @@ void msrRepeat::cascadeAppendMultipleMeasureRestToRepeat (
         std::stringstream ss;
 
         ss <<
-          "multiple measure rests '" <<
+          "multiple measure rests " <<
           multipleMeasureRests->asShortString () <<
           "'cannot be added to a completed repeat" <<
           '(' << context << ")";
@@ -1828,7 +1894,7 @@ std::string msrRepeat::asShortString () const
 
   ss <<
     "[Repeat" <<
-    ", " << fRepeatTimes << " times" <<
+    ", fRepeatTimes: " << fRepeatTimes <<
    ", fRepeatExplicitStartKind: " <<
     msrRepeatExplicitStartKindAsString (
       fRepeatExplicitStartKind);
@@ -1883,7 +1949,7 @@ std::string msrRepeat::asString () const
 
   ss <<
     "[Repeat" <<
-    ", " << fRepeatTimes << " times" <<
+    ", fRepeatTimes: " << fRepeatTimes <<
    ", fRepeatExplicitStartKind: " <<
     msrRepeatExplicitStartKindAsString (
       fRepeatExplicitStartKind);
@@ -1945,13 +2011,13 @@ std::string msrRepeat::asString () const
 
 void msrRepeat::displayRepeat (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   gLog <<
     std::endl <<
-    "*********>> Repeat '" <<
+    "*********>> Repeat " <<
     asShortString () <<
-    "' (" << context << ")" <<
+    " (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
     std::endl;
@@ -1969,7 +2035,7 @@ void msrRepeat::printFull (std::ostream& os) const
 {
   os <<
     "[Repeat" <<
-    ", " << fRepeatTimes << " times" <<
+    ", fRepeatTimes: " << fRepeatTimes <<
     ", line " << fInputLineNumber <<
     std::endl;
 
@@ -2082,7 +2148,7 @@ void msrRepeat::print (std::ostream& os) const
 {
   os <<
     "[Repeat" <<
-    ", " << fRepeatTimes << " times" <<
+    ", fRepeatTimes: " << fRepeatTimes <<
     ", fRepeatExplicitStartKind: " <<
     fRepeatExplicitStartKind <<
 //     ", fCurrentRepeatBuildPhaseKind: " <<

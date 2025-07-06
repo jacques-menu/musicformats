@@ -1,6 +1,7 @@
 # Librarie MusicFormats
 
 Statut des versions:
+
 [![MacOS](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact.yml)
 [![Ubuntu](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml)
 [![Windows](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml)
@@ -13,10 +14,10 @@ comme MusicXML, LilyPond, musique braille et Guido.
 Elle est écrite en C++20. Pour la construire à partir du code source,
 il faut un compilateur C++ et l'outil `cmake`.
 
-MusicFormats contient des  convertisseurs entre ces formats comme xml2ly.
-Des exemples de l'emploi de la librarie pour generer des fichier ex-nihilo sont fournis.
+MusicFormats contient des  convertisseurs entre ces formats comme `xml2ly`.
+Des exemples de l'emploi de la librarie pour générer des fichier ex-nihilo sont fournis.
 
-Il y a aussi un interpréteur for MFSL (MusicFormats Scripting Language),
+Il y a aussi un interpréteur pour MFSL (MusicFormats Scripting Language),
 qui peut être utilisé pour faciliter l'emploi et la selection des options
 avec les outils fournis par MusicFormats.
 
@@ -34,11 +35,11 @@ La documentation contient entre autres un guide d'utilisation en anglais :
 et un guide de maintenance pour les développeurs :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
 
-Il y a dans le dossier 'releases' des versions prêtes à l'emploi de MusicFormats pour les trois systèmes d'exploitation principaux,
+Il y a dans le dossier `releases` des versions prêtes à l'emploi de MusicFormats pour les trois systèmes d'exploitation principaux,
 soit MacOS™, Linux dans sa déclinaison Ubuntu et Windows™,
 Elles sont en format ZIP et peuvent être téléchargées depuis la page d'accueil du dépôt GitHub à
 https://github.com/jacques-menu/musicformats.
-Cliquer sur le lien 'n tags' en haut de la page pour accéder aux diverses versions.
+Cliquer sur le lien `n tags` en haut de la page pour accéder aux diverses versions.
 
 On peut aussi aller directement à :
 https://github.com/jacques-menu/musicformats/tags .

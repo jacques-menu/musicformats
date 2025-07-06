@@ -54,6 +54,13 @@ LOGFILE=${MUSICFORMATS_DIR}/build/${LOGFILE_NAME}
 # exec > ${LOGFILE} 2>&1
 
 
+# Change to MusicFormats directory
+# -----------------------------------------
+
+cd ${MUSICFORMATS_DIR}
+echo "pwd: $CWD"
+
+
 # Run 'cmake'
 # -----------------------------------------
 

@@ -1400,7 +1400,7 @@ void mfSplitStringIntoChunks (
 
 //______________________________________________________________________________
 void mfSplitRegularStringAtEndOfLines (
-  std::string             theString,
+  std::string              theString,
   std::list <std::string>& chunksList)
 {
 #ifdef DEBUG_SPLITTING
@@ -1513,7 +1513,7 @@ void mfSplitRegularStringAtEndOfLines (
 
 //______________________________________________________________________________
 void mfSplitHTMLStringContainingEndOfLines (
-  std::string             theString,
+  std::string              theString,
   std::list <std::string>& chunksList)
 {
 #ifdef DEBUG_SPLITTING
@@ -1697,7 +1697,7 @@ std::string mfMakeSingleWordFromString (const std::string& theString)
 
 //______________________________________________________________________________
 Bool mfStringIsInStringSet (
-  const std::string&           theString,
+  const std::string&            theString,
   const std::set <std::string>& stringSet)
 {
   Bool result (false);
@@ -1882,9 +1882,9 @@ void displayMeasureNumberSet (
 
 //______________________________________________________________________________
 Bool mfFetchValueFromStringToStringMap (
-  const std::string&                        theKey,
+  const std::string&                         theKey,
   const std::map <std::string, std::string>& stringToStringMap,
-  std::string&                              theValue)
+  std::string&                               theValue)
 {
   Bool result (false);
 
@@ -1954,9 +1954,9 @@ std::string mfStringToStringMapAsString (
 }
 
 void mfDisplayStringToStringMap (
-  const std::string&                        title,
+  const std::string&                         title,
   const std::map <std::string, std::string>& stringToStringMap,
-  std::ostream&                             os)
+  std::ostream&                              os)
 {
   // print the title
   os << title << ":";
@@ -2013,7 +2013,7 @@ void mfDisplayStringToStringMap (
 
 //______________________________________________________________________________
 Bool mfKeyIsInStringToStringMultiMap (
-  const std::string&                             theKey,
+  const std::string&                              theKey,
   const std::multimap <std::string, std::string>& stringToStringMultiMap)
 {
   const std::multimap <std::string, std::string>::const_iterator it =
@@ -2024,9 +2024,9 @@ Bool mfKeyIsInStringToStringMultiMap (
 }
 
 Bool mfKeyValuePairIsInStringToStringMultiMap (
-  const std::string&                             theKey,
+  const std::string&                              theKey,
   const std::multimap <std::string, std::string>& stringToStringMultiMap,
-  const std::string&                             theValue)
+  const std::string&                              theValue)
 {
   Bool result (false);
 
@@ -2109,9 +2109,9 @@ std::string mfStringToStringMultiMapAsString (
 }
 
 void mfDisplayStringToStringMultiMap (
-  const std::string&                             title,
+  const std::string&                              title,
   const std::multimap <std::string, std::string>& stringToStringMultiMap,
-  std::ostream&                                  os)
+  std::ostream&                                   os)
 {
   // print the title
   os << title << ":";

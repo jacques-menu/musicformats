@@ -163,30 +163,30 @@ class EXP msrSyllable : public msrElement
 
     static SMARTP<msrSyllable> create (
                             const mfInputLineNumber& inputLineNumber,
-                            msrSyllableKind        syllableKind,
-                            msrSyllableExtendKind  syllableExtendKind,
-                            const mfStanzaNumber&  syllableStanzaNumber,
-                            const mfWholeNotes&    syllableWholeNotes,
-                            const msrTupletFactor& syllableTupletFactor);
+                            msrSyllableKind          syllableKind,
+                            msrSyllableExtendKind    syllableExtendKind,
+                            const mfStanzaNumber&    syllableStanzaNumber,
+                            const mfWholeNotes&      syllableWholeNotes,
+                            const msrTupletFactor&   syllableTupletFactor);
 
     static SMARTP<msrSyllable> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrMeasure&    upLinkToMeasure,
-                            msrSyllableKind        syllableKind,
-                            msrSyllableExtendKind  syllableExtendKind,
-                            const mfStanzaNumber&  syllableStanzaNumber,
-                            const mfWholeNotes&    syllableWholeNotes,
-                            const msrTupletFactor& syllableTupletFactor,
-                            const S_msrStanza&     syllableUpLinkToStanza);
+                            const S_msrMeasure&      upLinkToMeasure,
+                            msrSyllableKind          syllableKind,
+                            msrSyllableExtendKind    syllableExtendKind,
+                            const mfStanzaNumber&    syllableStanzaNumber,
+                            const mfWholeNotes&      syllableWholeNotes,
+                            const msrTupletFactor&   syllableTupletFactor,
+                            const S_msrStanza&      syllableUpLinkToStanza);
 
     static SMARTP<msrSyllable> create (
                             const mfInputLineNumber& inputLineNumber,
-                            msrSyllableKind        syllableKind,
-                            msrSyllableExtendKind  syllableExtendKind,
-                            const mfStanzaNumber&  syllableStanzaNumber,
-                            const mfWholeNotes&    syllableWholeNotes,
-                            const msrTupletFactor& syllableTupletFactor,
-                            const S_msrStanza&     syllableUpLinkToStanza);
+                            msrSyllableKind          syllableKind,
+                            msrSyllableExtendKind    syllableExtendKind,
+                            const mfStanzaNumber&    syllableStanzaNumber,
+                            const mfWholeNotes&      syllableWholeNotes,
+                            const msrTupletFactor&   syllableTupletFactor,
+                            const S_msrStanza&       syllableUpLinkToStanza);
 
     SMARTP<msrSyllable> createSyllableNewbornClone (
                             const S_msrPart& containingPart); // JMI 0.9.67
@@ -201,21 +201,21 @@ class EXP msrSyllable : public msrElement
 
                           msrSyllable (
                             const mfInputLineNumber& inputLineNumber,
-                            msrSyllableKind        syllableKind,
-                            msrSyllableExtendKind  syllableExtendKind,
-                            const mfStanzaNumber&  syllableStanzaNumber,
-                            const mfWholeNotes&    syllableWholeNotes,
-                            const msrTupletFactor& syllableTupletFactor);
+                            msrSyllableKind          syllableKind,
+                            msrSyllableExtendKind    syllableExtendKind,
+                            const mfStanzaNumber&    syllableStanzaNumber,
+                            const mfWholeNotes&      syllableWholeNotes,
+                            const msrTupletFactor&   syllableTupletFactor);
 
                           msrSyllable (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrMeasure&    upLinkToMeasure,
-                            msrSyllableKind        syllableKind,
-                            msrSyllableExtendKind  syllableExtendKind,
-                            const mfStanzaNumber&  syllableStanzaNumber,
-                            const mfWholeNotes&    syllableWholeNotes,
-                            const msrTupletFactor& syllableTupletFactor,
-                            const S_msrStanza&     syllableUpLinkToStanza);
+                            const S_msrMeasure&      upLinkToMeasure,
+                            msrSyllableKind          syllableKind,
+                            msrSyllableExtendKind    syllableExtendKind,
+                            const mfStanzaNumber&    syllableStanzaNumber,
+                            const mfWholeNotes&      syllableWholeNotes,
+                            const msrTupletFactor&   syllableTupletFactor,
+                            const S_msrStanza&       syllableUpLinkToStanza);
 
     virtual               ~msrSyllable ();
 
@@ -386,8 +386,8 @@ class EXP msrStanza : public msrElement
 
     static SMARTP<msrStanza> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfStanzaNumber& stanzaNumber,
-                            const S_msrVoice&  stanzaUpLinkToVoice);
+                            const mfStanzaNumber&    stanzaNumber,
+                            const S_msrVoice&        stanzaUpLinkToVoice);
 
     SMARTP<msrStanza> createStanzaNewbornClone (
                             const S_msrVoice& containingVoice);
@@ -402,8 +402,8 @@ class EXP msrStanza : public msrElement
 
                           msrStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfStanzaNumber& stanzaNumber,
-                            const S_msrVoice&  stanzaUpLinkToVoice);
+                            const mfStanzaNumber&    stanzaNumber,
+                            const S_msrVoice&        stanzaUpLinkToVoice);
 
   public:
 
@@ -453,9 +453,10 @@ class EXP msrStanza : public msrElement
     // ------------------------------------------------------
 
     void                  appendSyllableToStanza (
-                            const S_msrSyllable&       syllable,
-                            const S_msrMeasure&        upLinkToMeasure,
-                            const mfPositionInMeasure& partCurrentDrawingPositionInMeasure);
+                            const S_msrSyllable& syllable,
+                            const S_msrMeasure&  upLinkToMeasure,
+                            const mfPositionInMeasure&
+                                                 partCurrentDrawingPositionInMeasure);
 
     void                  appendSyllableToStanzaClone (
                             const S_msrSyllable& syllable,
@@ -471,51 +472,52 @@ class EXP msrStanza : public msrElement
 
     void                  appendMeasureEndSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrMeasure&        upLinkToMeasure,
-                            const mfPositionInMeasure& partCurrentDrawingPositionInMeasure);
+                            const S_msrMeasure&      upLinkToMeasure,
+                            const mfPositionInMeasure&
+                                                     partCurrentDrawingPositionInMeasure);
 
 //     S_msrSyllable         appendMelismaSyllableToStanza (
 //                             const mfInputLineNumber& inputLineNumber,
-//                             msrSyllableKind syllableKind,
-//                             const mfWholeNotes& wholeNote);
+//                             msrSyllableKind          syllableKind,
+//                             const mfWholeNotes&       wholeNote);
 
 /* JMI
     S_msrSyllable         appendTiedSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfWholeNotes& wholeNotes);
+                            const mfWholeNotes&      wholeNotes);
 
     S_msrSyllable         appendSlurSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfWholeNotes& wholeNotes);
+                            const mfWholeNotes&      wholeNotes);
 
     S_msrSyllable         appendSlurBeyondEndSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfWholeNotes& wholeNotes);
+                            const mfWholeNotes&      wholeNotes);
 
     S_msrSyllable         appendLigatureSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfWholeNotes& wholeNotes);
+                            const mfWholeNotes&      wholeNotes);
 
     S_msrSyllable         appendLigatureBeyondEndSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfWholeNotes& wholeNotes);
+                            const mfWholeNotes&      wholeNotes);
 
     S_msrSyllable         appendBarNumberCheckSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfMeasureNumber& nextMeasureNumber);
+                            const mfMeasureNumber&   nextMeasureNumber);
 
     S_msrSyllable         appendBarcheckSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfMeasureNumber& nextMeasureNumber);
+                            const mfMeasureNumber&   d nextMeasureNumber);
 */
 
     S_msrSyllable         appendLineBreakSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure);
+                            const S_msrMeasure&      upLinkToMeasure);
 
     S_msrSyllable         appendPageBreakSyllableToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure);
+                            const S_msrMeasure&      upLinkToMeasure);
 
 //     void                  padUpToMeasureCurrentPositionInMeasureInStanza ( // JMI 0.9.68
 //                             const mfInputLineNumber& inputLineNumber,
@@ -523,7 +525,7 @@ class EXP msrStanza : public msrElement
 
     void                  appendPaddingNoteToStanza (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfWholeNotes& forwardStepLength);
+                            const mfWholeNotes&      forwardStepLength);
 
   public:
 

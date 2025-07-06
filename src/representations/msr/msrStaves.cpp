@@ -3709,47 +3709,48 @@ void msrStaff::print (std::ostream& os) const
   os << std::endl;
 
   // print the  voices
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fStaffAllVoicesMap.size()" << ": " << fStaffAllVoicesMap.size () <<
-    std::endl <<
-
-    "fStaffAllVoicesMap" << ": ";
-  if (! fStaffAllVoicesMap.empty ()) {
-    os << std::endl;
-
-    ++gIndenter;
-
-    std::map <mfVoiceNumber, S_msrVoice>::const_iterator
-      iBegin = fStaffAllVoicesMap.begin (),
-      iEnd   = fStaffAllVoicesMap.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_msrVoice voice = (*i).second;
-
-      os << voice;
-
-      if (++i == iEnd) break;
-
-      os << std::endl;
-    } // for
-
-    --gIndenter;
-  }
-
-  else {
-    os << "[EMPTY]";
-  }
-
-  os << std::endl;
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
+//     "fStaffAllVoicesMap.size()" << ": " << fStaffAllVoicesMap.size () <<
+//     std::endl <<
+//
+//     "fStaffAllVoicesMap" << ": ";
+//   if (! fStaffAllVoicesMap.empty ()) {
+//     os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::map <mfVoiceNumber, S_msrVoice>::const_iterator
+//       iBegin = fStaffAllVoicesMap.begin (),
+//       iEnd   = fStaffAllVoicesMap.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       S_msrVoice voice = (*i).second;
+//
+//       os << voice;
+//
+//       if (++i == iEnd) break;
+//
+//       os << std::endl;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   else {
+//     os << "[EMPTY]";
+//   }
+//
+//   os << std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
     "fStaffAllVoicesList.size()" << ": " << fStaffAllVoicesList.size () <<
-    std::endl <<
+    std::endl;
 
-    "fStaffAllVoicesList" << ": ";
+  os <<
+    "***** fStaffAllVoicesList *****" << ": ";
   if (! fStaffAllVoicesList.empty ()) {
     os << std::endl;
 

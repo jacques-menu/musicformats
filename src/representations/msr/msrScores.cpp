@@ -607,10 +607,146 @@ void msrScore::displayPartGroupsList (
 //   if (partGroupsListSize == 2) abort (); // JMI 0.9.69
 }
 
+void msrScore::print (std::ostream& os) const
+{
+  os <<
+    "***** [MSR Score, short version] *****" <<
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 38;
+
+  size_t partGroupsListSize =
+    fPartGroupsList.size ();
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "partGroupsListSize" << ": " <<
+    partGroupsListSize <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fScoreMeasuresNumber" << ": " <<
+    fScoreMeasuresNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fScoreFirstMeasureNumber" << ": " <<
+    fScoreFirstMeasureNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fScoreLastMeasureNumber" << ": " <<
+    fScoreLastMeasureNumber <<
+    std::endl;
+
+  os << std::endl;
+
+  // print the scaling if any
+  if (fScaling) {
+    os <<
+      fScaling <<
+      std::endl;
+  }
+
+  // print the page layout if any
+  if (fPageLayout) {
+    os <<
+      fPageLayout <<
+      std::endl;
+  }
+
+  // print the system layout if any
+  if (fSystemLayout) {
+    os <<
+      fSystemLayout <<
+      std::endl;
+  }
+
+  // print the staff layout if any
+  if (fStaffLayout) {
+    os <<
+      fStaffLayout <<
+      std::endl;
+  }
+
+  // print the appearance if any
+  if (fAppearance) {
+    os <<
+      fAppearance <<
+      std::endl;
+  }
+
+  // print the credits if any
+  size_t creditsListSize = fCreditsList.size ();
+
+  os <<
+    std::setw (fieldWidth) <<
+    "fCreditsList";
+  if (creditsListSize) {
+    os << std::endl;
+    ++gIndenter;
+
+    std::list <S_msrCredit>::const_iterator
+      iBegin = fCreditsList.begin (),
+      iEnd   = fCreditsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrCredit credit = (*i);
+
+      os << credit;
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os <<
+      ": [EMPTY]" <<
+      std::endl;
+  }
+  os << std::endl;
+
+  // print the part groups if any
+  os <<
+    "fPartGroupsList contains " <<
+    mfSingularOrPlural (
+      partGroupsListSize, "element", "elements");
+  if (partGroupsListSize) {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::list <S_msrPartGroup>::const_iterator
+      iBegin = fPartGroupsList.begin (),
+      iEnd   = fPartGroupsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+//       os << std::endl << "FAA before partGroup" << std::endl;
+      os << (*i);
+//       os << std::endl << "FOO after partGroup" << std::endl;
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os <<
+      ": [EMPTY]" <<
+      std::endl;
+  }
+
+  os << ']' << std::endl;
+
+  --gIndenter;
+}
+
 void msrScore::printFull (std::ostream& os) const
 {
   os <<
-    "[MSR Score printfull()" <<
+    "***** [MSR Score full version *****" <<
     ", line " << fInputLineNumber <<
     std::endl;
 
@@ -821,140 +957,6 @@ void msrScore::printFull (std::ostream& os) const
   --gIndenter;
 
   os << ']' << std::endl;
-}
-
-void msrScore::print (std::ostream& os) const
-{
-  os <<
-    "MSR Score, short version" <<
-    std::endl;
-
-  ++gIndenter;
-
-  constexpr int fieldWidth = 38;
-
-  size_t partGroupsListSize =
-    fPartGroupsList.size ();
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "partGroupsListSize" << ": " <<
-    partGroupsListSize <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fScoreMeasuresNumber" << ": " <<
-    fScoreMeasuresNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fScoreFirstMeasureNumber" << ": " <<
-    fScoreFirstMeasureNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fScoreLastMeasureNumber" << ": " <<
-    fScoreLastMeasureNumber <<
-    std::endl;
-
-  os << std::endl;
-
-  // print the scaling if any
-  if (fScaling) {
-    os <<
-      fScaling <<
-      std::endl;
-  }
-
-  // print the page layout if any
-  if (fPageLayout) {
-    os <<
-      fPageLayout <<
-      std::endl;
-  }
-
-  // print the system layout if any
-  if (fSystemLayout) {
-    os <<
-      fSystemLayout <<
-      std::endl;
-  }
-
-  // print the staff layout if any
-  if (fStaffLayout) {
-    os <<
-      fStaffLayout <<
-      std::endl;
-  }
-
-  // print the appearance if any
-  if (fAppearance) {
-    os <<
-      fAppearance <<
-      std::endl;
-  }
-
-  // print the credits if any
-  size_t creditsListSize = fCreditsList.size ();
-
-  os <<
-    std::setw (fieldWidth) <<
-    "fCreditsList";
-  if (creditsListSize) {
-    os << std::endl;
-    ++gIndenter;
-
-    std::list <S_msrCredit>::const_iterator
-      iBegin = fCreditsList.begin (),
-      iEnd   = fCreditsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_msrCredit credit = (*i);
-
-      os << credit;
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-
-    --gIndenter;
-  }
-  else {
-    os <<
-      ": [EMPTY]" <<
-      std::endl;
-  }
-  os << std::endl;
-
-  // print the part groups if any
-  os <<
-    "fPartGroupsList contains " <<
-    mfSingularOrPlural (
-      partGroupsListSize, "element", "elements");
-  if (partGroupsListSize) {
-    os << std::endl;
-
-    ++gIndenter;
-
-    std::list <S_msrPartGroup>::const_iterator
-      iBegin = fPartGroupsList.begin (),
-      iEnd   = fPartGroupsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-//       os << std::endl << "FAA before partGroup" << std::endl;
-      os << (*i);
-//       os << std::endl << "FOO after partGroup" << std::endl;
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-
-    --gIndenter;
-  }
-  else {
-    os <<
-      ": [EMPTY]" <<
-      std::endl;
-  }
-
-  --gIndenter;
 }
 
 void msrScore::printSummary (std::ostream& os) const

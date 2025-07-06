@@ -2,12 +2,14 @@
 
 % Generated from "HelloWorld.xml"
 % by xml2ly v0.9.75-dev (built June 13, 2025)
-% on Saturday 2025-06-14 @ 08:25:09 CEST
+% on Friday 2025-06-20 @ 09:44:21 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos -auto-output-file-name -lilypond-run-date -lilypond-generation-infos HelloWorld.xml
+%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos HelloWorld.xml -tpasses -cpu -dmsr1
+% or, with long option names:
+%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos HelloWorld.xml -trace-passes -display-cpu-usage -display-msr1
 % or, with short option names:
-%         HelloWorld.xml
+%      HelloWorld.xml   
 
 
 % Scheme function(s): "date & time"

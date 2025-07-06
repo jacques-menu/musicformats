@@ -1,6 +1,7 @@
 # MusicFormats library
 
 Versions status:
+
 [![MacOS](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-macos-artifact.yml)
 [![Ubuntu](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-ubuntu-artifact.yml)
 [![Windows](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml/badge.svg)](https://github.com/jacques-menu/musicformats/actions/workflows/build-windows-artifact.yml)
@@ -37,9 +38,9 @@ and a maintenance guide for developpers :
 The MusicFormats releases contain ready-to-be-used versions of [MusicFormats] for the three main operating systems,
 i.e. MacOS™, Linux in its Ubuntu declination and Windows™.
 They are in ZIP format and can be downloaded:
-  - from the repository 'releases' page at
+  - from the repository `releases` page at
 https://github.com/jacques-menu/musicformats/releases;
-  - or manually by clicking on the 'Releases' link in the right pane of the repository's main window..
+  - or manually by clicking on the `Releases` link in the right pane of the repository's main window..
 
 Each `.zip` archive contains:
   - text files containing the version number and release date;

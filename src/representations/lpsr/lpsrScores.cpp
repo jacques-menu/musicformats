@@ -2154,7 +2154,7 @@ chExceptionMusic = {)###" <<
     chordsDisplayList =
       gGlobalLpsr2lilypondOahGroup->getChordsDisplayList ();
 
-  if (chordsDisplayList.size ()) {
+  if (! chordsDisplayList.empty ()) {
     std::list <std::pair <std::string, std::string>>::const_iterator
       iBegin = chordsDisplayList.begin (),
       iEnd   = chordsDisplayList.end (),
@@ -3152,6 +3152,93 @@ void lpsrScore::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
+void lpsrScore::print (std::ostream& os) const
+{
+  os <<
+    "***** [LPSR Score, short version] *****" <<
+    std::endl << std::endl;
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    fEmbeddedMsrScore != nullptr,
+    "fEmbeddedMsrScore is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  ++gIndenter;
+
+//   // print the MSR embedded score (without the voices)
+//   os << fEmbeddedMsrScore;
+//   os << std::endl;
+
+  os <<
+    "***** LPSR basic information *****" <<
+    std::endl << std::endl;
+
+  ++gIndenter;
+
+  // print LPSR basic information
+  os << fScoreHeader;
+  os << std::endl;
+
+  os << fScorePaper;
+  os << std::endl;
+
+  if (fScoreLayout) {
+    os << fScoreLayout;
+    os << std::endl;
+  }
+
+  --gIndenter;
+
+  // print the score elements list
+  os <<
+    "***** fScoreElementsList *****" <<
+    std::endl << std::endl;
+
+  if (! fScoreElementsList.empty ()) {
+
+    ++gIndenter;
+
+    std::list <S_msrElement>::const_iterator
+      iBegin = fScoreElementsList.begin (),
+      iEnd   = fScoreElementsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    os << std::endl;
+    --gIndenter;
+  }
+
+  // print the book blocks
+  if (! fScoreBookBlocksList.empty ()) {
+    os <<
+      "Book blocks" <<
+      std::endl << std::endl;
+    ++gIndenter;
+
+    std::list <S_lpsrBookBlock>::const_iterator
+      iBegin = fScoreBookBlocksList.begin (),
+      iEnd   = fScoreBookBlocksList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    os << std::endl;
+    --gIndenter;
+  }
+
+  --gIndenter;
+}
+
 void lpsrScore::printFull (std::ostream& os) const
 {
   os <<
@@ -3305,7 +3392,7 @@ void lpsrScore::printFull (std::ostream& os) const
     std::endl << std::endl;
 
   os <<
-    "LPSR basic information" <<
+    "***** LPSR basic information *****" <<
     std::endl << std::endl;
 
   ++gIndenter;
@@ -3325,7 +3412,7 @@ void lpsrScore::printFull (std::ostream& os) const
   --gIndenter;
 
   // print the voices and stanzas
-  if (fScoreElementsList.size ()) {
+  if (! fScoreElementsList.empty ()) {
     os <<
       "Voices & Stanzas" <<
       std::endl << std::endl;
@@ -3347,7 +3434,7 @@ void lpsrScore::printFull (std::ostream& os) const
   }
 
   // print the book blocks
-  if (fScoreBookBlocksList.size ()) {
+  if (! fScoreBookBlocksList.empty ()) {
     os <<
       "Book blocks" <<
       std::endl << std::endl;
@@ -3523,7 +3610,7 @@ void lpsrScore::printSummary (std::ostream& os) const
     std::endl << std::endl;
 
   os <<
-    "LPSR basic information" <<
+    "***** LPSR basic information *****" <<
     std::endl << std::endl;
 
   ++gIndenter;
@@ -3543,7 +3630,7 @@ void lpsrScore::printSummary (std::ostream& os) const
   --gIndenter;
 
   // print the voices and stanzas
-  if (fScoreElementsList.size ()) {
+  if (! fScoreElementsList.empty ()) {
     os <<
       "Voices & Stanzas" <<
       std::endl << std::endl;
@@ -3565,7 +3652,7 @@ void lpsrScore::printSummary (std::ostream& os) const
   }
 
   // print the book blocks
-  if (fScoreBookBlocksList.size ()) {
+  if (! fScoreBookBlocksList.empty ()) {
     os <<
       "Book blocks" <<
       std::endl << std::endl;
@@ -3741,7 +3828,7 @@ void lpsrScore::printNames (std::ostream& os) const
     std::endl << std::endl;
 
   os <<
-    "LPSR basic information" <<
+    "***** LPSR basic information *****" <<
     std::endl << std::endl;
 
   ++gIndenter;
@@ -3761,7 +3848,7 @@ void lpsrScore::printNames (std::ostream& os) const
   --gIndenter;
 
   // print the voices and stanzas
-  if (fScoreElementsList.size ()) {
+  if (! fScoreElementsList.empty ()) {
     os <<
       "Voices & Stanzas" <<
       std::endl << std::endl;
@@ -3783,7 +3870,7 @@ void lpsrScore::printNames (std::ostream& os) const
   }
 
   // print the book blocks
-  if (fScoreBookBlocksList.size ()) {
+  if (! fScoreBookBlocksList.empty ()) {
     os <<
       "Book blocks" <<
       std::endl << std::endl;
@@ -3959,7 +4046,7 @@ void lpsrScore::printFlatView (std::ostream& os) const
     std::endl << std::endl;
 
   os <<
-    "LPSR basic information" <<
+    "***** LPSR basic information *****" <<
     std::endl << std::endl;
 
   ++gIndenter;
@@ -3979,7 +4066,7 @@ void lpsrScore::printFlatView (std::ostream& os) const
   --gIndenter;
 
   // print the voices and stanzas
-  if (fScoreElementsList.size ()) {
+  if (! fScoreElementsList.empty ()) {
     os <<
       "Voices & Stanzas" <<
       std::endl << std::endl;
@@ -4001,7 +4088,7 @@ void lpsrScore::printFlatView (std::ostream& os) const
   }
 
   // print the book blocks
-  if (fScoreBookBlocksList.size ()) {
+  if (! fScoreBookBlocksList.empty ()) {
     os <<
       "Book blocks" <<
       std::endl << std::endl;
@@ -4177,7 +4264,7 @@ void lpsrScore::printSlices (std::ostream& os) const
 //     std::endl << std::endl;
 
   os <<
-    "LPSR basic information" <<
+    "***** LPSR basic information *****" <<
     std::endl << std::endl;
 
   ++gIndenter;
@@ -4197,7 +4284,7 @@ void lpsrScore::printSlices (std::ostream& os) const
   --gIndenter;
 
   // print the voices and stanzas
-  if (fScoreElementsList.size ()) {
+  if (! fScoreElementsList.empty ()) {
     os <<
       "Voices & Stanzas" <<
       std::endl << std::endl;
@@ -4219,7 +4306,7 @@ void lpsrScore::printSlices (std::ostream& os) const
   }
 
   // print the book blocks
-  if (fScoreBookBlocksList.size ()) {
+  if (! fScoreBookBlocksList.empty ()) {
     os <<
       "Book blocks" <<
       std::endl << std::endl;
@@ -4231,92 +4318,6 @@ void lpsrScore::printSlices (std::ostream& os) const
       i      = iBegin;
     for ( ; ; ) {
       (*i)->print (os);
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-
-    os << std::endl;
-    --gIndenter;
-  }
-
-  --gIndenter;
-}
-
-void lpsrScore::print (std::ostream& os) const
-{
-  os <<
-    "LPSR Score, short version" <<
-    std::endl << std::endl;
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    fEmbeddedMsrScore != nullptr,
-    "fEmbeddedMsrScore is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  ++gIndenter;
-
-  // print the MSR embedded score (without the voices)
-  os << fEmbeddedMsrScore;
-  os << std::endl;
-
-  os <<
-    "LPSR basic information" <<
-    std::endl << std::endl;
-
-  ++gIndenter;
-
-  // print LPSR basic information
-  os << fScoreHeader;
-  os << std::endl;
-
-  os << fScorePaper;
-  os << std::endl;
-
-  if (fScoreLayout) {
-    os << fScoreLayout;
-    os << std::endl;
-  }
-
-  --gIndenter;
-
-  // print the voices and stanzas
-  if (fScoreElementsList.size ()) {
-    os <<
-      "Voices & Stanzas" <<
-      std::endl << std::endl;
-
-    ++gIndenter;
-
-    std::list <S_msrElement>::const_iterator
-      iBegin = fScoreElementsList.begin (),
-      iEnd   = fScoreElementsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-
-    os << std::endl;
-    --gIndenter;
-  }
-
-  // print the book blocks
-  if (fScoreBookBlocksList.size ()) {
-    os <<
-      "Book blocks" <<
-      std::endl << std::endl;
-    ++gIndenter;
-
-    std::list <S_lpsrBookBlock>::const_iterator
-      iBegin = fScoreBookBlocksList.begin (),
-      iEnd   = fScoreBookBlocksList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for
