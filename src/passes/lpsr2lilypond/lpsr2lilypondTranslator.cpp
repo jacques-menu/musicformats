@@ -3352,22 +3352,42 @@ void lpsr2lilypondTranslator::generateRegularNoteInTuplet (
       noteDisplayWholeNotes);
   }
 
-/* JMI
-  // generate the tie if any
-  {
-    const std::list <S_msrTie>& noteTiesList = note->getNoteTiesList ();
+  // generate the ties if relevant // JMI only 1 tie at most? 0.9.72
+  const std::list <S_msrTie>& noteTiesList = note->getNoteTiesList ();
 
-    if (! noteTiesList.empty ()) {
-      if (noteTie->getTieKind () == msrTieKind::kTieStart) {
-        fLilypondCodeStream <<
-          " %{ <-- line " <<
-          note->getInputLineNumber () <<
-          " %} " <<
-          "~  %{ kTupletMemberNote %} "; // JMI spaces???
-      }
-    }
+  if (! noteTiesList.empty ()) {
+    for (S_msrTie noteTie : noteTiesList) {
+      switch (noteTie->getTieKind ()) {
+        case msrTieKind::kTieNone:
+          break;
+        case msrTieKind::kTieStart:
+         fLilypondCodeStream << " ~ "; // JMI 0.9.72
+          break;
+        case msrTieKind::kTieContinue:
+          break;
+        case msrTieKind::kTieStop:
+          break;
+        case msrTieKind::kTieLetRing: // MusicXML 4.0
+          fLilypondCodeStream << " \\laissezVibrer "; // JMI 0.9.72
+          break;
+      } // switch
+    } // for
   }
-*/
+
+//   generate the tie if any
+//   {
+//     const std::list <S_msrTie>& noteTiesList = note->getNoteTiesList ();
+//
+//     if (! noteTiesList.empty ()) {
+//       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
+//         fLilypondCodeStream <<
+//           " %{ <-- line " <<
+//           note->getInputLineNumber () <<
+//           " %} " <<
+//           "~  %{ kTupletMemberNote %} "; // JMI spaces???
+//       }
+//     }
+//   }
 
   // this note is the new relative octave reference
   switch (gGlobalLpsr2lilypondOahGroup->fetchOctaveEntryVariableValue ()) {

@@ -3361,7 +3361,7 @@ void msrSegment::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fSegmentElementsList" << ": ";
+    "***** fSegmentElementsList *****" << ": ";
 
   if (! fSegmentElementsList.empty ()) {
     os << std::endl;

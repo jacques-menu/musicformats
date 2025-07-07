@@ -2183,7 +2183,7 @@ class EXP mxsr2msrSkeletonPopulator :
     msrBarLineHasSegnoKind    fCurrentBarLineHasSegnoKind;
     msrBarLineHasCodaKind     fCurrentBarLineHasCodaKind;
     std::string               fCurrentBarLineEndingNumber; // std::vector <std::string> ??? JMI
-                                // may be "1, 2"
+                                // a string, because if may be "1, 2" for example
 
     msrBarLineLocationKind    fCurrentBarLineLocationKind;
     msrBarLineStyleKind       fCurrentBarLineStyleKind;
@@ -2525,6 +2525,9 @@ class EXP mxsr2msrSkeletonPopulator :
     std::string               fCurrentTiedOrientation; // JMI 0.9.70
 //     S_msrTie                  fCurrentTie;
     std::list <S_msrTie>      fPendingTiesList;
+
+    // there is a bug in Dolet 6.6 for Sibelius,
+    // in which there can be tie start with no tie end... 0.9.76
 
     void                      attachPendingTiesToCurrentNote ();
 

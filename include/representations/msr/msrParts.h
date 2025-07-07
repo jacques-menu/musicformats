@@ -480,7 +480,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  cascadeHandleRepeatEndingEndInPart (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&  repeatEndingNumber, // may be "1, 2"
+                            const std::string&  repeatEndingNumber, // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind repeatEndingKind);
 
     /* JMI ???

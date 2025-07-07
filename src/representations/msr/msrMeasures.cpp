@@ -8128,23 +8128,12 @@ void msrMeasure::displayMeasure (
 
 void msrMeasure::print (std::ostream& os) const
 {
-  // fetch the voice
-  S_msrVoice
-    voice =
-      fMeasureUpLinkToSegment->
-        getSegmentUpLinkToVoice ();
-
   os <<
     "[Measure" <<
     ", fMeasureNumber: '" <<
     fMeasureNumber <<
     "', fMeasureKind: " <<
     fMeasureKind <<
-    ", voice: " <<
-    voice->getVoiceName () <<
-    ", fMeasureWholeNotesDuration: " <<
-    fMeasureWholeNotesDuration <<
-
     ", " <<
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
@@ -8153,9 +8142,25 @@ void msrMeasure::print (std::ostream& os) const
 
   ++gIndenter;
 
+  // get the uplink to the voice
+  S_msrVoice
+    upLinkToVoice =
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
+
   constexpr int fieldWidth = 45;
 
   os << std::left <<
+    std::setw (fieldWidth) <<
+    "upLinkToVoice" << ": " <<
+    upLinkToVoice->getVoiceName () <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMeasureWholeNotesDuration" << ": " <<
+    fMeasureWholeNotesDuration <<
+    std::endl <<
+
     std::setw (fieldWidth) <<
     "fMeasureCurrentPositionInMeasure" << ": " <<
     fMeasureCurrentPositionInMeasure <<
@@ -8241,23 +8246,12 @@ void msrMeasure::print (std::ostream& os) const
 
 void msrMeasure::printFull (std::ostream& os) const
 {
-  // fetch the voice
-  S_msrVoice
-    voice =
-      fMeasureUpLinkToSegment->
-        getSegmentUpLinkToVoice ();
-
   os <<
     "[Measure" <<
     ", fMeasureNumber: '" <<
     fMeasureNumber <<
     "', fMeasureKind: " <<
     fMeasureKind <<
-    ", voice: " <<
-    voice->getVoiceName () <<
-    ", fMeasureWholeNotesDuration: " <<
-    fMeasureWholeNotesDuration <<
-
     ", " <<
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
@@ -8266,9 +8260,26 @@ void msrMeasure::printFull (std::ostream& os) const
 
   ++gIndenter;
 
+  // get the uplink to the voice
+  S_msrVoice
+    upLinkToVoice =
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
+
   constexpr int fieldWidth = 45;
 
   os << std::left <<
+    std::setw (fieldWidth) <<
+    "upLinkToVoice" << ": " <<
+    upLinkToVoice->getVoiceName () <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMeasureWholeNotesDuration" << ": " <<
+    fMeasureWholeNotesDuration <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
     std::setw (fieldWidth) <<
     "fMeasureCurrentPositionInMeasure" << ": " <<
     fMeasureCurrentPositionInMeasure <<
@@ -8335,13 +8346,13 @@ void msrMeasure::printFull (std::ostream& os) const
   // fetch voice's current clef, key and time signature
   S_msrClef
     voiceCurrentClef =
-      voice->getVoiceCurrentClef ();
+      upLinkToVoice->getVoiceCurrentClef ();
   S_msrKey
     voiceCurrentKey =
-      voice->getVoiceCurrentKey ();
+      upLinkToVoice->getVoiceCurrentKey ();
   S_msrTimeSignature
     voiceCurrentTimeSignature =
-      voice->getVoiceCurrentTimeSignature ();
+      upLinkToVoice->getVoiceCurrentTimeSignature ();
 
   // print the voice current clef, key and time signature
   os << std::left <<

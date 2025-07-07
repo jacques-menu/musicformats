@@ -699,7 +699,7 @@ class EXP msrVoice : public msrElement
 
     void                  handleRepeatEndingEndInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&  repeatEndingNumber, // may be "1, 2"
+                            const std::string&  repeatEndingNumber, // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind repeatEndingKind);
 
     void                  handleRepeatCommonPartStartInVoiceClone (
@@ -711,11 +711,11 @@ class EXP msrVoice : public msrElement
     void                  handleRepeatEndingStartInVoiceClone (
                             const mfInputLineNumber& inputLineNumber,
                             msrRepeatEndingKind repeatEndingKind,
-                            const std::string&  repeatEndingNumber); // may be "1, 2"
+                            const std::string&  repeatEndingNumber); // a string, because if may be "1, 2" for example
 
     void                  handleRepeatEndingEndInVoiceClone (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&  repeatEndingNumber, // may be "1, 2"
+                            const std::string&  repeatEndingNumber, // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind repeatEndingKind);
 
     void                  handleSegmentCloneEndInVoiceClone (
@@ -1008,19 +1008,19 @@ class EXP msrVoice : public msrElement
 
     void                  handleHookedRepeatEndingEndInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber); // may be "1, 2"
+                            const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
 
     void                  handleHooklessRepeatEndingEndInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber); // may be "1, 2"
+                            const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
 
     void                  handleHookedRepeatEndingEndInVoiceClone (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber); // may be "1, 2"
+                            const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
 
     void                  handleHooklessRepeatEndingEndInVoiceClone (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber); // may be "1, 2"
+                            const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
 
     // multiple measure rests
 

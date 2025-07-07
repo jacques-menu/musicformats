@@ -6740,7 +6740,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
   const mfInputLineNumber& inputLineNumber,
   msrRepeatEndingKind
                      repeatEndingKind,
-  const std::string& repeatEndingNumber) // may be "1, 2"
+  const std::string& repeatEndingNumber) // a string, because if may be "1, 2" for example
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -9263,7 +9263,7 @@ void msrVoice::appendMeasureRepeatCloneToVoiceClone (
 
 void msrVoice::handleHookedRepeatEndingEndInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& repeatEndingNumber) // may be "1, 2"
+  const std::string& repeatEndingNumber) // a string, because if may be "1, 2" for example
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -9382,7 +9382,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
 
 void msrVoice::handleHooklessRepeatEndingEndInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& repeatEndingNumber) // may be "1, 2"
+  const std::string& repeatEndingNumber) // a string, because if may be "1, 2" for example
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -9518,7 +9518,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
 
 void msrVoice::handleRepeatEndingEndInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&  repeatEndingNumber, // may be "1, 2"
+  const std::string&  repeatEndingNumber, // a string, because if may be "1, 2" for example
   msrRepeatEndingKind repeatEndingKind)
 {
   switch (fVoiceKind) {
@@ -9554,7 +9554,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 }
 
 void msrVoice::handleRepeatCommonPartStartInVoiceClone (
-  const mfInputLineNumber& inputLineNumber) // may be "1, 2"
+  const mfInputLineNumber& inputLineNumber) // a string, because if may be "1, 2" for example
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -9642,7 +9642,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
 }
 
 void msrVoice::handleRepeatCommonPartEndInVoiceClone (
-  const mfInputLineNumber& inputLineNumber) // may be "1, 2"
+  const mfInputLineNumber& inputLineNumber) // a string, because if may be "1, 2" for example
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -9725,7 +9725,7 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
 
 void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& repeatEndingNumber) // may be "1, 2"
+  const std::string& repeatEndingNumber) // a string, because if may be "1, 2" for example
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -9819,7 +9819,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
 
 void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& repeatEndingNumber) // may be "1, 2"
+  const std::string& repeatEndingNumber) // a string, because if may be "1, 2" for example
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -9907,7 +9907,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
 
 void msrVoice::handleRepeatEndingEndInVoiceClone (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&  repeatEndingNumber, // may be "1, 2"
+  const std::string&  repeatEndingNumber, // a string, because if may be "1, 2" for example
   msrRepeatEndingKind repeatEndingKind)
 {
 #ifdef MF_TRACE_IS_ENABLED

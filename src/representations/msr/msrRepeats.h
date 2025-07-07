@@ -141,7 +141,7 @@ class EXP msrRepeatEnding : public msrElement
 
     static SMARTP<msrRepeatEnding> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber, // may be "1, 2"
+                            const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind      repeatEndingKind,
                             const S_msrRepeat&       upLinkToRepeat);
 
@@ -152,7 +152,7 @@ class EXP msrRepeatEnding : public msrElement
 
                           msrRepeatEnding (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber, // may be "1, 2"
+                            const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind      repeatEndingKind,
                             const S_msrRepeat&       upLinkToRepeat);
 
@@ -255,7 +255,7 @@ class EXP msrRepeatEnding : public msrElement
     S_msrRepeat           fRepeatEndingUpLinkToRepeat;
 
     // numbers
-    std::string           fRepeatEndingNumber; // may be "1, 2"
+    std::string           fRepeatEndingNumber; // a string, because if may be "1, 2" for example
     int                   fRepeatEndingInternalNumber; // internally assigned
 
     // kind

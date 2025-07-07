@@ -599,7 +599,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatCommonPart& elt)
 //______________________________________________________________________________
 S_msrRepeatEnding msrRepeatEnding::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&       repeatEndingNumber, // may be "1, 2"
+  const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
   msrRepeatEndingKind      repeatEndingKind,
   const S_msrRepeat&       upLinkToRepeat)
 {
@@ -615,7 +615,7 @@ S_msrRepeatEnding msrRepeatEnding::create (
 
 msrRepeatEnding::msrRepeatEnding (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&       repeatEndingNumber, // may be "1, 2"
+  const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
   msrRepeatEndingKind      repeatEndingKind,
   const S_msrRepeat&       upLinkToRepeat)
     : msrElement (inputLineNumber)

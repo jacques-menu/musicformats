@@ -301,7 +301,7 @@ class EXP msrBarLine : public msrMeasureElement
 
     msrBarLineEndingTypeKind
                           fEndingTypeKind;
-    std::string           fEndingNumber; // may be "1, 2"
+    std::string           fEndingNumber; // a string, because if may be "1, 2" for example
 
     int                   fBarLineTimes;
 

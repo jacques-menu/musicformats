@@ -5081,19 +5081,19 @@ void msrNote::print (std::ostream& os) const
                 getMeasureElementSoundingWholeNotes ());
         }
         else {
-          os <<
-            "*** unknown yet ***";
+          os << "[NULL]";
         }
         os << std::endl;
 
       os <<
         std::setw (fieldWidth) <<
-        "fNoteTupletFactor" << ": RAH" <<
+        "fNoteTupletFactor" << ": " <<
         std::endl;
 
       ++gIndenter;
-        os <<
-          fNoteTupletFactor;
+      os <<
+        fNoteTupletFactor <<
+        std::endl;
       --gIndenter;
       break;
     } // switch

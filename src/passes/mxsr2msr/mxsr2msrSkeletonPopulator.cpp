@@ -281,7 +281,7 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fCurrentFrameNoteBarreTypeKind = msrBarreTypeKind::kBarreTypeNone;
 
   // barLine handling
-  fCurrentBarLineEndingNumber = ""; // may be "1, 2"
+  fCurrentBarLineEndingNumber = ""; // a string, because if may be "1, 2" for example
   fCurrentBarLineHasSegnoKind =
     msrBarLineHasSegnoKind::kBarLineHasSegnoNo;
   fCurrentBarLineHasCodaKind =
@@ -11769,7 +11769,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barline& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentBarLineEndingNumber = ""; // may be "1, 2"
+  fCurrentBarLineEndingNumber = ""; // a string, because if may be "1, 2" for example
 
   fCurrentBarLineHasSegnoKind = msrBarLineHasSegnoKind::kBarLineHasSegnoNo;
   fCurrentBarLineHasCodaKind = msrBarLineHasCodaKind::kBarLineHasCodaNo;
@@ -12214,7 +12214,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ending& elt)
 
   {
     fCurrentBarLineEndingNumber =
-      elt->getAttributeValue ("number"); // may be "1, 2"
+      elt->getAttributeValue ("number"); // a string, because if may be "1, 2" for example
 
     if (fCurrentBarLineEndingNumber.empty ()) {
       mxsr2msrWarning (
