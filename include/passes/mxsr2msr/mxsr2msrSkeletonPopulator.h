@@ -2526,8 +2526,10 @@ class EXP mxsr2msrSkeletonPopulator :
 //     S_msrTie                  fCurrentTie;
     std::list <S_msrTie>      fPendingTiesList;
 
+    // JMI 0.9.76
     // there is a bug in Dolet 6.6 for Sibelius,
-    // in which there can be tie start with no tie end... 0.9.76
+    // in which there can be tie start with no tie end...
+    // but we won't try to cope with that
 
     void                      attachPendingTiesToCurrentNote ();
 

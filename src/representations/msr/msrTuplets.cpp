@@ -741,7 +741,7 @@ void msrTuplet::setMeasureElementPositionInMeasure (
     std::stringstream ss;
 
     ss <<
-      "Setting the measure position of " <<
+      "Setting the measure position of measure element " <<
       asString () <<
       " to " <<
       positionInMeasure.asString () <<

@@ -214,7 +214,7 @@ R"(Write a trace of the passes to standard error.)",
       regex_replace (
         regex_replace (
           regex_replace (
-R"(Write a trace of pass PASSID only to standard error.
+R"(Restrict the production of trace information to standard error to pass PASSID.
 The NUMBER PASSIDs available are:
 PASSID_KINDS.
 The default is 'DEFAULT_VALUE'.)",
@@ -2131,7 +2131,7 @@ This option implies '-trace-measures-basics, -tmeasb' and '-trace-measures, -tme
   fTraceOnlyMeasurerNumbeOahAtom =
     oahStringAtom::create (
       "trace-only-measure", "tom",
-R"(Restrict the production of trace information to measure NUMBER)",
+R"(Restrict the production of trace information to standard error to measure NUMBER)",
       "NUMBER",
       "fTraceOnlyMeasure",
       fTraceOnlyMeasure);

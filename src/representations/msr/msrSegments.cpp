@@ -1386,7 +1386,7 @@ void msrSegment::cascadeAppendFiguredBassesListToSegment (
 {
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceFiguredBassesBasics ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
     std::stringstream ss;
 
     ss <<
@@ -3276,16 +3276,17 @@ std::string msrSegment::asString () const
     fSegmentUpLinkToVoice->getVoiceName () <<
     "\"";
 
+  ss <<
+    "fSegmentElementsList: ";
   if (fSegmentElementsList.empty ()) {
     ss <<
-      " (0 measures)";
+      "[EMPTY]";
   }
   else {
     ss <<
-      " (" <<
       mfSingularOrPlural (
-        fSegmentElementsList.size (), "measure", " measures") <<
-      "), i.e. [";
+        fSegmentElementsList.size (), "element", " elements") <<
+      ", [";
 
     if (! fSegmentElementsList.empty ()) {
       std::list <S_msrSegmentElement>::const_iterator

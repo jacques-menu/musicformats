@@ -3,7 +3,7 @@
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
   <work>
-    <work-title>A simple repeat 5 times over a measure</work-title>
+    <work-title>A simple repeat 5 times over a measure, explicit initial barline</work-title>
     </work>
   <part-list>
     <score-part id="P1">

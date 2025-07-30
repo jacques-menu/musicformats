@@ -6333,7 +6333,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
     std::stringstream ss;
 
     ss <<
-      "Handling repeat start in part clone" <<
+      "Handling a repeat start in part clone" <<
       fCurrentPartClone->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (

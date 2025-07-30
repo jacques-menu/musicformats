@@ -2330,7 +2330,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Setting the measure position of " <<
+//       "Setting the measure position of note " <<
 //       asString () <<
 //       " to " <<
 //       positionInMeasure.asString () <<

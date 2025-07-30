@@ -4161,12 +4161,12 @@ void msrVoice::pushRepeatOntoVoiceRepeatsStack (
     repeat);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::string
       combinedContext =
-        "pushRepeatOntoVoiceRepeatsStack() called from " + context;
+        "pushRepeatOntoVoiceRepeatsStack() END, called from " + context;
 
-    displayVoiceRepeatsStackSummary (
+    displayVoiceRepeatsStack (
       inputLineNumber,
       combinedContext);
   }
@@ -4183,7 +4183,7 @@ void msrVoice::popRepeatFromVoiceRepeatsStack (
     std::stringstream ss;
 
     ss <<
-      "Popping repeat ***** 1 " <<
+      "Popping repeat ***** BEGIN " <<
 //       repeat->asShortString () <<
       " from the repeats stack in voice \"" <<
       fVoiceName <<
@@ -4198,12 +4198,12 @@ void msrVoice::popRepeatFromVoiceRepeatsStack (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::string
       combinedContext =
-        "popRepeatFromVoiceRepeatsStack() 1 called from context " + context;
+        "popRepeatFromVoiceRepeatsStack() BEGIN, called from context " + context;
 
-    displayVoiceRepeatsStackSummary (
+    displayVoiceRepeatsStack (
       inputLineNumber,
       combinedContext);
   }
@@ -4235,7 +4235,7 @@ void msrVoice::popRepeatFromVoiceRepeatsStack (
     std::stringstream ss;
 
     ss <<
-      "Popping repeat ***** 2 " <<
+      "Popping repeat ***** END " <<
       repeat->asString () <<
       " from the repeat stack in voice \"" <<
       fVoiceName <<
@@ -4252,12 +4252,12 @@ void msrVoice::popRepeatFromVoiceRepeatsStack (
   fVoicePendingRepeatsStack.pop_front ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::string
       combinedContext =
-        "popRepeatFromVoiceRepeatsStack() 2 called from " + context;
+        "popRepeatFromVoiceRepeatsStack() END, called from " + context;
 
-    displayVoiceRepeatsStackSummary (
+    displayVoiceRepeatsStack (
       inputLineNumber,
       combinedContext);
   }
@@ -4273,23 +4273,22 @@ void msrVoice::displayVoiceRepeatsStack (
 
   gLog <<
     std::endl <<
-    ">>++++++++++++++++ Displaying voice repeats stack " << context <<
-    std::endl <<
-    "The repeats stack in voice " <<
+    ">>++++++++++++++++ Repeats stack of voice " <<
     asShortString () <<
-    " contains " <<
+    ", " <<
     mfSingularOrPlural (repeatsStackSize, "element", "elements") <<
+    " - " << context <<
     ", line " << inputLineNumber <<
-    ":" <<
+    ':' <<
     std::endl;
 
   if (repeatsStackSize) {
+    ++gIndenter;
+
     std::list <S_msrRepeat>::const_iterator
       iBegin = fVoicePendingRepeatsStack.begin (),
       iEnd   = fVoicePendingRepeatsStack.end (),
       i      = iBegin;
-
-    ++gIndenter;
 
     int n = repeatsStackSize;
     for ( ; ; ) {
@@ -4303,7 +4302,8 @@ void msrVoice::displayVoiceRepeatsStack (
 
       ++gIndenter;
       gLog <<
-        repeat->asString ();
+        repeat <<
+        std::endl;
       --gIndenter;
 
       --n;
@@ -4330,20 +4330,22 @@ void msrVoice::displayVoiceRepeatsStackSummary (
 
   gLog <<
     std::endl <<
-    "The voice repeats stack contains " <<
+    ">>++++++++++++++++ Repeats stack of voice " <<
+    asShortString () <<
+    ", " <<
     mfSingularOrPlural (repeatsStackSize, "element", "elements") <<
     " - " << context <<
     ", line " << inputLineNumber <<
-    ":" <<
+    ':' <<
     std::endl;
 
   if (repeatsStackSize) {
+    ++gIndenter;
+
     std::list <S_msrRepeat>::const_iterator
       iBegin = fVoicePendingRepeatsStack.begin (),
       iEnd   = fVoicePendingRepeatsStack.end (),
       i      = iBegin;
-
-    ++gIndenter;
 
     int n = repeatsStackSize;
     for ( ; ; ) {
@@ -4357,7 +4359,8 @@ void msrVoice::displayVoiceRepeatsStackSummary (
 
       ++gIndenter;
       gLog <<
-        repeat->asString ();
+        repeat->asString () <<
+        std::endl;
       --gIndenter;
 
       --n;
@@ -4398,7 +4401,7 @@ void msrVoice::displayVoiceMeasureRepeat (
     std::endl <<
     "The current voice measures repeat contains " <<
     ", line " << inputLineNumber <<
-    ":" <<
+    ':' <<
     std::endl;
 
   ++gIndenter;
@@ -4537,7 +4540,7 @@ void msrVoice::displayVoiceMultipleMeasureRests (
     std::endl <<
     "The current voice multiple measure rests contains " <<
     ", line " << inputLineNumber <<
-    ":" <<
+    ':' <<
     std::endl;
 
   ++gIndenter;
@@ -4579,7 +4582,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
   const std::string& context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
     std::stringstream ss;
 
     ss <<
@@ -5108,7 +5111,17 @@ void msrVoice::handleVoiceLevelRepeatStart (
 
     ss <<
       "Handling a voice-level repeat start in voice \"" <<
-      fVoiceName <<
+      fVoiceName;
+
+    ss << ", fVoiceLastSegment: ";
+    if (fVoiceLastSegment) {
+      ss << fVoiceLastSegment->asString ();
+    }
+    else {
+      ss << "[NULL]";
+    }
+
+    ss <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -5400,9 +5413,11 @@ void msrVoice::handleRepeatStartInVoice (
     std::stringstream ss;
 
     ss <<
-      "Handling repeat start in voice \"" <<
+      "Handling a repeat start in voice \"" <<
       fVoiceName <<
       "\"" <<
+      ", fVoicePendingRepeatsStack.size (): " <<
+      fVoicePendingRepeatsStack.size () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -9959,7 +9974,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
     std::stringstream ss;
 
     ss <<
-      "Handling repeat start in voice clone \"" <<
+      "Handling a repeat start in voice clone \"" <<
       fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber;
@@ -10423,7 +10438,7 @@ void msrVoice::prependBarLineToVoice (
       "Prepending barLine " <<
       barLine->asString () <<
       " to voice \"" << fVoiceName << "\"" <<
-      ":";
+      ':';
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10450,7 +10465,7 @@ void msrVoice::appendBarLineToVoice (
       "Appending barLine " <<
       barLine->asString () <<
       " to voice \"" << fVoiceName << "\"" <<
-      ":";
+      ':';
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10507,7 +10522,7 @@ void msrVoice::appendCodaToVoice (const S_msrCoda& coda)
 
     ss <<
       "Appending a coda to voice \"" << fVoiceName << "\"" <<
-      ":";
+      ':';
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -11761,13 +11776,10 @@ void msrVoice::print (std::ostream& os) const
   os <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "***** fVoiceInitialElementsList *****";
-  if (voiceInitialElementsListSize) {
-    os << ": " <<  voiceInitialElementsListSize << " elements";
-  }
-  else {
-    os << ": " << "[EMPTY]";
-  }
+    "***** fVoiceInitialElementsList *****" <<
+    ", " <<
+    mfSingularOrPlural (
+      voiceInitialElementsListSize, "element",  "elements");
 
   if (voiceInitialElementsListSize) {
     os << std::endl;
@@ -11787,6 +11799,9 @@ void msrVoice::print (std::ostream& os) const
     } // for
 
     --gIndenter;
+  }
+  else {
+    os << ": " << "[EMPTY]";
   }
   os << std::endl;
 

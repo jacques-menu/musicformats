@@ -609,7 +609,7 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Setting the measure position of " <<
+//       "Setting the measure position of chord " <<
 //       asString () <<
 //       " to " <<
 //       positionInMeasure.asString () <<

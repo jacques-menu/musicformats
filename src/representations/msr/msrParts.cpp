@@ -1682,7 +1682,7 @@ void msrPart::cascadeHandleRepeatEndingStartInPart (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
     std::stringstream ss;
 
     ss <<
@@ -1715,7 +1715,7 @@ void msrPart::cascadeHandleRepeatEndingEndInPart (
   msrRepeatEndingKind repeatEndingKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+  if (gTraceOahGroup->getTraceRepeats ()) {
     std::stringstream ss;
 
     ss <<
@@ -2657,7 +2657,7 @@ void msrPart::cascadeAppendFiguredBassesListToPart (
 {
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceFiguredBassesBasics ()) {
+  if (gTraceOahGroup->getTraceFiguredBasses ()) {
     std::stringstream ss;
 
     ss <<

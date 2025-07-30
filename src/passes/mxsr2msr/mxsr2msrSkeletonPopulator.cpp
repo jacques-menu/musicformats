@@ -26771,6 +26771,23 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
     cascadeHandleRepeatStartInPart (
       barLine->getInputLineNumber ());
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Handling a repeat start in part " <<
+      fCurrentPart->fetchPartNameForTrace () <<
+      ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
+      "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
+      "\", line " << barLine->getInputLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   // append the bar line to the current part
   fCurrentPart->
     appendBarLineToPart (barLine); // JMI

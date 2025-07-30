@@ -1779,7 +1779,7 @@ void msrMeasure::setFullMeasureWholeNotesDuration (
 }
 
 void msrMeasure::setMeasureCurrentPositionInMeasure (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&   inputLineNumber,
   const mfPositionInMeasure& positionInMeasure,
   std::string                context)
 {
@@ -1792,7 +1792,7 @@ void msrMeasure::setMeasureCurrentPositionInMeasure (
     std::stringstream ss;
 
     ss <<
-      "Setting the measure position of measure " <<
+      "Setting the current position in measure " <<
       this->asString () <<
       " to "  <<
       positionInMeasure.asFractionString () <<

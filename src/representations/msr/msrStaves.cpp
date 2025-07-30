@@ -2423,7 +2423,7 @@ void msrStaff::cascadeHandleRepeatStartInStaff (
     std::stringstream ss;
 
     ss <<
-      "Cascading handling repeat start in staff \"" <<
+      "Cascading handling a repeat start in staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
