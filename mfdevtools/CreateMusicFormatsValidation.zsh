@@ -16,7 +16,7 @@
 # Write all output to logfile
 # -----------------------------------------
 
-MUSIC_FORMATS_DEV_DIR=/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev
+MUSIC_FORMATS_DEV_DIR=/Volumes/JMI_Volume/JMI_DEVELOPMENT/musicformats-git-dev
 echo "--> MUSIC_FORMATS_DEV_DIR = ${MUSIC_FORMATS_DEV_DIR}"
 echo
 
@@ -40,7 +40,7 @@ echo
 
 
 # create MF_RELEASES_DIR it if it does not exist
-MF_RELEASES_DIR=/Volumes/JMI_Volume/JMI_Developpement/musicformats_releases
+MF_RELEASES_DIR=/Volumes/JMI_Volume/JMI_DEVELOPMENT/musicformats_releases
 echo "--> MF_RELEASES_DIR = ${MF_RELEASES_DIR}"
 
 [[ ! -d "${MF_RELEASES_DIR}" ]] && mkdir "${MF_RELEASES_DIR}"

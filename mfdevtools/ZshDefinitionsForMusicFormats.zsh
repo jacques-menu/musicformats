@@ -22,8 +22,8 @@ export PATH=/Library/TeX/texbin:$PATH
 #	my actual work directory
 #----------------------------------------------
 
-# MY_WORK_DIR=${HOME}/JMI_Developpement
-MY_WORK_DIR=/Volumes/JMI_Volume/JMI_Developpement
+MY_WORK_DIR=${HOME}/JMI_DEVELOPMENT
+# MY_WORK_DIR=/Volumes/JMI_Volume/JMI_DEVELOPMENT
 
 # dev branch
 #----------------------------------------------
@@ -175,7 +175,7 @@ alias msdm="cd ${SRC_DIR}/translators/msdl2msr"
 # soundnotation
 #----------------------------------------------
 
-alias sound='cd ${HOME}/JMI_Developpement/soundnotation'
+alias sound='cd ${HOME}/JMI_DEVELOPMENT/soundnotation'
 
 
 # EJMA

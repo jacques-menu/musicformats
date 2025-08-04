@@ -144,9 +144,9 @@ rm -f *.ly *.pdf *.midi *.log
 # done
 
 # array of directories names in $PWD:
-# jacquesmenu@macstudio:/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev/musicxmlfiles/gracenotesandchords > pwd_list=( "${(s:/:)${PWD/#$HOME/~}}" )
-# jacquesmenu@macstudio:/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev/musicxmlfiles/gracenotesandchords > echo $pwd_list
-# Volumes JMI_Volume JMI_Developpement musicformats-git-dev musicxmlfiles gracenotesandchords
+# jacquesmenu@macstudio:/Volumes/JMI_Volume/JMI_DEVELOPMENT/musicformats-git-dev/musicxmlfiles/gracenotesandchords > pwd_list=( "${(s:/:)${PWD/#$HOME/~}}" )
+# jacquesmenu@macstudio:/Volumes/JMI_Volume/JMI_DEVELOPMENT/musicformats-git-dev/musicxmlfiles/gracenotesandchords > echo $pwd_list
+# Volumes JMI_Volume JMI_DEVELOPMENT musicformats-git-dev musicxmlfiles gracenotesandchords
 
 
 

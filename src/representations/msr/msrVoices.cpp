@@ -394,7 +394,7 @@ void msrVoice::setRegularVoiceStaffSequentialNumber (
 
 void msrVoice::setVoiceNamesFromNumber (
   const mfInputLineNumber& inputLineNumber,
-  const mfVoiceNumber& voiceNumber)
+  const mfVoiceNumber&     voiceNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -496,7 +496,8 @@ void msrVoice::initializeVoice (
     std::stringstream ss;
 
     ss <<
-      "Initializing voice \"" << fVoiceName <<
+      "Initializing voice \"" <<
+      fVoiceName <<
       "\"" <<
       ", voiceNumber: " << voiceNumber <<
       ", in staff \"" <<
@@ -630,6 +631,26 @@ void msrVoice::initializeVoice (
         "fVoiceLastSegment is NULL");
 
       // create the last segment
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+        std::stringstream ss;
+
+        ss <<
+          "Crating an initial last segment for voice \"" <<
+          fVoiceName <<
+          "\"" <<
+          ", voiceNumber: " << voiceNumber <<
+          ", in staff \"" <<
+          fVoiceUpLinkToStaff->getStaffPathLikeName () <<
+          " line " << fInputLineNumber <<
+          "\"";
+
+        gWaeHandler->waeTrace (
+          __FILE__, mfInputLineNumber (__LINE__),
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
+
       fVoiceLastSegment =
         msrSegment::create (
           fInputLineNumber,
@@ -646,7 +667,8 @@ void msrVoice::initializeVoice (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoicesDetails ()) {
     gLog <<
-      "Initial contents of voice \"" << fVoiceName <<
+      "Initial contents of voice \"" <<
+      fVoiceName <<
       "\" in staff \"" <<
       fVoiceUpLinkToStaff->getStaffPathLikeName () <<
       "\":" <<
@@ -748,9 +770,9 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
 
 S_msrVoice msrVoice::createVoiceDeepClone (
   const mfInputLineNumber& inputLineNumber,
-  msrVoiceKind      voiceKind,
+  msrVoiceKind             voiceKind,
   const mfVoiceNumber&     voiceNumber,
-  const S_msrStaff& containingStaff)
+  const S_msrStaff&        containingStaff)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -1220,7 +1242,7 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
   {
 /* JMI
     // move fVoiceLastSegment to the initial voice elements list
-    moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
+    moveVoiceLastSegmentToInitialVoiceElementsListIfRelevant (
       segment->getInputLineNumber (),
       "appendSegmentToVoiceClone()");
       */
@@ -1294,7 +1316,8 @@ void msrVoice::cascadeNetNextMeasureNumberInVoice (
     ss <<
       "Setting next measure number to " <<
       nextMeasureNumber <<
-      ", in voice \"" << fVoiceName << "\"" <<
+      ", in voice \"" <<
+      fVoiceName << "\"" <<
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1327,7 +1350,8 @@ void msrVoice::cascadeNetNextMeasureNumberInVoice (
         ", fVoiceRemainingMultipleMeasureRests: " <<
         fVoiceRemainingMultipleMeasureRests <<
         " in voice \"" <<
-        fVoiceName << "\"";
+        fVoiceName <<
+        "\"";
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -1348,7 +1372,8 @@ void msrVoice::cascadeNetNextMeasureNumberInVoice (
           "Setting multiple measure rests next measure number to " <<
           nextMeasureNumber <<
           " in voice \"" <<
-          fVoiceName << "\"";
+          fVoiceName <<
+          "\"";
 
         gWaeHandler->waeTrace (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -1388,7 +1413,8 @@ void msrVoice::incrementVoiceCurrentMeasurePuristNumber (
 
     ss <<
       "Incrementing the voice current measure purist number of voice " <<
-      " \"" << fVoiceName << "\"" <<
+      " \"" <<
+      fVoiceName << "\"" <<
       " to " <<
       fVoiceCurrentMeasurePuristNumber <<
       " (" << context << ")" <<
@@ -1411,7 +1437,8 @@ void msrVoice::setVoiceFirstMeasure (
     ss <<
       "Measure " <<
       measure->asShortString () <<
-      " is the first measure in  voice \"" << fVoiceName << "\"" <<
+      " is the first measure in  voice \"" <<
+      fVoiceName << "\"" <<
       "', line " << measure->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1425,7 +1452,7 @@ void msrVoice::setVoiceFirstMeasure (
 
 void msrVoice::appendMeasureCloneToVoiceClone (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrMeasure& measureClone)
+  const S_msrMeasure&      measureClone)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -1434,7 +1461,8 @@ void msrVoice::appendMeasureCloneToVoiceClone (
     ss <<
       "Appending measure clone " <<
       measureClone->asShortString () <<
-      " to voice " << fVoiceName << "\"" <<
+      " to voice " <<
+      fVoiceName << "\"" <<
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1458,7 +1486,7 @@ void msrVoice::appendMeasureCloneToVoiceClone (
 
 void msrVoice::setWholeNotesSinceLastRegularMeasureEnd (
   const mfInputLineNumber& inputLineNumber,
-  const mfWholeNotes& wholeNotes)
+  const mfWholeNotes&      wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -1468,8 +1496,10 @@ void msrVoice::setWholeNotesSinceLastRegularMeasureEnd (
       "Setting voice whole notes since last regular measure end to " <<
       wholeNotes.asString () <<
   // JMI    " (" << context << ")" <<
-      " in voice \"" << fVoiceName << "\"" <<
-      "', line " << inputLineNumber;
+      " in voice \"" <<
+      fVoiceName <<
+      "\"" <<
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1511,8 +1541,10 @@ void msrVoice::setCurrentVoiceRepeatPhaseKind (
       msrVoiceRepeatPhaseKindAsString (
         afterRepeatComponentPhaseKind) <<
  // JMI     " (" << context << ")" <<
-      " in voice \"" << fVoiceName << "\"" <<
-      "', line " << inputLineNumber;
+      " in voice \"" <<
+      fVoiceName <<
+       "\"" <<
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1526,7 +1558,7 @@ void msrVoice::setCurrentVoiceRepeatPhaseKind (
 
 void msrVoice::createNewLastSegmentForVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegmentsBasics ()) {
@@ -1659,7 +1691,9 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
 //     ss <<
 //       "Creating measure " <<
 //       measureNumber <<
-//       " and appending it to voice \"" << fVoiceName << "\"" <<
+//       " and appending it to voice \"" <<
+      // fVoiceName <<
+//        "\"" <<
 //       "', line " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
@@ -1709,7 +1743,9 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
       ss <<
         "Creating a measure with number " <<
         measureNumber <<
-        " in voice \"" << fVoiceName << "\"" <<
+        " in voice \"" <<
+        fVoiceName <<
+        "\"" <<
         "', line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
@@ -1961,7 +1997,9 @@ void msrVoice::addStanzaToVoice (const S_msrStanza& stanza)
     ss <<
       "Adding stanza " << stanza->getStanzaName () <<
       " (" << stanzaNumber <<
-      ") to voice \"" << fVoiceName << "\"";
+      ") to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1987,7 +2025,9 @@ void msrVoice::addStanzaToVoiceWithoutCatchUp (const S_msrStanza& stanza)
     ss <<
       "Adding stanza " << stanza->getStanzaName () <<
       " (" << stanzaNumber <<
-      ") to voice \"" << fVoiceName << "\"";
+      ") to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2023,7 +2063,9 @@ S_msrStanza msrVoice::createStanzaInVoiceIfNotYetDone (
         "Creating stanza" <<
         " number " << stanzaNumber <<
         ", name \"" << stanzaName << "\"" <<
-        ", in voice \"" << fVoiceName << "\"" <<
+        ", in voice \"" <<
+        fVoiceName <<
+        "\"" <<
         ", line " << inputLineNumber <<
         ", fVoiceStanzasMap.size (): " << fVoiceStanzasMap.size ();
 
@@ -2075,7 +2117,9 @@ S_msrStanza msrVoice::fetchStanzaInVoice (
       "Stanza" <<
       " number " << stanzaNumber <<
       ", name \"" << stanzaName << "\"" <<
-      ", not found in voice \"" << fVoiceName << "\"" <<
+      ", not found in voice \"" <<
+      fVoiceName <<
+      "\"" <<
       ", line " << inputLineNumber <<
       ", fVoiceStanzasMap.size (): " << fVoiceStanzasMap.size () <<
       std::endl;
@@ -2137,7 +2181,9 @@ void msrVoice::appendMusicXMLPrintLayoutToVoice (
 
     ss <<
       "Appending print layout " << musicXMLPrintLayout->asString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2164,7 +2210,9 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
     ss <<
       "Appending clefKeyTimeSignatureGroup " <<
       clefKeyTimeSignatureGroup->asString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2236,7 +2284,9 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //
 //     ss <<
 //       "Appending clef " << clef
-//       " to voice \"" << fVoiceName << "\"" <<
+//       " to voice \"" <<
+//         fVoiceName <<
+//          "\"" <<
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
@@ -2275,7 +2325,9 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //
 //     ss <<
 //       "Appending key " << key
-//       " to voice \"" << fVoiceName << "\"" <<
+//       " to voice \"" <<
+      // fVoiceName <<
+//       "\"" <<
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
@@ -2313,7 +2365,9 @@ void msrVoice::appendTimeSignatureToVoice (
     ss <<
       "Appending time signature " <<
       timeSignature->asString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2343,7 +2397,9 @@ void msrVoice::appendTimeSignatureToVoiceClone (
     ss <<
       "Appending time signature " <<
       timeSignature->asString () <<
-      " to voice clone \"" << fVoiceName << "\"";
+      " to voice clone \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2374,7 +2430,9 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
     ss <<
       "Inserting hidden measure and barLine at position " <<
       positionInMeasure.asString () <<
-      " to voice clone \"" << fVoiceName << "\"" <<
+      " to voice clone \"" <<
+      fVoiceName <<
+      "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2612,7 +2670,9 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
       std::stringstream ss;
 
       ss <<
-        "The new shortest note in voice \"" << fVoiceName << "\"" <<
+        "The new shortest note in voice \"" <<
+        fVoiceName <<
+        "\"" <<
         " becomes " << note->asString ();
 
       gWaeHandler->waeTrace (
@@ -2661,7 +2721,9 @@ void msrVoice::cascadeAppendHarmonyToVoice (
 
     ss <<
       "Appending harmony " << harmony->asString () <<
-      " to voice \"" << fVoiceName << "\"" <<
+      " to voice \"" <<
+      fVoiceName <<
+      "\"" <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
       ", line " << inputLineNumber;
 
@@ -2757,7 +2819,9 @@ void msrVoice::cascadeAppendHarmonyToVoiceClone (
 
     ss <<
       "Appending harmony " << harmony->asString () <<
-      " to voice clone \"" << fVoiceName << "\"" <<
+      " to voice clone \"" <<
+      fVoiceName <<
+      "\"" <<
       ", line " << harmony->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2814,7 +2878,9 @@ void msrVoice::appendFiguredBassToVoice (
 
     ss <<
       "Appending figured bass " << figuredBass->asString () <<
-      " to voice \"" << fVoiceName << "\"" <<
+      " to voice \"" <<
+      fVoiceName <<
+      "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2882,7 +2948,9 @@ void msrVoice::cascadeAppendFiguredBassesListToVoice (
     ss <<
       "Appending figured basses list \"" <<
 //       figuredBasssesList->asString () << // JMI 0.9.67 HARMFUL
-      " to voice \"" << fVoiceName << "\"" <<
+      " to voice \"" <<
+      fVoiceName <<
+      "\"" <<
       "\"" <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
       ", line " << inputLineNumber;
@@ -2910,7 +2978,9 @@ void msrVoice::appendFiguredBassToVoiceClone (
 
     ss <<
       "Appending figured bass " << figuredBass->asString () <<
-      " to voice clone \"" << fVoiceName << "\"" <<
+      " to voice clone \"" <<
+      fVoiceName <<
+      "\"" <<
       ", line " << figuredBass->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2958,7 +3028,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 
 // void msrVoice::padUpToPositionInMeasureInVoice (
 //   const mfInputLineNumber& inputLineNumber,
-//   const mfWholeNotes& wholeNotesPositionInMeasure)
+//   const mfWholeNotes&      wholeNotesPositionInMeasure)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -3010,8 +3080,10 @@ void msrVoice::appendFiguredBassToVoiceClone (
 // }
 
 // void msrVoice::casadeBackupByWholeNotesStepLengthInVoice (
-//   const mfInputLineNumber& inputLineNumber,
-//   const mfWholeNotes& backupTargetMeasureElementPositionInMeasure)
+//   const mfInputLineNumber&
+//              inputLineNumber,
+//   const mfWholeNotes&
+//              backupTargetMeasureElementPositionInMeasure)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceDurations ()) {
@@ -3051,7 +3123,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 
 void msrVoice::cascadeAppendPaddingNoteToVoice (
   const mfInputLineNumber& inputLineNumber,
-  const mfWholeNotes& forwardStepLength)
+  const mfWholeNotes&      forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -3115,7 +3187,9 @@ void msrVoice::appendTranspositionToVoice (
     ss <<
       "Appending transposition " <<
       transposition->asString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3137,7 +3211,9 @@ void msrVoice::appendStaffDetailsToVoice (
     ss <<
       "Appending staff details " <<
       staffDetails->asShortString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3168,7 +3244,8 @@ void msrVoice::appendTempoToVoice (
       "Appending tempo " <<
       tempo->asShortString () <<
       " to voice \"" <<
-      fVoiceName << "\"";
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3191,7 +3268,9 @@ void msrVoice::appendOctaveShiftToVoice (
       "Appending octave shift " <<
       octaveShift->getOctaveShiftKind () <<
       "', size: " << octaveShift->getOctaveShiftSize () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3213,7 +3292,9 @@ void msrVoice::appendScordaturaToVoice (
     ss <<
       "Appending scordatura " <<
       scordatura->asString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3236,7 +3317,9 @@ void msrVoice::appendAccordionRegistrationToVoice (
     ss <<
       "Appending accordion registration " <<
       accordionRegistration->asString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3260,7 +3343,9 @@ void msrVoice::appendHarpPedalsTuningToVoice (
     ss <<
       "Appending harp pedals tuning " <<
       harpPedalsTuning->asString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3282,7 +3367,9 @@ void msrVoice::appendRehearsalMarkToVoice (
 
     ss <<
       "Appending rehearsalMark " << rehearsalMark->getRehearsalMarkText () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3305,7 +3392,9 @@ void msrVoice::appendVoiceStaffChangeToVoice (
       "Appending voice staff change " <<
       voiceStaffChange->asString () <<
       " to voice " <<
-      "\"" << fVoiceName << "\"" <<
+      "\"" <<
+      fVoiceName <<
+      "\"" <<
       ", line " << voiceStaffChange->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -3333,7 +3422,9 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
     ss <<
       "Appending note " <<
       note->asString () <<
-      " to voice \"" << fVoiceName << "\"" <<
+      " to voice \"" <<
+      fVoiceName <<
+      "\"" <<
       ", line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -3467,7 +3558,9 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
     ss <<
       "Appending note " <<
       note->asString () <<
-      " to voice clone \"" << fVoiceName << "\"" <<
+      " to voice clone \"" <<
+      fVoiceName <<
+      "\"" <<
       ", line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -3560,7 +3653,9 @@ void msrVoice::appendDoubleTremoloToVoice (
     ss <<
       "Appending double tremolo " <<
       doubleTremolo->asShortString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3587,7 +3682,9 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
     --gIndenter;
 
     gLog <<
-      "to voice \"" << fVoiceName << "\"" <<
+      "to voice \"" <<
+      fVoiceName <<
+      "\"" <<
       std::endl << std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -3661,7 +3758,9 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
 
     ss <<
       "Appending tuplet " << tuplet->asString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3715,7 +3814,9 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     ss <<
       "Adding grace notes " <<
       graceNotesGroup->asString () <<
-      " ahead of voice if needed in \"" << fVoiceName << "\"";
+      " ahead of voice if needed in \"" <<
+       fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3843,7 +3944,9 @@ void msrVoice::appendAfterGraceNotesToVoice (
 
     ss <<
       "Appending after grace notes " << // JMI AfterGraceNotes <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3866,7 +3969,9 @@ void msrVoice::prependAfterGraceNotesToVoice (
 
     ss <<
       "Prepending after grace notes " << // JMI AfterGraceNotes <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3895,7 +4000,9 @@ void msrVoice::appendSyllableToVoice (
     ss <<
       "Appending syllable " <<
       syllable->asString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3952,7 +4059,9 @@ void msrVoice::appendBarNumberCheckToVoice (
     ss <<
       "Appending barnumber check " <<
       barNumberCheck->asString () <<
-      " to voice \"" << fVoiceName <<  "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3973,7 +4082,9 @@ void msrVoice::appendLineBreakToVoice  (
 
     ss <<
       "Appending line break " << lineBreak->asString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4006,7 +4117,8 @@ void msrVoice::appendPageBreakToVoice (
 
     ss <<
       "Appending page break " << pageBreak->asString () <<
-      " to voice \"" << fVoiceName << "\"";
+      " to voice \"" << fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4037,7 +4149,9 @@ void msrVoice::appendPageBreakToVoice (
 //
 //     ss <<
 //       "Prepending other element " << elem <<
-//       " to voice \"" << fVoiceName << "\"" <<
+//       " to voice \"" <<
+      // fVoiceName <<
+//       "\"" <<
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
@@ -4057,7 +4171,9 @@ void msrVoice::appendPageBreakToVoice (
 //
 //     ss <<
 //       "Appending other element " << elem <<
-//       " to voice \"" << fVoiceName << "\"" <<
+//       " to voice \"" <<
+      // fVoiceName <<
+//       "\"" <<
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
@@ -4954,9 +5070,9 @@ void msrVoice::appendMeasureRepeatToInitialVoiceElements (
 //     measureRepeat);
 }
 
-void msrVoice::appendVoiceLastSegmentToInitialVoiceElements (
+void msrVoice::appendVoiceLastSegmentToInitialVoiceElementsList (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   // append segment to the list of initial elements
 #ifdef MF_TRACE_IS_ENABLED
@@ -4981,9 +5097,9 @@ void msrVoice::appendVoiceLastSegmentToInitialVoiceElements (
     fVoiceLastSegment);
 }
 
-void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
+void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsListIfRelevant (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   if (fVoiceLastSegment) {
     const std::list <S_msrSegmentElement>&
@@ -5012,7 +5128,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
       if (gTraceOahGroup->getTraceSegmentsDetails ()) {
         displayVoice (
           inputLineNumber,
-          "moveVoiceLastSegmentToInitialVoiceElementsIfRelevant() 1");
+          "moveVoiceLastSegmentToInitialVoiceElementsListIfRelevant() 1");
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5027,7 +5143,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
       if (gTraceOahGroup->getTraceSegmentsDetails ()) {
         displayVoice (
           inputLineNumber,
-          "moveVoiceLastSegmentToInitialVoiceElementsIfRelevant() 2");
+          "moveVoiceLastSegmentToInitialVoiceElementsListIfRelevant() 2");
       }
 #endif // MF_TRACE_IS_ENABLED
     }
@@ -5074,7 +5190,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
   }
 }
 
-void msrVoice::appendRepeatCloneToInitialVoiceElements (
+void msrVoice::appendRepeatCloneToInitialVoiceElementsList (
   const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat& repeatCLone,
   const std::string& context)
@@ -5224,16 +5340,17 @@ void msrVoice::handleVoiceLevelRepeatStart (
               "handleVoiceLevelRepeatStart() 3");
 */
           // append last segment to initial voice elements list
-          appendVoiceLastSegmentToInitialVoiceElements (
+          appendVoiceLastSegmentToInitialVoiceElementsList (
             inputLineNumber,
             "handleVoiceLevelRepeatStart() 4");
 
           // create a new last segment for the voice
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceSegments ()) {
+          if (gTraceOahGroup->getTraceSegmentsBasics ()) {
             gLog <<
-              "Creating a new last segment for voice \"" <<
-              fVoiceName << "\"" <<
+              "Creating a new last segment for a voice level repeat in voice \"" <<
+              fVoiceName <<
+              "\"" <<
               ", line " << inputLineNumber <<
               std::endl;
           }
@@ -5294,7 +5411,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
 //                 "handleVoiceLevelRepeatStart() 55");
 
         // append the voice last segment to the initial voice elements list
-        appendVoiceLastSegmentToInitialVoiceElements (
+        appendVoiceLastSegmentToInitialVoiceElementsList (
           inputLineNumber,
           "handleVoiceLevelRepeatStart() 555");
 
@@ -5822,15 +5939,15 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 
 void msrVoice::handleVoiceLevelRepeatEndWithStart (
   const mfInputLineNumber& inputLineNumber,
-  const mfMeasureNumber& measureNumber,
-  int                repeatTimes)
+  const mfMeasureNumber&   measureNumber,
+  int                      repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Handling a voice-level repeat end with start in voice \"" <<
+      "Handling a voice-level repeat end WITH start in voice \"" <<
       fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber;
@@ -5849,19 +5966,19 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "This repeat end with a start is at the voice-level" <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "This repeat end with a start is at the voice-level" <<
+//       ", line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
@@ -6177,14 +6294,14 @@ void msrVoice::handleRepeatEndInVoice (
 
 void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
   const mfInputLineNumber& inputLineNumber,
-  S_msrRepeat& currentRepeat)
+  S_msrRepeat&             currentRepeat)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Handling a voice-level repeat ending start without explicit start in voice \"" <<
+      "Handling a voice-level repeat ending start WITHOUT explicit start in voice \"" <<
       fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber;
@@ -6359,17 +6476,17 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
     // it is not empty
 
     // append last segment to initial voice elements list
-    appendVoiceLastSegmentToInitialVoiceElements (
+    appendVoiceLastSegmentToInitialVoiceElementsList (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 4");
 
     // create a new last segment for the voice
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceSegments ()) {
+    if (gTraceOahGroup->getTraceSegmentsBasics ()) {
       std::stringstream ss;
 
       ss <<
-        "Creating a new last segment for voice \"" <<
+        "Creating a new last segment for a voice level repeat ending WITHOUT explicit start in voice \"" <<
         fVoiceName << "\"" <<
         ", line " << inputLineNumber;
 
@@ -6542,17 +6659,17 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
     // it is not empty
 
     // append last segment to initial voice elements list
-    appendVoiceLastSegmentToInitialVoiceElements (
+    appendVoiceLastSegmentToInitialVoiceElementsList (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 5");
 
     // create a new last segment for the voice
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceSegments ()) {
+    if (gTraceOahGroup->getTraceSegmentsBasics ()) {
       std::stringstream ss;
 
       ss <<
-        "Creating a new last segment for voice \"" <<
+        "Creating a new last segment for a voice level repeat ending WITH explicit start in voice \"" <<
         fVoiceName << "\"" <<
         ", line " << inputLineNumber;
 
@@ -6609,7 +6726,7 @@ void msrVoice::nestContentsIntoNewRepeatInVoice (
 #endif // MF_TRACE_IS_ENABLED
 
           // move voice last segment to the list of initial elements
-          moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
+          moveVoiceLastSegmentToInitialVoiceElementsListIfRelevant (
             inputLineNumber,
             "nestContentsIntoNewRepeatInVoice() 1");
 
@@ -6753,9 +6870,8 @@ void msrVoice::handleRepeatEndingStartInVoice (
 
 void msrVoice::handleRepeatEndingStartInVoiceClone (
   const mfInputLineNumber& inputLineNumber,
-  msrRepeatEndingKind
-                     repeatEndingKind,
-  const std::string& repeatEndingNumber) // a string, because if may be "1, 2" for example
+  msrRepeatEndingKind      repeatEndingKind,
+  const std::string&       repeatEndingNumber) // a string, because if may be "1, 2" for example
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -6909,7 +7025,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
 
 void msrVoice::handleSegmentCloneEndInVoiceClone (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrSegment& segmentClone)
+  const S_msrSegment&      segmentClone)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegments ()) {
@@ -7031,7 +7147,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
     // segmentClone is a voice-level segment
 
     // move fVoiceLastSegment to the initial voice elements list
-    moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
+    moveVoiceLastSegmentToInitialVoiceElementsListIfRelevant (
       inputLineNumber,
       "handleSegmentCloneEndInVoiceClone()");
   }
@@ -7050,8 +7166,8 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
 /* JMI
 void msrVoice::finalizeRepeatEndInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const mfMeasureNumber& measureNumber,
-  int                repeatTimes)
+  const mfMeasureNumber&   measureNumber,
+  int                      repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -7195,6 +7311,26 @@ void msrVoice::cascadeCreateAMeasureRepeatAndAppendItToVoice (
 //         inputLineNumber);
 
   // create the measures repeat repeated segment
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating the measures repeat repeated segment in voice \"" <<
+      fVoiceName <<
+      "\"" <<
+      ", fVoiceNumber: " << fVoiceNumber <<
+      ", in staff \"" <<
+      fVoiceUpLinkToStaff->getStaffPathLikeName () <<
+      " line " << fInputLineNumber <<
+      "\"";
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   S_msrSegment
     repeatedSegment =
       msrSegment::create (
@@ -7556,7 +7692,8 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
 
     ss <<
       "Creating a measures repeat replicas contents for voice \"" <<
-      fVoiceName << "\" is:";
+      fVoiceName <<
+      "\" is:";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -7604,7 +7741,8 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
 
     ss <<
       "Setting measures repeat segment to voice last segment for voice \"" <<
-      fVoiceName << "\"";
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -7633,7 +7771,8 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
 
     ss <<
       "Creating a new last segment with the AAA measures repeat next measure for voice \"" <<
-      fVoiceName << "\"" <<
+      fVoiceName <<
+      "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -8004,7 +8143,8 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
             fVoiceCurrentMultipleMeasureRest->asString () <<
             " as waiting for its next measure number" <<
             " in voice \"" <<
-            fVoiceName << "\"";
+            fVoiceName <<
+            "\"";
 
           gWaeHandler->waeTrace (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -8023,7 +8163,8 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
             "Setting fVoiceRemainingMultipleMeasureRests to " <<
             multipleMeasureRestMeasuresNumber <<
             " in voice \"" <<
-            fVoiceName << "\"";
+            fVoiceName <<
+            "\"";
 
           gWaeHandler->waeTrace (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -8373,7 +8514,7 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
 }
 
 void msrVoice::handleMultipleMeasureRestsStartInVoiceClone (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&        inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRest)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -8418,7 +8559,7 @@ void msrVoice::handleMultipleMeasureRestsStartInVoiceClone (
 //             inputLineNumber);
 //
 //           // move voice last segment to the list of initial elements
-//           moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
+//           moveVoiceLastSegmentToInitialVoiceElementsListIfRelevant (
 //             inputLineNumber,
 //             "handleMultipleMeasureRestsStartInVoiceClone() 2");
 //
@@ -8551,7 +8692,7 @@ void msrVoice::handleMultipleMeasureRestsEndInVoiceClone (
 }
 
 void msrVoice::appendMultipleMeasureRestCloneToVoiceClone (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&        inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRestClone)
 {
   ++gIndenter;
@@ -8642,7 +8783,7 @@ void msrVoice::appendMultipleMeasureRestCloneToVoiceClone (
 
 void msrVoice::appendRepeatCloneToVoiceClone (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& repeatCLone)
+  const S_msrRepeat&       repeatCLone)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -8707,7 +8848,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
           "appendRepeatCloneToVoiceClone() 2");
 
         // append it to the list of initial elements
-        appendRepeatCloneToInitialVoiceElements (
+        appendRepeatCloneToInitialVoiceElementsList (
           inputLineNumber,
           repeatCLone,
           "appendRepeatCloneToVoiceClone() 3");
@@ -9187,7 +9328,7 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
 }
 
 void msrVoice::appendMeasureRepeatCloneToVoiceClone (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&  inputLineNumber,
   const S_msrMeasureRepeat& measureRepeatClone)
 {
   ++gIndenter;
@@ -9504,7 +9645,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   // append currentRepeat to the list of initial elements
-  appendRepeatCloneToInitialVoiceElements (
+  appendRepeatCloneToInitialVoiceElementsList (
     inputLineNumber,
     currentRepeat,
     "handleHooklessRepeatEndingEndInVoice() 3");
@@ -9533,7 +9674,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
 
 void msrVoice::handleRepeatEndingEndInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&  repeatEndingNumber, // a string, because if may be "1, 2" for example
+  const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
   msrRepeatEndingKind repeatEndingKind)
 {
   switch (fVoiceKind) {
@@ -9922,8 +10063,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
 
 void msrVoice::handleRepeatEndingEndInVoiceClone (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&  repeatEndingNumber, // a string, because if may be "1, 2" for example
-  msrRepeatEndingKind repeatEndingKind)
+  const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
+  msrRepeatEndingKind      repeatEndingKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -9967,7 +10108,7 @@ void msrVoice::handleRepeatEndingEndInVoiceClone (
 
 void msrVoice::handleRepeatStartInVoiceClone (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& repeat)
+  const S_msrRepeat&       repeat)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -10016,7 +10157,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
             inputLineNumber);
 
           // move current last segment to the list of initial elements
-          moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
+          moveVoiceLastSegmentToInitialVoiceElementsListIfRelevant (
             inputLineNumber,
             "handleRepeatStartInVoiceClone() 2");
 
@@ -10175,7 +10316,7 @@ void msrVoice::handleRepeatEndInVoiceClone (
                     getRepeatCommonPart ();
 
               // append currentRepeat to the list of initial elements
-              appendRepeatCloneToInitialVoiceElements (
+              appendRepeatCloneToInitialVoiceElementsList (
                 inputLineNumber,
                 currentRepeat,
                 "handleRepeatEndInVoiceClone() 4");
@@ -10295,7 +10436,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
   } // switch
 }
 
-// void msrVoice::cascadeAppendMultipleMeasureRestToVoiceElementsList (
+// void msrVoice::cascadeAppendMultipleMeasureRestToVoiceInitialElementsList (
 //   const S_msrMultipleMeasureRest& multipleMeasureRest)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -10437,7 +10578,9 @@ void msrVoice::prependBarLineToVoice (
     ss <<
       "Prepending barLine " <<
       barLine->asString () <<
-      " to voice \"" << fVoiceName << "\"" <<
+      " to voice \"" <<
+      fVoiceName <<
+      "\"" <<
       ':';
 
     gWaeHandler->waeTrace (
@@ -10464,7 +10607,9 @@ void msrVoice::appendBarLineToVoice (
     ss <<
       "Appending barLine " <<
       barLine->asString () <<
-      " to voice \"" << fVoiceName << "\"" <<
+      " to voice \"" <<
+      fVoiceName <<
+      "\"" <<
       ':';
 
     gWaeHandler->waeTrace (
@@ -10495,7 +10640,9 @@ void msrVoice::appendSegnoToVoice (const S_msrSegno& segno)
     std::stringstream ss;
 
     ss <<
-      "Appending a segno to voice \"" << fVoiceName << "\"";
+      "Appending a segno to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10521,7 +10668,9 @@ void msrVoice::appendCodaToVoice (const S_msrCoda& coda)
     std::stringstream ss;
 
     ss <<
-      "Appending a coda to voice \"" << fVoiceName << "\"" <<
+      "Appending a coda to voice \"" <<
+      fVoiceName <<
+      "\"" <<
       ':';
 
     gWaeHandler->waeTrace (
@@ -10549,7 +10698,9 @@ void msrVoice::appendEyeGlassesToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending a eyeGlasses to voice \"" << fVoiceName << "\"";
+      "Appending a eyeGlasses to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10575,7 +10726,9 @@ void msrVoice::appendPedalToVoice (const S_msrPedal& pedal)
     std::stringstream ss;
 
     ss <<
-      "Appending a pedal to voice \"" << fVoiceName << "\"";
+      "Appending a pedal to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10602,7 +10755,9 @@ void msrVoice::appendDampToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending a damp to voice \"" << fVoiceName << "\"";
+      "Appending a damp to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10629,7 +10784,9 @@ void msrVoice::appendDampAllToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending a damp all to voice \"" << fVoiceName << "\"";
+      "Appending a damp all to voice \"" <<
+      fVoiceName <<
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -10683,7 +10840,9 @@ S_msrElement msrVoice::removeLastElementFromVoice (  // JMI
 //     ss <<
 //       "Removing note " <<
 //       note->asShortString () <<
-//       " from voice \"" << fVoiceName << "\"";
+//       " from voice \"" <<
+//       fVoiceName <<
+//       "\"";
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -10721,7 +10880,9 @@ S_msrElement msrVoice::removeLastElementFromVoice (  // JMI
 //     ss <<
 //       "Removing element " <<
 //       element->asShortString () <<
-//       " from voice \"" << fVoiceName << "\"";
+//       " from voice \"" <<
+//       fVoiceName <<
+//       "\"";
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -11181,7 +11342,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
         fVoiceShortestNoteTupletFactor);
   }
 
-  // is this voice totally empty? this should be rare...
+  // is this voice totally empty? (should be rare...)
   if (
     fVoiceInitialElementsList.empty ()
       &&
@@ -11538,14 +11699,10 @@ void msrVoice::browseData (basevisitor* v)
 
   // browse the voice initial elements
   if (! fVoiceInitialElementsList.empty ()) {
-    for (
-      std::list <S_msrVoiceElement>::const_iterator i = fVoiceInitialElementsList.begin ();
-      i != fVoiceInitialElementsList.end ();
-      ++i
-    ) {
-      // browse the element
+    for (S_msrVoiceElement voiceElement : fVoiceInitialElementsList) {
+      // browse the voice element
       msrBrowser<msrVoiceElement> browser (v);
-      browser.browse (*(*i));
+      browser.browse (*voiceElement);
     } // for
   }
 
@@ -12307,7 +12464,7 @@ std::ostream& operator << (std::ostream& os, const S_msrVoice& elt)
 //         ++gIndenter;
 //
 //         // move the current voice last segment to the initial elements list
-//         moveVoiceLastSegmentToInitialVoiceElementsIfRelevant ( //JMI
+//         moveVoiceLastSegmentToInitialVoiceElementsListIfRelevant ( //JMI
 //           inputLineNumber,
 //           "appendEmptyMeasuresToVoice() 2");
 //

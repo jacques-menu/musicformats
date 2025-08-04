@@ -50,7 +50,7 @@ int msrSegment::sSegmentDebugNumber = 0;
 
 S_msrSegment msrSegment::create (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrVoice& segmentUpLinkToVoice)
+  const S_msrVoice&        segmentUpLinkToVoice)
 {
   msrSegment* obj =
     new msrSegment (
@@ -62,7 +62,7 @@ S_msrSegment msrSegment::create (
 
 msrSegment::msrSegment (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrVoice& segmentUpLinkToVoice)
+  const S_msrVoice&        segmentUpLinkToVoice)
     : msrVoiceElement (inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -138,7 +138,9 @@ void msrSegment::setSegmentFirstMeasure (
     std::stringstream ss;
 
     ss <<
-      "Setting segment first measure to ";
+      "Setting first measure of segment " <<
+      fSegmentDebugNumber <<
+      " to ";
 
     if (measure) {
       ss <<
@@ -174,7 +176,9 @@ void msrSegment::setSegmentLastMeasure (
     std::stringstream ss;
 
     ss <<
-      "Setting segment last measure to ";
+      "Setting last measure of segment " <<
+      fSegmentDebugNumber <<
+      " to ";
 
     if (measure) {
       ss <<
@@ -520,9 +524,9 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
 
 S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
   const mfInputLineNumber& inputLineNumber,
-  int                    previousMeasureEndInputLineNumber,
-  const mfMeasureNumber& measureNumber,
-  msrMeasureImplicitKind measureImplicitKind)
+  int                      previousMeasureEndInputLineNumber,
+  const mfMeasureNumber&   measureNumber,
+  msrMeasureImplicitKind   measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -635,7 +639,7 @@ S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
 
 void msrSegment::setNextMeasureNumberInSegment (
   const mfInputLineNumber& inputLineNumber,
-  const mfMeasureNumber& nextMeasureNumber)
+  const mfMeasureNumber&   nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -1195,7 +1199,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (
 }
 
 void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&   inputLineNumber,
   const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1235,7 +1239,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
 }
 
 void msrSegment::appendHarmonyToSegment (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&   inputLineNumber,
   const S_msrHarmony&        harmony,
   const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
@@ -1337,7 +1341,7 @@ void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
 }
 
 void msrSegment::appendFiguredBassToSegment (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&   inputLineNumber,
   const S_msrFiguredBass&    figuredBass,
   const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
@@ -1380,11 +1384,11 @@ void msrSegment::appendFiguredBassToSegment (
 }
 
 void msrSegment::cascadeAppendFiguredBassesListToSegment (
-  const mfInputLineNumber&            inputLineNumber,
-  const std::list <S_msrFiguredBass>& figuredBasssesList,
-  const mfPositionInMeasure&          positionInMeasureToAppendAt)
+  const mfInputLineNumber&   inputLineNumber,
+  const std::list <S_msrFiguredBass>&
+                             figuredBasssesList,
+  const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
     std::stringstream ss;
@@ -2192,7 +2196,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 
 void msrSegment::cascadeAppendPaddingNoteToSegment (
   const mfInputLineNumber& inputLineNumber,
-  const mfWholeNotes& forwardStepLength)
+  const mfWholeNotes&      forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
@@ -2871,7 +2875,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 
 S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -3311,7 +3315,7 @@ std::string msrSegment::asString () const
 
 void msrSegment::displaySegment (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   gLog <<
     std::endl <<
