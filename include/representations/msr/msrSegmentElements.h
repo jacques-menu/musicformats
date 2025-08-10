@@ -68,8 +68,8 @@ class EXP msrSegmentElement : public msrElement
     // public services
     // ------------------------------------------------------
 
-    virtual void          appendMeasureElementToSegmentElement (
-                            const S_msrMeasureElement& elem) = 0;
+//     virtual void          appendMeasureElementToSegmentElement (
+//                             const S_msrMeasureElement& elem) = 0;
 
 //     static bool           compareSegmentElementsByIncreasingPositionInMeasure (
 //                             const SMARTP<msrSegmentElement>& first,

@@ -270,6 +270,14 @@ S_msrScore msrMeasure::fetchMeasureUpLinkToScore () const
   return result;
 }
 
+// void msrMeasure::appendMeasureElementToSegmentElement (
+//   const S_msrMeasureElement& elem) override
+// {
+//   appendMeasureElementToMeasure (
+//     elem,
+//     "appendMeasureElementToSegmentElement()");
+// } // JMI 0.9.66 ???
+
 S_msrMeasure msrMeasure::createMeasureNewbornClone (
   const S_msrSegment& containingSegment)
 {

@@ -309,8 +309,8 @@ class EXP msrMeasureRepeat : public msrSegmentElement
     // public services
     // ------------------------------------------------------
 
-    void                  appendMeasureElementToSegmentElement (
-                            const S_msrMeasureElement& elem) override;
+//     void                  appendMeasureElementToSegmentElement (
+//                             const S_msrMeasureElement& elem) override;
 
     int                   fetchMeasureRepeatReplicasNumber () const;
 

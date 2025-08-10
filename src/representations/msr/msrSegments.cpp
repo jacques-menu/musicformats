@@ -49,6 +49,16 @@ int msrSegment::sSegmentsCounter = 0;
 int msrSegment::sSegmentDebugNumber = 0;
 
 S_msrSegment msrSegment::create (
+  const mfInputLineNumber& inputLineNumber)
+{
+  msrSegment* obj =
+    new msrSegment (
+      inputLineNumber);
+  assert (obj != nullptr);
+  return obj;
+}
+
+S_msrSegment msrSegment::create (
   const mfInputLineNumber& inputLineNumber,
   const S_msrVoice&        segmentUpLinkToVoice)
 {
@@ -61,9 +71,19 @@ S_msrSegment msrSegment::create (
 }
 
 msrSegment::msrSegment (
+  const mfInputLineNumber& inputLineNumber)
+//     : msrVoiceElement (inputLineNumber)
+    : msrElement (inputLineNumber)
+{
+  // do other initializations
+  initializeSegment ();
+}
+
+msrSegment::msrSegment (
   const mfInputLineNumber& inputLineNumber,
   const S_msrVoice&        segmentUpLinkToVoice)
-    : msrVoiceElement (inputLineNumber)
+//     : msrVoiceElement (inputLineNumber)
+    : msrElement (inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check

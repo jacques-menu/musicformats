@@ -171,23 +171,23 @@ void msrMultipleMeasureRest::setLastMeasurePuristMeasureNumber (
     puristMeasureNumber;
 }
 
-void msrMultipleMeasureRest::appendMeasureElementToSegmentElement (
-  const S_msrMeasureElement& elem)
-{
-  std::stringstream ss;
-
-  ss <<
-    "cannot append measure element " <<
-    elem->asShortString () <<
-    " to multiple measure rests " <<
-    asShortString ();
-
-  msrInternalError (
-    gServiceRunData->getInputSourceName (),
-    fInputLineNumber,
-    __FILE__, mfInputLineNumber (__LINE__),
-    ss.str ());
-}
+// void msrMultipleMeasureRest::appendMeasureElementToSegmentElement (
+//   const S_msrMeasureElement& elem)
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//     "cannot append measure element " <<
+//     elem->asShortString () <<
+//     " to multiple measure rests " <<
+//     asShortString ();
+//
+//   msrInternalError (
+//     gServiceRunData->getInputSourceName (),
+//     fInputLineNumber,
+//     __FILE__, mfInputLineNumber (__LINE__),
+//     ss.str ());
+// }
 
 void msrMultipleMeasureRest::appendMeasureToMultipleMeasureRest (
   const S_msrMeasure& measure)

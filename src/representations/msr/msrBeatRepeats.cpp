@@ -1293,23 +1293,23 @@ void msrBeatRepeat::browseData (basevisitor* v)
   */
 }
 
-void msrBeatRepeat::appendMeasureElementToSegmentElement (
-  const S_msrMeasureElement& elem)
-{
-  std::stringstream ss;
-
-  ss <<
-    "cannot append measure element " <<
-    elem->asShortString () <<
-    " to beat repeat " <<
-    asShortString ();
-
-  msrInternalError (
-    gServiceRunData->getInputSourceName (),
-    fInputLineNumber,
-    __FILE__, mfInputLineNumber (__LINE__),
-    ss.str ());
-}
+// void msrBeatRepeat::appendMeasureElementToSegmentElement (
+//   const S_msrMeasureElement& elem)
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//     "cannot append measure element " <<
+//     elem->asShortString () <<
+//     " to beat repeat " <<
+//     asShortString ();
+//
+//   msrInternalError (
+//     gServiceRunData->getInputSourceName (),
+//     fInputLineNumber,
+//     __FILE__, mfInputLineNumber (__LINE__),
+//     ss.str ());
+// }
 
 std::string msrBeatRepeatKindAsString (
   msrBeatRepeatKind beatRepeatKind)

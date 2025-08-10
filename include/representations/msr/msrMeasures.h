@@ -298,13 +298,8 @@ class EXP msrMeasure : public msrSegmentElement
 
     // MSR segment elements
 
-    virtual void          appendMeasureElementToSegmentElement (
-                            const S_msrMeasureElement& elem) override
-                              {
-                                appendMeasureElementToMeasure (
-                                  elem,
-                                  "appendMeasureElementToSegmentElement()");
-                              } // JMI 0.9.66 ???
+//     virtual void          appendMeasureElementToSegmentElement (
+//                             const S_msrMeasureElement& elem) override;
 
     // lengths
 

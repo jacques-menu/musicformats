@@ -32,12 +32,16 @@ class   msrClefKeyTimeSignatureGroup;
 typedef SMARTP<msrClefKeyTimeSignatureGroup> S_msrClefKeyTimeSignatureGroup;
 
 //______________________________________________________________________________
-class EXP msrSegment : public msrVoiceElement
+// class EXP msrSegment : public msrVoiceElement
+class EXP msrSegment : public msrElement
 {
   public:
 
     // creation from MusicXML
     // ------------------------------------------------------
+
+    static SMARTP<msrSegment> create (
+                            const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrSegment> create (
                             const mfInputLineNumber& inputLineNumber,
@@ -53,6 +57,9 @@ class EXP msrSegment : public msrVoiceElement
 
     // constructors/destructor
     // ------------------------------------------------------
+
+                          msrSegment (
+                            const mfInputLineNumber& inputLineNumber);
 
                           msrSegment (
                             const mfInputLineNumber& inputLineNumber,
@@ -182,7 +189,20 @@ class EXP msrSegment : public msrVoiceElement
     void                  prependMeasureToSegment (
                             const S_msrMeasure& measure);
 
+    // repeats
+
+    void                  appendRepeatToSegment (
+                            const S_msrRepeat& repeat);
+
     // measure repeats
+
+    void                  appendMeasureRepeatToSegment (
+                            const S_msrMeasureRepeat& measureRepeat);
+
+    // beat repeats
+
+    void                  appendBeatRepeatToSegment (
+                            const S_msrBeatRepeat& beatRepeat);
 
     // JMI 0.9.76
 //     void                  cascadeCreateAMeasureRepeatAndAppendItToSegment (
@@ -196,6 +216,9 @@ class EXP msrSegment : public msrVoiceElement
     Bool                  fOnGoingMultipleMeasureRest;
     S_msrMultipleMeasureRest
                           fCurrentMultipleMeasureRest;
+
+    void                  appendMultipleMeasureRestToSegment (
+                            const S_msrMultipleMeasureRest& multipleMeasureRest);
 
     void                  cascadeAppendMultipleMeasureRestToSegment (
                             const S_msrMultipleMeasureRest& multipleMeasureRest);

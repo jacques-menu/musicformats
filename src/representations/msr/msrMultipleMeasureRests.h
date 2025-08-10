@@ -94,8 +94,8 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     // public services
     // ------------------------------------------------------
 
-    void                  appendMeasureElementToSegmentElement (
-                            const S_msrMeasureElement& elem) override;
+//     void                  appendMeasureElementToSegmentElement (
+//                             const S_msrMeasureElement& elem) override;
 
     void                  appendMeasureToMultipleMeasureRest (
                             const S_msrMeasure& measure);

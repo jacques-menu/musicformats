@@ -1280,23 +1280,23 @@ void msrMeasureRepeat::browseData (basevisitor* v)
   }
 }
 
-void msrMeasureRepeat::appendMeasureElementToSegmentElement (
-  const S_msrMeasureElement& elem)
-{
-  std::stringstream ss;
-
-  ss <<
-    "cannot append measure element " <<
-    elem->asShortString () <<
-    " to measure repeat " <<
-    asShortString ();
-
-  msrInternalError (
-    gServiceRunData->getInputSourceName (),
-    fInputLineNumber,
-    __FILE__, mfInputLineNumber (__LINE__),
-    ss.str ());
-}
+// void msrMeasureRepeat::appendMeasureElementToSegmentElement (
+//   const S_msrMeasureElement& elem)
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//     "cannot append measure element " <<
+//     elem->asShortString () <<
+//     " to measure repeat " <<
+//     asShortString ();
+//
+//   msrInternalError (
+//     gServiceRunData->getInputSourceName (),
+//     fInputLineNumber,
+//     __FILE__, mfInputLineNumber (__LINE__),
+//     ss.str ());
+// }
 
 std::string msrMeasureRepeatKindAsString (
   msrMeasureRepeatKind measureRepeatKind)
