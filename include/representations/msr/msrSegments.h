@@ -84,10 +84,15 @@ class EXP msrSegment : public msrElement
     S_msrVoice            getSegmentUpLinkToVoice () const
                               { return fSegmentUpLinkToVoice; }
 
-    // number
+    //segmet numbers
 
-    int                   getSegmentAbsoluteNumber () const
+    const mfSegmentNumber&
+                          getSegmentAbsoluteNumber () const
                               { return fSegmentAbsoluteNumber; }
+
+    const mfSegmentNumber&
+                          getSegmentNumber () const
+                              { return fSegmentNumber; }
 
     // measures elements
 
@@ -151,6 +156,9 @@ class EXP msrSegment : public msrElement
 
     void                  appendMusicXMLPrintLayoutToSegment (
                             const S_msrMusicXMLPrintLayout& musicXMLPrintLayout);
+
+    void                  appendSegmentElementToSegment (
+                            S_msrSegmentElement segmentElement);
 
     // backup and padding
 
@@ -493,7 +501,7 @@ class EXP msrSegment : public msrElement
     S_msrVoice            fSegmentUpLinkToVoice;
 
     // absolute number, shared by newborn clones and deep copies
-    int                   fSegmentAbsoluteNumber;
+    mfSegmentNumber       fSegmentAbsoluteNumber;
 
     // the measures elements in the segment contain the mmusic
     std::list <S_msrSegmentElement>
@@ -503,9 +511,10 @@ class EXP msrSegment : public msrElement
     std::list <S_msrMeasure>
                           fSegmentMeasuresList;
 
-    // debug number, unique for every msrSegment instance
-    static int            sSegmentDebugNumber;
-    int                   fSegmentDebugNumber;
+    // segment number, unique for every msrSegment instance
+    static mfSegmentNumber
+                          sSegmentNumber;
+    mfSegmentNumber       fSegmentNumber;
 
 /* JMI
     // segment shortest note
@@ -523,7 +532,8 @@ class EXP msrSegment : public msrElement
     // ------------------------------------------------------
 
     // counter
-    static int            sSegmentsCounter;
+    static mfSegmentNumber
+                          sSegmentsCounter;
 
     // measures
     S_msrMeasure          fSegmentFirstMeasure;

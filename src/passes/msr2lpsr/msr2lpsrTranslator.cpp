@@ -3020,10 +3020,10 @@ void msr2lpsrTranslator::visitStart (S_msrSegment& elt)
     elt->createSegmentNewbornClone (
       fCurrentVoiceClone);
 
-  // set it as the new voice last segment
-  fCurrentVoiceClone->
-    setVoiceLastSegmentInVoiceClone (
-      fCurrentSegmentClone);
+//   // set it as the new voice last segment
+//   fCurrentVoiceClone->
+//     setVoiceLastSegmentInVoiceClone (
+//       fCurrentSegmentClone);
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrSegment& elt)

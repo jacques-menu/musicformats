@@ -181,6 +181,31 @@ EXP extern std::string mfMeasureNumberAsString (
   const mfMeasureNumber& measureNumber);
 
 //______________________________________________________________________________
+// segment numbers
+
+EXP extern const int K_MF_SEGMENT_NUMBER_UNKNOWN_;
+
+EXP extern const std::string
+  kMfSegmentNumberPrefix,
+  kMfSegmentNumberDefaultValueString;
+
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfSegmentNumber = std::string;
+// #else
+  using mfSegmentNumber =
+    mfWrappedValueForArithmetic <
+      int,
+      kMfSegmentNumberPrefix,
+      K_MF_EMPTY_STRING,
+      K_MF_SEGMENT_NUMBER_UNKNOWN_,
+      kMfSegmentNumberDefaultValueString
+    >;
+// #endif // MF_USE_WRAPPED_TYPES
+
+EXP extern std::string mfSegmentNumberAsString (
+  const mfSegmentNumber& segmentNumber);
+
+//______________________________________________________________________________
 // tuplet numbers
 
 EXP extern const int K_MF_TUPLET_NUMBER_UNKNOWN_;

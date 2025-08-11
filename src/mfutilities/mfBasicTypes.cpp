@@ -215,6 +215,34 @@ std::string mfMeasureNumberAsString (
 }
 
 //______________________________________________________________________________
+// segment numbers
+
+const int K_MF_SEGMENT_NUMBER_UNKNOWN_ = 0;
+
+const std::string
+  kMfSegmentNumberPrefix ("segment_"),
+  kMfSegmentNumberDefaultValueString ("*segment_Unknown*");
+
+std::string mfSegmentNumberAsString (
+  const mfSegmentNumber& segmentNumber)
+{
+  std::string result;
+
+  if (segmentNumber == K_MF_SEGMENT_NUMBER_UNKNOWN_) {
+    result = "K_MF_SEGMENT_NUMBER_UNKNOWN_";
+  }
+  else {
+// #ifndef MF_USE_WRAPPED_TYPES
+//     result = segmentNumber;
+// #else
+    result = segmentNumber.getBareValue ();
+// #endif // MF_USE_WRAPPED_TYPES
+  }
+
+  return result;
+}
+
+//______________________________________________________________________________
 // tuplet numbers
 
 const int K_MF_TUPLET_NUMBER_UNKNOWN_ = 0;

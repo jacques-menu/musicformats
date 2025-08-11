@@ -3744,13 +3744,13 @@ void msrStaff::print (std::ostream& os) const
 //
 //   os << std::endl;
 
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fStaffAllVoicesList.size()" << ": " << fStaffAllVoicesList.size () <<
+  os <<
+    "***** fStaffAllVoicesList ***** (" <<
+    mfSingularOrPlural (
+      fStaffAllVoicesList.size (), "element",  "elements") <<
+    "):" <<
     std::endl;
 
-  os <<
-    "***** fStaffAllVoicesList *****" << ": ";
   if (! fStaffAllVoicesList.empty ()) {
     os << std::endl;
 

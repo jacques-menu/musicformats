@@ -5289,7 +5289,7 @@ std::string msrChordGraceNotesGroupLink::asString () const
 void msrChordGraceNotesGroupLink::print (std::ostream& os) const
 {
   os <<
-    "[ChordGraceNotesGroupLink FULL" <<
+    "[ChordGraceNotesGroupLink" <<
     ", line " << fInputLineNumber <<
     std::endl;
 

@@ -243,11 +243,11 @@ class EXP msrVoice : public msrElement
 
     // voice last segment
 
-    void                  setVoiceLastSegmentInVoiceClone (
-                            const S_msrSegment& segment);
+//     void                  setVoiceLastSegmentInVoiceClone (
+//                             const S_msrSegment& segment);
 
-    void                  appendSegmentToVoiceClone (
-                            const S_msrSegment& segment);
+//     void                  appendSegmentToVoiceClone (
+//                             const S_msrSegment& segment);
 
     const S_msrSegment&   getVoiceCurrentRecipientSegment () const
                               { return fVoiceCurrentRecipientSegment; }
@@ -681,14 +681,14 @@ class EXP msrVoice : public msrElement
 
     // segments
 
-    void                  createNewLastSegmentForVoice (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string&       context);
+//     void                  createNewLastSegmentForVoice (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const std::string&       context);
 
-    void                  createNewLastSegmentFromItsFirstMeasureForVoice (
-                            const mfInputLineNumber& inputLineNumber,
-                            const S_msrMeasure&      firstMeasure,
-                            const std::string&       context);
+//     void                  createNewLastSegmentFromItsFirstMeasureForVoice (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const S_msrMeasure&      firstMeasure,
+//                             const std::string&       context);
 
     // repeats
 

@@ -729,7 +729,7 @@ std::string msrGraceNotesGroup::asString () const
 void msrGraceNotesGroup::printFull (std::ostream& os) const
 {
   os <<
-    "[GraceNotesGroup FULL" <<
+    "[GraceNotesGroup" <<
     ", fGraceNotesGroupKind: " <<
     fGraceNotesGroupKind <<
     ", line " << fInputLineNumber <<
