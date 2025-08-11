@@ -97,7 +97,8 @@ msrRepeatElement::msrRepeatElement (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fRepeatElementSegment = msrSegment::create (inputLineNumber);
+  initializeRepeatElement (
+    inputLineNumber);
 }
 
 msrRepeatElement::msrRepeatElement (
@@ -139,13 +140,23 @@ msrRepeatElement::msrRepeatElement (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fRepeatElementSegment = msrSegment::create (inputLineNumber);
-
   fRepeatElementUpLinkToRepeat = upLinkToRepeat;
+
+  initializeRepeatElement (
+    inputLineNumber);
 }
 
 msrRepeatElement::~msrRepeatElement ()
 {}
+
+void msrRepeatElement::initializeRepeatElement (
+  const mfInputLineNumber& inputLineNumber)
+{
+  // create voice segment
+  fRepeatElementSegment =
+    msrSegment::create (
+      inputLineNumber);
+}
 
 void msrRepeatElement::appendMeasureToRepeatElement (
   const mfInputLineNumber& inputLineNumber,

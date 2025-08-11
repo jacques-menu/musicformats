@@ -102,6 +102,14 @@ class EXP msrRepeatElement: public msrElement
     void                  collectRepeatElementMeasuresIntoFlatList (
                             const mfInputLineNumber& inputLineNumber);
 
+  private:
+
+    // private services
+    // ------------------------------------------------------
+
+    void                  initializeRepeatElement (
+                            const mfInputLineNumber& inputLineNumber);
+
   public:
 
     // visitors
@@ -133,7 +141,9 @@ class EXP msrRepeatElement: public msrElement
     // elements list
     S_msrSegment          fRepeatElementSegment;
 };
-typedef SMARTP<msrRepeatElement> S_msrRepeatElement;
+
+using S_msrRepeatElement = SMARTP<msrRepeatElement>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatElement& elt);
 
 //______________________________________________________________________________
@@ -245,7 +255,9 @@ class EXP msrRepeatCommonPart : public msrRepeatElement
 //     std::list <S_msrVoiceElement>
 //                           fRepeatCommonPartElementsList;
 };
-typedef SMARTP<msrRepeatCommonPart> S_msrRepeatCommonPart;
+
+using S_msrRepeatCommonPart = SMARTP<msrRepeatCommonPart>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatCommonPart& elt);
 
 //______________________________________________________________________________
@@ -382,7 +394,9 @@ class EXP msrRepeatEnding : public msrRepeatElement
 //     std::list <S_msrVoiceElement>
 //                           fRepeatEndingElementsList;
 };
-typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
+
+using S_msrRepeatEnding = SMARTP<msrRepeatEnding>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt);
 
 //______________________________________________________________________________
@@ -595,7 +609,9 @@ class EXP msrRepeat : public msrSegmentElement
     msrRepeatBuildPhaseKind
                           fCurrentRepeatBuildPhaseKind;
 };
-typedef SMARTP<msrRepeat> S_msrRepeat;
+
+using S_msrRepeat = SMARTP<msrRepeat>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrRepeat& elt);
 
 
