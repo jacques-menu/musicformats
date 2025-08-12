@@ -1521,6 +1521,11 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
       break;
   } // switch
 
+  // get the current segment clone JMI 0.9.76 ???
+  fCurrentSegmentClone =
+    fCurrentVoiceClone->
+      getVoiceSegment ();
+
   // clear the voice notes map
   fVoiceNotesMap.clear ();
 
@@ -1615,11 +1620,20 @@ void msr2msrTranslator::visitStart (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // create a clone of the segment
-  fCurrentSegmentClone =
-    elt->createSegmentNewbornClone (
-      fCurrentVoiceClone);
+  // the container for the the original segment has just been cloned
+  // and fCurrentSegmentClone has been set accordingly,
+  // so there is nothing to be done here
 
+//   // create a clone of the segment
+//   fCurrentSegmentClone =
+//     elt->createSegmentNewbornClone (
+//       fCurrentVoiceClone);
+
+//   // get the current segment clone JMI 0.9.76 ???
+//   fCurrentSegmentClone =
+//     fCurrentVoiceClone->
+//       getVoiceCurrentRecipientSegment ();
+//
 //   // set it as the new voice last segment
 //   fCurrentVoiceClone->
 //     setVoiceLastSegmentInVoiceClone (
@@ -6439,6 +6453,14 @@ void msr2msrTranslator::visitStart (S_msrRepeatEnding& elt)
       elt->getInputLineNumber (),
       elt->getRepeatEndingKind (),
       elt->getRepeatEndingNumber ());
+
+  // the container for the the original segment has just been cloned
+  // and fCurrentSegmentClone has been set accordingly,
+
+  // get the current segment clone JMI 0.9.76 ???
+  fCurrentSegmentClone =
+    fCurrentVoiceClone->
+      getVoiceCurrentRecipientSegment ();
 }
 
 void msr2msrTranslator::visitEnd (S_msrRepeatEnding& elt)

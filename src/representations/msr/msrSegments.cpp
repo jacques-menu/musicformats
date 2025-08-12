@@ -499,48 +499,48 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
   }
 }
 
-void msrSegment::assertSegmentElementsListIsNotEmpty (
-  const mfInputLineNumber& inputLineNumber) const
-{
-  if (fSegmentElementsList.empty ()) {
-#ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceMeasuresDetails ()
-      ||
-    gTraceOahGroup->getTraceSegmentsDetails ()
-      ||
-    gTraceOahGroup->getTraceRepeatsDetails ()
-  ) {
-    fSegmentUpLinkToVoice->
-      displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
-        inputLineNumber,
-        "assertSegmentElementsListIsNotEmpty()");
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-    std::stringstream ss;
-
-    ss <<
-      "assertSegmentElementsListIsNotEmpty()" <<
-      ", fSegmentElementsList is empty in segment: " <<
-      this->asString () <<
-      ", in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      ", line " << inputLineNumber <<
-      std::endl;
-
-    gLog <<
-      ss.str () <<
-      std::endl;
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-}
+// void msrSegment::assertSegmentElementsListIsNotEmpty (
+//   const mfInputLineNumber& inputLineNumber) const
+// {
+//   if (fSegmentElementsList.empty ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (
+//     gTraceOahGroup->getTraceMeasuresDetails ()
+//       ||
+//     gTraceOahGroup->getTraceSegmentsDetails ()
+//       ||
+//     gTraceOahGroup->getTraceRepeatsDetails ()
+//   ) {
+//     fSegmentUpLinkToVoice->
+//       displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
+//         inputLineNumber,
+//         "assertSegmentElementsListIsNotEmpty()");
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//     std::stringstream ss;
+//
+//     ss <<
+//       "assertSegmentElementsListIsNotEmpty()" <<
+//       ", fSegmentElementsList is empty in segment: " <<
+//       this->asString () <<
+//       ", in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"" <<
+//       ", line " << inputLineNumber <<
+//       std::endl;
+//
+//     gLog <<
+//       ss.str () <<
+//       std::endl;
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// }
 
 S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
   const mfInputLineNumber& inputLineNumber,
@@ -731,41 +731,33 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
 
   ++gIndenter;
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  if (fSegmentElementsList.empty ()) {
-    std::stringstream ss;
-
-    ss <<
-      ", fSegmentElementsList is empty in segment " <<
-      this->asString () <<
-      ", in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      ", fSegmentAbsoluteNumber: " <<
-      fSegmentAbsoluteNumber <<
-      ", segmentNumber: " <<
-      fSegmentNumber <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
-
-    gLog <<
-      "fSegmentUpLinkToVoice:" <<
-      std::endl;
-    ++gIndenter;
-    gLog <<
-      fSegmentUpLinkToVoice <<
-      std::endl;
-    --gIndenter;
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      musicXMLPrintLayout->getInputLineNumber (),
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   if (fSegmentElementsList.empty ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "appendMusicXMLPrintLayoutToSegment()" <<
+//       ", fSegmentElementsList is empty in segment " <<
+//       this->asString () <<
+//       ", in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"" <<
+//       ", fSegmentAbsoluteNumber: " <<
+//       fSegmentAbsoluteNumber <<
+//       ", segmentNumber: " <<
+//       fSegmentNumber <<
+//       " in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"";
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       musicXMLPrintLayout->getInputLineNumber (),
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // register print layout in segments's current measure
   fSegmentLastMeasure->
@@ -927,41 +919,33 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 
   ++gIndenter;
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-//   if (false && fSegmentElementsList.empty ()) { // JMI 0.9.73
-  if (fSegmentElementsList.empty ()) { // JMI 0.9.73
-    std::stringstream ss;
-
-    ss <<
-      ", fSegmentElementsList is empty in segment " <<
-      this->asString () <<
-      ", in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      fSegmentAbsoluteNumber <<
-      ", segmentNumber: " <<
-      fSegmentNumber <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
-
-    gLog <<
-      "fSegmentUpLinkToVoice:" <<
-      std::endl;
-    ++gIndenter;
-    gLog <<
-      fSegmentUpLinkToVoice <<
-      std::endl;
-    --gIndenter;
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-       clefKeyTimeSignatureGroup->getInputLineNumber (),
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+// //   if (false && fSegmentElementsList.empty ()) { // JMI 0.9.73
+//   if (fSegmentElementsList.empty ()) { // JMI 0.9.73
+//     std::stringstream ss;
+//
+//     ss <<
+//       "appendClefKeyTimeSignatureGroupToSegment()" <<
+//       ", fSegmentElementsList is empty in segment " <<
+//       this->asString () <<
+//       ", in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"" <<
+//       fSegmentAbsoluteNumber <<
+//       ", segmentNumber: " <<
+//       fSegmentNumber <<
+//       " in voice \"" <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
+//       "\"";
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//        clefKeyTimeSignatureGroup->getInputLineNumber (),
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // register clefKeyTimeSignatureGroup in segments's current measure
   fSegmentLastMeasure->
@@ -1000,7 +984,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     std::stringstream ss;
 //
 //     ss <<
-//       ", fSegmentElementsList is empty in segment " <<
+//       "appendClefToSegment(): fSegmentElementsList is empty in segment " <<
 //       this->asString () <<
 //       ", in voice \"" <<
 //       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -1011,15 +995,6 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       " in voice \"" <<
 //       fSegmentUpLinkToVoice->getVoiceName () <<
 //       "\"";
-//
-//     gLog <<
-//       "fSegmentUpLinkToVoice:" <<
-//       std::endl;
-//     ++gIndenter;
-//     gLog <<
-//       fSegmentUpLinkToVoice <<
-//       std::endl;
-//     --gIndenter;
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
@@ -1067,7 +1042,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     std::stringstream ss;
 //
 //     ss <<
-//       ", fSegmentElementsList is empty in segment " <<
+//       "prependClefToSegment(): fSegmentElementsList is empty in segment " <<
 //       this->asString () <<
 //       ", in voice \"" <<
 //       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -1078,15 +1053,6 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       " in voice \"" <<
 //       fSegmentUpLinkToVoice->getVoiceName () <<
 //       "\"";
-//
-//     gLog <<
-//       "fSegmentUpLinkToVoice:" <<
-//       std::endl;
-//     ++gIndenter;
-//     gLog <<
-//       fSegmentUpLinkToVoice <<
-//       std::endl;
-//     --gIndenter;
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
@@ -2269,25 +2235,9 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //       fSegmentNumber <<
 //       " in voice \"" <<
 //       fSegmentUpLinkToVoice->getVoiceName () <<
-//       "\"";
-//
-//     gLog <<
-//       "fSegmentUpLinkToVoice:" <<
-//       std::endl;
-//     ++gIndenter;
-//     gLog <<
-//       fSegmentUpLinkToVoice <<
-//       std::endl;
-//     --gIndenter;
-//
-//     gLog <<
-//       "Part:" <<
-//       std::endl;
-//     ++gIndenter;
-//     gLog <<
-//       fSegmentUpLinkToVoice->fetchVoiceUpLinkToPart () <<
-//       std::endl;
-//     --gIndenter;
+//       "\"" <<
+//       ", part " <<
+//       fSegmentUpLinkToVoice->fetchVoiceUpLinkToPart ();
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
@@ -2629,11 +2579,11 @@ void msrSegment::prependBarLineToSegment (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  assertSegmentElementsListIsNotEmpty (
-    barLine->getInputLineNumber ());
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   assertSegmentElementsListIsNotEmpty (
+//     barLine->getInputLineNumber ());
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // prepend barLine to this segment
   ++gIndenter;

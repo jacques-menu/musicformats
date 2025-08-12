@@ -217,6 +217,22 @@ class EXP msrVoice : public msrElement
     std::string           getVoiceName () const
                               { return fVoiceName; }
 
+
+    // segments
+
+//     void                  setVoiceLastSegmentInVoiceClone (
+//                             const S_msrSegment& segment);
+
+//     void                  appendSegmentToVoiceClone (
+//                             const S_msrSegment& segment);
+
+    const S_msrSegment&   getVoiceCurrentRecipientSegment () const
+                              { return fVoiceCurrentRecipientSegment; }
+
+
+    const S_msrSegment&   getVoiceSegment () const
+                              { return fVoiceSegment; }
+
     // harmonies
 
 // JMI
@@ -240,17 +256,6 @@ class EXP msrVoice : public msrElement
     const std::map <mfStanzaNumber, S_msrStanza>&
                           getVoiceStanzasMap () const
                               { return fVoiceStanzasMap; }
-
-    // voice last segment
-
-//     void                  setVoiceLastSegmentInVoiceClone (
-//                             const S_msrSegment& segment);
-
-//     void                  appendSegmentToVoiceClone (
-//                             const S_msrSegment& segment);
-
-    const S_msrSegment&   getVoiceCurrentRecipientSegment () const
-                              { return fVoiceCurrentRecipientSegment; }
 
     // voice last appended note
 

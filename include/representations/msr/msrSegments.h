@@ -488,9 +488,9 @@ class EXP msrSegment : public msrElement
     void                  assertSegmentLastMeasureIsNotNull (
                             const mfInputLineNumber& inputLineNumber) const;
 
-    // necessary due to the complexity of repeats management
-    void                  assertSegmentElementsListIsNotEmpty (
-                            const mfInputLineNumber& inputLineNumber) const;
+//     // necessary due to the complexity of repeats management
+//     void                  assertSegmentElementsListIsNotEmpty (
+//                             const mfInputLineNumber& inputLineNumber) const;
 
   private:
 

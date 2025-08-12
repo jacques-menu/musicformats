@@ -2911,6 +2911,10 @@ void msr2bsrTranslator::visitStart (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // the container for the the original segment has just been cloned
+  // and fCurrentSegmentClone has been set accordingly,
+  // so there is nothing to be done here
+
 / * JMI
 
   // fetch the current segment clone
@@ -2918,6 +2922,11 @@ void msr2bsrTranslator::visitStart (S_msrSegment& elt)
     fCurrentVoiceClone->
       getVoiceLastSegment ();
       * /
+
+  // get the current segment clone JMI 0.9.76 ???
+  fCurrentSegmentClone =
+    fCurrentVoiceClone->
+      getVoiceCurrentRecipientSegment ();
 
   // create a clone of the segment
   S_msrSegment

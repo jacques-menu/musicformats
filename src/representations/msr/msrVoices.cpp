@@ -1444,7 +1444,7 @@ void msrVoice::setVoiceFirstMeasure (
   const S_msrMeasure& measure)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1468,7 +1468,7 @@ void msrVoice::appendMeasureCloneToVoiceClone (
   const S_msrMeasure&      measureClone)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1698,7 +1698,7 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
   fCallsCounter++;
 
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasures ()) {
+//   if (gTraceOahGroup->getTraceMeasuresBasics ()) {
 //     std::stringstream ss;
 //
 //     ss <<
@@ -1780,7 +1780,7 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
 
     // append it to the current multiple measure rests
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceMeasures ()) {
+    if (gTraceOahGroup->getTraceMeasuresBasics ()) {
       std::stringstream ss;
 
       ss <<
@@ -7029,6 +7029,11 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
       break;
   } // switch
 
+  // the new current segment has just been created in repeatCommonPart
+  fCurrentSegmentClone =
+    repeatEnding->
+      getfRepeatElementSegment ();
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
@@ -9800,6 +9805,11 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
   currentRepeat->
     setRepeatCommonPart (
       repeatCommonPart);
+
+  // the new current segment has just been created in repeatCommonPart
+  fCurrentSegmentClone =
+    repeatCommonPart->
+      getfRepeatElementSegment ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
