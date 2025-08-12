@@ -6883,11 +6883,13 @@ void msrVoice::handleRepeatEndingStartInVoice (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrVoice::handleRepeatEndingStartInVoiceClone (
+S_msrSegment msrVoice::handleRepeatEndingStartInVoiceClone (
   const mfInputLineNumber& inputLineNumber,
   msrRepeatEndingKind      repeatEndingKind,
   const std::string&       repeatEndingNumber) // a string, because if may be "1, 2" for example
 {
+  S_msrSegment result;
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
@@ -7001,6 +7003,11 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
               currentRepeat->
                 setCurrentRepeatBuildPhaseKind (
                   msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings);
+
+              // the new current segment has just been created in repeatCommonPart
+              result =
+                repeatEnding->
+                  getfRepeatElementSegment ();
             }
           break;
 
@@ -7029,11 +7036,6 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
       break;
   } // switch
 
-  // the new current segment has just been created in repeatCommonPart
-  fCurrentSegmentClone =
-    repeatEnding->
-      getfRepeatElementSegment ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
@@ -7041,6 +7043,8 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
       "handleRepeatEndingStartInVoiceClone() 2");
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  return result;
 }
 
 void msrVoice::handleSegmentCloneEndInVoiceClone (
@@ -9729,9 +9733,11 @@ void msrVoice::handleRepeatEndingEndInVoice (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrVoice::handleRepeatCommonPartStartInVoiceClone (
+S_msrSegment msrVoice::handleRepeatCommonPartStartInVoiceClone (
   const mfInputLineNumber& inputLineNumber) // a string, because if may be "1, 2" for example
 {
+  S_msrSegment result;
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
@@ -9807,7 +9813,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
       repeatCommonPart);
 
   // the new current segment has just been created in repeatCommonPart
-  fCurrentSegmentClone =
+  result =
     repeatCommonPart->
       getfRepeatElementSegment ();
 
@@ -9820,6 +9826,8 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
 #endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
+
+  return result;
 }
 
 void msrVoice::handleRepeatCommonPartEndInVoiceClone (

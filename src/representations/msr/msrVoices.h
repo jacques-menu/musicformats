@@ -710,13 +710,13 @@ class EXP msrVoice : public msrElement
                             const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind      repeatEndingKind);
 
-    void                  handleRepeatCommonPartStartInVoiceClone (
+    S_msrSegment          handleRepeatCommonPartStartInVoiceClone (
                             const mfInputLineNumber& inputLineNumber);
 
     void                  handleRepeatCommonPartEndInVoiceClone (
                             const mfInputLineNumber& inputLineNumber);
 
-    void                  handleRepeatEndingStartInVoiceClone (
+    S_msrSegment          handleRepeatEndingStartInVoiceClone (
                             const mfInputLineNumber& inputLineNumber,
                             msrRepeatEndingKind      repeatEndingKind,
                             const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example

@@ -11015,9 +11015,10 @@ void msr2mxsrTranslator::visitStart (S_msrRepeatCommonPart& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleRepeatCommonPartStartInVoiceClone (
-      elt->getInputLineNumber ());
+  fCurrentSegmentClone =
+    fCurrentVoiceClone->
+      handleRepeatCommonPartStartInVoiceClone (
+        elt->getInputLineNumber ());
 }
 
 void msr2mxsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
@@ -11074,11 +11075,12 @@ void msr2mxsrTranslator::visitStart (S_msrRepeatEnding& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleRepeatEndingStartInVoiceClone (
-      elt->getInputLineNumber (),
-      elt->getRepeatEndingKind (),
-      elt->getRepeatEndingNumber ());
+  fCurrentSegmentClone =
+    fCurrentVoiceClone->
+      handleRepeatEndingStartInVoiceClone (
+        elt->getInputLineNumber (),
+        elt->getRepeatEndingKind (),
+        elt->getRepeatEndingNumber ());
 }
 
 void msr2mxsrTranslator::visitEnd (S_msrRepeatEnding& elt)

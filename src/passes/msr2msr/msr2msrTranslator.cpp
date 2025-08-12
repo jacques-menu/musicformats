@@ -6389,9 +6389,10 @@ void msr2msrTranslator::visitStart (S_msrRepeatCommonPart& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleRepeatCommonPartStartInVoiceClone (
-      elt->getInputLineNumber ());
+  fCurrentSegmentClone =
+    fCurrentVoiceClone->
+      handleRepeatCommonPartStartInVoiceClone (
+        elt->getInputLineNumber ());
 }
 
 void msr2msrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
@@ -6448,19 +6449,15 @@ void msr2msrTranslator::visitStart (S_msrRepeatEnding& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleRepeatEndingStartInVoiceClone (
-      elt->getInputLineNumber (),
-      elt->getRepeatEndingKind (),
-      elt->getRepeatEndingNumber ());
+  fCurrentSegmentClone =
+    fCurrentVoiceClone->
+      handleRepeatEndingStartInVoiceClone (
+        elt->getInputLineNumber (),
+        elt->getRepeatEndingKind (),
+        elt->getRepeatEndingNumber ());
 
   // the container for the the original segment has just been cloned
   // and fCurrentSegmentClone has been set accordingly,
-
-  // get the current segment clone JMI 0.9.76 ???
-  fCurrentSegmentClone =
-    fCurrentVoiceClone->
-      getVoiceCurrentRecipientSegment ();
 }
 
 void msr2msrTranslator::visitEnd (S_msrRepeatEnding& elt)
