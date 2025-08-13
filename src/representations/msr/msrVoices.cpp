@@ -346,10 +346,11 @@ void msrVoice::initializeVoice (
   ++gIndenter;
 
   // compute voice number
-  mfVoiceNumber voiceNumber =
-    gMsrOahGroup->getCreateVoicesStaffRelativeNumbers ()
-      ? fRegularVoiceStaffSequentialNumber
-      : fVoiceNumber;
+  mfVoiceNumber
+    voiceNumber =
+      gMsrOahGroup->getCreateVoicesStaffRelativeNumbers ()
+        ? fRegularVoiceStaffSequentialNumber
+        : fVoiceNumber;
 
   // set voice name
   setVoiceNamesFromNumber (
@@ -430,7 +431,7 @@ void msrVoice::initializeVoice (
 
   // set it as the current voice recipient segment
   // this will change when repeats within the voice are being built
-  fVoiceCurrentRecipientSegment = fVoiceSegment;
+  setVoiceCurrentRecipientSegment (fVoiceSegment);
 
   // voice shortest note
   fVoiceShortestNoteWholeNotes =
@@ -558,6 +559,27 @@ void msrVoice::initializeVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
+}
+
+void msrVoice::setVoiceCurrentRecipientSegment (S_msrSegment segment)
+{
+ #ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting voice current recipient segment in " <<
+      asString () <<
+      " to " <<
+      segment->asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fVoiceCurrentRecipientSegment = fVoiceSegment;
 }
 
 S_msrPart msrVoice::fetchVoiceUpLinkToPart () const
@@ -2194,9 +2216,8 @@ void msrVoice::appendMusicXMLPrintLayoutToVoice (
 
     ss <<
       "Appending print layout " << musicXMLPrintLayout->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2223,9 +2244,8 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
     ss <<
       "Appending clefKeyTimeSignatureGroup " <<
       clefKeyTimeSignatureGroup->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2379,9 +2399,8 @@ void msrVoice::appendTimeSignatureToVoice (
     ss <<
       "Appending time signature " <<
       timeSignature->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3201,9 +3220,8 @@ void msrVoice::appendTranspositionToVoice (
     ss <<
       "Appending transposition " <<
       transposition->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3225,9 +3243,8 @@ void msrVoice::appendStaffDetailsToVoice (
     ss <<
       "Appending staff details " <<
       staffDetails->asShortString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3258,9 +3275,8 @@ void msrVoice::appendTempoToVoice (
     ss <<
       "Appending tempo " <<
       tempo->asShortString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3283,9 +3299,8 @@ void msrVoice::appendOctaveShiftToVoice (
       "Appending octave shift " <<
       octaveShift->getOctaveShiftKind () <<
       "', size: " << octaveShift->getOctaveShiftSize () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3307,9 +3322,8 @@ void msrVoice::appendScordaturaToVoice (
     ss <<
       "Appending scordatura " <<
       scordatura->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3332,9 +3346,8 @@ void msrVoice::appendAccordionRegistrationToVoice (
     ss <<
       "Appending accordion registration " <<
       accordionRegistration->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3358,9 +3371,8 @@ void msrVoice::appendHarpPedalsTuningToVoice (
     ss <<
       "Appending harp pedals tuning " <<
       harpPedalsTuning->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3382,9 +3394,8 @@ void msrVoice::appendRehearsalMarkToVoice (
 
     ss <<
       "Appending rehearsalMark " << rehearsalMark->getRehearsalMarkText () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3668,9 +3679,8 @@ void msrVoice::appendDoubleTremoloToVoice (
     ss <<
       "Appending double tremolo " <<
       doubleTremolo->asShortString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3773,9 +3783,8 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
 
     ss <<
       "Appending tuplet " << tuplet->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3959,9 +3968,8 @@ void msrVoice::appendAfterGraceNotesToVoice (
 
     ss <<
       "Appending after grace notes " << // JMI AfterGraceNotes <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3984,9 +3992,8 @@ void msrVoice::prependAfterGraceNotesToVoice (
 
     ss <<
       "Prepending after grace notes " << // JMI AfterGraceNotes <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4015,9 +4022,8 @@ void msrVoice::appendSyllableToVoice (
     ss <<
       "Appending syllable " <<
       syllable->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4050,9 +4056,8 @@ void msrVoice::appendBarCheckToVoice (
     ss <<
       "Appending bar check " <<
       barCheck->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4074,9 +4079,8 @@ void msrVoice::appendBarNumberCheckToVoice (
     ss <<
       "Appending barnumber check " <<
       barNumberCheck->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4097,9 +4101,8 @@ void msrVoice::appendLineBreakToVoice  (
 
     ss <<
       "Appending line break " << lineBreak->asString () <<
-      " to voice \"" <<
-      fVoiceName <<
-      "\"";
+      " to voice " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -7007,7 +7010,7 @@ S_msrSegment msrVoice::handleRepeatEndingStartInVoiceClone (
               // the new current segment has just been created in repeatCommonPart
               result =
                 repeatEnding->
-                  getfRepeatElementSegment ();
+                  getRepeatElementSegment ();
             }
           break;
 
@@ -9815,7 +9818,7 @@ S_msrSegment msrVoice::handleRepeatCommonPartStartInVoiceClone (
   // the new current segment has just been created in repeatCommonPart
   result =
     repeatCommonPart->
-      getfRepeatElementSegment ();
+      getRepeatElementSegment ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -11797,13 +11800,13 @@ std::string msrVoice::asShortString () const
 
   ss <<
     "[Voice " << fVoicePathLikeName <<
-    ", " <<
+    ", fVoiceKind: " <<
     fVoiceKind <<
-//     msrVoiceKindAsStringForPrint (fVoiceKind) << // JMI
-    " voice " << fVoiceName <<
-    ", fVoiceNumber " <<
+    ", fVoiceSegment: " <<
+    fVoiceSegment->asString () <<
+    ", fVoiceNumber: " <<
     fVoiceNumber <<
-    ", fRegularVoiceOrdinalNumberInPart " <<
+    ", fRegularVoiceOrdinalNumberInPart: " <<
     fRegularVoiceOrdinalNumberInPart <<
     ", line " << fInputLineNumber <<
     ']';
@@ -11816,12 +11819,13 @@ std::string msrVoice::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Voice " << fVoicePathLikeName <<
-//     msrVoiceKindAsStringForPrint (fVoiceKind) <<
-    ", " <<
+    "[Voice " <<
+    ", fVoicePathLikeName: " <<
     fVoicePathLikeName <<
-    ", " <<
+    ", fVoiceKind: " <<
     fVoiceKind <<
+    ", fVoiceSegment: " <<
+    fVoiceSegment->asString () <<
      ", " <<
     mfSingularOrPlural (
       fVoiceActualNotesCounter, "actual note", "actual notes") <<
