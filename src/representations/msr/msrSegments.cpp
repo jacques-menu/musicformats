@@ -800,7 +800,7 @@ void msrSegment::appendRepeatToSegment (
     std::stringstream ss;
 
     ss <<
-      "Appending beat repeat " <<
+      "Appending repeat " <<
       repeat->asString () <<
       " to segment " <<
       asString () <<
@@ -814,6 +814,24 @@ void msrSegment::appendRepeatToSegment (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+//   for (
+//     std::list <S_msrVoiceElement>::iterator i = fVoiceInitialElementsList.begin ();
+//     i != fVoiceInitialElementsList.end ();
+//     ++i
+//   ) {
+//     S_msrVoiceElement element = (*i);
+//
+//     // append the element to the new segment
+//     repeatCommonPart->
+//       appendVoiceElementToRepeatCommonPart (
+//         inputLineNumber,
+//         element,
+//         "moveVoiceInitialElementsToRepeatCommonPart()");
+//
+//     // remove it from the voice initial elements
+//     i = fVoiceInitialElementsList.erase (i);
+//   } // for
 
   appendSegmentElementToSegment (repeat);
 }

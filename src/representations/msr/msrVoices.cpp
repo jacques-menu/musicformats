@@ -4733,16 +4733,20 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
 #endif // MF_TRACE_IS_ENABLED
 
   S_msrRepeat
-    result =
+    newRepeat =
       msrRepeat::create (
         inputLineNumber,
         2, // repeatTimes, default value JMI
         this);
 
+  // append newRepeat to the voice's segment
+  fVoiceSegment->
+    appendRepeatToSegment (newRepeat);
+
   // push it onto the voice's repeat descrs stack
   pushRepeatOntoVoiceRepeatsStack (
     inputLineNumber,
-    result,
+    newRepeat,
     "createARepeatAndStackIt() 1");
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -4753,7 +4757,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  return result;
+  return newRepeat;
 }
 
 S_msrRepeat msrVoice::createARepeatCloneAndStackIt (
@@ -6097,9 +6101,9 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 //     currentRepeat,
 //     "handleVoiceLevelRepeatEndWithStart() 4");
 
-  // append endingRepeat to the voice's segment
-  fVoiceSegment->
-    appendRepeatToSegment (endingRepeat);
+//   // append endingRepeat to the voice's segment
+//   fVoiceSegment->
+//     appendRepeatToSegment (endingRepeat);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
