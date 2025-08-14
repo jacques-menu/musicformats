@@ -1,8 +1,8 @@
 \version "2.24.4"
 
 % Generated from "AMereNote.xml"
-% by xml2ly v0.9.75-dev (built June 13, 2025)
-% on Saturday 2025-06-14 @ 08:24:16 CEST
+% by xml2ly 0.9.76-dev (built on August 13, 2025)
+% on Thursday 2025-08-14 @ 10:59:35 CEST
 
 % The conversion command as supplied was: 
 %  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name AMereNote.ly AMereNote.xml
@@ -85,7 +85,7 @@
     \column {
       \fill-line {
         #(string-append
-"Score generated from MusicXML data by xml2ly v0.9.75-dev (built June 13, 2025) and LilyPond " (lilypond-version))
+"Score generated from MusicXML data by xml2ly 0.9.76-dev (built on August 13, 2025) and LilyPond " (lilypond-version))
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }

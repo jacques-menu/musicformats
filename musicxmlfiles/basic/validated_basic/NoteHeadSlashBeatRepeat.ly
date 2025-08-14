@@ -1,13 +1,13 @@
 \version "2.24.4"
 
-% Generated from "TestDirection.xml"
+% Generated from "NoteHeadSlashBeatRepeat.xml"
 % by xml2ly 0.9.76-dev (built on August 13, 2025)
-% on Thursday 2025-08-14 @ 10:59:43 CEST
+% on Thursday 2025-08-14 @ 10:59:40 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name TestDirection.ly TestDirection.xml
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name NoteHeadSlashBeatRepeat.ly NoteHeadSlashBeatRepeat.xml
 % or, with short option names:
-%     TestDirection.ly TestDirection.xml
+%     NoteHeadSlashBeatRepeat.ly NoteHeadSlashBeatRepeat.xml
 
 
 % Scheme function(s): "date & time"
@@ -40,8 +40,10 @@
 
 
 \header {
-  movementTitle       = "TestDirection"
-  title               = "TestDirection"
+  workCreditTypeTitle = "Note Head Slash - Beat Repeat"
+  encodingDate        = "2019-07-17"
+  software            = "MuseScore 3.2.3"
+  title               = "Note Head Slash - Beat Repeat"
 }
 
 \paper {
@@ -111,10 +113,12 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  \clef "treble"
+  \clef "bass"
   \key c \major
   \numericTimeSignature \time 4/4
-c'1 ^\markup { \bold "Moderato   MM 1/4=90" } ^\markup { \bold "Nr. I      Lasset die Bären erwachen" } }
+  \stemDown f4 \tweak style #'slash f \tweak style #'slash f \tweak style #'slash f
+  \bar "|."
+}
 
 \book {
 
@@ -125,7 +129,8 @@ c'1 ^\markup { \bold "Moderato   MM 1/4=90" } ^\markup { \bold "Nr. I      Lasse
       
         \new Staff  = "Part_POne_Staff_One"
         \with {
-          instrumentName = "Music"
+          instrumentName = "Piano"
+          shortInstrumentName = "Pno."
         }
         <<
           \context Voice = "Part_POne_Staff_One_Voice_One" <<

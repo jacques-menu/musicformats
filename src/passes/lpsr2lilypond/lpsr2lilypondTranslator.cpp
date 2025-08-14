@@ -7273,11 +7273,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
         getIdentificationComposersList ();
 
   if (! composersList.empty ()) {
-    std::list <std::string>::const_iterator i;
-
-    for (i = composersList.begin (); i != composersList.end (); ++i) {
-      std::string composer = (*i);
-
+    for (std::string composer : composersList) {
       nameStringValuePairsList.push_back (
         std::make_pair (
           "composer",
@@ -7292,14 +7288,10 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
         getIdentificationLyricistsList ();
 
   if (! lyricistsList.empty ()) {
-    std::list <std::string>::const_iterator i;
-
-    for (i = lyricistsList.begin (); i != lyricistsList.end (); ++i) {
-      std::string lyricist = (*i);
-
+    for (std::string lyricist : lyricistsList) {
       nameStringValuePairsList.push_back (
         std::make_pair (
-          "lyricist",
+          "poet", // NOT lyricist!
           lyricist));
     } // for
   }
@@ -7311,11 +7303,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
         getIdentificationArrangersList ();
 
   if (! arrangersList.empty ()) {
-    std::list <std::string>::const_iterator i;
-
-    for (i = arrangersList.begin (); i != arrangersList.end (); ++i) {
-      std::string arranger = (*i);
-
+    for (std::string arranger : arrangersList) {
       nameStringValuePairsList.push_back (
         std::make_pair (
           "arranger",
@@ -7332,9 +7320,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
   if (! poetsList.empty ()) {
     std::list <std::string>::const_iterator i;
 
-    for (i = poetsList.begin (); i != poetsList.end (); ++i) {
-      std::string poet = (*i);
-
+    for (std::string poet : poetsList) {
       nameStringValuePairsList.push_back (
         std::make_pair (
           "poet",
@@ -7351,9 +7337,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
   if (! translatorsList.empty ()) {
     std::list <std::string>::const_iterator i;
 
-    for (i = translatorsList.begin (); i != translatorsList.end (); ++i) {
-      std::string translator = (*i);
-
+    for (std::string translator : translatorsList) {
       nameStringValuePairsList.push_back (
         std::make_pair (
           "translator",
@@ -7370,9 +7354,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
   if (! artistsList.empty ()) {
     std::list <std::string>::const_iterator i;
 
-    for (i = artistsList.begin (); i != artistsList.end (); ++i) {
-      std::string artist = (*i);
-
+    for (std::string artist : artistsList) {
       nameStringValuePairsList.push_back (
         std::make_pair (
           "artist",
@@ -7389,9 +7371,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
   if (! softwaresList.empty ()) {
     std::list <std::string>::const_iterator i;
 
-    for (i = softwaresList.begin (); i != softwaresList.end (); ++i) {
-      std::string software = (*i);
-
+    for (std::string software : softwaresList) {
       nameStringValuePairsList.push_back (
         std::make_pair (
           "software",
@@ -7408,9 +7388,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
   if (! rightsList.empty ()) {
     std::list <std::string>::const_iterator i;
 
-    for (i = rightsList.begin (); i != rightsList.end (); ++i) {
-      std::string right = (*i);
-
+    for (std::string right : rightsList) {
       nameStringValuePairsList.push_back (
         std::make_pair (
           "right",
@@ -7427,9 +7405,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
   if (! sourcesList.empty ()) {
     std::list <std::string>::const_iterator i;
 
-    for (i = sourcesList.begin (); i != sourcesList.end (); ++i) {
-      std::string source = (*i);
-
+    for (std::string source : sourcesList) {
       nameStringValuePairsList.push_back (
         std::make_pair (
           "source",
@@ -7446,9 +7422,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
   if (! relationsList.empty ()) {
     std::list <std::string>::const_iterator i;
 
-    for (i = relationsList.begin (); i != relationsList.end (); ++i) {
-      std::string relation = (*i);
-
+    for (std::string relation : relationsList) {
       nameStringValuePairsList.push_back (
         std::make_pair (
           "relation",
@@ -7462,14 +7436,9 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       "% --> The identification nameStringValuePairsList contains:" <<
       std::endl;
 
-    for (
-      std::list <std::pair <std::string, std::string>>::const_iterator i =
-        nameStringValuePairsList.begin ();
-      i != nameStringValuePairsList.end ();
-      ++i
-    ) {
-      std::string name = (*i).first;
-      std::string value = (*i).second;
+    for (std::pair <std::string, std::string> thePair : nameStringValuePairsList) {
+      std::string name = thePair.first;
+      std::string value = thePair.second;
 
       fLilypondCodeStream <<
         "% " << name << " ---> " << value <<

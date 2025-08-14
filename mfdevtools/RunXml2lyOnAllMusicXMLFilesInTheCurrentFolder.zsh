@@ -76,6 +76,12 @@ echo
 rm -f *.ly *.pdf *.midi *.log
 
 
+# # empty the MusicXML files names array
+# # ---------------------------------------------------------
+#
+# MUSICXML_FILE_NAMES_ARRAY=()
+
+
 # select which files to translate
 # ---------------------------------------------------------
 
@@ -230,7 +236,7 @@ function HandleAllMusicXMLFilesInCurrentDirectory ()
 
   FILES_NBR=$(ls *.xml | wc -l)
 
-  echo "There are $FILES_NBR MusicXML files to be translated"
+  echo "There are $FILES_NBR MusicXML files to be translated in $PWD"
   echo
 
   for FILE_NAME in ls *.xml ; do
@@ -238,7 +244,10 @@ function HandleAllMusicXMLFilesInCurrentDirectory ()
     echo "----------------------------"
     echo "==> FILE_NAME: $FILE_NAME:"
 
-    RunXml2lyOnFile ""$FILE_NAME
+    # temporary fix to file 'ls' being found...
+    if [ -e $FILE_NAME ]; then
+      RunXml2lyOnFile $FILE_NAME
+    fi
   done
 }
 
@@ -253,7 +262,7 @@ function HandletheMusicXMLFilesPassedAsArguments ()
   echo '$@:                       ' $@
 
   FILES_NBR=${#[@]}
-  echo "There are $FILES_NBR files to be translated"
+  echo "There are $FILES_NBR files to be translated in $@"
   echo
 
   for FILE_NAME in $@ ; do
@@ -276,7 +285,7 @@ function DisplayTheResultingFiles ()
   echo "==> MUSICXML_FILE_NAMES_ARRAY: $MUSICXML_FILE_NAMES_ARRAY:"
   echo "----------------------------"
   FILES_NBR=${#MUSICXML_FILE_NAMES_ARRAY[@]}
-  echo "There are $FILES_NBR handled MusicXML files:"
+  echo "There are $FILES_NBR MusicXML files:"
   echo
   for FILE_NAME in $MUSICXML_FILE_NAMES_ARRAY ; do
     if [ -f $FILE_NAME ]; then

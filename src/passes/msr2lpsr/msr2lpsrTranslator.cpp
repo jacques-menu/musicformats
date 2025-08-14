@@ -2921,6 +2921,11 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
       break;
   } // switch
 
+  // get the current segment clone JMI 0.9.76 ???
+  fCurrentSegmentClone =
+    fCurrentVoiceClone->
+      getVoiceSegment ();
+
   // clear the voice notes map
   fVoiceNotesMap.clear ();
 
@@ -8132,7 +8137,7 @@ void msr2lpsrTranslator::visitStart (S_msrRepeatEnding& elt)
   fCurrentSegmentClone =
     fCurrentVoiceClone->
       handleRepeatEndingStartInVoiceClone (
-         elt->getInputLineNumber (),
+        elt->getInputLineNumber (),
         elt->getRepeatEndingKind (),
         elt->getRepeatEndingNumber ());
 }

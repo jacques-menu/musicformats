@@ -1508,9 +1508,9 @@ void msrVoice::appendMeasureCloneToVoiceClone (
 
   ++gIndenter;
 
-//   // append measureClone to the voice last segment
-//   fVoiceCurrentRecipientSegment->
-//     appendMeasureToSegment (measureClone);
+  // append measureClone to the voice last segment
+  fVoiceCurrentRecipientSegment->
+    appendMeasureToSegment (measureClone);
 
   // measureClone is the new voice last appended measure
   setVoiceLastAppendedMeasure (
@@ -5611,7 +5611,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
     std::stringstream ss;
 
     ss <<
-      "Handling a voice-level repeat end without start in voice \"" <<
+      "Handling a voice-level repeat end WITHOUT start in voice \"" <<
       fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber;
@@ -6013,20 +6013,20 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 
   // grab current repeat
   S_msrRepeat
-    currentRepeat =
+    endingRepeat =
       fVoicePendingRepeatsStack.front ();
 
   // pop it from the repeats stack
   popRepeatFromVoiceRepeatsStack (
     inputLineNumber,
-    currentRepeat,
+    endingRepeat,
     "handleVoiceLevelRepeatEndWithStart() 2");
 
   // set its repeat times field
-  currentRepeat->
+  endingRepeat->
     setRepeatTimes (repeatTimes);
 
-  // create the currentRepeat's common part
+  // create the endingRepeat's common part
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
@@ -6047,10 +6047,10 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
     repeatCommonPart =
       msrRepeatCommonPart::create (
         inputLineNumber,
-        currentRepeat);
+        endingRepeat);
 
-  // register it in newRepeat
-  currentRepeat->
+  // register it in endingRepeat
+  endingRepeat->
     setRepeatCommonPart (
       repeatCommonPart);
 
@@ -6086,16 +6086,20 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
   }
     */
 
-  // set currentRepeat's build phase to completed
-  currentRepeat->
+  // set endingRepeat's build phase to completed
+  endingRepeat->
     setCurrentRepeatBuildPhaseKind (
       msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted);
 
-//   // append currentRepeat to the list of initial elements
+//   // append endingRepeat to the list of initial elements
 //   appendRepeatToInitialVoiceElementsList (
 //     inputLineNumber,
 //     currentRepeat,
 //     "handleVoiceLevelRepeatEndWithStart() 4");
+
+  // append endingRepeat to the voice's segment
+  fVoiceSegment->
+    appendRepeatToSegment (endingRepeat);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {

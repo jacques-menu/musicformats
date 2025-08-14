@@ -2390,7 +2390,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       '\'';
 
     ss <<
-      ", " <<
+      ' ' <<
       measure->asString () <<
       " to segment " <<
       asString () <<

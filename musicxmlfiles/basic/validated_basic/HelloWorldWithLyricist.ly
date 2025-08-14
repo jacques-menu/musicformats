@@ -1,13 +1,13 @@
 \version "2.24.4"
 
-% Generated from "TestDirection.xml"
+% Generated from "HelloWorldWithLyricist.xml"
 % by xml2ly 0.9.76-dev (built on August 13, 2025)
-% on Thursday 2025-08-14 @ 10:59:43 CEST
+% on Thursday 2025-08-14 @ 10:59:37 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name TestDirection.ly TestDirection.xml
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name HelloWorldWithLyricist.ly HelloWorldWithLyricist.xml
 % or, with short option names:
-%     TestDirection.ly TestDirection.xml
+%     HelloWorldWithLyricist.ly HelloWorldWithLyricist.xml
 
 
 % Scheme function(s): "date & time"
@@ -40,8 +40,14 @@
 
 
 \header {
-  movementTitle       = "TestDirection"
-  title               = "TestDirection"
+  workCreditTypeTitle = "Hello World With Lyricist"
+  encodingDate        = "2011-08-08"
+  composer            = "Ludwig van Beethoven"
+  lyricist            = "Aloys Jeitteles"
+  software            = "Finale 2011 for Windows"
+  software            = "Dolet 6.0 for Finale"
+  right               = "Copyright © 2002 Recordare LLC"
+  title               = "Hello World With Lyricist"
 }
 
 \paper {
@@ -114,7 +120,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
   \clef "treble"
   \key c \major
   \numericTimeSignature \time 4/4
-c'1 ^\markup { \bold "Moderato   MM 1/4=90" } ^\markup { \bold "Nr. I      Lasset die Bären erwachen" } }
+c'1 }
 
 \book {
 

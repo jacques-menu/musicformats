@@ -1,13 +1,15 @@
 \version "2.24.4"
 
 % Generated from "Lyricist.xml"
-% by xml2ly v0.9.75-dev (built June 13, 2025)
-% on Saturday 2025-06-14 @ 08:24:19 CEST
+% by xml2ly 0.9.76-dev (built on August 13, 2025)
+% on Thursday 2025-08-14 @ 09:01:54 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name Lyricist.ly Lyricist.xml
+%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos Lyricist.xml -dlpsr
+% or, with long option names:
+%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos Lyricist.xml -display-lpsr
 % or, with short option names:
-%     Lyricist.ly Lyricist.xml
+%      Lyricist.xml
 
 
 % Scheme function(s): "date & time"
@@ -91,7 +93,7 @@
     \column {
       \fill-line {
         #(string-append
-"Score generated from MusicXML data by xml2ly v0.9.75-dev (built June 13, 2025) and LilyPond " (lilypond-version))
+"Score generated from MusicXML data by xml2ly 0.9.76-dev (built on August 13, 2025) and LilyPond " (lilypond-version))
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
