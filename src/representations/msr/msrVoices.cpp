@@ -5489,16 +5489,16 @@ void msrVoice::handleVoiceLevelRepeatStart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  S_msrRepeatCommonPart
-    repeatCommonPart =
-      msrRepeatCommonPart::create (
-        inputLineNumber,
-        newRepeat);
-
-  // register it in newRepeat
-  newRepeat->
-    setRepeatCommonPart (
-      repeatCommonPart);
+//   S_msrRepeatCommonPart
+//     repeatCommonPart =
+//       msrRepeatCommonPart::create (
+//         inputLineNumber,
+//         newRepeat);
+//
+//   // register it in newRepeat
+//   newRepeat->
+//     setRepeatCommonPart (
+//       repeatCommonPart);
 
   // set newRepeat as having an explicit start
   newRepeat->
@@ -5693,16 +5693,16 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  S_msrRepeatCommonPart
-    repeatCommonPart =
-      msrRepeatCommonPart::create (
-        repeatInputLineNumber,
-        newRepeat);
-
-  // register it in newRepeat
-  newRepeat->
-    setRepeatCommonPart (
-      repeatCommonPart);
+//   S_msrRepeatCommonPart
+//     repeatCommonPart =
+//       msrRepeatCommonPart::create (
+//         repeatInputLineNumber,
+//         newRepeat);
+//
+//   // register it in newRepeat
+//   newRepeat->
+//     setRepeatCommonPart (
+//       repeatCommonPart);
 
   // fetch the last segment's last measure
   S_msrMeasure
@@ -5864,16 +5864,16 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  S_msrRepeatCommonPart
-    newRepeatCommonPart =
-      msrRepeatCommonPart::create (
-        repeatInputLineNumber,
-        newRepeat);
-
-  // register it in newRepeat
-  newRepeat->
-    setRepeatCommonPart (
-      newRepeatCommonPart);
+//   S_msrRepeatCommonPart
+//     newRepeatCommonPart =
+//       msrRepeatCommonPart::create (
+//         repeatInputLineNumber,
+//         newRepeat);
+//
+//   // register it in newRepeat
+//   newRepeat->
+//     setRepeatCommonPart (
+//       newRepeatCommonPart);
 
   // fetch the last segment's last measure
   S_msrMeasure
@@ -6047,16 +6047,16 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  S_msrRepeatCommonPart
-    repeatCommonPart =
-      msrRepeatCommonPart::create (
-        inputLineNumber,
-        endingRepeat);
-
-  // register it in endingRepeat
-  endingRepeat->
-    setRepeatCommonPart (
-      repeatCommonPart);
+//   S_msrRepeatCommonPart
+//     repeatCommonPart =
+//       msrRepeatCommonPart::create (
+//         inputLineNumber,
+//         endingRepeat);
+//
+//   // register it in endingRepeat
+//   endingRepeat->
+//     setRepeatCommonPart (
+//       repeatCommonPart);
 
   // move the voice last segment to the new repeat common part
 #ifdef MF_TRACE_IS_ENABLED
@@ -6391,15 +6391,15 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    repeatCommonPart =
-      msrRepeatCommonPart::create (
-        repeatInputLineNumber,
-        currentRepeat);
-
-    // register it in newRepeat
-    currentRepeat->
-      setRepeatCommonPart (
-        repeatCommonPart);
+//     repeatCommonPart =
+//       msrRepeatCommonPart::create (
+//         repeatInputLineNumber,
+//         currentRepeat);
+//
+//     // register it in newRepeat
+//     currentRepeat->
+//       setRepeatCommonPart (
+//         repeatCommonPart);
   }
 
   // fetch last measure
@@ -9812,16 +9812,16 @@ S_msrSegment msrVoice::handleRepeatCommonPartStartInVoiceClone (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  S_msrRepeatCommonPart
-    repeatCommonPart =
-      msrRepeatCommonPart::create (
-        inputLineNumber,
-        currentRepeat);
-
-  // register it in currentRepeat
-  currentRepeat->
-    setRepeatCommonPart (
-      repeatCommonPart);
+//   S_msrRepeatCommonPart
+//     repeatCommonPart =
+//       msrRepeatCommonPart::create (
+//         inputLineNumber,
+//         currentRepeat);
+//
+//   // register it in currentRepeat
+//   currentRepeat->
+//     setRepeatCommonPart (
+//       repeatCommonPart);
 
   // the new current segment has just been created in repeatCommonPart
   result =

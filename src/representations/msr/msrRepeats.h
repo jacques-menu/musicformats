@@ -432,6 +432,16 @@ class EXP msrRepeat : public msrSegmentElement
 
     virtual               ~msrRepeat ();
 
+  private:
+
+    // private initialization
+    // ------------------------------------------------------
+
+    void                  initializeRepeat (
+                            const mfInputLineNumber& inputLineNumber,
+                            int                      repeatTimes,
+                            const S_msrVoice&        upLinkToVoice);
+
   public:
 
     // set and get

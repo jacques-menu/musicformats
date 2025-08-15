@@ -1600,6 +1600,17 @@ msrRepeat::msrRepeat (
     "upLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
+  initializeRepeat (
+    inputLineNumber,
+    repeatTimes,
+    upLinkToVoice);
+}
+
+void msrRepeat::initializeRepeat (
+  const mfInputLineNumber& inputLineNumber,
+  int                      repeatTimes,
+  const S_msrVoice&        upLinkToVoice)
+{
   fRepeatTimes = repeatTimes;
 
   fRepeatExplicitStartKind =
@@ -1611,7 +1622,19 @@ msrRepeat::msrRepeat (
   fCurrentRepeatBuildPhaseKind =
     msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated;
 
+  // set uplink to voice
   fRepeatUpLinkToVoice = upLinkToVoice;
+
+  // create the repeat common part
+  S_msrRepeatCommonPart
+    repeatCommonPart =
+      msrRepeatCommonPart::create (
+        inputLineNumber,
+        newRepeat);
+
+  // register it in newRepeat
+  setRepeatCommonPart (
+    repeatCommonPart);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {

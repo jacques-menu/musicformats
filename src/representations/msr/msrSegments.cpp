@@ -815,6 +815,41 @@ void msrSegment::appendRepeatToSegment (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+//   // should the current/last measure be moved inside the repeat common part?
+//   S_msrVoice
+//     containingVoice =
+//       getSegmentUpLinkToVoice ();
+
+  if (fSegmentLastMeasure) {
+    // are there elements before the current last measure in this segment?
+    if (
+      fSegmentLastMeasure->getMeasureIsMusicallyEmpty ()
+        &&
+      ! fSegmentElementsList.empty ()
+    ) {
+      // the are non-musical elements before the repeat in fSegmentLastMeasure:
+      // the latter belongs actually to the repeat's common part
+
+      // append the last segment measure to the repeat's common part
+      S_msrRepeatCommonPart
+        repeatCommonPart =
+          repeat->getRepeatCommonPart ();
+
+      S_msrSegment
+        repeatCommonPartSegment =
+          repeatCommonPart->getRepeatElementSegment ();
+
+      repeatCommonPartSegment->
+        appendMeasureToSegment (fSegmentLastMeasure);
+
+      // remove it from the segment elements list
+//       fSegmentElementsList.erase (fSegmentLastMeasure);
+      fSegmentElementsList.pop_back ();
+
+      // remove it from the segment measures list
+//       fSegmentMeasuresList.erase (fSegmentLastMeasure);
+      fSegmentMeasuresList.pop_back ();
+    }
 //   for (
 //     std::list <S_msrVoiceElement>::iterator i = fVoiceInitialElementsList.begin ();
 //     i != fVoiceInitialElementsList.end ();
@@ -832,6 +867,7 @@ void msrSegment::appendRepeatToSegment (
 //     // remove it from the voice initial elements
 //     i = fVoiceInitialElementsList.erase (i);
 //   } // for
+  }
 
   appendSegmentElementToSegment (repeat);
 }
