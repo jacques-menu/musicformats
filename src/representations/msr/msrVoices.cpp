@@ -4278,7 +4278,7 @@ void msrVoice::pushRepeatOntoVoiceRepeatsStack (
 
     ss <<
       "Pushing repeat ***** " <<
-      repeat->asShortString () <<
+      "repeat->asShortString ()" <<
       " onto the repeats stack in voice \"" <<
       fVoiceName <<
       "\"" <<
@@ -5607,8 +5607,8 @@ void msrVoice::handleRepeatStartInVoice (
 
 void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
   const mfInputLineNumber& inputLineNumber,
-  const mfMeasureNumber& measureNumber,
-  int                repeatTimes)
+  const mfMeasureNumber&   measureNumber,
+  int                      repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -5667,31 +5667,31 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int repeatInputLineNumber = 1; // could find first measure's input line number??? JMI
-
-  S_msrRepeat
-    newRepeat =
-      msrRepeat::create (
-        repeatInputLineNumber,
-        repeatTimes,
-        this);
-
-  // create the repeat common part
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating a repeat common part upon its end in voice \"" <<
-      fVoiceName <<
-      "\"" <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
+//   int repeatInputLineNumber = 1; // could find first measure's input line number??? JMI 0.9.76
+//
+//   S_msrRepeat
+//     newRepeat =
+//       msrRepeat::create (
+//         repeatInputLineNumber,
+//         repeatTimes,
+//         this);
+//
+//   // create the repeat common part
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Creating a repeat common part upon its end in voice \"" <<
+//       fVoiceName <<
+//       "\"" <<
+//       ", line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
 
 //   S_msrRepeatCommonPart
 //     repeatCommonPart =
@@ -5754,10 +5754,10 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 //     inputLineNumber,
 //     "handleVoiceLevelRepeatEndWithoutStart() 5");
 
-  // set newRepeat's build phase to completed
-  newRepeat->
-    setCurrentRepeatBuildPhaseKind (
-      msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted);
+//   // set newRepeat's build phase to completed
+//   newRepeat->
+//     setCurrentRepeatBuildPhaseKind (
+//       msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted);
 
 //   // append newRepeat to the list of initial elements
 //   appendRepeatToInitialVoiceElementsList (
@@ -5778,8 +5778,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 
 void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
   const mfInputLineNumber& inputLineNumber,
-  const mfMeasureNumber& measureNumber,
-  int                repeatTimes)
+  const mfMeasureNumber&   measureNumber,
+  int                      repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -5875,31 +5875,31 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 //     setRepeatCommonPart (
 //       newRepeatCommonPart);
 
-  // fetch the last segment's last measure
-  S_msrMeasure
-    voiceLastSegmentLastMeasure =
-      fVoiceCurrentRecipientSegment->
-        fetchLastMeasureFromSegment (
-          inputLineNumber,
-          "handleVoiceLevelContainingRepeatEndWithoutStart() 1");
-
-  // fetch the top of the repeats stack
-  S_msrRepeat
-    repeatsStackTopRepeat =
-      fVoicePendingRepeatsStack.front ();
-
-//   // pop it from the repeats stack
-//   popRepeatFromVoiceRepeatsStack (
-//     inputLineNumber,
-//     repeatsStackTopRepeat,
-//     "handleVoiceLevelContainingRepeatEndWithoutStart() 2");
-
-  // append it to newRepeat's common part
-  newRepeatCommonPart->
-    appendRepeatToRepeatCommonPart (
-      inputLineNumber,
-      repeatsStackTopRepeat,
-      "handleVoiceLevelContainingRepeatEndWithoutStart() 3");
+//   // fetch the last segment's last measure
+//   S_msrMeasure
+//     voiceLastSegmentLastMeasure =
+//       fVoiceCurrentRecipientSegment->
+//         fetchLastMeasureFromSegment (
+//           inputLineNumber,
+//           "handleVoiceLevelContainingRepeatEndWithoutStart() 1");
+//
+//   // fetch the top of the repeats stack
+//   S_msrRepeat
+//     repeatsStackTopRepeat =
+//       fVoicePendingRepeatsStack.front ();
+//
+// //   // pop it from the repeats stack
+// //   popRepeatFromVoiceRepeatsStack (
+// //     inputLineNumber,
+// //     repeatsStackTopRepeat,
+// //     "handleVoiceLevelContainingRepeatEndWithoutStart() 2");
+//
+//   // append it to newRepeat's common part
+//   newRepeatCommonPart->
+//     appendRepeatToRepeatCommonPart (
+//       inputLineNumber,
+//       repeatsStackTopRepeat,
+//       "handleVoiceLevelContainingRepeatEndWithoutStart() 3");
 
 //   // append newRepeat to the list of initial elements
 //   appendRepeatToInitialVoiceElementsList (
@@ -6118,8 +6118,8 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 
 void msrVoice::handleNestedRepeatEndInVoice (
   const mfInputLineNumber& inputLineNumber,
-  const mfMeasureNumber& measureNumber,
-  int                repeatTimes)
+  const mfMeasureNumber&   measureNumber,
+  int                      repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -9795,22 +9795,22 @@ S_msrSegment msrVoice::handleRepeatCommonPartStartInVoiceClone (
     currentRepeat =
       fVoicePendingRepeatsStack.front ();
 
-  // create currentRepeat's common part
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating a repeat common part upon its start in voice \"" <<
-      fVoiceName <<
-      "\"" <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
+//   // create currentRepeat's common part
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Creating a repeat common part upon its start in voice \"" <<
+//       fVoiceName <<
+//       "\"" <<
+//       ", line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
 
 //   S_msrRepeatCommonPart
 //     repeatCommonPart =
@@ -9824,6 +9824,10 @@ S_msrSegment msrVoice::handleRepeatCommonPartStartInVoiceClone (
 //       repeatCommonPart);
 
   // the new current segment has just been created in repeatCommonPart
+  S_msrRepeatCommonPart
+    repeatCommonPart =
+      currentRepeat->getRepeatCommonPart ();
+
   result =
     repeatCommonPart->
       getRepeatElementSegment ();
@@ -11870,7 +11874,7 @@ void msrVoice::displayVoice (
 
 void msrVoice::displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   displayVoice (
     inputLineNumber,

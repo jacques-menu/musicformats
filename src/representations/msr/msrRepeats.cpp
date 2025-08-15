@@ -1630,7 +1630,7 @@ void msrRepeat::initializeRepeat (
     repeatCommonPart =
       msrRepeatCommonPart::create (
         inputLineNumber,
-        newRepeat);
+        this);
 
   // register it in newRepeat
   setRepeatCommonPart (
@@ -1642,7 +1642,7 @@ void msrRepeat::initializeRepeat (
 
     ss <<
       "Initializing repeat " <<
-      asString () <<
+      "asString ()" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1655,19 +1655,6 @@ void msrRepeat::initializeRepeat (
 S_msrRepeat msrRepeat::createRepeatNewbornClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating a newborn clone of a repeat";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
@@ -1675,6 +1662,22 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
     containingVoice != nullptr,
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a newborn clone of repeat " <<
+      asShortString () <<
+      " in voice " <<
+      containingVoice->asShortString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   S_msrRepeat
     newbornClone =
@@ -1707,7 +1710,8 @@ void msrRepeat::setRepeatCommonPart (
     ss <<
       "Setting repeat common part to " <<
       repeatCommonPart->asShortString () <<
-      " in repeat " << asShortString ();
+      " in repeat " <<
+      "asShortString ()";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),

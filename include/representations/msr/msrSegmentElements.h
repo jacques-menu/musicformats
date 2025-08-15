@@ -80,23 +80,23 @@ class EXP msrSegmentElement : public msrElement
     // visitors
     // ------------------------------------------------------
 
-    void                  acceptIn  (basevisitor* v) override;
-    void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override = 0; // JMI ???
+//     void                  acceptIn  (basevisitor* v) override;
+//     void                  acceptOut (basevisitor* v) override;
+//
+//     void                  browseData (basevisitor* v) override = 0; // JMI ???
 
   public:
 
     // print
     // ------------------------------------------------------
 
-    std::string           asShortString () const override;
-    std::string           asString () const override;
-
-    void                  print (std::ostream& os) const override;
-    void                  printFull (std::ostream& os) const override; // JMI ??? 0.9.70
-
-    void                  printSummary (std::ostream& os) const override {}
+//     std::string           asShortString () const override;
+//     std::string           asString () const override;
+//
+//     void                  print (std::ostream& os) const override;
+//     void                  printFull (std::ostream& os) const override; // JMI ??? 0.9.70
+//
+//     void                  printSummary (std::ostream& os) const override {}
 
   protected:
 
@@ -113,7 +113,9 @@ class EXP msrSegmentElement : public msrElement
 //     mfMoment             fSegmentElementMeasureMoment;
 //     mfMoment             fSegmentElementVoiceMoment;
 };
-typedef SMARTP<msrSegmentElement> S_msrSegmentElement;
+
+using S_msrSegmentElement = SMARTP<msrSegmentElement>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrSegmentElement& elt);
 
 

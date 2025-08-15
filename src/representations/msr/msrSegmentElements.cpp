@@ -81,100 +81,100 @@ msrSegmentElement::~msrSegmentElement ()
 //   fSegmentElementSoundingWholeNotes = wholeNotes;
 // }
 
-void msrSegmentElement::acceptIn (basevisitor* v)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
+// void msrSegmentElement::acceptIn (basevisitor* v)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "% ==> msrSegmentElement::acceptIn ()";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   if (visitor<S_msrSegmentElement>*
+//     p =
+//       dynamic_cast<visitor<S_msrSegmentElement>*> (v)) {
+//         S_msrSegmentElement elem = this;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gMsrOahGroup->getTraceMsrVisitors ()) {
+//           std::stringstream ss;
+//
+//           ss <<
+//             "% ==> Launching msrSegmentElement::visitStart ()";
+//
+//           gWaeHandler->waeTrace (
+//             __FILE__, mfInputLineNumber (__LINE__),
+//             ss.str ());
+//         }
+// #endif // MF_TRACE_IS_ENABLED
+//         p->visitStart (elem);
+//   }
+// }
+//
+// void msrSegmentElement::acceptOut (basevisitor* v)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "% ==> msrSegmentElement::acceptOut ()";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   if (visitor<S_msrSegmentElement>*
+//     p =
+//       dynamic_cast<visitor<S_msrSegmentElement>*> (v)) {
+//         S_msrSegmentElement elem = this;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gMsrOahGroup->getTraceMsrVisitors ()) {
+//           std::stringstream ss;
+//
+//           ss <<
+//             "% ==> Launching msrSegmentElement::visitEnd ()";
+//
+//           gWaeHandler->waeTrace (
+//             __FILE__, mfInputLineNumber (__LINE__),
+//             ss.str ());
+//         }
+// #endif // MF_TRACE_IS_ENABLED
+//         p->visitEnd (elem);
+//   }
+// }
 
-    ss <<
-      "% ==> msrSegmentElement::acceptIn ()";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (visitor<S_msrSegmentElement>*
-    p =
-      dynamic_cast<visitor<S_msrSegmentElement>*> (v)) {
-        S_msrSegmentElement elem = this;
-
-#ifdef MF_TRACE_IS_ENABLED
-        if (gMsrOahGroup->getTraceMsrVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
-            "% ==> Launching msrSegmentElement::visitStart ()";
-
-          gWaeHandler->waeTrace (
-            __FILE__, mfInputLineNumber (__LINE__),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-        p->visitStart (elem);
-  }
-}
-
-void msrSegmentElement::acceptOut (basevisitor* v)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "% ==> msrSegmentElement::acceptOut ()";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (visitor<S_msrSegmentElement>*
-    p =
-      dynamic_cast<visitor<S_msrSegmentElement>*> (v)) {
-        S_msrSegmentElement elem = this;
-
-#ifdef MF_TRACE_IS_ENABLED
-        if (gMsrOahGroup->getTraceMsrVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
-            "% ==> Launching msrSegmentElement::visitEnd ()";
-
-          gWaeHandler->waeTrace (
-            __FILE__, mfInputLineNumber (__LINE__),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-        p->visitEnd (elem);
-  }
-}
-
-std::string msrSegmentElement::asString () const
-{
-  // this is overriden all in actual elements
-  return "??? msrSegmentElement::asString () ???";
-}
-
-std::string msrSegmentElement::asShortString () const
-{
-  // this can be overriden in actual elements
-  return asString ();
-}
-
-void msrSegmentElement::print (std::ostream& os) const
-{
-  os << asString () << std::endl;
-}
-
-void msrSegmentElement::printFull (std::ostream& os) const
-{
-  print (os); // JMI 0.9.70
-  os << std::endl;
-}
+// std::string msrSegmentElement::asString () const
+// {
+//   // this is overriden all in actual elements
+//   return "??? msrSegmentElement::asString () ???";
+// }
+//
+// std::string msrSegmentElement::asShortString () const
+// {
+//   // this can be overriden in actual elements
+//   return asString ();
+// }
+//
+// void msrSegmentElement::print (std::ostream& os) const
+// {
+//   os << asString () << std::endl;
+// }
+//
+// void msrSegmentElement::printFull (std::ostream& os) const
+// {
+//   print (os); // JMI 0.9.70
+//   os << std::endl;
+// }
 
 std::ostream& operator << (std::ostream& os, const S_msrSegmentElement& elt)
 {

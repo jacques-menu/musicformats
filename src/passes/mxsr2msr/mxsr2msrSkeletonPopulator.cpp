@@ -1241,7 +1241,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
 
           ss <<
             "Creating the MXSR voice handler for voice " <<
-            theMsrVoice <<
+            theMsrVoice->asString () <<
             " in staff " <<
             staffNumber <<
             " in part \"" <<
@@ -1272,7 +1272,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
       ||
     gTraceOahGroup->getTraceVoicesBasics ()
   ) {
-    // display the resulting maps
+    // display the part's staff to MXSR voices map
     displayCurrentPartStaffMxsrVoicesMap ();
 
     displayCurrentPartStaffMsrVoicesMap (
@@ -3742,7 +3742,7 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
     fCurrentPart->getPartStavesMapPtr ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoicesBasics ()) {
+  if (gTraceOahGroup->getTraceStavesBasics ()) {
     // display the stave vectors
     displayCurrentPartStavesMap ();
   }
@@ -3752,8 +3752,12 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
   populateCurrentPartStaffVoicesMapsFromPart (fCurrentPart);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
-    // display the voices vectors
+  if (
+    gTraceOahGroup->getTraceStavesBasics ()
+      ||
+    gTraceOahGroup->getTraceVoicesBasics ()
+  ) {
+    // display the part's staff to MSR voices map
     displayCurrentPartStaffMsrVoicesMap (
       inputLineNumber,
       "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
@@ -24208,8 +24212,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   if (gTraceOahGroup->getTraceNotesBasics ()) {
     displayGatheredNoteInformations (
       "visitEnd (S_note& elt)");
-
-    displayCurrentPartStaffMxsrVoicesMap ();
   }
 #endif
 

@@ -28,8 +28,8 @@ namespace MusicFormats
 //______________________________________________________________________________
 // PRE-declarations for class mutual dependencies
 
-class   msrClefKeyTimeSignatureGroup;
-typedef SMARTP<msrClefKeyTimeSignatureGroup> S_msrClefKeyTimeSignatureGroup;
+// class msrClefKeyTimeSignatureGroup;
+// using S_msrClefKeyTimeSignatureGroup = SMARTP<msrClefKeyTimeSignatureGroup>;
 
 //______________________________________________________________________________
 // class EXP msrSegment : public msrVoiceElement

@@ -801,7 +801,7 @@ void msrSegment::appendRepeatToSegment (
 
     ss <<
       "Appending repeat " <<
-      repeat->asString () <<
+      "repeat->asString ()" <<
       " to segment " <<
       asString () <<
       " in voice \"" <<
@@ -848,7 +848,9 @@ void msrSegment::appendRepeatToSegment (
 
       // remove it from the segment measures list
 //       fSegmentMeasuresList.erase (fSegmentLastMeasure);
-      fSegmentMeasuresList.pop_back ();
+      if (! fSegmentMeasuresList.empty ()) { // JMI should not be necessary 0.9.76
+        fSegmentMeasuresList.pop_back ();
+      }
     }
 //   for (
 //     std::list <S_msrVoiceElement>::iterator i = fVoiceInitialElementsList.begin ();
@@ -1628,9 +1630,14 @@ void msrSegment::appendSegnoToSegment (const S_msrSegno& segno)
     ss <<
       "Appending segno " <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1662,9 +1669,14 @@ void msrSegment::appendCodaToSegment (const S_msrCoda& coda)
     ss <<
       "Appending coda " <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1697,9 +1709,14 @@ void msrSegment::appendEyeGlassesToSegment (
     ss <<
       "Appending eyeGlasses " <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1731,9 +1748,14 @@ void msrSegment::appendPedalToSegment (const S_msrPedal& pedal)
     ss <<
       "Appending pedal " <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1766,9 +1788,14 @@ void msrSegment::appendDampToSegment (
     ss <<
       "Appending damp " <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1801,9 +1828,14 @@ void msrSegment::appendDampAllToSegment (
     ss <<
       "Appending damp all " <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1836,9 +1868,14 @@ void msrSegment::appendTranspositionToSegment (
     ss <<
       "Appending transposition " <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1938,9 +1975,14 @@ void msrSegment::appendLineBreakToSegment (
       "Appending break " <<
       lineBreak->asShortString () <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1973,9 +2015,14 @@ void msrSegment::appendPageBreakToSegment (
     ss <<
       "Appending break " <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2008,9 +2055,14 @@ void msrSegment::appendBarNumberCheckToSegment (
     ss <<
       "Appending bar number check " <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2045,9 +2097,14 @@ void msrSegment::appendTempoToSegment (
       tempo->asShortString () <<
       " to segment " <<
       asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2080,9 +2137,14 @@ void msrSegment::appendRehearsalMarkToSegment (
     ss <<
       "Appending rehearsalMark " <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2116,9 +2178,14 @@ void msrSegment::appendOctaveShiftToSegment (
       "Appending octave shift " <<
       octaveShift->getOctaveShiftKind () <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2152,9 +2219,14 @@ void msrSegment::appendScordaturaToSegment (
       "Appending scordatura XXX " <<
   // JMI ???    scordatura->getOctaveShiftKind () <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2189,9 +2261,14 @@ void msrSegment::appendAccordionRegistrationToSegment (
       "Appending accordion registration " <<
       accordionRegistration->asString () <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2227,9 +2304,14 @@ void msrSegment::appendHarpPedalsTuningToSegment (
       "Appending staff pedals tuning " <<
       harpPedalsTuning->asString () <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2397,9 +2479,14 @@ void msrSegment::cascadeAppendMultipleMeasureRestToSegment (
     ss <<
       "Cascading appending multiple measure rest " << multipleMeasureRest->asString () <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2448,9 +2535,15 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       measure->asString () <<
       " to segment " <<
       asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
+    ss <<
       ", line " << measure->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2505,14 +2598,16 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 
   // is measure the first one it the voice?
   // this is necessary for voice clones,
-  // which don't go down the part-staff-voice-segment hierarchy
-  if (! fSegmentUpLinkToVoice->getVoiceFirstMeasure ()) {
-    // yes, register it as such
-    fSegmentUpLinkToVoice->
-      setVoiceFirstMeasure (measure);
+  // which don't go down the part-staff-voice-segment hierarchy JMI 0.9.76 ???
+  if (fSegmentUpLinkToVoice) {
+    if (! fSegmentUpLinkToVoice->getVoiceFirstMeasure ()) {
+      // yes, register it as such
+      fSegmentUpLinkToVoice->
+        setVoiceFirstMeasure (measure);
 
-    measure->
-      setMeasureIsFirstInVoice ();
+      measure->
+        setMeasureIsFirstInVoice ();
+    }
   }
 
   if (fOnGoingMultipleMeasureRest) {
@@ -2563,7 +2658,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
       " to segment " << asString ();
 
     if (segmentElementsListSize == 0) {
-      gLog <<
+      ss <<
         ", as first measure";
     }
 
@@ -2573,10 +2668,16 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
       ", after measure number " << segmentLastMeasureNumber << "";
 */
 
-    gLog <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"," <<
+    ss <<
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
+    ss <<
       ", line " << measure->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2592,9 +2693,14 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
       "prepending measure number " << measureNumber <<
       " occurs more that once in segment " <<
       asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     msrInternalError (
 // JMI    msrInternalWarning (
@@ -2623,9 +2729,14 @@ void msrSegment::prependBarLineToSegment (
     ss <<
       "Prepending barLine " << barLine->asString () <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2658,9 +2769,14 @@ void msrSegment::appendBarLineToSegment (
     ss <<
       "Appending barLine " << barLine->asString () <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2693,9 +2809,14 @@ void msrSegment::appendBarCheckToSegment (
     ss <<
       "Appending bar check " << barCheck->asString () <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\",";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2791,9 +2912,14 @@ void msrSegment::appendDoubleTremoloToSegment ( // JMI
       "Appending double tremolo " <<
       doubleTremolo->asShortString () <<
       " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
+      "fSegmentUpLinkToVoice" << ": ";
+    if (fSegmentUpLinkToVoice) {
+      ss <<
+        fSegmentUpLinkToVoice->getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3428,9 +3554,14 @@ std::string msrSegment::asString () const
     fSegmentAbsoluteNumber <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
-    ", in voice \"" <<
-    fSegmentUpLinkToVoice->getVoiceName () <<
-    "\"";
+    ", fSegmentUpLinkToVoice: ";
+  if (fSegmentUpLinkToVoice) {
+    ss <<
+      fSegmentUpLinkToVoice->getVoiceName ();
+  }
+  else {
+    ss << "[NULL]";
+  }
 
   ss <<
     "fSegmentElementsList: ";
@@ -3450,7 +3581,9 @@ std::string msrSegment::asString () const
         i      = iBegin;
 
       for ( ; ; ) {
-        ss << (*i)->asString ();
+        S_msrSegmentElement segmentElement = (*i);
+
+        ss << segmentElement->asString ();
         if (++i == iEnd) break;
         ss << ", ";
       } // for
@@ -3474,15 +3607,16 @@ void msrSegment::displaySegment (
     fSegmentAbsoluteNumber <<
     ", segmentNumber: " <<
     fSegmentNumber <<
-    /* JMI
-    ", score:" <<
+    ", fSegmentUpLinkToVoice: ";
+  if (fSegmentUpLinkToVoice) {
+    gLog <<
+      fSegmentUpLinkToVoice->getVoiceName ();
+  }
+  else {
+    gLog << "[NULL]";
+  }
+  gLog <<
     std::endl <<
-    fSegmentUpLinkToVoice->
-      fetchVoiceGroupUpLinkToScore () <<
-            */
-    ", voice:" <<
-    std::endl <<
-    fSegmentUpLinkToVoice->getVoiceName () <<
     " (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
@@ -3519,10 +3653,15 @@ void msrSegment::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fSegmentUpLinkToVoice" << ": " <<
-    "\"" <<
-    fSegmentUpLinkToVoice->getVoiceName () <<
-    "\"" <<
+    "fSegmentUpLinkToVoice" << ": ";
+  if (fSegmentUpLinkToVoice) {
+    os <<
+      fSegmentUpLinkToVoice->getVoiceName ();
+  }
+  else {
+    os << "[NULL]";
+  }
+  os <<
     std::endl;
 
   os << std::endl;
@@ -3546,7 +3685,9 @@ void msrSegment::print (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      os << (*i);
+      S_msrSegmentElement segmentElement = (*i);
+
+      os << segmentElement;
       if (++i == iEnd) break;
       os << std::endl;
     } // for
@@ -3587,10 +3728,15 @@ void msrSegment::printFull (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fSegmentUpLinkToVoice" << ": " <<
-    "\"" <<
-    fSegmentUpLinkToVoice->getVoiceName () <<
-    "\"" <<
+    "fSegmentUpLinkToVoice" << ": ";
+  if (fSegmentUpLinkToVoice) {
+    os <<
+      fSegmentUpLinkToVoice->getVoiceName ();
+  }
+  else {
+    os << "[NULL]";
+  }
+  os <<
     std::endl;
 
 /* JMI
