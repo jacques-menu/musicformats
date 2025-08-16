@@ -3564,7 +3564,7 @@ std::string msrSegment::asString () const
   }
 
   ss <<
-    "fSegmentElementsList: ";
+    ", fSegmentElementsList: ";
   if (fSegmentElementsList.empty ()) {
     ss << "[EMPTY]";
   }
@@ -3582,6 +3582,10 @@ std::string msrSegment::asString () const
 
       for ( ; ; ) {
         S_msrSegmentElement segmentElement = (*i);
+
+if (! segmentElement) abort ();
+
+gLog << "*** segmentElement ***" << std::endl << segmentElement << std::endl;
 
         ss << segmentElement->asString ();
         if (++i == iEnd) break;

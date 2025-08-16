@@ -80,23 +80,23 @@ class EXP msrSegmentElement : public msrElement
     // visitors
     // ------------------------------------------------------
 
-//     void                  acceptIn  (basevisitor* v) override;
-//     void                  acceptOut (basevisitor* v) override;
-//
-//     void                  browseData (basevisitor* v) override = 0; // JMI ???
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override; // JMI ??? 0.9.76
 
   public:
 
     // print
     // ------------------------------------------------------
 
-//     std::string           asShortString () const override;
-//     std::string           asString () const override;
-//
-//     void                  print (std::ostream& os) const override;
-//     void                  printFull (std::ostream& os) const override; // JMI ??? 0.9.70
-//
-//     void                  printSummary (std::ostream& os) const override {}
+    std::string           asShortString () const override;
+    std::string           asString () const override;
+
+    void                  print (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override; // JMI ??? 0.9.70
+
+    void                  printSummary (std::ostream& os) const override {}
 
   protected:
 

@@ -67,11 +67,6 @@ void msrMeasureElement::setMeasureElementUpLinkToMeasure (
   fMeasureElementUpLinkToMeasure = measure;
 }
 
-S_msrMeasure msrMeasureElement::getMeasureElementUpLinkToMeasure () const
-{
-  return fMeasureElementUpLinkToMeasure;
-}
-
 void msrMeasureElement::setMeasureElementSoundingWholeNotes (
   const mfWholeNotes& wholeNotes,
   const std::string&   context)
@@ -180,21 +175,6 @@ void msrMeasureElement::incrementMeasureElementSoundingWholeNotesBy (
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureElementSoundingWholeNotes += wholeNotes;
-}
-
-mfWholeNotes msrMeasureElement:: getMeasureElementSoundingWholeNotes () const
-{
-  return fMeasureElementSoundingWholeNotes;
-}
-
-mfPositionInMeasure msrMeasureElement::getMeasureElementPositionInMeasure () const
-{
-  return fMeasureElementPositionInMeasure;
-}
-
-mfPositionInMeasure msrMeasureElement::getMeasureElementVoicePosition () const
-{
-  return fMeasureElementVoicePosition;
 }
 
 void msrMeasureElement::setMeasureElementPositionInMeasure (

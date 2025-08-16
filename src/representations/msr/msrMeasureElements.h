@@ -52,7 +52,11 @@ class EXP msrMeasureElement : public msrElement
     virtual void          setMeasureElementUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
-    virtual S_msrMeasure  getMeasureElementUpLinkToMeasure () const;
+    virtual const S_msrMeasure&
+                          getMeasureElementUpLinkToMeasure () const
+                              {
+                                return fMeasureElementUpLinkToMeasure;
+                              }
 
     void                  setMeasureElementSoundingWholeNotes (
                             const mfWholeNotes& wholeNotes,
@@ -62,7 +66,10 @@ class EXP msrMeasureElement : public msrElement
                             const mfWholeNotes& wholeNotes,
                             const std::string&  context);
 
-    mfWholeNotes          getMeasureElementSoundingWholeNotes () const;
+    mfWholeNotes          getMeasureElementSoundingWholeNotes () const
+                              {
+                                return fMeasureElementSoundingWholeNotes;
+                              }
 
     // this method is overridden in sub-classes such as those for
     // time signatures, harmonies and figured bass elements,
@@ -76,13 +83,19 @@ class EXP msrMeasureElement : public msrElement
                             const mfPositionInMeasure& positionInMeasure,
                             const std::string&         context);
 
-    mfPositionInMeasure   getMeasureElementPositionInMeasure () const;
+    mfPositionInMeasure   getMeasureElementPositionInMeasure () const
+                              {
+                                return fMeasureElementPositionInMeasure;
+                              }
 
     void                  setMeasureElementVoicePosition (
                             const mfPositionInMeasure& voicePosition,
                             const std::string&         context);
 
-    mfPositionInMeasure   getMeasureElementVoicePosition () const;
+    mfPositionInMeasure   getMeasureElementVoicePosition () const
+                              {
+                                return fMeasureElementVoicePosition;
+                              }
 
 //     void                  setMeasureMoment (
 //                             const mfMoment&   measureMoment,
