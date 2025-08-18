@@ -115,8 +115,8 @@ class EXP msrRepeatElement: public msrElement
     // visitors
     // ------------------------------------------------------
 
-//     void                  acceptIn  (basevisitor* v) override;
-//     void                  acceptOut (basevisitor* v) override;
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
 //
     void                  browseData (basevisitor* v) override;
 
@@ -125,10 +125,10 @@ class EXP msrRepeatElement: public msrElement
     // print
     // ------------------------------------------------------
 
-//     std::string           asString () const override;
-//
-//     void                  print (std::ostream& os) const override;
-//     void                  printFull (std::ostream& os) const override;
+    std::string           asString () const override;
+
+    void                  print (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   protected:
 
@@ -231,7 +231,7 @@ class EXP msrRepeatCommonPart : public msrRepeatElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-//     void                  browseData (basevisitor* v) override;
+    void                  browseData (basevisitor* v) override;
 
   public:
 
@@ -363,7 +363,7 @@ class EXP msrRepeatEnding : public msrRepeatElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-//     void                  browseData (basevisitor* v) override;
+    void                  browseData (basevisitor* v) override;
 
   public:
 

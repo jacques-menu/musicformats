@@ -3671,6 +3671,30 @@ void msrSegment::print (std::ostream& os) const
   os << std::endl;
 
   os <<
+    "fSegmentFirstMeasure" << ": ";
+  if (fSegmentFirstMeasure) {
+    os << std::endl;
+    ++gIndenter;
+    fSegmentFirstMeasure->printFull (os);
+    --gIndenter;
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  os <<
+    "fSegmentLastMeasure" << ": ";
+  if (fSegmentLastMeasure) {
+    os << std::endl;
+    ++gIndenter;
+    fSegmentLastMeasure->printFull (os);
+    --gIndenter;
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  os <<
     std::setw (fieldWidth) <<
     "***** fSegmentElementsList ***** (" <<
     mfSingularOrPlural (
@@ -3692,6 +3716,41 @@ void msrSegment::print (std::ostream& os) const
       S_msrSegmentElement segmentElement = (*i);
 
       os << segmentElement;
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+
+  else {
+     os <<
+      "[EMPTY]" <<
+      std::endl;
+  }
+
+  os <<
+    std::setw (fieldWidth) <<
+    "***** fSegmentMeasuresList ***** (" <<
+    mfSingularOrPlural (
+      fSegmentMeasuresList.size (), "element",  "elements") <<
+    "):" <<
+    std::endl;
+
+  if (! fSegmentMeasuresList.empty ()) {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::list <S_msrMeasure>::const_iterator
+      iBegin = fSegmentMeasuresList.begin (),
+      iEnd   = fSegmentMeasuresList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      S_msrMeasure measure = (*i);
+
+      os << measure;
       if (++i == iEnd) break;
       os << std::endl;
     } // for

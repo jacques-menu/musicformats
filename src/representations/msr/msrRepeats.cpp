@@ -332,77 +332,77 @@ void msrRepeatElement::appendMultipleMeasureRestToRepeatElement (
     multipleMeasureRest);
 }
 
-// void msrRepeatElement::acceptIn (basevisitor* v)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "% ==> msrRepeatElement::acceptIn ()";
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   if (visitor<S_msrRepeatElement>*
-//     p =
-//       dynamic_cast<visitor<S_msrRepeatElement>*> (v)) {
-//         S_msrRepeatElement elem = this;
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gMsrOahGroup->getTraceMsrVisitors ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             "% ==> Launching msrRepeatElement::visitStart ()";
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, mfInputLineNumber (__LINE__),
-//             ss.str ());
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//         p->visitStart (elem);
-//   }
-// }
-//
-// void msrRepeatElement::acceptOut (basevisitor* v)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "% ==> msrRepeatElement::acceptOut ()";
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   if (visitor<S_msrRepeatElement>*
-//     p =
-//       dynamic_cast<visitor<S_msrRepeatElement>*> (v)) {
-//         S_msrRepeatElement elem = this;
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gMsrOahGroup->getTraceMsrVisitors ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             "% ==> Launching msrRepeatElement::visitEnd ()";
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, mfInputLineNumber (__LINE__),
-//             ss.str ());
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//         p->visitEnd (elem);
-//   }
-// }
+void msrRepeatElement::acceptIn (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "% ==> msrRepeatElement::acceptIn ()";
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_msrRepeatElement>*
+    p =
+      dynamic_cast<visitor<S_msrRepeatElement>*> (v)) {
+        S_msrRepeatElement elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            "% ==> Launching msrRepeatElement::visitStart ()";
+
+          gWaeHandler->waeTrace (
+            __FILE__, mfInputLineNumber (__LINE__),
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitStart (elem);
+  }
+}
+
+void msrRepeatElement::acceptOut (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "% ==> msrRepeatElement::acceptOut ()";
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_msrRepeatElement>*
+    p =
+      dynamic_cast<visitor<S_msrRepeatElement>*> (v)) {
+        S_msrRepeatElement elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gMsrOahGroup->getTraceMsrVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            "% ==> Launching msrRepeatElement::visitEnd ()";
+
+          gWaeHandler->waeTrace (
+            __FILE__, mfInputLineNumber (__LINE__),
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitEnd (elem);
+  }
+}
 
 void msrRepeatElement::browseData (basevisitor* v)
 {
@@ -411,27 +411,23 @@ void msrRepeatElement::browseData (basevisitor* v)
     browser.browse (*fRepeatElementSegment);
 }
 
-// std::string msrRepeatElement::asString () const
-// {
-//   std::stringstream ss;
-//
-//   ss <<
-//     "[RepeatElement" <<
-//     ", fRepeatElementUpLinkToRepeat: " <<
-//     fRepeatElementUpLinkToRepeat->asShortString () <<
-//     ", line " << fInputLineNumber <<
-//     ']';
-//
-//   return ss.str ();
-// }
-//
-// void msrRepeatElement::print (std::ostream& os) const
-// {
-//   os <<
-//     "[RepeatElement" <<
-//     ", line " << fInputLineNumber <<
-//     std::endl;
-//
+std::string msrRepeatElement::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[??? RepeatElement ???]";
+
+  return ss.str ();
+}
+
+void msrRepeatElement::print (std::ostream& os) const
+{
+  os <<
+    "[RepeatElement" <<
+    ", line " << fInputLineNumber <<
+    std::endl;
+
 //   ++gIndenter;
 //
 //   // print the uplink to the repeat
@@ -456,17 +452,17 @@ void msrRepeatElement::browseData (basevisitor* v)
 //   --gIndenter;
 //
 //   --gIndenter;
-//
-//   os << ']' << std::endl;
-// }
-//
-// void msrRepeatElement::printFull (std::ostream& os) const
-// {
-//   os <<
-//     "[RepeatElement" <<
-//     ", line " << fInputLineNumber <<
-//     std::endl;
-//
+
+  os << ']' << std::endl;
+}
+
+void msrRepeatElement::printFull (std::ostream& os) const
+{
+  os <<
+    "[RepeatElement" <<
+    ", line " << fInputLineNumber <<
+    std::endl;
+
 //   ++gIndenter;
 //
 //   // print the uplink to the repeat
@@ -491,9 +487,9 @@ void msrRepeatElement::browseData (basevisitor* v)
 //   --gIndenter;
 //
 //   --gIndenter;
-//
-//   os << ']' << std::endl;
-// }
+
+  os << ']' << std::endl;
+}
 
 std::ostream& operator << (std::ostream& os, const S_msrRepeatElement& elt)
 {
@@ -873,21 +869,12 @@ void msrRepeatCommonPart::acceptOut (basevisitor* v)
   }
 }
 
-// void msrRepeatCommonPart::browseData (basevisitor* v)
-// {
-//   // browse the elements
-//   if (fRepeatCommonPartElementsList.size ()) {
-//     for (
-//       std::list <S_msrVoiceElement>::const_iterator i = fRepeatCommonPartElementsList.begin ();
-//       i != fRepeatCommonPartElementsList.end ();
-//       ++i
-//   ) {
-//       // browse the element
-//       msrBrowser<msrVoiceElement> browser (v);
-//       browser.browse (*(*i));
-//     } // for
-//   }
-// }
+void msrRepeatCommonPart::browseData (basevisitor* v)
+{
+  // browse the segment
+    msrBrowser<msrSegment> browser (v);
+    browser.browse (*fRepeatElementSegment);
+}
 
 std::string msrRepeatCommonPart::asString () const
 {
@@ -1338,21 +1325,12 @@ void msrRepeatEnding::acceptOut (basevisitor* v)
   }
 }
 
-// void msrRepeatEnding::browseData (basevisitor* v)
-// {
-//   // browse the elements
-//   if (fRepeatEndingElementsList.size ()) {
-//     for (
-//       std::list <S_msrVoiceElement>::const_iterator i = fRepeatEndingElementsList.begin ();
-//       i != fRepeatEndingElementsList.end ();
-//       ++i
-//   ) {
-//       // browse the element
-//       msrBrowser<msrVoiceElement> browser (v);
-//       browser.browse (*(*i));
-//     } // for
-//   }
-// }
+void msrRepeatEnding::browseData (basevisitor* v)
+{
+  // browse the segment
+    msrBrowser<msrSegment> browser (v);
+    browser.browse (*fRepeatElementSegment);
+}
 
 std::string msrRepeatEnding::asString () const
 {
@@ -1625,17 +1603,17 @@ void msrRepeat::initializeRepeat (
   // set uplink to voice
   fRepeatUpLinkToVoice = upLinkToVoice;
 
-  // create the repeat common part
-  S_msrRepeatCommonPart
-    repeatCommonPart =
-      msrRepeatCommonPart::create (
-        inputLineNumber,
-        this);
-
-  // register it in newRepeat
-//   setRepeatCommonPart ( JMI 0.9.76 incomplete virtual method table???
-//     repeatCommonPart);
-  fRepeatCommonPart = repeatCommonPart;
+//   // create the repeat common part
+//   S_msrRepeatCommonPart
+//     repeatCommonPart =
+//       msrRepeatCommonPart::create (
+//         inputLineNumber,
+//         this);
+//
+//   // register it in newRepeat
+// //   setRepeatCommonPart ( JMI 0.9.76 incomplete virtual method table???
+// //     repeatCommonPart);
+//   fRepeatCommonPart = repeatCommonPart;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -2332,7 +2310,7 @@ void msrRepeat::acceptOut (basevisitor* v)
 void msrRepeat::browseData (basevisitor* v)
 {
   if (fRepeatCommonPart) {
-  // browse the common part
+    // browse the common part
     msrBrowser<msrRepeatCommonPart> browser (v);
     browser.browse (*fRepeatCommonPart);
   }
