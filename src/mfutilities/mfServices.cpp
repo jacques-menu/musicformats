@@ -723,7 +723,7 @@ EXP void initializeServices ()
   //   gLog << "--------------" << std::endl;
   //
   //   gLog <<
-  //     "xml2lyService::fetchServicePassDescriptionsAsString ()" <<
+  //     xml2lyService::fetchServicePassDescriptionsAsString () <<
   //     std::endl;
   //
   //   ++gIndenter;

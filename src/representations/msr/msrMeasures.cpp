@@ -4508,7 +4508,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 //
 //     ++gIndenter;
 //     ss <<
-//       " JMI ??? element->elementAsString ()" << std::endl;
+//       element->elementAsString () << std::endl;
 //     --gIndenter;
 //
 //     ss <<

@@ -86,12 +86,10 @@ class EXP msrSegment : public msrElement
 
     //segmet numbers
 
-    const mfSegmentNumber&
-                          getSegmentAbsoluteNumber () const
+    mfSegmentNumber       getSegmentAbsoluteNumber () const
                               { return fSegmentAbsoluteNumber; }
 
-    const mfSegmentNumber&
-                          getSegmentNumber () const
+    mfSegmentNumber       getSegmentNumber () const
                               { return fSegmentNumber; }
 
     // measures elements

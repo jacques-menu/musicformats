@@ -220,7 +220,7 @@ class EXP msrVoice : public msrElement
 
     // segments
 
-    void                  setVoiceCurrentRecipientSegment (S_msrSegment segment);
+    void                  setVoiceCurrentRecipientSegment (const S_msrSegment& segment);
 
 //     void                  setVoiceLastSegmentInVoiceClone (
 //                             const S_msrSegment& segment);

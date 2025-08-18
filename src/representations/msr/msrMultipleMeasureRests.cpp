@@ -376,7 +376,7 @@ std::string msrMultipleMeasureRest::asString () const
 
   if (fMultipleMeasureRestUpLinkToSegment) {
     ss <<
-      "fMultipleMeasureRestUpLinkToSegment->asString ()"; // JMI 0.9.67
+      fMultipleMeasureRestUpLinkToSegment->asString (); // JMI 0.9.67
   }
   else {
     ss << "[NULL]";

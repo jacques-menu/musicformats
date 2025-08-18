@@ -1633,8 +1633,9 @@ void msrRepeat::initializeRepeat (
         this);
 
   // register it in newRepeat
-  setRepeatCommonPart (
-    repeatCommonPart);
+//   setRepeatCommonPart ( JMI 0.9.76 incomplete virtual method table???
+//     repeatCommonPart);
+  fRepeatCommonPart = repeatCommonPart;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -1642,7 +1643,7 @@ void msrRepeat::initializeRepeat (
 
     ss <<
       "Initializing repeat " <<
-      "asString ()" <<
+      ", fRepeatTimes: " << fRepeatTimes <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1711,7 +1712,7 @@ void msrRepeat::setRepeatCommonPart (
       "Setting repeat common part to " <<
       repeatCommonPart->asShortString () <<
       " in repeat " <<
-      "asShortString ()";
+      asShortString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),

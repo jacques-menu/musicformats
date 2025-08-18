@@ -801,7 +801,7 @@ void msrSegment::appendRepeatToSegment (
 
     ss <<
       "Appending repeat " <<
-      "repeat->asString ()" <<
+      repeat->asString ()<<
       " to segment " <<
       asString () <<
       " in voice \"" <<

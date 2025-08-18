@@ -64,7 +64,7 @@ class EXP msrRepeatElement: public msrElement
                               { return fRepeatElementUpLinkToRepeat; }
 
     // segment
-    const S_msrSegment&   getRepeatElementSegment () const
+    S_msrSegment          getRepeatElementSegment () const
                               { return fRepeatElementSegment; }
 
   public:

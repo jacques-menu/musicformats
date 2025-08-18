@@ -489,7 +489,7 @@ std::string msrAfterGraceNotesGroup::asShortString () const
   ss <<
     "AfterGraceNotesGroup " <<
     ", AfterGraceNotesGroupElement: " <<
-    "JMI ???fAfterGraceNotesGroupElement->asShortString ()" <<
+    fAfterGraceNotesGroupElement->asShortString () <<
     ", fAfterGraceNotesGroupContents: " <<
     fAfterGraceNotesGroupContents->asShortString ();
 

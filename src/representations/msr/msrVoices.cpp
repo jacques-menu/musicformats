@@ -561,7 +561,7 @@ void msrVoice::initializeVoice (
   --gIndenter;
 }
 
-void msrVoice::setVoiceCurrentRecipientSegment (S_msrSegment segment)
+void msrVoice::setVoiceCurrentRecipientSegment (const S_msrSegment& segment)
 {
  #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegmentsBasics ()) {
@@ -4269,8 +4269,8 @@ S_msrMeasureElement msrVoice::fetchVoiceLastMeasureElement (
 
 void msrVoice::pushRepeatOntoVoiceRepeatsStack (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& repeat,
-  const std::string& context)
+  const S_msrRepeat&       repeat,
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -4278,7 +4278,7 @@ void msrVoice::pushRepeatOntoVoiceRepeatsStack (
 
     ss <<
       "Pushing repeat ***** " <<
-      "repeat->asShortString ()" <<
+      repeat->asShortString () <<
       " onto the repeats stack in voice \"" <<
       fVoiceName <<
       "\"" <<
@@ -4309,8 +4309,8 @@ void msrVoice::pushRepeatOntoVoiceRepeatsStack (
 
 void msrVoice::popRepeatFromVoiceRepeatsStack (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& repeat,
-  const std::string& context)
+  const S_msrRepeat&       repeat,
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -4400,7 +4400,7 @@ void msrVoice::popRepeatFromVoiceRepeatsStack (
 
 void msrVoice::displayVoiceRepeatsStack (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   size_t repeatsStackSize =
     fVoicePendingRepeatsStack.size ();
@@ -4457,7 +4457,7 @@ void msrVoice::displayVoiceRepeatsStack (
 
 void msrVoice::displayVoiceRepeatsStackSummary (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   size_t repeatsStackSize =
     fVoicePendingRepeatsStack.size ();
@@ -4514,7 +4514,7 @@ void msrVoice::displayVoiceRepeatsStackSummary (
 
 void msrVoice::displayVoiceRepeatsStackAndVoice ( // JMI never used ???
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   displayVoiceRepeatsStack (
     inputLineNumber,
@@ -4527,7 +4527,7 @@ void msrVoice::displayVoiceRepeatsStackAndVoice ( // JMI never used ???
 
 void msrVoice::displayVoiceMeasureRepeat (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   gLog <<
     std::endl <<
@@ -4561,7 +4561,7 @@ void msrVoice::displayVoiceMeasureRepeat (
 
 void msrVoice::displayVoiceMeasureRepeatAndVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   displayVoiceMeasureRepeat (
     inputLineNumber,
@@ -4666,7 +4666,7 @@ void msrVoice::displayVoiceMeasuresFlatList (
 
 void msrVoice::displayVoiceMultipleMeasureRests (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   gLog <<
     std::endl <<
@@ -4700,7 +4700,7 @@ void msrVoice::displayVoiceMultipleMeasureRests (
 
 void msrVoice::displayVoiceMultipleMeasureRestsAndVoice (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
   displayVoiceMultipleMeasureRests (
     inputLineNumber,
@@ -4713,7 +4713,7 @@ void msrVoice::displayVoiceMultipleMeasureRestsAndVoice (
 
 S_msrRepeat msrVoice::createARepeatAndStackIt (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& context)
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
@@ -4762,8 +4762,8 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
 
 S_msrRepeat msrVoice::createARepeatCloneAndStackIt (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& repeat,
-  const std::string& context)
+  const S_msrRepeat&       repeat,
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
