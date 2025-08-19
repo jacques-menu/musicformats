@@ -152,7 +152,7 @@ msrRepeatElement::~msrRepeatElement ()
 void msrRepeatElement::initializeRepeatElement (
   const mfInputLineNumber& inputLineNumber)
 {
-  // create voice segment
+  // create repeat element segment
   fRepeatElementSegment =
     msrSegment::create (
       inputLineNumber);

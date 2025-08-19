@@ -3650,7 +3650,7 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
 //   if (
 //     gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
 //   ) {
-// #ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
     if (
       gTraceOahGroup->getTraceParts ()
     ) {
@@ -3664,7 +3664,7 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
         __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
-// #endif // MF_TRACE_IS_ENABLED
+#endif // MF_TRACE_IS_ENABLED
 //   }
 // #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
@@ -23215,6 +23215,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
 
     // sanity checks
     if (noteSequentialNumber != fCurrentNoteSequentialNumber) {
+#ifdef MF_TRACE_IS_ENABLED
       std::stringstream ss;
 
       ss <<
@@ -23228,6 +23229,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
         __FILE__, mfInputLineNumber (__LINE__),
 //         false,
         ss.str ());
+#endif // MF_TRACE_IS_ENABLED
     }
 
     if (eventInputStartLineNumber != fCurrentNoteInputStartLineNumber) {
@@ -23292,12 +23294,12 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 //         staffChangeTakeOffEvent->
 //           getNoteEventVoiceNumber ();
 
-#ifdef MF_TRACE_IS_ENABLED
     mxsrNoteSequentialNumber
       noteSequentialNumber =
         staffChangeTakeOffEvent->
           getNoteSequentialNumber ();
 
+#ifdef MF_TRACE_IS_ENABLED
     gLog <<
       "There is a staff change createStaffChange():" <<
       std::endl <<
@@ -23335,11 +23337,12 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 // 				__FILE__, mfInputLineNumber (__LINE__),
 // 				ss.str ());
 // 		}
-#endif // MF_TRACE_IS_ENABLE
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
     // sanity checks
     if (noteSequentialNumber != fCurrentNoteSequentialNumber) {
+#ifdef MF_TRACE_IS_ENABLED
       std::stringstream ss;
 
       ss <<
@@ -23353,9 +23356,11 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
         __FILE__, mfInputLineNumber (__LINE__),
 //         false,
         ss.str ());
+#endif // MF_TRACE_IS_ENABLED
     }
 
     if (eventInputStartLineNumber != fCurrentNoteInputStartLineNumber) {
+#ifdef MF_TRACE_IS_ENABLED
       std::stringstream ss;
 
       ss <<
@@ -23369,7 +23374,8 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
         __FILE__, mfInputLineNumber (__LINE__),
 //         false,
         ss.str ());
-    }
+ #endif // MF_TRACE_IS_ENABLED
+   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     // fetch the current note's staff

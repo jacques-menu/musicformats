@@ -5438,7 +5438,7 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 				__FILE__, mfInputLineNumber (__LINE__),
 				ss.str ());
 		}
-#endif // MF_TRACE_IS_ENABLE
+#endif // MF_TRACE_IS_ENABLED
 
 		mfStaffNumber
 			takeOffStaffNumber = fPreviousNoteStaffNumber,

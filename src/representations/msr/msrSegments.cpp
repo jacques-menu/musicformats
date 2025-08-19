@@ -115,6 +115,7 @@ void msrSegment::initializeSegment ()
 
     ss <<
       "Initializing segment" <<
+      asString () <<
       ", fSegmentAbsoluteNumber: " <<
       fSegmentAbsoluteNumber <<
       ", segmentNumber: " <<
@@ -838,6 +839,14 @@ void msrSegment::appendRepeatToSegment (
       S_msrSegment
         repeatCommonPartSegment =
           repeatCommonPart->getRepeatElementSegment ();
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+      // sanity check
+      mfAssert (
+        __FILE__, mfInputLineNumber (__LINE__),
+        repeatCommonPartSegment != nullptr,
+        "repeatCommonPartSegment is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       repeatCommonPartSegment->
         appendMeasureToSegment (fSegmentLastMeasure);
