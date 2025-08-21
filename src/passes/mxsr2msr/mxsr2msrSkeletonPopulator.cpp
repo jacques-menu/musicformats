@@ -1290,8 +1290,8 @@ void mxsr2msrSkeletonPopulator::createVoiceSegmentsForCurrentPartVoices (
     S_msrSegment
       voiceSegment =
         msrSegment::create (
-          elt->getInputLineNumber (),
-          fCurrentNoteMsrVoice); // the uplink to the voice
+          part->getInputLineNumber (),
+          voice); // the uplink to the voice
 
     // set it as the voice's voice segment
     voice->setVoiceSegment (voiceSegment);

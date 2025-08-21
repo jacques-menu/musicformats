@@ -840,6 +840,18 @@ gLog << "*** repeat *** " << repeat << std::endl;
         repeatCommonPart =
           repeat->getRepeatCommonPart ();
 
+      if (! repeatCommonPart) { // JMI 0.9.76
+        repeatCommonPart =
+          msrRepeatCommonPart::create (
+            repeat->getInputLineNumber (),
+            repeat);
+
+        // register it in repeat
+        repeat->
+          setRepeatCommonPart (
+            repeatCommonPart);
+      }
+
       S_msrSegment
         repeatCommonPartSegment =
           repeatCommonPart->getRepeatElementSegment ();
@@ -3549,9 +3561,15 @@ std::string msrSegment::asShortString () const
     fSegmentAbsoluteNumber <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
-    ", in voice: \"" <<
-    fSegmentUpLinkToVoice->getVoiceName () <<
-    '"' <<
+    ", fSegmentUpLinkToVoice: ";
+  if (fSegmentUpLinkToVoice) {
+    ss <<
+      fSegmentUpLinkToVoice->getVoiceName ();
+  }
+  else {
+    ss << "[NULL]";
+  }
+  ss <<
     ']';
 
   return ss.str ();
