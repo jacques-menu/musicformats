@@ -595,6 +595,7 @@ class EXP msrStaff : public msrElement
 using S_msrStaff = SMARTP<msrStaff>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrStaff& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrStaff& elt);
 
 
 }

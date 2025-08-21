@@ -8566,6 +8566,13 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrMeasure& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 
 }
 

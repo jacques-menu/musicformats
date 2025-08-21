@@ -541,6 +541,7 @@ class EXP msrSegment : public msrElement
 using S_msrSegment = SMARTP<msrSegment>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrSegment& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrSegment& elt);
 
 
 }

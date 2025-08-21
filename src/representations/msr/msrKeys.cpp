@@ -946,5 +946,12 @@ std::ostream& operator << (std::ostream& os, const S_msrKey& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrKey& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 
 }

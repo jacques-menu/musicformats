@@ -27058,7 +27058,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
               precedingRepeat =
                 currentRepeat->getImmediatelyPrecedingRepeat ();
 
-            if (precedingRepeat && ! precedingRepeat-> getRepeatEndings ().empty ()) {
+            if (precedingRepeat && ! precedingRepeat-> getRepeatEndingsVector ().empty ()) {
               // JMI 0.9.72
             }
           }
@@ -27085,7 +27085,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
               followingRepeat =
                 currentRepeat->getImmediatelyPrecedingRepeat ();
 
-      // JMI      if (followingRepeat && followingRepeat-> getRepeatEndings ().empty ()) {
+      // JMI      if (followingRepeat && followingRepeat-> getRepeatEndingsVector ().empty ()) {
             if (followingRepeat) {
               fLilypondCodeStream << "\\bar \":|][|:\" ";
             }
@@ -27671,7 +27671,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   int repeatEndingsNumber =
-    elt->getRepeatEndings ().size ();
+    elt->getRepeatEndingsVector ().size ();
 
   if (repeatEndingsNumber == 0)
     repeatEndingsNumber = 2; // implicitly JMI 0.9.70

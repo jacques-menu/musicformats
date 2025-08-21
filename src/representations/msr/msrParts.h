@@ -412,6 +412,10 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  sortStavesByIncreasingNumber ();
 
+    void                  displayPartStavesMap (
+                            const mfInputLineNumber& inputLineNumber,
+                            const std::string& context) const;
+
     // voices
 
     void                  registerVoiceInPartVoicesList (
@@ -420,9 +424,9 @@ class EXP msrPart : public msrPartGroupElement
 //     void                  registerVoiceInRegularVoicesMap (
 //                             const S_msrVoice& voice);
 
-    void                  displayPartStavesMap (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string& context) const;
+    const std::list <S_msrVoice>&
+                          getPartVoicesList () const
+                              { return fPartVoicesList; }
 
 //     void                  displayPartRegularVoicesMap (
 //                             const mfInputLineNumber& inputLineNumber,
@@ -809,6 +813,7 @@ class EXP msrPart : public msrPartGroupElement
 using S_msrPart = SMARTP<msrPart>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrPart& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrPart& elt);
 
 
 }

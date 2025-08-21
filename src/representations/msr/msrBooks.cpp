@@ -1080,5 +1080,12 @@ std::ostream& operator << (std::ostream& os, const S_msrBook& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrBook& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 
 }

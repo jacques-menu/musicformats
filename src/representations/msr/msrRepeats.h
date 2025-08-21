@@ -145,6 +145,7 @@ class EXP msrRepeatElement: public msrElement
 using S_msrRepeatElement = SMARTP<msrRepeatElement>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrRepeatElement& elt);
 
 //______________________________________________________________________________
 class EXP msrRepeatCommonPart : public msrRepeatElement
@@ -259,6 +260,7 @@ class EXP msrRepeatCommonPart : public msrRepeatElement
 using S_msrRepeatCommonPart = SMARTP<msrRepeatCommonPart>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatCommonPart& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrRepeatCommonPart& elt);
 
 //______________________________________________________________________________
 class EXP msrRepeatEnding : public msrRepeatElement
@@ -398,6 +400,7 @@ class EXP msrRepeatEnding : public msrRepeatElement
 using S_msrRepeatEnding = SMARTP<msrRepeatEnding>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrRepeatEnding& elt);
 
 //______________________________________________________________________________
 // class EXP msrRepeat : public msrVoiceElement
@@ -482,8 +485,8 @@ class EXP msrRepeat : public msrSegmentElement
 
     // endings
     const std::vector <S_msrRepeatEnding>&
-                          getRepeatEndings () const
-                              { return fRepeatEndings; }
+                          getRepeatEndingsVector () const
+                              { return fRepeatEndingsVector; }
 
     // immediately preceding and following repeats
     void                  setImmediatelyPrecedingRepeat (
@@ -579,7 +582,7 @@ class EXP msrRepeat : public msrSegmentElement
 
     // repeat endings
     std::vector <S_msrRepeatEnding>
-                          fRepeatEndings;
+                          fRepeatEndingsVector;
     int                   fRepeatEndingsInternalCounter;
 
     // immediately preceding and following repeats
@@ -623,6 +626,7 @@ class EXP msrRepeat : public msrSegmentElement
 using S_msrRepeat = SMARTP<msrRepeat>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrRepeat& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrRepeat& elt);
 
 
 }

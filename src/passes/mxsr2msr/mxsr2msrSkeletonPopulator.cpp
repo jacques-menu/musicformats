@@ -1282,6 +1282,22 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
 #endif // MF_TRACE_IS_ENABLED
 }
 
+void mxsr2msrSkeletonPopulator::createVoiceSegmentsForCurrentPartVoices (
+  const S_msrPart& part)
+{
+  for (S_msrVoice voice : fCurrentPart->getPartVoicesList ()) {
+    // create a segment
+    S_msrSegment
+      voiceSegment =
+        msrSegment::create (
+          elt->getInputLineNumber (),
+          fCurrentNoteMsrVoice); // the uplink to the voice
+
+    // set it as the voice's voice segment
+    voice->setVoiceSegment (voiceSegment);
+  } // for
+}
+
 void mxsr2msrSkeletonPopulator::displayCurrentPartStaffMsrVoicesMap (
   const mfInputLineNumber& inputLineNumber,
   const std::string& context) const
@@ -3763,6 +3779,9 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
       "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
 #endif
+
+  // create the current part's voices voice segments
+  createVoiceSegmentsForCurrentPartVoices (fCurrentPart);
 
   // is there an implicit initial repeat?
   Bool
@@ -8940,7 +8959,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting S_staff_details" <<
+      "--> Start visiting S_voice" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (

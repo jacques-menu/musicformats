@@ -1366,7 +1366,10 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrVoice                fCurrentRecipientMsrVoice;
 
     void                      populateCurrentPartStaffVoicesMapsFromPart (
-                                  const S_msrPart& part);
+                                const S_msrPart& part);
+
+    void                      createVoiceSegmentsForCurrentPartVoices (
+                                const S_msrPart& part);
 
 		void											displayCurrentPartStaffMxsrVoicesMap () const;
 

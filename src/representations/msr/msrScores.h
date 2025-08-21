@@ -481,8 +481,11 @@ class EXP msrScore : public msrBookElement
     S_msrMeasuresSlicesSequence
                           fScoreMeasuresSlicesSequence;
 };
-typedef SMARTP<msrScore> S_msrScore;
+
+using S_msrScore = SMARTP<msrScore>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrScore& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrScore& elt);
 
 
 }

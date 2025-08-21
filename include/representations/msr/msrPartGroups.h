@@ -69,8 +69,8 @@ std::ostream& operator << (std::ostream& os, const msrPartGroupBarLineKind& elt)
 
 //______________________________________________________________________________
 // PRE-declaration
-class   msrPartGroup;
-typedef SMARTP<msrPartGroup> S_msrPartGroup;
+class msrPartGroup;
+using S_msrPartGroup = SMARTP<msrPartGroup>;
 
 //______________________________________________________________________________
 class EXP msrPartGroup : public msrPartGroupElement
@@ -389,8 +389,11 @@ class EXP msrPartGroup : public msrPartGroupElement
     S_msrMeasuresSlicesSequence
                           fPartGroupMeasuresSlicesSequence;
 };
-typedef SMARTP<msrPartGroup> S_msrPartGroup;
+
+using S_msrPartGroup = SMARTP<msrPartGroup>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrPartGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrPartGroup& elt);
 
 
 }

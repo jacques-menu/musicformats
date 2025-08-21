@@ -24,7 +24,7 @@ namespace MusicFormats
 {
 //______________________________________________________________________________
 class   msrMeasure;
-typedef SMARTP<msrMeasure> S_msrMeasure;
+using S_msrMeasure = SMARTP<msrMeasure>;
 
 //______________________________________________________________________________
 /*
@@ -166,6 +166,7 @@ class EXP msrMeasureElement : public msrElement
 using S_msrMeasureElement = SMARTP<msrMeasureElement>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrMeasureElement& elt);
 
 
 }

@@ -4298,5 +4298,12 @@ std::ostream& operator << (std::ostream& os, const S_msrStaff& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrStaff& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 
 }

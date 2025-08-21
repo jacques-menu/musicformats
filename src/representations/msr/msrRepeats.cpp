@@ -503,6 +503,13 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatElement& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrRepeatElement& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrRepeatCommonPart msrRepeatCommonPart::create (
   const mfInputLineNumber& inputLineNumber,
@@ -1039,6 +1046,13 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatCommonPart& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrRepeatCommonPart& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrRepeatEnding msrRepeatEnding::create (
   const mfInputLineNumber& inputLineNumber,
@@ -1535,6 +1549,13 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrRepeatEnding& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrRepeat msrRepeat::create (
   const mfInputLineNumber& inputLineNumber,
@@ -1850,7 +1871,7 @@ void msrRepeat::addRepeatEndingToRepeat (
       break;
   } // switch
 
-  fRepeatEndings.push_back (repeatEnding);
+  fRepeatEndingsVector.push_back (repeatEnding);
 
   // set repeat ending internal number
   repeatEnding->
@@ -1920,7 +1941,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 //       break;
 //
 //     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
-//       fRepeatEndings.back ()->
+//       fRepeatEndingsVector.back ()->
 //         appendSegmentToRepeatEnding (
 //           inputLineNumber,
 //           segment,
@@ -2009,7 +2030,7 @@ void msrRepeat::appendRepeatToRepeat (
       break;
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
-      fRepeatEndings.back ()->
+      fRepeatEndingsVector.back ()->
         appendRepeatToRepeatEnding (
           inputLineNumber,
           repeat,
@@ -2098,7 +2119,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
       break;
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
-      fRepeatEndings.back ()->
+      fRepeatEndingsVector.back ()->
         appendMeasureRepeatToRepeatEnding (
           inputLineNumber,
           measureRepeat,
@@ -2187,7 +2208,7 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
       break;
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
-      fRepeatEndings.back ()->
+      fRepeatEndingsVector.back ()->
         appendMultipleMeasureRestToRepeatEnding (
           inputLineNumber,
           multipleMeasureRests,
@@ -2316,14 +2337,10 @@ void msrRepeat::browseData (basevisitor* v)
   }
 
   // browse the repeat endings
-  for (
-    std::vector <S_msrRepeatEnding>::const_iterator i = fRepeatEndings.begin ();
-    i != fRepeatEndings.end ();
-    ++i
-  ) {
+  for (S_msrRepeatEnding repeatEnding : fRepeatEndingsVector) {
     // browse the repeat ending
     msrBrowser<msrRepeatEnding> browser (v);
-    browser.browse (*(*i));
+    browser.browse (*repeatEnding);
   } // for
 }
 
@@ -2368,7 +2385,7 @@ std::string msrRepeat::asShortString () const
   }
 
   int repeatEndingsNumber =
-    fRepeatEndings.size ();
+    fRepeatEndingsVector.size ();
 
   ss <<
     ", repeatEndingsNumber: " << repeatEndingsNumber <<
@@ -2414,15 +2431,15 @@ std::string msrRepeat::asString () const
   }
 
   int endingsNumber =
-    fRepeatEndings.size ();
+    fRepeatEndingsVector.size ();
 
   ss <<
     ", endingsNumber: " << endingsNumber;
 
   if (endingsNumber) {
     std::vector <S_msrRepeatEnding>::const_iterator
-      iBegin = fRepeatEndings.begin (),
-      iEnd   = fRepeatEndings.end (),
+      iBegin = fRepeatEndingsVector.begin (),
+      iEnd   = fRepeatEndingsVector.end (),
       i      = iBegin;
 
     ss <<
@@ -2498,11 +2515,11 @@ void msrRepeat::print (std::ostream& os) const
 
   // short print the repeat endings
   int repeatEndingsSize =
-    fRepeatEndings.size ();
+    fRepeatEndingsVector.size ();
 
   os <<
     std::setw (fieldWidth) <<
-    "fRepeatEndings" << ": ";
+    "fRepeatEndingsVector" << ": ";
   if (repeatEndingsSize) {
     os << '(' << repeatEndingsSize << ")";
   }
@@ -2515,8 +2532,8 @@ void msrRepeat::print (std::ostream& os) const
     ++gIndenter;
 
     std::vector <S_msrRepeatEnding>::const_iterator
-      iBegin = fRepeatEndings.begin (),
-      iEnd   = fRepeatEndings.end (),
+      iBegin = fRepeatEndingsVector.begin (),
+      iEnd   = fRepeatEndingsVector.end (),
       i      = iBegin;
 
     for ( ; ; ) {
@@ -2554,7 +2571,7 @@ void msrRepeat::printFull (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "repeat ending(s)" << ": " <<
-    fRepeatEndings.size () <<
+    fRepeatEndingsVector.size () <<
     std::endl;
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2612,10 +2629,10 @@ void msrRepeat::printFull (std::ostream& os) const
 
   // print the repeat endings
   int endingsNumber =
-    fRepeatEndings.size ();
+    fRepeatEndingsVector.size ();
 
   os <<
-    "fRepeatEndings: ";
+    "fRepeatEndingsVector: ";
   if (endingsNumber > 0) {
     os << '(' << endingsNumber << ")";
   }
@@ -2628,8 +2645,8 @@ void msrRepeat::printFull (std::ostream& os) const
     ++gIndenter;
 
     std::vector <S_msrRepeatEnding>::const_iterator
-      iBegin = fRepeatEndings.begin (),
-      iEnd   = fRepeatEndings.end (),
+      iBegin = fRepeatEndingsVector.begin (),
+      iEnd   = fRepeatEndingsVector.end (),
       i      = iBegin;
 
     for ( ; ; ) {
@@ -2659,6 +2676,12 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeat& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrRepeat& elt)
+{
+  elt.print (os);
+
+  return os;
+}
 
 }
 

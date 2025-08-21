@@ -1161,5 +1161,12 @@ std::ostream& operator << (std::ostream& os, const S_msrScore& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrScore& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 
 }

@@ -220,8 +220,6 @@ class EXP msrVoice : public msrElement
 
     // segments
 
-    void                  setVoiceCurrentRecipientSegment (const S_msrSegment& segment);
-
 //     void                  setVoiceLastSegmentInVoiceClone (
 //                             const S_msrSegment& segment);
 
@@ -231,6 +229,8 @@ class EXP msrVoice : public msrElement
     const S_msrSegment&   getVoiceCurrentRecipientSegment () const
                               { return fVoiceCurrentRecipientSegment; }
 
+
+    void                  setVoiceSegment (const S_msrSegment& segment);
 
     const S_msrSegment&   getVoiceSegment () const
                               { return fVoiceSegment; }
@@ -1316,6 +1316,14 @@ class EXP msrVoice : public msrElement
 
   private:
 
+    // private work methods
+    // ------------------------------------------------------
+
+    void                  setVoiceCurrentRecipientSegment (
+                            const S_msrSegment& segment);
+
+  private:
+
     // private work fields
     // ------------------------------------------------------
 
@@ -1409,7 +1417,7 @@ class EXP msrVoice : public msrElement
     // current voice position
 
     mfWholeNotes          fCurrentVoicePosition;
-    mfMoment             fCurrentVoiceMoment;
+    mfMoment              fCurrentVoiceMoment;
 
     // voice finalization
 
@@ -1417,7 +1425,7 @@ class EXP msrVoice : public msrElement
 
     // beams begin, continue and end check
 
-    std::list <int>        fVoiceBeamNumbersStack;
+    std::list <int>       fVoiceBeamNumbersStack;
 
     // calls counter (for debug)
     int                   fCallsCounter;
@@ -1426,6 +1434,7 @@ class EXP msrVoice : public msrElement
 using S_msrVoice = SMARTP<msrVoice>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrVoice& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrVoice& elt);
 
 
 }

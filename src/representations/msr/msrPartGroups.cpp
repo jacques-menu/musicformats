@@ -1733,5 +1733,12 @@ std::ostream& operator << (std::ostream& os, const S_msrPartGroup& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrPartGroup& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 
 }

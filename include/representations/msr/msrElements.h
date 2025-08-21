@@ -102,8 +102,11 @@ class EXP msrElement : public smartable
 
     mfInputLineNumber     fInputLineNumber;
 };
-typedef SMARTP<msrElement> S_msrElement;
+
+using S_msrElement = SMARTP<msrElement>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrElement& elt);
 
 
 }

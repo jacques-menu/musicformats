@@ -202,5 +202,12 @@ std::ostream& operator << (std::ostream& os, const S_msrElement& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrElement& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 
 }

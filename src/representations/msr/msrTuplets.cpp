@@ -1412,6 +1412,13 @@ std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrTuplet& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 
 }
 

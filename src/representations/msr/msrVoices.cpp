@@ -423,16 +423,6 @@ void msrVoice::initializeVoice (
       break;
   } // switch
 
-  // create voice segment
-  fVoiceSegment =
-    msrSegment::create (
-      inputLineNumber,
-      this);
-
-  // set it as the current voice recipient segment
-  // this will change when repeats within the voice are being built
-  setVoiceCurrentRecipientSegment (fVoiceSegment);
-
   // voice shortest note
   fVoiceShortestNoteWholeNotes =
     mfWholeNotes (INT_MAX, 1);
@@ -561,6 +551,31 @@ void msrVoice::initializeVoice (
   --gIndenter;
 }
 
+void msrVoice::setVoiceSegment (const S_msrSegment& segment)
+{
+ #ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting voice segment in voice " <<
+      asString () <<
+      " to " <<
+      segment->asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fVoiceSegment = segment;
+
+  // set it as the current voice recipient segment
+  // this will change when repeats within the voice are being built
+  setVoiceCurrentRecipientSegment (segment);
+}
+
 void msrVoice::setVoiceCurrentRecipientSegment (const S_msrSegment& segment)
 {
  #ifdef MF_TRACE_IS_ENABLED
@@ -568,7 +583,7 @@ void msrVoice::setVoiceCurrentRecipientSegment (const S_msrSegment& segment)
     std::stringstream ss;
 
     ss <<
-      "Setting voice current recipient segment in " <<
+      "Setting voice current recipient segment in voice " <<
       asString () <<
       " to " <<
       segment->asString ();
@@ -1826,7 +1841,7 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
   }
 
   else {
-    // no
+    // no, there is no on-going multiple measure rests
 
 //     // create the voice last segment if needed
 // //     if (false && ! fVoiceLastSegment) { // JMI 0.9.73
@@ -1835,6 +1850,11 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
 //         inputLineNumber,
 //         "cascadeCreateAMeasureAndAppendItInVoice() 2");
 //     }
+
+    // make sure the voice current recipient has been set
+    if (! fVoiceCurrentRecipientSegment) {
+      fVoiceCurrentRecipientSegment = fVoiceSegment;
+    }
 
     // append a new measure with given number to voice last segment
     result =
@@ -11820,6 +11840,15 @@ std::string msrVoice::asShortString () const
     fVoiceNumber <<
     ", fRegularVoiceOrdinalNumberInPart: " <<
     fRegularVoiceOrdinalNumberInPart <<
+    ", fVoiceSegment: ";
+  if (fVoiceSegment) {
+    ss <<
+      fVoiceSegment->asString ();
+  }
+  else {
+    ss << "[NULL]";
+  }
+  ss <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -11836,8 +11865,15 @@ std::string msrVoice::asString () const
     fVoicePathLikeName <<
     ", fVoiceKind: " <<
     fVoiceKind <<
-    ", fVoiceSegment: " <<
-    fVoiceSegment->asString () <<
+    ", fVoiceSegment: ";
+  if (fVoiceSegment) {
+    ss <<
+      fVoiceSegment->asString ();
+  }
+  else {
+    ss << "[NULL]";
+  }
+  ss <<
      ", " <<
     mfSingularOrPlural (
       fVoiceActualNotesCounter, "actual note", "actual notes") <<
@@ -12043,20 +12079,24 @@ void msrVoice::print (std::ostream& os) const
     "***** fVoiceCurrentRecipientSegment *****" << ": ";
     os << std::endl;
 
-  ++gIndenter;
-  // getSegmentAbsoluteNumber() could be used too JMI ??? 0.9.76
-  if (
-    fVoiceCurrentRecipientSegment->getSegmentNumber ()
-      !=
-    fVoiceSegment->getSegmentNumber ()
-  ) {
-    os << fVoiceCurrentRecipientSegment;
+  if (fVoiceCurrentRecipientSegment) {
+    ++gIndenter;
+    // getSegmentAbsoluteNumber() could be used too JMI ??? 0.9.76
+    if (
+      fVoiceCurrentRecipientSegment->getSegmentNumber ()
+        !=
+      fVoiceSegment->getSegmentNumber ()
+    ) {
+      os << fVoiceCurrentRecipientSegment;
+    }
+    else {
+      os << "--- same as fVoiceSegment ---" << std::endl;
+    }
+    --gIndenter;
   }
   else {
-    os << "--- same as fVoiceSegment ---" << std::endl;
+    os << "[NULL]";
   }
-  --gIndenter;
-
   os << std::endl;
 
   // print the stanzas if any
@@ -12445,11 +12485,14 @@ void msrVoice::printFull (std::ostream& os) const
     "***** fVoiceCurrentRecipientSegment *****" << ": ";
     os << std::endl;
 
-    ++gIndenter;
-    os << fVoiceCurrentRecipientSegment;
-    --gIndenter;
-
-  os << std::endl;
+  if (fVoiceCurrentRecipientSegment) {
+      ++gIndenter;
+      os << fVoiceCurrentRecipientSegment;
+      --gIndenter;
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
 
   // print the stanzas if any
   os <<
@@ -12512,6 +12555,13 @@ std::ostream& operator << (std::ostream& os, const S_msrVoice& elt)
   else {
     os << "[NULL]" << std::endl;
   }
+
+  return os;
+}
+
+std::ostream& operator << (std::ostream& os, const msrVoice& elt)
+{
+  elt.print (os);
 
   return os;
 }

@@ -7822,6 +7822,13 @@ std::ostream& operator << (std::ostream& os, const S_msrNote& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrNote& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 
 }
 

@@ -1282,6 +1282,7 @@ class EXP msrNote : public msrTupletElement
 using S_msrNote = SMARTP<msrNote>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrNote& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrNote& elt);
 
 
 }

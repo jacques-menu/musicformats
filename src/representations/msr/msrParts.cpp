@@ -4527,5 +4527,12 @@ std::ostream& operator << (std::ostream& os, const S_msrPart& elt)
   return os;
 }
 
+std::ostream& operator << (std::ostream& os, const msrPart& elt)
+{
+  elt.print (os);
+
+  return os;
+}
+
 
 }

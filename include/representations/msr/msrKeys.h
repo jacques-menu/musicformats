@@ -23,8 +23,8 @@ namespace MusicFormats
 //______________________________________________________________________________
 // PRE-declarations for class mutual dependencies
 
-class   msrKey;
-typedef SMARTP<msrKey> S_msrKey;
+class msrKey;
+using S_msrKey = SMARTP<msrKey>;
 
 // keys
 //______________________________________________________________________________
@@ -58,8 +58,8 @@ msrModeKind modeKindFromString (
 //______________________________________________________________________________
 // PRE-declarations for mutual class dependencies
 
-class   msrHumdrumScotKeyItem;
-typedef SMARTP<msrHumdrumScotKeyItem> S_msrHumdrumScotKeyItem;
+class msrHumdrumScotKeyItem;
+using S_msrHumdrumScotKeyItem = SMARTP<msrHumdrumScotKeyItem>;
 
 //______________________________________________________________________________
 class EXP msrHumdrumScotKeyItem : public msrElement
@@ -143,14 +143,16 @@ class EXP msrHumdrumScotKeyItem : public msrElement
     msrAlterationKind     fKeyAlterationKind;
     msrOctaveKind         fKeyOctaveKind;
 };
-typedef SMARTP<msrHumdrumScotKeyItem> S_msrHumdrumScotKeyItem;
+
+using S_msrHumdrumScotKeyItem = SMARTP<msrHumdrumScotKeyItem>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrHumdrumScotKeyItem& elt);
 
 //______________________________________________________________________________
 // PRE-declaration
 
-class   msrKey;
-typedef SMARTP<msrKey> S_msrKey;
+class msrKey;
+using S_msrKey = SMARTP<msrKey>;
 
 //______________________________________________________________________________
 class EXP msrKey : public msrMeasureElement
@@ -288,8 +290,11 @@ class EXP msrKey : public msrMeasureElement
                           fHumdrumScotKeyItemsVector;
     Bool                  fKeyItemsOctavesAreSpecified;
 };
-typedef SMARTP<msrKey> S_msrKey;
+
+using S_msrKey = SMARTP<msrKey>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrKey& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrKey& elt);
 
 
 }

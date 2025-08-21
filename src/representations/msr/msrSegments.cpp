@@ -114,7 +114,7 @@ void msrSegment::initializeSegment ()
     std::stringstream ss;
 
     ss <<
-      "Initializing segment" <<
+      "Initializing segment " <<
       asString () <<
       ", fSegmentAbsoluteNumber: " <<
       fSegmentAbsoluteNumber <<
@@ -797,7 +797,7 @@ void msrSegment::appendRepeatToSegment (
   const S_msrRepeat& repeat)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -820,6 +820,10 @@ void msrSegment::appendRepeatToSegment (
 //   S_msrVoice
 //     containingVoice =
 //       getSegmentUpLinkToVoice ();
+
+gLog << "*** msrSegment *** " << *this << std::endl;
+gLog << std::endl << std::endl;
+gLog << "*** repeat *** " << repeat << std::endl;
 
   if (fSegmentLastMeasure) {
     // are there elements before the current last measure in this segment?
@@ -3890,6 +3894,13 @@ std::ostream& operator << (std::ostream& os, const S_msrSegment& elt)
   else {
     os << "[NULL]" << std::endl;
   }
+
+  return os;
+}
+
+std::ostream& operator << (std::ostream& os, const msrSegment& elt)
+{
+  elt.print (os);
 
   return os;
 }
