@@ -821,62 +821,71 @@ void msrSegment::appendRepeatToSegment (
 //     containingVoice =
 //       getSegmentUpLinkToVoice ();
 
+// gLog << "*** msrSegment *** " << *this << std::endl;
+// gLog << std::endl << std::endl;
+// gLog << "*** repeat *** " << repeat << std::endl;
+
+    // create a repeat common part if needed
+    S_msrRepeatCommonPart
+      repeatCommonPart =
+        repeat->getRepeatCommonPart ();
+
+    if (! repeatCommonPart) { // JMI 0.9.76
+      repeatCommonPart =
+        msrRepeatCommonPart::create (
+          repeat->getInputLineNumber (),
+          repeat);
+
+      // register it in repeat
+      repeat->
+        setRepeatCommonPart (
+          repeatCommonPart);
+    }
+
+  // append the last segment measure to the repeat's common part
 gLog << "*** msrSegment *** " << *this << std::endl;
 gLog << std::endl << std::endl;
-gLog << "*** repeat *** " << repeat << std::endl;
 
   if (fSegmentLastMeasure) {
     // are there elements before the current last measure in this segment?
-    if (
-      fSegmentLastMeasure->getMeasureIsMusicallyEmpty ()
-        &&
-      ! fSegmentElementsList.empty ()
-    ) {
-      // the are non-musical elements before the repeat in fSegmentLastMeasure:
-      // the latter belongs actually to the repeat's common part
+//     if (
+//       fSegmentLastMeasure->getMeasureIsMusicallyEmpty ()
+//         &&
+//       ! fSegmentElementsList.empty ()
+//     ) {
+//       // the are non-musical elements before the repeat in fSegmentLastMeasure:
+//       // the latter belongs actually to the repeat's common part
 
-      // append the last segment measure to the repeat's common part
-      S_msrRepeatCommonPart
-        repeatCommonPart =
-          repeat->getRepeatCommonPart ();
+//       S_msrSegment
+//         repeatCommonPartSegment =
+//           repeatCommonPart->getRepeatElementSegment ();
 
-      if (! repeatCommonPart) { // JMI 0.9.76
-        repeatCommonPart =
-          msrRepeatCommonPart::create (
-            repeat->getInputLineNumber (),
-            repeat);
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//       // sanity check
+//       mfAssert (
+//         __FILE__, mfInputLineNumber (__LINE__),
+//         repeatCommonPartSegment != nullptr,
+//         "repeatCommonPartSegment is NULL");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-        // register it in repeat
-        repeat->
-          setRepeatCommonPart (
-            repeatCommonPart);
-      }
-
-      S_msrSegment
-        repeatCommonPartSegment =
-          repeatCommonPart->getRepeatElementSegment ();
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-      // sanity check
-      mfAssert (
-        __FILE__, mfInputLineNumber (__LINE__),
-        repeatCommonPartSegment != nullptr,
-        "repeatCommonPartSegment is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-      repeatCommonPartSegment->
-        appendMeasureToSegment (fSegmentLastMeasure);
+//       repeatCommonPartSegment->
+//         appendMeasureToSegment (fSegmentLastMeasure);
+      // append segment last measure to repeatCommonPart
+      repeatCommonPart->
+        appendMeasureToRepeatElement (
+          repeat->getInputLineNumber (),
+          fSegmentLastMeasure,
+          "appendRepeatToSegment()");
 
       // remove it from the segment elements list
-//       fSegmentElementsList.erase (fSegmentLastMeasure);
       fSegmentElementsList.pop_back ();
 
       // remove it from the segment measures list
-//       fSegmentMeasuresList.erase (fSegmentLastMeasure);
       if (! fSegmentMeasuresList.empty ()) { // JMI should not be necessary 0.9.76
         fSegmentMeasuresList.pop_back ();
       }
-    }
+//     }
+
 //   for (
 //     std::list <S_msrVoiceElement>::iterator i = fVoiceInitialElementsList.begin ();
 //     i != fVoiceInitialElementsList.end ();
@@ -2653,6 +2662,9 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
   // append measure to the segment
   appendSegmentElementToSegment (measure);
 
+  //append measure to the segment's measures list
+  fSegmentMeasuresList.push_back (measure);
+
   // register measure as the last one in the segment
   setSegmentLastMeasure (
     measure);
@@ -3706,7 +3718,9 @@ void msrSegment::print (std::ostream& os) const
   if (fSegmentFirstMeasure) {
     os << std::endl;
     ++gIndenter;
-    fSegmentFirstMeasure->printFull (os);
+    os <<
+      fSegmentFirstMeasure->asString () <<
+      std::endl;
     --gIndenter;
   }
   else {
@@ -3718,12 +3732,16 @@ void msrSegment::print (std::ostream& os) const
   if (fSegmentLastMeasure) {
     os << std::endl;
     ++gIndenter;
-    fSegmentLastMeasure->printFull (os);
+    os <<
+      fSegmentLastMeasure->asString () <<
+      std::endl;
     --gIndenter;
   }
   else {
     os << "[NULL]" << std::endl;
   }
+
+  os << std::endl;
 
   os <<
     std::setw (fieldWidth) <<
@@ -3759,6 +3777,8 @@ void msrSegment::print (std::ostream& os) const
       "[EMPTY]" <<
       std::endl;
   }
+
+  os << std::endl;
 
   os <<
     std::setw (fieldWidth) <<
