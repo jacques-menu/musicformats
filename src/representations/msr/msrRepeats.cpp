@@ -1624,13 +1624,13 @@ void msrRepeat::initializeRepeat (
   // set uplink to voice
   fRepeatUpLinkToVoice = upLinkToVoice;
 
-//   // create the repeat common part
+  // create the repeat common part
 //   S_msrRepeatCommonPart
-//     repeatCommonPart =
-//       msrRepeatCommonPart::create (
-//         inputLineNumber,
-//         this);
-//
+  fRepeatCommonPart =
+    msrRepeatCommonPart::create (
+      inputLineNumber,
+      this);
+
 //   // register it in newRepeat
 // //   setRepeatCommonPart ( JMI 0.9.76 incomplete virtual method table???
 // //     repeatCommonPart);
@@ -1641,8 +1641,9 @@ void msrRepeat::initializeRepeat (
     std::stringstream ss;
 
     ss <<
-      "Initializing repeat " <<
+      "Initializing repeat" <<
       ", fRepeatTimes: " << fRepeatTimes <<
+//       ", fRepeatCommonPart: " << fRepeatCommonPart->asString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (

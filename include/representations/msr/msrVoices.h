@@ -226,8 +226,8 @@ class EXP msrVoice : public msrElement
 //     void                  appendSegmentToVoiceClone (
 //                             const S_msrSegment& segment);
 
-    const S_msrSegment&   getVoiceCurrentRecipientSegment () const
-                              { return fVoiceCurrentRecipientSegment; }
+//     const S_msrSegment&   getVoiceCurrentRecipientSegment () const
+//                               { return fVoiceCurrentRecipientSegment; }
 
 
     void                  setVoiceSegment (const S_msrSegment& segment);
@@ -1328,9 +1328,6 @@ class EXP msrVoice : public msrElement
     // ------------------------------------------------------
 
     // voice initial elements list
-
-    S_msrSegment          fVoiceCurrentRecipientSegment;
-
 //     std::list <S_msrVoiceElement>
 //                           fVoiceInitialElementsList;
 

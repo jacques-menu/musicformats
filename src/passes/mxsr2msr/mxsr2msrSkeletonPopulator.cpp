@@ -1285,17 +1285,17 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
 void mxsr2msrSkeletonPopulator::createVoiceSegmentsForCurrentPartVoices (
   const S_msrPart& part)
 {
-  for (S_msrVoice voice : fCurrentPart->getPartVoicesList ()) {
-    // create a segment
-    S_msrSegment
-      voiceSegment =
-        msrSegment::create (
-          part->getInputLineNumber (),
-          voice); // the uplink to the voice
-
-    // set it as the voice's voice segment
-    voice->setVoiceSegment (voiceSegment);
-  } // for
+//   for (S_msrVoice voice : fCurrentPart->getPartVoicesList ()) {
+//     // create a segment
+//     S_msrSegment
+//       voiceSegment =
+//         msrSegment::create (
+//           part->getInputLineNumber (),
+//           voice); // the uplink to the voice
+//
+//     // set it as the voice's voice segment
+//     voice->setVoiceSegment (voiceSegment);
+//   } // for
 }
 
 void mxsr2msrSkeletonPopulator::displayCurrentPartStaffMsrVoicesMap (

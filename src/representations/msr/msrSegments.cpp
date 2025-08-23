@@ -796,6 +796,16 @@ void msrSegment::appendSegmentElementToSegment (
 void msrSegment::appendRepeatToSegment (
   const S_msrRepeat& repeat)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    repeat != nullptr,
+    "repeat is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+gLog << "*** repeat *** " << repeat << std::endl;
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
