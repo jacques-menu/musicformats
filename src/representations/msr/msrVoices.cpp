@@ -569,7 +569,7 @@ void msrVoice::setVoiceSegment (const S_msrSegment& segment)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fVoiceSegment = segment;
+//   fVoiceSegment = segment;
 
   // set it as the current voice recipient segment
   // this will change when repeats within the voice are being built
