@@ -4752,6 +4752,14 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // this should NOT be necessary JMI 0.9.76
+  if (! fVoiceSegment) {
+    fVoiceSegment =
+      msrSegment::create (
+        fInputLineNumber,
+        this);
+  }
+
   S_msrRepeat
     repeat =
       msrRepeat::create (
