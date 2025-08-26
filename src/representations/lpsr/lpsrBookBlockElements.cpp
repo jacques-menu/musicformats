@@ -171,9 +171,85 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
+std::string lpsrBookBlockElement::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[BookBlockElement" <<
+    ", fBookBlockHeader: ";
+  if (fBookBlockHeader) {
+    ss <<
+      fBookBlockHeader->asString () ;
+  }
+  else {
+    ss << "[NULL]";
+  }
+    ", fBookBlockPaper: ";
+  if (fBookBlockPaper) {
+    ss <<
+      fBookBlockPaper->asString () ;
+  }
+  else {
+    ss << "[NULL]";
+  }
+
+  ss <<
+    ", fBookBlockElementsList: " <<
+  for (S_lpsrBookBlockElement bookBlockElement : fBookBlockElementsList) {
+    ss << bookBlockElement->asString ();
+  } // for
+
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
+
 void lpsrBookBlockElement::print (std::ostream& os) const
 {
-  // will never be called since it is overridden in sub-classes
+  const int fieldWidth = 30;
+
+  os <<
+    "[BookBlockElement" <<
+    std::endl;
+
+  ++gIndenter;
+
+  os << left <<
+    std::setw (fieldWidth) <<
+    ", fBookBlockHeader: ";
+  if (fBookBlockHeader) {
+    os <<
+      fBookBlockHeader->asString () ;
+  }
+  else {
+    os << "[NULL]";
+  }
+    ", fBookBlockPaper: ";
+  if (fBookBlockPaper) {
+    os <<
+      fBookBlockPaper->asString () ;
+  }
+  else {
+    os << "[NULL]";
+  }
+
+  os <<
+    ", fBookBlockElementsList: " <<
+  for (S_lpsrBookBlockElement bookBlockElement : fBookBlockElementsList) {
+    os << bookBlockElement->asString ();
+  } // for
+
+  os <<
+    ", line " << fInputLineNumber;
+
+  --gIndenter;
+
+  os <<
+    ']' <<
+    std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_lpsrBookBlockElement& scr)
@@ -451,9 +527,31 @@ void lpsrScoreBlock::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
+std::string lpsrBookBlockElement::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[ScoreBlock" <<
+    ", fBookBlockElementParallelMusicBlock: " <<
+    fBookBlockElementParallelMusicBlock->asString ();
+    ", fScoreBlockLayout: ";
+  if (fScoreBlockLayout) {
+    ss <<
+      fScoreBlockLayout->asString () ;
+  }
+  ss <<
+    ", fBookBlockElementParallelMusicBlock " <<
+    fBookBlockElementParallelMusicBlock->asString () <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
+
 void lpsrScoreBlock::print (std::ostream& os) const
 {
-  os << "ScoreBlock" << std::endl << std::endl;
+  os << "[ScoreBlock" << std::endl << std::endl;
 
   ++gIndenter;
 
@@ -472,6 +570,8 @@ void lpsrScoreBlock::print (std::ostream& os) const
     std::endl;
 
   --gIndenter;
+
+  os << ']';
 }
 
 std::ostream& operator << (std::ostream& os, const S_lpsrScoreBlock& scr)
@@ -687,9 +787,34 @@ void lpsrBookPartBlock::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
+std::string lpsrBookBlockElement::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[BookPartBlock" <<
+    ", fBookBlockElementParallelMusicBlock: " <<
+    fBookBlockElementParallelMusicBlock->asString ();
+    ", fBookBlockElementParallelMusicBlock: ";
+  if (fBookBlockElementParallelMusicBlock) {
+    ss <<
+      fBookBlockElementParallelMusicBlock->asString () ;
+  }
+  else {
+    ss << "[NULL]";
+  }
+  ss <<
+    ", fBookBlockElementParallelMusicBlock " <<
+    fBookBlockElementParallelMusicBlock->asString () <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
+
 void lpsrBookPartBlock::print (std::ostream& os) const
 {
-  os << "BookPartBlock" << std::endl << std::endl;
+  os << "[BookPartBlock" << std::endl << std::endl;
 
   ++gIndenter;
 
@@ -698,6 +823,8 @@ void lpsrBookPartBlock::print (std::ostream& os) const
     std::endl;
 
   --gIndenter;
+
+  os << ']';
 }
 
 std::ostream& operator << (std::ostream& os, const S_lpsrBookPartBlock& scr)

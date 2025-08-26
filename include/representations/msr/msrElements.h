@@ -27,6 +27,11 @@ using namespace MusicXML2;
 
 namespace MusicFormats
 {
+//______________________________________________________________________________
+// pre-declaration
+
+class msrElement;
+using S_msrElement = SMARTP<msrElement>;
 
 //______________________________________________________________________________
 class EXP msrElement : public smartable
@@ -84,6 +89,7 @@ class EXP msrElement : public smartable
     // print
     // ------------------------------------------------------
 
+/*
     virtual std::string   asString () const;
 
     virtual std::string   asShortString () const;
@@ -94,6 +100,46 @@ class EXP msrElement : public smartable
     virtual void          printFull (std::ostream& os) const;
 
     virtual void          printSummary (std::ostream& os) const;
+*/
+
+    virtual std::string   asString () const = 0;
+
+    virtual std::string   asShortString () const
+                              { return asString (); }
+
+//     Bool                  operator == (const Bool &otherBool) const
+//                               { return fBareValue == otherBool.fBareValue; }
+//     std::string           operator std::string () const
+//                               { return asString (); }
+
+    virtual std::string   asStringForMeasuresSlices () const;
+
+    virtual void          print (std::ostream& os) const
+                              { os << asString () << std::endl; }
+
+    virtual void          printFull (std::ostream& os) const
+                              { print (os); }
+
+    virtual void          printSummary (std::ostream& os) const;
+
+//     EXP std::ostream&     operator << (std::ostream& os, const S_msrElement& elt)
+//                               {
+//                                 if (elt) {
+//                                   elt->print (os);
+//                                 }
+//                                 else {
+//                                   os << "[NULL]" << std::endl;
+//                                 }
+//
+//                                 return os;
+//                               }
+//
+//     EXP std::ostream&     operator << (std::ostream& os, const msrElement& elt)
+//                               {
+//                                 elt.print (os);
+//
+//                                 return os;
+//                               }
 
   protected:
 
@@ -106,8 +152,25 @@ class EXP msrElement : public smartable
 using S_msrElement = SMARTP<msrElement>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrElement& elt);
-EXP std::ostream& operator << (std::ostream& os, const msrElement& elt);
+// EXP std::ostream& operator << (std::ostream& os, const S_msrElement& elt)
+// {
+//   if (elt) {
+//     elt->print (os);
+//   }
+//   else {
+//     os << "[NULL]" << std::endl;
+//   }
+//
+//   return os;
+// }
 
+EXP std::ostream& operator << (std::ostream& os, const msrElement& elt);
+// EXP std::ostream& operator << (std::ostream& os, const msrElement& elt)
+// {
+//   elt.print (os);
+//
+//   return os;
+// }
 
 }
 

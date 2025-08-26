@@ -121,24 +121,37 @@ void lpsrBarNumberCheck::acceptOut (basevisitor* v)
 void lpsrBarNumberCheck::browseData (basevisitor* v)
 {}
 
-void lpsrBarNumberCheck::print (std::ostream& os) const
+std::string lpsrBarNumberCheck::asString () const
 {
-  os <<
-    "BarNumberCheck" << ' ' << fNextBarNumber <<
-    std::endl;
+  std::stringstream ss;
+
+  ss <<
+    "[BarNumberCheck" <<
+    ", fNextBarNumber: " << fNextBarNumber <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
 }
 
-std::ostream& operator << (std::ostream& os, const S_lpsrBarNumberCheck& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "[NULL]" << std::endl;
-  }
+// void lpsrBarNumberCheck::print (std::ostream& os) const
+// {
+//   os <<
+//     "BarNumberCheck" << ' ' << fNextBarNumber <<
+//     std::endl;
+// }
 
-  return os;
-}
+// std::ostream& operator << (std::ostream& os, const S_lpsrBarNumberCheck& elt)
+// {
+//   if (elt) {
+//     elt->print (os);
+//   }
+//   else {
+//     os << "[NULL]" << std::endl;
+//   }
+//
+//   return os;
+// }
 
 //______________________________________________________________________________
 S_lpsrBarCommand lpsrBarCommand::create (
@@ -234,18 +247,30 @@ void lpsrBarCommand::acceptOut (basevisitor* v)
 void lpsrBarCommand::browseData (basevisitor* v)
 {}
 
-void lpsrBarCommand::print (std::ostream& os) const
+std::string lpsrBarCommand::asString () const
 {
-  os <<
-    "BarCommand" << ' ' << "\"|.\"" <<
-    std::endl;
+  std::stringstream ss;
+
+  ss <<
+    "[BarCommand" <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
 }
 
-std::ostream& operator << (std::ostream& os, const S_lpsrBarCommand& nstf)
-{
-  nstf->print (os);
-  return os;
-}
+// void lpsrBarCommand::print (std::ostream& os) const
+// {
+//   os <<
+//     "BarCommand" << ' ' << "\"|.\"" <<
+//     std::endl;
+// }
+
+// std::ostream& operator << (std::ostream& os, const S_lpsrBarCommand& nstf)
+// {
+//   nstf->print (os);
+//   return os;
+// }
 
 
 }

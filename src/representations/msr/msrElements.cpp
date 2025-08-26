@@ -145,6 +145,7 @@ void msrElement::browseDataAlongPathToVoice (
   browseData (v);
 }
 
+/*
 std::string msrElement::asString () const
 {
   // this is overriden all in actual elements
@@ -202,12 +203,71 @@ std::ostream& operator << (std::ostream& os, const S_msrElement& elt)
   return os;
 }
 
-std::ostream& operator << (std::ostream& os, const msrElement& elt)
-{
-  elt.print (os);
+*/
 
-  return os;
+// std::string msrElement::asString () const
+// {
+//   // this is overriden all in actual elements
+//   return "[??? msrElement::asString () ???]";
+// }
+//
+// std::string msrElement::asShortString () const
+// {
+//   // this can be overriden in actual elements
+//   return asString ();
+// }
+
+std::string msrElement::asStringForMeasuresSlices () const
+{
+  // this can be overriden in actual elements
+  std::stringstream ss;
+
+  ss <<
+    '[' <<
+    asShortString () <<
+    ']';
+
+  return ss.str ();
 }
+
+// void msrElement::print (std::ostream& os) const
+// {
+//   os << asString () << std::endl;
+// }
+
+// void msrElement::printFull (std::ostream& os) const
+// {
+//    print (os);
+// }
+
+void msrElement::printSummary (std::ostream& os) const
+{
+  print (os);
+}
+
+msrElement::operator std::string ()
+{
+  return asString ();
+}
+
+// std::ostream& operator << (std::ostream& os, const S_msrElement& elt)
+// {
+//   if (elt) {
+//     elt->print (os);
+//   }
+//   else {
+//     os << "[NULL]" << std::endl;
+//   }
+//
+//   return os;
+// }
+//
+// std::ostream& operator << (std::ostream& os, const msrElement& elt)
+// {
+//   elt.print (os);
+//
+//   return os;
+// }
 
 
 }

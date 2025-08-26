@@ -1268,9 +1268,9 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceStavesBasics ()
+    gTraceOahGroup->getTraceStaves ()
       ||
-    gTraceOahGroup->getTraceVoicesBasics ()
+    gTraceOahGroup->getTraceVoices ()
   ) {
     // display the part's staff to MXSR voices map
     displayCurrentPartStaffMxsrVoicesMap ();
@@ -3769,9 +3769,9 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceStavesBasics ()
+    gTraceOahGroup->getTraceStaves ()
       ||
-    gTraceOahGroup->getTraceVoicesBasics ()
+    gTraceOahGroup->getTraceVoices ()
   ) {
     // display the part's staff to MSR voices map
     displayCurrentPartStaffMsrVoicesMap (

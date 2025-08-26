@@ -804,7 +804,7 @@ void msrSegment::appendRepeatToSegment (
     "repeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-gLog << "*** repeat *** " << repeat << std::endl;
+// gLog << "*** repeat *** " << repeat << std::endl;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -812,7 +812,7 @@ gLog << "*** repeat *** " << repeat << std::endl;
 
     ss <<
       "Appending repeat " <<
-      repeat->asString ()<<
+//       repeat->asString () <<
       " to segment " <<
       asString () <<
       " in voice \"" <<
@@ -835,22 +835,22 @@ gLog << "*** repeat *** " << repeat << std::endl;
 // gLog << std::endl << std::endl;
 // gLog << "*** repeat *** " << repeat << std::endl;
 
-    // create a repeat common part if needed
-    S_msrRepeatCommonPart
-      repeatCommonPart =
-        repeat->getRepeatCommonPart ();
-
-    if (! repeatCommonPart) { // JMI 0.9.76
-      repeatCommonPart =
-        msrRepeatCommonPart::create (
-          repeat->getInputLineNumber (),
-          repeat);
-
-      // register it in repeat
-      repeat->
-        setRepeatCommonPart (
-          repeatCommonPart);
-    }
+//     // create a repeat common part if needed
+//     S_msrRepeatCommonPart
+//       repeatCommonPart =
+//         repeat->getRepeatCommonPart ();
+//
+//     if (! repeatCommonPart) { // JMI 0.9.76
+//       repeatCommonPart =
+//         msrRepeatCommonPart::create (
+//           repeat->getInputLineNumber (),
+//           repeat);
+//
+//       // register it in repeat
+//       repeat->
+//         setRepeatCommonPart (
+//           repeatCommonPart);
+//     }
 
   // append the last segment measure to the repeat's common part
 gLog << "*** msrSegment *** " << *this << std::endl;
@@ -870,22 +870,36 @@ gLog << std::endl << std::endl;
 //         repeatCommonPartSegment =
 //           repeatCommonPart->getRepeatElementSegment ();
 
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//       // sanity check
-//       mfAssert (
-//         __FILE__, mfInputLineNumber (__LINE__),
-//         repeatCommonPartSegment != nullptr,
-//         "repeatCommonPartSegment is NULL");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+      // get repeat common part
+      S_msrRepeatCommonPart
+        repeatCommonPart =
+          repeat->getRepeatCommonPart ();
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+      // sanity check
+      mfAssert (
+        __FILE__, mfInputLineNumber (__LINE__),
+        repeatCommonPart != nullptr,
+        "repeatCommonPart is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+      // append segment last measure to repeatCommonPart segment
 //       repeatCommonPartSegment->
 //         appendMeasureToSegment (fSegmentLastMeasure);
-      // append segment last measure to repeatCommonPart
+
+      // append segment last measure to repeat common part
       repeatCommonPart->
         appendMeasureToRepeatElement (
           repeat->getInputLineNumber (),
           fSegmentLastMeasure,
-          "appendRepeatToSegment()");
+          "appendMeasureToRepeatElement()");
+
+      // append segment last measure to repeatCommonPart
+//       repeatCommonPart->
+//         appendMeasureToRepeatElement (
+//           repeat->getInputLineNumber (),
+//           fSegmentLastMeasure,
+//           "appendRepeatToSegment()");
 
       // remove it from the segment elements list
       fSegmentElementsList.pop_back ();
@@ -3638,9 +3652,9 @@ std::string msrSegment::asString () const
 
 if (! segmentElement) abort ();
 
-gLog << "*** segmentElement ***" << std::endl << segmentElement << std::endl;
+// gLog << "*** segmentElement ***" << std::endl << segmentElement << std::endl;
 
-        ss << segmentElement->asString ();
+//         ss << segmentElement->asString ();
         if (++i == iEnd) break;
         ss << ", ";
       } // for

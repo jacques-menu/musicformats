@@ -601,8 +601,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
 
     ss <<
       "Appending repeat " <<
-    // JMI  repeat->asString () <<
-      repeat <<
+      repeat->asString () <<
       " to repeat common part " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
@@ -911,7 +910,7 @@ void msrRepeatCommonPart::print (std::ostream& os) const
     "[RepeatCommonPart" <<
 //     ", fRepeatElementUpLinkToRepeat: " <<
 //     fRepeatElementUpLinkToRepeat->
-//       asShortString () <<
+      asShortString () <<
     ", line " << fInputLineNumber <<
     std::endl;
 
@@ -1405,8 +1404,7 @@ void msrRepeatEnding::printFull (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "repeat upLink" << " : " <<
-    fRepeatElementUpLinkToRepeat->
-      asShortString () <<
+    fRepeatElementUpLinkToRepeat->asShortString () <<
     '\'' <<
     std::endl << std::endl;
 
@@ -1643,7 +1641,7 @@ void msrRepeat::initializeRepeat (
     ss <<
       "Initializing repeat" <<
       ", fRepeatTimes: " << fRepeatTimes <<
-//       ", fRepeatCommonPart: " << fRepeatCommonPart->asString () <<
+//       ", fRepeatCommonPart: " << fRepeatCommonPart->asString () << CANNOT RUN
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1696,35 +1694,35 @@ msrRepeat::~msrRepeat ()
 void msrRepeat::setRepeatCommonPart (
   const S_msrRepeatCommonPart& repeatCommonPart)
 {
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    repeatCommonPart != nullptr,
-    "repeatCommonPart is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Setting repeat common part to " <<
-      repeatCommonPart->asShortString () <<
-      " in repeat " <<
-      asShortString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fRepeatCommonPart = repeatCommonPart;
-
-  // set repeat's build phase
-  fCurrentRepeatBuildPhaseKind =
-    msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart;
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, mfInputLineNumber (__LINE__),
+//     repeatCommonPart != nullptr,
+//     "repeatCommonPart is NULL");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting repeat common part to " <<
+//       repeatCommonPart->asShortString () <<
+//       " in repeat " <<
+// //       asShortString (); CANNOT RUN
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fRepeatCommonPart = repeatCommonPart;
+//
+//   // set repeat's build phase
+//   fCurrentRepeatBuildPhaseKind =
+//     msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart;
 }
 
 void msrRepeat::addRepeatEndingToRepeat (

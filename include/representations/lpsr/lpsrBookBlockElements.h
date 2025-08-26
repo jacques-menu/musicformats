@@ -87,7 +87,9 @@ class EXP lpsrBookBlockElement : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (std::ostream& os) const override;
+    std::string           asString () const override;
+
+//     void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -157,7 +159,9 @@ class EXP lpsrScoreBlock : public lpsrBookBlockElement
     // print
     // ------------------------------------------------------
 
-    void                  print (std::ostream& os) const override;
+    std::string           asString () const override;
+
+//     void                  print (std::ostream& os) const override;
 
   private:
 
@@ -220,7 +224,9 @@ class EXP lpsrBookPartBlock : public lpsrBookBlockElement
     // print
     // ------------------------------------------------------
 
-    void                  print (std::ostream& os) const override;
+    std::string           asString () const override;
+
+//     void                  print (std::ostream& os) const override;
 
   private:
 
@@ -307,6 +313,8 @@ class EXP lpsrBookBlock : public lpsrElement
 
     // print
     // ------------------------------------------------------
+
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 

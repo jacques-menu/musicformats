@@ -68,7 +68,9 @@ class EXP lpsrBarNumberCheck : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (std::ostream& os) const override;
+    std::string           asString () const override;
+
+//     void                  print (std::ostream& os) const override;
 
   private:
 
@@ -77,7 +79,10 @@ class EXP lpsrBarNumberCheck : public lpsrElement
 
     int                   fNextBarNumber;
 };
-typedef SMARTP<lpsrBarNumberCheck> S_lpsrBarNumberCheck;
+
+using S_lpsrBarNumberCheck = SMARTP<lpsrBarNumberCheck>;
+
+// EXP std::ostream& operator << (std::ostream& os, const S_lpsrBarNumberCheck& elt);
 
 //______________________________________________________________________________
 class EXP lpsrBarCommand : public lpsrElement
@@ -125,15 +130,19 @@ class EXP lpsrBarCommand : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (std::ostream& os) const override;
+    std::string           asString () const override;
+
+//     void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<lpsrBarCommand> S_lpsrBarCommand;
-EXP std::ostream& operator << (std::ostream& os, const S_lpsrBarCommand& elt);
+
+using S_lpsrBarCommand = SMARTP<lpsrBarCommand>;
+
+// EXP std::ostream& operator << (std::ostream& os, const S_lpsrBarCommand& elt);
 
 
 }

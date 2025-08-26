@@ -3000,7 +3000,7 @@ void msrVoice::cascadeAppendFiguredBassesListToVoice (
 
     ss <<
       "Appending figured basses list \"" <<
-//       figuredBasssesList->asString () << // JMI 0.9.67 HARMFUL
+//       figuredBasssesList->asString () << // JMI 0.9.76 HARMFUL
       " to voice \"" <<
       fVoiceName <<
       "\"" <<
@@ -4338,7 +4338,7 @@ void msrVoice::popRepeatFromVoiceRepeatsStack (
 
     ss <<
       "Popping repeat ***** BEGIN " <<
-//       repeat->asShortString () <<
+      repeat->asShortString () <<
       " from the repeats stack in voice \"" <<
       fVoiceName <<
       "\"" <<
@@ -4456,7 +4456,7 @@ void msrVoice::displayVoiceRepeatsStack (
 
       ++gIndenter;
       gLog <<
-        repeat <<
+//         repeat <<
         std::endl;
       --gIndenter;
 
@@ -4754,6 +4754,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
 
   // this should NOT be necessary JMI 0.9.76
   if (! fVoiceSegment) {
+    gLog << "*** FOO FOO FOO 1 ***" << std::endl;
     fVoiceSegment =
       msrSegment::create (
         fInputLineNumber,
@@ -4767,9 +4768,14 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
         2, // repeatTimes, default value JMI
         this);
 
-  // append repeat to the voice's segment
-  fVoiceSegment->
-    appendRepeatToSegment (repeat);
+  if (! repeat) {
+    gLog << "*** FOO FOO FOO 2 ***" << std::endl;
+    abort ();
+  }
+
+//   // append repeat to the voice's segment
+//   fVoiceSegment->
+//     appendRepeatToSegment (repeat);
 
   // push it onto the voice's repeat descrs stack
   pushRepeatOntoVoiceRepeatsStack (
@@ -9120,8 +9126,7 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
     ss <<
       "current voice measures repeat is null when attempting to handle measures repeat pattern start " <<
       " in voice clone " <<
-      asShortString () <<
-      " ";
+      asShortString ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -9203,8 +9208,7 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
     ss <<
       "current voice measures repeat is null when attempting to handle measures repeat pattern end " <<
       " in voice clone " <<
-      asShortString () <<
-      " ";
+      asShortString ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -9272,8 +9276,7 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
     ss <<
       "current voice measures repeat is null when attempting to handle measures repeat replicas start " <<
       " in voice clone " <<
-      asShortString () <<
-      " ";
+      asShortString ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -9355,8 +9358,7 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
     ss <<
       "current voice measures repeat is null when attempting to handle measures repeat replicas end " <<
       " in voice clone " <<
-      asShortString () <<
-      " ";
+      asShortString ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -9629,8 +9631,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
 
     ss <<
       "repeats stack is empty when attempting to handle a hookless repeat ending end in voice " <<
-      asShortString () <<
-      " ";
+      asShortString ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -9808,8 +9809,7 @@ S_msrSegment msrVoice::handleRepeatCommonPartStartInVoiceClone (
     ss <<
       "repeats stack is empty when attempting to handle repeat common part start " <<
       " in voice clone " <<
-      asShortString () <<
-      " ";
+      asShortString ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -9906,10 +9906,9 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
 
     ss <<
       "repeats stack is empty when attempting to handle repeat ending " <<
- //     repeatEnding->asShortString () <<
+//       repeatEnding->asShortString () <<
       " in voice clone " <<
-      asShortString () <<
-      " ";
+      asShortString ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -9988,11 +9987,8 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
     std::stringstream ss;
 
     ss <<
-      "repeats stack is empty when attempting to handle hooked repeat ending " <<
- //     repeatEnding->asShortString () <<
-      " in voice clone " <<
-      asShortString () <<
-      " ";
+      "repeats stack is empty when attempting to handle a hooked repeat ending in voice clone " <<
+      asShortString ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -10082,11 +10078,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
     std::stringstream ss;
 
     ss <<
-      "repeats stack is empty when attempting to handle hookless repeat ending " <<
- //     repeatEnding->asShortString () <<
-      " in voice clone " <<
-      asShortString () <<
-      " ";
+      "repeats stack is empty when attempting to handle a hookless repeat ending in voice clone " <<
+      asShortString ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -11232,7 +11225,8 @@ void msrVoice::finalizeVoice (
       "--> in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asFractionString () <<
+      ", fVoiceShortestNoteWholeNotes: " <<
+      fVoiceShortestNoteWholeNotes.asFractionString () <<
       ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes;
 
     gWaeHandler->waeTrace (
@@ -11397,8 +11391,10 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       "--> in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asFractionString () <<
-      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asFractionString ();
+      ", fVoiceShortestNoteWholeNotes: " <<
+      fVoiceShortestNoteWholeNotes.asFractionString () <<
+      ", partShortestNoteWholeNotes: " <<
+      partShortestNoteWholeNotes.asFractionString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),

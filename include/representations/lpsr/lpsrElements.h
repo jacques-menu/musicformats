@@ -59,7 +59,8 @@ class EXP lpsrElement : public msrElement
 
     void                  browseData (basevisitor* v) override;
 };
-typedef SMARTP<lpsrElement> S_lpsrElement;
+
+using S_lpsrElement = SMARTP<lpsrElement>;
 
 
 }
