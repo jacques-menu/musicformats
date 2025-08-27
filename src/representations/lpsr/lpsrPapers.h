@@ -189,6 +189,8 @@ class EXP lpsrPaper : public lpsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;
 
@@ -237,7 +239,9 @@ class EXP lpsrPaper : public lpsrElement
     std::string           fOddFooterMarkup;
     std::string           fEvenFooterMarkup;
 };
-typedef SMARTP<lpsrPaper> S_lpsrPaper;
+
+using S_lpsrPaper = SMARTP<lpsrPaper>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrPaper& elt);
 
 

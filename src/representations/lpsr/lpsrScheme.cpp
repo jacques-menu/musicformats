@@ -187,8 +187,24 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
   }
 }
 
-void lpsrSchemeVariable::browseData (basevisitor* v)
-{}
+std::string lpsrSchemeVariable::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[SchemeVariable";
+
+  ss <<
+    ", fCommentedKind: " << fCommentedKind <<
+    ", fVariableName: " << fVariableName <<
+    ", fVariableValue: " << fVariableValue <<
+    ", fComment: " << fComment <<
+    ", fEndOfLineKind: " << fEndOfLineKind <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
 
 void lpsrSchemeVariable::print (std::ostream& os) const
 {
@@ -200,12 +216,14 @@ void lpsrSchemeVariable::print (std::ostream& os) const
 
   // escape quotes if any
   std::string variableName;
-  std::string variableValue;
 
   for_each (
     fVariableName.begin (),
     fVariableName.end (),
     mfStringQuoteEscaper (variableName));
+
+  std::string variableValue;
+
   for_each (
     fVariableValue.begin (),
     fVariableValue.end (),
@@ -219,6 +237,7 @@ void lpsrSchemeVariable::print (std::ostream& os) const
     "variableName" << ": " <<
     "\"" << variableName << "\"" <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "variableValue" << ": " <<
     "\"" << variableValue << "\"" <<
@@ -251,9 +270,9 @@ std::ostream& operator << (std::ostream& os, const S_lpsrSchemeVariable& schemeV
 //______________________________________________________________________________
 S_lpsrSchemeFunction lpsrSchemeFunction::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& functionName,
-  const std::string& functionDescription,
-  const std::string& functionCode)
+  const std::string&       functionName,
+  const std::string&       functionDescription,
+  const std::string&       functionCode)
 {
   lpsrSchemeFunction* obj =
     new lpsrSchemeFunction (
@@ -265,9 +284,9 @@ S_lpsrSchemeFunction lpsrSchemeFunction::create (
 
 lpsrSchemeFunction::lpsrSchemeFunction (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& functionName,
-  const std::string& functionDescription,
-  const std::string& functionCode)
+  const std::string&       functionName,
+  const std::string&       functionDescription,
+  const std::string&       functionCode)
     : lpsrElement (inputLineNumber)
 {
   fFunctionName = functionName;
@@ -350,13 +369,27 @@ void lpsrSchemeFunction::acceptOut (basevisitor* v)
   }
 }
 
-void lpsrSchemeFunction::browseData (basevisitor* v)
-{}
+std::string lpsrSchemeFunction::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[SchemeFunction";
+
+  ss <<
+    ", fFunctionName: " << fFunctionName <<
+    ", fFunctionDescription: " << fFunctionDescription <<
+    ", fFunctionCode: " << fFunctionCode <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
 
 void lpsrSchemeFunction::print (std::ostream& os) const
 {
   os <<
-    "SchemeFunction" <<
+    "[SchemeFunction" <<
     std::endl;
 
   ++gIndenter;
@@ -368,6 +401,8 @@ void lpsrSchemeFunction::print (std::ostream& os) const
     "fFunctionDescription: \"" << fFunctionDescription << "\"" <<
     std::endl <<
     "fFunctionCode: \"" << fFunctionCode << "\"" <<
+    std::endl <<
+    ']' <<
     std::endl;
 
   --gIndenter;

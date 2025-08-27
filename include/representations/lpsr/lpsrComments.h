@@ -39,9 +39,12 @@ class EXP lpsrComment : public lpsrElement
 
     static SMARTP<lpsrComment> create (
                             const mfInputLineNumber& inputLineNumber,
+                            const std::string&       contents);
+
+    static SMARTP<lpsrComment> create (
+                            const mfInputLineNumber&     inputLineNumber,
                             const std::string&           contents,
-                            lpsrCommentGapAfterwardsKind commentGapAfterwardsKind =
-                                                 lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo);
+                            lpsrCommentGapAfterwardsKind commentGapAfterwardsKind);
 
   protected:
 
@@ -50,9 +53,12 @@ class EXP lpsrComment : public lpsrElement
 
                           lpsrComment (
                             const mfInputLineNumber& inputLineNumber,
+                            const std::string&       contents);
+
+                          lpsrComment (
+                            const mfInputLineNumber&     inputLineNumber,
                             const std::string&           contents,
-                            lpsrCommentGapAfterwardsKind commentGapAfterwardsKind =
-                                                 lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo);
+                            lpsrCommentGapAfterwardsKind commentGapAfterwardsKind);
 
     virtual               ~lpsrComment ();
 
@@ -64,8 +70,9 @@ class EXP lpsrComment : public lpsrElement
     std::string           getContents () const
                               { return fContents; }
 
-    lpsrCommentGapAfterwardsKind    getCommentGapKind  () const
-                              { return fCommentGapKind; }
+    lpsrCommentGapAfterwardsKind
+                          getCommentGapAfterwardsKind () const
+                              { return fCommentGapAfterwardsKind; }
 
   public:
 
@@ -87,6 +94,8 @@ class EXP lpsrComment : public lpsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -94,10 +103,13 @@ class EXP lpsrComment : public lpsrElement
     // private fields
     // ------------------------------------------------------
 
-    std::string         fContents;
-    lpsrCommentGapAfterwardsKind  fCommentGapKind;
+    std::string           fContents;
+    lpsrCommentGapAfterwardsKind
+                          fCommentGapAfterwardsKind;
 };
-typedef SMARTP<lpsrComment> S_lpsrComment;
+
+using S_lpsrComment = SMARTP<lpsrComment>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrComment& elt);
 
 

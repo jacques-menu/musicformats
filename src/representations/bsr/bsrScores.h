@@ -107,6 +107,8 @@ class EXP bsrScore : public bsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;
 
@@ -124,9 +126,11 @@ class EXP bsrScore : public bsrElement
     int                   fBrailleLineLength; // cells JMI ???
     int                   fBraillePageLength;
 
-    std::list <S_bsrPage>       fScorePagesList;
+    std::list <S_bsrPage> fScorePagesList;
 };
-typedef SMARTP<bsrScore> S_bsrScore;
+
+using S_bsrScore = SMARTP<bsrScore>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_bsrScore& score);
 
 

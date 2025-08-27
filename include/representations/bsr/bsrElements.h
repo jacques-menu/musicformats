@@ -21,6 +21,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 class EXP bsrElement : public msrElement
 {
+/* this class is purely virtual
   public:
 
     // creation
@@ -28,6 +29,7 @@ class EXP bsrElement : public msrElement
 
     static SMARTP<bsrElement> create (
                             const mfInputLineNumber& inputLineNumber);
+*/
 
   protected:
 
@@ -48,29 +50,10 @@ class EXP bsrElement : public msrElement
 
     // public services
     // ------------------------------------------------------
-
-  public:
-
-    // visitors
-    // ------------------------------------------------------
-
-    void                  acceptIn  (basevisitor* v) override;
-    void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
-
-  public:
-
-    // print
-    // ------------------------------------------------------
-
-    std::string           asString () const override;
-
-    std::string           asShortString () const override;
-
-    void                  print (std::ostream& os) const override;
 };
-typedef SMARTP<bsrElement> S_bsrElement;
+
+using S_bsrElement = SMARTP<bsrElement>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_bsrElement& elt);
 
 

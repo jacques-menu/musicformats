@@ -58,79 +58,6 @@ mfInputLineNumber msrElement::getInputLineNumber () const
   return fInputLineNumber;
 }
 
-//______________________________________________________________________________
-void msrElement::acceptIn (basevisitor* v)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "% ==> msrElement::msrElement ()";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (visitor<S_msrElement>*
-    p =
-      dynamic_cast<visitor<S_msrElement>*> (v)) {
-        S_msrElement elem = this;
-
-#ifdef MF_TRACE_IS_ENABLED
-        if (gMsrOahGroup->getTraceMsrVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
-            "% ==> Launching msrElement::visitStart ()";
-
-          gWaeHandler->waeTrace (
-            __FILE__, mfInputLineNumber (__LINE__),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-        p->visitStart (elem);
-  }
-}
-
-void msrElement::acceptOut (basevisitor* v)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "% ==> msrElement::acceptOut ()";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (visitor<S_msrElement>*
-    p =
-      dynamic_cast<visitor<S_msrElement>*> (v)) {
-        S_msrElement elem = this;
-
-#ifdef MF_TRACE_IS_ENABLED
-        if (gMsrOahGroup->getTraceMsrVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
-            "% ==> Launching msrElement::visitEnd ()";
-
-          gWaeHandler->waeTrace (
-            __FILE__, mfInputLineNumber (__LINE__),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-        p->visitEnd (elem);
-  }
-}
-
 void msrElement::browseDataAlongPathToVoice (
   basevisitor*            v,
   const S_msrPathToVoice& pathToVoice)
@@ -145,17 +72,17 @@ void msrElement::browseDataAlongPathToVoice (
   browseData (v);
 }
 
-/*
-std::string msrElement::asString () const
-{
-  // this is overriden all in actual elements
-  return "[??? msrElement::asString () ???]";
-}
-
-std::string msrElement::asShortString () const
+std::string msrElement::asStringForMeasuresSlices () const
 {
   // this can be overriden in actual elements
-  return asString ();
+  std::stringstream ss;
+
+  ss <<
+    "[Element " <<
+    asShortString () <<
+    ']';
+
+  return ss.str ();
 }
 
 std::string msrElement::asStringForMeasuresSlices () const
@@ -169,26 +96,6 @@ std::string msrElement::asStringForMeasuresSlices () const
     ']';
 
   return ss.str ();
-}
-
-void msrElement::print (std::ostream& os) const
-{
-  os << asString () << std::endl;
-}
-
-void msrElement::printFull (std::ostream& os) const
-{
-   print (os);
-}
-
-void msrElement::printSummary (std::ostream& os) const
-{
-  print (os);
-}
-
-msrElement::operator std::string() const
-{
-  return asString ();
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrElement& elt)
@@ -203,71 +110,24 @@ std::ostream& operator << (std::ostream& os, const S_msrElement& elt)
   return os;
 }
 
-*/
-
-// std::string msrElement::asString () const
-// {
-//   // this is overriden all in actual elements
-//   return "[??? msrElement::asString () ???]";
-// }
-//
-// std::string msrElement::asShortString () const
-// {
-//   // this can be overriden in actual elements
-//   return asString ();
-// }
-
-std::string msrElement::asStringForMeasuresSlices () const
+std::ostream& operator << (std::ostream& os, const msrElement& elt)
 {
-  // this can be overriden in actual elements
-  std::stringstream ss;
+  elt.print (os);
 
-  ss <<
-    '[' <<
-    asShortString () <<
-    ']';
-
-  return ss.str ();
+  return os;
 }
 
-// void msrElement::print (std::ostream& os) const
-// {
-//   os << asString () << std::endl;
-// }
-
-// void msrElement::printFull (std::ostream& os) const
-// {
-//    print (os);
-// }
-
-void msrElement::printSummary (std::ostream& os) const
+std::string msrElementAsStringOrNULL(
+  S_msrElement element)
 {
-  print (os);
+  if (element) {
+    return
+      element->asString ();
+  }
+  else {
+    return "[NULL]";
+  }
 }
-
-msrElement::operator std::string ()
-{
-  return asString ();
-}
-
-// std::ostream& operator << (std::ostream& os, const S_msrElement& elt)
-// {
-//   if (elt) {
-//     elt->print (os);
-//   }
-//   else {
-//     os << "[NULL]" << std::endl;
-//   }
-//
-//   return os;
-// }
-//
-// std::ostream& operator << (std::ostream& os, const msrElement& elt)
-// {
-//   elt.print (os);
-//
-//   return os;
-// }
 
 
 }

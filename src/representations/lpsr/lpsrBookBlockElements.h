@@ -19,7 +19,7 @@
 #include "lpsrLayouts.h"
 #include "lpsrPapers.h"
 #include "lpsrParallelMusic.h"
-#include "lpsrPartGroups.h"
+#include "lpsrPartGroupBlocks.h"
 #include "lpsrScheme.h"
 
 #include "msrMidi.h"
@@ -89,7 +89,7 @@ class EXP lpsrBookBlockElement : public lpsrElement
 
     std::string           asString () const override;
 
-//     void                  print (std::ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -161,7 +161,7 @@ class EXP lpsrScoreBlock : public lpsrBookBlockElement
 
     std::string           asString () const override;
 
-//     void                  print (std::ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -226,7 +226,7 @@ class EXP lpsrBookPartBlock : public lpsrBookBlockElement
 
     std::string           asString () const override;
 
-//     void                  print (std::ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -330,7 +330,9 @@ class EXP lpsrBookBlock : public lpsrElement
     std::list <S_lpsrBookBlockElement>
                           fBookBlockElementsList;
 };
-typedef SMARTP<lpsrBookBlock> S_lpsrBookBlock;
+
+using S_lpsrBookBlock = SMARTP<lpsrBookBlock>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrBookBlock& elt);
 
 

@@ -121,7 +121,9 @@ class EXP bsrKey : public bsrLineContentsElement
 
     S_bsrCellsList        fKeyCellsList;
 };
-typedef SMARTP<bsrKey> S_bsrKey;
+
+using S_bsrKey = SMARTP<bsrKey>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_bsrKey& elt);
 
 

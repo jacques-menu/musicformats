@@ -1965,6 +1965,18 @@ std::ostream& operator << (std::ostream& os, const S_mfcMultiComponent& elt)
   return os;
 }
 
+std::string mfcMultiComponentAsStringOrNULL(
+  S_mfcMultiComponent multiComponent)
+{
+  if (multiComponent) {
+    return
+      multiComponent->asString ();
+  }
+  else {
+    return "[NULL]";
+  }
+}
+
 //______________________________________________________________________________
 S_mfcGeneratorComponent mfcGeneratorComponent::create (
   const std::string& generatorName,

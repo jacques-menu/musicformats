@@ -24,6 +24,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
+/* this class is purely virtual
 S_lpsrElement lpsrElement::create (
   const mfInputLineNumber& inputLineNumber)
 {
@@ -33,6 +34,7 @@ S_lpsrElement lpsrElement::create (
   assert (obj != nullptr);
   return obj;
 }
+*/
 
 lpsrElement::lpsrElement (
   const mfInputLineNumber& inputLineNumber)
@@ -40,81 +42,6 @@ lpsrElement::lpsrElement (
 {}
 
 lpsrElement::~lpsrElement ()
-{}
-
-void lpsrElement::acceptIn (basevisitor* v)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "% ==> lpsrElement::acceptIn ()";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (visitor<S_lpsrElement>*
-    p =
-      dynamic_cast<visitor<S_lpsrElement>*> (v)) {
-        S_lpsrElement elem = this;
-
-#ifdef MF_TRACE_IS_ENABLED
-        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
-            "% ==> Launching lpsrElement::visitStart ()";
-
-          gWaeHandler->waeTrace (
-            __FILE__, mfInputLineNumber (__LINE__),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-        p->visitStart (elem);
-  }
-}
-
-void lpsrElement::acceptOut (basevisitor* v)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "% ==> lpsrElement::acceptOut ()";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (visitor<S_lpsrElement>*
-    p =
-      dynamic_cast<visitor<S_lpsrElement>*> (v)) {
-        S_lpsrElement elem = this;
-
-#ifdef MF_TRACE_IS_ENABLED
-        if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
-          std::stringstream ss;
-
-          ss <<
-            "% ==> Launching lpsrElement::visitEnd ()";
-
-          gWaeHandler->waeTrace (
-            __FILE__, mfInputLineNumber (__LINE__),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-        p->visitEnd (elem);
-  }
-}
-
-void lpsrElement::browseData (basevisitor* v)
 {}
 
 

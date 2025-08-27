@@ -125,7 +125,68 @@ void lpsrNewStaffGroupBlock::acceptOut (basevisitor* v)
 }
 
 void lpsrNewStaffGroupBlock::browseData (basevisitor* v)
-{}
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "% ==> lpsrNewStaffGroupBlock::browseData ()";
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  for (S_msrElement element : fNewStaffGroupElementsVector) {
+    // browse the element
+    msrBrowser<msrElement> browser (v);
+    browser.browse (*element);
+  } // for
+}
+
+std::string lpsrNewStaffGroupBlock::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[NewStaffGroupBlock";
+
+  ss <<
+    "fNewStaffGroupElementsVector: ";
+  if (! fNewStaffGroupElementsVector.empty ()) {
+    ss << '[';
+
+    ++gIndenter;
+
+    std::vector <S_msrElement>::const_iterator
+      iBegin = fNewStaffGroupElementsVector.begin (),
+      iEnd   = fNewStaffGroupElementsVector.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrElement
+        element = (*i);
+
+      ss << element;
+
+      if (++i == iEnd) break;
+      ss << ", ";
+    } // for
+
+    ss << ']';
+  }
+  else {
+    ss << "[EMPTY]";
+  }
+
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
+
 
 void lpsrNewStaffGroupBlock::print (std::ostream& os) const
 {
@@ -244,16 +305,49 @@ void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
 }
 
 void lpsrNewStaffTuningBlock::browseData (basevisitor* v)
-{}
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "% ==> lpsrNewStaffTuningBlock::browseData ()";
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // browse the element
+  msrBrowser<msrStaffTuning> browser (v);
+  browser.browse (*fStaffTuning);
+}
+
+std::string lpsrNewStaffTuningBlock::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[NewStaffTuningBlock";
+
+  ss <<
+    ", fStaffTuning: " << msrElementAsStringOrNULL (fStaffTuning) <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
 
 void lpsrNewStaffTuningBlock::print (std::ostream& os) const
 {
-  os << "NewStaffTuningBlock" << std::endl;
+  os << "[NewStaffTuningBlock" << std::endl;
 
   ++gIndenter;
 
   os <<
-    fStaffTuning;
+    fStaffTuning <<
+    ']';
 
   --gIndenter;
 }
@@ -356,7 +450,67 @@ void lpsrNewStaffBlock::acceptOut (basevisitor* v)
 }
 
 void lpsrNewStaffBlock::browseData (basevisitor* v)
-{}
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "% ==> lpsrNewStaffBlock::browseData ()";
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  for (S_msrElement element : fNewStaffElementsVector) {
+    // browse the element
+    msrBrowser<msrElement> browser (v);
+    browser.browse (*element);
+  } // for
+}
+
+std::string lpsrNewStaffBlock::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[NewStaffBlock";
+
+  ss <<
+    "fNewStaffElementsVector: ";
+  if (! fNewStaffElementsVector.empty ()) {
+    ss << '[';
+
+    ++gIndenter;
+
+    std::vector <S_msrElement>::const_iterator
+      iBegin = fNewStaffElementsVector.begin (),
+      iEnd   = fNewStaffElementsVector.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrElement
+        element = (*i);
+
+      ss << element;
+
+      if (++i == iEnd) break;
+      ss << ", ";
+    } // for
+
+    ss << ']';
+  }
+  else {
+    ss << "[EMPTY]";
+  }
+
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
 
 void lpsrNewStaffBlock::print (std::ostream& os) const
 {
@@ -423,7 +577,7 @@ void lpsrStaffBlock::appendVoiceUseToStaffBlock (const S_msrVoice& voice)
         fInputLineNumber,
         voice);
 
-  fStaffBlockElements.push_back (useVoiceCommand);
+  fStaffBlockElementsList.push_back (useVoiceCommand);
 }
 
 void lpsrStaffBlock::appendLyricsUseToStaffBlock (const S_msrStanza& stanza)
@@ -435,7 +589,7 @@ void lpsrStaffBlock::appendLyricsUseToStaffBlock (const S_msrStanza& stanza)
         stanza,
         stanza->getStanzaUpLinkToVoice ());
 
-  fStaffBlockElements.push_back (newLyricsCommand);
+  fStaffBlockElementsList.push_back (newLyricsCommand);
 }
 
 void lpsrStaffBlock::acceptIn (basevisitor* v)
@@ -525,28 +679,57 @@ void lpsrStaffBlock::browseData (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (
-    std::list <S_msrElement>::const_iterator i = fStaffBlockElements.begin ();
-    i != fStaffBlockElements.end ();
-    ++i
-  ) {
+  for (S_msrElement element : fStaffBlockElementsList) {
     // browse the element
     msrBrowser<msrElement> browser (v);
-    browser.browse (*(*i));
+    browser.browse (*element);
   } // for
+}
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
-    std::stringstream ss;
+std::string lpsrStaffBlock::asString () const
+{
+  std::stringstream ss;
 
-    ss <<
-      "% <== lpsrStaffBlock::browseData ()";
+  ss <<
+    "[StaffBlock";
 
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
+  ss <<
+    ", fStaff: " << msrElementAsStringOrNULL (fStaff);
+
+  ss <<
+    ", fStaffBlockElementsList: ";
+  if (! fStaffBlockElementsList.empty ()) {
+    ss << '[';
+
+    ++gIndenter;
+
+    std::list <S_msrElement>::const_iterator
+      iBegin = fStaffBlockElementsList.begin (),
+      iEnd   = fStaffBlockElementsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrElement
+        element = (*i);
+
+      ss << element;
+
+      if (++i == iEnd) break;
+      ss << ", ";
+    } // for
+
+    ss << ']';
   }
-#endif // MF_TRACE_IS_ENABLED
+  else {
+    ss << "[EMPTY]";
+  }
+
+  ss <<
+    ", fStaffBlockInstrumentName: " << fStaffBlockInstrumentName <<
+    ", fStaffBlockShortInstrumentName: " << fStaffBlockShortInstrumentName <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
 }
 
 void lpsrStaffBlock::print (std::ostream& os) const
@@ -557,7 +740,7 @@ void lpsrStaffBlock::print (std::ostream& os) const
     "\" (" << msrStaffKindAsString (fStaff->getStaffKind ()) <<
     "), " <<
     mfSingularOrPlural (
-      fStaffBlockElements.size (), "element", "elements") <<
+      fStaffBlockElementsList.size (), "element", "elements") <<
     std::endl;
 
   ++gIndenter;
@@ -574,10 +757,10 @@ void lpsrStaffBlock::print (std::ostream& os) const
     "\")" <<
     std::endl << std::endl;
 
-  if (fStaffBlockElements.size ()) {
+  if (fStaffBlockElementsList.size ()) {
     std::list <S_msrElement>::const_iterator
-      iBegin = fStaffBlockElements.begin (),
-      iEnd   = fStaffBlockElements.end (),
+      iBegin = fStaffBlockElementsList.begin (),
+      iEnd   = fStaffBlockElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);

@@ -71,6 +71,8 @@ class EXP lpsrNewStaffGroupBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -80,7 +82,9 @@ class EXP lpsrNewStaffGroupBlock : public lpsrElement
 
     std::vector <S_msrElement> fNewStaffGroupElementsVector;
 };
-typedef SMARTP<lpsrNewStaffGroupBlock> S_lpsrNewStaffGroupBlock;
+
+using S_lpsrNewStaffGroupBlock = SMARTP<lpsrNewStaffGroupBlock>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffGroupBlock& elt);
 
 //______________________________________________________________________________
@@ -134,6 +138,8 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -143,7 +149,9 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
 
     S_msrStaffTuning      fStaffTuning;
 };
-typedef SMARTP<lpsrNewStaffTuningBlock> S_lpsrNewStaffTuningBlock;
+
+using S_lpsrNewStaffTuningBlock = SMARTP<lpsrNewStaffTuningBlock>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffTuningBlock& elt);
 
 //______________________________________________________________________________
@@ -192,6 +200,8 @@ class EXP lpsrNewStaffBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -201,7 +211,9 @@ class EXP lpsrNewStaffBlock : public lpsrElement
 
     std::vector <S_msrElement> fNewStaffElementsVector;
 };
-typedef SMARTP<lpsrNewStaffBlock> S_lpsrNewStaffBlock;
+
+using S_lpsrNewStaffBlock = SMARTP<lpsrNewStaffBlock>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffBlock& elt);
 
 //______________________________________________________________________________
@@ -234,8 +246,8 @@ class EXP lpsrStaffBlock : public lpsrElement
                               { return fStaff; }
 
     const std::list <S_msrElement>&
-                          getStaffBlockElements () const
-                              { return fStaffBlockElements; }
+                          getStaffBlockElementsList () const
+                              { return fStaffBlockElementsList; }
 
     void                  setStaffBlockInstrumentName (
                             const std::string& instrumentName)
@@ -270,7 +282,7 @@ class EXP lpsrStaffBlock : public lpsrElement
 
     void                  appendElementToStaffBlock (
                             const S_msrElement& elem)
-                              { fStaffBlockElements.push_back (elem); }
+                              { fStaffBlockElementsList.push_back (elem); }
 
   public:
 
@@ -287,6 +299,8 @@ class EXP lpsrStaffBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -297,12 +311,14 @@ class EXP lpsrStaffBlock : public lpsrElement
     S_msrStaff            fStaff;
 
     std::list <S_msrElement>
-                          fStaffBlockElements;
+                          fStaffBlockElementsList;
 
     std::string           fStaffBlockInstrumentName;
     std::string           fStaffBlockShortInstrumentName;
 };
-typedef SMARTP<lpsrStaffBlock> S_lpsrStaffBlock;
+
+using S_lpsrStaffBlock = SMARTP<lpsrStaffBlock>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrStaffBlock& elt);
 
 

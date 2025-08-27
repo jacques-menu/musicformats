@@ -41,8 +41,8 @@
 
 #include "lpsrBookBlockElements.h"
 #include "lpsrHeaders.h"
-#include "lpsrParts.h"
-#include "lpsrPartGroups.h"
+#include "lpsrPartBlocks.h"
+#include "lpsrPartGroupBlocks.h"
 #include "lpsrStaves.h"
 #include "lpsrScores.h"
 #include "lpsrStaves.h"

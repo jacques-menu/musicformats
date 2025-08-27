@@ -427,8 +427,9 @@ class EXP lpsrScore : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (std::ostream& os) const override;
+    std::string           asString () const override;
 
+    void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;
 
     void                  printSummary (std::ostream& os) const override;
@@ -473,8 +474,9 @@ class EXP lpsrScore : public lpsrElement
                           fScoreElementsList;
 
     // score LPSR book blocks list
-    std::list <S_lpsrBookBlock> fScoreBookBlocksList;
-    S_lpsrScoreBlock      fScoreScoreBlock; // JMI ???
+    std::list <S_lpsrBookBlock>
+                          fScoreBookBlocksList;
+    S_lpsrScoreBlock      fScoreScoreBlock; // JMI ??? 0.9.76
 
     // files includes
     Bool                  fLilyJazzFontFileIncludeIsNeeded;
@@ -551,7 +553,9 @@ class EXP lpsrScore : public lpsrElement
     std::map <std::string, S_lpsrSchemeFunction>
                           fScoreSchemeFunctionsMap;
 };
-typedef SMARTP<lpsrScore> S_lpsrScore;
+
+using S_lpsrScore = SMARTP<lpsrScore>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrScore& elt);
 
 

@@ -15,6 +15,8 @@
 #include "browser.h"
 
 
+using namespace MusicXML2;
+
 namespace MusicFormats
 {
 

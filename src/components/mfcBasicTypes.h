@@ -128,7 +128,9 @@ class EXP mfcVersionNumber : public smartable
     int                   fPatchNumber;
     std::string           fPreRelease;
 };
-typedef SMARTP<mfcVersionNumber> S_mfcVersionNumber;
+
+using S_mfcVersionNumber = SMARTP<mfcVersionNumber>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mfcVersionNumber& elt);
 
 //______________________________________________________________________________
@@ -191,7 +193,9 @@ class EXP mfcVersion : public smartable
     std::list <std::string>
                           fVersionDescriptionItems;
 };
-typedef SMARTP<mfcVersion> S_mfcVersion;
+
+using S_mfcVersion = SMARTP<mfcVersion>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mfcVersion& elt);
 
 //______________________________________________________________________________
@@ -249,7 +253,9 @@ class EXP mfcVersionsHistory : public smartable
     std::list <S_mfcVersion>
                           fVersionsList;
 };
-typedef SMARTP<mfcVersionsHistory> S_mfcVersionsHistory;
+
+using S_mfcVersionsHistory = SMARTP<mfcVersionsHistory>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mfcVersionsHistory& elt);
 
 //______________________________________________________________________________
@@ -352,7 +358,9 @@ class EXP mfcComponent : public smartable
 
     S_mfcVersionsHistory  fVersionsHistory;
 };
-typedef SMARTP<mfcComponent> S_mfcComponent;
+
+using S_mfcComponent = SMARTP<mfcComponent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mfcComponent& elt);
 
 //______________________________________________________________________________
@@ -376,7 +384,9 @@ class EXP mfcOahComponent : public mfcComponent
 
     virtual               ~mfcOahComponent ();
 };
-typedef SMARTP<mfcOahComponent> S_mfcOahComponent;
+
+using S_mfcOahComponent = SMARTP<mfcOahComponent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mfcOahComponent& elt);
 
 //______________________________________________________________________________
@@ -400,7 +410,9 @@ class EXP mfcRepresentationComponent : public mfcComponent
 
     virtual               ~mfcRepresentationComponent ();
 };
-typedef SMARTP<mfcRepresentationComponent> S_mfcRepresentationComponent;
+
+using S_mfcRepresentationComponent = SMARTP<mfcRepresentationComponent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mfcRepresentationComponent& elt);
 
 //______________________________________________________________________________
@@ -424,7 +436,9 @@ class EXP mfcPassComponent : public mfcComponent
 
     virtual               ~mfcPassComponent ();
 };
-typedef SMARTP<mfcPassComponent> S_mfcPassComponent;
+
+using S_mfcPassComponent = SMARTP<mfcPassComponent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mfcPassComponent& elt);
 
 //______________________________________________________________________________
@@ -563,8 +577,13 @@ class EXP mfcMultiComponent : public mfcComponent
     mfcMultiComponentUsedFromTheCLIKind
                           fComponentUsedFromTheCLIKind;
 };
-typedef SMARTP<mfcMultiComponent> S_mfcMultiComponent;
+
+using S_mfcMultiComponent = SMARTP<mfcMultiComponent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mfcMultiComponent& elt);
+
+std::string mfcMultiComponentAsStringOrNULL(
+  S_mfcMultiComponent multiComponent);
 
 //______________________________________________________________________________
 class EXP mfcGeneratorComponent : public mfcMultiComponent
@@ -595,7 +614,9 @@ class EXP mfcGeneratorComponent : public mfcMultiComponent
 
     virtual               ~mfcGeneratorComponent ();
 };
-typedef SMARTP<mfcGeneratorComponent> S_mfcGeneratorComponent;
+
+using S_mfcGeneratorComponent = SMARTP<mfcGeneratorComponent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mfcGeneratorComponent& elt);
 
 //______________________________________________________________________________
@@ -627,7 +648,9 @@ class EXP mfcConverterComponent : public mfcMultiComponent
 
     virtual               ~mfcConverterComponent ();
 };
-typedef SMARTP<mfcConverterComponent> S_mfcConverterComponent;
+
+using S_mfcConverterComponent = SMARTP<mfcConverterComponent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mfcConverterComponent& elt);
 
 //______________________________________________________________________________
@@ -702,7 +725,9 @@ class EXP mfcLibraryComponent : public mfcMultiComponent
     std::list <S_mfcConverterComponent>
                           fConverterComponentsList;
 };
-typedef SMARTP<mfcLibraryComponent> S_mfcLibraryComponent;
+
+using S_mfcLibraryComponent = SMARTP<mfcLibraryComponent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mfcLibraryComponent& elt);
 
 

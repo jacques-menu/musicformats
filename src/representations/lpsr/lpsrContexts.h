@@ -111,19 +111,7 @@ class EXP lpsrContext : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    std::string           getLpsrContextTypeKindAsString () const
-                              {
-                                return
-                                  lpsrContextTypeKindAsString (
-                                    fContextTypeKind);
-                              }
-
-    std::string           getLpsrContextUseExistingKindAsString () const
-                              {
-                                return
-                                  lpsrContextUseExistingKindAsString (
-                                    fContextUseExistingKind);
-                              }
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -141,7 +129,9 @@ class EXP lpsrContext : public lpsrElement
     std::list <S_msrElement>
                           fContextElementsList;
 };
-typedef SMARTP<lpsrContext> S_lpsrContext;
+
+using S_lpsrContext = SMARTP<lpsrContext>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrContext& elt);
 
 //______________________________________________________________________________
@@ -199,6 +189,8 @@ class EXP lpsrChordNamesContext : public lpsrContext
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -208,7 +200,9 @@ class EXP lpsrChordNamesContext : public lpsrContext
 
     S_msrVoice            fContextVoice;
 };
-typedef SMARTP<lpsrChordNamesContext> S_lpsrChordNamesContext;
+
+using S_lpsrChordNamesContext = SMARTP<lpsrChordNamesContext>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrChordNamesContext& elt);
 
 //______________________________________________________________________________
@@ -266,7 +260,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
     // print
     // ------------------------------------------------------
 
-    void                  print (std::ostream& os) const override;
+    std::string           asString () const override;
 
   private:
 
@@ -275,7 +269,9 @@ class EXP lpsrFiguredBassContext : public lpsrContext
 
     S_msrStaff            fContextStaff;
 };
-typedef SMARTP<lpsrFiguredBassContext> S_lpsrFiguredBassContext;
+
+using S_lpsrFiguredBassContext = SMARTP<lpsrFiguredBassContext>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrFiguredBassContext& elt);
 
 

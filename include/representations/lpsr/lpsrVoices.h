@@ -65,12 +65,12 @@ class EXP lpsrUseVoiceCommand : public lpsrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
     // ------------------------------------------------------
+
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -81,7 +81,9 @@ class EXP lpsrUseVoiceCommand : public lpsrElement
 
     S_msrVoice            fVoice;
 };
-typedef SMARTP<lpsrUseVoiceCommand> S_lpsrUseVoiceCommand;
+
+using S_lpsrUseVoiceCommand = SMARTP<lpsrUseVoiceCommand>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrUseVoiceCommand& elt);
 
 

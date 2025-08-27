@@ -39,7 +39,7 @@
 
 #include "lpsrBarNumbers.h"
 #include "lpsrLyrics.h"
-#include "lpsrParts.h"
+#include "lpsrPartBlocks.h"
 #include "lpsrStaves.h"
 #include "lpsrScores.h"
 #include "lpsrVoices.h"
@@ -11521,7 +11521,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrComment& elt)
     "% " << elt->getContents () <<
     std::endl;
 
-  switch (elt->getCommentGapKind ()) {
+  switch (elt->getCommentGapAfterwardsKind ()) {
     case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes:
       fLilypondCodeStream << std::endl;
       break;

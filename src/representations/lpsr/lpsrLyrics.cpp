@@ -125,13 +125,18 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
 void lpsrNewLyricsBlock::browseData (basevisitor* v)
 {}
 
-void lpsrNewLyricsBlock::print (std::ostream& os) const
+std::string lpsrNewLyricsBlock::asString () const
 {
-  os <<
-    "NewLyricsBlock" << ' ' <<
-    fStanza->getStanzaName () << ' ' <<
-    fVoice->getVoiceName () <<
-    std::endl;
+  std::stringstream ss;
+
+  ss <<
+    "[NewLyricsBlock" <<
+    ", fStanza: " << fStanza->getStanzaName () <<
+    ", fVoice: " << fVoice->getVoiceName () <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
 }
 
 std::ostream& operator << (std::ostream& os, const S_lpsrNewLyricsBlock& nlc)

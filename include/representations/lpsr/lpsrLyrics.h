@@ -75,7 +75,7 @@ class EXP lpsrNewLyricsBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (std::ostream& os) const override;
+    std::string           asString () const override;
 
   private:
 
@@ -85,7 +85,9 @@ class EXP lpsrNewLyricsBlock : public lpsrElement
     S_msrStanza           fStanza;
     S_msrVoice            fVoice;
 };
-typedef SMARTP<lpsrNewLyricsBlock> S_lpsrNewLyricsBlock;
+
+using S_lpsrNewLyricsBlock = SMARTP<lpsrNewLyricsBlock>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewLyricsBlock& elt);
 
 

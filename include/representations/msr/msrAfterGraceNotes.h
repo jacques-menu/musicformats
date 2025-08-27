@@ -91,7 +91,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // print
     // ------------------------------------------------------
 
-    std::string           asShortString () const override;
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -107,8 +107,11 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     std::list <S_msrMeasureElement>
                           fAfterGraceNotesGroupContentsNotesList;
 };
-typedef SMARTP<msrAfterGraceNotesGroupContents> S_msrAfterGraceNotesGroupContents;
-EXP std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroupContents& elt);
+
+using S_msrAfterGraceNotesGroupContents = SMARTP<msrAfterGraceNotesGroupContents>;
+
+EXP std::ostream& operator << (
+  std::ostream& os, const S_msrAfterGraceNotesGroupContents& elt);
 
 //______________________________________________________________________________
 class EXP msrAfterGraceNotesGroup : public msrElement
@@ -184,7 +187,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
     // print
     // ------------------------------------------------------
 
-    std::string           asShortString () const override;
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -203,8 +206,11 @@ class EXP msrAfterGraceNotesGroup : public msrElement
     S_msrAfterGraceNotesGroupContents
                           fAfterGraceNotesGroupContents;
 };
-typedef SMARTP<msrAfterGraceNotesGroup> S_msrAfterGraceNotesGroup;
-EXP std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroup& elt);
+
+using S_msrAfterGraceNotesGroup = SMARTP<msrAfterGraceNotesGroup>;
+
+EXP std::ostream& operator << (
+  std::ostream& os, const S_msrAfterGraceNotesGroup& elt);
 
 
 }

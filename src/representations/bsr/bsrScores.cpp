@@ -182,6 +182,82 @@ void bsrScore::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
+void bsrScore::print (std::ostream& os) const
+{
+  os <<
+    "BSR Score" <<
+    std::endl << std::endl;
+
+  ++gIndenter;
+
+  // print the MSR score (without the voices)
+  os << fMsrScore;
+  os << std::endl;
+
+  // print the transcription notes if any
+  constexpr int fieldWidth = 19;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fTranscriptionNotes" << ": ";
+
+  if (fTranscriptionNotes) {
+    os << std::endl;
+    ++gIndenter;
+    os <<
+      fTranscriptionNotes;
+    --gIndenter;
+  }
+  else {
+    os <<
+      "[NULL]" <<
+      std::endl;
+  }
+
+  // print the lines and pages maximum lengths
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "BrailleLineLength" << ": " << fBrailleLineLength <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "BraillePageLength" << ": " << fBraillePageLength <<
+    std::endl;
+  os << std::endl;
+
+  // print the score pages if any
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fScorePagesList" << ": ";
+
+  if (! fScorePagesList.empty ()) {
+    os << std::endl;
+    ++gIndenter;
+
+    std::list <S_bsrPage>::const_iterator
+      iBegin = fScorePagesList.begin (),
+      iEnd   = fScorePagesList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_bsrPage page = (*i);
+
+      os << page;
+      if (++i == iEnd) break;
+      os <<std::endl; // no std::endl here??? JMI 0.9.76
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os <<
+      ": " <<
+       "[EMPTY]" <<
+    std::endl;
+  }
+
+  --gIndenter;
+}
+
 void bsrScore::printFull (std::ostream& os) const
 {
   os <<
@@ -198,134 +274,62 @@ void bsrScore::printFull (std::ostream& os) const
   // print the transcription notes if any
   constexpr int fieldWidth = 19;
 
-  if (fTranscriptionNotes || gBsrOahGroup->getDisplayBsrFull ()) {
-    if (fTranscriptionNotes) {
-      os <<
-        fTranscriptionNotes;
-    }
-    else {
-      os <<
-        "TranscriptionNotes: [EMPTY]" <<
-        std::endl;
-    }
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fTranscriptionNotes" << ": ";
+
+  if (fTranscriptionNotes) {
+    os << std::endl;
+    ++gIndenter;
+    os <<
+      fTranscriptionNotes;
+    --gIndenter;
+  }
+  else {
+    os <<
+      "[NULL]" <<
+      std::endl;
   }
 
-/*
-  // print the lines and pages maximum lengths JMI
+  // print the lines and pages maximum lengths
   os <<
     std::setw (fieldWidth) <<
     "BrailleLineLength" << ": " << fBrailleLineLength <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "BraillePageLength" << ": " << fBraillePageLength <<
     std::endl;
   os << std::endl;
-        */
 
   // print the score pages if any
-  size_t scorePagesListSize = fScorePagesList.size ();
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fScorePagesList" << ": ";
 
-  if (scorePagesListSize || gBsrOahGroup->getDisplayBsrFull ()) {
+  if (! fScorePagesList.empty ()) {
+    os << std::endl;
+    ++gIndenter;
+
+    std::list <S_bsrPage>::const_iterator
+      iBegin = fScorePagesList.begin (),
+      iEnd   = fScorePagesList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_bsrPage page = (*i);
+
+      os << page;
+      if (++i == iEnd) break;
+      os <<std::endl; // no std::endl here??? JMI 0.9.76
+    } // for
+
+    --gIndenter;
+  }
+  else {
     os <<
-      std::setw (fieldWidth) <<
-      "ScorePagesList";
-
-    if (scorePagesListSize) {
-      os << std::endl;
-      ++gIndenter;
-
-      std::list <S_bsrPage>::const_iterator
-        iBegin = fScorePagesList.begin (),
-        iEnd   = fScorePagesList.end (),
-        i      = iBegin;
-      for ( ; ; ) {
-        os << (*i);
-        if (++i == iEnd) break;
-        // no std::endl here
-      } // for
-
-      --gIndenter;
-    }
-    else {
-      os <<
-        ": " <<
-         "[EMPTY]" <<
-      std::endl;
-    }
-  }
-
-  --gIndenter;
-}
-
-void bsrScore::print (std::ostream& os) const
-{
-  os <<
-    "BSR Score" <<
-    std::endl << std::endl;
-
-  ++gIndenter;
-
-  // print the MSR score (without the voices)
-  os << fMsrScore;
-  os << std::endl;
-
-  // print the transcription notes if any
-  constexpr int fieldWidth = 19;
-
-  if (fTranscriptionNotes || gBsrOahGroup->getDisplayBsrFull ()) {
-    if (fTranscriptionNotes) {
-      os <<
-        fTranscriptionNotes;
-    }
-    else {
-      os <<
-        "TranscriptionNotes: [NULL]" <<
-        std::endl;
-    }
-  }
-
-/*
-  // print the lines and pages maximum lengths JMI
-  os <<
-    std::setw (fieldWidth) <<
-    "BrailleLineLength" << ": " << fBrailleLineLength <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "BraillePageLength" << ": " << fBraillePageLength <<
+      ": " <<
+       "[EMPTY]" <<
     std::endl;
-  os << std::endl;
-        */
-
-  // print the score pages if any
-  size_t scorePagesListSize = fScorePagesList.size ();
-
-  if (scorePagesListSize || gBsrOahGroup->getDisplayBsrFull ()) {
-    os <<
-      std::setw (fieldWidth) <<
-      "ScorePagesList";
-
-    if (scorePagesListSize) {
-      os << std::endl;
-      ++gIndenter;
-
-      std::list <S_bsrPage>::const_iterator
-        iBegin = fScorePagesList.begin (),
-        iEnd   = fScorePagesList.end (),
-        i      = iBegin;
-      for ( ; ; ) {
-        os << (*i);
-        if (++i == iEnd) break;
-        // no std::endl here
-      } // for
-
-      --gIndenter;
-    }
-    else {
-      os <<
-        ": " <<
-         "[EMPTY]" <<
-      std::endl;
-    }
   }
 
   --gIndenter;

@@ -198,6 +198,50 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
+std::string lpsrParallelMusicBLock::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[ParallelMusicBLock";
+
+  ss <<
+    "fParallelMusicBLockPartGroupBlocks: ";
+  if (! fParallelMusicBLockPartGroupBlocks.empty ()) {
+    ss << '[';
+
+    ++gIndenter;
+
+    std::list <S_lpsrPartGroupBlock>::const_iterator
+      iBegin = fParallelMusicBLockPartGroupBlocks.begin (),
+      iEnd   = fParallelMusicBLockPartGroupBlocks.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_lpsrPartGroupBlock
+        partGroupBlock = (*i);
+
+      ss << partGroupBlock;
+
+      if (++i == iEnd) break;
+      ss << ", ";
+    } // for
+
+    ss << ']';
+  }
+  else {
+    ss << "[EMPTY]";
+  }
+
+  ss <<
+    ", fElementsSeparatorKind: " << fElementsSeparatorKind;
+
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
+
 void lpsrParallelMusicBLock::print (std::ostream& os) const
 {
   os <<

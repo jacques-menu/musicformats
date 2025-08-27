@@ -32,6 +32,7 @@ std::string bsrParallelLayoutKindAsString (
 
 std::ostream& operator << (std::ostream& os, const bsrParallelLayoutKind& elt);
 
+//______________________________________________________________________________
 class EXP bsrParallel : public bsrElement
 {
   public:
@@ -86,6 +87,8 @@ class EXP bsrParallel : public bsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -99,7 +102,9 @@ class EXP bsrParallel : public bsrElement
     std::list <S_bsrElement>
                           fParallelElementsList;
 };
-typedef SMARTP<bsrParallel> S_bsrParallel;
+
+using S_bsrParallel = SMARTP<bsrParallel>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_bsrParallel& elt);
 
 

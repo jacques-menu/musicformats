@@ -3152,6 +3152,43 @@ void lpsrScore::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
+std::string lpsrScore::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "***** [LPSR Score, short version] *****";
+
+  ss <<
+    ", fMultiComponent: " <<
+       mfcMultiComponentAsStringOrNULL (fMultiComponent) <<
+
+    ", fInputSourceNameComment: " <<
+       msrElementAsStringOrNULL (fInputSourceNameComment) <<
+    ", fGeneratedOnComment: " <<
+       msrElementAsStringOrNULL (fGeneratedOnComment) <<
+    ", fGeneratedByComment: " <<
+       msrElementAsStringOrNULL (fGeneratedByComment) <<
+
+     ", fCommandLineAsSuppliedComment: " <<
+       msrElementAsStringOrNULL (fCommandLineAsSuppliedComment) <<
+
+    ", fRunDateComment: " <<
+       msrElementAsStringOrNULL (fRunDateComment) <<
+
+    ", fScoreHeader: " <<
+       msrElementAsStringOrNULL (fScoreHeader) <<
+    ", fScorePaper: " <<
+       msrElementAsStringOrNULL (fScorePaper) <<
+    ", fScoreLayout: " <<
+       msrElementAsStringOrNULL (fScoreLayout) <<
+
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
+
 void lpsrScore::print (std::ostream& os) const
 {
   os <<
@@ -3242,7 +3279,7 @@ void lpsrScore::print (std::ostream& os) const
 void lpsrScore::printFull (std::ostream& os) const
 {
   os <<
-    std::string ("LPSR Score printfull()")
+    "***** [LPSR Score, full version] *****" <<
       + ", " +
     gLanguage->fullVersion () <<
     std::endl << std::endl;

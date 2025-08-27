@@ -62,7 +62,7 @@ formats/lpsr/lpsrBarNumbers.h:85:class EXP lpsrBarCommand : public lpsrElement
 formats/lpsr/lpsrLyrics.h:31:class EXP lpsrNewLyricsBlock : public lpsrElement
 formats/lpsr/lpsrComments.h:25:class EXP lpsrComment : public lpsrElement
 formats/lpsr/lpsrVoices.h:29:class EXP lpsrUseVoiceCommand : public lpsrElement
-formats/lpsr/lpsrParts.h:27:class EXP lpsrPartBlock : public lpsrElement
+formats/lpsr/lpsrPartBlocks.h:27:class EXP lpsrPartBlock : public lpsrElement
 formats/lpsr/lpsrPapers.h:32:class EXP lpsrPaper : public lpsrElement
 formats/lpsr/lpsrPartGroups.h:29:class EXP lpsrPartGroupBlock : public lpsrElement
 formats/lpsr/lpsrParallelMusic.h:28:class EXP lpsrParallelMusicBLock : public lpsrElement
@@ -1833,9 +1833,9 @@ formats/msr/msrStaves.h:    static bool           compareVoicesToHaveHarmoniesAb
 formats/msr/msrStaves.h:    static bool           compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
 formats/msr/msrMeasuresSlices.h:    static bool           compareNotesEventsByIncreasingPositionInMeasure (
 formats/msr/msrMeasuresSlices.h:    static bool           compareSimultaneousNotesChunksByIncreasingPositionInMeasure (
-formats/lpsr/lpsrParts.h:    static bool           compareElementsToHaveHarmoniesAboveCorrespondingStaff (
-formats/lpsr/lpsrParts.h:    static bool           compareStaffBlockWithOtherElement (
-formats/lpsr/lpsrParts.h:    static bool           compareChordNamesContextWithOtherElement (
+formats/lpsr/lpsrPartBlocks.h:    static bool           compareElementsToHaveHarmoniesAboveCorrespondingStaff (
+formats/lpsr/lpsrPartBlocks.h:    static bool           compareStaffBlockWithOtherElement (
+formats/lpsr/lpsrPartBlocks.h:    static bool           compareChordNamesContextWithOtherElement (
 utilities/mfutilities.h:    // compare indentation value
 \end{lstlisting}
 

@@ -97,7 +97,9 @@ class EXP msrMidiTempo : public msrElement
     std::string           fMidiTempoNotesDuration;
     int                   fMidiTempoPerSecond;
 };
-typedef SMARTP<msrMidiTempo> S_msrMidiTempo;
+
+using S_msrMidiTempo = SMARTP<msrMidiTempo>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrMidiTempo& elt);
 
 

@@ -30,7 +30,7 @@ class EXP lpsrVariableUseCommand : public lpsrElement
 
     static SMARTP<lpsrVariableUseCommand> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& variableName);
+                            const std::string&       variableName);
 
   protected:
 
@@ -39,7 +39,7 @@ class EXP lpsrVariableUseCommand : public lpsrElement
 
                           lpsrVariableUseCommand (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& variableName);
+                            const std::string&       variableName);
 
     virtual               ~lpsrVariableUseCommand ();
 
@@ -61,12 +61,12 @@ class EXP lpsrVariableUseCommand : public lpsrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
     // ------------------------------------------------------
+
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -77,7 +77,9 @@ class EXP lpsrVariableUseCommand : public lpsrElement
 
     std::string           fVariableName;
 };
-typedef SMARTP<lpsrVariableUseCommand> S_lpsrVariableUseCommand;
+
+using S_lpsrVariableUseCommand = SMARTP<lpsrVariableUseCommand>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrVariableUseCommand& elt);
 
 

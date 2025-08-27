@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___lpsrPartGroups___
-#define ___lpsrPartGroups___
+#ifndef ___lpsrPartGroupBlocks___
+#define ___lpsrPartGroupBlocks___
 
 #include "msrPartGroups.h"
 
@@ -21,8 +21,8 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class   lpsrPartGroupBlock;
-typedef SMARTP<lpsrPartGroupBlock> S_lpsrPartGroupBlock;
+class lpsrPartGroupBlock;
+using S_lpsrPartGroupBlock = SMARTP<lpsrPartGroupBlock>;
 
 //______________________________________________________________________________
 class EXP lpsrPartGroupBlock : public lpsrElement
@@ -81,6 +81,8 @@ class EXP lpsrPartGroupBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -99,4 +101,4 @@ EXP std::ostream& operator << (std::ostream& os, const S_lpsrPartGroupBlock& elt
 }
 
 
-#endif // ___lpsrPartGroups___
+#endif // ___lpsrPartGroupBlocks___

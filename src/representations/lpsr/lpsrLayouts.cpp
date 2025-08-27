@@ -13,8 +13,9 @@
 
 #include "visitor.h"
 
-#include "lpsrLayouts.h"
+#include "lpsrBrowsers.h"
 
+#include "lpsrLayouts.h"
 #include "lpsrScheme.h"
 
 #include "oahOah.h"
@@ -121,12 +122,73 @@ void lpsrLayout::acceptOut (basevisitor* v)
 }
 
 void lpsrLayout::browseData (basevisitor* v)
-{}
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "% ==> lpsrBookBlockElement::browseData ()";
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  for (S_lpsrSchemeVariable schemeVariable : fLpsrSchemeVariablesVector) {
+    // browse the element
+    lpsrBrowser<lpsrSchemeVariable> browser (v);
+    browser.browse (*schemeVariable);
+  } // for
+}
+
+std::string lpsrLayout::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[Layout" <<
+    ", fLayoutGlobalStaffSize: " << fLayoutGlobalStaffSize;
+
+  ss <<
+    "fLpsrSchemeVariablesVector: ";
+  if (! fLpsrSchemeVariablesVector.empty ()) {
+    ss << '[';
+
+    ++gIndenter;
+
+    std::vector <S_lpsrSchemeVariable>::const_iterator
+      iBegin = fLpsrSchemeVariablesVector.begin (),
+      iEnd   = fLpsrSchemeVariablesVector.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_lpsrSchemeVariable
+        schemeVariable = (*i);
+
+      ss << schemeVariable;
+
+      if (++i == iEnd) break;
+      ss << ", ";
+    } // for
+
+    ss << ']';
+  }
+  else {
+    ss << "[EMPTY]";
+  }
+
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
 
 void lpsrLayout::print (std::ostream& os) const
 {
   os <<
-    "Layout" <<
+    "[Layout" <<
     std::endl;
 
   ++gIndenter;
@@ -135,10 +197,40 @@ void lpsrLayout::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-   "layoutGlobalStaffSize" << ": " << fLayoutGlobalStaffSize <<
+    "fLayoutGlobalStaffSize" << ": " << fLayoutGlobalStaffSize <<
     std::endl;
 
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fLpsrSchemeVariablesVector" << ": ";
+  if (! fLpsrSchemeVariablesVector.empty ()) {
+    os << '[';
+
+    ++gIndenter;
+
+    std::vector <S_lpsrSchemeVariable>::const_iterator
+      iBegin = fLpsrSchemeVariablesVector.begin (),
+      iEnd   = fLpsrSchemeVariablesVector.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_lpsrSchemeVariable
+        schemeVariable = (*i);
+
+      os << schemeVariable;
+
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    os << ']';
+  }
+  else {
+    os << "[EMPTY]";
+  }
+
   --gIndenter;
+
+  os << ']' << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_lpsrLayout& lay)

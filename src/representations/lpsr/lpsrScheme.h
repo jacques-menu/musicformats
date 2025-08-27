@@ -43,6 +43,7 @@ std::string lpsrEndOfLineKindAsString (
 
 std::ostream& operator << (std::ostream& os, const lpsrEndOfLineKind& elt);
 
+//______________________________________________________________________________
 class EXP lpsrSchemeVariable : public lpsrElement
 {
   public:
@@ -90,7 +91,7 @@ class EXP lpsrSchemeVariable : public lpsrElement
     std::string           getComment  () const
                               { return fComment; }
 
-    lpsrEndOfLineKind          getEndOfLineKind () const
+    lpsrEndOfLineKind     getEndOfLineKind () const
                               { return fEndOfLineKind; }
 
   public:
@@ -106,12 +107,12 @@ class EXP lpsrSchemeVariable : public lpsrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
     // ------------------------------------------------------
+
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -120,17 +121,19 @@ class EXP lpsrSchemeVariable : public lpsrElement
     // private fields
     // ------------------------------------------------------
 
-    lpsrCommentedKind fCommentedKind;
+    lpsrCommentedKind     fCommentedKind;
 
     std::string           fVariableName;
     std::string           fVariableValue;
 
     std::string           fComment;
 
-    lpsrEndOfLineKind          fEndOfLineKind;
+    lpsrEndOfLineKind     fEndOfLineKind;
 
 };
-typedef SMARTP<lpsrSchemeVariable> S_lpsrSchemeVariable;
+
+using S_lpsrSchemeVariable = SMARTP<lpsrSchemeVariable>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrSchemeVariable& schemeVariable);
 
 //______________________________________________________________________________
@@ -143,9 +146,9 @@ class EXP lpsrSchemeFunction : public lpsrElement
 
     static SMARTP<lpsrSchemeFunction> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& functionName,
-                            const std::string& functionDescription,
-                            const std::string& functionCode);
+                            const std::string&       functionName,
+                            const std::string&       functionDescription,
+                            const std::string&       functionCode);
 
   protected:
 
@@ -154,9 +157,9 @@ class EXP lpsrSchemeFunction : public lpsrElement
 
                           lpsrSchemeFunction (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& functionName,
-                            const std::string& functionDescription,
-                            const std::string& functionCode);
+                            const std::string&       functionName,
+                            const std::string&       functionDescription,
+                            const std::string&       functionCode);
 
     virtual               ~lpsrSchemeFunction ();
 
@@ -187,12 +190,12 @@ class EXP lpsrSchemeFunction : public lpsrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
     // ------------------------------------------------------
+
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -201,13 +204,15 @@ class EXP lpsrSchemeFunction : public lpsrElement
     // private fields
     // ------------------------------------------------------
 
-    std::string       fFunctionName;
+    std::string           fFunctionName;
 
-    std::string       fFunctionDescription;
+    std::string           fFunctionDescription;
 
-    std::string       fFunctionCode;
+    std::string           fFunctionCode;
 };
-typedef SMARTP<lpsrSchemeFunction> S_lpsrSchemeFunction;
+
+using S_lpsrSchemeFunction = SMARTP<lpsrSchemeFunction>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrSchemeFunction& schemeFunction);
 
 

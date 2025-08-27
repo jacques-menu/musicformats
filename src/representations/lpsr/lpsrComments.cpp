@@ -25,26 +25,73 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+std::string lpsrCommentGapAfterwardsKindAsString (
+  lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
+{
+  std::string result;
+
+  switch (commentGapAfterwardsKind) {
+    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes:
+      result = "kCommentGapAfterwardsYes";
+      break;
+    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo:
+      result = "kCommentGapAfterwardsNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const lpsrCommentGapAfterwardsKind& elt)
+{
+  os << lpsrCommentGapAfterwardsKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_lpsrComment lpsrComment::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&      contents,
+  const std::string&       contents)
+{
+  lpsrComment* obj = new
+    lpsrComment (
+      inputLineNumber,
+      contents);
+  assert (obj != nullptr);
+  return obj;
+}
+
+S_lpsrComment lpsrComment::create (
+  const mfInputLineNumber&     inputLineNumber,
+  const std::string&           contents,
   lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
 {
   lpsrComment* obj = new
     lpsrComment (
-      inputLineNumber, contents, commentGapAfterwardsKind);
+      inputLineNumber,
+      contents,
+      commentGapAfterwardsKind);
   assert (obj != nullptr);
   return obj;
 }
 
 lpsrComment::lpsrComment (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&      contents,
+  const std::string&       contents)
+    : lpsrElement (inputLineNumber)
+{
+  fContents = contents;
+  fCommentGapAfterwardsKind = lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo;
+}
+
+lpsrComment::lpsrComment (
+  const mfInputLineNumber&     inputLineNumber,
+  const std::string&           contents,
   lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
     : lpsrElement (inputLineNumber)
 {
   fContents = contents;
-  fCommentGapKind = commentGapAfterwardsKind;
+  fCommentGapAfterwardsKind = commentGapAfterwardsKind;
 }
 
 lpsrComment::~lpsrComment ()
@@ -125,27 +172,18 @@ void lpsrComment::acceptOut (basevisitor* v)
 void lpsrComment::browseData (basevisitor* v)
 {}
 
-std::string lpsrCommentGapAfterwardsKindAsString (
-  lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
+std::string lpsrComment::asString () const
 {
-  std::string result;
+  std::stringstream ss;
 
-  switch (commentGapAfterwardsKind) {
-    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes:
-      result = "kCommentGapAfterwardsYes";
-      break;
-    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo:
-      result = "kCommentGapAfterwardsNo";
-      break;
-  } // switch
+  ss <<
+    "[Comment" <<
+    ", fContents: " << fContents <<
+    ", fCommentGapAfterwardsKind: " << fCommentGapAfterwardsKind <<
+    ", line " << fInputLineNumber <<
+    ']';
 
-  return result;
-}
-
-std::ostream& operator << (std::ostream& os, const lpsrCommentGapAfterwardsKind& elt)
-{
-  os << lpsrCommentGapAfterwardsKindAsString (elt);
-  return os;
+  return ss.str ();
 }
 
 void lpsrComment::print (std::ostream& os) const
@@ -160,7 +198,7 @@ void lpsrComment::print (std::ostream& os) const
     "% " << fContents <<
     std::endl;
 
-  switch (fCommentGapKind) {
+  switch (fCommentGapAfterwardsKind) {
     case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes:
       os << std::endl;
       break;
@@ -170,6 +208,7 @@ void lpsrComment::print (std::ostream& os) const
 
   --gIndenter;
 }
+
 
 std::ostream& operator << (std::ostream& os, const S_lpsrComment& elt)
 {

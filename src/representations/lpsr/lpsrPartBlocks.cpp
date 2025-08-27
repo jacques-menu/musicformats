@@ -17,7 +17,7 @@
 
 #include "lpsrWae.h"
 
-#include "lpsrParts.h"
+#include "lpsrPartBlocks.h"
 
 #include "oahOah.h"
 
@@ -511,6 +511,54 @@ void lpsrPartBlock::browseData (basevisitor* v)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+}
+
+std::string lpsrPartBlock::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[PartBlock";
+
+  ss <<
+    ", fPart: " << msrElementAsStringOrNULL (fPart);
+
+  ss <<
+    "fPartBlockElementsList: ";
+  if (! fPartBlockElementsList.empty ()) {
+    ss << '[';
+
+    ++gIndenter;
+
+    std::list <S_msrElement>::const_iterator
+      iBegin = fPartBlockElementsList.begin (),
+      iEnd   = fPartBlockElementsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrElement
+        element = (*i);
+
+      ss << element;
+
+      if (++i == iEnd) break;
+      ss << ", ";
+    } // for
+
+    ss << ']';
+  }
+  else {
+    ss << "[EMPTY]";
+  }
+
+  ss <<
+    ", fPartBlockInstrumentName: " << fPartBlockInstrumentName <<
+    ", fPartBlockShortInstrumentName: " << fPartBlockShortInstrumentName;
+
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
 }
 
 void lpsrPartBlock::print (std::ostream& os) const

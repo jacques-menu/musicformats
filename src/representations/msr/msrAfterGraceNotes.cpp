@@ -209,29 +209,31 @@ void msrAfterGraceNotesGroupContents::browseData (basevisitor* v)
   } // for
 }
 
-std::string msrAfterGraceNotesGroupContents::asShortString () const
+std::string msrAfterGraceNotesGroupContents::asString () const
 {
   std::stringstream ss;
 
   ss <<
-    "AfterGraceNotesGroupContents" <<
-    ", " <<
-    mfSingularOrPlural (
-      fAfterGraceNotesGroupContentsNotesList.size (), "note", "notes");
+    "[AfterGraceNotesGroupContents" <<
+    ", fAfterGraceNotesGroupContentsUpLinkToVoice: " <<
+    msrElementAsStringOrNULL (fAfterGraceNotesGroupContentsUpLinkToVoice);
 
-
-  if (fAfterGraceNotesGroupContentsNotesList.size ()) {
+  ss <<
+    ", fAfterGraceNotesGroupContentsUpLinkToVoice: ";
+  if (! fAfterGraceNotesGroupContentsUpLinkToVoice.empty ()) {
     std::list <S_msrMeasureElement>::const_iterator
-      iBegin = fAfterGraceNotesGroupContentsNotesList.begin (),
-      iEnd   = fAfterGraceNotesGroupContentsNotesList.end (),
+      iBegin = fAfterGraceNotesGroupContentsUpLinkToVoice.begin (),
+      iEnd   = fAfterGraceNotesGroupContentsUpLinkToVoice.end (),
       i      = iBegin;
 
     for ( ; ; ) {
-      ss << (*i)->asShortString ();
+      ss << (*i)->asString ();
       if (++i == iEnd) break;
       ss << ' ';
     } // for
   }
+
+  ss << ']';
 
   return ss.str ();
 }
@@ -354,7 +356,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
 
     ss <<
       "Creating a newborn clone of after grace notes group '" <<
-      asShortString () <<
+      asString () <<
       "'";
 
     gWaeHandler->waeTrace (
@@ -482,16 +484,17 @@ void msrAfterGraceNotesGroup::browseData (basevisitor* v)
   }
 }
 
-std::string msrAfterGraceNotesGroup::asShortString () const
+std::string msrAfterGraceNotesGroup::asString () const
 {
   std::stringstream ss;
 
   ss <<
-    "AfterGraceNotesGroup " <<
+    "[AfterGraceNotesGroup " <<
     ", AfterGraceNotesGroupElement: " <<
-    fAfterGraceNotesGroupElement->asShortString () <<
+    fAfterGraceNotesGroupElement->asString () <<
     ", fAfterGraceNotesGroupContents: " <<
-    fAfterGraceNotesGroupContents->asShortString ();
+    fAfterGraceNotesGroupContents->asString () <<
+    ']';
 
   return ss.str ();
 }

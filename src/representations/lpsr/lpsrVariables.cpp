@@ -26,7 +26,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_lpsrVariableUseCommand lpsrVariableUseCommand::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& variableName)
+  const std::string&       variableName)
 {
   lpsrVariableUseCommand* obj =
     new lpsrVariableUseCommand (
@@ -118,15 +118,31 @@ void lpsrVariableUseCommand::acceptOut (basevisitor* v)
   }
 }
 
-void lpsrVariableUseCommand::browseData (basevisitor* v)
-{}
+std::string lpsrVariableUseCommand::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[VariableUseCommand";
+
+  ss <<
+    ", fVariableName: " << fVariableName <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
 
 void lpsrVariableUseCommand::print (std::ostream& os) const
 {
-  os << "VariableUseCommand" << std::endl;
+  os << "[VariableUseCommand" << std::endl;
   ++gIndenter;
   os << fVariableName << std::endl;
   --gIndenter;
+
+  os <<
+    std::endl <<
+    ']';
 }
 
 std::ostream& operator << (std::ostream& os, const S_lpsrVariableUseCommand& nstf)

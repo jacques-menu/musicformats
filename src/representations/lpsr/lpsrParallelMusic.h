@@ -17,7 +17,7 @@
 
 #include "lpsrElements.h"
 
-#include "lpsrPartGroups.h"
+#include "lpsrPartGroupBlocks.h"
 
 
 namespace MusicFormats
@@ -107,6 +107,8 @@ class EXP lpsrParallelMusicBLock : public lpsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -120,7 +122,9 @@ class EXP lpsrParallelMusicBLock : public lpsrElement
     lpsrElementsSeparatorKind
                           fElementsSeparatorKind;
 };
-typedef SMARTP<lpsrParallelMusicBLock> S_lpsrParallelMusicBLock;
+
+using S_lpsrParallelMusicBLock = SMARTP<lpsrParallelMusicBLock>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrParallelMusicBLock& elt);
 
 

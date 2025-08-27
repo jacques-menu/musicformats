@@ -13,7 +13,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "lpsrPartGroups.h"
+#include "lpsrPartGroupBlocks.h"
 
 #include "oahOah.h"
 
@@ -134,28 +134,55 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (
-    std::list <S_msrElement>::const_iterator i = fPartGroupBlockElements.begin ();
-    i != fPartGroupBlockElements.end ();
-    ++i
-  ) {
+  for (S_msrElement element : fPartGroupBlockElements) {
     // browse the element
     msrBrowser<msrElement> browser (v);
-    browser.browse (*(*i));
+    browser.browse (*element);
   } // for
+}
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
-    std::stringstream ss;
+std::string lpsrPartGroupBlock::asString () const
+{
+  std::stringstream ss;
 
-    ss <<
-      "% <== lpsrPartGroupBlock::browseData ()";
+  ss <<
+    "[PartGroupBlock";
 
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
+  ss <<
+    ", fPartGroup: " << msrElementAsStringOrNULL (fPartGroup);
+
+  ss <<
+    "fParallelMusicBLockPartGroupBlocks: ";
+  if (! fPartGroupBlockElements.empty ()) {
+    ss << '[';
+
+    ++gIndenter;
+
+    std::list <S_msrElement>::const_iterator
+      iBegin = fPartGroupBlockElements.begin (),
+      iEnd   = fPartGroupBlockElements.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrElement
+        element = (*i);
+
+      ss << element;
+
+      if (++i == iEnd) break;
+      ss << ", ";
+    } // for
+
+    ss << ']';
   }
-#endif // MF_TRACE_IS_ENABLED
+  else {
+    ss << "[EMPTY]";
+  }
+
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
 }
 
 void lpsrPartGroupBlock::print (std::ostream& os) const

@@ -233,185 +233,46 @@ void lpsrPaper::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void lpsrPaper::printFull (std::ostream& os) const
+std::string lpsrPaper::asString () const
 {
-  os <<
-    "Paper" <<
-    std::endl;
+  std::stringstream ss;
 
-  ++gIndenter;
+  ss <<
+    "[Paper" <<
+    ", fScaling: " << fScaling;
 
-  constexpr int fieldWidth = 27;
+  ss <<
+    ", fPageLayout: " << msrElementAsStringOrNULL (fPageLayout);
 
 /*
-  // scaling
+    // indents
+    S_msrLength           fHorizontalShift;
+    S_msrLength           fIndent;
+    S_msrLength           fShortIndent;
 
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fScaling" << ": ";
-  if (fScaling) {
-    os << fScaling;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
-
-  // page layout
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fPageLayout" << ": ";
-  if (fPageLayout) {
-    os << fPageLayout;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
-
-  // indents
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fHorizontalShift" << ": ";
-  if (fHorizontalShift) {
-    os << fHorizontalShift;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
+    // spaces
+    S_msrLength           fMarkupSystemSpacingPadding;
+    S_msrLength           fBetweenSystemSpace;
+    S_msrLength           fPageTopSpacing;
 */
 
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fIndent" << ": ";
-  if (fIndent) {
-    os << fIndent;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
+  ss <<
+    ", fPageCount: " << fPageCount <<
+    ", fSystemCount: " << fSystemCount <<
+    ", fRaggedBottom: " << fRaggedBottom <<
+    ", fRaggedLast: " << fRaggedLast <<
+    ", fRaggedLastBottom: " << fRaggedLastBottom <<
+    ", fRaggedRight: " << fRaggedRight <<
+    ", fOddHeaderMarkup: " << fOddHeaderMarkup <<
+    ", fEvenHeaderMarkup: " << fEvenHeaderMarkup <<
+    ", fOddFooterMarkup: " << fOddFooterMarkup <<
+    ", fEvenFooterMarkup: " << fEvenFooterMarkup;
 
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fShortIndent" << ": ";
-  if (fShortIndent) {
-    os << fShortIndent;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
 
-  // spaces
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fMarkupSystemSpacingPadding" << ": ";
-  if (fMarkupSystemSpacingPadding) {
-    os << fMarkupSystemSpacingPadding;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fBetweenSystemSpace" << ": ";
-  if (fBetweenSystemSpace) {
-    os << fBetweenSystemSpace;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fPageTopSpacing" << ": ";
-  if (fPageTopSpacing) {
-    os << fPageTopSpacing;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
-
-  // counts
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fPageCount" << ": ";
-  if (fPageCount) {
-    os << fPageCount;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fSystemCount" << ": ";
-  if (fSystemCount) {
-    os << fSystemCount;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
-
-  // ragged output
-
-//   os << std::left <<
-//     std::setw (fieldWidth) <<
-//     "fRaggedBottom" << ": " << fRaggedBottom <<
-//     std::endl <<
-//     std::setw (fieldWidth) <<
-//     "fRaggedLast" << ": " << fRaggedLast <<
-//     std::endl <<
-//     std::setw (fieldWidth) <<
-//     "fRaggedLastBottom" << ": " << fRaggedLastBottom <<
-//     std::endl <<
-//     std::setw (fieldWidth) <<
-//     "fRaggedRight" << ": " << fRaggedRight <<
-//     std::endl;
-
-  // headers and footers
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fOddHeaderMarkup" << ": \"" <<
-    fOddHeaderMarkup <<
-    "\"" <<
-    std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fEvenHeaderMarkup" << ": " <<
-    fEvenHeaderMarkup <<
-    "\"" <<
-    std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fOddFooterMarkup" << ": " <<
-    fOddFooterMarkup <<
-    "\"" <<
-    std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fEvenFooterMarkup" << ": " <<
-    fEvenFooterMarkup <<
-    "\"" <<
-    std::endl;
-
-  --gIndenter;
+  return ss.str ();
 }
 
 void lpsrPaper::print (std::ostream& os) const
@@ -586,6 +447,187 @@ void lpsrPaper::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "evenFooterMarkup" << ": " <<
+    fEvenFooterMarkup <<
+    "\"" <<
+    std::endl;
+
+  --gIndenter;
+}
+
+void lpsrPaper::printFull (std::ostream& os) const
+{
+  os <<
+    "Paper" <<
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 27;
+
+/*
+  // scaling
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fScaling" << ": ";
+  if (fScaling) {
+    os << fScaling;
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  // page layout
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fPageLayout" << ": ";
+  if (fPageLayout) {
+    os << fPageLayout;
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  // indents
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fHorizontalShift" << ": ";
+  if (fHorizontalShift) {
+    os << fHorizontalShift;
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+*/
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fIndent" << ": ";
+  if (fIndent) {
+    os << fIndent;
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fShortIndent" << ": ";
+  if (fShortIndent) {
+    os << fShortIndent;
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  // spaces
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMarkupSystemSpacingPadding" << ": ";
+  if (fMarkupSystemSpacingPadding) {
+    os << fMarkupSystemSpacingPadding;
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fBetweenSystemSpace" << ": ";
+  if (fBetweenSystemSpace) {
+    os << fBetweenSystemSpace;
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fPageTopSpacing" << ": ";
+  if (fPageTopSpacing) {
+    os << fPageTopSpacing;
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  // counts
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fPageCount" << ": ";
+  if (fPageCount) {
+    os << fPageCount;
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fSystemCount" << ": ";
+  if (fSystemCount) {
+    os << fSystemCount;
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  // ragged output
+
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
+//     "fRaggedBottom" << ": " << fRaggedBottom <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
+//     "fRaggedLast" << ": " << fRaggedLast <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
+//     "fRaggedLastBottom" << ": " << fRaggedLastBottom <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
+//     "fRaggedRight" << ": " << fRaggedRight <<
+//     std::endl;
+
+  // headers and footers
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fOddHeaderMarkup" << ": \"" <<
+    fOddHeaderMarkup <<
+    "\"" <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fEvenHeaderMarkup" << ": " <<
+    fEvenHeaderMarkup <<
+    "\"" <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fOddFooterMarkup" << ": " <<
+    fOddFooterMarkup <<
+    "\"" <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fEvenFooterMarkup" << ": " <<
     fEvenFooterMarkup <<
     "\"" <<
     std::endl;

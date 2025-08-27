@@ -501,56 +501,17 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
 void lpsrFiguredBassContext::browseData (basevisitor* v)
 {}
 
-void lpsrFiguredBassContext::print (std::ostream& os) const
+std::string lpsrFiguredBassContext::asString () const
 {
-  os <<
-  /* JMI
-    "FiguredBassContext, \"" <<
-    fContextTypeKind <<
-    "\"" <<
-    */
-    "FiguredBassContext" <<
-    std::endl;
+  std::stringstream ss;
 
-  ++gIndenter;
+  ss <<
+    "[FiguredBassContext" <<
+    ", fContextStaff: " << fContextStaff <<
+    ", line " << fInputLineNumber <<
+    ']';
 
-  constexpr int fieldWidth = 20;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fContextUseExistingKind" << ": " <<
-    lpsrContextUseExistingKindAsString (
-      fContextUseExistingKind) <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fContextPathLikeName" << ": \"" << fContextPathLikeName << "\"" <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "contextStaff" << ": \"" << fContextStaff->getStaffPathLikeName () << "\"" <<
-    std::endl;
-
-  os <<
-    std::setw (fieldWidth) <<
-    "fContextElementsList";
-
-  if (fContextElementsList.size ()) {
-    os << std::endl;
-
-    ++gIndenter;
-
-    for (S_msrElement element : fContextElementsList) {
-      os << element;
-    } // for
-
-    --gIndenter;
-  }
-  else {
-    os <<
-      ": " << "[EMPTY]" <<
-    std::endl;
-  }
-
-  --gIndenter;
+  return ss.str ();
 }
 
 std::ostream& operator << (std::ostream& os, const S_lpsrFiguredBassContext& elt)

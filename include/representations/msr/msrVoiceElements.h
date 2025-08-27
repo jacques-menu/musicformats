@@ -46,7 +46,9 @@ class EXP msrVoiceElement : public msrElement
     to allow for separate *.h files, C++ constraint
   */
 };
-typedef SMARTP<msrVoiceElement> S_msrVoiceElement;
+
+using S_msrVoiceElement = SMARTP<msrVoiceElement>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrVoiceElement& elt);
 
 

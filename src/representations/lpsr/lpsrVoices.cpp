@@ -121,18 +121,31 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
   }
 }
 
-void lpsrUseVoiceCommand::browseData (basevisitor* v)
-{}
+std::string lpsrUseVoiceCommand::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[UseVoiceCommand";
+
+  ss <<
+    ", fVoice: " << fVoice <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
 
 void lpsrUseVoiceCommand::print (std::ostream& os) const
 {
   os <<
-    "UseVoiceCommand" << " \"" <<
-    fVoice->getVoiceName () <<
-    "\", " <<
+    "[UseVoiceCommand" <<
+    ", fVoice: " << fVoice->getVoiceName () <<
+    ", getVoiceStanzasMap: " <<
     mfSingularOrPlural (
       fVoice->getVoiceStanzasMap ().size (), "stanza", "stanzas") <<
-    std::endl;
+    std::endl <<
+    ']';
 }
 
 std::ostream& operator << (std::ostream& os, const S_lpsrUseVoiceCommand& nlc)

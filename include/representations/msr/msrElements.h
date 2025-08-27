@@ -36,6 +36,7 @@ using S_msrElement = SMARTP<msrElement>;
 //______________________________________________________________________________
 class EXP msrElement : public smartable
 {
+/* this class is purely virtual
   public:
 
     // creation from MusicXML
@@ -43,6 +44,7 @@ class EXP msrElement : public smartable
 
     // cloning
     // ------------------------------------------------------
+*/
 
   protected:
 
@@ -75,10 +77,13 @@ class EXP msrElement : public smartable
     // visitors
     // ------------------------------------------------------
 
-    virtual void          acceptIn  (basevisitor* v);
-    virtual void          acceptOut (basevisitor* v);
+    virtual void          acceptIn  (basevisitor* v) = 0;
+    virtual void          acceptOut (basevisitor* v) = 0;
 
-    virtual void          browseData (basevisitor* v) = 0;
+    virtual void          browseData (basevisitor* v)
+                              {
+                                // there is nothing to browse in simple elements
+                              };
 
     virtual void          browseDataAlongPathToVoice (
                             basevisitor*            v,
@@ -89,57 +94,27 @@ class EXP msrElement : public smartable
     // print
     // ------------------------------------------------------
 
-/*
-    virtual std::string   asString () const;
-
-    virtual std::string   asShortString () const;
-
-    virtual std::string   asStringForMeasuresSlices () const;
-
-    virtual void          print (std::ostream& os) const;
-    virtual void          printFull (std::ostream& os) const;
-
-    virtual void          printSummary (std::ostream& os) const;
-*/
-
     virtual std::string   asString () const = 0;
 
     virtual std::string   asShortString () const
                               { return asString (); }
 
-//     Bool                  operator == (const Bool &otherBool) const
-//                               { return fBareValue == otherBool.fBareValue; }
-//     std::string           operator std::string () const
-//                               { return asString (); }
-
     virtual std::string   asStringForMeasuresSlices () const;
 
     virtual void          print (std::ostream& os) const
-                              { os << asString () << std::endl; }
+                              {
+                                os << asString () << std::endl;
+                                // asString() is enough for simple elements
+                              }
 
     virtual void          printFull (std::ostream& os) const
                               { print (os); }
 
-    virtual void          printSummary (std::ostream& os) const;
+    virtual void          printSummary (std::ostream& os) const
+                              { print (os); }
 
-//     EXP std::ostream&     operator << (std::ostream& os, const S_msrElement& elt)
-//                               {
-//                                 if (elt) {
-//                                   elt->print (os);
-//                                 }
-//                                 else {
-//                                   os << "[NULL]" << std::endl;
-//                                 }
-//
-//                                 return os;
-//                               }
-//
-//     EXP std::ostream&     operator << (std::ostream& os, const msrElement& elt)
-//                               {
-//                                 elt.print (os);
-//
-//                                 return os;
-//                               }
+                          operator std::string ()
+                              { return asString (); }
 
   protected:
 
@@ -152,25 +127,12 @@ class EXP msrElement : public smartable
 using S_msrElement = SMARTP<msrElement>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrElement& elt);
-// EXP std::ostream& operator << (std::ostream& os, const S_msrElement& elt)
-// {
-//   if (elt) {
-//     elt->print (os);
-//   }
-//   else {
-//     os << "[NULL]" << std::endl;
-//   }
-//
-//   return os;
-// }
 
 EXP std::ostream& operator << (std::ostream& os, const msrElement& elt);
-// EXP std::ostream& operator << (std::ostream& os, const msrElement& elt)
-// {
-//   elt.print (os);
-//
-//   return os;
-// }
+
+std::string msrElementAsStringOrNULL(
+  S_msrElement element);
+
 
 }
 

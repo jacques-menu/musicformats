@@ -28,6 +28,30 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+std::string bsrParallelLayoutKindAsString (
+  bsrParallelLayoutKind parallelLayoutKind)
+{
+  std::string result;
+
+  switch (parallelLayoutKind) {
+    case bsrParallelLayoutKind::kParallelLayoutBarOverBar:
+      result = "kParallelLayoutBarOverBar";
+      break;
+    case bsrParallelLayoutKind::kParallelLayoutLineOverLine:
+      result = "kParallelLayoutLineOverLine";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const bsrParallelLayoutKind& elt)
+{
+  os << bsrParallelLayoutKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_bsrParallel bsrParallel::create (
   const mfInputLineNumber& inputLineNumber)
 {
@@ -143,36 +167,55 @@ void bsrParallel::browseData (basevisitor* v)
     bsrBrowser<bsrElement> browser (v);
     browser.browse (*element);
   } // for
-
 }
 
-std::string bsrParallelLayoutKindAsString (
-  bsrParallelLayoutKind parallelLayoutKind)
+std::string bsrParallel::asString () const
 {
-  std::string result;
+  std::stringstream ss;
 
-  switch (parallelLayoutKind) {
-    case bsrParallelLayoutKind::kParallelLayoutBarOverBar:
-      result = "kParallelLayoutBarOverBar";
-      break;
-    case bsrParallelLayoutKind::kParallelLayoutLineOverLine:
-      result = "kParallelLayoutLineOverLine";
-      break;
-  } // switch
+  ss <<
+    "[Parallel" <<
+    ", fPrintParallelNumber: " << fPrintParallelNumber <<
+    ", fBrailleParallelNumber: " << fBrailleParallelNumber;
+  ss <<
+    ", fParallelElementsList: ";
 
-  return result;
-}
+  if (! fParallelElementsList.empty ()) {
+    ss << '[';
 
-std::ostream& operator << (std::ostream& os, const bsrParallelLayoutKind& elt)
-{
-  os << bsrParallelLayoutKindAsString (elt);
-  return os;
+    ++gIndenter;
+
+    std::list <S_bsrElement>::const_iterator
+      iBegin = fParallelElementsList.begin (),
+      iEnd   = fParallelElementsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_bsrElement
+        element = (*i);
+
+      ss << element;
+
+      if (++i == iEnd) break;
+      ss << ", ";
+    } // for
+
+    ss << ']';
+  }
+  else {
+    ss << "[EMPTY]";
+  }
+
+  ss <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
 }
 
 void bsrParallel::print (std::ostream& os) const
 {
   os <<
-    "Parallel" <<
+    "[Parallel" <<
     std::endl;
 
   ++gIndenter;
@@ -221,6 +264,8 @@ void bsrParallel::print (std::ostream& os) const
   }
 
   --gIndenter;
+
+  os << ']' << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_bsrParallel& elt)

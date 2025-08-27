@@ -78,6 +78,8 @@ class EXP lpsrLayout : public lpsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -90,7 +92,9 @@ class EXP lpsrLayout : public lpsrElement
     std::vector <S_lpsrSchemeVariable>
                           fLpsrSchemeVariablesVector;
 };
-typedef SMARTP<lpsrLayout> S_lpsrLayout;
+
+using S_lpsrLayout = SMARTP<lpsrLayout>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrLayout& elt);
 
 

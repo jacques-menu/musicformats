@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___lpsrParts___
-#define ___lpsrParts___
+#ifndef ___lpsrPartBlocks___
+#define ___lpsrPartBlocks___
 
 #include "msrElements.h"
 #include "msrParts.h"
@@ -125,6 +125,8 @@ class EXP lpsrPartBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -140,11 +142,13 @@ class EXP lpsrPartBlock : public lpsrElement
     std::string           fPartBlockInstrumentName; // JMI
     std::string           fPartBlockShortInstrumentName; // JMI
 };
-typedef SMARTP<lpsrPartBlock> S_lpsrPartBlock;
+
+using S_lpsrPartBlock = SMARTP<lpsrPartBlock>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrPartBlock& elt);
 
 
 }
 
 
-#endif // ___lpsrParts___
+#endif // ___lpsrPartBlocks___

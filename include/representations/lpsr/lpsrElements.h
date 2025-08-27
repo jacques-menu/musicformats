@@ -21,6 +21,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 class EXP lpsrElement : public msrElement
 {
+/* this class is purely virtual
   public:
 
     // creation from MusicXML
@@ -28,6 +29,7 @@ class EXP lpsrElement : public msrElement
 
     static SMARTP<lpsrElement> create (
                             const mfInputLineNumber& inputLineNumber);
+*/
 
   protected:
 
@@ -48,16 +50,6 @@ class EXP lpsrElement : public msrElement
 
     // public services
     // ------------------------------------------------------
-
-  public:
-
-    // visitors
-    // ------------------------------------------------------
-
-    void                  acceptIn  (basevisitor* v) override;
-    void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 };
 
 using S_lpsrElement = SMARTP<lpsrElement>;
