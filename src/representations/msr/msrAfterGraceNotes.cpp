@@ -33,32 +33,31 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::create (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice)
+  const S_msrVoice&        upLinkToVoice)
 {
   msrAfterGraceNotesGroupContents* obj =
     new msrAfterGraceNotesGroupContents (
       inputLineNumber,
-      afterGraceNotesGroupContentsUpLinkToVoice);
+      upLinkToVoice);
   assert (obj != nullptr);
   return obj;
 }
 
 msrAfterGraceNotesGroupContents::msrAfterGraceNotesGroupContents (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice)
+  const S_msrVoice&        upLinkToVoice)
     : msrElement (inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    afterGraceNotesGroupContentsUpLinkToVoice != nullptr,
-    "afterGraceNotesGroupContentsUpLinkToVoice is NULL");
+    upLinkToVoice != nullptr,
+    "upLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set after notes contents's voice upLink
-  fAfterGraceNotesGroupContentsUpLinkToVoice =
-    afterGraceNotesGroupContentsUpLinkToVoice;
+  fUpLinkToVoice = upLinkToVoice;
 }
 
 msrAfterGraceNotesGroupContents::~msrAfterGraceNotesGroupContents ()
@@ -68,9 +67,9 @@ S_msrPart msrAfterGraceNotesGroupContents::fetchAfterGraceNotesGroupContentsUpLi
 {
   S_msrPart result;
 
-  if (fAfterGraceNotesGroupContentsUpLinkToVoice) {
+  if (fUpLinkToVoice) {
     result =
-      fAfterGraceNotesGroupContentsUpLinkToVoice->
+      fUpLinkToVoice->
         fetchVoiceUpLinkToPart ();
   }
 
@@ -113,13 +112,13 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
 void msrAfterGraceNotesGroupContents::appendNoteToAfterGraceNotesGroupContents (
   const S_msrNote& note)
 {
-  fAfterGraceNotesGroupContentsNotesList.push_back (note);
+  fMeasureElementsList.push_back (note);
 }
 
 void msrAfterGraceNotesGroupContents::appendNoteToAfterGraceNotesGroupContents (
   const S_msrChord& chord)
 {
-  fAfterGraceNotesGroupContentsNotesList.push_back (chord);
+  fMeasureElementsList.push_back (chord);
 }
 
 void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
@@ -196,16 +195,10 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
 
 void msrAfterGraceNotesGroupContents::browseData (basevisitor* v)
 {
-  std::list <S_msrMeasureElement>::const_iterator i;
-
-  for (
-    i = fAfterGraceNotesGroupContentsNotesList.begin ();
-    i != fAfterGraceNotesGroupContentsNotesList.end ();
-    ++i
-  ) {
-    // browse the note
+  for (S_msrMeasureElement measureElement : fMeasureElementsList) {
+    // browse the measure element
     msrBrowser<msrMeasureElement> browser (v);
-    browser.browse (*(*i));
+    browser.browse (*measureElement);
   } // for
 }
 
@@ -215,21 +208,23 @@ std::string msrAfterGraceNotesGroupContents::asString () const
 
   ss <<
     "[AfterGraceNotesGroupContents" <<
-    ", fAfterGraceNotesGroupContentsUpLinkToVoice: " <<
-    msrElementAsStringOrNULL (fAfterGraceNotesGroupContentsUpLinkToVoice);
+    ", fUpLinkToVoice: " <<
+    msrElementAsStringOrNULL (fUpLinkToVoice);
 
   ss <<
-    ", fAfterGraceNotesGroupContentsUpLinkToVoice: ";
-  if (! fAfterGraceNotesGroupContentsUpLinkToVoice.empty ()) {
+    ", fMeasureElementsList: ";
+  if (! fMeasureElementsList.empty ()) {
     std::list <S_msrMeasureElement>::const_iterator
-      iBegin = fAfterGraceNotesGroupContentsUpLinkToVoice.begin (),
-      iEnd   = fAfterGraceNotesGroupContentsUpLinkToVoice.end (),
+      iBegin = fMeasureElementsList.begin (),
+      iEnd   = fMeasureElementsList.end (),
       i      = iBegin;
 
     for ( ; ; ) {
-      ss << (*i)->asString ();
+      S_msrMeasureElement measureElement = (*i);
+
+      ss << measureElement->asString ();
       if (++i == iEnd) break;
-      ss << ' ';
+      ss << "' ";
     } // for
   }
 
@@ -244,20 +239,22 @@ void msrAfterGraceNotesGroupContents::print (std::ostream& os) const
     "[AfterGraceNotesGroupContents" <<
     ", " <<
     mfSingularOrPlural (
-      fAfterGraceNotesGroupContentsNotesList.size (), "note", "notes") <<
+      fMeasureElementsList.size (), "note", "notes") <<
     ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
 
-  if (fAfterGraceNotesGroupContentsNotesList.size ()) {
+  if (fMeasureElementsList.size ()) {
     std::list <S_msrMeasureElement>::const_iterator
-      iBegin = fAfterGraceNotesGroupContentsNotesList.begin (),
-      iEnd   = fAfterGraceNotesGroupContentsNotesList.end (),
+      iBegin = fMeasureElementsList.begin (),
+      iEnd   = fMeasureElementsList.end (),
       i      = iBegin;
 
     for ( ; ; ) {
-      os << (*i);
+      S_msrMeasureElement measureElement = (*i);
+
+      os << measureElement;
       if (++i == iEnd) break;
    // JMI   os << std::endl;
     } // for
@@ -285,14 +282,14 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::create (
   const mfInputLineNumber& inputLineNumber,
   const S_msrElement& afterGraceNotesGroupElement,
   Bool         afterGraceNotesGroupIsSlashed,
-  const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice)
+  const S_msrVoice&   upLinkToVoice)
 {
   msrAfterGraceNotesGroup* obj =
     new msrAfterGraceNotesGroup (
       inputLineNumber,
       afterGraceNotesGroupElement,
       afterGraceNotesGroupIsSlashed,
-      afterGraceNotesGroupUpLinkToVoice);
+      upLinkToVoice);
   assert (obj != nullptr);
   return obj;
 }
@@ -301,20 +298,20 @@ msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
   const mfInputLineNumber& inputLineNumber,
   const S_msrElement& afterGraceNotesGroupElement,
   Bool         afterGraceNotesGroupIsSlashed,
-  const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice)
+  const S_msrVoice&   upLinkToVoice)
     : msrElement (inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    afterGraceNotesGroupUpLinkToVoice != nullptr,
-    "afterGraceNotesGroupUpLinkToVoice is NULL");
+    upLinkToVoice != nullptr,
+    "upLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set after gracenotes group voice upLink
   fAfterGraceNotesGroupUpLinkToVoice =
-    afterGraceNotesGroupUpLinkToVoice;
+    upLinkToVoice;
 
   // pupulate this after grace notes group
   fAfterGraceNotesGroupElement =
@@ -327,7 +324,7 @@ msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
   fAfterGraceNotesGroupContents =
     msrAfterGraceNotesGroupContents::create (
       inputLineNumber,
-      afterGraceNotesGroupUpLinkToVoice);
+      upLinkToVoice);
 }
 
 msrAfterGraceNotesGroup::~msrAfterGraceNotesGroup ()

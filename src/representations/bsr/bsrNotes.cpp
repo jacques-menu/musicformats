@@ -938,9 +938,6 @@ void bsrNote::acceptOut (basevisitor* v)
   }
 }
 
-void bsrNote::browseData (basevisitor* v)
-{}
-
 std::string bsrNoteValueKindAsString (
   bsrNoteValueKind noteValueKind)
 {

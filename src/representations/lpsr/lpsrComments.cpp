@@ -169,9 +169,6 @@ void lpsrComment::acceptOut (basevisitor* v)
   }
 }
 
-void lpsrComment::browseData (basevisitor* v)
-{}
-
 std::string lpsrComment::asString () const
 {
   std::stringstream ss;

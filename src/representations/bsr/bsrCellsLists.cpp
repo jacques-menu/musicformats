@@ -338,7 +338,9 @@ void bsrCellsList::acceptOut (basevisitor* v)
 }
 
 void bsrCellsList::browseData (basevisitor* v)
-{}
+{
+  // fCellsListElements JMI
+}
 
 
 std::string bsrCellsList::asString () const

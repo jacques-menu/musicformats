@@ -118,9 +118,6 @@ void lpsrBarNumberCheck::acceptOut (basevisitor* v)
   }
 }
 
-void lpsrBarNumberCheck::browseData (basevisitor* v)
-{}
-
 std::string lpsrBarNumberCheck::asString () const
 {
   std::stringstream ss;
@@ -243,9 +240,6 @@ void lpsrBarCommand::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void lpsrBarCommand::browseData (basevisitor* v)
-{}
 
 std::string lpsrBarCommand::asString () const
 {

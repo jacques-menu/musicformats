@@ -138,7 +138,9 @@ void bsrSpaces::acceptOut (basevisitor* v)
 }
 
 void bsrSpaces::browseData (basevisitor* v)
-{}
+{
+  // fSpacesCellsList JMI
+}
 
 std::string bsrSpaces::asString () const
 {

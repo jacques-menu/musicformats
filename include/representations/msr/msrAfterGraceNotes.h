@@ -31,7 +31,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
 
     static SMARTP<msrAfterGraceNotesGroupContents> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice);
+                            const S_msrVoice&        upLinkToVoice);
 
     SMARTP<msrAfterGraceNotesGroupContents> createAfterGraceNotesGroupContentsNewbornClone (
                             const S_msrVoice& containingVoice);
@@ -46,7 +46,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
 
                           msrAfterGraceNotesGroupContents (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice);
+                            const S_msrVoice&        upLinkToVoice);
 
     virtual               ~msrAfterGraceNotesGroupContents ();
 
@@ -55,12 +55,12 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // set and get
     // ------------------------------------------------------
 
+    const S_msrVoice      getUpLinkToVoice () const
+                              { return fUpLinkToVoice; }
+
     const std::list <S_msrMeasureElement>&
-                          getAfterGraceNotesGroupContentsNotesList () const
-                              {
-                                return
-                                  fAfterGraceNotesGroupContentsNotesList;
-                              }
+                          getAfterGraceNotesGroupMeasureElementsList () const
+                              { return fMeasureElementsList; }
 
   public:
 
@@ -101,11 +101,11 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrVoice            fAfterGraceNotesGroupContentsUpLinkToVoice;
+    S_msrVoice            fUpLinkToVoice;
 
-    // the notes list
+    // this list can contain notes and chords
     std::list <S_msrMeasureElement>
-                          fAfterGraceNotesGroupContentsNotesList;
+                          fMeasureElementsList;
 };
 
 using S_msrAfterGraceNotesGroupContents = SMARTP<msrAfterGraceNotesGroupContents>;
@@ -125,7 +125,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrElement& afterGraceNotesGroupElement,
                             Bool         afterGraceNotesGroupIsSlashed,
-                            const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice);
+                            const S_msrVoice&   upLinkToVoice);
 
     SMARTP<msrAfterGraceNotesGroup> createAfterGraceNotesGroupNewbornClone (
                             const S_msrNote&  noteClone,
@@ -144,7 +144,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrElement& afterGraceNotesGroupElement,
                             Bool         afterGraceNotesGroupIsSlashed,
-                            const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice);
+                            const S_msrVoice&   upLinkToVoice);
 
     virtual               ~msrAfterGraceNotesGroup ();
 

@@ -221,6 +221,39 @@ void msrCreditWords::acceptOut (basevisitor* v)
 void msrCreditWords::browseData (basevisitor* v)
 {}
 
+std::string msrCreditWords::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[CreditWords" <<
+    ", fCreditWordsContents: " << fCreditWordsContents;
+
+//     ", fUpLinkToVoice: " <<
+//     msrElementAsStringOrNULL (fUpLinkToVoice);
+//
+//   ss <<
+//     ", fMeasureElementsList: ";
+//   if (! fMeasureElementsList.empty ()) {
+//     std::list <S_msrMeasureElement>::const_iterator
+//       iBegin = fMeasureElementsList.begin (),
+//       iEnd   = fMeasureElementsList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       S_msrMeasureElement measureElement = (*i);
+//
+//       ss << measureElement->asString ();
+//       if (++i == iEnd) break;
+//       ss << "' ";
+//     } // for
+//   }
+
+  ss << ']';
+
+  return ss.str ();
+}
+
 void msrCreditWords::print (std::ostream& os) const
 {
   os <<

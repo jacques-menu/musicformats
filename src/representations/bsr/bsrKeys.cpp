@@ -284,7 +284,9 @@ void bsrKey::acceptOut (basevisitor* v)
 }
 
 void bsrKey::browseData (basevisitor* v)
-{}
+{
+  // fKeyCellsList JMI
+}
 
 std::string bsrKey::asString () const
 {

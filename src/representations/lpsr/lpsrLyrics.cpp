@@ -122,9 +122,6 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
   }
 }
 
-void lpsrNewLyricsBlock::browseData (basevisitor* v)
-{}
-
 std::string lpsrNewLyricsBlock::asString () const
 {
   std::stringstream ss;

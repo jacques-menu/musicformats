@@ -142,6 +142,8 @@ class EXP msrCreditWords : public msrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -169,7 +171,9 @@ class EXP msrCreditWords : public msrElement
                           fCreditWordsVerticalAlignmentKind;
     msrXMLLangKind        fCreditWordsXMLLang;
 };
-typedef SMARTP<msrCreditWords> S_msrCreditWords;
+
+using S_msrCreditWords = SMARTP<msrCreditWords>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrCreditWords& elt);
 
 //______________________________________________________________________________
@@ -222,8 +226,6 @@ class EXP msrCredit : public msrElement
     void                  appendCreditWordsToCredit (
                             const S_msrCreditWords& creditWords);
 
-    std::string           asString () const override;
-
   public:
 
     // visitors
@@ -239,6 +241,8 @@ class EXP msrCredit : public msrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
@@ -253,7 +257,9 @@ class EXP msrCredit : public msrElement
     std::vector <S_msrCreditWords>
                           fCreditWordsList;
 };
-typedef SMARTP<msrCredit> S_msrCredit;
+
+using S_msrCredit = SMARTP<msrCredit>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrCredit& elt);
 
 

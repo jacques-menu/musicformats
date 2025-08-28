@@ -130,7 +130,9 @@ void bsrFootNotesElement::acceptOut (basevisitor* v)
 }
 
 void bsrFootNotesElement::browseData (basevisitor* v)
-{}
+{
+  // fFootNotesElementCellsList JMI
+}
 
 std::string bsrFootNotesElement::asString () const
 {

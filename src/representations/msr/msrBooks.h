@@ -292,6 +292,8 @@ class EXP msrBook : public msrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;
 

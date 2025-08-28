@@ -143,10 +143,6 @@ void bsrPageElement::acceptOut (basevisitor* v)
   }
 }
 
-void bsrPageElement::browseData (basevisitor* v)
-{}
-
-
 std::string bsrPageElement::asString () const
 {
   // this is overriden all in actual elements

@@ -307,7 +307,9 @@ void bsrDynamic::acceptOut (basevisitor* v)
 }
 
 void bsrDynamic::browseData (basevisitor* v)
-{}
+{
+  // fDynamicsCellsList JMI
+}
 
 std::string bsrDynamic::asString () const
 {

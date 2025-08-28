@@ -168,9 +168,6 @@ void lpsrHeader::acceptOut (basevisitor* v)
   }
 }
 
-void lpsrHeader::browseData (basevisitor* v)
-{}
-
 std::string lpsrHeader::asString () const
 {
   std::stringstream ss;

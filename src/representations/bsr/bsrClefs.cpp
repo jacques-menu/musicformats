@@ -232,7 +232,9 @@ void bsrClef::acceptOut (basevisitor* v)
 }
 
 void bsrClef::browseData (basevisitor* v)
-{}
+{
+  // fClefCellsList
+}
 
 
 std::string bsrClefKindAsString (

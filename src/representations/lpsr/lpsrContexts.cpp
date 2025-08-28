@@ -172,9 +172,6 @@ void lpsrContext::acceptOut (basevisitor* v)
   }
 }
 
-void lpsrContext::browseData (basevisitor* v)
-{}
-
 void lpsrContext::print (std::ostream& os) const
 {
   os <<
@@ -213,7 +210,7 @@ void lpsrContext::print (std::ostream& os) const
 
 //______________________________________________________________________________
 S_lpsrChordNamesContext lpsrChordNamesContext::create (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&   inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   const std::string&         contextPathLikeName,
   const S_msrVoice&          contextVoice)
@@ -229,7 +226,7 @@ S_lpsrChordNamesContext lpsrChordNamesContext::create (
 }
 
 lpsrChordNamesContext::lpsrChordNamesContext (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&   inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   const std::string&         contextPathLikeName,
   const S_msrVoice&          contextVoice)
@@ -245,9 +242,6 @@ lpsrChordNamesContext::lpsrChordNamesContext (
 
   fContextVoice = contextVoice;
 }
-
-lpsrChordNamesContext::~lpsrChordNamesContext ()
-{}
 
 void lpsrChordNamesContext::acceptIn (basevisitor* v)
 {
@@ -320,9 +314,6 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void lpsrChordNamesContext::browseData (basevisitor* v)
-{}
 
 void lpsrChordNamesContext::print (std::ostream& os) const
 {
@@ -497,9 +488,6 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void lpsrFiguredBassContext::browseData (basevisitor* v)
-{}
 
 std::string lpsrFiguredBassContext::asString () const
 {

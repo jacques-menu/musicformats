@@ -311,7 +311,9 @@ void bsrTimeSignatureItem::acceptOut (basevisitor* v)
 }
 
 void bsrTimeSignatureItem::browseData (basevisitor* v)
-{}
+{
+  // fTimeSignatureBeatsNumbersVector JMI
+}
 
 std::string bsrTimeSignatureItem::asString () const
 {

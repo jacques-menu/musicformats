@@ -105,12 +105,12 @@ class EXP msrDynamic : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
     // ------------------------------------------------------
+
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -119,7 +119,7 @@ class EXP msrDynamic : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    msrDynamicKind       fDynamicKind;
+    msrDynamicKind        fDynamicKind;
 
     msrPlacementKind      fDynamicPlacementKind;
 };
@@ -174,8 +174,6 @@ class EXP msrOtherDynamic : public msrElement
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 
@@ -252,12 +250,12 @@ class EXP msrCrescDecresc : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
     // ------------------------------------------------------
+
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -356,8 +354,6 @@ class EXP msrWedge : public msrElement
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 

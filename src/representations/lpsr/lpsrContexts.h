@@ -104,8 +104,6 @@ class EXP lpsrContext : public lpsrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -143,7 +141,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
     // ------------------------------------------------------
 
     static SMARTP<lpsrChordNamesContext> create (
-                            const mfInputLineNumber& inputLineNumber,
+                            const mfInputLineNumber&   inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
                             const std::string&         contextPathLikeName,
                             const S_msrVoice&          contextVoice);
@@ -154,7 +152,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
     // ------------------------------------------------------
 
                           lpsrChordNamesContext (
-                            const mfInputLineNumber& inputLineNumber,
+                            const mfInputLineNumber&   inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
                             const std::string&         contextPathLikeName,
                             const S_msrVoice&          contextVoice);
@@ -181,8 +179,6 @@ class EXP lpsrChordNamesContext : public lpsrContext
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 
@@ -252,8 +248,6 @@ class EXP lpsrFiguredBassContext : public lpsrContext
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 

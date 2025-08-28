@@ -378,8 +378,38 @@ void msrDynamic::acceptOut (basevisitor* v)
 }
 
 
-void msrDynamic::browseData (basevisitor* v)
-{}
+std::string msrDynamic::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[Dynamic" <<
+    ", fDynamicKind: " << fDynamicKind;
+
+//     ", fUpLinkToVoice: " <<
+//     msrElementAsStringOrNULL (fUpLinkToVoice);
+//
+//   ss <<
+//     ", fMeasureElementsList: ";
+//   if (! fMeasureElementsList.empty ()) {
+//     std::list <S_msrMeasureElement>::const_iterator
+//       iBegin = fMeasureElementsList.begin (),
+//       iEnd   = fMeasureElementsList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       S_msrMeasureElement measureElement = (*i);
+//
+//       ss << measureElement->asString ();
+//       if (++i == iEnd) break;
+//       ss << "' ";
+//     } // for
+//   }
+
+  ss << ']';
+
+  return ss.str ();
+}
 
 void msrDynamic::print (std::ostream& os) const
 {
@@ -505,9 +535,6 @@ void msrOtherDynamic::acceptOut (basevisitor* v)
   }
 }
 
-
-void msrOtherDynamic::browseData (basevisitor* v)
-{}
 
 std::string msrOtherDynamic::asString () const
 {
@@ -661,8 +688,38 @@ void msrCrescDecresc::acceptOut (basevisitor* v)
   }
 }
 
-void msrCrescDecresc::browseData (basevisitor* v)
-{}
+std::string msrCrescDecresc::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[CrescDecresc" <<
+    ", fCrescDecrescKind: " << fCrescDecrescKind;
+
+//     ", fUpLinkToVoice: " <<
+//     msrElementAsStringOrNULL (fUpLinkToVoice);
+//
+//   ss <<
+//     ", fMeasureElementsList: ";
+//   if (! fMeasureElementsList.empty ()) {
+//     std::list <S_msrMeasureElement>::const_iterator
+//       iBegin = fMeasureElementsList.begin (),
+//       iEnd   = fMeasureElementsList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       S_msrMeasureElement measureElement = (*i);
+//
+//       ss << measureElement->asString ();
+//       if (++i == iEnd) break;
+//       ss << "' ";
+//     } // for
+//   }
+
+  ss << ']';
+
+  return ss.str ();
+}
 
 void msrCrescDecresc::print (std::ostream& os) const
 {
@@ -857,9 +914,6 @@ void msrWedge::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void msrWedge::browseData (basevisitor* v)
-{}
 
 std::string msrWedge::asString () const
 {

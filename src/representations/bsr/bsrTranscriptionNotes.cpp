@@ -137,9 +137,6 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
   }
 }
 
-void bsrTranscriptionNotesElement::browseData (basevisitor* v)
-{}
-
 std::string bsrTranscriptionNotesElement::asString () const
 {
   std::stringstream ss;

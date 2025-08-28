@@ -459,7 +459,9 @@ void bsrTempo::acceptOut (basevisitor* v)
 }
 
 void bsrTempo::browseData (basevisitor* v)
-{}
+{
+  // fTempoCellsList JMI
+}
 
 std::string bsrTempo::asString () const
 {

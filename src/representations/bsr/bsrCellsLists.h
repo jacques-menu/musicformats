@@ -187,7 +187,8 @@ class EXP bsrCellsList : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    std::list <bsrCellKind>     fCellsListElements;
+    std::list <bsrCellKind>
+                          fCellsListElements;
 };
 typedef SMARTP<bsrCellsList> S_bsrCellsList;
 EXP std::ostream& operator << (std::ostream& os, const S_bsrCellsList& elt);

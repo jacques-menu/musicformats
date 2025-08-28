@@ -549,197 +549,37 @@ void msrBook::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrBook::printFull (std::ostream& os) const
+std::string msrBook::asString () const
 {
-  os <<
-    "[MSR book" <<
-    ", line " << fInputLineNumber <<
-    std::endl;
+  std::stringstream ss;
 
-  ++gIndenter;
+  ss <<
+    "[Book" <<
+    ", fBookName: " << fBookName;
 
-  constexpr int fieldWidth = 38;
+//     ", fUpLinkToVoice: " <<
+//     msrElementAsStringOrNULL (fUpLinkToVoice);
+//
+//   ss <<
+//     ", fMeasureElementsList: ";
+//   if (! fMeasureElementsList.empty ()) {
+//     std::list <S_msrMeasureElement>::const_iterator
+//       iBegin = fMeasureElementsList.begin (),
+//       iEnd   = fMeasureElementsList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       S_msrMeasureElement measureElement = (*i);
+//
+//       ss << measureElement->asString ();
+//       if (++i == iEnd) break;
+//       ss << "' ";
+//     } // for
+//   }
 
-  size_t bookElementsListSize =
-    fBookElementsList.size ();
+  ss << ']';
 
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "bookElementsListSize" << ": " <<
-    bookElementsListSize <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fBookNumberOfMeasures" << ": " <<
-    fBookNumberOfMeasures <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fBookPartGroupNamesMaxLength" <<  ": " <<
-    fBookElementNamesMaxLength <<
-    std::endl<<
-
-    std::setw (fieldWidth) <<
-    "fBookCreditTypePartNamesMaxLength" <<  ": " <<
-    fBookElementNamesMaxLength <<
-    std::endl<<
-
-    std::setw (fieldWidth) <<
-    "fBookInstrumentNamesMaxLength" <<  ": " <<
-    fBookInstrumentNamesMaxLength <<
-    std::endl<<
-
-    std::setw (fieldWidth) <<
-    "fBookInstrumentAbbreviationsMaxLength" <<  ": " <<
-    fBookInstrumentAbbreviationsMaxLength <<
-    std::endl<<
-
-    std::setw (fieldWidth) <<
-    "fInhibitGraceNotesGroupsBeforeBrowsing" <<  ": " <<
-    fInhibitGraceNotesGroupsBeforeBrowsing <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fInhibitGraceNotesGroupsAfterBrowsing" <<  ": " <<
-    fInhibitGraceNotesGroupsAfterBrowsing <<
-    std::endl<<
-
-    std::setw (fieldWidth) <<
-    "fInhibitMeasureRepeatReplicasBrowsing" <<  ": " <<
-    fInhibitMeasureRepeatReplicasBrowsing <<
-    std::endl<<
-
-    std::setw (fieldWidth) <<
-    "fInhibitMultipleMeasureRestsBrowsing" <<  ": " <<
-    fInhibitMultipleMeasureRestsBrowsing <<
-    std::endl<<
-    std::endl;
-
-  // print the identification if any
-  if (fIdentification) {
-    os <<
-      fIdentification;
-  }
-
-  // print the scaling if any
-  if (fScaling) {
-    os <<
-      fScaling <<
-      std::endl;
-  }
-
-  // print the page layout if any
-  if (fPageLayout) {
-    os <<
-      fPageLayout <<
-      std::endl;
-  }
-
-  // print the system layout if any
-  if (fSystemLayout) {
-    os <<
-      fSystemLayout <<
-      std::endl;
-  }
-
-  // print the staff layout if any
-  if (fStaffLayout) {
-    os <<
-      fStaffLayout <<
-      std::endl;
-  }
-
-  // print the appearance if any
-  if (fAppearance) {
-    os <<
-      fAppearance <<
-      std::endl;
-  }
-
-  os << std::endl;
-
-  // print the credits if any
-  size_t creditsListSize = fCreditsList.size ();
-
-  os <<
-    std::setw (fieldWidth) <<
-    "CreditsList";
-  if (creditsListSize) {
-    os << std::endl;
-    ++gIndenter;
-
-    std::list <S_msrCredit>::const_iterator
-      iBegin = fCreditsList.begin (),
-      iEnd   = fCreditsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_msrCredit credit = (*i);
-
-      os << credit;
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-
-    --gIndenter;
-  }
-  else {
-    os <<
-      ": [EMPTY]" <<
-      std::endl;
-  }
-  os << std::endl;
-
-  // print all the voices if any
-  size_t scoreAllVoicesListSize = fBookAllVoicesList.size ();
-
-  os <<
-    std::setw (fieldWidth) <<
-    "BookAllVoicesList";
-  if (scoreAllVoicesListSize) {
-    os << std::endl;
-    ++gIndenter;
-
-    std::list <S_msrVoice>::const_iterator
-      iBegin = fBookAllVoicesList.begin (),
-      iEnd   = fBookAllVoicesList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_msrVoice voice = (*i);
-
-      os << voice->getVoiceName () << std::endl;
-      if (++i == iEnd) break;
-      // os << std::endl;
-    } // for
-    os << std::endl;
-
-    --gIndenter;
-  }
-  else {
-    os <<
-      ": " << "[EMPTY]" <<
-      std::endl;
-  }
-
-  // print the part groups if any
-  if (bookElementsListSize) {
-    std::list <S_msrBookElement>::const_iterator
-      iBegin = fBookElementsList.begin (),
-      iEnd   = fBookElementsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
-      // no std::endl here
-    } // for
-  }
-  else {
-    os <<
-      "There are no part groups in the list" <<
-      std::endl;
-  }
-
-  --gIndenter;
-
-  os << ']' << std::endl;
+  return ss.str ();
 }
 
 void msrBook::print (std::ostream& os) const
@@ -915,6 +755,199 @@ void msrBook::print (std::ostream& os) const
       std::endl;
   }
 */
+
+  // print the part groups if any
+  if (bookElementsListSize) {
+    std::list <S_msrBookElement>::const_iterator
+      iBegin = fBookElementsList.begin (),
+      iEnd   = fBookElementsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      // no std::endl here
+    } // for
+  }
+  else {
+    os <<
+      "There are no part groups in the list" <<
+      std::endl;
+  }
+
+  --gIndenter;
+
+  os << ']' << std::endl;
+}
+
+void msrBook::printFull (std::ostream& os) const
+{
+  os <<
+    "[MSR book" <<
+    ", line " << fInputLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 38;
+
+  size_t bookElementsListSize =
+    fBookElementsList.size ();
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "bookElementsListSize" << ": " <<
+    bookElementsListSize <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fBookNumberOfMeasures" << ": " <<
+    fBookNumberOfMeasures <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fBookPartGroupNamesMaxLength" <<  ": " <<
+    fBookElementNamesMaxLength <<
+    std::endl<<
+
+    std::setw (fieldWidth) <<
+    "fBookCreditTypePartNamesMaxLength" <<  ": " <<
+    fBookElementNamesMaxLength <<
+    std::endl<<
+
+    std::setw (fieldWidth) <<
+    "fBookInstrumentNamesMaxLength" <<  ": " <<
+    fBookInstrumentNamesMaxLength <<
+    std::endl<<
+
+    std::setw (fieldWidth) <<
+    "fBookInstrumentAbbreviationsMaxLength" <<  ": " <<
+    fBookInstrumentAbbreviationsMaxLength <<
+    std::endl<<
+
+    std::setw (fieldWidth) <<
+    "fInhibitGraceNotesGroupsBeforeBrowsing" <<  ": " <<
+    fInhibitGraceNotesGroupsBeforeBrowsing <<
+    std::endl<<
+    std::setw (fieldWidth) <<
+    "fInhibitGraceNotesGroupsAfterBrowsing" <<  ": " <<
+    fInhibitGraceNotesGroupsAfterBrowsing <<
+    std::endl<<
+
+    std::setw (fieldWidth) <<
+    "fInhibitMeasureRepeatReplicasBrowsing" <<  ": " <<
+    fInhibitMeasureRepeatReplicasBrowsing <<
+    std::endl<<
+
+    std::setw (fieldWidth) <<
+    "fInhibitMultipleMeasureRestsBrowsing" <<  ": " <<
+    fInhibitMultipleMeasureRestsBrowsing <<
+    std::endl<<
+    std::endl;
+
+  // print the identification if any
+  if (fIdentification) {
+    os <<
+      fIdentification;
+  }
+
+  // print the scaling if any
+  if (fScaling) {
+    os <<
+      fScaling <<
+      std::endl;
+  }
+
+  // print the page layout if any
+  if (fPageLayout) {
+    os <<
+      fPageLayout <<
+      std::endl;
+  }
+
+  // print the system layout if any
+  if (fSystemLayout) {
+    os <<
+      fSystemLayout <<
+      std::endl;
+  }
+
+  // print the staff layout if any
+  if (fStaffLayout) {
+    os <<
+      fStaffLayout <<
+      std::endl;
+  }
+
+  // print the appearance if any
+  if (fAppearance) {
+    os <<
+      fAppearance <<
+      std::endl;
+  }
+
+  os << std::endl;
+
+  // print the credits if any
+  size_t creditsListSize = fCreditsList.size ();
+
+  os <<
+    std::setw (fieldWidth) <<
+    "CreditsList";
+  if (creditsListSize) {
+    os << std::endl;
+    ++gIndenter;
+
+    std::list <S_msrCredit>::const_iterator
+      iBegin = fCreditsList.begin (),
+      iEnd   = fCreditsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrCredit credit = (*i);
+
+      os << credit;
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os <<
+      ": [EMPTY]" <<
+      std::endl;
+  }
+  os << std::endl;
+
+  // print all the voices if any
+  size_t scoreAllVoicesListSize = fBookAllVoicesList.size ();
+
+  os <<
+    std::setw (fieldWidth) <<
+    "BookAllVoicesList";
+  if (scoreAllVoicesListSize) {
+    os << std::endl;
+    ++gIndenter;
+
+    std::list <S_msrVoice>::const_iterator
+      iBegin = fBookAllVoicesList.begin (),
+      iEnd   = fBookAllVoicesList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrVoice voice = (*i);
+
+      os << voice->getVoiceName () << std::endl;
+      if (++i == iEnd) break;
+      // os << std::endl;
+    } // for
+    os << std::endl;
+
+    --gIndenter;
+  }
+  else {
+    os <<
+      ": " << "[EMPTY]" <<
+      std::endl;
+  }
 
   // print the part groups if any
   if (bookElementsListSize) {

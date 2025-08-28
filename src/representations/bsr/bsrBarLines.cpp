@@ -189,7 +189,9 @@ void bsrBarLine::acceptOut (basevisitor* v)
 }
 
 void bsrBarLine::browseData (basevisitor* v)
-{}
+{
+  // fBarLineCellsList JMI
+}
 
 std::string bsrBarLineKindAsString (
   bsrBarLineKind barLineKind)

@@ -180,7 +180,9 @@ void bsrPagination::acceptOut (basevisitor* v)
 }
 
 void bsrPagination::browseData (basevisitor* v)
-{}
+{
+  // fPaginationCellsList JMI
+}
 
 std::string bsrPagination::asString () const
 {
