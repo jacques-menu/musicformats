@@ -1833,6 +1833,20 @@ void msrStanza::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
+std::string msrStanza::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[Stanza" <<
+//     ", fTechnicalWithFloatKind: " << fTechnicalWithFloatKind <<
+//     ", fTechnicalWithFloatValue :'" << fTechnicalWithFloatValue << '\'' <<
+//     ", fTechnicalWithFloatPlacementKind: " << fTechnicalWithFloatPlacementKind <<
+    ']';
+
+  return ss.str ();
+}
+
 void msrStanza::print (std::ostream& os) const
 {
   os <<

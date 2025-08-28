@@ -172,6 +172,20 @@ void lpsrContext::acceptOut (basevisitor* v)
   }
 }
 
+std::string lpsrContext::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[Context" <<
+//     ", fTechnicalWithFloatKind: " << fTechnicalWithFloatKind <<
+//     ", fTechnicalWithFloatValue :'" << fTechnicalWithFloatValue << '\'' <<
+//     ", fTechnicalWithFloatPlacementKind: " << fTechnicalWithFloatPlacementKind <<
+    ']';
+
+  return ss.str ();
+}
+
 void lpsrContext::print (std::ostream& os) const
 {
   os <<
@@ -231,10 +245,10 @@ lpsrChordNamesContext::lpsrChordNamesContext (
   const std::string&         contextPathLikeName,
   const S_msrVoice&          contextVoice)
     : lpsrContext (
-      inputLineNumber,
-      contextUseExistingKind,
-      lpsrContextTypeKind::kContextChordNames,
-      contextPathLikeName)
+        inputLineNumber,
+        contextUseExistingKind,
+        lpsrContextTypeKind::kContextChordNames,
+        contextPathLikeName)
 {
   fContextUseExistingKind = contextUseExistingKind;
 
@@ -315,15 +329,43 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
   }
 }
 
+std::string lpsrChordNamesContext::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[ChordNamesContext";
+//     ", fDynamicKind: " << fDynamicKind;
+//
+//     ", fUpLinkToVoice: " <<
+//     msrElementAsStringOrNULL (fUpLinkToVoice);
+//
+//   ss <<
+//     ", fMeasureElementsList: ";
+//   if (! fMeasureElementsList.empty ()) {
+//     std::list <S_msrMeasureElement>::const_iterator
+//       iBegin = fMeasureElementsList.begin (),
+//       iEnd   = fMeasureElementsList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       S_msrMeasureElement measureElement = (*i);
+//
+//       ss << measureElement->asString ();
+//       if (++i == iEnd) break;
+//       ss << "' ";
+//     } // for
+//   }
+
+  ss << ']';
+
+  return ss.str ();
+}
+
 void lpsrChordNamesContext::print (std::ostream& os) const
 {
   os <<
-  /* JMI
-    "ChordNamesContext, \"" <<
-    fContextTypeKind <<
-    "\"" <<
-    */
-    "ChordNamesContext" <<
+    "[ChordNamesContext" <<
     std::endl;
 
   ++gIndenter;
@@ -365,6 +407,8 @@ void lpsrChordNamesContext::print (std::ostream& os) const
   }
 
   --gIndenter;
+
+  os << ']' << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_lpsrChordNamesContext& elt)

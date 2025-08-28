@@ -607,6 +607,20 @@ void msrScore::displayPartGroupsList (
 //   if (partGroupsListSize == 2) abort (); // JMI 0.9.69
 }
 
+std::string msrScore::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[***** [MSR Score, asString()] *****]" <<
+//     ", fTechnicalWithFloatKind: " << fTechnicalWithFloatKind <<
+//     ", fTechnicalWithFloatValue :'" << fTechnicalWithFloatValue << '\'' <<
+//     ", fTechnicalWithFloatPlacementKind: " << fTechnicalWithFloatPlacementKind <<
+    ']';
+
+  return ss.str ();
+}
+
 void msrScore::print (std::ostream& os) const
 {
   os <<
