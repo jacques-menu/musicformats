@@ -477,9 +477,6 @@ void msrMeasureElement::acceptOut (basevisitor* v)
   }
 }
 
-void msrMeasureElement::browseData (basevisitor* v)
-{}
-
 std::string msrMeasureElement::asString () const
 {
   // this is overriden all in actual elements

@@ -163,9 +163,6 @@ void msrLigature::acceptOut (basevisitor* v)
 }
 
 
-void msrLigature::browseData (basevisitor* v)
-{}
-
 std::string msrLigatureKindAsString (
   msrLigatureKind ligatureKind)
 {

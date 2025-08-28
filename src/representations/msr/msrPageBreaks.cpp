@@ -218,9 +218,6 @@ void msrPageBreak::acceptOut (basevisitor* v)
   }
 }
 
-void msrPageBreak::browseData (basevisitor* v)
-{}
-
 std::string msrPageBreak::asString () const
 {
   std::stringstream ss;

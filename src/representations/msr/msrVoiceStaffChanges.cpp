@@ -191,9 +191,6 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
   }
 }
 
-void msrVoiceStaffChange::browseData (basevisitor* v)
-{}
-
 std::string msrVoiceStaffChange::asString () const
 {
   std::stringstream ss;

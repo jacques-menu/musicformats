@@ -192,9 +192,6 @@ void msrSpanner::acceptOut (basevisitor* v)
   }
 }
 
-void msrSpanner::browseData (basevisitor* v)
-{}
-
 std::string msrSpannerKindAsString (
   msrSpannerKind spannerKind)
 {

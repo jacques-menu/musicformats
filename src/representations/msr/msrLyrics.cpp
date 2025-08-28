@@ -205,21 +205,6 @@ std::string msrSyllableElement::asString () const
   return ss.str ();
 }
 
-std::string msrSyllableElement::asShortString () const
-{
-  std::stringstream ss;
-
-  ss <<
-//     '[' <<
-    "\"" << fSyllableElementContents << "\"" <<
-    ", " <<
-    fSyllableElementKind <<
-    ", line " << fInputLineNumber;
-//     ']';
-
-  return ss.str ();
-}
-
 void msrSyllableElement::print (std::ostream& os) const
 {
   os <<
@@ -272,28 +257,6 @@ std::string syllableElementsListAsString (
 
     for ( ; ; ) {
       ss << (*i).asString ();
-      if (++i == iEnd) break;
-      ss << ", ";
-    } // for
-  }
-
-  return ss.str ();
-}
-
-std::string syllableElementsListAsShortString (
-  const std::list <msrSyllableElement>& syllableElementsList)
-{
-  std::stringstream ss;
-
-  if (syllableElementsList.size ()) {
-    std::list <msrSyllableElement>::const_iterator
-      iBegin = syllableElementsList.begin (),
-      iEnd   = syllableElementsList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      ss <<
-        (*i).asShortString ();
       if (++i == iEnd) break;
       ss << ", ";
     } // for
@@ -835,7 +798,9 @@ void msrSyllable::acceptOut (basevisitor* v)
 }
 
 void msrSyllable::browseData (basevisitor* v)
-{}
+{
+  // fSyllableElementsList JMI
+}
 
 std::string msrSyllable::syllableWholeNotesPitchAndOctaveAsString () const // JMI OCTAVE??? BABASSE
 {
@@ -920,46 +885,6 @@ std::string msrSyllable::syllableUpLinkToNoteAsShortString () const
   return result;
 }
 
-// std::string msrSyllable::syllableElementsListAsString () const
-// {
-//   std::stringstream ss;
-//
-//   if (fSyllableElementsList.size ()) {
-//     std::list <msrSyllableElement>::const_iterator
-//       iBegin = fSyllableElementsList.begin (),
-//       iEnd   = fSyllableElementsList.end (),
-//       i      = iBegin;
-//
-//     for ( ; ; ) {
-//       ss << mfDoubleQuoteStringIfNonAlpha ((*i).asString ());
-//       if (++i == iEnd) break;
-//       ss << " || ";
-//     } // for
-//   }
-//
-//   return ss.str ();
-// }
-//
-// std::string msrSyllable::syllableElementsListAsShortString () const
-// {
-//   std::stringstream ss;
-//
-//   if (fSyllableElementsList.size ()) {
-//     std::list <msrSyllableElement>::const_iterator
-//       iBegin = fSyllableElementsList.begin (),
-//       iEnd   = fSyllableElementsList.end (),
-//       i      = iBegin;
-//
-//     for ( ; ; ) {
-//       ss << mfDoubleQuoteStringIfNonAlpha ((*i).asString ());
-//       if (++i == iEnd) break;
-//       ss << " || ";
-//     } // for
-//   }
-//
-//   return ss.str ();
-// }
-
 std::string msrSyllable::asString () const
 {
   std::stringstream ss;
@@ -1032,38 +957,6 @@ std::string msrSyllable::asString () const
   else {
     ss << "[NULL]";
   }
-
-  ss << ']';
-
-  return ss.str ();
-}
-
-std::string msrSyllable::asShortString () const
-{
-  std::stringstream ss;
-
-  ss <<
-    "[Syllable " <<
-    syllableElementsListAsShortString (fSyllableElementsList) <<
-    "\", " << fSyllableKind <<
-    ", " << fSyllableKind <<
-    ", " << fSyllableExtendKind <<
-    ", \"" << fSyllableStanzaNumber << "\"" <<
-    ", fSyllableWholeNotes: " << fSyllableWholeNotes.asFractionString () <<
-    ", fSyllableTupletFactor: " << fSyllableTupletFactor.asFractionString ();
-
-//   ss <<
-//     ", fSyllableUpLinkToMeasure: ";
-//     if (fSyllableUpLinkToMeasure) {
-//       ss <<
-//         fSyllableUpLinkToMeasure->asString ();
-//     }
-//     else {
-//       ss << "[NULL]";
-//     }
-
-  ss <<
-    ", line " << fInputLineNumber;
 
   ss << ']';
 

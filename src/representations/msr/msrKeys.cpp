@@ -255,9 +255,6 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
   }
 }
 
-void msrHumdrumScotKeyItem::browseData (basevisitor* v)
-{}
-
 std::string msrHumdrumScotKeyItem::asString () const
 {
   std::stringstream ss;
@@ -803,7 +800,9 @@ void msrKey::acceptOut (basevisitor* v)
 }
 
 void msrKey::browseData (basevisitor* v)
-{}
+{
+  // fHumdrumScotKeyItemsVector
+}
 
 std::string msrKey::asString () const
 {

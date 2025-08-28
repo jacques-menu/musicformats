@@ -63,7 +63,8 @@ class EXP msrElement : public smartable
     // set and get
     // ------------------------------------------------------
 
-    mfInputLineNumber     getInputLineNumber () const;
+    mfInputLineNumber     getInputLineNumber () const
+                              { return fInputLineNumber; }
 
   public:
 

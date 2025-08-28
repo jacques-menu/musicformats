@@ -181,9 +181,6 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
   }
 }
 
-void msrHiddenMeasureAndBarLine::browseData (basevisitor* v)
-{}
-
 std::string msrHiddenMeasureAndBarLine::asString () const
 {
   std::stringstream ss;

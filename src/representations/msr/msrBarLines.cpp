@@ -332,7 +332,9 @@ void msrBarLine::acceptOut (basevisitor* v)
 }
 
 void msrBarLine::browseData (basevisitor* v)
-{}
+{
+  // fEndingNumbersList JMI
+}
 
 std::string msrBarLineLocationKindAsString (
   msrBarLineLocationKind barLineLocationKind)

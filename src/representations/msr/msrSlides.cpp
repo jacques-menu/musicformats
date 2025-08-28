@@ -193,9 +193,6 @@ void msrSlide::acceptOut (basevisitor* v)
   }
 }
 
-void msrSlide::browseData (basevisitor* v)
-{}
-
 std::string msrSlide::asString () const
 {
   std::stringstream ss;

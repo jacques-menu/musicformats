@@ -56,16 +56,16 @@ class EXP msrRehearsalMark : public msrMeasureElement
 
     static SMARTP<msrRehearsalMark> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrMeasure&        upLinkToMeasure,
-                            msrRehearsalMarkKind rehearsalKind,
-                            const std::string&   rehearsalText,
-                            msrPlacementKind     rehearsalPlacementKind);
+                            const S_msrMeasure&      upLinkToMeasure,
+                            msrRehearsalMarkKind     rehearsalKind,
+                            const std::string&       rehearsalText,
+                            msrPlacementKind         rehearsalPlacementKind);
 
     static SMARTP<msrRehearsalMark> create (
                             const mfInputLineNumber& inputLineNumber,
-                            msrRehearsalMarkKind rehearsalKind,
-                            const std::string&   rehearsalText,
-                            msrPlacementKind     rehearsalPlacementKind);
+                            msrRehearsalMarkKind     rehearsalKind,
+                            const std::string&       rehearsalText,
+                            msrPlacementKind         rehearsalPlacementKind);
 
   protected:
 
@@ -74,10 +74,10 @@ class EXP msrRehearsalMark : public msrMeasureElement
 
                           msrRehearsalMark (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrMeasure&        upLinkToMeasure,
-                            msrRehearsalMarkKind rehearsalKind,
-                            const std::string&   rehearsalText,
-                            msrPlacementKind     rehearsalPlacementKind);
+                            const S_msrMeasure&      upLinkToMeasure,
+                            msrRehearsalMarkKind     rehearsalKind,
+                            const std::string&       rehearsalText,
+                            msrPlacementKind         rehearsalPlacementKind);
 
     virtual               ~msrRehearsalMark ();
 
@@ -107,8 +107,6 @@ class EXP msrRehearsalMark : public msrMeasureElement
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 

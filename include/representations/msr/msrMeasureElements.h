@@ -128,8 +128,6 @@ class EXP msrMeasureElement : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override; // JMI ??? 0.9.66
-
   public:
 
     // print

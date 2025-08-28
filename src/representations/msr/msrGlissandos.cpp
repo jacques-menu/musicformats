@@ -193,9 +193,6 @@ void msrGlissando::acceptOut (basevisitor* v)
   }
 }
 
-void msrGlissando::browseData (basevisitor* v)
-{}
-
 std::string msrGlissando::asString () const
 {
   std::stringstream ss;

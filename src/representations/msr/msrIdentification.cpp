@@ -624,13 +624,15 @@ void msrIdentification::acceptOut (basevisitor* v)
             __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
 
 void msrIdentification::browseData (basevisitor* v)
-{}
+{
+  // fIdentificationComposersList JMI
+}
 
 std::string msrIdentification::asString () const
 {

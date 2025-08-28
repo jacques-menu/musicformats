@@ -154,9 +154,6 @@ void msrStem::acceptOut (basevisitor* v)
   }
 }
 
-void msrStem::browseData (basevisitor* v)
-{}
-
 std::string msrStem::asString () const
 {
   std::stringstream ss;

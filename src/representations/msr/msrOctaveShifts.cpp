@@ -181,9 +181,6 @@ void msrOctaveShift::acceptOut (basevisitor* v)
   }
 }
 
-void msrOctaveShift::browseData (basevisitor* v)
-{}
-
 std::string msrOctaveShiftKindAsString (
   msrOctaveShiftKind octaveShiftKind)
 {

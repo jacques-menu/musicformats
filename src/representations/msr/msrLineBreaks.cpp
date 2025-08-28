@@ -232,9 +232,6 @@ void msrLineBreak::acceptOut (basevisitor* v)
   }
 }
 
-void msrLineBreak::browseData (basevisitor* v)
-{}
-
 std::string msrLineBreak::asString () const
 {
   std::stringstream ss;

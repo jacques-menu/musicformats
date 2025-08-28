@@ -126,9 +126,6 @@ void msrOrnament::acceptOut (basevisitor* v)
   }
 }
 
-void msrOrnament::browseData (basevisitor* v)
-{}
-
 std::string msrOrnamentKindAsString (
   msrOrnamentKind ornamentKind)
 {

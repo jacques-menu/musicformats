@@ -165,9 +165,6 @@ void msrWords::acceptOut (basevisitor* v)
   }
 }
 
-void msrWords::browseData (basevisitor* v)
-{}
-
 std::string msrWords::wordsPlacementKindAsString () const
 {
   return

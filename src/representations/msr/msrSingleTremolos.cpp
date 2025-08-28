@@ -29,8 +29,8 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrSingleTremolo msrSingleTremolo::create (
   const mfInputLineNumber& inputLineNumber,
-  int              singleTremoloMarksNumber,
-  msrPlacementKind singleTremoloPlacementKind)
+  int                      singleTremoloMarksNumber,
+  msrPlacementKind         singleTremoloPlacementKind)
 {
   msrSingleTremolo* obj =
     new msrSingleTremolo (
@@ -42,8 +42,8 @@ S_msrSingleTremolo msrSingleTremolo::create (
 
 msrSingleTremolo::msrSingleTremolo (
   const mfInputLineNumber& inputLineNumber,
-  int              singleTremoloMarksNumber,
-  msrPlacementKind singleTremoloPlacementKind)
+  int                      singleTremoloMarksNumber,
+  msrPlacementKind         singleTremoloPlacementKind)
     : msrElement (inputLineNumber)
 {
   fSingleTremoloMarksNumber = singleTremoloMarksNumber;
@@ -131,9 +131,6 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void msrSingleTremolo::browseData (basevisitor* v)
-{}
 
 std::string msrSingleTremolo::asString () const
 {

@@ -228,9 +228,6 @@ void msrTransposition::acceptOut (basevisitor* v)
   }
 }
 
-void msrTransposition::browseData (basevisitor* v)
-{}
-
 std::string msrTransposition::asString () const
 {
   std::stringstream ss;

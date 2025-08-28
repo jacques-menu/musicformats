@@ -207,9 +207,6 @@ void msrSlur::acceptOut (basevisitor* v)
 }
 
 
-void msrSlur::browseData (basevisitor* v)
-{}
-
 std::string msrSlur::asString () const
 {
   std::stringstream ss;

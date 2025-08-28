@@ -49,15 +49,6 @@ SMARTP<msrElement> msrElement::createDeepClone ()
   return createNewbornClone ();
 }
 
-//______________________________________________________________________________
-// set and get
-// ------------------------------------------------------
-
-mfInputLineNumber msrElement::getInputLineNumber () const
-{
-  return fInputLineNumber;
-}
-
 void msrElement::browseDataAlongPathToVoice (
   basevisitor*            v,
   const S_msrPathToVoice& pathToVoice)
@@ -79,19 +70,6 @@ std::string msrElement::asStringForMeasuresSlices () const
 
   ss <<
     "[Element " <<
-    asShortString () <<
-    ']';
-
-  return ss.str ();
-}
-
-std::string msrElement::asStringForMeasuresSlices () const
-{
-  // this can be overriden in actual elements
-  std::stringstream ss;
-
-  ss <<
-    '[' <<
     asShortString () <<
     ']';
 

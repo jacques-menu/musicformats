@@ -424,8 +424,6 @@ class EXP msrSystemDividers : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -517,8 +515,6 @@ class EXP msrStaffLayout : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -599,8 +595,6 @@ class EXP msrMeasureLayout : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -664,8 +658,6 @@ class EXP msrLineWidth : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -727,8 +719,6 @@ class EXP msrNoteSize : public msrElement
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 
@@ -793,8 +783,6 @@ class EXP msrDistance : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -857,8 +845,6 @@ class EXP msrGlyph : public msrElement
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 
@@ -923,8 +909,6 @@ class EXP msrOtherAppearance : public msrElement
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 

@@ -85,8 +85,6 @@ class EXP msrStringTuning : public msrMeasureElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -255,8 +253,6 @@ class EXP msrAccordionRegistration : public msrMeasureElement
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 
@@ -454,8 +450,6 @@ class EXP msrPedal : public msrMeasureElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -519,8 +513,6 @@ class EXP msrDamp : public msrMeasureElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -532,7 +524,6 @@ class EXP msrDamp : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
-
 };
 typedef SMARTP<msrDamp> S_msrDamp;
 EXP std::ostream& operator << (std::ostream& os, const S_msrDamp& elt);

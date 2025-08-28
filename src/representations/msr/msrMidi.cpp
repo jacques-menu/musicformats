@@ -141,13 +141,10 @@ void msrMidiTempo::acceptOut (basevisitor* v)
             __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
-
-void msrMidiTempo::browseData (basevisitor* v)
-{}
 
 std::string msrMidiTempo::asString () const
 {

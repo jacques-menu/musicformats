@@ -156,8 +156,6 @@ class EXP msrSpanner : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -171,10 +169,12 @@ class EXP msrSpanner : public msrElement
 
     // upLinks
     // ------------------------------------------------------
+
     S_msrNote             fSpannerUpLinkToNote;
 
     // sideLinks
     // ------------------------------------------------------
+
     S_msrSpanner          fSpannerSideLinkToOtherEnd; // two-way
 
     // fields

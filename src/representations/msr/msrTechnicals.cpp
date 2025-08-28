@@ -293,13 +293,10 @@ void msrTechnical::acceptOut (basevisitor* v)
             __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
-
-void msrTechnical::browseData (basevisitor* v)
-{}
 
 std::string msrTechnical::asString () const
 {
@@ -431,13 +428,10 @@ void msrTechnicalWithInteger::acceptOut (basevisitor* v)
             __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
-
-void msrTechnicalWithInteger::browseData (basevisitor* v)
-{}
 
 std::string msrTechnicalWithInteger::asString () const
 {
@@ -592,13 +586,10 @@ void msrTechnicalWithFloat::acceptOut (basevisitor* v)
             __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
-
-void msrTechnicalWithFloat::browseData (basevisitor* v)
-{}
 
 std::string msrTechnicalWithFloat::asString () const
 {
@@ -759,13 +750,10 @@ void msrTechnicalWithString::acceptOut (basevisitor* v)
             __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
-
-void msrTechnicalWithString::browseData (basevisitor* v)
-{}
 
 std::string msrTechnicalWithString::asString () const
 {

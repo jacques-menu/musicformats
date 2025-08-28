@@ -173,9 +173,6 @@ void msrTie::acceptOut (basevisitor* v)
   }
 }
 
-void msrTie::browseData (basevisitor* v)
-{}
-
 std::string msrTie::asString () const
 {
   std::stringstream ss;

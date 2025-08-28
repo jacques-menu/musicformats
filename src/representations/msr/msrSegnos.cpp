@@ -204,9 +204,6 @@ void msrSegno::acceptOut (basevisitor* v)
   }
 }
 
-void msrSegno::browseData (basevisitor* v)
-{}
-
 std::string msrSegno::asString () const
 {
   std::stringstream ss;
@@ -390,9 +387,6 @@ void msrDalSegno::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void msrDalSegno::browseData (basevisitor* v)
-{}
 
 std::string msrDalSegno::asString () const
 {

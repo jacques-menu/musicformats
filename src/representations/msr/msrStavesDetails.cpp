@@ -248,9 +248,6 @@ void msrStaffTuning::acceptOut (basevisitor* v)
   }
 }
 
-void msrStaffTuning::browseData (basevisitor* v)
-{}
-
 std::string msrStaffTuning::asString () const
 {
   std::stringstream ss;

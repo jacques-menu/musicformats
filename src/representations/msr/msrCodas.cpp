@@ -205,9 +205,6 @@ void msrCoda::acceptOut (basevisitor* v)
   }
 }
 
-void msrCoda::browseData (basevisitor* v)
-{}
-
 std::string msrCoda::asString () const
 {
   std::stringstream ss;

@@ -72,12 +72,12 @@ class EXP msrScaling : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
     // ------------------------------------------------------
+
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 

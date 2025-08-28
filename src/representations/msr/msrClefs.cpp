@@ -672,9 +672,6 @@ void msrClef::acceptOut (basevisitor* v)
   }
 }
 
-void msrClef::browseData (basevisitor* v)
-{}
-
 std::string msrClef::asString () const
 {
   std::stringstream ss;

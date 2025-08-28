@@ -77,7 +77,6 @@ class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
-
 };
 typedef SMARTP<msrHiddenMeasureAndBarLine> S_msrHiddenMeasureAndBarLine;
 EXP std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLine& elt);

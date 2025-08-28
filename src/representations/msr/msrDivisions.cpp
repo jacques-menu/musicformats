@@ -611,7 +611,9 @@ void msrDivisions::acceptOut (basevisitor* v)
 }
 
 void msrDivisions::browseData (basevisitor* v)
-{}
+{
+  // fNotesDurationKindsToDivisions JMI
+}
 
 std::string msrDivisions::asString () const
 {

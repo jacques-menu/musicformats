@@ -952,9 +952,6 @@ void msrSystemDividers::acceptOut (basevisitor* v)
   }
 }
 
-void msrSystemDividers::browseData (basevisitor* v)
-{}
-
 std::string msrSystemDividers::asString () const
 {
   std::stringstream ss;
@@ -1095,9 +1092,6 @@ void msrStaffLayout::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void msrStaffLayout::browseData (basevisitor* v)
-{}
 
 std::string msrStaffLayout::asString () const
 {
@@ -1242,9 +1236,6 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void msrMeasureLayout::browseData (basevisitor* v)
-{}
 
 std::string msrMeasureLayout::asString () const
 {
@@ -1402,9 +1393,6 @@ void msrLineWidth::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void msrLineWidth::browseData (basevisitor* v)
-{}
 
 std::string msrLineWidth::asString () const
 {
@@ -1583,9 +1571,6 @@ void msrNoteSize::acceptOut (basevisitor* v)
   }
 }
 
-void msrNoteSize::browseData (basevisitor* v)
-{}
-
 std::string msrNoteSize::asString () const
 {
   std::stringstream ss;
@@ -1749,9 +1734,6 @@ void msrDistance::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void msrDistance::browseData (basevisitor* v)
-{}
 
 std::string msrDistance::asString () const
 {
@@ -1917,9 +1899,6 @@ void msrGlyph::acceptOut (basevisitor* v)
   }
 }
 
-void msrGlyph::browseData (basevisitor* v)
-{}
-
 std::string msrGlyph::asString () const
 {
   std::stringstream ss;
@@ -2084,8 +2063,6 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
   }
 }
 
-void msrOtherAppearance::browseData (basevisitor* v)
-{}
 
 std::string msrOtherAppearance::asString () const
 {

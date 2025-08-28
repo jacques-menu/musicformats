@@ -347,7 +347,9 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
 }
 
 void msrTimeSignatureItem::browseData (basevisitor* v)
-{}
+{
+  // fTimeSignatureBeatsNumbersVector JMI
+}
 
 std::string msrTimeSignatureItem::asString () const
 {
@@ -1251,7 +1253,9 @@ void msrTimeSignature::acceptOut (basevisitor* v)
 }
 
 void msrTimeSignature::browseData (basevisitor* v)
-{}
+{
+  // fTimeSignatureItemsVector JMI
+}
 
 std::string msrTimeSignature::asString () const
 {

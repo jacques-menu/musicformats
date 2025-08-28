@@ -242,9 +242,6 @@ void msrSlash::acceptOut (basevisitor* v)
   }
 }
 
-void msrSlash::browseData (basevisitor* v)
-{}
-
 std::string msrSlash::asString () const
 {
   std::stringstream ss;

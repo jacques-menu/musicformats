@@ -230,9 +230,6 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
   }
 }
 
-void msrEyeGlasses::browseData (basevisitor* v)
-{}
-
 std::string msrEyeGlasses::asString () const
 {
   std::stringstream ss;

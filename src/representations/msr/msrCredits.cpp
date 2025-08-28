@@ -218,9 +218,6 @@ void msrCreditWords::acceptOut (basevisitor* v)
   }
 }
 
-void msrCreditWords::browseData (basevisitor* v)
-{}
-
 std::string msrCreditWords::asString () const
 {
   std::stringstream ss;

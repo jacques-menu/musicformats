@@ -247,13 +247,24 @@ void msrScaling::acceptOut (basevisitor* v)
             __FILE__, mfInputLineNumber (__LINE__),
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
 
-void msrScaling::browseData (basevisitor* v)
-{}
+std::string msrScaling::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[Scaling" <<
+    ", fMillimeters: " << fMillimeters <<
+    ", fTenths: \"" << fTenths <<
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return ss.str ();
+}
 
 void msrScaling::print (std::ostream& os) const
 {
@@ -268,11 +279,12 @@ void msrScaling::print (std::ostream& os) const
   // relative to absolute lengths conversion
   os << std::left <<
     std::setw (fieldWidth) <<
-    "millimeters" << ": " <<
+    "fMillimeters" << ": " <<
     std::setprecision (2) << fMillimeters <<
     std::endl <<
+
     std::setw (fieldWidth) <<
-    "tenths" << ": " <<
+    "fTenths" << ": " <<
     std::setprecision (2) << fTenths <<
     std::endl;
 

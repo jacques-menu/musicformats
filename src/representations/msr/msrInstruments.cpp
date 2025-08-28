@@ -176,9 +176,6 @@ void msrStringTuning::acceptOut (basevisitor* v)
   }
 }
 
-void msrStringTuning::browseData (basevisitor* v)
-{}
-
 void msrStringTuning::print (std::ostream& os) const
 {
   ++gIndenter;
@@ -361,7 +358,9 @@ void msrScordatura::acceptOut (basevisitor* v)
 }
 
 void msrScordatura::browseData (basevisitor* v)
-{}
+{
+  // fScordaturaStringTuningsList JMI
+}
 
 void msrScordatura::print (std::ostream& os) const
 {
@@ -558,9 +557,6 @@ void msrAccordionRegistration::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void msrAccordionRegistration::browseData (basevisitor* v)
-{}
 
 std::string msrAccordionRegistration::asString () const
 {
@@ -807,7 +803,9 @@ void msrHarpPedalsTuning::acceptOut (basevisitor* v)
 }
 
 void msrHarpPedalsTuning::browseData (basevisitor* v)
-{}
+{
+  // fHarpPedalsAlterationKindsMap
+}
 
 std::string msrHarpPedalsTuning::asString () const
 {
@@ -1054,9 +1052,6 @@ void msrPedal::acceptOut (basevisitor* v)
   }
 }
 
-void msrPedal::browseData (basevisitor* v)
-{}
-
 std::string msrPedalTypeKindAsString (
   msrPedalTypeKind pedalTypeKind)
 {
@@ -1292,9 +1287,6 @@ void msrDamp::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void msrDamp::browseData (basevisitor* v)
-{}
 
 void msrDamp::print (std::ostream& os) const
 {

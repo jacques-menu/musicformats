@@ -127,7 +127,6 @@ class EXP msrSyllableElement : public smartable
     // ------------------------------------------------------
 
     std::string           asString () const;
-    std::string           asShortString () const;
 
     void                  print (std::ostream& os) const;
 
@@ -148,9 +147,6 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrSyllableElement& elt
 
 //______________________________________________________________________________
 std::string syllableElementsListAsString (
-  const std::list <msrSyllableElement>& syllableElementsList);
-
-std::string syllableElementsListAsShortString (
   const std::list <msrSyllableElement>& syllableElementsList);
 
 //______________________________________________________________________________
@@ -327,7 +323,6 @@ class EXP msrSyllable : public msrElement
     std::string           syllableWholeNotesPitchAndOctaveAsString () const;
 
     std::string           asString () const override;
-    std::string           asShortString () const override;
 
     void                  print (std::ostream& os) const override;
 //     void                  printFull (
@@ -541,6 +536,8 @@ class EXP msrStanza : public msrElement
 
     // print
     // ------------------------------------------------------
+
+    std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;

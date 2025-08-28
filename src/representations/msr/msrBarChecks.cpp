@@ -274,9 +274,6 @@ void msrBarCheck::acceptOut (basevisitor* v)
   }
 }
 
-void msrBarCheck::browseData (basevisitor* v)
-{}
-
 std::string msrBarCheck::asString () const
 {
   std::stringstream ss;

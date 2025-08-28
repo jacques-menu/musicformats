@@ -204,9 +204,6 @@ void msrFrameNote::acceptOut (basevisitor* v)
   }
 }
 
-void msrFrameNote::browseData (basevisitor* v)
-{}
-
 void msrFrameNote::print (std::ostream& os) const
 {
   os <<

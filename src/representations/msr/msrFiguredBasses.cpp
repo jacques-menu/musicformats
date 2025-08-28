@@ -361,9 +361,6 @@ void msrBassFigure::acceptOut (basevisitor* v)
   }
 }
 
-void msrBassFigure::browseData (basevisitor* v)
-{}
-
 std::string msrBassFigure::asString () const
 {
   std::stringstream ss;

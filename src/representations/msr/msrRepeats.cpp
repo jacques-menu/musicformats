@@ -2335,7 +2335,7 @@ void msrRepeat::browseData (basevisitor* v)
     browser.browse (*fRepeatCommonPart);
   }
 
-  // browse the repeat endings
+  // browse the repeat endings if any
   for (S_msrRepeatEnding repeatEnding : fRepeatEndingsVector) {
     // browse the repeat ending
     msrBrowser<msrRepeatEnding> browser (v);

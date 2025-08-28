@@ -135,7 +135,7 @@ class EXP msrTimeSignatureItem : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    std::vector <int>      fTimeSignatureBeatsNumbersVector; // 5+3+1 is possible
+    std::vector <int>     fTimeSignatureBeatsNumbersVector; // 5+3+1 is possible
     int                   fTimeSignatureBeatValue;
 };
 typedef SMARTP<msrTimeSignatureItem> S_msrTimeSignatureItem;

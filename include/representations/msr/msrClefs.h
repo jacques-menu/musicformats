@@ -65,8 +65,8 @@ void initializeClefKinds ();
 //______________________________________________________________________________
 // PRE-declaration
 
-class   msrClef;
-typedef SMARTP<msrClef> S_msrClef;
+class msrClef;
+using S_msrClef = SMARTP<msrClef>;
 
 //______________________________________________________________________________
 class EXP msrClef : public msrMeasureElement
@@ -138,8 +138,6 @@ class EXP msrClef : public msrMeasureElement
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 

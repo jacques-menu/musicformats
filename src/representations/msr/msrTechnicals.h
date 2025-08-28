@@ -173,8 +173,6 @@ class EXP msrTechnical : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -260,8 +258,6 @@ class EXP msrTechnicalWithInteger : public msrElement
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 
@@ -351,8 +347,6 @@ class EXP msrTechnicalWithFloat : public msrElement
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 
@@ -445,8 +439,6 @@ class EXP msrTechnicalWithString : public msrElement
 
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
 
   public:
 

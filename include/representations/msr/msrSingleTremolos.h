@@ -33,8 +33,8 @@ class EXP msrSingleTremolo : public msrElement
 
     static SMARTP<msrSingleTremolo> create (
                             const mfInputLineNumber& inputLineNumber,
-                            int              singleTremoloMarksNumber,
-                            msrPlacementKind singleTremoloPlacementKind);
+                            int                      singleTremoloMarksNumber,
+                            msrPlacementKind         singleTremoloPlacementKind);
 
   protected:
 
@@ -43,8 +43,8 @@ class EXP msrSingleTremolo : public msrElement
 
                           msrSingleTremolo (
                             const mfInputLineNumber& inputLineNumber,
-                            int              singleTremoloMarksNumber,
-                            msrPlacementKind singleTremoloPlacementKind);
+                            int                      singleTremoloMarksNumber,
+                            msrPlacementKind         singleTremoloPlacementKind);
 
     virtual               ~msrSingleTremolo ();
 
@@ -92,8 +92,6 @@ class EXP msrSingleTremolo : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override;
-
   public:
 
     // print
@@ -114,9 +112,11 @@ class EXP msrSingleTremolo : public msrElement
 
     msrPlacementKind      fSingleTremoloPlacementKind;
 
-    mfDurationKind  fSingleTremoloGraphicNotesDurationKind;
+    mfDurationKind        fSingleTremoloGraphicNotesDurationKind;
 };
-typedef SMARTP<msrSingleTremolo> S_msrSingleTremolo;
+
+using S_msrSingleTremolo = SMARTP<msrSingleTremolo>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrSingleTremolo& elt);
 
 

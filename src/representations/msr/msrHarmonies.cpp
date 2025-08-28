@@ -3815,9 +3815,6 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
   }
 }
 
-void msrHarmonyDegree::browseData (basevisitor* v)
-{}
-
 std::string msrHarmonyDegreeTypeKindAsString (
   msrHarmonyDegreeTypeKind harmonyDegreeTypeKind)
 {

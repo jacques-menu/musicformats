@@ -35,10 +35,10 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrRehearsalMark msrRehearsalMark::create (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrMeasure&  upLinkToMeasure,
-  msrRehearsalMarkKind rehearsalKind,
-  const std::string&   rehearsalText,
-  msrPlacementKind     rehearsalPlacementKind)
+  const S_msrMeasure&      upLinkToMeasure,
+  msrRehearsalMarkKind     rehearsalKind,
+  const std::string&       rehearsalText,
+  msrPlacementKind         rehearsalPlacementKind)
 {
   msrRehearsalMark* obj =
     new msrRehearsalMark (
@@ -53,9 +53,9 @@ S_msrRehearsalMark msrRehearsalMark::create (
 
 S_msrRehearsalMark msrRehearsalMark::create (
   const mfInputLineNumber& inputLineNumber,
-  msrRehearsalMarkKind rehearsalKind,
-  const std::string&   rehearsalText,
-  msrPlacementKind     rehearsalPlacementKind)
+  msrRehearsalMarkKind     rehearsalKind,
+  const std::string&       rehearsalText,
+  msrPlacementKind         rehearsalPlacementKind)
 {
   return
     msrRehearsalMark::create (
@@ -68,10 +68,10 @@ S_msrRehearsalMark msrRehearsalMark::create (
 
 msrRehearsalMark::msrRehearsalMark (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrMeasure&  upLinkToMeasure,
-  msrRehearsalMarkKind rehearsalKind,
-  const std::string&   rehearsalText,
-  msrPlacementKind     rehearsalPlacementKind)
+  const S_msrMeasure&      upLinkToMeasure,
+  msrRehearsalMarkKind     rehearsalKind,
+  const std::string&       rehearsalText,
+  msrPlacementKind         rehearsalPlacementKind)
     : msrMeasureElement (
         inputLineNumber)
 {
@@ -186,9 +186,6 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
         p->visitEnd (elem);
   }
 }
-
-void msrRehearsalMark::browseData (basevisitor* v)
-{}
 
 std::string msrRrehearsalKindAsString (
   msrRehearsalMarkKind rehearsalKind)

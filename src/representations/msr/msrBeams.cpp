@@ -177,9 +177,6 @@ void msrBeam::acceptOut (basevisitor* v)
   }
 }
 
-void msrBeam::browseData (basevisitor* v)
-{}
-
 std::string msrBeam::asString () const
 {
   std::stringstream ss;
