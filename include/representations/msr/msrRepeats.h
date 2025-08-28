@@ -552,8 +552,8 @@ class EXP msrRepeat : public msrSegmentElement
     // print
     // ------------------------------------------------------
 
-    std::string           asShortString () const override;
-    std::string           asString () const override;
+    std::string           asShortString () const override final;
+    std::string           asString () const override final;
 
     void                  displayRepeat (
                             const mfInputLineNumber& inputLineNumber,

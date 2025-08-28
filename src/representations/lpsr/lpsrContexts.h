@@ -58,7 +58,7 @@ class EXP lpsrContext : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrContext> create (
-                            const mfInputLineNumber& inputLineNumber,
+                            const mfInputLineNumber&   inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
                             lpsrContextTypeKind        contextTypeKind,
                             const std::string&         contextPathLikeName);
@@ -69,7 +69,7 @@ class EXP lpsrContext : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrContext (
-                            const mfInputLineNumber& inputLineNumber,
+                            const mfInputLineNumber&   inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
                             lpsrContextTypeKind        contextTypeKind,
                             const std::string&         contextPathLikeName);

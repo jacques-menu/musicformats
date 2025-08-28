@@ -70,7 +70,7 @@ std::ostream& operator << (std::ostream& os, const lpsrContextUseExistingKind& e
 
 //______________________________________________________________________________
 S_lpsrContext lpsrContext::create (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&   inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   lpsrContextTypeKind        contextTypeKind,
   const std::string&         contextPathLikeName)
@@ -86,7 +86,7 @@ S_lpsrContext lpsrContext::create (
 }
 
 lpsrContext::lpsrContext (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&   inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   lpsrContextTypeKind        contextTypeKind,
   const std::string&         contextPathLikeName)
@@ -256,6 +256,9 @@ lpsrChordNamesContext::lpsrChordNamesContext (
 
   fContextVoice = contextVoice;
 }
+
+lpsrChordNamesContext::~lpsrChordNamesContext ()
+{}
 
 void lpsrChordNamesContext::acceptIn (basevisitor* v)
 {

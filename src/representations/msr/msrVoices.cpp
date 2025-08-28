@@ -4784,7 +4784,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
     "createARepeatAndStackIt() 1");
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "createARepeatAndStackIt() 2");
@@ -5303,7 +5303,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatStart() 1");
@@ -5540,7 +5540,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
       msrRepeatExplicitStartKind::kRepeatExplicitStartYes);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatStart() 11");
@@ -5570,7 +5570,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleNestedRepeatStartInVoice() 2");
@@ -5600,7 +5600,7 @@ void msrVoice::handleRepeatStartInVoice (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatStartInVoice() 1");
@@ -5631,7 +5631,7 @@ void msrVoice::handleRepeatStartInVoice (
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatStartInVoice() 2");
@@ -5661,7 +5661,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithoutStart() 1");
@@ -5800,7 +5800,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 //     "handleVoiceLevelRepeatEndWithoutStart() 6");
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithoutStart() 7");
@@ -5832,7 +5832,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelContainingRepeatEndWithoutStart() 1");
@@ -5983,7 +5983,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 //     "handleVoiceLevelContainingRepeatEndWithoutStart() 6");
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelContainingRepeatEndWithoutStart() 7");
@@ -6015,7 +6015,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithStart() 1");
@@ -6140,7 +6140,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 //     appendRepeatToSegment (endingRepeat);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatEndWithStart() 5");
@@ -6172,7 +6172,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleNestedRepeatEndInVoice() 1");
@@ -6241,7 +6241,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleNestedRepeatEndInVoice() 2");
@@ -6255,12 +6255,18 @@ void msrVoice::handleRepeatEndInVoice (
   int                       repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatEndInVoice() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  gLog << "*** msrVoice::handleRepeatEndInVoice(), this: ***" <<
+    std::endl <<
+    *this <<
+    std::endl <<
+    std::endl;
 
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
@@ -6344,7 +6350,7 @@ void msrVoice::handleRepeatEndInVoice (
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatEndInVoice() 2");
@@ -12083,25 +12089,25 @@ void msrVoice::print (std::ostream& os) const
     "***** fVoiceSegment *****" << ": ";
     os << std::endl;
 
-  if (fVoiceSegment) {
-    ++gIndenter;
-    // getSegmentAbsoluteNumber() could be used too JMI ??? 0.9.76
-    if (
-      fVoiceSegment->getSegmentNumber ()
-        !=
-      fVoiceSegment->getSegmentNumber ()
-    ) {
-      os << fVoiceSegment;
-    }
-    else {
-      os << "--- same as fVoiceSegment ---" << std::endl;
-    }
-    --gIndenter;
-  }
-  else {
-    os << "[NULL]";
-  }
-  os << std::endl;
+//   if (fVoiceSegment) {
+//     ++gIndenter;
+//     // getSegmentAbsoluteNumber() could be used too JMI ??? 0.9.76
+//     if (
+//       fVoiceSegment->getSegmentNumber ()
+//         !=
+//       fVoiceSegment->getSegmentNumber ()
+//     ) {
+//       os << fVoiceSegment;
+//     }
+//     else {
+//       os << "--- same as fVoiceSegment ---" << std::endl;
+//     }
+//     --gIndenter;
+//   }
+//   else {
+//     os << "[NULL]";
+//   }
+//   os << std::endl;
 
   // print the stanzas if any
   if (! fVoiceStanzasMap.empty ()) {
