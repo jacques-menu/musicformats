@@ -1,8 +1,8 @@
 \version "2.24.4"
 
 % Generated from "BackupInBetweenTupletMembersWithFourVoices.xml"
-% by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04)
-% on Thursday 2025-05-29 @ 15:36:31 CEST
+% by xml2ly 0.9.76-dev (built on September 10, 2025)
+% on Tuesday 2025-09-16 @ 15:29:26 CEST
 
 % The conversion command as supplied was: 
 %  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name BackupInBetweenTupletMembersWithFourVoices.ly BackupInBetweenTupletMembersWithFourVoices.xml
@@ -85,7 +85,7 @@
     \column {
       \fill-line {
         #(string-append
-"Score generated from MusicXML data by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04) and LilyPond " (lilypond-version))
+"Score generated from MusicXML data by xml2ly 0.9.76-dev (built on September 10, 2025) and LilyPond " (lilypond-version))
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
@@ -156,7 +156,7 @@ Part_POne_Staff_One_Voice_Two = \absolute {
   \clef "bass"
   \key f \major
   \numericTimeSignature \time 3/4
-  \stemUp g2  | % 1
+  \stemUp g2  | % 2
   \barNumberCheck #1
 }
 

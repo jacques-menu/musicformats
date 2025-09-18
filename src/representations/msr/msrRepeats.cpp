@@ -908,21 +908,28 @@ void msrRepeatCommonPart::print (std::ostream& os) const
 {
   os <<
     "[RepeatCommonPart" <<
-//     ", fRepeatElementUpLinkToRepeat: " <<
-//     fRepeatElementUpLinkToRepeat->
+    ", fRepeatElementUpLinkToRepeat: ";
+  if (fRepeatElementUpLinkToRepeat) {
+    os <<
       asShortString () <<
     ", line " << fInputLineNumber <<
     std::endl;
+  }
+  else {
+    os << "[EMPTY]";
+  }
 
   ++gIndenter;
 
-/* JMI
+  // print the segment
   os <<
-    "repeat upLink: " <<
-    fRepeatElementUpLinkToRepeat->
-      asShortString () <<
+    "fRepeatElementSegment:" <<
     std::endl;
-*/
+
+  ++gIndenter;
+  os <<
+    fRepeatElementSegment;
+  --gIndenter;
 
 //   // print the elements
 //   int repeatCommonPartElementsListSize =
@@ -1622,16 +1629,17 @@ void msrRepeat::initializeRepeat (
   // set uplink to voice
   fRepeatUpLinkToVoice = upLinkToVoice;
 
-  // create the repeat common part
+//   // create the repeat common part
 //   S_msrRepeatCommonPart
-  fRepeatCommonPart =
-    msrRepeatCommonPart::create (
-      inputLineNumber,
-      this);
-
-//   // register it in newRepeat
-// //   setRepeatCommonPart ( JMI 0.9.76 incomplete virtual method table???
-// //     repeatCommonPart);
+//   repeatCommonPart =
+// //   fRepeatCommonPart =
+//     msrRepeatCommonPart::create (
+//       inputLineNumber,
+//       this);
+//
+// //   // register it in newRepeat
+// // //   setRepeatCommonPart ( JMI 0.9.76 incomplete virtual method table???
+// // //     repeatCommonPart);
 //   fRepeatCommonPart = repeatCommonPart;
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1641,7 +1649,8 @@ void msrRepeat::initializeRepeat (
     ss <<
       "Initializing repeat" <<
       ", fRepeatTimes: " << fRepeatTimes <<
-//       ", fRepeatCommonPart: " << fRepeatCommonPart->asString () << CANNOT RUN
+//       ", fRepeatCommonPart: " << fRepeatCommonPart->asString () << // CANNOT RUN, HAVOC
+//       ", repeatCommonPart: " << repeatCommonPart->asString () << // CANNOT RUN, HAVOC
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1694,32 +1703,32 @@ msrRepeat::~msrRepeat ()
 void msrRepeat::setRepeatCommonPart (
   const S_msrRepeatCommonPart& repeatCommonPart)
 {
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check
-//   mfAssert (
-//     __FILE__, mfInputLineNumber (__LINE__),
-//     repeatCommonPart != nullptr,
-//     "repeatCommonPart is NULL");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Setting repeat common part to " <<
-//       repeatCommonPart->asShortString () <<
-//       " in repeat " <<
-// //       asShortString (); CANNOT RUN
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   fRepeatCommonPart = repeatCommonPart;
-//
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    repeatCommonPart != nullptr,
+    "repeatCommonPart is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting repeat common part to " <<
+      repeatCommonPart->asShortString () <<
+      " in repeat " <<
+      asShortString (); // CANNOT RUN HAVOC ???
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fRepeatCommonPart = repeatCommonPart;
+
 //   // set repeat's build phase
 //   fCurrentRepeatBuildPhaseKind =
 //     msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart;
@@ -2512,11 +2521,13 @@ void msrRepeat::print (std::ostream& os) const
     os << "[NULL]" << std::endl;
   }
 
+  os << std::endl;
+
   // short print the repeat endings
   int repeatEndingsSize =
     fRepeatEndingsVector.size ();
 
-  os <<
+  os << std::left <<
     std::setw (fieldWidth) <<
     "fRepeatEndingsVector" << ": ";
   if (repeatEndingsSize) {
@@ -2630,8 +2641,9 @@ void msrRepeat::printFull (std::ostream& os) const
   int endingsNumber =
     fRepeatEndingsVector.size ();
 
-  os <<
-    "fRepeatEndingsVector: ";
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fRepeatEndingsVector" << ": ";
   if (endingsNumber > 0) {
     os << '(' << endingsNumber << ")";
   }

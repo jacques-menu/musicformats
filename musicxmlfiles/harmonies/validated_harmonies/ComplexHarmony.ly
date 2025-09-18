@@ -1,13 +1,13 @@
 \version "2.24.4"
 
-% Generated from "WrongDurationsInChordedNotesWithTimeModifications.xml"
+% Generated from "ComplexHarmony.xml"
 % by xml2ly 0.9.76-dev (built on September 10, 2025)
-% on Tuesday 2025-09-16 @ 15:29:39 CEST
+% on Wednesday 2025-09-10 @ 17:30:06 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name WrongDurationsInChordedNotesWithTimeModifications.ly WrongDurationsInChordedNotesWithTimeModifications.xml
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name ComplexHarmony.ly ComplexHarmony.xml
 % or, with short option names:
-%     WrongDurationsInChordedNotesWithTimeModifications.ly WrongDurationsInChordedNotesWithTimeModifications.xml
+%     ComplexHarmony.ly ComplexHarmony.xml
 
 
 % Scheme function(s): "date & time"
@@ -40,25 +40,8 @@
 
 
 \header {
-  workCreditTypeTitle = "Wrong Durations In Chorded Notes With Time Modifications"
-  miscellaneousField  = "
-                Sibelius 7.0.0 exports wrong duration values
-                for chorded notes in tuplets.  The exported value in this example is 256 instead of 170.
-                170 is not an optimal value for a quarter note in a triplet of eighths as there
-                is a rounding difference (256*2/3=170.6666...).  The same holds for an eighth note in a
-                triplet of eighths (128*2/3=85.3333... instead of 86 used here).   musicxml2ly does not
-                like rounding errors.  The resulting LilyPond-Code contains wild scaling durations
-                and a superfluous spacer rest:
-                \times 2/3 { <c'' a'>4*255/256 s512*43 r8*129/128 } r4 r2 }.
-                This is bad because we have a bar check problem here!
-                Sometimes music applications export suboptimal/false values for divisions and durations.
-                A solution: musicxml2ly should recalculate all durations on the basis of a divisions value of 6720.
-                This figure is divisible without remainder by e.g. 2, 3, 4, 5, 6, 7, 8, 16, 32, 64 and
-                therefore can provide for note durations up to 256th.  A quarter note (6720) in a triplet of eighths
-                would have a value of 4480 (6720*2/3); An eighth note (6720/2=3360) in a triplet of eighths would have
-                a value of 2240 (3360*2/3).  (half note: 6720*2 = 13440.)
-            "
-  title               = "Wrong Durations In Chorded Notes With Time Modifications"
+  workCreditTypeTitle = "Complex Harmony"
+  title               = "Complex Harmony"
 }
 
 \paper {
@@ -125,17 +108,19 @@
   }
 }
 
-Part_POne_Staff_One_Voice_One = \absolute {
+Part_POne_HARMONIES_Staff_HARMONIES_VoiceEleven = \chordmode {
   \language "nederlands"
-  
   
   \clef "treble"
   \key c \major
-  \numericTimeSignature \time 4/4
+a1:m7.9- }
+
+Part_POne_Staff_One_Voice_One = \absolute {
+  \language "nederlands"
   
-  \once\override TupletBracket.bracket-visibility = ##t
-  \tuplet 3/2 {  \stemUp c''4 r8 } r4 r2
-}
+  \clef "treble"
+  \key c \major
+r1 }
 
 \book {
 
@@ -144,14 +129,25 @@ Part_POne_Staff_One_Voice_One = \absolute {
       
       <<
       
-        \new Staff  = "Part_POne_Staff_One"
+        \new PianoStaff
         \with {
           instrumentName = "Part_POne"
         }
+        
         <<
-          \context Voice = "Part_POne_Staff_One_Voice_One" <<
-            \Part_POne_Staff_One_Voice_One
+        
+          \context ChordNames = "Part_POne_HARMONIES_Staff_HARMONIES_VoiceEleven"
+          \Part_POne_HARMONIES_Staff_HARMONIES_VoiceEleven
+          
+          \new Staff  = "Part_POne_Staff_One"
+          \with {
+          }
+          <<
+            \context Voice = "Part_POne_Staff_One_Voice_One" <<
+              \Part_POne_Staff_One_Voice_One
+            >>
           >>
+          
         >>
       
       >>

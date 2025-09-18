@@ -104,6 +104,14 @@ void msrMeasure::initializeMeasure ()
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, mfInputLineNumber (__LINE__),
+//     upLinkToVoice != nullptr,
+//     "upLinkToVoice is NULL");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
@@ -116,9 +124,19 @@ void msrMeasure::initializeMeasure ()
       fMeasureDebugNumber <<
       " in segment " <<
       fMeasureUpLinkToSegment->asString () <<
-      ", in voice \"" <<
-      upLinkToVoice->getVoiceName () <<
-      "\"" <<
+      ", upLinkToVoice:";
+
+    if (upLinkToVoice) {
+      ss <<
+        " \"" <<
+        upLinkToVoice->getVoiceName () <<
+        "\"";
+    }
+    else {
+      ss << "[NULL]";
+    }
+
+    ss <<
       ", line " << fInputLineNumber <<
       ']';
 
@@ -141,21 +159,23 @@ void msrMeasure::initializeMeasure ()
   // single-measure rest?
   fMeasureIsAMeasureRest = false;
 
-  // fetch the staff
-  S_msrStaff
-    upLinkToStaff =
-      upLinkToVoice->
-        getVoiceUpLinkToStaff ();
+  if (upLinkToVoice) {
+    // fetch the staff
+    S_msrStaff
+      upLinkToStaff =
+        upLinkToVoice->
+          getVoiceUpLinkToStaff ();
 
-  // set the full measure whole notes duration from time if relevant
-  S_msrTimeSignature
-    staffCurrentTimeSignature =
-      upLinkToStaff->
-        getStaffCurrentTimeSignature ();
+    // set the full measure whole notes duration from time if relevant
+    S_msrTimeSignature
+      staffCurrentTimeSignature =
+        upLinkToStaff->
+          getStaffCurrentTimeSignature ();
 
-  if (staffCurrentTimeSignature) {
-    setFullMeasureWholeNotesDurationFromTimeSignature (
-      staffCurrentTimeSignature);
+    if (staffCurrentTimeSignature) {
+      setFullMeasureWholeNotesDurationFromTimeSignature (
+        staffCurrentTimeSignature);
+    }
   }
 
   // measure shortest note duration
@@ -295,7 +315,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
         getSegmentUpLinkToVoice ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -386,7 +406,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         getSegmentUpLinkToVoice ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -602,7 +622,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
         getSegmentUpLinkToVoice ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -768,7 +788,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
 
   else {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceMeasures ()) {
+    if (gTraceOahGroup->getTraceMeasuresBasics ()) {
       std::stringstream ss;
 
       ss <<

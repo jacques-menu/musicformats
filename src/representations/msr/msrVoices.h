@@ -942,7 +942,6 @@ class EXP msrVoice : public msrElement
 
     void                  popRepeatFromVoiceRepeatsStack (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrRepeat&       repeat,
                             const std::string&       context);
 
 //     void                  appendRepeatToInitialVoiceElementsList (

@@ -1,8 +1,8 @@
 \version "2.24.4"
 
 % Generated from "TupletTest3.xml"
-% by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04)
-% on Thursday 2025-05-29 @ 15:28:05 CEST
+% by xml2ly 0.9.76-dev (built on September 10, 2025)
+% on Tuesday 2025-09-16 @ 15:29:36 CEST
 
 % The conversion command as supplied was: 
 %  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name TupletTest3.ly TupletTest3.xml
@@ -85,7 +85,7 @@
     \column {
       \fill-line {
         #(string-append
-"Score generated from MusicXML data by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04) and LilyPond " (lilypond-version))
+"Score generated from MusicXML data by xml2ly 0.9.76-dev (built on September 10, 2025) and LilyPond " (lilypond-version))
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }

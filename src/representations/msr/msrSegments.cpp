@@ -3808,36 +3808,36 @@ void msrSegment::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "***** fSegmentMeasuresList ***** (" <<
     mfSingularOrPlural (
-      fSegmentMeasuresList.size (), "element",  "elements") <<
-    "):" <<
+      fSegmentMeasuresList.size (), "measure",  "measures") <<
+    ")" <<
     std::endl;
 
-  if (! fSegmentMeasuresList.empty ()) {
-    os << std::endl;
-
-    ++gIndenter;
-
-    std::list <S_msrMeasure>::const_iterator
-      iBegin = fSegmentMeasuresList.begin (),
-      iEnd   = fSegmentMeasuresList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_msrMeasure measure = (*i);
-
-      os << measure;
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-
-    --gIndenter;
-  }
-
-  else {
-     os <<
-      "[EMPTY]" <<
-      std::endl;
-  }
+//   if (! fSegmentMeasuresList.empty ()) {
+//     os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list <S_msrMeasure>::const_iterator
+//       iBegin = fSegmentMeasuresList.begin (),
+//       iEnd   = fSegmentMeasuresList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       S_msrMeasure measure = (*i);
+//
+//       os << measure;
+//       if (++i == iEnd) break;
+//       os << std::endl;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   else {
+//      os <<
+//       "[EMPTY]" <<
+//       std::endl;
+//   }
 
   --gIndenter;
 
@@ -3877,24 +3877,16 @@ void msrSegment::printFull (std::ostream& os) const
   os <<
     std::endl;
 
-/* JMI
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fSegmentShortestNoteWholeNotes" << ": " <<
-    fSegmentShortestNoteWholeNotes <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fSegmentShortestNoteTupletFactor" << ": " <<
-    fSegmentShortestNoteTupletFactor <<
-    std::endl;
-*/
+  os << std::endl;
 
   os <<
     "fSegmentFirstMeasure" << ": ";
   if (fSegmentFirstMeasure) {
     os << std::endl;
     ++gIndenter;
-    fSegmentFirstMeasure->printFull (os);
+    os <<
+      fSegmentFirstMeasure->asString () <<
+      std::endl;
     --gIndenter;
   }
   else {
@@ -3906,21 +3898,26 @@ void msrSegment::printFull (std::ostream& os) const
   if (fSegmentLastMeasure) {
     os << std::endl;
     ++gIndenter;
-    fSegmentLastMeasure->printFull (os);
+    os <<
+      fSegmentLastMeasure->asString () <<
+      std::endl;
     --gIndenter;
   }
   else {
     os << "[NULL]" << std::endl;
   }
 
-  if (fSegmentElementsList.empty ()) {
-    os <<
-      std::setw (fieldWidth) <<
-      "fSegmentElementsList" << ": " << "[EMPTY]" <<
-      std::endl;
-  }
+  os << std::endl;
 
-  else {
+  os <<
+    std::setw (fieldWidth) <<
+    "***** fSegmentElementsList ***** (" <<
+    mfSingularOrPlural (
+      fSegmentElementsList.size (), "element",  "elements") <<
+    "):" <<
+    std::endl;
+
+  if (! fSegmentElementsList.empty ()) {
     os << std::endl;
 
     ++gIndenter;
@@ -3931,16 +3928,57 @@ void msrSegment::printFull (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      S_msrSegmentElement
-        segmentElement = (*i);
+      S_msrSegmentElement segmentElement = (*i);
 
-      segmentElement->printFull (os);
-
+      os << segmentElement;
       if (++i == iEnd) break;
       os << std::endl;
     } // for
 
     --gIndenter;
+  }
+
+  else {
+     os <<
+      "[EMPTY]" <<
+      std::endl;
+  }
+
+  os << std::endl;
+
+  os <<
+    std::setw (fieldWidth) <<
+    "***** fSegmentMeasuresList ***** (" <<
+    mfSingularOrPlural (
+      fSegmentMeasuresList.size (), "element",  "elements") <<
+    "):" <<
+    std::endl;
+
+  if (! fSegmentMeasuresList.empty ()) {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::list <S_msrMeasure>::const_iterator
+      iBegin = fSegmentMeasuresList.begin (),
+      iEnd   = fSegmentMeasuresList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      S_msrMeasure measure = (*i);
+
+      os << measure;
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+
+  else {
+     os <<
+      "[EMPTY]" <<
+      std::endl;
   }
 
   --gIndenter;

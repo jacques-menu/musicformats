@@ -1,13 +1,13 @@
 \version "2.24.4"
 
 % Generated from "HarmonyWithBackup.xml"
-% by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04)
-% on Thursday 2025-05-29 @ 16:06:20 CEST
+% by xml2ly 0.9.76-dev (built on September 10, 2025)
+% on Thursday 2025-09-11 @ 09:49:13 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name HarmonyWithBackup.ly HarmonyWithBackup.xml
+%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos -auto-output-file-name -lilypond-run-date -lilypond-generation-infos HarmonyWithBackup.xml
 % or, with short option names:
-%     HarmonyWithBackup.ly HarmonyWithBackup.xml
+%         HarmonyWithBackup.xml
 
 
 % Scheme function(s): "date & time"
@@ -88,7 +88,7 @@
     \column {
       \fill-line {
         #(string-append
-"Score generated from MusicXML data by xml2ly v0.9.74-dev (built May 29, 2025 @ 13:04) and LilyPond " (lilypond-version))
+"Score generated from MusicXML data by xml2ly 0.9.76-dev (built on September 10, 2025) and LilyPond " (lilypond-version))
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
@@ -176,7 +176,7 @@ Part_POne_Staff_Two_Voice_Five = \absolute {
   \stemUp  < a, a > 2 \stemDown  < e' f' a' >  
   \break | % -1
   
-  s1  | % 6
+  s1  | % 7
   \barNumberCheck #6
 }
 

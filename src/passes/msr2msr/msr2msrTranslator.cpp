@@ -1521,10 +1521,10 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
       break;
   } // switch
 
-  // get the current segment clone JMI 0.9.76 ???
-  fCurrentSegmentClone =
-    fCurrentVoiceClone->
-      getVoiceSegment ();
+//   // get the current segment clone JMI 0.9.76 ???
+//   fCurrentSegmentClone =
+//     fCurrentVoiceClone->
+//       getVoiceSegment ();
 
   // clear the voice notes map
   fVoiceNotesMap.clear ();
@@ -1622,12 +1622,12 @@ void msr2msrTranslator::visitStart (S_msrSegment& elt)
 
   // the container for the the original segment has just been cloned
   // and fCurrentSegmentClone has been set accordingly,
-  // so there is nothing to be done here
+  // so there is nothing to be done here JMI ??? 0.9.76
 
-//   // create a clone of the segment
-//   fCurrentSegmentClone =
-//     elt->createSegmentNewbornClone (
-//       fCurrentVoiceClone);
+  // create a clone of the segment
+  fCurrentSegmentClone =
+    elt->createSegmentNewbornClone (
+      fCurrentVoiceClone);
 
 //   // get the current segment clone JMI 0.9.76 ???
 //   fCurrentSegmentClone =
@@ -2016,7 +2016,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
     setCurrentMeasureNumber (
       fCurrentMeasureNumber);
 
-  // create a clone of the measure
+  // create a measure newborn clone
   fCurrentMeasureClone =
     elt->
       createMeasureNewbornClone (

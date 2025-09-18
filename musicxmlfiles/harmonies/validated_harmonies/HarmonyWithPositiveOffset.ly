@@ -1,5 +1,44 @@
 \version "2.24.4"
 
+% Generated from "HarmonyWithPositiveOffset.xml"
+% by xml2ly 0.9.76-dev (built on September 10, 2025)
+% on Wednesday 2025-09-10 @ 17:30:09 CEST
+
+% The conversion command as supplied was: 
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name HarmonyWithPositiveOffset.ly HarmonyWithPositiveOffset.xml
+% or, with short option names:
+%     HarmonyWithPositiveOffset.ly HarmonyWithPositiveOffset.xml
+
+
+% Scheme function(s): "date & time"
+% A set of functions to obtain the LilyPond file creation or modification time.
+
+#(define commandLine                  (object->string (command-line)))
+#(define loc                          (+ (string-rindex commandLine #\space ) 2))
+#(define commandLineLength            (- (string-length commandLine) 2))
+#(define lilypondFileName             (substring commandLine loc commandLineLength))
+
+#(define lilypondFileDirName          (dirname lilypondFileName))
+#(define lilypondFileBaseName         (basename lilypondFileName))
+#(define lilypondFileSuffixlessName   (basename lilypondFileBaseName ".ly"))
+
+#(define pdfFileName                  (string-append lilypondFileSuffixlessName ".pdf"))
+#(define pdfFileFullName              (string-append lilypondFileDirName file-name-separator-string pdfFileName))
+
+#(define lilypondVersion              (object->string (lilypond-version)))
+#(define currentDate                  (strftime "%d/%m/%Y" (localtime (current-time))))
+#(define currentTime                  (strftime "%H:%M:%S" (localtime (current-time))))
+
+#(define lilypondFileModificationTime (stat:mtime (stat lilypondFileName)))
+
+#(define lilypondFileModificationTimeAsString (strftime "%A %d/%m/%Y, %H:%M:%S" (localtime lilypondFileModificationTime)))
+
+#(use-modules (srfi srfi-19))
+% https://www.gnu.org/software/guile/manual/html_node/SRFI_002d19-Date-to-string.html
+%#(define pdfFileCreationTime (date->string (current-date) "~A, ~B ~e ~Y ~H:~M:~S"))
+#(define pdfFileCreationTime (date->string (current-date) "~A ~d/~m/~Y, ~H:~M:~S"))
+
+
 \header {
   movementTitle       = "Harmony With Positive Offset"
   encodingDate        = "2018-10-19"
@@ -20,9 +59,47 @@
   % page-count = -1
   % system-count = -1
   
-  % oddHeaderMarkup = ""
-  % evenHeaderMarkup = ""
-  % oddFooterMarkup = ""
+  oddHeaderMarkup = \markup {
+    \fill-line {
+      \unless \on-first-page {
+        \fromproperty #'page:page-number-std::string
+        ' '
+        \fromproperty #'header:title
+        ' '
+        \fromproperty #'header:subtitle
+      }
+    }
+  }
+
+  evenHeaderMarkup = \markup {
+    \fill-line {
+      \unless \on-first-page {
+        \fromproperty #'page:page-number-std::string
+        ' '
+        \fromproperty #'header:title
+        ' '
+        \fromproperty #'header:subtitle
+      }
+    }
+  }
+
+  oddFooterMarkup = \markup {
+    \tiny
+    \column {
+      \fill-line {
+        #(string-append
+"Score generated from MusicXML data by xml2ly 0.9.76-dev (built on September 10, 2025) and LilyPond " (lilypond-version))
+      }
+      \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
+      \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
+     \fill-line { \column { \italic { \concat { "lilypondFileDirName: " \lilypondFileDirName } } } }
+     \fill-line { \column { \italic { \concat { "pdfFileFullName: " \pdfFileFullName } } } }
+%      \fill-line { \column { \italic { \concat { "lilypondFileBaseName: " \lilypondFileBaseName } } } }
+%      \fill-line { \column { \italic { \concat { "lilypondFileSuffixlessName: " \lilypondFileSuffixlessName } } } }
+%      \fill-line { \column { \italic { \concat { "pdfFileName: " \pdfFileName } } } }
+    }
+  }
+
   % evenFooterMarkup = ""
 }
 
@@ -40,13 +117,6 @@ Part_POne_HARMONIES_Staff_HARMONIES_VoiceEleven = \chordmode {
   \clef "treble"
   \key a \minor
   \numericTimeSignature \time 4/4
-  \tempo \markup {
-    \concat {
-       \smaller \general-align #Y #DOWN \note {4} #UP
-      " = "
-      130
-    } % concat
-  }
   a1:sus2 f1:5.3/a  | % 3
   \barNumberCheck #3
   a1:sus2  | % 1
@@ -68,7 +138,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
   }
   R1  | % 3
   \barNumberCheck #3
-  R1  | % 4
+  R1  | % 5
   \barNumberCheck #4
 }
 
@@ -76,8 +146,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
 
   \score {
     <<
-      
-      
       
       <<
       
@@ -102,7 +170,6 @@ Part_POne_Staff_One_Voice_One = \absolute {
           >>
           
         >>
-      
       
       >>
     

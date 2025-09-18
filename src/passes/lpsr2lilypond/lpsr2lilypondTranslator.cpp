@@ -6006,7 +6006,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
       switch (harmonyDegreeTypeKind) {
         case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAdd:
           ss <<
-//             "." << // JMI ??? 0.9.71
+            "." << // JMI ??? 0.9.76
             harmonyDegreeValue <<
             harmonyDegreeAlterationKindAsLilypondString (
               harmonyDegreeAlterationKind);

@@ -1,5 +1,44 @@
 \version "2.24.4"
 
+% Generated from "HarmoniesSharingANote.xml"
+% by xml2ly 0.9.76-dev (built on September 10, 2025)
+% on Wednesday 2025-09-10 @ 17:30:08 CEST
+
+% The conversion command as supplied was: 
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name HarmoniesSharingANote.ly HarmoniesSharingANote.xml
+% or, with short option names:
+%     HarmoniesSharingANote.ly HarmoniesSharingANote.xml
+
+
+% Scheme function(s): "date & time"
+% A set of functions to obtain the LilyPond file creation or modification time.
+
+#(define commandLine                  (object->string (command-line)))
+#(define loc                          (+ (string-rindex commandLine #\space ) 2))
+#(define commandLineLength            (- (string-length commandLine) 2))
+#(define lilypondFileName             (substring commandLine loc commandLineLength))
+
+#(define lilypondFileDirName          (dirname lilypondFileName))
+#(define lilypondFileBaseName         (basename lilypondFileName))
+#(define lilypondFileSuffixlessName   (basename lilypondFileBaseName ".ly"))
+
+#(define pdfFileName                  (string-append lilypondFileSuffixlessName ".pdf"))
+#(define pdfFileFullName              (string-append lilypondFileDirName file-name-separator-string pdfFileName))
+
+#(define lilypondVersion              (object->string (lilypond-version)))
+#(define currentDate                  (strftime "%d/%m/%Y" (localtime (current-time))))
+#(define currentTime                  (strftime "%H:%M:%S" (localtime (current-time))))
+
+#(define lilypondFileModificationTime (stat:mtime (stat lilypondFileName)))
+
+#(define lilypondFileModificationTimeAsString (strftime "%A %d/%m/%Y, %H:%M:%S" (localtime lilypondFileModificationTime)))
+
+#(use-modules (srfi srfi-19))
+% https://www.gnu.org/software/guile/manual/html_node/SRFI_002d19-Date-to-string.html
+%#(define pdfFileCreationTime (date->string (current-date) "~A, ~B ~e ~Y ~H:~M:~S"))
+#(define pdfFileCreationTime (date->string (current-date) "~A ~d/~m/~Y, ~H:~M:~S"))
+
+
 \header {
   movementTitle       = "Harmonies Sharing A Note"
   encodingDate        = "2018-10-19"
@@ -20,9 +59,47 @@
   % page-count = -1
   % system-count = -1
   
-  % oddHeaderMarkup = ""
-  % evenHeaderMarkup = ""
-  % oddFooterMarkup = ""
+  oddHeaderMarkup = \markup {
+    \fill-line {
+      \unless \on-first-page {
+        \fromproperty #'page:page-number-std::string
+        ' '
+        \fromproperty #'header:title
+        ' '
+        \fromproperty #'header:subtitle
+      }
+    }
+  }
+
+  evenHeaderMarkup = \markup {
+    \fill-line {
+      \unless \on-first-page {
+        \fromproperty #'page:page-number-std::string
+        ' '
+        \fromproperty #'header:title
+        ' '
+        \fromproperty #'header:subtitle
+      }
+    }
+  }
+
+  oddFooterMarkup = \markup {
+    \tiny
+    \column {
+      \fill-line {
+        #(string-append
+"Score generated from MusicXML data by xml2ly 0.9.76-dev (built on September 10, 2025) and LilyPond " (lilypond-version))
+      }
+      \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
+      \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
+     \fill-line { \column { \italic { \concat { "lilypondFileDirName: " \lilypondFileDirName } } } }
+     \fill-line { \column { \italic { \concat { "pdfFileFullName: " \pdfFileFullName } } } }
+%      \fill-line { \column { \italic { \concat { "lilypondFileBaseName: " \lilypondFileBaseName } } } }
+%      \fill-line { \column { \italic { \concat { "lilypondFileSuffixlessName: " \lilypondFileSuffixlessName } } } }
+%      \fill-line { \column { \italic { \concat { "pdfFileName: " \pdfFileName } } } }
+    }
+  }
+
   % evenFooterMarkup = ""
 }
 
@@ -40,13 +117,6 @@ Part_POne_HARMONIES_Staff_HARMONIES_VoiceEleven = \chordmode {
   \clef "treble"
   \key a \minor
   \numericTimeSignature \time 4/4
-  \tempo \markup {
-    \concat {
-       \smaller \general-align #Y #DOWN \note {4} #UP
-      " = "
-      130
-    } % concat
-  }
   a1:sus2 a2:m7 c:maj7.9  | % 3
   \barNumberCheck #3
   d2:m7 g4:5.3 g:m  | % 4
@@ -81,16 +151,18 @@ Part_POne_Staff_One_Voice_One = \absolute {
 Part_PTwo_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
+  
   \clef "treble"
   \key a \minor
   \numericTimeSignature \time 4/4
   
-  \arpeggioNormal \ottava #1 < b'' e''' b''' > 1 -\arpeggio \stemUp  < a c' e' g' > 2  < e' g' b'! d'' > 4.  < d' ~  f' ~  a' ~  c'' ~  > 8  | % 3
-  \barNumberCheck #3
-   < d' f' a' c'' > 8 \stemDown  < g' ~  b' ~  d'' ~  > 4.  < g' b' d'' > 8  < g' bes'! d'' > 4.  | % 4
-  \barNumberCheck #4
-  \stemUp  < e' g' b'! c'' > 2 r  | % 1
-  \barNumberCheck #5
+  \arpeggioNormal \ottava #1 < b'' e''' b''' > 1 -\arpeggio
+  
+  \stemUp  < a c' e' g' > 2  < e' g' b'! d'' > 4.  < d' ~  f' ~  a' ~  c'' ~  > 8
+  
+   < d' f' a' c'' > 8 \stemDown  < g' ~  b' ~  d'' ~  > 4.  < g' b' d'' > 8  < g' bes'! d'' > 4.
+  
+  \stemUp  < e' g' b'! c'' > 2 r
 }
 
 Part_PTwo_Staff_Two_Voice_Five = \absolute {
@@ -99,20 +171,18 @@ Part_PTwo_Staff_Two_Voice_Five = \absolute {
   \clef "treble"
   \key a \minor
   \numericTimeSignature \time 4/4
-  a'1 \stemUp  < a, e > 2 \stemDown  < c e g > 4.  < d ~  f ~  a ~  > 8  | % 3
-  \barNumberCheck #3
-   < d f a > 8  < g ~  b ~  d' ~  > 4.  < g b d' > 8  < g bes! d' > 4.  | % 4
-  \barNumberCheck #4
-  c'2 r4 \stemUp  < a,,, ~  a,, ~  >   | % 5
-  \barNumberCheck #5
+  a'1
+  \stemUp  < a, e > 2 \stemDown  < c e g > 4.  < d ~  f ~  a ~  > 8
+  
+   < d f a > 8  < g ~  b ~  d' ~  > 4.  < g b d' > 8  < g bes! d' > 4.
+  
+  c'2 r4 \stemUp  < a,,, ~  a,, ~  >  
 }
 
 \book {
 
   \score {
     <<
-      
-      
       
       <<
       
@@ -163,7 +233,6 @@ Part_PTwo_Staff_Two_Voice_Five = \absolute {
             >>
           >>
         >>
-      
       
       >>
     
