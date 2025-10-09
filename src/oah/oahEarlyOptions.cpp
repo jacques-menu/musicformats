@@ -265,7 +265,7 @@ void oahEarlyOptions::setEarlyTraceOah ()
 
 //_______________________________________________________________________________
 const std::string K_TRACE_OAH_DETAILS_OPTION_LONG_NAME  = "trace-oah-details";
-const std::string K_TRACE_OAH_DETAILS_OPTION_SHORT_NAME = "toahdets";
+const std::string K_TRACE_OAH_DETAILS_OPTION_SHORT_NAME = "toahd";
 
 void oahEarlyOptions::setEarlyTraceOahDetails ()
 {

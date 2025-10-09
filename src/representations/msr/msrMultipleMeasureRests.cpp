@@ -240,8 +240,7 @@ void msrMultipleMeasureRest::appendMeasureToMultipleMeasureRest (
 
   // register measure as the last one in the segment
   fMultipleMeasureRestUpLinkToSegment->
-    setSegmentLastMeasure (
-      measure);
+    setSegmentLastMeasure (measure);
 }
 
 void msrMultipleMeasureRest::acceptIn (basevisitor* v)

@@ -151,20 +151,9 @@ void msrSegment::setSegmentFirstMeasure (
 
     ss <<
       "Setting first measure of segment " <<
-      fSegmentNumber <<
-      " to ";
-
-    if (measure) {
-      ss <<
-        measure->asString ();
-    }
-    else {
-      ss << "[NULL]";
-    }
-
-    ss <<
-      " in segment " <<
-      asString () <<
+      asShortString () <<
+      " to " <<
+      fetchMeasureAsString (measure) <<
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -189,20 +178,9 @@ void msrSegment::setSegmentLastMeasure (
 
     ss <<
       "Setting last measure of segment " <<
-      fSegmentNumber <<
-      " to ";
-
-    if (measure) {
-      ss <<
-        measure->asString ();
-    }
-    else {
-      ss << "[NULL]";
-    }
-
-    ss <<
-      " in segment " <<
-      asShortString () << // avoid loop JMI 0.9.76
+      asShortString () <<
+      " to " <<
+      fetchMeasureAsString (measure) <<
       ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -997,7 +975,8 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
     ss <<
       "Appending clefKeyTimeSignatureGroup " <<
       clefKeyTimeSignatureGroup->asString () <<
-      " to segment " << asString () <<
+      " to segment " <<
+      asString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice);
 
@@ -1032,6 +1011,8 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       ss.str ());
 //   }
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  print (gLog);
 
   // register clefKeyTimeSignatureGroup in segments's current measure
   fSegmentLastMeasure->
@@ -2526,12 +2507,11 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
   // append measure to the segment
   appendSegmentElementToSegment (measure);
 
-  //append measure to the segment's measures list
+  // append measure to the segment's measures list
   fSegmentMeasuresList.push_back (measure);
 
   // register measure as the last one in the segment
-  setSegmentLastMeasure (
-    measure);
+  setSegmentLastMeasure (measure);
 }
 
 void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
