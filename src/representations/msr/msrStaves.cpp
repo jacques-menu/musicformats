@@ -2784,8 +2784,8 @@ void msrStaff::appendPendingMultipleMeasureRestsToStaff (
 }
 
 void msrStaff::appendMultipleMeasureRestCloneToStaff (
-  const mfInputLineNumber& inputLineNumber,
-  const S_msrMultipleMeasureRest& multipleMeasureRests)
+  const mfInputLineNumber&        inputLineNumber,
+  const S_msrMultipleMeasureRest& multipleMeasureRestsClone)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -2793,7 +2793,7 @@ void msrStaff::appendMultipleMeasureRestCloneToStaff (
 
     ss <<
       "Appending multiple rest '" <<
-      multipleMeasureRests->asString () <<
+      multipleMeasureRestsClone->asString () <<
       "' to staff clone \"" <<
       fStaffPathLikeName <<
       "\"";
@@ -2809,13 +2809,13 @@ void msrStaff::appendMultipleMeasureRestCloneToStaff (
     voice->
       appendMultipleMeasureRestCloneToVoiceClone (
         inputLineNumber,
-        multipleMeasureRests);
+        multipleMeasureRestsClone);
   } // for
 }
 
 void msrStaff::appendRepeatCloneToStaff (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& repeatCLone)
+  const S_msrRepeat&       repeatCLone)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {

@@ -496,7 +496,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  appendRepeatCloneToPart (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrRepeat& repeatCLone);
+                            const S_msrRepeat&       repeatCLone);
 
     void                  appendRepeatEndingCloneToPart (
                             const S_msrRepeatEnding& repeatEndingClone);
@@ -505,38 +505,38 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  cascadeAppendMultipleMeasureRestToPart (
                             const mfInputLineNumber& inputLineNumber,
-                            int               multipleMeasureRestMeasuresNumber,
-                            int               multipleMeasureRestSlashesNumber,
-                            msrUseSymbolsKind multipleMeasureRestUseSymbolsKind);
+                            int                      multipleMeasureRestMeasuresNumber,
+                            int                      multipleMeasureRestSlashesNumber,
+                            msrUseSymbolsKind        multipleMeasureRestUseSymbolsKind);
 
     void                  appendPendingMultipleMeasureRestsToPart (
                             const mfInputLineNumber& inputLineNumber);
 
     void                  replicateLastAppendedMeasureInPart (
                             const mfInputLineNumber& inputLineNumber,
-                            int replicatasNumber);
+                            int                      replicatasNumber);
 
     void                  cascadeAppendEmptyMeasuresToPart (
                             const mfInputLineNumber& inputLineNumber,
                             const mfMeasureNumber&   previousMeasureNumber,
                             int                      measureRestsNumber);
 
-    void                  appendMultipleMeasureRestCloneToPart (
-                            const mfInputLineNumber& inputLineNumber,
-                            const S_msrMultipleMeasureRest& multipleMeasureRests);
+//     void                  appendMultipleMeasureRestCloneToPart (
+//                             const mfInputLineNumber&        inputLineNumber,
+//                             const S_msrMultipleMeasureRest& multipleMeasureRestsClone);
 
     // measure repeats
 
     void                  cascadeCreateAMeasureRepeatAndAppendItToPart (
                             const mfInputLineNumber& inputLineNumber,
-                            int measureRepeatMeasuresNumber,
-                            int measureRepeatSlashesNumber);
+                            int                      measureRepeatMeasuresNumber,
+                            int                      measureRepeatSlashesNumber);
 
-    void                  cascadeCreateAMeasureRepeatAndAppendItToPart (
-                            const mfInputLineNumber& inputLineNumber,
-                            int                    previousMeasureEndInputLineNumber,
-                            const mfMeasureNumber& measureNumber,
-                            msrMeasureImplicitKind measureImplicitKind);
+//     void                  cascadeCreateAMeasureRepeatAndAppendItToPart (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             int                      previousMeasureEndInputLineNumber,
+//                             const mfMeasureNumber&   measureNumber,
+//                             msrMeasureImplicitKind   measureImplicitKind);
 
     void                  appendPendingMeasureRepeatToPart (
                             const mfInputLineNumber& inputLineNumber);
@@ -556,7 +556,7 @@ class EXP msrPart : public msrPartGroupElement
                             const mfMeasureNumber&   currentMeasureNumber);
 
     void                  appendHarmonyToPart (
-                            const mfInputLineNumber& inputLineNumber,
+                            const mfInputLineNumber&  inputLineNumber,
                             const S_msrHarmony&        harmony,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
@@ -572,14 +572,16 @@ class EXP msrPart : public msrPartGroupElement
                             const mfMeasureNumber&   currentMeasureNumber);
 
     void                  appendFiguredBassToPart (
-                            const mfInputLineNumber& inputLineNumber,
+                            const mfInputLineNumber&   inputLineNumber,
                             const S_msrFiguredBass&    figuredBass,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  cascadeAppendFiguredBassesListToPart (
-                            const mfInputLineNumber&            inputLineNumber,
-                            const std::list <S_msrFiguredBass>& figuredBasssesList,
-                            const mfPositionInMeasure&          positionInMeasureToAppendAt);
+                            const mfInputLineNumber& inputLineNumber,
+                            const std::list <S_msrFiguredBass>&
+                                                     figuredBasssesList,
+                            const mfPositionInMeasure&
+                                                     positionInMeasureToAppendAt);
 
 //     void                  appendFiguredBassToPart ( // JMI 0.9.67 HARMFUL
 //                             const S_msrVoice&       figuredBassSupplierVoice,

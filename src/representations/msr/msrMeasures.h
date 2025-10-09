@@ -38,9 +38,14 @@ class EXP msrMeasure : public msrSegmentElement
 
     static SMARTP<msrMeasure> create (
                             const mfInputLineNumber& inputLineNumber,
+                            const mfMeasureNumber&   measureNumber);
+
+    static SMARTP<msrMeasure> create (
+                            const mfInputLineNumber& inputLineNumber,
                             const mfMeasureNumber&   measureNumber,
                             const S_msrSegment&      measureUpLinkToSegment);
-                              // no const alias, call argument may be 'this' JMI 0.9.66
+
+    SMARTP<msrMeasure> createMeasureNewbornClone ();
 
     SMARTP<msrMeasure> createMeasureNewbornClone (
                             const S_msrSegment& containingSegment);
@@ -56,6 +61,10 @@ class EXP msrMeasure : public msrSegmentElement
 
     // constructors
     // ------------------------------------------------------
+
+                          msrMeasure (
+                            const mfInputLineNumber& inputLineNumber,
+                            const mfMeasureNumber&   measureNumber);
 
                           msrMeasure (
                             const mfInputLineNumber& inputLineNumber,
@@ -923,6 +932,9 @@ using S_msrMeasure = SMARTP<msrMeasure>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt);
 EXP std::ostream& operator << (std::ostream& os, const msrMeasure& elt);
+
+std::string fetchMeasureAsShortString (const S_msrMeasure& measure);
+std::string fetchMeasureAsString (const S_msrMeasure& measure);
 
 
 }

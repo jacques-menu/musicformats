@@ -1786,7 +1786,7 @@ void msrPart::finalizeRepeatEndInPart (
 
 void msrPart::appendRepeatCloneToPart (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrRepeat& repeatCLone)
+  const S_msrRepeat&       repeatCLone)
 {
   for (S_msrStaff staff : fPartAllStavesList) {
     switch (staff->getStaffKind ()) {
@@ -1828,8 +1828,8 @@ void msrPart::appendRepeatEndingCloneToPart (
 
 void msrPart::cascadeCreateAMeasureRepeatAndAppendItToPart (
   const mfInputLineNumber& inputLineNumber,
-  int measureRepeatMeasuresNumber,
-  int measureRepeatSlashesNumber)
+  int                      measureRepeatMeasuresNumber,
+  int                      measureRepeatSlashesNumber)
 {
   // create measures repeat in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1854,9 +1854,9 @@ void msrPart::appendPendingMeasureRepeatToPart (
 
 void msrPart::cascadeAppendMultipleMeasureRestToPart (
   const mfInputLineNumber& inputLineNumber,
-  int               multipleMeasureRestMeasuresNumber,
-  int               multipleMeasureRestSlashesNumber,
-  msrUseSymbolsKind multipleMeasureRestUseSymbolsKind)
+  int                      multipleMeasureRestMeasuresNumber,
+  int                      multipleMeasureRestSlashesNumber,
+  msrUseSymbolsKind        multipleMeasureRestUseSymbolsKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -1891,7 +1891,7 @@ void msrPart::cascadeAppendMultipleMeasureRestToPart (
 
 void msrPart::replicateLastAppendedMeasureInPart (
   const mfInputLineNumber& inputLineNumber,
-  int replicatasNumber)
+  int                      replicatasNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -1976,33 +1976,33 @@ void msrPart::appendPendingMultipleMeasureRestsToPart (
   } // for
 }
 
-void msrPart::appendMultipleMeasureRestCloneToPart (
-  const mfInputLineNumber& inputLineNumber,
-  const S_msrMultipleMeasureRest& multipleMeasureRests)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Appending multiple rest '" <<
-      multipleMeasureRests->asString () <<
-      "' to part clone " <<
-      fetchPartNameForTrace ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  for (S_msrStaff staff : fPartAllStavesList) {
-    staff->
-      appendMultipleMeasureRestCloneToStaff (
-        inputLineNumber,
-        multipleMeasureRests);
-  } // for
-}
+// void msrPart::appendMultipleMeasureRestCloneToPart (
+//   const mfInputLineNumber&        inputLineNumber,
+//   const S_msrMultipleMeasureRest& multipleMeasureRestsClone)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Appending multiple rest clone " <<
+//       multipleMeasureRests->asString () <<
+//       " to part clone " <<
+//       fetchPartNameForTrace ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   for (S_msrStaff staff : fPartAllStavesList) {
+//     staff->
+//       appendMultipleMeasureRestCloneToStaff (
+//         inputLineNumber,
+//         multipleMeasureRests);
+//   } // for
+// }
 
 void msrPart::appendBarLineToPart (
   const S_msrBarLine& barLine)
@@ -2651,11 +2651,12 @@ void msrPart::appendHarmoniesListToPart (
 }
 
 void msrPart::cascadeAppendFiguredBassesListToPart (
-  const mfInputLineNumber&            inputLineNumber,
-  const std::list <S_msrFiguredBass>& figuredBasssesList,
-  const mfPositionInMeasure&          positionInMeasureToAppendAt)
+  const mfInputLineNumber& inputLineNumber,
+  const std::list <S_msrFiguredBass>&
+                           figuredBasssesList,
+  const mfPositionInMeasure&
+                           positionInMeasureToAppendAt)
 {
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
     std::stringstream ss;
@@ -2771,7 +2772,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 }
 
 void msrPart::appendFiguredBassToPart (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&   inputLineNumber,
   const S_msrFiguredBass&    figuredBass,
   const mfPositionInMeasure& positionInMeasureToAppendAt)
 {

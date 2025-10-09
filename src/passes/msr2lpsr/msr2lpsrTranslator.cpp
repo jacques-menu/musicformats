@@ -3446,7 +3446,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
   else {
     // append current measure clone to the current voice clone
     fCurrentVoiceClone->
-      appendMeasureCloneToVoiceClone (
+      addMeasureCloneToVoiceClone (
          elt->getInputLineNumber (),
         fCurrentMeasureClone);
   }

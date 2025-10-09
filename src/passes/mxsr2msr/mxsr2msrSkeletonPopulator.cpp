@@ -1285,7 +1285,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
 void mxsr2msrSkeletonPopulator::createVoiceSegmentsForCurrentPartVoices (
   const S_msrPart& part)
 {
-//   for (S_msrVoice voice : fCurrentPart->getPartVoicesList ()) {
+//   for (S_msrVoice voice : fCurrentPart->getPartVoicesList ()) { // JMI 0.9.76 ???
 //     // create a segment
 //     S_msrSegment
 //       voiceSegment =

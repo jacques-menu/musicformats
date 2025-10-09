@@ -1569,10 +1569,20 @@ S_msrRepeat msrRepeat::create (
   msrRepeat* obj =
     new msrRepeat (
       inputLineNumber,
-      repeatTimes,
-      gNullVoice);
+      repeatTimes);
   assert (obj != nullptr);
   return obj;
+
+  // create the repeat common part
+  S_msrRepeatCommonPart
+    repeatCommonPart =
+      msrRepeatCommonPart::create (
+        inputLineNumber,
+        obj);
+
+  // register it in newRepeat
+  obj->setRepeatCommonPart ( // JMI 0.9.76
+    repeatCommonPart);
 }
 
 S_msrRepeat msrRepeat::create (
@@ -1587,6 +1597,29 @@ S_msrRepeat msrRepeat::create (
       upLinkToVoice);
   assert (obj != nullptr);
   return obj;
+
+  // create the repeat common part
+  S_msrRepeatCommonPart
+    repeatCommonPart =
+      msrRepeatCommonPart::create (
+        inputLineNumber,
+        obj);
+
+  // register it in newRepeat
+  obj->setRepeatCommonPart ( // JMI 0.9.76
+    repeatCommonPart);
+}
+
+msrRepeat::msrRepeat (
+  const mfInputLineNumber& inputLineNumber,
+  int                      repeatTimes)
+//     : msrVoiceElement (inputLineNumber)
+    : msrSegmentElement (inputLineNumber)
+{
+  initializeRepeat (
+    inputLineNumber,
+    repeatTimes,
+    nullptr); // fRepeatUpLinkToVoice will be set later
 }
 
 msrRepeat::msrRepeat (
@@ -1628,19 +1661,6 @@ void msrRepeat::initializeRepeat (
 
   // set uplink to voice
   fRepeatUpLinkToVoice = upLinkToVoice;
-
-//   // create the repeat common part
-//   S_msrRepeatCommonPart
-//   repeatCommonPart =
-// //   fRepeatCommonPart =
-//     msrRepeatCommonPart::create (
-//       inputLineNumber,
-//       this);
-//
-// //   // register it in newRepeat
-// // //   setRepeatCommonPart ( JMI 0.9.76 incomplete virtual method table???
-// // //     repeatCommonPart);
-//   fRepeatCommonPart = repeatCommonPart;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -1693,6 +1713,8 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
         fInputLineNumber,
         fRepeatTimes,
         containingVoice);
+
+  // DON'T create the repeat common part, that will be done upon browsing
 
   return newbornClone;
 }

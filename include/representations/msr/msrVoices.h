@@ -232,8 +232,14 @@ class EXP msrVoice : public msrElement
 
     void                  setVoiceSegment (const S_msrSegment& segment);
 
-    const S_msrSegment&   getVoiceSegment () const
+    const S_msrSegment    getVoiceSegment () const
                               { return fVoiceSegment; }
+
+    S_msrSegment          fetchVoiceCurrentRecipientSegment () const;
+
+    void                  addSegmentCloneToVoiceClone (
+                            const mfInputLineNumber& inputLineNumber,
+                            S_msrSegment             segmentClone);
 
     // harmonies
 
@@ -1265,7 +1271,7 @@ class EXP msrVoice : public msrElement
     const S_msrMeasure&   getVoiceFirstMeasure () const
                               { return fVoiceFirstMeasure; }
 
-    void                  appendMeasureCloneToVoiceClone (
+    void                  addMeasureCloneToVoiceClone (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&      measureClone);
 
@@ -1432,6 +1438,7 @@ using S_msrVoice = SMARTP<msrVoice>;
 EXP std::ostream& operator << (std::ostream& os, const S_msrVoice& elt);
 EXP std::ostream& operator << (std::ostream& os, const msrVoice& elt);
 
+std::string fetchVoiceName (const S_msrVoice& voice);
 
 }
 

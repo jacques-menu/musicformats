@@ -344,12 +344,12 @@ class EXP msrStaff : public msrElement
                             int                      emptyMeasuresNumber);
 
     void                  appendMultipleMeasureRestCloneToStaff (
-                            const mfInputLineNumber& inputLineNumber,
-                            const S_msrMultipleMeasureRest& multipleMeasureRests);
+                            const mfInputLineNumber&        inputLineNumber,
+                            const S_msrMultipleMeasureRest& multipleMeasureRestsClone);
 
     void                  appendRepeatCloneToStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrRepeat& repeatCLone);
+                            const S_msrRepeat&       repeatCLone);
 
     void                  appendRepeatEndingCloneToStaff (
                             const S_msrRepeatEnding& repeatEndingClone);

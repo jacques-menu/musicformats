@@ -200,6 +200,12 @@ S_msrVoice msrVoice::create (
       voiceCreateInitialLastSegmentKind,
       voiceUpLinkToStaff);
   assert (obj != nullptr);
+
+  // create the voice segment
+  obj->setVoiceSegment (
+    msrSegment::create (
+      inputLineNumber));
+
   return obj;
 }
 
@@ -496,32 +502,6 @@ void msrVoice::initializeVoice (
 //         fVoiceLastSegment == nullptr,
 //         "fVoiceLastSegment is NULL");
 
-  // create the voice segment
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Crating an initial last segment for voice \"" <<
-      fVoiceName <<
-      "\"" <<
-      ", voiceNumber: " << voiceNumber <<
-      ", in staff \"" <<
-      fVoiceUpLinkToStaff->getStaffPathLikeName () <<
-      " line " << fInputLineNumber <<
-      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fVoiceSegment =
-    msrSegment::create (
-      fInputLineNumber,
-      this);
-
 //       if (! fVoiceFirstSegment) {
 //         fVoiceFirstSegment = fVoiceLastSegment;
 //       }
@@ -549,223 +529,6 @@ void msrVoice::initializeVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
-}
-
-void msrVoice::setVoiceSegment (const S_msrSegment& segment)
-{
- #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Setting voice segment in voice " <<
-      asString () <<
-      " to " <<
-      segment->asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-//   fVoiceSegment = segment;
-
-  // set it as the current voice recipient segment
-  // this will change when repeats within the voice are being built
-  setVoiceCurrentRecipientSegment (segment);
-}
-
-void msrVoice::setVoiceCurrentRecipientSegment (const S_msrSegment& segment)
-{
- #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Setting voice current recipient segment in voice " <<
-      asString () <<
-      " to " <<
-      segment->asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-//   fVoiceSegment = fVoiceSegment;
-}
-
-S_msrPart msrVoice::fetchVoiceUpLinkToPart () const
-{
-  S_msrPart result;
-
-  if (fVoiceUpLinkToStaff) {
-    result =
-      fVoiceUpLinkToStaff->
-        getStaffUpLinkToPart ();
-  }
-
-  return result;
-}
-
-S_msrPartGroup msrVoice::fetchVoiceUpLinkToPartGroup () const
-{
-  S_msrPartGroup result;
-
-  if (fVoiceUpLinkToStaff) {
-    result =
-      fVoiceUpLinkToStaff->
-        fetchStaffUpLinkToPartGroup ();
-  }
-
-  return result;
-}
-
-S_msrScore msrVoice::fetchVoiceUpLinkToScore () const
-{
-  S_msrScore result;
-
-  if (fVoiceUpLinkToStaff) {
-    result =
-      fVoiceUpLinkToStaff->
-        fetchStaffUpLinkToScore ();
-  }
-
-  return result;
-}
-
-void msrVoice::setRegularVoiceStaffSequentialNumber (
-  int regularVoiceStaffSequentialNumber)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Setting the regular voice staff sequential number of voice \"" <<
-      fVoiceName <<
-      "\" to " << regularVoiceStaffSequentialNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fRegularVoiceStaffSequentialNumber =
-    regularVoiceStaffSequentialNumber;
-}
-
-void msrVoice::setVoiceNamesFromNumber (
-  const mfInputLineNumber& inputLineNumber,
-  const mfVoiceNumber&     voiceNumber)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Setting the names of " <<
-      fVoiceKind <<
-      " voice from voice number " << voiceNumber <<
-      "'";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  switch (fVoiceKind) {
-    case msrVoiceKind::kVoiceKindRegular:
-      fVoiceName =
-        fVoiceUpLinkToStaff->getStaffPathLikeName () +
-        "_Voice_" +
-        mfVoiceNumberAsString (voiceNumber);
-
-      fVoicePathLikeName =
-        fVoiceUpLinkToStaff->getStaffPathLikeName () +
-        "_Voice_" +
-        mfIntToEnglishWord (mfVoiceNumberAsInteger (voiceNumber));
-      break;
-
-    case msrVoiceKind::kVoiceKindDynamics:
-      break;
-
-    case msrVoiceKind::kVoiceKindHarmonies:
-      fVoiceName =
-        fVoiceUpLinkToStaff->getStaffPathLikeName () +
-        "_HARMONIES_Voice";
-
-      fVoicePathLikeName =
-        fVoiceUpLinkToStaff->getStaffPathLikeName () +
-        "_HARMONIES_Voice" +
-        mfIntToEnglishWord (mfVoiceNumberAsInteger (voiceNumber));
-      break;
-
-    case msrVoiceKind::kVoiceKindFiguredBass:
-      fVoiceName =
-        fVoiceUpLinkToStaff->getStaffPathLikeName () +
-        "_FIGURED_BASS_Voice";
-
-      fVoicePathLikeName =
-        fVoiceUpLinkToStaff->getStaffPathLikeName () +
-        "_FIGURED_BASS_Voice" +
-        mfIntToEnglishWord (mfVoiceNumberAsInteger (voiceNumber));
-      break;
-  } // switch
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
-    std::stringstream ss;
-
-    ss <<
-      "The resulting voice names are \"" <<
-      fVoiceName <<
-      "\" and " <<
-      fVoicePathLikeName <<
-      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
-
-void msrVoice::changeVoiceIdentity ( // after a deep clone is created
-  const mfVoiceNumber& voiceNumber)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Changing the partGroupSequentialNumber of voice \"" <<
-      fVoiceName <<
-      "\"" <<
-      ", number: " << voiceNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // make it a regular voice
-  setVoiceKind (
-    msrVoiceKind::kVoiceKindRegular);
-
-  // set its voice number
-  setVoiceNumber (
-    voiceNumber);
-
-  // set its name
-  setVoiceNamesFromNumber (
-    fInputLineNumber,
-    voiceNumber);
 }
 
 S_msrVoice msrVoice::createVoiceNewbornClone (
@@ -814,6 +577,9 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
   // voice name
   newbornClone->fVoiceName =
     fVoiceName;
+
+  // DON'T create the voice segment,
+  // that will be done upon browing
 
   return newbornClone;
 }
@@ -1049,6 +815,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 // #endif // MF_TRACE_IS_ENABLED
 //   }
 //
+
   // multiple measure rests
   deepClone->fVoiceContainsMultipleMeasureRests =
     fVoiceContainsMultipleMeasureRests;
@@ -1091,6 +858,271 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 #endif // MF_TRACE_IS_ENABLED
 
   return deepClone;
+}
+
+void msrVoice::setVoiceSegment (const S_msrSegment& segment)
+{
+ #ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting voice segment in voice " <<
+      asString () <<
+      " to " <<
+      segment->asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fVoiceSegment = segment;
+
+  // set it as the current voice recipient segment
+  // this will change when repeats within the voice are being built
+//   setVoiceCurrentRecipientSegment (segment);
+}
+
+// void msrVoice::setVoiceCurrentRecipientSegment (const S_msrSegment& segment)
+// {
+//  #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting voice current recipient segment in voice " <<
+//       asString () <<
+//       " to " <<
+//       segment->asString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// //   fVoiceSegment = fVoiceSegment;
+// }
+
+void msrVoice::addSegmentCloneToVoiceClone (
+  const mfInputLineNumber& inputLineNumber,
+  S_msrSegment             segmentClone)
+{
+ #ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Adding segment clone" <<
+      segmentClone->asString () <<
+      " to voice  clone " <<
+      asString () <<
+      "', line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (fVoicePendingRepeatsStack.empty ()) {
+    setVoiceSegment (segmentClone);
+  }
+  else {
+    fVoicePendingRepeatsStack.front ()->
+      getRepeatCommonPart ()-> // TEMP JMI 0.9.76 could also be an ending..
+        setRepeatElementSegment (segmentClone);
+  }
+}
+
+S_msrSegment msrVoice::fetchVoiceCurrentRecipientSegment () const
+{
+  S_msrSegment result;
+
+  if (fVoicePendingRepeatsStack.empty ()) {
+    result = fVoiceSegment;
+  }
+  else {
+    result =
+      fVoicePendingRepeatsStack.front ()->
+        getRepeatCommonPart ()-> // TEMP JMI 0.9.76 could also be an ending..
+          getRepeatElementSegment ();
+  }
+
+  return result;
+}
+
+S_msrPart msrVoice::fetchVoiceUpLinkToPart () const
+{
+  S_msrPart result;
+
+  if (fVoiceUpLinkToStaff) {
+    result =
+      fVoiceUpLinkToStaff->
+        getStaffUpLinkToPart ();
+  }
+
+  return result;
+}
+
+S_msrPartGroup msrVoice::fetchVoiceUpLinkToPartGroup () const
+{
+  S_msrPartGroup result;
+
+  if (fVoiceUpLinkToStaff) {
+    result =
+      fVoiceUpLinkToStaff->
+        fetchStaffUpLinkToPartGroup ();
+  }
+
+  return result;
+}
+
+S_msrScore msrVoice::fetchVoiceUpLinkToScore () const
+{
+  S_msrScore result;
+
+  if (fVoiceUpLinkToStaff) {
+    result =
+      fVoiceUpLinkToStaff->
+        fetchStaffUpLinkToScore ();
+  }
+
+  return result;
+}
+
+void msrVoice::setRegularVoiceStaffSequentialNumber (
+  int regularVoiceStaffSequentialNumber)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceVoices ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting the regular voice staff sequential number of voice \"" <<
+      fVoiceName <<
+      "\" to " << regularVoiceStaffSequentialNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fRegularVoiceStaffSequentialNumber =
+    regularVoiceStaffSequentialNumber;
+}
+
+void msrVoice::setVoiceNamesFromNumber (
+  const mfInputLineNumber& inputLineNumber,
+  const mfVoiceNumber&     voiceNumber)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceVoices ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting the names of " <<
+      fVoiceKind <<
+      " voice from voice number " << voiceNumber <<
+      "'";
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  switch (fVoiceKind) {
+    case msrVoiceKind::kVoiceKindRegular:
+      fVoiceName =
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
+        "_Voice_" +
+        mfVoiceNumberAsString (voiceNumber);
+
+      fVoicePathLikeName =
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
+        "_Voice_" +
+        mfIntToEnglishWord (mfVoiceNumberAsInteger (voiceNumber));
+      break;
+
+    case msrVoiceKind::kVoiceKindDynamics:
+      break;
+
+    case msrVoiceKind::kVoiceKindHarmonies:
+      fVoiceName =
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
+        "_HARMONIES_Voice";
+
+      fVoicePathLikeName =
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
+        "_HARMONIES_Voice" +
+        mfIntToEnglishWord (mfVoiceNumberAsInteger (voiceNumber));
+      break;
+
+    case msrVoiceKind::kVoiceKindFiguredBass:
+      fVoiceName =
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
+        "_FIGURED_BASS_Voice";
+
+      fVoicePathLikeName =
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
+        "_FIGURED_BASS_Voice" +
+        mfIntToEnglishWord (mfVoiceNumberAsInteger (voiceNumber));
+      break;
+  } // switch
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceVoices ()) {
+    std::stringstream ss;
+
+    ss <<
+      "The resulting voice names are \"" <<
+      fVoiceName <<
+      "\" and " <<
+      fVoicePathLikeName <<
+      "\"";
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+void msrVoice::changeVoiceIdentity ( // after a deep clone is created
+  const mfVoiceNumber& voiceNumber)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceVoices ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Changing the partGroupSequentialNumber of voice \"" <<
+      fVoiceName <<
+      "\"" <<
+      ", number: " << voiceNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // make it a regular voice
+  setVoiceKind (
+    msrVoiceKind::kVoiceKindRegular);
+
+  // set its voice number
+  setVoiceNumber (
+    voiceNumber);
+
+  // set its name
+  setVoiceNamesFromNumber (
+    fInputLineNumber,
+    voiceNumber);
 }
 
 bool msrVoice::compareVoicesByIncreasingNumber (
@@ -1500,7 +1532,7 @@ void msrVoice::setVoiceFirstMeasure (
   fVoiceFirstMeasure = measure;
 }
 
-void msrVoice::appendMeasureCloneToVoiceClone (
+void msrVoice::addMeasureCloneToVoiceClone (
   const mfInputLineNumber& inputLineNumber,
   const S_msrMeasure&      measureClone)
 {
@@ -1509,9 +1541,9 @@ void msrVoice::appendMeasureCloneToVoiceClone (
     std::stringstream ss;
 
     ss <<
-      "Appending measure clone " <<
+      "Adding measure clone " <<
       measureClone->asShortString () <<
-      " to voice " <<
+      " to voice clone " <<
       fVoiceName << "\"" <<
       "', line " << inputLineNumber;
 
@@ -1523,8 +1555,12 @@ void msrVoice::appendMeasureCloneToVoiceClone (
 
   ++gIndenter;
 
-  // append measureClone to the voice last segment
-  fVoiceSegment->
+  S_msrSegment
+    voiceCurrentRecipientSegment =
+      fetchVoiceCurrentRecipientSegment ();
+
+  // append measureClone to the voice current recipient segment
+  voiceCurrentRecipientSegment->
     appendMeasureToSegment (measureClone);
 
   // measureClone is the new voice last appended measure
@@ -1807,8 +1843,8 @@ S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
     result =
       msrMeasure::create (
         inputLineNumber,
-        measureNumber,
-        fVoiceSegment); // JMI 0.9.76 ???
+        measureNumber);
+//         fVoiceSegment); // JMI 0.9.76 ???
 
     // set result's ordinal number
     result->
@@ -4757,21 +4793,20 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // this should NOT be necessary JMI 0.9.76
-  if (! fVoiceSegment) {
-    gLog << "*** FOO FOO FOO 1 ***" << std::endl;
-    fVoiceSegment =
-      msrSegment::create (
-        fInputLineNumber,
-        this);
-  }
+//   // this should NOT be necessary JMI 0.9.76
+//   if (! fVoiceSegment) {
+//     gLog << "*** FOO FOO FOO 1 ***" << std::endl;
+//     fVoiceSegment =
+//       msrSegment::create (
+//         fInputLineNumber,
+//         this);
+//   }
 
   S_msrRepeat
     repeat =
       msrRepeat::create (
         inputLineNumber,
-        2, // repeatTimes, default value JMI
-        this);
+        2); // repeatTimes, default value JMI
 
 //   if (! repeat) {
 //     gLog << "*** FOO FOO FOO 2 ***" << std::endl;
@@ -10309,7 +10344,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceRepeatsDetails ()) {
         //     displayVoiceRepeatsStackSummary (
-    displayVoiceRepeatsStack (
+            displayVoiceRepeatsStack (
               inputLineNumber,
               "handleRepeatStartInVoiceClone() 3");
           }
@@ -10344,7 +10379,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     //     displayVoiceRepeatsStackSummary (
-    displayVoiceRepeatsStack (
+        displayVoiceRepeatsStack (
           inputLineNumber,
           "handleRepeatStartInVoiceClone() 5");
       }
@@ -12641,7 +12676,7 @@ std::ostream& operator << (std::ostream& os, const S_msrVoice& elt)
     elt->print (os);
   }
   else {
-    os << "[NULL]" << std::endl;
+    os << "[NULL]";
   }
 
   return os;
@@ -12654,9 +12689,22 @@ std::ostream& operator << (std::ostream& os, const msrVoice& elt)
   return os;
 }
 
+std::string fetchVoiceName (const S_msrVoice& voice)
+{
+  std::string result;
 
+  if (voice) {
+    result = voice->getVoiceName ();
+  }
+  else {
+    result = "\"** VOICE IS NULL **\"";
+  }
+
+  return result;
 }
 
+
+}
 
 //   switch (fVoiceKind) {//
 //     case msrVoiceKind::kVoiceKindRegular:

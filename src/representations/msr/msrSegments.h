@@ -543,6 +543,9 @@ using S_msrSegment = SMARTP<msrSegment>;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSegment& elt);
 EXP std::ostream& operator << (std::ostream& os, const msrSegment& elt);
 
+std::string fetchSegmentAsShortString (const S_msrSegment& segment);
+std::string fetchSegmentAsString (const S_msrSegment& segment);
+
 
 }
 

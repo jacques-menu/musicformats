@@ -64,6 +64,9 @@ class EXP msrRepeatElement: public msrElement
                               { return fRepeatElementUpLinkToRepeat; }
 
     // segment
+    void                  setRepeatElementSegment (S_msrSegment segment)
+                              { fRepeatElementSegment = segment; }
+
     S_msrSegment          getRepeatElementSegment () const
                               { return fRepeatElementSegment; }
 
@@ -413,7 +416,7 @@ class EXP msrRepeat : public msrSegmentElement
 
     static SMARTP<msrRepeat> create (
                             const mfInputLineNumber& inputLineNumber,
-                            int repeatTimes);
+                            int                      repeatTimes);
 
     static SMARTP<msrRepeat> create (
                             const mfInputLineNumber& inputLineNumber,
@@ -427,6 +430,10 @@ class EXP msrRepeat : public msrSegmentElement
 
     // constructors/destructor
     // ------------------------------------------------------
+
+                          msrRepeat (
+                            const mfInputLineNumber& inputLineNumber,
+                            int                      repeatTimes);
 
                           msrRepeat (
                             const mfInputLineNumber& inputLineNumber,

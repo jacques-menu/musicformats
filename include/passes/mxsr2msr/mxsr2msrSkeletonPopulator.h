@@ -1326,8 +1326,6 @@ class EXP mxsr2msrSkeletonPopulator :
     // ------------------------------------------------------
 
 
-    S_msrSegment              fCurrentRecipientSegment;
-
     S_msrMeasureElement       fPreviousMeasureElement;
 
     S_msrVoice                fetchFirstVoiceFromCurrentPart (

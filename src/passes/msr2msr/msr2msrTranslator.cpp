@@ -1610,8 +1610,8 @@ void msr2msrTranslator::visitStart (S_msrSegment& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrSegment '" <<
-      elt->getSegmentAbsoluteNumber () << '\'' <<
+      "--> Start visiting msrSegment " <<
+      elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1624,10 +1624,10 @@ void msr2msrTranslator::visitStart (S_msrSegment& elt)
   // and fCurrentSegmentClone has been set accordingly,
   // so there is nothing to be done here JMI ??? 0.9.76
 
-  // create a clone of the segment
-  fCurrentSegmentClone =
-    elt->createSegmentNewbornClone (
-      fCurrentVoiceClone);
+//   // create a clone of the segment
+//   fCurrentSegmentClone =
+//     elt->createSegmentNewbornClone (
+//       fCurrentVoiceClone);
 
 //   // get the current segment clone JMI 0.9.76 ???
 //   fCurrentSegmentClone =
@@ -1638,6 +1638,18 @@ void msr2msrTranslator::visitStart (S_msrSegment& elt)
 //   fCurrentVoiceClone->
 //     setVoiceLastSegmentInVoiceClone (
 //       fCurrentSegmentClone);
+
+  // create a segment clone
+  S_msrSegment
+    segmentClone =
+      elt->createSegmentNewbornClone (
+        fCurrentVoiceClone);
+
+  // add it to the current voice clone
+  fCurrentVoiceClone->
+    addSegmentCloneToVoiceClone (
+      elt->getInputLineNumber (),
+      segmentClone);
 }
 
 void msr2msrTranslator::visitEnd (S_msrSegment& elt)
@@ -1647,8 +1659,8 @@ void msr2msrTranslator::visitEnd (S_msrSegment& elt)
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrSegment '" <<
-      elt->getSegmentAbsoluteNumber () << '\'' <<
+      "--> End visiting msrSegment " <<
+      elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1657,13 +1669,13 @@ void msr2msrTranslator::visitEnd (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleSegmentCloneEndInVoiceClone (
-      elt->getInputLineNumber (),
-      fCurrentSegmentClone);
+//   fCurrentVoiceClone->
+//     handleSegmentCloneEndInVoiceClone (
+//       elt->getInputLineNumber (),
+//       fCurrentSegmentClone);
 
-  // forget current segment clone
-  fCurrentSegmentClone = nullptr;
+//   // forget current segment clone
+//   fCurrentSegmentClone = nullptr;
 }
 
 //________________________________________________________________________
@@ -1973,11 +1985,9 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrMeasure '" <<
-      fCurrentMeasureNumber <<
-      "', measurePuristNumber: '" <<
-      measurePuristNumber <<
-      "', line " << elt->getInputLineNumber ();
+      "--> Start visiting msrMeasure " <<
+      elt->asShortString () <<
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2019,8 +2029,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
   // create a measure newborn clone
   fCurrentMeasureClone =
     elt->
-      createMeasureNewbornClone (
-        fCurrentSegmentClone);
+      createMeasureNewbornClone ();
 
   if (fOnGoingMultipleMeasureRests) {
     // append current measure clone to the current multiple measure rests clone
@@ -2031,7 +2040,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
   else {
     // append current measure clone to the current voice clone
     fCurrentVoiceClone->
-      appendMeasureCloneToVoiceClone (
+      addMeasureCloneToVoiceClone (
         elt->getInputLineNumber (),
         fCurrentMeasureClone);
   }
@@ -2053,6 +2062,21 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
 
 void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting msrMeasure " <<
+      elt->asShortString () <<
+      ", line " << elt->getInputLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   mfMeasureNumber
     nextMeasureNumber =
       elt->getNextMeasureNumber ();
@@ -6389,10 +6413,11 @@ void msr2msrTranslator::visitStart (S_msrRepeatCommonPart& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentSegmentClone =
-    fCurrentVoiceClone->
-      handleRepeatCommonPartStartInVoiceClone (
-        elt->getInputLineNumber ());
+  S_msrSegment
+    fCurrentSegmentClone =
+      fCurrentVoiceClone->
+        handleRepeatCommonPartStartInVoiceClone (
+          elt->getInputLineNumber ());
 }
 
 void msr2msrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
@@ -6449,12 +6474,13 @@ void msr2msrTranslator::visitStart (S_msrRepeatEnding& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentSegmentClone =
-    fCurrentVoiceClone->
-      handleRepeatEndingStartInVoiceClone (
-        elt->getInputLineNumber (),
-        elt->getRepeatEndingKind (),
-        elt->getRepeatEndingNumber ());
+// S_msrSegment
+//   fCurrentSegmentClone =
+//     fCurrentVoiceClone->
+//       handleRepeatEndingStartInVoiceClone (
+//         elt->getInputLineNumber (),
+//         elt->getRepeatEndingKind (),
+//         elt->getRepeatEndingNumber ());
 
   // the container for the the original segment has just been cloned
   // and fCurrentSegmentClone has been set accordingly,
@@ -6534,10 +6560,10 @@ void msr2msrTranslator::visitStart (S_msrMultipleMeasureRest& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // create a multiple measure rests clone
-  fCurrentMultipleMeasureRestsClone =
-    elt->
-      createMultipleMeasureRestNewbornClone (
-        fCurrentSegmentClone);
+//   fCurrentMultipleMeasureRestsClone =
+//     elt->
+//       createMultipleMeasureRestNewbornClone (
+//         fCurrentSegmentClone);
 
   // append it to the current voice clone
   fCurrentVoiceClone->
@@ -7099,7 +7125,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //
 //       // append current measure clone to the current voice clone
 //       fCurrentVoiceClone->
-//         appendMeasureCloneToVoiceClone (
+//         addMeasureCloneToVoiceClone (
 //           elt->getInputLineNumber (),
 //           fCurrentMeasureClone);
 // //     }
@@ -7110,7 +7136,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //
 //     // append current measure clone to the current voice clone
 //     fCurrentVoiceClone->
-//       appendMeasureCloneToVoiceClone (
+//       addMeasureCloneToVoiceClone (
 //         elt->getInputLineNumber (),
 //         fCurrentMeasureClone);
 //   }
@@ -7118,7 +7144,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 /* JMI
   // append current measure clone to the current voice clone
   fCurrentVoiceClone->
-    appendMeasureCloneToVoiceClone (
+    addMeasureCloneToVoiceClone (
       elt->getInputLineNumber (),
       fCurrentMeasureClone);
 */
