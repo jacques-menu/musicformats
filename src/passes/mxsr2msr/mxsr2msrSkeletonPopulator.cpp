@@ -10881,7 +10881,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 //   mfAssert (
 //     __FILE__, mfInputLineNumber (__LINE__),
 //     fCurrentRecipientMsrVoice != nullptr,
-//     "fCurrentRecipientMsrVoice is null");
+//     "fCurrentRecipientMsrVoice is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //     // fetch stanzaNumber in the current note's voice

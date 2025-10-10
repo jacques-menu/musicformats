@@ -687,8 +687,7 @@ class EXP msr2msrTranslator :
     // segments
     // ------------------------------------------------------
 
-//     // the current segment clone is the one at the top of the stack
-//     S_msrSegment              fCurrentSegmentClone;
+    S_msrSegment              fCurrentSegmentClone;
 
 
     // measures

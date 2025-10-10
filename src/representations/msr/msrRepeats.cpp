@@ -960,7 +960,7 @@ void msrRepeatCommonPart::print (std::ostream& os) const
 //       i      = iBegin;
 //
 //     for ( ; ; ) {
-//       // short print the element
+//       //printthe element
 //       os << (*i);
 //       if (++i == iEnd) break;
 //       os << std::endl;
@@ -2529,7 +2529,7 @@ void msrRepeat::print (std::ostream& os) const
 
   constexpr int fieldWidth = 18;
 
-  // short print the repeat common part
+  // print the repeat common part
   os <<
     std::setw (fieldWidth) <<
     "fRepeatCommonPart" << ": ";
@@ -2545,7 +2545,7 @@ void msrRepeat::print (std::ostream& os) const
 
   os << std::endl;
 
-  // short print the repeat endings
+  // print the repeat endings
   int repeatEndingsSize =
     fRepeatEndingsVector.size ();
 
@@ -2569,7 +2569,7 @@ void msrRepeat::print (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      // short print the repeat ending
+      // print the repeat ending
       os << (*i);
       if (++i == iEnd) break;
   // JMI    os << std::endl;

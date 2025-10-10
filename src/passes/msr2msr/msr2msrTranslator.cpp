@@ -1387,8 +1387,8 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrVoice \"" <<
-      elt->asString () << "\"" <<
+      "--> Start visiting msrVoice " <<
+      elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1580,8 +1580,8 @@ void msr2msrTranslator::visitStart (S_msrVoiceStaffChange& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrVoiceStaffChange '" <<
-      elt->asString () << '\'' <<
+      "--> Start visiting msrVoiceStaffChange " <<
+      elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1640,8 +1640,9 @@ void msr2msrTranslator::visitStart (S_msrSegment& elt)
 //       fCurrentSegmentClone);
 
   // create a segment clone
-  S_msrSegment
-    segmentClone =
+//   S_msrSegment
+//     segmentClone =
+    fCurrentSegmentClone =
       elt->createSegmentNewbornClone (
         fCurrentVoiceClone);
 
@@ -1649,7 +1650,8 @@ void msr2msrTranslator::visitStart (S_msrSegment& elt)
   fCurrentVoiceClone->
     addSegmentCloneToVoiceClone (
       elt->getInputLineNumber (),
-      segmentClone);
+//       segmentClone);
+      fCurrentSegmentClone);
 }
 
 void msr2msrTranslator::visitEnd (S_msrSegment& elt)
@@ -1669,13 +1671,13 @@ void msr2msrTranslator::visitEnd (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fCurrentVoiceClone->
-//     handleSegmentCloneEndInVoiceClone (
-//       elt->getInputLineNumber (),
-//       fCurrentSegmentClone);
+  fCurrentVoiceClone->
+    handleSegmentCloneEndInVoiceClone (
+      elt->getInputLineNumber (),
+      fCurrentSegmentClone);
 
-//   // forget current segment clone
-//   fCurrentSegmentClone = nullptr;
+  // forget current segment clone
+  fCurrentSegmentClone = nullptr;
 }
 
 //________________________________________________________________________
@@ -1760,7 +1762,7 @@ void msr2msrTranslator::visitStart (S_msrHarmonyDegree& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting S_msrHarmonyDegree '" <<
+      "--> Start visiting S_msrHarmonyDegree " <<
       elt->asString () <<
       ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
       ", fOnGoingChord: " << fOnGoingChord <<
@@ -1787,9 +1789,8 @@ void msr2msrTranslator::visitEnd (S_msrHarmony& elt)
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrHarmony '" <<
+      "--> End visiting msrHarmony " <<
       elt->asString () <<
-      '\'' <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1811,9 +1812,8 @@ void msr2msrTranslator::visitStart (S_msrFrame& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrFrame '" <<
+      "--> Start visiting msrFrame " <<
       elt->asString () <<
-      '\'' <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1928,9 +1928,8 @@ void msr2msrTranslator::visitStart (S_msrBassFigure& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrBassFigure '" <<
+      "--> Start visiting msrBassFigure " <<
       elt->asString () <<
-      '\'' <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1952,9 +1951,8 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrFiguredBass '" <<
+      "--> End visiting msrFiguredBass " <<
       elt->asString () <<
-      '\'' <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1986,7 +1984,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
 
     ss <<
       "--> Start visiting msrMeasure " <<
-      elt->asShortString () <<
+      elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2038,11 +2036,15 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
         fCurrentMeasureClone);
   }
   else {
-    // append current measure clone to the current voice clone
-    fCurrentVoiceClone->
-      addMeasureCloneToVoiceClone (
-        elt->getInputLineNumber (),
-        fCurrentMeasureClone);
+      // append current measure clone to the current segment clone
+    fCurrentSegmentClone->
+      appendMeasureToSegment (fCurrentMeasureClone);
+
+//     // append current measure clone to the current voice clone
+//     fCurrentVoiceClone->
+//       addMeasureCloneToVoiceClone (
+//         elt->getInputLineNumber (),
+//         fCurrentMeasureClone);
   }
 
   // JMI superflous ???
@@ -2068,7 +2070,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 
     ss <<
       "--> End visiting msrMeasure " <<
-      elt->asShortString () <<
+      elt->asString () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2121,11 +2123,11 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 
         ss <<
           "measure '" << fCurrentMeasureNumber <<
-          "' in voice \"" <<
+          "' in voice " <<
           elt->
             fetchMeasureUpLinkToVoice ()->
               getVoiceName () <<
-          "\" is of unknown kind in msr2msrTranslator";
+          " is of unknown kind in msr2msrTranslator";
 
         msr2msrInternalError (
 //         msr2msrInternalWarning (
@@ -2255,7 +2257,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 //         std::stringstream ss;
 //
 //         ss <<
-//           "fCurrentMultipleMeasureRests is null upon multiple measure rest end" <<
+//           "fCurrentMultipleMeasureRests is NULL upon multiple measure rest end" <<
 //           fCurrentMeasureNumber <<
 //           "', measurePuristNumber: '" <<
 //           measurePuristNumber <<
@@ -2553,10 +2555,15 @@ void msr2msrTranslator::visitStart (S_msrClefKeyTimeSignatureGroup& elt)
     elt->
       createClefKeyTimeSignatureGroupNewbornClone ();
 
-  // append it to the current voice clone
-  fCurrentVoiceClone->
-    appendClefKeyTimeSignatureGroupToVoice (
+  // append it to the current measure clone
+  fCurrentMeasureClone->
+    appendClefKeyTimeSignatureGroupToMeasure (
       fCurrentClefKeyTimeSignatureGroup);
+
+//   // append it to the current voice clone
+//   fCurrentVoiceClone->
+//     appendClefKeyTimeSignatureGroupToVoice (
+//       fCurrentClefKeyTimeSignatureGroup);
 
 //   fCurrentStaffClone->
 //     appendClefKeyTimeSignatureGroupToStaffClone (
@@ -6413,7 +6420,7 @@ void msr2msrTranslator::visitStart (S_msrRepeatCommonPart& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  S_msrSegment
+//   S_msrSegment
     fCurrentSegmentClone =
       fCurrentVoiceClone->
         handleRepeatCommonPartStartInVoiceClone (
@@ -6475,12 +6482,12 @@ void msr2msrTranslator::visitStart (S_msrRepeatEnding& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 // S_msrSegment
-//   fCurrentSegmentClone =
-//     fCurrentVoiceClone->
-//       handleRepeatEndingStartInVoiceClone (
-//         elt->getInputLineNumber (),
-//         elt->getRepeatEndingKind (),
-//         elt->getRepeatEndingNumber ());
+  fCurrentSegmentClone =
+    fCurrentVoiceClone->
+      handleRepeatEndingStartInVoiceClone (
+        elt->getInputLineNumber (),
+        elt->getRepeatEndingKind (),
+        elt->getRepeatEndingNumber ());
 
   // the container for the the original segment has just been cloned
   // and fCurrentSegmentClone has been set accordingly,

@@ -180,9 +180,9 @@ void msrMeasure::initializeMeasure ()
 
     ss <<
       "Initializing measure: [" <<
-      "fMeasureNumber: '" <<
+      "fMeasureNumber: " <<
       fMeasureNumber <<
-      "', fMeasureDebugNumber: " <<
+      ", fMeasureDebugNumber: " <<
       fMeasureDebugNumber <<
       ", fMeasureUpLinkToSegment: " <<
       fetchSegmentAsShortString (fMeasureUpLinkToSegment) <<
@@ -981,9 +981,9 @@ void msrMeasure::setMeasureRepeatContextKind (
       std::stringstream ss;
 
       ss <<
-        "Setting repeat context kind of measure '" <<
-        fMeasureNumber <<
-        "' to '" <<
+        "Setting repeat context kind of measure " <<
+        asString () <<
+        " to '" <<
         measureRepeatContextKind <<
         "' in segment " <<
         fetchSegmentAsString (fMeasureUpLinkToSegment) <<
@@ -1011,9 +1011,9 @@ void msrMeasure::setMeasureNumber (
       std::stringstream ss;
 
       ss <<
-        "Setting the measure number of measure '" <<
-        fMeasureNumber <<
-        "' to '" <<
+        "Setting the measure number of measure " <<
+        asString () <<
+        " to '" <<
         measureNumber <<
         "' in segment " <<
         fetchSegmentAsString (fMeasureUpLinkToSegment) <<
@@ -1041,9 +1041,9 @@ void msrMeasure::setMeasureOrdinalNumberInVoice (
       std::stringstream ss;
 
       ss <<
-        "Setting ordinal number of measure '" <<
-        fMeasureNumber <<
-        "' to '" <<
+        "Setting ordinal number of measure " <<
+        asString () <<
+        " to '" <<
         measureOrdinalNumber <<
         "' in segment " <<
         fetchSegmentAsString (fMeasureUpLinkToSegment) <<
@@ -1071,9 +1071,9 @@ void msrMeasure::setMeasurePuristNumber (
     std::stringstream ss;
 
     ss <<
-      "Setting the purist number of measure '" <<
-      fMeasureNumber <<
-      "' to '" <<
+      "Setting the purist number of measure " <<
+      asString () <<
+      " to '" <<
       measurePuristNumber <<
       "' in segment " <<
       fetchSegmentAsString (fMeasureUpLinkToSegment) <<
@@ -1671,9 +1671,9 @@ void msrMeasure::setNextMeasureNumber (const mfMeasureNumber& nextMeasureNumber)
     std::stringstream ss;
 
     ss <<
-      "Setting next measure number for measure '" <<
-      fMeasureNumber <<
-      "' to '" <<
+      "Setting next measure number for measure " <<
+      asString () <<
+      " to '" <<
       nextMeasureNumber <<
       "' in measure " <<
       this->asShortString () <<
@@ -4722,9 +4722,9 @@ void msrMeasure::setMeasurePuristNumberFromVoice ()
       std::stringstream ss;
 
       ss <<
-        "Setting the measure purist number of measure '" <<
-        fMeasureNumber <<
-        "' from voice " <<
+        "Setting the measure purist number of measure " <<
+        asString () <<
+        " from voice " <<
         voice->getVoiceName () <<
         " to '" <<
         voiceCurrentPuristNumber <<
@@ -6487,7 +6487,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
 
     ss <<
       "handleFirstFiguredBassInFiguredBassMeasure() 5" <<
-      ", previousFiguredBass is null, positionInMeasureToPadUpTo: " <<
+      ", previousFiguredBass is NULL, positionInMeasureToPadUpTo: " <<
       positionInMeasureToPadUpTo.asString ();
 
     gWaeHandler->waeTrace (
@@ -7097,7 +7097,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
 /* JMI
     else {
       gLog <<
-        "*** currentFiguredBass is null ***" << // JMI
+        "*** currentFiguredBass is NULL ***" << // JMI
         std::endl;
     }
     */
@@ -7565,6 +7565,8 @@ void msrMeasure::finalizeMeasure (
         fetchMeasureUpLinkToVoice ()->getVoiceName () <<
         ", fMeasureNumber: " <<
         fMeasureNumber <<
+        ", fMeasureDebugNumber: " <<
+        fMeasureDebugNumber <<
         ", fMeasureNotesFlatList: " <<
         mfSingularOrPlural (
           measureNotesFlatListSize, "note", "notes") <<
@@ -7761,9 +7763,9 @@ void msrMeasure::finalizeMeasureClone (
       std::stringstream ss;
 
       ss <<
-        "*********>> measure clone '" <<
-        fMeasureNumber <<
-        "': measure kind '" <<
+        "*********>> measure clone " <<
+        asString () <<
+        ": measure kind '" <<
         fMeasureKind <<
         "' differs from original measure measure kind '" <<
         originalMeasureMeasureKind <<
@@ -7782,9 +7784,9 @@ void msrMeasure::finalizeMeasureClone (
         std::stringstream ss;
 
         ss <<
-          "*********>> measure clone '" <<
-          fMeasureNumber <<
-          "' full measure whole notes is 0" <<
+          "*********>> measure clone " <<
+          asString () <<
+          ": full measure whole notes is 0" <<
           ", line " << inputLineNumber;
 
      //   msrInternalError ( // JMI
@@ -8064,6 +8066,8 @@ std::string msrMeasure::asShortString () const
     "[Measure" <<
     ", fMeasureNumber: '" <<
     fMeasureNumber <<
+    ", fMeasureDebugNumber: '" <<
+    fMeasureNumber <<
     "', fMeasureKind: " <<
     fMeasureKind <<
     ", fMeasureWholeNotesDuration: " <<
@@ -8204,6 +8208,8 @@ std::string msrMeasure::asString () const
     "[Measure" <<
     ", fMeasureNumber: '" <<
     fMeasureNumber <<
+    ", fMeasureDebugNumber: '" <<
+    fMeasureDebugNumber <<
     "', fMeasureKind: " <<
     fMeasureKind <<
     ", segmentUpLinkToVoice: ";
@@ -8252,7 +8258,10 @@ void msrMeasure::displayMeasure (
   gLog <<
     std::endl <<
     "*********>> Measure " <<
+    ", fMeasureNumber: '" <<
     fMeasureNumber <<
+    ", fMeasureDebugNumber: '" <<
+    fMeasureDebugNumber <<
     /* JMI
     "', fMeasurePuristNumber: " <<
     fMeasurePuristNumber <<
@@ -8279,6 +8288,8 @@ void msrMeasure::print (std::ostream& os) const
     "[Measure" <<
     ", fMeasureNumber: '" <<
     fMeasureNumber <<
+    ", fMeasureDebugNumber: '" <<
+    fMeasureDebugNumber <<
     "', fMeasureKind: " <<
     fMeasureKind <<
     ", " <<
@@ -8397,6 +8408,8 @@ void msrMeasure::printFull (std::ostream& os) const
     "[Measure" <<
     ", fMeasureNumber: '" <<
     fMeasureNumber <<
+    ", fMeasureDebugNumber: '" <<
+    fMeasureDebugNumber <<
     "', fMeasureKind: " <<
     fMeasureKind <<
     ", " <<
@@ -8664,7 +8677,10 @@ void msrMeasure::printFull (std::ostream& os) const
     mfSingularOrPlural (
       measureNotesFlatListSize, "note", "notes") <<
     ", fetchMeasureUpLinkToVoice: " << fetchMeasureUpLinkToVoice ()->getVoiceName () <<
-    ", fMeasureNumber:" << fMeasureNumber <<
+    ", fMeasureNumber: '" <<
+    fMeasureNumber <<
+    ", fMeasureDebugNumber: '" <<
+    fMeasureDebugNumber <<
     std::endl;
 
   if (measureNotesFlatListSize) {

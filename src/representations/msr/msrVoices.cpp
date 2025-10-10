@@ -364,7 +364,7 @@ void msrVoice::initializeVoice (
     voiceNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoicesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -535,7 +535,7 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
   const S_msrStaff& staffClone)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoicesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -591,7 +591,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
   const S_msrStaff&        containingStaff)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoicesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -863,7 +863,11 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 void msrVoice::setVoiceSegment (const S_msrSegment& segment)
 {
  #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+  if (
+    gTraceOahGroup->getTraceVoicesBasics ()
+      ||
+    gTraceOahGroup->getTraceSegmentsBasics ()
+  ) {
     std::stringstream ss;
 
     ss <<
@@ -915,7 +919,7 @@ void msrVoice::addSegmentCloneToVoiceClone (
     std::stringstream ss;
 
     ss <<
-      "Adding segment clone" <<
+      "Adding segment clone " <<
       segmentClone->asString () <<
       " to voice  clone " <<
       asString () <<
@@ -1542,10 +1546,10 @@ void msrVoice::addMeasureCloneToVoiceClone (
 
     ss <<
       "Adding measure clone " <<
-      measureClone->asShortString () <<
+      measureClone->asString () <<
       " to voice clone " <<
-      fVoiceName << "\"" <<
-      "', line " << inputLineNumber;
+      fVoiceName <<
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3532,7 +3536,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 //     std::stringstream ss;
 //
 //     ss <<
-//       "fVoiceLastSegment is null in appendNoteToVoice()";
+//       "fVoiceLastSegment is NULL in appendNoteToVoice()";
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
@@ -5288,7 +5292,7 @@ S_msrRepeat msrVoice::createARepeatCloneAndStackIt (
 //       ss <<
 //         "Voice last segment " <<
 //         fVoiceSegment->asString () <<
-//         " is null, not moved to the initial elements list in voice \"" <<
+//         " is NULL, not moved to the initial elements list in voice \"" <<
 //         fVoiceName <<
 //         "\" (" << context << ")" <<
 //         ", line " << inputLineNumber;
@@ -5568,9 +5572,8 @@ void msrVoice::handleVoiceLevelRepeatStart (
     std::stringstream ss;
 
     ss <<
-      "Creating a repeat common part upon its start in voice \"" <<
+      "Creating a repeat common part upon its voice-level start in voice " <<
       fVoiceName <<
-      "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -8823,7 +8826,7 @@ void msrVoice::handleMultipleMeasureRestsEndInVoiceClone (
         std::stringstream ss;
 
         ss <<
-          "current voice multiple measure rests is null when attempting to handle multiple measure rests end in voice clone " <<
+          "current voice multiple measure rests is NULL when attempting to handle multiple measure rests end in voice clone " <<
           asShortString ();
 
         msrInternalError (
@@ -9156,7 +9159,7 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
         std::stringstream ss;
 
         ss <<
-          "current voice measures repeat is null when attempting to handle measures repeat end in voice clone " <<
+          "current voice measures repeat is NULL when attempting to handle measures repeat end in voice clone " <<
           asShortString ();
 
         msrInternalError (
@@ -9221,7 +9224,7 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
     std::stringstream ss;
 
     ss <<
-      "current voice measures repeat is null when attempting to handle measures repeat pattern start " <<
+      "current voice measures repeat is NULL when attempting to handle measures repeat pattern start " <<
       " in voice clone " <<
       asShortString ();
 
@@ -9303,7 +9306,7 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
     std::stringstream ss;
 
     ss <<
-      "current voice measures repeat is null when attempting to handle measures repeat pattern end " <<
+      "current voice measures repeat is NULL when attempting to handle measures repeat pattern end " <<
       " in voice clone " <<
       asShortString ();
 
@@ -9371,7 +9374,7 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
     std::stringstream ss;
 
     ss <<
-      "current voice measures repeat is null when attempting to handle measures repeat replicas start " <<
+      "current voice measures repeat is NULL when attempting to handle measures repeat replicas start " <<
       " in voice clone " <<
       asShortString ();
 
@@ -9453,7 +9456,7 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
     std::stringstream ss;
 
     ss <<
-      "current voice measures repeat is null when attempting to handle measures repeat replicas end " <<
+      "current voice measures repeat is NULL when attempting to handle measures repeat replicas end " <<
       " in voice clone " <<
       asShortString ();
 
@@ -9934,9 +9937,8 @@ S_msrSegment msrVoice::handleRepeatCommonPartStartInVoiceClone (
     std::stringstream ss;
 
     ss <<
-      "Creating a repeat common part upon its start in voice \"" <<
+      "Creating a repeat common part upon its start in voice clone " <<
       fVoiceName <<
-      "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (

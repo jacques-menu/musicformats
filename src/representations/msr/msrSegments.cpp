@@ -116,10 +116,6 @@ void msrSegment::initializeSegment ()
     ss <<
       "Initializing segment " <<
       asString () <<
-      ", fSegmentAbsoluteNumber: " <<
-      fSegmentAbsoluteNumber <<
-      ", segmentNumber: " <<
-      fSegmentNumber <<
       ", in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
       ", line " << fInputLineNumber;
@@ -172,7 +168,7 @@ void msrSegment::setSegmentLastMeasure (
   if (
     gTraceOahGroup->getTraceSegmentsBasics ()
       ||
-    gTraceOahGroup->getTraceMeasures ()
+    gTraceOahGroup->getTraceMeasuresBasics ()
   ) {
     std::stringstream ss;
 
@@ -453,7 +449,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
     std::stringstream ss;
 
     ss <<
-      "fSegmentLastMeasure is null in segment " <<
+      "fSegmentLastMeasure is NULL in segment " <<
       this->asString () <<
       ", in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
@@ -2333,9 +2329,7 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
       ", forwardStepLength: " <<
       forwardStepLength <<
       ", to segment " <<
-      fSegmentAbsoluteNumber <<
-      ", segmentNumber: " <<
-      fSegmentNumber <<
+      asString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
       ", line " << inputLineNumber;
@@ -3012,9 +3006,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 
     ss <<
       "Fetching last measure from segment " <<
-      fSegmentAbsoluteNumber <<
-      ", segmentNumber: " <<
-      fSegmentNumber <<
+      asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -3029,9 +3021,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 
     ss <<
       "cannot fetch last measure from segment " <<
-      fSegmentAbsoluteNumber <<
-      ", segmentNumber: " <<
-      fSegmentNumber <<
+      asString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
       ", since it is empty";
@@ -3079,9 +3069,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //
 //     ss <<
 //       "Removing last measure from segment " <<
-//       fSegmentAbsoluteNumber <<
-//       ", segmentNumber: " <<
-//       fSegmentNumber <<
+//       asString () <<
 //       " (" << context << ")" <<
 //       ", line " << inputLineNumber;
 //
@@ -3105,9 +3093,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 // //
 // //     ss <<
 // //       "cannot remove last measure from segment " <<
-// //       fSegmentAbsoluteNumber <<
-// //       ", segmentNumber: " <<
-// //       fSegmentNumber <<
+//       asString () <<
 // //       " in voice \"" <<
 // //       fetchVoiceName (fSegmentUpLinkToVoice) <<
 // //       "\"" <<
@@ -3127,9 +3113,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //
 //     ss <<
 //       "cannot remove last measure from segment " <<
-//       fSegmentAbsoluteNumber <<
-//       ", segmentNumber: " <<
-//       fSegmentNumber <<
+//       asString () <<
 //       " in voice \"" <<
 //       fetchVoiceName (fSegmentUpLinkToVoice) <<
 //       "\"" <<
@@ -3250,7 +3234,7 @@ void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
 
     ss <<
       "Finalizing all the measures of segment " <<
-      fSegmentAbsoluteNumber <<
+      asString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -3382,19 +3366,12 @@ std::string msrSegment::asShortString () const
   ss <<
     '[' <<
     "Segment " <<
-    ", fSegmentAbsoluteNumber: " <<
-    fSegmentAbsoluteNumber <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
-    ", fSegmentUpLinkToVoice: ";
-  if (fSegmentUpLinkToVoice) {
-    ss <<
-      fetchVoiceName (fSegmentUpLinkToVoice);
-  }
-  else {
-    ss << "[NULL]";
-  }
-  ss <<
+    ", fSegmentAbsoluteNumber: " <<
+    fSegmentAbsoluteNumber <<
+    ", fSegmentUpLinkToVoice: " <<
+    fetchVoiceName (fSegmentUpLinkToVoice) <<
     ']';
 
   return ss.str ();
@@ -3406,18 +3383,12 @@ std::string msrSegment::asString () const
 
   ss <<
     "[Segment" <<
-    ", fSegmentAbsoluteNumber: " <<
-    fSegmentAbsoluteNumber <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
-    ", fSegmentUpLinkToVoice: ";
-  if (fSegmentUpLinkToVoice) {
-    ss <<
-      fetchVoiceName (fSegmentUpLinkToVoice);
-  }
-  else {
-    ss << "[NULL]";
-  }
+    ", fSegmentAbsoluteNumber: " <<
+    fSegmentAbsoluteNumber <<
+    ", fSegmentUpLinkToVoice: " <<
+    fetchVoiceName (fSegmentUpLinkToVoice);
 
   ss <<
     ", fSegmentElementsList: ";
@@ -3467,16 +3438,10 @@ void msrSegment::displaySegment (
     fSegmentAbsoluteNumber <<
     ", segmentNumber: " <<
     fSegmentNumber <<
-    ", fSegmentUpLinkToVoice: ";
-  if (fSegmentUpLinkToVoice) {
-    gLog <<
-      fetchVoiceName (fSegmentUpLinkToVoice);
-  }
-  else {
-    gLog << "[NULL]";
-  }
-  gLog <<
+    ", fSegmentUpLinkToVoice: " <<
+    fetchVoiceName (fSegmentUpLinkToVoice) <<
     std::endl <<
+
     " (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
@@ -3495,10 +3460,10 @@ void msrSegment::print (std::ostream& os) const
 {
   os <<
     "[Segment" <<
-    ", fSegmentAbsoluteNumber: " <<
-    fSegmentAbsoluteNumber <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
+    ", fSegmentAbsoluteNumber: " <<
+    fSegmentAbsoluteNumber <<
     ", " <<
     mfSingularOrPlural (
       fSegmentElementsList.size (), "element", "elements") <<
@@ -3513,15 +3478,8 @@ void msrSegment::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fSegmentUpLinkToVoice" << ": ";
-  if (fSegmentUpLinkToVoice) {
-    os <<
-      fetchVoiceName (fSegmentUpLinkToVoice);
-  }
-  else {
-    os << "[NULL]";
-  }
-  os <<
+    "fSegmentUpLinkToVoice" << ": " <<
+    fetchVoiceName (fSegmentUpLinkToVoice) <<
     std::endl;
 
   os << std::endl;
@@ -3637,10 +3595,10 @@ void msrSegment::printFull (std::ostream& os) const
 {
   os <<
     "[Segment" <<
-    ", fSegmentAbsoluteNumber: " <<
-    fSegmentAbsoluteNumber <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
+    ", fSegmentAbsoluteNumber: " <<
+    fSegmentAbsoluteNumber <<
     ", " <<
     mfSingularOrPlural (
       fSegmentElementsList.size (), "element", "elements") <<
@@ -3655,15 +3613,8 @@ void msrSegment::printFull (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fSegmentUpLinkToVoice" << ": ";
-  if (fSegmentUpLinkToVoice) {
-    os <<
-      fetchVoiceName (fSegmentUpLinkToVoice);
-  }
-  else {
-    os << "[NULL]";
-  }
-  os <<
+    "fSegmentUpLinkToVoice" << ": " <<
+    fetchVoiceName (fSegmentUpLinkToVoice) <<
     std::endl;
 
   os << std::endl;
