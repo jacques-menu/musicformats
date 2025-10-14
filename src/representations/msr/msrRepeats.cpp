@@ -129,16 +129,8 @@ msrRepeatElement::msrRepeatElement (
       "Creating a repeat element";
 
     ss <<
-      ", upLinkToRepeat: ";
-    if (upLinkToRepeat) {
-      ss <<
-        upLinkToRepeat->asShortString ();
-    }
-    else {
-      ss << "[NULL]";
-    }
-
-    ss <<
+      ", upLinkToRepeat: " <<
+      fetchRepeatAsShortString (upLinkToRepeat) <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1017,16 +1009,8 @@ void msrRepeatCommonPart::printFull (std::ostream& os) const
 
   os <<
     "fRepeatElementUpLinkToRepeat: " <<
-    ", fRepeatElementUpLinkToRepeat: ";
-  if (fRepeatElementUpLinkToRepeat) {
-    os <<
-      fRepeatElementUpLinkToRepeat->
-        asShortString ();
-  }
-  else {
-    os << "[NULL]";
-  }
-  os <<
+    ", fRepeatElementUpLinkToRepeat: " <<
+    fetchRepeatAsShortString (fRepeatElementUpLinkToRepeat) <<
     std::endl << std::endl;
 
 //   // print the elements
@@ -1423,18 +1407,8 @@ std::string msrRepeatEnding::asString () const
   ss <<
     "[RepeatEnding" <<
     ", fRepeatEndingKind: " << fRepeatEndingKind <<
-    ", fRepeatElementUpLinkToRepeat: ";
-
-  if (fRepeatElementUpLinkToRepeat) { // JMI 0.9.76
-    ss <<
-      fRepeatElementUpLinkToRepeat->
-        asShortString ();
-  }
-  else {
-    ss << "[NULL]";
-  }
-
-  ss <<
+    ", fRepeatElementUpLinkToRepeat: " <<
+    fetchRepeatAsShortString (fRepeatElementUpLinkToRepeat) <<
     ", fRepeatEndingNumber: " << fRepeatEndingNumber <<
     ", fRepeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
     "', line " << fInputLineNumber <<
@@ -2467,9 +2441,9 @@ std::string msrRepeat::asShortString () const
   }
 */
 
-  ss <<
-    ", fRepeatCommonPart: " <<
-    fetchRepeatCommonPartAsShortString (fRepeatCommonPart);
+//   ss <<
+//     ", fRepeatCommonPart: " <<
+//     fetchRepeatCommonPartAsShortString (fRepeatCommonPart);
 
   int repeatEndingsNumber =
     fRepeatEndingsVector.size ();
@@ -2508,14 +2482,8 @@ std::string msrRepeat::asString () const
   }
 
   ss <<
-    ", fRepeatCommonPart: ";
-  if (fRepeatCommonPart) {
-    ss <<
-      fRepeatCommonPart->asString ();
-  }
-  else {
-    ss << "[NULL]";
-  }
+    ", fRepeatCommonPart: " <<
+      fetchRepeatCommonPartAsShortString (fRepeatCommonPart);
 
   int endingsNumber =
     fRepeatEndingsVector.size ();
@@ -2589,18 +2557,9 @@ void msrRepeat::print (std::ostream& os) const
   // print the repeat common part
   os <<
     std::setw (fieldWidth) <<
-    "fRepeatCommonPart" << ": ";
-  if (fRepeatCommonPart) {
-    os << std::endl;
-    ++gIndenter;
-    os << fRepeatCommonPart;
-    --gIndenter;
-  }
-  else {
-    os << "[NULL]" << std::endl;
-  }
-
-  os << std::endl;
+    "fRepeatCommonPart" << ": " <<
+    fetchRepeatCommonPartAsShortString (fRepeatCommonPart) <<
+    std::endl;
 
   // print the repeat endings
   int repeatEndingsSize =
@@ -2680,41 +2639,22 @@ void msrRepeat::printFull (std::ostream& os) const
   // print the immediately preceding and following repeats
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fImmediatelyPrecedingRepeat" << ": ";
-  if (fImmediatelyPrecedingRepeat) {
-    os <<
-      fImmediatelyPrecedingRepeat->asShortString ();
-  }
-  else {
-    os << "[NULL]";
-  }
-  os << std::endl << std::endl;
+    "fImmediatelyPrecedingRepeat" << ": " <<
+      fetchRepeatAsShortString (fImmediatelyPrecedingRepeat) <<
+    std::endl << std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fImmediatelyFollowingRepeat" << ": ";
-  if (fImmediatelyFollowingRepeat) {
-    os <<
-      fImmediatelyFollowingRepeat->asShortString ();
-  }
-  else {
-    os << "[NULL]";
-  }
-  os << std::endl << std::endl;
+    "fImmediatelyFollowingRepeat" << ": " <<
+      fetchRepeatAsShortString (fImmediatelyFollowingRepeat) <<
+    std::endl << std::endl;
 
   // print the repeat common part
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fRepeatCommonPart" << ": ";
-  if (fRepeatCommonPart) {
-    os <<
-      fRepeatCommonPart <<
-      std::endl;
-  }
-  else {
-    os << "[NULL]";
-  }
-  os << std::endl << std::endl;
+    "fRepeatCommonPart" << ": " <<
+      fetchRepeatCommonPartAsShortString (fRepeatCommonPart) <<
+    std::endl << std::endl;
 
   // print the repeat endings
   int endingsNumber =
