@@ -648,6 +648,17 @@ using S_msrRepeat = SMARTP<msrRepeat>;
 EXP std::ostream& operator << (std::ostream& os, const S_msrRepeat& elt);
 EXP std::ostream& operator << (std::ostream& os, const msrRepeat& elt);
 
+std::string fetchRepeatAsShortString (const S_msrRepeat& Repeat);
+std::string fetchRepeatAsString (const S_msrRepeat& Repeat);
+
+std::string fetchRepeatCommonPartAsShortString (
+  const S_msrRepeatCommonPart& repeatCommonPart);
+std::string fetchepeatCommonPartAsString (
+  const S_msrRepeatCommonPart& repeatCommonPart);
+
+std::string fetchRepeatEndingAsShortString (const S_msrRepeatEnding& repeatEnding);
+std::string fetchRepeatEndingAsString (const S_msrRepeatEnding& repeatEnding);
+
 
 }
 

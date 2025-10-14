@@ -928,16 +928,8 @@ std::string msrRepeatCommonPart::asString () const
 
   ss <<
     "[RepeatCommonPart" <<
-    ", fRepeatElementUpLinkToRepeat: ";
-  if (fRepeatElementUpLinkToRepeat) {
-    ss <<
-      fRepeatElementUpLinkToRepeat->
-        asShortString ();
-  }
-  else {
-    ss << "[NULL]";
-  }
-  ss <<
+    ", fRepeatElementUpLinkToRepeat: " <<
+    fetchRepeatAsShortString (fRepeatElementUpLinkToRepeat) <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -2476,15 +2468,8 @@ std::string msrRepeat::asShortString () const
 */
 
   ss <<
-    ", fRepeatCommonPart: ";
-  if (fRepeatCommonPart) {
-    ss <<
-      fRepeatCommonPart->asShortString ();
-  }
-  else {
-    ss <<
-      "[NULL]";
-  }
+    ", fRepeatCommonPart: " <<
+    fetchRepeatCommonPartAsShortString (fRepeatCommonPart);
 
   int repeatEndingsNumber =
     fRepeatEndingsVector.size ();
@@ -2787,6 +2772,105 @@ std::ostream& operator << (std::ostream& os, const msrRepeat& elt)
 
   return os;
 }
+
+std::string fetchRepeatAsShortString (const S_msrRepeat& repeat)
+{
+  std::string result;
+
+  if (repeat) {
+    result =
+      repeat->asShortString ();
+  }
+  else {
+    result = "\"** REPEAT IS NULL **\"";
+  }
+
+  return result;
+}
+
+std::string fetchRepeatAsString (const S_msrRepeat& repeat)
+{
+  std::string result;
+
+  if (repeat) {
+    result =
+      repeat->asString ();
+  }
+  else {
+    result = "\"** REPEAT IS NULL **\"";
+  }
+
+  return result;
+}
+
+
+
+std::string fetchRepeatCommonPartAsShortString (
+  const S_msrRepeatCommonPart& repeatCommonPart)
+{
+  std::string result;
+
+  if (repeatCommonPart) {
+    result =
+      repeatCommonPart->asShortString ();
+  }
+  else {
+    result = "\"** REPEAT_COMMON_PART IS NULL **\"";
+  }
+
+  return result;
+}
+
+std::string fetchepeatCommonPartAsString (
+  const S_msrRepeatCommonPart& repeatCommonPart)
+{
+  std::string result;
+
+  if (repeatCommonPart) {
+    result =
+      repeatCommonPart->asShortString ();
+  }
+  else {
+    result = "\"** REPEAT_COMMON_PART IS NULL **\"";
+  }
+
+  return result;
+}
+
+
+
+std::string fetchRepeatEndingAsShortString (const S_msrRepeatEnding& repeatEnding)
+{
+  std::string result;
+
+  if (repeatEnding) {
+    result =
+      repeatEnding->asString ();
+  }
+  else {
+    result = "\"** REPEAT_ENDING IS NULL **\"";
+  }
+
+  return result;
+}
+
+std::string fetchRepeatEndingAsString (const S_msrRepeatEnding& repeatEnding)
+{
+  std::string result;
+
+  if (repeatEnding) {
+    result =
+      repeatEnding->asShortString ();
+  }
+  else {
+    result = "\"** REPEAT_ENDING IS NULL **\"";
+  }
+
+  return result;
+}
+
+
+
 
 }
 

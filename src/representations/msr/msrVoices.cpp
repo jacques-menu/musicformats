@@ -4364,7 +4364,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-    displayPendingRepeatsStackSummary (
+    displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "createARepeatAndStackIt() 2");
   }
@@ -4406,7 +4406,7 @@ void msrVoice::pushRepeatOntoVoiceRepeatsStack (
       combinedContext =
         "pushRepeatOntoVoiceRepeatsStack() called from " + context;
 
-    displayPendingRepeatsStackSummary (
+    displayVoiceRepeatsStackSummary (
       inputLineNumber,
       combinedContext);
   }
@@ -4443,7 +4443,7 @@ void msrVoice::popRepeatFromVoiceRepeatsStack (
       combinedContext =
         "popRepeatFromVoiceRepeatsStack() 1 called from context " + context;
 
-    displayPendingRepeatsStackSummary (
+    displayVoiceRepeatsStackSummary (
       inputLineNumber,
       combinedContext);
   }
@@ -4497,7 +4497,7 @@ void msrVoice::popRepeatFromVoiceRepeatsStack (
       combinedContext =
         "popRepeatFromVoiceRepeatsStack() 2 called from " + context;
 
-    displayPendingRepeatsStackSummary (
+    displayVoiceRepeatsStackSummary (
       inputLineNumber,
       combinedContext);
   }
@@ -4561,7 +4561,7 @@ void msrVoice::displayPendingRepeatsStack (
     std::endl << std::endl;
 }
 
-void msrVoice::displayPendingRepeatsStackSummary (
+void msrVoice::displayVoiceRepeatsStackSummary (
   const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
@@ -5161,7 +5161,7 @@ void msrVoice::handleRepeatStartInVoice (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-    displayPendingRepeatsStackSummary (
+    displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatStartInVoice() 1");
   }
@@ -5192,7 +5192,7 @@ void msrVoice::handleRepeatStartInVoice (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-    displayPendingRepeatsStackSummary (
+    displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleRepeatStartInVoice() 2");
   }
@@ -6353,7 +6353,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-    displayPendingRepeatsStackSummary (
+    displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatStart() 1");
   }
@@ -6589,7 +6589,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-    displayPendingRepeatsStackSummary (
+    displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleVoiceLevelRepeatStart() 11");
   }
@@ -6619,7 +6619,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-    displayPendingRepeatsStackSummary (
+    displayVoiceRepeatsStackSummary (
       inputLineNumber,
       "handleNestedRepeatStartInVoice() 2");
   }
@@ -6647,7 +6647,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleRepeatStartInVoice() 1");
 //   }
@@ -6678,7 +6678,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleRepeatStartInVoice() 2");
 //   }
@@ -6708,7 +6708,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleVoiceLevelRepeatEndWithoutStart() 1");
 //   }
@@ -6847,7 +6847,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleVoiceLevelRepeatEndWithoutStart() 7");
 //   }
@@ -6879,7 +6879,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleVoiceLevelContainingRepeatEndWithoutStart() 1");
 //   }
@@ -7030,7 +7030,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleVoiceLevelContainingRepeatEndWithoutStart() 7");
 //   }
@@ -7062,7 +7062,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleVoiceLevelRepeatEndWithStart() 1");
 //   }
@@ -7183,7 +7183,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleVoiceLevelRepeatEndWithStart() 5");
 //   }
@@ -7215,7 +7215,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleNestedRepeatEndInVoice() 1");
 //   }
@@ -7284,7 +7284,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleNestedRepeatEndInVoice() 2");
 //   }
@@ -7298,7 +7298,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleRepeatEndInVoice() 1");
 //   }
@@ -7387,7 +7387,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleRepeatEndInVoice() 2");
 //   }
@@ -7416,7 +7416,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 1");
 //   }
@@ -7610,7 +7610,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 2");
 //   }
@@ -7640,7 +7640,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleVoiceLevelRepeatEndingStartWithExplicitStart() 1");
 //   }
@@ -7793,7 +7793,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayPendingRepeatsStackSummary (
+//     displayVoiceRepeatsStackSummary (
 //       inputLineNumber,
 //       "handleVoiceLevelRepeatEndingStartWithExplicitStart() 3");
 //   }
