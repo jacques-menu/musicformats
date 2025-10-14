@@ -682,25 +682,87 @@ class EXP msr2msrTranslator :
     S_msrVoice                fCurrentVoiceOriginal;
 
     std::map <S_msrNote, S_msrNote>
-                              fVoiceNotesMap; // JMI
+                              fVoiceNotesMap; // JMI 0.9.76
 
     // segments
     // ------------------------------------------------------
 
-    S_msrSegment              fCurrentSegmentClone;
+//     std::list <S_msrSegment>  fSegmentClonesStack;
+
+//     void                      displaySegmentClonesStack (
+//                                 const mfInputLineNumber& inputLineNumber,
+//                                 const std::string&       context);
 
 
     // measures
     // ------------------------------------------------------
 
     mfMeasureNumber           fCurrentMeasureNumber;
-    S_msrMeasure              fCurrentMeasureClone;
+    std::list <S_msrMeasure>  fMeasureClonesStack;
 
-    // multiple measure rests compression
-//     S_msrMeasure              fCurrentRestMeasure;
+    void                      displayMeasureClonesStack (
+                                const mfInputLineNumber& inputLineNumber,
+                                const std::string&       context);
 
-    S_msrMultipleMeasureRest fCurrentMultipleMeasureRestsClone;
+
+    // repeats
+    // ------------------------------------------------------
+
+    // a stack is needed to handle pending repeats, which can be nested
+    std::list <S_msrRepeat>   fRepeatClonesStack;
+
+    std::list <S_msrRepeatElement>
+                              fRepeatElementsStack;
+
+    S_msrRepeat               createARepeatCloneAndStackIt (
+                                const mfInputLineNumber& inputLineNumber,
+                                const std::string&       context);
+
+    void                      pushRepeatOntoVoiceRepeatsStack (
+                                const mfInputLineNumber& inputLineNumber,
+                                const S_msrRepeat&       repeat,
+                                const std::string&       context);
+
+    void                      popRepeatFromVoiceRepeatsStack (
+                                const mfInputLineNumber& inputLineNumber,
+                                const std::string&       context);
+
+    void                      handleVoiceLevelRepeatStart (
+                                const mfInputLineNumber& inputLineNumber);
+
+    void                      handleNestedRepeatStartInVoice (
+                                const mfInputLineNumber& inputLineNumber);
+
+    void                      handleVoiceLevelRepeatEndWithoutStart (
+                                const mfInputLineNumber& inputLineNumber,
+                                const mfMeasureNumber&   measureNumber,
+                                int                      repeatTimes);
+
+    void                      displayRepeatClonesStack (
+                                const mfInputLineNumber& inputLineNumber,
+                                const std::string&       context);
+
+
+    // multiple measure rests
+    // ------------------------------------------------------
+
+    S_msrMultipleMeasureRest  fCurrentMultipleMeasureRestsClone;
     Bool                      fOnGoingMultipleMeasureRests;
+
+    void                      displayMultipleMeasureRestClones (
+                                const mfInputLineNumber& inputLineNumber,
+                                const std::string&       context);
+
+
+    // measure repeats
+    // ------------------------------------------------------
+
+    S_msrMeasureRepeat        fCurrentMeasureRepeatClone;
+
+    void                      displayMeasureRepeat (
+                                const mfInputLineNumber& inputLineNumber,
+                                const std::string&       context);
+
 
     // bar checks
     // ------------------------------------------------------

@@ -12,8 +12,8 @@
 #ifndef ___msrVoices___
 #define ___msrVoices___
 
+#include <list>
 #include <map>
-#include <stack>
 
 #include "msrTypesForwardDeclarations.h"
 
@@ -54,7 +54,6 @@ std::string msrVoiceKindAsStringForPrint (
   msrVoiceKind voiceKind);
 
 //______________________________________________________________________________
-
 // data types
 // ------------------------------------------------------
 
@@ -237,9 +236,9 @@ class EXP msrVoice : public msrElement
 
     S_msrSegment          fetchVoiceCurrentRecipientSegment () const;
 
-    void                  addSegmentCloneToVoiceClone (
-                            const mfInputLineNumber& inputLineNumber,
-                            S_msrSegment             segmentClone);
+//     void                  addSegmentCloneToVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             S_msrSegment             segmentClone);
 
     // harmonies
 
@@ -934,7 +933,7 @@ class EXP msrVoice : public msrElement
 
     S_msrRepeat           createARepeatAndStackIt (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       context);
+                            const std::string& context);
 
     S_msrRepeat           createARepeatCloneAndStackIt (
                             const mfInputLineNumber& inputLineNumber,
@@ -948,6 +947,7 @@ class EXP msrVoice : public msrElement
 
     void                  popRepeatFromVoiceRepeatsStack (
                             const mfInputLineNumber& inputLineNumber,
+                            const S_msrRepeat&       repeat,
                             const std::string&       context);
 
 //     void                  appendRepeatToInitialVoiceElementsList (
@@ -965,7 +965,7 @@ class EXP msrVoice : public msrElement
 
     void                  handleNestedRepeatStartInVoice (
                             const mfInputLineNumber& inputLineNumber);
-
+//
     void                  handleVoiceLevelRepeatEndWithoutStart (
                             const mfInputLineNumber& inputLineNumber,
                             const mfMeasureNumber&   measureNumber,
@@ -1081,10 +1081,6 @@ class EXP msrVoice : public msrElement
     virtual void          displayVoice (
                             const mfInputLineNumber& inputLineNumber,
                             const std::string&       context) const;
-
-    void                  displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string&       context);
 
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;
@@ -1287,33 +1283,29 @@ class EXP msrVoice : public msrElement
     // private work services
     // ------------------------------------------------------
 
-    void                  displayVoiceRepeatsStackSummary (
+    void                  displayPendingRepeatsStack (
                             const mfInputLineNumber& inputLineNumber,
                             const std::string&       context);
+
+    void                  displayVoiceRepeatsStackSummary (
+                            const mfInputLineNumber& inputLineNumber,
+                            const std::string& context);
 
     void                  displayVoiceRepeatsStack (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       context);
-
-    void                  displayVoiceRepeatsStackAndVoice (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string&       context);
-
-    void                  displayVoiceMultipleMeasureRests (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string&       context);
-
-    void                  displayVoiceMultipleMeasureRestsAndVoice (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string&       context);
-
-    void                  displayVoiceMeasureRepeat (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string&       context);
-
-    void                  displayVoiceMeasureRepeatAndVoice (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string&       context);
+                            const std::string& context);
+//
+//     void                  displayVoiceMultipleMeasureRests (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const std::string&       context);
+//
+//     void                  displayVoiceMeasureRepeat (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const std::string&       context);
+//
+//     void                  displayVoiceMeasureRepeatAndVoice (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const std::string&       context);
 
     void                  displayVoiceMeasuresFlatList (
                             int fieldWidth) const;

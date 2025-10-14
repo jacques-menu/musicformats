@@ -957,8 +957,8 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatReplicas& e
 //______________________________________________________________________________
 S_msrMeasureRepeat msrMeasureRepeat::create (
   const mfInputLineNumber& inputLineNumber,
-  int measureRepeatMeasuresNumber,
-  int measureRepeatSlashesNumber)
+  int                      measureRepeatMeasuresNumber,
+  int                      measureRepeatSlashesNumber)
 {
   msrMeasureRepeat* obj =
     new msrMeasureRepeat (
@@ -971,8 +971,8 @@ S_msrMeasureRepeat msrMeasureRepeat::create (
 
 msrMeasureRepeat::msrMeasureRepeat (
   const mfInputLineNumber& inputLineNumber,
-  int  measureRepeatMeasuresNumber,
-  int  measureRepeatSlashesNumber)
+  int                      measureRepeatMeasuresNumber,
+  int                      measureRepeatSlashesNumber)
     : msrSegmentElement (inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED

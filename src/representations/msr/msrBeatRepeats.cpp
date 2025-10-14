@@ -958,9 +958,9 @@ std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatReplicas& elt)
 //______________________________________________________________________________
 S_msrBeatRepeat msrBeatRepeat::create (
   const mfInputLineNumber& inputLineNumber,
-  int        beatRepeatMeasuresNumber,
-  int        beatRepeatSlashesNumber,
-  const S_msrVoice& upLinkToVoice)
+  int                       beatRepeatMeasuresNumber,
+  int                       beatRepeatSlashesNumber,
+  const S_msrVoice&         upLinkToVoice)
 {
   msrBeatRepeat* obj =
     new msrBeatRepeat (
@@ -974,9 +974,9 @@ S_msrBeatRepeat msrBeatRepeat::create (
 
 msrBeatRepeat::msrBeatRepeat (
   const mfInputLineNumber& inputLineNumber,
-  int        beatRepeatMeasuresNumber,
-  int        beatRepeatSlashesNumber,
-  const S_msrVoice& upLinkToVoice)
+  int                       beatRepeatMeasuresNumber,
+  int                       beatRepeatSlashesNumber,
+  const S_msrVoice&         upLinkToVoice)
     : msrSegmentElement (inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED

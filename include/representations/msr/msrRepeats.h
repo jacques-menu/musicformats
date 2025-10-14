@@ -19,6 +19,8 @@
 #include "msrMeasureRepeats.h"
 #include "msrMultipleMeasureRests.h"
 #include "msrRepeatsEnumTypes.h"
+#include "msrSegmentsEnumTypes.h"
+#include "msrSegments.h"
 #include "msrVoiceElements.h"
 
 
@@ -34,10 +36,12 @@ class EXP msrRepeatElement: public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrRepeatElement> create (
-                            const mfInputLineNumber& inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber,
+                            msrSegmentKind           segmentKind);
 
     static SMARTP<msrRepeatElement> create (
                             const mfInputLineNumber& inputLineNumber,
+                            msrSegmentKind           segmentKind,
                             const S_msrRepeat&       upLinkToRepeat);
 
   protected:
@@ -46,10 +50,12 @@ class EXP msrRepeatElement: public msrElement
     // ------------------------------------------------------
 
                           msrRepeatElement (
-                            const mfInputLineNumber& inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber,
+                            msrSegmentKind           segmentKind);
 
                           msrRepeatElement (
                             const mfInputLineNumber& inputLineNumber,
+                            msrSegmentKind           segmentKind,
                             const S_msrRepeat&       upLinkToRepeat);
 
     virtual               ~msrRepeatElement ();
@@ -111,7 +117,8 @@ class EXP msrRepeatElement: public msrElement
     // ------------------------------------------------------
 
     void                  initializeRepeatElement (
-                            const mfInputLineNumber& inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber,
+                            msrSegmentKind           segmentKind);
 
   public:
 
@@ -161,6 +168,9 @@ class EXP msrRepeatCommonPart : public msrRepeatElement
     static SMARTP<msrRepeatCommonPart> create (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeat&       upLinkToRepeat);
+
+    SMARTP<msrRepeatCommonPart> createRepeatCommonPartNewbornClone (
+                            const S_msrVoice& containingVoice);
 
   protected:
 
@@ -278,6 +288,9 @@ class EXP msrRepeatEnding : public msrRepeatElement
                             const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind      repeatEndingKind,
                             const S_msrRepeat&       upLinkToRepeat);
+
+    SMARTP<msrRepeatEnding> createRepeatEndingNewbornClone (
+                            const S_msrVoice& containingVoice);
 
   protected:
 
@@ -423,7 +436,7 @@ class EXP msrRepeat : public msrSegmentElement
                             int                      repeatTimes,
                             const S_msrVoice&        upLinkToVoice);
 
-    SMARTP<msrRepeat> createRepeatNewbornClone (
+    SMARTP<msrRepeat>     createRepeatNewbornClone (
                             const S_msrVoice& containingVoice);
 
   protected:

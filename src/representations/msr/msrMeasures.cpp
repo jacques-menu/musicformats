@@ -5009,11 +5009,6 @@ void msrMeasure::handleEmptyMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
-    voice->
-      displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
-        inputLineNumber,
-        "handleEmptyMeasure() 1 measure has 0 measure whole notes???"); // JMI 0.9.72
-
     std::stringstream ss;
 
     ss <<

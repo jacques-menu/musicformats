@@ -49,38 +49,46 @@ mfSegmentNumber msrSegment::sSegmentsCounter;
 mfSegmentNumber msrSegment::sSegmentNumber;
 
 S_msrSegment msrSegment::create (
-  const mfInputLineNumber& inputLineNumber)
+  const mfInputLineNumber& inputLineNumber,
+  msrSegmentKind           segmentKind)
 {
   msrSegment* obj =
     new msrSegment (
-      inputLineNumber);
+      inputLineNumber,
+      segmentKind);
   assert (obj != nullptr);
   return obj;
 }
 
 S_msrSegment msrSegment::create (
   const mfInputLineNumber& inputLineNumber,
+  msrSegmentKind           segmentKind,
   const S_msrVoice&        segmentUpLinkToVoice)
 {
   msrSegment* obj =
     new msrSegment (
       inputLineNumber,
+      segmentKind,
       segmentUpLinkToVoice);
   assert (obj != nullptr);
   return obj;
 }
 
 msrSegment::msrSegment (
-  const mfInputLineNumber& inputLineNumber)
+  const mfInputLineNumber& inputLineNumber,
+  msrSegmentKind           segmentKind)
 //     : msrVoiceElement (inputLineNumber)
     : msrElement (inputLineNumber)
 {
+  fSegmentKind = segmentKind;
+
   // do other initializations
   initializeSegment ();
 }
 
 msrSegment::msrSegment (
   const mfInputLineNumber& inputLineNumber,
+  msrSegmentKind           segmentKind,
   const S_msrVoice&        segmentUpLinkToVoice)
 //     : msrVoiceElement (inputLineNumber)
     : msrElement (inputLineNumber)
@@ -92,6 +100,8 @@ msrSegment::msrSegment (
     segmentUpLinkToVoice != nullptr,
     "segmentUpLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  fSegmentKind = segmentKind;
 
   // set segment's voice upLink
   fSegmentUpLinkToVoice =
@@ -269,6 +279,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
     newbornClone =
       msrSegment::create (
         fInputLineNumber,
+        fSegmentKind,
         containingVoice);
 
   // absolute number, for coherency between passes
@@ -309,6 +320,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
     deepClone =
       msrSegment::create (
         fInputLineNumber,
+        fSegmentKind,
         containingVoice);
 
   // absolute number
@@ -431,20 +443,20 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
   const mfInputLineNumber& inputLineNumber) const
 {
   if (! fSegmentLastMeasure) {
-#ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceMeasuresDetails ()
-      ||
-    gTraceOahGroup->getTraceSegmentsDetails ()
-      ||
-    gTraceOahGroup->getTraceRepeatsDetails ()
-  ) {
-    fSegmentUpLinkToVoice->
-      displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
-        inputLineNumber,
-        "assertSegmentLastMeasureIsNotNull()");
-  }
-#endif // MF_TRACE_IS_ENABLED
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (
+//     gTraceOahGroup->getTraceMeasuresDetails ()
+//       ||
+//     gTraceOahGroup->getTraceSegmentsDetails ()
+//       ||
+//     gTraceOahGroup->getTraceRepeatsDetails ()
+//   ) {
+//     fSegmentUpLinkToVoice->
+//       displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
+//         inputLineNumber,
+//         "assertSegmentLastMeasureIsNotNull()");
+//   }
+// #endif // MF_TRACE_IS_ENABLED
 
     std::stringstream ss;
 
@@ -3368,6 +3380,8 @@ std::string msrSegment::asShortString () const
     "Segment " <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
+    ", fSegmentKind: " <<
+    fSegmentKind <<
     ", fSegmentAbsoluteNumber: " <<
     fSegmentAbsoluteNumber <<
     ", fSegmentUpLinkToVoice: " <<
@@ -3383,6 +3397,8 @@ std::string msrSegment::asString () const
 
   ss <<
     "[Segment" <<
+    ", fSegmentKind: " <<
+    fSegmentKind <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
     ", fSegmentAbsoluteNumber: " <<
@@ -3460,6 +3476,8 @@ void msrSegment::print (std::ostream& os) const
 {
   os <<
     "[Segment" <<
+    ", fSegmentKind: " <<
+    fSegmentKind <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
     ", fSegmentAbsoluteNumber: " <<
@@ -3595,6 +3613,8 @@ void msrSegment::printFull (std::ostream& os) const
 {
   os <<
     "[Segment" <<
+    ", fSegmentKind: " <<
+    fSegmentKind <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
     ", fSegmentAbsoluteNumber: " <<

@@ -20,6 +20,7 @@
 #include "msrMeasures.h"
 #include "mfMoments.h"
 #include "msrMultipleMeasureRests.h"
+#include "msrSegmentsEnumTypes.h"
 
 
 namespace MusicFormats
@@ -41,10 +42,12 @@ class EXP msrSegment : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrSegment> create (
-                            const mfInputLineNumber& inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber,
+                            msrSegmentKind           segmentKind);
 
     static SMARTP<msrSegment> create (
                             const mfInputLineNumber& inputLineNumber,
+                            msrSegmentKind           segmentKind,
                             const S_msrVoice&        segmentUpLinkToVoice);
 
     SMARTP<msrSegment> createSegmentNewbornClone (
@@ -59,10 +62,12 @@ class EXP msrSegment : public msrElement
     // ------------------------------------------------------
 
                           msrSegment (
-                            const mfInputLineNumber& inputLineNumber);
+                            const mfInputLineNumber& inputLineNumber,
+                            msrSegmentKind           segmentKind);
 
                           msrSegment (
                             const mfInputLineNumber& inputLineNumber,
+                            msrSegmentKind           segmentKind,
                             const S_msrVoice&        segmentUpLinkToVoice);
 
     virtual               ~msrSegment ();
@@ -84,7 +89,13 @@ class EXP msrSegment : public msrElement
     S_msrVoice            getSegmentUpLinkToVoice () const
                               { return fSegmentUpLinkToVoice; }
 
-    //segmet numbers
+
+    // segment kind
+
+    msrSegmentKind        getSegmentKind () const
+                              { return fSegmentKind; }
+
+    // segmet numbers
 
     mfSegmentNumber       getSegmentAbsoluteNumber () const
                               { return fSegmentAbsoluteNumber; }
@@ -497,6 +508,9 @@ class EXP msrSegment : public msrElement
 
     // upLinks
     S_msrVoice            fSegmentUpLinkToVoice;
+
+    // segment kind
+    msrSegmentKind        fSegmentKind;
 
     // absolute number, shared by newborn clones and deep copies
     mfSegmentNumber       fSegmentAbsoluteNumber;

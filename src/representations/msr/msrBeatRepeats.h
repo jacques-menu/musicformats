@@ -233,9 +233,9 @@ class EXP msrBeatRepeat : public msrSegmentElement
 
     static SMARTP<msrBeatRepeat> create (
                             const mfInputLineNumber& inputLineNumber,
-                            int        beatRepeatMeasuresNumber,
-                            int        beatRepeatSlashesNumber,
-                            const S_msrVoice& upLinkToVoice);
+                            int                       beatRepeatMeasuresNumber,
+                            int                       beatRepeatSlashesNumber,
+                            const S_msrVoice&         upLinkToVoice);
 
     SMARTP<msrBeatRepeat> createABeatRepeatNewbornClone (
                             const S_msrVoice& containingVoice);
@@ -250,9 +250,9 @@ class EXP msrBeatRepeat : public msrSegmentElement
 
                           msrBeatRepeat (
                             const mfInputLineNumber& inputLineNumber,
-                            int        beatRepeatMeasuresNumber,
-                            int        beatRepeatSlashesNumber,
-                            const S_msrVoice& upLinkToVoice);
+                            int                       beatRepeatMeasuresNumber,
+                            int                       beatRepeatSlashesNumber,
+                            const S_msrVoice&         upLinkToVoice);
 
     virtual               ~msrBeatRepeat ();
 

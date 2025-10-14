@@ -19,7 +19,7 @@
 
 #include "msrWae.h"
 
-#include "msrRepeatsEnumTypes.h"
+// #include "msrRepeatsEnumTypes.h"
 #include "msrRepeats.h"
 #include "msrTuplets.h"
 #include "msrVoiceConstants.h"
@@ -44,42 +44,47 @@ namespace MusicFormats
 
   A repeat is recognized in MusicXML either by:
 
-    - it's start: handleRepeatStart
-    - it's first hooked ending (45b): handleRepeatEndingStart
-        the elements before is moved to the new repeat's common part
-    - it's end: handleRepeatEnd
+    - it's start: handleRepeatStart()
+    - it's first hooked ending (45b): handleRepeatEndingStart()
+        the elements before it are moved to the new repeat's common part
+    - it's end: handleRepeatEnd()
 
-  Hooked endings following the first one are added to currentRepeat handleRepeatHookedEndingEnd
+  Hooked endings following the first one are added to currentRepeat handleRepeatHookedEndingEnd()
 
-  A hookless ending terminates currentRepeat: handleRepeatHooklessEndingEnd
+  A hookless ending terminates currentRepeat: handleRepeatHooklessEndingEnd()
     finalize currentRepeat
 */
 
 //______________________________________________________________________________
 S_msrRepeatElement msrRepeatElement::create (
-  const mfInputLineNumber& inputLineNumber)
+  const mfInputLineNumber& inputLineNumber,
+  msrSegmentKind           segmentKind)
 {
   msrRepeatElement* obj =
     new msrRepeatElement (
-      inputLineNumber);
+      inputLineNumber,
+      segmentKind);
   assert (obj != nullptr);
   return obj;
 }
 
 S_msrRepeatElement msrRepeatElement::create (
   const mfInputLineNumber& inputLineNumber,
+  msrSegmentKind           segmentKind,
   const S_msrRepeat&       upLinkToRepeat)
 {
   msrRepeatElement* obj =
     new msrRepeatElement (
       inputLineNumber,
+      segmentKind,
       upLinkToRepeat);
   assert (obj != nullptr);
   return obj;
 }
 
 msrRepeatElement::msrRepeatElement (
-  const mfInputLineNumber& inputLineNumber)
+  const mfInputLineNumber& inputLineNumber,
+  msrSegmentKind           segmentKind)
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -98,11 +103,13 @@ msrRepeatElement::msrRepeatElement (
 #endif // MF_TRACE_IS_ENABLED
 
   initializeRepeatElement (
-    inputLineNumber);
+    inputLineNumber,
+    segmentKind);
 }
 
 msrRepeatElement::msrRepeatElement (
   const mfInputLineNumber& inputLineNumber,
+  msrSegmentKind           segmentKind,
   const S_msrRepeat&       upLinkToRepeat)
     : msrElement (inputLineNumber)
 {
@@ -143,19 +150,22 @@ msrRepeatElement::msrRepeatElement (
   fRepeatElementUpLinkToRepeat = upLinkToRepeat;
 
   initializeRepeatElement (
-    inputLineNumber);
+    inputLineNumber,
+    segmentKind);
 }
 
 msrRepeatElement::~msrRepeatElement ()
 {}
 
 void msrRepeatElement::initializeRepeatElement (
-  const mfInputLineNumber& inputLineNumber)
+  const mfInputLineNumber& inputLineNumber,
+  msrSegmentKind           segmentKind)
 {
   // create repeat element segment
   fRepeatElementSegment =
     msrSegment::create (
-      inputLineNumber);
+      inputLineNumber,
+      segmentKind);
 }
 
 void msrRepeatElement::appendMeasureToRepeatElement (
@@ -523,10 +533,40 @@ S_msrRepeatCommonPart msrRepeatCommonPart::create (
   return obj;
 }
 
+S_msrRepeatCommonPart msrRepeatCommonPart::createRepeatCommonPartNewbornClone (
+  const S_msrVoice& containingVoice)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a newborn clone of repeat common part " <<
+      asShortString () <<
+      " in voice " <<
+      containingVoice->asShortString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  S_msrRepeatCommonPart
+    newbornClone =
+      msrRepeatCommonPart::create (
+        fInputLineNumber,
+        nullptr);
+
+  return newbornClone;
+}
+
 msrRepeatCommonPart::msrRepeatCommonPart (
   const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat&       upLinkToRepeat)
-    : msrRepeatElement (inputLineNumber)
+    : msrRepeatElement (
+        inputLineNumber,
+        msrSegmentKind::kSegmentKindInRepeatCommonPart)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -536,7 +576,7 @@ msrRepeatCommonPart::msrRepeatCommonPart (
     "upLinkToRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//   fRepeatElementUpLinkToRepeat = upLinkToRepeat;
+  fRepeatElementUpLinkToRepeat = upLinkToRepeat;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -1076,12 +1116,44 @@ S_msrRepeatEnding msrRepeatEnding::create (
   return obj;
 }
 
+S_msrRepeatEnding msrRepeatEnding::createRepeatEndingNewbornClone (
+  const S_msrVoice& containingVoice)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a newborn clone of repeat ending " <<
+      asShortString () <<
+      " in voice " <<
+      containingVoice->asShortString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  S_msrRepeatEnding
+    newbornClone =
+      msrRepeatEnding::create (
+        fInputLineNumber,
+        fRepeatEndingNumber,
+        fRepeatEndingKind,
+        nullptr);
+
+  return newbornClone;
+}
+
 msrRepeatEnding::msrRepeatEnding (
   const mfInputLineNumber& inputLineNumber,
   const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
   msrRepeatEndingKind      repeatEndingKind,
   const S_msrRepeat&       upLinkToRepeat)
-    : msrRepeatElement (inputLineNumber)
+    : msrRepeatElement (
+        inputLineNumber,
+        msrSegmentKind::kSegmentKindInRepeatEnding)
 {
   fRepeatEndingNumber = repeatEndingNumber;
 
@@ -1379,85 +1451,6 @@ std::string msrRepeatEnding::asString () const
   return ss.str ();
 }
 
-void msrRepeatEnding::printFull (std::ostream& os) const
-{
-  os <<
-    std::endl <<
-    "[RepeatEnding" <<
-    ", fRepeatEndingKind: " <<
-    msrRepeatEndingKindAsString (
-      fRepeatEndingKind) <<
-    ", line " << fInputLineNumber <<
-    std::endl;
-
-  ++gIndenter;
-
-/* JMI
-  os <<
-    "fRepeatElementUpLinkToRepeat: " <<
-    fRepeatElementUpLinkToRepeat->
-      asShortString () <<
-    std::endl;
-*/
-
-  constexpr int fieldWidth = 27;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "repeatEndingNumber" <<  ": " <<fRepeatEndingNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "repeatEndingInternalNumber" <<  ": " <<fRepeatEndingInternalNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "repeat upLink" << " : " <<
-    fRepeatElementUpLinkToRepeat->asShortString () <<
-    '\'' <<
-    std::endl << std::endl;
-
-//   // print the elements
-//   int repeatEndingElementsListSize =
-//     fRepeatEndingElementsList.size ();
-//
-//   os <<
-//     "repeatEndingElementsList: ";
-//   if (repeatEndingElementsListSize) {
-//     os <<
-//       '(' <<
-//       mfSingularOrPlural (
-//         repeatEndingElementsListSize, "element", "elements") <<
-//       ")";
-//   }
-//   else {
-//     os << "[EMPTY]";
-//   }
-//   os << std::endl;
-//
-//   if (repeatEndingElementsListSize) {
-//     os << std::endl;
-//
-//     ++gIndenter;
-//
-//     std::list <S_msrVoiceElement>::const_iterator
-//       iBegin = fRepeatEndingElementsList.begin (),
-//       iEnd   = fRepeatEndingElementsList.end (),
-//       i      = iBegin;
-//
-//     for ( ; ; ) {
-//       // print the element
-//       (*i)->print (os);
-//       if (++i == iEnd) break;
-//       os << std::endl;
-//     } // for
-//
-//     --gIndenter;
-//   }
-
-  --gIndenter;
-
-  os << ']' << std::endl;
-}
-
 void msrRepeatEnding::print (std::ostream& os) const
 {
   os <<
@@ -1538,6 +1531,85 @@ void msrRepeatEnding::print (std::ostream& os) const
 
   --gIndenter;
 */
+
+  os << ']' << std::endl;
+}
+
+void msrRepeatEnding::printFull (std::ostream& os) const
+{
+  os <<
+    std::endl <<
+    "[RepeatEnding" <<
+    ", fRepeatEndingKind: " <<
+    msrRepeatEndingKindAsString (
+      fRepeatEndingKind) <<
+    ", line " << fInputLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+/* JMI
+  os <<
+    "fRepeatElementUpLinkToRepeat: " <<
+    fRepeatElementUpLinkToRepeat->
+      asShortString () <<
+    std::endl;
+*/
+
+  constexpr int fieldWidth = 27;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "repeatEndingNumber" <<  ": " <<fRepeatEndingNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "repeatEndingInternalNumber" <<  ": " <<fRepeatEndingInternalNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "repeat upLink" << " : " <<
+    fRepeatElementUpLinkToRepeat->asShortString () <<
+    '\'' <<
+    std::endl << std::endl;
+
+//   // print the elements
+//   int repeatEndingElementsListSize =
+//     fRepeatEndingElementsList.size ();
+//
+//   os <<
+//     "repeatEndingElementsList: ";
+//   if (repeatEndingElementsListSize) {
+//     os <<
+//       '(' <<
+//       mfSingularOrPlural (
+//         repeatEndingElementsListSize, "element", "elements") <<
+//       ")";
+//   }
+//   else {
+//     os << "[EMPTY]";
+//   }
+//   os << std::endl;
+//
+//   if (repeatEndingElementsListSize) {
+//     os << std::endl;
+//
+//     ++gIndenter;
+//
+//     std::list <S_msrVoiceElement>::const_iterator
+//       iBegin = fRepeatEndingElementsList.begin (),
+//       iEnd   = fRepeatEndingElementsList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       // print the element
+//       (*i)->print (os);
+//       if (++i == iEnd) break;
+//       os << std::endl;
+//     } // for
+//
+//     --gIndenter;
+//   }
+
+  --gIndenter;
 
   os << ']' << std::endl;
 }
