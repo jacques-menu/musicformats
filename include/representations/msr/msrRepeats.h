@@ -166,6 +166,9 @@ class EXP msrRepeatCommonPart : public msrRepeatElement
     // ------------------------------------------------------
 
     static SMARTP<msrRepeatCommonPart> create (
+                            const mfInputLineNumber& inputLineNumber);
+
+    static SMARTP<msrRepeatCommonPart> create (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeat&       upLinkToRepeat);
 
@@ -176,6 +179,9 @@ class EXP msrRepeatCommonPart : public msrRepeatElement
 
     // constructors/destructor
     // ------------------------------------------------------
+
+                          msrRepeatCommonPart (
+                            const mfInputLineNumber& inputLineNumber);
 
                           msrRepeatCommonPart (
                             const mfInputLineNumber& inputLineNumber,
@@ -285,7 +291,14 @@ class EXP msrRepeatEnding : public msrRepeatElement
 
     static SMARTP<msrRepeatEnding> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
+                            const std::string&       repeatEndingNumber,
+                               // a string, because if may be "1, 2" for example
+                            msrRepeatEndingKind      repeatEndingKind);
+
+    static SMARTP<msrRepeatEnding> create (
+                            const mfInputLineNumber& inputLineNumber,
+                            const std::string&       repeatEndingNumber,
+                              // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind      repeatEndingKind,
                             const S_msrRepeat&       upLinkToRepeat);
 
@@ -299,7 +312,14 @@ class EXP msrRepeatEnding : public msrRepeatElement
 
                           msrRepeatEnding (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
+                            const std::string&       repeatEndingNumber,
+                              // a string, because if may be "1, 2" for example
+                            msrRepeatEndingKind      repeatEndingKind);
+
+                          msrRepeatEnding (
+                            const mfInputLineNumber& inputLineNumber,
+                            const std::string&       repeatEndingNumber,
+                              // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind      repeatEndingKind,
                             const S_msrRepeat&       upLinkToRepeat);
 
@@ -402,7 +422,8 @@ class EXP msrRepeatEnding : public msrRepeatElement
 //     S_msrRepeat           fRepeatEndingUpLinkToRepeat;
 
     // numbers
-    std::string           fRepeatEndingNumber; // a string, because if may be "1, 2" for example
+    std::string           fRepeatEndingNumber;
+      // a string, because if may be "1, 2" for example
     int                   fRepeatEndingInternalNumber; // internally assigned
 
     // kind

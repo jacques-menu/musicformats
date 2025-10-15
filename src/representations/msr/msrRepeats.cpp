@@ -514,6 +514,16 @@ std::ostream& operator << (std::ostream& os, const msrRepeatElement& elt)
 
 //______________________________________________________________________________
 S_msrRepeatCommonPart msrRepeatCommonPart::create (
+  const mfInputLineNumber& inputLineNumber)
+{
+  msrRepeatCommonPart* obj =
+    new msrRepeatCommonPart (
+      inputLineNumber);
+  assert (obj != nullptr);
+  return obj;
+}
+
+S_msrRepeatCommonPart msrRepeatCommonPart::create (
   const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat&       upLinkToRepeat)
 {
@@ -547,10 +557,33 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createRepeatCommonPartNewbornClone (
   S_msrRepeatCommonPart
     newbornClone =
       msrRepeatCommonPart::create (
-        fInputLineNumber,
-        nullptr);
+        fInputLineNumber);
+
+  // there no scalar fields to be copied
 
   return newbornClone;
+}
+
+msrRepeatCommonPart::msrRepeatCommonPart (
+  const mfInputLineNumber& inputLineNumber)
+    : msrRepeatElement (
+        inputLineNumber,
+        msrSegmentKind::kSegmentKindInRepeatCommonPart)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Initializing repeat common part " <<
+      asString () <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 msrRepeatCommonPart::msrRepeatCommonPart (
@@ -1079,6 +1112,20 @@ std::ostream& operator << (std::ostream& os, const msrRepeatCommonPart& elt)
 S_msrRepeatEnding msrRepeatEnding::create (
   const mfInputLineNumber& inputLineNumber,
   const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
+  msrRepeatEndingKind      repeatEndingKind)
+{
+  msrRepeatEnding* obj =
+    new msrRepeatEnding (
+      inputLineNumber,
+      repeatEndingNumber,
+      repeatEndingKind);
+  assert (obj != nullptr);
+  return obj;
+}
+
+S_msrRepeatEnding msrRepeatEnding::create (
+  const mfInputLineNumber& inputLineNumber,
+  const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
   msrRepeatEndingKind      repeatEndingKind,
   const S_msrRepeat&       upLinkToRepeat)
 {
@@ -1116,15 +1163,50 @@ S_msrRepeatEnding msrRepeatEnding::createRepeatEndingNewbornClone (
       msrRepeatEnding::create (
         fInputLineNumber,
         fRepeatEndingNumber,
-        fRepeatEndingKind,
-        nullptr);
+        fRepeatEndingKind);
+
+  newbornClone-> fRepeatEndingInternalNumber =
+    fRepeatEndingInternalNumber;
 
   return newbornClone;
 }
 
 msrRepeatEnding::msrRepeatEnding (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
+  const std::string&       repeatEndingNumber,
+    // a string, because if may be "1, 2" for example
+  msrRepeatEndingKind      repeatEndingKind)
+    : msrRepeatElement (
+        inputLineNumber,
+        msrSegmentKind::kSegmentKindInRepeatEnding)
+{
+  fRepeatEndingNumber = repeatEndingNumber;
+
+  fRepeatEndingInternalNumber = 0;
+    // will be set by msrRepeat::addRepeatEnding ()
+
+  fRepeatEndingKind = repeatEndingKind;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Initializing repeat ending " <<
+      asString () <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+msrRepeatEnding::msrRepeatEnding (
+  const mfInputLineNumber& inputLineNumber,
+  const std::string&       repeatEndingNumber,
+    // a string, because if may be "1, 2" for example
   msrRepeatEndingKind      repeatEndingKind,
   const S_msrRepeat&       upLinkToRepeat)
     : msrRepeatElement (
@@ -1751,6 +1833,14 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
         fInputLineNumber,
         fRepeatTimes,
         containingVoice);
+
+    // number of repetitions
+    newbornClone->fRepeatTimes =
+      fRepeatTimes;
+
+    // explicit start?
+    newbornClone->fRepeatExplicitStartKind =
+      fRepeatExplicitStartKind;
 
   // DON'T create the repeat common part, that will be done upon browsing
 
