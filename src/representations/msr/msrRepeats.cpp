@@ -153,11 +153,11 @@ void msrRepeatElement::initializeRepeatElement (
   const mfInputLineNumber& inputLineNumber,
   msrSegmentKind           segmentKind)
 {
-  // create repeat element segment
-  fRepeatElementSegment =
-    msrSegment::create (
-      inputLineNumber,
-      segmentKind);
+//   // create repeat element segment
+//   fRepeatElementSegment =
+//     msrSegment::create (
+//       inputLineNumber,
+//       segmentKind);
 }
 
 void msrRepeatElement::appendMeasureToRepeatElement (
@@ -520,10 +520,11 @@ S_msrRepeatCommonPart msrRepeatCommonPart::create (
     new msrRepeatCommonPart (
       inputLineNumber);
   assert (obj != nullptr);
+
   return obj;
 }
 
-S_msrRepeatCommonPart msrRepeatCommonPart::create (
+S_msrRepeatCommonPart msrRepeatCommonPart::createAsWellAsSegment (
   const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat&       upLinkToRepeat)
 {
@@ -532,6 +533,13 @@ S_msrRepeatCommonPart msrRepeatCommonPart::create (
       inputLineNumber,
       upLinkToRepeat);
   assert (obj != nullptr);
+
+  // create the repeat element segment
+  obj->fRepeatElementSegment =
+    msrSegment::create (
+      inputLineNumber,
+      msrSegmentKind::kSegmentKindInRepeatCommonPart);
+
   return obj;
 }
 
@@ -558,6 +566,8 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createRepeatCommonPartNewbornClone (
     newbornClone =
       msrRepeatCommonPart::create (
         fInputLineNumber);
+
+  // DON't create the repeat element segment, that will be done upon browsing
 
   // there no scalar fields to be copied
 
@@ -953,6 +963,8 @@ std::string msrRepeatCommonPart::asString () const
 
   ss <<
     "[RepeatCommonPart" <<
+    ", fRepeatElementSegment: " <<
+    fRepeatElementSegment->asShortString () <<
     ", fRepeatElementUpLinkToRepeat: " <<
     fetchRepeatAsShortString (fRepeatElementUpLinkToRepeat) <<
     ", line " << fInputLineNumber <<
@@ -1111,7 +1123,8 @@ std::ostream& operator << (std::ostream& os, const msrRepeatCommonPart& elt)
 //______________________________________________________________________________
 S_msrRepeatEnding msrRepeatEnding::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
+  const std::string&       repeatEndingNumber,
+    // a string, because if may be "1, 2" for example
   msrRepeatEndingKind      repeatEndingKind)
 {
   msrRepeatEnding* obj =
@@ -1123,9 +1136,32 @@ S_msrRepeatEnding msrRepeatEnding::create (
   return obj;
 }
 
+S_msrRepeatEnding msrRepeatEnding::createAsWellAsSegment (
+  const mfInputLineNumber& inputLineNumber,
+  const std::string&       repeatEndingNumber,
+    // a string, because if may be "1, 2" for example
+  msrRepeatEndingKind      repeatEndingKind)
+{
+  msrRepeatEnding* obj =
+    new msrRepeatEnding (
+      inputLineNumber,
+      repeatEndingNumber,
+      repeatEndingKind);
+  assert (obj != nullptr);
+
+  // create the repeat element segment
+  obj->fRepeatElementSegment =
+    msrSegment::create (
+      inputLineNumber,
+      msrSegmentKind::kSegmentKindInRepeatCommonPart);
+
+  return obj;
+}
+
 S_msrRepeatEnding msrRepeatEnding::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
+  const std::string&       repeatEndingNumber,
+    // a string, because if may be "1, 2" for example
   msrRepeatEndingKind      repeatEndingKind,
   const S_msrRepeat&       upLinkToRepeat)
 {
@@ -1164,6 +1200,8 @@ S_msrRepeatEnding msrRepeatEnding::createRepeatEndingNewbornClone (
         fInputLineNumber,
         fRepeatEndingNumber,
         fRepeatEndingKind);
+
+  // DON't create the repeat element segment, that will be done upon browsing
 
   newbornClone-> fRepeatEndingInternalNumber =
     fRepeatEndingInternalNumber;
@@ -1493,7 +1531,9 @@ std::string msrRepeatEnding::asString () const
     fetchRepeatAsShortString (fRepeatElementUpLinkToRepeat) <<
     ", fRepeatEndingNumber: " << fRepeatEndingNumber <<
     ", fRepeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
-    "', line " << fInputLineNumber <<
+    ", fRepeatElementSegment: " <<
+    fRepeatElementSegment->asShortString () <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();

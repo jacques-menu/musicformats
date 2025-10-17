@@ -2570,7 +2570,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   fPartHarmoniesVoice =
-    msrVoice::create (
+    msrVoice::createAsWellAsSegment (
       inputLineNumber,
       msrVoiceKind::kVoiceKindHarmonies,
       partHarmoniesVoiceNumber,
@@ -2749,7 +2749,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   fPartFiguredBassVoice =
-    msrVoice::create (
+    msrVoice::createAsWellAsSegment (
       inputLineNumber,
       msrVoiceKind::kVoiceKindFiguredBass,
       partFiguredBassVoiceNumber,

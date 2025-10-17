@@ -109,6 +109,8 @@ class EXP msrSegment : public msrElement
                           getSegmentElementsList () const
                               { return fSegmentElementsList; }
 
+    size_t                getSegmentElementsListSize () const
+                              { return fSegmentElementsList.size (); }
     // measures
 
     void                  setSegmentFirstMeasure (

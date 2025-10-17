@@ -136,12 +136,163 @@ void msrSegment::initializeSegment ()
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  if (fSegmentNumber == 4) abort ();
+
 // JMI 0.9.63
 //  // segment shortest note wholeNotes
 //  fSegmentShortestNoteWholeNotes = mfWholeNotes (INT_MAX, 1);
 
 // segment shortest note tuplet factor
 //  fSegmentShortestNoteTupletFactor = mfWholeNotes (1, 1);
+}
+
+S_msrSegment msrSegment::createSegmentNewbornClone (
+  const S_msrVoice& containingVoice)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a newborn clone of segment " <<
+      asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    containingVoice != nullptr,
+    "containingVoice is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  S_msrSegment
+    newbornClone =
+      msrSegment::create (
+        fInputLineNumber,
+        fSegmentKind,
+        containingVoice);
+
+  // absolute number, for coherency between passes
+  newbornClone->fSegmentAbsoluteNumber =
+    fSegmentAbsoluteNumber;
+
+  // keep debug number fSegmentNumber unchanged JMI ???
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "The newborn segment clone is " <<
+      newbornClone->asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return newbornClone;
+}
+
+S_msrSegment msrSegment::createSegmentDeepClone (
+  const S_msrVoice& containingVoice)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a deep clone of segment " <<
+      asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    containingVoice != nullptr,
+    "containingVoice is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  S_msrSegment
+    deepClone =
+      msrSegment::create (
+        fInputLineNumber,
+        fSegmentKind,
+        containingVoice);
+
+  // absolute number
+  deepClone->fSegmentAbsoluteNumber =
+    fSegmentAbsoluteNumber;
+
+  // keep debug number fSegmentNumber unchanged JMI ???
+
+  // the measure elements in the segment contain the mmusic
+  size_t segmentElementsListSize =
+   fSegmentElementsList.size ();
+
+  if (segmentElementsListSize != 0) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceVoices ()) {
+      std::stringstream ss;
+
+      ss <<
+        "There are " <<
+        segmentElementsListSize <<
+        " measure elements in segment to be deep copied";
+
+      gWaeHandler->waeTrace (
+        __FILE__, mfInputLineNumber (__LINE__),
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    for (S_msrSegmentElement measureElement : fSegmentElementsList) {
+      // append a deep clone of the measure element to the deep clone
+      // DEEP CLONING IS NOT YET FINALIZED JMI 0.9.63
+//       if (
+//         S_msrMeasure measure = dynamic_cast<msrRepeat*>(&(*(measureElement)))
+//       ) {
+
+//       deepClone->
+//         appendMeasureToSegment (
+//           measureElement->
+//             createMeasureDeepClone (this));
+    } // for
+  }
+
+  else {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceSegments ()) {
+      std::stringstream ss;
+
+      ss <<
+        "There are no measures in segment to be deep copied";
+
+      gWaeHandler->waeTrace (
+        __FILE__, mfInputLineNumber (__LINE__),
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+  }
+
+  // upLinks
+  deepClone->fSegmentUpLinkToVoice =
+    containingVoice;
+
+  return deepClone;
 }
 
 void msrSegment::setSegmentFirstMeasure (
@@ -248,141 +399,6 @@ S_msrScore msrSegment::fetchSegmentUpLinkToScore () const
   }
 
   return result;
-}
-
-S_msrSegment msrSegment::createSegmentNewbornClone (
-  const S_msrVoice& containingVoice)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating a newborn clone of segment " <<
-      asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    containingVoice != nullptr,
-    "containingVoice is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  S_msrSegment
-    newbornClone =
-      msrSegment::create (
-        fInputLineNumber,
-        fSegmentKind,
-        containingVoice);
-
-  // absolute number, for coherency between passes
-  newbornClone->fSegmentAbsoluteNumber =
-    fSegmentAbsoluteNumber;
-
-  // keep debug number fSegmentNumber unchanged JMI ???
-
-  return newbornClone;
-}
-
-S_msrSegment msrSegment::createSegmentDeepClone (
-  const S_msrVoice& containingVoice)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating a deep clone of segment " <<
-      asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    containingVoice != nullptr,
-    "containingVoice is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  S_msrSegment
-    deepClone =
-      msrSegment::create (
-        fInputLineNumber,
-        fSegmentKind,
-        containingVoice);
-
-  // absolute number
-  deepClone->fSegmentAbsoluteNumber =
-    fSegmentAbsoluteNumber;
-
-  // keep debug number fSegmentNumber unchanged JMI ???
-
-  // the measure elements in the segment contain the mmusic
-  size_t segmentElementsListSize =
-   fSegmentElementsList.size ();
-
-  if (segmentElementsListSize != 0) {
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceVoices ()) {
-      std::stringstream ss;
-
-      ss <<
-        "There are " <<
-        segmentElementsListSize <<
-        " measure elements in segment to be deep copied";
-
-      gWaeHandler->waeTrace (
-        __FILE__, mfInputLineNumber (__LINE__),
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    for (S_msrSegmentElement measureElement : fSegmentElementsList) {
-      // append a deep clone of the measure element to the deep clone
-      // DEEP CLONING IS NOT YET FINALIZED JMI 0.9.63
-//       if (
-//         S_msrMeasure measure = dynamic_cast<msrRepeat*>(&(*(measureElement)))
-//       ) {
-
-//       deepClone->
-//         appendMeasureToSegment (
-//           measureElement->
-//             createMeasureDeepClone (this));
-    } // for
-  }
-
-  else {
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceSegments ()) {
-      std::stringstream ss;
-
-      ss <<
-        "There are no measures in segment to be deep copied";
-
-      gWaeHandler->waeTrace (
-        __FILE__, mfInputLineNumber (__LINE__),
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-  }
-
-  // upLinks
-  deepClone->fSegmentUpLinkToVoice =
-    containingVoice;
-
-  return deepClone;
 }
 
 /* JMI
@@ -3384,6 +3400,8 @@ std::string msrSegment::asShortString () const
     fSegmentKind <<
     ", fSegmentAbsoluteNumber: " <<
     fSegmentAbsoluteNumber <<
+    ", fSegmentElementsList.size (): " <<
+    fSegmentElementsList.size () <<
     ", fSegmentUpLinkToVoice: " <<
     fetchVoiceName (fSegmentUpLinkToVoice) <<
     ']';
@@ -3403,6 +3421,8 @@ std::string msrSegment::asString () const
     fSegmentNumber <<
     ", fSegmentAbsoluteNumber: " <<
     fSegmentAbsoluteNumber <<
+    ", fSegmentElementsList.size (): " <<
+    fSegmentElementsList.size () <<
     ", fSegmentUpLinkToVoice: " <<
     fetchVoiceName (fSegmentUpLinkToVoice);
 

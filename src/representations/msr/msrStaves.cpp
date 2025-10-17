@@ -753,7 +753,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
   // create the voice
   S_msrVoice
     voice =
-      msrVoice::create (
+      msrVoice::createAsWellAsSegment (
         inputLineNumber,
         msrVoiceKind::kVoiceKindRegular,
         voiceNumber,

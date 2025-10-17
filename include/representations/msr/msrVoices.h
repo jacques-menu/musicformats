@@ -105,6 +105,14 @@ class EXP msrVoice : public msrElement
                                                      voiceCreateInitialLastSegmentKind,
                             const S_msrStaff&        voiceUpLinkToStaff);
 
+    static SMARTP<msrVoice> createAsWellAsSegment (
+                            const mfInputLineNumber& inputLineNumber,
+                            msrVoiceKind             voiceKind,
+                            const mfVoiceNumber&     voiceNumber,
+                            msrVoiceCreateInitialLastSegmentKind
+                                                     voiceCreateInitialLastSegmentKind,
+                            const S_msrStaff&        voiceUpLinkToStaff);
+
     SMARTP<msrVoice> createVoiceNewbornClone (
                             const S_msrStaff& containingStaff);
 

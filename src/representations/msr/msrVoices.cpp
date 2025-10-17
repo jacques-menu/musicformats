@@ -201,7 +201,27 @@ S_msrVoice msrVoice::create (
       voiceUpLinkToStaff);
   assert (obj != nullptr);
 
-  // create the voice segment
+  return obj;
+}
+
+S_msrVoice msrVoice::createAsWellAsSegment (
+  const mfInputLineNumber& inputLineNumber,
+  msrVoiceKind             voiceKind,
+  const mfVoiceNumber&     voiceNumber,
+  msrVoiceCreateInitialLastSegmentKind
+                           voiceCreateInitialLastSegmentKind,
+  const S_msrStaff&        voiceUpLinkToStaff)
+{
+  msrVoice* obj =
+    new msrVoice (
+      inputLineNumber,
+      voiceKind,
+      voiceNumber,
+      voiceCreateInitialLastSegmentKind,
+      voiceUpLinkToStaff);
+  assert (obj != nullptr);
+
+  // create the voice segment on the fly
   obj->setVoiceSegment (
     msrSegment::create (
       inputLineNumber,
@@ -216,7 +236,7 @@ S_msrVoice msrVoice::createRegularVoice (
   const S_msrStaff&        voiceUpLinkToStaff)
 {
   return
-    msrVoice::create (
+    msrVoice::createAsWellAsSegment (
       inputLineNumber,
       msrVoiceKind::kVoiceKindRegular,
       voiceNumber,
@@ -231,7 +251,7 @@ S_msrVoice msrVoice::createHarmoniesVoice (
   const S_msrStaff&        voiceUpLinkToStaff) // unused yet JMI 0.9.66
 {
   return
-    msrVoice::create (
+    msrVoice::createAsWellAsSegment (
       inputLineNumber,
       msrVoiceKind::kVoiceKindHarmonies,
       voiceNumber,
@@ -246,7 +266,7 @@ S_msrVoice msrVoice::createFiguredBassVoice (
   const S_msrStaff&        voiceUpLinkToStaff) // unused yet JMI0.9.66
 {
   return
-    msrVoice::create (
+    msrVoice::createAsWellAsSegment (
       inputLineNumber,
       msrVoiceKind::kVoiceKindFiguredBass,
       voiceNumber,
@@ -558,15 +578,16 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
     "staffClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  S_msrVoice
-    newbornClone =
-      msrVoice::create (
-        fInputLineNumber,
-        fVoiceKind,
-        fVoiceNumber,
-        msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentNo,
-          // initial segment will be created upon a later segment visit
-        staffClone);
+  msrVoice* newbornClone =
+    new msrVoice (
+      fInputLineNumber,
+      fVoiceKind,
+      fVoiceNumber,
+      msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentNo, // JMI ??? 0.9.76
+      staffClone);
+  assert (newbornClone != nullptr);
+
+  // DON'T create the voice segment on the fly, it will be created upon browsing
 
   // voice numbers
   newbornClone->fRegularVoiceStaffSequentialNumber =
@@ -635,7 +656,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
   S_msrVoice
     deepClone =
-      msrVoice::create (
+    msrVoice::createAsWellAsSegment (
         fInputLineNumber,
         voiceKind,
         voiceNumber,
@@ -1966,7 +1987,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   fRegularVoiceForwardLinkToHarmoniesVoice =
-    msrVoice::create (
+    msrVoice::createAsWellAsSegment (
       inputLineNumber,
       msrVoiceKind::kVoiceKindHarmonies,
       regularVoiceHarmoniesVoiceNumber,
@@ -2022,7 +2043,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 // #endif // MF_TRACE_IS_ENABLED
 //
 //   fRegularVoiceForwardLinkToFiguredBassVoice =
-//     msrVoice::create (
+//     msrVoice::createAsWellAsSegment (
 //       inputLineNumber,
 //       msrVoiceKind::kVoiceKindFiguredBass,
 //       regularVoiceFiguredBassVoiceNumber,
@@ -10360,7 +10381,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
 
   S_msrRepeatEnding
     repeatEnding =
-      msrRepeatEnding::create (
+      msrRepeatEnding::createAsWellAsSegment (
         inputLineNumber,
         repeatEndingNumber,
         repeatEndingKind,
@@ -10469,7 +10490,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
 
   S_msrRepeatEnding
     repeatEnding =
-      msrRepeatEnding::create (
+      msrRepeatEnding::createAsWellAsSegment (
         inputLineNumber,
         repeatEndingNumber,
         repeatEndingKind,
