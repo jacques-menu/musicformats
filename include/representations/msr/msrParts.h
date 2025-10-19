@@ -817,6 +817,9 @@ using S_msrPart = SMARTP<msrPart>;
 EXP std::ostream& operator << (std::ostream& os, const S_msrPart& elt);
 EXP std::ostream& operator << (std::ostream& os, const msrPart& elt);
 
+std::string fetchPartAsShortString (const S_msrPart& part);
+std::string fetchPartAsString (const S_msrPart& part);
+
 
 }
 

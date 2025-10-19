@@ -105,7 +105,7 @@ class EXP msrVoice : public msrElement
                                                      voiceCreateInitialLastSegmentKind,
                             const S_msrStaff&        voiceUpLinkToStaff);
 
-    static SMARTP<msrVoice> createAsWellAsSegment (
+    static SMARTP<msrVoice> createAsWellAsItsSegment (
                             const mfInputLineNumber& inputLineNumber,
                             msrVoiceKind             voiceKind,
                             const mfVoiceNumber&     voiceNumber,
@@ -1439,6 +1439,10 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrVoice& elt);
 EXP std::ostream& operator << (std::ostream& os, const msrVoice& elt);
 
 std::string fetchVoiceName (const S_msrVoice& voice);
+
+std::string fetchVoiceAsShortString (const S_msrVoice& voice);
+std::string fetchVoiceAsString (const S_msrVoice& voice);
+
 
 }
 

@@ -238,7 +238,7 @@ class EXP msrStaff : public msrElement
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInStaffClone (
-                            const mfInputLineNumber& inputLineNumber,
+                            const mfInputLineNumber&   inputLineNumber,
                             const mfPositionInMeasure& positionInMeasure);
 
     // transposition
@@ -256,15 +256,15 @@ class EXP msrStaff : public msrElement
 
     void                  registerVoiceInStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrVoice& voice);
+                            const S_msrVoice&        voice);
 
     void                  registerVoiceInStaffClone (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrVoice& voice);
+                            const S_msrVoice&        voice);
 
     S_msrVoice            fetchRegularVoiceFromStaffByItsNumber (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfVoiceNumber& voiceNumber);
+                            const mfVoiceNumber&     voiceNumber);
 
     S_msrVoice            fetchFirstRegularVoiceFromStaff (
                             const mfInputLineNumber& inputLineNumber);
@@ -276,9 +276,9 @@ class EXP msrStaff : public msrElement
 
     void                  cascadeCreateAMeasureAndAppendItInStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            int                    previousMeasureEndInputLineNumber,
-                            const mfMeasureNumber& measureNumber,
-                            msrMeasureImplicitKind measureImplicitKind);
+                            int                      previousMeasureEndInputLineNumber,
+                            const mfMeasureNumber&   measureNumber,
+                            msrMeasureImplicitKind   measureImplicitKind);
 
     void                  cascadeNetNextMeasureNumberInStaff (
                             const mfInputLineNumber& inputLineNumber,
@@ -288,8 +288,8 @@ class EXP msrStaff : public msrElement
 
     void                  cascadeCreateAMeasureRepeatAndAppendItToStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            int measureRepeatMeasuresNumber,
-                            int measureRepeatSlashesNumber);
+                            int                       measureRepeatMeasuresNumber,
+                            int                       measureRepeatSlashesNumber);
 
     void                  appendPendingMeasureRepeatToStaff (
                             const mfInputLineNumber& inputLineNumber);
@@ -325,9 +325,9 @@ class EXP msrStaff : public msrElement
 
     void                  cascadeAppendMultipleMeasureRestToStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            int               multipleMeasureRestMeasuresNumber,
-                            int               multipleMeasureRestSlashesNumber,
-                            msrUseSymbolsKind multipleMeasureRestUseSymbolsKind);
+                            int                      multipleMeasureRestMeasuresNumber,
+                            int                      multipleMeasureRestSlashesNumber,
+                            msrUseSymbolsKind        multipleMeasureRestUseSymbolsKind);
 
     void                  appendPendingMultipleMeasureRestsToStaff (
                             const mfInputLineNumber& inputLineNumber);
@@ -357,8 +357,8 @@ class EXP msrStaff : public msrElement
     // beat repeats
     void                  createABeatRepeatFromItsFirstMeasuresInStaff ( // JMI 0.9.72
                             const mfInputLineNumber& inputLineNumber,
-                            int beatRepeatMeasuresNumber,
-                            int beatRepeatSlashesNumber);
+                            int                      beatRepeatMeasuresNumber,
+                            int                      beatRepeatSlashesNumber);
 
     // bar lines
 
@@ -596,6 +596,9 @@ using S_msrStaff = SMARTP<msrStaff>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrStaff& elt);
 EXP std::ostream& operator << (std::ostream& os, const msrStaff& elt);
+
+std::string fetchStaffAsShortString (const S_msrStaff& staff);
+std::string fetchStaffAsString (const S_msrStaff& staff);
 
 
 }

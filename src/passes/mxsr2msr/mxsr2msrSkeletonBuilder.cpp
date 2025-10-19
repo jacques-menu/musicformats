@@ -4245,7 +4245,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
       elt->getInputLineNumber ());
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceStaves ()) {
     gLog <<
     	std::endl <<
       "<!--=== "

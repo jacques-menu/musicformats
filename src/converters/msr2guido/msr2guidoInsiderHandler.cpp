@@ -355,8 +355,7 @@ std::string msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
         ss <<
           "msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -374,8 +373,7 @@ std::string msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
         ss <<
           "msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),

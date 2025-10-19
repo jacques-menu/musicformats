@@ -3378,8 +3378,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
       ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
 //      "', voice \"" <<
 //      fCurrentVoiceClone->getVoiceName () <<
-//       "\"" <<
-      ", line " << elt->getInputLineNumber () <<
+//       ", line " << elt->getInputLineNumber () <<
       " ===-->";
 
     gWaeHandler->waeTrace (
@@ -3568,7 +3567,6 @@ void msr2mxsrTranslator::visitStart (S_msrMusicXMLPrintLayout& elt)
       std::endl <<
 //      "', voice \"" <<
 //      fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->";
 
     gWaeHandler->waeTrace (
@@ -4764,8 +4762,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
           S_msrWords words = (*i);
 
           fOutputStream <<
-     // JMI       "\"" <<
-            words->getWordsContents (); // JMI <<
+     // JMI             words->getWordsContents (); // JMI <<
       // JMI      "\"";
 
           if (++i == iEnd) break;
@@ -8595,7 +8592,6 @@ void msr2mxsrTranslator::visitStart (S_msrStanza& elt)
     ss <<
       "--> Start visiting msrStanza \"" <<
       elt->getStanzaName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -8638,7 +8634,6 @@ void msr2mxsrTranslator::visitEnd (S_msrStanza& elt)
     ss <<
       "--> End visiting msrStanza \"" <<
       elt->getStanzaName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (

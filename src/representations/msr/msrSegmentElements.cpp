@@ -61,8 +61,7 @@ msrSegmentElement::~msrSegmentElement ()
 // //       fSegmentElementMeasureNumber <<
 //       ", context: \"" <<
 //       context <<
-//       "\"" <<
-//       std::endl;
+// //       std::endl;
 //
 //       gWaeHandler->waeTrace (
 //         __FILE__, mfInputLineNumber (__LINE__),

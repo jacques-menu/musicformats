@@ -704,8 +704,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
         ss <<
           "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -720,8 +719,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
         ss <<
           "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: " <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),

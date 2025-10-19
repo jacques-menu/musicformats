@@ -1142,6 +1142,21 @@ S_msrStanza msrStanza::create (
       stanzaNumber,
       stanzaUpLinkToVoice);
   assert (obj != nullptr);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceLyrics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating stanza " <<
+      obj->asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   return obj;
 }
 
@@ -1183,19 +1198,6 @@ void msrStanza::initializeStanza ()
       mfStringNumbersToEnglishWords (
         mfMakeSingleWordFromString (
           mfStanzaNumberAsString (fStanzaNumber)));
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Initializing stanza " << getStanzaName ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
 
   fStanzaTextPresent = false;
 

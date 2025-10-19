@@ -458,8 +458,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
         ss <<
           "musicxml2lilypondInsiderInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -477,8 +476,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
         ss <<
           "musicxml2lilypondInsiderInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: " <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),

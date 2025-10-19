@@ -90,7 +90,6 @@ Usage: xml2brl [[option]* [MusicXMLFile|-] [[option]*
     ss <<
       "Initializing xml2brl insider options handler \"" <<
       fHandlerHeader <<
-      "\"" <<
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
@@ -403,8 +402,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
         ss <<
           "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -469,8 +467,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
         ss <<
           "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -501,8 +498,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
         ss <<
           "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 3: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),

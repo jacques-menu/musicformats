@@ -714,6 +714,13 @@ class EXP msr2msrTranslator :
     std::list <S_msrRepeatElement>
                               fRepeatElementsStack;
 
+    void                      pushRepeatOntoRepeatElementsStack (
+                                const mfInputLineNumber&  inputLineNumber,
+                                const S_msrRepeatElement& repeatElement);
+
+    S_msrRepeatElement        popRepeatFromRepeatElementsStack (
+                                const mfInputLineNumber& inputLineNumber);
+
     S_msrRepeat               createARepeatCloneAndStackIt (
                                 const mfInputLineNumber& inputLineNumber,
                                 const std::string&       context);

@@ -3412,7 +3412,6 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
       ", measure \"" << fCurrentMeasureNumber << "\"" <<
       "', voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       ", line " <<  elt->getInputLineNumber () <<
       " ===-->";
 
@@ -3768,7 +3767,6 @@ void msr2lpsrTranslator::visitStart (S_msrStanza& elt)
     ss <<
       "--> Start visiting msrStanza \"" <<
       elt->getStanzaName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -3811,7 +3809,6 @@ void msr2lpsrTranslator::visitEnd (S_msrStanza& elt)
     ss <<
       "--> End visiting msrStanza \"" <<
       elt->getStanzaName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -6548,8 +6545,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
               ", as double tremolo first element" <<
               " in voice \"" <<
               fCurrentVoiceClone->getVoiceName () <<
-              "\"" <<
-              std::endl;
+                      std::endl;
 
             gWaeHandler->waeTrace (
               __FILE__, mfInputLineNumber (__LINE__),
@@ -6574,8 +6570,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
               ", as double tremolo second element" <<
               " in voice \"" <<
               fCurrentVoiceClone->getVoiceName () <<
-              "\"" <<
-              std::endl;
+                      std::endl;
 
             gWaeHandler->waeTrace (
               __FILE__, mfInputLineNumber (__LINE__),
@@ -8614,7 +8609,6 @@ void msr2lpsrTranslator::visitStart (S_msrMidiTempo& elt)
       elt->asString () <<
       " in voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       ", line " <<  elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (

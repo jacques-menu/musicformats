@@ -351,7 +351,6 @@ void mxsrVoice::appendTupletWhereItBelongs (
       tuplet->asString () <<
       " in voice \"" <<
       fMsrVoice->getVoiceName () <<
-      "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
     }
@@ -374,7 +373,6 @@ void mxsrVoice::appendTupletWhereItBelongs (
       fTupletsStack.front ()->asString () <<
       " in voice \"" <<
       fMsrVoice->getVoiceName () <<
-      "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
     }

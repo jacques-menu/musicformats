@@ -916,11 +916,9 @@ Bool mfslDriver::applySelectOptionsFinally ()
         "====> applySelectOptionsFinally():" <<
         "optionSuppliedChoiceName\"" <<
         optionSuppliedChoiceName <<
-        "\"" <<
-        ", optionSuppliedLabel\"" <<
+          ", optionSuppliedLabel\"" <<
         optionSuppliedLabel <<
-        "\"" <<
-        endl;
+          endl;
     }
 
     S_mfslChoice

@@ -781,16 +781,9 @@ void mxsr2msrSkeletonPopulator::displayStaffAndVoiceInformation (
 {
 	gLog <<
 		context <<
-		", fCurrentNote: ";
+		", fCurrentNote: " <<
+		fetchNoteAsString (fCurrentNote) <<
 
-	if (fCurrentNote) {
-	  gLog << fCurrentNote->asString ();
-	}
-	else {
-	  gLog << "[NULL]";
-	}
-
-	gLog <<
 		", fPreviousNoteMusicXMLStaffNumber: " <<
 		mfStaffNumberAsString (fPreviousNoteMusicXMLStaffNumber) <<
 		", fCurrentNoteMusicXMLStaffNumber: " <<
@@ -939,15 +932,6 @@ void mxsr2msrSkeletonPopulator::populatePartsMapFromScore ()
     // there aren't any arts in the current MSR score
     std::stringstream ss;
 
-    fMsrScore->
-      printSummary (gLog); // JMI 0.9.69
-
-    gLog <<
-      fMsrScore; // JMI 0.9.69
-
-    fMsrScore->
-      displayPartGroupsList ("visitStart (S_part& elt)");
-
     ss <<
       "the MSR score doesn't contain any parts";
 
@@ -956,6 +940,15 @@ void mxsr2msrSkeletonPopulator::populatePartsMapFromScore ()
       1, // inputLineNumber
       __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
+
+    fMsrScore->
+      printSummary (gLog); // JMI 0.9.69
+
+    gLog <<
+      fMsrScore; // JMI 0.9.69
+
+    fMsrScore->
+      displayPartGroupsList ("visitStart (S_part& elt)");
   }
 
 //   else {
@@ -1282,22 +1275,6 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrSkeletonPopulator::createVoiceSegmentsForCurrentPartVoices (
-  const S_msrPart& part)
-{
-//   for (S_msrVoice voice : fCurrentPart->getPartVoicesList ()) { // JMI 0.9.76 ???
-//     // create a segment
-//     S_msrSegment
-//       voiceSegment =
-//         msrSegment::create (
-//           part->getInputLineNumber (),
-//           voice); // the uplink to the voice
-//
-//     // set it as the voice's voice segment
-//     voice->setVoiceSegment (voiceSegment);
-//   } // for
-}
-
 void mxsr2msrSkeletonPopulator::displayCurrentPartStaffMsrVoicesMap (
   const mfInputLineNumber& inputLineNumber,
   const std::string& context) const
@@ -1478,14 +1455,11 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   if (! theMsrVoice) {
-    staff->print (gLog); // JMI
-
     std::stringstream ss;
 
     ss <<
       "first voice not found in score skeleton's staff \"" <<
       staff->getStaffPathLikeName () <<
-      "\"" <<
       ", line " << inputLineNumber;
 
     mxsr2msrInternalError (
@@ -1493,6 +1467,8 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
       inputLineNumber,
       __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
+
+    staff->print (gLog); // JMI
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
@@ -3569,8 +3545,6 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_appearance& elt)
 //________________________________________________________________________
 void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 {
-//   gLog << elt; //JMI 0.9.66 create MusicFormats's own smart pointer type ???
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -3743,7 +3717,7 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoicesBasics ()) {
+  if (gTraceOahGroup->getTraceStaves ()) {
     // display the current part's voices map
     fCurrentPart->
       displayPartStavesMap (
@@ -3779,9 +3753,6 @@ void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
       "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
 #endif
-
-  // create the current part's voices voice segments
-  createVoiceSegmentsForCurrentPartVoices (fCurrentPart);
 
   // is there an implicit initial repeat?
   Bool
@@ -4826,7 +4797,7 @@ If the cancel attribute is
         fCurrentHumdrumScotKeyItemsVector.begin ();
       i != fCurrentHumdrumScotKeyItemsVector.end ();
       ++i
-  ) {
+    ) {
       gLog <<
         ++counter << ": " << (*i) <<
         std::endl;
@@ -7173,8 +7144,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           ", placement: \"" <<
           msrPlacementKindAsString (
             fCurrentDirectionPlacementKind) <<
-          "\"" <<
-          ", line " << elt->getInputLineNumber ();
+              ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -10909,8 +10879,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 
         ", fCurrentSyllableElementsList = \"" <<
         syllableElementsListAsString (fCurrentSyllableElementsList) <<
-        "\"" <<
-        ", line " << inputStartLineNumber;
+          ", line " << inputStartLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -13284,11 +13253,9 @@ void mxsr2msrSkeletonPopulator::visitStart (S_type& elt)
     gLog <<
       "fCurrentGraphicNoteType: \"" <<
       fCurrentGraphicNoteType <<
-      "\"" <<
       std::endl <<
       "noteTypeSize: \"" <<
       noteTypeSize <<
-      "\"" <<
       std::endl;
         */
   }
@@ -14189,7 +14156,6 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
     ss <<
       "slashType: \"" <<
       slashType <<
-      "\"" <<
       std::endl <<
       "slashTypeSize: \"" <<
       slashTypeSize <<
@@ -21777,8 +21743,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLigaturesToCurrentNote ()
               fCurrentNote->asString () <<
 //                 " in voice \"" <<
 //                 noteVoice->getVoiceName () <<
-//                 "\"" <<
-              ", line " << ligature->getInputLineNumber () <<
+//                         ", line " << ligature->getInputLineNumber () <<
               std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -23617,8 +23582,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
       ss <<
         "Creating grace notes group in voice \"" <<
         fCurrentRecipientMsrVoice->getVoiceName () <<
-        "\"" <<
-        ", fCurrentNoteSequentialNumber: " <<
+          ", fCurrentNoteSequentialNumber: " <<
         fCurrentNoteSequentialNumber <<
         ", fCurrentNoteMusicXMLStaffNumber: " <<
         fCurrentNoteMusicXMLStaffNumber <<
@@ -25277,9 +25241,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesBasics ()) {
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Handling non-chord, non-tuplet regularNote " <<
       fCurrentNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
       ", fCurrentRecipientMxsrVoice: \"" <<
@@ -25299,7 +25261,6 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
     gLog << std::left <<
       std::setw (fieldWidth) << "voice" << ": \"" <<
       fCurrentRecipientMsrVoice->getVoiceName () <<
-      "\"" <<
       std::endl <<
       std::setw (fieldWidth) << "line:" << ": " <<
       fCurrentNote->getInputLineNumber () <<
@@ -25359,8 +25320,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
             ", line " << fCurrentNote->getInputLineNumber () <<
             ", to voice \"" <<
             fCurrentRecipientMsrVoice->getVoiceName () <<
-            "\"" <<
-            std::endl;
+                  std::endl;
 
           gWaeHandler->waeTrace (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -25389,8 +25349,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
             ", as double tremolo first element" <<
             " in voice \"" <<
             fCurrentRecipientMsrVoice->getVoiceName () <<
-            "\"" <<
-            std::endl;
+                  std::endl;
 
           gWaeHandler->waeTrace (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -25416,8 +25375,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
             ", as double tremolo second element" <<
             " in voice \"" <<
             fCurrentRecipientMsrVoice->getVoiceName () <<
-            "\"" <<
-            std::endl;
+                  std::endl;
 
           gWaeHandler->waeTrace (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -25565,9 +25523,7 @@ void mxsr2msrSkeletonPopulator::handleARestInAMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesBasics ()) {
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Handling standalone rest " <<
        rest->asShortString () << // NO, would lead to infinite recursion ??? JMI
       ", fCurrentRecipientMxsrVoice: \"" <<
@@ -25587,7 +25543,6 @@ void mxsr2msrSkeletonPopulator::handleARestInAMeasure (
     gLog << std::left <<
       std::setw (fieldWidth) << "voice" << ": \"" <<
       fCurrentRecipientMsrVoice->getVoiceName () <<
-      "\"" <<
       std::endl <<
       std::setw (fieldWidth) << "line:" << ": " <<
       rest->getInputLineNumber () <<
@@ -25719,9 +25674,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesBasics ()) {
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Handling grace note " <<
        graceNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
       ", fCurrentRecipientMxsrVoice: \"" <<
@@ -25742,7 +25695,6 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
       std::setw (fieldWidth) <<
       "voice" << ": \"" <<
       fCurrentRecipientMsrVoice->getVoiceName () <<
-      "\"" <<
       std::endl <<
       std::setw (fieldWidth) << "line:" << ": " <<
       graceNote->getInputLineNumber () <<
@@ -25933,7 +25885,6 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
       "fCurrentRecipientMxsrVoice" <<
       " = \"" <<
       fCurrentRecipientMsrVoice->getVoiceName () <<
-      "\"" <<
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentNote" << " = \"" << fCurrentNote->asShortString () << "\"" <<
@@ -26136,9 +26087,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChord (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       "Handling a regular regularNote in a chord" <<
       ", regularNote:" <<
       std::endl;
@@ -26252,8 +26201,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChord (
             " to " << chordFirstNoteSoundingWholeNotes <<
             " in voice \"" <<
             fCurrentRecipientMsrVoice->getVoiceName () <<
-            "\"" <<
-            std::endl;
+                  std::endl;
         }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -26778,7 +26726,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat start in part " <<
+      "1 Handling a repeat start in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
@@ -26803,7 +26751,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat start in part " <<
+      "2 Handling a repeat start in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
@@ -27464,7 +27412,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
         useSymbolsString);
 
   if (false) {
-    gLog << useSymbolsKind << std::endl;
+    gLog << "useSymbolsKind: " << useSymbolsKind << std::endl;
   }
 
   // harmony use stack degrees
@@ -27896,9 +27844,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
    // create the harmony
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
-      std::stringstream ss;
-
-      ss <<
+      gLog <<
         "Creating a harmony" <<
         ", line " << elt->getInputLineNumber () << ":" <<
         std::endl;
@@ -27966,10 +27912,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
         std::endl;
 
       --gIndenter;
-
-      gWaeHandler->waeTrace (
-        __FILE__, mfInputLineNumber (__LINE__),
-        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -29688,8 +29630,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //                     note->asString () <<
 //                     " in voice \"" <<
 //                     noteVoice->getVoiceName () <<
-//                     "\"" <<
-//                     ", line " << ligature->getInputLineNumber () <<
+//               //                     ", line " << ligature->getInputLineNumber () <<
 //                     std::endl;
 //                 }
 // #endif // MF_TRACE_IS_ENABLED
@@ -29710,8 +29651,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //                     note->asString () <<
 //                     " in voice \"" <<
 //                     noteVoice->getVoiceName () <<
-//                     "\"" <<
-//                     ", line " << ligature->getInputLineNumber () <<
+//               //                     ", line " << ligature->getInputLineNumber () <<
 //                     std::endl;
 //                 }
 // #endif // MF_TRACE_IS_ENABLED

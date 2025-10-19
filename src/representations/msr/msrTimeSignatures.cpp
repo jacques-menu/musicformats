@@ -951,7 +951,6 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     ss <<
       "beatsNumber: \"" <<
       beatsNumber <<
-      "\"" <<
       std::endl <<
 
       "beatsNotesDuration: \"" <<

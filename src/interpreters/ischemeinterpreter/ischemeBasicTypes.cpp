@@ -285,8 +285,7 @@ void ischemeInput::selectInputName (
 //               "\" by an option-supplied to the script" <<
 //               ", ignoring name \"" <<
 //               name <<
-//               "\"" <<
-//               "\", line " << drv.getScannerLocation () <<
+//         //               "\", line " << drv.getScannerLocation () <<
 //               endl;
 //           }
 //
@@ -335,8 +334,7 @@ void ischemeInput::selectInputName (
 //         ss <<
 //           "input \"" <<
 //           fInputName <<
-//           "\"" <<
-//           " already has name \"" <<
+//     //           " already has name \"" <<
 //           fInputName <<
 //           "\" supplied to the script";
 //
@@ -504,11 +502,9 @@ void ischemeInput::addName (
       gLog <<
         "====> Adding name \"" <<
         name <<
-        "\"" <<
-        " to input \"" <<
+          " to input \"" <<
         fInputName <<
-        "\"" <<
-        ", line " << drv.getScannerLocation () <<
+          ", line " << drv.getScannerLocation () <<
         endl;
     }
 
@@ -1106,8 +1102,7 @@ void ischemeChoice::selectChoiceLabel (
               "\" by an option-supplied to the script" <<
               ", ignoring label \"" <<
               label <<
-              "\"" <<
-              "\", line " << drv.getScannerLocation () <<
+                      "\", line " << drv.getScannerLocation () <<
               endl;
           }
 
@@ -1156,8 +1151,7 @@ void ischemeChoice::selectChoiceLabel (
         ss <<
           "choice \"" <<
           fChoiceName <<
-          "\"" <<
-          " already has label \"" <<
+              " already has label \"" <<
           fChoiceLabel <<
           "\" supplied to the script";
 
@@ -1325,11 +1319,9 @@ void ischemeChoice::addLabel (
       gLog <<
         "====> Adding label \"" <<
         label <<
-        "\"" <<
-        " to choice \"" <<
+          " to choice \"" <<
         fChoiceName <<
-        "\"" <<
-        ", line " << drv.getScannerLocation () <<
+          ", line " << drv.getScannerLocation () <<
         endl;
     }
 

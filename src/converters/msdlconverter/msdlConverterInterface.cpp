@@ -505,8 +505,7 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //       err <<
 //         "xmlFile2lilypond() outputFileName: \"" <<
 //         outputFileName <<
-//         "\"" <<
-//         std::endl;
+//   //         std::endl;
 //     }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -552,8 +551,7 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //         err <<
 //           "xmlFile2lilypond() output goes to file \"" <<
 //           outputFileName <<
-//           "\"" <<
-//           std::endl;
+//     //           std::endl;
 //       }
 // #endif // MF_TRACE_IS_ENABLED
 //

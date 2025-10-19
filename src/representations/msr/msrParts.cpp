@@ -669,7 +669,6 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
       fPartMusicXMLID <<
       ", \"" <<
       fPartName <<
-      "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -874,7 +873,6 @@ mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
     ss <<
       "fetchPartMeasuresWholeNotesVectorAt() in part \"" <<
       fetchPartNameForTrace () <<
-      "\"" <<
       ", partMeasuresWholeNotesVectorSize: " <<
       partMeasuresWholeNotesVectorSize <<
       ", indexValue: " << indexValue;
@@ -903,7 +901,6 @@ mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
     ss <<
       "fetchPartMeasuresWholeNotesVectorAt() in part \"" <<
       fetchPartNameForTrace () <<
-      "\"" <<
       ", partMeasuresWholeNotesVectorSize: " <<
       partMeasuresWholeNotesVectorSize <<
       ", indexValue: " << indexValue << " is out of bounds" <<
@@ -1655,7 +1652,6 @@ void msrPart::cascadeHandleRepeatEndInPart (
     ss <<
       "Cascading handling a repeat end in part \"" <<
       fetchPartNameForTrace () <<
-      "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1688,7 +1684,6 @@ void msrPart::cascadeHandleRepeatEndingStartInPart (
     ss <<
       "Cascading handling a repeat ending start in part \"" <<
       fetchPartNameForTrace () <<
-      "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1724,7 +1719,6 @@ void msrPart::cascadeHandleRepeatEndingEndInPart (
         repeatEndingKind) <<
       " repeat ending end in part \"" <<
       fetchPartNameForTrace () <<
-      "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1760,7 +1754,6 @@ void msrPart::finalizeRepeatEndInPart (
     ss <<
       "Finalizing a repeat upon its end in part \"" <<
       fetchPartNameForTrace () <<
-      "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2401,8 +2394,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       fPartMusicXMLID <<
 //       ", \"" <<
 //       fPartName <<
-//       "\"" <<
-//       ", line " << voice->getInputLineNumber ();
+// //       ", line " << voice->getInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -2455,8 +2447,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       fPartMusicXMLID <<
 //       ", \"" <<
 //       fPartName <<
-//       "\"" <<
-//       ", line " << voice->getInputLineNumber ();
+// //       ", line " << voice->getInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -2570,7 +2561,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   fPartHarmoniesVoice =
-    msrVoice::createAsWellAsSegment (
+    msrVoice::createAsWellAsItsSegment (
       inputLineNumber,
       msrVoiceKind::kVoiceKindHarmonies,
       partHarmoniesVoiceNumber,
@@ -2749,7 +2740,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   fPartFiguredBassVoice =
-    msrVoice::createAsWellAsSegment (
+    msrVoice::createAsWellAsItsSegment (
       inputLineNumber,
       msrVoiceKind::kVoiceKindFiguredBass,
       partFiguredBassVoiceNumber,
@@ -2848,8 +2839,7 @@ void msrPart::appendFiguredBassToPart (
 //             figuredBassSupplierVoice->getVoiceKind ()) <<
 //           " voice \" " <<
 //           figuredBassSupplierVoice->getVoiceName () <<
-//           "\"" <<
-//           ", line " << figuredBass->getInputLineNumber ();
+//     //           ", line " << figuredBass->getInputLineNumber ();
 //
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
@@ -2907,8 +2897,7 @@ void msrPart::appendFiguredBassToPartClone (
             figuredBassSupplierVoice->getVoiceKind ()) <<
           " voice \" " <<
           figuredBassSupplierVoice->getVoiceName () <<
-          "\"" <<
-          ", line " << figuredBass->getInputLineNumber ();
+              ", line " << figuredBass->getInputLineNumber ();
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -3119,7 +3108,7 @@ void msrPart::displayPartStavesMap (
   const std::string& context) const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceStaves ()) {
     gLog <<
       ">>> The fPartStavesMap of part \"" <<
       getPartName () <<
@@ -3619,8 +3608,7 @@ void msrPart::browseData (basevisitor* v)
         ss <<
           "staves browsing order is unknown in score, part: \"" <<
           fetchPartNameForTrace () <<
-          "\"" <<
-          ", line " << fInputLineNumber;
+              ", line " << fInputLineNumber;
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -4534,6 +4522,37 @@ std::ostream& operator << (std::ostream& os, const msrPart& elt)
 
   return os;
 }
+
+std::string fetchPartAsShortString (const S_msrPart& part)
+{
+  std::string result;
+
+  if (part) {
+    result =
+      part->asShortString ();
+  }
+  else {
+    result = "\"** PART IS NULL **\"";
+  }
+
+  return result;
+}
+
+std::string fetchPartAsString (const S_msrPart& part)
+{
+  std::string result;
+
+  if (part) {
+    result =
+      part->asString ();
+  }
+  else {
+    result = "\"** PART IS NULL **\"";
+  }
+
+  return result;
+}
+
 
 
 }

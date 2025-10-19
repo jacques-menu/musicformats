@@ -148,7 +148,6 @@ void stringMatcherInterpreterInsiderHandler::createThestringMatcherInterpreterPr
     gLog <<
       "Creating the stringMatcher prefixes in \"" <<
       fHandlerHeader <<
-      "\"" <<
       endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -218,7 +217,6 @@ void stringMatcherInterpreterInsiderHandler::checkOptionsAndArguments () const
     gLog <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
-      "\"" <<
       endl;
   }
 #endif // MF_TRACE_IS_ENABLED

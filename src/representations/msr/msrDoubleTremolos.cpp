@@ -242,8 +242,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //       fBarLineUpLinkToMeasure->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
-//       "\"" <<
-//       std::endl;
+// //       std::endl;
 //
 //     --gIndenter;
 //   }

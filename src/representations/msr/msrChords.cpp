@@ -330,8 +330,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //       fMeasureElementUpLinkToMeasure->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
-//       "\"" <<
-//       std::endl;
+// //       std::endl;
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -5348,6 +5347,36 @@ std::ostream& operator << (std::ostream& os, const S_msrChordGraceNotesGroupLink
   }
 
   return os;
+}
+
+std::string fetchChordAsShortString (const S_msrChord& chord)
+{
+  std::string result;
+
+  if (chord) {
+    result =
+      chord->asShortString ();
+  }
+  else {
+    result = "\"** NOTE IS NULL **\"";
+  }
+
+  return result;
+}
+
+std::string fetchChordAsString (const S_msrChord& chord)
+{
+  std::string result;
+
+  if (chord) {
+    result =
+      chord->asString ();
+  }
+  else {
+    result = "\"** NOTE IS NULL **\"";
+  }
+
+  return result;
 }
 
 

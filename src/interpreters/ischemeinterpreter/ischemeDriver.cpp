@@ -907,11 +907,9 @@ Bool ischemeDriver::applySelectOptionsFinally ()
         "====> applySelectOptionsFinally():" <<
         "optionSuppliedChoiceName\"" <<
         optionSuppliedChoiceName <<
-        "\"" <<
-        ", optionSuppliedLabel\"" <<
+          ", optionSuppliedLabel\"" <<
         optionSuppliedLabel <<
-        "\"" <<
-        endl;
+          endl;
     }
 
     S_ischemeChoice

@@ -97,7 +97,6 @@ void translateMxsrToGuido (
     err <<
       "xmlFile2gmn() outputFileName: \"" <<
       outputFileName <<
-      "\"" <<
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
@@ -131,8 +130,7 @@ void translateMxsrToGuido (
       err <<
         "xmlFile2gmn() output goes to file \"" <<
         outputFileName <<
-        "\"" <<
-        std::endl;
+          std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, mfInputLineNumber (__LINE__),

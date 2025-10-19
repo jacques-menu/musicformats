@@ -1369,9 +1369,6 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      populateCurrentPartStaffVoicesMapsFromPart (
                                 const S_msrPart& part);
 
-    void                      createVoiceSegmentsForCurrentPartVoices (
-                                const S_msrPart& part);
-
 		void											displayCurrentPartStaffMxsrVoicesMap () const;
 
     // staff details handling

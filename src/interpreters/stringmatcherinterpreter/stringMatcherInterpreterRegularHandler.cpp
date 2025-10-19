@@ -106,7 +106,6 @@ void stringMatcherInterpreterRegularHandler::createRegularHandlerGroups ()
     gLog <<
       "Creating the regular handler groups for \"" <<
       fHandlerHeader <<
-      "\"" <<
       endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -375,7 +374,6 @@ void stringMatcherInterpreterRegularHandler::checkOptionsAndArguments () const
     gLog <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
-      "\"" <<
       endl;
   }
 #endif // MF_TRACE_IS_ENABLED

@@ -237,8 +237,7 @@ void mfDisplayStringsVector (
         std::right << std::setw (2) << counter++ <<
         ": \"" <<
         theString <<
-        "\"" <<
-        std::endl;
+          std::endl;
     } //for
 
     --gIndenter;

@@ -168,10 +168,14 @@ class EXP msrRepeatCommonPart : public msrRepeatElement
     static SMARTP<msrRepeatCommonPart> create (
                             const mfInputLineNumber& inputLineNumber);
 
-    static SMARTP<msrRepeatCommonPart> createAsWellAsSegment (
+    static SMARTP<msrRepeatCommonPart> createAsWellAsItsSegment (
                             const mfInputLineNumber& inputLineNumber);
 
     static SMARTP<msrRepeatCommonPart> create (
+                            const mfInputLineNumber& inputLineNumber,
+                            const S_msrRepeat&       upLinkToRepeat);
+
+    static SMARTP<msrRepeatCommonPart> createAsWellAsItsSegment (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeat&       upLinkToRepeat);
 
@@ -298,13 +302,20 @@ class EXP msrRepeatEnding : public msrRepeatElement
                                // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind      repeatEndingKind);
 
-    static SMARTP<msrRepeatEnding> createAsWellAsSegment (
+    static SMARTP<msrRepeatEnding> createAsWellAsItsSegment (
                             const mfInputLineNumber& inputLineNumber,
                             const std::string&       repeatEndingNumber,
                                // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind      repeatEndingKind);
 
     static SMARTP<msrRepeatEnding> create (
+                            const mfInputLineNumber& inputLineNumber,
+                            const std::string&       repeatEndingNumber,
+                              // a string, because if may be "1, 2" for example
+                            msrRepeatEndingKind      repeatEndingKind,
+                            const S_msrRepeat&       upLinkToRepeat);
+
+    static SMARTP<msrRepeatEnding> createAsWellAsItsSegment (
                             const mfInputLineNumber& inputLineNumber,
                             const std::string&       repeatEndingNumber,
                               // a string, because if may be "1, 2" for example

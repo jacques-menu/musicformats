@@ -427,8 +427,7 @@ EXP int mfsl (
         ss <<
           "Reading file \"" <<
           inputSourceName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),

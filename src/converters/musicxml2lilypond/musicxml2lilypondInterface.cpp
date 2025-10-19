@@ -328,7 +328,6 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
     err <<
       "xmlFile2lilypond() outputFileName: \"" <<
       outputFileName <<
-      "\"" <<
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
@@ -384,8 +383,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       err <<
         "xmlFile2lilypond() output goes to file \"" <<
         outputFileName <<
-        "\"" <<
-        std::endl;
+          std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, mfInputLineNumber (__LINE__),

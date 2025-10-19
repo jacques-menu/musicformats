@@ -668,7 +668,6 @@ void msrIdentification::print (std::ostream& os) const
       std::setw (fieldWidth) <<
       "fIdentificationWorkNumber" << ": \"" <<
       fIdentificationWorkNumber <<
-      "\"" <<
       std::endl;
 
     emptyIdentification = false;
@@ -679,7 +678,6 @@ void msrIdentification::print (std::ostream& os) const
       std::setw (fieldWidth) <<
       "fIdentificationWorkCreditTypeTitle" << ": \"" <<
       fIdentificationWorkCreditTypeTitle <<
-      "\"" <<
       std::endl;
 
     emptyIdentification = false;
@@ -690,7 +688,6 @@ void msrIdentification::print (std::ostream& os) const
       std::setw (fieldWidth) <<
       "fIdentificationOpus" << ": \"" <<
       fIdentificationOpus <<
-      "\"" <<
       std::endl;
 
     emptyIdentification = false;
@@ -701,7 +698,6 @@ void msrIdentification::print (std::ostream& os) const
       std::setw (fieldWidth) <<
       "fIdentificationMovementNumber" << ": \"" <<
       fIdentificationMovementNumber <<
-      "\"" <<
       std::endl;
 
     emptyIdentification = false;
@@ -712,7 +708,6 @@ void msrIdentification::print (std::ostream& os) const
       std::setw (fieldWidth) <<
       "fIdentificationMovementTitle" << ": \"" <<
       fIdentificationMovementTitle <<
-      "\"" <<
       std::endl;
 
     emptyIdentification = false;
@@ -723,7 +718,6 @@ void msrIdentification::print (std::ostream& os) const
       std::setw (fieldWidth) <<
       "fIdentificationEncodingDate" << ": \"" <<
       fIdentificationEncodingDate <<
-      "\"" <<
       std::endl;
 
     emptyIdentification = false;
@@ -734,7 +728,6 @@ void msrIdentification::print (std::ostream& os) const
       std::setw (fieldWidth) <<
       "fIdentificationMiscellaneousField" << ": \"" <<
       fIdentificationMiscellaneousField <<
-      "\"" <<
       std::endl;
 
     emptyIdentification = false;

@@ -695,15 +695,12 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     ss <<
       "keyTonic: \"" <<
       keyTonic <<
-      "\"" <<
       std::endl <<
       "keyQuarterTonesTonicPitchKind: \"" <<
       msrQuarterTonesPitchKindAsString (keyQuarterTonesTonicPitchKind) <<
-      "\"" <<
       std::endl <<
       "keyMode: \"" <<
       keyMode <<
-      "\"" <<
       std::endl <<
       "keyModeKind: \"" <<
       keyModeKind <<

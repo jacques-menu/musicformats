@@ -1089,8 +1089,7 @@ void lilypondTransposePartIDAtom::displayAtomWithVariableOptionsValues (
     for (std::pair <std::string, S_msrSemiTonesPitchAndOctave> thePair : fStringToMsrSemiTonesPitchAndOctaveMapVariable
     ) {
       os <<
-        "\"" <<
-        thePair.first <<
+          thePair.first <<
         "\" --> " <<
         thePair.second <<
         std::endl;
@@ -7533,12 +7532,10 @@ void lilypondBreakPageAfterMeasureNumberAtom::displayAtomWithVariableOptionsValu
       i      = iBegin;
     for ( ; ; ) {
       os <<
-        "\"" <<
-        (*i).first <<
+          (*i).first <<
         "\" --> \"" <<
         (*i).second <<
-        "\"" <<
-        ", fSelected: " <<
+          ", fSelected: " <<
         fSelected <<
         std::endl;
       if (++i == iEnd) break;

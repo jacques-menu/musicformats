@@ -231,7 +231,6 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     err <<
       "msdlStream2lilypond() outputFileName: \"" <<
       outputFileName <<
-      "\"" <<
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
@@ -287,8 +286,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       err <<
         "msdlStream2lilypond() output goes to file \"" <<
         outputFileName <<
-        "\"" <<
-        std::endl;
+          std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
 //       __FILE__, mfInputLineNumber (__LINE__),

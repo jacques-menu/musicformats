@@ -239,7 +239,11 @@ class EXP msrTuplet : public msrTupletElement
     std::list <S_msrTupletElement>
                           fTupletElementsList;
 };
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt);
+
+std::string fetchTupletAsShortString (const S_msrTuplet& tuplet);
+std::string fetchTupletAsString (const S_msrTuplet& tuplet);
 
 
 }

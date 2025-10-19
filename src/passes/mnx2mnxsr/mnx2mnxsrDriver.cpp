@@ -916,11 +916,9 @@ Bool mnx2mnxsrDriver::applySelectOptionsFinally ()
         "====> applySelectOptionsFinally():" <<
         "optionSuppliedChoiceName\"" <<
         optionSuppliedChoiceName <<
-        "\"" <<
-        ", optionSuppliedLabel\"" <<
+          ", optionSuppliedLabel\"" <<
         optionSuppliedLabel <<
-        "\"" <<
-        endl;
+          endl;
     }
 
     S_mnx2mnxsrChoice

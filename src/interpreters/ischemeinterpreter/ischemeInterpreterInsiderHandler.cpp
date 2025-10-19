@@ -150,7 +150,6 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterPrefixes ()
     gLog <<
       "Creating the ischeme prefixes in \"" <<
       fHandlerHeader <<
-      "\"" <<
       endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -220,7 +219,6 @@ void ischemeInterpreterInsiderHandler::checkOptionsAndArguments () const
     gLog <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
-      "\"" <<
       endl;
   }
 #endif // MF_TRACE_IS_ENABLED

@@ -57,6 +57,22 @@ S_msrSegment msrSegment::create (
       inputLineNumber,
       segmentKind);
   assert (obj != nullptr);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating segment " <<
+      obj->asString () <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   return obj;
 }
 
@@ -71,6 +87,24 @@ S_msrSegment msrSegment::create (
       segmentKind,
       segmentUpLinkToVoice);
   assert (obj != nullptr);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating segment " <<
+      obj->asString () <<
+      " with uplink to voice " <<
+      fetchVoiceName (segmentUpLinkToVoice) <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   return obj;
 }
 
@@ -119,24 +153,7 @@ void msrSegment::initializeSegment ()
   fSegmentAbsoluteNumber = ++sSegmentsCounter;
   fSegmentNumber = ++sSegmentNumber;
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceSegmentsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Initializing segment " <<
-      asString () <<
-      ", in voice " <<
-      fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << fInputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (fSegmentNumber == 4) abort ();
+//   if (fSegmentNumber == 4) abort ();
 
 // JMI 0.9.63
 //  // segment shortest note wholeNotes
@@ -835,8 +852,8 @@ void msrSegment::appendRepeatToSegment (
 //     }
 
   // append the last segment measure to the repeat's common part
-gLog << "*** msrSegment *** " << *this << std::endl;
-gLog << std::endl << std::endl;
+// gLog << "*** msrSegment *** " << *this << std::endl;
+// gLog << std::endl << std::endl;
 
   if (fSegmentLastMeasure) {
     // are there elements before the current last measure in this segment?
@@ -1036,7 +1053,8 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //   }
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  print (gLog);
+//   gLog << "*** appendClefKeyTimeSignatureGroupToSegment()" << std::endl;
+//   print (gLog);
 
   // register clefKeyTimeSignatureGroup in segments's current measure
   fSegmentLastMeasure->
@@ -1309,16 +1327,7 @@ void msrSegment::appendTimeSignatureToSegment (
 
     ss <<
       "Appending time signature:" <<
-      std::endl;
-
-    ++gIndenter;
-
-    gLog <<
-      timeSignature;
-
-    --gIndenter;
-
-    gLog <<
+      timeSignature->asShortString () <<
       "to segment " << asString () <<
       ", in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice);
@@ -1352,16 +1361,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (
 
     ss <<
       "Appending time signature:" <<
-      std::endl;
-
-    ++gIndenter;
-
-    gLog <<
-      timeSignature;
-
-    --gIndenter;
-
-    gLog <<
+      timeSignature->asShortString () <<
       "to segment clone " << asString () <<
       ", in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice);
@@ -2285,8 +2285,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //       fSegmentNumber <<
 //       " in voice \"" <<
 //       fetchVoiceName (fSegmentUpLinkToVoice) <<
-//       "\"" <<
-//       ", part " <<
+// //       ", part " <<
 //       fSegmentUpLinkToVoice->fetchVoiceUpLinkToPart ();
 //
 //     msrInternalError (
@@ -3124,8 +3123,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //       asString () <<
 // //       " in voice \"" <<
 // //       fetchVoiceName (fSegmentUpLinkToVoice) <<
-// //       "\"" <<
-// //       ", since it is empty";
+// // // //       ", since it is empty";
 // //
 // //     msrInternalError (
 // //       gServiceRunData->getInputSourceName (),
@@ -3144,8 +3142,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 //       asString () <<
 //       " in voice \"" <<
 //       fetchVoiceName (fSegmentUpLinkToVoice) <<
-//       "\"" <<
-//       ", since that segment does not contain any";
+// //       ", since that segment does not contain any";
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
@@ -3392,8 +3389,7 @@ std::string msrSegment::asShortString () const
   std::stringstream ss;
 
   ss <<
-    '[' <<
-    "Segment " <<
+    "[Segment" <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
     ", fSegmentKind: " <<

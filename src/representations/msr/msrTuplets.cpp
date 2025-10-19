@@ -1419,6 +1419,37 @@ std::ostream& operator << (std::ostream& os, const msrTuplet& elt)
   return os;
 }
 
+std::string fetchTupletAsShortString (const S_msrTuplet& tuplet)
+{
+  std::string result;
+
+  if (tuplet) {
+    result =
+      tuplet->asShortString ();
+  }
+  else {
+    result = "\"** TUPLET IS NULL **\"";
+  }
+
+  return result;
+}
+
+std::string fetchTupletAsString (const S_msrTuplet& tuplet)
+{
+  std::string result;
+
+  if (tuplet) {
+    result =
+      tuplet->asString ();
+  }
+  else {
+    result = "\"** TUPLET IS NULL **\"";
+  }
+
+  return result;
+}
+
+
 
 }
 

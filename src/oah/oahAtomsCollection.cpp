@@ -5266,7 +5266,6 @@ void oahIntegerAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for integer string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
-      "\"" <<
       std::endl;
 
     for (unsigned i = 0; i < smSize; ++i) {
@@ -5569,7 +5568,6 @@ void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
       "There are " << smSize << " matches" <<
       " for integer string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
-      "\"" <<
       std::endl;
 
     for (unsigned i = 0; i < smSize; ++i) {
@@ -5888,7 +5886,6 @@ void oahFloatAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for float string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
-      "\"" <<
       std::endl;
 
     for (unsigned i = 0; i < smSize; ++i) {
@@ -7171,8 +7168,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtom (
           booleanAtomLongName <<
           "\" is different than the long names prefix name \"" <<
           fLongNamesPrefixName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         booleanAtom->print (ss);
 
@@ -7188,8 +7184,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtom (
           booleanAtomLongName <<
           "\" doesn't start by the long names prefix name \"" <<
           fLongNamesPrefixName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         booleanAtom->print (ss);
 
@@ -7209,8 +7204,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtom (
             booleanAtomLongName <<
             "\" is nothing more than the long names prefix name \"" <<
             fLongNamesPrefixName <<
-            "\"" <<
-          std::endl;
+                std::endl;
 
           booleanAtom->print (ss);
 
@@ -8143,7 +8137,6 @@ void oahRationalAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for mfRational string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
-      "\"" <<
       std::endl;
 
     for (unsigned i = 0; i < smSize; ++i) {
@@ -10283,12 +10276,10 @@ void oahStringToIntMapAtom::displayAtomWithVariableOptionsValues (
 
     for (std::pair <std::string, int> thePair : fStringToIntMapVariable) {
       os <<
-        "\"" <<
-        thePair.first <<
+          thePair.first <<
         "\" --> \"" <<
         thePair.second <<
-        "\"" <<
-        std::endl;
+          std::endl;
     } // for
 
     os <<
@@ -10673,12 +10664,10 @@ void oahMeasureNumberToIntMapAtom::displayAtomWithVariableOptionsValues (
 
     for (std::pair <mfMeasureNumber, int> thePair : fMeasureNumberToIntMapVariable) {
       os <<
-        "\"" <<
-        thePair.first <<
+          thePair.first <<
         "\" --> \"" <<
         thePair.second <<
-        "\"" <<
-        std::endl;
+          std::endl;
     } // for
 
     os <<
@@ -11063,12 +11052,10 @@ void oahMeasureNumberToMeasureNumberMapAtom::displayAtomWithVariableOptionsValue
 
     for (std::pair <mfMeasureNumber, mfMeasureNumber> thePair : fMeasureNumberToMeasureNumberMapVariable) {
       os <<
-        "\"" <<
-        thePair.first <<
+          thePair.first <<
         "\" --> \"" <<
         thePair.second <<
-        "\"" <<
-        std::endl;
+          std::endl;
     } // for
 
     os <<
@@ -11444,12 +11431,10 @@ void oahStringToStringMapAtom::displayAtomWithVariableOptionsValues (
 
     for (std::pair <std::string, std::string> thePair : fStringToStringMapVariable) {
       os <<
-        "\"" <<
-        thePair.first <<
+          thePair.first <<
         "\" --> \"" <<
         thePair.second <<
-        "\"" <<
-        std::endl;
+          std::endl;
     } // for
 
     os <<
@@ -11825,12 +11810,10 @@ void oahStringToStringMultiMapAtom::displayAtomWithVariableOptionsValues (
 
     for (std::pair <std::string, std::string> thePair : fStringToStringMultiMapVariable) {
       os <<
-        "\"" <<
-        thePair.first <<
+          thePair.first <<
         "\" --> \"" <<
         thePair.second <<
-        "\"" <<
-        std::endl;
+          std::endl;
     } // for
 
     os <<
@@ -11938,7 +11921,6 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for integer string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
-      "\"" <<
       std::endl;
 
     for (unsigned i = 0; i < smSize; ++i) {
@@ -12306,7 +12288,6 @@ void oahMeasureNumberAndIntegerAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for integer string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
-      "\"" <<
       std::endl;
 
     for (unsigned i = 0; i < smSize; ++i) {
@@ -12673,7 +12654,6 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for integer string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
-      "\"" <<
       std::endl;
 
     for (unsigned i = 0; i < smSize; ++i) {
@@ -13354,7 +13334,6 @@ void oahLengthAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for integer string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
-      "\"" <<
       std::endl;
 
     for (unsigned i = 0; i < smSize; ++i) {

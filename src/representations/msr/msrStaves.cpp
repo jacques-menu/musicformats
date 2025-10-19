@@ -52,8 +52,8 @@ int msrStaff::sStaffMaxRegularVoices = 4; // JMI TEMP MOD 0.9.70
 
 S_msrStaff msrStaff::create (
   const mfInputLineNumber& inputLineNumber,
-  msrStaffKind     staffKind,
-  const mfStaffNumber& staffNumber)
+  msrStaffKind             staffKind,
+  const                    mfStaffNumber& staffNumber)
 {
   msrStaff* obj =
     new msrStaff (
@@ -66,9 +66,9 @@ S_msrStaff msrStaff::create (
 
 S_msrStaff msrStaff::create (
   const mfInputLineNumber& inputLineNumber,
-  msrStaffKind     staffKind,
-  const mfStaffNumber& staffNumber,
-  const S_msrPart& staffUpLinkToPart)
+  msrStaffKind             staffKind,
+  const                    mfStaffNumber& staffNumber,
+  const                    S_msrPart& staffUpLinkToPart)
 {
   msrStaff* obj =
     new msrStaff (
@@ -85,8 +85,8 @@ S_msrStaff msrStaff::create (
 
 msrStaff::msrStaff (
   const mfInputLineNumber& inputLineNumber,
-  msrStaffKind     staffKind,
-  const mfStaffNumber& staffNumber)
+  msrStaffKind             staffKind,
+  const mfStaffNumber&     staffNumber)
     : msrElement (inputLineNumber)
 {
   // set staff kind and number
@@ -563,9 +563,9 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 
 void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
   const mfInputLineNumber& inputLineNumber,
-  int                    previousMeasureEndInputLineNumber,
-  const mfMeasureNumber& measureNumber,
-  msrMeasureImplicitKind measureImplicitKind)
+  int                      previousMeasureEndInputLineNumber,
+  const mfMeasureNumber&   measureNumber,
+  msrMeasureImplicitKind   measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -753,7 +753,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
   // create the voice
   S_msrVoice
     voice =
-      msrVoice::createAsWellAsSegment (
+      msrVoice::createAsWellAsItsSegment (
         inputLineNumber,
         msrVoiceKind::kVoiceKindRegular,
         voiceNumber,
@@ -985,8 +985,8 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 
 void msrStaff::registerVoiceByItsNumber (
   const mfInputLineNumber& inputLineNumber,
-  const mfStaffNumber& staffNumber,
-  const S_msrVoice& voice)
+  const mfStaffNumber&     staffNumber,
+  const S_msrVoice&        voice)
 {
   mfVoiceNumber voiceNumber = voice->getVoiceNumber ();
 
@@ -995,10 +995,9 @@ void msrStaff::registerVoiceByItsNumber (
     std::stringstream ss;
 
     ss <<
-      "Registering voice named \"" << voice->getVoiceName () <<
-      "\", " <<
+      "Registering voice " <<
       voice->asShortString () <<
-      ", by its number '" << voiceNumber <<
+      " by its number '" << voiceNumber <<
       "\" in staff " << fStaffPathLikeName <<
       " with number " << staffNumber <<
       " line " << fInputLineNumber;
@@ -1096,7 +1095,7 @@ void msrStaff::registerVoiceByItsNumber (
 
 void msrStaff::registerRegularVoiceByItsNumber (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrVoice& regularVoice,
+  const S_msrVoice&        regularVoice,
   const mfVoiceNumber&     voiceNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1190,7 +1189,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
 
 void msrStaff::registerHarmoniesVoiceByItsNumber (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrVoice& voice)
+  const S_msrVoice&        voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -1219,7 +1218,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
 
 void msrStaff::registerFiguredBassVoiceByItsNumber (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrVoice& voice)
+  const S_msrVoice&        voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -1248,7 +1247,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
 
 S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
   const mfInputLineNumber& inputLineNumber,
-  const mfVoiceNumber& voiceNumber)
+  const mfVoiceNumber&     voiceNumber)
 {
   S_msrVoice result; // JMI avoid repetitive messages! 0.9.66
 
@@ -1317,7 +1316,6 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
     ss <<
       "Assigning sequential numbers to the regular voices in staff \"" <<
       fStaffPathLikeName <<
-      "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1469,7 +1467,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
 
 void msrStaff::registerVoiceInStaff (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrVoice& voice)
+  const S_msrVoice&        voice)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1581,7 +1579,7 @@ void msrStaff::registerVoiceInStaff (
 
 void msrStaff::registerPartLevelVoiceInStaff (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrVoice& voice)
+  const S_msrVoice&        voice)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1699,7 +1697,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
 
 void msrStaff::registerVoiceInStaffClone (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrVoice& voice)
+  const S_msrVoice&        voice)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -2179,7 +2177,8 @@ void msrStaff::appendTimeSignatureToStaff (
 }
 
 void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
-  const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup){
+  const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup)
+{
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
     std::stringstream ss;
@@ -2351,7 +2350,7 @@ void msrStaff::appendPageBreakToStaff (
 }
 
 void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&   inputLineNumber,
   const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2557,7 +2556,7 @@ void msrStaff::cascadeHandleRepeatEndingEndInStaff (
 /* JMI
 void msrStaff::finalizeRepeatEndInStaff (
   const mfInputLineNumber& inputLineNumber,
-  const mfMeasureNumber& measureNumber,
+  const mfMeasureNumber&   measureNumber,
   int           repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2594,8 +2593,8 @@ void msrStaff::finalizeRepeatEndInStaff (
 
 void msrStaff::cascadeCreateAMeasureRepeatAndAppendItToStaff (
   const mfInputLineNumber& inputLineNumber,
-  int measureRepeatMeasuresNumber,
-  int measureRepeatSlashesNumber)
+  int                      measureRepeatMeasuresNumber,
+  int                      measureRepeatSlashesNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
@@ -2652,9 +2651,9 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
 
 void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
   const mfInputLineNumber& inputLineNumber,
-  int               multipleMeasureRestMeasuresNumber,
-  int               multipleMeasureRestSlashesNumber,
-  msrUseSymbolsKind multipleMeasureRestUseSymbolsKind)
+  int                      multipleMeasureRestMeasuresNumber,
+  int                      multipleMeasureRestSlashesNumber,
+  msrUseSymbolsKind        multipleMeasureRestUseSymbolsKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -2691,7 +2690,7 @@ void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
 
 void msrStaff::replicateLastAppendedMeasureInStaff (
   const mfInputLineNumber& inputLineNumber,
-  int replicatasNumber)
+  int                      replicatasNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -4304,6 +4303,37 @@ std::ostream& operator << (std::ostream& os, const msrStaff& elt)
 
   return os;
 }
+
+std::string fetchStaffAsShortString (const S_msrStaff& staff)
+{
+  std::string result;
+
+  if (staff) {
+    result =
+      staff->asShortString ();
+  }
+  else {
+    result = "\"** STAFF IS NULL **\"";
+  }
+
+  return result;
+}
+
+std::string fetchStaffAsString (const S_msrStaff& staff)
+{
+  std::string result;
+
+  if (staff) {
+    result =
+      staff->asString ();
+  }
+  else {
+    result = "\"** STAFF IS NULL **\"";
+  }
+
+  return result;
+}
+
 
 
 }

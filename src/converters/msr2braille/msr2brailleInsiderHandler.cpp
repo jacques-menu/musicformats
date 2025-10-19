@@ -387,8 +387,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
         ss <<
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -453,8 +452,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
         ss <<
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -485,8 +483,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
         ss <<
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 3: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),

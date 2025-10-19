@@ -980,8 +980,7 @@ void lpsrStaffInstrumentNameAtom::displayAtomWithVariableOptionsValues (
         staffInstrumentName = (*i).second;
 
       os <<
-        "\"" <<
-        staffName <<
+          staffName <<
         "\" --> \"";
 
       for (char ch : staffInstrumentName) {
@@ -994,8 +993,7 @@ void lpsrStaffInstrumentNameAtom::displayAtomWithVariableOptionsValues (
       }
 
       os <<
-        "\"" <<
-        std::endl;
+          std::endl;
 
       if (++i == iEnd) break;
     } // for

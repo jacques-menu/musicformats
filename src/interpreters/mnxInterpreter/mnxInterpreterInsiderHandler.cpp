@@ -146,7 +146,6 @@ void mnx2mnxsrInterpreterInsiderHandler::createTheMnx2mnxsrInterpreterPrefixes (
     gLog <<
       "Creating the mnx2mnxsr prefixes in \"" <<
       fHandlerHeader <<
-      "\"" <<
       endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -216,7 +215,6 @@ void mnx2mnxsrInterpreterInsiderHandler::checkOptionsAndArguments () const
     gLog <<
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
-      "\"" <<
       endl;
   }
 #endif // MF_TRACE_IS_ENABLED

@@ -955,8 +955,13 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
 
     S_msrGraceNotesGroup  fOriginalGraceNotesGroup;
 };
+
 typedef SMARTP<msrChordGraceNotesGroupLink> S_msrChordGraceNotesGroupLink;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrChordGraceNotesGroupLink& elt);
+
+std::string fetchChordAsShortString (const S_msrChord& chord);
+std::string fetchChordAsString (const S_msrChord& chord);
 
 
 }

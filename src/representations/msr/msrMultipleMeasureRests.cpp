@@ -472,7 +472,6 @@ void msrMultipleMeasureRest::print (std::ostream& os) const
 
   if (fMultipleMeasureRestUpLinkToSegment) {
     os <<
-      "\"" <<
       fMultipleMeasureRestUpLinkToSegment->asString () <<
       "\"";
   }

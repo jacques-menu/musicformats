@@ -1317,8 +1317,7 @@ void msdlScanner::acceptAString ()
               "--- acceptAString(), escaped character" <<
               ", currentChunk: \"" <<
               currentChunk <<
-              "\"" <<
-              std::endl;
+                      std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1329,8 +1328,7 @@ void msdlScanner::acceptAString ()
               "--- acceptAString(), theString with chunk appended" <<
               ", theString: \"" <<
               theString <<
-              "\"" <<
-              std::endl;
+                      std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1375,8 +1373,7 @@ void msdlScanner::acceptAString ()
               "--- acceptAString(), theString with escaped character appended" <<
               ", theString: \"" <<
               theString <<
-              "\"" <<
-              std::endl;
+                      std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
 

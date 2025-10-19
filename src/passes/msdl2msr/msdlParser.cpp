@@ -2042,8 +2042,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
           "=== Pitches()" <<
           ", fPitchesLanguageKind: \"" <<
           fPitchesLanguageKind <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
@@ -2156,8 +2155,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
           "=== Octaves()" <<
           ", fPitchesLanguageKind: \"" <<
           fPitchesLanguageKind <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,

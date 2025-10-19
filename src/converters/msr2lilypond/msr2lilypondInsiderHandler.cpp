@@ -430,8 +430,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
         ss <<
           "msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -449,8 +448,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
         ss <<
           "msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),

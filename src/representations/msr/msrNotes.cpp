@@ -46,7 +46,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrNote msrNote::create (
-  const mfInputLineNumber& inputLineNumber,
+  const mfInputLineNumber&   inputLineNumber,
   const S_msrMeasure&        upLinkToMeasure,
 
 //   const mfMeasureNumber& noteMeasureNumber, // JMI 0.9.66
@@ -104,6 +104,23 @@ S_msrNote msrNote::create (
       msrNoteHeadFilledKind,
       msrNoteHeadParenthesesKind);
   assert (obj != nullptr);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceNotesDetails ()) {
+    std::stringstream ss;
+
+    ss <<
+      std::endl <<
+      "Creating note" <<
+      obj->asString () <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   return obj;
 }
 
@@ -213,150 +230,6 @@ void msrNote::initializeNote ()
 
   // note lyrics
   // ------------------------------------------------------
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesDetails ()) {
-    std::stringstream ss;
-
-    ss <<
-      std::endl <<
-      "Initializing a note" <<
-      ", kind: ";
-		ss <<
-			fNoteKind <<
-      ", line " << fInputLineNumber << ":" <<
-      std::endl;
-
-    ++gIndenter;
-
-    constexpr int fieldWidth = 30;
-
-    ss <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteQuarterTonesPitchKind" << ": " <<
-        msrQuarterTonesPitchKindAsStringInLanguage (
-          fNoteQuarterTonesPitchKind,
-          gMsrOahGroup->
-            getMsrQuarterTonesPitchesLanguageKind ()) <<
-        std::endl;
-
-    ss <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fMeasureElementSoundingWholeNotes" << ": " <<
-        fMeasureElementSoundingWholeNotes.asFractionString () <<
-        std::endl <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << ": " <<
-        fNoteDisplayWholeNotes.asFractionString () <<
-        std::endl;
-
-    ss <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteOctaveKind" << ": " <<
-        fNoteOctaveKind <<
-        std::endl <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteDisplayOctaveKind" << ": " <<
-        fNoteDisplayOctaveKind <<
-        std::endl;
-
-    ss <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteDotsNumber" << ": " <<
-        fNoteDotsNumber <<
-        std::endl <<
-
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteGraphicNotesDurationKind" << ": " <<
-        fNoteGraphicNotesDurationKind <<
-        std::endl;
-
-    ss <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteTupletFactor" << ": " <<
-        fNoteTupletFactor <<
-        std::endl;
-
-    ss <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteIsACueNoteKind" << ": " <<
-        fNoteIsACueNoteKind <<
-        std::endl <<
-
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNotePrintObjectKind" << ": " <<
-         fNotePrintObjectKind <<
-        std::endl <<
-
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteHeadKind" << ": " <<
-         fNoteHeadKind <<
-        std::endl <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteHeadFilledKind" << ": " <<
-         fNoteHeadFilledKind <<
-        std::endl <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteHeadParenthesesKind" << ": " <<
-         fNoteHeadParenthesesKind <<
-        std::endl <<
-
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteAccidentalKind" << ": " <<
-        fNoteAccidentalKind <<
-        std::endl <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteEditorialAccidentalKind" << ": " <<
-        fNoteEditorialAccidentalKind <<
-        std::endl <<
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteCautionaryAccidentalKind" << ": " <<
-        fNoteCautionaryAccidentalKind <<
-        std::endl <<
-
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteBelongsToAChord" << ": " <<
-         fNoteBelongsToAChord <<
-        std::endl <<
-
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteBelongsToATuplet" << ": " <<
-         fNoteBelongsToATuplet <<
-        std::endl <<
-
-      std::left <<
-        std::setw (fieldWidth) <<
-        "fNoteOccupiesAFullMeasure" << ": " <<
-         fNoteOccupiesAFullMeasure <<
-        std::endl;
-
-		ss << std::endl;
-
-    --gIndenter;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
 
   // solo note or rest?
   // ------------------------------------------------------
@@ -1324,11 +1197,11 @@ S_msrNote msrNote::createNoteDeepClone (
 }
 
 S_msrNote msrNote::createRestNote (
-	const mfInputLineNumber& inputLineNumber,
-	const mfMeasureNumber& noteMeasureNumber,
-	const mfWholeNotes& soundingWholeNotes,
-	const mfWholeNotes& displayWholeNotes,
-	int                 dotsNumber)
+  const mfInputLineNumber& inputLineNumber,
+  const mfMeasureNumber&   noteMeasureNumber,
+  const mfWholeNotes&      soundingWholeNotes,
+  const mfWholeNotes&      displayWholeNotes,
+  int                      dotsNumber)
 {
   msrNote * obj =
     new msrNote (
@@ -1380,11 +1253,11 @@ S_msrNote msrNote::createRestNote (
 }
 
 S_msrNote msrNote::createSkipNote (
-	const mfInputLineNumber& inputLineNumber,
-	const mfMeasureNumber& noteMeasureNumber,
-	const mfWholeNotes& soundingWholeNotes,
-	const mfWholeNotes& displayWholeNotes,
-	int                 dotsNumber)
+  const mfInputLineNumber& inputLineNumber,
+  const mfMeasureNumber&   noteMeasureNumber,
+  const mfWholeNotes&      soundingWholeNotes,
+  const mfWholeNotes&      displayWholeNotes,
+  int                      dotsNumber)
 {
   msrNote * obj =
     new msrNote (
@@ -1437,11 +1310,11 @@ S_msrNote msrNote::createSkipNote (
 
 S_msrNote msrNote::createSkipNoteWithContext (
   const mfInputLineNumber& inputLineNumber,
-  const mfMeasureNumber& noteMeasureNumber,
-  const mfWholeNotes& soundingWholeNotes,
-  const mfWholeNotes& displayWholeNotes,
-  int                 dotsNumber,
-  const std::string&  context)
+  const mfMeasureNumber&   noteMeasureNumber,
+  const mfWholeNotes&      soundingWholeNotes,
+  const mfWholeNotes&      displayWholeNotes,
+  int                      dotsNumber,
+  const std::string&       context)
 {
   msrNote * obj =
     new msrNote (
@@ -1551,12 +1424,12 @@ S_msrNote msrNote::createGraceSkipNote (
 
 //________________________________________________________________________
 S_msrNote msrNote::createRestNoteWithOctave (
-	const mfInputLineNumber& inputLineNumber,
-	const mfMeasureNumber& noteMeasureNumber,
-	msrOctaveKind       noteOctave,
-	const mfWholeNotes& soundingWholeNotes,
-	const mfWholeNotes& displayWholeNotes,
-	int                 dotsNumber)
+  const mfInputLineNumber& inputLineNumber,
+  const mfMeasureNumber&   noteMeasureNumber,
+  msrOctaveKind            noteOctave,
+  const mfWholeNotes&      soundingWholeNotes,
+  const mfWholeNotes&      displayWholeNotes,
+  int                      dotsNumber)
 {
   msrNote * obj =
     new msrNote (
@@ -1609,12 +1482,12 @@ S_msrNote msrNote::createRestNoteWithOctave (
 
 //________________________________________________________________________
 S_msrNote msrNote::createSkipNoteWithOctave (
-	const mfInputLineNumber& inputLineNumber,
-	const mfMeasureNumber& noteMeasureNumber,
-	msrOctaveKind       noteOctave,
-	const mfWholeNotes& soundingWholeNotes,
-	const mfWholeNotes& displayWholeNotes,
-	int                 dotsNumber)
+  const mfInputLineNumber& inputLineNumber,
+  const mfMeasureNumber&   noteMeasureNumber,
+  msrOctaveKind            noteOctave,
+  const mfWholeNotes&      soundingWholeNotes,
+  const mfWholeNotes&      displayWholeNotes,
+  int                      dotsNumber)
 {
   msrNote * obj =
     new msrNote (
@@ -1831,12 +1704,10 @@ S_msrNote msrNote::createRestFromString (
     ss <<
       "restNotesDuration: \"" <<
       restNotesDuration <<
-      "\"" <<
       std::endl <<
 
       "restDots: \"" <<
       restDots <<
-      "\"" <<
       std::endl <<
       "dotsNumber: " <<
       dotsNumber;
@@ -1992,12 +1863,10 @@ S_msrNote msrNote::createSkipFromString (
     ss <<
       "skipNotesDuration: \"" <<
       skipNotesDuration <<
-      "\"" <<
       std::endl <<
 
       "skipDots: \"" <<
       skipDots <<
-      "\"" <<
       std::endl <<
       "dotsNumber: " <<
       dotsNumber;
@@ -2161,22 +2030,18 @@ S_msrNote msrNote::createNoteFromString (
     ss <<
       "notePitch: \"" <<
       notePitch <<
-      "\"" <<
       std::endl <<
 
       "noteOctaveIndication: \"" <<
       noteOctaveIndication <<
-      "\"" <<
       std::endl <<
 
       "noteNotesDuration: \"" <<
       noteNotesDuration <<
-      "\"" <<
       std::endl <<
 
       "noteDots: \"" <<
       noteDots <<
-      "\"" <<
       std::endl <<
       "dotsNumber: " <<
       dotsNumber;
@@ -3327,8 +3192,7 @@ void msrNote::appendScordaturaToNote (
 //       fMeasureElementUpLinkToMeasure->getMeasureNumber () <<
 //       ", context: \"" <<
 //       context <<
-//       "\"" <<
-//       std::endl;
+// //       std::endl;
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -3353,8 +3217,7 @@ void msrNote::appendScordaturaToNote (
 //       fMeasureElementUpLinkToMeasure->getMeasureNumber () <<
 //       ", context: \"" <<
 //       context <<
-//       "\"" <<
-//       std::endl;
+// //       std::endl;
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -3373,8 +3236,7 @@ void msrNote::appendScordaturaToNote (
 //       voicePosition <<
 //       ", context: \"" <<
 //       context <<
-//       "\"" <<
-//       std::endl;
+// //       std::endl;
 
 //       gWaeHandler->waeTrace (
 //         __FILE__, mfInputLineNumber (__LINE__),
@@ -6602,8 +6464,7 @@ void msrNote::printFull (std::ostream& os) const
         std::setw (fieldWidth) <<
         "noteSoundingWholeNotesPitchAndOctaveAsString" << ": \"" <<
         noteSoundingWholeNotesPitchAndOctaveAsString () <<
-        "\"" <<
-        std::endl;
+          std::endl;
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
@@ -6611,8 +6472,7 @@ void msrNote::printFull (std::ostream& os) const
         std::setw (fieldWidth) <<
         "noteSoundingWholeNotesPitchAndOctaveAsString" << ": \"" <<
         noteSoundingWholeNotesPitchAndOctaveAsString () <<
-        "\"" <<
-        std::endl;
+          std::endl;
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
@@ -6620,13 +6480,11 @@ void msrNote::printFull (std::ostream& os) const
         std::setw (fieldWidth) <<
         "noteSoundingWholeNotesPitchAndOctaveAsString" << ": \"" <<
         noteSoundingWholeNotesPitchAndOctaveAsString () <<
-        "\"" <<
-        std::endl <<
+          std::endl <<
         std::setw (fieldWidth) <<
         "noteDisplayWholeNotesPitchAndOctaveAsString" << ": \"" <<
         noteDisplayWholeNotesPitchAndOctaveAsString () <<
-        "\"" <<
-        std::endl <<
+          std::endl <<
         std::setw (fieldWidth) <<
         "fNoteGraphicNotesDurationKind" << ": " <<
         fNoteGraphicNotesDurationKind <<
@@ -6634,8 +6492,7 @@ void msrNote::printFull (std::ostream& os) const
         std::setw (fieldWidth) <<
         "noteGraphicNotesDurationAsMusicXMLString" << ": \"" <<
         fNoteGraphicNotesDurationKind <<
-        "\"" <<
-        std::endl;
+          std::endl;
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
@@ -6643,13 +6500,11 @@ void msrNote::printFull (std::ostream& os) const
         std::setw (fieldWidth) <<
         "noteSoundingWholeNotesPitchAndOctaveAsString" << ": \"" <<
         noteSoundingWholeNotesPitchAndOctaveAsString () <<
-        "\"" <<
-        std::endl <<
+          std::endl <<
         std::setw (fieldWidth) <<
         "noteDisplayWholeNotesPitchAndOctaveAsString" << ": \"" <<
         noteDisplayWholeNotesPitchAndOctaveAsString () <<
-        "\"" <<
-        std::endl <<
+          std::endl <<
         std::setw (fieldWidth) <<
         "fNoteGraphicNotesDurationKind" << ": " <<
         fNoteGraphicNotesDurationKind <<
@@ -6699,16 +6554,14 @@ void msrNote::printFull (std::ostream& os) const
         std::setw (fieldWidth) <<
         "fNoteTupletNoteGraphicNotesDurationpitchAndOctaveAsString" << ": \"" <<
         fNoteTupletNoteGraphicNotesDurationpitchAndOctaveAsString <<
-        "\"" <<
-        std::endl <<
+          std::endl <<
         std::setw (fieldWidth) <<
         "noteTupletnoteSoundingWholeNotesPitchAndOctaveAsString" << ": ";
           */
 
       if (fNoteShortcutUpLinkToTuplet) {
         os <<
-          "\"" <<
-          wholeNotesPitchAndOctaveAsString (
+              wholeNotesPitchAndOctaveAsString (
             fInputLineNumber,
             getNoteShortcutUpLinkToTuplet ()->
               getMeasureElementSoundingWholeNotes ()) <<
@@ -7827,6 +7680,36 @@ std::ostream& operator << (std::ostream& os, const msrNote& elt)
   elt.print (os);
 
   return os;
+}
+
+std::string fetchNoteAsShortString (const S_msrNote& note)
+{
+  std::string result;
+
+  if (note) {
+    result =
+      note->asShortString ();
+  }
+  else {
+    result = "\"** NOTE IS NULL **\"";
+  }
+
+  return result;
+}
+
+std::string fetchNoteAsString (const S_msrNote& note)
+{
+  std::string result;
+
+  if (note) {
+    result =
+      note->asString ();
+  }
+  else {
+    result = "\"** NOTE IS NULL **\"";
+  }
+
+  return result;
 }
 
 

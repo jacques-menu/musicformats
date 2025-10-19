@@ -4698,8 +4698,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //       fHarmonyUpLinkToMeasure->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
-//       "\"" <<
-//       "', harmonyWholeNotesOffset: " <<
+// //       "', harmonyWholeNotesOffset: " <<
 //       fHarmonyWholeNotesOffset <<
 //       std::endl;
 //   }

@@ -3226,7 +3226,6 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
       ", measure \"" << fCurrentMeasureNumber << "\"" <<
       "', voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber () <<
       " ===-->";
 
@@ -3407,7 +3406,6 @@ void msr2bsrTranslator::visitStart (S_msrStanza& elt)
     ss <<
       "--> Start visiting msrStanza \"" <<
       elt->getStanzaName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -3450,7 +3448,6 @@ void msr2bsrTranslator::visitEnd (S_msrStanza& elt)
     ss <<
       "--> End visiting msrStanza \"" <<
       elt->getStanzaName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -5344,8 +5341,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
               ", as double tremolo first element" <<
               " in voice \"" <<
               fCurrentVoiceClone->getVoiceName () <<
-              "\"" <<
-              std::endl;
+                      std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5364,8 +5360,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
               ", as double tremolo second element" <<
               " in voice \"" <<
               fCurrentVoiceClone->getVoiceName () <<
-              "\"" <<
-              std::endl;
+                      std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6460,7 +6455,6 @@ void msr2bsrTranslator::visitStart (S_msrRepeatCommonPart& elt)
       std::endl <<
       "Upon visitStart (S_msrRepeatCommonPart&(), voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber () <<
       ", contains:" <<
       std::endl;
@@ -6507,7 +6501,6 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
       std::endl <<
       "Upon visitEnd (S_msrRepeatCommonPart&(), voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber () <<
       ", contains:" <<
       std::endl;
@@ -6587,7 +6580,6 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatEnding& elt)
     ss <<
       "Appending a repeat ending clone to voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       std::endl;
   }
 
@@ -6847,7 +6839,6 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
       std::endl <<
       "Upon I visitStart (S_msrMultipleRest&(), voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber () <<
       ", contains:" <<
       std::endl;
@@ -6877,7 +6868,6 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
       std::endl <<
       "Upon II visitStart (S_msrMultipleRest&(), voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber () <<
       ", contains:" <<
       std::endl;
@@ -6994,7 +6984,6 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
       std::endl <<
       "Upon visitEnd (S_msrMultipleRest&(), voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber () <<
       ", contains:" <<
       std::endl;
@@ -7040,7 +7029,6 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRestContents& elt)
       std::endl <<
       "Upon visitStart (S_msrMultipleRestContents&(), voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber () <<
       ", contains:" <<
       std::endl;
@@ -7111,7 +7099,6 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
       std::endl <<
       "Upon visitEnd (S_msrMultipleRestContents&(), voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
-      "\"" <<
       ", line " << elt->getInputLineNumber () <<
       ", contains:" <<
       std::endl;

@@ -353,8 +353,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         err <<
           "convertMsdlStream2brailleWithHandler() outputFileName: \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
 //         gWaeHandler->waeTraceWithoutInputLocation ( // JMI 0.9.67
 //           __FILE__, mfInputLineNumber (__LINE__),
@@ -400,8 +399,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         err <<
           "convertMsdlStream2brailleWithHandler() output goes to file \"" <<
           outputFileName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
 //         gWaeHandler->waeTraceWithoutInputLocation ( // JMI 0.9.67
 //           __FILE__, mfInputLineNumber (__LINE__),

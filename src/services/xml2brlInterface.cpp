@@ -406,8 +406,7 @@ EXP int xml2brl (
         ss <<
           "Reading file \"" <<
           inputSourceName <<
-          "\"" <<
-          std::endl;
+              std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, mfInputLineNumber (__LINE__),

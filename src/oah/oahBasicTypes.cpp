@@ -277,8 +277,7 @@ EXP void displayStringPairVector (
 //         optionName <<
 //         "\" \"" <<
 //         optionValue <<
-//         "\"" <<
-//         std::endl;
+//   //         std::endl;
 //     } //for
 //
 //     os << std::endl;
@@ -2331,8 +2330,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //       fetchNames () <<
 //       "' string variable to \"" <<
 //      value <<
-//       "\"" <<
-//       std::endl;
+// //       std::endl;
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -6229,8 +6227,7 @@ void oahHandler::displayNamesToElementsMap ()
       S_oahElement element = (*i).second;
 
       gLog <<
-        "\"" <<
-        name <<
+          name <<
         "\":" <<
         std::endl;
 
@@ -6878,7 +6875,6 @@ void oahHandler::printNameIntrospectiveHelp (
       name <<
       "\" introspective help in handler \"" <<
       fHandlerHeader <<
-      "\"" <<
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
@@ -7091,7 +7087,6 @@ Bool oahHandler::fetchElementsMatchingStringInHandler (
       lowerCaseString <<
       "\" in handler \"" <<
       fHandlerHeader <<
-      "\"" <<
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
@@ -7187,7 +7182,6 @@ Bool oahHandler::findStringInFindableElement (
       lowerCaseString <<
       "\" in handler \"" <<
       fHandlerHeader <<
-      "\"" <<
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
@@ -7280,7 +7274,6 @@ void oahHandler::includeOptionsFileInHandler (
       optionsFileName <<
       "\" in handler \"" <<
       fHandlerHeader <<
-      "\"" <<
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67
@@ -7390,7 +7383,6 @@ void oahHandler::printHandlerOptionsValues (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
     os <<
-      "\"" <<
       fHandlerHeader <<
       "\"";
   }
@@ -7495,7 +7487,6 @@ void oahHandler::printHandlerOptionsValuesAll (
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
     os <<
-      "\"" <<
       fHandlerHeader <<
       "\"";
   }
@@ -8696,8 +8687,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
       std::string singleCharacterElementName = (*i);
 
       gLog <<
-        "\"" <<
-        singleCharacterElementName <<
+          singleCharacterElementName <<
         "\" ";
     } // for
     gLog << std::endl;
@@ -9131,7 +9121,6 @@ void oahHandler::handleArgvOptionValueOrArgument (
     ss <<
       "Handling argv option value or argument \"" <<
       theString <<
-      "\"" <<
       std::endl;
 
     ++gIndenter;
@@ -9569,8 +9558,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
 //       gLog <<
 //         "The options and arguments is empty in \"" <<
 //         fHandlerHeader <<
-//         "\"" <<
-//         std::endl;
+//   //         std::endl;
 //     }
 // #endif // MF_TRACE_IS_ENABLED
 //   }
@@ -10993,7 +10981,6 @@ void oahHandler::includeOptionsAndArgumentsFile (
   if (gEarlyOptions.getTraceEarlyOptions ()) {
     os << "Including options and arguments file \"" <<
       includeFileName <<
-      "\"" <<
       std::endl;
 
 //     gWaeHandler->waeTraceWithoutInputLocation ( JMI 0.9.67

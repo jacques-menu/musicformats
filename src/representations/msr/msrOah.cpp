@@ -697,12 +697,10 @@ void msrRenamePartAtom::displayAtomWithVariableOptionsValues (
       i      = iBegin;
     for ( ; ; ) {
       os <<
-        "\"" <<
-        (*i).first <<
+          (*i).first <<
         "\" --> \"" <<
         (*i).second <<
-        "\"" <<
-        std::endl;
+          std::endl;
       if (++i == iEnd) break;
     } // for
 

@@ -90,7 +90,6 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
 //       "', context: \"" <<
       ", context: \"" <<
       context <<
-      "\"" <<
       std::endl;
 
 //     if (wholeNotes == mfWholeNotes (114, 1)) abort (); // JMI 0.9.67 HARMFUL
@@ -145,7 +144,6 @@ void msrMeasureElement::incrementMeasureElementSoundingWholeNotesBy (
 //       "', context: \"" <<
       ", context: \"" <<
       context <<
-      "\"" <<
       std::endl;
 
 //     if (wholeNotes == mfWholeNotes (114, 1)) abort (); // JMI 0.9.67 HARMFUL
@@ -357,8 +355,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //       getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
-//       "\"" <<
-//       std::endl;
+// //       std::endl;
 //
 //       gWaeHandler->waeTrace (
 //         __FILE__, mfInputLineNumber (__LINE__),
@@ -385,8 +382,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //       getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
-//       "\"" <<
-//       std::endl;
+// //       std::endl;
 //
 //       gWaeHandler->waeTrace (
 //         __FILE__, mfInputLineNumber (__LINE__),

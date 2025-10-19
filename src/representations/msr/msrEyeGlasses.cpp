@@ -115,8 +115,7 @@ msrEyeGlasses::~msrEyeGlasses ()
 //       fBarLineUpLinkToMeasure->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
-//       "\"" <<
-//       std::endl;
+// //       std::endl;
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //

@@ -59,7 +59,7 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     static SMARTP<msrNote> create (
-                            const mfInputLineNumber& inputLineNumber,
+                            const mfInputLineNumber&   inputLineNumber,
                             const S_msrMeasure&        upLinkToMeasure,
 
 //                             const mfMeasureNumber& noteMeasureNumber, JMI 0.9.66
@@ -98,41 +98,41 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createRestNote (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfMeasureNumber& noteMeasureNumber,
-                            const mfWholeNotes& soundingWholeNotes,
-                            const mfWholeNotes& displayWholeNotes,
-                            int                 dotsNumber);
+                            const mfMeasureNumber&   noteMeasureNumber,
+                            const mfWholeNotes&      soundingWholeNotes,
+                            const mfWholeNotes&      displayWholeNotes,
+                            int                      dotsNumber);
 
     static SMARTP<msrNote> createRestNoteWithOctave (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfMeasureNumber& noteMeasureNumber,
-                            msrOctaveKind       noteOctave,
-                            const mfWholeNotes& soundingWholeNotes,
-                            const mfWholeNotes& displayWholeNotes,
-                            int                 dotsNumber);
+                            const mfMeasureNumber&   noteMeasureNumber,
+                            msrOctaveKind            noteOctave,
+                            const mfWholeNotes&      soundingWholeNotes,
+                            const mfWholeNotes&      displayWholeNotes,
+                            int                      dotsNumber);
 
     static SMARTP<msrNote> createSkipNote (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfMeasureNumber& noteMeasureNumber,
-                            const mfWholeNotes& soundingWholeNotes,
-                            const mfWholeNotes& displayWholeNotes,
-                            int                 dotsNumber);
+                            const mfMeasureNumber&   noteMeasureNumber,
+                            const mfWholeNotes&      soundingWholeNotes,
+                            const mfWholeNotes&      displayWholeNotes,
+                            int                      dotsNumber);
 
     static SMARTP<msrNote> createSkipNoteWithContext (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfMeasureNumber& noteMeasureNumber,
-                            const mfWholeNotes& soundingWholeNotes,
-                            const mfWholeNotes& displayWholeNotes,
-                            int                 dotsNumber,
-                            const std::string&  context);
+                            const mfMeasureNumber&   noteMeasureNumber,
+                            const mfWholeNotes&      soundingWholeNotes,
+                            const mfWholeNotes&      displayWholeNotes,
+                            int                      dotsNumber,
+                            const std::string&       context);
 
     static SMARTP<msrNote> createSkipNoteWithOctave (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfMeasureNumber& noteMeasureNumber,
-                            msrOctaveKind       noteOctave,
-                            const mfWholeNotes& soundingWholeNotes,
-                            const mfWholeNotes& displayWholeNotes,
-                            int                 dotsNumber);
+                            const mfMeasureNumber&   noteMeasureNumber,
+                            msrOctaveKind            noteOctave,
+                            const mfWholeNotes&      soundingWholeNotes,
+                            const mfWholeNotes&      displayWholeNotes,
+                            int                      dotsNumber);
 
     static SMARTP<msrNote> createGraceSkipNote (
                             const mfInputLineNumber& inputLineNumber,
@@ -1283,6 +1283,9 @@ using S_msrNote = SMARTP<msrNote>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrNote& elt);
 EXP std::ostream& operator << (std::ostream& os, const msrNote& elt);
+
+std::string fetchNoteAsShortString (const S_msrNote& note);
+std::string fetchNoteAsString (const S_msrNote& note);
 
 
 }

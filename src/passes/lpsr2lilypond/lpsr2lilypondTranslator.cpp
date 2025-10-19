@@ -5251,8 +5251,7 @@ void lpsr2lilypondTranslator::generateSpannerBeforeNote (
           fLilypondCodeStream <<
              "\\TextSpannerWithCenteredText \"" << // JMI
              spannerMiddleText <<
-             "\"" <<
-            std::endl;
+                   std::endl;
         }
 
         // handle spanner end text if not empty
@@ -9777,7 +9776,6 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
     fLilypondCodeStream <<
       "instrumentName = \"" <<
       partGroupInstrumentName <<
-      "\"" <<
       std::endl;
   }
 
@@ -9985,8 +9983,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
       fLilypondCodeStream <<
         "instrumentName = \"" <<
         partName <<
-        "\"" <<
-        std::endl;
+          std::endl;
     }
     if (! partAbbreviation.empty ()) {
       fLilypondCodeStream <<
@@ -10852,8 +10849,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
         semiTonesPitchAndOctave->asString () <<
         " in part \"" <<
         partName <<
-        "\"" <<
-        ", part ID \"" <<
+          ", part ID \"" <<
         partMusicXMLID <<
         "\"";
 
@@ -12506,8 +12502,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaff& elt)
       ss <<
         "% --> Start visiting msrStaff \"" <<
         elt->getStaffPathLikeName () <<
-        "\"" <<
-        ", line " << elt->getInputLineNumber () <<
+          ", line " << elt->getInputLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -12553,8 +12548,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaff& elt)
       ss <<
         "% --> End visiting msrStaff \"" <<
         elt->getStaffPathLikeName () <<
-        "\"" <<
-        ", line " << elt->getInputLineNumber () <<
+          ", line " << elt->getInputLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -12709,8 +12703,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       ss <<
         "% --> Start visiting msrVoice \"" <<
         elt->getVoicePathLikeName () <<
-        "\"" <<
-        ", line " << elt->getInputLineNumber () <<
+          ", line " << elt->getInputLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -12846,7 +12839,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       msrQuarterTonesPitchesLanguageKindAsLilypondString (
         gLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ()) <<
-      "\"" <<
       std::endl;
   }
 
@@ -13011,8 +13003,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
       ss <<
         "% --> End visiting msrVoice \"" <<
         elt->getVoicePathLikeName () <<
-        "\"" <<
-        ", line " << elt->getInputLineNumber () <<
+          ", line " << elt->getInputLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -13133,8 +13124,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 //       fCurrentNote->asShortString () <<
 //       "' in voice \"" <<
 //       voiceToInsertInto->getPartPathLikeName () <<
-//       "\"" <<
-//       " from staff " << fPreviousNoteMusicXMLStaffNumber <<
+// //       " from staff " << fPreviousNoteMusicXMLStaffNumber <<
 //       " to staff " << landingStaff->asShortString () <<
       ", to staff \"" << landingStaff->getStaffPathLikeName () << "\"" <<
       ", line " << elt->getInputLineNumber () <<
@@ -14732,8 +14722,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
       ss <<
         "% --> Start visiting msrStanza \"" <<
         elt->getStanzaName () <<
-        "\"" <<
-        ", line " << elt->getInputLineNumber () <<
+          ", line " << elt->getInputLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -14772,8 +14761,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 //             "\\lyricsto \"" <<
 //             elt->
 //               getStanzaUpLinkToVoice ()->getVoicePathLikeName () <<
-//             "\"" <<
-//             std::endl;
+//       //             std::endl;
           fLilypondCodeStream <<
             "\\set ignoreMelismata = ##t" <<
             std::endl;
@@ -14787,8 +14775,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
             "\\set associatedVoice = #\"" <<
             elt->
               getStanzaUpLinkToVoice ()->getVoicePathLikeName () <<
-            "\"" <<
-            std::endl <<
+                  std::endl <<
             "\\set ignoreMelismata = ##t" <<
             std::endl;
           break;
@@ -14801,8 +14788,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
             "\\set associatedVoice = #\"" <<
             elt->
               getStanzaUpLinkToVoice ()->getVoicePathLikeName () <<
-            "\"" <<
-            std::endl <<
+                  std::endl <<
             "\\set ignoreMelismata = ##t" <<
             std::endl;
           break;
@@ -14832,8 +14818,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
       ss <<
         "% --> End visiting msrStanza \"" <<
         elt->getStanzaName () <<
-        "\"" <<
-        ", line " << elt->getInputLineNumber () <<
+          ", line " << elt->getInputLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18637,7 +18622,6 @@ If the double element is present, it indicates that the music is doubled one oct
       elt->transposeAsString () <<
       "' ignored because it is already present in voice \"" <<
       fCurrentVoice->getVoicePathLikeName () <<
-      "\"" <<
       / * JMI
       getStaffPathLikeName () <<
       "\" in part " <<
@@ -19175,8 +19159,7 @@ void lpsr2lilypondTranslator::generateTempoNotesRelationship (
       S_msrWords words = (*i);
 
       fLilypondCodeStream <<
- // JMI       "\"" <<
-        words->getWordsContents (); // JMI <<
+      words->getWordsContents (); // JMI <<
   // JMI      "\"";
 
       if (++i == iEnd) break;
@@ -23473,8 +23456,7 @@ void lpsr2lilypondTranslator::generateNoteGlissandosListWithText (
                 std::endl <<
                 "\\once\\override Glissando.details.glissando-text = \"" <<
                 glissandoTextValue <<
-                "\"" <<
-                std::endl <<
+                          std::endl <<
                 "\\glissandoTextOn" <<
                 std::endl;
             }
@@ -23573,8 +23555,7 @@ void lpsr2lilypondTranslator::generateNoteSlidesListWithText (
                 std::endl <<
                 "\\once\\override Glissando.details.glissando-text = \"" <<
                 slideTextValue <<
-                "\"" <<
-                std::endl <<
+                          std::endl <<
                 "\\glissandoTextOn" <<
                 std::endl;
             }
