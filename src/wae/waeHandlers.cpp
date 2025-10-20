@@ -42,10 +42,10 @@ waeHandler::~waeHandler ()
 // warnings
 
 void waeHandler::waeWarning (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& message)
+  const std::string&       message)
 //   const mfMeasureNumber& measureNumber,
 //   int                scoreMeasuresNumber)
 {
@@ -56,7 +56,7 @@ void waeHandler::waeWarning (
 
     gLog <<
       "*** " << context << " warning *** " <<
-      mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
+      mfBaseName (inputSourceName) << ":" << inputLineNumber.getBareValue () << ": " <<
       message;
 
     if (gServiceRunData) {
@@ -99,10 +99,10 @@ void waeHandler::waeWarning (
 // internal warnings
 
 void waeHandler::waeInternalWarning (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& message)
+  const std::string&       message)
 //   const mfMeasureNumber& measureNumber,
 //   int                scoreMeasuresNumber)
 {
@@ -113,7 +113,7 @@ void waeHandler::waeInternalWarning (
 
     gLog <<
       "*** " << context << " INTERNAL warning *** " <<
-      mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
+      mfBaseName (inputSourceName) << ":" << inputLineNumber.getBareValue () << ": " <<
       message;
 
     if (gServiceRunData) {
@@ -157,7 +157,7 @@ void waeHandler::waeInternalWarning (
 // errors without exceptions
 
 void waeHandler::waeErrorWithoutException (
-  const std::string& context,
+  const std::string&       context,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message)
@@ -171,7 +171,7 @@ void waeHandler::waeErrorWithoutException (
 
     if (gOahOahGroup->getDisplaySourceCodePositions ()) {
       gLog <<
-        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber.getBareValue () <<
         " --FOO 2 -- " <<
         ' ';
     }
@@ -179,7 +179,7 @@ void waeHandler::waeErrorWithoutException (
     if (! gWaeOahGroup->getDontShowErrors ()) {
       gLog <<
         "### " << context << " ERROR ### " <<
-//         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber << ": " <<
+//         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber.getBareValue () << ": " <<
         message;
 
       if (gServiceRunData) {
@@ -218,8 +218,8 @@ void waeHandler::waeErrorWithoutException (
 }
 
 void waeHandler::waeErrorWithoutExceptionWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
@@ -234,7 +234,7 @@ void waeHandler::waeErrorWithoutExceptionWithInputLocation (
 
     if (gOahOahGroup->getDisplaySourceCodePositions ()) {
       gLog <<
-        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber.getBareValue () <<
         " --FOO 4 -- " <<
         ' ';
     }
@@ -242,7 +242,7 @@ void waeHandler::waeErrorWithoutExceptionWithInputLocation (
     if (! gWaeOahGroup->getDontShowErrors ()) {
       gLog <<
         "### " << context << " ERROR ### " <<
-        mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
+        mfBaseName (inputSourceName) << ":" << inputLineNumber.getBareValue () << ": " <<
         message;
 
       if (gServiceRunData) {
@@ -287,11 +287,11 @@ void waeHandler::waeErrorWithoutExceptionWithInputLocation (
 // errors with exceptions
 
 void waeHandler::waeErrorWithException (
-  const std::string& context,
+  const std::string&       context,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message,
-  const S_mfException& except)
+  const S_mfException&     except)
 {
   this->waeErrorWithoutException (
     context,
@@ -305,8 +305,8 @@ abort (); // JMI
 }
 
 void waeHandler::waeErrorWithExceptionWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
@@ -330,7 +330,7 @@ abort (); // JMI
 // errors
 
 void waeHandler::waeError (
-  const std::string& context,
+  const std::string&       context,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message)
@@ -345,8 +345,8 @@ void waeHandler::waeError (
 }
 
 void waeHandler::waeErrorWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
@@ -367,8 +367,8 @@ void waeHandler::waeErrorWithInputLocation (
 // internal errors
 
 void waeHandler::waeInternalErrorWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
@@ -386,8 +386,8 @@ void waeHandler::waeInternalErrorWithInputLocation (
 }
 
 void waeHandler::waeInternalErrorWithExceptionWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,

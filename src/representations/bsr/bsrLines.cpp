@@ -280,9 +280,9 @@ void bsrLine::appendMeasureToLine (S_bsrMeasure measure)
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures () || gBsrOahGroup->getTraceLines ()) {
     gLog <<
-      "Appending measure '" <<
+      "Appending measure " <<
       measure->asShortString () <<
-      "' to line '" <<
+      " to line '" <<
       asString () <<
       '\'' <<
       std::endl;

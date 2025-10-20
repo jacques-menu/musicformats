@@ -26,32 +26,32 @@ namespace MusicFormats
 // warnings
 
 EXP void waeWarning (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& message);
+  const std::string&       message);
 
 //______________________________________________________________________________
 // internal warnings
 
 EXP void waeInternalWarning (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& message);
+  const std::string&       message);
 
 //______________________________________________________________________________
 // errors without exceptions
 
 EXP void waeErrorWithoutException (
-  const std::string& context,
+  const std::string&       context,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message);
 
 EXP void waeErrorWithoutExceptionWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
@@ -61,33 +61,33 @@ EXP void waeErrorWithoutExceptionWithInputLocation (
 // errors with exceptions
 
 EXP void waeErrorWithException (
-  const std::string& context,
+  const std::string&       context,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message,
-  const S_mfException& except);
+  const S_mfException&     except);
 
 EXP void waeErrorWithExceptionWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message,
-  const S_mfException& except);
+  const S_mfException&     except);
 
 //______________________________________________________________________________
 // errors
 
 EXP void waeError (
-  const std::string& context,
+  const std::string&       context,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message);
 
 EXP void waeErrorWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
@@ -97,21 +97,21 @@ EXP void waeErrorWithInputLocation (
 // internal errors
 
 EXP void waeInternalErrorWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message);
 
 EXP void waeInternalErrorWithExceptionWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message,
-  const S_mfException& except);
+  const S_mfException&     except);
 
 //______________________________________________________________________________
 

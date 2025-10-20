@@ -189,7 +189,9 @@ class EXP lpsrHeader : public lpsrElement
     // centered at the bottom of the last page
     std::string           fLilypondTagline;
 };
-typedef SMARTP<lpsrHeader> S_lpsrHeader;
+
+using S_lpsrHeader = SMARTP<lpsrHeader>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrHeader& elt);
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& os, const S_lpsrHeader& elt);

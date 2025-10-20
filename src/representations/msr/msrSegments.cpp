@@ -812,7 +812,7 @@ void msrSegment::appendRepeatToSegment (
 
     ss <<
       "Appending repeat " <<
-//       repeat->asString () <<
+      repeat->asString () <<
       " to segment " <<
       asString () <<
       " in voice " <<
@@ -928,6 +928,7 @@ void msrSegment::appendRepeatToSegment (
 //   } // for
   }
 
+  // append repeat to the segment
   appendSegmentElementToSegment (repeat);
 }
 
@@ -3084,171 +3085,83 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
   return result;
 }
 
-// S_msrMeasure msrSegment::removeLastMeasureFromSegment (
-//   const mfInputLineNumber& inputLineNumber,
-//   const std::string& context)
-// {
-//   S_msrMeasure result;
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasures ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Removing last measure from segment " <<
-//       asString () <<
-//       " (" << context << ")" <<
-//       ", line " << inputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
-//     fSegmentUpLinkToVoice->
-//       displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
-//         inputLineNumber,
-//         "removeLastMeasureFromSegment() 1");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// //   if (fSegmentMeasuresList.empty ()) {
-// //     std::stringstream ss;
-// //
-// //     ss <<
-// //       "cannot remove last measure from segment " <<
-//       asString () <<
-// //       " in voice \"" <<
-// //       fetchVoiceName (fSegmentUpLinkToVoice) <<
-// // // //       ", since it is empty";
-// //
-// //     msrInternalError (
-// //       gServiceRunData->getInputSourceName (),
-// //       inputLineNumber,
-// //       __FILE__, mfInputLineNumber (__LINE__),
-// //       ss.str ());
-// //   }
-//
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check
-//   if (! fSegmentLastMeasure) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "cannot remove last measure from segment " <<
-//       asString () <<
-//       " in voice \"" <<
-//       fetchVoiceName (fSegmentUpLinkToVoice) <<
-// //       ", since that segment does not contain any";
-//
-//     msrInternalError (
-//       gServiceRunData->getInputSourceName (),
-//       inputLineNumber,
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-//   // we've got the result
-//   result = fSegmentLastMeasure;
-//
-//   // remove it from segment elements list too ??? JMI 0.9.63 JMI 0.9.67
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
-//     fSegmentUpLinkToVoice->
-//       displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
-//         inputLineNumber,
-//         "removeLastMeasureFromSegment() 2");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   S_msrSegmentElement
-//     segmentElementsListLastElement =
-//       fSegmentElementsList.back ();
-//
-//   if (segmentElementsListLastElement == fSegmentLastMeasure) {
-//     // remove it from the elements list
-//     fSegmentElementsList.pop_back ();
-//   }
-//   else {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "attempt at removing the last measure of segment " <<
-//       this->asString () <<
-//       " which is not at the end of fSegmentElementsList" <<
-//       ", in voice " <<
-//       fetchVoiceName (fSegmentUpLinkToVoice) <<
-//       ", line " << inputLineNumber;
-//
-//     gLog <<
-//       std::endl << std::endl <<
-//       ss.str () <<
-//       std::endl << std::endl;
-//
-//     gLog << "THIS:" << std::endl;
-//     gLog << "----------------------------" << std::endl;
-//     ++gIndenter;
-//     gLog << std::hex << std::showbase << this << std::dec; // JMI 0.9.69
-//     --gIndenter;
-//
-//     gLog << std::endl;
-//
-//     gLog << "fSegmentLastMeasure:" << std::endl;
-//     gLog << "----------------------------" << std::endl;
-//     ++gIndenter;
-//     gLog << fSegmentLastMeasure;
-//     --gIndenter;
-//
-//     gLog << std::endl;
-//
-//     gLog << "segmentElementsListLastElement:" << std::endl;
-//     gLog << "----------------------------" << std::endl;
-//     ++gIndenter;
-//     gLog << segmentElementsListLastElement;
-//     --gIndenter;
-//
-// //     abort (); // JMI 0.9.67 HARMFUL
-//
-//     msrInternalError ( // JMI 0.9.64 ???
-//       gServiceRunData->getInputSourceName (),
-//       inputLineNumber,
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasures ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "The removed measure contains:" <<
-//       std::endl;
-//
-//     ++gIndenter;
-//
-//     gLog <<
-//       result->asString () <<
-//       std::endl;
-//
-//     --gIndenter;
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   // remove the last measure from the segments measures list
-//   fSegmentMeasuresList.pop_back ();
-//
-//   // don't forget about fSegmentLastMeasure now,
-//   // since it may be used and/or re-appended soon JMI 0.9.63
-// //   setSegmentLastMeasure ( // JMI 0.9.67
-// //     nullptr);
-//
-//   return result;
-// }
+S_msrMeasure msrSegment::removeLastMeasureFromSegment (
+  const mfInputLineNumber& inputLineNumber,
+  const std::string& context)
+{
+  S_msrMeasure result;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Removing last measure from segment " <<
+      asString () <<
+      " (" << context << ")" <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fSegmentElementsList.empty (),
+    "fSegmentElementsList is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  S_msrSegmentElement
+    lastSegmentElement =
+      fSegmentElementsList.back ();
+
+  S_msrMeasure
+    lastSegmentMeasure =
+      dynamic_cast<msrMeasure*>(&(*lastSegmentElement)) ;
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    lastSegmentMeasure != nullptr,
+    "lastSegmentMeasure is NOT A MEASURE");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  // we've got the result
+  result = lastSegmentMeasure;
+
+  // remove lastSegmentMeasure from the segment elements list
+  fSegmentElementsList.pop_back ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasures ()) {
+    std::stringstream ss;
+
+    ss <<
+      "The removed measure contains:" <<
+      std::endl;
+
+    ++gIndenter;
+
+    gLog <<
+      result->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // don't forget about fSegmentLastMeasure now,
+  // since it may be used and/or re-appended soon JMI 0.9.76
+//   setSegmentLastMeasure ( // JMI 0.9.67
+//     nullptr);
+
+  return result;
+}
 
 void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
   const mfInputLineNumber& inputLineNumber)

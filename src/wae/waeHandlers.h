@@ -59,95 +59,95 @@ class EXP waeHandler : public smartable
     // ------------------------------------------------------
 
     virtual void          waeWarning (
-                            const std::string& context,
-                            const std::string& inputSourceName,
+                            const std::string&       context,
+                            const std::string&       inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& message);
+                            const std::string&       message);
 
     // internal warnings
     // ------------------------------------------------------
 
     virtual void          waeInternalWarning (
-                            const std::string& context,
-                            const std::string& inputSourceName,
+                            const std::string&       context,
+                            const std::string&       inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& message);
+                            const std::string&       message);
 
     // errors without exception
     // ------------------------------------------------------
 
     virtual void          waeErrorWithoutException (
-                            const std::string& context,
-                            const std::string& sourceCodeFileName,
+                            const std::string&       context,
+                            const std::string&       sourceCodeFileName,
                             const mfInputLineNumber& sourceCodeLineNumber,
-                            const std::string& message);
+                            const std::string&       message);
 
     virtual void          waeErrorWithoutExceptionWithInputLocation (
-                            const std::string& context,
-                            const std::string& inputSourceName,
+                            const std::string&       context,
+                            const std::string&       inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& sourceCodeFileName,
+                            const std::string&       sourceCodeFileName,
                             const mfInputLineNumber& sourceCodeLineNumber,
-                            const std::string& message);
+                            const std::string&       message);
 
     // errors with exception
     // ------------------------------------------------------
 
     virtual void          waeErrorWithException (
-                            const std::string& context,
-                            const std::string& sourceCodeFileName,
+                            const std::string&       context,
+                            const std::string&       sourceCodeFileName,
                             const mfInputLineNumber& sourceCodeLineNumber,
-                            const std::string& message,
-                            const S_mfException& except);
+                            const std::string&       message,
+                            const S_mfException&     except);
 
     virtual void          waeErrorWithExceptionWithInputLocation (
-                            const std::string& context,
-                            const std::string& inputSourceName,
+                            const std::string&       context,
+                            const std::string&       inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& sourceCodeFileName,
+                            const std::string&       sourceCodeFileName,
                             const mfInputLineNumber& sourceCodeLineNumber,
-                            const std::string& message,
-                            const S_mfException& except);
+                            const std::string&       message,
+                            const S_mfException&     except);
 
     // internal errors with exceptions
     // ------------------------------------------------------
 
     virtual void          waeInternalErrorWithExceptionWithInputLocation (
-                            const std::string& context,
-                            const std::string& inputSourceName,
+                            const std::string&       context,
+                            const std::string&       inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& sourceCodeFileName,
+                            const std::string&       sourceCodeFileName,
                             const mfInputLineNumber& sourceCodeLineNumber,
-                            const std::string& message,
-                            const S_mfException& except);
+                            const std::string&       message,
+                            const S_mfException&     except);
 
     // errors
     // ------------------------------------------------------
 
     virtual void          waeError (
-                            const std::string& context,
-                            const std::string& sourceCodeFileName,
+                            const std::string&       context,
+                            const std::string&       sourceCodeFileName,
                             const mfInputLineNumber& sourceCodeLineNumber,
-                            const std::string& message);
+                            const std::string&       message);
 
     virtual void          waeErrorWithInputLocation (
-                            const std::string& context,
-                            const std::string& inputSourceName,
+                            const std::string&       context,
+                            const std::string&       inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& sourceCodeFileName,
+                            const std::string&       sourceCodeFileName,
                             const mfInputLineNumber& sourceCodeLineNumber,
-                            const std::string& message);
+                            const std::string&       message);
 
     // internal errors
     // ------------------------------------------------------
 
     virtual void          waeInternalErrorWithInputLocation (
-                            const std::string& context,
-                            const std::string& inputSourceName,
+                            const std::string&       context,
+                            const std::string&       inputSourceName,
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& sourceCodeFileName,
+                            const std::string&       sourceCodeFileName,
                             const mfInputLineNumber& sourceCodeLineNumber,
-                            const std::string& message);
+                            const std::string&       message);
 
 
     // display input line numbers

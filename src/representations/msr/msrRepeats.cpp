@@ -2041,7 +2041,7 @@ void msrRepeat::addRepeatEndingToRepeat (
     std::stringstream ss;
 
     ss <<
-      "Adding ending " <<
+      "Adding repeat ending " <<
       repeatEnding->asString () <<
       " to repeat" <<
       asShortString ();

@@ -32,10 +32,10 @@ namespace MusicFormats
 // warnings
 
 void waeWarning (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& message)
+  const std::string&       message)
 {
   gWaeHandler->
     waeWarning (
@@ -49,10 +49,10 @@ void waeWarning (
 // internal warnings
 
 void waeInternalWarning (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& message)
+  const std::string&       message)
 {
   gWaeHandler->
     waeInternalWarning (
@@ -66,7 +66,7 @@ void waeInternalWarning (
 // errors without exception
 
 void waeErrorWithoutException (
-  const std::string& context,
+  const std::string&       context,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message)
@@ -80,8 +80,8 @@ void waeErrorWithoutException (
 }
 
 void waeErrorWithoutExceptionWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
@@ -101,11 +101,11 @@ void waeErrorWithoutExceptionWithInputLocation (
 // errors with exception
 
 void waeErrorWithException (
-  const std::string& context,
+  const std::string&       context,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message,
-  const S_mfException& except)
+  const S_mfException&     except)
 {
   waeErrorWithoutException (
     context,
@@ -119,13 +119,13 @@ abort (); // JMI 0.9.67
 }
 
 void waeErrorWithExceptionWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message,
-  const S_mfException& except)
+  const S_mfException&     except)
 {
   waeErrorWithoutExceptionWithInputLocation (
     context,
@@ -144,8 +144,8 @@ abort (); // JMI
 // internal errors
 
 void waeInternalErrorWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
@@ -163,13 +163,13 @@ void waeInternalErrorWithInputLocation (
 }
 
 void waeInternalErrorWithExceptionWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message,
-  const S_mfException& except)
+  const S_mfException&     except)
 {
   waeErrorWithoutExceptionWithInputLocation (
     context,
@@ -186,7 +186,7 @@ void waeInternalErrorWithExceptionWithInputLocation (
 // errors
 
 void waeError (
-  const std::string& context,
+  const std::string&       context,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message)
@@ -203,8 +203,8 @@ abort (); // JMI 0.9.67
 }
 
 void waeErrorWithInputLocation (
-  const std::string& context,
-  const std::string& inputSourceName,
+  const std::string&       context,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
