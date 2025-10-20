@@ -197,6 +197,10 @@ void msrRepeatElement::appendMeasureToRepeatElement (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+static int n = 0;
+++n;
+if (n == 2) abort ();
+
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
@@ -2788,8 +2792,12 @@ void msrRepeat::print (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fRepeatCommonPart" << ": " <<
-    fetchRepeatCommonPartAsShortString (fRepeatCommonPart) <<
     std::endl;
+  ++gIndenter;
+  os <<
+    fRepeatCommonPart <<
+    std::endl;
+  --gIndenter;
 
   // print the repeat endings
   int repeatEndingsSize =
@@ -2883,7 +2891,13 @@ void msrRepeat::printFull (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fRepeatCommonPart" << ": " <<
-      fetchRepeatCommonPartAsShortString (fRepeatCommonPart) <<
+    std::endl;
+  ++gIndenter;
+  os <<
+    fRepeatCommonPart <<
+    std::endl;
+  --gIndenter;
+  os <<
     std::endl << std::endl;
 
   // print the repeat endings

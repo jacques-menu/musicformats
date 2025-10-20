@@ -4663,7 +4663,9 @@ void msrVoice::moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart (
     std::stringstream ss;
 
     ss <<
-      "Moving the voice last appended measure in voice " <<
+      "Moving the voice last appended measure " <<
+      fetchMeasureAsShortString (fVoiceLastAppendedMeasure) <<
+      " in voice " <<
       fVoiceName <<
       " to repeat common part " <<
       repeatCommonPart->asShortString () <<
@@ -4701,10 +4703,10 @@ void msrVoice::moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart (
   // remove fVoiceLastAppendedMeasure from fVoiceSegment
 
   // remove fVoiceLastAppendedMeasure from fVoiceMeasuresFlatList JMI ??? 0.9.76
-  fVoiceMeasuresFlatList.pop_back ();
+//   fVoiceMeasuresFlatList.pop_back ();
 
-  // forget about this voice last segment
-  fVoiceLastAppendedMeasure = nullptr;
+  // DON't forget about this voice last segment!
+//   fVoiceLastAppendedMeasure = nullptr;
 }
 
 // void msrVoice::moveAllVoiceContentsToRepeatCommonPart (
@@ -5513,7 +5515,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
     std::stringstream ss;
 
     ss <<
-      "Moving the voice last appended measure in voice " << ZOULOU
+      "Moving the voice last appended measure in voice " << // ZOULOU
       fVoiceName <<
       " to the current voice-level repeat common part" <<
       " and forget about it" <<
@@ -5527,11 +5529,11 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 
   moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart (
     inputLineNumber,
-    innerMostRepeat->get
+    innerMostRepeat->getRepeatCommonPart (),
     "handleVoiceLevelRepeatEndWithStart()");
-  const mfInputLineNumber&     inputLineNumber,
-  const S_msrRepeatCommonPart& repeatCommonPart,
-  const std::string&           context)
+//   const mfInputLineNumber&     inputLineNumber,
+//   const S_msrRepeatCommonPart& repeatCommonPart,
+//   const std::string&           context)
 
 //   moveVoiceLastSegmentToRepeatCommonPart (
 //     inputLineNumber,
@@ -11613,7 +11615,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -11631,6 +11633,8 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
+
+//  return; // ZOULOU
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
