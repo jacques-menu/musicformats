@@ -337,7 +337,7 @@ S_msrMeasure Mikrokosmos3WanderingGenerator::createMeasureInVoice (
 {
   return
     voice->
-      cascadeCreateAMeasureAndAppendItInVoice (
+      createAMeasureAndAppendItInVoice (
         inputLineNumber,
         333, //         previousMeasureEndInputLineNumber, 0.9.62
         measureNumber,

@@ -237,9 +237,9 @@ class EXP msrStaff : public msrElement
 
     // dal segno
 
-    void                  insertHiddenMeasureAndBarLineInStaffClone (
-                            const mfInputLineNumber&   inputLineNumber,
-                            const mfPositionInMeasure& positionInMeasure);
+//     void                  insertHiddenMeasureAndBarLineInStaffClone (
+//                             const mfInputLineNumber&   inputLineNumber,
+//                             const mfPositionInMeasure& positionInMeasure);
 
     // transposition
 
@@ -513,7 +513,7 @@ class EXP msrStaff : public msrElement
 
     // finalization
 
-    void                  finalizeLastAppendedMeasureInStaff (
+    void                  cascadeFinalizeLastAppendedMeasureInStaff (
                             const mfInputLineNumber& inputLineNumber);
 
     void                  finalizeStaff (

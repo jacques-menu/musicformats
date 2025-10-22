@@ -11358,7 +11358,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
     // finalize current measure in the part,
     // to add skips if necessary and set measure kind
     fCurrentPart->
-      finalizeLastAppendedMeasureInPart (
+      cascadeFinalizeLastAppendedMeasureInPart (
         elt->getInputLineNumber ());
 
 // BOFFF...

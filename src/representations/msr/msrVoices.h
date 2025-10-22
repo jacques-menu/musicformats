@@ -407,7 +407,7 @@ class EXP msrVoice : public msrElement
 
     // measures
 
-    S_msrMeasure          cascadeCreateAMeasureAndAppendItInVoice (
+    S_msrMeasure          createAMeasureAndAppendItInVoice (
                             const mfInputLineNumber& inputLineNumber,
                             int                      previousMeasureEndInputLineNumber,
                             const mfMeasureNumber&   measureNumber,
@@ -455,9 +455,9 @@ class EXP msrVoice : public msrElement
 
     // dal segno
 
-    void                  insertHiddenMeasureAndBarLineInVoiceClone (
-                            const mfInputLineNumber&   inputLineNumber,
-                            const mfPositionInMeasure& positionInMeasure);
+//     void                  insertHiddenMeasureAndBarLineInVoiceClone (
+//                             const mfInputLineNumber&   inputLineNumber,
+//                             const mfPositionInMeasure& positionInMeasure);
 
     // notes
 
@@ -715,23 +715,23 @@ class EXP msrVoice : public msrElement
     void                  handleRepeatStartInVoice (
                             const mfInputLineNumber& inputLineNumber);
 
-    void                  handleRepeatStartInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber,
-                            const S_msrRepeat&       repeat);
+//     void                  handleRepeatStartInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const S_msrRepeat&       repeat);
 
-    void                  handleRepeatEndInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber);
+//     void                  handleRepeatEndInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber);
 
     void                  handleRepeatEndInVoice (
                             const mfInputLineNumber& inputLineNumber,
                             const mfMeasureNumber&   measureNumber,
                             int                      repeatTimes);
 
-    S_msrSegment          handleRepeatCommonPartStartInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber);
-
-    void                  handleRepeatCommonPartEndInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber);
+//     S_msrSegment          handleRepeatCommonPartStartInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber);
+//
+//     void                  handleRepeatCommonPartEndInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber);
 
     void                  handleRepeatEndingStartInVoice (
                             const mfInputLineNumber& inputLineNumber);
@@ -741,19 +741,19 @@ class EXP msrVoice : public msrElement
                             const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind      repeatEndingKind);
 
-    S_msrSegment          handleRepeatEndingStartInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber,
-                            msrRepeatEndingKind      repeatEndingKind,
-                            const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
-
-    void                  handleRepeatEndingEndInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
-                            msrRepeatEndingKind      repeatEndingKind);
-
-    void                  handleSegmentCloneEndInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber,
-                            const S_msrSegment&      segmentClone);
+//     S_msrSegment          handleRepeatEndingStartInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             msrRepeatEndingKind      repeatEndingKind,
+//                             const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
+//
+//     void                  handleRepeatEndingEndInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
+//                             msrRepeatEndingKind      repeatEndingKind);
+//
+//     void                  handleSegmentCloneEndInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const S_msrSegment&      segmentClone);
 
     void                  appendRepeatCloneToVoiceClone (
                             const mfInputLineNumber& inputLineNumber,
@@ -797,12 +797,12 @@ class EXP msrVoice : public msrElement
     void                  appendPendingMultipleMeasureRestsToVoice (
                             const mfInputLineNumber& inputLineNumber);
 
-    void                  handleMultipleMeasureRestsStartInVoiceClone (
-                            const mfInputLineNumber&        inputLineNumber,
-                            const S_msrMultipleMeasureRest& multipleMeasureRest);
-
-    void                  handleMultipleMeasureRestsEndInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber);
+//     void                  handleMultipleMeasureRestsStartInVoiceClone (
+//                             const mfInputLineNumber&        inputLineNumber,
+//                             const S_msrMultipleMeasureRest& multipleMeasureRest);
+//
+//     void                  handleMultipleMeasureRestsEndInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber);
 
 //     void                  handleMultipleMeasureRestsContentsStartInVoiceClone (
 //                             const mfInputLineNumber& inputLineNumber);
@@ -840,28 +840,28 @@ class EXP msrVoice : public msrElement
                             int                      measureRepeatMeasuresNumber,
                             int                      measureRepeatSlashesNumber);
 
-    void                  handleMeasureRepeatStartInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber,
-                            const S_msrMeasureRepeat& beatRepeat);
-
-    void                  handleMeasureRepeatEndInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber);
-
-    void                  handleMeasureRepeatPatternStartInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber);
-
-    void                  handleMeasureRepeatPatternEndInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber);
-
-    void                  handleMeasureRepeatReplicasStartInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber);
-
-    void                  handleMeasureRepeatReplicasEndInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber);
-
-    void                  appendMeasureRepeatCloneToVoiceClone ( // JMI ???
-                            const mfInputLineNumber&  inputLineNumber,
-                            const S_msrMeasureRepeat& beatRepeatClone);
+//     void                  handleMeasureRepeatStartInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const S_msrMeasureRepeat& beatRepeat);
+//
+//     void                  handleMeasureRepeatEndInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber);
+//
+//     void                  handleMeasureRepeatPatternStartInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber);
+//
+//     void                  handleMeasureRepeatPatternEndInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber);
+//
+//     void                  handleMeasureRepeatReplicasStartInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber);
+//
+//     void                  handleMeasureRepeatReplicasEndInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber);
+//
+//     void                  appendMeasureRepeatCloneToVoiceClone ( // JMI ???
+//                             const mfInputLineNumber&  inputLineNumber,
+//                             const S_msrMeasureRepeat& beatRepeatClone);
 
     // stanzas
 
@@ -896,7 +896,7 @@ class EXP msrVoice : public msrElement
     mfWholeNotes          getCurrentVoicePosition () const
                               { return fCurrentVoicePosition; }
 
-    const mfMoment&      getCurrentVoiceMoment () const
+    const mfMoment&       getCurrentVoiceMoment () const
                               { return fCurrentVoiceMoment; }
 
     // beams begin, continue and end check
@@ -943,10 +943,10 @@ class EXP msrVoice : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& context);
 
-    S_msrRepeat           createARepeatCloneAndStackIt (
-                            const mfInputLineNumber& inputLineNumber,
-                            const S_msrRepeat&       repeat,
-                            const std::string&       context);
+//     S_msrRepeat           createARepeatCloneAndStackIt (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const S_msrRepeat&       repeat,
+//                             const std::string&       context);
 
     void                  pushRepeatOntoVoiceRepeatsStack (
                             const mfInputLineNumber& inputLineNumber,
@@ -1034,13 +1034,13 @@ class EXP msrVoice : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
 
-    void                  handleHookedRepeatEndingEndInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
-
-    void                  handleHooklessRepeatEndingEndInVoiceClone (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
+//     void                  handleHookedRepeatEndingEndInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
+//
+//     void                  handleHooklessRepeatEndingEndInVoiceClone (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
 
     // multiple measure rests
 

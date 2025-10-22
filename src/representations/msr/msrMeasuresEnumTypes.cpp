@@ -26,7 +26,7 @@ std::string msrMeasureKindAsString (
 
   switch (measureKind) {
     case msrMeasureKind::kMeasureKindUnknown:
-      result = "kMeasureKindUnknown***";
+      result = "** kMeasureKindUnknown **";
       break;
     case msrMeasureKind::kMeasureKindRegular:
       result = "kMeasureKindRegular";
@@ -93,7 +93,7 @@ std::string msrMeasureKindasShortStringForMeasuresSlices (
 
   switch (measureKind) {
     case msrMeasureKind::kMeasureKindUnknown:
-      result = "kMeasureKindUnknown***";
+      result = "** kMeasureKindUnknown **";
       break;
     case msrMeasureKind::kMeasureKindRegular:
       result = "kMeasureKindRegular";

@@ -458,9 +458,9 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendBarLineToPart (
                             const S_msrBarLine& barLine);
 
-    void                  insertHiddenMeasureAndBarLineInPartClone (
-                            const mfInputLineNumber& inputLineNumber,
-                            const mfPositionInMeasure& positionInMeasure);
+//     void                  insertHiddenMeasureAndBarLineInPartClone (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const mfPositionInMeasure& positionInMeasure);
 
     // breaks
 
@@ -773,7 +773,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // finalization
 
-    void                  finalizeLastAppendedMeasureInPart (
+    void                  cascadeFinalizeLastAppendedMeasureInPart (
                             const mfInputLineNumber& inputLineNumber);
 
     void                  finalizePart (

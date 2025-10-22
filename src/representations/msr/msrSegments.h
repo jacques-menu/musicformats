@@ -192,7 +192,7 @@ class EXP msrSegment : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             const std::string&       context);
 
-    S_msrMeasure          cascadeCreateAMeasureAndAppendItInSegment (
+    S_msrMeasure          createAMeasureAndAppendItInSegment (
                             const mfInputLineNumber& inputLineNumber,
                             int                      previousMeasureEndInputLineNumber,
                             const mfMeasureNumber&   measureNumber,

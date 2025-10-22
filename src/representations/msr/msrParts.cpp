@@ -1540,38 +1540,38 @@ void msrPart::appendPageBreakToPart (
   } // for
 }
 
-void msrPart::insertHiddenMeasureAndBarLineInPartClone (
-  const mfInputLineNumber& inputLineNumber,
-  const mfPositionInMeasure& positionInMeasure)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Inserting hidden measure and barLine at position " <<
-      positionInMeasure.asString () <<
-      "' in part clone " << fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  ++gIndenter;
-
-  // cascade it to all staves
-  for (S_msrStaff staff : fPartAllStavesList) {
-    staff->
-      insertHiddenMeasureAndBarLineInStaffClone (
-        inputLineNumber,
-        positionInMeasure);
-  } // for
-
-  --gIndenter;
-}
+// void msrPart::insertHiddenMeasureAndBarLineInPartClone (
+//   const mfInputLineNumber& inputLineNumber,
+//   const mfPositionInMeasure& positionInMeasure)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasures ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Inserting hidden measure and barLine at position " <<
+//       positionInMeasure.asString () <<
+//       "' in part clone " << fetchPartNameForTrace () <<
+//       ", line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+//   // cascade it to all staves
+//   for (S_msrStaff staff : fPartAllStavesList) {
+//     staff->
+//       insertHiddenMeasureAndBarLineInStaffClone (
+//         inputLineNumber,
+//         positionInMeasure);
+//   } // for
+//
+//   --gIndenter;
+// }
 
 void msrPart::appendTranspositionToPart (
   const S_msrTransposition& transposition)
@@ -3039,7 +3039,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 //     backupStepLength);
 // }
 
-void msrPart::finalizeLastAppendedMeasureInPart (
+void msrPart::cascadeFinalizeLastAppendedMeasureInPart (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3062,7 +3062,7 @@ void msrPart::finalizeLastAppendedMeasureInPart (
   // finalize current measure in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      finalizeLastAppendedMeasureInStaff (
+      cascadeFinalizeLastAppendedMeasureInStaff (
         inputLineNumber);
   } // for
 

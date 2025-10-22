@@ -336,7 +336,7 @@ S_msrMeasure LilyPondIssue34Generator::createMeasureInVoice (
 {
   return
     voice->
-      cascadeCreateAMeasureAndAppendItInVoice (
+      createAMeasureAndAppendItInVoice (
         inputLineNumber,
         333, //         previousMeasureEndInputLineNumber, 0.9.62
         measureNumber,

@@ -551,7 +551,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
 //   }
 // }
 
-S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
+S_msrMeasure msrSegment::createAMeasureAndAppendItInSegment (
   const mfInputLineNumber& inputLineNumber,
   int                      previousMeasureEndInputLineNumber,
   const mfMeasureNumber&   measureNumber,
@@ -3409,8 +3409,6 @@ void msrSegment::print (std::ostream& os) const
     fSegmentKind <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
-    ", fSegmentAbsoluteNumber: " <<
-    fSegmentAbsoluteNumber <<
     ", " <<
     mfSingularOrPlural (
       fSegmentElementsList.size (), "element", "elements") <<
@@ -3424,6 +3422,11 @@ void msrSegment::print (std::ostream& os) const
   constexpr int fieldWidth = 20;
 
   os <<
+    std::setw (fieldWidth) <<
+    "fSegmentAbsoluteNumber" << ": " <<
+    fSegmentAbsoluteNumber<<
+    std::endl <<
+
     std::setw (fieldWidth) <<
     "fSegmentUpLinkToVoice" << ": " <<
     fetchVoiceName (fSegmentUpLinkToVoice) <<
@@ -3546,8 +3549,6 @@ void msrSegment::printFull (std::ostream& os) const
     fSegmentKind <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
-    ", fSegmentAbsoluteNumber: " <<
-    fSegmentAbsoluteNumber <<
     ", " <<
     mfSingularOrPlural (
       fSegmentElementsList.size (), "element", "elements") <<
@@ -3561,6 +3562,11 @@ void msrSegment::printFull (std::ostream& os) const
   constexpr int fieldWidth = 20;
 
   os <<
+    std::setw (fieldWidth) <<
+    "fSegmentAbsoluteNumber" << ": " <<
+    fSegmentAbsoluteNumber<<
+    std::endl <<
+
     std::setw (fieldWidth) <<
     "fSegmentUpLinkToVoice" << ": " <<
     fetchVoiceName (fSegmentUpLinkToVoice) <<

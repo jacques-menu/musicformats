@@ -725,12 +725,12 @@ class EXP msr2msrTranslator :
                                 const mfInputLineNumber& inputLineNumber,
                                 const std::string&       context);
 
-    void                      pushRepeatOntoVoiceRepeatsStack (
+    void                      pushRepeatOntoRepeatClonesStack (
                                 const mfInputLineNumber& inputLineNumber,
                                 const S_msrRepeat&       repeat,
                                 const std::string&       context);
 
-    void                      popRepeatFromVoiceRepeatsStack (
+    void                      popRepeatFromRepeatClonesStack (
                                 const mfInputLineNumber& inputLineNumber,
                                 const std::string&       context);
 

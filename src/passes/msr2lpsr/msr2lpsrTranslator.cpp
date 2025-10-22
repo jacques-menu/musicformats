@@ -878,10 +878,10 @@ void msr2lpsrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
         dalSegno =
           hiddenMeasureAndBarLineDescr->getDalSegno ();
 
-      fCurrentPartClone->
-        insertHiddenMeasureAndBarLineInPartClone (
-          hiddenMeasureAndBarLineDescr->getInputLineNumber (),
-          dalSegno->getMeasureElementPositionInMeasure ());
+//       fCurrentPartClone->
+//         insertHiddenMeasureAndBarLineInPartClone (
+//           hiddenMeasureAndBarLineDescr->getInputLineNumber (),
+//           dalSegno->getMeasureElementPositionInMeasure ());
 
       if (++i == iEnd) break;
     } // for
@@ -3057,10 +3057,10 @@ void msr2lpsrTranslator::visitEnd (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleSegmentCloneEndInVoiceClone (
-       elt->getInputLineNumber (),
-      fCurrentSegmentClone);
+//   fCurrentVoiceClone->
+//     handleSegmentCloneEndInVoiceClone (
+//        elt->getInputLineNumber (),
+//       fCurrentSegmentClone);
 
   // forget current segment clone
   fCurrentSegmentClone = nullptr;
@@ -7666,11 +7666,11 @@ void msr2lpsrTranslator::visitStart (S_msrDalSegno& elt)
        elt));
 
 //* JMI BLARK
-  fCurrentPartClone->
-    insertHiddenMeasureAndBarLineInPartClone (
-       elt->getInputLineNumber (),
-      elt->getMeasureElementPositionInMeasure ());
-     // */
+//   fCurrentPartClone->
+//     insertHiddenMeasureAndBarLineInPartClone (
+//        elt->getInputLineNumber (),
+//       elt->getMeasureElementPositionInMeasure ());
+//      // */
 }
 
 void msr2lpsrTranslator::visitStart (S_msrCoda& elt)
@@ -8008,10 +8008,10 @@ void msr2lpsrTranslator::visitStart (S_msrRepeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleRepeatStartInVoiceClone (
-       elt->getInputLineNumber (),
-      elt);
+//   fCurrentVoiceClone->
+//     handleRepeatStartInVoiceClone (
+//        elt->getInputLineNumber (),
+//       elt);
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrRepeat& elt)
@@ -8047,9 +8047,9 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleRepeatEndInVoiceClone (
-       elt->getInputLineNumber ());
+//   fCurrentVoiceClone->
+//     handleRepeatEndInVoiceClone (
+//        elt->getInputLineNumber ());
 }
 
 //________________________________________________________________________
@@ -8069,10 +8069,10 @@ void msr2lpsrTranslator::visitStart (S_msrRepeatCommonPart& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentSegmentClone =
-    fCurrentVoiceClone->
-      handleRepeatCommonPartStartInVoiceClone (
-         elt->getInputLineNumber ());
+//   fCurrentSegmentClone =
+//     fCurrentVoiceClone->
+//       handleRepeatCommonPartStartInVoiceClone (
+//          elt->getInputLineNumber ());
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
@@ -8091,9 +8091,9 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleRepeatCommonPartEndInVoiceClone (
-       elt->getInputLineNumber ());
+//   fCurrentVoiceClone->
+//     handleRepeatCommonPartEndInVoiceClone (
+//        elt->getInputLineNumber ());
 }
 
 //________________________________________________________________________
@@ -8129,12 +8129,12 @@ void msr2lpsrTranslator::visitStart (S_msrRepeatEnding& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentSegmentClone =
-    fCurrentVoiceClone->
-      handleRepeatEndingStartInVoiceClone (
-        elt->getInputLineNumber (),
-        elt->getRepeatEndingKind (),
-        elt->getRepeatEndingNumber ());
+//   fCurrentSegmentClone =
+//     fCurrentVoiceClone->
+//       handleRepeatEndingStartInVoiceClone (
+//         elt->getInputLineNumber (),
+//         elt->getRepeatEndingKind (),
+//         elt->getRepeatEndingNumber ());
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrRepeatEnding& elt)
@@ -8169,11 +8169,11 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeatEnding& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleRepeatEndingEndInVoiceClone (
-      elt->getInputLineNumber (),
-      elt->getRepeatEndingNumber (),
-      elt->getRepeatEndingKind ());
+//   fCurrentVoiceClone->
+//     handleRepeatEndingEndInVoiceClone (
+//       elt->getInputLineNumber (),
+//       elt->getRepeatEndingNumber (),
+//       elt->getRepeatEndingKind ());
 }
 
 //________________________________________________________________________
@@ -8302,10 +8302,10 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleMeasureRepeatStartInVoiceClone (
-       elt->getInputLineNumber (),
-      elt);
+//   fCurrentVoiceClone->
+//     handleMeasureRepeatStartInVoiceClone (
+//       elt->getInputLineNumber (),
+//       elt);
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
@@ -8359,9 +8359,9 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleMeasureRepeatEndInVoiceClone (
-       elt->getInputLineNumber ());
+//   fCurrentVoiceClone->
+//     handleMeasureRepeatEndInVoiceClone (
+//        elt->getInputLineNumber ());
 }
 
 //________________________________________________________________________
@@ -8392,9 +8392,9 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleMeasureRepeatPatternStartInVoiceClone (
-       elt->getInputLineNumber ());
+//   fCurrentVoiceClone->
+//     handleMeasureRepeatPatternStartInVoiceClone (
+//        elt->getInputLineNumber ());
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
@@ -8424,9 +8424,9 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleMeasureRepeatPatternEndInVoiceClone (
-       elt->getInputLineNumber ());
+//   fCurrentVoiceClone->
+//     handleMeasureRepeatPatternEndInVoiceClone (
+//        elt->getInputLineNumber ());
 }
 
 //________________________________________________________________________
@@ -8457,9 +8457,9 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleMeasureRepeatReplicasStartInVoiceClone (
-       elt->getInputLineNumber ());
+//   fCurrentVoiceClone->
+//     handleMeasureRepeatReplicasStartInVoiceClone (
+//        elt->getInputLineNumber ());
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
@@ -8490,9 +8490,9 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    handleMeasureRepeatReplicasEndInVoiceClone (
-       elt->getInputLineNumber ());
+//   fCurrentVoiceClone->
+//     handleMeasureRepeatReplicasEndInVoiceClone (
+//        elt->getInputLineNumber ());
 }
 
 //________________________________________________________________________

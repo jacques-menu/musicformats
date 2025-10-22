@@ -863,7 +863,7 @@ void msdlParser::createMeasureNumber (
   // create the measure and append it to the voice
   fCurrentMeasure =
     fCurrentVoice->
-      cascadeCreateAMeasureAndAppendItInVoice (
+      createAMeasureAndAppendItInVoice (
         inputLineNumber,
         333, //         previousMeasureEndInputLineNumber, 0.9.62
         ss.str (),

@@ -538,7 +538,7 @@ S_msrMeasure createMeasureInVoice (
 {
   return
     voice->
-      cascadeCreateAMeasureAndAppendItInVoice (
+      createAMeasureAndAppendItInVoice (
         inputLineNumber,
         333, //         previousMeasureEndInputLineNumber, 0.9.62
         measureNumber,

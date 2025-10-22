@@ -193,7 +193,7 @@ const std::string K_MF_MEASURE_NUMBER_UNKNOWN_ =
 
 const std::string
   kMfMeasureNumberPrefix ("measure_"),
-  kMfMeasureNumberDefaultValueString ("*measure_Unknown*");
+  kMfMeasureNumberDefaultValueString ("** UNKNOWN_MEASURE **");
 
 std::string mfMeasureNumberAsString (
   const mfMeasureNumber& measureNumber)

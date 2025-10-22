@@ -596,7 +596,7 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       voice->
-        cascadeCreateAMeasureAndAppendItInVoice (
+        createAMeasureAndAppendItInVoice (
           inputLineNumber,
           previousMeasureEndInputLineNumber,
           measureNumber,
@@ -2349,41 +2349,41 @@ void msrStaff::appendPageBreakToStaff (
   } // for
 }
 
-void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
-  const mfInputLineNumber&   inputLineNumber,
-  const mfPositionInMeasure& positionInMeasure)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Inserting hidden measure and barLine at position " <<
-      positionInMeasure.asString () <<
-      "' in staff clone \"" <<
-      fStaffPathLikeName <<
-      "\" in part " <<
-      fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  ++gIndenter;
-
-  // cascade it to all voices
-  for (S_msrVoice voice : fStaffAllVoicesList) {
-    voice->
-      insertHiddenMeasureAndBarLineInVoiceClone (
-        inputLineNumber,
-        positionInMeasure);
-  } // for
-
-  --gIndenter;
-}
+// void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
+//   const mfInputLineNumber&   inputLineNumber,
+//   const mfPositionInMeasure& positionInMeasure)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasures ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Inserting hidden measure and barLine at position " <<
+//       positionInMeasure.asString () <<
+//       "' in staff clone \"" <<
+//       fStaffPathLikeName <<
+//       "\" in part " <<
+//       fStaffUpLinkToPart->fetchPartNameForTrace () <<
+//       ", line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+//   // cascade it to all voices
+//   for (S_msrVoice voice : fStaffAllVoicesList) {
+//     voice->
+//       insertHiddenMeasureAndBarLineInVoiceClone (
+//         inputLineNumber,
+//         positionInMeasure);
+//   } // for
+//
+//   --gIndenter;
+// }
 
 /* JMI
 void msrStaff::nestContentsIntoNewRepeatInStaff (
@@ -2836,7 +2836,8 @@ void msrStaff::appendRepeatCloneToStaff (
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendRepeatCloneToVoiceClone (
-        inputLineNumber, repeatCLone);
+        inputLineNumber,
+        repeatCLone);
   } // for
 }
 
@@ -3079,11 +3080,11 @@ void msrStaff::appendHarpPedalsTuningToStaff (
   } // for
 }
 
-void msrStaff::finalizeLastAppendedMeasureInStaff (
+void msrStaff::cascadeFinalizeLastAppendedMeasureInStaff (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
