@@ -548,7 +548,7 @@ S_msrRepeat msr2msrTranslator::createARepeatCloneAndStackIt (
     repeat =
       msrRepeat::create (
         inputLineNumber,
-        2); // repeatTimes, default value JMI
+        2); // repeatTimes, default value JMI 0.9.76
 
 //   if (! repeat) {
 //     gLog << "*** FOO FOO FOO 2 ***" << std::endl;

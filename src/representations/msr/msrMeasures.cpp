@@ -61,6 +61,22 @@ S_msrMeasure msrMeasure::create (
       inputLineNumber,
       measureNumber);
   assert (obj != nullptr);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating measure " <<
+      obj->asShortString () <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   return obj;
 }
 
@@ -75,6 +91,24 @@ S_msrMeasure msrMeasure::create (
       measureNumber,
       measureUpLinkToSegment);
   assert (obj != nullptr);
+
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating measure " <<
+      obj->asShortString () <<
+      " with an uplink to segment " <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   return obj;
 }
 
@@ -94,25 +128,6 @@ msrMeasure::msrMeasure (
 
   // do other initializations
   initializeMeasure ();
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating measure: [" <<
-      "fMeasureNumber: " <<
-      fMeasureNumber <<
-      ", fMeasureDebugNumber: " <<
-      fMeasureDebugNumber <<
-      ", line " << fInputLineNumber <<
-      ']';
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
 }
 
 msrMeasure::msrMeasure (
@@ -180,27 +195,6 @@ msrMeasure::msrMeasure (
 
   // do other initializations
   initializeMeasure ();
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating measure: [" <<
-      "fMeasureNumber: " <<
-      fMeasureNumber <<
-      ", fMeasureDebugNumber: " <<
-      fMeasureDebugNumber <<
-      ", fMeasureUpLinkToSegment: " <<
-      fetchSegmentAsShortString (fMeasureUpLinkToSegment) <<
-      ", line " << fInputLineNumber <<
-      ']';
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrMeasure::initializeMeasure ()
@@ -606,7 +600,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         this->asShortString () <<
         " in segment " <<
         containingSegment->asString () <<
-        " in voice \"" <<
+        " in voice " <<
           containingSegment->
             getSegmentUpLinkToVoice ()->
               getVoiceName () <<
@@ -692,7 +686,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         "There are no elements in measure to be deep copied" <<
         " in segment " <<
         containingSegment->asString () <<
-        " in voice \"" <<
+        " in voice " <<
         containingSegment->
           getSegmentUpLinkToVoice ()->
             getVoiceName () <<
@@ -804,7 +798,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
         this->asShortString () <<
         " in segment " <<
         containingSegment->asString () <<
-        " in voice \"" <<
+        " in voice " <<
           containingSegment->
             getSegmentUpLinkToVoice ()->
               getVoiceName () <<
@@ -894,7 +888,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
         "There are no elements in measure to be deep copied" <<
         " in segment " <<
         containingSegment->asString () <<
-        " in voice \"" <<
+        " in voice " <<
         containingSegment->
           getSegmentUpLinkToVoice ()->
             getVoiceName () <<
@@ -978,7 +972,7 @@ void msrMeasure::setMeasureEndRegularKind (
         msrMeasureEndRegularKindAsString (measureEndRegularKind) <<
         "' in segment " <<
         fetchSegmentAsString (fMeasureUpLinkToSegment) <<
-        " in voice \"" <<
+        " in voice " <<
         fMeasureUpLinkToSegment->
           getSegmentUpLinkToVoice ()->
             getVoiceName () <<
@@ -1007,7 +1001,7 @@ void msrMeasure::setMeasureRepeatContextKind (
         measureRepeatContextKind <<
         "' in segment " <<
         fetchSegmentAsString (fMeasureUpLinkToSegment) <<
-        " in voice \"" <<
+        " in voice " <<
         fMeasureUpLinkToSegment->
           getSegmentUpLinkToVoice ()->
             getVoiceName () <<
@@ -1036,7 +1030,7 @@ void msrMeasure::setMeasureNumber (
         measureNumber <<
         "' in segment " <<
         fetchSegmentAsString (fMeasureUpLinkToSegment) <<
-        " in voice \"" <<
+        " in voice " <<
         fMeasureUpLinkToSegment->
           getSegmentUpLinkToVoice ()->
             getVoiceName () <<
@@ -1065,7 +1059,7 @@ void msrMeasure::setMeasureOrdinalNumberInVoice (
         measureOrdinalNumber <<
         "' in segment " <<
         fetchSegmentAsString (fMeasureUpLinkToSegment) <<
-        " in voice \"" <<
+        " in voice " <<
         fMeasureUpLinkToSegment->
           getSegmentUpLinkToVoice ()->
             getVoiceName () <<
@@ -1094,7 +1088,7 @@ void msrMeasure::setMeasurePuristNumber (
       measurePuristNumber <<
       "' in segment " <<
       fetchSegmentAsString (fMeasureUpLinkToSegment) <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -1121,9 +1115,9 @@ void msrMeasure::setMeasurePuristNumber (
 //         this->asShortString () <<
 //         " by " <<
 //         wholeNotesDelta.asString () <<
-//         " in voice \"" <<
-//         voice->getVoiceName () <<
-//         "\", line " << inputLineNumber <<
+//         " in voice " <<
+//         fetchVoiceName (voice) <<
+//         ", line " << inputLineNumber <<
 //         std::endl;
 //
 //        gWaeHandler->waeTrace (
@@ -1156,7 +1150,7 @@ void msrMeasure::appendMeasureElementToMeasure (
       measureElement->asShortString () <<
       " to measure " <<
       asShortString () <<
-//       " in voice \"" <<
+//       " in voice " <<
 //       fetchMeasureUpLinkToVoice ()-> JMI not yet set 0.9.66
 //         getVoiceName () <<
 //       ", fMeasureCurrentPositionInMeasure: " <<
@@ -1911,7 +1905,7 @@ void msrMeasure::setMeasureCurrentPositionInMeasure (
       this->asString () <<
       " to "  <<
       positionInMeasure.asFractionString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -1981,7 +1975,7 @@ void msrMeasure::incrementMeasureCurrentPositionInMeasure (
       wholeNotesDelta.asFractionString () <<
       " to " <<
       newMeasurePositionInMeasure.asFractionString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -2039,7 +2033,7 @@ void msrMeasure::setMeasureKind (
       measureKind <<
       " in segment " <<
       fetchSegmentAsString (fMeasureUpLinkToSegment) <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -2088,7 +2082,7 @@ void msrMeasure::setMeasureKind (
           measureKind <<
           " in segment " <<
           fetchSegmentAsString (fMeasureUpLinkToSegment) <<
-          " in voice \"" <<
+          " in voice " <<
           fMeasureUpLinkToSegment->
             getSegmentUpLinkToVoice ()->
               getVoiceName () <<
@@ -2127,7 +2121,7 @@ void msrMeasure::setMeasureKind (
           measureKind <<
           " in segment " <<
           fetchSegmentAsString (fMeasureUpLinkToSegment) <<
-          " in voice \"" <<
+          " in voice " <<
           fMeasureUpLinkToSegment->
             getSegmentUpLinkToVoice ()->
               getVoiceName () <<
@@ -2169,10 +2163,9 @@ void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
       "Appending print layout " << musicXMLPrintLayout->asString () <<
       " to measure " <<
       this->asShortString () <<
-      ", in voice \"" <<
+      ", in voice " <<
       fetchMeasureUpLinkToVoice ()->
-        getVoiceName () <<
-      "\"";
+        getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2202,10 +2195,9 @@ void msrMeasure::appendClefKeyTimeSignatureGroupToMeasure (
       clefKeyTimeSignatureGroup->asString () <<
       " to measure " <<
       this->asShortString () <<
-      ", in voice \"" <<
+      ", in voice " <<
       fetchMeasureUpLinkToVoice ()->
-        getVoiceName () <<
-      "\"";
+        getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2240,10 +2232,9 @@ void msrMeasure::appendClefToMeasure (
       clef <<
       " to measure " <<
       this->asShortString () <<
-      ", in voice \"" <<
+      ", in voice " <<
       fetchMeasureUpLinkToVoice ()->
-        getVoiceName () <<
-      "\"";
+        getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2269,10 +2260,9 @@ void msrMeasure::appendKeyToMeasure (
       key <<
       " to measure " <<
       this->asShortString () <<
-      ", in voice \"" <<
+      ", in voice " <<
       fetchMeasureUpLinkToVoice ()->
-        getVoiceName () <<
-      "\"";
+        getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2306,11 +2296,10 @@ void msrMeasure::appendTimeSignatureToMeasure (
       timeSignature <<
       " to measure " <<
       this->asShortString ()<<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"";
+          getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2358,7 +2347,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
       this->asShortString () <<
       " from time signature " <<
       timeSignature->asShortString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -2398,7 +2387,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
             timeSignature->asString () <<
             "in measure " <<
             this->asShortString () <<
-            " in voice \"" <<
+            " in voice " <<
             fMeasureUpLinkToSegment->
               getSegmentUpLinkToVoice ()->
                 getVoiceName () <<
@@ -2421,7 +2410,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
           ss <<
             "Measure " <<
             this->asShortString () <<
-            "'in voice \"" <<
+            "'in voice " <<
             fMeasureUpLinkToSegment->
               getSegmentUpLinkToVoice ()->
                 getVoiceName () <<
@@ -2448,7 +2437,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
         ss <<
           "Measure " <<
           this->asShortString () <<
-           " in voice \"" <<
+           " in voice " <<
           fMeasureUpLinkToSegment->
             getSegmentUpLinkToVoice ()->
               getVoiceName () <<
@@ -2507,7 +2496,7 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
       " to segment clone '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice " <<
-      upLinkToVoice->getVoiceName ();
+      fetchVoiceName (upLinkToVoice);
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2544,10 +2533,10 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
       positionInMeasure.asString () <<
       "' in measure clone \"" <<
       this->asShortString () <<
-      "\" in segment clone " <<
+      " in segment clone " <<
       fetchSegmentAsShortString (fMeasureUpLinkToSegment) <<
       " in voice " <<
-     upLinkToVoice->getVoiceName () <<
+      fetchVoiceName (upLinkToVoice) <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2591,7 +2580,7 @@ void msrMeasure::appendTranspositionToMeasure (
       " to measure " <<
       this->asShortString () <<
       " in voice " <<
-      voice->getVoiceName ();
+      fetchVoiceName (voice);
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2656,9 +2645,8 @@ void msrMeasure::appendBarLineToMeasure (
       barLine->asString () <<
       " to measure " <<
       this->asShortString () <<
-      " in voice \"" <<
-      voice->getVoiceName () <<
-      "\"";
+      " in voice " <<
+      fetchVoiceName (voice);
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2776,7 +2764,7 @@ void msrMeasure::appendNoteToMeasureAtPosition (
       "Appending note " << note->asShortString () <<
       " to measure " <<
       this->asShortString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -2845,7 +2833,7 @@ void msrMeasure::appendNoteToMeasureAtPosition (
           fMeasureCurrentPositionInMeasure <<
           " in measure " <<
           this->asShortString () <<
-          ", cannot padup in voice \"" <<
+          ", cannot padup in voice " <<
           fMeasureUpLinkToSegment->
             getSegmentUpLinkToVoice ()->
               getVoiceName () <<
@@ -2942,8 +2930,8 @@ void msrMeasure::appendNoteToMeasure (
        note->asShortString () <<
       " to measure " <<
       this->asShortString () <<
-      " in voice \"" <<
-       voice->getVoiceName () <<
+      " in voice " <<
+       fetchVoiceName (voice) <<
       ", fMeasureCurrentPositionInMeasure: " <<
       fMeasureCurrentPositionInMeasure <<
       ", noteSoundingWholeNotes: " << noteSoundingWholeNotes.asFractionString () <<
@@ -3077,7 +3065,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
       "Appending padding note " << note->asString () <<
       " at the end of measure " <<
       this->asString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -3143,8 +3131,7 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
       "' in voice clone \"" <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"";
+          getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3208,11 +3195,10 @@ void msrMeasure::accountForTupletMemberNoteNotesDurationInMeasure ( // JMI 0.9.6
       note->asShortString () <<
       " in measure " <<
       this->asShortString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"";
+          getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3257,11 +3243,10 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
       "Appending chord '" << chord <<
       "' to measure " <<
       this->asShortString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"";
+          getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3318,7 +3303,7 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
       "Appending tuplet " << tuplet->asString () <<
       " to measure " <<
       this->asShortString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -3369,11 +3354,10 @@ void msrMeasure::appendDoubleTremoloToMeasure (
       doubleTremolo->asShortString () <<
       "' to measure " <<
       this->asShortString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"";
+          getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3404,7 +3388,7 @@ void msrMeasure::appendHarmonyToMeasureWithoutPadUp (
       this->asShortString () <<
       " in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -3443,7 +3427,7 @@ void msrMeasure::appendHarmonyToMeasure (
       this->asShortString () <<
       " in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -3494,7 +3478,7 @@ void msrMeasure::appendHarmoniesListToMeasure (
       this->asShortString () <<
       " in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -3576,7 +3560,7 @@ void msrMeasure::appendFiguredBassToMeasureWithoutPadUp (
       "Appending figured bass " << figuredBass->asString () <<
       " to measure without padUp" <<
       this->asShortString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -3613,7 +3597,7 @@ void msrMeasure::appendFiguredBassToMeasure (
       "Appending figured bass " << figuredBass->asString () <<
       " to measure " <<
       this->asShortString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -3658,7 +3642,7 @@ void msrMeasure::cascadeAppendFiguredBassesListToMeasure (
       this->asShortString () <<
       " in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
@@ -3741,11 +3725,11 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
     std::stringstream ss;
 
     ss <<
-      "Creating a padding skip note for voice \"" <<
-      voice->getVoiceName () <<
+      "Creating a padding skip note for voice " <<
+      fetchVoiceName (voice) <<
       "', duration: '" <<
       duration <<
-      "\" in measure " <<
+      " in measure " <<
       this->asShortString () <<
       ", line " << inputLineNumber;
 
@@ -3800,9 +3784,9 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //       this->asShortString () <<
 //       " in segment " <<
 //       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-//       " in voice \"" <<
-//       measureVoice->getVoiceName () <<
-//       "\", line " << inputLineNumber <<
+//       " in voice " <<
+//       fetchVoiceName (measureVoice)  <<
+//       ", line " << inputLineNumber <<
 //       std::endl;
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -3843,8 +3827,8 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //         " to measure position '" <<positionInMeasureToPadUpTo.asString () << "'"
 //         " in measure " <<
 //         this->asShortString () <<
-//         " in voice \"" <<
-//         measureVoice->getVoiceName () <<
+//         " in voice " <<
+//         fetchVoiceName (measureVoice)  <<
 //         std::endl;
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -3879,9 +3863,9 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //         this->asShortString () <<
 //         " in segment " <<
 //         fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-//         " in voice \"" <<
-//         measureVoice->getVoiceName () <<
-//         "\", line " << inputLineNumber <<
+//         " in voice " <<
+//         fetchVoiceName (measureVoice)  <<
+//         ", line " << inputLineNumber <<
 //         std::endl;
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -3902,9 +3886,9 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //         this->asShortString () <<
 //         " in segment " <<
 //         fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-//         " in voice \"" <<
-//         measureVoice->getVoiceName () <<
-//         "\", line " << inputLineNumber;
+//         " in voice " <<
+//         fetchVoiceName (measureVoice)  <<
+//         ", line " << inputLineNumber;
 //
 // //    msrError ( JMI
 //     msrWarning (
@@ -3947,9 +3931,9 @@ void msrMeasure::padUpToPositionInMeasure (
       this->asShortString () <<
       " in segment " <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      " in voice \"" <<
-      measureVoice->getVoiceName () <<
-      "\", line " << inputLineNumber;
+      " in voice " <<
+      fetchVoiceName (measureVoice)  <<
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3989,7 +3973,7 @@ void msrMeasure::padUpToPositionInMeasure (
         "Creating a padding note for measure debug number " <<
         fMeasureDebugNumber <<
         ", missingNotesDuration: " << missingNotesDuration <<
-        " in voice \"" << measureVoice->getVoiceName () <<
+        " in voice " << fetchVoiceName (measureVoice)  <<
         "\", measure: " <<
         this->asShortString () <<
         ", fMeasureCurrentPositionInMeasure: " <<
@@ -4016,8 +4000,8 @@ void msrMeasure::padUpToPositionInMeasure (
       ss <<
         "Appending padding note " << paddingNote->asString () <<
         " (" << missingNotesDuration << " whole notes)" <<
-        " to finalize \"" << measureVoice->getVoiceName () <<
-        "\" measure: " <<
+        " to finalize \"" << fetchVoiceName (measureVoice)  <<
+        " measure: " <<
         this->asShortString () <<
         ", fMeasureCurrentPositionInMeasure: " <<
         fMeasureCurrentPositionInMeasure.asFractionString ();
@@ -4067,10 +4051,10 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       this->asString () <<
       " in segment " <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      " in voice \"" <<
-      measureVoice->getVoiceName () <<
+      " in voice " <<
+      fetchVoiceName (measureVoice) <<
       ", , context: " << context <<
-      "\", line " << inputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4107,7 +4091,8 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         ", missingNotesDuration: " << missingNotesDuration <<
         ", at the end of measure " <<
         this->asString () <<
-        " in voice \"" << measureVoice->getVoiceName () << "\",  " <<
+        " in voice " <<
+        fetchVoiceName (measureVoice)  <<
         ", fMeasureCurrentPositionInMeasure: " <<
         fMeasureCurrentPositionInMeasure <<
         ", line " << inputLineNumber;
@@ -4148,8 +4133,8 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       ss <<
         "Appending padding skip note " << paddingSkipNote->asString () <<
         " (" << missingNotesDuration << " whole notes)" <<
-        " to finalize \"" << measureVoice->getVoiceName () <<
-        "\" measure: " <<
+        " to finalize \"" << fetchVoiceName (measureVoice)  <<
+        " measure: " <<
         this->asShortString () <<
         " measureCurrentPositionInMeasure: " <<
         fMeasureCurrentPositionInMeasure.asFractionString ();
@@ -4184,8 +4169,8 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
           fMeasureCurrentPositionInMeasure <<
           " to " <<
           positionInMeasureToPadUpTo.asString () <<
-          " in voice \"" <<
-          measureVoice->getVoiceName () <<
+          " in voice " <<
+          fetchVoiceName (measureVoice)  <<
           "\"," <<
           " since the latter has already been overtaken";
 
@@ -4214,8 +4199,8 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         fMeasureCurrentPositionInMeasure <<
         " to " <<
         positionInMeasureToPadUpTo.asString () <<
-        " in voice \"" <<
-        measureVoice->getVoiceName () <<
+        " in voice " <<
+        fetchVoiceName (measureVoice)  <<
         "\"," <<
         " since the latter is already at the desired measure position";
 
@@ -4274,9 +4259,9 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 //       getFullMeasureWholeNotesDuration ().asString () <<
 //       "' in segment " <<
 //       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-//       " in voice \"" <<
-//       measureVoice->getVoiceName () <<
-//       "\", line " << inputLineNumber;
+//       " in voice " <<
+//       fetchVoiceName (measureVoice)  <<
+//       ", line " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -4425,11 +4410,10 @@ void msrMeasure::appendStaffDetailsToMeasure (
       "Appending staff details '" << staffDetails->asShortString () <<
       "' to measure " <<
       this->asShortString () <<
-      " in voice \"" <<
+      " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"";
+          getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4489,7 +4473,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 //       note->asShortString () <<
 //       "' from measure " <<
 //       this->asShortString () <<
-//       " in voice \"" <<
+//       " in voice " <<
 //       fMeasureUpLinkToSegment->
 //         getSegmentUpLinkToVoice ()->
 //           getVoiceName () <<
@@ -4572,8 +4556,8 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 //     note <<
 //     " from measure " <<
 //     this->asShortString () <<
-//     " in voice \"" <<
-//     segmentUpLinkToVoice->getVoiceName () <<
+//     " in voice " <<
+//     fetchVoiceName (segmentUpLinkToVoice) <<
 //     "\"," <<
 //     " since this note has not been found in fMeasureElementsList";
 //
@@ -4611,7 +4595,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 //       std::endl <<
 //       " from measure " <<
 //       this->asShortString () <<
-//       " in voice \"" <<
+//       " in voice " <<
 //       fMeasureUpLinkToSegment->
 //         getSegmentUpLinkToVoice ()->
 //           getVoiceName () <<
@@ -4659,7 +4643,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 //     element->asString () <<
 //     " from measure " <<
 //     this->asShortString () <<
-//     " in voice \"" <<
+//     " in voice " <<
 //     fMeasureUpLinkToSegment->
 //       getSegmentUpLinkToVoice ()->
 //         getVoiceName () <<
@@ -4726,12 +4710,12 @@ void msrMeasure::setMeasurePuristNumberFromVoice ()
         "Setting the measure purist number of measure " <<
         asString () <<
         " from voice " <<
-        voice->getVoiceName () <<
+        fetchVoiceName (voice) <<
         " to '" <<
         voiceCurrentPuristNumber <<
         "' in segment " <<
         fetchSegmentAsString (fMeasureUpLinkToSegment) <<
-        " in voice \"" <<
+        " in voice " <<
         fMeasureUpLinkToSegment->
           getSegmentUpLinkToVoice ()->
             getVoiceName () <<
@@ -4772,7 +4756,7 @@ void msrMeasure::determineMeasureKind (
           "### MAINTAINANCE ### -- " <<
           "Attempting to determine measure kind for measure \"" <<
           asShortString () <<
-          "\" more than once";
+          " more than once";
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -4870,7 +4854,8 @@ if (false)
       newWholeNotesSinceLastRegularMeasureEnd <<
       ", currentVoiceRepeatPhaseKind: " <<
       currentVoiceRepeatPhaseKind <<
-      "' in voice \"" << voice->getVoiceName () <<
+      " in voice " <<
+       fetchVoiceName (voice) <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -5362,9 +5347,9 @@ void msrMeasure::finalizeMeasureInRegularVoice (
       this->asShortString () <<
       " in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in regular voice \"" <<
-      voice->getVoiceName () <<
-      "\" (" << context << ")" <<
+      "' in regular voice " <<
+      fetchVoiceName (voice) <<
+      " (" << context << ")" <<
       ", fMeasureOrdinalNumberInVoice: " <<
       fMeasureOrdinalNumberInVoice <<
       ", fullMeasureWholeNotesDuration: " <<
@@ -5451,9 +5436,9 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 //           this->asShortString () <<
 //           " fully in segment '" <<
 //           fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-//           "' in voice \"" <<
-//           voice->getVoiceName () <<
-//           "\", line " << inputLineNumber <<
+//           " in voice " <<
+//           fetchVoiceName (voice) <<
+//           ", line " << inputLineNumber <<
 //           std::endl;
 //
 //         gWaeHandler->waeTrace (
@@ -5568,9 +5553,9 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 //         skipNote->asString () <<
 //         " before currentHarmony " <<
 //         currentHarmony->asString () <<
-//         " in voice \"" <<
-//         voice->getVoiceName () <<
-//         "\", line " << inputLineNumber <<
+//         " in voice " <<
+//         fetchVoiceName (voice) <<
+//         ", line " << inputLineNumber <<
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
@@ -5723,9 +5708,9 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 //         skipNote->asString () <<
 //         " before currentHarmony " <<
 //         currentHarmony->asString () <<
-//         " in voice \"" <<
-//         voice->getVoiceName () <<
-//         "\", line " << inputLineNumber <<
+//         " in voice " <<
+//         fetchVoiceName (voice) <<
+//         ", line " << inputLineNumber <<
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
@@ -5799,8 +5784,8 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
       this->asShortString () <<
       " in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in voice \"" <<
-      voice->getVoiceName () <<
+      " in voice " <<
+      fetchVoiceName (voice) <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -5963,9 +5948,9 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
         this->asShortString () <<
         ", the gap is " <<
         gapAtTheEndOfTheMeasure.asString () <<
-        ", in voice \"" <<
-        voice->getVoiceName () <<
-        "\", line " << inputLineNumber;
+        ", in voice " <<
+        fetchVoiceName (voice) <<
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -6024,9 +6009,9 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
 //         currentHarmonySoundingWholeNotes.asFractionString () <<
 //         " to " <<
 //         reducedSoundingWholeNotes.asFractionString () <<
-//         " in voice \"" <<
-//         voice->getVoiceName () <<
-//         "\", line " << inputLineNumber <<
+//         " in voice " <<
+//         fetchVoiceName (voice) <<
+//         ", line " << inputLineNumber <<
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
@@ -6070,9 +6055,9 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
         " reaches the end of measure " <<
         this->asShortString () <<
         ", nothing more to do" <<
-        ", in voice \"" <<
-        voice->getVoiceName () <<
-        "\", line " << inputLineNumber;
+        ", in voice " <<
+        fetchVoiceName (voice) <<
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -6104,11 +6089,11 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
       this->asShortString () <<
       " in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in voice \"" <<
-      voice->getVoiceName () <<
+      " in voice " <<
+      fetchVoiceName (voice) <<
       ", fMeasureOrdinalNumberInVoice: " <<
       fMeasureOrdinalNumberInVoice <<
-      "\" (" << context << ")" <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -6139,9 +6124,9 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
         this->asShortString () <<
         " in segment '" <<
         fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-        "' in voice \"" <<
-        voice->getVoiceName () <<
-        "\" (" << context << ")" <<
+        " in voice " <<
+        fetchVoiceName (voice) <<
+        " (" << context << ")" <<
         ", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
@@ -6178,9 +6163,9 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
           this->asShortString () <<
           " in segment '" <<
           fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-          "' in voice \"" <<
-          voice->getVoiceName () <<
-          "\" (" << context << ")" <<
+          " in voice " <<
+          fetchVoiceName (voice) <<
+          " (" << context << ")" <<
           ", line " << measureElement->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
@@ -6371,9 +6356,9 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
 //       this->asShortString () <<
 //       " in segment '" <<
 //       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-//       "' in voice \"" <<
-//       voice->getVoiceName () <<
-//       "\" (" << context << ")" <<
+//       " in voice " <<
+//       fetchVoiceName (voice) <<
+//       " (" << context << ")" <<
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //
@@ -6512,9 +6497,9 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
         skipNote->asString () <<
         " before currentFiguredBass " <<
         currentFiguredBass->asString () <<
-        " in voice \"" <<
-        voice->getVoiceName () <<
-        "\", line " << inputLineNumber;
+        " in voice " <<
+        fetchVoiceName (voice) <<
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -6634,9 +6619,9 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         skipNote->asString () <<
         " before currentFiguredBass " <<
         currentFiguredBass->asString () <<
-        " in voice \"" <<
-        voice->getVoiceName () <<
-        "\", line " << inputLineNumber;
+        " in voice " <<
+        fetchVoiceName (voice) <<
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -6684,9 +6669,9 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         previousFiguredBassSoundingWholeNotes.asFractionString () <<
         " to " <<
         reducedSoundingWholeNotes.asFractionString () <<
-        " in voice \"" <<
-        voice->getVoiceName () <<
-        "\", line " << inputLineNumber;
+        " in voice " <<
+        fetchVoiceName (voice) <<
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -6851,9 +6836,9 @@ void msrMeasure::handleTheLastFiguredBassInFiguredBassMeasure (
         currentFiguredBassSoundingWholeNotes.asFractionString () <<
         " to " <<
         reducedSoundingWholeNotes.asFractionString () <<
-        " in voice \"" <<
-        voice->getVoiceName () <<
-        "\", line " << inputLineNumber;
+        " in voice " <<
+        fetchVoiceName (voice) <<
+        ", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -6907,9 +6892,9 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
       this->asShortString () <<
       " in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in voice \"" <<
-      voice->getVoiceName () <<
-      "\" (" << context << ")" <<
+      " in voice " <<
+      fetchVoiceName (voice) <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -6939,9 +6924,9 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
 //         this->asShortString () <<
 //         " in segment '" <<
 //         fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-//         "' in voice \"" <<
-//         voice->getVoiceName () <<
-//         "\" (" << context << ")" <<
+//         " in voice " <<
+//         fetchVoiceName (voice) <<
+//         " (" << context << ")" <<
 //         ", line " << inputLineNumber <<
 //         std::endl;
 //
@@ -7138,9 +7123,9 @@ void msrMeasure::finalizeMeasureInHarmonyVoice (
       this->asShortString () <<
       " in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in harmonies voice \"" <<
-      harmoniesVoice->getVoiceName () <<
-      "\" (" << context << ")" <<
+      "' in harmonies voice " <<
+      fetchVoiceName (harmoniesVoice) <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -7255,9 +7240,9 @@ void msrMeasure::finalizeMeasureInFiguredBassVoice (
       this->asShortString () <<
       " in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in figured bass voice \"" <<
-      figuredBassVoice->getVoiceName () <<
-      "\" (" << context << ")" <<
+      "' in figured bass voice " <<
+      fetchVoiceName (figuredBassVoice) <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -7473,9 +7458,9 @@ void msrMeasure::finalizeMeasure (
           this->asShortString () <<
           " in segment '" <<
           fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-          "' in voice \"" <<
+          " in voice " <<
           fetchVoiceName (segmentUpLinkToVoice) <<
-          "\", line " << inputLineNumber <<
+          ", line " << inputLineNumber <<
           ", doesn't contain any music" <<
           std::endl;
 
@@ -7612,7 +7597,7 @@ void msrMeasure::finalizeMeasureClone (
       this->asString () <<
       " in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "' in voice \"" <<
+      " in voice " <<
 // JMI      fMeasureUpLinkToSegment->getSegmentUpLinkToVoice ()->getVoiceName () <<
       voiceClone->getVoiceName () <<
         ", lines " << inputLineNumber << " .. " << fInputLineNumber << // JMI
@@ -7640,7 +7625,7 @@ void msrMeasure::finalizeMeasureClone (
         fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
         "' in voice clone \"" <<
         voiceClone->getVoiceName () <<
-        "\", line " << inputLineNumber <<
+        ", line " << inputLineNumber <<
         ", doesn't contain any music" <<
         std::endl;
 
@@ -7675,7 +7660,7 @@ void msrMeasure::finalizeMeasureClone (
           "### MAINTAINANCE ### -- " <<
           "Attempt at finalizing measure clone " <<
           asShortString () <<
-          "\" more than once";
+          " more than once";
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -7764,7 +7749,7 @@ void msrMeasure::finalizeMeasureClone (
         fMeasureKind <<
         "' differs from original measure measure kind '" <<
         originalMeasureMeasureKind <<
-        "' in voice \"" <<
+        " in voice " <<
         voiceClone->getVoiceName () <<
         "', line " << inputLineNumber;
 
@@ -8067,15 +8052,8 @@ std::string msrMeasure::asShortString () const
     fMeasureKind <<
     ", fMeasureWholeNotesDuration: " <<
     fMeasureWholeNotesDuration <<
-    ", segmentUpLinkToVoice: ";
-  if (segmentUpLinkToVoice) {
-    ss <<
-      segmentUpLinkToVoice->getVoiceName ();
-  }
-  else {
-    ss << "[*** UNKNOWN VOICE NAME ***]";
-  }
-  ss <<
+    ", segmentUpLinkToVoice: " <<
+    fetchVoiceName (segmentUpLinkToVoice)  <<
     ", fMeasureOrdinalNumberInVoice: " <<
     fMeasureOrdinalNumberInVoice <<
     ", fMeasurePuristNumber: " <<
@@ -8112,15 +8090,9 @@ std::string msrMeasure::asStringForMeasuresSlices () const
 
   ss <<
     fMeasureNumber <<
-    ": ";
-  if (segmentUpLinkToVoice) {
-    ss <<
-       segmentUpLinkToVoice->getVoiceName ();
-  }
-  else {
-    ss << "[*** UNKNOWN VOICE NAME ***]";
-  }
-  ss <<
+    ": " <<
+    ", segmentUpLinkToVoice: " <<
+    fetchVoiceName (segmentUpLinkToVoice)  <<
     " [";
 /* JMI
 // JMI    ", measureKind: " <<
@@ -8128,7 +8100,7 @@ std::string msrMeasure::asStringForMeasuresSlices () const
     msrMeasureKindasShortStringForMeasuresSlices (fMeasureKind) <<
     ", voice: " <<
     ", " <<
-    voice->getVoiceName () <<
+    fetchVoiceName (voice) <<
     ", fMeasureOrdinalNumberInVoice: " <<
     fMeasureOrdinalNumberInVoice <<
     ", fMeasurePuristNumber: " <<
@@ -8207,15 +8179,8 @@ std::string msrMeasure::asString () const
     fMeasureDebugNumber <<
     "', fMeasureKind: " <<
     fMeasureKind <<
-    ", segmentUpLinkToVoice: ";
-  if (segmentUpLinkToVoice) {
-    ss <<
-      segmentUpLinkToVoice->getVoiceName ();
-  }
-  else {
-    ss << "[NULL]";
-  }
-  ss <<
+    ", segmentUpLinkToVoice: " <<
+    fetchVoiceName (segmentUpLinkToVoice)  <<
     ", fMeasureWholeNotesDuration: " <<
     fMeasureWholeNotesDuration <<
 
@@ -8788,9 +8753,9 @@ std::string fetchMeasureAsString (const S_msrMeasure& measure)
 //         skipNote->asString () <<
 //         " before currentHarmony " <<
 //         currentHarmony->asString () <<
-//         " in voice \"" <<
-//         voice->getVoiceName () <<
-//         "\", line " << inputLineNumber <<
+//         " in voice " <<
+//         fetchVoiceName (voice) <<
+//         ", line " << inputLineNumber <<
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (
@@ -8839,9 +8804,9 @@ std::string fetchMeasureAsString (const S_msrMeasure& measure)
 //         previousHarmonySoundingWholeNotes.asFractionString () <<
 //         " to " <<
 //         reducedSoundingWholeNotes.asFractionString () <<
-//         " in voice \"" <<
-//         voice->getVoiceName () <<
-//         "\", line " << inputLineNumber <<
+//         " in voice " <<
+//         fetchVoiceName (voice) <<
+//         ", line " << inputLineNumber <<
 //         std::endl;
 //
 //       gWaeHandler->waeTrace (

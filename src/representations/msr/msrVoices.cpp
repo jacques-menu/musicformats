@@ -4306,7 +4306,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
 
   S_msrRepeat
     result =
-      msrRepeat::create (
+      msrRepeat::createAsWellAsItsCommonPart (
         inputLineNumber,
         2, // repeatTimes, default value JMI
         this);
@@ -4693,12 +4693,12 @@ void msrVoice::moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart (
     inputLineNumber,
     msrVoiceRepeatPhaseKind::kVoiceRepeatPhaseAfterCommonPart);
 
-  // append fVoiceLastAppendedMeasure to the repeat common part
-  repeatCommonPart->
-    appendMeasureToRepeatElement (
-      inputLineNumber,
-      fVoiceLastAppendedMeasure,
-      context);
+//   // append fVoiceLastAppendedMeasure to the repeat common part ZOULOU VIRER
+//   repeatCommonPart->
+//     appendMeasureToRepeatElement (
+//       inputLineNumber,
+//       fVoiceLastAppendedMeasure,
+//       context);
 
   // remove fVoiceLastAppendedMeasure from fVoiceSegment
 
@@ -5300,7 +5300,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 
   S_msrRepeat
     newRepeat =
-      msrRepeat::create (
+      msrRepeat::createAsWellAsItsCommonPart (
         repeatInputLineNumber,
         repeatTimes,
         this);
@@ -5510,30 +5510,10 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 //       repeatCommonPart);
 
   // move the voice last measure to the new repeat common part
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Moving the voice last appended measure in voice " << // ZOULOU
-      fVoiceName <<
-      " to the current voice-level repeat common part" <<
-      " and forget about it" <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
   moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart (
     inputLineNumber,
     innerMostRepeat->getRepeatCommonPart (),
     "handleVoiceLevelRepeatEndWithStart()");
-//   const mfInputLineNumber&     inputLineNumber,
-//   const S_msrRepeatCommonPart& repeatCommonPart,
-//   const std::string&           context)
 
 //   moveVoiceLastSegmentToRepeatCommonPart (
 //     inputLineNumber,

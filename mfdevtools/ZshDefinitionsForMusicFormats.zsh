@@ -255,7 +255,7 @@ alias rmmakefiles="rm -rf ./libdir/CMakeFiles"
 function bmf ()
 {
 #   set -x
-  SCRIPT_NAME=BuildMusicFormats.zsh
+  SCRIPT_NAME=BuildMusicFormatsLibrary.zsh
   SCRIPT=${DEVTOOLS_DIR}/${SCRIPT_NAME}
 
   LOGFILE_NAME=${SCRIPT_NAME}.log

@@ -30,6 +30,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 class EXP msrRepeatElement: public msrElement
 {
+/* this class is purely virtual
   public:
 
     // creation from MusicXML
@@ -43,6 +44,7 @@ class EXP msrRepeatElement: public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             msrSegmentKind           segmentKind,
                             const S_msrRepeat&       upLinkToRepeat);
+*/
 
   protected:
 
@@ -135,10 +137,10 @@ class EXP msrRepeatElement: public msrElement
     // print
     // ------------------------------------------------------
 
-    std::string           asString () const override;
+    std::string           asString () const override = 0;
 
-    void                  print (std::ostream& os) const override;
-    void                  printFull (std::ostream& os) const override;
+    void                  print (std::ostream& os) const override = 0;
+    void                  printFull (std::ostream& os) const override = 0;
 
   protected:
 
@@ -472,7 +474,16 @@ class EXP msrRepeat : public msrSegmentElement
                             const mfInputLineNumber& inputLineNumber,
                             int                      repeatTimes);
 
+    static SMARTP<msrRepeat> createAsWellAsItsCommonPart (
+                            const mfInputLineNumber& inputLineNumber,
+                            int                      repeatTimes);
+
     static SMARTP<msrRepeat> create (
+                            const mfInputLineNumber& inputLineNumber,
+                            int                      repeatTimes,
+                            const S_msrVoice&        upLinkToVoice);
+
+    static SMARTP<msrRepeat> createAsWellAsItsCommonPart (
                             const mfInputLineNumber& inputLineNumber,
                             int                      repeatTimes,
                             const S_msrVoice&        upLinkToVoice);

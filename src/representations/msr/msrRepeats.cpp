@@ -56,6 +56,7 @@ namespace MusicFormats
 */
 
 //______________________________________________________________________________
+/* this class is purely virtual
 S_msrRepeatElement msrRepeatElement::create (
   const mfInputLineNumber& inputLineNumber,
   msrSegmentKind           segmentKind)
@@ -119,6 +120,7 @@ S_msrRepeatElement msrRepeatElement::create (
 
   return obj;
 }
+*/
 
 msrRepeatElement::msrRepeatElement (
   const mfInputLineNumber& inputLineNumber,
@@ -197,9 +199,9 @@ void msrRepeatElement::appendMeasureToRepeatElement (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-static int n = 0;
-++n;
-if (n == 2) abort ();
+// static int n = 0;
+// ++n;
+// if (n == 2) abort ();
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -432,85 +434,85 @@ void msrRepeatElement::browseData (basevisitor* v)
     browser.browse (*fRepeatElementSegment);
 }
 
-std::string msrRepeatElement::asString () const
-{
-  std::stringstream ss;
-
-  ss <<
-    "[??? RepeatElement ???]";
-
-  return ss.str ();
-}
-
-void msrRepeatElement::print (std::ostream& os) const
-{
-  os <<
-    "[RepeatElement" <<
-    ", line " << fInputLineNumber <<
-    std::endl;
-
-//   ++gIndenter;
+// std::string msrRepeatElement::asString () const
+// {
+//   std::stringstream ss;
 //
-//   // print the uplink to the repeat
+//   ss <<
+//     "[??? RepeatElement ???]";
+//
+//   return ss.str ();
+// }
+//
+// void msrRepeatElement::print (std::ostream& os) const
+// {
 //   os <<
-//     "fRepeatElementUpLinkToRepeat:";
+//     "[RepeatElement" <<
+//     ", line " << fInputLineNumber <<
+//     std::endl;
 //
-//   if (fRepeatElementUpLinkToRepeat) {
-//     ++gIndenter;
-//     os << fRepeatElementUpLinkToRepeat;
-//     --gIndenter;
-//   }
-//   else {
-//     os << " [NULL]";
-//   }
-//   os << std::endl;
+// //   ++gIndenter;
+// //
+// //   // print the uplink to the repeat
+// //   os <<
+// //     "fRepeatElementUpLinkToRepeat:";
+// //
+// //   if (fRepeatElementUpLinkToRepeat) {
+// //     ++gIndenter;
+// //     os << fRepeatElementUpLinkToRepeat;
+// //     --gIndenter;
+// //   }
+// //   else {
+// //     os << " [NULL]";
+// //   }
+// //   os << std::endl;
+// //
+// //   // print the segment
+// //   os <<
+// //     "fRepeatElementSegment: ";
+// //   ++gIndenter;
+// //   os << fRepeatElementSegment;
+// //   --gIndenter;
+// //
+// //   --gIndenter;
 //
-//   // print the segment
+//   os << ']' << std::endl;
+// }
+//
+// void msrRepeatElement::printFull (std::ostream& os) const
+// {
 //   os <<
-//     "fRepeatElementSegment: ";
-//   ++gIndenter;
-//   os << fRepeatElementSegment;
-//   --gIndenter;
+//     "[RepeatElement" <<
+//     ", line " << fInputLineNumber <<
+//     std::endl;
 //
-//   --gIndenter;
-
-  os << ']' << std::endl;
-}
-
-void msrRepeatElement::printFull (std::ostream& os) const
-{
-  os <<
-    "[RepeatElement" <<
-    ", line " << fInputLineNumber <<
-    std::endl;
-
-//   ++gIndenter;
+// //   ++gIndenter;
+// //
+// //   // print the uplink to the repeat
+// //   os <<
+// //     "fRepeatElementUpLinkToRepeat:";
+// //
+// //   if (fRepeatElementUpLinkToRepeat) {
+// //     ++gIndenter;
+// //     fRepeatElementUpLinkToRepeat->printFull (os);
+// //     --gIndenter;
+// //   }
+// //   else {
+// //     os << " [NULL]";
+// //   }
+// //   os << std::endl;
+// //
+// //   // print the segment
+// //   os <<
+// //     "fRepeatElementSegment: ";
+// //   ++gIndenter;
+// //   os << fRepeatElementSegment;
+// //   --gIndenter;
+// //
+// //   --gIndenter;
 //
-//   // print the uplink to the repeat
-//   os <<
-//     "fRepeatElementUpLinkToRepeat:";
-//
-//   if (fRepeatElementUpLinkToRepeat) {
-//     ++gIndenter;
-//     fRepeatElementUpLinkToRepeat->printFull (os);
-//     --gIndenter;
-//   }
-//   else {
-//     os << " [NULL]";
-//   }
-//   os << std::endl;
-//
-//   // print the segment
-//   os <<
-//     "fRepeatElementSegment: ";
-//   ++gIndenter;
-//   os << fRepeatElementSegment;
-//   --gIndenter;
-//
-//   --gIndenter;
-
-  os << ']' << std::endl;
-}
+//   os << ']' << std::endl;
+// }
 
 std::ostream& operator << (std::ostream& os, const S_msrRepeatElement& elt)
 {
@@ -1025,18 +1027,21 @@ void msrRepeatCommonPart::print (std::ostream& os) const
 {
   os <<
     "[RepeatCommonPart" <<
-    ", fRepeatElementUpLinkToRepeat: ";
-  if (fRepeatElementUpLinkToRepeat) {
-    os <<
-      asShortString () <<
     ", line " << fInputLineNumber <<
     std::endl;
-  }
-  else {
-    os << "[EMPTY]";
-  }
 
   ++gIndenter;
+
+  // print the uplink to repeat
+  os <<
+    "fRepeatElementUpLinkToRepeat: " <<
+    std::endl;
+
+  ++gIndenter;
+  os <<
+    fRepeatElementUpLinkToRepeat->asShortString () <<
+    std::endl;
+  --gIndenter;
 
   // print the segment
   os <<
@@ -1836,6 +1841,34 @@ S_msrRepeat msrRepeat::create (
       repeatTimes);
   assert (obj != nullptr);
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating repeat" <<
+      obj->asString () <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return obj;
+}
+
+S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
+  const mfInputLineNumber& inputLineNumber,
+  int                      repeatTimes)
+{
+  msrRepeat* obj =
+    new msrRepeat (
+      inputLineNumber,
+      repeatTimes);
+  assert (obj != nullptr);
+
   // create the repeat common part
   S_msrRepeatCommonPart
     repeatCommonPart =
@@ -1866,6 +1899,21 @@ S_msrRepeat msrRepeat::create (
 }
 
 S_msrRepeat msrRepeat::create (
+  const mfInputLineNumber& inputLineNumber,
+  int                      repeatTimes,
+  const S_msrVoice&        upLinkToVoice)
+{
+  msrRepeat* obj =
+    new msrRepeat (
+      inputLineNumber,
+      repeatTimes,
+      upLinkToVoice);
+  assert (obj != nullptr);
+
+  return obj;
+}
+
+S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
   const mfInputLineNumber& inputLineNumber,
   int                      repeatTimes,
   const S_msrVoice&        upLinkToVoice)
@@ -2775,7 +2823,8 @@ void msrRepeat::print (std::ostream& os) const
 {
   os <<
     "[Repeat" <<
-    ", fRepeatTimes: " << fRepeatTimes <<
+    ", fRepeatTimes: " <<
+    fRepeatTimes <<
     ", fRepeatExplicitStartKind: " <<
     fRepeatExplicitStartKind <<
 //     ", fCurrentRepeatBuildPhaseKind: " <<
