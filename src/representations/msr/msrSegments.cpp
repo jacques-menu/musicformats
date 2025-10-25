@@ -1594,11 +1594,13 @@ void msrSegment::cascadeAppendFiguredBassesListToSegment (
 #endif // MF_TRACE_IS_ENABLED
 
   // append the figured basses to this segment
+  ++gIndenter;
   fSegmentLastMeasure->
     cascadeAppendFiguredBassesListToMeasure (
       inputLineNumber,
       figuredBasssesList,
       positionInMeasureToAppendAt);
+  --gIndenter;
 }
 
 void msrSegment::appendFiguredBassToSegmentClone (
@@ -2372,16 +2374,18 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
 
   if (! fSegmentMeasuresList.empty ()) { // JMI BOFBOF 0.9.67
     // append a padding note to the segment's last measure
+    ++gIndenter;
     fSegmentLastMeasure->
       appendPaddingSkipNoteToMeasure ( // JMI why not a rest??? 0.9.67
         inputLineNumber,
         forwardStepLength);
+    --gIndenter;
   }
 
   --gIndenter;
 }
 
-void msrSegment::cascadeAppendMultipleMeasureRestToSegment (
+void msrSegment::cascadeAppendMultipleMeasureRestToSegment ( // BIBI
   const S_msrMultipleMeasureRest& multipleMeasureRest)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3405,8 +3409,6 @@ void msrSegment::print (std::ostream& os) const
 {
   os <<
     "[Segment" <<
-    ", fSegmentKind: " <<
-    fSegmentKind <<
     ", fSegmentNumber: " <<
     fSegmentNumber <<
     ", " <<
@@ -3417,11 +3419,14 @@ void msrSegment::print (std::ostream& os) const
 
   ++gIndenter;
 
-  os << std::endl;
-
   constexpr int fieldWidth = 20;
 
   os <<
+    std::setw (fieldWidth) <<
+    "fSegmentKind" << ": " <<
+    fSegmentKind<<
+    std::endl <<
+
     std::setw (fieldWidth) <<
     "fSegmentAbsoluteNumber" << ": " <<
     fSegmentAbsoluteNumber<<
@@ -3495,7 +3500,7 @@ void msrSegment::print (std::ostream& os) const
 
   else {
      os <<
-      "[EMPTY]" <<
+      " [EMPTY]" <<
       std::endl;
   }
 
@@ -3635,7 +3640,7 @@ void msrSegment::printFull (std::ostream& os) const
 
   else {
      os <<
-      "[EMPTY]" <<
+      " [EMPTY]" <<
       std::endl;
   }
 

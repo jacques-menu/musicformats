@@ -561,7 +561,7 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 }
 */
 
-void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
+void msrStaff::cascadeCreateAMeasureAndAppendItInStaff ( // BIBI
   const mfInputLineNumber& inputLineNumber,
   int                      previousMeasureEndInputLineNumber,
   const mfMeasureNumber&   measureNumber,
@@ -653,10 +653,12 @@ void msrStaff::cascadeNetNextMeasureNumberInStaff (
     }
 #endif // MF_TRACE_IS_ENABLED
 
+    ++gIndenter;
     voice->
       cascadeNetNextMeasureNumberInVoice (
         inputLineNumber,
         nextMeasureNumber);
+    --gIndenter;
   } // for
 
   --gIndenter;
@@ -2437,10 +2439,11 @@ void msrStaff::cascadeHandleRepeatStartInStaff (
   ++gIndenter;
 
   // cascade it to all voices
-  for (S_msrVoice voice : fStaffAllVoicesList) {
+    ++gIndenter;
     voice->
       handleRepeatStartInVoice (
         inputLineNumber);
+    --gIndenter;
   } // for
 
   --gIndenter;
@@ -2472,11 +2475,13 @@ void msrStaff::cascadeHandleRepeatEndInStaff (
 
   // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
+    ++gIndenter;
     voice->
       handleRepeatEndInVoice (
         inputLineNumber,
         measureNumber,
         repeatTimes);
+    --gIndenter;
   } // for
 
   --gIndenter;
@@ -2506,9 +2511,11 @@ void msrStaff::cascadeHandleRepeatEndingStartInStaff (
 
   // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
+    ++gIndenter;
     voice->
       handleRepeatEndingStartInVoice (
         inputLineNumber);
+    --gIndenter;
   } // for
 
   --gIndenter;
@@ -2543,11 +2550,13 @@ void msrStaff::cascadeHandleRepeatEndingEndInStaff (
 
   // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
+    ++gIndenter;
     voice->
       handleRepeatEndingEndInVoice (
         inputLineNumber,
         repeatEndingNumber,
         repeatEndingKind);
+    --gIndenter;
   } // for
 
   --gIndenter;
@@ -2614,11 +2623,13 @@ void msrStaff::cascadeCreateAMeasureRepeatAndAppendItToStaff (
 
   // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
+    ++gIndenter;
     voice->
       cascadeCreateAMeasureRepeatAndAppendItToVoice (
         inputLineNumber,
         measureRepeatMeasuresNumber,
         measureRepeatSlashesNumber);
+    --gIndenter;
   } // for
 }
 
@@ -2679,12 +2690,14 @@ void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
 
   // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
+    ++gIndenter;
     voice->
       createAMultipleMeasureRestAndAppendItToVoice (
         inputLineNumber,
         multipleMeasureRestMeasuresNumber,
         multipleMeasureRestSlashesNumber,
         multipleMeasureRestUseSymbolsKind);
+    --gIndenter;
   } // for
 }
 
@@ -2747,11 +2760,13 @@ void msrStaff::cascadeAppendEmptyMeasuresToStaff (
 
   // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
+    ++gIndenter;
     voice->
       appendEmptyMeasuresToVoice (
         inputLineNumber,
         previousMeasureNumber,
         emptyMeasuresNumber);
+    --gIndenter;
   } // for
 }
 
@@ -3080,7 +3095,7 @@ void msrStaff::appendHarpPedalsTuningToStaff (
   } // for
 }
 
-void msrStaff::cascadeFinalizeLastAppendedMeasureInStaff (
+void msrStaff::cascadeFinalizeLastAppendedMeasureInStaff ( // BIBI
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED

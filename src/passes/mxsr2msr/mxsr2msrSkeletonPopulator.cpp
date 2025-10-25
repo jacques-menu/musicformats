@@ -12470,7 +12470,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
             msrBarLineCategoryKind::kBarLineCategoryRepeatStart);
 
         // handle the repeat start
-        handleRepeatStart (barLine);
+        handleRepeatStart (barLine); // JMI ZOULOU
 
         barLineHasBeenHandled = true;
       }
@@ -26707,7 +26707,7 @@ void mxsr2msrSkeletonPopulator::handleImplicitInitialForwardRepeat (
   // remember repeat start measure number
   fCurrentRepeatStartMeasureNumber = fCurrentMeasureNumber; // JMI 0.9.75
 
-  // prepare for repeat in current part
+  // prepare for repeat in current part // JMI ZOULOU
   fCurrentPart->
     cascadeHandleRepeatStartInPart (
       inputLineNumber);
@@ -26741,7 +26741,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
   // remember repeat start measure number
 //   fCurrentRepeatStartMeasureNumber = barLine->getInputLineNumber (); // JMI 0.9.75
 
-  // prepare for repeat in current part
+  // prepare for repeat in current part // JMI ZOULOU
   fCurrentPart->
     cascadeHandleRepeatStartInPart (
       barLine->getInputLineNumber ());

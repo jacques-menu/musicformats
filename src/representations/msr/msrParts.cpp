@@ -806,12 +806,14 @@ void msrPart::cascadeCreateAMeasureAndAppendItInPart (
   // create and append measure in all the staves
   if (! fPartAllStavesList.empty ()) {
     for (S_msrStaff staff : fPartAllStavesList) {
+      ++gIndenter;
       staff->
         cascadeCreateAMeasureAndAppendItInStaff (
           inputLineNumber,
           previousMeasureEndInputLineNumber,
           measureNumber,
           measureImplicitKind);
+      --gIndenter;
     } // for
   }
 
@@ -843,10 +845,12 @@ void msrPart::cascadeNetNextMeasureNumberInPart (
 
   // set next measure number in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
+    ++gIndenter;
     staff->
       cascadeNetNextMeasureNumberInStaff (
         inputLineNumber,
         nextMeasureNumber);
+    --gIndenter;
   } // for
 
   --gIndenter;
@@ -1632,9 +1636,11 @@ void msrPart::cascadeHandleRepeatStartInPart (
 
   // cascade to all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
+    ++gIndenter;
     staff->
       cascadeHandleRepeatStartInStaff (
         inputLineNumber);
+    --gIndenter;
   } // for
 
   --gIndenter;
@@ -1696,9 +1702,11 @@ void msrPart::cascadeHandleRepeatEndingStartInPart (
 
   // cascade to all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
+    ++gIndenter;
     staff->
       cascadeHandleRepeatEndingStartInStaff (
         inputLineNumber);
+    --gIndenter;
   } // for
 
   --gIndenter;
@@ -1731,11 +1739,12 @@ void msrPart::cascadeHandleRepeatEndingEndInPart (
 
   // cascade to all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
-    staff->
+      ++gIndenter;
       cascadeHandleRepeatEndingEndInStaff (
         inputLineNumber,
         repeatEndingNumber,
         repeatEndingKind);
+      --gIndenter;
   } // for
 
   --gIndenter;
@@ -1826,11 +1835,13 @@ void msrPart::cascadeCreateAMeasureRepeatAndAppendItToPart (
 {
   // create measures repeat in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
+    ++gIndenter;
     staff->
       cascadeCreateAMeasureRepeatAndAppendItToStaff (
         inputLineNumber,
         measureRepeatMeasuresNumber,
         measureRepeatSlashesNumber);
+    --gIndenter;
   } // for
 }
 
@@ -1873,12 +1884,14 @@ void msrPart::cascadeAppendMultipleMeasureRestToPart (
 
   // create multiple rest in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
+    ++gIndenter;
     staff->
       cascadeAppendMultipleMeasureRestToStaff (
         inputLineNumber,
         multipleMeasureRestSlashesNumber,
         multipleMeasureRestMeasuresNumber,
         multipleMeasureRestUseSymbolsKind);
+    --gIndenter;
   } // for
 }
 
@@ -1936,11 +1949,13 @@ void msrPart::cascadeAppendEmptyMeasuresToPart (
 
   // add multiple rest to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
+    ++gIndenter;
     staff->
       cascadeAppendEmptyMeasuresToStaff (
         inputLineNumber,
         previousMeasureNumber,
         measureRestsNumber);
+    --gIndenter;
   } // for
 }
 
@@ -2666,11 +2681,13 @@ void msrPart::cascadeAppendFiguredBassesListToPart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  ++gIndenter;
   fPartHarmoniesVoice->
     cascadeAppendFiguredBassesListToVoice (
       inputLineNumber,
       figuredBasssesList,
       positionInMeasureToAppendAt);
+  --gIndenter;
 }
 
 S_msrVoice msrPart::createPartFiguredBassVoice (
@@ -3061,9 +3078,11 @@ void msrPart::cascadeFinalizeLastAppendedMeasureInPart (
 
   // finalize current measure in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
+    ++gIndenter;
     staff->
       cascadeFinalizeLastAppendedMeasureInStaff (
         inputLineNumber);
+    --gIndenter;
   } // for
 
   --gIndenter;

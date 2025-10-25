@@ -123,9 +123,6 @@ msrMeasure::msrMeasure (
 
   fMeasurePuristNumber = -1; // default irrealist value
 
-  // set debug number
-  fMeasureDebugNumber = ++sGlobalMeasureDebugNumber;
-
   // do other initializations
   initializeMeasure ();
 }
@@ -153,9 +150,6 @@ msrMeasure::msrMeasure (
   fMeasureOrdinalNumberInVoice = -1;
 
   fMeasurePuristNumber = -1; // default irrealist value
-
-  // set debug number
-  fMeasureDebugNumber = ++sGlobalMeasureDebugNumber;
 
   // get segment uplink to voice
     S_msrVoice segmentUpLinkToVoice;
@@ -211,6 +205,9 @@ void msrMeasure::initializeMeasure ()
     }
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  // set debug number
+  fMeasureDebugNumber = ++sGlobalMeasureDebugNumber;
 
   // measure kind
   fMeasureKind = msrMeasureKind::kMeasureKindUnknown;
@@ -1357,6 +1354,11 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       __FILE__, mfInputLineNumber (__LINE__),
       ss.str ());
 
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasures ()) {
     displayMeasure (
       elem->getInputLineNumber (),
       "appendElementAtTheEndOfMeasure() 2");
@@ -3674,9 +3676,11 @@ void msrMeasure::cascadeAppendFiguredBassesListToMeasure (
 
   // append the figured basses to the measure elements list without padUp
   for (S_msrFiguredBass figuredBass : figuredBasssesList) {
+    ++gIndenter;
     appendFiguredBassToMeasureWithoutPadUp (
       inputLineNumber,
       figuredBass);
+    --gIndenter;
   } // for
 
   --gIndenter;
@@ -7387,66 +7391,16 @@ void msrMeasure::finalizeMeasure (
         getSegmentUpLinkToVoice ();
   }
 
- if (fMeasureHasBeenFinalized) {
-    // measure has already been finalized
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fMeasureHasBeenFinalized,
+    "measure has already been finalized");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-// #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
-//     if (
-//       gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
-//     ) {
-// #ifdef MF_TRACE_IS_ENABLED
-//       if (true || gTraceOahGroup->getTraceMeasures ()) {
-//         std::stringstream ss;
-//
-//         ss <<
-//           "### MAINTAINANCE ### -- " <<
-//           "Attempt at finalizing measure " <<
-//           this->asShortString () <<
-//           " more than once in segment " <<
-//           fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-//           "', context: " << context <<
-//           "', measureFinalizationContext: " << fMeasureFinalizationContext <<
-//           " in voice " <<
-//           fetchVoiceName (segmentUpLinkToVoice) <<
-//           " (context: " << context << ")" <<
-//           ", line " << inputLineNumber;
-//
-//         if (gTraceOahGroup->getTraceMeasuresDetails ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             std::endl <<
-//             ss.str () <<
-//             std::endl << std::endl;
-//
-//           S_msrStaff
-//             staff =
-//               fetchMeasureUpLinkToStaff ();
-//
-//           ss <<
-//             "staff:" <<
-//             std::endl;
-//
-//           ++gIndenter;
-//           ss << staff;
-//           ss << std::endl;
-//           --gIndenter;
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, mfInputLineNumber (__LINE__),
-//             ss.str ());
-//         }
-//
-//   //     msrInternalError ( // JMI 0.9.70
-//         msrInternalWarning (
-//           gServiceRunData->getInputSourceName (),
-//           fInputLineNumber,
-//     //       __FILE__, mfInputLineNumber (__LINE__),
-//           ss.str ());
-//       }
-// #endif // MF_TRACE_IS_ENABLED
-//     }
-// #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
+  if (fMeasureHasBeenFinalized) {
+    // nothing to do
   }
 
   else {
@@ -7474,6 +7428,7 @@ void msrMeasure::finalizeMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
 //     gLog <<
+//       "FOFOFSOfs" <<
 //       std::endl <<
 //       this <<
 //       std::endl;
@@ -7506,7 +7461,7 @@ void msrMeasure::finalizeMeasure (
     }
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (true || gTraceOahGroup->getTraceMeasuresDetails ()) {
+    if (gTraceOahGroup->getTraceMeasuresDetails ()) {
       displayMeasure (
         inputLineNumber,
         "finalizeMeasure() 1");

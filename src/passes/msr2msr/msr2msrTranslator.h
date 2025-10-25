@@ -687,20 +687,26 @@ class EXP msr2msrTranslator :
     // segments
     // ------------------------------------------------------
 
-//     std::list <S_msrSegment>  fSegmentClonesStack;
+    std::list <S_msrSegment>  fSegmentsStack;
 
-//     void                      displaySegmentClonesStack (
-//                                 const mfInputLineNumber& inputLineNumber,
-//                                 const std::string&       context);
+    void                      pushSegmentOntoSegmentsStack (
+                                const mfInputLineNumber&  inputLineNumber,
+                                const S_msrSegment&       segment);
 
+    S_msrSegment              popSegmentFromSegmentsStack (
+                                const mfInputLineNumber& inputLineNumber);
+
+    void                      displaySegmentsStack (
+                                const mfInputLineNumber& inputLineNumber,
+                                const std::string&       context);
 
     // measures
     // ------------------------------------------------------
 
     mfMeasureNumber           fCurrentMeasureNumber;
-    std::list <S_msrMeasure>  fMeasureClonesStack;
+    std::list <S_msrMeasure>  fMeasuresStack;
 
-    void                      displayMeasureClonesStack (
+    void                      displayMeasuresStack (
                                 const mfInputLineNumber& inputLineNumber,
                                 const std::string&       context);
 
@@ -709,33 +715,27 @@ class EXP msr2msrTranslator :
     // ------------------------------------------------------
 
     // a stack is needed to handle pending repeats, which can be nested
-    std::list <S_msrRepeat>   fRepeatClonesStack;
-
-    std::list <S_msrRepeatElement>
-                              fRepeatElementsStack;
-
-    void                      pushRepeatOntoRepeatElementsStack (
-                                const mfInputLineNumber&  inputLineNumber,
-                                const S_msrRepeatElement& repeatElement);
-
-    S_msrRepeatElement        popRepeatFromRepeatElementsStack (
-                                const mfInputLineNumber& inputLineNumber);
+    std::list <S_msrRepeat>   fRepeatsStack;
 
     S_msrRepeat               createARepeatCloneAndStackIt (
                                 const mfInputLineNumber& inputLineNumber,
                                 const std::string&       context);
 
-    void                      pushRepeatOntoRepeatClonesStack (
+    void                      pushRepeatOntoRepeatsStack (
                                 const mfInputLineNumber& inputLineNumber,
                                 const S_msrRepeat&       repeat,
                                 const std::string&       context);
 
-    void                      popRepeatFromRepeatClonesStack (
+    void                      popRepeatFromRepeatsStack (
                                 const mfInputLineNumber& inputLineNumber,
                                 const std::string&       context);
 
-    void                      handleVoiceLevelRepeatStart (
-                                const mfInputLineNumber& inputLineNumber);
+    void                      displayRepeatsStack (
+                                const mfInputLineNumber& inputLineNumber,
+                                const std::string&       context);
+
+//     void                      handleVoiceLevelRepeatStart (
+//                                 const mfInputLineNumber& inputLineNumber);
 
     void                      handleNestedRepeatStartInVoice (
                                 const mfInputLineNumber& inputLineNumber);
@@ -745,9 +745,18 @@ class EXP msr2msrTranslator :
                                 const mfMeasureNumber&   measureNumber,
                                 int                      repeatTimes);
 
-    void                      displayRepeatClonesStack (
-                                const mfInputLineNumber& inputLineNumber,
-                                const std::string&       context);
+    // repeats elements
+    // ------------------------------------------------------
+
+    std::list <S_msrRepeatElement>
+                              fRepeatElementsStack;
+
+    void                      pushRepeatElementOntoRepeatElementsStack (
+                                const mfInputLineNumber&  inputLineNumber,
+                                const S_msrRepeatElement& repeatElement);
+
+    S_msrRepeatElement        popRepeatElementFromRepeatElementsStack (
+                                const mfInputLineNumber& inputLineNumber);
 
 
     // multiple measure rests
@@ -895,7 +904,7 @@ class EXP msr2msrTranslator :
     // ------------------------------------------------------
 //    const S_msrTuplet&             fCurrentTupletClone;
  //   Bool                      fOnGoingTuplet;
-    std::list <S_msrTuplet>   fTupletClonesStack;
+    std::list <S_msrTuplet>   fTupletsStack;
 
 
     // slurs

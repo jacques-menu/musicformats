@@ -152,6 +152,10 @@ class EXP msrRepeatElement: public msrElement
 
     // elements list
     S_msrSegment          fRepeatElementSegment;
+
+    // debug number
+    static int            sGlobalRepeatElementDebugNumber;
+    int                   fRepeatElementDebugNumber;
 };
 
 using S_msrRepeatElement = SMARTP<msrRepeatElement>;
@@ -474,19 +478,41 @@ class EXP msrRepeat : public msrSegmentElement
                             const mfInputLineNumber& inputLineNumber,
                             int                      repeatTimes);
 
-    static SMARTP<msrRepeat> createAsWellAsItsCommonPart (
-                            const mfInputLineNumber& inputLineNumber,
-                            int                      repeatTimes);
+    static SMARTP<msrRepeat> create (
+                            const mfInputLineNumber&   inputLineNumber,
+                            int                        repeatTimes,
+                            msrRepeatExplicitStartKind repeatExplicitStartKind);
 
     static SMARTP<msrRepeat> create (
                             const mfInputLineNumber& inputLineNumber,
                             int                      repeatTimes,
                             const S_msrVoice&        upLinkToVoice);
 
+    static SMARTP<msrRepeat> create (
+                            const mfInputLineNumber& inputLineNumber,
+                            int                        repeatTimes,
+                            msrRepeatExplicitStartKind repeatExplicitStartKind,
+                            const S_msrVoice&          upLinkToVoice);
+
+    static SMARTP<msrRepeat> createAsWellAsItsCommonPart (
+                            const mfInputLineNumber& inputLineNumber,
+                            int                      repeatTimes);
+
+    static SMARTP<msrRepeat> createAsWellAsItsCommonPart (
+                            const mfInputLineNumber&   inputLineNumber,
+                            int                        repeatTimes,
+                            msrRepeatExplicitStartKind repeatExplicitStartKind);
+
     static SMARTP<msrRepeat> createAsWellAsItsCommonPart (
                             const mfInputLineNumber& inputLineNumber,
                             int                      repeatTimes,
                             const S_msrVoice&        upLinkToVoice);
+
+    static SMARTP<msrRepeat> createAsWellAsItsCommonPart (
+                            const mfInputLineNumber& inputLineNumber,
+                            int                        repeatTimes,
+                            msrRepeatExplicitStartKind repeatExplicitStartKind,
+                            const S_msrVoice&          upLinkToVoice);
 
     SMARTP<msrRepeat>     createRepeatNewbornClone (
                             const S_msrVoice& containingVoice);
@@ -693,6 +719,10 @@ class EXP msrRepeat : public msrSegmentElement
     // repeat build phase, used when building the repeat JMI ???
     msrRepeatBuildPhaseKind
                           fCurrentRepeatBuildPhaseKind;
+
+    // debug number
+    static int            sGlobalRepeatDebugNumber;
+    int                   fRepeatDebugNumber;
 };
 
 using S_msrRepeat = SMARTP<msrRepeat>;
