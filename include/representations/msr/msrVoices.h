@@ -939,10 +939,10 @@ class EXP msrVoice : public msrElement
 
     // repeats
 
-    S_msrRepeat           createARepeatAndStackIt (
-                            const mfInputLineNumber&   inputLineNumber,
-                            msrRepeatExplicitStartKind repeatExplicitStartKind,
-                            const std::string&         context);
+//     S_msrRepeat           createARepeatAndStackIt (
+//                             const mfInputLineNumber&   inputLineNumber,
+//                             msrRepeatExplicitStartKind repeatExplicitStartKind,
+//                             const std::string&         context);
 
 //     S_msrRepeat           createARepeatCloneAndStackIt (
 //                             const mfInputLineNumber& inputLineNumber,

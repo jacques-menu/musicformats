@@ -913,12 +913,12 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     // pitch kind
-    std::string           noteDiatonicPitchKindAsString (
+    std::string           fetchNoteDiatonicPitchKindAsString (
                             const mfInputLineNumber& inputLineNumber) const;
 
     std::string           notePitchAsString () const;
 
-    std::string           noteDisplayPitchKindAsString () const;
+    std::string           fetchNoteDisplayPitchKindAsString () const;
 
     // whole notes
     std::string           noteSoundingWholeNotesPitchAndOctaveAsString () const;

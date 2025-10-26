@@ -4406,9 +4406,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
 
       ss <<
         "Replace clef " <<
-        msrClefKindAsString (clefKind) <<
+        clefKind <<
         " by " <<
-        msrClefKindAsString (newClefKind) <<
+        newClefKind <<
         ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
@@ -7141,10 +7141,9 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 
         ss <<
           "Creating words \"" << wordsValue << "\"" <<
-          ", placement: \"" <<
-          msrPlacementKindAsString (
-            fCurrentDirectionPlacementKind) <<
-              ", line " << elt->getInputLineNumber ();
+          ", fCurrentDirectionPlacementKind: " <<
+          fCurrentDirectionPlacementKind <<
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -8885,8 +8884,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_tuning& elt)
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentStaffTuningAlteration" << ": " <<
-      msrAlterationKindAsString (
-        fCurrentStaffTuningAlterationKind) <<
+      fCurrentStaffTuningAlterationKind <<
       std::endl <<
       std::setw (fieldWidth) <<
       "quarterTonesPitch" << ": " <<
@@ -8897,7 +8895,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_tuning& elt)
       std::endl <<
       std::setw (fieldWidth) <<
       "currentStaffTuningOctaveKind" << ": " <<
-      msrOctaveKindAsString (fCurrentStaffTuningOctaveKind) <<
+      fCurrentStaffTuningOctaveKind <<
       std::endl;
 
     --gIndenter;
@@ -9756,12 +9754,10 @@ The values of start, stop, and continue refer to how an
           "visitStart (S_slur&)"
           ", slurNumber: " <<
           slurNumber <<
-          ", slurTypeKind: " <<
-          msrSlurTypeKindAsString (
-            fCurrentSlurTypeKind) <<
-          ", slurLineType: " <<
-          msrLineTypeKindAsString (
-            slurLineTypeKind);
+          ", fCurrentSlurTypeKind: " <<
+          fCurrentSlurTypeKind <<
+          ", slurLineTypeKind: " <<
+          slurLineTypeKind;
 
         gWaeHandler->waeTrace (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -10673,7 +10669,7 @@ void mxsr2msrSkeletonPopulator::displayGatheredLyricInformations (
 
     std::setw (fieldWidth) <<
     "fCurrentSlurTypeKind" << ": \"" <<
-    msrSlurTypeKindAsString (fCurrentSlurTypeKind) <<
+    fCurrentSlurTypeKind <<
     "\"" <<
     std::endl <<
 
@@ -16409,9 +16405,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
           ", " <<
           mfSingularOrPlural (
             tremoloMarksNumber, "mark", "marks") <<
-          ", placement : " <<
-          msrPlacementKindAsString (
-            singleTremoloPlacementKind);
+          ", singleTremoloPlacementKind : " <<
+          singleTremoloPlacementKind;
 
         gWaeHandler->waeTrace (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -16446,9 +16441,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
             ", " <<
             mfSingularOrPlural (
               tremoloMarksNumber, "mark", "marks") <<
-            ", placement : " <<
-            msrPlacementKindAsString (
-              doubleTremoloPlacementKind);
+            ", doubleTremoloPlacementKind : " <<
+            doubleTremoloPlacementKind;
 
           gWaeHandler->waeTrace (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -20422,7 +20416,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentOrnamentsToCurrentNote ()
 
       ss <<
         "Attaching ornament " <<
-        msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
+        ornament->getOrnamentKind () <<
         " to note " << fCurrentNote->asString () <<
         std::endl;
 
@@ -28902,8 +28896,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_pedal_tuning& elt)
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentHarpPedalAlteration" << ": " <<
-      msrAlterationKindAsString (
-        fCurrentHarpPedalAlterationKind) <<
+      fCurrentHarpPedalAlterationKind <<
       std::endl;
 
     --gIndenter;

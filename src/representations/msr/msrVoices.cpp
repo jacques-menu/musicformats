@@ -497,7 +497,7 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of voice " <<
+      "Creating a voice newborn clone of " <<
       fVoiceName;
 
     gWaeHandler->waeTrace (
@@ -1381,7 +1381,7 @@ void msrVoice::setVoiceLastAppendedMeasure (
   fVoiceLastAppendedMeasure = measure;
 }
 
-void msrVoice::cascadeNetNextMeasureNumberInVoice ( // BIBI
+void msrVoice::cascadeNetNextMeasureNumberInVoice ( // cascade bottom
   const mfInputLineNumber& inputLineNumber,
   const mfMeasureNumber&   nextMeasureNumber)
 {
@@ -1614,8 +1614,7 @@ void msrVoice::setCurrentVoiceRepeatPhaseKind (
 
     ss <<
       "Setting voice current after repeat component phase kind to " <<
-      msrVoiceRepeatPhaseKindAsString (
-        afterRepeatComponentPhaseKind) <<
+     afterRepeatComponentPhaseKind <<
  // JMI     " (" << context << ")" <<
       " in voice " <<
       fVoiceName <<
@@ -2776,7 +2775,7 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
 //   }
 // }
 
-void msrVoice::cascadeAppendHarmonyToVoice ( // BIBI
+void msrVoice::cascadeAppendHarmonyToVoice ( // cascade bottom
   const mfInputLineNumber& inputLineNumber,
   const S_msrHarmony&        harmony,
   const mfPositionInMeasure& positionInMeasureToAppendAt)
@@ -2873,7 +2872,7 @@ void msrVoice::appendHarmoniesListToVoice (
       positionInMeasureToAppendAt);
 }
 
-void msrVoice::cascadeAppendHarmonyToVoiceClone ( // BIBI
+void msrVoice::cascadeAppendHarmonyToVoiceClone ( // cascade bottom
   const S_msrHarmony& harmony)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4309,6 +4308,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
   S_msrRepeat
     result =
       msrRepeat::createAsWellAsItsCommonPart (
+//       msrRepeat::create ( // ZOULOU ZOULOU
         inputLineNumber,
         2, // repeatTimes, default value JMI
         this);
@@ -4817,7 +4817,7 @@ void msrVoice::moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart (
 //     repeat);
 // }
 
-// void msrVoice::cascadeAppendMultipleMeasureRestToInitialVoiceElementsList ( // BIBI
+// void msrVoice::cascadeAppendMultipleMeasureRestToInitialVoiceElementsList ( // cascade bottom
 //   const mfInputLineNumber&        inputLineNumber,
 //   const S_msrMultipleMeasureRest& multipleMeasureRest,
 //   const std::string&              context)
@@ -6205,8 +6205,54 @@ void msrVoice::handleVoiceLevelRepeatStart (
     newRepeat =
       createARepeatAndStackIt (
         inputLineNumber,
-        msrRepeatExplicitStartKind::kRepeatExplicitStartNo, // JMI ZOULOU pass it as a parameter???
+        msrRepeatExplicitStartKind::kRepeatExplicitStartNo, // JMI  // ZOULOU ZOULOU pass it as a parameter???
         "handleVoiceLevelRepeatStart() 10");
+
+
+
+// ZOULOU ZOULOU
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeats ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a repeat and stacking it in voice " <<
+      fVoiceName <<
+      " (" << context << ")" <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  S_msrRepeat
+    result =
+      msrRepeat::createAsWellAsItsCommonPart (
+//       msrRepeat::create ( // ZOULOU ZOULOU
+        inputLineNumber,
+        2, // repeatTimes, default value JMI
+        this);
+
+  // push it onto the voice's repeat descrs stack
+  pushRepeatOntoVoiceRepeatsStack (
+    inputLineNumber,
+    result,
+    "createARepeatAndStackIt()");
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+    displayVoiceRepeatsStackSummary (
+      inputLineNumber,
+      "createARepeatAndStackIt()");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+
+
+
 
   // create the repeat common part
 #ifdef MF_TRACE_IS_ENABLED
@@ -6224,17 +6270,17 @@ void msrVoice::handleVoiceLevelRepeatStart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  S_msrRepeatCommonPart
-    repeatCommonPart =
-      msrRepeatCommonPart::createAsWellAsItsSegment (
-        inputLineNumber,
-        newRepeat);
-
-  // register it in newRepeat
-  newRepeat->
-    setRepeatCommonPart (
-      repeatCommonPart);
-
+//   S_msrRepeatCommonPart
+//     repeatCommonPart =
+//       msrRepeatCommonPart::createAsWellAsItsSegment (
+//         inputLineNumber,
+//         newRepeat);
+//
+//   // register it in newRepeat
+//   newRepeat->
+//     setRepeatCommonPart (
+//       repeatCommonPart);
+//
   // set newRepeat as having an explicit start
   newRepeat->
     setRepeatExplicitStartKind (
@@ -7702,7 +7748,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
 //
 //                 ss <<
 //                   "Appending a " <<
-//                   msrRepeatEndingKindAsString (repeatEndingKind) <<
+//                  repeatEndingKind <<
 //                   " repeat ending to current repeat in voice " <<
 //                   fVoiceName;
 //
@@ -8006,7 +8052,7 @@ void msrVoice::finalizeRepeatEndInVoice (
 }
 */
 
-void msrVoice::cascadeCreateAMeasureRepeatAndAppendItToVoice ( // BIBI
+void msrVoice::cascadeCreateAMeasureRepeatAndAppendItToVoice ( // cascade bottom
   const mfInputLineNumber& inputLineNumber,
   int                      measureRepeatMeasuresNumber,
   int                      measureRepeatSlashesNumber)
@@ -10010,8 +10056,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
 
     ss <<
       "Appending a " <<
-      msrRepeatEndingKindAsString (
-        repeatEndingKind) <<
+      repeatEndingKind <<
       " repeat ending to current repeat in voice " <<
       fVoiceName;
 
@@ -10124,8 +10169,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
 
     ss <<
       "Appending a " <<
-      msrRepeatEndingKindAsString (
-        repeatEndingKind) <<
+      repeatEndingKind <<
       " repeat ending to current repeat in voice " <<
       fVoiceName;
 
@@ -10945,7 +10989,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
   } // switch
 }
 
-// void msrVoice::cascadeAppendMultipleMeasureRestToVoiceInitialElementsList ( // BIBI
+// void msrVoice::cascadeAppendMultipleMeasureRestToVoiceInitialElementsList ( // cascade bottom
 //   const S_msrMultipleMeasureRest& multipleMeasureRest)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -11018,8 +11062,7 @@ void msrVoice::appendRepeatEndingCloneToVoice ( // JMI
 
           ss <<
             "Appending a " <<
-            msrRepeatEndingKindAsString (
-              repeatEndingClone->getRepeatEndingKind ()) <<
+            repeatEndingClone->getRepeatEndingKind () <<
             " repeat ending clone to current repeat in voice " <<
             fVoiceName <<
                   std::endl;
@@ -11041,8 +11084,7 @@ void msrVoice::appendRepeatEndingCloneToVoice ( // JMI
 
           ss <<
             "repeats stack is empty when attempt at appending a " <<
-            msrRepeatEndingKindAsString (
-              repeatEndingClone->getRepeatEndingKind ()) <<
+            repeatEndingClone->getRepeatEndingKind () <<
             " repeat ending to voice " <<
             asShortString () <<
             " ";
@@ -12626,8 +12668,7 @@ void msrVoice::printFull (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fCurrentVoiceRepeatPhaseKind" << ": " <<
-    msrVoiceRepeatPhaseKindAsString (
-      fCurrentVoiceRepeatPhaseKind) <<
+    fCurrentVoiceRepeatPhaseKind <<
     std::endl;
 
   // print the voice first clef, and the current clef, key and time signature

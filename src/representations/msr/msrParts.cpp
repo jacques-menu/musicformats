@@ -782,7 +782,7 @@ void msrPart::cascadeCreateAMeasureAndAppendItInPart (
   msrMeasureImplicitKind measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1618,7 +1618,7 @@ void msrPart::cascadeHandleRepeatStartInPart (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1652,7 +1652,7 @@ void msrPart::cascadeHandleRepeatEndInPart (
   int                      repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1684,7 +1684,7 @@ void msrPart::cascadeHandleRepeatEndingStartInPart (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1718,13 +1718,12 @@ void msrPart::cascadeHandleRepeatEndingEndInPart (
   msrRepeatEndingKind repeatEndingKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
       "Cascading handling a " <<
-      msrRepeatEndingKindAsString (
-        repeatEndingKind) <<
+      repeatEndingKind <<
       " repeat ending end in part \"" <<
       fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
@@ -1739,12 +1738,13 @@ void msrPart::cascadeHandleRepeatEndingEndInPart (
 
   // cascade to all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
-      ++gIndenter;
+    ++gIndenter;
+    staff->
       cascadeHandleRepeatEndingEndInStaff (
         inputLineNumber,
         repeatEndingNumber,
         repeatEndingKind);
-      --gIndenter;
+    --gIndenter;
   } // for
 
   --gIndenter;
@@ -1863,7 +1863,7 @@ void msrPart::cascadeAppendMultipleMeasureRestToPart (
   msrUseSymbolsKind        multipleMeasureRestUseSymbolsKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2664,7 +2664,7 @@ void msrPart::cascadeAppendFiguredBassesListToPart (
                            positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBassesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2852,8 +2852,7 @@ void msrPart::appendFiguredBassToPart (
 //
 //         ss <<
 //           "figured bass cannot by appended to part by " <<
-//           msrVoiceKindAsString (
-//             figuredBassSupplierVoice->getVoiceKind ()) <<
+//           figuredBassSupplierVoice->getVoiceKind () <<
 //           " voice \" " <<
 //           figuredBassSupplierVoice->getVoiceName () <<
 //     //           ", line " << figuredBass->getInputLineNumber ();
@@ -2910,11 +2909,10 @@ void msrPart::appendFiguredBassToPartClone (
 
         ss <<
           "figured bass cannot by appended to part clone by " <<
-          msrVoiceKindAsString (
-            figuredBassSupplierVoice->getVoiceKind ()) <<
-          " voice \" " <<
+          figuredBassSupplierVoice->getVoiceKind () <<
+          " voice " <<
           figuredBassSupplierVoice->getVoiceName () <<
-              ", line " << figuredBass->getInputLineNumber ();
+          ", line " << figuredBass->getInputLineNumber ();
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),

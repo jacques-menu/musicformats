@@ -1137,7 +1137,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
   std::string
     referenceDiatonicPitchKindAsString =
       fCurrentOctaveEntryReference->
-        noteDiatonicPitchKindAsString (
+        fetchNoteDiatonicPitchKindAsString (
           note->getInputLineNumber ());
 
   msrOctaveKind

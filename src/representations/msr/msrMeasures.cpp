@@ -269,79 +269,6 @@ void msrMeasure::initializeMeasure ()
 msrMeasure::~msrMeasure ()
 {}
 
-S_msrVoice msrMeasure::fetchMeasureUpLinkToVoice () const
-{
-  S_msrVoice result;
-
-  if (fMeasureUpLinkToSegment) {
-    result =
-      fMeasureUpLinkToSegment->
-        getSegmentUpLinkToVoice ();
-  }
-
-  return result;
-}
-
-S_msrStaff msrMeasure::fetchMeasureUpLinkToStaff () const
-{
-  S_msrStaff result;
-
-  if (fMeasureUpLinkToSegment) {
-    result =
-      fMeasureUpLinkToSegment->
-        fetchSegmentUpLinkToStaff ();
-  }
-
-  return result;
-}
-
-S_msrPart msrMeasure::fetchMeasureUpLinkToPart () const
-{
-  S_msrPart result;
-
-  if (fMeasureUpLinkToSegment) {
-    result =
-      fMeasureUpLinkToSegment->
-        fetchSegmentUpLinkToPart ();
-  }
-
-  return result;
-}
-
-S_msrPartGroup msrMeasure::fetchMeasureUpLinkToPartGroup () const
-{
-  S_msrPartGroup result;
-
-  if (fMeasureUpLinkToSegment) {
-    result =
-      fMeasureUpLinkToSegment->
-        fetchSegmentUpLinkToPartGroup ();
-  }
-
-  return result;
-}
-
-S_msrScore msrMeasure::fetchMeasureUpLinkToScore () const
-{
-  S_msrScore result;
-
-  if (fMeasureUpLinkToSegment) {
-    result =
-      fMeasureUpLinkToSegment->
-        fetchSegmentUpLinkToScore ();
-  }
-
-  return result;
-}
-
-// void msrMeasure::appendMeasureElementToSegmentElement (
-//   const S_msrMeasureElement& elem) override
-// {
-//   appendMeasureElementToMeasure (
-//     elem,
-//     "appendMeasureElementToSegmentElement()");
-// } // JMI 0.9.66 ???
-
 S_msrMeasure msrMeasure::createMeasureNewbornClone ()
 {
   // create newborn clone
@@ -703,6 +630,79 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   return deepClone;
 }
 
+S_msrVoice msrMeasure::fetchMeasureUpLinkToVoice () const
+{
+  S_msrVoice result;
+
+  if (fMeasureUpLinkToSegment) {
+    result =
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
+  }
+
+  return result;
+}
+
+S_msrStaff msrMeasure::fetchMeasureUpLinkToStaff () const
+{
+  S_msrStaff result;
+
+  if (fMeasureUpLinkToSegment) {
+    result =
+      fMeasureUpLinkToSegment->
+        fetchSegmentUpLinkToStaff ();
+  }
+
+  return result;
+}
+
+S_msrPart msrMeasure::fetchMeasureUpLinkToPart () const
+{
+  S_msrPart result;
+
+  if (fMeasureUpLinkToSegment) {
+    result =
+      fMeasureUpLinkToSegment->
+        fetchSegmentUpLinkToPart ();
+  }
+
+  return result;
+}
+
+S_msrPartGroup msrMeasure::fetchMeasureUpLinkToPartGroup () const
+{
+  S_msrPartGroup result;
+
+  if (fMeasureUpLinkToSegment) {
+    result =
+      fMeasureUpLinkToSegment->
+        fetchSegmentUpLinkToPartGroup ();
+  }
+
+  return result;
+}
+
+S_msrScore msrMeasure::fetchMeasureUpLinkToScore () const
+{
+  S_msrScore result;
+
+  if (fMeasureUpLinkToSegment) {
+    result =
+      fMeasureUpLinkToSegment->
+        fetchSegmentUpLinkToScore ();
+  }
+
+  return result;
+}
+
+// void msrMeasure::appendMeasureElementToSegmentElement (
+//   const S_msrMeasureElement& elem) override
+// {
+//   appendMeasureElementToMeasure (
+//     elem,
+//     "appendMeasureElementToSegmentElement()");
+// } // JMI 0.9.66 ???
+
 S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
   const S_msrSegment& containingSegment,
   const mfMeasureNumber&  measureNumber)
@@ -966,7 +966,7 @@ void msrMeasure::setMeasureEndRegularKind (
         "Setting end regular kind of measure " <<
         fMeasureNumber <<
         " to " <<
-        msrMeasureEndRegularKindAsString (measureEndRegularKind) <<
+        measureEndRegularKind <<
         " in segment " <<
         fetchSegmentAsString (fMeasureUpLinkToSegment) <<
         " in voice " <<
@@ -3643,7 +3643,7 @@ void msrMeasure::cascadeAppendFiguredBassesListToMeasure (
   const mfPositionInMeasure&          positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBassesBasics ()) {
     std::stringstream ss;
 
     ss <<

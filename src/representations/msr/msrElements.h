@@ -53,11 +53,6 @@ class EXP msrElement : public smartable
 
     virtual               ~msrElement ();
 
-    virtual SMARTP<msrElement>
-                          createNewbornClone ();
-    virtual SMARTP<msrElement>
-                          createDeepClone ();
-
   public:
 
     // set and get

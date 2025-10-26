@@ -74,7 +74,7 @@ class EXP msrSingleTremolo : public msrElement
                                   notesDurationKind;
                               }
 
-    mfDurationKind  getSingleTremoloGraphicNotesDurationKind () const
+    mfDurationKind        getSingleTremoloGraphicNotesDurationKind () const
                               {
                                 return fSingleTremoloGraphicNotesDurationKind;
                               }

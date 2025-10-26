@@ -1186,26 +1186,22 @@ void msrTuplet::printFull (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fTupletBracketKind" << ": " <<
-    msrTupletBracketKindAsString (
-      fTupletBracketKind) <<
+    fTupletBracketKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fTupletLineShapeKind" << ": " <<
-    msrTupletLineShapeKindAsString (
-      fTupletLineShapeKind) <<
+    fTupletLineShapeKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fTupletShowNumberKind" << ": " <<
-    msrTupletShowNumberKindAsString (
-      fTupletShowNumberKind) <<
+    fTupletShowNumberKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fTupletShowTypeKind" << ": " <<
-    msrTupletShowTypeKindAsString (
-      fTupletShowTypeKind) <<
+    fTupletShowTypeKind <<
     std::endl <<
 
 //     std::setw (fieldWidth) <<

@@ -3654,9 +3654,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
     ss <<
       "Handling part group '" <<
       fCurrentPartGroupNumber <<
-      "', type: \"" <<
-      msrPartGroupTypeKindAsString (
-        fCurrentPartGroupTypeKind) << "\""  <<
+      "', type: " <<
+      fCurrentPartGroupTypeKind <<
       ", fCurrentPartGroupSequentialNumber: " <<
       fCurrentPartGroupSequentialNumber<<
       ", line " << elt->getInputLineNumber ();

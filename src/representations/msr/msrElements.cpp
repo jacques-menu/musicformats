@@ -39,16 +39,6 @@ msrElement::msrElement (
 msrElement::~msrElement ()
 {}
 
-SMARTP<msrElement> msrElement::createNewbornClone ()
-{
-  return this;
-}
-
-SMARTP<msrElement> msrElement::createDeepClone ()
-{
-  return createNewbornClone ();
-}
-
 void msrElement::browseDataAlongPathToVoice (
   basevisitor*            v,
   const S_msrPathToVoice& pathToVoice)

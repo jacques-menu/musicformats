@@ -561,14 +561,14 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 }
 */
 
-void msrStaff::cascadeCreateAMeasureAndAppendItInStaff ( // BIBI
+void msrStaff::cascadeCreateAMeasureAndAppendItInStaff ( // cascade bottom
   const mfInputLineNumber& inputLineNumber,
   int                      previousMeasureEndInputLineNumber,
   const mfMeasureNumber&   measureNumber,
   msrMeasureImplicitKind   measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -781,7 +781,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "Creating harmonies voice number '" <<
           voiceNumber <<
           "', voiceKind '" <<
-          msrVoiceKindAsString (voiceKind) <<
+          voiceKind <<
           "' in staff \"" << fStaffPathLikeName <<
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
@@ -804,7 +804,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "Creating figured bass voice number '" <<
           voiceNumber <<
           "', voiceKind '" <<
-          msrVoiceKindAsString (voiceKind) <<
+          voiceKind <<
           "' in staff \"" << fStaffPathLikeName <<
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
@@ -2420,7 +2420,7 @@ void msrStaff::cascadeHandleRepeatStartInStaff (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2439,6 +2439,7 @@ void msrStaff::cascadeHandleRepeatStartInStaff (
   ++gIndenter;
 
   // cascade it to all voices
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     ++gIndenter;
     voice->
       handleRepeatStartInVoice (
@@ -2455,7 +2456,7 @@ void msrStaff::cascadeHandleRepeatEndInStaff (
   int                      repeatTimes)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2491,7 +2492,7 @@ void msrStaff::cascadeHandleRepeatEndingStartInStaff (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2532,8 +2533,7 @@ void msrStaff::cascadeHandleRepeatEndingEndInStaff (
 
     ss <<
       "Cascading handling a " <<
-      msrRepeatEndingKindAsString (
-        repeatEndingKind) <<
+      repeatEndingKind <<
       " repeat ending end in staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
@@ -2606,7 +2606,7 @@ void msrStaff::cascadeCreateAMeasureRepeatAndAppendItToStaff (
   int                      measureRepeatSlashesNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2667,7 +2667,7 @@ void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
   msrUseSymbolsKind        multipleMeasureRestUseSymbolsKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -3032,7 +3032,7 @@ void msrStaff::appendStaffDetailsToStaff (
 
     ss <<
       "Setting staff kind to '" <<
-      msrStaffKindAsString (fStaffKind) <<
+      fStaffKind <<
       "' in staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
@@ -3095,7 +3095,7 @@ void msrStaff::appendHarpPedalsTuningToStaff (
   } // for
 }
 
-void msrStaff::cascadeFinalizeLastAppendedMeasureInStaff ( // BIBI
+void msrStaff::cascadeFinalizeLastAppendedMeasureInStaff ( // cascade bottom
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3980,7 +3980,7 @@ void msrStaff::printFull (std::ostream& os) const
 
       os <<
 //         "voiceKind: " << JMI
-//         msrVoiceKindAsString (voice->getVoiceKind ()) <<
+//         voice->getVoiceKind () <<
         "getRegularVoiceStaffSequentialNumber: " <<
         voice->getRegularVoiceStaffSequentialNumber () <<
         std::endl;
@@ -4028,7 +4028,7 @@ void msrStaff::printFull (std::ostream& os) const
 
       os <<
 //         "voiceKind: " << JMI
-//         msrVoiceKindAsString (voice->getVoiceKind ()) <<
+//         voice->getVoiceKind () <<
         "getRegularVoiceStaffSequentialNumber: " <<
         voice->getRegularVoiceStaffSequentialNumber () <<
         std::endl;
@@ -4076,7 +4076,7 @@ void msrStaff::printFull (std::ostream& os) const
 
       os <<
 //        "voiceKind: " << JMI
-//        msrVoiceKindAsString (voice->getVoiceKind ()) <<
+//        voice->getVoiceKind () <<
         "getRegularVoiceStaffSequentialNumber: " <<
         voice->getRegularVoiceStaffSequentialNumber () <<
         std::endl;

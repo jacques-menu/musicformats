@@ -690,7 +690,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createRepeatCommonPartNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of repeat common part " <<
+      "Creating a repeat common part newborn clone of " <<
       asShortString () <<
       " in voice " <<
       containingVoice->asShortString ();
@@ -709,6 +709,20 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createRepeatCommonPartNewbornClone (
   // DON't create the repeat element segment, that will be done upon browsing
 
   // there no scalar fields to be copied
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "The resulting repeat common part newborn clone is " <<
+      newbornClone->asShortString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   return newbornClone;
 }
@@ -818,7 +832,7 @@ void msrRepeatCommonPart::appendMultipleMeasureRestToRepeatCommonPart (
   const std::string&              context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1382,7 +1396,7 @@ S_msrRepeatEnding msrRepeatEnding::createRepeatEndingNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of repeat ending " <<
+      "Creating a repeat ending newborn clone of " <<
       asShortString () <<
       " in voice " <<
       containingVoice->asShortString ();
@@ -1404,6 +1418,20 @@ S_msrRepeatEnding msrRepeatEnding::createRepeatEndingNewbornClone (
 
   newbornClone-> fRepeatEndingInternalNumber =
     fRepeatEndingInternalNumber;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "The resulting repeat ending newborn clone is " <<
+      newbornClone->asShortString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   return newbornClone;
 }
@@ -1555,7 +1583,7 @@ void msrRepeatEnding::appendMultipleMeasureRestToRepeatEnding (
     std::stringstream ss;
 
     ss <<
-      "Cascading appending multiple measure rest " <<
+      "Cascading appending multiple measure restBasics " <<
       multipleMeasureRests->asShortString () <<
       " to repeat ending " << asString () <<
       " (" << context << ")" <<
@@ -1803,8 +1831,7 @@ void msrRepeatEnding::printFull (std::ostream& os) const
     ", fRepeatElementDebugNumber: " <<
     fRepeatElementDebugNumber <<
     ", fRepeatEndingKind: " <<
-    msrRepeatEndingKindAsString (
-      fRepeatEndingKind) <<
+    fRepeatEndingKind <<
     ", line " << fInputLineNumber <<
     std::endl;
 
@@ -2223,7 +2250,7 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of repeat " <<
+      "Creating a repeat newborn clone of " <<
       asShortString () <<
       " in voice " <<
       containingVoice->asShortString ();
@@ -2250,6 +2277,20 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
       fRepeatExplicitStartKind;
 
   // DON'T create the repeat common part, that will be done upon browsing
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "The resulting repeat newborn clone is " <<
+      newbornClone->asShortString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   return newbornClone;
 }
@@ -2725,7 +2766,7 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
   const std::string&              context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2919,12 +2960,10 @@ std::string msrRepeat::asShortString () const
     fRepeatDebugNumber <<
     ", fRepeatTimes: " <<
     fRepeatTimes <<
-   ", fRepeatExplicitStartKind: " <<
-    msrRepeatExplicitStartKindAsString (
-      fRepeatExplicitStartKind);
+    ", fRepeatExplicitStartKind: " <<
+     fRepeatExplicitStartKind;
 //     ", fCurrentRepeatBuildPhaseKind: " <<
-//     repeatBuildPhaseKindAsString (
-//       fCurrentRepeatBuildPhaseKind);
+//     fCurrentRepeatBuildPhaseKind;
 
   if (fImmediatelyPrecedingRepeat && fImmediatelyPrecedingRepeat != this) { // JMI 0.9.71 loop removal
     ss <<
@@ -2966,12 +3005,10 @@ std::string msrRepeat::asString () const
     fRepeatDebugNumber <<
     ", fRepeatTimes: " <<
     fRepeatTimes <<
-   ", fRepeatExplicitStartKind: " <<
-    msrRepeatExplicitStartKindAsString (
-      fRepeatExplicitStartKind);
+    ", fRepeatExplicitStartKind: " <<
+    fRepeatExplicitStartKind;
 //     ", fCurrentRepeatBuildPhaseKind: " <<
-//     repeatBuildPhaseKindAsString (
-//       fCurrentRepeatBuildPhaseKind);
+//     fCurrentRepeatBuildPhaseKind;
 
   if (fImmediatelyPrecedingRepeat) {
     ss <<
@@ -3049,8 +3086,7 @@ void msrRepeat::print (std::ostream& os) const
     ", fRepeatTimes: " <<
     fRepeatTimes <<
 //     ", fCurrentRepeatBuildPhaseKind: " <<
-//     repeatBuildPhaseKindAsString (
-//       fCurrentRepeatBuildPhaseKind);
+//     fCurrentRepeatBuildPhaseKind;
     ", line " << fInputLineNumber <<
     std::endl;
 
@@ -3135,8 +3171,7 @@ void msrRepeat::printFull (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
    "fRepeatExplicitStartKind: " <<
-    msrRepeatExplicitStartKindAsString (
-      fRepeatExplicitStartKind) <<
+    fRepeatExplicitStartKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fRepeatEndingsVector.size ()" << ": " <<

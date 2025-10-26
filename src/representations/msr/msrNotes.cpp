@@ -4023,7 +4023,7 @@ void msrNote::browseData (basevisitor* v)
   }
 }
 
-std::string msrNote::noteDiatonicPitchKindAsString (
+std::string msrNote::fetchNoteDiatonicPitchKindAsString (
   const mfInputLineNumber& inputLineNumber) const
 {
   return
@@ -4071,11 +4071,11 @@ std::string msrNote::notePitchAsString () const
   return ss.str ();
 }
 
-std::string msrNote::noteDisplayPitchKindAsString () const
+std::string msrNote::fetchNoteDisplayPitchKindAsString () const
 {
   std::stringstream ss;
 
-// 	// ss << "======> noteDisplayPitchKindAsString()" << std::endl;
+// 	// ss << "======> fetchNoteDisplayPitchKindAsString()" << std::endl;
 
   ss <<
     msrQuarterTonesPitchKindAsStringInLanguage (

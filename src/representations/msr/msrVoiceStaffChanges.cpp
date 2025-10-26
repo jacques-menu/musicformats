@@ -68,9 +68,8 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of voice staff change '" <<
-      asString () <<
-      "'";
+      "Creating a voice staff change newborn clone of " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),

@@ -717,9 +717,9 @@ class EXP msr2msrTranslator :
     // a stack is needed to handle pending repeats, which can be nested
     std::list <S_msrRepeat>   fRepeatsStack;
 
-    S_msrRepeat               createARepeatCloneAndStackIt (
-                                const mfInputLineNumber& inputLineNumber,
-                                const std::string&       context);
+//     S_msrRepeat               createARepeatCloneAndStackIt (
+//                                 const mfInputLineNumber& inputLineNumber,
+//                                 const std::string&       context);
 
     void                      pushRepeatOntoRepeatsStack (
                                 const mfInputLineNumber& inputLineNumber,

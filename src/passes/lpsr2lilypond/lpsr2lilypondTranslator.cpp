@@ -609,8 +609,7 @@ if (false) // JMI
     ss <<
       "lpsr2lilypondTranslator()" <<
       ", octaveEntryKind is" <<
-      msrOctaveEntryKindAsString (
-        gGlobalLpsr2lilypondOahGroup->fetchOctaveEntryVariableValue ()) <<
+      gGlobalLpsr2lilypondOahGroup->fetchOctaveEntryVariableValue () <<
       std::endl <<
       "Initial fCurrentOctaveEntryReference is ";
 
@@ -712,8 +711,7 @@ void lpsr2lilypondTranslator::setCurrentOctaveEntryReferenceFromTheLilypondOah (
     ss <<
       "setCurrentOctaveEntryReferenceFromTheLilypondOah()" <<
       ", octaveEntryKind is" <<
-      msrOctaveEntryKindAsString (
-        gGlobalLpsr2lilypondOahGroup->fetchOctaveEntryVariableValue ()) <<
+     gGlobalLpsr2lilypondOahGroup->fetchOctaveEntryVariableValue () <<
       std::endl <<
       "The initial fCurrentOctaveEntryReference is ";
 
@@ -857,7 +855,7 @@ std::string lpsr2lilypondTranslator::absoluteOctaveAsLilypondString (
     fLilypondCodeStream <<
       std::endl <<
       "%{ absoluteOctaveKind: " <<
-      msrOctaveKindAsString (absoluteOctaveKind) <<
+      absoluteOctaveKind <<
       " %}" <<
       std::endl;
   }
@@ -871,7 +869,7 @@ std::string lpsr2lilypondTranslator::absoluteOctaveAsLilypondString (
 
         ss <<
           "absolute octave " <<
-          msrOctaveKindAsString (absoluteOctaveKind) <<
+          absoluteOctaveKind <<
           " cannot be translated to LilyPond";
 
 //       result =
@@ -992,7 +990,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
   std::string
     referenceDiatonicPitchKindAsString =
       fCurrentOctaveEntryReference->
-        noteDiatonicPitchKindAsString (
+        fetchNoteDiatonicPitchKindAsString ( // BUG!!!
           note->getInputLineNumber ());
 
   msrOctaveKind
@@ -1038,7 +1036,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
       std::endl <<
       std::setw (fieldWidth) <<
       "% referenceAbsoluteOctave: " <<
-      msrOctaveKindAsString (referenceAbsoluteOctave) <<
+      referenceAbsoluteOctave <<
       std::endl <<
       std::setw (fieldWidth) <<
       "% referenceAboluteDiatonicOrdinal: " <<
@@ -1262,18 +1260,17 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
       getStringTuningNumber <<
       std::endl <<
       "%stringTuningDiatonicPitchKind: " <<
-      msrDiatonicPitchKindAsString (
-        stringTuningDiatonicPitchKind) <<
+      stringTuningDiatonicPitchKind <<
       std::endl <<
       "%stringTuningAlterationKind: " <<
       alterationKindAsLilypondString (
         stringTuningAlterationKind) <<
       std::endl <<
       "%stringTuningOctave: " <<
-      msrOctaveKindAsString (stringTuningOctave) <<
+      stringTuningOctave <<
       std::endl <<
       "%quarterTonesPitchKind: " <<
-      msrQuarterTonesPitchKindAsString (quarterTonesPitchKind) <<
+      quarterTonesPitchKind <<
       std::endl <<
       "%msrQuarterTonesPitchKindAsString: " <<
       msrQuarterTonesPitchKindAsStringInLanguage (
@@ -1383,11 +1380,11 @@ std::string lpsr2lilypondTranslator::notePitchAsLilypondString (
 
       std::setw (fieldWidth) <<
       "% noteAbsoluteOctave: " <<
-      msrOctaveKindAsString (noteAbsoluteOctave) <<
+      noteAbsoluteOctave <<
       std::endl <<
       std::setw (fieldWidth) <<
       "% noteAbsoluteDisplayOctave: " <<
-      msrOctaveKindAsString (noteAbsoluteDisplayOctave) <<
+      noteAbsoluteDisplayOctave <<
       std::endl <<
 
       std::setw (fieldWidth) <<
@@ -1689,7 +1686,7 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
   // generate the display pitch
   ss <<
     note->
-      noteDisplayPitchKindAsString ();
+      fetchNoteDisplayPitchKindAsString ();
 //    note->notePitchAsString (); JMI
 //    quarterTonesDisplayPitchAsString;
 
@@ -1722,11 +1719,11 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
 
       std::setw (fieldWidth) <<
       "% noteAbsoluteOctave: " <<
-      msrOctaveKindAsString (noteAbsoluteOctave) <<
+      noteAbsoluteOctave <<
       std::endl <<
       std::setw (fieldWidth) <<
       "% noteAbsoluteDisplayOctave: " <<
-      msrOctaveKindAsString (noteAbsoluteDisplayOctave) <<
+      noteAbsoluteDisplayOctave <<
       std::endl <<
 
       std::setw (fieldWidth) <<
@@ -5654,7 +5651,7 @@ std::string lpsr2lilypondTranslator::singleTremoloNotesDurationAsLilypondString 
       mfSingularOrPlural (
         singleTremoloMarksNumber, "mark", "marks") <<
       ", singleTremoloNoteNotesDurationKind: " <<
-      mfDurationKindAsString (singleTremoloNoteNotesDurationKind) <<
+      singleTremoloNoteNotesDurationKind <<
       ", durationToUse: " <<
       durationToUse;
 
@@ -12851,9 +12848,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
     ) {
       fLilypondCodeStream <<
         "\\" <<
-        lpsrChordsLanguageKindAsString (
-          gLpsrOahGroup->
-            getLpsrChordsLanguageKind ()) <<
+        gLpsrOahGroup-> getLpsrChordsLanguageKind () <<
         "Chords" <<
         std::endl;
     }
@@ -12905,9 +12900,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
   if (dynamicsTextSpannersStyleKindAtom->getSelected ()) {
     fLilypondCodeStream <<
       "\\override DynamicTextSpanner.style = #'" <<
-      lpsrDynamicsTextSpannersStyleKindAsString (
-       dynamicsTextSpannersStyleKindAtom->
-         getLpsrdDynamicsTextSpannersStyleKindVariable ()) <<
+      dynamicsTextSpannersStyleKindAtom->
+        getLpsrdDynamicsTextSpannersStyleKindVariable () <<
       std::endl << std::endl;
   }
 
@@ -12933,8 +12927,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
   ) {
     fLilypondCodeStream <<
       "\\accidentalStyle Score." <<
-      lpsrAccidentalStyleKindAsString (
-        gGlobalLpsr2lilypondOahGroup->getAccidentalStyleKind ()) <<
+      gGlobalLpsr2lilypondOahGroup->getAccidentalStyleKind () <<
       std::endl << std::endl;
   }
 

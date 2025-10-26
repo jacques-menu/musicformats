@@ -206,7 +206,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "The newborn segment clone is " <<
+      "The resulting segment newborn clone is " <<
       newbornClone->asString ();
 
     gWaeHandler->waeTrace (
@@ -558,7 +558,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItInSegment (
   msrMeasureImplicitKind   measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1575,7 +1575,7 @@ void msrSegment::cascadeAppendFiguredBassesListToSegment (
   const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBassesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2351,7 +2351,7 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
   const mfWholeNotes&      forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotes ()) {
+  if (gTraceOahGroup->getTraceNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2385,11 +2385,11 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
   --gIndenter;
 }
 
-void msrSegment::cascadeAppendMultipleMeasureRestToSegment ( // BIBI
+void msrSegment::cascadeAppendMultipleMeasureRestToSegment ( // cascade bottom
   const S_msrMultipleMeasureRest& multipleMeasureRest)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceBarLines ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<

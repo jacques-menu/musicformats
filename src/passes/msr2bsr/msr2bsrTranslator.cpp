@@ -1835,7 +1835,7 @@ bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkIfNeeded (
   std::string
     referenceDiatonicPitchKindAsString =
       fRelativeOctaveReference->
-        noteDiatonicPitchKindAsString (
+        fetchNoteDiatonicPitchKindAsString (
           note->getInputLineNumber ());
 
   msrOctaveKind
