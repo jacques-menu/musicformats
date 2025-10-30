@@ -561,7 +561,7 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 }
 */
 
-void msrStaff::cascadeCreateAMeasureAndAppendItInStaff ( // cascade bottom
+void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
   const mfInputLineNumber& inputLineNumber,
   int                      previousMeasureEndInputLineNumber,
   const mfMeasureNumber&   measureNumber,
@@ -655,7 +655,7 @@ void msrStaff::cascadeNetNextMeasureNumberInStaff (
 
     ++gIndenter;
     voice->
-      cascadeNetNextMeasureNumberInVoice (
+      edacsacSetNextMeasureNumberInVoice (
         inputLineNumber,
         nextMeasureNumber);
     --gIndenter;
@@ -735,7 +735,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
     std::stringstream ss;
 
     ss <<
-      "attempt at creating a voice anew by number" <<
+      "Attempting to create a voice anew with number" <<
       ", voiceNumber: " << voiceNumber <<
       ", currentMeasureNumber: " << currentMeasureNumber <<
       " ' in staff \"" <<
@@ -2610,7 +2610,7 @@ void msrStaff::cascadeCreateAMeasureRepeatAndAppendItToStaff (
     std::stringstream ss;
 
     ss <<
-      "Cascading creating a measures repeat from it's first measure in staff \"" <<
+      "Cascading creating a measure repeat from it's first measure in staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace ();
@@ -2625,7 +2625,7 @@ void msrStaff::cascadeCreateAMeasureRepeatAndAppendItToStaff (
   for (S_msrVoice voice : fStaffAllVoicesList) {
     ++gIndenter;
     voice->
-      cascadeCreateAMeasureRepeatAndAppendItToVoice (
+      edacsacCreateAMeasureRepeatAndAppendItToVoice (
         inputLineNumber,
         measureRepeatMeasuresNumber,
         measureRepeatSlashesNumber);
@@ -2641,7 +2641,7 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
     std::stringstream ss;
 
     ss <<
-      "Appending the pending measures repeat to staff \"" <<
+      "Appending the pending measure repeat to staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace ();

@@ -230,6 +230,14 @@ S_msrTuplet mxsrVoice::popInnerMostTuplet (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fTupletsStack.empty (),
+    "fTupletsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   // pop from the tuplets stack
   fTupletsStack.pop_front (); // JMI 0.9.68
 

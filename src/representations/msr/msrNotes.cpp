@@ -3335,8 +3335,8 @@ int msrNote::fetchNoteSlurStopsNumber () const
 //   // sanity check
 //   mfAssert (
 //     __FILE__, mfInputLineNumber (__LINE__),
-//     fNoteDynamicsList.size () > 0,
-//     "fNoteDynamicsList is empty");
+//     ! fNoteDynamicsList.empty (),
+//     "fNoteDynamicsList is EMPTY");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   S_msrDynamic dyn = fNoteDynamicsList.front ();
@@ -3365,8 +3365,8 @@ int msrNote::fetchNoteSlurStopsNumber () const
 //   // sanity check
 //   mfAssert (
 //     __FILE__, mfInputLineNumber (__LINE__),
-//     fNoteDynamicsList.size () > 0,
-//     "fNoteDynamicsList is empty");
+//     ! fNoteDynamicsList.empty (),
+//     "fNoteDynamicsList is EMPTY");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   S_msrWedge wedge = fNoteWedgesList.front ();
@@ -6038,7 +6038,7 @@ void msrNote::printFull (std::ostream& os) const
 //     std::stringstream ss;
 //
 //     ss <<
-//       "fMeasureElementUpLinkToMeasure->getMeasureNumber () is empty in note " <<
+//       "fMeasureElementUpLinkToMeasure->getMeasureNumber () is EMPTY in note " <<
 //       this->asString ();
 //
 // // JMI     msrInternalError (

@@ -144,8 +144,16 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
 
     mfMeasureNumber       fNextMeasureNumber;
 };
-typedef SMARTP<msrMultipleMeasureRest> S_msrMultipleMeasureRest;
+
+
+using S_msrMultipleMeasureRest = SMARTP<msrMultipleMeasureRest>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrMultipleMeasureRest& elt);
+
+std::string fetchMultipleMeasureRestAsShortString (
+  const S_msrMultipleMeasureRest& multipleMeasureRest);
+std::string fetchMultipleMeasureRestAsString (
+  const S_msrMultipleMeasureRest& multipleMeasureRest);
 
 
 }

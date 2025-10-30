@@ -413,7 +413,7 @@ class EXP msrVoice : public msrElement
                             const mfMeasureNumber&   measureNumber,
                             msrMeasureImplicitKind   measureImplicitKind);
 
-    void                  cascadeNetNextMeasureNumberInVoice (
+    void                  edacsacSetNextMeasureNumberInVoice (
                             const mfInputLineNumber& inputLineNumber,
                             const mfMeasureNumber&   nextMeasureNumber);
 
@@ -555,7 +555,7 @@ class EXP msrVoice : public msrElement
 
     // harmonies
 
-    void                  cascadeAppendHarmonyToVoice (
+    void                  edacsacAppendHarmonyToVoice (
                             const mfInputLineNumber&   inputLineNumber,
                             const S_msrHarmony&        harmony,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
@@ -565,7 +565,7 @@ class EXP msrVoice : public msrElement
                             const std::list <S_msrHarmony>& harmoniesList,
                             const mfPositionInMeasure&      positionInMeasureToAppendAt);
 
-    void                  cascadeAppendHarmonyToVoiceClone (
+    void                  edacsacAppendHarmonyToVoiceClone (
                             const S_msrHarmony& harmony);
 
     // figured bass
@@ -817,7 +817,7 @@ class EXP msrVoice : public msrElement
 
     // measure repeats
 
-    void                  cascadeCreateAMeasureRepeatAndAppendItToVoice (
+    void                  edacsacCreateAMeasureRepeatAndAppendItToVoice (
                             const mfInputLineNumber& inputLineNumber,
                             int                      measureRepeatMeasuresNumber,
                             int                      measureRepeatSlashesNumber);
@@ -968,7 +968,7 @@ class EXP msrVoice : public msrElement
 //                             const S_msrRepeat&       repeatCLone,
 //                             const std::string&       context);
 
-    void                  handleVoiceLevelRepeatStart (
+    void                  handleVoiceLevelRepeatStartInVoice (
                             const mfInputLineNumber& inputLineNumber);
 
     void                  handleNestedRepeatStartInVoice (

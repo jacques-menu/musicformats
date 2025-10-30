@@ -8361,7 +8361,7 @@ void msr2mxsrTranslator::visitStart (S_msrHarmony& elt)
 
     // append the harmony to the current voice clone
     fCurrentVoiceClone->
-      cascadeAppendHarmonyToVoiceClone (
+      edacsacAppendHarmonyToVoiceClone (
         fCurrentHarmonyClone);
   }
 
@@ -11219,7 +11219,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureRepeat& elt)
     std::stringstream ss;
 
     ss <<
-      "Handling measures repeat start in voice clone \"" <<
+      "Handling measure repeat start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
@@ -11254,13 +11254,13 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
   --gIndenter;
 
 / * JMI
-  // set last segment as the measures repeat pattern segment
+  // set last segment as the measure repeat pattern segment
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
     std::stringstream ss;
 
     ss <<
-      "Setting current last segment as measures repeat pattern segment in voice \"" <<
+      "Setting current last segment as measure repeat pattern segment in voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
@@ -11276,7 +11276,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
     std::stringstream ss;
 
     ss <<
-      "Handling measures repeat end in voice clone \"" <<
+      "Handling measure repeat end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 

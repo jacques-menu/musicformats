@@ -66,6 +66,9 @@ case "$#" in
   ;;
 esac
 
+echo "xlm2ly:"
+xml2ly --version
+echo
 echo "OPTIONS_STRING : ${OPTIONS_STRING}"
 echo
 

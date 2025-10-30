@@ -3013,7 +3013,7 @@ void msr2bsrTranslator::visitStart (S_msrHarmony& elt)
 
   else if (fOnGoingHarmoniesVoice) {
     fCurrentVoiceClone->
-      cascadeAppendHarmonyToVoiceClone (
+      edacsacAppendHarmonyToVoiceClone (
         fCurrentHarmonyClone);
   }
 }
@@ -5999,6 +5999,14 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fTupletClonesStack.empty (),
+    "fTupletClonesStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   fTupletClonesStack.pop_front ();
 
   if (fTupletClonesStack.size ()) {
@@ -6645,13 +6653,13 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
 
   --gIndenter;
 
-  // set last segment as the measures repeat pattern segment
+  // set last segment as the measure repeat pattern segment
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
     std::stringstream ss;
 
     ss <<
-      "Setting current last segment as measures repeat pattern segment in voice \"" <<
+      "Setting current last segment as measure repeat pattern segment in voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
@@ -6700,18 +6708,18 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
 
   --gIndenter;
 
-  // get the measures repeat upLink
+  // get the measure repeat upLink
   S_msrMeasureRepeat
     measureRepeat =
       elt->getUpLinkToMeasureRepeat ();
 
-  // create a measures repeat and append it to voice clone
+  // create a measure repeat and append it to voice clone
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending a measures repeat to voice clone \"" <<
+      "Appending a measure repeat to voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
@@ -6729,7 +6737,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
       measureRepeat->
         getMeasureRepeatSlashesNumber ());
 
-  // forget about the current measures repeat pattern clone
+  // forget about the current measure repeat pattern clone
   fCurrentMeasureRepeatPatternClone = nullptr;
 }
 
@@ -6771,7 +6779,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 
   --gIndenter;
 
-  // create a measures repeat replica clone and append it to voice clone
+  // create a measure repeat replica clone and append it to voice clone
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
     std::stringstream ss;
@@ -6791,7 +6799,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
     appendMeasureRepeatReplicaToVoice (
       elt->getInputLineNumber ());
 
-  // forget about the current measures repeat replicas clone
+  // forget about the current measure repeat replicas clone
  // JMI ??? fCurrentMeasureRepeatReplicasClone = nullptr;
 }
 

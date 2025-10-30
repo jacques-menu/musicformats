@@ -9064,8 +9064,8 @@ void oahHandler::handleOptionNameAndValueAtTopOahLevel (
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    optionName.size () > 0,
-    "optionName is empty");
+    ! optionName.empty (),
+    "optionName is EMPTY");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // does optionName start with a dash?

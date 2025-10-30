@@ -239,7 +239,7 @@ class EXP msrSegment : public msrElement
     void                  appendMultipleMeasureRestToSegment (
                             const S_msrMultipleMeasureRest& multipleMeasureRest);
 
-    void                  cascadeAppendMultipleMeasureRestToSegment (
+    void                  edacsacAppendMultipleMeasureRestToSegment (
                             const S_msrMultipleMeasureRest& multipleMeasureRest);
 
     // clef, key, time signature
@@ -458,12 +458,12 @@ class EXP msrSegment : public msrElement
 //                             const mfInputLineNumber& inputLineNumber,
 //                             const S_msrElement& element);
 
-    S_msrMeasure          removeLastMeasureFromSegment (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string& context);
+//     S_msrMeasure          removeLastMeasureFromSegment (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const std::string& context);
 
-    void                  finalizeAllTheMeasuresOfSegment (
-                            const mfInputLineNumber& inputLineNumber);
+//     void                  finalizeAllTheMeasuresOfSegment (
+//                             const mfInputLineNumber& inputLineNumber);
 
   public:
 

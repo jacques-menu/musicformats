@@ -771,6 +771,14 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+    // sanity check
+    mfAssert (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ! fPartGroupsStack.empty (),
+      "fPartGroupsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
 		fPartGroupsStack.pop ();
 
 		// fetch the new top of the stack, i.e. the new current part group
@@ -1397,6 +1405,14 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 							ss.str ());
 					}
 #endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+          // sanity check
+          mfAssert (
+            __FILE__, mfInputLineNumber (__LINE__),
+            ! fPartGroupsStack.empty (),
+            "fPartGroupsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 					fPartGroupsStack.pop ();
 

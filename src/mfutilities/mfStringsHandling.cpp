@@ -261,7 +261,7 @@ char* mfCharStarCat (
     std::stringstream ss;
 
     ss <<
-      "mfCharStarCat(): attempt at destination overflow" <<
+      "mfCharStarCat(): Attempting to overflow destination" <<
       ", destinationSize: [" << destinationSize <<
       "], destination: [" << destination <<
       "], strlen (source): [" << strlen (source) <<

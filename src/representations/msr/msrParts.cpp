@@ -1833,7 +1833,7 @@ void msrPart::cascadeCreateAMeasureRepeatAndAppendItToPart (
   int                      measureRepeatMeasuresNumber,
   int                      measureRepeatSlashesNumber)
 {
-  // create measures repeat in all staves
+  // create measure repeat in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     ++gIndenter;
     staff->
@@ -1848,7 +1848,7 @@ void msrPart::cascadeCreateAMeasureRepeatAndAppendItToPart (
 void msrPart::appendPendingMeasureRepeatToPart (
   const mfInputLineNumber& inputLineNumber)
 {
-  // append pending measures repeat to all staves
+  // append pending measure repeat to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
       appendPendingMeasureRepeatToStaff (
@@ -2622,7 +2622,7 @@ void msrPart::appendHarmonyToPart (
 #endif // MF_TRACE_IS_ENABLED
 
   fPartHarmoniesVoice->
-     cascadeAppendHarmonyToVoice (
+     edacsacAppendHarmonyToVoice (
       inputLineNumber,
       harmony,
       positionInMeasureToAppendAt);

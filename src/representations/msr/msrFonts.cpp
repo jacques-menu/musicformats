@@ -260,7 +260,7 @@ float msrFontSize::getFontNumericSize () const
         std::stringstream ss;
 
         ss <<
-          "attempt at getting font numeric size for a " <<
+          "Attempting to get font numeric size for a " <<
           msrFontSizeKindAsString (fFontSizeKind);
 
         msrInternalError (

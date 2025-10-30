@@ -516,7 +516,7 @@ void msrMeasureRepeatPattern::setMeasureRepeatPatternSegment (
     std::stringstream ss;
 
     ss <<
-      "Setting measures repeat pattern segment containing " <<
+      "Setting measure repeat pattern segment containing " <<
       mfSingularOrPlural (
         fetchMeasuresNumber (),
         "measure",
@@ -755,7 +755,7 @@ void msrMeasureRepeatReplicas::setMeasureRepeatReplicasSegment (
     std::stringstream ss;
 
     ss <<
-      "Setting measures repeat replicas segment containing " <<
+      "Setting measure repeat replicas segment containing " <<
       mfSingularOrPlural (
         fetchMeasuresNumber (),
         "measure",
@@ -994,7 +994,7 @@ msrMeasureRepeat::msrMeasureRepeat (
   fMeasureRepeatMeasuresNumber = measureRepeatMeasuresNumber;
   fMeasureRepeatSlashesNumber = measureRepeatSlashesNumber;
 
-  // measures repeat build phase
+  // measure repeat build phase
   fCurrentMeasureRepeatBuildPhaseKind =
     msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseJustCreated;
 }
@@ -1009,7 +1009,7 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone ()
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of measures repeat '" <<
+      "Creating a newborn clone of measure repeat '" <<
       asString () <<
       "'";
 
@@ -1037,7 +1037,7 @@ void msrMeasureRepeat::setMeasureRepeatPattern (
     std::stringstream ss;
 
     ss <<
-      "Setting measures repeat pattern containing " <<
+      "Setting measure repeat pattern containing " <<
       mfSingularOrPlural (
         measureRepeatPattern->
           fetchMeasuresNumber (),
@@ -1073,7 +1073,7 @@ void msrMeasureRepeat::setMeasureRepeatReplicas (
     std::stringstream ss;
 
     ss <<
-      "Setting measures repeat replicas containing " <<
+      "Setting measure repeat replicas containing " <<
       mfSingularOrPlural (
         measureRepeatReplicas->
           fetchMeasuresNumber (),
@@ -1262,7 +1262,7 @@ void msrMeasureRepeat::browseData (basevisitor* v)
       std::stringstream ss;
 
       ss <<
-        "% ==> visiting measures repeat replicas is inhibited";
+        "% ==> visiting measure repeat replicas is inhibited";
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -1273,7 +1273,7 @@ void msrMeasureRepeat::browseData (basevisitor* v)
 
   if (fMeasureRepeatReplicas) {
     if (! inhibitMeasureRepeatReplicasBrowsing) {
-      // browse the measures repeat replicas
+      // browse the measure repeat replicas
       msrBrowser<msrMeasureRepeatReplicas> browser (v);
       browser.browse (*fMeasureRepeatReplicas);
     }
@@ -1436,7 +1436,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
-    // print the current measures repeat build phase
+    // print the current measure repeat build phase
     constexpr int fieldWidth = 36;
 
     os <<
@@ -1448,7 +1448,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // print the measures repeat pattern
+  // print the measure repeat pattern
   if (! fMeasureRepeatPattern) {
     os <<
       "fMeasureRepeatPattern: [NONE]" <<
@@ -1460,7 +1460,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
       fMeasureRepeatPattern;
   }
 
-  // print the measures repeat replicas
+  // print the measure repeat replicas
   if (! fMeasureRepeatReplicas) {
     os <<
       "fMeasureRepeatReplicas: [NONE]" <<
@@ -1487,6 +1487,36 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeat& elt)
   }
 
   return os;
+}
+
+std::string fetchMeasureRepeatAsShortString (const S_msrMeasureRepeat& measureRepeat)
+{
+  std::string result;
+
+  if (measureRepeat) {
+    result =
+      measureRepeat->asString ();
+  }
+  else {
+    result = "\"** MEASURE_REPEAT IS NULL **\"";
+  }
+
+  return result;
+}
+
+std::string fetchMeasureRepeatAsString (const S_msrMeasureRepeat& measureRepeat)
+{
+  std::string result;
+
+  if (measureRepeat) {
+    result =
+      measureRepeat->asShortString ();
+  }
+  else {
+    result = "\"** MEASURE_REPEAT IS NULL **\"";
+  }
+
+  return result;
 }
 
 

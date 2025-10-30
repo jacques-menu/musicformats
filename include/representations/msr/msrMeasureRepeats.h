@@ -282,7 +282,7 @@ class EXP msrMeasureRepeat : public msrSegmentElement
                           getMeasureRepeatPattern () const
                               { return fMeasureRepeatPattern; }
 
-    // measures repeat replicas
+    // measure repeat replicas
     void                  setMeasureRepeatReplicas (
                             const S_msrMeasureRepeatReplicas&
                               measureRepeatReplicas);
@@ -291,7 +291,7 @@ class EXP msrMeasureRepeat : public msrSegmentElement
                           getMeasureRepeatReplicas () const
                               { return fMeasureRepeatReplicas; }
 
-    // measures repeat build phase
+    // measure repeat build phase
     void                  setCurrentMeasureRepeatBuildPhaseKind (
                             msrMeasureRepeatBuildPhaseKind
                               measureRepeatBuildPhaseKind)
@@ -357,15 +357,15 @@ class EXP msrMeasureRepeat : public msrSegmentElement
     // slashes
     int                   fMeasureRepeatSlashesNumber;
 
-    // measures repeat pattern
+    // measure repeat pattern
     S_msrMeasureRepeatPattern
                           fMeasureRepeatPattern;
 
-    // measures repeat replicas
+    // measure repeat replicas
     S_msrMeasureRepeatReplicas
                           fMeasureRepeatReplicas;
 
-    // measures repeat build phase, used when building the measures repeat
+    // measure repeat build phase, used when building the measure repeat
     msrMeasureRepeatBuildPhaseKind
                           fCurrentMeasureRepeatBuildPhaseKind;
 };
@@ -373,6 +373,9 @@ class EXP msrMeasureRepeat : public msrSegmentElement
 using S_msrMeasureRepeat = SMARTP<msrMeasureRepeat>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeat& elt);
+
+std::string fetchMeasureRepeatAsShortString (const S_msrMeasureRepeat& measureRepeat);
+std::string fetchMeasureRepeatAsString (const S_msrMeasureRepeat& measureRepeat);
 
 
 }

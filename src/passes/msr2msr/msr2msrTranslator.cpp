@@ -111,7 +111,8 @@ void msrHiddenMeasureAndBarLineDescr::print (std::ostream& os) const
     std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt)
+std::ostream& operator << (
+  std::ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt)
 {
   if (elt) {
     elt->print (os);
@@ -125,8 +126,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLineD
 
 //________________________________________________________________________
 msr2msrTranslator::msr2msrTranslator ()
-//   : fCurrentMeasureNumber (K_MF_MEASURE_NUMBER_UNKNOWN_)
-{};
+{}
 
 msr2msrTranslator::~msr2msrTranslator ()
 {}
@@ -219,7 +219,7 @@ S_msrScore msr2msrTranslator::translateMsrToMsrAlongPathToVoice (
 void msr2msrTranslator::displayCurrentOnGoingValues ()
 {
   gLog <<
-    "Current ongoing values:" <<
+    "Current msr2msrTranslator ongoing values:" <<
     std::endl;
 
   ++gIndenter;
@@ -515,80 +515,6 @@ void msr2msrTranslator::displayMultipleMeasureRestClones (
     std::endl << std::endl;
 }
 
-// S_msrRepeat msr2msrTranslator::createARepeatCloneAndStackIt (
-//   const mfInputLineNumber& inputLineNumber,
-//   const std::string&       context)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeats ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Creating a repeat and stacking it in voice " <<
-//       fCurrentVoiceClone->getVoiceName () <<
-//       " (" << context << ")" <<
-//       ", line " << inputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// //   // this should NOT be necessary JMI 0.9.76
-// //   if (! fVoiceSegment) {
-// //     gLog << "*** FOO FOO FOO 1 ***" << std::endl;
-// //     fVoiceSegment =
-// //       msrSegment::create (
-// //         fInputLineNumber,
-// //         this);
-// //   }
-//
-//   S_msrRepeat
-//     repeat =
-//       msrRepeat::create (
-//         inputLineNumber,
-//         2); // repeatTimes, default value JMI 0.9.76
-//
-// //   if (! repeat) {
-// //     gLog << "*** FOO FOO FOO 2 ***" << std::endl;
-// //     abort ();
-// //   }
-//
-//   // DONT't create the repeat common part, that will be done upon browsing ZOULOU
-// //   // create the repeat common part
-// //   S_msrRepeatCommonPart
-// //     repeatCommonPart =
-// //       msrRepeatCommonPart::create (
-// //         inputLineNumber,
-// //         repeat);
-// //
-// //   // register it in repeat
-// //   repeat->
-// //     setRepeatCommonPart (
-// //       repeatCommonPart);
-//
-// //   // append repeat to the voice's segment
-// //   fVoiceSegment->
-// //     appendRepeatToSegment (repeat);
-//
-//   // push repeat onto the voice's repeat descrs stack
-//   pushRepeatOntoRepeatsStack (
-//     inputLineNumber,
-//     repeat,
-//     "createARepeatCloneAndStackIt() 1");
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//     displayRepeatsStack (
-//       inputLineNumber,
-//       "createARepeatCloneAndStackIt() 2");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   return repeat;
-// }
-
 void msr2msrTranslator::pushSegmentOntoSegmentsStack (
   const mfInputLineNumber&  inputLineNumber,
   const S_msrSegment&       segment)
@@ -615,6 +541,14 @@ void msr2msrTranslator::pushSegmentOntoSegmentsStack (
 S_msrSegment msr2msrTranslator::popSegmentFromSegmentsStack (
   const mfInputLineNumber& inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fSegmentsStack.empty (),
+    "fSegmentsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   S_msrSegment
     result =
       fSegmentsStack.front ();
@@ -739,7 +673,7 @@ void msr2msrTranslator::pushRepeatOntoRepeatsStack (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2msrTranslator::popRepeatFromRepeatsStack (
+S_msrRepeat msr2msrTranslator::popRepeatFromRepeatsStack (
   const mfInputLineNumber& inputLineNumber,
   const std::string&       context)
 {
@@ -748,7 +682,7 @@ void msr2msrTranslator::popRepeatFromRepeatsStack (
     std::stringstream ss;
 
     ss <<
-      "Popping repeat ***** BEGIN " <<
+      "Popping repeat ***** BEGIN" <<
       " from the repeat clones stack in voice " <<
       fCurrentVoiceClone->getVoiceName () <<
       " from context " + context <<
@@ -759,6 +693,14 @@ void msr2msrTranslator::popRepeatFromRepeatsStack (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fRepeatsStack.empty (),
+    "fRepeatsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -798,7 +740,7 @@ void msr2msrTranslator::popRepeatFromRepeatsStack (
     std::stringstream ss;
 
     ss <<
-      "Popping repeat ***** END " <<
+      "Popping repeat ***** END" <<
       " from the repeat stack in voice " <<
       fCurrentVoiceClone->getVoiceName () <<
       " (" << context << ")" <<
@@ -809,6 +751,18 @@ void msr2msrTranslator::popRepeatFromRepeatsStack (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fRepeatsStack.empty (),
+    "fRepeatsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  S_msrRepeat
+    result =
+      fRepeatsStack.front ();
 
   // pop it from repeats stack
   fRepeatsStack.pop_front ();
@@ -824,6 +778,8 @@ void msr2msrTranslator::popRepeatFromRepeatsStack (
       combinedContext);
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  return result;
 }
 
 void msr2msrTranslator::pushRepeatElementOntoRepeatElementsStack (
@@ -871,6 +827,14 @@ S_msrRepeatElement msr2msrTranslator::popRepeatElementFromRepeatElementsStack (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fRepeatElementsStack.empty (),
+    "fRepeatElementsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatElementsStack.pop_back ();
 
@@ -966,66 +930,6 @@ void msr2msrTranslator::handleNestedRepeatStartInVoice (
 // #endif // MF_TRACE_IS_ENABLED
 }
 
-// void msr2msrTranslator::handleRepeatStartInVoice (
-//   const mfInputLineNumber& inputLineNumber)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Handling a repeat start in voice \"" <<
-//       fCurrentVoiceClone->getVoiceName () <<
-// //       ", fRepeatsStack.size (): " <<
-//       fRepeatsStack.size () <<
-//       ", line " << inputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//     displayRepeatsStack (
-//       inputLineNumber,
-//       "handleRepeatStartInVoice() 1");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   switch (fCurrentVoiceClone->getVoiceKind ()) {
-//     case msrVoiceKind::kVoiceKindRegular:
-//     case msrVoiceKind::kVoiceKindDynamics:
-//     case msrVoiceKind::kVoiceKindHarmonies:
-//     case msrVoiceKind::kVoiceKindFiguredBass:
-//       // analyze this repeat start's context
-//       switch (fRepeatsStack.size ()) {
-//         case 0:
-//           // this repeat start is at the voice-level
-//           // -------------------------------------
-//           handleVoiceLevelRepeatStart (
-//             inputLineNumber);
-//           break;
-//
-//         default:
-//           // this repeat start belongs to a nested repeat
-//           // ---------------------------------------
-//           handleNestedRepeatStartInVoice (
-//             inputLineNumber);
-//       } // switch
-//       break;
-//   } // switch
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//     displayRepeatsStack (
-//       inputLineNumber,
-//       "handleRepeatStartInVoice() 2");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
-
 //________________________________________________________________________
 void msr2msrTranslator::displayMeasureRepeat (
   const mfInputLineNumber& inputLineNumber,
@@ -1035,7 +939,7 @@ void msr2msrTranslator::displayMeasureRepeat (
     std::endl <<
     ">>++++++++++++++++ Displaying voice measure repeats " << context <<
     std::endl <<
-    "The current voice measures repeat contains " <<
+    "The current voice measure repeat contains " <<
     ", line " << inputLineNumber <<
     ':' <<
     std::endl;
@@ -1656,6 +1560,14 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+    // sanity check
+    mfAssert (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ! fPartGroupsStack.empty (),
+      "fPartGroupsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
     fPartGroupsStack.pop_front ();
 
     // handle part group type
@@ -1934,8 +1846,8 @@ void msr2msrTranslator::visitEnd (S_msrStaffDetails& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // append the staff details to the current voice clone
-  fCurrentVoiceClone->
-    appendStaffDetailsToVoice (
+  fMeasuresStack.front ()->
+    appendStaffDetailsToMeasure (
       elt);
 }
 
@@ -2282,8 +2194,8 @@ void msr2msrTranslator::visitStart (S_msrVoiceStaffChange& elt)
         createStaffChangeNewbornClone ();
 
   // append it to the current voice clone
-  fCurrentVoiceClone->
-    appendVoiceStaffChangeToVoice (
+  fMeasuresStack.front ()->
+    appendVoiceStaffChangeToMeasure (
       voiceStaffChangeClone);
 }
 
@@ -2322,27 +2234,30 @@ void msr2msrTranslator::visitStart (S_msrSegment& elt)
       fCurrentVoiceClone->
         setVoiceSegment (segmentClone);
       break;
+
     case msrSegmentKind::kSegmentKindInRepeatCommonPart:
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+      // sanity check
+      mfAssert (
+        __FILE__, mfInputLineNumber (__LINE__),
+        ! fRepeatElementsStack.empty (),
+        "fRepeatElementsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
       fRepeatElementsStack.front ()->
         setRepeatElementSegment (segmentClone);
       break;
+
     case msrSegmentKind::kSegmentKindInRepeatEnding:
       fRepeatElementsStack.front ()->
         setRepeatElementSegment (segmentClone);
       break;
+
     case msrSegmentKind::kSegmentKindInMeasureRepeat:
 //       fRepeatElementsStack.front ()->
 //         setRepeatElementSegment (segmentClone);
       break;
   } // switch
-
-  // place it to the current repeat element clone
-//   fCurrentVoiceClone->
-//     addSegmentCloneToVoiceClone (
-//       elt->getInputLineNumber (),
-//       segmentClone);
-//   fRepeatElementsStack.front ()->
-//     setRepeatElementSegment (segmentClone);
 }
 
 void msr2msrTranslator::visitEnd (S_msrSegment& elt)
@@ -2361,11 +2276,6 @@ void msr2msrTranslator::visitEnd (S_msrSegment& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-//   fCurrentVoiceClone->
-//     handleSegmentCloneEndInVoiceClone (
-//       elt->getInputLineNumber (),
-//       fSegmentsStack.front ());
 
   // pop it from the segment clones stack
   popSegmentFromSegmentsStack (
@@ -2427,8 +2337,9 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
 
   else if (fOnGoingHarmoniesVoice) {
     // append the harmony clone to the current voice clone
-    fCurrentVoiceClone->
-      cascadeAppendHarmonyToVoiceClone (
+    fMeasuresStack.front ()->
+//       edacsacAppendHarmonyToVoiceClone (
+      appendHarmonyToMeasureClone (
         fCurrentHarmonyClone);
   }
 
@@ -2591,8 +2502,8 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
 
   else if (fOnGoingFiguredBassVoice) {
     // append the figured bass clone to the current voice clone
-    fCurrentVoiceClone->
-      appendFiguredBassToVoiceClone (
+    fMeasuresStack.front ()->
+      appendFiguredBassToMeasureClone (
         fCurrentFiguredBassClone);
   }
 
@@ -2662,10 +2573,6 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
 //________________________________________________________________________
 void msr2msrTranslator::visitStart (S_msrMeasure& elt)
 {
-  mfMeasureNumber
-    fCurrentMeasureNumber =
-      elt->getMeasureNumber ();
-
   int
     measurePuristNumber =
       elt->getMeasurePuristNumber ();
@@ -2694,7 +2601,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
       "<!--=== " <<
       "part \"" << fCurrentPartClone->getPartName () << "\"" <<
       " (partMusicXMLID \"" << fCurrentPartClone->getPartMusicXMLID () << "\")" <<
-      ", measure \"" << fCurrentMeasureNumber << "\"" <<
+      ", measure \"" << elt->getMeasureNumber () << "\"" <<
       "', voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       ", line " << elt->getInputLineNumber () <<
@@ -2713,15 +2620,12 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
 
   serviceRunData->
     setCurrentMeasureNumber (
-      fCurrentMeasureNumber);
+      elt->getMeasureNumber ());
 
   // create a measure newborn clone
   S_msrMeasure
     measureClone =
       elt->
-//         createMeasureNewbornClone (
-//           fRepeatElementsStack.front ()->
-//             getRepeatElementSegment ());
         createMeasureNewbornClone (
           fSegmentsStack.front ()); // JMI ??? ZOULOU
 
@@ -2734,23 +2638,18 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
       appendMeasureToMultipleMeasureRest (
         measureClone);
   }
+
   else {
     // append current measure clone to the current segment clone
     fSegmentsStack.front ()->
       appendMeasureToSegment (
         measureClone);
-
-//     // append current measure clone to the current voice clone
-//     fCurrentVoiceClone->
-//       addMeasureCloneToVoiceClone (
-//         elt->getInputLineNumber (),
-//         fMeasuresStack.front ());
   }
 
   // JMI superflous ???
   fCurrentPartClone->
     setPartCurrentMeasureNumber (
-      fCurrentMeasureNumber);
+      elt->getMeasureNumber ());
 
   // should the last bar check's measure purist number be set?
   if (fLastBarCheck) {
@@ -2815,9 +2714,9 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
         std::stringstream ss;
 
         ss <<
-          "Measure '" <<
-          fCurrentMeasureNumber <<
-          "' in voice " <<
+          "Measure " <<
+          elt->getMeasureNumber () <<
+          " in voice " <<
           fetchVoiceName (
             elt->fetchMeasureUpLinkToVoice ()) <<
           " is of unknown kind in msr2msrTranslator";
@@ -2951,10 +2850,10 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 //
 //         ss <<
 //           "fCurrentMultipleMeasureRests is NULL upon multiple measure rest end" <<
-//           fCurrentMeasureNumber <<
-//           "', measurePuristNumber: '" <<
+//           elt->getMeasureNumber () <<
+//           "', measurePuristNumber: " <<
 //           measurePuristNumber <<
-//           "', line " << elt->getInputLineNumber ();
+//           ", line " << elt->getInputLineNumber ();
 //
 // /* JMI ???
 //         msr2msrInternalError (
@@ -2967,17 +2866,17 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 //     }
   }
 
-  // is fCurrentMeasureNumber in the parts ignore IDs set?
+  // is elt->getMeasureNumber () in the parts ignore IDs set?
   if (! gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().empty ()) {
     std::set <mfMeasureNumber>::iterator
       it =
         gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().find (
-          fCurrentMeasureNumber);
+          elt->getMeasureNumber ());
 
     if (it != gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().end ()) { // JMI 0.9.70
       gLog <<
         "==> adding a page break after measureNumber: \"" <<
-        fCurrentMeasureNumber <<
+        elt->getMeasureNumber () <<
           ", line " << elt->getInputLineNumber () <<
         std::endl;
 
@@ -3125,11 +3024,10 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //     std::stringstream ss;
 //
 //     ss <<
-//             "Changing lyrics '" <<
+//             "Changing lyrics " <<
 //             wordsValue <<
-//             "' into words for note '" <<
+//             " into words for note " <<
 //             fCurrentNonGraceNoteClone->asShortString () <<
-//             '\'' <<
 //       // JMI      fCurrentSyllableClone->asString () <<
 //             std::endl;
 //         }
@@ -3160,11 +3058,10 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //     std::stringstream ss;
 //
 //     ss <<
-//             "Appending words '" <<
+//             "Appending words " <<
 //             words->asShortString () <<
-//             "' to note '" <<
+//             " to note " <<
 //             fCurrentNonGraceNoteClone->asShortString () <<
-//             '\'' <<
 //             std::endl;
 //         }
 // #endif // MF_TRACE_IS_ENABLED
@@ -3200,8 +3097,8 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
           lpsrMelismaCommand::kMelismaEnd);
 
     // append it to current voice clone
-    fCurrentVoiceClone->
-      appendOtherElementToVoice (melismaCommand);
+    fMeasuresStack.front ()->
+      appendOtherElementToMeasure (melismaCommand);
 */
 
     fOnGoingSyllableExtend = false;
@@ -3252,15 +3149,6 @@ void msr2msrTranslator::visitStart (S_msrClefKeyTimeSignatureGroup& elt)
   fMeasuresStack.front ()->
     appendClefKeyTimeSignatureGroupToMeasure (
       fCurrentClefKeyTimeSignatureGroup);
-
-//   // append it to the current voice clone
-//   fCurrentVoiceClone->
-//     appendClefKeyTimeSignatureGroupToVoice (
-//       fCurrentClefKeyTimeSignatureGroup);
-
-//   fCurrentStaffClone->
-//     appendClefKeyTimeSignatureGroupToStaffClone (
-//       fCurrentClefKeyTimeSignatureGroup);
 }
 
 void msr2msrTranslator::visitEnd (S_msrClefKeyTimeSignatureGroup& elt)
@@ -3433,8 +3321,8 @@ void msr2msrTranslator::visitStart (S_msrTransposition& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // append transpose to voice clone
-  fCurrentVoiceClone->
-    appendTranspositionToVoice (elt);
+  fMeasuresStack.front ()->
+    appendTranspositionToMeasure (elt);
 }
 
 void msr2msrTranslator::visitEnd (S_msrTransposition& elt)
@@ -3485,11 +3373,10 @@ void msr2msrTranslator::visitStart (S_msrTempo& elt)
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceTempos ()) {
 //       gLog <<
-//         "Converting tempos '" <<
+//         "Converting tempos " <<
 //         elt->asShortString () <<
-//         "' to rehearsal mark '" <<
+//         " to rehearsal mark " <<
 //         rehearsalMark->asShortString () <<
-//         '\'' <<
 //         std::endl;
 //     std::stringstream ss;
 //
@@ -3498,13 +3385,13 @@ void msr2msrTranslator::visitStart (S_msrTempo& elt)
 // #endif // MF_TRACE_IS_ENABLED
 //
 //     // append the rehearsalMark to the current voice clone
-//     fCurrentVoiceClone->
-//       appendRehearsalMarkToVoice (rehearsalMark);
+//     fMeasuresStack.front ()->
+//       appendRehearsalMarkToMeasure (rehearsalMark);
 //   }
 //
 //   else {
-    fCurrentVoiceClone->
-      appendTempoToVoice (elt);
+    fMeasuresStack.front ()->
+      appendTempoToMeasure (elt);
 //   }
 }
 
@@ -3542,8 +3429,8 @@ void msr2msrTranslator::visitStart (S_msrRehearsalMark& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    appendRehearsalMarkToVoice (elt);
+  fMeasuresStack.front ()->
+    appendRehearsalMarkToMeasure (elt);
 }
 
 void msr2msrTranslator::visitEnd (S_msrRehearsalMark& elt)
@@ -4326,8 +4213,8 @@ void msr2msrTranslator::visitEnd (S_msrDoubleTremolo& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // append the current double tremolo clone to the current voice clone
-  fCurrentVoiceClone->
-    appendDoubleTremoloToVoice (
+  fMeasuresStack.front ()->
+    appendDoubleTremoloToMeasure (
       fCurrentDoubleTremoloClone);
 
   // forget about it
@@ -4500,18 +4387,17 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
 // #ifdef MF_TRACE_IS_ENABLED
 //       if (gTraceOahGroup->getTraceWords ()) {
 //         gLog <<
-//           "Converting words '" <<
+//           "Converting words " <<
 //           elt->asShortString () <<
-//           "' to tempo '" <<
+//           " to tempo " <<
 //           tempo->asShortString () <<
-//           '\'' <<
 //           std::endl;
 //       }
 // #endif // MF_TRACE_IS_ENABLED
 //
 //       // append the tempo to the current voice clone
-//       fCurrentVoiceClone->
-//         appendTempoToVoice (tempo);
+//       fMeasuresStack.front ()->
+//         appendTempoToMeasure (tempo);
 //
 //       wordsHasBeenHandled = true;
 //     }
@@ -5306,9 +5192,9 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
     std::stringstream ss;
 
     ss <<
-            "The first note of voice clone GFFF '" <<
+            "The first note of voice clone GFFF " <<
             fCurrentVoiceClone->getVoiceName () <<
-            "' is '";
+            " is ";
 
           if (fFirstNoteCloneInVoice) {
             ss <<
@@ -5405,9 +5291,9 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
       std::stringstream ss;
 
       ss <<
-        "Optimizing grace notes on trilled note '" <<
+        "Optimizing grace notes on trilled note " <<
         elt->asShortString () <<
-        "' as after grace notes " <<
+        " as after grace notes " <<
         ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
@@ -5493,8 +5379,9 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         std::stringstream ss;
 
         ss <<
-          "Appending rest note clone '" <<
-          fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
+          "Appending rest note clone " <<
+          fCurrentNonGraceNoteClone->asShortString () <<
+          " to voice clone " <<
           fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
@@ -5503,8 +5390,8 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      fCurrentVoiceClone->
-        appendNoteToVoiceClone (
+      fMeasuresStack.front ()->
+        appendNoteToMeasure (
           fCurrentNonGraceNoteClone);
       break;
 
@@ -5515,8 +5402,9 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         std::stringstream ss;
 
         ss <<
-          "Appending skip note clone '" <<
-          fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
+          "Appending skip note clone " <<
+          fCurrentNonGraceNoteClone->asShortString () <<
+          " to voice clone " <<
           fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
@@ -5525,8 +5413,8 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      fCurrentVoiceClone->
-        appendNoteToVoiceClone (
+      fMeasuresStack.front ()->
+        appendNoteToMeasure (
           fCurrentNonGraceNoteClone);
       break;
 
@@ -5536,8 +5424,9 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         std::stringstream ss;
 
         ss <<
-          "Appending unpitched note clone '" <<
-          fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
+          "Appending unpitched note clone " <<
+          fCurrentNonGraceNoteClone->asShortString () <<
+          " to voice clone " <<
           fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
@@ -5546,8 +5435,8 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      fCurrentVoiceClone->
-        appendNoteToVoiceClone (
+      fMeasuresStack.front ()->
+        appendNoteToMeasure (
           fCurrentNonGraceNoteClone);
       break;
 
@@ -5557,8 +5446,9 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         std::stringstream ss;
 
         ss <<
-          "Appending regular note clone '" <<
-          fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
+          "Appending regular note clone " <<
+          fCurrentNonGraceNoteClone->asShortString () <<
+          " to voice clone " <<
           fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
@@ -5567,8 +5457,6 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
       }
 #endif // MF_TRACE_IS_ENABLED
 
-//       fCurrentVoiceClone->
-//         appendNoteToVoiceClone (
       fMeasuresStack.front ()->
         appendNoteToMeasure (fCurrentNonGraceNoteClone);
       break;
@@ -5582,9 +5470,9 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             std::stringstream ss;
 
             ss <<
-              "Setting note '" <<
+              "Setting note " <<
               fCurrentNonGraceNoteClone->asString () <<
-              "', line " << fCurrentNonGraceNoteClone->getInputLineNumber () <<
+              ", line " << fCurrentNonGraceNoteClone->getInputLineNumber () <<
               ", as double tremolo first element" <<
               " in voice " <<
               fCurrentVoiceClone->getVoiceName () <<
@@ -5607,9 +5495,9 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             std::stringstream ss;
 
             ss <<
-              "Setting note '" <<
+              "Setting note " <<
               fCurrentNonGraceNoteClone->asString () <<
-              "', line " << fCurrentNonGraceNoteClone->getInputLineNumber () <<
+              ", line " << fCurrentNonGraceNoteClone->getInputLineNumber () <<
               ", as double tremolo second element" <<
               " in voice " <<
               fCurrentVoiceClone->getVoiceName () <<
@@ -5630,8 +5518,8 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           std::stringstream ss;
 
           ss <<
-            "note '" << fCurrentNonGraceNoteClone->asShortString () <<
-            "' belongs to a double tremolo, but is not marked as such";
+            "note " << fCurrentNonGraceNoteClone->asShortString () <<
+            " belongs to a double tremolo, but is not marked as such";
 
           msr2msrInternalError (
             gServiceRunData->getInputSourceName (),
@@ -5645,8 +5533,8 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         std::stringstream ss;
 
         ss <<
-          "double tremolo note '" << fCurrentNonGraceNoteClone->asShortString () <<
-          "' found outside of a double tremolo";
+          "double tremolo note " << fCurrentNonGraceNoteClone->asShortString () <<
+          " found outside of a double tremolo";
 
         msr2msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -5695,8 +5583,8 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         std::stringstream ss;
 
         ss <<
-          "grace note '" << fCurrentNonGraceNoteClone->asShortString () <<
-          "' found outside of any grace notes group";
+          "grace note " << fCurrentNonGraceNoteClone->asShortString () <<
+          " found outside of any grace notes group";
 
 //         msr2msrInternalError ( // JMI 0.9.67
         msr2msrInternalWarning(
@@ -5711,9 +5599,9 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceGraceNotes ()) {
           gLog <<
-            "Appending note '" <<
+            "Appending note " <<
             fCurrentNonGraceNoteClone->asShortString () <<
-            "' to the grace notes in voice " <<
+            " to the grace notes in voice " <<
             fCurrentVoiceClone->getVoiceName ();
 
           gWaeHandler->waeTrace (
@@ -5731,9 +5619,9 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceGraceNotes ()) {
           gLog <<
-            "Appending note '" <<
+            "Appending note " <<
             fCurrentNonGraceNoteClone->asShortString () <<
-            "' to the after grace notes in voice " <<
+            " to the after grace notes in voice " <<
             fCurrentVoiceClone->getVoiceName ();
 
           gWaeHandler->waeTrace (
@@ -5753,9 +5641,8 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         ss <<
           "both fCurrentGraceNoteGroupsClone and fPendingAfterGraceNoteGroup are null," <<
           std::endl <<
-          "cannot handle grace note'" <<
-          elt->asString () <<
-          "'";
+          "cannot handle grace note" <<
+          elt->asString ();
 
         msr2msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -5790,8 +5677,8 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
           // append current chord clone to the current voice,
           // only now that its duration is known
-                                              //           fCurrentVoiceClone->
-                                              //             appendChordToVoice (
+                                              //           fMeasuresStack.front ()->
+                                              //             appendChordToMeasure (
                                               //               fCurrentChordClone);
 
 //           // increment the current measure's accumulated duration
@@ -5891,7 +5778,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         appendNoteToTuplet (
           fCurrentNonGraceNoteClone);
 
-      fCurrentVoiceClone->
+      fCurrentVoiceClone-> // ZOULOU
         registerTupletNoteInVoice (fCurrentNonGraceNoteClone);
 
       break;
@@ -5915,8 +5802,8 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
               lpsrMelismaCommand::kMelismaStart);
 
         // append it to current voice clone
-        fCurrentVoiceClone->
-          appendOtherElementToVoice (melismaCommand);
+        fMeasuresStack.front ()->
+          appendOtherElementToMeasure (melismaCommand);
 
         // append
         * /
@@ -6033,8 +5920,8 @@ void msr2msrTranslator::visitStart (S_msrAccordionRegistration& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // append the accordion registration to the voice clone
-  fCurrentVoiceClone->
-    appendAccordionRegistrationToVoice (elt);
+  fMeasuresStack.front ()->
+    appendAccordionRegistrationToMeasure (elt);
 }
 
 //________________________________________________________________________
@@ -6055,8 +5942,8 @@ void msr2msrTranslator::visitStart (S_msrHarpPedalsTuning& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // append the harp pedals tuning to the voice clone
-  fCurrentVoiceClone->
-    appendHarpPedalsTuningToVoice (elt);
+  fMeasuresStack.front ()->
+    appendHarpPedalsTuningToMeasure (elt);
 }
 
 //________________________________________________________________________
@@ -6348,8 +6235,9 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
       std::stringstream ss;
 
       ss <<
-        "chord '" << elt->asString () <<
-        "' belongs to a double tremolo, but is not marked as such";
+        "chord " <<
+        elt->asString () <<
+        " belongs to a double tremolo, but is not marked as such";
 
       msr2msrInternalError (
         gServiceRunData->getInputSourceName (),
@@ -6367,12 +6255,12 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
   }
 
   else {
-    // DON'T append current chord chone to the current voice clone yet,
+    // DON'T append current chord chone to the current voice clone yet, ZOULOU
     // wait until its first note is appended to it,
     // i.e. its duration is known
     // append current chord clone to the current voice
-    fCurrentVoiceClone->
-      appendChordToVoice (
+    fMeasuresStack.front ()->
+      appendChordToMeasure (
         fCurrentChordClone);
   }
 
@@ -6416,7 +6304,7 @@ void msr2msrTranslator::visitEnd (S_msrChord& elt)
 
   else {
 //     // append current chord clone to the current voice
-//     fCurrentVoiceClone->
+//     fMeasuresStack.front ()->
 //       appendChordToVoice (
 //         fCurrentChordClone);
   }
@@ -6499,6 +6387,14 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fTupletsStack.empty (),
+    "fTupletsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   fTupletsStack.pop_front ();
 
   if (! fTupletsStack.empty ()) {
@@ -6510,9 +6406,8 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
     ss <<
         "Adding nested tuplet " <<
       elt->asString () <<
-        " to stack top tuplet '" <<
-      fTupletsStack.front ()->asString () <<
-      "'";
+        " to stack top tuplet " <<
+      fTupletsStack.front ()->asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -6543,8 +6438,8 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    fCurrentVoiceClone->
-      appendTupletToVoice (elt);
+    fMeasuresStack.front ()->
+      appendTupletToMeasure (elt);
   }
 }
 
@@ -6876,8 +6771,8 @@ void msr2msrTranslator::visitStart (S_msrBarCheck& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    appendBarCheckToVoice (elt);
+  fMeasuresStack.front ()->
+    appendBarCheckToMeasure (elt);
 }
 
 void msr2msrTranslator::visitEnd (S_msrBarCheck& elt)
@@ -6914,8 +6809,8 @@ void msr2msrTranslator::visitStart (S_msrBarNumberCheck& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    appendBarNumberCheckToVoice (elt);
+  fMeasuresStack.front ()->
+    appendBarNumberCheckToMeasure (elt);
 }
 
 void msr2msrTranslator::visitEnd (S_msrBarNumberCheck& elt)
@@ -6952,8 +6847,8 @@ void msr2msrTranslator::visitStart (S_msrLineBreak& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    appendLineBreakToVoice (elt);
+  fMeasuresStack.front ()->
+    appendLineBreakToMeasure (elt);
 }
 
 void msr2msrTranslator::visitEnd (S_msrLineBreak& elt)
@@ -6990,8 +6885,8 @@ void msr2msrTranslator::visitStart (S_msrPageBreak& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentVoiceClone->
-    appendPageBreakToVoice (elt);
+  fMeasuresStack.front ()->
+    appendPageBreakToMeasure (elt);
 }
 
 void msr2msrTranslator::visitEnd (S_msrPageBreak& elt)
@@ -7043,65 +6938,45 @@ void msr2msrTranslator::visitStart (S_msrRepeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fCurrentVoiceClone->
-//     handleRepeatStartInVoiceClone (
-//       elt->getInputLineNumber (),
-//       elt);
-
-//   // create a repeat newborn clone
-//   S_msrRepeat
-//     repeatClone =
-//       createARepeatCloneAndStackIt (
-//         elt->getInputLineNumber (),
-//         "visitStart (S_msrRepeat& elt)");
-
-
 // ZOULOU ZOULOU
 
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeats ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Creating a repeat and stacking it in voice " <<
-//       fVoiceName <<
-//       " (" << context << ")" <<
-//       ", line " << inputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   S_msrRepeat
-//     result =
-//       msrRepeat::createAsWellAsItsCommonPart (
-// //       msrRepeat::create ( // ZOULOU ZOULOU
-//         inputLineNumber,
-//         2, // repeatTimes, default value JMI
-//         this);
-//
-//   // push it onto the voice's repeat descrs stack
-//   pushRepeatOntoVoiceRepeatsStack (
-//     inputLineNumber,
-//     result,
-//     "createARepeatAndStackIt()");
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//     displayVoiceRepeatsStackSummary (
-//       inputLineNumber,
-//       "createARepeatAndStackIt()");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
 
+    ss <<
+      "Creating a repeat in voice " <<
+      fCurrentVoiceClone->getVoiceName () <<
+      ", line " << elt->getInputLineNumber ();
 
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
+  S_msrRepeat
+    repeatClone =
+      elt->createRepeatNewbornClone (
+        fCurrentVoiceClone);
 
-//   // append it to the current segment clone
-//   fSegmentsStack.front ()->
-//     appendRepeatToSegment (repeatClone);
+  // push it onto the voice's repeat descrs stack
+  pushRepeatOntoRepeatsStack (
+    elt->getInputLineNumber (),
+    repeatClone,
+    "createARepeatAndStackIt()");
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
+    displayRepeatsStack (
+      elt->getInputLineNumber (),
+      "visitStart (S_msrRepeat& elt)");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // append it to the current segment clone
+  fSegmentsStack.front ()->
+    appendRepeatToSegment (repeatClone);
 }
 
 void msr2msrTranslator::visitEnd (S_msrRepeat& elt)
@@ -7137,14 +7012,12 @@ void msr2msrTranslator::visitEnd (S_msrRepeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fCurrentVoiceClone->
-//     handleRepeatEndInVoiceClone (
-//       elt->getInputLineNumber ());
-
   // pop the inner-most repeat from the repeat clones stack
-  popRepeatFromRepeatsStack (
-    elt->getInputLineNumber (),
-    "visitEnd (S_msrRepeat& elt)");
+  S_msrRepeat
+    innerMostRepeat =
+      popRepeatFromRepeatsStack (
+        elt->getInputLineNumber (),
+        "visitEnd (S_msrRepeat& elt)");
 }
 
 //________________________________________________________________________
@@ -7164,19 +7037,18 @@ void msr2msrTranslator::visitStart (S_msrRepeatCommonPart& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   S_msrSegment
-//     segmentClone =
-//       fCurrentVoiceClone->
-//         handleRepeatCommonPartStartInVoiceClone (
-//           elt->getInputLineNumber ());
-
   // create a repeat common part newborn clone
   S_msrRepeatCommonPart
     repeatCommonPartClone =
       elt->createRepeatCommonPartNewbornClone (
         fCurrentVoiceClone);
 
-  // push it onto the repeat clones stack
+  // attach it to the current repeat clone
+  fRepeatsStack.front ()->
+    setRepeatCommonPart (
+      repeatCommonPartClone);
+
+  // push it on the repeat elements stack
   pushRepeatElementOntoRepeatElementsStack (
     elt->getInputLineNumber (),
     repeatCommonPartClone);
@@ -7198,13 +7070,11 @@ void msr2msrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fCurrentVoiceClone->
-//     handleRepeatCommonPartEndInVoiceClone (
-//       elt->getInputLineNumber ());
-
-  // pop the inner-most repeat common part from the stack
-  popRepeatElementFromRepeatElementsStack (
-    elt->getInputLineNumber ());
+  // pop the inner-most repeat common part from the stack ZOULOU
+  S_msrRepeatElement
+    currentRepeatElement =
+      popRepeatElementFromRepeatElementsStack (
+        elt->getInputLineNumber ());
 }
 
 //________________________________________________________________________
@@ -7239,14 +7109,6 @@ void msr2msrTranslator::visitStart (S_msrRepeatEnding& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-//   S_msrSegment
-//     segmentClone =
-//       fCurrentVoiceClone->
-//         handleRepeatEndingStartInVoiceClone (
-//           elt->getInputLineNumber (),
-//           elt->getRepeatEndingKind (),
-//           elt->getRepeatEndingNumber ());
 
   // the container for the the original segment has just been cloned
   // and fCurrentSegmentClone has been set accordingly,
@@ -7295,15 +7157,11 @@ void msr2msrTranslator::visitEnd (S_msrRepeatEnding& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fCurrentVoiceClone->
-//     handleRepeatEndingEndInVoiceClone (
-//       elt->getInputLineNumber (),
-//       elt->getRepeatEndingNumber (),
-//       elt->getRepeatEndingKind ());
-
   // pop the inner-most repeat ending from the stack
-  popRepeatElementFromRepeatElementsStack (
-    elt->getInputLineNumber ());
+  S_msrRepeatElement
+    currentRepeatElement =
+      popRepeatElementFromRepeatElementsStack (
+        elt->getInputLineNumber ());
 }
 
 //________________________________________________________________________
@@ -7347,10 +7205,11 @@ void msr2msrTranslator::visitStart (S_msrMultipleMeasureRest& elt)
 //         fCurrentSegmentClone);
 
   // append it to the current voice clone
-  fCurrentVoiceClone->
-    cascadeAppendMultipleMeasureRestToVoice (
+  fRepeatsStack.front ()->
+    appendMultipleMeasureRestToRepeat (
       elt->getInputLineNumber (),
-      fCurrentMultipleMeasureRestsClone);
+      fCurrentMultipleMeasureRestsClone,
+      "visitStart (S_msrMultipleMeasureRest& elt)");
 
   fOnGoingMultipleMeasureRests = true;
 }
@@ -7418,7 +7277,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeat& elt)
     std::stringstream ss;
 
     ss <<
-      "Handling measures repeat start in voice clone \"" <<
+      "Handling measure repeat start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
@@ -7428,7 +7287,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fCurrentVoiceClone->
+//   fMeasuresStack.front ()->
 //     handleMeasureRepeatStartInVoiceClone (
 //       elt->getInputLineNumber (),
 //       elt);
@@ -7453,13 +7312,13 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeat& elt)
   --gIndenter;
 
 /* JMI
-  // set last segment as the measures repeat pattern segment
+  // set last segment as the measure repeat pattern segment
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
     std::stringstream ss;
 
     ss <<
-      "Setting current last segment as measures repeat pattern segment in voice " <<
+      "Setting current last segment as measure repeat pattern segment in voice " <<
       fCurrentVoiceClone->getVoiceName () <<;
 
     gWaeHandler->waeTrace (
@@ -7474,7 +7333,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeat& elt)
     std::stringstream ss;
 
     ss <<
-      "Handling measures repeat end in voice clone \"" <<
+      "Handling measure repeat end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
@@ -7484,7 +7343,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fCurrentVoiceClone->
+//   fMeasuresStack.front ()->
 //     handleMeasureRepeatEndInVoiceClone (
 //       elt->getInputLineNumber ());
 }
@@ -7517,7 +7376,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fCurrentVoiceClone->
+//   fMeasuresStack.front ()->
 //     handleMeasureRepeatPatternStartInVoiceClone (
 //       elt->getInputLineNumber ());
 }
@@ -7549,7 +7408,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fCurrentVoiceClone->
+//   fMeasuresStack.front ()->
 //     handleMeasureRepeatPatternEndInVoiceClone (
 //       elt->getInputLineNumber ());
 }
@@ -7582,7 +7441,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fCurrentVoiceClone->
+//   fMeasuresStack.front ()->
 //     handleMeasureRepeatReplicasStartInVoiceClone (
 //       elt->getInputLineNumber ());
 }
@@ -7615,7 +7474,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fCurrentVoiceClone->
+//   fMeasuresStack.front ()->
 //     handleMeasureRepeatReplicasEndInVoiceClone (
 //       elt->getInputLineNumber ());
 }
@@ -7642,9 +7501,9 @@ void msr2msrTranslator::visitStart (S_msrBarLine& elt)
     std::stringstream ss;
 
     ss <<
-      "Handling '" <<
+      "Handling " <<
       elt->getBarLineCategory () <<
-      "' in voice " <<
+      " in voice " <<
       fCurrentVoiceClone->getVoiceName () ;
 
     gWaeHandler->waeTrace (
@@ -7653,11 +7512,7 @@ void msr2msrTranslator::visitStart (S_msrBarLine& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // append the barLine to the current voice clone
-//   fCurrentVoiceClone->
-//     appendBarLineToVoice (elt);
-
-  // finalize the current measure clone
+  // append the barLine to the current measure clone
   fMeasuresStack.front ()->
     appendBarLineToMeasure (elt);
 }
@@ -7795,17 +7650,16 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //     std::stringstream ss;
 //
 //     ss <<
-//           "Converting words '" <<
+//           "Converting words " <<
 //           elt->asShortString () <<
-//           "' to rehearsal mark '" <<
+//           " to rehearsal mark " <<
 //           rehearsalMark->asShortString () <<
-//           '\'' <<
 //           std::endl;
 //       }
 // #endif // MF_TRACE_IS_ENABLED
 //
 //       // append the rehearsalMark to the current voice clone
-//       fCurrentVoiceClone->
+//       fMeasuresStack.front ()->
 //         appendRehearsalMarkToVoice (rehearsalMark);
 //
 //       wordsHasBeenHandled = true;
@@ -7843,11 +7697,10 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //     std::stringstream ss;
 //
 //     ss <<
-//             "Converting words '" <<
+//             "Converting words " <<
 //             elt->asShortString () <<
-//             "' to dal segno element '" <<
+//             " to dal segno element " <<
 //             dalSegno->asShortString () <<
-//             '\'' <<
 //             std::endl;
 //         }
 // #endif // MF_TRACE_IS_ENABLED
@@ -7886,7 +7739,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //
 // /* JMI
 //         // append the current multiple measure rests to the current voice clone
-//         fCurrentVoiceClone->
+//         fMeasuresStack.front ()->
 //           cascadeAppendMultipleMeasureRestToVoice (
 //             elt->getInputLineNumber (),
 //             fCurrentMultipleMeasureRests);
@@ -7907,7 +7760,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //       // no
 //
 //       // append current measure clone to the current voice clone
-//       fCurrentVoiceClone->
+//       fMeasuresStack.front ()->
 //         addMeasureCloneToVoiceClone (
 //           elt->getInputLineNumber (),
 //           fMeasuresStack.front ());
@@ -7918,7 +7771,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //     // no
 //
 //     // append current measure clone to the current voice clone
-//     fCurrentVoiceClone->
+//     fMeasuresStack.front ()->
 //       addMeasureCloneToVoiceClone (
 //         elt->getInputLineNumber (),
 //         fMeasuresStack.front ());
@@ -7926,282 +7779,9 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 
 /* JMI
   // append current measure clone to the current voice clone
-  fCurrentVoiceClone->
+  fMeasuresStack.front ()->
     addMeasureCloneToVoiceClone (
       elt->getInputLineNumber (),
       fMeasuresStack.front ());
 */
-
-
-
-// void msr2msrTranslator::handleVoiceLevelRepeatStart (
-//   const mfInputLineNumber& inputLineNumber)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Handling a voice-level repeat start in voice \"" <<
-//       fCurrentVoiceClone->getVoiceName ();
-//
-//     ss << ", fVoiceLastSegment: ";
-//       ss << fVoiceSegment->asString ();
-// //     }
-// //     else {
-// //       ss << "[NULL]";
-// //     }
-//
-//     ss <<
-//       ", line " << inputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//     displayRepeatsStack (
-//       inputLineNumber,
-//       "handleVoiceLevelRepeatStart() 1");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   ++gIndenter;
-//
-// //   // is there a voice last segment?
-// //   if (fVoiceLastSegment) {
-//
-//     // fetch last segment's measure elements list
-//     std::list <S_msrSegmentElement>
-//       voiceLastSegmentElementsList =
-//         fVoiceSegment->
-//           getSegmentElementsList ();
-//
-//     // are there measures in the voice last segment?
-//     if (! voiceLastSegmentElementsList.empty ()) {
-//       // yes
-//
-//       // fetch last measure in the last segment
-//       S_msrMeasure
-//         lastMeasureInLastSegment =
-//           fVoiceSegment->
-//             getSegmentLastMeasure (); // JMI 0.9.63
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//       if (gTraceOahGroup->getTraceRepeatsDetails ()) {
-//         lastMeasureInLastSegment->
-//           displayMeasure (
-//             inputLineNumber,
-//             "lastMeasureInLastSegment - handleVoiceLevelRepeatStart() 2");
-//       }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//       // let's look at the last measure in detail
-//
-//       // fetch its elements list
-//       const std::list <S_msrMeasureElement>&
-//         lastMeasureElementsList =
-//           lastMeasureInLastSegment->
-//             getMeasureElementsList ();
-//
-//       if (! lastMeasureElementsList.empty ()) {
-//         // the last measure is not empty
-//
-//         mfPositionInMeasure
-//           measureCurrentPositionInMeasure =
-//             lastMeasureInLastSegment->
-//               getMeasureCurrentPositionInMeasure ();
-//
-//         mfWholeNotes
-//           fullMeasureWholeNotesDuration =
-//             lastMeasureInLastSegment->
-//               getFullMeasureWholeNotesDuration ();
-//
-//         // is there a measure splitting?
-//         if ( // JMI better criterion???
-//           measureCurrentPositionInMeasure.getNumerator () > 0
-//             &&
-//           measureCurrentPositionInMeasure.asWholeNotes ()
-//             <
-//           fullMeasureWholeNotesDuration
-//         ) {
-//           // yes this measure is not yet complete and should be split
-// #ifdef MF_TRACE_IS_ENABLED
-//           if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//             gLog <<
-//               "Splitting measure " <<
-//               lastMeasureInLastSegment->asShortString () <<
-//               " upon a repeat start in voice \"" <<
-//               fCurrentVoiceClone->getVoiceName () <<
-//         //               ", measureCurrentPositionInMeasure: " <<
-//               measureCurrentPositionInMeasure.asString () <<
-//               ", fullMeasureWholeNotesDuration: " <<
-//               fullMeasureWholeNotesDuration.asString () <<
-//               ", line " << inputLineNumber <<
-//               std::endl;
-//           }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// /* JMI
-//           // finalize lastMeasureInLastSegment
-//           lastMeasureInLastSegment->
-//             finalizeMeasure (
-//               inputLineNumber,
-//               msrMeasureRepeatContextKind::kMeasureRepeatContextNone,
-//               "handleVoiceLevelRepeatStart() 3");
-// */
-// //           // append last segment to initial voice elements list
-// //           appendVoiceLastSegmentToInitialVoiceElementsList (
-// //             inputLineNumber,
-// //             "handleVoiceLevelRepeatStart() 4");
-//
-//           // create a new last segment for the voice
-// #ifdef MF_TRACE_IS_ENABLED
-//           if (gTraceOahGroup->getTraceSegmentsBasics ()) {
-//             gLog <<
-//               "Creating a new last segment for a voice level repeat in voice \"" <<
-//               fCurrentVoiceClone->getVoiceName () <<
-//         //               ", line " << inputLineNumber <<
-//               std::endl;
-//           }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// //           createNewLastSegmentForVoice (
-// //             inputLineNumber,
-// //             "handleVoiceLevelRepeatStart() 5");
-//
-//           // create a new measure with the same number as the voice last measure
-//           // and append it to the voice,
-//           createAMeasureAndAppendItInVoice (
-//             inputLineNumber,
-//             333, //  JMI ???       previousMeasureEndInputLineNumber, 0.9.62 76
-//             lastMeasureInLastSegment->getMeasureNumber (),
-//             msrMeasureImplicitKind::kMeasureImplicitKindNo);
-//
-//         /* JMI
-//           // set it as created before a repeat
-//           voiceLastMeasure->
-//             setMeasureCreatedForARepeatKind ( // JMI 0.9.66
-//               msrMeasure::kMeasureCreatedForARepeatBefore);
-//               */
-//         }
-//         else {
-//           // no this measure is complete
-//           // JMI ???
-//         }
-//       }
-//
-//       else {
-//         // the last measure elements list is empty,
-//         // keep it for a new voice last segment
-//
-//         // remove last measure
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             "Removing the last measure in voice \"" <<
-//             fCurrentVoiceClone->getVoiceName () <<
-//       //             " (voice level start)" <<
-//             ", line " << inputLineNumber;
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, mfInputLineNumber (__LINE__),
-//             ss.str ());
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// //         S_msrMeasure
-// //           dummyMeasure = // JMI ??? 0.9.72
-// //             fVoiceSegment->
-// //               removeLastMeasureFromSegment (
-// //                 inputLineNumber,
-// //                 "handleVoiceLevelRepeatStart() 55");
-//
-// //         // append the voice last segment to the initial voice elements list
-// //         appendVoiceLastSegmentToInitialVoiceElementsList (
-// //           inputLineNumber,
-// //           "handleVoiceLevelRepeatStart() 555");
-//
-//         // create a new last segment containing a new measure for the voice
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             "Creating a new last segment with the first common part measure for voice \"" <<
-//             fCurrentVoiceClone->getVoiceName () << "\"" <<
-//             ", line " << inputLineNumber;
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, mfInputLineNumber (__LINE__),
-//             ss.str ());
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// //         createNewLastSegmentFromItsFirstMeasureForVoice (
-// //           inputLineNumber,
-// //           dummyMeasure,
-// //           "handleVoiceLevelRepeatStart() 5555");
-//       }
-//     }
-// //   }
-// //
-// //   else {
-// //     // no voice last segment JMI ???
-// //   }
-//
-//   // create the repeat and stack it
-//   S_msrRepeat
-//     voiceLevelRepeat =
-//       createARepeatCloneAndStackIt (
-//         inputLineNumber,
-//         "handleVoiceLevelRepeatStart() 10");
-//
-//   // create the repeat common part
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Creating a repeat common part upon its voice-level start in voice " <<
-//       fCurrentVoiceClone->getVoiceName () <<
-//       ", line " << inputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// //   S_msrRepeatCommonPart
-// //     repeatCommonPart =
-// //       msrRepeatCommonPart::create (
-// //         inputLineNumber,
-// //         voiceLevelRepeat);
-// //
-// //   // register it in voiceLevelRepeat
-// //   voiceLevelRepeat->
-// //     setRepeatCommonPart (
-// //       repeatCommonPart);
-//
-//   // set voiceLevelRepeat as having an explicit start
-//   voiceLevelRepeat->
-//     setRepeatExplicitStartKind (
-//       msrRepeatExplicitStartKind::kRepeatExplicitStartYes);
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//     displayRepeatsStack (
-//       inputLineNumber,
-//       "handleVoiceLevelRepeatStart() 11");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   --gIndenter;
-// }
 

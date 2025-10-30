@@ -13887,7 +13887,7 @@ The <measure-repeat> element specifies a notation style for repetitions.
     std::stringstream ss;
 
     ss <<
-      "Creating measures repeat from its first measures" <<
+      "Creating measure repeat from its first measures" <<
       "in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
       ", fCurrentMultipleMeasureRestMeasuresNumber: " <<
@@ -13918,7 +13918,7 @@ The <measure-repeat> element specifies a notation style for repetitions.
     std::stringstream ss;
 
     ss <<
-      "Appending measures repeat " <<
+      "Appending measure repeat " <<
       "to part " <<
       fCurrentPart->fetchPartNameForTrace () <<
       ", line " << elt->getInputLineNumber ();

@@ -893,8 +893,8 @@ S_mfcVersion mfcVersionsHistory::fetchMostRecentVersion () const
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    fVersionsList.size () > 0,
-    "fVersionsList is empty");
+    ! fVersionsList.empty (),
+    "fVersionsList is EMPTY");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return fVersionsList.back ();

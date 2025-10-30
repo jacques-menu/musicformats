@@ -817,7 +817,7 @@ EXP void setGlobalLanguage (mfLanguageKind languageKind)
         std::stringstream ss;
 
         ss <<
-          "Attempt at setting fEarlyLanguageKind to kMusicFormatsLanguage_UNKNOWN_" <<
+          "Attempting to set fEarlyLanguageKind to kMusicFormatsLanguage_UNKNOWN_" <<
           std::endl;
 
         oahError (ss.str ());

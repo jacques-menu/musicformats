@@ -558,7 +558,7 @@ if (false) // JMI
   fCurrentVisitedMsrScore->
     setInhibitMeasureRepeatReplicasBrowsing ();
 
-  // inhibit the browsing of measures repeat replicas,
+  // inhibit the browsing of measure repeat replicas,
   // since Lilypond only needs the measure number
 // if (false) // JMI 0.9.67
 //   fVisitedLpsrScore->
@@ -1429,9 +1429,9 @@ std::string lpsr2lilypondTranslator::notePitchAsLilypondString (
           std::stringstream ss;
 
           ss <<
-            "notePitchAsLilypondString() 3: fCurrentOctaveEntryReference is '" <<
+            "notePitchAsLilypondString() 3: fCurrentOctaveEntryReference is " <<
             fCurrentOctaveEntryReference->asString () <<
-            "' upon note " << note->asString () <<
+            " upon note " << note->asString () <<
             ", line " << note->getInputLineNumber ();
 
           gWaeHandler->waeTrace (
@@ -1811,9 +1811,9 @@ void lpsr2lilypondTranslator::generateNoteHeadColor (
       std::stringstream ss;
 
       ss <<
-        "note RGB color '" <<
+        "note RGB color " <<
         noteRGB <<
-        "' is ill-formed" <<
+        " is ill-formed" <<
         ", line " << note->getInputLineNumber ();
 
       lpsr2lilypondInternalError (
@@ -1873,9 +1873,9 @@ void lpsr2lilypondTranslator::generateNoteLigaturesList (
               std::stringstream ss;
 
               ss <<
-                "Ligature vertical flipping factore for note '" <<
+                "Ligature vertical flipping factore for note " <<
                 note->asString () <<
-                "' in voice \"" <<
+                " in voice \"" <<
                 noteVoice->getVoicePathLikeName () <<
                 "\" is " <<
                 ligatureVerticalFlippingFactor <<
@@ -4512,9 +4512,9 @@ R"(\once\override BreathingSign.text = \markup {\musicglyph #"scripts.caesura.st
         std::stringstream ss;
 
         ss <<
-          "note articulation '" <<
+          "note articulation " <<
           articulation->asString () <<
-          "' has 'fermata' kind, but is not of type S_msrFermata" <<
+          " has 'fermata' kind, but is not of type S_msrFermata" <<
           ", line " << articulation->getInputLineNumber ();
 
         lpsr2lilypondInternalError (
@@ -4704,9 +4704,9 @@ R"(\once\override BreathingSign.text = \markup {\musicglyph #"scripts.caesura.st
         std::stringstream ss;
 
         ss <<
-          "chord articulation '" <<
+          "chord articulation " <<
           articulation->asString () <<
-          "' has 'fermata' kind, but is not of type S_msrFermata" <<
+          " has 'fermata' kind, but is not of type S_msrFermata" <<
           ", line " << articulation->getInputLineNumber ();
 
         lpsr2lilypondInternalError (
@@ -5589,10 +5589,9 @@ void lpsr2lilypondTranslator::transposeDiatonicError (
   std::stringstream ss;
 
   ss <<
-    "diatonic '" << transposeDiatonic <<
-    "' is not consistent with " <<
-    "chromatic '" << transposeChromatic <<
-    "'";
+    "diatonic " << transposeDiatonic <<
+    " is not consistent with " <<
+    "chromatic " << transposeChromatic;
 
   lpsr2lilypondError (
     gServiceRunData->getInputSourceName (),
@@ -9502,9 +9501,8 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting lpsrPartGroupBlock for '" <<
+        "% --> Start visiting lpsrPartGroupBlock for " <<
         partGroup->asShortString () <<
-        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -9913,7 +9911,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting lpsrPartBlock for '" <<
+        "% --> Start visiting lpsrPartBlock for " <<
         part->asShortString () <<
         ", line " << elt->getInputLineNumber () <<
         std::endl;
@@ -10868,7 +10866,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
        semiTonesPitchAndOctaveAsLilypondString <<
        std::endl <<
        "\\transpose " <<
-       semiTonesPitchAndOctaveAsLilypondString << cLilyPondSpace << "c'" <<
+       semiTonesPitchAndOctaveAsLilypondString << cLilyPondSpace << "c'" << // JMI 0.9.76
       std::endl;
   }
 
@@ -13086,8 +13084,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting msrVoiceStaffChange '" <<
-        elt->asString () << '\'' <<
+        "% --> Start visiting msrVoiceStaffChange " <<
+        elt->asString () <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -13113,9 +13111,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
     std::stringstream ss;
 
     ss <<
-      "*** There is staff change" << // for chord member note '" <<
+      "*** There is staff change" << // for chord member note " <<
 //       fCurrentNote->asShortString () <<
-//       "' in voice \"" <<
+//       " in voice \"" <<
 //       voiceToInsertInto->getPartPathLikeName () <<
 // //       " from staff " << fPreviousNoteMusicXMLStaffNumber <<
 //       " to staff " << landingStaff->asShortString () <<
@@ -13165,9 +13163,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting msrHarmony '" <<
+        "% --> Start visiting msrHarmony " <<
         elt->asString () <<
-        '\'' <<
 //         ", fCurrentTupletsStack.size (): " <<
 //         fCurrentTupletsStack.size () <<
         ", fOnGoingChord: " <<
@@ -13302,9 +13299,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting msrFiguredBass '" <<
+        "% --> Start visiting msrFiguredBass " <<
         elt->asString () <<
-        '\'' <<
 //         ", fCurrentTupletsStack.size (): " <<
 //         fCurrentTupletsStack.size () <<
         ", fOnGoingChord: " <<
@@ -13399,9 +13395,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting msrBassFigure '" <<
+        "% --> Start visiting msrBassFigure " <<
         elt->asString () <<
-        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -13531,9 +13526,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> End visiting msrFiguredBass '" <<
+        "% --> End visiting msrFiguredBass " <<
         elt->asString () <<
-        '\'' <<
         ", line " << elt->getInputLineNumber () <<
         std::endl;
 
@@ -13620,8 +13614,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
       std::stringstream ss;
 
       ss <<
-        "%--> Start visiting msrSegment '" <<
-        elt->getSegmentAbsoluteNumber () << '\'' <<
+        "%--> Start visiting msrSegment " <<
+        elt->getSegmentAbsoluteNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -13666,8 +13660,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
       std::stringstream ss;
 
       ss <<
-        "%--> End visiting msrSegment '" <<
-        elt->getSegmentAbsoluteNumber () << '\'' <<
+        "%--> End visiting msrSegment " <<
+        elt->getSegmentAbsoluteNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -13724,11 +13718,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting msrMeasure '" << fCurrentMeasureNumber << '\'' <<
+        "% --> Start visiting msrMeasure " << fCurrentMeasureNumber <<
         ", measureKind: " << measureKind <<
         ", measureEndRegularKind: " <<
         elt-> getMeasureEndRegularKind () <<
-        ", fCurrentMeasureNumber: '" << fCurrentMeasureNumber << '\'' <<
+        ", fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
         ", fOnGoingMultipleMeasureRests: " << fOnGoingMultipleMeasureRests <<
         ", line " << elt->getInputLineNumber () <<
         std::endl;
@@ -13798,9 +13792,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
         ss <<
           std::endl <<
-          "Generating a box around LilyPond measure number '" <<
+          "Generating a box around LilyPond measure number " <<
           fCurrentMeasureNumber <<
-          "', line " << elt->getInputLineNumber () << " ===-->";
+          ", line " << elt->getInputLineNumber () << " ===-->";
 
         gWaeHandler->waeTrace (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -13836,9 +13830,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
           ss <<
             std::endl <<
-            "Resetting LilyPond measure number from '" <<
+            "Resetting LilyPond measure number from " <<
             fCurrentMeasureNumber <<
-            "' to " <<
+            " to " <<
             lilypondMeasureNumber <<
             "', line " << elt->getInputLineNumber () << " ===-->";
 
@@ -13860,9 +13854,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
           ss <<
             std::endl <<
-            "Cannot reset measure LilyPond number from '" <<
+            "Cannot reset measure LilyPond number from " <<
             fCurrentMeasureNumber <<
-            "' to " <<
+            " to " <<
             lilypondMeasureNumber <<
             ": they're one and the same" <<
             "', line " << elt->getInputLineNumber () << " ===-->";
@@ -13999,8 +13993,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //         std::stringstream ss;
 //
 //         ss <<
-//           "measure '" << fCurrentMeasureNumber <<
-//           "' is of unknown kind in lpsr2lilypondTranslator";
+//           "measure " << fCurrentMeasureNumber <<
+//           " is of unknown kind in lpsr2lilypondTranslator";
 //
 // // if (false) // JMI
 // //         lpsr2lilypondInternalError (
@@ -14122,8 +14116,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //           std::stringstream ss;
 //
 //           ss <<
-//             "underfull measure '" << fCurrentMeasureNumber <<
-//             "' has actually the full measure whole notes";
+//             "underfull measure " << fCurrentMeasureNumber <<
+//             " has actually the full measure whole notes";
 //
 //      // JMI       lpsr2lilypondInternalError (
 //           lpsr2lilypondInternalWarning (
@@ -14317,13 +14311,12 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> End visiting msrMeasure '" <<
+        "% --> End visiting msrMeasure " <<
         fCurrentMeasureNumber <<
-        ", measureKind: '" << measureKind << '\'' <<
-        ", measureEndRegularKind: '" <<
+        ", measureKind: " << measureKind <<
+        ", measureEndRegularKind: " <<
         elt-> getMeasureEndRegularKind () <<
-        '\'' <<
-        ", elt->getMeasureNumber (): '" << elt->getMeasureNumber () << '\'' <<
+        ", elt->getMeasureNumber (): " << elt->getMeasureNumber () <<
         ", fOnGoingMultipleMeasureRests: " << fOnGoingMultipleMeasureRests <<
         ", line " << elt->getInputLineNumber () <<
         std::endl;
@@ -14361,9 +14354,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
     ss <<
       ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
-      ", measureEndRegularKind: '" <<
+      ", measureEndRegularKind: " <<
       elt-> getMeasureEndRegularKind () <<
-      ", elt->getMeasureNumber (): " << elt->getMeasureNumber () << '\'' <<
+      ", elt->getMeasureNumber (): " << elt->getMeasureNumber () <<
       ", fOnGoingMultipleMeasureRests: " << fOnGoingMultipleMeasureRests <<
       ", line " << elt->getInputLineNumber () <<
       " ===-->";
@@ -14604,9 +14597,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
           ss <<
             std::endl <<
-            "Adding a LilyPond line break after measure number '" <<
+            "Adding a LilyPond line break after measure number " <<
             fCurrentMeasureNumber <<
-            "', line " << elt->getInputLineNumber () << " ===-->";
+            ", line " << elt->getInputLineNumber () << " ===-->";
 
           gWaeHandler->waeTrace (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -14625,9 +14618,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
      if (gTraceOahGroup->getTraceLineBreaks ()) { // JMI
         ss <<
           std::endl <<
-          "Measure number '" <<
+          "Measure number " <<
           fCurrentMeasureNumber <<
-          "' not found in gGlobalLpsr2lilypondOahGroup->getBreakLineAfterMeasureNumberSet ()" <<
+          " not found in gGlobalLpsr2lilypondOahGroup->getBreakLineAfterMeasureNumberSet ()" <<
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
@@ -14654,9 +14647,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
           ss <<
             std::endl <<
-            "Adding a LilyPond page break after measure number '" <<
+            "Adding a LilyPond page break after measure number " <<
             fCurrentMeasureNumber <<
-            "', line " << elt->getInputLineNumber () << " ===-->";
+            ", line " << elt->getInputLineNumber () << " ===-->";
 
           gWaeHandler->waeTrace (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -14677,9 +14670,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
         ss <<
           std::endl <<
-          "Measure number '" <<
+          "Measure number " <<
           fCurrentMeasureNumber <<
-          "' not found in gGlobalLpsr2lilypondOahGroup->getBreakPageAfterMeasureNumberSet ()" <<
+          " not found in gGlobalLpsr2lilypondOahGroup->getBreakPageAfterMeasureNumberSet ()" <<
           ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
@@ -14865,9 +14858,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting msrSyllable '" <<
+        "% --> Start visiting msrSyllable " <<
         elt->asString () <<
-        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -14931,11 +14923,10 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
     fLilypondCodeStream <<
       noteTheSyllableIsAttachedTo->
         noteCoreAsString () <<
-        ", measure '" <<
+        ", measure " <<
       noteTheSyllableIsAttachedTo->
         getMeasureElementUpLinkToMeasure ()->
           getMeasureNumber () <<
-      '\'' <<
       std::endl;
 
     // get the note ties list
@@ -17312,9 +17303,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> End visiting msrSyllable '" <<
+        "% --> End visiting msrSyllable " <<
         elt->asString () <<
-        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -17349,9 +17339,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrClefKeyTimeSignatureGroup& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting msrClefKeyTimeSignatureGroup '" <<
+        "% --> Start visiting msrClefKeyTimeSignatureGroup " <<
         elt->asString () <<
-        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -17385,9 +17374,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClefKeyTimeSignatureGroup& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> End visiting msrClefKeyTimeSignatureGroup '" <<
+        "% --> End visiting msrClefKeyTimeSignatureGroup " <<
         elt->asString () <<
-        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -17422,9 +17410,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting msrClef '" <<
+        "% --> Start visiting msrClef " <<
         elt->asString () <<
-        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -17615,9 +17602,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClef& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> End visiting msrClef '" <<
+        "% --> End visiting msrClef " <<
         elt->asString () <<
-        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -17652,9 +17638,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting msrKey '" <<
+        "% --> Start visiting msrKey " <<
         elt->asString () <<
-        '\'' <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -17829,11 +17814,10 @@ void lpsr2lilypondTranslator::visitEnd (S_msrKey& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> End visiting msrKey '" <<
+        "% --> End visiting msrKey " <<
         elt->asString () <<
-        "'"  <<
         ", line " << elt->getInputLineNumber () <<
-      std::endl;
+        std::endl;
 
       if (traceLpsrVisitors) {
         gWaeHandler->waeTrace (
@@ -18556,8 +18540,9 @@ If the double element is present, it indicates that the music is doubled one oct
         std::stringstream ss;
 
         ss <<
-          "fTransposition chromatic '" << transposeChromatic <<
-          "' is not between -12 and 12, ignored";
+          "fTransposition chromatic " <<
+          transposeChromatic <<
+          " is not between -12 and 12, ignored";
 
         lpsr2lilypondError (
           gServiceRunData->getInputSourceName (),
@@ -18611,9 +18596,9 @@ If the double element is present, it indicates that the music is doubled one oct
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTranspositions ()) {
     fLilypondCodeStream << // JMI
-      "Handlling transpose '" <<
+      "Handlling transpose " <<
       elt->transposeAsString () <<
-      "' ignored because it is already present in voice \"" <<
+      " ignored because it is already present in voice \"" <<
       fCurrentVoice->getVoicePathLikeName () <<
       / * JMI
       getStaffPathLikeName () <<
@@ -21792,9 +21777,9 @@ slash = \tweak Flag.stroke-style grace \etc
         std::stringstream ss;
 
         fLilypondCodeStream <<
-          "grace notes group elements list in '" <<
+          "grace notes group elements list in " <<
           graceNotesGroup->asString () <<
-          "' is empty" <<
+          " is empty" <<
           ", line " << graceNotesGroup->getInputLineNumber ();
 
         lpsr2lilypondInternalError (
@@ -21816,9 +21801,9 @@ slash = \tweak Flag.stroke-style grace \etc
     std::stringstream ss;
 
     fLilypondCodeStream <<
-      "grace notes group elements list in '" <<
+      "grace notes group elements list in " <<
       graceNotesGroup->asString () <<
-      "' is empty" <<
+      " is empty" <<
       ", line " << graceNotesGroup->getInputLineNumber ();
 
     lpsr2lilypondInternalError (
@@ -23025,7 +23010,7 @@ void lpsr2lilypondTranslator::generateNoteHeadAndStem (
 //                 ":" <<
 //                 tempo->getInputLineNumber () <<
 //                 ": " <<
-//                 "ignoring 'msrPrintObjectKind::kPrintObjectNo'" <<
+//                 "ignoring 'msrPrintObjectKind::kPrintObjectNo" <<
 //                 " %}" <<
 //                 std::endl;
 //             }
@@ -23907,9 +23892,9 @@ void lpsr2lilypondTranslator:: generateArticulations (
           std::stringstream ss;
 
           ss <<
-            "note articulation '" <<
+            "note articulation " <<
             articulation->asString () <<
-            "' has 'fermata' kind, but is not of type S_msrFermata" <<
+            " has 'fermata' kind, but is not of type S_msrFermata" <<
             ", line " << articulation->getInputLineNumber ();
 
           lpsr2lilypondInternalError (
@@ -26790,9 +26775,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
         std::stringstream ss;
 
         ss <<
-          "msrPedal '" <<
+          "msrPedal " <<
           elt->asShortString () <<
-          "' has no pedal type";
+          " has no pedal type";
 
         lpsr2lilypondInternalError (
           gServiceRunData->getInputSourceName (),
@@ -28027,9 +28012,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondRepeats ()) {
     fLilypondCodeStream <<
-      "% ===**** fRepeatDescrsStack.back (): '" <<
+      "% ===**** fRepeatDescrsStack.back (): " <<
       fRepeatDescrsStack.back ()->asString () <<
-      '\'' <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -28268,7 +28252,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
       elt->fetchMeasureRepeatPatternMeasuresNumber ();
 
     fLilypondCodeStream <<
-      "% measures repeat, line " << elt->getInputLineNumber () << ":" <<
+      "% measure repeat, line " << elt->getInputLineNumber () << ":" <<
       std::endl;
 
     int fieldWidth = 24;
@@ -28289,7 +28273,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
 
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
-      " % start of measures repeat" <<
+      " % start of measure repeat" <<
       mfSingularOrPlural (
         elt->fetchMeasureRepeatReplicasNumber (),
         "replica",
@@ -28350,7 +28334,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
 
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
-      "% end of measures repeat" <<
+      "% end of measure repeat" <<
       mfSingularOrPlural (
         elt->fetchMeasureRepeatReplicasNumber (),
         "replica",
@@ -28463,7 +28447,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
 
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
     fLilypondCodeStream <<
-      " % start of measures repeat replicas" <<
+      " % start of measure repeat replicas" <<
       std::endl;
   }
 
@@ -28908,9 +28892,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
               std::stringstream ss;
 
               ss <<
-                "note articulation '" <<
+                "note articulation " <<
                 articulation->asString () <<
-                "' has 'fermata' kind, but is not of type S_msrFermata" <<
+                " has 'fermata' kind, but is not of type S_msrFermata" <<
                 ", line " << articulation->getInputLineNumber ();
 
               lpsr2lilypondInternalError (

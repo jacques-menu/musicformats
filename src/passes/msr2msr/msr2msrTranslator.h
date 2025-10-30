@@ -107,8 +107,11 @@ struct msrHiddenMeasureAndBarLineDescr : public smartable
     mfInputLineNumber     fInputLineNumber;
     S_msrDalSegno         fDalSegno;
 };
-typedef SMARTP<msrHiddenMeasureAndBarLineDescr> S_msrHiddenMeasureAndBarLineDescr;
-EXP std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt);
+
+using S_msrHiddenMeasureAndBarLineDescr = SMARTP<msrHiddenMeasureAndBarLineDescr>;
+
+EXP std::ostream& operator << (
+  std::ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt);
 
 //________________________________________________________________________
 class EXP msr2msrTranslator :
@@ -163,15 +166,15 @@ class EXP msr2msrTranslator :
   // clef, key and time signature handling
 
   public                      visitor<S_msrClefKeyTimeSignatureGroup>,
-//   public                      visitor<S_msrClef>,
+  public                      visitor<S_msrClef>,
 
   // keys
 
-//   public                      visitor<S_msrKey>,
+  public                      visitor<S_msrKey>,
 
   // time signatures
 
-//   public                      visitor<S_msrTimeSignature>,
+  public                      visitor<S_msrTimeSignature>,
 
   // transposition
 
@@ -365,6 +368,11 @@ class EXP msr2msrTranslator :
                                 const S_msrPathToVoice& pathToVoice);
 
   protected:
+
+    /*
+      these visitStart() and visitEnd() methods can be overriden
+      in sub-classes such a msr2lpsrTranslator
+    */
 
     virtual void              visitStart (S_msrScore& elt);
     virtual void              visitEnd   (S_msrScore& elt);
@@ -621,7 +629,12 @@ class EXP msr2msrTranslator :
     virtual void              visitStart (S_msrMidiTempo& elt);
     virtual void              visitEnd   (S_msrMidiTempo& elt);
 
-  private:
+  protected:
+
+    /*
+      these fields and methods are thus accessible
+      in sub-classes such a msr2lpsrTranslator
+    */
 
     // the MSR score we're visiting
     // ------------------------------------------------------
@@ -703,12 +716,11 @@ class EXP msr2msrTranslator :
     // measures
     // ------------------------------------------------------
 
-    mfMeasureNumber           fCurrentMeasureNumber;
     std::list <S_msrMeasure>  fMeasuresStack;
-
-    void                      displayMeasuresStack (
-                                const mfInputLineNumber& inputLineNumber,
-                                const std::string&       context);
+//
+//     void                      displayMeasuresStack (
+//                                 const mfInputLineNumber& inputLineNumber,
+//                                 const std::string&       context);
 
 
     // repeats
@@ -717,25 +729,18 @@ class EXP msr2msrTranslator :
     // a stack is needed to handle pending repeats, which can be nested
     std::list <S_msrRepeat>   fRepeatsStack;
 
-//     S_msrRepeat               createARepeatCloneAndStackIt (
-//                                 const mfInputLineNumber& inputLineNumber,
-//                                 const std::string&       context);
-
     void                      pushRepeatOntoRepeatsStack (
                                 const mfInputLineNumber& inputLineNumber,
                                 const S_msrRepeat&       repeat,
                                 const std::string&       context);
 
-    void                      popRepeatFromRepeatsStack (
+    S_msrRepeat               popRepeatFromRepeatsStack (
                                 const mfInputLineNumber& inputLineNumber,
                                 const std::string&       context);
 
     void                      displayRepeatsStack (
                                 const mfInputLineNumber& inputLineNumber,
                                 const std::string&       context);
-
-//     void                      handleVoiceLevelRepeatStart (
-//                                 const mfInputLineNumber& inputLineNumber);
 
     void                      handleNestedRepeatStartInVoice (
                                 const mfInputLineNumber& inputLineNumber);
@@ -922,10 +927,10 @@ class EXP msr2msrTranslator :
     S_msrSyllable             fCurrentSyllableClone;
     Bool                      fOnGoingSyllableExtend;
 
-
     // current ongoing values display
     // ------------------------------------------------------
-    void                      displayCurrentOnGoingValues ();
+    virtual void              displayCurrentOnGoingValues ();
+
 };
 
 

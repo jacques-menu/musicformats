@@ -6395,11 +6395,11 @@ oahFactorizedStringAtom::oahFactorizedStringAtom (
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
     stringValueDescriptor.size () > 0,
-    "stringValueDescriptor is empty");
+    "stringValueDescriptor is EMPTY");
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
     stringValueDescriptor.size () > 0,
-    "stringValueDescriptor is empty");
+    "stringValueDescriptor is EMPTY");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 }
 
@@ -6426,7 +6426,7 @@ void oahFactorizedStringAtom::addStringAtom (
 
     ss <<
       "option long name \"" << stringAtomLongName <<
-      "\" is empty";
+      "\" is EMPTY";
 
     stringAtom->print (ss);
 
@@ -6445,7 +6445,7 @@ void oahFactorizedStringAtom::addStringAtom (
       ss <<
         "Option short name \"" << stringAtomShortName << "\"" <<
         " for long name \"" << stringAtomLongName << "\"" <<
-        " is empty";
+        " is EMPTY";
 
       oahWarning (ss.str ());
     }
@@ -7223,7 +7223,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtom (
       ss <<
         "Option long name \"" <<
         booleanAtomLongName <<
-        "\" is empty, atom \"" <<
+        "\" is EMPTY, atom \"" <<
         fLongNamesPrefixName <<
         "\" cannot be used in a multiplex booleans atom";
 

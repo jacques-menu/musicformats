@@ -517,5 +517,37 @@ std::ostream& operator << (std::ostream& os, const S_msrMultipleMeasureRest& elt
   return os;
 }
 
+std::string fetchMultipleMeasureRestAsShortString (
+  const S_msrMultipleMeasureRest& multipleMeasureRest)
+{
+  std::string result;
+
+  if (multipleMeasureRest) {
+    result =
+      multipleMeasureRest->asString ();
+  }
+  else {
+    result = "\"** MULTIPLE_MEASURE_REST IS NULL **\"";
+  }
+
+  return result;
+}
+
+std::string fetchMultipleMeasureRestAsString (
+  const S_msrMultipleMeasureRest& multipleMeasureRest)
+{
+  std::string result;
+
+  if (multipleMeasureRest) {
+    result =
+      multipleMeasureRest->asShortString ();
+  }
+  else {
+    result = "\"** MULTIPLE_MEASURE_REST IS NULL **\"";
+  }
+
+  return result;
+}
+
 
 }

@@ -517,7 +517,7 @@ void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
     std::stringstream ss;
 
     ss <<
-      "Setting measures repeat pattern segment containing " <<
+      "Setting measure repeat pattern segment containing " <<
       mfSingularOrPlural (
         fetchMeasuresNumber (),
         "measure",
@@ -756,7 +756,7 @@ void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
     std::stringstream ss;
 
     ss <<
-      "Setting measures repeat replicas segment containing " <<
+      "Setting measure repeat replicas segment containing " <<
       mfSingularOrPlural (
         fetchMeasuresNumber (),
         "measure",
@@ -1001,7 +1001,7 @@ msrBeatRepeat::msrBeatRepeat (
 
   fUpLinkToBeatRepeatToVoice = upLinkToVoice;
 
-  // measures repeat build phase
+  // measure repeat build phase
   fCurrentBeatRepeatBuildPhaseKind =
     msrBeatRepeatBuildPhaseKind::kBeatRepeatBuildPhaseJustCreated;
 }
@@ -1017,7 +1017,7 @@ S_msrBeatRepeat msrBeatRepeat::createABeatRepeatNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of measures repeat '" <<
+      "Creating a newborn clone of measure repeat '" <<
       asString () <<
       "'";
 
@@ -1054,7 +1054,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
     std::stringstream ss;
 
     ss <<
-      "Setting measures repeat pattern containing " <<
+      "Setting measure repeat pattern containing " <<
       mfSingularOrPlural (
         beatRepeatPattern->
           fetchMeasuresNumber (),
@@ -1090,7 +1090,7 @@ void msrBeatRepeat::setBeatRepeatReplicas (
     std::stringstream ss;
 
     ss <<
-      "Setting measures repeat replicas containing " <<
+      "Setting measure repeat replicas containing " <<
       mfSingularOrPlural (
         beatRepeatReplicas->
           fetchMeasuresNumber (),
@@ -1274,7 +1274,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
 #ifdef MF_TRACE_IS_ENABLED
     if (gMsrOahGroup->getTraceMsrVisitors () || gTraceOahGroup->getTraceBeatRepeats ()) {
       gLog <<
-        "% ==> visiting measures repeat replicas is inhibited";
+        "% ==> visiting measure repeat replicas is inhibited";
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -1285,7 +1285,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
 
   if (fBeatRepeatReplicas) {
     if (! inhibitBeatRepeatReplicasBrowsing) {
-      // browse the measures repeat replicas
+      // browse the measure repeat replicas
       msrBrowser<msrBeatRepeatReplicas> browser (v);
       browser.browse (*fBeatRepeatReplicas);
     }
@@ -1445,7 +1445,7 @@ void msrBeatRepeat::print (std::ostream& os) const
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeatRepeats ()) {
-    // print the current measures repeat build phase
+    // print the current measure repeat build phase
     constexpr int fieldWidth = 36;
 
     os <<
@@ -1496,6 +1496,36 @@ std::ostream& operator << (std::ostream& os, const S_msrBeatRepeat& elt)
   }
 
   return os;
+}
+
+std::string fetchBeatRepeatAsShortString (const S_msrBeatRepeat& beatRepeat)
+{
+  std::string result;
+
+  if (beatRepeat) {
+    result =
+      beatRepeat->asString ();
+  }
+  else {
+    result = "\"** BEAT_REPEAT IS NULL **\"";
+  }
+
+  return result;
+}
+
+std::string fetchBeatRepeatAsString (const S_msrBeatRepeat& beatRepeat)
+{
+  std::string result;
+
+  if (beatRepeat) {
+    result =
+      beatRepeat->asShortString ();
+  }
+  else {
+    result = "\"** BEAT_REPEAT IS NULL **\"";
+  }
+
+  return result;
 }
 
 

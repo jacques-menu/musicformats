@@ -471,8 +471,8 @@ void msrPartGroup::setPartGroupInstrumentName (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, mfInputLineNumber (__LINE__),
-//     partMusicXMLID.size () > 0,
-//     "partMusicXMLID is empty");
+//     ! partMusicXMLID.empty (),
+//     "partMusicXMLID is EMPTY");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // has this partMusicXMLID already been added to this part?

@@ -72,8 +72,7 @@ class EXP msrRepeatElement: public msrElement
                               { return fRepeatElementUpLinkToRepeat; }
 
     // segment
-    void                  setRepeatElementSegment (S_msrSegment segment)
-                              { fRepeatElementSegment = segment; }
+    void                  setRepeatElementSegment (S_msrSegment segment);
 
     S_msrSegment          getRepeatElementSegment () const
                               { return fRepeatElementSegment; }
@@ -294,6 +293,11 @@ using S_msrRepeatCommonPart = SMARTP<msrRepeatCommonPart>;
 EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatCommonPart& elt);
 EXP std::ostream& operator << (std::ostream& os, const msrRepeatCommonPart& elt);
 
+std::string fetchRepeatCommonPartAsShortString (
+  const S_msrRepeatCommonPart& repeatCommonPart);
+std::string fetchRepeatCommonPartAsString (
+  const S_msrRepeatCommonPart& repeatCommonPart);
+
 //______________________________________________________________________________
 class EXP msrRepeatEnding : public msrRepeatElement
 {
@@ -465,6 +469,9 @@ using S_msrRepeatEnding = SMARTP<msrRepeatEnding>;
 EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt);
 EXP std::ostream& operator << (std::ostream& os, const msrRepeatEnding& elt);
 
+std::string fetchRepeatEndingAsShortString (const S_msrRepeatEnding& repeatEnding);
+std::string fetchRepeatEndingAsString (const S_msrRepeatEnding& repeatEnding);
+
 //______________________________________________________________________________
 // class EXP msrRepeat : public msrVoiceElement
 class EXP msrRepeat : public msrSegmentElement
@@ -508,7 +515,18 @@ class EXP msrRepeat : public msrSegmentElement
                             int                      repeatTimes,
                             const S_msrVoice&        upLinkToVoice);
 
+    static SMARTP<msrRepeat> createAsWellAsItsCommonPartWithIsSegment (
+                            const mfInputLineNumber& inputLineNumber,
+                            int                      repeatTimes,
+                            const S_msrVoice&        upLinkToVoice);
+
     static SMARTP<msrRepeat> createAsWellAsItsCommonPart (
+                            const mfInputLineNumber& inputLineNumber,
+                            int                        repeatTimes,
+                            msrRepeatExplicitStartKind repeatExplicitStartKind,
+                            const S_msrVoice&          upLinkToVoice);
+
+    static SMARTP<msrRepeat> createAsWellAsItsCommonPartWithIsSegment (
                             const mfInputLineNumber& inputLineNumber,
                             int                        repeatTimes,
                             msrRepeatExplicitStartKind repeatExplicitStartKind,
@@ -732,14 +750,6 @@ EXP std::ostream& operator << (std::ostream& os, const msrRepeat& elt);
 
 std::string fetchRepeatAsShortString (const S_msrRepeat& Repeat);
 std::string fetchRepeatAsString (const S_msrRepeat& Repeat);
-
-std::string fetchRepeatCommonPartAsShortString (
-  const S_msrRepeatCommonPart& repeatCommonPart);
-std::string fetchepeatCommonPartAsString (
-  const S_msrRepeatCommonPart& repeatCommonPart);
-
-std::string fetchRepeatEndingAsShortString (const S_msrRepeatEnding& repeatEnding);
-std::string fetchRepeatEndingAsString (const S_msrRepeatEnding& repeatEnding);
 
 
 }

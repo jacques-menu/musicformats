@@ -73,6 +73,7 @@ namespace MusicFormats
 
 //________________________________________________________________________
 msr2lpsrTranslator::msr2lpsrTranslator ()
+  : msr2msrTranslator ()
 {}
 
 msr2lpsrTranslator::~msr2lpsrTranslator ()
@@ -645,53 +646,22 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
 //________________________________________________________________________
 void msr2lpsrTranslator::displayCurrentOnGoingValues ()
 {
-  gLog <<
-    "Current ongoing values:" <<
-    std::endl;
+  msr2msrTranslator::displayCurrentOnGoingValues ();
 
-  ++gIndenter;
-
-  constexpr int fieldWidth = 25;
-
-  gLog << std::left <<
-    std::setw (fieldWidth) <<
-    "fOnGoingIdentification" << ": " << fOnGoingIdentification <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fOnGoingStaff" << ": " << fOnGoingStaff <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fOnGoingHarmoniesVoice" << ": " << fOnGoingHarmoniesVoice <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fOnGoingHarmony" << ": " << fOnGoingHarmony <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fOnGoingFiguredBassVoice" << ": " << fOnGoingFiguredBassVoice <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fOnGoingNotesStack.size ()" << ": " << fOnGoingNotesStack.size () <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fOnGoingNonGraceNote" << ": " << fOnGoingNonGraceNote <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fOnGoingDoubleTremolo" << ": " << fOnGoingDoubleTremolo <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fOnGoingGraceNotesGroup" << ": " << fOnGoingGraceNotesGroup <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fOnGoingChord" << ": " << fOnGoingChord <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fOnGoingStanza" << ": " << fOnGoingStanza <<
-    std::endl<<
-    std::setw (fieldWidth) <<
-    "fOnGoingSyllableExtend" << ": " << fOnGoingSyllableExtend <<
-    std::endl;
-
-  --gIndenter;
+//   gLog <<
+//     "Current msr2lpsrTranslator ongoing values:" <<
+//     std::endl;
+//
+//   ++gIndenter;
+//
+//   constexpr int fieldWidth = 25;
+//
+//   gLog << std::left <<
+//     std::setw (fieldWidth) <<
+//     "fOnGoingSyllableExtend" << ": " << fOnGoingSyllableExtend <<
+//     std::endl;
+//
+//   --gIndenter;
 }
 
 //______________________________________________________________________________
@@ -744,148 +714,6 @@ void msr2lpsrTranslator::displayPartGroupsStack (
   gLog <<
     " <<++++++++++++++++ " <<
     std::endl << std::endl;
-}
-
-//________________________________________________________________________
-void msr2lpsrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
-{
-  gLog <<
-    "fPartHiddenMeasureAndBarLineDescrList:" <<
-    std::endl;
-
-  if (fPartHiddenMeasureAndBarLineDescrList.size ()) {
-    ++gIndenter;
-
-    constexpr int fieldWidth = 19;
-
-    std::list <S_msrHiddenMeasureAndBarLineDescr>::const_iterator
-      iBegin = fPartHiddenMeasureAndBarLineDescrList.begin (),
-      iEnd   = fPartHiddenMeasureAndBarLineDescrList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_msrHiddenMeasureAndBarLineDescr
-        hiddenMeasureAndBarLineDescr = (*i);
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-      // sanity check
-      mfAssert (
-        __FILE__, mfInputLineNumber (__LINE__),
-        hiddenMeasureAndBarLineDescr != nullptr,
-        "hiddenMeasureAndBarLineDescr is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-      S_msrDalSegno
-        dalSegno =
-          hiddenMeasureAndBarLineDescr->getDalSegno ();
-
-      gLog << std::left <<
-        std::setw (fieldWidth) <<
-        "inputStartLineNumber" << ": " <<
-        hiddenMeasureAndBarLineDescr->getInputLineNumber () <<
-        std::endl <<
-        std::setw (fieldWidth) <<
-        "dalSegno" << ": " <<
-        dalSegno <<
-        std::endl;
-
-      if (++i == iEnd) break;
-    } // for
-
-    --gIndenter;
-  }
-  else {
-    gLog << "[EMPTY]" << std::endl;
-  }
-}
-
-//________________________________________________________________________
-void msr2lpsrTranslator::displayOnGoingNotesStack (
-  const std::string& context)
-{
-  size_t onGoingNotesStackSize = fOnGoingNotesStack.size ();
-
-  gLog <<
-    std::endl <<
-    ">>++++++++++++++++ " <<
-    "The on-going notes stack contains " <<
-    onGoingNotesStackSize <<
-    " elements" <<
-    " (context: " << context << "):" <<
-    std::endl;
-
-  if (onGoingNotesStackSize) {
-    std::list <S_msrNote>::const_iterator
-      iBegin = fOnGoingNotesStack.begin (),
-      iEnd   = fOnGoingNotesStack.end (),
-      i      = iBegin;
-
-    S_msrNote note = (*i);
-
-    ++gIndenter;
-
-    int n = onGoingNotesStackSize;
-    for ( ; ; ) {
-      gLog <<
-        "v (" << n << ")" <<
-        std::endl;
-
-      ++gIndenter;
-      gLog << note << std::endl;
-      --gIndenter;
-
-      --n;
-
-      if (++i == iEnd) break;
-
-      gLog << std::endl;
-    } // for
-
-    --gIndenter;
-  }
-
-  gLog <<
-    " <<++++++++++++++++ " <<
-    std::endl << std::endl;
-}
-
-//________________________________________________________________________
-void msr2lpsrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
-{
-  gLog <<
-    "fPartHiddenMeasureAndBarLineDescrList:" <<
-    std::endl;
-
-  if (fPartHiddenMeasureAndBarLineDescrList.size ()) {
-    std::list <S_msrHiddenMeasureAndBarLineDescr>::const_iterator
-      iBegin = fPartHiddenMeasureAndBarLineDescrList.begin (),
-      iEnd   = fPartHiddenMeasureAndBarLineDescrList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_msrHiddenMeasureAndBarLineDescr
-        hiddenMeasureAndBarLineDescr = (*i);
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-      // sanity check
-      mfAssert (
-        __FILE__, mfInputLineNumber (__LINE__),
-        hiddenMeasureAndBarLineDescr != nullptr,
-        "hiddenMeasureAndBarLineDescr is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-      S_msrDalSegno
-        dalSegno =
-          hiddenMeasureAndBarLineDescr->getDalSegno ();
-
-//       fCurrentPartClone->
-//         insertHiddenMeasureAndBarLineInPartClone (
-//           hiddenMeasureAndBarLineDescr->getInputLineNumber (),
-//           dalSegno->getMeasureElementPositionInMeasure ());
-
-      if (++i == iEnd) break;
-    } // for
-  }
 }
 
 //________________________________________________________________________
@@ -2036,7 +1864,13 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    fPartGroupsStack.pop_front ();
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+    // sanity check
+    mfAssert (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ! fPartGroupBlocksStack.empty (),
+      "fPartGroupBlocksStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     // fetch the current part group block
     S_lpsrPartGroupBlock
@@ -2047,7 +1881,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
       // add the current partgroup clone to the LPSR score's parallel music
       // if it is the top-level one, i.e it's alone in the stack
 
-  #ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTracePartGroups ()) {
         std::stringstream ss;
 
@@ -2062,7 +1896,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
           __FILE__, mfInputLineNumber (__LINE__),
           ss.str ());
       }
-  #endif // MF_TRACE_IS_ENABLED
+#endif // MF_TRACE_IS_ENABLED
 
       // append the current partgroup block to the current score block if relevant
       switch (gGlobalMsr2lpsrOahGroup->getScoreOutputKind ()) {
@@ -2185,6 +2019,14 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
           ss.str ());
       }
   #endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+      // sanity check
+      mfAssert (
+        __FILE__, mfInputLineNumber (__LINE__),
+        ! fPartGroupBlocksStack.empty (),
+        "fPartGroupBlocksStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       fPartGroupBlocksStack.pop_front ();
 
@@ -3122,7 +2964,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
   else if (fOnGoingHarmoniesVoice) {
     // append the harmony clone to the current voice clone
     fCurrentVoiceClone->
-      cascadeAppendHarmonyToVoiceClone (
+      edacsacAppendHarmonyToVoiceClone (
         fCurrentHarmonyClone);
   }
 
@@ -3375,95 +3217,92 @@ void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
 
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
-{
-  fCurrentMeasureNumber =
-    elt->getMeasureNumber ();
-
-  int
-    measurePuristNumber =
-      elt->getMeasurePuristNumber ();
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrMeasure '" <<
-      fCurrentMeasureNumber <<
-      "', measurePuristNumber: '" <<
-      measurePuristNumber <<
-      "', line " <<  elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
-    std::stringstream ss;
-
-    ss <<
-      std::endl <<
-      "<!--=== " <<
-      "part \"" << fCurrentPartClone->getPartName () << "\"" <<
-      " (partMusicXMLID \"" << fCurrentPartClone->getPartMusicXMLID () << "\")" <<
-      ", measure \"" << fCurrentMeasureNumber << "\"" <<
-      "', voice \"" <<
-      fCurrentVoiceClone->getVoiceName () <<
-      ", line " <<  elt->getInputLineNumber () <<
-      " ===-->";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // register the current measure number in the service run data
-  S_mfServiceRunData
-    serviceRunData =
-      gServiceRunData;
-
-  serviceRunData->
-    setCurrentMeasureNumber (
-      fCurrentMeasureNumber);
-
-  // create a clone of the measure
-  fCurrentMeasureClone =
-    elt->
-      createMeasureNewbornClone (
-        fCurrentSegmentClone);
-
-  if (fOnGoingMultipleMeasureRests) {
-    // append current measure clone to the current multiple measure rests clone
-    fCurrentMultipleMeasureRestsClone->
-      appendMeasureToMultipleMeasureRest (
-        fCurrentMeasureClone);
-  }
-  else {
-    // append current measure clone to the current voice clone
-    fCurrentVoiceClone->
-      addMeasureCloneToVoiceClone (
-         elt->getInputLineNumber (),
-        fCurrentMeasureClone);
-  }
-
-  // JMI superflous???
-  fCurrentPartClone->
-    setPartCurrentMeasureNumber (
-      fCurrentMeasureNumber);
-
-  // should the last bar check's measure purist number be set?
-  if (fLastBarCheck) {
-    fLastBarCheck->
-      setNextBarPuristNumber (
-        measurePuristNumber);
-
-    // forget about fLastBarCheck
-    fLastBarCheck = nullptr;
-  }
+{//
+//   int
+//     measurePuristNumber =
+//       elt->getMeasurePuristNumber ();
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "--> Start visiting msrMeasure '" <<
+//       elt->getMeasureNumber () <<
+//       "', measurePuristNumber: '" <<
+//       measurePuristNumber <<
+//       "', line " <<  elt->getInputLineNumber ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasures ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       std::endl <<
+//       "<!--=== " <<
+//       "part \"" << fCurrentPartClone->getPartName () << "\"" <<
+//       " (partMusicXMLID \"" << fCurrentPartClone->getPartMusicXMLID () << "\")" <<
+//       ", measure \"" << elt->getMeasureNumber () << "\"" <<
+//       "', voice \"" <<
+//       fCurrentVoiceClone->getVoiceName () <<
+//       ", line " <<  elt->getInputLineNumber () <<
+//       " ===-->";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // register the current measure number in the service run data
+//   S_mfServiceRunData
+//     serviceRunData =
+//       gServiceRunData;
+//
+//   serviceRunData->
+//     setCurrentMeasureNumber (
+//       elt->getMeasureNumber ());
+//
+//   // create a clone of the measure
+//   fCurrentMeasureClone =
+//     elt->
+//       createMeasureNewbornClone (
+//         fCurrentSegmentClone);
+//
+//   if (fOnGoingMultipleMeasureRests) {
+//     // append current measure clone to the current multiple measure rests clone
+//     fCurrentMultipleMeasureRestsClone->
+//       appendMeasureToMultipleMeasureRest (
+//         fMeasuresStack.front ());
+//   }
+//   else {
+//     // append current measure clone to the current voice clone
+//     fCurrentVoiceClone->
+//       addMeasureCloneToVoiceClone (
+//          elt->getInputLineNumber (),
+//         fMeasuresStack.front ());
+//   }
+//
+//   // JMI superflous???
+//   fCurrentPartClone->
+//     setPartCurrentMeasureNumber (
+//       elt->getMeasureNumber ());
+//
+//   // should the last bar check's measure purist number be set?
+//   if (fLastBarCheck) {
+//     fLastBarCheck->
+//       setNextBarPuristNumber (
+//         measurePuristNumber);
+//
+//     // forget about fLastBarCheck
+//     fLastBarCheck = nullptr;
+//   }
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
@@ -3482,8 +3321,8 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 
     ss <<
       "--> End visiting msrMeasure" <<
-      ", fCurrentMeasureNumber: " <<
-      fCurrentMeasureNumber <<
+      ", elt->getMeasureNumber (): " <<
+      elt->getMeasureNumber () <<
       "', nextMeasureNumber: '" <<
       nextMeasureNumber <<
       "', measurePuristNumber: '" <<
@@ -3497,7 +3336,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // finalize the current measure clone
-  fCurrentMeasureClone->
+  fMeasuresStack.front ()->
     finalizeMeasureClone (
       elt->getInputLineNumber (),
       elt, // original measure
@@ -3536,7 +3375,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         std::stringstream ss;
 
         ss <<
-          "measure '" << fCurrentMeasureNumber <<
+          "measure '" << elt->getMeasureNumber () <<
           "' in voice \"" <<
           elt->
             fetchMeasureUpLinkToVoice ()->
@@ -3560,7 +3399,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         // fetch the measure whole notes duration from the current measure clone
         mfWholeNotes
           fullMeasureWholeNotesDuration =
-            fCurrentMeasureClone->
+            fMeasuresStack.front ()->
               getFullMeasureWholeNotesDuration ();
 
         // get the current voice clone time signature
@@ -3608,12 +3447,12 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
           scoreLastMeasureNumber =
             elt->fetchMeasureUpLinkToScore ()->getScoreLastMeasureNumber ();
 //         gLog << // JMI 0.9.71
-//           "fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
+//           "elt->getMeasureNumber (): " << elt->getMeasureNumber () <<
 //           ", scoreLastMeasureNumber: " << scoreLastMeasureNumber <<
 //           std::endl;
 
         doCreateABarCheck =
-          fCurrentMeasureNumber != scoreLastMeasureNumber;
+          elt->getMeasureNumber () != scoreLastMeasureNumber;
         doCreateABarNumberCheck = doCreateABarCheck;
       }
       break;
@@ -3623,7 +3462,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         // fetch the measure whole notes duration from the current measure clone
         mfWholeNotes
           fullMeasureWholeNotesDuration =
-            fCurrentMeasureClone->
+            fMeasuresStack.front ()->
               getFullMeasureWholeNotesDuration ();
 
         // get the current voice clone time signature
@@ -3729,10 +3568,10 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
     fLastBarCheck =
       msrBarCheck::createWithNextBarPuristNumber (
         elt->getInputLineNumber (),
-        fCurrentMeasureNumber, // JMI 0.9.75
+        elt->getMeasureNumber (), // JMI 0.9.75
         fCurrentVoiceClone->
           getVoiceCurrentMeasurePuristNumber () + 1,
-        fCurrentMeasureClone);
+        fMeasuresStack.front ());
 
     // append it to the current voice clone
     fCurrentVoiceClone->
@@ -3746,7 +3585,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       barNumberCheck =
         msrBarNumberCheck::create (
           elt->getInputLineNumber (),
-          fCurrentMeasureClone,
+          fMeasuresStack.front (),
           nextMeasureNumber,
           fCurrentVoiceClone->
             getVoiceCurrentMeasurePuristNumber ());
@@ -3851,7 +3690,7 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
     fCurrentStanzaClone->
       appendSyllableToStanzaClone (
         fCurrentSyllableClone,
-        fCurrentMeasureClone);
+        fMeasuresStack.front ());
   }
 
   else if (fOnGoingNonGraceNote) { // JMI
@@ -4259,7 +4098,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
       rehearsalMark =
         msrRehearsalMark::create (
           elt->getInputLineNumber (),
-          fCurrentMeasureClone,
+          fMeasuresStack.front (),
           msrRehearsalMarkKind::kRehearsalMarkNone,
           elt->tempoWordsListAsString (" "), //JMI ???
           elt->getTempoPlacementKind ());
@@ -5379,7 +5218,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
         tempo =
           msrTempo::createTempoWordsOnly (
              elt->getInputLineNumber (),
-            fCurrentMeasureClone,
+            fMeasuresStack.front (),
             elt,
             msrTempoParenthesizedKind::kTempoParenthesizedNo,    // JMI
             msrPlacementKind::kPlacementAbove); // JMI
@@ -5414,7 +5253,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
         rehearsalMark =
           msrRehearsalMark::create (
              elt->getInputLineNumber (),
-            fCurrentMeasureClone,
+            fMeasuresStack.front (),
             msrRehearsalMarkKind::kRehearsalMarkNone,
             elt->getWordsContents (),
             elt->getWordsPlacementKind ()); // above ??? JMI
@@ -6817,7 +6656,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      fTupletClonesStack.front ()->
+      fTupletsStack.front ()->
         appendNoteToTuplet (
           fCurrentNonGraceNoteClone);
 
@@ -7271,9 +7110,9 @@ void msr2lpsrTranslator::visitStart (S_msrChord& elt)
 
   fCurrentChordHasBeenPopulatedFromItsFirstNote = false;
 
-  if (fTupletClonesStack.size ()) {
+  if (fTupletsStack.size ()) {
     // a chord in a tuplet is handled as part of the tuplet JMI
-    fTupletClonesStack.front ()->
+    fTupletsStack.front ()->
       appendChordToTuplet (
         fCurrentChordClone);
   }
@@ -7344,9 +7183,9 @@ void msr2lpsrTranslator::visitEnd (S_msrChord& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fTupletClonesStack.size ()) {
+  if (fTupletsStack.size ()) {
 //     // append current chord clone to the current, innermost tuplet
-//     fTupletClonesStack.front ()->
+//     fTupletsStack.front ()->
 //       appendChordToTuplet (
 //         fCurrentChordClone);
   }
@@ -7406,7 +7245,7 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fTupletClonesStack.push_front (tupletClone);
+  fTupletsStack.push_front (tupletClone);
 
   // is Scheme support needed?
   switch (elt->getTupletLineShapeKind ()) {
@@ -7451,9 +7290,17 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fTupletClonesStack.pop_front ();
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fTupletsStack.empty (),
+    "fTupletsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  if (fTupletClonesStack.size ()) {
+  fTupletsStack.pop_front ();
+
+  if (fTupletsStack.size ()) {
     // tuplet is a nested tuplet
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTupletsBasics ()) {
@@ -7463,7 +7310,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
         "Adding nested tuplet " <<
       elt->asString () <<
         " to stack top tuplet '" <<
-      fTupletClonesStack.front ()->asString () <<
+      fTupletsStack.front ()->asString () <<
       '\'' <<
       std::endl;
 
@@ -7473,7 +7320,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    fTupletClonesStack.front ()->
+    fTupletsStack.front ()->
       appendTupletToTupletClone (elt);
   }
 
@@ -8292,7 +8139,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeat& elt)
     std::stringstream ss;
 
     ss <<
-      "Handling measures repeat start in voice clone \"" <<
+      "Handling measure repeat start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
@@ -8327,13 +8174,13 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
   --gIndenter;
 
 /* JMI
-  // set last segment as the measures repeat pattern segment
+  // set last segment as the measure repeat pattern segment
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
     std::stringstream ss;
 
     ss <<
-      "Setting current last segment as measures repeat pattern segment in voice \"" <<
+      "Setting current last segment as measure repeat pattern segment in voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
@@ -8349,7 +8196,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
     std::stringstream ss;
 
     ss <<
-      "Handling measures repeat end in voice clone \"" <<
+      "Handling measure repeat end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
