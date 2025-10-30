@@ -381,7 +381,6 @@ class EXP msr2msrTranslator :
     virtual void              visitEnd   (S_msrIdentification& elt);
 
     virtual void              visitStart (S_msrCredit& elt);
-    virtual void              visitEnd   (S_msrCredit& elt);
     virtual void              visitStart (S_msrCreditWords& elt);
     virtual void              visitEnd   (S_msrCreditWords& elt);
 
@@ -406,25 +405,11 @@ class EXP msr2msrTranslator :
     virtual void              visitStart (S_msrVoiceStaffChange& elt);
 
     virtual void              visitStart (S_msrStanza& elt);
-    virtual void              visitEnd   (S_msrStanza& elt);
 
     virtual void              visitStart (S_msrSyllable& elt);
-    virtual void              visitEnd   (S_msrSyllable& elt);
 
     virtual void              visitStart (S_msrClefKeyTimeSignatureGroup& elt);
     virtual void              visitEnd   (S_msrClefKeyTimeSignatureGroup& elt);
-
-    virtual void              visitStart (S_msrClef& elt);
-    virtual void              visitEnd   (S_msrClef& elt);
-
-    virtual void              visitStart (S_msrKey& elt);
-    virtual void              visitEnd   (S_msrKey& elt);
-
-    virtual void              visitStart (S_msrTimeSignature& elt);
-    virtual void              visitEnd   (S_msrTimeSignature& elt);
-
-    virtual void              visitStart (S_msrTransposition& elt);
-    virtual void              visitEnd   (S_msrTransposition& elt);
 
     virtual void              visitStart (S_msrWords& elt);
     virtual void              visitEnd   (S_msrWords& elt);
@@ -432,17 +417,12 @@ class EXP msr2msrTranslator :
     virtual void              visitStart (S_msrTempo& elt);
     virtual void              visitEnd   (S_msrTempo& elt);
 
-    virtual void              visitStart (S_msrRehearsalMark& elt);
-    virtual void              visitEnd   (S_msrRehearsalMark& elt);
-
     virtual void              visitStart (S_msrSegment& elt);
     virtual void              visitEnd   (S_msrSegment& elt);
 
     virtual void              visitStart (S_msrHarmony& elt);
     virtual void              visitEnd   (S_msrHarmony& elt);
     virtual void              visitStart (S_msrHarmonyDegree& elt);
-
-    virtual void              visitStart (S_msrFrame& elt);
 
     virtual void              visitStart (S_msrFiguredBass& elt);
     virtual void              visitEnd   (S_msrFiguredBass& elt);
@@ -452,7 +432,6 @@ class EXP msr2msrTranslator :
     virtual void              visitEnd   (S_msrMeasure& elt);
 
     virtual void              visitStart (S_msrArticulation& elt);
-    virtual void              visitEnd   (S_msrArticulation& elt);
 
     virtual void              visitStart (S_msrFermata& elt);
 
