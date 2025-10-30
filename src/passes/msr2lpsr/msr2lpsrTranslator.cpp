@@ -1301,31 +1301,33 @@ void msr2lpsrTranslator::visitEnd (S_msrIdentification& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrScaling& elt)
 {
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "--> Start visiting msrScaling" <<
+//       ", line " << elt->getInputLineNumber ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+//   // create a scaling clone
+//   S_msrScaling
+//     scalingClone =
+//       elt->createMsrScalingNewbornClone ();
+//
+//   // register it in the current MSR score clone
+//   fCurrentMsrScoreClone-> // JMI BLARK ???
+//     setScaling (
+//       scalingClone);
 
-    ss <<
-      "--> Start visiting msrScaling" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  ++gIndenter;
-
-  // create a scaling clone
-  S_msrScaling
-    scalingClone =
-      elt->createMsrScalingNewbornClone ();
-
-  // register it in the current MSR score clone
-  fCurrentMsrScoreClone-> // JMI BLARK ???
-    setScaling (
-      scalingClone);
+  msr2msrTranslator::visitStart (elt);
 
   // get LPSR score paper
   S_lpsrPaper
@@ -1362,166 +1364,6 @@ void msr2lpsrTranslator::visitEnd (S_msrScaling& elt)
 
     ss <<
       "--> End visiting msrScaling" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
-
-//________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrSystemLayout& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrSystemLayout" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // register the aystem layout in the current MSR score clone
-  fCurrentMsrScoreClone->
-    setSystemLayout (
-      elt);
-}
-
-void msr2lpsrTranslator::visitEnd (S_msrSystemLayout& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting msrSystemLayout" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
-
-//________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrStaffLayout& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrStaffLayout" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // register the staff layout in the current MSR score clone
-  fCurrentMsrScoreClone->
-    setStaffLayout (
-      elt);
-}
-
-void msr2lpsrTranslator::visitEnd (S_msrStaffLayout& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting msrStaffLayout" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
-
-//________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrAppearance& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrAppearance" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // register the appearance in the current MSR score clone
-  fCurrentMsrScoreClone->
-    setAppearance (
-      elt);
-}
-
-void msr2lpsrTranslator::visitEnd (S_msrAppearance& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting msrAppearance" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
-
-//________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrPageLayout& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrPageLayout" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // register the page layout in the current MSR score clone
-  fCurrentMsrScoreClone->
-    setPageLayout (
-      elt);
-}
-
-void msr2lpsrTranslator::visitEnd (S_msrPageLayout& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting msrPageLayout" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2272,71 +2114,6 @@ void msr2lpsrTranslator::visitStart (S_msrStaffLinesNumber& elt)
 */
 
 //________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrStaffTuning& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrStaffTuning" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // create a staff tuning clone
-  fCurrentStaffTuningClone =
-    elt->
-      createStaffTuningNewbornClone ();
-}
-
-//________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrStaffDetails& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrStaffDetails" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fCurrentStaffTuningClone = nullptr;
-}
-
-void msr2lpsrTranslator::visitEnd (S_msrStaffDetails& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting msrStaffDetails" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // append the staff details to the current voice clone
-  fCurrentVoiceClone->
-    appendStaffDetailsToVoice (
-      elt);
-}
-
-//________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrStaff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2492,48 +2269,48 @@ void msr2lpsrTranslator::visitStart (S_msrStaff& elt)
   } // switch
 }
 
-void msr2lpsrTranslator::visitEnd (S_msrStaff& elt)
-{
-  --gIndenter;
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting S_msrStaff \"" <<
-      elt->getStaffPathLikeName () << "\"" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  switch (elt->getStaffKind ()) {
-    case msrStaffKind::kStaffKindRegular:
-    case msrStaffKind::kStaffKindDrum:
-    case msrStaffKind::kStaffKindRythmic:
-      {
-        fOnGoingStaff = false;
-      }
-      break;
-
-    case msrStaffKind::kStaffKindTablature:
-      // JMI
-      break;
-
-    case msrStaffKind::kStaffKindHarmonies:
-      // JMI
-      break;
-
-    case msrStaffKind::kStaffKindFiguredBass:
-      // JMI
-      break;
-  } // switch
-}
-
+// void msr2lpsrTranslator::visitEnd (S_msrStaff& elt)
+// {
+//   --gIndenter;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "--> End visiting S_msrStaff \"" <<
+//       elt->getStaffPathLikeName () << "\"" <<
+//       ", line " << elt->getInputLineNumber ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   switch (elt->getStaffKind ()) {
+//     case msrStaffKind::kStaffKindRegular:
+//     case msrStaffKind::kStaffKindDrum:
+//     case msrStaffKind::kStaffKindRythmic:
+//       {
+//         fOnGoingStaff = false;
+//       }
+//       break;
+//
+//     case msrStaffKind::kStaffKindTablature:
+//       // JMI
+//       break;
+//
+//     case msrStaffKind::kStaffKindHarmonies:
+//       // JMI
+//       break;
+//
+//     case msrStaffKind::kStaffKindFiguredBass:
+//       // JMI
+//       break;
+//   } // switch
+// }
+//
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
 {
@@ -2774,267 +2551,106 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
   fFirstNoteCloneInVoice = nullptr;
 }
 
-void msr2lpsrTranslator::visitEnd (S_msrVoice& elt)
-{
-  --gIndenter;
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting msrVoice \"" <<
-      elt->getVoiceName () << "\"" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  switch (elt->getVoiceKind ()) {
-    case msrVoiceKind::kVoiceKindRegular:
-      // JMI
-      break;
-
-    case msrVoiceKind::kVoiceKindDynamics:
-      break;
-
-    case msrVoiceKind::kVoiceKindHarmonies:
-      fOnGoingHarmoniesVoice = false;
-      break;
-
-    case msrVoiceKind::kVoiceKindFiguredBass:
-      fOnGoingFiguredBassVoice = false;
-      break;
-  } // switch
-
-  // forget about the current voice clone
-  fCurrentVoiceClone = nullptr;
-}
-
 //________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrVoiceStaffChange& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrVoiceStaffChange '" <<
-      elt->asString () << '\'' <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // create a voice staff change clone
-  S_msrVoiceStaffChange
-    voiceStaffChangeClone =
-      elt->
-        createStaffChangeNewbornClone ();
-
-  // append it to the current voice clone
-  fCurrentVoiceClone->
-    appendVoiceStaffChangeToVoice (
-      voiceStaffChangeClone);
-}
-
-//________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrSegment& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrSegment '" <<
-      elt->getSegmentAbsoluteNumber () << '\'' <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // the container for the the original segment has just been cloned
-  // and fCurrentSegmentClone has been set accordingly,
-  // so there is nothing to be done here
-
-//   // create a clone of the segment
-//   fCurrentSegmentClone =
-//     elt->createSegmentNewbornClone (
-//       fCurrentVoiceClone);
-
-//   // get the current segment clone JMI 0.9.76 ???
-//   fCurrentSegmentClone =
+// void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "--> Start visiting msrHarmony '" <<
+//       elt->asString () <<
+//       ", fCurrentVoiceClone->getVoiceKind (): " << fCurrentVoiceClone->getVoiceKind () <<
+//       ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
+//       ", fOnGoingChord: " << fOnGoingChord <<
+//       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
+//       ", fOnGoingHarmony: " << fOnGoingHarmony <<
+//       ", fCurrentHarmonyClone: " << fCurrentHarmonyClone <<
+//       ", fCurrentNonGraceNoteClone: " << fCurrentNonGraceNoteClone <<
+//       ", line " << elt->getInputLineNumber ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // create a harmony newborn clone
+//   fCurrentHarmonyClone =
+//     elt->
+//       createHarmonyNewbornClone (
+//         fCurrentVoiceClone);
+//
+//   if (fOnGoingNonGraceNote) {
+//     // register fCurrentNonGraceNoteClone as the harmony note upLink
+//     fCurrentHarmonyClone->
+//       setHarmonyUpLinkToNote (
+//         fCurrentNonGraceNoteClone);
+//
+//     // append the harmony in the current non-grace note clone
+//     fCurrentNonGraceNoteClone->
+//       appendHarmonyToNote (
+//         fCurrentHarmonyClone);
+//
+//     // don't append the harmony to the part harmony,
+//     // this has been done in pass2b // JMI ???
+//   }
+//
+//   else if (fOnGoingChord) {
+//     // register the harmony clone in the current chord clone
+//     fCurrentChordClone->
+//       appendHarmonyToChord (
+//         fCurrentHarmonyClone); // JMI ??? 0.9.66
+//   }
+//
+//   else if (fOnGoingHarmoniesVoice) {
+//     // append the harmony clone to the current voice clone
 //     fCurrentVoiceClone->
-//       getVoiceCurrentRecipientSegment ();
-
-//   // set it as the new voice last segment
-//   fCurrentVoiceClone->
-//     setVoiceLastSegmentInVoiceClone (
-//       fCurrentSegmentClone);
-}
-
-void msr2lpsrTranslator::visitEnd (S_msrSegment& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting msrSegment '" <<
-      elt->getSegmentAbsoluteNumber () << '\'' <<
-      ", line " <<  elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-//   fCurrentVoiceClone->
-//     handleSegmentCloneEndInVoiceClone (
-//        elt->getInputLineNumber (),
-//       fCurrentSegmentClone);
-
-  // forget current segment clone
-  fCurrentSegmentClone = nullptr;
-}
-
-//________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrHarmony '" <<
-      elt->asString () <<
-      ", fCurrentVoiceClone->getVoiceKind (): " << fCurrentVoiceClone->getVoiceKind () <<
-      ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
-      ", fOnGoingChord: " << fOnGoingChord <<
-      ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
-      ", fOnGoingHarmony: " << fOnGoingHarmony <<
-      ", fCurrentHarmonyClone: " << fCurrentHarmonyClone <<
-      ", fCurrentNonGraceNoteClone: " << fCurrentNonGraceNoteClone <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // create a harmony newborn clone
-  fCurrentHarmonyClone =
-    elt->
-      createHarmonyNewbornClone (
-        fCurrentVoiceClone);
-
-  if (fOnGoingNonGraceNote) {
-    // register fCurrentNonGraceNoteClone as the harmony note upLink
-    fCurrentHarmonyClone->
-      setHarmonyUpLinkToNote (
-        fCurrentNonGraceNoteClone);
-
-    // append the harmony in the current non-grace note clone
-    fCurrentNonGraceNoteClone->
-      appendHarmonyToNote (
-        fCurrentHarmonyClone);
-
-    // don't append the harmony to the part harmony,
-    // this has been done in pass2b // JMI ???
-  }
-
-  else if (fOnGoingChord) {
-    // register the harmony clone in the current chord clone
-    fCurrentChordClone->
-      appendHarmonyToChord (
-        fCurrentHarmonyClone); // JMI ??? 0.9.66
-  }
-
-  else if (fOnGoingHarmoniesVoice) {
-    // append the harmony clone to the current voice clone
-    fCurrentVoiceClone->
-      edacsacAppendHarmonyToVoiceClone (
-        fCurrentHarmonyClone);
-  }
-
-  else {
-    std::stringstream ss;
-
-    ss <<
-      "harmony is out of context, cannot be handled: " <<
-      elt->asShortString ();
-
-    msr2lpsrInternalError (
-      gServiceRunData->getInputSourceName (),
-      elt->getInputLineNumber (),
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-
-  fOnGoingHarmony = true;
-}
-
-void msr2lpsrTranslator::visitStart (S_msrHarmonyDegree& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting S_msrHarmonyDegree '" <<
-      elt->asString () <<
-      ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
-      ", fOnGoingChord: " << fOnGoingChord <<
-      ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
-      ", fOnGoingHarmony: " << fOnGoingHarmony <<
-      "', line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // append the harmony degree to the current harmony clone
-  fCurrentHarmonyClone->
-    appendHarmonyDegreeToHarmony (
-      elt);
-}
-
-void msr2lpsrTranslator::visitEnd (S_msrHarmony& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting msrHarmony '" <<
-      elt->asString () <<
-      '\'' <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // forget about current harmony clone
-  fCurrentHarmonyClone = nullptr;
-
-  fOnGoingHarmony = false;
-}
+//       edacsacAppendHarmonyToVoiceClone (
+//         fCurrentHarmonyClone);
+//   }
+//
+//   else {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "harmony is out of context, cannot be handled: " <<
+//       elt->asShortString ();
+//
+//     msr2lpsrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       elt->getInputLineNumber (),
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+//
+//   fOnGoingHarmony = true;
+// }
+//
+// void msr2lpsrTranslator::visitEnd (S_msrHarmony& elt)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "--> End visiting msrHarmony '" <<
+//       elt->asString () <<
+//       '\'' <<
+//       ", line " << elt->getInputLineNumber ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // forget about current harmony clone
+//   fCurrentHarmonyClone = nullptr;
+//
+//   fOnGoingHarmony = false;
+// }
 
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrFrame& elt)
@@ -3076,144 +2692,45 @@ void msr2lpsrTranslator::visitStart (S_msrFrame& elt)
   }
 }
 
-//________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrFiguredBass '" <<
-      elt->asString () <<
-      ", fCurrentVoiceClone->getVoiceKind (): " << fCurrentVoiceClone->getVoiceKind () <<
-      ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
-      ", fOnGoingChord: " << fOnGoingChord <<
-      ", fOnGoingFiguredBassVoice: " << fOnGoingFiguredBassVoice <<
-      ", fOnGoingFiguredBass: " << fOnGoingFiguredBass <<
-      ", fCurrentFiguredBassClone: " << fCurrentFiguredBassClone <<
-      ", fCurrentNonGraceNoteClone: " << fCurrentNonGraceNoteClone <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // create a figured bass newborn clone
-  fCurrentFiguredBassClone =
-    elt->
-      createFiguredBassNewbornClone (
-        fCurrentVoiceClone);
-
-  if (fOnGoingNonGraceNote) {
-    // register fCurrentNonGraceNoteClone as the figured bass's note upLink
-    fCurrentFiguredBassClone->
-      setFiguredBassUpLinkToNote (
-        fCurrentNonGraceNoteClone);
-
-//     // append the figured bass to the current non-grace note clone
-//     fCurrentNonGraceNoteClone->
-//       appendFiguredBassToNote (
-//         fCurrentFiguredBassClone);
-
-    // don't append the figured bass to the part figured bass,  JMI ???
-    // this will be done below
-  }
-
-  else if (fOnGoingChord) {
-    // register the figured bass element clone in the current chord clone
-    fCurrentChordClone->
-      setChordFiguredBassesList (
-        fCurrentFiguredBassClone); // JMI 0.9.66
-  }
-
-  else if (fOnGoingFiguredBassVoice) { // JMI
-    // append the figured bass clone to the current voice clone
-    fCurrentVoiceClone->
-      appendFiguredBassToVoiceClone (
-        fCurrentFiguredBassClone);
-  }
-
-  else {
-    std::stringstream ss;
-
-    ss <<
-      "figured bass is out of context, cannot be handled: " <<
-      elt->asShortString ();
-
-    msr2lpsrInternalError (
-      gServiceRunData->getInputSourceName (),
-      elt->getInputLineNumber (),
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-
-  fOnGoingFiguredBass = true;
-}
-
-void msr2lpsrTranslator::visitStart (S_msrBassFigure& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrBassFigure '" <<
-      elt->asString () <<
-      '\'' <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (fOnGoingFiguredBass) {
-    // append the bass figure to the current figured bass
-    fCurrentFiguredBassClone->
-      appendFigureToFiguredBass (
-        elt);
-  }
-
-  else {
-    std::stringstream ss;
-
-    ss <<
-      "bass figure is out of context, cannot be handled: " <<
-      elt->asShortString ();
-
-    msr2lpsrInternalError (
-      gServiceRunData->getInputSourceName (),
-      elt->getInputLineNumber (),
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-}
-
-void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting msrFiguredBass '" <<
-      elt->asString () <<
-      '\'' <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fCurrentFiguredBassClone = nullptr;
-  fOnGoingFiguredBass = false;
-}
+// void msr2lpsrTranslator::visitStart (S_msrBassFigure& elt)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gMsrOahGroup->getTraceMsrVisitors ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "--> Start visiting msrBassFigure '" <<
+//       elt->asString () <<
+//       '\'' <<
+//       ", line " << elt->getInputLineNumber ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   if (fOnGoingFiguredBass) {
+//     // append the bass figure to the current figured bass
+//     fCurrentFiguredBassClone->
+//       appendFigureToFiguredBass (
+//         elt);
+//   }
+//
+//   else {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "bass figure is out of context, cannot be handled: " <<
+//       elt->asShortString ();
+//
+//     msr2lpsrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       elt->getInputLineNumber (),
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+// }
 
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
@@ -3820,50 +3337,6 @@ void msr2lpsrTranslator::visitEnd (S_msrSyllable& elt)
 
     ss <<
       "--> End visiting msrSyllable" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
-
-//________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrClefKeyTimeSignatureGroup& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting msrClefKeyTimeSignatureGroup" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // create an msrClefKeyTimeSignatureGroup clone
-  fCurrentClefKeyTimeSignatureGroup =
-    elt->createClefKeyTimeSignatureGroupNewbornClone ();
-
-  // append it to the current voice clone
-  fCurrentVoiceClone->
-    appendClefKeyTimeSignatureGroupToVoice (
-      fCurrentClefKeyTimeSignatureGroup);
-}
-
-void msr2lpsrTranslator::visitEnd (S_msrClefKeyTimeSignatureGroup& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gMsrOahGroup->getTraceMsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting msrClefKeyTimeSignatureGroup" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (

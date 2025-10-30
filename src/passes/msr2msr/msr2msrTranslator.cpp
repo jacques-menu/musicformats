@@ -1807,6 +1807,8 @@ void msr2msrTranslator::visitStart (S_msrStaffTuning& elt)
   fCurrentStaffTuningClone =
     elt->
       createStaffTuningNewbornClone ();
+
+  // UST IT! JMI ZOULOU
 }
 
 //________________________________________________________________________
@@ -7109,9 +7111,6 @@ void msr2msrTranslator::visitStart (S_msrRepeatEnding& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-  // the container for the the original segment has just been cloned
-  // and fCurrentSegmentClone has been set accordingly,
 
   // create a repeat common part newborn clone
   S_msrRepeatEnding
