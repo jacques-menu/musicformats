@@ -729,10 +729,21 @@ class EXP msr2msrTranslator :
     // ------------------------------------------------------
 
     std::list <S_msrMeasure>  fMeasuresStack;
-//
-//     void                      displayMeasuresStack (
-//                                 const mfInputLineNumber& inputLineNumber,
-//                                 const std::string&       context);
+
+    void                      pushMeasureOntoMeasuresStack (
+                                const mfInputLineNumber&  inputLineNumber,
+                                const S_msrMeasure&        mesure);
+
+    S_msrMeasure              popMeasureFromMesuresStack (
+                                const mfInputLineNumber& inputLineNumber);
+
+    void                      displayMesuresStack (
+                                const mfInputLineNumber& inputLineNumber,
+                                const std::string&       context);
+
+    void                      displayMeasuresStack (
+                                const mfInputLineNumber& inputLineNumber,
+                                const std::string&       context);
 
 
     // repeats

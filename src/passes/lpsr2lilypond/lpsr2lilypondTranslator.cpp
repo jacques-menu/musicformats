@@ -12834,6 +12834,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       msrQuarterTonesPitchesLanguageKindAsLilypondString (
         gLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ()) <<
+      '\"' <<
       std::endl;
   }
 

@@ -26,7 +26,7 @@ namespace MusicFormats
 const int K_MF_INPUT_LINE_UNKNOWN_ = -1;
 
 const std::string
-  kMfInputLineNumberPrefix             ("line_"),
+  kMfInputLineNumberPrefix             ("line "),
   kMfInputLineNumberDefaultValueString ("*line_Unknown*");
 
 EXP extern std::string mfInputLineNumberAsString (

@@ -515,6 +515,7 @@ void msr2msrTranslator::displayMultipleMeasureRestClones (
     std::endl << std::endl;
 }
 
+//________________________________________________________________________
 void msr2msrTranslator::pushSegmentOntoSegmentsStack (
   const mfInputLineNumber&  inputLineNumber,
   const S_msrSegment&       segment)
@@ -635,6 +636,128 @@ void msr2msrTranslator::displaySegmentsStack (
     std::endl << std::endl;
 }
 
+//________________________________________________________________________
+void msr2msrTranslator::pushMeasureOntoMeasuresStack (
+  const mfInputLineNumber&  inputLineNumber,
+  const S_msrMeasure&       mesure)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Pushing mesure " <<
+      mesure->asShortString () <<
+      " onto mesure clones stack" <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fMeasuresStack.push_front (mesure);
+}
+
+S_msrMeasure msr2msrTranslator::popMeasureFromMesuresStack (
+  const mfInputLineNumber& inputLineNumber)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fMeasuresStack.empty (),
+    "fMeasuresStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  S_msrMeasure
+    result =
+      fMeasuresStack.front ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Popping mesure " <<
+      result->asShortString () <<
+      " from mesure clones stack" <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fMeasuresStack.pop_back ();
+
+  return result;
+}
+
+void msr2msrTranslator::displayMeasuresStack (
+  const mfInputLineNumber& inputLineNumber,
+  const std::string&       context)
+{
+  size_t voicePendingMeasuresStackSize =
+    fMeasuresStack.size ();
+
+  gLog <<
+    ">>++++++++++++++++ displayMeasuresStack() - Measures stack of voice " <<
+    fCurrentVoiceClone->getVoiceName () <<
+    ", " <<
+    mfSingularOrPlural (voicePendingMeasuresStackSize, "element", "elements") <<
+    " - " << context <<
+    ", line " << inputLineNumber <<
+    ':' <<
+    std::endl;
+
+  ++gIndenter;
+
+  if (voicePendingMeasuresStackSize) {
+    std::list <S_msrMeasure>::const_iterator
+      iBegin = fMeasuresStack.begin (),
+      iEnd   = fMeasuresStack.end (),
+      i      = iBegin;
+
+    int n = voicePendingMeasuresStackSize;
+    for ( ; ; ) {
+      S_msrMeasure mesure = (*i);
+
+      gLog <<
+        "v (" << n << ")" <<
+        ", getInputLineNumber: " <<
+        mesure->getInputLineNumber () <<
+        std::endl;
+
+      ++gIndenter;
+      gLog <<
+        mesure <<
+        std::endl;
+      --gIndenter;
+
+      --n;
+
+      if (++i == iEnd) break;
+
+      gLog << std::endl;
+    } // for
+  }
+  else {
+    gLog <<
+      "*** EMPTY ***" <<
+      std::endl;
+  }
+
+  --gIndenter;
+
+  gLog <<
+    "<<++++++++++++++++" <<
+    std::endl << std::endl;
+}
+
+//________________________________________________________________________
 void msr2msrTranslator::pushRepeatOntoRepeatsStack (
   const mfInputLineNumber& inputLineNumber,
   const S_msrRepeat&       repeat,
@@ -782,65 +905,6 @@ S_msrRepeat msr2msrTranslator::popRepeatFromRepeatsStack (
   return result;
 }
 
-void msr2msrTranslator::pushRepeatElementOntoRepeatElementsStack (
-  const mfInputLineNumber&  inputLineNumber,
-  const S_msrRepeatElement& repeatElement)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Pushing repeat element " <<
-      repeatElement->asShortString () <<
-      " onto repeat elements stack" <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fRepeatElementsStack.push_front (repeatElement);
-}
-
-S_msrRepeatElement msr2msrTranslator::popRepeatElementFromRepeatElementsStack (
-  const mfInputLineNumber& inputLineNumber)
-{
-  S_msrRepeatElement
-    result =
-      fRepeatElementsStack.front ();
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Popping repeat element " <<
-      result->asShortString () <<
-      " from repeat elements stack" <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    ! fRepeatElementsStack.empty (),
-    "fRepeatElementsStack is EMPTY");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  fRepeatElementsStack.pop_back ();
-
-  return result;
-}
-
 void msr2msrTranslator::displayRepeatsStack (
   const mfInputLineNumber& inputLineNumber,
   const std::string&       context)
@@ -903,6 +967,67 @@ void msr2msrTranslator::displayRepeatsStack (
     std::endl << std::endl;
 }
 
+//________________________________________________________________________
+void msr2msrTranslator::pushRepeatElementOntoRepeatElementsStack (
+  const mfInputLineNumber&  inputLineNumber,
+  const S_msrRepeatElement& repeatElement)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Pushing repeat element " <<
+      repeatElement->asShortString () <<
+      " onto repeat elements stack" <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fRepeatElementsStack.push_front (repeatElement);
+}
+
+S_msrRepeatElement msr2msrTranslator::popRepeatElementFromRepeatElementsStack (
+  const mfInputLineNumber& inputLineNumber)
+{
+  S_msrRepeatElement
+    result =
+      fRepeatElementsStack.front ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Popping repeat element " <<
+      result->asShortString () <<
+      " from repeat elements stack" <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fRepeatElementsStack.empty (),
+    "fRepeatElementsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  fRepeatElementsStack.pop_back ();
+
+  return result;
+}
+
+//________________________________________________________________________
 void msr2msrTranslator::handleNestedRepeatStartInVoice (
   const mfInputLineNumber& inputLineNumber)
 {
@@ -2632,7 +2757,9 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
           fSegmentsStack.front ()); // JMI ??? ZOULOU
 
   // push it onto the measure clones stack
-  fMeasuresStack.push_front (measureClone);
+  pushMeasureOntoMeasuresStack (
+    elt->getInputLineNumber (),
+    measureClone);
 
   if (fOnGoingMultipleMeasureRests) {
     // append current measure clone to the current multiple measure rests clone
@@ -2897,7 +3024,8 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
   }
 
   // pop current measure from the measure clones stack
-  fMeasuresStack.pop_back ();
+  popMeasureFromMesuresStack (
+    elt->getInputLineNumber ());
 }
 
 //________________________________________________________________________

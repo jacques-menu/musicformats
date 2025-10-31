@@ -308,12 +308,9 @@ class EXP msr2lpsrTranslator : public msr2msrTranslator
 
    virtual void              visitStart (S_msrTempo& elt) override;
 
-//    virtual void              visitStart (S_msrRehearsalMark& elt) override;
-//    virtual void              visitEnd   (S_msrRehearsalMark& elt) override;
-
 //    virtual void              visitStart (S_msrBassFigure& elt) override;
 
-   virtual void              visitStart (S_msrMeasure& elt) override;
+//    virtual void              visitStart (S_msrMeasure& elt) override;
    virtual void              visitEnd   (S_msrMeasure& elt) override;
 
    virtual void              visitStart (S_msrArticulation& elt) override;
@@ -426,14 +423,14 @@ class EXP msr2lpsrTranslator : public msr2msrTranslator
     // part groups
     // ------------------------------------------------------
   //  S_msrPartGroup          fCurrentPartGroupClone; JMI
-
-    // partGroup's can be nested, hence this stack
-    // the current partGroup is the top of the stack
-    std::list <S_msrPartGroup>
-                              fPartGroupsStack;
-
-    void                      displayPartGroupsStack (
-                                const std::string& context);
+//
+//     // partGroup's can be nested, hence this stack
+//     // the current partGroup is the top of the stack
+//     std::list <S_msrPartGroup>
+//                               fPartGroupsStack;
+//
+//     void                      displayPartGroupsStack (
+//                                 const std::string& context);
 
     // part groups block are nested as the partGroup's are
     // the current partGroup block is the top of the stack
