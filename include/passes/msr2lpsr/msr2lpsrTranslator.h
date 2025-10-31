@@ -54,7 +54,7 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP msr2lpsrTranslator : public msr2msrTranslator
 
-  // most MSR types are aleading inherited by msr2msrTranslator
+  // most MSR types are alreading inherited from msr2msrTranslator
 
 //
 //   // lyrics
@@ -256,17 +256,20 @@ class EXP msr2lpsrTranslator : public msr2msrTranslator
 
   protected:
 
-  // most MSR types are aleading inherited by msr2msrTranslator
+  // most MSR types are alreading inherited from msr2msrTranslator
 
+   // scores
 
    virtual void              visitStart (S_msrScore& elt) override;
    virtual void              visitEnd   (S_msrScore& elt) override;
+
+   // identification
 
    virtual void              visitStart (S_msrIdentification& elt) override;
    virtual void              visitEnd   (S_msrIdentification& elt) override;
 
    virtual void              visitStart (S_msrCredit& elt) override;
-   virtual void              visitEnd   (S_msrCredit& elt) override;
+
    virtual void              visitStart (S_msrCreditWords& elt) override;
    virtual void              visitEnd   (S_msrCreditWords& elt) override;
 //
@@ -279,7 +282,6 @@ class EXP msr2lpsrTranslator : public msr2msrTranslator
    virtual void              visitEnd   (S_msrPart& elt) override;
 
    virtual void              visitStart (S_msrStaff& elt) override;
-   virtual void              visitEnd   (S_msrStaff& elt) override;
 
    virtual void              visitStart (S_msrVoice& elt) override;
 
@@ -333,106 +335,33 @@ class EXP msr2lpsrTranslator : public msr2msrTranslator
 
     // grace notes groups
    virtual void              visitStart (S_msrGraceNotesGroup& elt) override;
-//    virtual void              visitStart (S_msrChordGraceNotesGroupLink& elt) override;
-//    virtual void              visitEnd   (S_msrChordGraceNotesGroupLink& elt) override;
 
     // notes
-//    virtual void              visitStart (S_msrNote& elt) override;
-//    virtual void              visitEnd   (S_msrNote& elt) override;
-
-    // octave shifts
-//    virtual void              visitStart (S_msrOctaveShift& elt) override;
-//    virtual void              visitEnd   (S_msrOctaveShift& elt) override;
+   virtual void              visitStart (S_msrNote& elt) override;
+   virtual void              visitEnd   (S_msrNote& elt) override;
 
     // instruments
-//    virtual void              visitStart (S_msrAccordionRegistration& elt) override;
-
-//    virtual void              visitStart (S_msrHarpPedalsTuning& elt) override;
-
-    // stems
-//    virtual void              visitStart (S_msrStem& elt) override;
-//    virtual void              visitEnd   (S_msrStem& elt) override;
+   virtual void              visitStart (S_msrAccordionRegistration& elt) override;
 
     // beams
-//    virtual void              visitStart (S_msrBeam& elt) override;
-//    virtual void              visitEnd   (S_msrBeam& elt) override;
-//    virtual void              visitStart (S_msrChordBeamLink& elt) override;
-//    virtual void              visitEnd   (S_msrChordBeamLink& elt) override;
-
-    // chords
-//    virtual void              visitStart (S_msrChord& elt) override;
-//    virtual void              visitEnd   (S_msrChord& elt) override;
+   virtual void              visitStart (S_msrChordBeamLink& elt) override;
 
     // tuplets
-//    virtual void              visitStart (S_msrTuplet& elt) override;
-//    virtual void              visitEnd   (S_msrTuplet& elt) override;
-
-    // ties
-//    virtual void              visitStart (S_msrTie& elt) override;
-//    virtual void              visitEnd   (S_msrTie& elt) override;
+   virtual void              visitStart (S_msrTuplet& elt) override;
 
     // bar lines
-//    virtual void              visitStart (S_msrBarLine& elt) override;
-//    virtual void              visitEnd   (S_msrBarLine& elt) override;
+   virtual void              visitStart (S_msrBarLine& elt) override;
 
-//    virtual void              visitStart (S_msrSegno& elt) override;
-//    virtual void              visitStart (S_msrDalSegno& elt) override;
-//    virtual void              visitStart (S_msrCoda& elt) override;
-
-//    virtual void              visitStart (S_msrEyeGlasses& elt) override;
-//    virtual void              visitStart (S_msrPedal& elt) override;
-//    virtual void              visitStart (S_msrDamp& elt) override;
-//    virtual void              visitStart (S_msrDampAll& elt) override;
-//    virtual void              visitStart (S_msrScordatura& elt) override;
-
-    // bar checks
-//    virtual void              visitStart (S_msrBarCheck& elt) override;
-//    virtual void              visitEnd   (S_msrBarCheck& elt) override;
-
-    // bar number checks
-//    virtual void              visitStart (S_msrBarNumberCheck& elt) override;
-//    virtual void              visitEnd   (S_msrBarNumberCheck& elt) override;
-
-    // breaks
-//    virtual void              visitStart (S_msrLineBreak& elt) override;
-//    virtual void              visitEnd   (S_msrLineBreak& elt) override;
-
-//    virtual void              visitStart (S_msrPageBreak& elt) override;
-//    virtual void              visitEnd   (S_msrPageBreak& elt) override;
-
-    // repeats
-//    virtual void              visitStart (S_msrRepeat& elt) override;
-//    virtual void              visitEnd   (S_msrRepeat& elt) override;
-//    virtual void              visitStart (S_msrRepeatCommonPart& elt) override;
-//    virtual void              visitEnd   (S_msrRepeatCommonPart& elt) override;
-//    virtual void              visitStart (S_msrRepeatEnding& elt) override;
-//    virtual void              visitEnd   (S_msrRepeatEnding& elt) override;
-
-    // measure repeats
-//    virtual void              visitStart (S_msrMeasureRepeat& elt) override;
-//    virtual void              visitEnd   (S_msrMeasureRepeat& elt) override;
-//    virtual void              visitStart (S_msrMeasureRepeatPattern& elt) override;
-//    virtual void              visitEnd   (S_msrMeasureRepeatPattern& elt) override;
-//    virtual void              visitStart (S_msrMeasureRepeatReplicas& elt) override;
-//    virtual void              visitEnd   (S_msrMeasureRepeatReplicas& elt) override;
+   virtual void              visitStart (S_msrDalSegno& elt) override;
+   virtual void              visitStart (S_msrDamp& elt) override;
+   virtual void              visitStart (S_msrDampAll& elt) override;
 
     // multiple measure rests
-//    virtual void              visitStart (S_msrMultipleMeasureRest& elt) override;
-//    virtual void              visitEnd   (S_msrMultipleMeasureRest& elt) override;
+   virtual void              visitStart (S_msrMultipleMeasureRest& elt) override;
 
     // scaling
    virtual void              visitStart (S_msrScaling& elt) override;
    virtual void              visitEnd   (S_msrScaling& elt) override;
-
-    // layout
-
-//    virtual void              visitEnd   (S_msrStaffLayout& elt) override;
-
-    // appearance
-
-    // midi
-//    virtual void              visitStart (S_msrMidiTempo& elt) override;
-//    virtual void              visitEnd   (S_msrMidiTempo& elt) override;
 
   private:
 

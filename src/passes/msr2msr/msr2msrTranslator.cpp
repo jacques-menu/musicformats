@@ -6909,6 +6909,43 @@ void msr2msrTranslator::visitEnd (S_msrPageBreak& elt)
 }
 
 //________________________________________________________________________
+void msr2msrTranslator::visitStart (S_msrBeatRepeat& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Start visiting msrBeatRepeat" <<
+      ", line " << elt->getInputLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // JMI ???
+}
+
+void msr2msrTranslator::visitEnd (S_msrBeatRepeat& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting msrBeatRepeat" <<
+      ", line " << elt->getInputLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+//________________________________________________________________________
 void msr2msrTranslator::visitStart (S_msrRepeat& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -7549,6 +7586,8 @@ void msr2msrTranslator::visitStart (S_msrMidiTempo& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  // JMI ???
 }
 
 void msr2msrTranslator::visitEnd (S_msrMidiTempo& elt)
