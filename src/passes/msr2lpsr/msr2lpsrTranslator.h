@@ -310,9 +310,6 @@ class EXP msr2lpsrTranslator : public msr2msrTranslator
 
 //    virtual void              visitStart (S_msrBassFigure& elt) override;
 
-//    virtual void              visitStart (S_msrMeasure& elt) override;
-   virtual void              visitEnd   (S_msrMeasure& elt) override;
-
    virtual void              visitStart (S_msrArticulation& elt) override;
 
    virtual void              visitStart (S_msrTechnical& elt) override;
@@ -456,131 +453,6 @@ class EXP msr2lpsrTranslator : public msr2msrTranslator
     // prevent clef, key and time signature from being handled twice
 //     Bool                      fOnGoingStaff;
 
-
-    // voices
-    // ------------------------------------------------------
-//     S_msrVoice                fCurrentVoiceClone;
-//     S_msrVoice                fCurrentVoiceOriginal;
-
-//     std::map <S_msrNote, S_msrNote>
-//                               fVoiceNotesMap; // JMI
-
-    // clef, key, time signature
-    // ------------------------------------------------------
-
-//     S_msrClefKeyTimeSignatureGroup
-//                               fCurrentClefKeyTimeSignatureGroup;
-
-    // dal segnos
-    // ------------------------------------------------------
-
-//     std::list <S_msrHiddenMeasureAndBarLineDescr>
-//                               fPartHiddenMeasureAndBarLineDescrList;
-////
-//     void                      handlePartHiddenMeasureAndBarLineDescrList ();
-
-
-    // harmonies
-    // ------------------------------------------------------
-//     Bool                      fOnGoingHarmoniesVoice;
-//
-//     Bool                      fOnGoingHarmony;
-//     S_msrHarmony              fCurrentHarmonyClone;
-//
-//     std::list <S_msrHarmony>
-//                               fPendingHarmoniesList;
-
-
-    // figured bass
-    // ------------------------------------------------------
-//     Bool                      fOnGoingFiguredBassVoice;
-//
-//     Bool                      fOnGoingFiguredBass;
-
-
-    // segments
-    // ------------------------------------------------------
-    // the current segment clone is the one at the top of the stack
-//     S_msrSegment              fCurrentSegmentClone;
-
-
-    // measures
-    // ------------------------------------------------------
-    // multiple measure rests compression
-//     S_msrMeasure              fCurrentRestMeasure;
-
-//     S_msrMultipleMeasureRest fCurrentMultipleMeasureRestsClone;
-//     Bool                      fOnGoingMultipleMeasureRests;
-
-    // bar checks
-    // ------------------------------------------------------
-//     S_msrBarCheck             fLastBarCheck;
-
-
-    // line breaks
-    // ------------------------------------------------------
-//     S_msrLineBreak            fLastLineBreak;
-
-
-    // notes
-    // ------------------------------------------------------
-
-//     S_msrNote                 fCurrentNoteClone; // JMI 0.9.72
-
-    // browsing grace notes groups leads to several notes
-    // being ongoing simultaneously,
-    // since such groups are attached to a note, hence:
-//     std::list <S_msrNote>     fOnGoingNotesStack;
-
-//     Bool                      fOnGoingNonGraceNote;
-
-    // fCurrentNonGraceNoteClone is not used for grace notes,
-    // which are visited while the note they're attached to
-    // is being visited too
-//     S_msrNote                 fCurrentNonGraceNoteClone;
-
-    // to help workaround LilyPond_Issue_34
-//     S_msrNote                 fFirstNoteCloneInVoice;
-
-//     S_msrGraceNotesGroup      fCurrentSkipGraceNotesGroup;
-
-
-    // beams
-    // ------------------------------------------------------
-//     Bool                      fOnGoingChordBeamLink;
-
-    // glissandos
-    // ------------------------------------------------------
-
-
-    // slides
-    // ------------------------------------------------------
-
-
-    // double tremolos
-    // ------------------------------------------------------
-//     S_msrDoubleTremolo        fCurrentDoubleTremoloClone;
-//     Bool                      fOnGoingDoubleTremolo;
-
-
-    // stems
-    // ------------------------------------------------------
-//     S_msrStem                 fCurrentStem;
-
-
-    // grace notes
-    // ------------------------------------------------------
-//     S_msrGraceNotesGroup      fCurrentGraceNotesGroupClone;
-//
-//     S_msrNote                 fCurrentGraceNoteClone;
-//     Bool                      fOnGoingGraceNotesGroup;
-//
-//     Bool                      fOnGoingChordGraceNotesGroupLink;
-//
-//     // afterGraceNotes optimisation
-//     S_msrAfterGraceNotesGroup fPendingAfterGraceNotesGroup;
-//     S_msrElement              fCurrentAfterGraceNotesGroupElement;
-
     // circumvent LilyPond #34 issue if relevant
     void                      circumventLilyPond34IssueIfRelevant (
                                 S_msrGraceNotesGroup& graceNotesGroup);
@@ -591,33 +463,6 @@ class EXP msr2lpsrTranslator : public msr2msrTranslator
                                 const S_msrVoice&           voiceClone,
                                 const S_msrGraceNotesGroup& skipGraceNotesGroup);
                                 */
-
-    // chords
-    // ------------------------------------------------------
-//     Bool                      fOnGoingChord;
-//     S_msrChord                fCurrentChordClone;
-
-//     Bool                      fCurrentChordHasBeenPopulatedFromItsFirstNote;
-
-    // tuplets
-    // ------------------------------------------------------
-//     std::list <S_msrTuplet>   fTupletClonesStack;
-
-
-    // slurs
-    // ------------------------------------------------------
-//     Bool                      fOnGoingChordSlurLink;
-
-    // stanzas
-    // ------------------------------------------------------
-//     S_msrStanza               fCurrentStanzaClone;
-//     Bool                      fOnGoingStanza;
-
-
-    // syllables
-    // ------------------------------------------------------
-//     S_msrSyllable             fCurrentSyllableClone;
-//     Bool                      fOnGoingSyllableExtend;
 
     // current ongoing values display
     // ------------------------------------------------------

@@ -2836,6 +2836,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
       "msr2msrTranslator::visitEnd (S_msrMeasure&)");
 
   Bool doCreateABarCheck (false); // JMI ??? 0.9.70
+  Bool doCreateABarNumberCheck (false);
 
   switch (elt->getMeasureKind ()) {
     case msrMeasureKind::kMeasureKindUnknown:
@@ -2908,11 +2909,14 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
         doCreateABarCheck = true;
+//           elt->getMeasureNumber () != scoreLastMeasureNumber;
+        doCreateABarNumberCheck = doCreateABarCheck;
       }
       break;
 
     case msrMeasureKind::kMeasureKindAnacrusis:
       doCreateABarCheck = true;
+//         doCreateABarNumberCheck = true;
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteStandalone:
@@ -2937,14 +2941,24 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 
     case msrMeasureKind::kMeasureKindOverFlowing:
       doCreateABarCheck = true;
+//       doCreateABarNumberCheck = true;
       break;
 
     case msrMeasureKind::kMeasureKindCadenza:
       doCreateABarCheck = true;
+//         doCreateABarNumberCheck = false;
       break;
 
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
-      // JMI
+//       // JMI 0.9.72
+//       // append a skip to the current voice clone to fill this empty measure
+//       elt->
+//         appendPaddingSkipNoteToMeasure (
+//           elt->getInputLineNumber (),
+//           elt->getFullMeasureWholeNotesDuration ());
+
+//         doCreateABarCheck = true;
+//         doCreateABarNumberCheck = true;
       break;
   } // switch
 
@@ -2995,6 +3009,45 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 //     }
   }
 
+  // should a bar check be created?
+//   if (doCreateABarCheck) {
+// //     int
+// //       measurePuristNumber =
+// //         elt->getMeasurePuristNumber ();
+//
+//     // create a bar check
+//     fLastBarCheck =
+//       msrBarCheck::createWithNextBarPuristNumber (
+//         elt->getInputLineNumber (),
+//         elt->getMeasureNumber (), // JMI 0.9.75
+//         fCurrentVoiceClone->
+//           getVoiceCurrentMeasurePuristNumber () + 1,
+//         fMeasuresStack.front ());
+//
+//     // append it to the current voice clone
+//     fCurrentVoiceClone->
+//       appendBarCheckToVoice (fLastBarCheck);
+//   }
+//
+  // should a bar number check be created?
+//   if (doCreateABarNumberCheck) {
+//     // create a bar number check
+//     // should NOT be done in cadenza, SEE TO IT JMI 0.9.70
+//     S_msrBarNumberCheck
+//       barNumberCheck =
+//         msrBarNumberCheck::create (
+//           elt->getInputLineNumber (),
+//           fMeasuresStack.front (),
+//           nextMeasureNumber,
+//           fCurrentVoiceClone->
+//             getVoiceCurrentMeasurePuristNumber ());
+//
+//     // append it to the current voice clone
+//     fCurrentVoiceClone->
+//       appendBarNumberCheckToVoice (barNumberCheck);
+//   }
+
+  // should a page break be created?
   // is elt->getMeasureNumber () in the parts ignore IDs set?
   if (! gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().empty ()) {
     std::set <mfMeasureNumber>::iterator
