@@ -2393,7 +2393,7 @@ void msrSegment::edacsacAppendMultipleMeasureRestToSegment ( // cascade bottom
     std::stringstream ss;
 
     ss <<
-      "Cascading appending multiple measure rest " << multipleMeasureRest->asString () <<
+      "Edacsaccing appending multiple measure rest " << multipleMeasureRest->asString () <<
       " to segment " << asString () <<
       ", in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice);

@@ -1390,7 +1390,7 @@ void msrVoice::edacsacSetNextMeasureNumberInVoice ( // cascade bottom
     std::stringstream ss;
 
     ss <<
-      "Setting next measure number to " <<
+      "Edacsaccing setting next measure number to " <<
       nextMeasureNumber <<
       ", in voice " <<
       fVoiceName <<
@@ -2785,7 +2785,7 @@ void msrVoice::edacsacAppendHarmonyToVoice ( // cascade bottom
     std::stringstream ss;
 
     ss <<
-      "Appending harmony " << harmony->asString () <<
+      "Edacsaccing appending harmony " << harmony->asString () <<
       " to voice " <<
       fVoiceName <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
@@ -2880,7 +2880,7 @@ void msrVoice::edacsacAppendHarmonyToVoiceClone ( // cascade bottom
     std::stringstream ss;
 
     ss <<
-      "Appending harmony " << harmony->asString () <<
+      "Edacsaccing appending harmony " << harmony->asString () <<
       " to voice clone \"" <<
       fVoiceName <<
       ", line " << harmony->getInputLineNumber ();
@@ -4373,6 +4373,14 @@ S_msrRepeat msrVoice::popRepeatFromVoiceRepeatsStack (
   const mfInputLineNumber& inputLineNumber,
   const                    std::string& context)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fVoicePendingRepeatsStack.empty (),
+    "fVoicePendingRepeatsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   // get the inner-most repeat
   S_msrRepeat
     innerMostRepeat =
@@ -4383,9 +4391,9 @@ S_msrRepeat msrVoice::popRepeatFromVoiceRepeatsStack (
     std::stringstream ss;
 
     ss <<
-      "Popping repeat ***** " <<
+      "Popping voice repeat stack top ***** " <<
       innerMostRepeat->asShortString () <<
-      " from the repeats stack in voice " <<
+      " in voice " <<
       fVoiceName <<
       ", context: " + context <<
       ", line " << inputLineNumber;
@@ -4395,14 +4403,6 @@ S_msrRepeat msrVoice::popRepeatFromVoiceRepeatsStack (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    ! fVoicePendingRepeatsStack.empty (),
-    "fVoicePendingRepeatsStack is EMPTY");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // pop it from repeats stack
   fVoicePendingRepeatsStack.pop_front ();
@@ -6915,7 +6915,7 @@ void msrVoice::edacsacCreateAMeasureRepeatAndAppendItToVoice ( // cascade bottom
     std::stringstream ss;
 
     ss <<
-      "Creating a measure repeat in voice " <<
+      "Edacsaccing creating a measure repeat in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
 

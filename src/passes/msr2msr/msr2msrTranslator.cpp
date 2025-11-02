@@ -551,7 +551,7 @@ S_msrSegment msr2msrTranslator::popSegmentFromSegmentsStack (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrSegment
-    result =
+    currentSegment =
       fSegmentsStack.front ();
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -560,7 +560,7 @@ S_msrSegment msr2msrTranslator::popSegmentFromSegmentsStack (
 
     ss <<
       "Popping segment " <<
-      result->asShortString () <<
+      currentSegment->asShortString () <<
       " from segment clones stack" <<
       ", line " << inputLineNumber;
 
@@ -572,7 +572,7 @@ S_msrSegment msr2msrTranslator::popSegmentFromSegmentsStack (
 
   fSegmentsStack.pop_back ();
 
-  return result;
+  return currentSegment;
 }
 
 void msr2msrTranslator::displaySegmentsStack (
@@ -672,7 +672,7 @@ S_msrMeasure msr2msrTranslator::popMeasureFromMesuresStack (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrMeasure
-    result =
+    currentMeasure =
       fMeasuresStack.front ();
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -681,7 +681,7 @@ S_msrMeasure msr2msrTranslator::popMeasureFromMesuresStack (
 
     ss <<
       "Popping mesure " <<
-      result->asShortString () <<
+      currentMeasure->asShortString () <<
       " from mesure clones stack" <<
       ", line " << inputLineNumber;
 
@@ -693,7 +693,7 @@ S_msrMeasure msr2msrTranslator::popMeasureFromMesuresStack (
 
   fMeasuresStack.pop_back ();
 
-  return result;
+  return currentMeasure;
 }
 
 void msr2msrTranslator::displayMeasuresStack (
@@ -800,13 +800,26 @@ S_msrRepeat msr2msrTranslator::popRepeatFromRepeatsStack (
   const mfInputLineNumber& inputLineNumber,
   const std::string&       context)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fRepeatsStack.empty (),
+    "fRepeatsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  S_msrRepeat
+    innerMostRepeat =
+      fRepeatsStack.front ();
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Popping repeat ***** BEGIN" <<
-      " from the repeat clones stack in voice " <<
+      "Popping msr2msrTranslator repeat stack top ***** " <<
+      innerMostRepeat->asShortString () <<
+      " in voice " <<
       fCurrentVoiceClone->getVoiceName () <<
       " from context " + context <<
       ", line " << inputLineNumber;
@@ -816,14 +829,6 @@ S_msrRepeat msr2msrTranslator::popRepeatFromRepeatsStack (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    ! fRepeatsStack.empty (),
-    "fRepeatsStack is EMPTY");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -837,34 +842,13 @@ S_msrRepeat msr2msrTranslator::popRepeatFromRepeatsStack (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   if (
-//     repeat
-//       !=
-//     fRepeatsStack.front ()
-//   ) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "cannot pop repeat " <<
-//       repeat->asShortString () <<
-//       " from the stack since it is not at the top" <<
-//       " (" << context << ")" <<
-//       ", line " << inputLineNumber;
-//
-//     msrInternalError (
-//       gServiceRunData->getInputSourceName (),
-//       inputLineNumber,
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Popping repeat ***** END" <<
-      " from the repeat stack in voice " <<
+      "Popping msr2msrTranslator repeat stack top ***** END" <<
+      " in voice " <<
       fCurrentVoiceClone->getVoiceName () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
@@ -883,10 +867,6 @@ S_msrRepeat msr2msrTranslator::popRepeatFromRepeatsStack (
     "fRepeatsStack is EMPTY");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  S_msrRepeat
-    result =
-      fRepeatsStack.front ();
-
   // pop it from repeats stack
   fRepeatsStack.pop_front ();
 
@@ -902,7 +882,7 @@ S_msrRepeat msr2msrTranslator::popRepeatFromRepeatsStack (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  return result;
+  return innerMostRepeat;
 }
 
 void msr2msrTranslator::displayRepeatsStack (
@@ -994,26 +974,6 @@ void msr2msrTranslator::pushRepeatElementOntoRepeatElementsStack (
 S_msrRepeatElement msr2msrTranslator::popRepeatElementFromRepeatElementsStack (
   const mfInputLineNumber& inputLineNumber)
 {
-  S_msrRepeatElement
-    result =
-      fRepeatElementsStack.front ();
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Popping repeat element " <<
-      result->asShortString () <<
-      " from repeat elements stack" <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
@@ -1022,9 +982,30 @@ S_msrRepeatElement msr2msrTranslator::popRepeatElementFromRepeatElementsStack (
     "fRepeatElementsStack is EMPTY");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
+  S_msrRepeatElement
+    currentRepeatElement =
+      fRepeatElementsStack.front ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Popping msr2msrTranslator repeat element stack top ***** " <<
+      currentRepeatElement->asShortString () <<
+      ", fCurrentVoiceClone: " <<
+      fCurrentVoiceClone->getVoiceName () <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   fRepeatElementsStack.pop_back ();
 
-  return result;
+  return currentRepeatElement;
 }
 
 //________________________________________________________________________
@@ -1684,14 +1665,6 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-    // sanity check
-    mfAssert (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ! fPartGroupsStack.empty (),
-      "fPartGroupsStack is EMPTY");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     fPartGroupsStack.pop_front ();
 
@@ -2963,50 +2936,12 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
   } // switch
 
   // is this a measure rest?
-  if (elt->getMeasureIsAMeasureRest ()) {
+  if (elt->getMeasureIsAMeasureRest ()) { // ZOULOU
     // yes JMI
   }
 
   else {
     // no
-
-    // should we compress measure rests?
-//    if (gGlobalMsr2msrOahGroup->getTraceMultipleMeasureRests ()) {
-//       // yes
-//
-//       if (fCurrentMultipleMeasureRests) {
-//         // append the current multiple measure rests to the current voice clone
-//         fCurrentVoiceClone->
-//           cascadeAppendMultipleMeasureRestToVoice (
-//             elt->getInputLineNumber (),
-//             fCurrentMultipleMeasureRests);
-//
-//         // forget about the current rest measure
-//         fCurrentMultipleMeasureRestsClone = nullptr;
-//
-//         // forget about the current multiple measure rests
-//         fCurrentMultipleMeasureRests = nullptr;
-//       }
-//
-//       else {
-//         std::stringstream ss;
-//
-//         ss <<
-//           "fCurrentMultipleMeasureRests is NULL upon multiple measure rest end" <<
-//           elt->getMeasureNumber () <<
-//           "', measurePuristNumber: " <<
-//           measurePuristNumber <<
-//           ", line " << elt->getInputLineNumber ();
-//
-// /* JMI ???
-//         msr2msrInternalError (
-//           gServiceRunData->getInputSourceName (),
-//           elt->getInputLineNumber (),
-//           __FILE__, mfInputLineNumber (__LINE__),
-//           ss.str ());
-//           */
-//       }
-//     }
   }
 
   // should a bar check be created?
@@ -6555,6 +6490,14 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fTupletsStack.empty (),
+    "fTupletsStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
@@ -6569,14 +6512,6 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    ! fTupletsStack.empty (),
-    "fTupletsStack is EMPTY");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fTupletsStack.pop_front ();
 
@@ -8004,3 +7939,40 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
       fMeasuresStack.front ());
 */
 
+    // should we compress measure rests?
+//    if (gGlobalMsr2msrOahGroup->getTraceMultipleMeasureRests ()) {
+//       // yes
+//
+//       if (fCurrentMultipleMeasureRests) {
+//         // append the current multiple measure rests to the current voice clone
+//         fCurrentVoiceClone->
+//           cascadeAppendMultipleMeasureRestToVoice (
+//             elt->getInputLineNumber (),
+//             fCurrentMultipleMeasureRests);
+//
+//         // forget about the current rest measure
+//         fCurrentMultipleMeasureRestsClone = nullptr;
+//
+//         // forget about the current multiple measure rests
+//         fCurrentMultipleMeasureRests = nullptr;
+//       }
+//
+//       else {
+//         std::stringstream ss;
+//
+//         ss <<
+//           "fCurrentMultipleMeasureRests is NULL upon multiple measure rest end" <<
+//           elt->getMeasureNumber () <<
+//           "', measurePuristNumber: " <<
+//           measurePuristNumber <<
+//           ", line " << elt->getInputLineNumber ();
+//
+// /* JMI ???
+//         msr2msrInternalError (
+//           gServiceRunData->getInputSourceName (),
+//           elt->getInputLineNumber (),
+//           __FILE__, mfInputLineNumber (__LINE__),
+//           ss.str ());
+//           */
+//       }
+//     }

@@ -5984,6 +5984,14 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    ! fTupletClonesStack.empty (),
+    "fTupletClonesStack is EMPTY");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
     std::stringstream ss;
@@ -5998,14 +6006,6 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    ! fTupletClonesStack.empty (),
-    "fTupletClonesStack is EMPTY");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fTupletClonesStack.pop_front ();
 
