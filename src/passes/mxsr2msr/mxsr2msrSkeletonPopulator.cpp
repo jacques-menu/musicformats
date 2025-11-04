@@ -26701,10 +26701,10 @@ void mxsr2msrSkeletonPopulator::handleImplicitInitialForwardRepeat (
   // remember repeat start measure number
   fCurrentRepeatStartMeasureNumber = fCurrentMeasureNumber; // JMI 0.9.75
 
-//   // prepare for repeat in current part // JMI ZOULOU
-//   fCurrentPart->
-//     cascadeHandleRepeatStartInPart (
-//       inputLineNumber);
+  // prepare for repeat in current part // JMI ZOULOU
+  fCurrentPart->
+    cascadeHandleRepeatStartInPart (
+      inputLineNumber);
 
 //   // append the bar line to the current part
 //   fCurrentPart->

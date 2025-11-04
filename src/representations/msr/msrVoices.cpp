@@ -4434,7 +4434,7 @@ void msrVoice::displayPendingRepeatsStack (
     ">>++++++++++++++++ Displaying voice repeats stack " << context <<
     std::endl <<
     "The repeats stack in voice " <<
-    asShortString () <<
+    fVoiceName <<
     " contains " <<
     mfSingularOrPlural (repeatsStackSize, "element", "elements") <<
     ", line " << inputLineNumber <<
@@ -4461,7 +4461,7 @@ void msrVoice::displayPendingRepeatsStack (
 
       ++gIndenter;
       gLog <<
-        repeat->asString ();
+        repeat->asShortString ();
       --gIndenter;
 
       --n;
@@ -4516,7 +4516,7 @@ void msrVoice::displayVoiceRepeatsStackSummary (
 
       ++gIndenter;
       gLog <<
-        repeat->asString () <<
+        repeat->asShortString () <<
         std::endl;
       --gIndenter;
 
@@ -5676,7 +5676,7 @@ void msrVoice::handleRepeatEndInVoice (
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleRepeatEndInVoice() 1");
+      "handleRepeatEndInVoice() BEGIN");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5777,7 +5777,7 @@ void msrVoice::handleRepeatEndInVoice (
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleRepeatEndInVoice() 2");
+      "handleRepeatEndInVoice() END");
   }
 #endif // MF_TRACE_IS_ENABLED
 }

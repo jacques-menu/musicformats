@@ -572,7 +572,7 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
     std::stringstream ss;
 
     ss <<
-      "CCascading creating measure '" <<
+      "Cascading creating measure '" <<
       measureNumber <<
       "' and appending it to staff \"" << fStaffPathLikeName << "\"" <<
       "', line " << inputLineNumber;
