@@ -26701,10 +26701,10 @@ void mxsr2msrSkeletonPopulator::handleImplicitInitialForwardRepeat (
   // remember repeat start measure number
   fCurrentRepeatStartMeasureNumber = fCurrentMeasureNumber; // JMI 0.9.75
 
-  // prepare for repeat in current part // JMI ZOULOU
-  fCurrentPart->
-    cascadeHandleRepeatStartInPart (
-      inputLineNumber);
+//   // prepare for repeat in current part // JMI ZOULOU
+//   fCurrentPart->
+//     cascadeHandleRepeatStartInPart (
+//       inputLineNumber);
 
 //   // append the bar line to the current part
 //   fCurrentPart->
@@ -26720,7 +26720,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
     std::stringstream ss;
 
     ss <<
-      "1 Handling a repeat start in part " <<
+      "Handling a repeat start in part START " <<
       fCurrentPart->fetchPartNameForTrace () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
@@ -26735,7 +26735,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
   // remember repeat start measure number
 //   fCurrentRepeatStartMeasureNumber = barLine->getInputLineNumber (); // JMI 0.9.75
 
-  // prepare for repeat in current part // JMI ZOULOU
+  // prepare for repeat in current part // JMI ZOULOU OK but first measure of the repeat comes after it
   fCurrentPart->
     cascadeHandleRepeatStartInPart (
       barLine->getInputLineNumber ());
@@ -26745,7 +26745,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
     std::stringstream ss;
 
     ss <<
-      "2 Handling a repeat start in part " <<
+      "Handling a repeat start in part END " <<
       fCurrentPart->fetchPartNameForTrace () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
@@ -26788,7 +26788,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
     appendBarLineToPart (barLine); // JMI
 
   fCurrentPart->
-    cascadeHandleRepeatEndInPart (
+    cascadeHandleRepeatEndInPart ( // ZOULOU OK
       barLine->getInputLineNumber (),
       fCurrentRepeatStartMeasureNumber,
       barLine->getBarLineTimes ());

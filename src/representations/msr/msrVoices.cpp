@@ -4340,7 +4340,7 @@ void msrVoice::pushRepeatOntoVoiceRepeatsStack (
     std::stringstream ss;
 
     ss <<
-      "Pushing repeat ***** " <<
+      "Pushing repeat in voice ***** " <<
       repeat->asShortString () <<
       " onto the repeats stack in voice " <<
       fVoiceName <<
@@ -4391,7 +4391,7 @@ S_msrRepeat msrVoice::popRepeatFromVoiceRepeatsStack (
     std::stringstream ss;
 
     ss <<
-      "Popping voice repeat stack top ***** " <<
+      "Popping repeat stack top in voice ***** " <<
       innerMostRepeat->asShortString () <<
       " in voice " <<
       fVoiceName <<
@@ -4708,16 +4708,17 @@ void msrVoice::moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart (
     msrVoiceRepeatPhaseKind::kVoiceRepeatPhaseAfterCommonPart);
 
 //   // append fVoiceLastAppendedMeasure to the repeat common part ZOULOU VIRER
-//   repeatCommonPart->
-//     appendMeasureToRepeatElement (
-//       inputLineNumber,
-//       fVoiceLastAppendedMeasure,
-//       context);
+  repeatCommonPart->
+    appendMeasureToRepeatElement (
+      inputLineNumber,
+      fVoiceLastAppendedMeasure,
+      context);
 
   // remove fVoiceLastAppendedMeasure from fVoiceSegment
-
-  // remove fVoiceLastAppendedMeasure from fVoiceMeasuresFlatList JMI ??? 0.9.76
-//   fVoiceMeasuresFlatList.pop_back ();
+  fVoiceSegment->
+    removeLastMeasureFromSegment (
+      inputLineNumber,
+      "moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart()");
 
   // DON't forget about this voice last segment!
 //   fVoiceLastAppendedMeasure = nullptr;

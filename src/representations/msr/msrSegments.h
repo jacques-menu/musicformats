@@ -458,9 +458,9 @@ class EXP msrSegment : public msrElement
 //                             const mfInputLineNumber& inputLineNumber,
 //                             const S_msrElement& element);
 
-//     S_msrMeasure          removeLastMeasureFromSegment (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             const std::string& context);
+    S_msrMeasure          removeLastMeasureFromSegment (
+                            const mfInputLineNumber& inputLineNumber,
+                            const std::string&       context);
 
 //     void                  finalizeAllTheMeasuresOfSegment (
 //                             const mfInputLineNumber& inputLineNumber);
