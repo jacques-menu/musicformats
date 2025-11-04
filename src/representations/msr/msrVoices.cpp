@@ -5805,7 +5805,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 1");
+      "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() BEGIN");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5995,7 +5995,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 2");
+      "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() END");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6010,7 +6010,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
     std::stringstream ss;
 
     ss <<
-      "Handling a voice-level repeat ending start with explicit start in voice " <<
+      "Handling a voice-level repeat ending start WITH explicit start in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
 
@@ -6024,7 +6024,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleVoiceLevelRepeatEndingStartWithExplicitStart() 1");
+      "handleVoiceLevelRepeatEndingStartWithExplicitStart() BEGIN");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6174,7 +6174,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleVoiceLevelRepeatEndingStartWithExplicitStart() 3");
+      "handleVoiceLevelRepeatEndingStartWithExplicitStart() END");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6440,12 +6440,13 @@ void msrVoice::handleRepeatEndingStartInVoice (
 
         // analyze this repeat end's context
         switch (fVoicePendingRepeatsStack.size ()) {
+          // not the right criterion JMI 0.9.76 ZAZA
           case 0:
             // this the first ending of a voice-level repeat without start
             // -------------------------------------
-            handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
-              inputLineNumber,
-              gNullRepeat); // set later in XXX() JMI 0.9.66
+//             handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
+            handleVoiceLevelRepeatEndingStartWithExplicitStart (
+              inputLineNumber); // set later in XXX() JMI 0.9.66
             break;
 
           case 1:
