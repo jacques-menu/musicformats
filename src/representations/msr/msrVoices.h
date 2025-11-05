@@ -79,16 +79,6 @@ extern std::string msrVoiceFinalizationStatusKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrVoiceFinalizationStatusKind& elt);
 
-enum class msrVoiceCreateInitialLastSegmentKind {
-  kCreateInitialLastSegmentYes,
-  kCreateInitialLastSegmentNo
-};
-
-extern std::string msrVoiceFinalizationStatusKindAsString (
-  msrVoiceCreateInitialLastSegmentKind voiceCreateInitialLastSegmentKind);
-
-std::ostream& operator << (std::ostream& os, const msrVoiceCreateInitialLastSegmentKind& elt);
-
 //______________________________________________________________________________
 class EXP msrVoice : public msrElement
 {
@@ -101,16 +91,12 @@ class EXP msrVoice : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             msrVoiceKind             voiceKind,
                             const mfVoiceNumber&     voiceNumber,
-                            msrVoiceCreateInitialLastSegmentKind
-                                                     voiceCreateInitialLastSegmentKind,
                             const S_msrStaff&        voiceUpLinkToStaff);
 
     static SMARTP<msrVoice> createAsWellAsItsSegment (
                             const mfInputLineNumber& inputLineNumber,
                             msrVoiceKind             voiceKind,
                             const mfVoiceNumber&     voiceNumber,
-                            msrVoiceCreateInitialLastSegmentKind
-                                                     voiceCreateInitialLastSegmentKind,
                             const S_msrStaff&        voiceUpLinkToStaff);
 
     SMARTP<msrVoice> createVoiceNewbornClone (
@@ -150,8 +136,6 @@ class EXP msrVoice : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             msrVoiceKind             voiceKind,
                             const mfVoiceNumber&     voiceNumber,
-                            msrVoiceCreateInitialLastSegmentKind
-                                                     voiceCreateInitialLastSegmentKind,
                             const S_msrStaff&        voiceUpLinkToStaff);
 
                           msrVoice (
@@ -168,9 +152,7 @@ class EXP msrVoice : public msrElement
     // ------------------------------------------------------
 
     void                  initializeVoice (
-                            const mfInputLineNumber& inputLineNumber,
-                            msrVoiceCreateInitialLastSegmentKind
-                                                     voiceCreateInitialLastSegmentKind);
+                            const mfInputLineNumber& inputLineNumber);
 
   public:
 
@@ -701,15 +683,6 @@ class EXP msrVoice : public msrElement
 
     // segments
 
-//     void                  createNewLastSegmentForVoice (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             const std::string&       context);
-
-//     void                  createNewLastSegmentFromItsFirstMeasureForVoice (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             const S_msrMeasure&      firstMeasure,
-//                             const std::string&       context);
-
     // repeats
 
     void                  handleRepeatStartInVoice (
@@ -733,7 +706,7 @@ class EXP msrVoice : public msrElement
 //     void                  handleRepeatCommonPartEndInVoiceClone (
 //                             const mfInputLineNumber& inputLineNumber);
 
-    void                  handleRepeatEndingStartInVoice (
+    void                  edacsacHandleRepeatEndingStartInVoice (
                             const mfInputLineNumber& inputLineNumber);
 
     void                  handleRepeatEndingEndInVoice (
@@ -741,7 +714,7 @@ class EXP msrVoice : public msrElement
                             const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind      repeatEndingKind);
 
-//     S_msrSegment          handleRepeatEndingStartInVoiceClone (
+//     S_msrSegment          edacsacHandleRepeatEndingStartInVoiceClone (
 //                             const mfInputLineNumber& inputLineNumber,
 //                             msrRepeatEndingKind      repeatEndingKind,
 //                             const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
@@ -907,7 +880,7 @@ class EXP msrVoice : public msrElement
 
     // finalization
 
-    void                  finalizeLastAppendedMeasureInVoice (
+    void                  edacsacFinalizeLastAppendedMeasureInVoice (
                             const mfInputLineNumber& inputLineNumber);
 
     void                  finalizeVoice (

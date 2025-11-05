@@ -6945,32 +6945,6 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
     setMultipleRestContents (
       fCurrentMultipleRestContentsClone);
 
-  // create a new last segment to collect the remainder of the voice,
-  // containing the next, yet incomplete, measure
-#ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceMultipleMeasureRests ()
-      ||
-    gTraceOahGroup->getTraceSegments ()
-      ||
-    gTraceOahGroup->getTraceVoices ()
-  ) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating a new last segment for the remainder of voice \"" <<
-      fCurrentVoiceClone->getVoiceName () << "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fCurrentVoiceClone->
-    createNewLastSegmentForVoice (
-      elt->getInputLineNumber ());
-
   // append the multiple rest clone to the current voice clone
   fCurrentVoiceClone->
     appendMultipleRestCloneToVoice (

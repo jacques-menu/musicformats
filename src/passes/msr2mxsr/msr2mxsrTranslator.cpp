@@ -11072,7 +11072,7 @@ void msr2mxsrTranslator::visitStart (S_msrRepeatEnding& elt)
 
   fCurrentSegmentClone =
     fCurrentVoiceClone->
-      handleRepeatEndingStartInVoiceClone (
+      edacsacHandleRepeatEndingStartInVoiceClone (
         elt->getInputLineNumber (),
         elt->getRepeatEndingKind (),
         elt->getRepeatEndingNumber ());

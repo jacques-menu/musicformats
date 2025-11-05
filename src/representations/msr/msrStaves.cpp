@@ -759,7 +759,6 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
         inputLineNumber,
         msrVoiceKind::kVoiceKindRegular,
         voiceNumber,
-        msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
         this);
 
   // register the voice in staff by its number
@@ -826,7 +825,6 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
         inputLineNumber,
         voiceKind,
         voiceNumber,
-        msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
         this);
 
   // take this new voice into account if relevant
@@ -2514,7 +2512,7 @@ void msrStaff::cascadeHandleRepeatEndingStartInStaff (
   for (S_msrVoice voice : fStaffAllVoicesList) {
     ++gIndenter;
     voice->
-      handleRepeatEndingStartInVoice (
+      edacsacHandleRepeatEndingStartInVoice (
         inputLineNumber);
     --gIndenter;
   } // for
@@ -3125,7 +3123,7 @@ void msrStaff::cascadeFinalizeLastAppendedMeasureInStaff ( // cascade bottom
         {
           // handle the regular voice
           voice->
-            finalizeLastAppendedMeasureInVoice (
+            edacsacFinalizeLastAppendedMeasureInVoice (
               inputLineNumber);
 
 /* JMI this will be done later
@@ -3137,7 +3135,7 @@ void msrStaff::cascadeFinalizeLastAppendedMeasureInStaff ( // cascade bottom
 
           if (regularVoiceHarmoniesVoice) {
             regularVoiceHarmoniesVoice->
-              finalizeLastAppendedMeasureInVoice (
+              edacsacFinalizeLastAppendedMeasureInVoice (
                 inputLineNumber);
           }
 
@@ -3149,7 +3147,7 @@ void msrStaff::cascadeFinalizeLastAppendedMeasureInStaff ( // cascade bottom
 
           if (regularVoiceFiguredBassVoice) {
             regularVoiceFiguredBassVoice->
-              finalizeLastAppendedMeasureInVoice (
+              edacsacFinalizeLastAppendedMeasureInVoice (
                 inputLineNumber);
           }
 */

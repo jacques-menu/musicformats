@@ -2539,113 +2539,113 @@ void msrRepeat::addRepeatEndingToRepeat (
 #endif // MF_TRACE_IS_ENABLED
 
   // get repeat ending kind
-  msrRepeatEndingKind
-    repeatEndingKind =
-      repeatEnding->
-        getRepeatEndingKind ();
+//   msrRepeatEndingKind
+//     repeatEndingKind =
+//       repeatEnding->
+//         getRepeatEndingKind ();
 
   // consistency check
-  switch (repeatEndingKind) {
-    case msrRepeatEndingKind::kRepeatEndingHooked:
-      switch (fCurrentRepeatBuildPhaseKind) {
-        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
-          {
-            std::stringstream ss;
-
-            ss <<
-              "cannot add hooked ending " <<
-              fetchRepeatEndingAsShortString (repeatEnding) <<
-              " right after a repeat has been created";
-
-            msrError (
-              gServiceRunData->getInputSourceName (),
-              fInputLineNumber,
-              __FILE__, mfInputLineNumber (__LINE__),
-              ss.str ());
-          }
-          break;
-        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
-          fCurrentRepeatBuildPhaseKind =
-            msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings;
-          break;
-        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
-          // there can be several successive endings
-          break;
-        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
-          {
-            std::stringstream ss;
-
-            ss <<
-              "cannot add hooked ending " <<
-              fetchRepeatEndingAsShortString (repeatEnding) <<
-              " after a repeat has been completed";
-
-            msrError (
-              gServiceRunData->getInputSourceName (),
-              fInputLineNumber,
-              __FILE__, mfInputLineNumber (__LINE__),
-              ss.str ());
-          }
-          break;
-      } // switch
-      break;
-
-    case msrRepeatEndingKind::kRepeatEndingHookless:
-      switch (fCurrentRepeatBuildPhaseKind) {
-        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
-          {
-            std::stringstream ss;
-
-            ss <<
-              "cannot add hookless repeat ending " <<
-              fetchRepeatEndingAsShortString (repeatEnding) <<
-              " right after the repeat has been created";
-
-            msrInternalError (
-              gServiceRunData->getInputSourceName (),
-              fInputLineNumber,
-              __FILE__, mfInputLineNumber (__LINE__),
-              ss.str ());
-          }
-          break;
-        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
-          {
-            std::stringstream ss;
-
-            ss <<
-              "cannot add hookless repeat ending " <<
-              fetchRepeatEndingAsShortString (repeatEnding) <<
-              " right after the repeat common part";
-
-//             msrInternalError ( JMI 0.9.63
-            msrInternalWarning (
-              gServiceRunData->getInputSourceName (),
-              fInputLineNumber,
+//   switch (repeatEndingKind) {//
+//     case msrRepeatEndingKind::kRepeatEndingHooked:
+//       switch (fCurrentRepeatBuildPhaseKind) {
+//         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
+//           {
+//             std::stringstream ss;
+//
+//             ss <<
+//               "cannot add hooked ending " <<
+//               fetchRepeatEndingAsShortString (repeatEnding) <<
+//               " right after a repeat has been created";
+//
+//             msrError (
+//               gServiceRunData->getInputSourceName (),
+//               fInputLineNumber,
 //               __FILE__, mfInputLineNumber (__LINE__),
-              ss.str ());
-          }
-          break;
-        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
-          // there can be several successive endings
-          break;
-        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
-          {
-            std::stringstream ss;
-
-            ss <<
-              "cannot add hookless ending " <<
-              fetchRepeatEndingAsShortString (repeatEnding) <<
-              " after a repeat has been completed";
-
-            msrError (
-              gServiceRunData->getInputSourceName (),
-              fInputLineNumber,
-              __FILE__, mfInputLineNumber (__LINE__),
-              ss.str ());
-          }
-      } // switch
-      break;
-  } // switch
+//               ss.str ());
+//           }
+//           break;
+//         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
+//           fCurrentRepeatBuildPhaseKind =
+//             msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings;
+//           break;
+//         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
+//           // there can be several successive endings
+//           break;
+//         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
+//           {
+//             std::stringstream ss;
+//
+//             ss <<
+//               "cannot add hooked ending " <<
+//               fetchRepeatEndingAsShortString (repeatEnding) <<
+//               " after a repeat has been completed";
+//
+//             msrError (
+//               gServiceRunData->getInputSourceName (),
+//               fInputLineNumber,
+//               __FILE__, mfInputLineNumber (__LINE__),
+//               ss.str ());
+//           }
+//           break;
+//       } // switch
+//       break;
+//
+//     case msrRepeatEndingKind::kRepeatEndingHookless:
+//       switch (fCurrentRepeatBuildPhaseKind) {
+//         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
+//           {
+//             std::stringstream ss;
+//
+//             ss <<
+//               "cannot add hookless repeat ending " <<
+//               fetchRepeatEndingAsShortString (repeatEnding) <<
+//               " right after the repeat has been created";
+//
+//             msrInternalError (
+//               gServiceRunData->getInputSourceName (),
+//               fInputLineNumber,
+//               __FILE__, mfInputLineNumber (__LINE__),
+//               ss.str ());
+//           }
+//           break;
+//         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
+//           {
+//             std::stringstream ss;
+//
+//             ss <<
+//               "cannot add hookless repeat ending " <<
+//               fetchRepeatEndingAsShortString (repeatEnding) <<
+//               " right after the repeat common part";
+//
+// //             msrInternalError ( JMI 0.9.63
+//             msrInternalWarning (
+//               gServiceRunData->getInputSourceName (),
+//               fInputLineNumber,
+// //               __FILE__, mfInputLineNumber (__LINE__),
+//               ss.str ());
+//           }
+//           break;
+//         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
+//           // there can be several successive endings
+//           break;
+//         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
+//           {
+//             std::stringstream ss;
+//
+//             ss <<
+//               "cannot add hookless ending " <<
+//               fetchRepeatEndingAsShortString (repeatEnding) <<
+//               " after a repeat has been completed";
+//
+//             msrError (
+//               gServiceRunData->getInputSourceName (),
+//               fInputLineNumber,
+//               __FILE__, mfInputLineNumber (__LINE__),
+//               ss.str ());
+//           }
+//       } // switch
+//       break;
+//   } // switch
 
   fRepeatEndingsVector.push_back (repeatEnding);
 

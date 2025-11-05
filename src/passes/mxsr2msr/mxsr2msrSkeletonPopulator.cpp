@@ -12444,7 +12444,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
         }
 
         // don't know yet whether repeat ending start barLine is hooked or hookless
-        // remember it in fCurrentRepeatEndingStartBarLine,
+        // remember it in fCurrentRepeatEndingStartBarLine
         fCurrentRepeatEndingStartBarLine = barLine;
 
         // handle the repeat ending start
@@ -26838,21 +26838,6 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
 #endif // MF_TRACE_IS_ENABLED
 
   // handle the repeat ending
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Handling a repeat ending upon its start in part " <<
-      fCurrentPart->fetchPartNameForTrace () <<
-      ", line " << barLine->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
   fCurrentPart->
     cascadeHandleRepeatEndingStartInPart (
       barLine->getInputLineNumber ());

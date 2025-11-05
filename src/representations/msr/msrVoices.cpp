@@ -160,36 +160,11 @@ std::ostream& operator << (std::ostream& os, const msrVoiceFinalizationStatusKin
   return os;
 }
 
-std::string msrVoiceFinalizationStatusKindAsString (
-  msrVoiceCreateInitialLastSegmentKind voiceCreateInitialLastSegmentKind)
-{
-  std::string result;
-
-  switch (voiceCreateInitialLastSegmentKind) { // JMI ???
-    case msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes:
-      result = "kCreateInitialLastSegmentYes";
-      break;
-    case msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentNo:
-      result = "kCreateInitialLastSegmentNo";
-      break;
-  } // switch
-
-  return result;
-}
-
-std::ostream& operator << (std::ostream& os, const msrVoiceCreateInitialLastSegmentKind& elt)
-{
-  os << msrVoiceFinalizationStatusKindAsString (elt);
-  return os;
-}
-
 //______________________________________________________________________________
 S_msrVoice msrVoice::create (
   const mfInputLineNumber& inputLineNumber,
   msrVoiceKind             voiceKind,
   const mfVoiceNumber&     voiceNumber,
-  msrVoiceCreateInitialLastSegmentKind
-                           voiceCreateInitialLastSegmentKind,
   const S_msrStaff&        voiceUpLinkToStaff)
 {
   msrVoice* obj =
@@ -197,7 +172,6 @@ S_msrVoice msrVoice::create (
       inputLineNumber,
       voiceKind,
       voiceNumber,
-      voiceCreateInitialLastSegmentKind,
       voiceUpLinkToStaff);
   assert (obj != nullptr);
 
@@ -222,8 +196,6 @@ S_msrVoice msrVoice::createAsWellAsItsSegment (
   const mfInputLineNumber& inputLineNumber,
   msrVoiceKind             voiceKind,
   const mfVoiceNumber&     voiceNumber,
-  msrVoiceCreateInitialLastSegmentKind
-                           voiceCreateInitialLastSegmentKind,
   const S_msrStaff&        voiceUpLinkToStaff)
 {
   msrVoice* obj =
@@ -231,7 +203,6 @@ S_msrVoice msrVoice::createAsWellAsItsSegment (
       inputLineNumber,
       voiceKind,
       voiceNumber,
-      voiceCreateInitialLastSegmentKind,
       voiceUpLinkToStaff);
   assert (obj != nullptr);
 
@@ -264,8 +235,6 @@ msrVoice::msrVoice (
   const mfInputLineNumber& inputLineNumber,
   msrVoiceKind             voiceKind,
   const mfVoiceNumber&     voiceNumber,
-  msrVoiceCreateInitialLastSegmentKind
-                           voiceCreateInitialLastSegmentKind,
   const S_msrStaff&        voiceUpLinkToStaff)
     : msrElement (inputLineNumber)
 {
@@ -291,8 +260,7 @@ msrVoice::msrVoice (
 
   // do other initializations
   initializeVoice (
-    inputLineNumber,
-    voiceCreateInitialLastSegmentKind);
+    inputLineNumber);
 }
 
 msrVoice::msrVoice (
@@ -312,17 +280,14 @@ msrVoice::msrVoice (
 
   // do other initializations
   initializeVoice (
-    inputLineNumber,
-    msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes); // JMI default value
+    inputLineNumber);
 }
 
 msrVoice::~msrVoice ()
 {}
 
 void msrVoice::initializeVoice (
-  const mfInputLineNumber& inputLineNumber,
-  msrVoiceCreateInitialLastSegmentKind
-                           voiceCreateInitialLastSegmentKind)
+  const mfInputLineNumber& inputLineNumber)
 {
   // the voice staff sequential number will be set
   // when regular voices are added to a staff
@@ -451,23 +416,6 @@ void msrVoice::initializeVoice (
   // calls counter (for debug)
   fCallsCounter = 0;
 
-//   // create the initial last segment if needed
-//   switch (voiceCreateInitialLastSegmentKind) {
-//     case msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes:
-//       // sanity check // JMI LAST
-//       mfAssert (
-//         __FILE__, mfInputLineNumber (__LINE__),
-//         fVoiceLastSegment == nullptr,
-//         "fVoiceLastSegment is NULL");
-
-//       if (! fVoiceFirstSegment) {
-//         fVoiceFirstSegment = fVoiceLastSegment;
-//       }
-//       break;
-//     case msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentNo:
-//       break;
-//   } // switch
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoicesDetails ()) {
     gLog <<
@@ -519,7 +467,6 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
       fInputLineNumber,
       fVoiceKind,
       fVoiceNumber,
-      msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentNo, // JMI ??? 0.9.76
       staffClone);
   assert (newbornClone != nullptr);
 
@@ -595,7 +542,6 @@ S_msrVoice msrVoice::createVoiceDeepClone (
         fInputLineNumber,
         voiceKind,
         voiceNumber,
-        msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentNo,
           // the voice initial last segment
           // will be created by deep cloning below
         containingStaff);
@@ -826,8 +772,6 @@ S_msrVoice msrVoice::createRegularVoice (
       inputLineNumber,
       msrVoiceKind::kVoiceKindRegular,
       voiceNumber,
-      msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
-        // the initial last segment is ready to receive music
       voiceUpLinkToStaff);
 }
 
@@ -841,8 +785,6 @@ S_msrVoice msrVoice::createHarmoniesVoice (
       inputLineNumber,
       msrVoiceKind::kVoiceKindHarmonies,
       voiceNumber,
-      msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
-        // the initial last segment is ready to receive music
       voiceUpLinkToStaff);
 }
 
@@ -856,8 +798,6 @@ S_msrVoice msrVoice::createFiguredBassVoice (
       inputLineNumber,
       msrVoiceKind::kVoiceKindFiguredBass,
       voiceNumber,
-      msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
-        // the initial last segment is ready to receive music
       voiceUpLinkToStaff);
 }
 
@@ -1630,122 +1570,6 @@ void msrVoice::setCurrentVoiceRepeatPhaseKind (
     afterRepeatComponentPhaseKind;
 }
 
-// void msrVoice::createNewLastSegmentForVoice (
-//   const mfInputLineNumber& inputLineNumber,
-//   const std::string&       context)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceSegmentsBasics ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Creating a new last segment for voice " <<
-//       fVoiceName <<
-//       " (" << context << ")" <<
-//       ", line " << inputLineNumber <<
-//       std::endl;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-//
-//   if (gTraceOahGroup->getTraceVoicesDetails ()) {
-//     std::string
-//       combinedContext =
-//         "createNewLastSegmentForVoice() 1 context: " + context;
-//
-//     displayVoice (
-//       inputLineNumber,
-//       combinedContext);
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   // create the last segment
-//   fVoiceLastSegment =
-//     msrSegment::create (
-//       inputLineNumber,
-//       this);
-//
-//   if (! fVoiceFirstSegment) {
-//     fVoiceFirstSegment = fVoiceLastSegment;
-//   }
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceVoicesDetails ()) {
-//     std::string
-//       combinedContext =
-//         "createNewLastSegmentForVoice() 2 context: " + context;
-//
-//     displayVoice (
-//       inputLineNumber,
-//       combinedContext);
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
-
-// void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
-//   const mfInputLineNumber& inputLineNumber,
-//   const S_msrMeasure& firstMeasure,
-//   const std::string&  context)
-// {
-//   // create the last segment
-//   fVoiceLastSegment =
-//     msrSegment::create (
-//       inputLineNumber,
-//       this);
-//
-//   if (! fVoiceFirstSegment) {
-//     fVoiceFirstSegment = fVoiceLastSegment;
-//   }
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceSegmentsBasics ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Creating a new last segment " <<
-//       fVoiceSegment->asShortString () <<
-//       " from its first measure " <<
-//       firstMeasure->getMeasureNumber () <<
-//       " for voice " <<
-//       fVoiceName <<
-//       " (" << context << ")" <<
-//       ", line " << inputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, mfInputLineNumber (__LINE__),
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   // append firstMeasure to fVoiceLastSegment
-//   fVoiceSegment->
-//     appendMeasureToSegment (firstMeasure);
-//
-//   // firstMeasure is the new voice last appended measure
-//   setVoiceLastAppendedMeasure (
-//     firstMeasure);
-//
-//   // is firstMeasure the first one it the voice?
-//   if (! fVoiceFirstMeasure) {
-//     // yes, register it as such
-//     setVoiceFirstMeasure (
-//       firstMeasure);
-//
-//     firstMeasure->
-//       setMeasureIsFirstInVoice ();
-//   }
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
-//     displayVoice (
-//       inputLineNumber,
-//       "createNewLastSegmentFromItsFirstMeasureForVoice()");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
-
 S_msrMeasure msrVoice::createAMeasureAndAppendItInVoice (
   const mfInputLineNumber& inputLineNumber,
   int                    previousMeasureEndInputLineNumber,
@@ -1865,14 +1689,6 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItInVoice (
   else {
     // no, there is no on-going multiple measure rests
 
-//     // create the voice last segment if needed
-// //     if (false && ! fVoiceLastSegment) { // JMI 0.9.73
-//     if (! fVoiceLastSegment) { // JMI 0.9.73 WHY CAN IT BE NULL ???
-//       createNewLastSegmentForVoice (
-//         inputLineNumber,
-//         "createAMeasureAndAppendItInVoice() 2");
-//     }
-
     // make sure the voice current recipient has been set
 //     if (! fVoiceSegment) {
 //       fVoiceSegment = fVoiceSegment;
@@ -1951,7 +1767,6 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
       inputLineNumber,
       msrVoiceKind::kVoiceKindHarmonies,
       regularVoiceHarmoniesVoiceNumber,
-      msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
       fVoiceUpLinkToStaff);
 
   // register it in the staff
@@ -2007,7 +1822,6 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 //       inputLineNumber,
 //       msrVoiceKind::kVoiceKindFiguredBass,
 //       regularVoiceFiguredBassVoiceNumber,
-//       msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
 //       fVoiceUpLinkToStaff);
 //
 //   // register it in the staff
@@ -2330,13 +2144,6 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 // //       prependClefKeyTimeSignatureGroupToSegment (clefKeyTimeSignatureGroup);
 //       appendClefKeyTimeSignatureGroupToSegment (
 //         clefKeyTimeSignatureGroup); // JMI 0.9.67
-//   }
-
-//   // create the voice last segment if needed
-//   if (false && ! fVoiceLastSegment) { // JMI 0.9.73
-//     createNewLastSegmentForVoice (
-//       clefKeyTimeSignatureGroup->getInputLineNumber (),
-//       "appendClefKeyTimeSignatureGroupToVoice()");
 //   }
 
   // append clefKeyTimeSignatureGroup to last segment
@@ -3281,13 +3088,6 @@ void msrVoice::appendStaffDetailsToVoice (
 
   // staff details are attributes in MusicXML JMI 0.9.76 ???
 
-//   // create the voice last segment if needed
-//   if (false && ! fVoiceLastSegment) { // JMI 0.9.73
-//     createNewLastSegmentForVoice (
-//       staffDetails->getInputLineNumber (),
-//       "appendStaffDetailsToVoice()");
-//   }
-
   fVoiceSegment->
     appendStaffDetailsToSegment (staffDetails);
 }
@@ -3880,13 +3680,6 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     "=======================" <<
     std::endl << std::endl;
   */
-
-//   if (! fVoiceFirstSegment) {
-//     // these graceNotesGroup appears at the beginning of the voice:
-//     // create a first segment
-//     createNewLastSegmentForVoice (
-//       graceNotesGroup->getInputLineNumber (),
-//       "addGraceNotesGroupBeforeAheadOfVoiceIfNeeded()");
 
 //     fVoiceFirstSegment = fVoiceLastSegment;
 
@@ -5188,7 +4981,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
           "handleVoiceLevelRepeatEndWithoutStart() 2");
 
   // set voice current after repeat component phase kind
-  // before finalizeLastAppendedMeasureInVoice()
+  // before edacsacFinalizeLastAppendedMeasureInVoice()
   setCurrentVoiceRepeatPhaseKind (
     inputLineNumber,
     msrVoiceRepeatPhaseKind::kVoiceRepeatPhaseAfterCommonPart);
@@ -5223,11 +5016,6 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 //       inputLineNumber,
 //       fVoiceLastSegment,
 //       "handleVoiceLevelRepeatEndWithoutStart() 4");
-
-//   // create a new last segment for the voice
-//   createNewLastSegmentForVoice (
-//     inputLineNumber,
-//     "handleVoiceLevelRepeatEndWithoutStart() 5");
 
 //   // set newRepeat's build phase to completed
 //   newRepeat->
@@ -5402,13 +5190,6 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 //       fVoiceLastSegment,
 //       "handleVoiceLevelContainingRepeatEndWithoutStart() 5");
 
-/* JMI SURE
-  // create a new last segment for the voice
-  createNewLastSegmentForVoice (
-    inputLineNumber,
-    "handleVoiceLevelContainingRepeatEndWithoutStart()");
-    */
-
   // set newRepeat's build phase to completed
   newRepeat->
     setCurrentRepeatBuildPhaseKind (
@@ -5535,15 +5316,6 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 //     repeatCommonPart,
 //     "handleVoiceLevelRepeatEndWithStart() 3");
 
-/* JMI SURE ???
-  // create a new last segment to collect the remainder of the voice,
-  if (false) {
-  createNewLastSegmentForVoice ( // JMI
-    inputLineNumber,
-    "handleVoiceLevelRepeatEndWithStart() BOF");
-  }
-    */
-
   // set innerMostRepeat's build phase to completed
   innerMostRepeat->
     setCurrentRepeatBuildPhaseKind (
@@ -5582,6 +5354,10 @@ void msrVoice::handleNestedRepeatEndInVoice (
     ss <<
       "Handling a nested repeat end in voice " <<
       fVoiceName <<
+      ", measureNumber: " <<
+      measureNumber <<
+      ", repeatTimes: " <<
+      repeatTimes <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -5594,7 +5370,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleNestedRepeatEndInVoice() 1");
+      "handleNestedRepeatEndInVoice() BEGIN");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5662,7 +5438,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleNestedRepeatEndInVoice() 2");
+      "handleNestedRepeatEndInVoice() END");
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -5837,6 +5613,35 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 //         currentRepeat, // JMI ??? 0.9.76
 //         s1.str ());
 
+  S_msrRepeat
+    newRepeat;
+//     newRepeat =
+//       msrRepeat::createAsWellAsItsCommonPart (
+//         inputLineNumber,
+//         repeatTimes,
+//         this);
+
+  // push repeat clone as the (new) current repeat
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Pushing repeat clone as the new current repeat in voice " <<
+      fVoiceName;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // push the repeat clone onto the voice's repeat descrs stack
+  pushRepeatOntoVoiceRepeatsStack (
+    inputLineNumber,
+    newRepeat,
+    "appendRepeatCloneToVoiceClone() 2");
+
     // create the repeat common part
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -5885,7 +5690,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       fVoiceSegment->
         fetchLastMeasureFromSegment (
           inputLineNumber,
-          "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 1");
+          "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() BEGIN");
 
   // fetch lastMeasure's elements list
   const std::list <S_msrMeasureElement>&
@@ -5914,13 +5719,6 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-//     S_msrMeasure
-//       dummyMeasure =
-//         fVoiceSegment->
-//           removeLastMeasureFromSegment (
-//             inputLineNumber,
-//             "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 2");
-
     // move voice last segment into the repeat common part
     std::stringstream s2;
 
@@ -5933,27 +5731,6 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 //       inputLineNumber,
 //       repeatCommonPart,
 //       s2.str ());
-
-    // create a new last segment containing a new measure for the voice
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Creating a new last segment with the first ending measure for voice " <<
-        fVoiceName <<
-        ", line " << inputLineNumber;
-
-      gWaeHandler->waeTrace (
-        __FILE__, mfInputLineNumber (__LINE__),
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-//     createNewLastSegmentFromItsFirstMeasureForVoice (
-//       inputLineNumber,
-//       lastMeasure,
-//       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 3");
   }
 
   else {
@@ -5964,32 +5741,12 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 //     appendVoiceLastSegmentToInitialVoiceElementsList (
 //       inputLineNumber,
 //       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 4");
-
-    // create a new last segment for the voice
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceSegmentsBasics ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Creating a new last segment for a voice level repeat ending WITHOUT explicit start in voice " <<
-        fVoiceName <<
-        ", line " << inputLineNumber;
-
-      gWaeHandler->waeTrace (
-        __FILE__, mfInputLineNumber (__LINE__),
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-//     createNewLastSegmentForVoice (
-//       inputLineNumber,
-//       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart( 5)");
   }
 
   // set voiceLevelRepeat's build phase
-  repeat->
-    setCurrentRepeatBuildPhaseKind (
-      msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings);
+//   newRepeat->
+//     setCurrentRepeatBuildPhaseKind (
+//       msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -6113,27 +5870,6 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
 //       inputLineNumber,
 //       repeatCommonPart,
 //       s2.str ());
-
-//     // create a new last segment containing a new measure for the voice
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "Creating a new last segment with the first ending measure for voice " <<
-//         fVoiceName <<
-//         ", line " << inputLineNumber;
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, mfInputLineNumber (__LINE__),
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-
-//     createNewLastSegmentFromItsFirstMeasureForVoice (
-//       inputLineNumber,
-//       lastMeasure,
-//       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 4");
   }
 
   else {
@@ -6143,26 +5879,6 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
 //     appendVoiceLastSegmentToInitialVoiceElementsList (
 //       inputLineNumber,
 //       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 5");
-
-    // create a new last segment for the voice
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceSegmentsBasics ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Creating a new last segment for a voice level repeat ending WITH explicit start in voice " <<
-        fVoiceName <<
-        ", line " << inputLineNumber;
-
-      gWaeHandler->waeTrace (
-        __FILE__, mfInputLineNumber (__LINE__),
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-//     createNewLastSegmentForVoice (
-//       inputLineNumber,
-//       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 6");
   }
 
   // set currentRepeat's build phase
@@ -6347,7 +6063,7 @@ void msrVoice::nestContentsIntoNewRepeatInVoice (
         // are there measures in the voice last segment?
         if (! fVoiceSegment->getSegmentElementsList ().empty ()) {
           // finalize current measure in voice
-          finalizeLastAppendedMeasureInVoice (
+          edacsacFinalizeLastAppendedMeasureInVoice (
             inputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -6404,7 +6120,7 @@ void msrVoice::handleNestedRepeatEndingStartInVoice (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrVoice::handleRepeatEndingStartInVoice (
+void msrVoice::edacsacHandleRepeatEndingStartInVoice (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6412,7 +6128,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat ending start in voice " <<
+      "Edacsaccing handling a repeat ending start in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
 
@@ -6426,7 +6142,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleRepeatEndingStartInVoice() 1");
+      "edacsacHandleRepeatEndingStartInVoice() BEGIN");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6499,12 +6215,12 @@ void msrVoice::handleRepeatEndingStartInVoice (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleRepeatEndingStartInVoice() 2");
+      "edacsacHandleRepeatEndingStartInVoice() END");
   }
 #endif // MF_TRACE_IS_ENABLED
 }
 
-// S_msrSegment msrVoice::handleRepeatEndingStartInVoiceClone (
+// S_msrSegment msrVoice::edacsacHandleRepeatEndingStartInVoiceClone (
 //   const mfInputLineNumber& inputLineNumber,
 //   msrRepeatEndingKind      repeatEndingKind,
 //   const std::string&       repeatEndingNumber) // a string, because if may be "1, 2" for example
@@ -6515,7 +6231,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
 //     displayPendingRepeatsStack (
 //       inputLineNumber,
-//       "handleRepeatEndingStartInVoiceClone() 1");
+//       "edacsacHandleRepeatEndingStartInVoiceClone() 1");
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -6671,7 +6387,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
 //   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
 //     displayPendingRepeatsStack (
 //       inputLineNumber,
-//       "handleRepeatEndingStartInVoiceClone() 2");
+//       "edacsacHandleRepeatEndingStartInVoiceClone() 2");
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -6839,7 +6555,7 @@ void msrVoice::finalizeRepeatEndInVoice (
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
         // finalize current measure in voice
-        finalizeLastAppendedMeasureInVoice (
+        edacsacFinalizeLastAppendedMeasureInVoice (
           inputLineNumber);
 
         // fetch the repeat
@@ -7080,28 +6796,6 @@ void msrVoice::edacsacCreateAMeasureRepeatAndAppendItToVoice ( // cascade bottom
     setMeasureRepeatPattern (
       measureRepeatPattern);
 
-  // create a new last segment to collect the measure repeat replicas,
-  // containing the first, yet incomplete, replica
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating a new last segment with the first replica measure for voice " <<
-      fVoiceName <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-//   createNewLastSegmentFromItsFirstMeasureForVoice (
-//     inputLineNumber,
-//     firstReplicaMeasure,
-//     "edacsacCreateAMeasureRepeatAndAppendItToVoice() 2");
-
   // keep the measure repeat pending
 
 //   // print resulting voice contents
@@ -7140,13 +6834,6 @@ void msrVoice::cascadeAppendMultipleMeasureRestToVoice (
     case 0:
       // this multiple measure rests is at the voice-level
       // -------------------------------------
-
-//       // create the voice last segment if needed
-//       if (false && ! fVoiceLastSegment) { // JMI 0.9.73
-//         createNewLastSegmentForVoice (
-//           inputLineNumber,
-//           "cascadeAppendMultipleMeasureRestToVoice()");
-//       }
 
       // append multipleMeasureRest to it
       ++gIndenter;
@@ -7390,28 +7077,6 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
   appendMeasureRepeatToVoice (
     inputLineNumber,
     fVoicePendingMeasureRepeat);
-
-  // create a new last segment to collect the remainder of the voice,
-  // containing the next, yet incomplete, measure
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating a new last segment with the AAA measure repeat next measure for voice " <<
-      fVoiceName <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-//   createNewLastSegmentFromItsFirstMeasureForVoice (
-//     inputLineNumber,
-//     nextMeasureAfterMeasureRepeat,
-//     "appendPendingMeasureRepeatToVoice() 3");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
@@ -7670,13 +7335,6 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
             ss.str ());
         }
 
-//         if (false && ! fVoiceLastSegment) { // JMI 0.9.73 // JMI 0.9.63 useless???
-//           // create a new last segment for the voice
-//           createNewLastSegmentForVoice (
-//             inputLineNumber,
-//             "cascadeAppendMultipleMeasureRestToVoice()");
-//         }
-
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
           std::stringstream ss;
@@ -7769,23 +7427,6 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
         fVoiceRemainingMultipleMeasureRests =
           multipleMeasureRestMeasuresNumber;
 
-//         // create a new segment to collect the multiple measure rests,
-//         // containing the first, rest measure
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
-//           gLog <<
-//             "Creating a new last segment to create the first, rest measure in voice " <<
-//             fVoiceName <<
-//             ", line " << inputLineNumber <<
-//             std::endl;
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//         createNewLastSegmentFromItsFirstMeasureForVoice (
-//           inputLineNumber,
-//           firstRestMeasure,
-//           "cascadeAppendMultipleMeasureRestToVoice() 3");
-//
 //         // this voice contails multiple measure rests
 //         this->setVoiceContainsMultipleMeasureRests (
 //           inputLineNumber); // JMI 0.9.67
@@ -8107,7 +7748,7 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
 // //         if (! fVoiceSegment->getSegmentElementsList ().empty ()) {
 // //
 // //           // finalize current measure in voice
-// //           finalizeLastAppendedMeasureInVoice (
+// //           edacsacFinalizeLastAppendedMeasureInVoice (
 // //             inputLineNumber);
 // //
 // //           // move voice last segment to the list of initial elements
@@ -8117,11 +7758,6 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
 // //
 // //           // forget about fVoiceCurrentMultipleMeasureRest
 // //           fVoiceCurrentMultipleMeasureRest = nullptr;
-// //
-// //           // create a new last segment containing a new measure for the voice
-// //           createNewLastSegmentForVoice (
-// //             inputLineNumber,
-// //             "handleMultipleMeasureRestsStartInVoiceClone()");
 // //         }
 // //       }
 //
@@ -8877,8 +8513,8 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
   }
 
   // finalize current measure in voice
-  finalizeLastAppendedMeasureInVoice (
-    inputLineNumber);
+//   edacsacFinalizeLastAppendedMeasureInVoice ( // ZAZA
+//     inputLineNumber);
 
   // grab currentRepeat
   S_msrRepeat
@@ -8990,8 +8626,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
   }
 
   // finalize current measure in voice
-  finalizeLastAppendedMeasureInVoice (
-    inputLineNumber);
+//   edacsacFinalizeLastAppendedMeasureInVoice ( // ZAZA
+//     inputLineNumber);
 
   // grab currentRepeat
   S_msrRepeat
@@ -9067,11 +8703,6 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
       popRepeatFromVoiceRepeatsStack (
         inputLineNumber,
         "handleHooklessRepeatEndingEndInVoice");
-
-//   // create a new last segment containing a new measure for the voice
-//   createNewLastSegmentForVoice (
-//     inputLineNumber,
-//     "handleHooklessRepeatEndingEndInVoice() 4");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -9564,7 +9195,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //         // are there measures in the voice last segment?
 //         if (! voiceLastSegmentElementsList.empty ()) {
 //           // finalize current measure in voice
-//           finalizeLastAppendedMeasureInVoice (
+//           edacsacFinalizeLastAppendedMeasureInVoice (
 //             inputLineNumber);
 //
 // //           // move current last segment to the list of initial elements
@@ -9646,7 +9277,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //       {
 //       /* JMI
 //         // finalize current measure in voice
-//         finalizeLastAppendedMeasureInVoice (
+//         edacsacFinalizeLastAppendedMeasureInVoice (
 //           inputLineNumber);
 //           */
 //
@@ -10023,13 +9654,6 @@ void msrVoice::appendBarLineToVoice (
 
   ++gIndenter;
 
-//   // create the voice last segment if needed
-//   if (false && ! fVoiceLastSegment) { // JMI 0.9.73
-//     createNewLastSegmentForVoice (
-//       barLine->getInputLineNumber (),
-//       "appendBarLineToVoice()");
-//   }
-
   fVoiceSegment->
     appendBarLineToSegment (barLine);
 
@@ -10052,13 +9676,6 @@ void msrVoice::appendSegnoToVoice (const S_msrSegno& segno)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   // create the voice last segment if needed
-//   if (false && ! fVoiceLastSegment) { // JMI 0.9.73
-//     createNewLastSegmentForVoice (
-//       segno->getInputLineNumber (),
-//       "appendSegnoToVoice()");
-//   }
-
   fVoiceSegment->
     appendSegnoToSegment (segno);
 }
@@ -10078,13 +9695,6 @@ void msrVoice::appendCodaToVoice (const S_msrCoda& coda)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-//   // create the voice last segment if needed
-//   if (false && ! fVoiceLastSegment) { // JMI 0.9.73
-//     createNewLastSegmentForVoice (
-//       coda->getInputLineNumber (),
-//       "appendCodaToVoice()");
-//   }
 
   fVoiceSegment->
     appendCodaToSegment (coda);
@@ -10107,13 +9717,6 @@ void msrVoice::appendEyeGlassesToVoice (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   // create the voice last segment if needed
-//   if (false && ! fVoiceLastSegment) { // JMI 0.9.73
-//     createNewLastSegmentForVoice (
-//       eyeGlasses->getInputLineNumber (),
-//       "appendEyeGlassesToVoice()");
-//   }
-
   fVoiceSegment->
     appendEyeGlassesToSegment (eyeGlasses);
 }
@@ -10133,13 +9736,6 @@ void msrVoice::appendPedalToVoice (const S_msrPedal& pedal)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-//   // create the voice last segment if needed
-//   if (false && ! fVoiceLastSegment) { // JMI 0.9.73
-//     createNewLastSegmentForVoice (
-//       pedal->getInputLineNumber (),
-//       "appendPedalToVoice()");
-//   }
 
   fVoiceSegment->
     appendPedalToSegment (pedal);
@@ -10162,13 +9758,6 @@ void msrVoice::appendDampToVoice (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   // create the voice last segment if needed
-//   if (false && ! fVoiceLastSegment) { // JMI 0.9.73
-//     createNewLastSegmentForVoice (
-//       damp->getInputLineNumber (),
-//       "appendDampToVoice()");
-//   }
-
   fVoiceSegment->
     appendDampToSegment (damp);
 }
@@ -10189,13 +9778,6 @@ void msrVoice::appendDampAllToVoice (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-//   // create the voice last segment if needed
-//   if (false && ! fVoiceLastSegment) { // JMI 0.9.73
-//     createNewLastSegmentForVoice (
-//       dampAll->getInputLineNumber (),
-//       "appendDampAllToVoice()");
-//   }
 
   fVoiceSegment->
     appendDampAllToSegment (dampAll);
@@ -10327,7 +9909,7 @@ S_msrElement msrVoice::removeLastElementFromVoice (  // JMI
 //   return result;
 // }
 
-void msrVoice::finalizeLastAppendedMeasureInVoice (
+void msrVoice::edacsacFinalizeLastAppendedMeasureInVoice (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -10348,7 +9930,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
-      "finalizeLastAppendedMeasureInVoice() 1");
+      "edacsacFinalizeLastAppendedMeasureInVoice() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -10373,7 +9955,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
     finalizeMeasure (
       fVoiceLastAppendedMeasure->getInputLineNumber (),
       measureRepeatContextKind,
-      "finalizeLastAppendedMeasureInVoice() 2");
+      "edacsacFinalizeLastAppendedMeasureInVoice() 2");
 
 /* JMI NO v0.0.70
   // forget about fVoiceLastAppendedMeasure
@@ -10411,14 +9993,14 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
       // handle the harmonies voice if any
       if (fRegularVoiceForwardLinkToHarmoniesVoice) {
         fRegularVoiceForwardLinkToHarmoniesVoice->
-          finalizeLastAppendedMeasureInVoice (
+          edacsacFinalizeLastAppendedMeasureInVoice (
             inputLineNumber);
       }
 
       // handle the figured bass voice if any
       if (fRegularVoiceForwardLinkToFiguredBassVoice) {
         fRegularVoiceForwardLinkToFiguredBassVoice->
-          finalizeLastAppendedMeasureInVoice (
+          edacsacFinalizeLastAppendedMeasureInVoice (
             inputLineNumber);
       }
 //
@@ -10434,7 +10016,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
-      "finalizeLastAppendedMeasureInVoice() 3");
+      "edacsacFinalizeLastAppendedMeasureInVoice() 3");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -11950,13 +11532,6 @@ std::string fetchVoiceAsString (const S_msrVoice& voice)
 //             std::endl;
 //         }
 // #endif // MF_TRACE_IS_ENABLED
-//
-// /* JMI
-//         createNewLastSegmentFromItsFirstMeasureForVoice (
-//           inputLineNumber,
-//           firstRestMeasure,
-//           "appendEmptyMeasuresToVoice() 3");
-// */
 //
 //         // this voice contails multiple measure rests
 //         this->setVoiceContainsMultipleMeasureRests (
