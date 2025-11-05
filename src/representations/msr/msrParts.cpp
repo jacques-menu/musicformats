@@ -1689,7 +1689,7 @@ void msrPart::cascadeHandleRepeatEndingStartInPart (
     std::stringstream ss;
 
     ss <<
-      "Cascading handling a repeat ending start in part \"" <<
+      "Cascading handling a repeat ENDING start in part \"" <<
       fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
@@ -1725,7 +1725,7 @@ void msrPart::cascadeHandleRepeatEndingEndInPart (
     ss <<
       "Cascading handling a " <<
       repeatEndingKind <<
-      " repeat ending end in part \"" <<
+      " repeat ENDING end in part \"" <<
       fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 

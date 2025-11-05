@@ -4106,7 +4106,7 @@ void msrVoice::moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart (
       fetchMeasureAsShortString (fVoiceLastAppendedMeasure) <<
       " in voice " <<
       fVoiceName <<
-      " to repeat common part " <<
+      " to repeat COMMON PART " <<
       repeatCommonPart->asShortString () <<
       " (" << context << ")" <<
       " in voice " <<
@@ -4282,7 +4282,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Creating a repeat common part upon its end in voice " <<
+//       "Creating a repeat COMMON PART upon its end in voice " <<
 //       fVoiceName <<
 //       ", line " << inputLineNumber;
 //
@@ -4333,7 +4333,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
     ss <<
       "Appending the voice the voice segment in voice " <<
       fVoiceName <<
-      " to the new voice-level repeat common part" <<
+      " to the new voice-level repeat COMMON PART" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -4433,7 +4433,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
     std::stringstream ss;
 
     ss <<
-      "Creating a repeat common part upon its end in voice " <<
+      "Creating a repeat COMMON PART upon its end in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
 
@@ -4488,7 +4488,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
     ss <<
       "Appending the voice the voice segment in voice " <<
       fVoiceName <<
-      " to the new voice-level repeat common part" <<
+      " to the new voice-level repeat COMMON PART" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -4585,7 +4585,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
     std::stringstream ss;
 
     ss <<
-      "Creating a repeat common part upon repeat end in voice " <<
+      "Creating a repeat COMMON PART upon repeat end in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
 
@@ -4862,7 +4862,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
     std::stringstream ss;
 
     ss <<
-      "Handling a voice-level repeat ending start WITHOUT explicit start in voice " <<
+      "Handling a voice-level repeat ENDING start WITHOUT explicit start in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
 
@@ -4935,7 +4935,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       std::stringstream ss;
 
       ss <<
-        "Creating a repeat common part upon its end in voice " <<
+        "Creating a repeat COMMON PART upon its end in voice " <<
         fVoiceName <<
         ", line " << inputLineNumber;
 
@@ -5010,7 +5010,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
     std::stringstream s2;
 
     s2 <<
-      "Moving the voice the voice segment to the repeat common part in voice " <<
+      "Moving the voice the voice segment to the repeat COMMON PART in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
 
@@ -5048,7 +5048,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
     std::stringstream ss;
 
     ss <<
-      "Handling a voice-level repeat ending start WITH explicit start in voice " <<
+      "Handling a voice-level repeat ENDING start WITH explicit start in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
 
@@ -5143,7 +5143,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
     std::stringstream s2;
 
     s2 <<
-      "Moving the voice the voice segment to the repeat common part in voice " <<
+      "Moving the voice the voice segment to the repeat COMMON PART in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
 
@@ -5248,7 +5248,7 @@ void msrVoice::handleVoiceLevelRepeatStartInVoice (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Creating a repeat common part upon its start in voice " <<
+//       "Creating a repeat COMMON PART upon its start in voice " <<
 //       fVoiceName <<
 //       ", line " << inputLineNumber;
 //
@@ -5355,7 +5355,7 @@ void msrVoice::handleNestedRepeatEndingStartInVoice (
     std::stringstream ss;
 
     ss <<
-      "Handling a nested repeat ending start voice " <<
+      "Handling a nested repeat ENDING start voice " <<
       fVoiceName <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5383,7 +5383,7 @@ void msrVoice::edacsacHandleRepeatEndingStartInVoice (
     std::stringstream ss;
 
     ss <<
-      "Edacsaccing handling a repeat ending start in voice " <<
+      "Edacsaccing handling a repeat ENDING start in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
 
@@ -5429,15 +5429,23 @@ void msrVoice::edacsacHandleRepeatEndingStartInVoice (
 
               switch (currentRepeat->getRepeatExplicitStartKind ()) {
                 case msrRepeatExplicitStartKind::kRepeatExplicitStartUnknown:
-                  // JMI ??? 0.9.71 this the first ending of a voice-level repeat without a start
-                  // -------------------------------------
-                  handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
-                    inputLineNumber,
-                    currentRepeat);
+                  {
+                    std::stringstream ss;
+
+                    ss <<
+                      "The current repeat at the top of the repeats stack "
+                      "is of unknown RepeatExplicitStartKind"; // ZAZA
+
+                    msrInternalError (
+                      gServiceRunData->getInputSourceName (),
+                      inputLineNumber,
+                      __FILE__, mfInputLineNumber (__LINE__),
+                      ss.str ());
+                  }
                   break;
 
                 case msrRepeatExplicitStartKind::kRepeatExplicitStartNo:
-                  // this the first ending of a voice-level repeat without a start
+                  // this the first ending of a voice-level repeat without a start // ZAZA
                   // -------------------------------------
                   handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
                     inputLineNumber,
@@ -5445,7 +5453,7 @@ void msrVoice::edacsacHandleRepeatEndingStartInVoice (
                   break;
 
                 case msrRepeatExplicitStartKind::kRepeatExplicitStartYes:
-                  // this the first ending of a voice-level repeat with a start
+                  // this the first ending of a voice-level repeat with a start // ZAZA
                   // -------------------------------------
                   handleVoiceLevelRepeatEndingStartWithExplicitStart (
                     inputLineNumber);
@@ -5504,7 +5512,7 @@ void msrVoice::edacsacHandleRepeatEndingStartInVoice (
 //           std::stringstream ss;
 //
 //           ss <<
-//             "Handling a repeat ending upon its start in voice clone \"" <<
+//             "Handling a repeat ENDING upon its start in voice clone \"" <<
 //             fVoiceName <<
 //                   ", line " << inputLineNumber;
 //
@@ -5521,7 +5529,7 @@ void msrVoice::edacsacHandleRepeatEndingStartInVoice (
 //               std::stringstream ss;
 //
 //               ss <<
-//                 "repeats stack is empty when attempting to handle a repeat ending start in voice clone " <<
+//                 "repeats stack is empty when attempting to handle a repeat ENDING start in voice clone " <<
 //                 asShortString ();
 //
 //               msrInternalError (
@@ -5549,7 +5557,7 @@ void msrVoice::edacsacHandleRepeatEndingStartInVoice (
 //                 ss <<
 //                   "Creating a " <<
 //                   repeatEndingKind <<
-//                   " repeat ending in current repeat in voice clone " <<
+//                   " repeat ENDING in current repeat in voice clone " <<
 //                   fVoiceName <<
 //                   ", line " << inputLineNumber;
 //
@@ -5575,7 +5583,7 @@ void msrVoice::edacsacHandleRepeatEndingStartInVoice (
 //                 ss <<
 //                   "Appending a " <<
 //                  repeatEndingKind <<
-//                   " repeat ending to current repeat in voice " <<
+//                   " repeat ENDING to current repeat in voice " <<
 //                   fVoiceName;
 //
 //                 gWaeHandler->waeTrace (
@@ -5588,7 +5596,7 @@ void msrVoice::edacsacHandleRepeatEndingStartInVoice (
 //               if (gTraceOahGroup->getTraceRepeatsDetails ()) {
 //                 displayPendingRepeatsStack (
 //                   inputLineNumber,
-//                   "before adding a hooked repeat ending to current repeat");
+//                   "before adding a HOOKED repeat ENDING to current repeat");
 //               }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -5621,7 +5629,7 @@ void msrVoice::edacsacHandleRepeatEndingStartInVoice (
 //                 std::stringstream ss;
 //
 //                 ss <<
-//                   "Moving the voice the voice segment to the repeat common part in voice clone " <<
+//                   "Moving the voice the voice segment to the repeat COMMON PART in voice clone " <<
 //                   fVoiceName <<
 //                   ", line " << inputLineNumber;
 //
@@ -6408,7 +6416,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
           std::stringstream ss;
 
           ss <<
-            "Setting repeat common part in voice " <<
+            "Setting repeat COMMON PART in voice " <<
             fVoiceName;
 
           gWaeHandler->waeTrace (
@@ -7638,7 +7646,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
     std::stringstream ss;
 
     ss <<
-      "Handling a hooked repeat ending in voice " <<
+      "Handling a HOOKED repeat ENDING in voice " <<
       fVoiceName <<  "\"" <<
       ", line " << inputLineNumber;
 
@@ -7667,7 +7675,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
     std::stringstream ss;
 
     ss <<
-      "repeats stack is empty when attempting to handle a hooked repeat ending end in voice " <<
+      "repeats stack is empty when attempting to handle a HOOKED repeat ENDING end in voice " <<
       asShortString ();
 
     msrInternalError (
@@ -7686,7 +7694,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
     currentRepeat =
       fVoicePendingRepeatsStack.front ();
 
-  // create a hooked repeat ending
+  // create a HOOKED repeat ending
   msrRepeatEndingKind
     repeatEndingKind =
       msrRepeatEndingKind::kRepeatEndingHooked;
@@ -7707,7 +7715,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
     ss <<
       "Appending a " <<
       repeatEndingKind <<
-      " repeat ending to current repeat in voice " <<
+      " repeat ENDING to current repeat in voice " <<
       fVoiceName;
 
     gWaeHandler->waeTrace (
@@ -7720,7 +7728,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "before adding a hooked repeat ending to current repeat");
+      "before adding a HOOKED repeat ENDING to current repeat");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7749,7 +7757,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
     std::stringstream ss;
 
     ss <<
-      "Handling a hookless repeat ending in voice " <<
+      "Handling a HOOKLESS repeat ENDING in voice " <<
       fVoiceName <<  "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -7774,7 +7782,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
     std::stringstream ss;
 
     ss <<
-      "repeats stack is empty when attempting to handle a hookless repeat ending end in voice " <<
+      "repeats stack is empty when attempting to handle a HOOKLESS repeat ENDING end in voice " <<
       asShortString ();
 
     msrInternalError (
@@ -7793,7 +7801,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
     currentRepeat =
       fVoicePendingRepeatsStack.front ();
 
-  // create a hookless repeat ending
+  // create a HOOKLESS repeat ending
   msrRepeatEndingKind
     repeatEndingKind =
       msrRepeatEndingKind::kRepeatEndingHookless;
@@ -7814,7 +7822,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
     ss <<
       "Appending a " <<
       repeatEndingKind <<
-      " repeat ending to current repeat in voice " <<
+      " repeat ENDING to current repeat in voice " <<
       fVoiceName;
 
     gWaeHandler->waeTrace (
@@ -7827,7 +7835,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "before adding a hookless repeat ending to current repeat");
+      "before adding a HOOKLESS repeat ENDING to current repeat");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7840,7 +7848,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "after adding a hookless repeat ending to current repeat");
+      "after adding a HOOKLESS repeat ENDING to current repeat");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7909,7 +7917,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Handling a repeat common part start in voice clone \"" <<
+//       "Handling a repeat COMMON PART start in voice clone \"" <<
 //       fVoiceName <<  "\"" <<
 //       ", line " << inputLineNumber;
 //
@@ -7933,7 +7941,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "repeats stack is empty when attempting to handle repeat common part start " <<
+//       "repeats stack is empty when attempting to handle repeat COMMON PART start " <<
 //       " in voice clone " <<
 //       asShortString ();
 //
@@ -7955,7 +7963,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Creating a repeat common part upon its start in voice clone " <<
+//       "Creating a repeat COMMON PART upon its start in voice clone " <<
 //       fVoiceName <<
 //       ", line " << inputLineNumber;
 //
@@ -8002,7 +8010,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Handling a repeat common part end in voice clone \"" <<
+//       "Handling a repeat COMMON PART end in voice clone \"" <<
 //       fVoiceName <<  "\"" <<
 //       ", line " << inputLineNumber;
 //
@@ -8026,7 +8034,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "repeats stack is empty when attempting to handle repeat ending " <<
+//       "repeats stack is empty when attempting to handle repeat ENDING " <<
 // //       repeatEnding->asShortString () <<
 //       " in voice clone " <<
 //       asShortString ();
@@ -8084,7 +8092,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Handling a hooked repeat ending in voice clone \"" <<
+//       "Handling a HOOKED repeat ENDING in voice clone \"" <<
 //       fVoiceName <<  "\"" <<
 //       ", line " << inputLineNumber;
 //
@@ -8108,7 +8116,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "repeats stack is empty when attempting to handle a hooked repeat ending in voice clone " <<
+//       "repeats stack is empty when attempting to handle a HOOKED repeat ENDING in voice clone " <<
 //       asShortString ();
 //
 //     msrInternalError (
@@ -8123,7 +8131,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     currentRepeat =
 //       fVoicePendingRepeatsStack.front ();
 //
-//   // create a hooked repeat ending
+//   // create a HOOKED repeat ending
 //   msrRepeatEndingKind
 //     repeatEndingKind =
 //       msrRepeatEndingKind::kRepeatEndingHooked;
@@ -8169,7 +8177,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Handling a hookless repeat ending in voice clone \"" <<
+//       "Handling a HOOKLESS repeat ENDING in voice clone \"" <<
 //       fVoiceName <<  "\"" <<
 //       ", line " << inputLineNumber;
 //
@@ -8193,7 +8201,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "repeats stack is empty when attempting to handle a hookless repeat ending in voice clone " <<
+//       "repeats stack is empty when attempting to handle a HOOKLESS repeat ENDING in voice clone " <<
 //       asShortString ();
 //
 //     msrInternalError (
@@ -8208,7 +8216,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     currentRepeat =
 //       fVoicePendingRepeatsStack.front ();
 //
-//   // create a hookless repeat ending
+//   // create a HOOKLESS repeat ENDING
 //   msrRepeatEndingKind
 //     repeatEndingKind =
 //       msrRepeatEndingKind::kRepeatEndingHookless;
@@ -8618,7 +8626,7 @@ void msrVoice::appendRepeatEndingCloneToVoice ( // JMI
           ss <<
             "Appending a " <<
             repeatEndingClone->getRepeatEndingKind () <<
-            " repeat ending clone to current repeat in voice " <<
+            " repeat ENDING clone to current repeat in voice " <<
             fVoiceName <<
                   std::endl;
 
@@ -8640,7 +8648,7 @@ void msrVoice::appendRepeatEndingCloneToVoice ( // JMI
           ss <<
             "repeats stack is empty when attempting to append a " <<
             repeatEndingClone->getRepeatEndingKind () <<
-            " repeat ending to voice " <<
+            " repeat ENDING to voice " <<
             asShortString () <<
             " ";
 

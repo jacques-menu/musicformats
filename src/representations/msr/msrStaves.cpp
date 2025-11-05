@@ -2495,7 +2495,7 @@ void msrStaff::cascadeHandleRepeatEndingStartInStaff (
     std::stringstream ss;
 
     ss <<
-      "Cascading handling a repeat ending start in staff \"" <<
+      "Cascading handling a repeat ENDING start in staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
@@ -2533,7 +2533,7 @@ void msrStaff::cascadeHandleRepeatEndingEndInStaff (
     ss <<
       "Cascading handling a " <<
       repeatEndingKind <<
-      " repeat ending end in staff \"" <<
+      " repeat ENDING end in staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
@@ -2863,7 +2863,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
     std::stringstream ss;
 
     ss <<
-      "Appending a repeat ending clone to staff \"" <<
+      "Appending a repeat ENDING clone to staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<

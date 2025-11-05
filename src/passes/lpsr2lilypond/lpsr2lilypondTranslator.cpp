@@ -27893,7 +27893,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
 
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
-          " % start of repeat hooked ending";
+          " % start of repeat HOOKED ENDING";
       }
 
       fLilypondCodeStream <<
@@ -27906,7 +27906,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
 
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
-          " % start of repeat hookless ending";
+          " % start of repeat HOOKLESS ENDING";
       }
 
     fLilypondCodeStream <<
@@ -27988,7 +27988,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
-          " % end of repeat hooked ending";
+          " % end of repeat HOOKED ENDING";
       }
       break;
 
@@ -27998,7 +27998,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ())   {
         fLilypondCodeStream <<
-          " % end of repeat hookless ending";
+          " % end of repeat HOOKLESS ENDING";
       }
 
       fLilypondCodeStream <<

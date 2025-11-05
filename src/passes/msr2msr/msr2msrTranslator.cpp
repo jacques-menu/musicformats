@@ -7255,7 +7255,7 @@ void msr2msrTranslator::visitStart (S_msrRepeatEnding& elt)
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat ending start in voice clone \"" <<
+      "Handling a repeat ENDING start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 
@@ -7299,7 +7299,7 @@ void msr2msrTranslator::visitEnd (S_msrRepeatEnding& elt)
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat ending end in voice clone \"" <<
+      "Handling a repeat ENDING end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"";
 

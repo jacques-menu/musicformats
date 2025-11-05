@@ -562,11 +562,11 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItInSegment (
     std::stringstream ss;
 
     ss <<
-      "Cascading creating and appending a measure " <<
-      ", to measureNumber: " <<
+      "Cascading creating and appending a measure," <<
+      ", measureNumber: " <<
       measureNumber <<
       ", to segment " <<
-      asString () <<
+      asShortString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
       ", line " << inputLineNumber;

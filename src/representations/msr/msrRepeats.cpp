@@ -45,13 +45,13 @@ namespace MusicFormats
   A repeat is recognized in MusicXML either by:
 
     - it's start: handleRepeatStart()
-    - it's first hooked ending (45b): handleRepeatEndingStart()
+    - it's first HOOKED ending (45b): handleRepeatEndingStart()
         the elements before it are moved to the new repeat's common part
     - it's end: handleRepeatEnd()
 
   Hooked endings following the first one are added to currentRepeat handleRepeatHookedEndingEnd()
 
-  A hookless ending terminates currentRepeat: handleRepeatHooklessEndingEnd()
+  A HOOKLESS ending terminates currentRepeat: handleRepeatHooklessEndingEnd()
     finalize currentRepeat
 */
 
@@ -603,7 +603,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::create (
     std::stringstream ss;
 
     ss <<
-      "Creating repeat common part " <<
+      "Creating repeat COMMON PART " <<
       obj->asString ();
 
     gWaeHandler->waeTrace (
@@ -634,7 +634,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createAsWellAsItsSegment (
     std::stringstream ss;
 
     ss <<
-      "Creating repeat common part " <<
+      "Creating repeat COMMON PART " <<
       obj->asString () <<
       " as well as its segment";
 
@@ -662,7 +662,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::create (
     std::stringstream ss;
 
     ss <<
-      "Creating repeat common part " <<
+      "Creating repeat COMMON PART " <<
       obj->asString () <<
       " with uplink to repeat " <<
       upLinkToRepeat->asShortString ();
@@ -697,7 +697,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createAsWellAsItsSegment (
     std::stringstream ss;
 
     ss <<
-      "Creating repeat common part " <<
+      "Creating repeat COMMON PART " <<
       obj->asString () <<
       " with uplink to repeat " <<
       upLinkToRepeat->asShortString () <<
@@ -748,7 +748,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createRepeatCommonPartNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "Creating a repeat common part newborn clone of " <<
+      "Creating a repeat COMMON PART newborn clone of " <<
       asShortString () <<
       " in voice " <<
       containingVoice->asShortString ();
@@ -773,7 +773,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createRepeatCommonPartNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "The resulting repeat common part newborn clone is " <<
+      "The resulting repeat COMMON PART newborn clone is " <<
       newbornClone->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -797,7 +797,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createRepeatCommonPartNewbornClone (
 //     ss <<
 //       "Appending segment " <<
 //       segment->asString () <<
-//       " to repeat common part " << asString () <<
+//       " to repeat COMMON PART " << asString () <<
 //       " (" << context << ")" <<
 //       ", line " << inputLineNumber;
 //
@@ -830,7 +830,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
     ss <<
       "Appending repeat " <<
       repeat->asString () <<
-      " to repeat common part " << asString () <<
+      " to repeat COMMON PART " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -863,7 +863,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
     ss <<
       "Appending measure repeat " <<
       measureRepeat->asString () <<
-      " to repeat common part " << asString () <<
+      " to repeat COMMON PART " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -896,7 +896,7 @@ void msrRepeatCommonPart::appendMultipleMeasureRestToRepeatCommonPart (
     ss <<
       "Cascading appending multiple measure rest " <<
       multipleMeasureRests->asString () <<
-      " to repeat common part " << asString () <<
+      " to repeat COMMON PART " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -929,7 +929,7 @@ void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
     ss <<
       "Appending voice element " <<
       voiceElement->asString () <<
-      " to repeat common part " << asString () <<
+      " to repeat COMMON PART " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -1320,7 +1320,7 @@ S_msrRepeatEnding msrRepeatEnding::create (
     std::stringstream ss;
 
     ss <<
-      "Creating repeat ending " <<
+      "Creating repeat ENDING " <<
       obj->asString ();
 
     gWaeHandler->waeTrace (
@@ -1356,7 +1356,7 @@ S_msrRepeatEnding msrRepeatEnding::createAsWellAsItsSegment (
     std::stringstream ss;
 
     ss <<
-      "Creating repeat ending " <<
+      "Creating repeat ENDING " <<
       obj->asString () <<
       " as well as its segment";
 
@@ -1389,7 +1389,7 @@ S_msrRepeatEnding msrRepeatEnding::create (
     std::stringstream ss;
 
     ss <<
-      "Creating repeat ending " <<
+      "Creating repeat ENDING " <<
       obj->asString () <<
       "with uplink to repeat " <<
       fetchRepeatAsShortString (upLinkToRepeat) <<
@@ -1430,7 +1430,7 @@ S_msrRepeatEnding msrRepeatEnding::createAsWellAsItsSegment (
     std::stringstream ss;
 
     ss <<
-      "Creating repeat ending " <<
+      "Creating repeat ENDING " <<
       obj->asString () <<
       "with uplink to repeat " <<
       fetchRepeatAsShortString (upLinkToRepeat) <<
@@ -1454,7 +1454,7 @@ S_msrRepeatEnding msrRepeatEnding::createRepeatEndingNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "Creating a repeat ending newborn clone of " <<
+      "Creating a repeat ENDING newborn clone of " <<
       asShortString () <<
       " in voice " <<
       fetchVoiceAsShortString (containingVoice);
@@ -1482,7 +1482,7 @@ S_msrRepeatEnding msrRepeatEnding::createRepeatEndingNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "The resulting repeat ending newborn clone is " <<
+      "The resulting repeat ENDING newborn clone is " <<
       fetchRepeatEndingAsShortString (newbornClone);
 
     gWaeHandler->waeTrace (
@@ -1545,7 +1545,7 @@ msrRepeatEnding::~msrRepeatEnding ()
 //
 //     ss <<
 //       "Appending segment " << segment <<
-//       " to repeat ending " << asString () <<
+//       " to repeat ENDING " << asString () <<
 //       " (" << context << ")" <<
 //       ", line " << inputLineNumber;
 //
@@ -1577,7 +1577,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
 
     ss <<
       "Appending repeat " << repeat <<
-      " to repeat ending " << asString () <<
+      " to repeat ENDING " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -1610,7 +1610,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
     ss <<
       "Appending measure repeat " <<
       fetchMeasureRepeatAsShortString (measureRepeat) <<
-      " to repeat ending " << asString () <<
+      " to repeat ENDING " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -1643,7 +1643,7 @@ void msrRepeatEnding::appendMultipleMeasureRestToRepeatEnding (
     ss <<
       "Cascading appending multiple measure restBasics " <<
       fetchMultipleMeasureRestAsShortString (multipleMeasureRests) <<
-      " to repeat ending " << asString () <<
+      " to repeat ENDING " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -1675,7 +1675,7 @@ void msrRepeatEnding::appendVoiceElementToRepeatEnding (
 
     ss <<
       "Appending voice element " << voiceElement <<
-      " to repeat ending " << asString () <<
+      " to repeat ENDING " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -2107,7 +2107,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
     ss <<
       "Creating repeat " <<
       obj->asString () <<
-      " as well as its common part" <<
+      " as well as its COMMON PART" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2154,7 +2154,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
       obj->asString () <<
       " with repeat explicit startKind " <<
       repeatExplicitStartKind <<
-      " as well as its common part" <<
+      " as well as its COMMON PART" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2198,7 +2198,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
       obj->asString () <<
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
-      " as well as its common part" <<
+      " as well as its COMMON PART" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2242,7 +2242,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPartWithIsSegment (
       obj->asString () <<
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
-      " as well as its common part with its segment" <<
+      " as well as its COMMON PART with its segment" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2282,7 +2282,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
       repeatExplicitStartKind <<
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
-      " as well as its common part" <<
+      " as well as its COMMON PART" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2339,7 +2339,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPartWithIsSegment (
       repeatExplicitStartKind <<
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
-      " as well as its common part with its segment" <<
+      " as well as its COMMON PART with its segment" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2484,7 +2484,7 @@ void msrRepeat::setRepeatCommonPart (
     std::stringstream ss;
 
     ss <<
-      "Setting repeat common part to " <<
+      "Setting repeat COMMON PART to " <<
       fetchRepeatCommonPartAsShortString (repeatCommonPart) <<
       " in repeat " <<
       asShortString (); // CANNOT RUN HAVOC ???
@@ -2519,7 +2519,7 @@ void msrRepeat::addRepeatEndingToRepeat (
     std::stringstream ss;
 
     ss <<
-      "Adding repeat ending " <<
+      "Adding repeat ENDING " <<
       repeatEnding->asString () <<
       " to repeat" <<
       asShortString ();
@@ -2553,7 +2553,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 //             std::stringstream ss;
 //
 //             ss <<
-//               "cannot add hooked ending " <<
+//               "cannot add HOOKED ending " <<
 //               fetchRepeatEndingAsShortString (repeatEnding) <<
 //               " right after a repeat has been created";
 //
@@ -2576,7 +2576,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 //             std::stringstream ss;
 //
 //             ss <<
-//               "cannot add hooked ending " <<
+//               "cannot add HOOKED ending " <<
 //               fetchRepeatEndingAsShortString (repeatEnding) <<
 //               " after a repeat has been completed";
 //
@@ -2597,7 +2597,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 //             std::stringstream ss;
 //
 //             ss <<
-//               "cannot add hookless repeat ending " <<
+//               "cannot add HOOKLESS repeat ENDING " <<
 //               fetchRepeatEndingAsShortString (repeatEnding) <<
 //               " right after the repeat has been created";
 //
@@ -2613,9 +2613,9 @@ void msrRepeat::addRepeatEndingToRepeat (
 //             std::stringstream ss;
 //
 //             ss <<
-//               "cannot add hookless repeat ending " <<
+//               "cannot add HOOKLESS repeat ENDING " <<
 //               fetchRepeatEndingAsShortString (repeatEnding) <<
-//               " right after the repeat common part";
+//               " right after the repeat COMMON PART";
 //
 // //             msrInternalError ( JMI 0.9.63
 //             msrInternalWarning (
@@ -2633,7 +2633,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 //             std::stringstream ss;
 //
 //             ss <<
-//               "cannot add hookless ending " <<
+//               "cannot add HOOKLESS ending " <<
 //               fetchRepeatEndingAsShortString (repeatEnding) <<
 //               " after a repeat has been completed";
 //

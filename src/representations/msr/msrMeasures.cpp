@@ -1144,7 +1144,7 @@ void msrMeasure::appendMeasureElementToMeasure (
 
     ss <<
       "Appending measure element " <<
-      measureElement->asShortString () <<
+      measureElement->asString () <<
       " to measure " <<
       asShortString () <<
 //       " in voice " <<
@@ -1319,7 +1319,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       "Appending measure element " <<
       elem->asString () <<
       " at the end of measure " <<
-      asString () <<
+      asShortString () <<
       " in voice " <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()

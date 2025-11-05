@@ -6586,7 +6586,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatEnding& elt)
     std::stringstream ss;
 
     ss <<
-      "Appending a repeat ending clone to voice clone \"" <<
+      "Appending a repeat ENDING clone to voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       std::endl;
   }

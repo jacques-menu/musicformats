@@ -12432,7 +12432,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
           ==
         msrBarLineEndingTypeKind::kBarLineEndingTypeStart
       ) {
-        // ending start, don't know yet whether it's hooked or hookless
+        // ending start, don't know yet whether it's HOOKED or HOOKLESS
         // ------------------------------------------------------
         if (fCurrentBarLineEndingNumber.empty ()) {
           mxsr2msrWarning (
@@ -12443,7 +12443,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
           fCurrentBarLineEndingNumber = "1";
         }
 
-        // don't know yet whether repeat ending start barLine is hooked or hookless
+        // don't know yet whether repeat ending start barLine is HOOKED or HOOKLESS
         // remember it in fCurrentRepeatEndingStartBarLine
         fCurrentRepeatEndingStartBarLine = barLine;
 
@@ -12522,7 +12522,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
           &&
         ! fCurrentBarLineEndingNumber.empty ()
       ) {
-        // hooked ending end
+        // HOOKED ending end
         // ------------------------------------------------------
         // set current barLine ending start category
         fCurrentRepeatEndingStartBarLine->
@@ -12534,7 +12534,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
           setBarLineCategory (
             msrBarLineCategoryKind::kBarLineCategoryHookedEndingEnd);
 
-        // handle the repeat hooked ending end
+        // handle the repeat HOOKED ending end
         handleRepeatHookedEndingEnd (barLine);
 
         barLineHasBeenHandled = true;
@@ -12564,7 +12564,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
           &&
         ! fCurrentBarLineEndingNumber.empty ()
       ) {
-        // hookless ending end
+        // HOOKLESS ending end
         // ------------------------------------------------------
         // set current barLine ending start category
         fCurrentRepeatEndingStartBarLine->
@@ -12576,7 +12576,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
           setBarLineCategory (
             msrBarLineCategoryKind::kBarLineCategoryHooklessEndingEnd);
 
-        // handle the repeat hookless ending end
+        // handle the repeat HOOKLESS ending end
         handleRepeatHooklessEndingEnd (barLine);
 
         barLineHasBeenHandled = true;
@@ -26808,7 +26808,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat ending start in part " <<
+      "Handling a repeat ENDING start in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
@@ -26856,7 +26856,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat hooked ending end in part " <<
+      "Handling a repeat HOOKED ending end in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
       ", line " << barLine->getInputLineNumber ();
 
@@ -26887,13 +26887,13 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
   fCurrentPart->
     appendBarLineToPart (barLine); // JMI
 
-  // create a hooked repeat ending from the current segment
+  // create a HOOKED repeat ending from the current segment
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Handling a hooked repeat ending in part " <<
+      "Handling a HOOKED repeat ENDING in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
       ", line " << barLine->getInputLineNumber ();
 
@@ -26928,7 +26928,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
     std::stringstream ss;
 
     ss <<
-      "Handling a repeat hookless ending end in part " <<
+      "Handling a repeat HOOKLESS ending end in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
       ", line " << barLine->getInputLineNumber ();
 
@@ -26959,13 +26959,13 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
   fCurrentPart->
     appendBarLineToPart (barLine);
 
-  // create a hookless repeat ending from the current segment
+  // create a HOOKLESS repeat ending from the current segment
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Handling a hookless repeat ending in part " <<
+      "Handling a HOOKLESS repeat ENDING in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
       ", line " << barLine->getInputLineNumber ();
 
