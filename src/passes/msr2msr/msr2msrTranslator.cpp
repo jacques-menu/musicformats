@@ -7119,7 +7119,7 @@ void msr2msrTranslator::visitStart (S_msrRepeat& elt)
   pushRepeatOntoRepeatsStack (
     elt->getInputLineNumber (),
     repeatClone,
-    "createARepeatAndStackIt()");
+    "visitStart (S_msrRepeat& elt)");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -7462,23 +7462,6 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeat& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
-
-/* JMI
-  // set last segment as the measure repeat pattern segment
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Setting current last segment as measure repeat pattern segment in voice " <<
-      fCurrentVoiceClone->getVoiceName () <<;
-
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-*/
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {

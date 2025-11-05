@@ -202,6 +202,14 @@ void msrRepeatElement::appendMeasureToRepeatElement (
   const S_msrMeasure&      measure,
   const std::string&       context)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    measure != nullptr,
+    "measure is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
@@ -224,14 +232,6 @@ void msrRepeatElement::appendMeasureToRepeatElement (
 // ++n;
 // if (n == 2) abort ();
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    measure != nullptr,
-    "measure is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
   fRepeatElementSegment->appendMeasureToSegment (
     measure);
 }
@@ -241,15 +241,23 @@ void msrRepeatElement::appendRepeatToRepeatElement (
   const S_msrRepeat&       repeat,
   const std::string&       context)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    repeat != nullptr,
+    "repeat is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending beat repeat " <<
+      "Appending repeat " <<
       repeat->asString () <<
       " to repeat element " <<
-      asString () <<
+      asShortString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -258,14 +266,6 @@ void msrRepeatElement::appendRepeatToRepeatElement (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    repeat != nullptr,
-    "repeat is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatElementSegment->appendRepeatToSegment (
     repeat);
@@ -311,13 +311,21 @@ void msrRepeatElement::appendBeatRepeatToRepeatElement (
   const S_msrBeatRepeat&   beatRepeat,
   const std::string&       context)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    beatRepeat != nullptr,
+    "beatRepeat is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
       "Appending beat repeat " <<
-      fetchBeatRepeatAsString (beatRepeat) <<
+      beatRepeat->asString () <<
       " to repeat element " <<
       asString () <<
       " (" << context << ")" <<
@@ -328,14 +336,6 @@ void msrRepeatElement::appendBeatRepeatToRepeatElement (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    beatRepeat != nullptr,
-    "beatRepeat is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatElementSegment->appendBeatRepeatToSegment (
     beatRepeat);
@@ -2067,7 +2067,7 @@ S_msrRepeat msrRepeat::create (
       "Creating repeat " <<
       obj->asString () <<
       " with uplink to voice " <<
-      fetchVoiceAsShortString (upLinkToVoice) <<
+      fetchVoiceName (upLinkToVoice) <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2197,7 +2197,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
       "Creating repeat " <<
       obj->asString () <<
       " with uplink to voice " <<
-      fetchVoiceAsShortString (upLinkToVoice) <<
+      fetchVoiceName (upLinkToVoice) <<
       " as well as its common part" <<
       ", line " << inputLineNumber;
 
@@ -2241,7 +2241,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPartWithIsSegment (
       "Creating repeat " <<
       obj->asString () <<
       " with uplink to voice " <<
-      upLinkToVoice->asShortString () <<
+      fetchVoiceName (upLinkToVoice) <<
       " as well as its common part with its segment" <<
       ", line " << inputLineNumber;
 
@@ -2281,7 +2281,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
       " with repeat explicit startKind " <<
       repeatExplicitStartKind <<
       " with uplink to voice " <<
-      fetchVoiceAsShortString (upLinkToVoice) <<
+      fetchVoiceName (upLinkToVoice) <<
       " as well as its common part" <<
       ", line " << inputLineNumber;
 
@@ -2338,7 +2338,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPartWithIsSegment (
       " with repeat explicit startKind " <<
       repeatExplicitStartKind <<
       " with uplink to voice " <<
-      fetchVoiceAsShortString (upLinkToVoice) <<
+      fetchVoiceName (upLinkToVoice) <<
       " as well as its common part with its segment" <<
       ", line " << inputLineNumber;
 

@@ -10950,7 +10950,7 @@ void msr2mxsrTranslator::visitStart (S_msrRepeat& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
-    handleRepeatStartInVoiceClone (
+    edacsacHandleRepeatStartInVoiceClone (
       elt->getInputLineNumber (),
       elt);
 }

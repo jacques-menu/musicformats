@@ -396,11 +396,6 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 //
 //   ++gIndenter;
 //
-//   fVoiceLastSegment->
-//     removeElementFromSegment (
-//       inputLineNumber,
-//       element);
-//
 //   --gIndenter;
 // }
 

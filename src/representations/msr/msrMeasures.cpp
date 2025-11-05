@@ -7374,7 +7374,7 @@ void msrMeasure::finalizeMeasure (
       std::stringstream ss;
 
       ss <<
-        "Finalizing measure 111 " <<
+        "Finalizing measure BEGIN " <<
         this->asShortString () <<
         " in segment " <<
         fMeasureUpLinkToSegment->asShortString () <<
@@ -7509,7 +7509,7 @@ void msrMeasure::finalizeMeasure (
           fMeasureNotesFlatList.size ();
 
       gLog <<
-        "Finalizing measure 222" <<
+        "Finalizing measure END" <<
         ", fetchMeasureUpLinkToVoice: " <<
         fetchMeasureUpLinkToVoice ()->getVoiceName () <<
         ", fMeasureNumber: " <<

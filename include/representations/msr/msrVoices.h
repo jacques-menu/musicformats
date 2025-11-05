@@ -685,10 +685,10 @@ class EXP msrVoice : public msrElement
 
     // repeats
 
-    void                  handleRepeatStartInVoice (
+    void                  edacsacHandleRepeatStartInVoice (
                             const mfInputLineNumber& inputLineNumber);
 
-//     void                  handleRepeatStartInVoiceClone (
+//     void                  edacsacHandleRepeatStartInVoiceClone (
 //                             const mfInputLineNumber& inputLineNumber,
 //                             const S_msrRepeat&       repeat);
 
@@ -743,9 +743,6 @@ class EXP msrVoice : public msrElement
                             */
 
     // multiple measure rests
-
-//     void                  cascadeAppendMultipleMeasureRestToVoiceInitialElementsList (
-//                             const S_msrMultipleMeasureRest& multipleMeasureRest);
 
     void                  createAMultipleMeasureRestAndAppendItToVoice (
                             const mfInputLineNumber&
@@ -900,22 +897,7 @@ class EXP msrVoice : public msrElement
     // private services
     // ------------------------------------------------------
 
-//     // voice last segment
-//
-//     void                  appendVoiceLastSegmentToInitialVoiceElementsList (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             const std::string&       context);
-//
-//     void                  moveVoiceLastSegmentToInitialVoiceElementsListIfRelevant (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             const std::string&       context);
-
     // repeats
-
-//     S_msrRepeat           createARepeatAndStackIt (
-//                             const mfInputLineNumber&   inputLineNumber,
-//                             msrRepeatExplicitStartKind repeatExplicitStartKind,
-//                             const std::string&         context);
 
 //     S_msrRepeat           createARepeatCloneAndStackIt (
 //                             const mfInputLineNumber& inputLineNumber,
@@ -930,16 +912,6 @@ class EXP msrVoice : public msrElement
     S_msrRepeat           popRepeatFromVoiceRepeatsStack (
                             const mfInputLineNumber& inputLineNumber,
                             const                    std::string& context);
-
-//     void                  appendRepeatToInitialVoiceElementsList (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             const S_msrRepeat&       repeat,
-//                             const std::string&       context);
-
-//     void                  appendRepeatCloneToInitialVoiceElementsList (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             const S_msrRepeat&       repeatCLone,
-//                             const std::string&       context);
 
     void                  handleVoiceLevelRepeatStartInVoice (
                             const mfInputLineNumber& inputLineNumber);
@@ -980,62 +952,34 @@ class EXP msrVoice : public msrElement
                             const mfMeasureNumber&   measureNumber,
                             int                      repeatTimes);
 
-//     void                  moveVoiceInitialElementsToRepeatCommonPart (
-//                             const mfInputLineNumber&     inputLineNumber,
-//                             const S_msrRepeatCommonPart& repeatCommonPart,
-//                             const std::string&           context);
-//
     void                  moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart (
                             const mfInputLineNumber&     inputLineNumber,
                             const S_msrRepeatCommonPart& repeatCommonPart,
                             const std::string&           context);
 //
-//     void                  moveAllVoiceContentsToRepeatCommonPart (
-//                             const mfInputLineNumber&     inputLineNumber,
-//                             const S_msrRepeatCommonPart& repeatCommonPart,
-//                             const std::string&           context);
-//
-//     void                  moveVoiceLastSegmentToRepeatEnding (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             const S_msrRepeatEnding& repeatEnding,
-//                             const std::string&       context);
-
     void                  handleHookedRepeatEndingEndInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
+                            const std::string&       repeatEndingNumber);
+                              // a string, because if may be "1, 2" for example
 
     void                  handleHooklessRepeatEndingEndInVoice (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
+                            const std::string&       repeatEndingNumber);
+                              // a string, because if may be "1, 2" for example
 
 //     void                  handleHookedRepeatEndingEndInVoiceClone (
 //                             const mfInputLineNumber& inputLineNumber,
-//                             const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
+//                             const std::string&       repeatEndingNumber);
+                                 // a string, because if may be "1, 2" for example
 //
 //     void                  handleHooklessRepeatEndingEndInVoiceClone (
 //                             const mfInputLineNumber& inputLineNumber,
-//                             const std::string&       repeatEndingNumber); // a string, because if may be "1, 2" for example
+//                             const std::string&       repeatEndingNumber);
+                                 // a string, because if may be "1, 2" for example
 
     // multiple measure rests
 
-//     void                  cascadeAppendMultipleMeasureRestToInitialVoiceElementsList (
-//                             const mfInputLineNumber&        inputLineNumber,
-//                             const S_msrMultipleMeasureRest& multipleMeasureRest,
-//                             const std::string&              context);
-
     // measure repeats
-
-//     void                  appendMeasureRepeatToInitialVoiceElementsList (
-//                             const mfInputLineNumber&  inputLineNumber,
-//                             const S_msrMeasureRepeat& measureRepeat,
-//                             const std::string&        context);
-
-    // beats repeats
-
-//     void                  appendBeatRepeatToInitialVoiceElementsList (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             const S_msrBeatRepeat&   beatRepeat,
-//                             const std::string&       context);
 
   public:
 
@@ -1110,9 +1054,7 @@ class EXP msrVoice : public msrElement
     S_msrMeasure          fVoiceLastAppendedMeasure;
 
     // measures flat list
-    // i.e. without segments nor repeats,
-    // gathered from fVoiceInitialElementsList and fVoiceLastSegment
-    // by finalizeMeasure()
+    // i.e. without segments nor repeats // ZAZA
     std::list <S_msrMeasure>
                           fVoiceMeasuresFlatList;
 
@@ -1304,21 +1246,6 @@ class EXP msrVoice : public msrElement
 
     // private work fields
     // ------------------------------------------------------
-
-    // voice initial elements list
-//     std::list <S_msrVoiceElement>
-//                           fVoiceInitialElementsList;
-
-    // voice first and last segments
-
-    // fVoiceLastSegment contains the music
-    // not yet stored in fVoiceInitialElementsList,
-    // it is thus logically the end of the latter,
-    // and is created implicitly for every voice.
-//     S_msrSegment          fVoiceLastSegment;
-
-    // fVoiceFirstSegment is used to work around LilyPond_Issue_34
-//     S_msrSegment          fVoiceFirstSegment;
 
     // counters
 

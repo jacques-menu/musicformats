@@ -572,10 +572,11 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
     std::stringstream ss;
 
     ss <<
-      "Cascading creating measure '" <<
+      "Cascading creating a measure" <<
+      ", measureNumber: " <<
       measureNumber <<
-      "' and appending it to staff \"" << fStaffPathLikeName << "\"" <<
-      "', line " << inputLineNumber;
+      ", and appending it to staff \"" << fStaffPathLikeName << "\"" <<
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2440,7 +2441,7 @@ void msrStaff::cascadeHandleRepeatStartInStaff (
   for (S_msrVoice voice : fStaffAllVoicesList) {
     ++gIndenter;
     voice->
-      handleRepeatStartInVoice (
+      edacsacHandleRepeatStartInVoice (
         inputLineNumber);
     --gIndenter;
   } // for
@@ -3101,7 +3102,7 @@ void msrStaff::cascadeFinalizeLastAppendedMeasureInStaff ( // cascade bottom
     std::stringstream ss;
 
     ss <<
-      "Finalizing last appended measure in staff \"" <<
+      "Cascading initializing last appended measure in staff \"" <<
       fStaffPathLikeName <<
       "\", line " << inputLineNumber;
 

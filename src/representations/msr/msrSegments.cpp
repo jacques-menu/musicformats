@@ -563,6 +563,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItInSegment (
 
     ss <<
       "Cascading creating and appending a measure " <<
+      ", to measureNumber: " <<
       measureNumber <<
       ", to segment " <<
       asString () <<
@@ -855,7 +856,7 @@ void msrSegment::appendRepeatToSegment (
 // gLog << "*** msrSegment *** " << *this << std::endl;
 // gLog << std::endl << std::endl;
 
-  if (false && fSegmentLastMeasure) {
+  if (false && fSegmentLastMeasure) { // ZAZA
     // are there elements before the current last measure in this segment?
 //     if (
 //       fSegmentLastMeasure->getMeasureIsMusicallyEmpty ()
@@ -907,25 +908,6 @@ void msrSegment::appendRepeatToSegment (
       if (! fSegmentMeasuresList.empty ()) { // JMI should not be necessary 0.9.76
         fSegmentMeasuresList.pop_back ();
       }
-//     }
-
-//   for (
-//     std::list <S_msrVoiceElement>::iterator i = fVoiceInitialElementsList.begin ();
-//     i != fVoiceInitialElementsList.end ();
-//     ++i
-//   ) {
-//     S_msrVoiceElement element = (*i);
-//
-//     // append the element to the new segment
-//     repeatCommonPart->
-//       appendVoiceElementToRepeatCommonPart (
-//         inputLineNumber,
-//         element,
-//         "moveVoiceInitialElementsToRepeatCommonPart()");
-//
-//     // remove it from the voice initial elements
-//     i = fVoiceInitialElementsList.erase (i);
-//   } // for
   }
 
   // append repeat to the segment

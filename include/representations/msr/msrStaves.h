@@ -470,10 +470,8 @@ class EXP msrStaff : public msrElement
     mfWholeNotes          fStaffShortestNoteWholeNotes;
     msrTupletFactor       fStaffShortestNoteTupletFactor;
 
-    // measures flat vector
-    // i.e. without segments nor repeats,
-    // gathered from the staff's voices fVoiceInitialElementsList and fVoiceLastSegment
-    // by finalizeMeasure()
+    // measures flat list vector
+    // i.e. without segments nor repeats // JMI 0.9.76 ZAZA
     std::vector <std::list <S_msrMeasure>>
                           fStaffMeasuresFlatListsVector;
 

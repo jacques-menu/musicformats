@@ -786,9 +786,10 @@ void msrPart::cascadeCreateAMeasureAndAppendItInPart (
     std::stringstream ss;
 
     ss <<
-      "Cascading creating a measure '" <<
+      "Cascading creating a measure" <<
+      ", measureNumber: " <<
       measureNumber <<
-      "' and appending it to part " <<
+      ", and appending it to part " <<
       fetchPartNameForTrace () <<
       "', line " << inputLineNumber;
 
@@ -3060,7 +3061,7 @@ void msrPart::cascadeFinalizeLastAppendedMeasureInPart (
     std::stringstream ss;
 
     ss <<
-      "Finalizing last appended measure in part " <<
+      "Cascading finalizing last appended measure in part " <<
       fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
