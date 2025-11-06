@@ -727,8 +727,9 @@ class EXP msrMeasure : public msrSegmentElement
 
     // debug number, unique for every msrMeasure instance
 
-    static int            sGlobalMeasureDebugNumber;
-    int                   fMeasureDebugNumber;
+    static mfMeasureDebugNumber
+                          sGlobalMeasureDebugNumber;
+    mfMeasureDebugNumber  fMeasureDebugNumber;
 
     // measure lengths, in whole notes
 

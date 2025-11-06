@@ -57,7 +57,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 
-int msrRepeatElement::sGlobalRepeatElementDebugNumber = 0;
+mfRepeatElementDebugNumber msrRepeatElement::sGlobalRepeatElementDebugNumber = 0;
 
 /* this class is purely virtual
 S_msrRepeatElement msrRepeatElement::create (
@@ -636,7 +636,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createAsWellAsItsSegment (
     ss <<
       "Creating repeat COMMON PART " <<
       obj->asString () <<
-      " as well as its segment";
+      " and its segment";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -701,7 +701,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createAsWellAsItsSegment (
       obj->asString () <<
       " with uplink to repeat " <<
       upLinkToRepeat->asShortString () <<
-      " as well as its segment";
+      " and its segment";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1358,7 +1358,7 @@ S_msrRepeatEnding msrRepeatEnding::createAsWellAsItsSegment (
     ss <<
       "Creating repeat ENDING " <<
       obj->asString () <<
-      " as well as its segment";
+      " and its segment";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1434,7 +1434,7 @@ S_msrRepeatEnding msrRepeatEnding::createAsWellAsItsSegment (
       obj->asString () <<
       "with uplink to repeat " <<
       fetchRepeatAsShortString (upLinkToRepeat) <<
-      " as well as its segment" <<
+      " and its segment" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1981,7 +1981,7 @@ std::ostream& operator << (std::ostream& os, const msrRepeatEnding& elt)
 }
 
 //______________________________________________________________________________
-int msrRepeat::sGlobalRepeatDebugNumber = 0;
+mfRepeatDebugNumber msrRepeat::sGlobalRepeatDebugNumber = 0;
 
 S_msrRepeat msrRepeat::create (
   const mfInputLineNumber& inputLineNumber,
@@ -2011,7 +2011,47 @@ S_msrRepeat msrRepeat::create (
   return obj;
 }
 
-S_msrRepeat msrRepeat::create (
+S_msrRepeat msrRepeat::createWithCommonPart (
+  const mfInputLineNumber& inputLineNumber,
+  int                      repeatTimes)
+{
+  msrRepeat* obj =
+    new msrRepeat (
+      inputLineNumber,
+      repeatTimes);
+  assert (obj != nullptr);
+
+  // create the repeat common part
+  S_msrRepeatCommonPart
+    repeatCommonPart =
+      msrRepeatCommonPart::create (
+        inputLineNumber,
+        obj);
+
+  // register it in obj
+  obj->setRepeatCommonPart ( // JMI 0.9.76
+    repeatCommonPart);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating repeat " <<
+      obj->asString () <<
+      " and its COMMON PART" <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return obj;
+}
+
+S_msrRepeat msrRepeat::createWithExplicitStartKind (
   const mfInputLineNumber&   inputLineNumber,
   int                        repeatTimes,
   msrRepeatExplicitStartKind repeatExplicitStartKind)
@@ -2046,7 +2086,7 @@ S_msrRepeat msrRepeat::create (
   return obj;
 }
 
-S_msrRepeat msrRepeat::create (
+S_msrRepeat msrRepeat::createWithUplink (
   const mfInputLineNumber& inputLineNumber,
   int                      repeatTimes,
   const S_msrVoice&        upLinkToVoice)
@@ -2079,26 +2119,22 @@ S_msrRepeat msrRepeat::create (
   return obj;
 }
 
-S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
-  const mfInputLineNumber& inputLineNumber,
-  int                      repeatTimes)
+S_msrRepeat msrRepeat::createWithExplicitStartKindAndUplink (
+  const mfInputLineNumber&   inputLineNumber,
+  int                        repeatTimes,
+  msrRepeatExplicitStartKind repeatExplicitStartKind,
+  const S_msrVoice&          upLinkToVoice)
 {
   msrRepeat* obj =
     new msrRepeat (
       inputLineNumber,
-      repeatTimes);
+      repeatTimes,
+      upLinkToVoice);
   assert (obj != nullptr);
 
-  // create the repeat common part
-  S_msrRepeatCommonPart
-    repeatCommonPart =
-      msrRepeatCommonPart::create (
-        inputLineNumber,
-        obj);
-
-  // register it in obj
-  obj->setRepeatCommonPart ( // JMI 0.9.76
-    repeatCommonPart);
+  obj->
+    setRepeatExplicitStartKind (
+      repeatExplicitStartKind);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -2107,7 +2143,10 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
     ss <<
       "Creating repeat " <<
       obj->asString () <<
-      " as well as its COMMON PART" <<
+      " with repeat explicit startKind " <<
+      repeatExplicitStartKind <<
+      " with uplink to voice " <<
+      fetchVoiceName (upLinkToVoice) <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2119,7 +2158,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
   return obj;
 }
 
-S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
+S_msrRepeat msrRepeat::createWithExplicitStartKindAndCommonPart (
   const mfInputLineNumber&   inputLineNumber,
   int                        repeatTimes,
   msrRepeatExplicitStartKind repeatExplicitStartKind)
@@ -2154,7 +2193,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
       obj->asString () <<
       " with repeat explicit startKind " <<
       repeatExplicitStartKind <<
-      " as well as its COMMON PART" <<
+      " and its COMMON PART" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2166,7 +2205,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
   return obj;
 }
 
-S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
+S_msrRepeat msrRepeat::createWithCommonPartAndUplink (
   const mfInputLineNumber& inputLineNumber,
   int                      repeatTimes,
   const S_msrVoice&        upLinkToVoice)
@@ -2198,7 +2237,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
       obj->asString () <<
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
-      " as well as its COMMON PART" <<
+      " and its COMMON PART" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2210,7 +2249,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
   return obj;
 }
 
-S_msrRepeat msrRepeat::createAsWellAsItsCommonPartWithIsSegment (
+S_msrRepeat msrRepeat::createWithUplinkAndCommonPartAndSegment (
   const mfInputLineNumber& inputLineNumber,
   int                      repeatTimes,
   const S_msrVoice&        upLinkToVoice)
@@ -2242,7 +2281,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPartWithIsSegment (
       obj->asString () <<
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
-      " as well as its COMMON PART with its segment" <<
+      " and its COMMON PART with its segment" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2254,7 +2293,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPartWithIsSegment (
   return obj;
 }
 
-S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
+S_msrRepeat msrRepeat::createWithExplicitStartKindAndUplinkAndCommonPart (
   const mfInputLineNumber&   inputLineNumber,
   int                        repeatTimes,
   msrRepeatExplicitStartKind repeatExplicitStartKind,
@@ -2271,6 +2310,17 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
     setRepeatExplicitStartKind (
       repeatExplicitStartKind);
 
+  // create the repeat common part
+  S_msrRepeatCommonPart
+    repeatCommonPart =
+      msrRepeatCommonPart::createAsWellAsItsSegment (
+        inputLineNumber,
+        obj);
+
+  // register it in obj
+  obj->setRepeatCommonPart ( // JMI 0.9.76
+    repeatCommonPart);
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
@@ -2282,7 +2332,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
       repeatExplicitStartKind <<
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
-      " as well as its COMMON PART" <<
+      " and its COMMON PART" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2294,7 +2344,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPart (
   return obj;
 }
 
-S_msrRepeat msrRepeat::createAsWellAsItsCommonPartWithIsSegment (
+S_msrRepeat msrRepeat::createWithExplicitStartKindAndUplinkAndCommonPartAndSegment (
   const mfInputLineNumber&   inputLineNumber,
   int                        repeatTimes,
   msrRepeatExplicitStartKind repeatExplicitStartKind,
@@ -2339,7 +2389,7 @@ S_msrRepeat msrRepeat::createAsWellAsItsCommonPartWithIsSegment (
       repeatExplicitStartKind <<
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
-      " as well as its COMMON PART with its segment" <<
+      " and its COMMON PART with its segment" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2433,18 +2483,11 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
 
   S_msrRepeat
     newbornClone =
-      msrRepeat::create (
+      msrRepeat::createWithExplicitStartKindAndUplink (
         fInputLineNumber,
         fRepeatTimes,
+        fRepeatExplicitStartKind,
         containingVoice);
-
-    // number of repetitions
-    newbornClone->fRepeatTimes =
-      fRepeatTimes;
-
-    // explicit start?
-    newbornClone->fRepeatExplicitStartKind =
-      fRepeatExplicitStartKind;
 
   // DON'T create the repeat common part, that will be done upon browsing
 

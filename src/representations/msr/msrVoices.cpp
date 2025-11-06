@@ -4422,9 +4422,10 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 
   S_msrRepeat
     newRepeat =
-      msrRepeat::createAsWellAsItsCommonPart (
+      msrRepeat::createWithExplicitStartKindAndUplinkAndCommonPart (
         repeatInputLineNumber,
         repeatTimes,
+        msrRepeatExplicitStartKind::kRepeatExplicitStartNo,
         this);
 
   // create the repeat common part
@@ -4903,7 +4904,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
   S_msrRepeat
     newRepeat;
 //     newRepeat =
-//       msrRepeat::createAsWellAsItsCommonPart (
+//       msrRepeat::createWithCommonPart (
 //         inputLineNumber,
 //         repeatTimes,
 //         this);
@@ -5219,10 +5220,11 @@ void msrVoice::handleVoiceLevelRepeatStartInVoice (
 
   S_msrRepeat
     result =
-      msrRepeat::createAsWellAsItsCommonPartWithIsSegment (
+      msrRepeat::createWithExplicitStartKindAndUplinkAndCommonPartAndSegment (
 //       msrRepeat::create ( // ZOULOU ZOULOU
         inputLineNumber,
         2, // repeatTimes, default value JMI
+        msrRepeatExplicitStartKind::kRepeatExplicitStartNo,
         this);
 
   // push it onto the voice's repeats stack

@@ -50,7 +50,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-int msrMeasure::sGlobalMeasureDebugNumber = 0;
+mfMeasureDebugNumber msrMeasure::sGlobalMeasureDebugNumber = 0;
 
 S_msrMeasure msrMeasure::create (
   const mfInputLineNumber& inputLineNumber,
@@ -3971,6 +3971,7 @@ void msrMeasure::padUpToPositionInMeasure (
 
       ss <<
         "Creating a padding note for measure debug number " <<
+        ", fMeasureDebugNumber: " <<
         fMeasureDebugNumber <<
         ", missingNotesDuration: " << missingNotesDuration <<
         " in voice " << fetchVoiceName (measureVoice)  <<

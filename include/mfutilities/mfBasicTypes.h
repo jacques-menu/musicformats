@@ -156,6 +156,31 @@ EXP extern int mfVoiceNumberAsInteger (
   const mfVoiceNumber& voiceNumber);
 
 //______________________________________________________________________________
+// segment numbers
+
+EXP extern const int K_MF_SEGMENT_NUMBER_UNKNOWN_;
+
+EXP extern const std::string
+  kMfSegmentNumberPrefix,
+  kMfSegmentNumberDefaultValueString;
+
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfSegmentNumber = std::string;
+// #else
+  using mfSegmentNumber =
+    mfWrappedValueForArithmetic <
+      int,
+      kMfSegmentNumberPrefix,
+      K_MF_EMPTY_STRING,
+      K_MF_SEGMENT_NUMBER_UNKNOWN_,
+      kMfSegmentNumberDefaultValueString
+    >;
+// #endif // MF_USE_WRAPPED_TYPES
+
+EXP extern std::string mfSegmentNumberAsString (
+  const mfSegmentNumber& segmentNumber);
+
+//______________________________________________________________________________
 // measure numbers
 
 EXP extern const std::string K_MF_MEASURE_NUMBER_UNKNOWN_;
@@ -180,30 +205,79 @@ EXP extern const std::string
 EXP extern std::string mfMeasureNumberAsString (
   const mfMeasureNumber& measureNumber);
 
-//______________________________________________________________________________
-// segment numbers
 
-EXP extern const int K_MF_SEGMENT_NUMBER_UNKNOWN_;
+// measure debug numbers
+
+EXP extern const int K_MF_MEASURE_DEBUG_NUMBER_UNKNOWN_;
 
 EXP extern const std::string
-  kMfSegmentNumberPrefix,
-  kMfSegmentNumberDefaultValueString;
+  kMfMeasureDebugNumberPrefix,
+  kMfMeasureDebugNumberDefaultValueString;
 
 // #ifndef MF_USE_WRAPPED_TYPES
-//   using mfSegmentNumber = std::string;
+//   using mfMeasureDebugNumber = std::string;
 // #else
-  using mfSegmentNumber =
+  using mfMeasureDebugNumber =
     mfWrappedValueForArithmetic <
       int,
-      kMfSegmentNumberPrefix,
+      kMfMeasureDebugNumberPrefix,
       K_MF_EMPTY_STRING,
-      K_MF_SEGMENT_NUMBER_UNKNOWN_,
-      kMfSegmentNumberDefaultValueString
+      K_MF_MEASURE_DEBUG_NUMBER_UNKNOWN_,
+      kMfMeasureDebugNumberDefaultValueString
     >;
 // #endif // MF_USE_WRAPPED_TYPES
 
-EXP extern std::string mfSegmentNumberAsString (
-  const mfSegmentNumber& segmentNumber);
+EXP extern std::string mfMeasureDebugNumberAsString (
+  const mfMeasureDebugNumber& measureDebugNumber);
+
+//______________________________________________________________________________
+// repeat elements debug numbers
+
+EXP extern const int K_MF_REPEAT_ELEMENT_DEBUG_NUMBER_UNKNOWN_;
+
+EXP extern const std::string
+  kMfRepeatElementDebugNumberPrefix,
+  kMfRepeatElementDebugNumberDefaultValueString;
+
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfRepeatElementDebugNumber = std::string;
+// #else
+  using mfRepeatElementDebugNumber =
+    mfWrappedValueForArithmetic <
+      int,
+      kMfRepeatElementDebugNumberPrefix,
+      K_MF_EMPTY_STRING,
+      K_MF_REPEAT_ELEMENT_DEBUG_NUMBER_UNKNOWN_,
+      kMfRepeatElementDebugNumberDefaultValueString
+    >;
+// #endif // MF_USE_WRAPPED_TYPES
+
+EXP extern std::string mfRepeatElementDebugNumberAsString (
+  const mfRepeatElementDebugNumber& repeatElementDebugNumber);
+
+// repeat debug numbers
+
+EXP extern const int K_MF_REPEAT_ELEMENT_DEBUG_NUMBER_UNKNOWN_;
+
+EXP extern const std::string
+  kMfRepeatDebugNumberPrefix,
+  kMfRepeatDebugNumberDefaultValueString;
+
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfRepeatDebugNumber = std::string;
+// #else
+  using mfRepeatDebugNumber =
+    mfWrappedValueForArithmetic <
+      int,
+      kMfRepeatDebugNumberPrefix,
+      K_MF_EMPTY_STRING,
+      K_MF_REPEAT_ELEMENT_DEBUG_NUMBER_UNKNOWN_,
+      kMfRepeatDebugNumberDefaultValueString
+    >;
+// #endif // MF_USE_WRAPPED_TYPES
+
+EXP extern std::string mfRepeatDebugNumberAsString (
+  const mfRepeatDebugNumber& repeatDebugNumber);
 
 //______________________________________________________________________________
 // tuplet numbers

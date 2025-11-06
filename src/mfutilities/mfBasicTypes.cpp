@@ -27,7 +27,7 @@ const int K_MF_INPUT_LINE_UNKNOWN_ = -1;
 
 const std::string
   kMfInputLineNumberPrefix             ("line "),
-  kMfInputLineNumberDefaultValueString ("*line_Unknown*");
+  kMfInputLineNumberDefaultValueString ("K_MF_INPUT_LINE_UNKNOWN_");
 
 EXP extern std::string mfInputLineNumberAsString (
   const mfInputLineNumber& inputLineNumber)
@@ -75,7 +75,7 @@ int mfInputLineNumberAsInteger (
 
 const std::string
   kMfInputLocationRangePrefix (".."),
-  kMfInputLocationDefaultValueString ("*location_Unknown*");
+  kMfInputLocationDefaultValueString ("K_MF_INPUT_LOCATION_UNKNOWN_");
 
 //______________________________________________________________________________
 // staff numbers
@@ -84,7 +84,7 @@ const int K_MF_STAFF_NUMBER_UNKNOWN_ = -99;
 
 const std::string
   kMfStaffNumberPrefix ("staff_"),
-  kMfStaffNumberDefaultValueString ("*staff_Unknown*");
+  kMfStaffNumberDefaultValueString ("K_MF_STAFF_NUMBER_UNKNOWN_");
 
 EXP extern const int K_MF_PART_HARMONIES_STAFF_NUMBER = 10;
 
@@ -141,7 +141,7 @@ const int K_MF_VOICE_NUMBER_UNKNOWN_ = -96;
 
 const std::string
   kMfVoiceNumberPrefix ("voice_"),
-  kMfVoiceNumberDefaultValueString ("*voice_Unknown*");
+  kMfVoiceNumberDefaultValueString ("K_MF_VOICE_NUMBER_UNKNOWN_");
 
 EXP extern const int K_MF_PART_HARMONIES_VOICE_NUMBER = 11;
 EXP extern const int K_MF_VOICE_HARMONIES_VOICE_BASE_NUMBER = 20;
@@ -186,42 +186,13 @@ int mfVoiceNumberAsInteger (const mfVoiceNumber& voiceNumber)
 }
 
 //______________________________________________________________________________
-// measure numbers
-
-const std::string K_MF_MEASURE_NUMBER_UNKNOWN_ =
-  "K_MF_MEASURE_NUMBER_UNKNOWN_";
-
-const std::string
-  kMfMeasureNumberPrefix ("measure_"),
-  kMfMeasureNumberDefaultValueString ("** UNKNOWN_MEASURE **");
-
-std::string mfMeasureNumberAsString (
-  const mfMeasureNumber& measureNumber)
-{
-  std::string result;
-
-  if (measureNumber == K_MF_MEASURE_NUMBER_UNKNOWN_) {
-    result = "K_MF_MEASURE_NUMBER_UNKNOWN_";
-  }
-  else {
-// #ifndef MF_USE_WRAPPED_TYPES
-//     result = measureNumber;
-// #else
-    result = measureNumber.getBareValue ();
-// #endif // MF_USE_WRAPPED_TYPES
-  }
-
-  return result;
-}
-
-//______________________________________________________________________________
 // segment numbers
 
 const int K_MF_SEGMENT_NUMBER_UNKNOWN_ = 0;
 
 const std::string
   kMfSegmentNumberPrefix ("segment_"),
-  kMfSegmentNumberDefaultValueString ("*segment_Unknown*");
+  kMfSegmentNumberDefaultValueString ("K_MF_SEGMENT_NUMBER_UNKNOWN_");
 
 std::string mfSegmentNumberAsString (
   const mfSegmentNumber& segmentNumber)
@@ -243,13 +214,128 @@ std::string mfSegmentNumberAsString (
 }
 
 //______________________________________________________________________________
+// measure numbers
+
+const std::string K_MF_MEASURE_NUMBER_UNKNOWN_ =
+  "K_MF_MEASURE_NUMBER_UNKNOWN_";
+
+const std::string
+  kMfMeasureNumberPrefix ("measure_"),
+  kMfMeasureNumberDefaultValueString ("K_MF_MEASURE_NUMBER_UNKNOWN_");
+
+std::string mfMeasureNumberAsString (
+  const mfMeasureNumber& measureNumber)
+{
+  std::string result;
+
+  if (measureNumber == K_MF_MEASURE_NUMBER_UNKNOWN_) {
+    result = "K_MF_MEASURE_NUMBER_UNKNOWN_";
+  }
+  else {
+// #ifndef MF_USE_WRAPPED_TYPES
+//     result = measureNumber;
+// #else
+    result = measureNumber.getBareValue ();
+// #endif // MF_USE_WRAPPED_TYPES
+  }
+
+  return result;
+}
+
+
+// measure debug numbers
+
+const int K_MF_MEASURE_DEBUG_NUMBER_UNKNOWN_ = 0;
+
+const std::string
+  kMfMeasureDebugNumberPrefix ("segment_"),
+  kMfMeasureDebugNumberDefaultValueString ("K_MF_MEASURE_DEBUG_NUMBER_UNKNOWN_");
+
+std::string mfMeasureDebugNumberAsString (
+  const mfMeasureDebugNumber& measureDebugNumber)
+{
+  std::string result;
+
+  if (measureDebugNumber == K_MF_MEASURE_DEBUG_NUMBER_UNKNOWN_) {
+    result = "K_MF_MEASURE_DEBUG_NUMBER_UNKNOWN_";
+  }
+  else {
+// #ifndef MF_USE_WRAPPED_TYPES
+//     result = measureDebugNumber;
+// #else
+    result = measureDebugNumber.getBareValue ();
+// #endif // MF_USE_WRAPPED_TYPES
+  }
+
+  return result;
+}
+
+//______________________________________________________________________________
+// repeat elements debug numbers
+
+const int K_MF_REPEAT_ELEMENT_DEBUG_NUMBER_UNKNOWN_ = 0;
+
+const std::string
+  kMfRepeatElementDebugNumberPrefix ("segment_"),
+  kMfRepeatElementDebugNumberDefaultValueString (
+    "K_MF_REPEAT_ELEMENT_DEBUG_NUMBER_UNKNOWN_");
+
+std::string mfRepeatElementDebugNumberAsString (
+  const mfRepeatElementDebugNumber& repeatElementDebugNumber)
+{
+  std::string result;
+
+  if (repeatElementDebugNumber == K_MF_REPEAT_ELEMENT_DEBUG_NUMBER_UNKNOWN_) {
+    result = "K_MF_REPEAT_ELEMENT_DEBUG_NUMBER_UNKNOWN_";
+  }
+  else {
+// #ifndef MF_USE_WRAPPED_TYPES
+//     result = repeatElementDebugNumber;
+// #else
+    result = repeatElementDebugNumber.getBareValue ();
+// #endif // MF_USE_WRAPPED_TYPES
+  }
+
+  return result;
+}
+
+
+// repeat debug numbers
+
+const int K_MF_REPEAT_DEBUG_NUMBER_UNKNOWN_ = 0;
+
+const std::string
+  kMfRepeatDebugNumberPrefix ("segment_"),
+  kMfRepeatDebugNumberDefaultValueString (
+    "K_MF_REPEAT_DEBUG_NUMBER_UNKNOWN_");
+
+std::string mfRepeatDebugNumberAsString (
+  const mfRepeatDebugNumber& repeatDebugNumber)
+{
+  std::string result;
+
+  if (repeatDebugNumber == K_MF_REPEAT_DEBUG_NUMBER_UNKNOWN_) {
+    result = "K_MF_REPEAT_DEBUG_NUMBER_UNKNOWN_";
+  }
+  else {
+// #ifndef MF_USE_WRAPPED_TYPES
+//     result = repeatDebugNumber;
+// #else
+    result = repeatDebugNumber.getBareValue ();
+// #endif // MF_USE_WRAPPED_TYPES
+  }
+
+  return result;
+}
+
+//______________________________________________________________________________
 // tuplet numbers
 
 const int K_MF_TUPLET_NUMBER_UNKNOWN_ = 0;
 
 const std::string
   kMfTupletNumberPrefix ("tuplet_"),
-  kMfTupletNumberDefaultValueString ("*tuplet_Unknown*");
+  kMfTupletNumberDefaultValueString ("K_MF_TUPLET_NUMBER_UNKNOWN_");
 
 std::string mfTupletNumberAsString (const mfTupletNumber& tupletNumber)
 {
@@ -292,7 +378,7 @@ int mfTupletNumberAsInteger (const mfTupletNumber& tupletNumber)
 
 const std::string
   kMfStanzaNumberPrefix ("stanza_"),
-  kMfStanzaNumberDefaultValueString ("*stanza_Unknown*");
+  kMfStanzaNumberDefaultValueString ("K_MF_STANZA_NUMBER_UNKNOWN_");
 
 const std::string
   K_MF_STANZA_NUMBER_UNKNOWN_ = "K_MF_STANZA_NUMBER_UNKNOWN_",
