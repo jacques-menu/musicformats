@@ -176,7 +176,7 @@ msrTimeSignatureItem::msrTimeSignatureItem (
 
     ss <<
       "Creating time signature item" <<
-      ", line: " << inputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),

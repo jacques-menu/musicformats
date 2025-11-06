@@ -82,7 +82,7 @@ msrClefKeyTimeSignatureOrderKind msrClefKeyTimeSignatureOrderKindFromString (
       "clef string \"" <<
       clefKeyTimeSignatureString <<
       "\" is unknown" <<
-      ", line: " << inputLineNumber;
+      ", line " << inputLineNumber;
 
     msrError (
       gServiceRunData->getInputSourceName (),

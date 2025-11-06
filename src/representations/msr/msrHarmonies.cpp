@@ -2745,7 +2745,7 @@ void msrHarmonyInterval::print (std::ostream& os) const
     "fHarmonyIntervalIntervalKind" << ": " <<
     fHarmonyIntervalRelativeOctave <<
   /* JMI
-    ", line: " << fInputLineNumber <<
+    ", line " << fInputLineNumber <<
     */
     std::endl;
 
@@ -2845,7 +2845,7 @@ msrModeKind modeKindFromString (
       "mode std::string \"" <<
       modeString <<
       "\" is unknown" <<
-      ", line: " << inputLineNumber;
+      ", line " << inputLineNumber;
 
     msrError (
       gServiceRunData->getInputSourceName (),
@@ -3865,7 +3865,7 @@ std::string msrHarmonyDegree::asString () const
     ", fHarmonyDegreeAlterationKind: " <<
     msrAlterationKindAsString (
       fHarmonyDegreeAlterationKind) <<
-    ", line: " << fInputLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -4204,7 +4204,7 @@ void msrHarmonyContents::print (std::ostream& os) const
   os <<
     "HarmonyContents" <<
   /* JMI
-    ", line: " << fInputLineNumber <<
+    ", line " << fInputLineNumber <<
     */
     std::endl;
 
@@ -7217,7 +7217,7 @@ void msrHarmonyStructure::print (std::ostream& os) const
     mfSingularOrPlural (
       fHarmonyStructureIntervals.size (), "interval", "intervals") <<
   /* JMI
-    ", line: " << fInputLineNumber <<
+    ", line " << fInputLineNumber <<
     */
     std::endl;
 

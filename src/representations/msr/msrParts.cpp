@@ -1715,7 +1715,7 @@ void msrPart::cascadeHandleRepeatEndingStartInPart (
 
 void msrPart::cascadeHandleRepeatEndingEndInPart (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&  repeatEndingNumber, // a string, because if may be "1, 2" for example
+  const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
   msrRepeatEndingKind repeatEndingKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1724,7 +1724,7 @@ void msrPart::cascadeHandleRepeatEndingEndInPart (
 
     ss <<
       "Cascading handling a " <<
-      repeatEndingKind <<
+      msrRepeatEndingKindAsStringForTrace (repeatEndingKind) <<
       " repeat ENDING end in part \"" <<
       fetchPartNameForTrace () <<
       ", line " << inputLineNumber;

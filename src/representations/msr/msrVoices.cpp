@@ -3813,9 +3813,9 @@ void msrVoice::pushRepeatOntoVoiceRepeatsStack (
     std::stringstream ss;
 
     ss <<
-      "Pushing repeat in voice ***** " <<
+      "Pushing repeat onto the repeats stack in voice " <<
       repeat->asShortString () <<
-      " onto the repeats stack in voice " <<
+      ", in voice: " <<
       fVoiceName <<
       ", context: " + context <<
       ", line " << inputLineNumber;
@@ -3864,7 +3864,7 @@ S_msrRepeat msrVoice::popRepeatFromVoiceRepeatsStack (
     std::stringstream ss;
 
     ss <<
-      "Popping repeat stack top in voice ***** " <<
+      "Popping repeat from the stack in voice ***** " <<
       innerMostRepeat->asShortString () <<
       " in voice " <<
       fVoiceName <<
@@ -4428,6 +4428,10 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
         msrRepeatExplicitStartKind::kRepeatExplicitStartNo,
         this);
 
+  // append innerMostRepeat to the voice's segment
+  fVoiceSegment->
+    appendRepeatToSegment (newRepeat); // ZAZA
+
   // create the repeat common part
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -4625,7 +4629,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
 
   // append innerMostRepeat to the voice's segment
   fVoiceSegment->
-    appendRepeatToSegment (innerMostRepeat);
+    appendRepeatToSegment (innerMostRepeat); // ZAZA
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
@@ -5219,7 +5223,7 @@ void msrVoice::handleVoiceLevelRepeatStartInVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   S_msrRepeat
-    result =
+    newRepeat =
       msrRepeat::createWithExplicitStartKindAndUplinkAndCommonPartAndSegment (
 //       msrRepeat::create ( // ZOULOU ZOULOU
         inputLineNumber,
@@ -5230,7 +5234,7 @@ void msrVoice::handleVoiceLevelRepeatStartInVoice (
   // push it onto the voice's repeats stack
   pushRepeatOntoVoiceRepeatsStack (
     inputLineNumber,
-    result,
+    newRepeat,
     "handleVoiceLevelRepeatStartInVoice()");
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -5276,6 +5280,10 @@ void msrVoice::handleVoiceLevelRepeatStartInVoice (
 //     setRepeatExplicitStartKind (
 //       msrRepeatExplicitStartKind::kRepeatExplicitStartYes);
 
+
+  // append innerMostRepeat to the voice's segment
+  fVoiceSegment->
+    appendRepeatToSegment (newRepeat); // ZAZA
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
@@ -5558,7 +5566,7 @@ void msrVoice::edacsacHandleRepeatEndingStartInVoice (
 //
 //                 ss <<
 //                   "Creating a " <<
-//                   repeatEndingKind <<
+//                   msrRepeatEndingKindAsStringForTrace (repeatEndingKind) <<
 //                   " repeat ENDING in current repeat in voice clone " <<
 //                   fVoiceName <<
 //                   ", line " << inputLineNumber;
@@ -5584,7 +5592,7 @@ void msrVoice::edacsacHandleRepeatEndingStartInVoice (
 //
 //                 ss <<
 //                   "Appending a " <<
-//                  repeatEndingKind <<
+//                  msrRepeatEndingKindAsStringForTrace (repeatEndingKind) <<
 //                   " repeat ENDING to current repeat in voice " <<
 //                   fVoiceName;
 //
@@ -7182,7 +7190,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
     case msrVoiceKind::kVoiceKindHarmonies:
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
-        // pushing repeat clone as the (new) current repeat
+        // push repeat clone as the (new) current repeat
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceRepeatsBasics ()) {
           std::stringstream ss;
@@ -7716,7 +7724,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
 
     ss <<
       "Appending a " <<
-      repeatEndingKind <<
+      msrRepeatEndingKindAsStringForTrace (repeatEndingKind) <<
       " repeat ENDING to current repeat in voice " <<
       fVoiceName;
 
@@ -7760,7 +7768,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
 
     ss <<
       "Handling a HOOKLESS repeat ENDING in voice " <<
-      fVoiceName <<  "\"" <<
+      fVoiceName <<
       ", line " << inputLineNumber <<
       std::endl;
 
@@ -7823,7 +7831,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
 
     ss <<
       "Appending a " <<
-      repeatEndingKind <<
+      msrRepeatEndingKindAsStringForTrace (repeatEndingKind) <<
       " repeat ENDING to current repeat in voice " <<
       fVoiceName;
 
@@ -7854,7 +7862,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // pop it from the voice's repeat descrs stack
+  // pop current repeat from the voice's repeat descrs stack
   S_msrRepeat
     innerMostRepeat =
       popRepeatFromVoiceRepeatsStack (

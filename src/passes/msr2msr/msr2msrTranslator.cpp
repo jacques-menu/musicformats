@@ -768,11 +768,11 @@ void msr2msrTranslator::pushRepeatOntoRepeatsStack (
     std::stringstream ss;
 
     ss <<
-      "Pushing repeat ***** " <<
+      "Pushing repeat onto the repeats stack " <<
       repeat->asShortString () <<
-      " onto the repeat clones s stack in voice " <<
+      ", in voice: " <<
       fCurrentVoiceClone->getVoiceName () <<
-      " from context " + context <<
+      " from context: " + context <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (

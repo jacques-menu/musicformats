@@ -813,9 +813,9 @@ void msrSegment::appendRepeatToSegment (
 
     ss <<
       "Appending repeat " <<
-      repeat->asString () <<
+      repeat->asShortString () <<
       " to segment " <<
-      asString () <<
+      asShortString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
       ", line " << repeat->getInputLineNumber ();

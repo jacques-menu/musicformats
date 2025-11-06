@@ -2564,7 +2564,7 @@ void msrRepeat::addRepeatEndingToRepeat (
     ss <<
       "Adding repeat ENDING " <<
       repeatEnding->asString () <<
-      " to repeat" <<
+      " to repeat " <<
       asShortString ();
 
     gWaeHandler->waeTrace (

@@ -212,7 +212,7 @@ std::string wholeNotesAsLilypondString (
     s2 <<
       "%{ " <<
       message <<
-      ", line: " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       " ???%}";
 
     return s2.str ();
@@ -1368,7 +1368,7 @@ lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
       "dynamics text spanners style string \"" <<
       dynamicsTextSpannersStyleKindString <<
       "\" is unknown" <<
-      ", line: " << inputLineNumber;
+      ", line " << inputLineNumber;
 
     lpsrError (
       gServiceRunData->getInputSourceName (),

@@ -10831,7 +10831,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     ss <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
       fCurrentSyllableKind <<
-      ", line: " << inputStartLineNumber <<
+      ", line " << inputStartLineNumber <<
       std::endl;
 
     gWaeHandler->waeTrace (

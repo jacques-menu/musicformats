@@ -194,7 +194,7 @@ msrClefKind msrClefKindFromString (
       "clef string \"" <<
       clefString <<
       "\" is unknown" <<
-      ", line: " << inputLineNumber;
+      ", line " << inputLineNumber;
 
     msrError (
       gServiceRunData->getInputSourceName (),

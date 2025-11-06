@@ -6990,7 +6990,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
     ss <<
       "visitEnd (S_lyric&)" <<
 			", fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
-      ", line: " << elt->getInputLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),

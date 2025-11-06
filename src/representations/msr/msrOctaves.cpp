@@ -294,7 +294,7 @@ msrOctaveKind msrOctaveKindFromCommasOrQuotes (
             "octave indication \"" <<
             octaveIndication <<
             "\" should contain only commas and quotes" <<
-            ", line: " << inputLineNumber;
+            ", line " << inputLineNumber;
 
           msrInternalError (
             gServiceRunData->getInputSourceName (),

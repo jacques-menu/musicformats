@@ -35,6 +35,23 @@ std::string msrRepeatEndingKindAsString (
   return result;
 }
 
+std::string msrRepeatEndingKindAsStringForTrace (
+  msrRepeatEndingKind repeatEndingKind)
+{
+  std::string result;
+
+  switch (repeatEndingKind) {
+    case msrRepeatEndingKind::kRepeatEndingHooked:
+      result = "HOOKED";
+      break;
+    case msrRepeatEndingKind::kRepeatEndingHookless:
+      result = "HOOKLESS";
+      break;
+  } // switch
+
+  return result;
+}
+
 std::ostream& operator << (std::ostream& os, const msrRepeatEndingKind& elt)
 {
   os << msrRepeatEndingKindAsString (elt);

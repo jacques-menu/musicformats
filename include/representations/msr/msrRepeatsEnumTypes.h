@@ -53,6 +53,9 @@ enum class msrRepeatEndingKind {
 std::string msrRepeatEndingKindAsString (
   msrRepeatEndingKind repeatEndingKind);
 
+std::string msrRepeatEndingKindAsStringForTrace (
+  msrRepeatEndingKind repeatEndingKind);
+
 std::ostream& operator << (std::ostream& os, const msrRepeatEndingKind& elt);
 
 

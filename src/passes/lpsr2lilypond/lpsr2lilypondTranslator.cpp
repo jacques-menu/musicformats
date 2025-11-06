@@ -14096,7 +14096,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //             "% Setting the measure whole notes for measure " <<
 //             std::setw (fieldWidth) <<
 //             fCurrentMeasureNumber <<
-//             ", line: " << elt->getInputLineNumber () <<
+//             ", line " << elt->getInputLineNumber () <<
 //             std::endl <<
 //             std::setw (fieldWidth) <<
 //             "% measureCurrentPositionInMeasure: " <<

@@ -89,7 +89,7 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
 
     ss <<
       "Creating Humdrum/Scot key item" <<
-      ", line: " << inputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
