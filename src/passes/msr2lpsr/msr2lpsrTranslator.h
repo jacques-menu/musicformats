@@ -26,7 +26,7 @@
 #include "msrHarmonies.h"
 #include "msrIdentification.h"
 #include "msrLyrics.h"
-#include "msrMultipleMeasureRests.h"
+#include "msrMultiMeasureRests.h"
 #include "msrNotes.h"
 #include "msrParts.h"
 #include "msrPartGroups.h"
@@ -237,7 +237,7 @@ class EXP msr2lpsrTranslator : public msr2msrTranslator
 //   public                      visitor<S_msrMeasureRepeatPattern>,
 //   public                      visitor<S_msrMeasureRepeatReplicas>,
 //
-//   public                      visitor<S_msrMultipleMeasureRest>,
+//   public                      visitor<S_msrMultiMeasureRest>,
 //
 //   // midi
 //
@@ -350,8 +350,8 @@ class EXP msr2lpsrTranslator : public msr2msrTranslator
    virtual void              visitStart (S_msrDamp& elt) override;
    virtual void              visitStart (S_msrDampAll& elt) override;
 
-    // multiple measure rests
-   virtual void              visitStart (S_msrMultipleMeasureRest& elt) override;
+    // multi-measure rests
+   virtual void              visitStart (S_msrMultiMeasureRest& elt) override;
 
     // scaling
    virtual void              visitStart (S_msrScaling& elt) override;

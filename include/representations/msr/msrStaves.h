@@ -280,7 +280,7 @@ class EXP msrStaff : public msrElement
                             const mfMeasureNumber&   measureNumber,
                             msrMeasureImplicitKind   measureImplicitKind);
 
-    void                  cascadeNetNextMeasureNumberInStaff (
+    void                  cascadeSetNextMeasureNumberInStaff (
                             const mfInputLineNumber& inputLineNumber,
                             const mfMeasureNumber&   nextMeasureNumber);
 
@@ -321,15 +321,15 @@ class EXP msrStaff : public msrElement
                             int                repeatTimes);
     */
 
-    // multiple measure rests
+    // multi-measure rests
 
-    void                  cascadeAppendMultipleMeasureRestToStaff (
+    void                  cascadeAppendMultiMeasureRestToStaff (
                             const mfInputLineNumber& inputLineNumber,
-                            int                      multipleMeasureRestMeasuresNumber,
-                            int                      multipleMeasureRestSlashesNumber,
-                            msrUseSymbolsKind        multipleMeasureRestUseSymbolsKind);
+                            int                      multiMeasureRestMeasuresNumber,
+                            int                      multiMeasureRestSlashesNumber,
+                            msrUseSymbolsKind        multiMeasureRestUseSymbolsKind);
 
-    void                  appendPendingMultipleMeasureRestsToStaff (
+    void                  appendPendingMultiMeasureRestsToStaff (
                             const mfInputLineNumber& inputLineNumber);
 
     // other
@@ -343,9 +343,9 @@ class EXP msrStaff : public msrElement
                             const mfMeasureNumber&   previousMeasureNumber,
                             int                      emptyMeasuresNumber);
 
-    void                  appendMultipleMeasureRestCloneToStaff (
+    void                  appendMultiMeasureRestCloneToStaff (
                             const mfInputLineNumber&        inputLineNumber,
-                            const S_msrMultipleMeasureRest& multipleMeasureRestsClone);
+                            const S_msrMultiMeasureRest& multiMeasureRestsClone);
 
     void                  appendRepeatCloneToStaff (
                             const mfInputLineNumber& inputLineNumber,
@@ -475,9 +475,9 @@ class EXP msrStaff : public msrElement
     std::vector <std::list <S_msrMeasure>>
                           fStaffMeasuresFlatListsVector;
 
-    // multiple measure rests
+    // multi-measure rests
 
-    Bool                  fStaffContainsMultipleMeasureRests;
+    Bool                  fStaffContainsMultiMeasureRests;
 
     // measures slices sequence
 

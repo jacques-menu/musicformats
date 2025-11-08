@@ -2398,7 +2398,7 @@ R"###(%% http://lsr.di.unimi.it/LSR/Item?id=336
 %%
 %% Limitations:
 %% - only handles two voices
-%% - does not handle multiple measure rests
+%% - does not handle multi-measure rests
 
 #(define (rest-score r)
    (let ((score 0)
@@ -2620,16 +2620,16 @@ R"(
     schemeFunction;
 }
 
-void lpsrScore::setMergeMultipleMeasureRestsIsNeeded ()
+void lpsrScore::setMergeMultiMeasureRestsIsNeeded ()
 {
-  if (! fMergeMultipleMeasureRestsIsNeeded) {
-    addMergeMultipleMeasureRestsToScore ();
+  if (! fMergeMultiMeasureRestsIsNeeded) {
+    addMergeMultiMeasureRestsToScore ();
 
-    fMergeMultipleMeasureRestsIsNeeded = true;
+    fMergeMultiMeasureRestsIsNeeded = true;
   }
 }
 
-void lpsrScore::addMergeMultipleMeasureRestsToScore ()
+void lpsrScore::addMergeMultiMeasureRestsToScore ()
 {
   std::stringstream ss;
 
@@ -2639,7 +2639,7 @@ R"###(
 
 #(define (append-merge x l r)
    "Add x to the head of list l, merging skips,
-and if r is true also merging multiple measure rests."
+and if r is true also merging multi-measure rests."
    (if (and (pair? l)
             (ly:music? x)
             (ly:music? (car l))
@@ -2675,14 +2675,14 @@ mergeSkips = #(define-music-function
                   m)
                 music))
 
-mergeMultipleMeasureRests = #(define-music-function
+mergeMultiMeasureRests = #(define-music-function
                       (parser location music) (ly:music?)
                       #{ \mergeSkips ##t $music #})
 )###";
 
   std::string
     schemeFunctionName =
-      "MergeMultipleMeasureRests",
+      "MergeMultiMeasureRests",
 
   schemeFunctionDescription =
 R"(
@@ -2763,7 +2763,7 @@ barNumberEveryNAndAtTheBeginningOfLines = \with {
 
   std::string
     schemeFunctionName =
-      "MergeMultipleMeasureRests",
+      "MergeMultiMeasureRests",
 
   schemeFunctionDescription =
 R"(
@@ -3419,8 +3419,8 @@ void lpsrScore::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMergeMultipleMeasureRestsIsNeeded" << ": " <<
-    fMergeMultipleMeasureRestsIsNeeded <<
+    "fMergeMultiMeasureRestsIsNeeded" << ": " <<
+    fMergeMultiMeasureRestsIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -3637,8 +3637,8 @@ void lpsrScore::printSummary (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMergeMultipleMeasureRestsIsNeeded" << ": " <<
-    fMergeMultipleMeasureRestsIsNeeded <<
+    "fMergeMultiMeasureRestsIsNeeded" << ": " <<
+    fMergeMultiMeasureRestsIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -3855,8 +3855,8 @@ void lpsrScore::printNames (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMergeMultipleMeasureRestsIsNeeded" << ": " <<
-    fMergeMultipleMeasureRestsIsNeeded <<
+    "fMergeMultiMeasureRestsIsNeeded" << ": " <<
+    fMergeMultiMeasureRestsIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -4073,8 +4073,8 @@ void lpsrScore::printFlatView (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMergeMultipleMeasureRestsIsNeeded" << ": " <<
-    fMergeMultipleMeasureRestsIsNeeded <<
+    "fMergeMultiMeasureRestsIsNeeded" << ": " <<
+    fMergeMultiMeasureRestsIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -4291,8 +4291,8 @@ void lpsrScore::printSlices (std::ostream& os) const
 //     std::endl <<
 //
 //     std::setw (fieldWidth) <<
-//     "fMergeMultipleMeasureRestsIsNeeded" << ": " <<
-//     fMergeMultipleMeasureRestsIsNeeded <<
+//     "fMergeMultiMeasureRestsIsNeeded" << ": " <<
+//     fMergeMultiMeasureRestsIsNeeded <<
 //     std::endl <<
 //
 //     std::setw (fieldWidth) <<

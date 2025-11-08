@@ -393,9 +393,9 @@ void msrVoice::initializeVoice (
     fInputLineNumber,
     msrVoiceRepeatPhaseKind::kVoiceRepeatPhaseNone);
 
-  // multiple measure rests
-  fVoiceContainsMultipleMeasureRests = false;
-  fVoiceRemainingMultipleMeasureRests = 0;
+  // multi-measure rests
+  fVoiceContainsMultiMeasureRests = false;
+  fVoiceRemainingMultiMeasureRests = 0;
 
   // measures repests
   fVoiceContainsMeasureRepeats = false;
@@ -601,9 +601,9 @@ S_msrVoice msrVoice::createVoiceDeepClone (
   deepClone->fCurrentVoiceRepeatPhaseKind =
     fCurrentVoiceRepeatPhaseKind;
 
-  // multiple measure rests
-  deepClone->fVoiceContainsMultipleMeasureRests =
-    fVoiceContainsMultipleMeasureRests;
+  // multi-measure rests
+  deepClone->fVoiceContainsMultiMeasureRests =
+    fVoiceContainsMultiMeasureRests;
 
   // measures reeats
   deepClone->fVoiceContainsMeasureRepeats =
@@ -775,7 +775,7 @@ S_msrSegment msrVoice::fetchVoiceCurrentRecipientSegment () const
   else {
     result =
       fVoicePendingRepeatsStack.front ()->
-        getRepeatCommonPart ()-> // TEMP JMI 0.9.76 could also be an ending..
+        getRepeatCommonPart ()-> // TEMP JMI 0.9.76 could also be an ending.. ZAZA
           getRepeatElementSegment ();
   }
 
@@ -1141,17 +1141,17 @@ void msrVoice::edacsacSetNextMeasureNumberInVoice ( // cascade bottom
 
   ++gIndenter;
 
-  // is there a current multiple measure rests in this voice?
-  if (fVoiceMultipleMeasureRestsWaitingForItsNextMeasureNumber) {
+  // is there a current multi-measure rests in this voice?
+  if (fVoiceMultiMeasureRestsWaitingForItsNextMeasureNumber) {
     // yes
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+    if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
       std::stringstream ss;
 
       ss <<
-        "There is a multiple measure rests waiting for its next measure number" <<
-        ", fVoiceRemainingMultipleMeasureRests: " <<
-        fVoiceRemainingMultipleMeasureRests <<
+        "There is a multi-measure rests waiting for its next measure number" <<
+        ", fVoiceRemainingMultiMeasureRests: " <<
+        fVoiceRemainingMultiMeasureRests <<
         " in voice " <<
         fVoiceName;
 
@@ -1161,17 +1161,17 @@ void msrVoice::edacsacSetNextMeasureNumberInVoice ( // cascade bottom
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    --fVoiceRemainingMultipleMeasureRests;
+    --fVoiceRemainingMultiMeasureRests;
 
     // is this the last measure in the row?
-    if (fVoiceRemainingMultipleMeasureRests == 0) {
-      // yes, set waiting multiple measure rests's next measure number
+    if (fVoiceRemainingMultiMeasureRests == 0) {
+      // yes, set waiting multi-measure rests's next measure number
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+      if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
         std::stringstream ss;
 
         ss <<
-          "Setting multiple measure rests next measure number to " <<
+          "Setting multi-measure rests next measure number to " <<
           nextMeasureNumber <<
           " in voice " <<
           fVoiceName;
@@ -1182,12 +1182,12 @@ void msrVoice::edacsacSetNextMeasureNumberInVoice ( // cascade bottom
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      fVoiceMultipleMeasureRestsWaitingForItsNextMeasureNumber->
+      fVoiceMultiMeasureRestsWaitingForItsNextMeasureNumber->
         setNextMeasureNumber (
           nextMeasureNumber);
 
-      // forget about this waiting multiple measure rests
-      fVoiceMultipleMeasureRestsWaitingForItsNextMeasureNumber = nullptr;
+      // forget about this waiting multi-measure rests
+      fVoiceMultiMeasureRestsWaitingForItsNextMeasureNumber = nullptr;
     }
   }
 
@@ -1415,8 +1415,8 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItInVoice (
 
   ++gIndenter;
 
-  // is there an on-going multiple measure rests?
-  if (fOnGoingMultipleMeasureRest) {
+  // is there an on-going multi-measure rests?
+  if (fOnGoingMultiMeasureRest) {
     // yes
 
     // create a measure
@@ -1448,7 +1448,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItInVoice (
       setMeasureOrdinalNumberInVoice (
         incrementVoiceCurrentMeasureOrdinalNumber ());
 
-    // append it to the current multiple measure rests
+    // append it to the current multi-measure rests
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasuresBasics ()) {
       std::stringstream ss;
@@ -1456,8 +1456,8 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItInVoice (
       ss <<
         "Appending measure " <<
         result->asString () <<
-        " to current multiple measure rests " <<
-        fVoiceCurrentMultipleMeasureRest->asString () <<
+        " to current multi-measure rests " <<
+        fVoiceCurrentMultiMeasureRest->asString () <<
         "in voice " <<
         fVoiceName <<
         "', line " << inputLineNumber;
@@ -1468,13 +1468,13 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItInVoice (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    fVoiceCurrentMultipleMeasureRest->
-      appendMeasureToMultipleMeasureRest (
+    fVoiceCurrentMultiMeasureRest->
+      appendMeasureToMultiMeasureRest (
         result);
   }
 
   else {
-    // no, there is no on-going multiple measure rests
+    // no, there is no on-going multi-measure rests
 
     // make sure the voice current recipient has been set
 //     if (! fVoiceSegment) {
@@ -3855,6 +3855,21 @@ S_msrRepeat msrVoice::popRepeatFromVoiceRepeatsStack (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // get the inner-most repeat
+  if (fVoicePendingRepeatsStack.empty ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Voice repeats stack is empty when attempting to pop a repeat " <<
+      " in voice " <<
+      fVoiceName;
+
+    msrInternalError (
+      gServiceRunData->getInputSourceName (),
+      fInputLineNumber,
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+
   S_msrRepeat
     innerMostRepeat =
       fVoicePendingRepeatsStack.front ();
@@ -4468,6 +4483,21 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
 //           "handleVoiceLevelContainingRepeatEndWithoutStart() 1");
 //
 //   // fetch the top of the repeats stack
+//   if (fVoicePendingRepeatsStack.empty ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "repeats stack is empty when attempting to handle repeat COMMON PART start " <<
+//       " in voice clone " <<
+//       fVoiceName;
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       fInputLineNumber,
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+//   }
+//
 //   S_msrRepeat
 //     repeatsStackTopRepeat =
 //       fVoicePendingRepeatsStack.front ();
@@ -4788,6 +4818,22 @@ void msrVoice::handleRepeatEndInVoice (
                 repeatTimes);
 
 //               // fetch the top of the repeats stack
+        //   if (fVoicePendingRepeatsStack.empty ()) {
+        //     std::stringstream ss;
+        //
+        //     ss <<
+        //       "repeats stack is empty when attempting to handle repeat COMMON PART start " <<
+        //       " in voice clone " <<
+        //       asShortString ();
+        //
+        //     msrInternalError (
+        //       gServiceRunData->getInputSourceName (),
+        //       fInputLineNumber,
+        //       __FILE__, mfInputLineNumber (__LINE__),
+        //       ss.str ());
+        //   }
+//
+//
 //               S_msrRepeat
 //                 repeatsStackTopRepeat =
 //                   fVoicePendingRepeatsStack.front ();
@@ -5074,6 +5120,20 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
   ++gIndenter;
 
   // fetch currentRepeat
+  if (fVoicePendingRepeatsStack.empty ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Voice repeats stack is empty when attempting to handle voice level repeat ENDING start WITH explicit start in voice " <<
+      fVoiceName;
+
+    msrInternalError (
+      gServiceRunData->getInputSourceName (),
+      fInputLineNumber,
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+
   S_msrRepeat
     currentRepeat =
       fVoicePendingRepeatsStack.front ();
@@ -5832,8 +5892,7 @@ void msrVoice::finalizeRepeatEndInVoice (
 
           ss <<
             "repeats stack is empty when attempting to finalize a repeat in voice " <<
-            asShortString () <<
-            " ";
+            fVoiceName;
 
           msrInternalError (
             gServiceRunData->getInputSourceName (),
@@ -6055,17 +6114,17 @@ void msrVoice::edacsacCreateAMeasureRepeatAndAppendItToVoice ( // cascade bottom
 // #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrVoice::cascadeAppendMultipleMeasureRestToVoice (
+void msrVoice::cascadeAppendMultiMeasureRestToVoice (
   const mfInputLineNumber&        inputLineNumber,
-  const S_msrMultipleMeasureRest& multipleMeasureRest)
+  const S_msrMultiMeasureRest& multiMeasureRest)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending multiple measure rest " <<
-      multipleMeasureRest->asShortString () <<
+      "Appending multi-measure rest " <<
+      multiMeasureRest->asShortString () <<
       " to voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
@@ -6076,32 +6135,32 @@ void msrVoice::cascadeAppendMultipleMeasureRestToVoice (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // analyze this multiple measure rests's context
+  // analyze this multi-measure rests's context
   switch (fVoicePendingRepeatsStack.size ()) {
     case 0:
-      // this multiple measure rests is at the voice-level
+      // this multi-measure rests is at the voice-level
       // -------------------------------------
 
-      // append multipleMeasureRest to it
+      // append multiMeasureRest to it
       ++gIndenter;
       fVoiceSegment->
-        edacsacAppendMultipleMeasureRestToSegment (
-          multipleMeasureRest);
+        edacsacAppendMultiMeasureRestToSegment (
+          multiMeasureRest);
       --gIndenter;
       break;
 
     default:
-      // this multiple measure rests is inside a repeat
+      // this multi-measure rests is inside a repeat
       // -------------------------------------
       S_msrRepeat
         currentRepeat =
           fVoicePendingRepeatsStack.front ();
 
 //       currentRepeat->
-//         cascadeAppendMultipleMeasureRestToRepeat (
+//         cascadeAppendMultiMeasureRestToRepeat (
 //           inputLineNumber,
-//           multipleMeasureRest,
-//           "cascadeAppendMultipleMeasureRestToVoice() 2");
+//           multiMeasureRest,
+//           "cascadeAppendMultiMeasureRestToVoice() 2");
   } // switch
 }
 
@@ -6473,18 +6532,18 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrVoice::setVoiceContainsMultipleMeasureRests (
+void msrVoice::setVoiceContainsMultiMeasureRests (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
       "Voice " <<
       fVoiceName <<
       ", line " << inputLineNumber <<
-      ", contains multiple measure rests";
+      ", contains multi-measure rests";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -6492,7 +6551,7 @@ void msrVoice::setVoiceContainsMultipleMeasureRests (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fVoiceContainsMultipleMeasureRests = true;
+  fVoiceContainsMultiMeasureRests = true;
 }
 
 void msrVoice::setVoiceContainsMeasureRepeats (
@@ -6517,21 +6576,21 @@ void msrVoice::setVoiceContainsMeasureRepeats (
   fVoiceContainsMeasureRepeats = true;
 }
 
-void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
+void msrVoice::createAMultiMeasureRestAndAppendItToVoice (
   const mfInputLineNumber& inputLineNumber,
-  int                      multipleMeasureRestMeasuresNumber,
-  int                      multipleMeasureRestSlashesNumber,
-  msrUseSymbolsKind        multipleMeasureRestUseSymbolsKind)
+  int                      multiMeasureRestMeasuresNumber,
+  int                      multiMeasureRestSlashesNumber,
+  msrUseSymbolsKind        multiMeasureRestUseSymbolsKind)
 {
-  // create a multiple measure rests
+  // create a multi-measure rests
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending a multiple measure rest for " <<
+      "Appending a multi-measure rest for " <<
       mfSingularOrPlural (
-        multipleMeasureRestMeasuresNumber, "measure", "measures") <<
+        multiMeasureRestMeasuresNumber, "measure", "measures") <<
       " to voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
@@ -6561,12 +6620,12 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
 //             removeLastMeasureFromVoice (
 //               inputLineNumber);
 
-        // create the multiple measure rests
-        if (fVoiceCurrentMultipleMeasureRest) {
+        // create the multi-measure rests
+        if (fVoiceCurrentMultiMeasureRest) {
           std::stringstream ss;
 
           ss <<
-            "Attempting to create a multiple measure rests while another one is pending";
+            "Attempting to create a multi-measure rests while another one is pending";
 
           msrInternalWarning (
 //           msrInternalError (
@@ -6577,13 +6636,13 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
         }
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+        if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
           std::stringstream ss;
 
           ss <<
-            "Creating a multiple measure rest for " <<
+            "Creating a multi-measure rest for " <<
             mfSingularOrPlural (
-              multipleMeasureRestMeasuresNumber, "measure", "measures") <<
+              multiMeasureRestMeasuresNumber, "measure", "measures") <<
             " in voice " <<
             fVoiceName <<
                   ", line " << inputLineNumber;
@@ -6594,20 +6653,20 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        fVoiceCurrentMultipleMeasureRest =
-          msrMultipleMeasureRest::create (
+        fVoiceCurrentMultiMeasureRest =
+          msrMultiMeasureRest::create (
             inputLineNumber,
-            multipleMeasureRestMeasuresNumber,
-            multipleMeasureRestSlashesNumber,
-            multipleMeasureRestUseSymbolsKind);
+            multiMeasureRestMeasuresNumber,
+            multiMeasureRestSlashesNumber,
+            multiMeasureRestUseSymbolsKind);
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+        if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
           std::stringstream ss;
 
           ss <<
-            "Appending multiple measure rest " <<
-            fVoiceCurrentMultipleMeasureRest->asString () <<
+            "Appending multi-measure rest " <<
+            fVoiceCurrentMultiMeasureRest->asString () <<
             " to the the voice segment of voice " <<
             fVoiceName <<
             ", line " << inputLineNumber;
@@ -6619,22 +6678,22 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
 #endif // MF_TRACE_IS_ENABLED
 
         fVoiceSegment->
-          edacsacAppendMultipleMeasureRestToSegment (
-            fVoiceCurrentMultipleMeasureRest);
+          edacsacAppendMultiMeasureRestToSegment (
+            fVoiceCurrentMultiMeasureRest);
 
-//         // append firstRestMeasure to fVoiceCurrentMultipleMeasureRest
-//         fVoiceCurrentMultipleMeasureRest->
-//           appendMeasureToMultipleMeasureRest (
+//         // append firstRestMeasure to fVoiceCurrentMultiMeasureRest
+//         fVoiceCurrentMultiMeasureRest->
+//           appendMeasureToMultiMeasureRest (
 //             firstRestMeasure);
 
-         // remember fVoiceCurrentMultipleMeasureRest for later next measure number setting
+         // remember fVoiceCurrentMultiMeasureRest for later next measure number setting
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+        if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
           std::stringstream ss;
 
           ss <<
-            "Registering multiple measure rests " <<
-            fVoiceCurrentMultipleMeasureRest->asString () <<
+            "Registering multi-measure rests " <<
+            fVoiceCurrentMultiMeasureRest->asString () <<
             " as waiting for its next measure number" <<
             " in voice " <<
             fVoiceName <<
@@ -6646,16 +6705,16 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        fVoiceMultipleMeasureRestsWaitingForItsNextMeasureNumber =
-          fVoiceCurrentMultipleMeasureRest;
+        fVoiceMultiMeasureRestsWaitingForItsNextMeasureNumber =
+          fVoiceCurrentMultiMeasureRest;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+        if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
           std::stringstream ss;
 
           ss <<
-            "Setting fVoiceRemainingMultipleMeasureRests to " <<
-            multipleMeasureRestMeasuresNumber <<
+            "Setting fVoiceRemainingMultiMeasureRests to " <<
+            multiMeasureRestMeasuresNumber <<
             " in voice " <<
             fVoiceName <<
             "\"";
@@ -6665,21 +6724,21 @@ void msrVoice::createAMultipleMeasureRestAndAppendItToVoice (
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
-        fVoiceRemainingMultipleMeasureRests =
-          multipleMeasureRestMeasuresNumber;
+        fVoiceRemainingMultiMeasureRests =
+          multiMeasureRestMeasuresNumber;
 
-//         // this voice contails multiple measure rests
-//         this->setVoiceContainsMultipleMeasureRests (
+//         // this voice contails multi-measure rests
+//         this->setVoiceContainsMultiMeasureRests (
 //           inputLineNumber); // JMI 0.9.67
 //
-//         // keep the multiple measure rests pending
+//         // keep the multi-measure rests pending
 
         --gIndenter;
       }
       break;
   } // switch
 
-  fOnGoingMultipleMeasureRest = true;
+  fOnGoingMultiMeasureRest = true;
 }
 
 void msrVoice::replicateLastAppendedMeasureInVoice (
@@ -6708,7 +6767,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
           " (replicated)");
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+    if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
       std::stringstream ss;
 
       ss <<
@@ -6751,9 +6810,9 @@ void msrVoice::appendEmptyMeasuresToVoice (
   const mfMeasureNumber&   previousMeasureNumber,
   int                      emptyMeasuresNumber)
 {
-  // create a multiple measure rests
+  // create a multi-measure rests
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -6870,20 +6929,20 @@ void msrVoice::appendEmptyMeasuresToVoice (
   } //for
 }
 
-void msrVoice::appendPendingMultipleMeasureRestsToVoice (
+void msrVoice::appendPendingMultiMeasureRestsToVoice (
     const mfInputLineNumber& inputLineNumber)
 {
-  // a multiple measure rests is a voice element,
+  // a multi-measure rests is a voice element,
   // and can be voice-level as well as part of a repeat
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsDetails ()) {
-      if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsDetails ()) {
+      if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
         std::stringstream ss;
 
         ss <<
-          "Appending current multiple measure rests " <<
-          fVoiceCurrentMultipleMeasureRest->asShortString () <<
+          "Appending current multi-measure rests " <<
+          fVoiceCurrentMultiMeasureRest->asShortString () <<
           " to voice " <<
           fVoiceName <<
           ", line " << inputLineNumber;
@@ -6901,12 +6960,12 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
     case msrVoiceKind::kVoiceKindHarmonies:
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
-//         // does the current multiple measure rests exist?
-//         if (! fVoiceCurrentMultipleMeasureRest) {
+//         // does the current multi-measure rests exist?
+//         if (! fVoiceCurrentMultiMeasureRest) {
 //           std::stringstream ss;
 //
 //           ss <<
-//             "Attempting to append a current multiple measure rests which doesn't exist";
+//             "Attempting to append a current multi-measure rests which doesn't exist";
 //
 //           msrInternalError (
 //             gServiceRunData->getInputSourceName (),
@@ -6916,12 +6975,12 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
 //         }
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+        if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
           std::stringstream ss;
 
           ss <<
-            "Appending current multiple measure rests " <<
-            fVoiceCurrentMultipleMeasureRest->asShortString () <<
+            "Appending current multi-measure rests " <<
+            fVoiceCurrentMultiMeasureRest->asShortString () <<
             " to the the voice segment of voice " <<
             fVoiceName <<
             ", line " << inputLineNumber;
@@ -6934,34 +6993,34 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
 //        fVoiceSegment->
           // JMI 0.9.67
 
-        // set current multiple measure rests last measure purist number
-        fVoiceCurrentMultipleMeasureRest->
+        // set current multi-measure rests last measure purist number
+        fVoiceCurrentMultiMeasureRest->
           setLastMeasurePuristMeasureNumber (
             inputLineNumber,
             fVoiceCurrentMeasurePuristNumber);
 
-        // append current multiple measure rests to the voice
-        cascadeAppendMultipleMeasureRestToVoice (
+        // append current multi-measure rests to the voice
+        cascadeAppendMultiMeasureRestToVoice (
           inputLineNumber,
-          fVoiceCurrentMultipleMeasureRest);
+          fVoiceCurrentMultiMeasureRest);
 
-        // forget about this current multiple measure rests
-        fVoiceCurrentMultipleMeasureRest = nullptr;
+        // forget about this current multi-measure rests
+        fVoiceCurrentMultiMeasureRest = nullptr;
       }
       break;
   } // switch
 }
 
-// void msrVoice::handleMultipleMeasureRestsStartInVoiceClone (
+// void msrVoice::handleMultiMeasureRestsStartInVoiceClone (
 //   const mfInputLineNumber&        inputLineNumber,
-//   const S_msrMultipleMeasureRest& multipleMeasureRest)
+//   const S_msrMultiMeasureRest& multiMeasureRest)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+//   if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Handling multiple measure rests start in voice clone \"" <<
+//       "Handling multi-measure rests start in voice clone \"" <<
 //       fVoiceName <<
 //       ", line " << inputLineNumber;
 //
@@ -6979,12 +7038,12 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
 //     case msrVoiceKind::kVoiceKindHarmonies:
 //     case msrVoiceKind::kVoiceKindFiguredBass:
 //
-//       // is there already a current multiple measure rests in this voice?
-//       if (fVoiceCurrentMultipleMeasureRest) {
+//       // is there already a current multi-measure rests in this voice?
+//       if (fVoiceCurrentMultiMeasureRest) {
 //         std::stringstream ss;
 //
 //         ss <<
-//           "current voice multiple measure rests is not null when attempting to handle multiple measure rests start in voice clone " <<
+//           "current voice multi-measure rests is not null when attempting to handle multi-measure rests start in voice clone " <<
 //           asShortString ();
 //
 //         msrInternalError (
@@ -6994,14 +7053,14 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
 //           ss.str ());
 //       }
 //
-//       // create the multiple measure rests clone and register it
-//       fVoiceCurrentMultipleMeasureRest =
-//         multipleMeasureRest->
-//           createMultipleMeasureRestNewbornClone (
+//       // create the multi-measure rests clone and register it
+//       fVoiceCurrentMultiMeasureRest =
+//         multiMeasureRest->
+//           createMultiMeasureRestNewbornClone (
 //             fVoiceSegment); // JMI ??? JMI 0.9.67
 //
-//       // this voice contails multiple measure rests
-//       this->setVoiceContainsMultipleMeasureRests (
+//       // this voice contails multi-measure rests
+//       this->setVoiceContainsMultiMeasureRests (
 //         inputLineNumber);
 //
 //       break;
@@ -7010,15 +7069,15 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
 //   --gIndenter;
 // }
 
-// void msrVoice::handleMultipleMeasureRestsEndInVoiceClone (
+// void msrVoice::handleMultiMeasureRestsEndInVoiceClone (
 //   const mfInputLineNumber& inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+//   if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Handling multiple measure rests end in voice clone \"" <<
+//       "Handling multi-measure rests end in voice clone \"" <<
 //       fVoiceName <<
 //       ", line " << inputLineNumber;
 //
@@ -7036,12 +7095,12 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
 //     case msrVoiceKind::kVoiceKindHarmonies:
 //     case msrVoiceKind::kVoiceKindFiguredBass:
 //
-//       // is there a current multiple measure rests in this voice?
-//       if (! fVoiceCurrentMultipleMeasureRest) {
+//       // is there a current multi-measure rests in this voice?
+//       if (! fVoiceCurrentMultiMeasureRest) {
 //         std::stringstream ss;
 //
 //         ss <<
-//           "current voice multiple measure rests is NULL when attempting to handle multiple measure rests end in voice clone " <<
+//           "current voice multi-measure rests is NULL when attempting to handle multi-measure rests end in voice clone " <<
 //           asShortString ();
 //
 //         msrInternalError (
@@ -7051,20 +7110,20 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
 //           ss.str ());
 //       }
 //
-//       // set current multiple measure rests last measure purist number
-//       fVoiceCurrentMultipleMeasureRest->
+//       // set current multi-measure rests last measure purist number
+//       fVoiceCurrentMultiMeasureRest->
 //         setLastMeasurePuristMeasureNumber (
 //           inputLineNumber,
 //           fVoiceCurrentMeasurePuristNumber);
 //
-//       // forget about fVoiceCurrentMultipleMeasureRest
-//       fVoiceCurrentMultipleMeasureRest = nullptr;
+//       // forget about fVoiceCurrentMultiMeasureRest
+//       fVoiceCurrentMultiMeasureRest = nullptr;
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//       if (gTraceOahGroup->getTraceMultipleMeasureRestsDetails ()) {
+//       if (gTraceOahGroup->getTraceMultiMeasureRestsDetails ()) {
 //         displayVoice (
 //           inputLineNumber,
-//           "handleMultipleMeasureRestsEndInVoiceClone() 3");
+//           "handleMultiMeasureRestsEndInVoiceClone() 3");
 //       }
 // #endif // MF_TRACE_IS_ENABLED
 //     break;
@@ -7073,9 +7132,9 @@ void msrVoice::appendPendingMultipleMeasureRestsToVoice (
 //   --gIndenter;
 // }
 
-void msrVoice::appendMultipleMeasureRestCloneToVoiceClone (
+void msrVoice::appendMultiMeasureRestCloneToVoiceClone (
   const mfInputLineNumber&        inputLineNumber,
-  const S_msrMultipleMeasureRest& multipleMeasureRestClone)
+  const S_msrMultiMeasureRest& multiMeasureRestClone)
 {
   ++gIndenter;
 
@@ -7083,8 +7142,8 @@ void msrVoice::appendMultipleMeasureRestCloneToVoiceClone (
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    multipleMeasureRestClone != nullptr,
-    "multipleMeasureRestClone is NULL");
+    multiMeasureRestClone != nullptr,
+    "multiMeasureRestClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fVoiceKind) {
@@ -7094,12 +7153,12 @@ void msrVoice::appendMultipleMeasureRestCloneToVoiceClone (
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+        if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
           std::stringstream ss;
 
           ss <<
-            "Appending multiple measure rest clone " <<
-            multipleMeasureRestClone->asString () <<
+            "Appending multi-measure rest clone " <<
+            multiMeasureRestClone->asString () <<
             " to voice clone \"" <<
             fVoiceName <<
             ", line " << inputLineNumber;
@@ -7110,7 +7169,7 @@ void msrVoice::appendMultipleMeasureRestCloneToVoiceClone (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        // is multiple measure rests nested in a repeat?
+        // is multi-measure rests nested in a repeat?
         if (! fVoicePendingRepeatsStack.empty ()) {
           // yes
 
@@ -7118,7 +7177,7 @@ void msrVoice::appendMultipleMeasureRestCloneToVoiceClone (
             currentRepeat =
               fVoicePendingRepeatsStack.front ();
 
-//           // grab the multiple measure rests segment, i.e. the voice's the voice segment JMI ??? ZAZA
+//           // grab the multi-measure rests segment, i.e. the voice's the voice segment JMI ??? ZAZA
         }
 
         else {
@@ -7126,17 +7185,17 @@ void msrVoice::appendMultipleMeasureRestCloneToVoiceClone (
           // JMI ???
         }
 
-        // append the multiple measure rests clone to the voice
-        cascadeAppendMultipleMeasureRestToVoice (
+        // append the multi-measure rests clone to the voice
+        cascadeAppendMultiMeasureRestToVoice (
           inputLineNumber,
-          multipleMeasureRestClone);
+          multiMeasureRestClone);
 
         // print resulting voice contents
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMultipleMeasureRestsDetails ()) {
+        if (gTraceOahGroup->getTraceMultiMeasureRestsDetails ()) {
           displayVoice (
             inputLineNumber,
-            "appendMultipleMeasureRestCloneToVoiceClone() 3");
+            "appendMultiMeasureRestCloneToVoiceClone() 3");
         }
 #endif // MF_TRACE_IS_ENABLED
       }
@@ -7685,8 +7744,8 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
     std::stringstream ss;
 
     ss <<
-      "repeats stack is empty when attempting to handle a HOOKED repeat ENDING end in voice " <<
-      asShortString ();
+      "Voice repeats stack is empty when attempting to handle a HOOKED repeat ENDING end in voice " <<
+      fVoiceName;
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -7792,8 +7851,8 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
     std::stringstream ss;
 
     ss <<
-      "repeats stack is empty when attempting to handle a HOOKLESS repeat ENDING end in voice " <<
-      asShortString ();
+      "Voice repeats stack is empty when attempting to handle a HOOKLESS repeat ENDING end in voice " <<
+      fVoiceName;
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -7885,6 +7944,22 @@ void msrVoice::handleRepeatEndingEndInVoice (
   const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
   msrRepeatEndingKind repeatEndingKind)
 {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Handling a repeat ENDING end in voice " <<
+      fVoiceName <<
+      ", repeatEndingNumber: " << repeatEndingNumber <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
     case msrVoiceKind::kVoiceKindDynamics:
@@ -7953,7 +8028,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //     ss <<
 //       "repeats stack is empty when attempting to handle repeat COMMON PART start " <<
 //       " in voice clone " <<
-//       asShortString ();
+//       fVoiceName;
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
@@ -8047,7 +8122,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //       "repeats stack is empty when attempting to handle repeat ENDING " <<
 // //       repeatEnding->asShortString () <<
 //       " in voice clone " <<
-//       asShortString ();
+//       fVoiceName;
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
@@ -8127,7 +8202,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //
 //     ss <<
 //       "repeats stack is empty when attempting to handle a HOOKED repeat ENDING in voice clone " <<
-//       asShortString ();
+//       fVoiceName;
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
@@ -8212,7 +8287,7 @@ void msrVoice::handleRepeatEndingEndInVoice (
 //
 //     ss <<
 //       "repeats stack is empty when attempting to handle a HOOKLESS repeat ENDING in voice clone " <<
-//       asShortString ();
+//       fVoiceName;
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
@@ -8656,11 +8731,10 @@ void msrVoice::appendRepeatEndingCloneToVoice ( // JMI
           std::stringstream ss;
 
           ss <<
-            "repeats stack is empty when attempting to append a " <<
+            "Voice repeats stack is empty when attempting to append a " <<
             repeatEndingClone->getRepeatEndingKind () <<
             " repeat ENDING to voice " <<
-            asShortString () <<
-            " ";
+            fVoiceName;
 
           msrInternalError (
             gServiceRunData->getInputSourceName (),
@@ -10042,8 +10116,8 @@ void msrVoice::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fVoiceContainsMultipleMeasureRests" << ": " <<
-    fVoiceContainsMultipleMeasureRests <<
+    "fVoiceContainsMultiMeasureRests" << ": " <<
+    fVoiceContainsMultiMeasureRests <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -10385,12 +10459,12 @@ std::string fetchVoiceAsString (const S_msrVoice& voice)
 //       {
 //         ++gIndenter;
 //
-//         // create the multiple measure rests
-//         if (fVoiceCurrentMultipleMeasureRest) {
+//         // create the multi-measure rests
+//         if (fVoiceCurrentMultiMeasureRest) {
 //           std::stringstream ss;
 //
 //           ss <<
-//             "Attempting to create a multiple measure rests while another one is pending";
+//             "Attempting to create a multi-measure rests while another one is pending";
 //
 //           msrInternalError (
 //             gServiceRunData->getInputSourceName (),
@@ -10400,50 +10474,50 @@ std::string fetchVoiceAsString (const S_msrVoice& voice)
 //         }
 //
 // /* JMI
-//         fVoiceCurrentMultipleMeasureRest =
-//           msrMultipleMeasureRest::create (
+//         fVoiceCurrentMultiMeasureRest =
+//           msrMultiMeasureRest::create (
 //             inputLineNumber,
 //             firstRestMeasure->getFullMeasureWholeNotesDuration (),
-//             multipleMeasureRestMeasuresNumber,
+//             multiMeasureRestMeasuresNumber,
 //             this);
 // */
 //
-//          // remember fVoiceCurrentMultipleMeasureRest for later next measure number setting JMI ???
+//          // remember fVoiceCurrentMultiMeasureRest for later next measure number setting JMI ???
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+//         if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
 //           gLog <<
-//             "Registering multiple measure rests " <<
-//             fVoiceCurrentMultipleMeasureRest->asString () <<
+//             "Registering multi-measure rests " <<
+//             fVoiceCurrentMultiMeasureRest->asString () <<
 //             " as waiting for its next measure number" <<
-//             ", multipleMeasureRestMeasuresNumber: " <<
-//             multipleMeasureRestMeasuresNumber <<
+//             ", multiMeasureRestMeasuresNumber: " <<
+//             multiMeasureRestMeasuresNumber <<
 //             " in voice " <<
 //             fVoiceName <<
 //             std::endl;
 //         }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//         fVoiceMultipleMeasureRestsWaitingForItsNextMeasureNumber =
-//           fVoiceCurrentMultipleMeasureRest;
+//         fVoiceMultiMeasureRestsWaitingForItsNextMeasureNumber =
+//           fVoiceCurrentMultiMeasureRest;
 //
-//         fVoiceRemainingMultipleMeasureRests =
-//           multipleMeasureRestMeasuresNumber;
+//         fVoiceRemainingMultiMeasureRests =
+//           multiMeasureRestMeasuresNumber;
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+//         if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
 //           gLog <<
-//             "Setting fVoiceRemainingMultipleMeasureRests to " <<
-//             fVoiceRemainingMultipleMeasureRests <<
+//             "Setting fVoiceRemainingMultiMeasureRests to " <<
+//             fVoiceRemainingMultiMeasureRests <<
 //             " in voice " <<
 //             fVoiceName <<
 //             std::endl;
 //         }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//         // create a new segment to collect the multiple measure rests,
+//         // create a new segment to collect the multi-measure rests,
 //         // containing the first, rest measure
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+//         if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
 //           gLog <<
 //             "Creating a new the voice segment to add the first, rest measure in voice " <<
 //             fVoiceName <<
@@ -10452,11 +10526,11 @@ std::string fetchVoiceAsString (const S_msrVoice& voice)
 //         }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//         // this voice contails multiple measure rests
-//         this->setVoiceContainsMultipleMeasureRests (
+//         // this voice contails multi-measure rests
+//         this->setVoiceContainsMultiMeasureRests (
 //           inputLineNumber);
 //
-//         // keep the multiple measure rests pending
+//         // keep the multi-measure rests pending
 //
 //         --gIndenter;
 //       }

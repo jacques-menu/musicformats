@@ -17,7 +17,7 @@
 #include "msrElements.h"
 #include "msrBeatRepeats.h"
 #include "msrMeasureRepeats.h"
-#include "msrMultipleMeasureRests.h"
+#include "msrMultiMeasureRests.h"
 #include "msrRepeatsEnumTypes.h"
 #include "msrSegmentsEnumTypes.h"
 #include "msrSegments.h"
@@ -102,9 +102,9 @@ class EXP msrRepeatElement: public msrElement
                             const S_msrMeasureRepeat& measureRepeat,
                             const std::string&        context);
 
-    void                  appendMultipleMeasureRestToRepeatElement (
+    void                  appendMultiMeasureRestToRepeatElement (
                             const mfInputLineNumber&        inputLineNumber,
-                            const S_msrMultipleMeasureRest& multipleMeasureRest,
+                            const S_msrMultiMeasureRest& multiMeasureRest,
                             const std::string&              context);
 
     S_msrNote             fetchRepeatElementFirstNonGraceNote () const;
@@ -247,9 +247,9 @@ class EXP msrRepeatCommonPart : public msrRepeatElement
                             const S_msrMeasureRepeat& measureRepeat,
                             const std::string&        context);
 
-    void                  appendMultipleMeasureRestToRepeatCommonPart (
+    void                  appendMultiMeasureRestToRepeatCommonPart (
                             const mfInputLineNumber&        inputLineNumber,
-                            const S_msrMultipleMeasureRest& multipleMeasureRests,
+                            const S_msrMultiMeasureRest& multiMeasureRests,
                             const std::string&              context);
 
     S_msrNote             fetchRepeatCommonPartFirstNonGraceNote () const;
@@ -417,9 +417,9 @@ class EXP msrRepeatEnding : public msrRepeatElement
                             const S_msrMeasureRepeat& measureRepeat,
                             const std::string&        context);
 
-    void                  appendMultipleMeasureRestToRepeatEnding (
+    void                  appendMultiMeasureRestToRepeatEnding (
                             const mfInputLineNumber&        inputLineNumber,
-                            const S_msrMultipleMeasureRest& multipleMeasureRests,
+                            const S_msrMultiMeasureRest& multiMeasureRests,
                             const std::string&              context);
 
     void                  collectRepeatEndingMeasuresIntoFlatList (
@@ -645,9 +645,9 @@ class EXP msrRepeat : public msrSegmentElement
                             const S_msrMeasureRepeat& measureRepeat,
                             const std::string&        context);
 
-    void                  appendMultipleMeasureRestToRepeat (
+    void                  appendMultiMeasureRestToRepeat (
                             const mfInputLineNumber&        inputLineNumber,
-                            const S_msrMultipleMeasureRest& multipleMeasureRests,
+                            const S_msrMultiMeasureRest& multiMeasureRests,
                             const std::string&              context);
 
     S_msrNote             fetchRepeatFirstNonGraceNote () const;

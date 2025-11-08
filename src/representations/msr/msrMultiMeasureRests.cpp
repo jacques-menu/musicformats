@@ -19,7 +19,7 @@
 
 #include "msrWae.h"
 
-#include "msrMultipleMeasureRests.h"
+#include "msrMultiMeasureRests.h"
 
 #include "oahOah.h"
 
@@ -34,14 +34,14 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-S_msrMultipleMeasureRest msrMultipleMeasureRest::create (
+S_msrMultiMeasureRest msrMultiMeasureRest::create (
   const mfInputLineNumber& inputLineNumber,
   int               measuresNumber,
   int               slashesNumber,
   msrUseSymbolsKind useSymbolsKind)
 {
-  msrMultipleMeasureRest* obj =
-    new msrMultipleMeasureRest (
+  msrMultiMeasureRest* obj =
+    new msrMultiMeasureRest (
       inputLineNumber,
       measuresNumber,
       slashesNumber,
@@ -50,7 +50,7 @@ S_msrMultipleMeasureRest msrMultipleMeasureRest::create (
   return obj;
 }
 
-msrMultipleMeasureRest::msrMultipleMeasureRest (
+msrMultiMeasureRest::msrMultiMeasureRest (
   const mfInputLineNumber& inputLineNumber,
   int               measuresNumber,
   int               slashesNumber,
@@ -64,18 +64,18 @@ msrMultipleMeasureRest::msrMultipleMeasureRest (
   fLastMeasurePuristNumber = -1;
 }
 
-msrMultipleMeasureRest::~msrMultipleMeasureRest ()
+msrMultiMeasureRest::~msrMultiMeasureRest ()
 {}
 
-S_msrMultipleMeasureRest msrMultipleMeasureRest::createMultipleMeasureRestNewbornClone (
+S_msrMultiMeasureRest msrMultiMeasureRest::createMultiMeasureRestNewbornClone (
   const S_msrSegment& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of multiple measure rests '" <<
+      "Creating a newborn clone of multi-measure rests '" <<
       asString () <<
       "'";
 
@@ -93,13 +93,13 @@ S_msrMultipleMeasureRest msrMultipleMeasureRest::createMultipleMeasureRestNewbor
     "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  S_msrMultipleMeasureRest
+  S_msrMultiMeasureRest
     newbornClone =
-//       msrMultipleMeasureRest::create (
+//       msrMultiMeasureRest::create (
 //         fInputLineNumber,
 //         fMeasuresNumber,
 //         containingVoice);
-      msrMultipleMeasureRest::create (
+      msrMultiMeasureRest::create (
         fInputLineNumber,
         fMeasuresNumber,
         fSlashesNumber,
@@ -113,7 +113,7 @@ S_msrMultipleMeasureRest msrMultipleMeasureRest::createMultipleMeasureRestNewbor
   return newbornClone;
 }
 
-mfWholeNotes msrMultipleMeasureRest::fetchMultipleMeasureRestMeasureSoundingNotes () const
+mfWholeNotes msrMultiMeasureRest::fetchMultiMeasureRestMeasureSoundingNotes () const
 {
   mfWholeNotes result;
 
@@ -125,15 +125,15 @@ mfWholeNotes msrMultipleMeasureRest::fetchMultipleMeasureRestMeasureSoundingNote
   return result;
 }
 
-void msrMultipleMeasureRest::setNextMeasureNumber (
+void msrMultiMeasureRest::setNextMeasureNumber (
   const mfMeasureNumber& nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
-      "Setting multiple measure rests next measure number to '" <<
+      "Setting multi-measure rests next measure number to '" <<
       "' " <<
       nextMeasureNumber;
 
@@ -147,16 +147,16 @@ void msrMultipleMeasureRest::setNextMeasureNumber (
     nextMeasureNumber;
 }
 
-void msrMultipleMeasureRest::setLastMeasurePuristMeasureNumber (
+void msrMultiMeasureRest::setLastMeasurePuristMeasureNumber (
   const mfInputLineNumber& inputLineNumber,
   int puristMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
-      "Setting multiple measure rests last measure purist number to '" <<
+      "Setting multi-measure rests last measure purist number to '" <<
       "' " <<
       puristMeasureNumber <<
       "', line " << inputLineNumber;
@@ -171,7 +171,7 @@ void msrMultipleMeasureRest::setLastMeasurePuristMeasureNumber (
     puristMeasureNumber;
 }
 
-// void msrMultipleMeasureRest::appendMeasureElementToSegmentElement (
+// void msrMultiMeasureRest::appendMeasureElementToSegmentElement (
 //   const S_msrMeasureElement& elem)
 // {
 //   std::stringstream ss;
@@ -179,7 +179,7 @@ void msrMultipleMeasureRest::setLastMeasurePuristMeasureNumber (
 //   ss <<
 //     "cannot append measure element " <<
 //     elem->asShortString () <<
-//     " to multiple measure rests " <<
+//     " to multi-measure rests " <<
 //     asShortString ();
 //
 //   msrInternalError (
@@ -189,21 +189,21 @@ void msrMultipleMeasureRest::setLastMeasurePuristMeasureNumber (
 //     ss.str ());
 // }
 
-void msrMultipleMeasureRest::appendMeasureToMultipleMeasureRest (
+void msrMultiMeasureRest::appendMeasureToMultiMeasureRest (
   const S_msrMeasure& measure)
 {
-//   fMultipleMeasureRestContents->
-//     getMultipleMeasureRestContentsSegment ()->
+//   fMultiMeasureRestContents->
+//     getMultiMeasureRestContentsSegment ()->
 //       appendMeasureToSegment (
 //         measureClone);
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
       "Appending measure "<<
       measure->asShortString () <<
-      " to multiple measure rests " <<
+      " to multi-measure rests " <<
       asShortString () <<
       "', line " << fInputLineNumber;
 
@@ -216,8 +216,8 @@ void msrMultipleMeasureRest::appendMeasureToMultipleMeasureRest (
   fMeasuresList.push_back (measure);
 
   // it measure the first one in the segment?
-  if (! fMultipleMeasureRestUpLinkToSegment->getSegmentFirstMeasure ()) {
-    fMultipleMeasureRestUpLinkToSegment->
+  if (! fMultiMeasureRestUpLinkToSegment->getSegmentFirstMeasure ()) {
+    fMultiMeasureRestUpLinkToSegment->
       setSegmentFirstMeasure (measure);
   }
 
@@ -226,7 +226,7 @@ void msrMultipleMeasureRest::appendMeasureToMultipleMeasureRest (
   // which don't go down the part-staff-voice-segment hierarchy
   S_msrVoice
     voice =
-      fMultipleMeasureRestUpLinkToSegment->
+      fMultiMeasureRestUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
   if (! voice->getVoiceFirstMeasure ()) {
@@ -239,18 +239,18 @@ void msrMultipleMeasureRest::appendMeasureToMultipleMeasureRest (
   }
 
   // register measure as the last one in the segment
-  fMultipleMeasureRestUpLinkToSegment->
+  fMultiMeasureRestUpLinkToSegment->
     setSegmentLastMeasure (measure);
 }
 
-void msrMultipleMeasureRest::acceptIn (basevisitor* v)
+void msrMultiMeasureRest::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMultipleMeasureRest::acceptIn ()";
+      "% ==> msrMultiMeasureRest::acceptIn ()";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -258,17 +258,17 @@ void msrMultipleMeasureRest::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_msrMultipleMeasureRest>*
+  if (visitor<S_msrMultiMeasureRest>*
     p =
-      dynamic_cast<visitor<S_msrMultipleMeasureRest>*> (v)) {
-        S_msrMultipleMeasureRest elem = this;
+      dynamic_cast<visitor<S_msrMultiMeasureRest>*> (v)) {
+        S_msrMultiMeasureRest elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMultipleMeasureRest::visitStart ()";
+            "% ==> Launching msrMultiMeasureRest::visitStart ()";
 
           gWaeHandler->waeTrace (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -279,14 +279,14 @@ void msrMultipleMeasureRest::acceptIn (basevisitor* v)
   }
 }
 
-void msrMultipleMeasureRest::acceptOut (basevisitor* v)
+void msrMultiMeasureRest::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMultipleMeasureRest::acceptOut ()";
+      "% ==> msrMultiMeasureRest::acceptOut ()";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -294,17 +294,17 @@ void msrMultipleMeasureRest::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_msrMultipleMeasureRest>*
+  if (visitor<S_msrMultiMeasureRest>*
     p =
-      dynamic_cast<visitor<S_msrMultipleMeasureRest>*> (v)) {
-        S_msrMultipleMeasureRest elem = this;
+      dynamic_cast<visitor<S_msrMultiMeasureRest>*> (v)) {
+        S_msrMultiMeasureRest elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gMsrOahGroup->getTraceMsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching msrMultipleMeasureRest::visitEnd ()";
+            "% ==> Launching msrMultiMeasureRest::visitEnd ()";
 
           gWaeHandler->waeTrace (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -315,14 +315,14 @@ void msrMultipleMeasureRest::acceptOut (basevisitor* v)
   }
 }
 
-void msrMultipleMeasureRest::browseData (basevisitor* v)
+void msrMultiMeasureRest::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "% ==> msrMultipleMeasureRest::browseData ()";
+      "% ==> msrMultiMeasureRest::browseData ()";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -330,8 +330,8 @@ void msrMultipleMeasureRest::browseData (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
- // JMI   if (! inhibitMultipleMeasureRestsBrowsing) { // JMI 0.9.67
-  // browse the multiple measure rests measures
+ // JMI   if (! inhibitMultiMeasureRestsBrowsing) { // JMI 0.9.67
+  // browse the multi-measure rests measures
   for (S_msrMeasure measure : fMeasuresList) {
     // browse the measure
     msrBrowser<msrMeasure> browser (v);
@@ -343,7 +343,7 @@ void msrMultipleMeasureRest::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "% <== msrMultipleMeasureRest::browseData ()";
+      "% <== msrMultiMeasureRest::browseData ()";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -352,12 +352,12 @@ void msrMultipleMeasureRest::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string msrMultipleMeasureRest::asString () const
+std::string msrMultiMeasureRest::asString () const
 {
   std::stringstream ss;
 
   ss <<
-    "[MultipleMeasureRest" <<
+    "[MultiMeasureRest" <<
     ", for " <<
     mfSingularOrPlural (
       fMeasuresNumber,
@@ -371,11 +371,11 @@ std::string msrMultipleMeasureRest::asString () const
     fUseSymbolsKind;
 
   ss <<
-    ", fMultipleMeasureRestUpLinkToSegment" << ": ";
+    ", fMultiMeasureRestUpLinkToSegment" << ": ";
 
-  if (fMultipleMeasureRestUpLinkToSegment) {
+  if (fMultiMeasureRestUpLinkToSegment) {
     ss <<
-      fMultipleMeasureRestUpLinkToSegment->asString (); // JMI 0.9.67
+      fMultiMeasureRestUpLinkToSegment->asString (); // JMI 0.9.67
   }
   else {
     ss << "[NULL]";
@@ -393,8 +393,8 @@ std::string msrMultipleMeasureRest::asString () const
     fNextMeasureNumber <<
     '\'' <<
 
-    ", multipleMeasureRestMeasureSoundingNotes: " <<
-    fetchMultipleMeasureRestMeasureSoundingNotes () <<
+    ", multiMeasureRestMeasureSoundingNotes: " <<
+    fetchMultiMeasureRestMeasureSoundingNotes () <<
     ", " <<
 
     ", line " << fInputLineNumber <<
@@ -403,13 +403,13 @@ std::string msrMultipleMeasureRest::asString () const
   return ss.str ();
 }
 
-void msrMultipleMeasureRest::displayMultipleMeasureRest (
+void msrMultiMeasureRest::displayMultiMeasureRest (
   const mfInputLineNumber& inputLineNumber,
   const std::string& context)
 {
   gLog <<
     std::endl <<
-    "*********>> Multiple measure rest " << context << " \"" <<
+    "*********>> Multi-measure rest " << context << " \"" <<
  // JMI   getVoiceName () <<
     "\"" <<
     ", line " << inputLineNumber <<
@@ -425,10 +425,10 @@ void msrMultipleMeasureRest::displayMultipleMeasureRest (
     std::endl << std::endl;
 }
 
-void msrMultipleMeasureRest::print (std::ostream& os) const
+void msrMultiMeasureRest::print (std::ostream& os) const
 {
   os <<
-    "[MultipleMeasureRest" <<
+    "[MultiMeasureRest" <<
     ", line " << fInputLineNumber <<
     std::endl;
 
@@ -462,17 +462,17 @@ void msrMultipleMeasureRest::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fetchMultipleMeasureRestMeasureSoundingNotes" << ": " <<
-    fetchMultipleMeasureRestMeasureSoundingNotes () <<
+    "fetchMultiMeasureRestMeasureSoundingNotes" << ": " <<
+    fetchMultiMeasureRestMeasureSoundingNotes () <<
     std::endl;
 
   // print the segment upLink
   os << std::left <<
-    "fMultipleMeasureRestUpLinkToSegment" << ": ";
+    "fMultiMeasureRestUpLinkToSegment" << ": ";
 
-  if (fMultipleMeasureRestUpLinkToSegment) {
+  if (fMultiMeasureRestUpLinkToSegment) {
     os <<
-      fMultipleMeasureRestUpLinkToSegment->asString () <<
+      fMultiMeasureRestUpLinkToSegment->asString () <<
       "\"";
   }
   else {
@@ -505,7 +505,7 @@ void msrMultipleMeasureRest::print (std::ostream& os) const
   --gIndenter;
 }
 
-std::ostream& operator << (std::ostream& os, const S_msrMultipleMeasureRest& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMultiMeasureRest& elt)
 {
   if (elt) {
     elt->print (os);
@@ -517,14 +517,14 @@ std::ostream& operator << (std::ostream& os, const S_msrMultipleMeasureRest& elt
   return os;
 }
 
-std::string fetchMultipleMeasureRestAsShortString (
-  const S_msrMultipleMeasureRest& multipleMeasureRest)
+std::string fetchMultiMeasureRestAsShortString (
+  const S_msrMultiMeasureRest& multiMeasureRest)
 {
   std::string result;
 
-  if (multipleMeasureRest) {
+  if (multiMeasureRest) {
     result =
-      multipleMeasureRest->asString ();
+      multiMeasureRest->asString ();
   }
   else {
     result = "\"** MULTIPLE_MEASURE_REST IS NULL **\"";
@@ -533,14 +533,14 @@ std::string fetchMultipleMeasureRestAsShortString (
   return result;
 }
 
-std::string fetchMultipleMeasureRestAsString (
-  const S_msrMultipleMeasureRest& multipleMeasureRest)
+std::string fetchMultiMeasureRestAsString (
+  const S_msrMultiMeasureRest& multiMeasureRest)
 {
   std::string result;
 
-  if (multipleMeasureRest) {
+  if (multiMeasureRest) {
     result =
-      multipleMeasureRest->asShortString ();
+      multiMeasureRest->asShortString ();
   }
   else {
     result = "\"** MULTIPLE_MEASURE_REST IS NULL **\"";

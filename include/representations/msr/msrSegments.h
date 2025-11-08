@@ -19,7 +19,7 @@
 #include "msrLyrics.h"
 #include "msrMeasures.h"
 #include "mfMoments.h"
-#include "msrMultipleMeasureRests.h"
+#include "msrMultiMeasureRests.h"
 #include "msrSegmentsEnumTypes.h"
 
 
@@ -230,17 +230,17 @@ class EXP msrSegment : public msrElement
 //                             const mfMeasureNumber&   measureNumber,
 //                             msrMeasureImplicitKind   measureImplicitKind);
 
-    // multiple measure rests
+    // multi-measure rests
 
-    Bool                  fOnGoingMultipleMeasureRest;
-    S_msrMultipleMeasureRest
-                          fCurrentMultipleMeasureRest;
+    Bool                  fOnGoingMultiMeasureRest;
+    S_msrMultiMeasureRest
+                          fCurrentMultiMeasureRest;
 
-    void                  appendMultipleMeasureRestToSegment (
-                            const S_msrMultipleMeasureRest& multipleMeasureRest);
+    void                  appendMultiMeasureRestToSegment (
+                            const S_msrMultiMeasureRest& multiMeasureRest);
 
-    void                  edacsacAppendMultipleMeasureRestToSegment (
-                            const S_msrMultipleMeasureRest& multipleMeasureRest);
+    void                  edacsacAppendMultiMeasureRestToSegment (
+                            const S_msrMultiMeasureRest& multiMeasureRest);
 
     // clef, key, time signature
 

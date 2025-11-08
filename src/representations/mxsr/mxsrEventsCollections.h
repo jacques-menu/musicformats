@@ -24,7 +24,7 @@
 #include "mxsrCueEvents.h"
 #include "mxsrGraceEvents.h"
 #include "mxsrMeasureRepeatEvents.h"
-#include "mxsrMultipleMeasureRestEvents.h"
+#include "mxsrMultiMeasureRestEvents.h"
 #include "mxsrNoteEvents.h"
 #include "mxsrStaffChangeEvents.h"
 #include "mxsrTupletEvents.h"
@@ -133,38 +133,38 @@ class EXP mxsrEventsCollection : public smartable
     // measure measure rest events
     // ------------------------------------------------------
 
-    S_mxsrMultipleMeasureRestEvent
-                          createAMultipleMeasureRestBegin (
+    S_mxsrMultiMeasureRestEvent
+                          createAMultiMeasureRestBegin (
                             const std::string&       partName,
                             const mfMeasureNumber&   measureNumber,
-                            int                      multipleMeasureRestNumber,
+                            int                      multiMeasureRestNumber,
                             const mfInputLineNumber& eventInputLineNumber);
 
-    void                  registerMultipleMeasureRestBegin (
-                            S_mxsrMultipleMeasureRestEvent multipleMeasureRestBeginEvent);
+    void                  registerMultiMeasureRestBegin (
+                            S_mxsrMultiMeasureRestEvent multiMeasureRestBeginEvent);
 
-//     S_mxsrMultipleMeasureRestEvent
-//                           createAMultipleMeasureRestEnd (
+//     S_mxsrMultiMeasureRestEvent
+//                           createAMultiMeasureRestEnd (
 //                             const std::string&       partName,
 //                             const mfMeasureNumber&   measureNumber,
-//                             int                      multipleMeasureRestNumber,
+//                             int                      multiMeasureRestNumber,
 //                             const mfInputLineNumber& eventInputLineNumber);
 //
-//     void                  registerMultipleMeasureRestEnd (
-//                             S_mxsrMultipleMeasureRestEvent multipleMeasureRestEndEvent);
+//     void                  registerMultiMeasureRestEnd (
+//                             S_mxsrMultiMeasureRestEvent multiMeasureRestEndEvent);
 
-    void                  createAMultipleMeasureRestEndAndRegisterIt (
+    void                  createAMultiMeasureRestEndAndRegisterIt (
                             const std::string&       partName,
                             const mfMeasureNumber&   measureNumber,
-                            int                      multipleMeasureRestNumber,
+                            int                      multiMeasureRestNumber,
                             const mfInputLineNumber& eventInputLineNumber);
 
-    S_mxsrMultipleMeasureRestEvent
-                          fetchMultipleMeasureRestBeginAtMeasureNumber (
+    S_mxsrMultiMeasureRestEvent
+                          fetchMultiMeasureRestBeginAtMeasureNumber (
                             const mfMeasureNumber& measureNumber) const;
 
-    S_mxsrMultipleMeasureRestEvent
-                          fetchMultipleMeasureRestEndAtMeasureNumber (
+    S_mxsrMultiMeasureRestEvent
+                          fetchMultiMeasureRestEndAtMeasureNumber (
                             const mfMeasureNumber& measureNumber) const;
 
     // measure repeat events
@@ -372,7 +372,7 @@ class EXP mxsrEventsCollection : public smartable
 
     void                  printAllEventsList (std::ostream& os) const;
 
-    void                  printMultipleMeasureRestEvents (std::ostream& os) const;
+    void                  printMultiMeasureRestEvents (std::ostream& os) const;
 
     void                  prinMeasureRepeatEvents (std::ostream& os) const;
 
@@ -418,9 +418,9 @@ class EXP mxsrEventsCollection : public smartable
 
     // there can be only one measure repeat begin and one measure repeat end
     // per measure, hence two maps, indexed by measure number
-    std::map <mfMeasureNumber, S_mxsrMultipleMeasureRestEvent>
-                          fMultipleMeasureRestBeginsMap,
-                          fMultipleMeasureRestEndsMap;
+    std::map <mfMeasureNumber, S_mxsrMultiMeasureRestEvent>
+                          fMultiMeasureRestBeginsMap,
+                          fMultiMeasureRestEndsMap;
 
     // measure repeat events
     // ------------------------------------------------------

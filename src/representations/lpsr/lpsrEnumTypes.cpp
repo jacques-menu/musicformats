@@ -672,7 +672,7 @@ std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
 }
 
 //_______________________________________________________________________________
-std::string multipleMeasureRestsWholeNoteAsLilypondString (
+std::string multiMeasureRestsWholeNoteAsLilypondString (
   const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes)
 {

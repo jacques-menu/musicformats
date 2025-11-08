@@ -340,7 +340,7 @@ class EXP msr2bsrTranslator :
     S_msrMeasureRepeatReplicas
                               fCurrentMeasureRepeatReplicasClone;
 
-    // multiple measure rests
+    // multi-measure rests
     // ------------------------------------------------------
 
     S_msrMultipleRest         fCurrentMultipleRestClone; // JMI

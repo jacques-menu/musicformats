@@ -4123,13 +4123,13 @@ void msr2lpsrTranslator::visitStart (S_msrDampAll& elt)
 }
 
 //________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrMultipleMeasureRest& elt)
+void msr2lpsrTranslator::visitStart (S_msrMultiMeasureRest& elt)
 {
   msr2msrTranslator::visitEnd (elt);
 
   fResultingLpsr->
-    // this score needs the 'merge multiple measure rests' Scheme function
-    setMergeMultipleMeasureRestsIsNeeded ();
+    // this score needs the 'merge multi-measure rests' Scheme function
+    setMergeMultiMeasureRestsIsNeeded ();
 }
 
 //________________________________________________________________________

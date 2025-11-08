@@ -4544,8 +4544,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
       " (fCurrentPartID \"" << fCurrentPartID << "\")" <<
       ", fPreviousMeasureNumber \"" << fPreviousMeasureNumber << "\"" <<
       ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
-      ", fCurrentMultipleMeasureRestNumber \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
-      ", fRemainingMultipleMeasureRestNumber \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
+      ", fCurrentMultiMeasureRestNumber \"" << fCurrentMultiMeasureRestNumber << "\"" <<
+      ", fRemainingMultiMeasureRestNumber \"" << fRemainingMultiMeasureRestNumber << "\"" <<
       ", line " << fCurrentMeasureInputLineNumber <<
       " ===-->";
 
@@ -4601,10 +4601,10 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
       " (fCurrentPartID \"" << fCurrentPartID << "\")" <<
       ", fPreviousMeasureNumber \"" << fPreviousMeasureNumber << "\"" <<
       ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
-      ", fOnGoingMultipleMeasureRest: " << fOnGoingMultipleMeasureRest <<
+      ", fOnGoingMultiMeasureRest: " << fOnGoingMultiMeasureRest <<
       ", fOnGoingMeasureRepeat: " << fOnGoingMeasureRepeat <<
-      ", fCurrentMultipleMeasureRestNumber \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
-      ", fRemainingMultipleMeasureRestNumber \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
+      ", fCurrentMultiMeasureRestNumber \"" << fCurrentMultiMeasureRestNumber << "\"" <<
+      ", fRemainingMultiMeasureRestNumber \"" << fRemainingMultiMeasureRestNumber << "\"" <<
       ", line " << fCurrentMeasureInputLineNumber <<
       " ===-->";
 
@@ -4614,15 +4614,15 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-	// if there is an ongoing multiple measure rest?
+	// if there is an ongoing multi-measure rest?
 	// this done only now in visitEnd (S_measure& elt),
 	// because it was not known in visitStart (S_measure& elt) for this measure
-	// that is was the first one of a multiple measure rest
-	if (fOnGoingMultipleMeasureRest) {
+	// that is was the first one of a multi-measure rest
+	if (fOnGoingMultiMeasureRest) {
 		// yes
 
-		// account for this measure in the multiple measure rests countdown
-		--fRemainingMultipleMeasureRestNumber;
+		// account for this measure in the multi-measure rests countdown
+		--fRemainingMultiMeasureRestNumber;
 
 #ifdef MF_TRACE_IS_ENABLED
 		if (gTraceOahGroup->getTraceMeasuresBasics ()) {
@@ -4634,9 +4634,9 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 				" (fCurrentPartID \"" << fCurrentPartID << "\")" <<
 				", fPreviousMeasureNumber \"" << fPreviousMeasureNumber << "\"" <<
 				", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
-				", fOnGoingMultipleMeasureRest: " << fOnGoingMultipleMeasureRest <<
-				", fCurrentMultipleMeasureRestNumber \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
-				", fRemainingMultipleMeasureRestNumber \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
+				", fOnGoingMultiMeasureRest: " << fOnGoingMultiMeasureRest <<
+				", fCurrentMultiMeasureRestNumber \"" << fCurrentMultiMeasureRestNumber << "\"" <<
+				", fRemainingMultiMeasureRestNumber \"" << fRemainingMultiMeasureRestNumber << "\"" <<
 				", line " << fCurrentMeasureInputLineNumber <<
 				" ===-->";
 
@@ -4646,18 +4646,18 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 		}
 #endif // MF_TRACE_IS_ENABLED
 
-		if (fRemainingMultipleMeasureRestNumber == 0) {
-			// this measure in the last one in the multiple measure rests group
+		if (fRemainingMultiMeasureRestNumber == 0) {
+			// this measure in the last one in the multi-measure rests group
 #ifdef MF_TRACE_IS_ENABLED
-			if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+			if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
 				std::stringstream ss;
 
 				ss <<
-					"--> There is a multiple measure rest end event" <<
+					"--> There is a multi-measure rest end event" <<
 					", fCurrentMeasureNumber: " <<
 					fCurrentMeasureNumber <<
-					", fCurrentMultipleMeasureRestNumber: " <<
-					fCurrentMultipleMeasureRestNumber <<
+					", fCurrentMultiMeasureRestNumber: " <<
+					fCurrentMultiMeasureRestNumber <<
 					", line " << elt->getInputLineNumber ();
 
 				gWaeHandler->waeTrace (
@@ -4666,18 +4666,18 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 			}
 #endif // MF_TRACE_IS_ENABLED
 
-			// create a multiple measure rest end event
-// 			S_mxsrMultipleMeasureRestEvent
-// 				multipleMeasureRestEndEvent =
-// 					fResultingEventsCollection.createAMultipleMeasureRestEnd (
+			// create a multi-measure rest end event
+// 			S_mxsrMultiMeasureRestEvent
+// 				multiMeasureRestEndEvent =
+// 					fResultingEventsCollection.createAMultiMeasureRestEnd (
 // 						fCurrentPart->getPartName (),
 // 						fCurrentMeasureNumber,
-// 						fCurrentMultipleMeasureRestNumber,
+// 						fCurrentMultiMeasureRestNumber,
 // 						elt->getInputLineNumber ());
 //
 // 			// register it
-// 			fResultingEventsCollection.registerMultipleMeasureRestEnd (
-// 				multipleMeasureRestEndEvent);
+// 			fResultingEventsCollection.registerMultiMeasureRestEnd (
+// 				multiMeasureRestEndEvent);
 
 			std::string
 				partName =
@@ -4687,13 +4687,13 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 				inputLineNumber =
 					elt->getInputLineNumber ();
 
-			fResultingEventsCollection.createAMultipleMeasureRestEndAndRegisterIt (
+			fResultingEventsCollection.createAMultiMeasureRestEndAndRegisterIt (
 				partName,
 				fCurrentMeasureNumber,
-				fCurrentMultipleMeasureRestNumber,
+				fCurrentMultiMeasureRestNumber,
 				inputLineNumber);
 
-			fOnGoingMultipleMeasureRest = false;
+			fOnGoingMultiMeasureRest = false;
 		}
 	}
 
@@ -4707,9 +4707,9 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
       " (fCurrentPartID \"" << fCurrentPartID << "\")" <<
       ", fPreviousMeasureNumber \"" << fPreviousMeasureNumber << "\"" <<
       ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
-      ", fOnGoingMultipleMeasureRest: " << fOnGoingMultipleMeasureRest <<
-      ", fCurrentMultipleMeasureRestNumber \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
-      ", fRemainingMultipleMeasureRestNumber \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
+      ", fOnGoingMultiMeasureRest: " << fOnGoingMultiMeasureRest <<
+      ", fCurrentMultiMeasureRestNumber \"" << fCurrentMultiMeasureRestNumber << "\"" <<
+      ", fRemainingMultiMeasureRestNumber \"" << fRemainingMultiMeasureRestNumber << "\"" <<
       ", line " << fCurrentMeasureInputLineNumber <<
       " ===-->";
 
@@ -4736,10 +4736,10 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 
 			case msrMeasureRepeatKind::kMeasureRepeatStop:
 				{
-					// create a multiple measure rest end event upon the previous measure,
+					// create a multi-measure rest end event upon the previous measure,
 					// since we're one measure too late
 // 					S_mxsrMeasureRepeatEvent
-// 						multipleMeasureResEndEvent =
+// 						multiMeasureResEndEvent =
 // 							fResultingEventsCollection.createAMeasureRepeatEnd (
 // 								fCurrentPart->getPartName (),
 // 								fPreviousMeasureNumber,
@@ -4749,7 +4749,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 //
 // 					// register it
 // 					fResultingEventsCollection.registerMeasureRepeatEnd (
-// 						multipleMeasureResEndEvent);
+// 						multiMeasureResEndEvent);
 
 			std::string
 				partName =
@@ -4885,27 +4885,27 @@ The stop type indicates the first measure where the repeats are *no longer* disp
     </measure>
 */
 
-  // multiple measure rest number
+  // multi-measure rest number
 
-  fCurrentMultipleMeasureRestNumber = (int)(*elt);
+  fCurrentMultiMeasureRestNumber = (int)(*elt);
 
   // start counting down the measures in the group:
   // the one containing the <S_multiple_rest /> is the first one in the group,
   // it will be accounted for in visitEnd (S_measure& elt):
-  fRemainingMultipleMeasureRestNumber =
-  	fCurrentMultipleMeasureRestNumber;
+  fRemainingMultiMeasureRestNumber =
+  	fCurrentMultiMeasureRestNumber;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
-			"--> There is a multiple measure rest begin event" <<
+			"--> There is a multi-measure rest begin event" <<
       ", fCurrentPartName: \"" << fCurrentPartName << "\"" <<
       " (fCurrentPartID: \"" << fCurrentPartID << "\")" <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber << "\"" <<
-      ", fCurrentMultipleMeasureRestNumber: \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
-      ", fRemainingMultipleMeasureRestNumber: \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
+      ", fCurrentMultiMeasureRestNumber: \"" << fCurrentMultiMeasureRestNumber << "\"" <<
+      ", fRemainingMultiMeasureRestNumber: \"" << fRemainingMultiMeasureRestNumber << "\"" <<
       ", line " << elt->getInputLineNumber () <<
       " ===-->";
 
@@ -4915,20 +4915,20 @@ The stop type indicates the first measure where the repeats are *no longer* disp
   }
 #endif // MF_TRACE_IS_ENABLED
 
-	// create a multiple measure rest begin event
-	S_mxsrMultipleMeasureRestEvent
-		multipleMeasureResBegintEvent =
-			fResultingEventsCollection.createAMultipleMeasureRestBegin (
+	// create a multi-measure rest begin event
+	S_mxsrMultiMeasureRestEvent
+		multiMeasureResBegintEvent =
+			fResultingEventsCollection.createAMultiMeasureRestBegin (
 				fCurrentPart->getPartName (),
 				fCurrentMeasureNumber,
-				fCurrentMultipleMeasureRestNumber,
+				fCurrentMultiMeasureRestNumber,
 				fCurrentMeasureInputLineNumber);
 
 	// register it
-	fResultingEventsCollection.registerMultipleMeasureRestBegin (
-		multipleMeasureResBegintEvent);
+	fResultingEventsCollection.registerMultiMeasureRestBegin (
+		multiMeasureResBegintEvent);
 
-  fOnGoingMultipleMeasureRest = true;
+  fOnGoingMultiMeasureRest = true;
 }
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_multiple_rest& elt)
@@ -4948,7 +4948,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_multiple_rest& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+//   if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
 //     std::stringstream ss;
 //
 //     ss <<
@@ -4956,8 +4956,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_multiple_rest& elt)
 //       ", fCurrentPartName: \"" << fCurrentPartName << "\"" <<
 //       " (fCurrentPartID: \"" << fCurrentPartID << "\")" <<
 //       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber << "\"" <<
-//       ", fCurrentMultipleMeasureRestNumber: \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
-//       ", fRemainingMultipleMeasureRestNumber: \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
+//       ", fCurrentMultiMeasureRestNumber: \"" << fCurrentMultiMeasureRestNumber << "\"" <<
+//       ", fRemainingMultiMeasureRestNumber: \"" << fRemainingMultiMeasureRestNumber << "\"" <<
 //       ", line " << elt->getInputLineNumber () <<
 //       " ===-->";
 //
@@ -4996,7 +4996,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure_repeat& elt)
 /*
 <!--
 	The measure-repeat element is used for both single and
-	multiple measure repeats. The text of the element indicates
+	multi-measure repeats. The text of the element indicates
 	the number of measures to be repeated in a single pattern.
 	The slashes attribute specifies the number of slashes to
 	use in the repeat sign. It is 1 if not specified. Both the
@@ -5077,7 +5077,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure_repeat& elt)
     	{
 				// the measure repeat end upon the previous measure
 				S_mxsrMeasureRepeatEvent
-					multipleMeasureResBeginEvent =
+					multiMeasureResBeginEvent =
 						fResultingEventsCollection.createAMeasureRepeatBegin (
 							fCurrentPart->getPartName (),
 							fPreviousMeasureNumber,
@@ -5087,7 +5087,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure_repeat& elt)
 
 				// register it
 				fResultingEventsCollection.registerMeasureRepeatBegin (
-					multipleMeasureResBeginEvent);
+					multiMeasureResBeginEvent);
 			}
       break;
 

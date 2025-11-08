@@ -401,8 +401,8 @@ void msrStaff::copyStuffFromUpLinkToPartToStaff ()
     fStaffUpLinkToPart->
       getPartInstrumentAbbreviation ();
 
-  // multiple measure rests
-  fStaffContainsMultipleMeasureRests = false;
+  // multi-measure rests
+  fStaffContainsMultiMeasureRests = false;
 }
 
 S_msrPartGroup msrStaff::fetchStaffUpLinkToPartGroup () const
@@ -606,7 +606,7 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
   }
 }
 
-void msrStaff::cascadeNetNextMeasureNumberInStaff (
+void msrStaff::cascadeSetNextMeasureNumberInStaff (
   const mfInputLineNumber& inputLineNumber,
   const mfMeasureNumber&   nextMeasureNumber)
 {
@@ -2659,20 +2659,20 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
   } // for
 }
 
-void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
+void msrStaff::cascadeAppendMultiMeasureRestToStaff (
   const mfInputLineNumber& inputLineNumber,
-  int                      multipleMeasureRestMeasuresNumber,
-  int                      multipleMeasureRestSlashesNumber,
-  msrUseSymbolsKind        multipleMeasureRestUseSymbolsKind)
+  int                      multiMeasureRestMeasuresNumber,
+  int                      multiMeasureRestSlashesNumber,
+  msrUseSymbolsKind        multiMeasureRestUseSymbolsKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Cascading appending a multiple measure rest for " <<
+      "Cascading appending a multi-measure rest for " <<
       mfSingularOrPlural (
-        multipleMeasureRestMeasuresNumber, "measure", "measures") <<
+        multiMeasureRestMeasuresNumber, "measure", "measures") <<
       " to staff \"" <<
       fStaffPathLikeName <<
       "\" in part " <<
@@ -2685,17 +2685,17 @@ void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fStaffContainsMultipleMeasureRests = true;
+  fStaffContainsMultiMeasureRests = true;
 
   // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     ++gIndenter;
     voice->
-      createAMultipleMeasureRestAndAppendItToVoice (
+      createAMultiMeasureRestAndAppendItToVoice (
         inputLineNumber,
-        multipleMeasureRestMeasuresNumber,
-        multipleMeasureRestSlashesNumber,
-        multipleMeasureRestUseSymbolsKind);
+        multiMeasureRestMeasuresNumber,
+        multiMeasureRestSlashesNumber,
+        multiMeasureRestUseSymbolsKind);
     --gIndenter;
   } // for
 }
@@ -2705,7 +2705,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
   int                      replicatasNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -2735,7 +2735,7 @@ void msrStaff::cascadeAppendEmptyMeasuresToStaff (
   int                      emptyMeasuresNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -2755,7 +2755,7 @@ void msrStaff::cascadeAppendEmptyMeasuresToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fStaffContainsMultipleMeasureRests = true;
+  fStaffContainsMultiMeasureRests = true;
 
   // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
@@ -2769,11 +2769,11 @@ void msrStaff::cascadeAppendEmptyMeasuresToStaff (
   } // for
 }
 
-void msrStaff::appendPendingMultipleMeasureRestsToStaff (
+void msrStaff::appendPendingMultiMeasureRestsToStaff (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -2791,22 +2791,22 @@ void msrStaff::appendPendingMultipleMeasureRestsToStaff (
   // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
-      appendPendingMultipleMeasureRestsToVoice (
+      appendPendingMultiMeasureRestsToVoice (
         inputLineNumber);
   } // for
 }
 
-void msrStaff::appendMultipleMeasureRestCloneToStaff (
+void msrStaff::appendMultiMeasureRestCloneToStaff (
   const mfInputLineNumber&        inputLineNumber,
-  const S_msrMultipleMeasureRest& multipleMeasureRestsClone)
+  const S_msrMultiMeasureRest& multiMeasureRestsClone)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
       "Appending multiple rest '" <<
-      multipleMeasureRestsClone->asString () <<
+      multiMeasureRestsClone->asString () <<
       "' to staff clone \"" <<
       fStaffPathLikeName <<
       "\"";
@@ -2820,9 +2820,9 @@ void msrStaff::appendMultipleMeasureRestCloneToStaff (
   // cascade it to all voices
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
-      appendMultipleMeasureRestCloneToVoiceClone (
+      appendMultiMeasureRestCloneToVoiceClone (
         inputLineNumber,
-        multipleMeasureRestsClone);
+        multiMeasureRestsClone);
   } // for
 }
 

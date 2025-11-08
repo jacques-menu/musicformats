@@ -44,14 +44,14 @@ namespace MusicFormats
 
   A repeat is recognized in MusicXML either by:
 
-    - it's start: handleRepeatStart()
-    - it's first HOOKED ending (45b): handleRepeatEndingStart()
+    - it's start: handleMxmlRepeatStart()
+    - it's first HOOKED ending (45b): handleMxmlRepeatEndingStart()
         the elements before it are moved to the new repeat's common part
-    - it's end: handleRepeatEnd()
+    - it's end: handleMxmlRepeatEnd()
 
-  Hooked endings following the first one are added to currentRepeat handleRepeatHookedEndingEnd()
+  Hooked endings following the first one are added to currentRepeat handleMxmlRepeatHookedEndingEnd()
 
-  A HOOKLESS ending terminates currentRepeat: handleRepeatHooklessEndingEnd()
+  A HOOKLESS ending terminates currentRepeat: handleMxmlRepeatHooklessEndingEnd()
     finalize currentRepeat
 */
 
@@ -376,9 +376,9 @@ void msrRepeatElement::appendMeasureRepeatToRepeatElement (
     measureRepeat);
 }
 
-void msrRepeatElement::appendMultipleMeasureRestToRepeatElement (
+void msrRepeatElement::appendMultiMeasureRestToRepeatElement (
   const mfInputLineNumber&        inputLineNumber,
-  const S_msrMultipleMeasureRest& multipleMeasureRest,
+  const S_msrMultiMeasureRest& multiMeasureRest,
   const std::string&              context)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -387,7 +387,7 @@ void msrRepeatElement::appendMultipleMeasureRestToRepeatElement (
 
     ss <<
       "Appending measure measure rest " <<
-      fetchMultipleMeasureRestAsString (multipleMeasureRest) <<
+      fetchMultiMeasureRestAsString (multiMeasureRest) <<
       " to repeat element " <<
       asString () <<
       " (" << context << ")" <<
@@ -403,12 +403,12 @@ void msrRepeatElement::appendMultipleMeasureRestToRepeatElement (
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    multipleMeasureRest != nullptr,
-    "multipleMeasureRest is NULL");
+    multiMeasureRest != nullptr,
+    "multiMeasureRest is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  fRepeatElementSegment->appendMultipleMeasureRestToSegment (
-    multipleMeasureRest);
+  fRepeatElementSegment->appendMultiMeasureRestToSegment (
+    multiMeasureRest);
 }
 
 void msrRepeatElement::acceptIn (basevisitor* v)
@@ -884,18 +884,18 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
 // JMI 0.9.67  fRepeatCommonPartElementsList.push_back (measureRepeat); JMI 0.9.66
 }
 
-void msrRepeatCommonPart::appendMultipleMeasureRestToRepeatCommonPart (
+void msrRepeatCommonPart::appendMultiMeasureRestToRepeatCommonPart (
   const mfInputLineNumber&        inputLineNumber,
-  const S_msrMultipleMeasureRest& multipleMeasureRests,
+  const S_msrMultiMeasureRest& multiMeasureRests,
   const std::string&              context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Cascading appending multiple measure rest " <<
-      multipleMeasureRests->asString () <<
+      "Cascading appending multi-measure rest " <<
+      multiMeasureRests->asString () <<
       " to repeat COMMON PART " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
@@ -910,11 +910,11 @@ void msrRepeatCommonPart::appendMultipleMeasureRestToRepeatCommonPart (
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    multipleMeasureRests != nullptr,
-    "multipleMeasureRests is NULL");
+    multiMeasureRests != nullptr,
+    "multiMeasureRests is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//  JMI 0.9.67 fRepeatCommonPartElementsList.push_back (multipleMeasureRests);
+//  JMI 0.9.67 fRepeatCommonPartElementsList.push_back (multiMeasureRests);
 }
 
 void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
@@ -1631,9 +1631,9 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
 // JMI 0.9.67  fRepeatEndingElementsList.push_back (measureRepeat);
 }
 
-void msrRepeatEnding::appendMultipleMeasureRestToRepeatEnding (
+void msrRepeatEnding::appendMultiMeasureRestToRepeatEnding (
   const mfInputLineNumber&        inputLineNumber,
-  const S_msrMultipleMeasureRest& multipleMeasureRests,
+  const S_msrMultiMeasureRest& multiMeasureRests,
   const std::string&              context)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1641,8 +1641,8 @@ void msrRepeatEnding::appendMultipleMeasureRestToRepeatEnding (
     std::stringstream ss;
 
     ss <<
-      "Cascading appending multiple measure restBasics " <<
-      fetchMultipleMeasureRestAsShortString (multipleMeasureRests) <<
+      "Cascading appending multi-measure restBasics " <<
+      fetchMultiMeasureRestAsShortString (multiMeasureRests) <<
       " to repeat ENDING " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
@@ -1657,11 +1657,11 @@ void msrRepeatEnding::appendMultipleMeasureRestToRepeatEnding (
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    multipleMeasureRests != nullptr,
-    "multipleMeasureRests is NULL");
+    multiMeasureRests != nullptr,
+    "multiMeasureRests is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//  JMI 0.9.67 fRepeatEndingElementsList.push_back (multipleMeasureRests);
+//  JMI 0.9.67 fRepeatEndingElementsList.push_back (multiMeasureRests);
 }
 
 void msrRepeatEnding::appendVoiceElementToRepeatEnding (
@@ -2981,9 +2981,9 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrRepeat::appendMultipleMeasureRestToRepeat (
+void msrRepeat::appendMultiMeasureRestToRepeat (
   const mfInputLineNumber&        inputLineNumber,
-  const S_msrMultipleMeasureRest& multipleMeasureRests,
+  const S_msrMultiMeasureRest& multiMeasureRests,
   const std::string&              context)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2991,8 +2991,8 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
     std::stringstream ss;
 
     ss <<
-      "Cascading appending multiple measure rest " <<
-      fetchMultipleMeasureRestAsString (multipleMeasureRests) <<
+      "Cascading appending multi-measure rest " <<
+      fetchMultiMeasureRestAsString (multiMeasureRests) <<
       " to repeat " <<
       asShortString () <<
       std::endl;
@@ -3003,7 +3003,7 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
-      "appendMultipleMeasureRestToRepeat() 1");
+      "appendMultiMeasureRestToRepeat() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -3013,8 +3013,8 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
         std::stringstream ss;
 
         ss <<
-          "multiple measure rests " <<
-          fetchMultipleMeasureRestAsShortString (multipleMeasureRests) <<
+          "multi-measure rests " <<
+          fetchMultiMeasureRestAsShortString (multiMeasureRests) <<
           "'cannot be added to a just created repeat" <<
           " (" << context << ")";
 
@@ -3028,17 +3028,17 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
       fRepeatCommonPart->
-        appendMultipleMeasureRestToRepeatCommonPart (
+        appendMultiMeasureRestToRepeatCommonPart (
           inputLineNumber,
-          multipleMeasureRests,
+          multiMeasureRests,
           context);
       break;
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
       fRepeatEndingsVector.back ()->
-        appendMultipleMeasureRestToRepeatEnding (
+        appendMultiMeasureRestToRepeatEnding (
           inputLineNumber,
-          multipleMeasureRests,
+          multiMeasureRests,
           context);
       break;
 
@@ -3047,8 +3047,8 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
         std::stringstream ss;
 
         ss <<
-          "multiple measure rests " <<
-          fetchMultipleMeasureRestAsShortString (multipleMeasureRests) <<
+          "multi-measure rests " <<
+          fetchMultiMeasureRestAsShortString (multiMeasureRests) <<
           "'cannot be added to a completed repeat" <<
           '(' << context << ")";
 
@@ -3065,7 +3065,7 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
-      "appendMultipleMeasureRestToRepeat() 2");
+      "appendMultiMeasureRestToRepeat() 2");
   }
 #endif // MF_TRACE_IS_ENABLED
 }

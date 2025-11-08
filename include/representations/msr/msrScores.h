@@ -198,15 +198,15 @@ class EXP msrScore : public msrBookElement
     int                   getScoreMeasuresNumber () const
                               { return fScoreMeasuresNumber; }
 
-    void                  setStaffContainsMultipleMeasureRests (
-                            Bool staffContainsMultipleMeasureRests)
+    void                  setStaffContainsMultiMeasureRests (
+                            Bool staffContainsMultiMeasureRests)
                               {
-                                fStaffContainsMultipleMeasureRests =
-                                  staffContainsMultipleMeasureRests;
+                                fStaffContainsMultiMeasureRests =
+                                  staffContainsMultiMeasureRests;
                               }
 
-    Bool                  getStaffContainsMultipleMeasureRests () const
-                              { return fStaffContainsMultipleMeasureRests; }
+    Bool                  getStaffContainsMultiMeasureRests () const
+                              { return fStaffContainsMultiMeasureRests; }
 
     // part group names max length
     void                  setScorePartGroupNamesMaxLength (size_t value)
@@ -293,15 +293,15 @@ class EXP msrScore : public msrBookElement
                                   fInhibitMeasureRepeatReplicasBrowsing;
                               };
 
-    void                  setInhibitMultipleMeasureRestsBrowsing ()
+    void                  setInhibitMultiMeasureRestsBrowsing ()
                               {
-                                fInhibitMultipleMeasureRestsBrowsing = true;
+                                fInhibitMultiMeasureRestsBrowsing = true;
                               }
 
-    Bool                  getInhibitMultipleMeasureRestsBrowsing () const
+    Bool                  getInhibitMultiMeasureRestsBrowsing () const
                               {
                                 return
-                                  fInhibitMultipleMeasureRestsBrowsing;
+                                  fInhibitMultiMeasureRestsBrowsing;
                               };
 
     // staves browsing order
@@ -432,9 +432,9 @@ class EXP msrScore : public msrBookElement
 
     int                   fScoreMeasuresNumber;
 
-    // multiple measure rests
+    // multi-measure rests
 
-    Bool                  fStaffContainsMultipleMeasureRests;
+    Bool                  fStaffContainsMultiMeasureRests;
 
     // part group names max length
 
@@ -465,9 +465,9 @@ class EXP msrScore : public msrBookElement
     // whereas LilyPond only needs the repeated measure
     Bool                  fInhibitMeasureRepeatReplicasBrowsing;
 
-    // in <multiple-rest/>, the multiple measure rests are explicit,
-    // whereas LilyPond only needs the number of multiple measure rests
-    Bool                  fInhibitMultipleMeasureRestsBrowsing;
+    // in <multiple-rest/>, the multi-measure rests are explicit,
+    // whereas LilyPond only needs the number of multi-measure rests
+    Bool                  fInhibitMultiMeasureRestsBrowsing;
 
     // staves browsing order
 

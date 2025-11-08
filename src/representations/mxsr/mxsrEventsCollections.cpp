@@ -37,10 +37,10 @@ mxsrEventsCollection::~mxsrEventsCollection ()
 {}
 
 //________________________________________________________________________
-S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::createAMultipleMeasureRestBegin (
+S_mxsrMultiMeasureRestEvent mxsrEventsCollection::createAMultiMeasureRestBegin (
   const std::string&       partName,
   const mfMeasureNumber&   measureNumber,
-  int                      multipleMeasureRestNumber,
+  int                      multiMeasureRestNumber,
   const mfInputLineNumber& eventInputLineNumber)
 {
   ++fCurrentEventSequentialNumber;
@@ -48,23 +48,23 @@ S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::createAMultipleMeasureRestB
     // since it is an instance of a template type
     // do we do it beforehand
 
-  S_mxsrMultipleMeasureRestEvent
-    multipleMeasureRestBeginEvent =
-      mxsrMultipleMeasureRestEvent::create (
-        mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventBegin,
+  S_mxsrMultiMeasureRestEvent
+    multiMeasureRestBeginEvent =
+      mxsrMultiMeasureRestEvent::create (
+        mxsrMultiMeasureRestEventKind::kMultiMeasureRestEventBegin,
         partName,
         measureNumber,
-        multipleMeasureRestNumber,
+        multiMeasureRestNumber,
         fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Registering multiple measure rest begin event " <<
-      multipleMeasureRestBeginEvent->asString () <<
+      "--> Registering multi-measure rest begin event " <<
+      multiMeasureRestBeginEvent->asString () <<
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -73,20 +73,20 @@ S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::createAMultipleMeasureRestB
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  return multipleMeasureRestBeginEvent;
+  return multiMeasureRestBeginEvent;
 }
 
-void mxsrEventsCollection::registerMultipleMeasureRestBegin (
-  S_mxsrMultipleMeasureRestEvent multipleMeasureRestBeginEvent)
+void mxsrEventsCollection::registerMultiMeasureRestBegin (
+  S_mxsrMultiMeasureRestEvent multiMeasureRestBeginEvent)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Registering multiple measure rest begin event " <<
-      multipleMeasureRestBeginEvent->asString () <<
-      ", line " << multipleMeasureRestBeginEvent->getEventInputLineNumber ();
+      "--> Registering multi-measure rest begin event " <<
+      multiMeasureRestBeginEvent->asString () <<
+      ", line " << multiMeasureRestBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -94,19 +94,19 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fMultipleMeasureRestBeginsMap.insert (
+  fMultiMeasureRestBeginsMap.insert (
     std::make_pair (
-      multipleMeasureRestBeginEvent->getMeasureNumber (),
-      multipleMeasureRestBeginEvent));
+      multiMeasureRestBeginEvent->getMeasureNumber (),
+      multiMeasureRestBeginEvent));
 
-  fAllEventsList.push_back (multipleMeasureRestBeginEvent);
+  fAllEventsList.push_back (multiMeasureRestBeginEvent);
 }
 
 //________________________________________________________________________
-// S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::createAMultipleMeasureRestEnd (
+// S_mxsrMultiMeasureRestEvent mxsrEventsCollection::createAMultiMeasureRestEnd (
 //   const std::string&       partName,
 //   const mfMeasureNumber&   measureNumber,
-//   int                      multipleMeasureRestNumber,
+//   int                      multiMeasureRestNumber,
 //   const mfInputLineNumber& eventInputLineNumber)
 // {
 //   ++fCurrentEventSequentialNumber;
@@ -114,23 +114,23 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
     // since it is an instance of a template type
     // do we do it beforehand
 //
-//   S_mxsrMultipleMeasureRestEvent
-//     multipleMeasureRestEndEvent =
-//       mxsrMultipleMeasureRestEvent::create (
-//         mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventEnd,
+//   S_mxsrMultiMeasureRestEvent
+//     multiMeasureRestEndEvent =
+//       mxsrMultiMeasureRestEvent::create (
+//         mxsrMultiMeasureRestEventKind::kMultiMeasureRestEventEnd,
 //         partName,
 //         measureNumber,
-//         multipleMeasureRestNumber,
+//         multiMeasureRestNumber,
 //         fCurrentEventSequentialNumber,
 //         eventInputLineNumber);
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+//   if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
 //     std::stringstream ss;
 //
 //     ss <<
-//       "--> Registering multiple measure rest end event " <<
-//       multipleMeasureRestEndEvent->asString () <<
+//       "--> Registering multi-measure rest end event " <<
+//       multiMeasureRestEndEvent->asString () <<
 //       ", line " << eventInputLineNumber;
 //
 //     gWaeHandler->waeTrace (
@@ -139,20 +139,20 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   return multipleMeasureRestEndEvent;
+//   return multiMeasureRestEndEvent;
 // }
 //
-// void mxsrEventsCollection::registerMultipleMeasureRestEnd (
-//   S_mxsrMultipleMeasureRestEvent multipleMeasureRestEndEvent)
+// void mxsrEventsCollection::registerMultiMeasureRestEnd (
+//   S_mxsrMultiMeasureRestEvent multiMeasureRestEndEvent)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+//   if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
 //     std::stringstream ss;
 //
 //     ss <<
-//       "--> Registering multiple measure rest end event " <<
-//       multipleMeasureRestEndEvent->asString () <<
-//       ", line " << multipleMeasureRestEndEvent->getEventInputLineNumber ();
+//       "--> Registering multi-measure rest end event " <<
+//       multiMeasureRestEndEvent->asString () <<
+//       ", line " << multiMeasureRestEndEvent->getEventInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -160,18 +160,18 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   fMultipleMeasureRestEndsMap.insert (
+//   fMultiMeasureRestEndsMap.insert (
 //     std::make_pair (
-//       multipleMeasureRestEndEvent->getMeasureNumber ().getBareValue (),
-//       multipleMeasureRestEndEvent));
+//       multiMeasureRestEndEvent->getMeasureNumber ().getBareValue (),
+//       multiMeasureRestEndEvent));
 //
-//   fAllEventsList.push_back (multipleMeasureRestEndEvent);
+//   fAllEventsList.push_back (multiMeasureRestEndEvent);
 // }
 
-void mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt (
+void mxsrEventsCollection::createAMultiMeasureRestEndAndRegisterIt (
   const std::string&       partName,
   const mfMeasureNumber&   measureNumber,
-  int                      multipleMeasureRestNumber,
+  int                      multiMeasureRestNumber,
   const mfInputLineNumber& eventInputLineNumber)
 {
   ++fCurrentEventSequentialNumber;
@@ -179,23 +179,23 @@ void mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt (
     // since it is an instance of a template type
     // do we do it beforehand
 
-  S_mxsrMultipleMeasureRestEvent
-    multipleMeasureRestEndEvent =
-      mxsrMultipleMeasureRestEvent::create (
-        mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventEnd,
+  S_mxsrMultiMeasureRestEvent
+    multiMeasureRestEndEvent =
+      mxsrMultiMeasureRestEvent::create (
+        mxsrMultiMeasureRestEventKind::kMultiMeasureRestEventEnd,
         partName,
         measureNumber,
-        multipleMeasureRestNumber,
+        multiMeasureRestNumber,
         fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Registering multiple measure rest end event " <<
-      multipleMeasureRestEndEvent->asString () <<
+      "--> Registering multi-measure rest end event " <<
+      multiMeasureRestEndEvent->asString () <<
       ", line " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -205,13 +205,13 @@ void mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Registering multiple measure rest end event " <<
-      multipleMeasureRestEndEvent->asString () <<
-      ", line " << multipleMeasureRestEndEvent->getEventInputLineNumber ();
+      "--> Registering multi-measure rest end event " <<
+      multiMeasureRestEndEvent->asString () <<
+      ", line " << multiMeasureRestEndEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -219,12 +219,12 @@ void mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fMultipleMeasureRestEndsMap.insert (
+  fMultiMeasureRestEndsMap.insert (
     std::make_pair (
-      multipleMeasureRestEndEvent->getMeasureNumber (),
-      multipleMeasureRestEndEvent));
+      multiMeasureRestEndEvent->getMeasureNumber (),
+      multiMeasureRestEndEvent));
 
-  fAllEventsList.push_back (multipleMeasureRestEndEvent);
+  fAllEventsList.push_back (multiMeasureRestEndEvent);
 }
 
 //________________________________________________________________________
@@ -1061,32 +1061,32 @@ void mxsrEventsCollection::sortTheMxsrEventsLists ()
 }
 
 //________________________________________________________________________
-S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::fetchMultipleMeasureRestBeginAtMeasureNumber (
+S_mxsrMultiMeasureRestEvent mxsrEventsCollection::fetchMultiMeasureRestBeginAtMeasureNumber (
     const mfMeasureNumber& measureNumber) const
 {
-  S_mxsrMultipleMeasureRestEvent result;
+  S_mxsrMultiMeasureRestEvent result;
 
-  std::map <mfMeasureNumber, S_mxsrMultipleMeasureRestEvent>::const_iterator
+  std::map <mfMeasureNumber, S_mxsrMultiMeasureRestEvent>::const_iterator
     it =
-      fMultipleMeasureRestBeginsMap.find (measureNumber);
+      fMultiMeasureRestBeginsMap.find (measureNumber);
 
-  if (it != fMultipleMeasureRestBeginsMap.end ()) {
+  if (it != fMultiMeasureRestBeginsMap.end ()) {
     result = (*it).second;
   }
 
   return result;
 }
 
-S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::fetchMultipleMeasureRestEndAtMeasureNumber (
+S_mxsrMultiMeasureRestEvent mxsrEventsCollection::fetchMultiMeasureRestEndAtMeasureNumber (
     const mfMeasureNumber& measureNumber) const
 {
-  S_mxsrMultipleMeasureRestEvent result;
+  S_mxsrMultiMeasureRestEvent result;
 
-  std::map <mfMeasureNumber, S_mxsrMultipleMeasureRestEvent>::const_iterator
+  std::map <mfMeasureNumber, S_mxsrMultiMeasureRestEvent>::const_iterator
     it =
-      fMultipleMeasureRestEndsMap.find (measureNumber);
+      fMultiMeasureRestEndsMap.find (measureNumber);
 
-  if (it != fMultipleMeasureRestEndsMap.end ()) {
+  if (it != fMultiMeasureRestEndsMap.end ()) {
     result = (*it).second;
   }
 
@@ -1445,12 +1445,12 @@ void mxsrEventsCollection::printAllEventsList (std::ostream& os) const
 }
 
 //------------------------------------------------------------------------
-void mxsrEventsCollection::printMultipleMeasureRestEvents (std::ostream& os) const
+void mxsrEventsCollection::printMultiMeasureRestEvents (std::ostream& os) const
 {
   os <<
-    "fMultipleMeasureRestBeginsMap: " <<
+    "fMultiMeasureRestBeginsMap: " <<
     mfSingularOrPlural (
-      fMultipleMeasureRestBeginsMap.size (),
+      fMultiMeasureRestBeginsMap.size (),
       "element",
       "elements") <<
     ", in note sequential number order" <<
@@ -1459,14 +1459,14 @@ void mxsrEventsCollection::printMultipleMeasureRestEvents (std::ostream& os) con
   ++gIndenter;
 
   for (
-    std::pair <mfMeasureNumber, S_mxsrMultipleMeasureRestEvent> thePair :
-      fMultipleMeasureRestBeginsMap
+    std::pair <mfMeasureNumber, S_mxsrMultiMeasureRestEvent> thePair :
+      fMultiMeasureRestBeginsMap
   ) {
     mfMeasureNumber
       measureNumber = thePair.first;
 
-    S_mxsrMultipleMeasureRestEvent
-      multipleMeasureRestEvent = thePair.second;
+    S_mxsrMultiMeasureRestEvent
+      multiMeasureRestEvent = thePair.second;
 
     os <<
       "Measure " << measureNumber <<
@@ -1475,7 +1475,7 @@ void mxsrEventsCollection::printMultipleMeasureRestEvents (std::ostream& os) con
 
     ++gIndenter;
     os <<
-      multipleMeasureRestEvent <<
+      multiMeasureRestEvent <<
       std::endl;
     --gIndenter;
   } // for
@@ -1485,9 +1485,9 @@ void mxsrEventsCollection::printMultipleMeasureRestEvents (std::ostream& os) con
   os << std::endl << "--------" << std::endl << std::endl;
 
   os <<
-    "fMultipleMeasureRestEndsMap: " <<
+    "fMultiMeasureRestEndsMap: " <<
     mfSingularOrPlural (
-      fMultipleMeasureRestEndsMap.size (),
+      fMultiMeasureRestEndsMap.size (),
       "element",
       "elements") <<
     ", in note sequential number order" <<
@@ -1496,14 +1496,14 @@ void mxsrEventsCollection::printMultipleMeasureRestEvents (std::ostream& os) con
   ++gIndenter;
 
   for (
-    std::pair <mfMeasureNumber, S_mxsrMultipleMeasureRestEvent> thePair :
-      fMultipleMeasureRestEndsMap
+    std::pair <mfMeasureNumber, S_mxsrMultiMeasureRestEvent> thePair :
+      fMultiMeasureRestEndsMap
   ) {
     mfMeasureNumber
       measureNumber = thePair.first;
 
-    S_mxsrMultipleMeasureRestEvent
-      multipleMeasureRestEvent = thePair.second;
+    S_mxsrMultiMeasureRestEvent
+      multiMeasureRestEvent = thePair.second;
 
     os <<
       "Note " << measureNumber <<
@@ -1512,7 +1512,7 @@ void mxsrEventsCollection::printMultipleMeasureRestEvents (std::ostream& os) con
 
     ++gIndenter;
     os <<
-      multipleMeasureRestEvent <<
+      multiMeasureRestEvent <<
       std::endl;
     --gIndenter;
   } // for
@@ -2082,20 +2082,20 @@ void mxsrEventsCollection::print (std::ostream& os) const
       "elements") <<
     std::endl;
 
-  // multiple measure rest events
+  // multi-measure rest events
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMultipleMeasureRestBeginsMap" << ": " <<
+    "fMultiMeasureRestBeginsMap" << ": " <<
     mfSingularOrPlural (
-      fMultipleMeasureRestBeginsMap.size (),
+      fMultiMeasureRestBeginsMap.size (),
       "element",
       "elements") <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMultipleMeasureRestEndsMap" << ": " <<
+    "fMultiMeasureRestEndsMap" << ": " <<
     mfSingularOrPlural (
-      fMultipleMeasureRestEndsMap.size (),
+      fMultiMeasureRestEndsMap.size (),
       "element",
       "elements") <<
     std::endl;
@@ -2220,11 +2220,11 @@ void mxsrEventsCollection::print (std::ostream& os) const
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // multiple measure rest events
+  // multi-measure rest events
 #ifdef MF_TRACE_IS_ENABLED
-  if (! (fMultipleMeasureRestBeginsMap.empty () && fMultipleMeasureRestEndsMap.empty ())) {
+  if (! (fMultiMeasureRestBeginsMap.empty () && fMultiMeasureRestEndsMap.empty ())) {
     os << "--------" << std::endl << std::endl;
-    printMultipleMeasureRestEvents (os);
+    printMultiMeasureRestEvents (os);
   }
 #endif // MF_TRACE_IS_ENABLED
 

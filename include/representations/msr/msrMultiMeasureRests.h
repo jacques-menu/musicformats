@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrMultipleMeasureRests___
-#define ___msrMultipleMeasureRests___
+#ifndef ___msrMultiMeasureRests___
+#define ___msrMultiMeasureRests___
 
 #include <list>
 
@@ -23,20 +23,20 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrMultipleMeasureRest : public msrSegmentElement
+class EXP msrMultiMeasureRest : public msrSegmentElement
 {
   public:
 
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<msrMultipleMeasureRest> create (
+    static SMARTP<msrMultiMeasureRest> create (
                             const mfInputLineNumber& inputLineNumber,
                             int               measuresNumber,
                             int               slashesNumber,
                             msrUseSymbolsKind fUseSymbolsKind);
 
-    SMARTP<msrMultipleMeasureRest> createMultipleMeasureRestNewbornClone (
+    SMARTP<msrMultiMeasureRest> createMultiMeasureRestNewbornClone (
                               const S_msrSegment& containingVoice);
 
   protected:
@@ -44,21 +44,21 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msrMultipleMeasureRest (
+                          msrMultiMeasureRest (
                             const mfInputLineNumber& inputLineNumber,
                             int               measuresNumber,
                             int               slashesNumber,
                             msrUseSymbolsKind fUseSymbolsKind);
 
-    virtual               ~msrMultipleMeasureRest ();
+    virtual               ~msrMultiMeasureRest ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    S_msrSegment          getMultipleMeasureRestUpLinkToSegment () const
-                              { return fMultipleMeasureRestUpLinkToSegment; }
+    S_msrSegment          getMultiMeasureRestUpLinkToSegment () const
+                              { return fMultiMeasureRestUpLinkToSegment; }
 
     int                   getMeasuresNumber () const
                               { return fMeasuresNumber; }
@@ -86,7 +86,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     int                   getLastMeasurePuristMeasureNumber () const
                               { return fLastMeasurePuristNumber; }
 
-    mfWholeNotes          fetchMultipleMeasureRestMeasureSoundingNotes () const;
+    mfWholeNotes          fetchMultiMeasureRestMeasureSoundingNotes () const;
                             // don't simply multiply duration by number,
                             // may help pin-point errors in representation
   public:
@@ -97,10 +97,10 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
 //     void                  appendMeasureElementToSegmentElement (
 //                             const S_msrMeasureElement& elem) override;
 
-    void                  appendMeasureToMultipleMeasureRest (
+    void                  appendMeasureToMultiMeasureRest (
                             const S_msrMeasure& measure);
 
-    void                  collectMultipleMeasureRestIntoFlatList (
+    void                  collectMultiMeasureRestIntoFlatList (
                             const mfInputLineNumber& inputLineNumber);
 
   public:
@@ -120,7 +120,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
 
     std::string           asString () const override;
 
-    void                  displayMultipleMeasureRest (
+    void                  displayMultiMeasureRest (
                             const mfInputLineNumber& inputLineNumber,
                             const std::string& context);
 
@@ -131,7 +131,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrSegment          fMultipleMeasureRestUpLinkToSegment;
+    S_msrSegment          fMultiMeasureRestUpLinkToSegment;
 
     int                   fMeasuresNumber;
     int                   fSlashesNumber;
@@ -146,17 +146,17 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
 };
 
 
-using S_msrMultipleMeasureRest = SMARTP<msrMultipleMeasureRest>;
+using S_msrMultiMeasureRest = SMARTP<msrMultiMeasureRest>;
 
-EXP std::ostream& operator << (std::ostream& os, const S_msrMultipleMeasureRest& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMultiMeasureRest& elt);
 
-std::string fetchMultipleMeasureRestAsShortString (
-  const S_msrMultipleMeasureRest& multipleMeasureRest);
-std::string fetchMultipleMeasureRestAsString (
-  const S_msrMultipleMeasureRest& multipleMeasureRest);
+std::string fetchMultiMeasureRestAsShortString (
+  const S_msrMultiMeasureRest& multiMeasureRest);
+std::string fetchMultiMeasureRestAsString (
+  const S_msrMultiMeasureRest& multiMeasureRest);
 
 
 }
 
 
-#endif // ___msrMultipleMeasureRests___
+#endif // ___msrMultiMeasureRests___

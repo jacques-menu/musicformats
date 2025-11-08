@@ -481,24 +481,24 @@ void msr2msrTranslator::displayOnGoingNotesStack (
 // }
 
 //________________________________________________________________________
-void msr2msrTranslator::displayMultipleMeasureRestClones (
+void msr2msrTranslator::displayMultiMeasureRestClones (
   const mfInputLineNumber& inputLineNumber,
   const std::string&       context)
 {
   gLog <<
     std::endl <<
-    ">>++++++++++++++++ voice multiple measure rests " << context <<
+    ">>++++++++++++++++ voice multi-measure rests " << context <<
     std::endl <<
-    "The current voice multiple measure rests contains " <<
+    "The current voice multi-measure rests contains " <<
     ", line " << inputLineNumber <<
     ':' <<
     std::endl;
 
   ++gIndenter;
 
-  if (fCurrentMultipleMeasureRestsClone) {
-    fCurrentMultipleMeasureRestsClone->
-      displayMultipleMeasureRest (
+  if (fCurrentMultiMeasureRestsClone) {
+    fCurrentMultiMeasureRestsClone->
+      displayMultiMeasureRest (
         inputLineNumber,
         context);
   }
@@ -2734,10 +2734,10 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
     elt->getInputLineNumber (),
     measureClone);
 
-  if (fOnGoingMultipleMeasureRests) {
-    // append current measure clone to the current multiple measure rests clone
-    fCurrentMultipleMeasureRestsClone->
-      appendMeasureToMultipleMeasureRest (
+  if (fOnGoingMultiMeasureRests) {
+    // append current measure clone to the current multi-measure rests clone
+    fCurrentMultiMeasureRestsClone->
+      appendMeasureToMultiMeasureRest (
         measureClone);
   }
 
@@ -7317,14 +7317,14 @@ void msr2msrTranslator::visitEnd (S_msrRepeatEnding& elt)
 }
 
 //________________________________________________________________________
-void msr2msrTranslator::visitStart (S_msrMultipleMeasureRest& elt)
+void msr2msrTranslator::visitStart (S_msrMultiMeasureRest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrMultipleMeasureRest" <<
+      "--> Start visiting msrMultiMeasureRest" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -7336,7 +7336,7 @@ void msr2msrTranslator::visitStart (S_msrMultipleMeasureRest& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -7350,30 +7350,30 @@ void msr2msrTranslator::visitStart (S_msrMultipleMeasureRest& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // create a multiple measure rests clone
-//   fCurrentMultipleMeasureRestsClone =
+  // create a multi-measure rests clone
+//   fCurrentMultiMeasureRestsClone =
 //     elt->
-//       createMultipleMeasureRestNewbornClone (
+//       createMultiMeasureRestNewbornClone (
 //         fCurrentSegmentClone);
 
   // append it to the current voice clone
   fRepeatsStack.front ()->
-    appendMultipleMeasureRestToRepeat (
+    appendMultiMeasureRestToRepeat (
       elt->getInputLineNumber (),
-      fCurrentMultipleMeasureRestsClone,
-      "visitStart (S_msrMultipleMeasureRest& elt)");
+      fCurrentMultiMeasureRestsClone,
+      "visitStart (S_msrMultiMeasureRest& elt)");
 
-  fOnGoingMultipleMeasureRests = true;
+  fOnGoingMultiMeasureRests = true;
 }
 
-void msr2msrTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
+void msr2msrTranslator::visitEnd (S_msrMultiMeasureRest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrMultipleMeasureRest" <<
+      "--> End visiting msrMultiMeasureRest" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -7385,7 +7385,7 @@ void msr2msrTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
   --gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -7399,10 +7399,10 @@ void msr2msrTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // forget about the current multiple measure rests
-  fCurrentMultipleMeasureRestsClone = nullptr;
+  // forget about the current multi-measure rests
+  fCurrentMultiMeasureRestsClone = nullptr;
 
-  fOnGoingMultipleMeasureRests = false;
+  fOnGoingMultiMeasureRests = false;
 }
 
 //________________________________________________________________________
@@ -7864,33 +7864,33 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //     if (gGlobalMsr2msrOahGroup->getCompressMeasureRests ()) {//
 //       // yes
 //
-//       if (! fCurrentMultipleMeasureRestsClone) {
-//         // this is the first multiple measure rest in the sequence
+//       if (! fCurrentMultiMeasureRestsClone) {
+//         // this is the first multi-measure rest in the sequence
 //
-//         // create a multiple measure rests  containing fMeasuresStack.front ()
-//         fCurrentMultipleMeasureRests =
-//           msrMultipleMeasureRest::create (
+//         // create a multi-measure rests  containing fMeasuresStack.front ()
+//         fCurrentMultiMeasureRests =
+//           msrMultiMeasureRest::create (
 //             elt->getInputLineNumber (),
 //             fMeasuresStack.front (),
 //             fCurrentVoiceClone);
 //
 // /* JMI
-//         // append the current multiple measure rests to the current voice clone
+//         // append the current multi-measure rests to the current voice clone
 //         fMeasuresStack.front ()->
-//           cascadeAppendMultipleMeasureRestToVoice (
+//           cascadeAppendMultiMeasureRestToVoice (
 //             elt->getInputLineNumber (),
-//             fCurrentMultipleMeasureRests);
+//             fCurrentMultiMeasureRests);
 //             */
 //       }
 //
 //       else {
-//         // this is a subsequent multiple measure rest, merely append it
-//         fCurrentMultipleMeasureRests->
-//           appendMeasureCloneToMultipleMeasureRests (
+//         // this is a subsequent multi-measure rest, merely append it
+//         fCurrentMultiMeasureRests->
+//           appendMeasureCloneToMultiMeasureRests (
 //             fMeasuresStack.front ());
 //       }
 //
-//       fCurrentMultipleMeasureRestsClone = fMeasuresStack.front ();
+//       fCurrentMultiMeasureRestsClone = fMeasuresStack.front ();
 //     }
 //
 //     else {
@@ -7923,28 +7923,28 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 */
 
     // should we compress measure rests?
-//    if (gGlobalMsr2msrOahGroup->getTraceMultipleMeasureRests ()) {
+//    if (gGlobalMsr2msrOahGroup->getTraceMultiMeasureRests ()) {
 //       // yes
 //
-//       if (fCurrentMultipleMeasureRests) {
-//         // append the current multiple measure rests to the current voice clone
+//       if (fCurrentMultiMeasureRests) {
+//         // append the current multi-measure rests to the current voice clone
 //         fCurrentVoiceClone->
-//           cascadeAppendMultipleMeasureRestToVoice (
+//           cascadeAppendMultiMeasureRestToVoice (
 //             elt->getInputLineNumber (),
-//             fCurrentMultipleMeasureRests);
+//             fCurrentMultiMeasureRests);
 //
 //         // forget about the current rest measure
-//         fCurrentMultipleMeasureRestsClone = nullptr;
+//         fCurrentMultiMeasureRestsClone = nullptr;
 //
-//         // forget about the current multiple measure rests
-//         fCurrentMultipleMeasureRests = nullptr;
+//         // forget about the current multi-measure rests
+//         fCurrentMultiMeasureRests = nullptr;
 //       }
 //
 //       else {
 //         std::stringstream ss;
 //
 //         ss <<
-//           "fCurrentMultipleMeasureRests is NULL upon multiple measure rest end" <<
+//           "fCurrentMultiMeasureRests is NULL upon multi-measure rest end" <<
 //           elt->getMeasureNumber () <<
 //           "', measurePuristNumber: " <<
 //           measurePuristNumber <<

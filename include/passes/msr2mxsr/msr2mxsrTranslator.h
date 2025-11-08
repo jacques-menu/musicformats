@@ -253,7 +253,7 @@ class EXP msr2mxsrTranslator :
   public                      visitor<S_msrMeasureRepeatPattern>,
   public                      visitor<S_msrMeasureRepeatReplicas>,
 
-  public                      visitor<S_msrMultipleMeasureRest>,
+  public                      visitor<S_msrMultiMeasureRest>,
 
   // midi
 
@@ -521,8 +521,8 @@ class EXP msr2mxsrTranslator :
     virtual void              visitStart (S_msrMeasureRepeatReplicas& elt);
     virtual void              visitEnd   (S_msrMeasureRepeatReplicas& elt);
 
-    virtual void              visitStart (S_msrMultipleMeasureRest& elt);
-    virtual void              visitEnd   (S_msrMultipleMeasureRest& elt);
+    virtual void              visitStart (S_msrMultiMeasureRest& elt);
+    virtual void              visitEnd   (S_msrMultiMeasureRest& elt);
 */
 
 /*
@@ -827,9 +827,9 @@ class EXP msr2mxsrTranslator :
     void                      createMxmlAttributesElementAndAppendItToMeasure ();
 
 /*
-    // multiple measure rests compression
+    // multi-measure rests compression
     S_msrMeasure              fCurrentRestMeasure;
-    S_msrMultipleMeasureRest         fCurrentMultipleMeasureRests;
+    S_msrMultiMeasureRest         fCurrentMultiMeasureRests;
 
     // bar checks
     // ------------------------------------------------------

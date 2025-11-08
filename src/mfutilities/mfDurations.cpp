@@ -921,7 +921,7 @@ std::string wholeNotesPitchAndOctaveAsString (
       dotsNumber);
 }
 
-std::string multipleMeasureRestsWholeNotesPitchAndOctaveAsString (
+std::string multiMeasureRestsWholeNotesPitchAndOctaveAsString (
   const mfInputLineNumber& inputLineNumber, // JMI
   const mfWholeNotes& wholeNotes)
 {

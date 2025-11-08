@@ -71,7 +71,7 @@ std::string mfDurationKindAsMusicXMLType (mfDurationKind notesDurationKind);
 //   const mfInputLineNumber& inputLineNumber,
 //   const mfPositionInMeasure& wholeNotes);
 //
-// std::string multipleMeasureRestsWholeNotesPitchAndOctaveAsString (
+// std::string multiMeasureRestsWholeNotesPitchAndOctaveAsString (
 //   const mfInputLineNumber& inputLineNumber, // JMI 0.9.67
 //   const mfPositionInMeasure& wholeNotes);
 
@@ -273,7 +273,7 @@ std::string wholeNotesPitchAndOctaveAsString (
   const mfInputLineNumber& inputLineNumber,
   const mfWholeNotes& wholeNotes);
 
-std::string multipleMeasureRestsWholeNotesPitchAndOctaveAsString (
+std::string multiMeasureRestsWholeNotesPitchAndOctaveAsString (
   const mfInputLineNumber& inputLineNumber, // JMI 0.9.67
   const mfWholeNotes& wholeNotes);
 

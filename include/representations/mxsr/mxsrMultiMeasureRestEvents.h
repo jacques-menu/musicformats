@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mxsrMultipleMeasureRestEvents___
-#define ___mxsrMultipleMeasureRestEvents___
+#ifndef ___mxsrMultiMeasureRestEvents___
+#define ___mxsrMultiMeasureRestEvents___
 
 #include "exports.h"
 #include "smartpointer.h"
@@ -24,38 +24,38 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-enum class mxsrMultipleMeasureRestEventKind {
-  kMultipleMeasureRestEvent_NONE,
-  kMultipleMeasureRestEventBegin, kMultipleMeasureRestEventEnd
+enum class mxsrMultiMeasureRestEventKind {
+  kMultiMeasureRestEvent_NONE,
+  kMultiMeasureRestEventBegin, kMultiMeasureRestEventEnd
 };
 
-std::string mxsrMultipleMeasureRestEventKindAsString (
-  mxsrMultipleMeasureRestEventKind multipleMeasureRestEventKind);
+std::string mxsrMultiMeasureRestEventKindAsString (
+  mxsrMultiMeasureRestEventKind multiMeasureRestEventKind);
 
-std::ostream& operator << (std::ostream& os, const mxsrMultipleMeasureRestEventKind& elt);
+std::ostream& operator << (std::ostream& os, const mxsrMultiMeasureRestEventKind& elt);
 
 //------------------------------------------------------------------------
-class EXP mxsrMultipleMeasureRestEvent : public mxsrPartEvent
+class EXP mxsrMultiMeasureRestEvent : public mxsrPartEvent
 {
   public:
 
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrMultipleMeasureRestEvent>
+    static SMARTP<mxsrMultiMeasureRestEvent>
                           create (
-                            mxsrMultipleMeasureRestEventKind multipleMeasureRestEventKind,
+                            mxsrMultiMeasureRestEventKind multiMeasureRestEventKind,
                             const std::string&               partName,
                             const mfMeasureNumber&           measureNumber,
-                            int                              multipleMeasureRestNumber,
+                            int                              multiMeasureRestNumber,
                             const mxsrEventSequentialNumber& eventSequentialNumber,
                             const mfInputLineNumber&         eventInputLineNumber);
 
-//     static SMARTP<mxsrMultipleMeasureRestEvent>
-//                           createAMultipleMeasureRestEnd (
+//     static SMARTP<mxsrMultiMeasureRestEvent>
+//                           createAMultiMeasureRestEnd (
 //                             const std::string&       partName,
 //                             const mfMeasureNumber&   measureNumber,
-//                             int                      multipleMeasureRestNumber,
+//                             int                      multiMeasureRestNumber,
 //                             const mfInputLineNumber& eventInputLineNumber);
 
   public:
@@ -63,27 +63,27 @@ class EXP mxsrMultipleMeasureRestEvent : public mxsrPartEvent
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mxsrMultipleMeasureRestEvent (
-                            mxsrMultipleMeasureRestEventKind multipleMeasureRestEventKind,
+                          mxsrMultiMeasureRestEvent (
+                            mxsrMultiMeasureRestEventKind multiMeasureRestEventKind,
                             const std::string&               partName,
                             const mfMeasureNumber&           measureNumber,
-                            int                              multipleMeasureRestNumber,
+                            int                              multiMeasureRestNumber,
                             const mxsrEventSequentialNumber& eventSequentialNumber,
                             const mfInputLineNumber&         eventInputLineNumber);
 
-    virtual               ~mxsrMultipleMeasureRestEvent ();
+    virtual               ~mxsrMultiMeasureRestEvent ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    mxsrMultipleMeasureRestEventKind
-                          getMultipleMeasureRestEventKind () const
-                              { return fMultipleMeasureRestEventKind; }
+    mxsrMultiMeasureRestEventKind
+                          getMultiMeasureRestEventKind () const
+                              { return fMultiMeasureRestEventKind; }
 
-    int                   getMultipleMeasureRestNumber () const
-                              { return fMultipleMeasureRestNumber; }
+    int                   getMultiMeasureRestNumber () const
+                              { return fMultiMeasureRestNumber; }
 
   public:
 
@@ -110,20 +110,20 @@ class EXP mxsrMultipleMeasureRestEvent : public mxsrPartEvent
     // protected fields
     // ------------------------------------------------------
 
-    mxsrMultipleMeasureRestEventKind
-                          fMultipleMeasureRestEventKind;
+    mxsrMultiMeasureRestEventKind
+                          fMultiMeasureRestEventKind;
 
-    int                   fMultipleMeasureRestNumber;
+    int                   fMultiMeasureRestNumber;
 
 };
 
-using S_mxsrMultipleMeasureRestEvent = SMARTP<mxsrMultipleMeasureRestEvent>;
+using S_mxsrMultiMeasureRestEvent = SMARTP<mxsrMultiMeasureRestEvent>;
 
-EXP std::ostream& operator << (std::ostream& os, const S_mxsrMultipleMeasureRestEvent& elt);
-EXP std::ostream& operator << (std::ostream& os, const mxsrMultipleMeasureRestEvent& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mxsrMultiMeasureRestEvent& elt);
+EXP std::ostream& operator << (std::ostream& os, const mxsrMultiMeasureRestEvent& elt);
 
 
 }
 
 
-#endif // ___mxsrMultipleMeasureRestEvents___
+#endif // ___mxsrMultiMeasureRestEvents___

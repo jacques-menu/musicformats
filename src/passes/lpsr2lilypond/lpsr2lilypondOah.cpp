@@ -4261,7 +4261,7 @@ The default is 'DEFAULT_VALUE'.)",
         "fAccidentalStyleKind",
         fAccidentalStyleKind));
 
-  // multiple measure rests
+  // multi-measure rests
   // --------------------------------------
 
   subGroup->
@@ -4282,26 +4282,26 @@ This causes a \compressMeasureRests command to be generated.)",
         "merge-staff-common-rests-in-lilypond", "mscril",
 R"(Merge common rests in LilyPond staves to obtain better looking scores.
 Limitations: this only handles two voices
-and does not handle multiple measure rests.)",
+and does not handle multi-measure rests.)",
         "fMergeStaffCommonRests",
         fMergeStaffCommonRests));
 
-  // multiple measure rests
+  // multi-measure rests
   // --------------------------------------
 
-  fMultipleMeasureRestsExpandLimitAtom =
+  fMultiMeasureRestsExpandLimitAtom =
       oahIntegerAtom::create (
         "multiple-measure-rests-expand-limit", "fbrel",
 R"(Set the maximum number of measures expanded in church rests to N,
 where N is a positive integer.
 The default value is 10.)",
         "N",
-        "fMultipleMeasureRestsExpandLimit",
-        fMultipleMeasureRestsExpandLimit);
+        "fMultiMeasureRestsExpandLimit",
+        fMultiMeasureRestsExpandLimit);
 
   subGroup->
     appendAtomToSubGroup (
-      fMultipleMeasureRestsExpandLimitAtom);
+      fMultiMeasureRestsExpandLimitAtom);
 
   // input line numbers
   // --------------------------------------
@@ -5140,9 +5140,9 @@ R"(Generate comments about measures.)",
     appendAtomToSubGroup (
       oahBooleanAtom::create (
         "comment-lilypond-multiple-measure-restss", "comlilymmr",
-R"(Generate comments about multiple measure rests.)",
-        "fCommentLilypondMultipleMeasureRests",
-        fCommentLilypondMultipleMeasureRests));
+R"(Generate comments about multi-measure rests.)",
+        "fCommentLilypondMultiMeasureRests",
+        fCommentLilypondMultiMeasureRests));
 
   subGroup->
     appendAtomToSubGroup (
@@ -6257,8 +6257,8 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       fMergeStaffCommonRests <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fMultipleMeasureRestsExpandLimit" << ": " <<
-      fMultipleMeasureRestsExpandLimit <<
+    std::setw (valueFieldWidth) << "fMultiMeasureRestsExpandLimit" << ": " <<
+      fMultiMeasureRestsExpandLimit <<
       std::endl <<
 
     std::setw (valueFieldWidth) << "fInputStartLineNumbers" << ": " <<
@@ -6893,8 +6893,8 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
       fMergeStaffCommonRests <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fMultipleMeasureRestsExpandLimit" << ": " <<
-      fMultipleMeasureRestsExpandLimit <<
+    std::setw (fieldWidth) << "fMultiMeasureRestsExpandLimit" << ": " <<
+      fMultiMeasureRestsExpandLimit <<
       std::endl <<
 
     std::setw (fieldWidth) << "fInputStartLineNumbers" << ": " <<

@@ -75,11 +75,11 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fCurrentMeasureRepeatKind =
     msrMeasureRepeatKind::kMeasureRepeat_UNKNOWN_;
 
-  fCurrentMultipleMeasureRestMeasuresNumber = -1;
+  fCurrentMultiMeasureRestMeasuresNumber = -1;
   fCurrentMeasureRepeatSlashesNumber = -1;
 
-  fCurrentMultipleMeasureRestMeasuresNumber = 0;
-  fRemainingMultipleMeasureRestMeasuresNumber = 0;
+  fCurrentMultiMeasureRestMeasuresNumber = 0;
+  fRemainingMultiMeasureRestMeasuresNumber = 0;
 
   fCurrentSlashDotsNumber = -1;
 
@@ -1493,61 +1493,61 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
 
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestBeginEventIfAny ()
+void mxsr2msrSkeletonPopulator::handleMultiMeasureRestBeginEventIfAny ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
     displayGatheredNoteInformations (
-      "handleMultipleMeasureRestBeginEventIfAny()");
+      "handleMultiMeasureRestBeginEventIfAny()");
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentMultipleMeasureRestBegin =
+  fCurrentMultiMeasureRestBegin =
     fKnownEventsCollection.
-      fetchMultipleMeasureRestBeginAtMeasureNumber (
+      fetchMultiMeasureRestBeginAtMeasureNumber (
         fCurrentMeasureNumber);
 
-  if (fCurrentMultipleMeasureRestBegin) {
-    switch (fCurrentMultipleMeasureRestBegin->getMultipleMeasureRestEventKind ()) {
-      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEvent_NONE:
+  if (fCurrentMultiMeasureRestBegin) {
+    switch (fCurrentMultiMeasureRestBegin->getMultiMeasureRestEventKind ()) {
+      case mxsrMultiMeasureRestEventKind::kMultiMeasureRestEvent_NONE:
         // should not occur
         break;
 
-      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventBegin:
-        handleMultipleMeasureRestBegin ();
+      case mxsrMultiMeasureRestEventKind::kMultiMeasureRestEventBegin:
+        handleMultiMeasureRestBegin ();
         break;
 
-      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventEnd:
+      case mxsrMultiMeasureRestEventKind::kMultiMeasureRestEventEnd:
         // should not occur
         break;
     } // switch
   }
 
   else {
-    // is this a MultipleMeasureRest member note without any MultipleMeasureRest event?
-    if (fOnGoingMultipleMeasureRest) {
-      fCurrentMeasureBelongsToAMultipleMeasureRest = true;
+    // is this a MultiMeasureRest member note without any MultiMeasureRest event?
+    if (fOnGoingMultiMeasureRest) {
+      fCurrentMeasureBelongsToAMultiMeasureRest = true;
     }
   }
 }
 
-void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestBegin ()
+void mxsr2msrSkeletonPopulator::handleMultiMeasureRestBegin ()
 {
-  // create the current MultipleMeasureRest
+  // create the current MultiMeasureRest
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Creating a MultipleMeasureRest" <<
+      "Creating a MultiMeasureRest" <<
       ", fCurrentMeasureNumber: " <<
       fCurrentMeasureNumber <<
-      ", fCurrentMultipleMeasureRestMeasuresNumber: " <<
-      fCurrentMultipleMeasureRestMeasuresNumber <<
+      ", fCurrentMultiMeasureRestMeasuresNumber: " <<
+      fCurrentMultiMeasureRestMeasuresNumber <<
       ", fCurrentMeasureRepeatSlashesNumber: " <<
       fCurrentMeasureRepeatSlashesNumber <<
-      ", fCurrentMultipleMeasureRestBegin: " <<
-      fCurrentMultipleMeasureRestBegin->asString () <<
+      ", fCurrentMultiMeasureRestBegin: " <<
+      fCurrentMultiMeasureRestBegin->asString () <<
       ", line " << fCurrentNoteInputStartLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1570,69 +1570,69 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestBegin ()
 >
 */
 
-  fCurrentMultipleMeasureRest =
-    msrMultipleMeasureRest::create (
-      fCurrentMultipleMeasureRestBegin->
+  fCurrentMultiMeasureRest =
+    msrMultiMeasureRest::create (
+      fCurrentMultiMeasureRestBegin->
         getEventInputLineNumber (),
-      fCurrentMultipleMeasureRestBegin->
-        getMultipleMeasureRestNumber (),
-      fCurrentMultipleMeasureRestBegin->
-        getMultipleMeasureRestNumber (),
+      fCurrentMultiMeasureRestBegin->
+        getMultiMeasureRestNumber (),
+      fCurrentMultiMeasureRestBegin->
+        getMultiMeasureRestNumber (),
       fCurrentUseSymbolsKind);
 
-  fCurrentMeasureBelongsToAMultipleMeasureRest = true;
+  fCurrentMeasureBelongsToAMultiMeasureRest = true;
 
-//         fOnGoingMultipleMeasureRest = true;
+//         fOnGoingMultiMeasureRest = true;
 }
 
-void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestEndEventIfAny ()
+void mxsr2msrSkeletonPopulator::handleMultiMeasureRestEndEventIfAny ()
 {
-  fCurrentMultipleMeasureRestEnd =
+  fCurrentMultiMeasureRestEnd =
     fKnownEventsCollection.
-      fetchMultipleMeasureRestEndAtMeasureNumber (
+      fetchMultiMeasureRestEndAtMeasureNumber (
         fCurrentMeasureNumber);
 
-  if (fCurrentMultipleMeasureRestEnd) {
+  if (fCurrentMultiMeasureRestEnd) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+    if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
       displayGatheredNoteInformations (
-        "--> handleMultipleMeasureRestEndEventIfAny()");
+        "--> handleMultiMeasureRestEndEventIfAny()");
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    switch (fCurrentMultipleMeasureRestEnd->getMultipleMeasureRestEventKind ()) {
-      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEvent_NONE:
+    switch (fCurrentMultiMeasureRestEnd->getMultiMeasureRestEventKind ()) {
+      case mxsrMultiMeasureRestEventKind::kMultiMeasureRestEvent_NONE:
         // should not occur
         break;
 
-      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventBegin:
+      case mxsrMultiMeasureRestEventKind::kMultiMeasureRestEventBegin:
         // nothing here, already handled earlier in this method
         break;
 
-      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventEnd:
-        handleMultipleMeasureRestEnd ();
+      case mxsrMultiMeasureRestEventKind::kMultiMeasureRestEventEnd:
+        handleMultiMeasureRestEnd ();
 
-    // forget about the current MultipleMeasureRest
-//         fCurrentMultipleMeasureRest = nullptr; JMI 0.9.72 NOT YET it may have to be appended to a tuplet...
+    // forget about the current MultiMeasureRest
+//         fCurrentMultiMeasureRest = nullptr; JMI 0.9.72 NOT YET it may have to be appended to a tuplet...
 
-      fOnGoingMultipleMeasureRest = false;
+      fOnGoingMultiMeasureRest = false;
       break;
     } // switch
 
-    // forget about fCurrentMultipleMeasureRestEnd
-    fCurrentMultipleMeasureRestEnd = nullptr;
+    // forget about fCurrentMultiMeasureRestEnd
+    fCurrentMultiMeasureRestEnd = nullptr;
   }
 }
 
-void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestEnd ()
+void mxsr2msrSkeletonPopulator::handleMultiMeasureRestEnd ()
 {
-  // append MultipleMeasureRest to the current tuplets stack top
+  // append MultiMeasureRest to the current tuplets stack top
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Handling MultipleMeasureRest end" <<
+      "Handling MultiMeasureRest end" <<
       ", line " << fCurrentNoteInputStartLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1640,10 +1640,10 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestEnd ()
       ss.str ());
 
     displayGatheredNoteInformations (
-      "handleMultipleMeasureRestEnd()");
+      "handleMultiMeasureRestEnd()");
 
     displayGatheredTupletInformations (
-      "handleMultipleMeasureRestEnd()");
+      "handleMultiMeasureRestEnd()");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1655,24 +1655,24 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestEnd ()
 //         "fetchInnerMostTuplet () is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  if (fOnGoingMultipleMeasureRest) {
-    // append current MultipleMeasureRest to the current grace notes group
-    // only now, so that the MultipleMeasureRest sounding duration is known
+  if (fOnGoingMultiMeasureRest) {
+    // append current MultiMeasureRest to the current grace notes group
+    // only now, so that the MultiMeasureRest sounding duration is known
     // and accounted for in the measure
 //     fPendingGraceNotesGroup->
-//       cascadeAppendMultipleMeasureRestToGraceNotesGroup ( // VITAL
-//         fCurrentMultipleMeasureRest);
+//       cascadeAppendMultiMeasureRestToGraceNotesGroup ( // VITAL
+//         fCurrentMultiMeasureRest);
   }
 
   else {
-    // append current MultipleMeasureRest to the current recipient voice
-    // only now, so that the MultipleMeasureRest sounding duration is known
+    // append current MultiMeasureRest to the current recipient voice
+    // only now, so that the MultiMeasureRest sounding duration is known
     // and accounted for in the measure
 //     abort();
 
 //     fCurrentRecipientMsrVoice->
-//       cascadeAppendMultipleMeasureRestToVoice ( // VITAL
-//         fCurrentMultipleMeasureRest);
+//       cascadeAppendMultiMeasureRestToVoice ( // VITAL
+//         fCurrentMultiMeasureRest);
   }
 }
 
@@ -1823,7 +1823,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
 //         "fetchInnerMostTuplet () is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  if (fOnGoingMultipleMeasureRest) {
+  if (fOnGoingMultiMeasureRest) {
     // append current MeasureRepeat to the current grace notes group
     // only now, so that the MeasureRepeat sounding duration is known
     // and accounted for in the measure
@@ -11110,7 +11110,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
   if (fPartMeasuresCounter > 1) { // JMI 0.9.71
 //     if (fCurrentPart) {
       fCurrentPart->
-        cascadeNetNextMeasureNumberInPart (
+        cascadeSetNextMeasureNumberInPart (
           elt->getInputLineNumber (),
           fCurrentMeasureNumber);
 //     }
@@ -11375,7 +11375,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
       if (it != measuresToBeReplicatedStringToIntMap.end ()) {
         // fCurrentMeasureNumber is to be replicated,
   #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+        if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
           std::stringstream ss;
 
           ss <<
@@ -11399,7 +11399,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
             measureReplicatesNumber);
       }
       else {
-        // fRemainingMultipleMeasureRestMeasuresNumber JMI ???
+        // fRemainingMultiMeasureRestMeasuresNumber JMI ???
       }
     }
   }
@@ -11430,7 +11430,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
       ss >> measuresToBeAdded;
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+      if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
         std::stringstream ss;
 
         ss <<
@@ -11454,7 +11454,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
           measuresToBeAdded);
     }
     else {
-      // fRemainingMultipleMeasureRestMeasuresNumber JMI ???
+      // fRemainingMultiMeasureRestMeasuresNumber JMI ???
     }
   }
 
@@ -12448,7 +12448,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
         fCurrentRepeatEndingStartBarLine = barLine;
 
         // handle the repeat ending start
-        handleRepeatEndingStart (barLine);
+        handleMxmlRepeatEndingStart (barLine);
 
         barLineHasBeenHandled = true;
       }
@@ -12466,7 +12466,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
             msrBarLineCategoryKind::kBarLineCategoryRepeatStart);
 
         // handle the repeat start
-        handleRepeatStart (barLine); // JMI ZOULOU
+        handleMxmlRepeatStart (barLine); // JMI ZOULOU
 
         barLineHasBeenHandled = true;
       }
@@ -12535,7 +12535,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
             msrBarLineCategoryKind::kBarLineCategoryHookedEndingEnd);
 
         // handle the repeat HOOKED ending end
-        handleRepeatHookedEndingEnd (barLine);
+        handleMxmlRepeatHookedEndingEnd (barLine);
 
         barLineHasBeenHandled = true;
       }
@@ -12554,7 +12554,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
             msrBarLineCategoryKind::kBarLineCategoryRepeatEnd);
 
         // handle the repeat end
-        handleRepeatEnd (barLine);
+        handleMxmlRepeatEnd (barLine);
 
         barLineHasBeenHandled = true;
       }
@@ -12577,7 +12577,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
             msrBarLineCategoryKind::kBarLineCategoryHooklessEndingEnd);
 
         // handle the repeat HOOKLESS ending end
-        handleRepeatHooklessEndingEnd (barLine);
+        handleMxmlRepeatHooklessEndingEnd (barLine);
 
         barLineHasBeenHandled = true;
       }
@@ -13827,7 +13827,7 @@ v<4.0
   top to bottom on the system, as with clef.
 
 v4.0
-The <measure-repeat> element is used for both single and multiple measure repeats.
+The <measure-repeat> element is used for both single and multi-measure repeats.
   The text of the element indicates the number of measures
   to be repeated in a single pattern.
   The text of the element is ignored when the type is stop.
@@ -13851,7 +13851,7 @@ The <measure-repeat> element specifies a notation style for repetitions.
 
 <!--
 	The measure-repeat element is used for both single and
-	multiple measure repeats. The text of the element indicates
+	multi-measure repeats. The text of the element indicates
 	the number of measures to be repeated in a single pattern.
 	The slashes attribute specifies the number of slashes to
 	use in the repeat sign. It is 1 if not specified. Both the
@@ -13863,7 +13863,7 @@ The <measure-repeat> element specifies a notation style for repetitions.
     slashes NMTOKEN #IMPLIED
 */
 
-  fCurrentMultipleMeasureRestMeasuresNumber = (int)(*elt);
+  fCurrentMultiMeasureRestMeasuresNumber = (int)(*elt);
 
   // slashes
 
@@ -13890,8 +13890,8 @@ The <measure-repeat> element specifies a notation style for repetitions.
       "Creating measure repeat from its first measures" <<
       "in part " <<
       fCurrentPart->fetchPartNameForTrace () <<
-      ", fCurrentMultipleMeasureRestMeasuresNumber: " <<
-      fCurrentMultipleMeasureRestMeasuresNumber <<
+      ", fCurrentMultiMeasureRestMeasuresNumber: " <<
+      fCurrentMultiMeasureRestMeasuresNumber <<
       ", fCurrentMeasureRepeatSlashesNumber: " <<
       fCurrentMeasureRepeatSlashesNumber <<
       ", line " << elt->getInputLineNumber ();
@@ -13989,7 +13989,7 @@ The <multiple-rest> element indicates multiple rests that span several measures.
 
   // measures number
 
-  fCurrentMultipleMeasureRestMeasuresNumber = (int)(*elt);
+  fCurrentMultiMeasureRestMeasuresNumber = (int)(*elt);
 
   // use symbols
 
@@ -14000,17 +14000,17 @@ The <multiple-rest> element indicates multiple rests that span several measures.
       elt->getInputLineNumber (),
       useSymbolsString);
 
-  // create a multiple measure rests
+  // create a multi-measure rests
   fCurrentPart->
-    cascadeAppendMultipleMeasureRestToPart (
+    cascadeAppendMultiMeasureRestToPart (
       elt->getInputLineNumber (),
-      fCurrentMultipleMeasureRestMeasuresNumber,
-      fCurrentMultipleMeasureRestSlashesNumber,
+      fCurrentMultiMeasureRestMeasuresNumber,
+      fCurrentMultiMeasureRestSlashesNumber,
       fCurrentUseSymbolsKind);
 
-  // set remaining multiple measure rests counter
-  fRemainingMultipleMeasureRestMeasuresNumber =
-    fCurrentMultipleMeasureRestMeasuresNumber;
+  // set remaining multi-measure rests counter
+  fRemainingMultiMeasureRestMeasuresNumber =
+    fCurrentMultiMeasureRestMeasuresNumber;
 }
 
 void mxsr2msrSkeletonPopulator::visitEnd (S_multiple_rest& elt)
@@ -26712,7 +26712,7 @@ void mxsr2msrSkeletonPopulator::handleImplicitInitialForwardRepeat (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleRepeatStart (
+void mxsr2msrSkeletonPopulator::handleMxmlRepeatStart (
   const S_msrBarLine& barLine)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -26763,7 +26763,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleRepeatEnd (
+void mxsr2msrSkeletonPopulator::handleMxmlRepeatEnd (
   const S_msrBarLine& barLine)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -26800,7 +26800,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
+void mxsr2msrSkeletonPopulator::handleMxmlRepeatEndingStart (
   const S_msrBarLine& barLine)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -26826,7 +26826,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
 
     ss <<
       std::endl << std::endl <<
-      "****************** handleRepeatEndingStart()" <<
+      "****************** handleMxmlRepeatEndingStart()" <<
       ", line " << barLine->getInputLineNumber () <<
       std::endl <<
       fCurrentPart;
@@ -26848,7 +26848,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
+void mxsr2msrSkeletonPopulator::handleMxmlRepeatHookedEndingEnd (
   const S_msrBarLine& barLine)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -26872,7 +26872,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
 
     ss <<
       std::endl << std::endl <<
-      "****************** handleRepeatHookedEndingEnd()" <<
+      "****************** handleMxmlRepeatHookedEndingEnd()" <<
       ", line " << barLine->getInputLineNumber () <<
       std::endl <<
       fCurrentPart;
@@ -26911,7 +26911,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
+void mxsr2msrSkeletonPopulator::handleMxmlRepeatHooklessEndingEnd (
   const S_msrBarLine& barLine)
 {
   /*
@@ -26944,7 +26944,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
 
     ss <<
       std::endl << std::endl <<
-      "****************** handleRepeatHooklessEndingEnd()" <<
+      "****************** handleMxmlRepeatHooklessEndingEnd()" <<
       ", line " << barLine->getInputLineNumber () <<
       std::endl <<
       fCurrentPart;
@@ -29732,69 +29732,69 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 
 
 
-// void mxsr2msrSkeletonPopulator::handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure (
+// void mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
 //   const mfInputLineNumber& inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+//   if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
 //     constexpr int fieldWidth = 37;
 //
 //     gLog <<
-//       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure()" <<
+//       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
 //       std::endl;
 //
 //     ++gIndenter;
 //
 //     gLog <<
 //       std::setw (fieldWidth) <<
-//       "fRemainingMultipleMeasureRestMeasuresNumber" << ": " <<
-//       fRemainingMultipleMeasureRestMeasuresNumber <<
+//       "fRemainingMultiMeasureRestMeasuresNumber" << ": " <<
+//       fRemainingMultiMeasureRestMeasuresNumber <<
 //       std::endl << std::endl;
 //
 //     --gIndenter;
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   if (fRemainingMultipleMeasureRestMeasuresNumber <= 0) {
+//   if (fRemainingMultiMeasureRestMeasuresNumber <= 0) {
 //     mxsr2msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
 //       __FILE__, mfInputLineNumber (__LINE__),
-//       "fRemainingMultipleMeasureRestMeasuresNumber problem");
+//       "fRemainingMultiMeasureRestMeasuresNumber problem");
 //   }
 //
-//   // account for one more measure rest in the multiple measure rests
-//   --fRemainingMultipleMeasureRestMeasuresNumber;
+//   // account for one more measure rest in the multi-measure rests
+//   --fRemainingMultiMeasureRestMeasuresNumber;
 //
-//   if (fRemainingMultipleMeasureRestMeasuresNumber == 0) {
-//     // all multiple measure rests have been handled,
-//     // the current one is the first after the  multiple measure rests
+//   if (fRemainingMultiMeasureRestMeasuresNumber == 0) {
+//     // all multi-measure rests have been handled,
+//     // the current one is the first after the  multi-measure rests
 //     fCurrentPart->
-//       appendPendingMultipleMeasureRestsToPart (
+//       appendPendingMultiMeasureRestsToPart (
 //         inputLineNumber);
 //
-//     if (fRemainingMultipleMeasureRestMeasuresNumber == 1) {
+//     if (fRemainingMultiMeasureRestMeasuresNumber == 1) {
 //       fCurrentPart-> // JMI ??? BOF
-//         cascadeNetNextMeasureNumberInPart (
+//         cascadeSetNextMeasureNumberInPart (
 //           inputLineNumber,
 //           fCurrentMeasureNumber);
 //     }
 //   }
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
+//   if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
 //     constexpr int fieldWidth = 37;
 //
 //     gLog <<
-//       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure()" <<
-//       ", onGoingMultipleMeasureRests:" <<
+//       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
+//       ", onGoingMultiMeasureRests:" <<
 //       std::endl;
 //
 //     ++gIndenter;
 //
 //     gLog <<
 //       std::setw (fieldWidth) <<
-//       "fRemainingMultipleMeasureRestMeasuresNumber" << ": " <<
+//       "fRemainingMultiMeasureRestMeasuresNumber" << ": " <<
 //       fRemainingMultipleRestMeasuresNumber <<
 //       std::endl <<
 //       std::endl;

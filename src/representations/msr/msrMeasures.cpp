@@ -499,7 +499,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   deepClone->fMeasureFirstInSegmentKind =
     fMeasureFirstInSegmentKind;
 
-    // multiple measure rest?
+    // multi-measure rest?
 
   deepClone->fMeasureIsAMeasureRest =
     fMeasureIsAMeasureRest;
@@ -2866,7 +2866,7 @@ void msrMeasure::appendNoteToMeasureAtPosition (
       setNoteOccupiesAFullMeasure ();
   }
 
-  // is note a multiple measure rest? JMI 0.9.69
+  // is note a multi-measure rest? JMI 0.9.69
   if (note->fetchNoteIsAFullNoteRest ()) {
     setMeasureIsAMeasureRest ();
   }

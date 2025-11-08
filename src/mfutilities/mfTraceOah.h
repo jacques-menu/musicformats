@@ -458,21 +458,21 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceMeasureRepeatsDetails () const
                               { return fTraceMeasureRepeatsDetails; }
 
-    // multiple measure rests
-    void                  setTraceMultipleMeasureRestsBasics ()
-                              { fTraceMultipleMeasureRestsBasics = true; }
-    Bool                  getTraceMultipleMeasureRestsBasics () const
-                              { return fTraceMultipleMeasureRestsBasics; }
+    // multi-measure rests
+    void                  setTraceMultiMeasureRestsBasics ()
+                              { fTraceMultiMeasureRestsBasics = true; }
+    Bool                  getTraceMultiMeasureRestsBasics () const
+                              { return fTraceMultiMeasureRestsBasics; }
 
-    void                  setTraceMultipleMeasureRests ()
-                              { fTraceMultipleMeasureRests = true; }
-    Bool                  getTraceMultipleMeasureRests () const
-                              { return fTraceMultipleMeasureRests; }
+    void                  setTraceMultiMeasureRests ()
+                              { fTraceMultiMeasureRests = true; }
+    Bool                  getTraceMultiMeasureRests () const
+                              { return fTraceMultiMeasureRests; }
 
-    void                  setTraceMultipleMeasureRestsDetails ()
-                              { fTraceMultipleMeasureRestsDetails = true; }
-    Bool                  getTraceMultipleMeasureRestsDetails () const
-                              { return fTraceMultipleMeasureRestsDetails; }
+    void                  setTraceMultiMeasureRestsDetails ()
+                              { fTraceMultiMeasureRestsDetails = true; }
+    Bool                  getTraceMultiMeasureRestsDetails () const
+                              { return fTraceMultiMeasureRestsDetails; }
     // beats repeats
     void                  setTraceBeatRepeats ()
                               { fTraceBeatRepeats = true; }
@@ -1144,12 +1144,12 @@ class EXP traceOahGroup : public oahGroup
     Bool                  fTraceMeasureRepeatsDetails;
 
 
-    // multiple measure rests
+    // multi-measure rests
     // --------------------------------------
 
-    Bool                  fTraceMultipleMeasureRestsBasics;
-    Bool                  fTraceMultipleMeasureRests;
-    Bool                  fTraceMultipleMeasureRestsDetails;
+    Bool                  fTraceMultiMeasureRestsBasics;
+    Bool                  fTraceMultiMeasureRests;
+    Bool                  fTraceMultiMeasureRestsDetails;
 
 
     // beats repeats

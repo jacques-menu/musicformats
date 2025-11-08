@@ -359,7 +359,7 @@ class EXP msrPart : public msrPartGroupElement
                             const mfMeasureNumber& measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
-    void                  cascadeNetNextMeasureNumberInPart (
+    void                  cascadeSetNextMeasureNumberInPart (
                             const mfInputLineNumber& inputLineNumber,
                             const mfMeasureNumber&   nextMeasureNumber);
 
@@ -501,15 +501,15 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendRepeatEndingCloneToPart (
                             const S_msrRepeatEnding& repeatEndingClone);
 
-    // multiple measure rests
+    // multi-measure rests
 
-    void                  cascadeAppendMultipleMeasureRestToPart (
+    void                  cascadeAppendMultiMeasureRestToPart (
                             const mfInputLineNumber& inputLineNumber,
-                            int                      multipleMeasureRestMeasuresNumber,
-                            int                      multipleMeasureRestSlashesNumber,
-                            msrUseSymbolsKind        multipleMeasureRestUseSymbolsKind);
+                            int                      multiMeasureRestMeasuresNumber,
+                            int                      multiMeasureRestSlashesNumber,
+                            msrUseSymbolsKind        multiMeasureRestUseSymbolsKind);
 
-    void                  appendPendingMultipleMeasureRestsToPart (
+    void                  appendPendingMultiMeasureRestsToPart (
                             const mfInputLineNumber& inputLineNumber);
 
     void                  replicateLastAppendedMeasureInPart (
@@ -521,9 +521,9 @@ class EXP msrPart : public msrPartGroupElement
                             const mfMeasureNumber&   previousMeasureNumber,
                             int                      measureRestsNumber);
 
-//     void                  appendMultipleMeasureRestCloneToPart (
+//     void                  appendMultiMeasureRestCloneToPart (
 //                             const mfInputLineNumber&        inputLineNumber,
-//                             const S_msrMultipleMeasureRest& multipleMeasureRestsClone);
+//                             const S_msrMultiMeasureRest& multiMeasureRestsClone);
 
     // measure repeats
 
@@ -543,7 +543,7 @@ class EXP msrPart : public msrPartGroupElement
 
 //     void                  appendMeasureRepeatCloneToPart ( JMI UNUSED 0.9.66
 //                             const mfInputLineNumber&        inputLineNumber,
-//                             const S_msrMultipleMeasureRest& multipleMeasureRests);
+//                             const S_msrMultiMeasureRest& multiMeasureRests);
 
     // frames
 
@@ -757,9 +757,9 @@ class EXP msrPart : public msrPartGroupElement
 
     S_msrTransposition    fPartCurrentTransposition;
 
-    // multiple measure rests
+    // multi-measure rests
 
-    Bool                  fPartContainsMultipleMeasureRests;
+    Bool                  fPartContainsMultiMeasureRests;
 
     // measures slices sequence
 

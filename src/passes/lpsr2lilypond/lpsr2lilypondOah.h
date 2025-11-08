@@ -1541,16 +1541,16 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahColorRGBAtom     getLedgerLinesColorRGBAtom () const
                               { return fLedgerLinesColorRGBAtom; }
 
-    // multiple measure rests
+    // multi-measure rests
     // --------------------------------------
 
-    void                  setMultipleMeasureRestsExpandLimit ()
-                              { fMultipleMeasureRestsExpandLimit = true; }
+    void                  setMultiMeasureRestsExpandLimit ()
+                              { fMultiMeasureRestsExpandLimit = true; }
 
-    Bool                  getMultipleMeasureRestsExpandLimit () const
-                              { return fMultipleMeasureRestsExpandLimit; }
-    S_oahIntegerAtom      getMultipleMeasureRestsExpandLimitAtom () const
-                              { return fMultipleMeasureRestsExpandLimitAtom; }
+    Bool                  getMultiMeasureRestsExpandLimit () const
+                              { return fMultiMeasureRestsExpandLimit; }
+    S_oahIntegerAtom      getMultiMeasureRestsExpandLimitAtom () const
+                              { return fMultiMeasureRestsExpandLimitAtom; }
 
     // chords
     // --------------------------------------
@@ -1657,10 +1657,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getCommentLilypondMeasures () const
                               { return fCommentLilypondMeasures; }
 
-    void                  setCommentLilypondMultipleMeasureRests ()
-                              { fCommentLilypondMultipleMeasureRests = true; }
-    Bool                  getCommentLilypondMultipleMeasureRests () const
-                              { return fCommentLilypondMultipleMeasureRests; }
+    void                  setCommentLilypondMultiMeasureRests ()
+                              { fCommentLilypondMultiMeasureRests = true; }
+    Bool                  getCommentLilypondMultiMeasureRests () const
+                              { return fCommentLilypondMultiMeasureRests; }
 
     void                  setCommentLilypondMeasureRepeats ()
                               { fCommentLilypondMeasureRepeats = true; }
@@ -2200,11 +2200,11 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahColorRGBAtom     fLedgerLinesColorRGBAtom;
 
 
-    // multiple measure rests
+    // multi-measure rests
     // --------------------------------------
 
-    int                   fMultipleMeasureRestsExpandLimit;
-    S_oahIntegerAtom      fMultipleMeasureRestsExpandLimitAtom;
+    int                   fMultiMeasureRestsExpandLimit;
+    S_oahIntegerAtom      fMultiMeasureRestsExpandLimitAtom;
 
     // notes
     // --------------------------------------
@@ -2315,7 +2315,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  fCommentLilypondVoices;
     Bool                  fCommentLilypondMeasures;
 
-    Bool                  fCommentLilypondMultipleMeasureRests;
+    Bool                  fCommentLilypondMultiMeasureRests;
     Bool                  fCommentLilypondMeasureRepeats;
 
     Bool                  fCommentLilypondBarLines;

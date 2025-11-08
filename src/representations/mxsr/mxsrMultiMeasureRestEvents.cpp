@@ -13,64 +13,64 @@
 
 #include "mfIndentedTextOutput.h"
 
-#include "mxsrMultipleMeasureRestEvents.h"
+#include "mxsrMultiMeasureRestEvents.h"
 
 
 namespace MusicFormats
 {
 
 //________________________________________________________________________
-std::string mxsrMultipleMeasureRestEventKindAsString (
-  mxsrMultipleMeasureRestEventKind multipleMeasureRestEventKind)
+std::string mxsrMultiMeasureRestEventKindAsString (
+  mxsrMultiMeasureRestEventKind multiMeasureRestEventKind)
 {
   std::string result;
 
-  switch (multipleMeasureRestEventKind) {
-    case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEvent_NONE:
-      result = "kMultipleMeasureRestEvent_NONE";
+  switch (multiMeasureRestEventKind) {
+    case mxsrMultiMeasureRestEventKind::kMultiMeasureRestEvent_NONE:
+      result = "kMultiMeasureRestEvent_NONE";
       break;
-    case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventBegin:
-      result = "kMultipleMeasureRestEventBegin";
+    case mxsrMultiMeasureRestEventKind::kMultiMeasureRestEventBegin:
+      result = "kMultiMeasureRestEventBegin";
       break;
-    case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventEnd:
-      result = "kMultipleMeasureRestEventEnd";
+    case mxsrMultiMeasureRestEventKind::kMultiMeasureRestEventEnd:
+      result = "kMultiMeasureRestEventEnd";
       break;
   } // switch
 
   return result;
 }
 
-std::ostream& operator << (std::ostream& os, const mxsrMultipleMeasureRestEventKind& elt)
+std::ostream& operator << (std::ostream& os, const mxsrMultiMeasureRestEventKind& elt)
 {
-  os << mxsrMultipleMeasureRestEventKindAsString (elt);
+  os << mxsrMultiMeasureRestEventKindAsString (elt);
   return os;
 }
 
 //________________________________________________________________________
-S_mxsrMultipleMeasureRestEvent mxsrMultipleMeasureRestEvent::create (
-  mxsrMultipleMeasureRestEventKind multipleMeasureRestEventKind,
+S_mxsrMultiMeasureRestEvent mxsrMultiMeasureRestEvent::create (
+  mxsrMultiMeasureRestEventKind multiMeasureRestEventKind,
   const std::string&               partName,
   const mfMeasureNumber&           measureNumber,
-  int                              multipleMeasureRestNumber,
+  int                              multiMeasureRestNumber,
   const mxsrEventSequentialNumber& eventSequentialNumber,
   const mfInputLineNumber&         eventInputLineNumber)
 {
-  mxsrMultipleMeasureRestEvent* obj =
-    new mxsrMultipleMeasureRestEvent (
-      multipleMeasureRestEventKind,
+  mxsrMultiMeasureRestEvent* obj =
+    new mxsrMultiMeasureRestEvent (
+      multiMeasureRestEventKind,
       partName,
       measureNumber,
-      multipleMeasureRestNumber,
+      multiMeasureRestNumber,
       eventSequentialNumber,
       eventInputLineNumber);
   assert (obj != nullptr);
   return obj;
 }
 
-// S_mxsrMultipleMeasureRestEvent mxsrMultipleMeasureRestEvent::createAMultipleMeasureRestEnd (
+// S_mxsrMultiMeasureRestEvent mxsrMultiMeasureRestEvent::createAMultiMeasureRestEnd (
 //   const std::string&       partName,
 //   const mfMeasureNumber&   measureNumber,
-//   int                      multipleMeasureRestNumber,
+//   int                      multiMeasureRestNumber,
 //   const mfInputLineNumber& eventInputLineNumber)
 // {
 //   ++fCurrentEventSequentialNumber;
@@ -78,23 +78,23 @@ S_mxsrMultipleMeasureRestEvent mxsrMultipleMeasureRestEvent::create (
     // since it is an instance of a template type
     // do we do it beforehand
 //
-//   S_mxsrMultipleMeasureRestEvent
-//     multipleMeasureRestEndEvent =
-//       mxsrMultipleMeasureRestEvent::create (
-//         mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventEnd,
+//   S_mxsrMultiMeasureRestEvent
+//     multiMeasureRestEndEvent =
+//       mxsrMultiMeasureRestEvent::create (
+//         mxsrMultiMeasureRestEventKind::kMultiMeasureRestEventEnd,
 //         partName,
 //         measureNumber,
-//         multipleMeasureRestNumber,
+//         multiMeasureRestNumber,
 //         fCurrentEventSequentialNumber,
 //         eventInputLineNumber);
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+//   if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
 //     std::stringstream ss;
 //
 //     ss <<
-//       "--> Registering multiple measure rest end event " <<
-//       multipleMeasureRestEndEvent->asString () <<
+//       "--> Registering multi-measure rest end event " <<
+//       multiMeasureRestEndEvent->asString () <<
 //       ", line " << eventInputLineNumber;
 //
 //     gWaeHandler->waeTrace (
@@ -103,14 +103,14 @@ S_mxsrMultipleMeasureRestEvent mxsrMultipleMeasureRestEvent::create (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   return multipleMeasureRestEndEvent;
+//   return multiMeasureRestEndEvent;
 // }
 
-mxsrMultipleMeasureRestEvent::mxsrMultipleMeasureRestEvent (
-  mxsrMultipleMeasureRestEventKind multipleMeasureRestEventKind,
+mxsrMultiMeasureRestEvent::mxsrMultiMeasureRestEvent (
+  mxsrMultiMeasureRestEventKind multiMeasureRestEventKind,
   const std::string&               partName,
   const mfMeasureNumber&           measureNumber,
-  int                              multipleMeasureRestNumber,
+  int                              multiMeasureRestNumber,
   const mxsrEventSequentialNumber& eventSequentialNumber,
   const mfInputLineNumber&         eventInputLineNumber)
   : mxsrPartEvent (
@@ -119,26 +119,26 @@ mxsrMultipleMeasureRestEvent::mxsrMultipleMeasureRestEvent (
       eventSequentialNumber,
       eventInputLineNumber)
 {
-  fMultipleMeasureRestEventKind = multipleMeasureRestEventKind;
+  fMultiMeasureRestEventKind = multiMeasureRestEventKind;
 
-  fMultipleMeasureRestNumber = multipleMeasureRestNumber;
+  fMultiMeasureRestNumber = multiMeasureRestNumber;
 }
 
-mxsrMultipleMeasureRestEvent::~mxsrMultipleMeasureRestEvent ()
+mxsrMultiMeasureRestEvent::~mxsrMultiMeasureRestEvent ()
 {}
 
-std::string mxsrMultipleMeasureRestEvent::asShortString () const
+std::string mxsrMultiMeasureRestEvent::asShortString () const
 {
   std::stringstream ss;
 
   ss <<
-    "[MultipleMeasureRestEvent" <<
-    ", fMultipleMeasureRestEventKind: " << fMultipleMeasureRestEventKind <<
+    "[MultiMeasureRestEvent" <<
+    ", fMultiMeasureRestEventKind: " << fMultiMeasureRestEventKind <<
     ", fEventInputLineNumber: " << fEventInputLineNumber <<
 
     ", fPartName: " << fPartName <<
     ", fMeasureNumber: " << fMeasureNumber <<
-    ", fMultipleMeasureRestNumber: " << fMultipleMeasureRestNumber <<
+    ", fMultiMeasureRestNumber: " << fMultiMeasureRestNumber <<
 
     ", fEventSequentialNumber: " << fEventSequentialNumber <<
     ']';
@@ -146,15 +146,15 @@ std::string mxsrMultipleMeasureRestEvent::asShortString () const
   return ss.str ();
 }
 
-std::string mxsrMultipleMeasureRestEvent::asString () const
+std::string mxsrMultiMeasureRestEvent::asString () const
 {
   return asShortString ();
 }
 
-void mxsrMultipleMeasureRestEvent::print (std::ostream& os) const
+void mxsrMultiMeasureRestEvent::print (std::ostream& os) const
 {
   os <<
-    "[MultipleMeasureRestEvent" <<
+    "[MultiMeasureRestEvent" <<
     std::endl;
 
   ++gIndenter;
@@ -163,7 +163,7 @@ void mxsrMultipleMeasureRestEvent::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMultipleMeasureRestEventKind" << ": " << fMultipleMeasureRestEventKind <<
+    "fMultiMeasureRestEventKind" << ": " << fMultiMeasureRestEventKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fEventInputLineNumber" << ": " << fEventInputLineNumber <<
@@ -176,7 +176,7 @@ void mxsrMultipleMeasureRestEvent::print (std::ostream& os) const
     "fMeasureNumber" << ": " << fMeasureNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMultipleMeasureRestNumber" << ": " << fMultipleMeasureRestNumber <<
+    "fMultiMeasureRestNumber" << ": " << fMultiMeasureRestNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -188,7 +188,7 @@ void mxsrMultipleMeasureRestEvent::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_mxsrMultipleMeasureRestEvent& elt)
+std::ostream& operator << (std::ostream& os, const S_mxsrMultiMeasureRestEvent& elt)
 {
   if (elt) {
     elt->print (os);
@@ -200,7 +200,7 @@ std::ostream& operator << (std::ostream& os, const S_mxsrMultipleMeasureRestEven
   return os;
 }
 
-std::ostream& operator << (std::ostream& os, const mxsrMultipleMeasureRestEvent& elt)
+std::ostream& operator << (std::ostream& os, const mxsrMultiMeasureRestEvent& elt)
 {
   elt.print (os);
   return os;

@@ -383,7 +383,7 @@ class EXP lpsr2lilypondTranslator :
   public                      visitor<S_msrMeasureRepeatPattern>,
   public                      visitor<S_msrMeasureRepeatReplicas>,
 
-  public                      visitor<S_msrMultipleMeasureRest>,
+  public                      visitor<S_msrMultiMeasureRest>,
 
   // rehearsal mark
 
@@ -746,9 +746,9 @@ class EXP lpsr2lilypondTranslator :
     virtual void              visitStart (S_msrMeasureRepeatReplicas& elt);
     virtual void              visitEnd   (S_msrMeasureRepeatReplicas& elt);
 
-    // multiple measure rests
-    virtual void              visitStart (S_msrMultipleMeasureRest& elt);
-    virtual void              visitEnd   (S_msrMultipleMeasureRest& elt);
+    // multi-measure rests
+    virtual void              visitStart (S_msrMultiMeasureRest& elt);
+    virtual void              visitEnd   (S_msrMultiMeasureRest& elt);
 
     // rehearsal marks
     virtual void              visitStart (S_msrRehearsalMark& elt);
@@ -1748,11 +1748,11 @@ class EXP lpsr2lilypondTranslator :
     std::list <S_lpsrRepeat>
                           fRepeatDescrsStack;
 
-    // multiple measure rests
+    // multi-measure rests
     // ------------------------------------------------------
 
     int                   fRemainingMeasureRestsNumber;
-    Bool                  fOnGoingMultipleMeasureRests;
+    Bool                  fOnGoingMultiMeasureRests;
 
     // segments
     // ------------------------------------------------------

@@ -312,8 +312,8 @@ In some cases, it is desirable not to browse part of the data. This is the case 
 
 For example, \class{msrMultipleMeasureRest} contains \class{msrMeasure} instances. \class{msrScore} contains:
 \begin{lstlisting}[language=CPlusPlus]
-    // in <multiple-rest/>, the multiple measure rests are explicit,
-    // whereas LilyPond only needs the number of multiple measure rests
+    // in <multiple-rest/>, the multi-measure rests are explicit,
+    // whereas LilyPond only needs the number of multi-measure rests
     Bool                  fInhibitMultipleMeasureRestsBrowsing;
 
     void                  setInhibitMultipleMeasureRestsBrowsing ()
@@ -337,7 +337,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   if (fOnGoingMultipleMeasureRests) {
     switch (elt->getNoteKind ()) {
       case msrNoteKind::kNoteRestInMeasure:
-        // don't handle multiple measure restss, that's done in visitEnd (S_msrMultipleMeasureRest&)
+        // don't handle multi-measure restss, that's done in visitEnd (S_msrMultipleMeasureRest&)
           if (elt->getNoteOccupiesAFullMeasure ()) {
             Bool inhibitMultipleMeasureRestsBrowsing =
               fVisitedLpsrScore->
@@ -352,7 +352,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                 gTraceOahGroup->getTraceMultipleMeasureRests ()
               ) {
                 gLog <<
-                  "% ==> end visiting multiple measure rests is ignored" <<
+                  "% ==> end visiting multi-measure rests is ignored" <<
                   std::endl;
               }
 #endif // MF_TRACE_IS_ENABLED

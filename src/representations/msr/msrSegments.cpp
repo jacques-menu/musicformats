@@ -485,7 +485,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
 //     gTraceOahGroup->getTraceRepeatsDetails ()
 //   ) {
 //     fSegmentUpLinkToVoice->
-//       displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
+//       displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
 //         inputLineNumber,
 //         "assertSegmentLastMeasureIsNotNull()");
 //   }
@@ -522,7 +522,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
 //     gTraceOahGroup->getTraceRepeatsDetails ()
 //   ) {
 //     fSegmentUpLinkToVoice->
-//       displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
+//       displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
 //         inputLineNumber,
 //         "assertSegmentElementsListIsNotEmpty()");
 //   }
@@ -964,21 +964,21 @@ void msrSegment::appendBeatRepeatToSegment (
   appendSegmentElementToSegment (beatRepeat);
 }
 
-void msrSegment::appendMultipleMeasureRestToSegment (
-  const S_msrMultipleMeasureRest& multipleMeasureRest)
+void msrSegment::appendMultiMeasureRestToSegment (
+  const S_msrMultiMeasureRest& multiMeasureRest)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending multiple measure rest " <<
-      multipleMeasureRest->asString () <<
+      "Appending multi-measure rest " <<
+      multiMeasureRest->asString () <<
       " to segment " <<
       asString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << multipleMeasureRest->getInputLineNumber ();
+      ", line " << multiMeasureRest->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -986,7 +986,7 @@ void msrSegment::appendMultipleMeasureRestToSegment (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  appendSegmentElementToSegment (multipleMeasureRest);
+  appendSegmentElementToSegment (multiMeasureRest);
 }
 
 void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
@@ -1163,13 +1163,13 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //   else if (
 //     // measure rest?
 //
-//     S_msrMultipleMeasureRest
-//       multipleMeasureRest =
-//         dynamic_cast<msrMultipleMeasureRest*>(&(*segmentElementsListFirstElement))
+//     S_msrMultiMeasureRest
+//       multiMeasureRest =
+//         dynamic_cast<msrMultiMeasureRest*>(&(*segmentElementsListFirstElement))
 //   ) {
 //     const std::list <S_msrMeasure>&
 //       measureRestsList =
-//         multipleMeasureRest->
+//         multiMeasureRest->
 //           getMeasureRestsList ();
 //
 //     if (! measureRestsList.empty ()) {
@@ -2367,15 +2367,15 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
   --gIndenter;
 }
 
-void msrSegment::edacsacAppendMultipleMeasureRestToSegment ( // cascade bottom
-  const S_msrMultipleMeasureRest& multipleMeasureRest)
+void msrSegment::edacsacAppendMultiMeasureRestToSegment ( // cascade bottom
+  const S_msrMultiMeasureRest& multiMeasureRest)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRestsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Edacsaccing appending multiple measure rest " << multipleMeasureRest->asString () <<
+      "Edacsaccing appending multi-measure rest " << multiMeasureRest->asString () <<
       " to segment " << asString () <<
       ", in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice);
@@ -2386,12 +2386,12 @@ void msrSegment::edacsacAppendMultipleMeasureRestToSegment ( // cascade bottom
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // append multipleMeasureRest to the segment
-  appendSegmentElementToSegment (multipleMeasureRest);
+  // append multiMeasureRest to the segment
+  appendSegmentElementToSegment (multiMeasureRest);
 
-  fCurrentMultipleMeasureRest = multipleMeasureRest;
+  fCurrentMultiMeasureRest = multiMeasureRest;
 
-  fOnGoingMultipleMeasureRest = true;
+  fOnGoingMultiMeasureRest = true;
 }
 
 void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
@@ -2498,10 +2498,10 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
     }
   }
 
-  if (fOnGoingMultipleMeasureRest) {
-    // append measure to the current multiple measure rests
-    fCurrentMultipleMeasureRest->
-      appendMeasureToMultipleMeasureRest (
+  if (fOnGoingMultiMeasureRest) {
+    // append measure to the current multi-measure rests
+    fCurrentMultiMeasureRest->
+      appendMeasureToMultiMeasureRest (
         measure);
   }
   else {

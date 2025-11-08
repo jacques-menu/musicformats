@@ -1409,43 +1409,77 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fPreviousMeasureInputLineNumber;
 
 
-    // multiple measure rests handling
+    // repeats handling
     // ------------------------------------------------------
 
-    int                       fCurrentMultipleMeasureRestMeasuresNumber;
-    int                       fRemainingMultipleMeasureRestMeasuresNumber;
+    mfMeasureNumber           fCurrentRepeatStartMeasureNumber;
+    S_msrBarLine              fCurrentRepeatEndingStartBarLine;
 
-    int                       fCurrentMultipleMeasureRestSlashesNumber;
+    void                      handleImplicitInitialForwardRepeat (
+                                const mfInputLineNumber& inputLineNumber);
+
+    void                      handleMxmlRepeatStart (
+                                const S_msrBarLine& barLine);
+
+    void                      handleMxmlRepeatEnd (
+                                const S_msrBarLine& barLine);
+
+    void                      handleMxmlRepeatEndingStart (
+                                const S_msrBarLine& barLine);
+
+/* JMI 0.9.66
+    void                      handleRepeatHookedEndingStart (
+                                S_barline     elt,
+                                const S_msrBarLine& barLine);
+*/
+    void                      handleMxmlRepeatHookedEndingEnd (
+                                const S_msrBarLine& barLine);
+/* JMI 0.9.66
+    void                      handleRepeatHooklessEndingStart (
+                                S_barline     elt,
+                                const S_msrBarLine& barLine);
+*/
+    void                      handleMxmlRepeatHooklessEndingEnd (
+                                const S_msrBarLine& barLine);
+
+
+    // multi-measure rests handling
+    // ------------------------------------------------------
+
+    int                       fCurrentMultiMeasureRestMeasuresNumber;
+    int                       fRemainingMultiMeasureRestMeasuresNumber;
+
+    int                       fCurrentMultiMeasureRestSlashesNumber;
 
     msrUseSymbolsKind         fCurrentUseSymbolsKind;
 
     Bool                      fCurrentRestIsAMeasureRest;
 
-//     void                      handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure (
+//     void                      handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
 //                                 const mfInputLineNumber& inputLineNumber);
 
-   S_mxsrMultipleMeasureRestEvent
-                              fCurrentMultipleMeasureRestBegin;
-    S_mxsrMultipleMeasureRestEvent
-                              fCurrentMultipleMeasureRestEnd;
+   S_mxsrMultiMeasureRestEvent
+                              fCurrentMultiMeasureRestBegin;
+    S_mxsrMultiMeasureRestEvent
+                              fCurrentMultiMeasureRestEnd;
 
-    S_msrMultipleMeasureRest  fCurrentMultipleMeasureRest;
-    Bool                      fOnGoingMultipleMeasureRest;
+    S_msrMultiMeasureRest  fCurrentMultiMeasureRest;
+    Bool                      fOnGoingMultiMeasureRest;
 
-    Bool                      fCurrentMeasureBelongsToAMultipleMeasureRest;
+    Bool                      fCurrentMeasureBelongsToAMultiMeasureRest;
 
-    void                      handleMultipleMeasureRestBeginEventIfAny ();
+    void                      handleMultiMeasureRestBeginEventIfAny ();
 
-    void                      handleMultipleMeasureRestEndEventIfAny ();
+    void                      handleMultiMeasureRestEndEventIfAny ();
 
-    void                      handleMultipleMeasureRestBegin ();
+    void                      handleMultiMeasureRestBegin ();
 
-    void                      handleMultipleMeasureRestEnd ();
+    void                      handleMultiMeasureRestEnd ();
 
-		void											displayGatheredMultipleMeasureRestInformations (
+		void											displayGatheredMultiMeasureRestInformations (
 																const std::string& context) const;
 
-    void                      printCurrentMultipleMeasureRest ();
+    void                      printCurrentMultiMeasureRest ();
 
 
     // measure repeats handling
@@ -1485,6 +1519,12 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      printCurrentMeasureRepeats ();
 
 
+    // beats repeats
+    // ------------------------------------------------------
+
+    int                       fCurrentBeatRepeatSlashes;
+
+
     // measure style handling
     // ------------------------------------------------------
 
@@ -1492,14 +1532,8 @@ class EXP mxsr2msrSkeletonPopulator :
     msrUseDotsKind            fCurrentUseDotsKind;
     msrSlashUseStemsKind      fCurrentSlashUseStemsKind;
 
-    mfDurationKind      fCurrentSlashGraphicNotesDurationKind;
+    mfDurationKind            fCurrentSlashGraphicNotesDurationKind;
     int                       fCurrentSlashDotsNumber;
-
-
-    // beats repeats
-    // ------------------------------------------------------
-
-    int                       fCurrentBeatRepeatSlashes;
 
 
     // notes handling
@@ -2206,40 +2240,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      attachPendingBarLinesToPart (
                                 const S_msrPart& part);
-
-
-    // repeats handling
-    // ------------------------------------------------------
-
-    mfMeasureNumber           fCurrentRepeatStartMeasureNumber;
-    S_msrBarLine              fCurrentRepeatEndingStartBarLine;
-
-    void                      handleImplicitInitialForwardRepeat (
-                                const mfInputLineNumber& inputLineNumber);
-
-    void                      handleRepeatStart (
-                                const S_msrBarLine& barLine);
-
-    void                      handleRepeatEnd (
-                                const S_msrBarLine& barLine);
-
-    void                      handleRepeatEndingStart (
-                                const S_msrBarLine& barLine);
-
-/* JMI 0.9.66
-    void                      handleRepeatHookedEndingStart (
-                                S_barline     elt,
-                                const S_msrBarLine& barLine);
-*/
-    void                      handleRepeatHookedEndingEnd (
-                                const S_msrBarLine& barLine);
-/* JMI 0.9.66
-    void                      handleRepeatHooklessEndingStart (
-                                S_barline     elt,
-                                const S_msrBarLine& barLine);
-*/
-    void                      handleRepeatHooklessEndingEnd (
-                                const S_msrBarLine& barLine);
 
 
     // notes/rests handling

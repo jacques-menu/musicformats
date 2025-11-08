@@ -667,20 +667,20 @@ class EXP mxsr2msrSkeletonBuilder :
 
 		Bool                      fAFirstForwardRepeatHasBeenMet;
 
-    // multiple multiple measure rests
+    // multiple multi-measure rests
     // ------------------------------------------------------
 
-    Bool                      fOnGoingMultipleMeasureRest;
+    Bool                      fOnGoingMultiMeasureRest;
 
-    // multiple measure repeats
+    // multi-measure repeats
     // ------------------------------------------------------
 
   	msrMeasureRepeatKind      fCurrentMeasureRepeatKind;
 
     int                       fCurrentMeasureRepeatNumber;
 
-    int                       fCurrentMultipleMeasureRestNumber;
-    int                       fRemainingMultipleMeasureRestNumber;
+    int                       fCurrentMultiMeasureRestNumber;
+    int                       fRemainingMultiMeasureRestNumber;
 
     int                       fCurrentMeasureRepeatSlashes;
 
@@ -734,13 +734,13 @@ class EXP mxsr2msrSkeletonBuilder :
 
     Bool                      fCurrentNoteIsARest;
 
-    // multiple measure rests handling
+    // multi-measure rests handling
     // ------------------------------------------------------
 
-    Bool                      fCurrentMeasureBelongsToAMultipleMeasureRest;
+    Bool                      fCurrentMeasureBelongsToAMultiMeasureRest;
 
-//     mxsrMultipleMeasureRestEvent
-//                               fPendingMultipleMeasureRestEvent;
+//     mxsrMultiMeasureRestEvent
+//                               fPendingMultiMeasureRestEvent;
 
     // measure repeats handling
     // ------------------------------------------------------
