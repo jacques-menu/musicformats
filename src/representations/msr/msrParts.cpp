@@ -50,25 +50,25 @@ int msrPart::sPartsCounter = 0;
 
 S_msrPart msrPart::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&       partMusicXMLID)
+  const std::string&       partMxmlID)
 {
   msrPart* obj =
     new msrPart (
       inputLineNumber,
-      partMusicXMLID);
+      partMxmlID);
   assert (obj != nullptr);
   return obj;
 }
 
 S_msrPart msrPart::create (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&       partMusicXMLID,
+  const std::string&       partMxmlID,
   const S_msrPartGroup&    partUpLinkToPartGroup)
 {
   msrPart* obj =
     new msrPart (
       inputLineNumber,
-      partMusicXMLID);
+      partMxmlID);
   assert (obj != nullptr);
 
   // set part's part group upLink
@@ -83,14 +83,14 @@ S_msrPart msrPart::create (
 
 msrPart::msrPart (
   const mfInputLineNumber& inputLineNumber,
-  const std::string&       partMusicXMLID)
+  const std::string&       partMxmlID)
     : msrPartGroupElement (inputLineNumber)
 {
-  // replace spaces by underscores in partMusicXMLID to set fPartMusicXMLID
+  // replace spaces by underscores in partMxmlID to set fPartMxmlID
   for_each (
-    partMusicXMLID.begin (),
-    partMusicXMLID.end (),
-    mfStringSpaceReplacer (fPartMusicXMLID, '_'));
+    partMxmlID.begin (),
+    partMxmlID.end (),
+    mfStringSpaceReplacer (fPartMxmlID, '_'));
 
 /* JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -127,7 +127,7 @@ void msrPart::initializePart ()
   // is this part name in the MSR OAH part renaming map?
   std::map <std::string, std::string>::const_iterator
     it =
-      gMsrOahGroup->getMsrPartsRenamingMap ().find (fPartMusicXMLID);
+      gMsrOahGroup->getMsrPartsRenamingMap ().find (fPartMxmlID);
 
   if (it != gMsrOahGroup->getMsrPartsRenamingMap ().end ()) {
     // yes, rename the part accordinglingly
@@ -157,7 +157,7 @@ void msrPart::initializePart ()
   else {
     // coin the names from the argument
     fPartPathLikeName =
-      "Part_" + mfStringNumbersToEnglishWords (fPartMusicXMLID);
+      "Part_" + mfStringNumbersToEnglishWords (fPartMxmlID);
   }
 
   // time signature is crucially needed for measure positions determination:
@@ -262,7 +262,7 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
     newbornClone =
       msrPart::create (
         fInputLineNumber,
-        fPartMusicXMLID,
+        fPartMxmlID,
         partGroupClone);
 
   newbornClone->fPartPathLikeName =
@@ -666,7 +666,7 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
 
     ss <<
       "Assigning sequential numbers to the staves in part \"" <<
-      fPartMusicXMLID <<
+      fPartMxmlID <<
       ", \"" <<
       fPartName <<
       ", line " << inputLineNumber;
@@ -719,7 +719,7 @@ void msrPart::setPartPathLikeName (const std::string& partPathLikeName)
       std::stringstream ss;
 
         ss <<
-        "Keeping partMusicXMLID \"" << partPathLikeName <<
+        "Keeping partMxmlID \"" << partPathLikeName <<
         "\" as part name  for " << fetchPartNameForTrace () <<
       std::endl;
     }
@@ -743,7 +743,7 @@ std::string msrPart::fetchPartIDAndName () const
   }
 
   ss <<
-    " \"" << fPartMusicXMLID << "\"";
+    " \"" << fPartMxmlID << "\"";
 
   if (! fPartName.empty ()) {
     ss <<
@@ -763,7 +763,7 @@ std::string msrPart::fetchPartNameForTrace () const
   ss <<
     '[' <<
     fPartPathLikeName <<
-    ", fPartMusicXMLID: \"" << fPartMusicXMLID << "\"";
+    ", fPartMxmlID: \"" << fPartMxmlID << "\"";
 
   if (! fPartName.empty ()) {
     ss <<
@@ -2239,7 +2239,7 @@ void msrPart::sortStavesByIncreasingNumber ()
       "Sorting the staves in part " <<
       fetchPartNameForTrace () <<
       ", " <<
-      fPartMusicXMLID <<
+      fPartMxmlID <<
       ", " <<
       fPartName <<
       " by increasing number";
@@ -2314,7 +2314,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       staffNumber <<
 //       ", " <<
 //       "\" in part " <<
-//       fPartMusicXMLID <<
+//       fPartMxmlID <<
 //       ", " <<
 //       fPartName <<
 //       ", line " << inputLineNumber;
@@ -2407,7 +2407,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       ", \"" <<
 //       voice->getVoiceName () <<
 //       "\" in part \"" <<
-//       fPartMusicXMLID <<
+//       fPartMxmlID <<
 //       ", \"" <<
 //       fPartName <<
 // //       ", line " << voice->getInputLineNumber ();
@@ -2460,7 +2460,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       ", \"" <<
 //       voice->getVoiceName () <<
 //       "\" in part \"" <<
-//       fPartMusicXMLID <<
+//       fPartMxmlID <<
 //       ", \"" <<
 //       fPartName <<
 // //       ", line " << voice->getInputLineNumber ();
@@ -2650,7 +2650,7 @@ void msrPart::appendHarmoniesListToPart (
 #endif // MF_TRACE_IS_ENABLED
 
   fPartHarmoniesVoice->
-    appendHarmoniesListToVoice (
+    cascadeAppendHarmoniesListToVoice (
       inputLineNumber,
       harmoniesList,
       positionInMeasureToAppendAt);
@@ -3713,8 +3713,8 @@ std::string msrPart::asString () const
 
   ss <<
     "[Part" <<
-    ", partMusicXMLID: \"" <<
-    fPartMusicXMLID <<
+    ", fPartMxmlID: \"" <<
+    fPartMxmlID <<
     "\", partName: \"" <<
     fPartName <<
     "\", fPartPathLikeName: \"" <<
@@ -3794,8 +3794,8 @@ void msrPart::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartMusicXMLID" << ": \"" <<
-    fPartMusicXMLID << "\"" <<
+    "fPartMxmlID" << ": \"" <<
+    fPartMxmlID << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -3967,8 +3967,8 @@ void msrPart::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartMusicXMLID" << ": \"" <<
-    fPartMusicXMLID << "\"" <<
+    "fPartMxmlID" << ": \"" <<
+    fPartMxmlID << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -4390,8 +4390,8 @@ void msrPart::printSummary (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartMusicXMLID" << ": \"" <<
-    fPartMusicXMLID << "\"" <<
+    "fPartMxmlID" << ": \"" <<
+    fPartMxmlID << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<

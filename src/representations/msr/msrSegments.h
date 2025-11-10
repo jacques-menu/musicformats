@@ -165,8 +165,8 @@ class EXP msrSegment : public msrElement
 
     // print layout MusicXML specific??? JMI
 
-    void                  appendMusicXMLPrintLayoutToSegment (
-                            const S_msrMusicXMLPrintLayout& musicXMLPrintLayout);
+    void                  appendMxmlPrintLayoutToSegment (
+                            const S_msrMxmlPrintLayout& MxmlPrintLayout);
 
     void                  appendSegmentElementToSegment (
                             S_msrSegmentElement segmentElement);
@@ -317,7 +317,7 @@ class EXP msrSegment : public msrElement
                             const S_msrHarmony&        harmony,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
-    void                  appendHarmoniesListToSegment (
+    void                  cascadeAppendHarmoniesListToSegment (
                             const mfInputLineNumber&        inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
                             const mfPositionInMeasure&      positionInMeasureToAppendAt);

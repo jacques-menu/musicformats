@@ -480,8 +480,8 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
     fMeasureWholeNotesDuration;
 
   // measure print layout, MusicXML specific
-  deepClone->fMeasureMusicXMLPrintLayout =
-    fMeasureMusicXMLPrintLayout;
+  deepClone->fMeasureMxmlPrintLayout =
+    fMeasureMxmlPrintLayout;
 
   // measure longest note
   deepClone->fMeasureLongestNote = // JMI ???
@@ -2156,15 +2156,15 @@ void msrMeasure::setMeasureKind (
   fMeasureKind = measureKind;
 }
 
-void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
-  const S_msrMusicXMLPrintLayout& musicXMLPrintLayout)
+void msrMeasure::appendMxmlPrintLayoutToMeasure (
+  const S_msrMxmlPrintLayout& mxmlPrintLayout)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMxmlPrintLayouts ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending print layout " << musicXMLPrintLayout->asString () <<
+      "Appending print layout " << mxmlPrintLayout->asString () <<
       " to measure " <<
       this->asShortString () <<
       ", in voice " <<
@@ -2178,13 +2178,13 @@ void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
   // append it to the measure elements list
-//   prependOtherElementToMeasure (musicXMLPrintLayout); // JMI 0.9.67
+//   prependOtherElementToMeasure (mxmlPrintLayout); // JMI 0.9.67
   appendMeasureElementToMeasure (
-    musicXMLPrintLayout,
-    "appendMusicXMLPrintLayoutToMeasure()");
+    mxmlPrintLayout,
+    "appendMxmlPrintLayoutToMeasure()");
 
   // register it for MusicXML generation from MSR
-  fMeasureMusicXMLPrintLayout = musicXMLPrintLayout;
+  fMeasureMxmlPrintLayout = mxmlPrintLayout;
 }
 
 void msrMeasure::appendClefKeyTimeSignatureGroupToMeasure (
@@ -3462,7 +3462,7 @@ void msrMeasure::appendHarmonyToMeasure (
   --gIndenter;
 }
 
-void msrMeasure::appendHarmoniesListToMeasure (
+void msrMeasure::edacsacAppendHarmoniesListToMeasure (
   const mfInputLineNumber&        inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
   const mfPositionInMeasure&      positionInMeasureToAppendAt)

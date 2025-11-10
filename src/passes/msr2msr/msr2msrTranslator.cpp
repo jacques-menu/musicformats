@@ -2700,7 +2700,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
 //       std::endl <<
       "<!--=== " <<
       "part \"" << fCurrentPartClone->getPartName () << "\"" <<
-      " (partMusicXMLID \"" << fCurrentPartClone->getPartMusicXMLID () << "\")" <<
+      " (PartMxmlID \"" << fCurrentPartClone->getPartMxmlID () << "\")" <<
       ", measure \"" << elt->getMeasureNumber () << "\"" <<
       "', voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<

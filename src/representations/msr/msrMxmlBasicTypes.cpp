@@ -23,7 +23,7 @@
 
 #include "msrBrowsers.h"
 #include "msrMeasureConstants.h"
-#include "msrMusicXMLBasicTypes.h"
+#include "msrMxmlBasicTypes.h"
 
 #include "oahEarlyOptions.h"
 
@@ -1303,7 +1303,7 @@ msrLineWidth::msrLineWidth (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMxmlPrintLayouts ()) {
     std::stringstream ss;
 
     ss <<
@@ -1480,7 +1480,7 @@ msrNoteSize::msrNoteSize (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMxmlPrintLayouts ()) {
     std::stringstream ss;
 
     ss <<
@@ -1644,7 +1644,7 @@ msrDistance::msrDistance (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMxmlPrintLayouts ()) {
     std::stringstream ss;
 
     ss <<
@@ -1808,7 +1808,7 @@ msrGlyph::msrGlyph (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMxmlPrintLayouts ()) {
     std::stringstream ss;
 
     ss <<
@@ -1972,7 +1972,7 @@ msrOtherAppearance::msrOtherAppearance (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMxmlPrintLayouts ()) {
     std::stringstream ss;
 
     ss <<
@@ -2131,7 +2131,7 @@ msrAppearance::msrAppearance (
     : msrElement (inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMxmlPrintLayouts ()) {
     std::stringstream ss;
 
     ss <<

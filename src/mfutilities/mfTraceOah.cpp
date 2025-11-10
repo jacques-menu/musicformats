@@ -119,7 +119,7 @@ void traceOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
   --gIndenter;
 }
 
-void traceOahGroup::initializeMusicXMLPrintLayoutsTraceOah ()
+void traceOahGroup::initializeMxmlPrintLayoutsTraceOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -135,17 +135,17 @@ R"()",
   // MusicXML print layouts
 
   S_oahTwoBooleansAtom
-    traceMusicXMLPrintLayoutsAtom =
+    traceMxmlPrintLayoutsAtom =
       oahTwoBooleansAtom::create (
         "trace-print-layouts", "tpl",
 R"(Print layouts)",
-        "fTraceMusicXMLPrintLayouts",
-        fTraceMusicXMLPrintLayouts,
+        "fTraceMxmlPrintLayouts",
+        fTraceMxmlPrintLayouts,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceMusicXMLPrintLayoutsAtom);
+      traceMxmlPrintLayoutsAtom);
 }
 
 void traceOahGroup::initializeOtherTraceOah ()
@@ -3133,7 +3133,7 @@ void traceOahGroup::initializeTraceOahGroup ()
   initializeBooksToVoicesTraceOah ();
 
   // print layouts
-  initializeMusicXMLPrintLayoutsTraceOah ();
+  initializeMxmlPrintLayoutsTraceOah ();
 
   // segments
   initializeSegmentsTraceOah ();
@@ -3417,8 +3417,8 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
     // MusicXML print layouts
-    std::setw (fieldWidth) << "fTraceMusicXMLPrintLayouts" << ": " <<
-    fTraceMusicXMLPrintLayouts <<
+    std::setw (fieldWidth) << "fTraceMxmlPrintLayouts" << ": " <<
+    fTraceMxmlPrintLayouts <<
     std::endl <<
 
     // segments

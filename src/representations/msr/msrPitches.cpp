@@ -110,7 +110,7 @@ msrDiatonicPitchKind msrDiatonicPitchKindFromChar (
 
 // alterations
 //______________________________________________________________________________
-msrAlterationKind msrAlterationKindFromMusicXMLAlter (
+msrAlterationKind msrAlterationKindFromMxmlAlter (
   float alter)
 {
 
@@ -172,7 +172,7 @@ msrAlterationKind msrAlterationKindFromMusicXMLAlter (
   return result;
 }
 
-float msrMusicXMLAlterFromAlterationKind (
+float msrMxmlAlterFromAlterationKind (
   msrAlterationKind alterationKind)
 {
   float result = -111.0;

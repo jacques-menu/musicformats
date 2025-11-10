@@ -193,30 +193,30 @@ class EXP mxsr2msrOahGroup : public oahGroup
                           getPartsIgnoreIDSet () const
                               { return fPartsIgnoreIDSet; }
     const std::set <std::string>&
-                          getMusicXMLPartsKeepIDSet () const
-                              { return fMusicXMLPartsKeepIDSet; }
+                          getMxmlPartsKeepIDSet () const
+                              { return fMxmlPartsKeepIDSet; }
 
     const std::set <std::string>&
-                          getMusicXMLPartsIgnoreNameSet () const
-                              { return fMusicXMLPartsIgnoreNameSet; }
+                          getMxmlPartsIgnoreNameSet () const
+                              { return fMxmlPartsIgnoreNameSet; }
     const std::set <std::string>&
-                          getMusicXMLPartsKeepNameSet () const
-                              { return fMusicXMLPartsKeepNameSet; }
+                          getMxmlPartsKeepNameSet () const
+                              { return fMxmlPartsKeepNameSet; }
 
     // for checkOptionsConsistency()
     S_oahStringSetAtom
-                          getIgnoreMusicXMLPartIDAtom () const
-                              { return fIgnoreMusicXMLPartIDAtom; }
+                          getIgnoreMxmlPartIDAtom () const
+                              { return fIgnoreMxmlPartIDAtom; }
     S_oahStringSetAtom
-                          getKeepMusicXMLPartIDAtom () const
-                              { return fKeepMusicXMLPartIDAtom; }
+                          getKeepMxmlPartIDAtom () const
+                              { return fKeepMxmlPartIDAtom; }
 
     S_oahStringSetAtom
-                          getIgnoreMusicXMLPartNameAtom () const
-                              { return fIgnoreMusicXMLPartNameAtom; }
+                          getIgnoreMxmlPartNameAtom () const
+                              { return fIgnoreMxmlPartNameAtom; }
     S_oahStringSetAtom
-                          getKeepMusicXMLPartNameAtom () const
-                              { return fKeepMusicXMLPartNameAtom; }
+                          getKeepMxmlPartNameAtom () const
+                              { return fKeepMxmlPartNameAtom; }
 
     // clefs, keys, time signatures
     // --------------------------------------
@@ -245,14 +245,14 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // page and line breaks
     // --------------------------------------
 
-    Bool                  getIgnoreMusicXMLPageBreaks () const
-                              { return fIgnoreMusicXMLPageBreaks; }
+    Bool                  getIgnoreMxmlPageBreaks () const
+                              { return fIgnoreMxmlPageBreaks; }
 
     // line breaks
     // --------------------------------------
 
-    Bool                  getIgnoreMusicXMLLineBreaks () const
-                              { return fIgnoreMusicXMLLineBreaks; }
+    Bool                  getIgnoreMxmlLineBreaks () const
+                              { return fIgnoreMxmlLineBreaks; }
 
     // measures
     // --------------------------------------
@@ -307,8 +307,8 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // words conversions
     // --------------------------------------
 
-    Bool                  getIgnoreMusicXMLWords () const
-                              { return fIgnoreMusicXMLWords; }
+    Bool                  getIgnoreMxmlWords () const
+                              { return fIgnoreMxmlWords; }
 
     const std::set <std::string>&
                           getBoldWordsSet () const
@@ -646,23 +646,23 @@ class EXP mxsr2msrOahGroup : public oahGroup
     std::set <std::string>
                           fPartsIgnoreIDSet;
     std::set <std::string>
-                          fMusicXMLPartsKeepIDSet;
+                          fMxmlPartsKeepIDSet;
 
     std::set <std::string>
-                          fMusicXMLPartsIgnoreNameSet;
+                          fMxmlPartsIgnoreNameSet;
     std::set <std::string>
-                          fMusicXMLPartsKeepNameSet;
+                          fMxmlPartsKeepNameSet;
 
      // for checkOptionsConsistency()
     S_oahStringSetAtom
-                          fIgnoreMusicXMLPartIDAtom;
+                          fIgnoreMxmlPartIDAtom;
     S_oahStringSetAtom
-                          fKeepMusicXMLPartIDAtom;
+                          fKeepMxmlPartIDAtom;
 
     S_oahStringSetAtom
-                          fIgnoreMusicXMLPartNameAtom;
+                          fIgnoreMxmlPartNameAtom;
     S_oahStringSetAtom
-                          fKeepMusicXMLPartNameAtom;
+                          fKeepMxmlPartNameAtom;
 
     // staves
     // --------------------------------------
@@ -709,12 +709,12 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // page and line breaks
     // --------------------------------------
 
-    Bool                  fIgnoreMusicXMLPageBreaks;
+    Bool                  fIgnoreMxmlPageBreaks;
 
     // line breaks
     // --------------------------------------
 
-    Bool                  fIgnoreMusicXMLLineBreaks;
+    Bool                  fIgnoreMxmlLineBreaks;
 
     // measures
     // --------------------------------------
@@ -754,7 +754,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // words
     // --------------------------------------
 
-    Bool                  fIgnoreMusicXMLWords;
+    Bool                  fIgnoreMxmlWords;
 
     std::set <std::string>
                           fBoldWordsSet;

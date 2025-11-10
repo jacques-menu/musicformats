@@ -250,7 +250,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
 //     S_msrPart             appendPartToPartGroupByItsPartID ( // JMI superflous 0.9.69
 //                             const mfInputLineNumber& inputLineNumber,
-//                             const std::string& partMusicXMLID);
+//                             const std::string& PartMxmlID);
 
     void                  appendPartToPartGroup (S_msrPart part);
 
@@ -266,7 +266,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     S_msrPart             fetchPartFromPartGroupByItsPartID (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& partMusicXMLID);
+                            const std::string& PartMxmlID);
 
     void                  collectPartGroupPartsList (
                             const mfInputLineNumber& inputLineNumber,

@@ -167,10 +167,10 @@ std::string msrAlterationKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrAlterationKind& elt);
 
-EXP msrAlterationKind msrAlterationKindFromMusicXMLAlter (
+EXP msrAlterationKind msrAlterationKindFromMxmlAlter (
   float alter);
 
-EXP float msrMusicXMLAlterFromAlterationKind (
+EXP float msrMxmlAlterFromAlterationKind (
   msrAlterationKind alterationKind);
 
 // alterations preferences

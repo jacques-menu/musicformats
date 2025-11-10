@@ -10811,23 +10811,23 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
     }
   }
 
-  // check by partMusicXMLID
-  std::string partMusicXMLID =
-    part->getPartMusicXMLID ();
+  // check by PartMxmlID
+  std::string PartMxmlID =
+    part->getPartMxmlID ();
 
-  if (! gGlobalLpsr2lilypondOahGroup->getPartMusicXMLIDsTranspositionMap ().empty ()) {
+  if (! gGlobalLpsr2lilypondOahGroup->getPartMxmlIDsTranspositionMap ().empty ()) {
     std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
       it =
-        gGlobalLpsr2lilypondOahGroup->getPartMusicXMLIDsTranspositionMap ().find (
-          partMusicXMLID);
+        gGlobalLpsr2lilypondOahGroup->getPartMxmlIDsTranspositionMap ().find (
+          PartMxmlID);
 
-    if (it != gGlobalLpsr2lilypondOahGroup->getPartMusicXMLIDsTranspositionMap ().end ()) {
-      // partMusicXMLID is present in the map,
+    if (it != gGlobalLpsr2lilypondOahGroup->getPartMxmlIDsTranspositionMap ().end ()) {
+      // PartMxmlID is present in the map,
       // fetch the semitones pitch and octave
       semiTonesPitchAndOctave =
         (*it).second;
 
-      partIDFoundInTranspositionMap = partMusicXMLID;
+      partIDFoundInTranspositionMap = PartMxmlID;
       doTransposeCurrentPart = true;
     }
   }
@@ -10845,7 +10845,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
         " in part \"" <<
         partName <<
           ", part ID \"" <<
-        partMusicXMLID <<
+        PartMxmlID <<
         "\"";
 
       gWaeHandler->waeTrace (
@@ -13116,7 +13116,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 //       fCurrentNote->asShortString () <<
 //       " in voice \"" <<
 //       voiceToInsertInto->getPartPathLikeName () <<
-// //       " from staff " << fPreviousNoteMusicXMLStaffNumber <<
+// //       " from staff " << fPreviousNoteMxmlStaffNumber <<
 //       " to staff " << landingStaff->asShortString () <<
       ", to staff \"" << landingStaff->getStaffPathLikeName () << "\"" <<
       ", line " << elt->getInputLineNumber () <<
@@ -13883,7 +13883,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     if (fCurrentPart) {
       ss <<
         "\"" << fCurrentPart->getPartPathLikeName () << "\"" <<
-        " (partMusicXMLID \"" << fCurrentPart->getPartMusicXMLID () << "\")";
+        " (PartMxmlID \"" << fCurrentPart->getPartMxmlID () << "\")";
     }
     else {
       ss << "fCurrentPart is [NULL]";
@@ -14347,7 +14347,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
     if (fCurrentPart) {
       ss <<
         "\"" << fCurrentPart->getPartPathLikeName () << "\"" <<
-        " (partMusicXMLID \"" << fCurrentPart->getPartMusicXMLID () << "\")";
+        " (PartMxmlID \"" << fCurrentPart->getPartMxmlID () << "\")";
     }
     else {
       ss << "fCurrentPart is [NULL]";

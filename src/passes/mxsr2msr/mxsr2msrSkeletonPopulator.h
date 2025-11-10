@@ -1221,7 +1221,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     std::string               fCurrentDisplayText;
 
-    S_msrMusicXMLPrintLayout  fCurrentMusicXMLPrintLayout;
+    S_msrMxmlPrintLayout      fCurrentMxmlPrintLayout;
 
     Bool                      fOnGoingPrint;
 
@@ -1302,7 +1302,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
 		void											displayPartsMap () const;
 
-    void                      handlePartMusicXMLID (
+    void                      handlePartMxmlID (
                                 const mfInputLineNumber& inputLineNumber,
                                 const std::string idString);
 
@@ -1539,10 +1539,10 @@ class EXP mxsr2msrSkeletonPopulator :
     // notes handling
     // ------------------------------------------------------
 
-    int                       fCurrentNoteMusicXMLStaffNumber;
-    int                       fPreviousNoteMusicXMLStaffNumber;
+    int                       fCurrentNoteMxmlStaffNumber;
+    int                       fPreviousNoteMxmlStaffNumber;
 
-    int                       fCurrentNoteMusicXMLVoiceNumber; // used throughout
+    int                       fCurrentNoteMxmlVoiceNumber; // used throughout
 
     S_msrNote                 fCurrentNote;
 
@@ -2600,8 +2600,8 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fCurrentForwardDuration;
     Bool                      fOnGoingForward;
 
-    int                       fCurrentMusicXMLForwardStaffNumber;
-    int                       fCurrentMusicXMLForwardVoiceNumber;
+    int                       fCurrentMxmlForwardStaffNumber;
+    int                       fCurrentMxmlForwardVoiceNumber;
 
 //     Bool                      fAForwardHasJustBeenHandled;
     std::list <S_msrVoice>    fForwardedToVoicesList;

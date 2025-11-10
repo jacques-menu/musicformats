@@ -42,11 +42,11 @@ class EXP msrPart : public msrPartGroupElement
 
     static SMARTP<msrPart> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       partMusicXMLID);
+                            const std::string&       partMxmlID);
 
     static SMARTP<msrPart> create (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       partMusicXMLID,
+                            const std::string&       partMxmlID,
                             const S_msrPartGroup&    partUpLinkToPartGroup);
 
     SMARTP<msrPart> createPartNewbornClone (
@@ -59,7 +59,7 @@ class EXP msrPart : public msrPartGroupElement
 
                           msrPart (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string&       partMusicXMLID);
+                            const std::string&       partMxmlID);
 
     virtual               ~msrPart ();
 
@@ -91,11 +91,11 @@ class EXP msrPart : public msrPartGroupElement
 
     // part MusicXML ID
 
-    void                  setPartMusicXMLID (const std::string& partMusicXMLID)
-                              { fPartMusicXMLID = partMusicXMLID; }
+    void                  setPartMxmlID (const std::string& partMxmlID)
+                              { fPartMxmlID = partMxmlID; }
 
-    std::string           getPartMusicXMLID () const
-                              { return fPartMusicXMLID; }
+    std::string           getPartMxmlID () const
+                              { return fPartMxmlID; }
 
     // part path-like name
 
@@ -532,18 +532,8 @@ class EXP msrPart : public msrPartGroupElement
                             int                      measureRepeatMeasuresNumber,
                             int                      measureRepeatSlashesNumber);
 
-//     void                  cascadeCreateAMeasureRepeatAndAppendItToPart (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             int                      previousMeasureEndInputLineNumber,
-//                             const mfMeasureNumber&   measureNumber,
-//                             msrMeasureImplicitKind   measureImplicitKind);
-
     void                  appendPendingMeasureRepeatToPart (
                             const mfInputLineNumber& inputLineNumber);
-
-//     void                  appendMeasureRepeatCloneToPart ( JMI UNUSED 0.9.66
-//                             const mfInputLineNumber&        inputLineNumber,
-//                             const S_msrMultiMeasureRest& multiMeasureRests);
 
     // frames
 
@@ -556,7 +546,7 @@ class EXP msrPart : public msrPartGroupElement
                             const mfMeasureNumber&   currentMeasureNumber);
 
     void                  appendHarmonyToPart (
-                            const mfInputLineNumber&  inputLineNumber,
+                            const mfInputLineNumber&   inputLineNumber,
                             const S_msrHarmony&        harmony,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
@@ -660,7 +650,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // part ID and names
 
-    std::string           fPartMusicXMLID; // native
+    std::string           fPartMxmlID; // native
 
     std::string           fPartPathLikeName;
                             // we use a pathname analogy so identify

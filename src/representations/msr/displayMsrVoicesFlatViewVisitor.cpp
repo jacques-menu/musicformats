@@ -428,8 +428,8 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrPart& elt)
 //
 //   gLog << std::left <<
 //     std::setw (fieldWidth) <<
-//     "partMusicXMLID" << ": \"" <<
-//     elt->getPartMusicXMLID () << "\"" <<
+//     "PartMxmlID" << ": \"" <<
+//     elt->getPartMxmlID () << "\"" <<
 //     std::endl <<
 //
 //     std::setw (fieldWidth) <<

@@ -384,8 +384,8 @@ class EXP msrVoice : public msrElement
                             const mfVoiceNumber& voiceNumber);
 
     // print layout MusicXML specific??? JMI
-     void                 appendMusicXMLPrintLayoutToVoice (
-                            const S_msrMusicXMLPrintLayout& musicXMLPrintLayout);
+     void                 appendMxmlPrintLayoutToVoice (
+                            const S_msrMxmlPrintLayout& MxmlPrintLayout);
 
     // measures
 
@@ -542,7 +542,7 @@ class EXP msrVoice : public msrElement
                             const S_msrHarmony&        harmony,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
-    void                  appendHarmoniesListToVoice (
+    void                  cascadeAppendHarmoniesListToVoice (
                             const mfInputLineNumber&        inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
                             const mfPositionInMeasure&      positionInMeasureToAppendAt);
@@ -695,7 +695,7 @@ class EXP msrVoice : public msrElement
 //     void                  handleRepeatEndInVoiceClone (
 //                             const mfInputLineNumber& inputLineNumber);
 
-    void                  handleRepeatEndInVoice (
+    void                  edacsacHandleRepeatEndInVoice (
                             const mfInputLineNumber& inputLineNumber,
                             const mfMeasureNumber&   measureNumber,
                             int                      repeatTimes);
@@ -709,7 +709,7 @@ class EXP msrVoice : public msrElement
     void                  edacsacHandleRepeatEndingStartInVoice (
                             const mfInputLineNumber& inputLineNumber);
 
-    void                  handleRepeatEndingEndInVoice (
+    void                  edacsacHandleRepeatEndingEndInVoice (
                             const mfInputLineNumber& inputLineNumber,
                             const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind      repeatEndingKind);
@@ -752,7 +752,7 @@ class EXP msrVoice : public msrElement
                             msrUseSymbolsKind multiMeasureRestUseSymbolsKind);
 
     void                  cascadeAppendMultiMeasureRestToVoice (
-                            const mfInputLineNumber&        inputLineNumber,
+                            const mfInputLineNumber&     inputLineNumber,
                             const S_msrMultiMeasureRest& multiMeasureRest);
 
     void                  replicateLastAppendedMeasureInVoice (
@@ -913,7 +913,7 @@ class EXP msrVoice : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             const                    std::string& context);
 
-    void                  handleVoiceLevelRepeatStartInVoice (
+    void                  handleVoiceLevelRepeatStart (
                             const mfInputLineNumber& inputLineNumber);
 
     void                  handleNestedRepeatStartInVoice (

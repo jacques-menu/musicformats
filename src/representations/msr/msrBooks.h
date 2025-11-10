@@ -21,7 +21,7 @@
 
 #include "msrCredits.h"
 #include "msrIdentification.h"
-#include "msrMusicXMLBasicTypes.h"
+#include "msrMxmlBasicTypes.h"
 #include "msrScaling.h"
 
 #include "msrBookElements.h"

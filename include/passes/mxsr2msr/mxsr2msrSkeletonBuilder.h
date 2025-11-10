@@ -625,7 +625,7 @@ class EXP mxsr2msrSkeletonBuilder :
     // voice handling
     // ------------------------------------------------------
 
-    int                       fCurrentMusicXMLVoiceNumber; // used throughout
+    int                       fCurrentMxmlVoiceNumber; // used throughout
 
     S_msrMeasureElement       fPreviousMeasureElement;
 

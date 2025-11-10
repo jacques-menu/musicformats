@@ -2477,7 +2477,7 @@ void msrStaff::cascadeHandleRepeatEndInStaff (
   for (S_msrVoice voice : fStaffAllVoicesList) {
     ++gIndenter;
     voice->
-      handleRepeatEndInVoice (
+      edacsacHandleRepeatEndInVoice (
         inputLineNumber,
         measureNumber,
         repeatTimes);
@@ -2551,7 +2551,7 @@ void msrStaff::cascadeHandleRepeatEndingEndInStaff (
   for (S_msrVoice voice : fStaffAllVoicesList) {
     ++gIndenter;
     voice->
-      handleRepeatEndingEndInVoice (
+      edacsacHandleRepeatEndingEndInVoice (
         inputLineNumber,
         repeatEndingNumber,
         repeatEndingKind);

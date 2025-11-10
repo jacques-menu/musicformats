@@ -1227,7 +1227,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     createMxmlelement (
       k_score_instrument,
       "");
-  // set it's "id" attribute later, when the partMusicXMLID is known!
+  // set it's "id" attribute later, when the PartMxmlID is known!
   // create an instrument name element
   Sxmlelement
     scoreInstrumentNameElement =
@@ -1637,7 +1637,7 @@ void msr2mxsrTranslator::visitStart (S_msrSystemLayout& elt)
     systemLayoutElement =
       createMxmlelement (k_system_layout, "");
 
-  if (fOnGoingMusicXMLPrintLayout) {
+  if (fOnGoingMxmlPrintLayout) {
     // append it to the current print element
     fCurrentPrintElement->push (
       systemLayoutElement);
@@ -1760,7 +1760,7 @@ void msr2mxsrTranslator::visitStart (S_msrStaffLayout& elt)
       staffDistanceElement);
   }
 
-  if (fOnGoingMusicXMLPrintLayout) {
+  if (fOnGoingMxmlPrintLayout) {
     // append it to the current print element
     fCurrentPrintElement->push (
       staffLayoutElement);
@@ -1805,7 +1805,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureLayout& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fOnGoingMusicXMLPrintLayout) {
+  if (fOnGoingMxmlPrintLayout) {
     // create a measure layout element
     Sxmlelement
       measureLayoutElement =
@@ -2759,8 +2759,8 @@ if (false) // JMI
   gLog << elt << std::endl;
 
   std::string
-    partMusicXMLID =
-      elt->getPartMusicXMLID (),
+    PartMxmlID =
+      elt->getPartMxmlID (),
     partName =
       elt->getPartName (),
     partAbbreviation =
@@ -2819,7 +2819,7 @@ if (false) // JMI
   // create a score part element
   fScorePartElement = createMxmlelement (k_score_part, "");
   // set it's "id" attribute
-  fScorePartElement->add (createMxmlAttribute ("id", partMusicXMLID));
+  fScorePartElement->add (createMxmlAttribute ("id", PartMxmlID));
 
   // append it to the part list element
   fScorePartListElement->push (fScorePartElement);
@@ -2842,8 +2842,8 @@ if (false) // JMI
   if (fScoreInstrumentElement) {
     // set its id
     std::string
-      partMusicXMLID = fCurrentMSRPart->getPartMusicXMLID ();
-    fScoreInstrumentElement->add (createMxmlAttribute ("id", partMusicXMLID + "I1"));
+      PartMxmlID = fCurrentMSRPart->getPartMxmlID ();
+    fScoreInstrumentElement->add (createMxmlAttribute ("id", PartMxmlID + "I1"));
 
     // append it to the score instrument element
     fScorePartElement->push (
@@ -2853,7 +2853,7 @@ if (false) // JMI
   // create a part element
   fCurrentPartElement = createMxmlelement (k_part, "");
   // set its "id" attribute
-  fCurrentPartElement->add (createMxmlAttribute ("id", partMusicXMLID));
+  fCurrentPartElement->add (createMxmlAttribute ("id", PartMxmlID));
 
   // append it to the pending part elements list
   fPendingPartElementsList.push_back (fCurrentPartElement);
@@ -3430,11 +3430,11 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
   }
 
   // is there a print element to be appended?
-  S_msrMusicXMLPrintLayout
-    measureMusicXMLPrintLayout =
-      elt->getMeasureMusicXMLPrintLayout ();
+  S_msrMxmlPrintLayout
+    measureMxmlPrintLayout =
+      elt->getMeasureMxmlPrintLayout ();
 
-  if (measureMusicXMLPrintLayout) {
+  if (measureMxmlPrintLayout) {
     if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
       // create a print comment
       std::stringstream ss;
@@ -3543,14 +3543,14 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator::visitStart (S_msrMusicXMLPrintLayout& elt)
+void msr2mxsrTranslator::visitStart (S_msrMxmlPrintLayout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrMusicXMLPrintLayout '" <<
+      "--> Start visiting msrMxmlPrintLayout '" <<
       "', line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -3560,7 +3560,7 @@ void msr2mxsrTranslator::visitStart (S_msrMusicXMLPrintLayout& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMxmlPrintLayouts ()) {
     std::stringstream ss;
 
     ss <<
@@ -3610,17 +3610,17 @@ void msr2mxsrTranslator::visitStart (S_msrMusicXMLPrintLayout& elt)
     fCurrentPrintElement->add (createMxmlAttribute ("page-number", ss.str ()));
   }
 
-  fOnGoingMusicXMLPrintLayout = true;
+  fOnGoingMxmlPrintLayout = true;
 }
 
-void msr2mxsrTranslator::visitEnd (S_msrMusicXMLPrintLayout& elt)
+void msr2mxsrTranslator::visitEnd (S_msrMxmlPrintLayout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrMusicXMLPrintLayout '" <<
+      "--> End visiting msrMxmlPrintLayout '" <<
       "', line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -3632,7 +3632,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMusicXMLPrintLayout& elt)
   // forget about the current print layout element
   fCurrentPrintElement = nullptr;
 
-  fOnGoingMusicXMLPrintLayout = false;
+  fOnGoingMxmlPrintLayout = false;
 }
 
 //________________________________________________________________________
@@ -7192,8 +7192,8 @@ void msr2mxsrTranslator::appendBasicsToNote (
       theMsrNote->getNoteOctaveKind ();
 
   float
-    noteMusicXMLAlter =
-      msrMusicXMLAlterFromAlterationKind (
+    noteMxmlAlter =
+      msrMxmlAlterFromAlterationKind (
         noteAlterationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -7263,10 +7263,10 @@ void msr2mxsrTranslator::appendBasicsToNote (
             k_step,
             msrDiatonicPitchKindAsString (noteDiatonicPitchKind)));
 
-        if (noteMusicXMLAlter != 0.0) {
+        if (noteMxmlAlter != 0.0) {
           // append the alter element
           std::stringstream ss;
-          ss << std::setprecision (2) << noteMusicXMLAlter;
+          ss << std::setprecision (2) << noteMxmlAlter;
           pitchElement->push (
             createMxmlelement (
               k_alter,
@@ -7303,10 +7303,10 @@ void msr2mxsrTranslator::appendBasicsToNote (
             k_step,
             msrDiatonicPitchKindAsString (noteDiatonicPitchKind)));
 
-        if (noteMusicXMLAlter != 0.0) {
+        if (noteMxmlAlter != 0.0) {
           // append the alter element
           std::stringstream ss;
-          ss << std::setprecision (2) << noteMusicXMLAlter;
+          ss << std::setprecision (2) << noteMxmlAlter;
           pitchElement->push (
             createMxmlelement (
               k_alter,

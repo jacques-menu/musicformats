@@ -967,7 +967,7 @@ void testWholeNotes ()
 
 
 //______________________________________________________________________________
-mfDurationKind mfDurationKindFromMusicXMLGraphicNoteType (
+mfDurationKind mfDurationKindFromMxmlGraphicNoteType (
   const mfInputLineNumber& inputLineNumber,
   const std::string& durationString)
 {

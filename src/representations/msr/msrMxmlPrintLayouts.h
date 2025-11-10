@@ -9,20 +9,20 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrMusicXMLPrintLayouts___
-#define ___msrMusicXMLPrintLayouts___
+#ifndef ___msrMxmlPrintLayouts___
+#define ___msrMxmlPrintLayouts___
 
 #include <list>
 
 #include "msrMeasureElements.h"
-#include "msrMusicXMLBasicTypes.h"
+#include "msrMxmlBasicTypes.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrMusicXMLPrintLayout : public msrMeasureElement
+class EXP msrMxmlPrintLayout : public msrMeasureElement
   // include it for MusicXML generation from MSR
 {
 /*
@@ -80,11 +80,11 @@ class EXP msrMusicXMLPrintLayout : public msrMeasureElement
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<msrMusicXMLPrintLayout> create (
+    static SMARTP<msrMxmlPrintLayout> create (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
-    static SMARTP<msrMusicXMLPrintLayout> create (
+    static SMARTP<msrMxmlPrintLayout> create (
                             const mfInputLineNumber& inputLineNumber);
 
   protected:
@@ -92,11 +92,11 @@ class EXP msrMusicXMLPrintLayout : public msrMeasureElement
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msrMusicXMLPrintLayout (
+                          msrMxmlPrintLayout (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
-    virtual               ~msrMusicXMLPrintLayout ();
+    virtual               ~msrMxmlPrintLayout ();
 
   public:
 
@@ -209,11 +209,11 @@ class EXP msrMusicXMLPrintLayout : public msrMeasureElement
 
     int                   fPageNumber;
 };
-typedef SMARTP<msrMusicXMLPrintLayout> S_msrMusicXMLPrintLayout;
-EXP std::ostream& operator << (std::ostream& os, const S_msrMusicXMLPrintLayout& elt);
+typedef SMARTP<msrMxmlPrintLayout> S_msrMxmlPrintLayout;
+EXP std::ostream& operator << (std::ostream& os, const S_msrMxmlPrintLayout& elt);
 
 
 }
 
 
-#endif // ___msrMusicXMLPrintLayouts___
+#endif // ___msrMxmlPrintLayouts___

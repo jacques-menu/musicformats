@@ -717,15 +717,15 @@ void msrSegment::setNextMeasureNumberInSegment (
   --gIndenter;
 }
 
-void msrSegment::appendMusicXMLPrintLayoutToSegment (
-  const S_msrMusicXMLPrintLayout& musicXMLPrintLayout)
+void msrSegment::appendMxmlPrintLayoutToSegment (
+  const S_msrMxmlPrintLayout& MxmlPrintLayout)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMxmlPrintLayouts ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending print layout " << musicXMLPrintLayout->asString () <<
+      "Appending print layout " << MxmlPrintLayout->asString () <<
       " to segment " << asString () <<
       ", in voice "<<
       fetchVoiceName (fSegmentUpLinkToVoice);
@@ -744,7 +744,7 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "appendMusicXMLPrintLayoutToSegment()" <<
+//       "appendMxmlPrintLayoutToSegment()" <<
 //       ", fSegmentElementsList is empty in segment " <<
 //       this->asString () <<
 //       ", in voice " <<
@@ -756,7 +756,7 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
-//       musicXMLPrintLayout->getInputLineNumber (),
+//       MxmlPrintLayout->getInputLineNumber (),
 //       __FILE__, mfInputLineNumber (__LINE__),
 //       ss.str ());
 //   }
@@ -764,7 +764,7 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
 
   // register print layout in segments's current measure
   fSegmentLastMeasure->
-    appendMusicXMLPrintLayoutToMeasure (musicXMLPrintLayout);
+    appendMxmlPrintLayoutToMeasure (MxmlPrintLayout);
 
   --gIndenter;
 }
@@ -1449,7 +1449,7 @@ void msrSegment::appendHarmonyToSegment (
   --gIndenter;
 }
 
-void msrSegment::appendHarmoniesListToSegment (
+void msrSegment::cascadeAppendHarmoniesListToSegment (
   const mfInputLineNumber&        inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
   const mfPositionInMeasure&      positionInMeasureToAppendAt)
@@ -1473,7 +1473,7 @@ void msrSegment::appendHarmoniesListToSegment (
 
   // append the harmonies to this segment
   fSegmentLastMeasure->
-    appendHarmoniesListToMeasure(
+    edacsacAppendHarmoniesListToMeasure (
       inputLineNumber,
       harmoniesList,
       positionInMeasureToAppendAt);

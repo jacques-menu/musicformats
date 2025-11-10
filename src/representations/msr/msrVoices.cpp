@@ -1846,15 +1846,15 @@ void msrVoice::setVoiceCurrentTimeSignature (
   fVoiceCurrentTimeSignature = timeSignature;
 };
 
-void msrVoice::appendMusicXMLPrintLayoutToVoice (
-  const S_msrMusicXMLPrintLayout& musicXMLPrintLayout)
+void msrVoice::appendMxmlPrintLayoutToVoice (
+  const S_msrMxmlPrintLayout& MxmlPrintLayout)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMusicXMLPrintLayouts ()) {
+  if (gTraceOahGroup->getTraceMxmlPrintLayouts ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending print layout " << musicXMLPrintLayout->asString () <<
+      "Appending print layout " << MxmlPrintLayout->asString () <<
       " to voice " <<
       asString ();
 
@@ -1867,7 +1867,7 @@ void msrVoice::appendMusicXMLPrintLayoutToVoice (
   ++gIndenter;
 
   fVoiceSegment->
-    appendMusicXMLPrintLayoutToSegment (musicXMLPrintLayout);
+    appendMxmlPrintLayoutToSegment (MxmlPrintLayout);
 
   --gIndenter;
 }
@@ -2421,7 +2421,7 @@ void msrVoice::edacsacAppendHarmonyToVoice ( // cascade bottom
   fVoiceIsMusicallyEmpty = false;
 }
 
-void msrVoice::appendHarmoniesListToVoice (
+void msrVoice::cascadeAppendHarmoniesListToVoice (
   const mfInputLineNumber&        inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
   const mfPositionInMeasure&      positionInMeasureToAppendAt)
@@ -2444,7 +2444,7 @@ void msrVoice::appendHarmoniesListToVoice (
 
   // append the harmonies to the voice the voice segment
   fVoiceSegment->
-    appendHarmoniesListToSegment (
+    cascadeAppendHarmoniesListToSegment (
       inputLineNumber,
       harmoniesList,
       positionInMeasureToAppendAt);
@@ -4200,7 +4200,7 @@ void msrVoice::edacsacHandleRepeatStartInVoice (
         case 0:
           // this repeat start is at the voice-level
           // -------------------------------------
-          handleVoiceLevelRepeatStartInVoice (
+          handleVoiceLevelRepeatStart (
             inputLineNumber);
           break;
 
@@ -4773,7 +4773,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrVoice::handleRepeatEndInVoice (
+void msrVoice::edacsacHandleRepeatEndInVoice (
   const mfInputLineNumber& inputLineNumber,
   const mfMeasureNumber&    measureNumber,
   int                       repeatTimes)
@@ -4782,11 +4782,11 @@ void msrVoice::handleRepeatEndInVoice (
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleRepeatEndInVoice() BEGIN");
+      "edacsacHandleRepeatEndInVoice() BEGIN");
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   gLog << "*** msrVoice::handleRepeatEndInVoice(), *this: ***" <<
+//   gLog << "*** msrVoice::edacsacHandleRepeatEndInVoice(), *this: ***" <<
 //     std::endl <<
 //     *this <<
 //     std::endl <<
@@ -4899,7 +4899,7 @@ void msrVoice::handleRepeatEndInVoice (
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     displayPendingRepeatsStack (
       inputLineNumber,
-      "handleRepeatEndInVoice() END");
+      "edacsacHandleRepeatEndInVoice() END");
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -4908,6 +4908,14 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
   const mfInputLineNumber& inputLineNumber,
   S_msrRepeat&             currentRepeat)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    currentRepeat != nullptr,
+    "currentRepeat is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
@@ -4933,10 +4941,9 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 
   ++gIndenter;
 
-  S_msrRepeat           repeat;
   S_msrRepeatCommonPart repeatCommonPart;
 
-  if (currentRepeat) {
+  if (currentRepeat) { // JMI ???
     repeatCommonPart =
       currentRepeat->
         getRepeatCommonPart ();
@@ -4947,31 +4954,30 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
     std::stringstream s1;
 
     s1 <<
-      "Creating a voice-level repeat upon its first ending in voice " <<
+      "Creating a voice-level repeat upon its first ENDING start WITHOUT explicit start in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
 
-  S_msrRepeat
-    newRepeat;
-//     newRepeat =
-//       msrRepeat::createWithCommonPart (
-//         inputLineNumber,
-//         repeatTimes,
-//         this);
+    S_msrRepeat
+      newRepeat =
+        msrRepeat::createWithCommonPartAndUplink (
+          inputLineNumber,
+          currentRepeat->getRepeatTimes (),
+          this);
 
   // push repeat clone as the (new) current repeat
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
-    std::stringstream ss;
+    if (gTraceOahGroup->getTraceRepeatsBasics ()) {
+      std::stringstream ss;
 
-    ss <<
-      "Pushing repeat clone as the new current repeat in voice " <<
-      fVoiceName;
+      ss <<
+        "Pushing repeat clone as the new current repeat in voice " <<
+        fVoiceName;
 
-    gWaeHandler->waeTrace (
-      __FILE__, mfInputLineNumber (__LINE__),
-      ss.str ());
-  }
+      gWaeHandler->waeTrace (
+        __FILE__, mfInputLineNumber (__LINE__),
+        ss.str ());
+    }
 #endif // MF_TRACE_IS_ENABLED
 
   // push the repeat clone onto the voice's repeat descrs stack
@@ -5064,6 +5070,12 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       "Moving the voice the voice segment to the repeat COMMON PART in voice " <<
       fVoiceName <<
       ", line " << inputLineNumber;
+
+  // move the voice last measure to the new repeat common part
+  moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart (
+    inputLineNumber,
+    currentRepeat->getRepeatCommonPart (),
+    "handleVoiceLevelRepeatEndWithStart()");
 
 //     moveVoiceLastSegmentToRepeatCommonPart (
 //       inputLineNumber,
@@ -5212,6 +5224,13 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       fVoiceName <<
       ", line " << inputLineNumber;
 
+    // move the voice last measure to the new repeat common part
+    moveVoiceSegmentLastAppendedMeasureToRepeatCommonPart (
+      inputLineNumber,
+      currentRepeat->getRepeatCommonPart (),
+      s2.str ());
+
+//       "handleVoiceLevelRepeatEndingStartWithExplicitStart()");
 //     moveVoiceLastSegmentToRepeatCommonPart (
 //       inputLineNumber,
 //       repeatCommonPart,
@@ -5238,7 +5257,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
   --gIndenter;
 }
 
-void msrVoice::handleVoiceLevelRepeatStartInVoice (
+void msrVoice::handleVoiceLevelRepeatStart (
   const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5260,7 +5279,7 @@ void msrVoice::handleVoiceLevelRepeatStartInVoice (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
-      "handleVoiceLevelRepeatStartInVoice() 1");
+      "handleVoiceLevelRepeatStart() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5295,13 +5314,13 @@ void msrVoice::handleVoiceLevelRepeatStartInVoice (
   pushRepeatOntoVoiceRepeatsStack (
     inputLineNumber,
     newRepeat,
-    "handleVoiceLevelRepeatStartInVoice()");
+    "handleVoiceLevelRepeatStart()");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
-      "handleVoiceLevelRepeatStartInVoice()");
+      "handleVoiceLevelRepeatStart()");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5349,7 +5368,7 @@ void msrVoice::handleVoiceLevelRepeatStartInVoice (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayVoiceRepeatsStackSummary (
       inputLineNumber,
-      "handleVoiceLevelRepeatStartInVoice() 11");
+      "handleVoiceLevelRepeatStart() 11");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7939,7 +7958,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
   --gIndenter;
 }
 
-void msrVoice::handleRepeatEndingEndInVoice (
+void msrVoice::edacsacHandleRepeatEndingEndInVoice (
   const mfInputLineNumber& inputLineNumber,
   const std::string&       repeatEndingNumber, // a string, because if may be "1, 2" for example
   msrRepeatEndingKind repeatEndingKind)

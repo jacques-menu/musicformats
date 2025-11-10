@@ -17,7 +17,7 @@
 #include "msrAlignments.h"
 #include "msrElements.h"
 #include "msrFonts.h"
-#include "msrMusicXMLBasicTypes.h"
+#include "msrMxmlBasicTypes.h"
 #include "msrPlacements.h"
 
 

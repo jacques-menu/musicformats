@@ -3222,7 +3222,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
       std::endl <<
       "<!--=== " <<
       "part \"" << fCurrentPartName << "\"" <<
-      " (partMusicXMLID \"" << fCurrentPart->getPartMusicXMLID () << "\")" <<
+      " (PartMxmlID \"" << fCurrentPart->getPartMxmlID () << "\")" <<
       ", measure \"" << fCurrentMeasureNumber << "\"" <<
       "', voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
@@ -6609,7 +6609,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatEnding& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
-    handleRepeatEndingEndInVoice (
+    edacsacHandleRepeatEndingEndInVoice (
       elt->getInputLineNumber (),
       elt->getRepeatEndingNumber (),
       elt->getRepeatEndingKind ());

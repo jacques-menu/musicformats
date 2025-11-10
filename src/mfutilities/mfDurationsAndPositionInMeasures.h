@@ -40,7 +40,7 @@ std::string mfDurationKindAsString (mfDurationKind notesDurationKind);
 
 std::ostream& operator << (std::ostream& os, const mfDurationKind& elt);
 
-EXP mfDurationKind mfDurationKindFromMusicXMLGraphicNoteType (
+EXP mfDurationKind mfDurationKindFromMxmlGraphicNoteType (
   const mfInputLineNumber& inputLineNumber,
   const std::string& durationString);
 

@@ -585,7 +585,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
   fPartsVector.push_back (thePart);
 
   // register it in the parts map
-  fPartsMap [thePart->getPartMusicXMLID ()] = thePart;
+  fPartsMap [thePart->getPartMxmlID ()] = thePart;
 
 	// append it to current part group
 	S_msrPartGroup
@@ -4098,7 +4098,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
     ss <<
 //       std::endl <<
       "<!--=== "
-      " partMusicXMLID \"" << fCurrentPartID << "\"" <<
+      " PartMxmlID \"" << fCurrentPartID << "\"" <<
 //       "partName \"" << fCurrentPartName << "\"" << JMI from fPartGroupElementsList ??? 0.9.67
       ", line " << elt->getInputLineNumber () <<
       " ===-->";
@@ -6769,7 +6769,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_type& elt)
 
 //     // the type contains a display duration
 //     fCurrentNoteNormalTypeNotesDuration =
-//       mfDurationKindFromMusicXMLGraphicNoteType (
+//       mfDurationKindFromMxmlGraphicNoteType (
 //         elt->getInputLineNumber (),
 //         normalTypeString);
 

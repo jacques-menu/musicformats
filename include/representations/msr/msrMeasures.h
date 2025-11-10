@@ -17,10 +17,10 @@
 #include "msrClefKeyTimeSignatureGroups.h"
 #include "msrMeasuresEnumTypes.h"
 #include "msrMeasureElements.h"
-#include "msrMusicXMLPrintLayouts.h"
+#include "msrMxmlPrintLayouts.h"
 #include "mfMoments.h"
 #include "msrNotes.h"
-#include "msrMusicXMLPrintLayouts.h"
+#include "msrMxmlPrintLayouts.h"
 #include "msrSegments.h"
 #include "msrSegmentElements.h"
 
@@ -344,12 +344,12 @@ class EXP msrMeasure : public msrSegmentElement
 
     // print layout
 
-    void                  appendMusicXMLPrintLayoutToMeasure (
-                            const S_msrMusicXMLPrintLayout& musicXMLPrintLayout);
+    void                  appendMxmlPrintLayoutToMeasure (
+                            const S_msrMxmlPrintLayout& mxmlPrintLayout);
 
-    S_msrMusicXMLPrintLayout
-                          getMeasureMusicXMLPrintLayout () const
-                              { return fMeasureMusicXMLPrintLayout; }
+    S_msrMxmlPrintLayout
+                          getMeasureMxmlPrintLayout () const
+                              { return fMeasureMxmlPrintLayout; }
 
     // clef, key, time signature
 
@@ -503,7 +503,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrHarmony&      harmony);
 
-    void                  appendHarmoniesListToMeasure (
+    void                  edacsacAppendHarmoniesListToMeasure (
                             const mfInputLineNumber&        inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
                             const mfPositionInMeasure&      positionInMeasureToAppendAt);
@@ -750,8 +750,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure print layout, MusicXML specific
 
-    S_msrMusicXMLPrintLayout
-                          fMeasureMusicXMLPrintLayout;
+    S_msrMxmlPrintLayout fMeasureMxmlPrintLayout;
 
 /* JMI
     // measure shortest note

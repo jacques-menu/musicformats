@@ -579,8 +579,8 @@ void lpsrPartBlock::print (std::ostream& os) const
     std::setw (fieldWidth) << std::string ("") + "partName" << ": \"" <<
     fPart->getPartName () << "\"" <<
     std::endl <<
-    std::setw (fieldWidth) << std::string ("") + "partMusicXMLID" << ": \"" <<
-    fPart->getPartMusicXMLID () << "\"" <<
+    std::setw (fieldWidth) << std::string ("") + "PartMxmlID" << ": \"" <<
+    fPart->getPartMxmlID () << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) << std::string ("") + "partAbbreviation" << ": \"" <<

@@ -317,7 +317,7 @@ void msrScore::appendCreditToScore (
 
 S_msrPart msrScore::fetchPartFromScoreByItsPartID (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& partMusicXMLID)
+  const std::string& PartMxmlID)
 {
   S_msrPart result;
 
@@ -326,7 +326,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
     std::stringstream ss;
 
     ss <<
-      "fetchPartFromScoreByItsPartID(" << partMusicXMLID << "), fPartGroupsList contains:" <<
+      "fetchPartFromScoreByItsPartID(" << PartMxmlID << "), fPartGroupsList contains:" <<
       std::endl;
 
     ++gIndenter;
@@ -348,7 +348,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
     --gIndenter;
 
     ss <<
-      "<=- fetchPartFromScoreByItsPartID(" << partMusicXMLID << ")" <<
+      "<=- fetchPartFromScoreByItsPartID(" << PartMxmlID << ")" <<
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
@@ -367,7 +367,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
         (*i)->
           fetchPartFromPartGroupByItsPartID (
             inputLineNumber,
-            partMusicXMLID);
+            PartMxmlID);
 
     if (part) {
       result = part;

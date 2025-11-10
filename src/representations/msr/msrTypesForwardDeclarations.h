@@ -252,8 +252,8 @@ typedef SMARTP<msrPathToVoice> S_msrPathToVoice;
 class   msrPedal;
 typedef SMARTP<msrPedal> S_msrPedal;
 
-class   msrMusicXMLPrintLayout;
-typedef SMARTP<msrMusicXMLPrintLayout> S_msrMusicXMLPrintLayout;
+class   msrMxmlPrintLayout;
+typedef SMARTP<msrMxmlPrintLayout> S_msrMxmlPrintLayout;
 
 class   msrRehearsalMark;
 typedef SMARTP<msrRehearsalMark> S_msrRehearsalMark;

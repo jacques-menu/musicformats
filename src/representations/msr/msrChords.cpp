@@ -22,7 +22,7 @@
 #include "msrArticulations.h"
 #include "msrGlissandos.h"
 #include "msrMeasureConstants.h"
-#include "msrMusicXMLBasicTypes.h"
+#include "msrMxmlBasicTypes.h"
 #include "msrSlides.h"
 #include "msrTechnicals.h"
 #include "msrTuplets.h"

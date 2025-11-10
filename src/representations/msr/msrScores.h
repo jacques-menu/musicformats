@@ -22,7 +22,7 @@
 #include "msrBooks.h"
 #include "msrCredits.h"
 #include "msrIdentification.h"
-#include "msrMusicXMLBasicTypes.h"
+#include "msrMxmlBasicTypes.h"
 #include "msrPartGroups.h"
 #include "msrScaling.h"
 #include "msrMeasuresSlices.h"
@@ -346,7 +346,7 @@ class EXP msrScore : public msrBookElement
 
     S_msrPart             fetchPartFromScoreByItsPartID (
                             const mfInputLineNumber& inputLineNumber,
-                            const std::string& partMusicXMLID);
+                            const std::string& PartMxmlID);
 
     void                  collectScorePartsInList (
                             const mfInputLineNumber& inputLineNumber,

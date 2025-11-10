@@ -796,7 +796,7 @@ R"()",
   // ignore MusicXML part ID
   // --------------------------------------
 
-  fIgnoreMusicXMLPartIDAtom =
+  fIgnoreMxmlPartIDAtom =
     oahStringSetAtom::create (
       "ignore-musicxml-part-with-id", "igmxmlpartwithid",
 R"(Ignore the part with ID PART_ID, which is a std::string.
@@ -809,12 +809,12 @@ This option is incompatible with '-mkpi, -msr-keep-musicxml-part-with-id'.)",
 
   subGroup->
     appendAtomToSubGroup (
-      fIgnoreMusicXMLPartIDAtom);
+      fIgnoreMxmlPartIDAtom);
 
   // ignore MusicXML part name
   // --------------------------------------
 
-  fIgnoreMusicXMLPartNameAtom =
+  fIgnoreMxmlPartNameAtom =
     oahStringSetAtom::create (
       "ignore-musicxml-part-with-name", "igmxmlpartwithname",
 R"(Ignore the part named PART_NAME, which is a std::string.
@@ -822,17 +822,17 @@ There can be several occurrences of this option.
 All the parts not ignored are kept.
 This option is incompatible with '-mkpn, -msr-keep-musicxml-part-with-name'.)",
       "PART_NAME",
-      "fMusicXMLPartsIgnoreNameSet",
-      fMusicXMLPartsIgnoreNameSet);
+      "fMxmlPartsIgnoreNameSet",
+      fMxmlPartsIgnoreNameSet);
 
   subGroup->
     appendAtomToSubGroup (
-      fIgnoreMusicXMLPartNameAtom);
+      fIgnoreMxmlPartNameAtom);
 
   // keep MusicXML part ID
   // --------------------------------------
 
-  fKeepMusicXMLPartIDAtom =
+  fKeepMxmlPartIDAtom =
     oahStringSetAtom::create (
       "keep-musicxml-part-with-id", "kmxmlpartwithid",
 R"(Keep the part with ID PART_ID, which is a std::string.
@@ -840,17 +840,17 @@ There can be several occurrences of this option.
 All the parts not kept are ignored.
 This option is incompatible with '-mopi, -msr-ignore-musicxml-part-with-id'.)",
       "PART_ID",
-      "fMusicXMLPartsKeepIDSet",
-      fMusicXMLPartsKeepIDSet);
+      "fMxmlPartsKeepIDSet",
+      fMxmlPartsKeepIDSet);
 
   subGroup->
     appendAtomToSubGroup (
-      fKeepMusicXMLPartIDAtom);
+      fKeepMxmlPartIDAtom);
 
   // keep MusicXML part name
   // --------------------------------------
 
-  fKeepMusicXMLPartNameAtom =
+  fKeepMxmlPartNameAtom =
     oahStringSetAtom::create (
       "keep-musicxml-part-with-name", "kmxmlpartwithname",
 R"(Keep the part named PART_NAME, which is a std::string.
@@ -858,12 +858,12 @@ There can be several occurrences of this option.
 All the parts not kept are ignored.
 This option is incompatible with '-mopn, -msr-ignore-musicxml-part-with-name'.)",
       "PART_NAME",
-      "fMusicXMLPartsKeepNameSet",
-      fMusicXMLPartsKeepNameSet);
+      "fMxmlPartsKeepNameSet",
+      fMxmlPartsKeepNameSet);
 
   subGroup->
     appendAtomToSubGroup (
-      fKeepMusicXMLPartNameAtom);
+      fKeepMxmlPartNameAtom);
 }
 
 void mxsr2msrOahGroup::initializeMxsr2msrStavesOptions ()
@@ -961,7 +961,7 @@ This option is incompatible with '-mopn, -msr-ignore-musicxml-voice-number'.)",
 
   subGroup->
     appendAtomToSubGroup (
-      fKeepMusicXMLPartNameAtom);
+      fKeepMxmlPartNameAtom);
 }
 
 void mxsr2msrOahGroup::initializeMxsr2msrClefsKeysTimesOptions ()
@@ -1099,8 +1099,8 @@ R"()",
       oahBooleanAtom::create (
         "ignore-musicxml-page-breaks", "imxmlpb",
 R"(Ignore page breaks in MusicXML data.)",
-        "fIgnoreMusicXMLPageBreaks",
-        fIgnoreMusicXMLPageBreaks));
+        "fIgnoreMxmlPageBreaks",
+        fIgnoreMxmlPageBreaks));
 
   // ignore MusicXML line breaks
   // --------------------------------------
@@ -1110,8 +1110,8 @@ R"(Ignore page breaks in MusicXML data.)",
       oahBooleanAtom::create (
         "ignore-musicxml-line-breaks", "imxmllb",
 R"(Ignore line breaks in MusicXML data.)",
-        "fIgnoreMusicXMLLineBreaks",
-        fIgnoreMusicXMLLineBreaks));
+        "fIgnoreMxmlLineBreaks",
+        fIgnoreMxmlLineBreaks));
 }
 
 void mxsr2msrOahGroup::initializeMxsr2msrMeasuresOptions ()
@@ -1564,16 +1564,16 @@ R"(Ignore words in MusicXML data.)",
   // ignore MusicXML words
 
   S_oahBooleanAtom
-    ignoreMusicXMLWordsAtom =
+    ignoreMxmlWordsAtom =
       oahBooleanAtom::create (
         "ignore-musicxml-words", "imwords",
 R"(Ignore '<words />' in MusicXML data.)",
-        "fIgnoreMusicXMLWords",
-        fIgnoreMusicXMLWords);
+        "fIgnoreMxmlWords",
+        fIgnoreMxmlWords);
 
   subGroup->
     appendAtomToSubGroup (
-      ignoreMusicXMLWordsAtom);
+      ignoreMxmlWordsAtom);
 
   // convert words to bold
 
@@ -1840,27 +1840,27 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 
   // JMI and if mixed ID and name options are used?
 
-  if (fPartsIgnoreIDSet.size () > 0 && fMusicXMLPartsKeepIDSet.size () > 0) {
+  if (fPartsIgnoreIDSet.size () > 0 && fMxmlPartsKeepIDSet.size () > 0) {
     std::stringstream ss;
 
     ss <<
       "options '" <<
-      fIgnoreMusicXMLPartIDAtom->fetchNames () <<
+      fIgnoreMxmlPartIDAtom->fetchNames () <<
       "' and '" <<
-      fKeepMusicXMLPartIDAtom->fetchNames () <<
+      fKeepMxmlPartIDAtom->fetchNames () <<
       "' are incompatible";
 
     oahError (ss.str ());
   }
 
-  if (fMusicXMLPartsIgnoreNameSet.size () > 0 && fMusicXMLPartsKeepNameSet.size () > 0) {
+  if (fMxmlPartsIgnoreNameSet.size () > 0 && fMxmlPartsKeepNameSet.size () > 0) {
     std::stringstream ss;
 
     ss <<
       "options '" <<
-      fIgnoreMusicXMLPartNameAtom->fetchNames () <<
+      fIgnoreMxmlPartNameAtom->fetchNames () <<
       "' and '" <<
-      fKeepMusicXMLPartNameAtom->fetchNames () <<
+      fKeepMxmlPartNameAtom->fetchNames () <<
       "' are incompatible";
 
     oahError (ss.str ());
@@ -2310,15 +2310,15 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   gLog << std::left <<
     std::setw (valueFieldWidth) << "parts kept IDs" << ": ";
 
-  if (! fMusicXMLPartsKeepIDSet.size ()) {
+  if (! fMxmlPartsKeepIDSet.size ()) {
     gLog <<
       "[EMPTY]";
   }
   else {
     for (
       std::set <std::string> ::const_iterator i =
-        fMusicXMLPartsKeepIDSet.begin ();
-      i != fMusicXMLPartsKeepIDSet.end ();
+        fMxmlPartsKeepIDSet.begin ();
+      i != fMxmlPartsKeepIDSet.end ();
       ++i
   ) {
         gLog <<
@@ -2331,15 +2331,15 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   gLog << std::left <<
     std::setw (valueFieldWidth) << "parts ignored names" << ": ";
 
-  if (! fMusicXMLPartsIgnoreNameSet.size ()) {
+  if (! fMxmlPartsIgnoreNameSet.size ()) {
     gLog <<
       "[EMPTY]";
   }
   else {
     for (
       std::set <std::string> ::const_iterator i =
-        fMusicXMLPartsIgnoreNameSet.begin ();
-      i != fMusicXMLPartsIgnoreNameSet.end ();
+        fMxmlPartsIgnoreNameSet.begin ();
+      i != fMxmlPartsIgnoreNameSet.end ();
       ++i
   ) {
         gLog <<
@@ -2352,15 +2352,15 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   gLog << std::left <<
     std::setw (valueFieldWidth) << "parts kept names" << ": ";
 
-  if (! fMusicXMLPartsKeepNameSet.size ()) {
+  if (! fMxmlPartsKeepNameSet.size ()) {
     gLog <<
       "[EMPTY]";
   }
   else {
     for (
       std::set <std::string> ::const_iterator i =
-        fMusicXMLPartsKeepNameSet.begin ();
-      i != fMusicXMLPartsKeepNameSet.end ();
+        fMxmlPartsKeepNameSet.begin ();
+      i != fMxmlPartsKeepNameSet.end ();
       ++i
   ) {
         gLog <<
@@ -2406,8 +2406,8 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreMusicXMLPageBreaks" << ": " <<
-    fIgnoreMusicXMLPageBreaks <<
+    std::setw (valueFieldWidth) << "fIgnoreMxmlPageBreaks" << ": " <<
+    fIgnoreMxmlPageBreaks <<
     std::endl <<
 
   --gIndenter;
@@ -2422,8 +2422,8 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreMusicXMLLineBreaks" << ": " <<
-    fIgnoreMusicXMLLineBreaks <<
+    std::setw (valueFieldWidth) << "fIgnoreMxmlLineBreaks" << ": " <<
+    fIgnoreMxmlLineBreaks <<
     std::endl <<
 
   --gIndenter;
@@ -2545,8 +2545,8 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreMusicXMLWords" << ": " <<
-    fIgnoreMusicXMLWords <<
+    std::setw (valueFieldWidth) << "fIgnoreMxmlWords" << ": " <<
+    fIgnoreMxmlWords <<
     std::endl <<
 
     std::setw (valueFieldWidth) <<

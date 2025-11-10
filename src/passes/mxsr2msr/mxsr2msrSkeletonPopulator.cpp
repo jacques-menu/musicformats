@@ -92,8 +92,8 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   populatePartsMapFromScore ();
 
   // staff handling
-  fPreviousNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
-  fCurrentNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+  fPreviousNoteMxmlStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+  fCurrentNoteMxmlStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   // staff changes handling
   fCurrentRecipientStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
@@ -132,11 +132,11 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
     msrOctaveKind::kOctave_UNKNOWN_;
 
   // voice handling
-  fCurrentNoteMusicXMLVoiceNumber = K_MF_VOICE_NUMBER_UNKNOWN_;
+  fCurrentNoteMxmlVoiceNumber = K_MF_VOICE_NUMBER_UNKNOWN_;
 
   // measures handling
   fPartMeasuresCounter = 0;
-//   fCurrentMusicXMLMeasureNumber = "K_MF_MEASURE_NUMBER_UNKNOWN_";
+//   fCurrentMxmlMeasureNumber = "K_MF_MEASURE_NUMBER_UNKNOWN_";
 
   fPreviousMeasureInputLineNumber = -1;
 
@@ -355,8 +355,8 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   // forward handling
   fCurrentForwardDuration = 1;
 
-  fCurrentMusicXMLForwardStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
-  fCurrentMusicXMLForwardVoiceNumber = K_MF_VOICE_NUMBER_UNKNOWN_;
+  fCurrentMxmlForwardStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+  fCurrentMxmlForwardVoiceNumber = K_MF_VOICE_NUMBER_UNKNOWN_;
 }
 
 mxsr2msrSkeletonPopulator::~mxsr2msrSkeletonPopulator ()
@@ -495,11 +495,11 @@ void mxsr2msrSkeletonPopulator::initializeNoteData ()
 
   // current note MusicXML staff number
 
-  fCurrentNoteMusicXMLStaffNumber = 1; // default value, it may be absent
+  fCurrentNoteMxmlStaffNumber = 1; // default value, it may be absent
 
   // current note MusicXML voice number
 
-  fCurrentNoteMusicXMLVoiceNumber = 1; // default value, it may be absent
+  fCurrentNoteMxmlVoiceNumber = 1; // default value, it may be absent
 
   // tremolos handling
   fCurrentNoteBelongsToADoubleTremolo = false;
@@ -570,12 +570,12 @@ void mxsr2msrSkeletonPopulator::displayGatheredNoteInformations (
     std::endl << std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPreviousNoteMusicXMLStaffNumber" << ": " <<
-    mfStaffNumberAsString (fPreviousNoteMusicXMLStaffNumber) <<
+    "fPreviousNoteMxmlStaffNumber" << ": " <<
+    mfStaffNumberAsString (fPreviousNoteMxmlStaffNumber) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fCurrentNoteMusicXMLStaffNumber" << ": " <<
-    mfStaffNumberAsString (fCurrentNoteMusicXMLStaffNumber) <<
+    "fCurrentNoteMxmlStaffNumber" << ": " <<
+    mfStaffNumberAsString (fCurrentNoteMxmlStaffNumber) <<
     std::endl << std::endl <<
     std::setw (fieldWidth) <<
     "fCurrentRecipientStaffNumber" << ": " <<
@@ -584,8 +584,8 @@ void mxsr2msrSkeletonPopulator::displayGatheredNoteInformations (
 
 
     std::setw (fieldWidth) <<
-    "fCurrentNoteMusicXMLVoiceNumber" << ": " <<
-    mfVoiceNumberAsString (fCurrentNoteMusicXMLVoiceNumber) <<
+    "fCurrentNoteMxmlVoiceNumber" << ": " <<
+    mfVoiceNumberAsString (fCurrentNoteMxmlVoiceNumber) <<
     std::endl << std::endl <<
 
 
@@ -763,13 +763,13 @@ void mxsr2msrSkeletonPopulator::displayGatheredTupletInformations (
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCurrentNoteMusicXMLStaffNumber" << ": " <<
-    fCurrentNoteMusicXMLStaffNumber <<
+    "fCurrentNoteMxmlStaffNumber" << ": " <<
+    fCurrentNoteMxmlStaffNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCurrentNoteMusicXMLVoiceNumber" << ": " <<
-    fCurrentNoteMusicXMLVoiceNumber <<
+    "fCurrentNoteMxmlVoiceNumber" << ": " <<
+    fCurrentNoteMxmlVoiceNumber <<
     std::endl << std::endl;
 
   --gIndenter;
@@ -784,18 +784,18 @@ void mxsr2msrSkeletonPopulator::displayStaffAndVoiceInformation (
 		", fCurrentNote: " <<
 		fetchNoteAsString (fCurrentNote) <<
 
-		", fPreviousNoteMusicXMLStaffNumber: " <<
-		mfStaffNumberAsString (fPreviousNoteMusicXMLStaffNumber) <<
-		", fCurrentNoteMusicXMLStaffNumber: " <<
-		mfStaffNumberAsString (fCurrentNoteMusicXMLStaffNumber) <<
-		", fCurrentNoteMusicXMLVoiceNumber: " <<
-		mfVoiceNumberAsString (fCurrentNoteMusicXMLVoiceNumber) <<
+		", fPreviousNoteMxmlStaffNumber: " <<
+		mfStaffNumberAsString (fPreviousNoteMxmlStaffNumber) <<
+		", fCurrentNoteMxmlStaffNumber: " <<
+		mfStaffNumberAsString (fCurrentNoteMxmlStaffNumber) <<
+		", fCurrentNoteMxmlVoiceNumber: " <<
+		mfVoiceNumberAsString (fCurrentNoteMxmlVoiceNumber) <<
 		", fCurrentRecipientStaffNumber: " <<
 		mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
 
-		", fCurrentNoteMusicXMLStaffNumber: ";
+		", fCurrentNoteMxmlStaffNumber: ";
 
-	if (fCurrentNoteMusicXMLStaffNumber) {
+	if (fCurrentNoteMxmlStaffNumber) {
 		gLog <<
 			fCurrentRecipientMsrVoice->getVoiceName ();
 	}
@@ -804,9 +804,9 @@ void mxsr2msrSkeletonPopulator::displayStaffAndVoiceInformation (
 	}
 
 	gLog <<
-		", fCurrentNoteMusicXMLStaffNumber: ";
+		", fCurrentNoteMxmlStaffNumber: ";
 
-	if (fCurrentNoteMusicXMLStaffNumber) {
+	if (fCurrentNoteMxmlStaffNumber) {
 		gLog <<
 			fCurrentRecipientMsrVoice->getVoiceName ();
 	}
@@ -1034,12 +1034,12 @@ void mxsr2msrSkeletonPopulator::displayPartsMap () const
   ++gIndenter;
 
   for (std::pair <std::string, S_msrPart> thePair : fPartsMap) {
-    std::string theMusicXMLID = thePair.first;
+    std::string theMxmlID = thePair.first;
     S_msrPart   part = thePair.second;
 
     gLog << std::left <<
       std::setw (3) <<
-      theMusicXMLID << ": " <<
+      theMxmlID << ": " <<
       part->asShortString () <<
       std::endl;
   } // for
@@ -1765,10 +1765,10 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatBegin ()
       "Creating a MeasureRepeat" <<
       ", fCurrentMeasureNumber: " <<
       fCurrentMeasureNumber <<
-      ", fCurrentNoteMusicXMLStaffNumber: " <<
-      fCurrentNoteMusicXMLStaffNumber <<
-      ", fCurrentNoteMusicXMLVoiceNumber: " <<
-      fCurrentNoteMusicXMLVoiceNumber <<
+      ", fCurrentNoteMxmlStaffNumber: " <<
+      fCurrentNoteMxmlStaffNumber <<
+      ", fCurrentNoteMxmlVoiceNumber: " <<
+      fCurrentNoteMxmlVoiceNumber <<
       ", fCurrentMeasureRepeatBegin: " <<
       fCurrentMeasureRepeatBegin->asString () <<
       ", line " << fCurrentNoteInputStartLineNumber;
@@ -2194,7 +2194,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_system_layout& elt)
 
   if (fOnGoingPrint) {
     // set the current print layout's system layout
-    fCurrentMusicXMLPrintLayout->
+    fCurrentMxmlPrintLayout->
       setSystemLayout (
         fCurrentSystemLayout);
   }
@@ -2901,7 +2901,7 @@ From DalSegno.xml: JMI there is no <staff-distance /> ...
 
   if (fOnGoingPrint) {
     // append it to the current print layout
-    fCurrentMusicXMLPrintLayout->
+    fCurrentMxmlPrintLayout->
       appendStaffLayout (
         fCurrentStaffLayout);
   }
@@ -3564,7 +3564,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 
   std::string idString = elt->getAttributeValue ("id");
 
-  handlePartMusicXMLID (
+  handlePartMxmlID (
     elt->getInputLineNumber (),
     idString);
 
@@ -3601,17 +3601,17 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   fCurrentTimeSignature = nullptr;
 
   // staff numbers
-  fCurrentNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
-//   fCurrentNoteMusicXMLStaffNumber = 1; // JMI 0.9.71 default voice number
+  fCurrentNoteMxmlStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+//   fCurrentNoteMxmlStaffNumber = 1; // JMI 0.9.71 default voice number
 
-  fPreviousNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+  fPreviousNoteMxmlStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   // staff changes handling
   fCurrentRecipientStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   // voice numbers
-//   fCurrentNoteMusicXMLVoiceNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
-  fCurrentNoteMusicXMLVoiceNumber = 1; // JMI 0.9.71 default voice number
+//   fCurrentNoteMxmlVoiceNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+  fCurrentNoteMxmlVoiceNumber = 1; // JMI 0.9.71 default voice number
 
 //   // get this part's staves map
 //   std::map <int, S_msrStaff>
@@ -3625,14 +3625,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 
   // measures
   fPartMeasuresCounter = 0;
-//   fCurrentMusicXMLMeasureNumber = "K_MF_MEASURE_NUMBER_UNKNOWN_";
+//   fCurrentMxmlMeasureNumber = "K_MF_MEASURE_NUMBER_UNKNOWN_";
 
   fPreviousMeasureInputLineNumber = -1;
 
   ++gIndenter; // will be decremented in visitEnd (S_part& elt)
 }
 
-void mxsr2msrSkeletonPopulator::handlePartMusicXMLID (
+void mxsr2msrSkeletonPopulator::handlePartMxmlID (
   const mfInputLineNumber& inputLineNumber,
   const std::string idString)
 {
@@ -3808,8 +3808,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    fCurrentNoteMusicXMLVoiceNumber != K_MF_VOICE_NUMBER_UNKNOWN_, // JMI 0.9.72 ???
-    "fCurrentNoteMusicXMLVoiceNumber is unknown");
+    fCurrentNoteMxmlVoiceNumber != K_MF_VOICE_NUMBER_UNKNOWN_, // JMI 0.9.72 ???
+    "fCurrentNoteMxmlVoiceNumber is unknown");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // attach pending barlines if any to part
@@ -3846,7 +3846,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
       it =
         gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().find (
           fCurrentPart->
-            getPartMusicXMLID ());
+            getPartMxmlID ());
 
     if (it != gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().end ()) {
       // the simplest way to ignore this part
@@ -3861,14 +3861,14 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
   }
 
   // is this part name in the parts keep IDs set?
-  if (! gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().empty ()) {
+  if (! gGlobalMxsr2msrOahGroup->getMxmlPartsKeepIDSet ().empty ()) {
     std::set <std::string>::iterator
       it =
-        gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().find (
+        gGlobalMxsr2msrOahGroup->getMxmlPartsKeepIDSet ().find (
           fCurrentPart->
-            getPartMusicXMLID ());
+            getPartMxmlID ());
 
-    if (it == gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().end ()) {
+    if (it == gGlobalMxsr2msrOahGroup->getMxmlPartsKeepIDSet ().end ()) {
       // the simplest way not to keep this part
       // is to remove it from its part-group
       // now that is has been completely built and populated
@@ -3881,14 +3881,14 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
   }
 
   // is this part name in the parts ignore names set?
-  if (! gGlobalMxsr2msrOahGroup->getMusicXMLPartsIgnoreNameSet ().empty ()) {
+  if (! gGlobalMxsr2msrOahGroup->getMxmlPartsIgnoreNameSet ().empty ()) {
     std::set <std::string>::iterator
       it =
-        gGlobalMxsr2msrOahGroup->getMusicXMLPartsIgnoreNameSet ().find (
+        gGlobalMxsr2msrOahGroup->getMxmlPartsIgnoreNameSet ().find (
           fCurrentPart->
             getPartName ());
 
-    if (it != gGlobalMxsr2msrOahGroup->getMusicXMLPartsIgnoreNameSet ().end ()) {
+    if (it != gGlobalMxsr2msrOahGroup->getMxmlPartsIgnoreNameSet ().end ()) {
       // the simplest way to ignore this part
       // is to remove it from its part-group
       // now that is has been completely built and populated
@@ -3901,14 +3901,14 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
   }
 
   // is this part name in the parts keep names set?
-  if (! gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepNameSet ().empty ()) {
+  if (! gGlobalMxsr2msrOahGroup->getMxmlPartsKeepNameSet ().empty ()) {
     std::set <std::string>::iterator
       it =
-        gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepNameSet ().find (
+        gGlobalMxsr2msrOahGroup->getMxmlPartsKeepNameSet ().find (
           fCurrentPart->
             getPartName ());
 
-    if (it == gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepNameSet ().end ()) {
+    if (it == gGlobalMxsr2msrOahGroup->getMxmlPartsKeepNameSet ().end ()) {
       // the simplest way not to keep this part
       // is to remove it from its part-group
       // now that is has been completely built and populated
@@ -4706,7 +4706,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_alter& elt)
   // determine the alteration
   msrAlterationKind
     keyAlterationKind =
-      msrAlterationKindFromMusicXMLAlter (
+      msrAlterationKindFromMxmlAlter (
         keyAlter);
 
   if (keyAlterationKind == msrAlterationKind::kAlteration_UNKNOWN_) {
@@ -6673,7 +6673,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
         wordsXMLLangString);
 
   // should the MusicXML words be ignored?
-  if (! gGlobalMxsr2msrOahGroup->getIgnoreMusicXMLWords ()) {
+  if (! gGlobalMxsr2msrOahGroup->getIgnoreMxmlWords ()) {
     // no
 
     Bool wordsHasBeenHandled (false);
@@ -7449,7 +7449,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit& elt)
   // the type contains a display duration
   mfDurationKind
     beatUnitNotesDurationKind =
-      mfDurationKindFromMusicXMLGraphicNoteType (
+      mfDurationKindFromMxmlGraphicNoteType (
         elt->getInputLineNumber (),
         beatUnitString);
 
@@ -7566,7 +7566,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_type& elt)
 
   // the type contains a display duration,
   fCurrentMetronomeNotesDurationKind =
-    mfDurationKindFromMusicXMLGraphicNoteType (
+    mfDurationKindFromMxmlGraphicNoteType (
      elt->getInputLineNumber (),
      metronomeType);
 }
@@ -8306,14 +8306,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // staff number
-  fCurrentNoteMusicXMLStaffNumber = int(*elt);
+  fCurrentNoteMxmlStaffNumber = int(*elt);
 
   // the staff number should be positive
-  if (fCurrentNoteMusicXMLStaffNumber <= 0) {
+  if (fCurrentNoteMxmlStaffNumber <= 0) {
     std::stringstream ss;
 
     ss <<
-      "staff number " << fCurrentNoteMusicXMLStaffNumber <<
+      "staff number " << fCurrentNoteMxmlStaffNumber <<
       " is not positive" <<
       ", line " << elt->getInputLineNumber ();
 
@@ -8354,8 +8354,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
     std::stringstream ss;
 
     ss <<
-      "--> S_staff, fCurrentNoteMusicXMLStaffNumber: " <<
-      fCurrentNoteMusicXMLStaffNumber <<
+      "--> S_staff, fCurrentNoteMxmlStaffNumber: " <<
+      fCurrentNoteMxmlStaffNumber <<
       std::endl <<
       "--> S_staff, current staff name: " <<
       staff->getStaffPathLikeName();
@@ -8373,11 +8373,11 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
 
   serviceRunData->
     setCurrentStaveNumber ( // JMI 0.9.72 ???
-      fCurrentNoteMusicXMLStaffNumber);
+      fCurrentNoteMxmlStaffNumber);
 
   // set concepts-specific staff numbers
   if (fOnGoingForward) {
-    fCurrentMusicXMLForwardStaffNumber = fCurrentNoteMusicXMLStaffNumber;
+    fCurrentMxmlForwardStaffNumber = fCurrentNoteMxmlStaffNumber;
   }
 
   else if (fOnGoingNote) {
@@ -8385,11 +8385,11 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
   }
 
   else if (fOnGoingDirection) {
-    fCurrentDirectionStaffNumber = fCurrentNoteMusicXMLStaffNumber;
+    fCurrentDirectionStaffNumber = fCurrentNoteMxmlStaffNumber;
   }
 
   else if (fOnGoingHarmony) {
-    fCurrentHarmoniesStaffNumber = fCurrentNoteMusicXMLStaffNumber;
+    fCurrentHarmoniesStaffNumber = fCurrentNoteMxmlStaffNumber;
   }
 
   else {
@@ -8397,7 +8397,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
 
     ss <<
       "<staff number /> " <<
-      fCurrentNoteMusicXMLStaffNumber <<
+      fCurrentNoteMxmlStaffNumber <<
       " is out of context";
 
     mxsr2msrError (
@@ -8768,7 +8768,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_alter& elt)
 
   msrAlterationKind
     tuningAlterationKind =
-      msrAlterationKindFromMusicXMLAlter (
+      msrAlterationKindFromMxmlAlter (
         tuningAlter);
 
   if (tuningAlterationKind == msrAlterationKind::kAlteration_UNKNOWN_) {
@@ -8951,7 +8951,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // the voice number can be out of 1..4 range
-  fCurrentNoteMusicXMLVoiceNumber = int(*elt);
+  fCurrentNoteMxmlVoiceNumber = int(*elt);
 
   // register the current voice number in the service run data
   S_mfServiceRunData
@@ -8960,12 +8960,12 @@ void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
 
   serviceRunData->
     setCurrentVoiceNumber (
-      fCurrentNoteMusicXMLVoiceNumber);
+      fCurrentNoteMxmlVoiceNumber);
 
   // set concepts-specific voice numbers
 
   if (fOnGoingForward) {
-    fCurrentMusicXMLForwardVoiceNumber = fCurrentNoteMusicXMLVoiceNumber;
+    fCurrentMxmlForwardVoiceNumber = fCurrentNoteMxmlVoiceNumber;
   }
 
   else if (fOnGoingNote) {
@@ -8973,7 +8973,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
   }
 
   else if (fOnGoingDirection) {
-    fCurrentDirectionVoiceNumber = fCurrentNoteMusicXMLVoiceNumber;
+    fCurrentDirectionVoiceNumber = fCurrentNoteMxmlVoiceNumber;
   }
 
   else {
@@ -8981,7 +8981,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
 
     ss <<
       "<voice /> " <<
-      mfVoiceNumberAsString (fCurrentNoteMusicXMLVoiceNumber) <<
+      mfVoiceNumberAsString (fCurrentNoteMxmlVoiceNumber) <<
       " is out of context";
 
     mxsr2msrError (
@@ -9080,8 +9080,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
       backupStepLength);
 
 //   // reset notes staff numbers // JMI 0.9.68
-//   fPreviousNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
-//   fCurrentNoteMusicXMLStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+//   fPreviousNoteMxmlStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
+//   fCurrentNoteMxmlStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
 
   // handle the backup right now:
 //   handleBackup (
@@ -9130,8 +9130,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_forward& elt)
 
   // the <staff /> and <voice /> are optional,
   // in which case the same staff/voice number remains in effect
-  fCurrentMusicXMLForwardStaffNumber = 1; // default value fCurrentNoteMusicXMLStaffNumber; 0.9.68
-  fCurrentMusicXMLForwardVoiceNumber = 1; // default value fCurrentNoteMusicXMLVoiceNumber; 0.9.68
+  fCurrentMxmlForwardStaffNumber = 1; // default value fCurrentNoteMxmlStaffNumber; 0.9.68
+  fCurrentMxmlForwardVoiceNumber = 1; // default value fCurrentNoteMxmlVoiceNumber; 0.9.68
 
   fOnGoingForward = true;
 }
@@ -9195,10 +9195,10 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
       fCurrentDivisionsPerQuarterNote <<
       ", forwardStepLength: " <<
       forwardStepLength <<
-      ", fCurrentMusicXMLForwardStaffNumber: " <<
-      fCurrentMusicXMLForwardStaffNumber <<
-      ", fCurrentMusicXMLForwardVoiceNumber: " <<
-      mfVoiceNumberAsString (fCurrentMusicXMLForwardVoiceNumber) <<
+      ", fCurrentMxmlForwardStaffNumber: " <<
+      fCurrentMxmlForwardStaffNumber <<
+      ", fCurrentMxmlForwardVoiceNumber: " <<
+      mfVoiceNumberAsString (fCurrentMxmlForwardVoiceNumber) <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -9214,11 +9214,11 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
       forwardStepLength);
 
   // the staff number if any should be positive
-  if (fCurrentMusicXMLForwardStaffNumber == K_MF_STAFF_NUMBER_UNKNOWN_) {
+  if (fCurrentMxmlForwardStaffNumber == K_MF_STAFF_NUMBER_UNKNOWN_) {
     std::stringstream ss;
 
     ss <<
-      "staff number " << fCurrentMusicXMLForwardStaffNumber <<
+      "staff number " << fCurrentMxmlForwardStaffNumber <<
       " is not positive" <<
       ", line " << elt->getInputLineNumber ();
 
@@ -9229,12 +9229,12 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   }
 
   // the voice number if any should be positive
-  if (fCurrentMusicXMLForwardVoiceNumber == K_MF_VOICE_NUMBER_UNKNOWN_) {
+  if (fCurrentMxmlForwardVoiceNumber == K_MF_VOICE_NUMBER_UNKNOWN_) {
     std::stringstream ss;
 
     ss <<
       "voice number " <<
-      fCurrentMusicXMLForwardVoiceNumber <<
+      fCurrentMxmlForwardVoiceNumber <<
       " is not positive" <<
       ", line " << elt->getInputLineNumber ();
 
@@ -9248,7 +9248,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   S_msrVoice
     voiceToBeForwardedTo =
       fCurrentPartStaffMsrVoicesMap
-        [fCurrentMusicXMLForwardStaffNumber] [fCurrentMusicXMLForwardVoiceNumber];
+        [fCurrentMxmlForwardStaffNumber] [fCurrentMxmlForwardVoiceNumber];
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -9282,7 +9282,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 
   // staff changes handling
 //   fCurrentRecipientStaffNumber = K_MF_STAFF_NUMBER_UNKNOWN_;
-  fCurrentRecipientStaffNumber = fCurrentMusicXMLForwardStaffNumber;
+  fCurrentRecipientStaffNumber = fCurrentMxmlForwardStaffNumber;
 
 //   // chords handling
 //   if (fOnGoingChord) {
@@ -9295,7 +9295,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   // tuplets handling
 //   gLog << "fCurrentRecipientMxsrVoice: " << fCurrentRecipientMxsrVoice << std::endl;
 
-  // there can be a <forward /> markup before any note in the MusicXML data
+  // there can be a <forward /> markup before any note in the Mxml data
   if (fCurrentRecipientMxsrVoice) {
     if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
       handleTupletEndEventsIfAny ();
@@ -10220,8 +10220,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
       ", wedgeKind: " << wedgeKind <<
       ", fCurrentDirectionPlacementKind: " <<
       fCurrentDirectionPlacementKind <<
-      ", fCurrentNoteMusicXMLVoiceNumber: " <<
-      fCurrentNoteMusicXMLVoiceNumber <<
+      ", fCurrentNoteMxmlVoiceNumber: " <<
+      fCurrentNoteMxmlVoiceNumber <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -10239,13 +10239,13 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
           wedgeNienteKind,
           wedgeLineTypeKind,
           fCurrentDirectionPlacementKind,
-          fCurrentNoteMusicXMLVoiceNumber);
+          fCurrentNoteMxmlVoiceNumber);
 
     fPendingWedgesList.push_back (wedge);
 
     fPendingVoiceWedgesList.push_back (
       std::make_pair (
-        fCurrentNoteMusicXMLVoiceNumber,
+        fCurrentNoteMxmlVoiceNumber,
         wedge));
   }
 }
@@ -10640,8 +10640,8 @@ void mxsr2msrSkeletonPopulator::displayGatheredLyricInformations (
 
   gLog << std::left <<
     std::setw (fieldWidth) <<
-    "fCurrentNoteMusicXMLStaffNumber" << ": " <<
-    mfStaffNumberAsString (fCurrentNoteMusicXMLStaffNumber) <<
+    "fCurrentNoteMxmlStaffNumber" << ": " <<
+    mfStaffNumberAsString (fCurrentNoteMxmlStaffNumber) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -10984,11 +10984,11 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 
   // number
   std::string
-    musicXMLMeasureNumber =
+    mxmlMeasureNumber =
       elt->getAttributeValue ("number");
 
   fCurrentMeasureNumber =
-    mfMeasureNumber (musicXMLMeasureNumber);
+    mfMeasureNumber (mxmlMeasureNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -11082,7 +11082,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
     ss <<
       "<!--=== " <<
       "partName \"" << fCurrentPart->getPartName () << "\"" <<
-      ", partMusicXMLID: \"" << fCurrentPart->getPartMusicXMLID () << "\"" <<
+      ", partMxmlID: \"" << fCurrentPart->getPartMxmlID () << "\"" <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber << "\"" <<
       ", measureImplicitKind: " << measureImplicitKind <<
       ", nonControllingString: \"" << nonControllingString << "\"" <<
@@ -11226,9 +11226,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 
   // take finalization actions if relevant 0.9.70
   if (
-    fCurrentNoteMusicXMLStaffNumber != K_MF_STAFF_NUMBER_UNKNOWN_
+    fCurrentNoteMxmlStaffNumber != K_MF_STAFF_NUMBER_UNKNOWN_
       &&
-    fCurrentNoteMusicXMLStaffNumber != K_MF_STAFF_NUMBER_UNKNOWN_
+    fCurrentNoteMxmlStaffNumber != K_MF_STAFF_NUMBER_UNKNOWN_
   ) {
     // fetch the voice
     S_msrVoice
@@ -11243,8 +11243,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
   //      fStaffVoicesLastMetNoteMap [currentNoteVoice];
         fStaffVoicesLastMetNoteMap [
           std::make_pair (
-            fCurrentNoteMusicXMLStaffNumber,
-            fCurrentNoteMusicXMLVoiceNumber)
+            fCurrentNoteMxmlStaffNumber,
+            fCurrentNoteMxmlVoiceNumber)
           ];
       */
         theMsrVoice->getVoiceLastAppendedNote (); // ??? JMI 0.9.70
@@ -11279,11 +11279,11 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
         ss <<
           "cannot find voice to insert after grace notes group into: " <<
           "chordFirstNote is NULL" <<
-          ", fCurrentNoteMusicXMLStaffNumber: " <<
-          mfStaffNumberAsString (fCurrentNoteMusicXMLStaffNumber) <<
+          ", fCurrentNoteMxmlStaffNumber: " <<
+          mfStaffNumberAsString (fCurrentNoteMxmlStaffNumber) <<
           std::endl <<
-          ", fCurrentNoteMusicXMLVoiceNumber: " <<
-          fCurrentNoteMusicXMLVoiceNumber <<
+          ", fCurrentNoteMxmlVoiceNumber: " <<
+          fCurrentNoteMxmlVoiceNumber <<
           ", line " << elt->getInputLineNumber ();
 
         mxsr2msrInternalError (
@@ -11533,8 +11533,8 @@ Staff spacing between multiple staves is measured in
   */
 
   // create a print layout
-  fCurrentMusicXMLPrintLayout =
-     msrMusicXMLPrintLayout::create (
+  fCurrentMxmlPrintLayout =
+     msrMxmlPrintLayout::create (
       elt->getInputLineNumber ());
 
   // handle 'staff-spacing' if present
@@ -11549,16 +11549,16 @@ Staff spacing between multiple staves is measured in
     float value;
     ss >> value;
 
-    fCurrentMusicXMLPrintLayout->setStaffSpacing (value);
+    fCurrentMxmlPrintLayout->setStaffSpacing (value);
   }
 
   // handle 'new-system' if present and relevant
 
-  if (! gGlobalMxsr2msrOahGroup->getIgnoreMusicXMLLineBreaks ()) {
+  if (! gGlobalMxsr2msrOahGroup->getIgnoreMxmlLineBreaks ()) {
     const std::string& newSystem = elt->getAttributeValue ("new-system");
 
     if (! newSystem.empty ()) {
-      fCurrentMusicXMLPrintLayout->setNewSystem ();
+      fCurrentMxmlPrintLayout->setNewSystem ();
 
       if (newSystem == "yes") {
         // create a line break
@@ -11608,11 +11608,11 @@ Staff spacing between multiple staves is measured in
 
   // handle 'new-page' if present and relevant
 
-  if (! gGlobalMxsr2msrOahGroup->getIgnoreMusicXMLPageBreaks ()) {
+  if (! gGlobalMxsr2msrOahGroup->getIgnoreMxmlPageBreaks ()) {
     const std::string& newPage = elt->getAttributeValue ("new-page");
 
     if (! newPage.empty ()) {
-      fCurrentMusicXMLPrintLayout->setNewPage ();
+      fCurrentMxmlPrintLayout->setNewPage ();
 
       if (newPage == "yes") { // JMI
         // create a page break
@@ -11661,7 +11661,7 @@ Staff spacing between multiple staves is measured in
   const int blankPage = elt->getAttributeIntValue ("blank-page", 0);
 
   if (blankPage > 0) {
-    fCurrentMusicXMLPrintLayout->setBlankPage (blankPage);
+    fCurrentMxmlPrintLayout->setBlankPage (blankPage);
   }
 
   // handle 'page-number' if present
@@ -11669,7 +11669,7 @@ Staff spacing between multiple staves is measured in
   const int pageNumber = elt->getAttributeIntValue ("page-number", 0);
 
   if (pageNumber > 0) {
-    fCurrentMusicXMLPrintLayout->setPageNumber (pageNumber);
+    fCurrentMxmlPrintLayout->setPageNumber (pageNumber);
   }
 
   fCurrentDisplayText = "";
@@ -11711,11 +11711,11 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_print& elt)
         elt->getInputLineNumber ());
 
   voiceOneInStaffOne->
-    appendMusicXMLPrintLayoutToVoice (
-      fCurrentMusicXMLPrintLayout);
+    appendMxmlPrintLayoutToVoice (
+      fCurrentMxmlPrintLayout);
 
   // forget about the current print layout
-  fCurrentMusicXMLPrintLayout = nullptr;
+  fCurrentMxmlPrintLayout = nullptr;
 
   fOnGoingPrint = false;
 }
@@ -12927,7 +12927,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_alter& elt)
   float alter = (float)(*elt);
 
   fCurrentNoteAlterationKind =
-    msrAlterationKindFromMusicXMLAlter (
+    msrAlterationKindFromMxmlAlter (
       alter);
 
   if (fCurrentNoteAlterationKind == msrAlterationKind::kAlteration_UNKNOWN_) {
@@ -13216,7 +13216,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_type& elt)
 
     // the type implies a display duration,
     fCurrentNoteDurationKindFromGraphicNoteType =
-      mfDurationKindFromMusicXMLGraphicNoteType (
+      mfDurationKindFromMxmlGraphicNoteType (
         elt->getInputLineNumber (),
         fCurrentGraphicNoteType);
   }
@@ -14124,7 +14124,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
 
   // the type contains a display duration,
   fCurrentSlashGraphicNotesDurationKind =
-    mfDurationKindFromMusicXMLGraphicNoteType (
+    mfDurationKindFromMxmlGraphicNoteType (
       elt->getInputLineNumber (),
       slashType);
 
@@ -16428,7 +16428,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 //         S_msrVoice UNUSED
 //           currentNoteVoice =
 //             fCurrentPartStaffMsrVoicesMap
-//         [fCurrentNoteMusicXMLVoiceNumber];
+//         [fCurrentNoteMxmlVoiceNumber];
 
         // create a double tremolo start
 #ifdef MF_TRACE_IS_ENABLED
@@ -19022,7 +19022,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
 
     // the type contains a display duration
     fCurrentNoteNormalTypeNotesDuration =
-      mfDurationKindFromMusicXMLGraphicNoteType (
+      mfDurationKindFromMxmlGraphicNoteType (
         elt->getInputLineNumber (),
         normalTypeString);
 
@@ -22483,11 +22483,11 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 //
 //     ss <<
 //       "--> createNote(): don't know how to characterize this note" <<
-//       ", fCurrentNoteMusicXMLStaffNumber: " <<
-//       mfStaffNumberAsString (fCurrentNoteMusicXMLStaffNumber) <<
+//       ", fCurrentNoteMxmlStaffNumber: " <<
+//       mfStaffNumberAsString (fCurrentNoteMxmlStaffNumber) <<
 //       std::endl <<
-//       ", fCurrentNoteMusicXMLVoiceNumber: " <<
-//       mfVoiceNumberAsString (fCurrentNoteMusicXMLVoiceNumber) <<
+//       ", fCurrentNoteMxmlVoiceNumber: " <<
+//       mfVoiceNumberAsString (fCurrentNoteMxmlVoiceNumber) <<
 //       ", line " << inputLineNumber;
 //
 //     mxsr2msrInternalError (
@@ -22624,13 +22624,13 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 
     ss <<
       "Setting last met note in voice " <<
-      mfVoiceNumberAsString (fCurrentNoteMusicXMLVoiceNumber) <<
+      fCurrentNoteMxmlVoiceNumber <<
       " to note " <<
       note->asShortString () <<
       ", fCurrentRecipientStaffNumber: " <<
-  		mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
-      ", fCurrentNoteMusicXMLVoiceNumber: " <<
-  		mfVoiceNumberAsString (fCurrentNoteMusicXMLVoiceNumber);
+  		fCurrentRecipientStaffNumber <<
+      ", fCurrentNoteMxmlVoiceNumber: " <<
+  		fCurrentNoteMxmlVoiceNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -23022,11 +23022,11 @@ On a given note, there can be the following events:
 //     ss <<
 //       "--> handleCurrentNote(): don't know how to handle note " <<
 //       fCurrentNote->asString () <<
-//       ", fCurrentNoteMusicXMLStaffNumber: " <<
-//       mfStaffNumberAsString (fCurrentNoteMusicXMLStaffNumber) <<
+//       ", fCurrentNoteMxmlStaffNumber: " <<
+//       mfStaffNumberAsString (fCurrentNoteMxmlStaffNumber) <<
 //       std::endl <<
-//       ", fCurrentNoteMusicXMLVoiceNumber: " <<
-//       mfVoiceNumberAsString (fCurrentNoteMusicXMLVoiceNumber) <<
+//       ", fCurrentNoteMxmlVoiceNumber: " <<
+//       mfVoiceNumberAsString (fCurrentNoteMxmlVoiceNumber) <<
 //       ", line " << inputLineNumber;
 //
 //     mxsr2msrInternalError (
@@ -23071,11 +23071,11 @@ On a given note, there can be the following events:
       " as last note found in voice " <<
       fCurrentRecipientMsrVoice->getVoiceName () <<
       std::endl <<
-      "-->  fCurrentNoteMusicXMLStaffNumber: " <<
-      mfStaffNumberAsString (fCurrentNoteMusicXMLStaffNumber) <<
+      "-->  fCurrentNoteMxmlStaffNumber: " <<
+      mfStaffNumberAsString (fCurrentNoteMxmlStaffNumber) <<
       std::endl <<
-      "--> fCurrentNoteMusicXMLVoiceNumber : " <<
-      mfVoiceNumberAsString (fCurrentNoteMusicXMLVoiceNumber) <<
+      "--> fCurrentNoteMxmlVoiceNumber : " <<
+      mfVoiceNumberAsString (fCurrentNoteMxmlVoiceNumber) <<
       std::endl <<
       / * JMI
       "--> staff name : " <<
@@ -23433,8 +23433,8 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
       "--> handleStaffChangeTakeOffEventIfAny()" <<
   		", fCurrentRecipientStaffNumber: " <<
   		mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
-  		", fCurrentNoteMusicXMLVoiceNumber: " <<
-  		mfVoiceNumberAsString (fCurrentNoteMusicXMLVoiceNumber) <<
+  		", fCurrentNoteMxmlVoiceNumber: " <<
+  		mfVoiceNumberAsString (fCurrentNoteMxmlVoiceNumber) <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -23578,10 +23578,10 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
         fCurrentRecipientMsrVoice->getVoiceName () <<
           ", fCurrentNoteSequentialNumber: " <<
         fCurrentNoteSequentialNumber <<
-        ", fCurrentNoteMusicXMLStaffNumber: " <<
-        fCurrentNoteMusicXMLStaffNumber <<
-        ", fCurrentNoteMusicXMLVoiceNumber: " <<
-        fCurrentNoteMusicXMLVoiceNumber <<
+        ", fCurrentNoteMxmlStaffNumber: " <<
+        fCurrentNoteMxmlStaffNumber <<
+        ", fCurrentNoteMxmlVoiceNumber: " <<
+        fCurrentNoteMxmlVoiceNumber <<
         ", line " << fCurrentNoteInputStartLineNumber;
 
       gWaeHandler->waeTrace (
@@ -23782,10 +23782,10 @@ void mxsr2msrSkeletonPopulator::handleChordBegin ()
       "Creating a chord" <<
       ", fCurrentNoteSequentialNumber: " <<
       fCurrentNoteSequentialNumber <<
-      ", fCurrentNoteMusicXMLStaffNumber: " <<
-      fCurrentNoteMusicXMLStaffNumber <<
-      ", fCurrentNoteMusicXMLVoiceNumber: " <<
-      fCurrentNoteMusicXMLVoiceNumber <<
+      ", fCurrentNoteMxmlStaffNumber: " <<
+      fCurrentNoteMxmlStaffNumber <<
+      ", fCurrentNoteMxmlVoiceNumber: " <<
+      fCurrentNoteMxmlVoiceNumber <<
       ", fCurrentNoteChordEnd: " <<
       fCurrentNoteChordBegin->asString () <<
       ", line " << fCurrentNoteInputStartLineNumber;
@@ -24089,10 +24089,10 @@ void mxsr2msrSkeletonPopulator:: handleTupletEnd (
       fCurrentNoteInputStartLineNumber <<
       ", fCurrentNoteSequentialNumber: " <<
       fCurrentNoteSequentialNumber <<
-      ", fCurrentNoteMusicXMLStaffNumber: " <<
-      fCurrentNoteMusicXMLStaffNumber <<
-      ", fCurrentNoteMusicXMLVoiceNumber: " <<
-      fCurrentNoteMusicXMLVoiceNumber <<
+      ", fCurrentNoteMxmlStaffNumber: " <<
+      fCurrentNoteMxmlStaffNumber <<
+      ", fCurrentNoteMxmlVoiceNumber: " <<
+      fCurrentNoteMxmlVoiceNumber <<
       ", fCurrentNote: " << fCurrentNote->asString ();
 
     gWaeHandler->waeTrace (
@@ -24185,7 +24185,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     // hence the current recipient staff number
     // it is that of the current note by default
     fCurrentRecipientStaffNumber =
-      fCurrentNoteMusicXMLStaffNumber;
+      fCurrentNoteMxmlStaffNumber;
   }
   // else {} ??? JMI
 
@@ -24201,7 +24201,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // denormalization for speed
   fCurrentNoteMxsrVoice =
     fCurrentPartStaffMxsrVoicesMapMap
-      [fCurrentNoteMusicXMLStaffNumber] [fCurrentNoteMusicXMLVoiceNumber];
+      [fCurrentNoteMxmlStaffNumber] [fCurrentNoteMxmlVoiceNumber];
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -24218,7 +24218,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // set the current recipient MXSR voice
   fCurrentRecipientMxsrVoice =
     fCurrentPartStaffMxsrVoicesMapMap
-      [fCurrentRecipientStaffNumber] [fCurrentNoteMusicXMLVoiceNumber];
+      [fCurrentRecipientStaffNumber] [fCurrentNoteMxmlVoiceNumber];
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -24443,7 +24443,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   }
 
 	// set current note MusicXML staff number as previous for the next note
-  fPreviousNoteMusicXMLStaffNumber = fCurrentNoteMusicXMLStaffNumber;
+  fPreviousNoteMxmlStaffNumber = fCurrentNoteMxmlStaffNumber;
 
   // remove fCurrentRecipientMsrVoice from fForwardedToVoicesList
   // if it has been forwarded to
@@ -25411,8 +25411,8 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
       ss <<
         ", fCurrentRecipientStaffNumber: " <<
         mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
-        ", fCurrentNoteMusicXMLVoiceNumber: " <<
-        fCurrentNoteMusicXMLVoiceNumber;
+        ", fCurrentNoteMxmlVoiceNumber: " <<
+        fCurrentNoteMxmlVoiceNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -25577,8 +25577,8 @@ void mxsr2msrSkeletonPopulator::handleARestInAMeasure (
       ss <<
         ", fCurrentRecipientStaffNumber: " <<
         mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
-        ", fCurrentNoteMusicXMLVoiceNumber: " <<
-        fCurrentNoteMusicXMLVoiceNumber;
+        ", fCurrentNoteMxmlVoiceNumber: " <<
+        fCurrentNoteMxmlVoiceNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -26100,8 +26100,8 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChord (
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    fCurrentNoteMusicXMLVoiceNumber != K_MF_VOICE_NUMBER_UNKNOWN_,
-    "fCurrentNoteMusicXMLVoiceNumber is unknown");
+    fCurrentNoteMxmlVoiceNumber != K_MF_VOICE_NUMBER_UNKNOWN_,
+    "fCurrentNoteMxmlVoiceNumber is unknown");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -27221,7 +27221,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root_alter& elt)
   float rootAlter = (float)(*elt);
 
   fCurrentHarmonyRootAlterationKind =
-    msrAlterationKindFromMusicXMLAlter (
+    msrAlterationKindFromMxmlAlter (
       rootAlter);
 
   if (fCurrentHarmonyRootAlterationKind == msrAlterationKind::kAlteration_UNKNOWN_) {
@@ -27564,7 +27564,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass_alter& elt)
   float bassAlter = (float)(*elt);
 
   fCurrentHarmonyBassAlterationKind =
-    msrAlterationKindFromMusicXMLAlter (
+    msrAlterationKindFromMxmlAlter (
       bassAlter);
 
   if (fCurrentHarmonyBassAlterationKind == msrAlterationKind::kAlteration_UNKNOWN_) {
@@ -27648,7 +27648,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_alter& elt)
   float degreeAlter = (float)(*elt);
 
   fCurrentHarmonyDegreeAlterationKind =
-    msrAlterationKindFromMusicXMLAlter (
+    msrAlterationKindFromMxmlAlter (
       degreeAlter);
 
   if (fCurrentHarmonyDegreeAlterationKind == msrAlterationKind::kAlteration_UNKNOWN_) {
@@ -28103,7 +28103,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame& elt)
   // alteration
 
   fCurrentHarmonyDegreeAlterationKind =
-    msrAlterationKindFromMusicXMLAlter (
+    msrAlterationKindFromMxmlAlter (
       degreeAlter);
 
   if (fCurrentHarmonyDegreeAlterationKind == msrAlterationKind::kAlteration_UNKNOWN_) {
@@ -28827,7 +28827,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_alter& elt)
   float pedalAlter = (float)(*elt);
 
   fCurrentHarpPedalAlterationKind =
-    msrAlterationKindFromMusicXMLAlter (
+    msrAlterationKindFromMxmlAlter (
       pedalAlter);
 
   if (fCurrentHarpPedalAlterationKind == msrAlterationKind::kAlteration_UNKNOWN_) {

@@ -465,22 +465,22 @@ void msrPartGroup::setPartGroupInstrumentName (
 
 // S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
 //   const mfInputLineNumber& inputLineNumber,
-//   const std::string& partMusicXMLID)
+//   const std::string& PartMxmlID)
 // {
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
 //     __FILE__, mfInputLineNumber (__LINE__),
-//     ! partMusicXMLID.empty (),
-//     "partMusicXMLID is EMPTY");
+//     ! PartMxmlID.empty (),
+//     "PartMxmlID is EMPTY");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
-//   // has this partMusicXMLID already been added to this part?
-//   if (fPartGroupPartsMap.count (partMusicXMLID)) {
+//   // has this PartMxmlID already been added to this part?
+//   if (fPartGroupPartsMap.count (PartMxmlID)) {
 //     std::stringstream ss;
 //
 //     ss <<
-//       "partMusicXMLID \"" << partMusicXMLID <<
+//       "PartMxmlID \"" << PartMxmlID <<
 //       "\" already exists in part group " <<
 //       fetchPartGroupInformationForTrace ();
 //
@@ -489,7 +489,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //       inputLineNumber,
 //       ss.str ());
 //
-//     return fPartGroupPartsMap [partMusicXMLID];
+//     return fPartGroupPartsMap [PartMxmlID];
 //   }
 //
 //   // create the part
@@ -497,7 +497,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //     part =
 //       msrPart::create (
 //         inputLineNumber,
-//         partMusicXMLID,
+//         PartMxmlID,
 //         this);
 //
 //   // register it in this part group
@@ -518,7 +518,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 // #endif // MF_TRACE_IS_ENABLED
 //
 //   // register part in part group
-//   fPartGroupPartsMap [partMusicXMLID] = part;
+//   fPartGroupPartsMap [PartMxmlID] = part;
 //
 //   fPartGroupElementsList.push_back (part);
 //
@@ -599,7 +599,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 #endif // MF_TRACE_IS_ENABLED
 
   // register part into this part group's data
-  fPartGroupPartsMap [part->getPartMusicXMLID ()] = part;
+  fPartGroupPartsMap [part->getPartMxmlID ()] = part;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -1038,7 +1038,7 @@ void msrPartGroup::displayPartGroupElementsList (
 
 S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& partMusicXMLID)
+  const std::string& PartMxmlID)
 {
   S_msrPart result;
 
@@ -1047,7 +1047,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
     std::stringstream ss;
 
     ss <<
-      "fetchPartFromPartGroupByItsPartID(" << partMusicXMLID <<
+      "fetchPartFromPartGroupByItsPartID(" << PartMxmlID <<
       "), fPartGroupElementsList contains:" <<
       std::endl;
 
@@ -1059,7 +1059,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
     --gIndenter;
 
     ss <<
-      "<=- fetchPartFromPartGroupByItsPartID(" << partMusicXMLID << ")";
+      "<=- fetchPartFromPartGroupByItsPartID(" << PartMxmlID << ")";
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1087,7 +1087,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
           partGroup->
             fetchPartFromPartGroupByItsPartID (
               inputLineNumber,
-              partMusicXMLID);
+              PartMxmlID);
 
       if (inter) {
         result = inter;
@@ -1101,7 +1101,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
           dynamic_cast<msrPart*>(&(*element))
       ) {
       // this is a part
-      if (part->getPartMusicXMLID () == partMusicXMLID) {
+      if (part->getPartMxmlID () == PartMxmlID) {
         result = part;
         break;
       }
@@ -1197,7 +1197,7 @@ void msrPartGroup::collectPartGroupParts (
           dynamic_cast<msrPart*>(&(*partGroupElement))
     ) {
       // this is a part
-      partsMap [part->getPartMusicXMLID ()] = part;
+      partsMap [part->getPartMxmlID ()] = part;
     }
 
     else {
