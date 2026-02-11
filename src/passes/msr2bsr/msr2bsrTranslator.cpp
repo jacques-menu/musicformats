@@ -2926,7 +2926,7 @@ void msr2bsrTranslator::visitStart (S_msrSegment& elt)
   // get the current segment clone JMI 0.9.76 ???
   fCurrentSegmentClone =
     fCurrentVoiceClone->
-      getVoiceCurrentRecipientSegment ();
+      fetchVoiceCurrentRecipientSegment ();
 
   // create a clone of the segment
   S_msrSegment

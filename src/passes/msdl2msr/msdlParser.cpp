@@ -867,7 +867,7 @@ void msdlParser::createMeasureNumber (
         inputLineNumber,
         333, //         previousMeasureEndInputLineNumber, 0.9.62
         ss.str (),
-        msrMeasureImplicitKind::kMeasureImplicitKindNo);
+        msrMeasureImplicitNumberKind::kMeasureImplicitNumberKindNo);
 }
 
 void msdlParser::createVoiceIfNeeded (const mfInputLineNumber& inputLineNumber)

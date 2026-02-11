@@ -357,7 +357,7 @@ class EXP msrPart : public msrPartGroupElement
                             const mfInputLineNumber& inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
                             const mfMeasureNumber& measureNumber,
-                            msrMeasureImplicitKind measureImplicitKind);
+                            msrMeasureImplicitNumberKind measureImplicitNumberKind);
 
     void                  cascadeSetNextMeasureNumberInPart (
                             const mfInputLineNumber& inputLineNumber,

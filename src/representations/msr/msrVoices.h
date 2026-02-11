@@ -215,9 +215,6 @@ class EXP msrVoice : public msrElement
 //     void                  appendSegmentToVoiceClone (
 //                             const S_msrSegment& segment);
 
-//     const S_msrSegment&   getVoiceCurrentRecipientSegment () const
-//                               { return fVoiceCurrentRecipientSegment; }
-
 
     void                  setVoiceSegment (const S_msrSegment& segment);
 
@@ -226,9 +223,6 @@ class EXP msrVoice : public msrElement
 
     S_msrSegment          fetchVoiceCurrentRecipientSegment () const;
 
-//     void                  addSegmentCloneToVoiceClone (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             S_msrSegment             segmentClone);
 
     // harmonies
 
@@ -393,7 +387,8 @@ class EXP msrVoice : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             int                      previousMeasureEndInputLineNumber,
                             const mfMeasureNumber&   measureNumber,
-                            msrMeasureImplicitKind   measureImplicitKind);
+                            msrMeasureImplicitNumberKind
+                                                     measureImplicitNumberKind);
 
     void                  edacsacSetNextMeasureNumberInVoice (
                             const mfInputLineNumber& inputLineNumber,
@@ -453,9 +448,9 @@ class EXP msrVoice : public msrElement
 
     // harmonies
 
-    S_msrVoice            createRegularVoiceHarmoniesVoice (
-                            const mfInputLineNumber& inputLineNumber,
-                            const mfMeasureNumber&   currentMeasureNumber);
+//     S_msrVoice            createRegularVoiceHarmoniesVoice (
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const mfMeasureNumber&   currentMeasureNumber);
 
     // figured bass
 
@@ -589,11 +584,11 @@ class EXP msrVoice : public msrElement
 
     // lyrics
 
-    void                  appendSyllableToVoice ( // JMI
-                            const mfInputLineNumber& inputLineNumber,
-                            const mfStanzaNumber&    stanzaNumber,
-                            const std::string&       stanzaName,
-                            const S_msrSyllable&     syllable);
+//     void                  appendSyllableToVoice ( // JMI
+//                             const mfInputLineNumber& inputLineNumber,
+//                             const mfStanzaNumber&    stanzaNumber,
+//                             const std::string&       stanzaName,
+//                             const S_msrSyllable&     syllable);
 
     // bar checks
 
@@ -899,11 +894,6 @@ class EXP msrVoice : public msrElement
 
     // repeats
 
-//     S_msrRepeat           createARepeatCloneAndStackIt (
-//                             const mfInputLineNumber& inputLineNumber,
-//                             const S_msrRepeat&       repeat,
-//                             const std::string&       context);
-
     void                  pushRepeatOntoVoiceRepeatsStack (
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrRepeat&       repeat,
@@ -934,7 +924,7 @@ class EXP msrVoice : public msrElement
                             const mfMeasureNumber&   measureNumber,
                             int                      repeatTimes);
 
-    void                  handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
+    void                  handleVoiceLevelRepeatEndingStartWithImplicitStart (
                             const mfInputLineNumber& inputLineNumber,
                             S_msrRepeat&             currentRepeat);
 

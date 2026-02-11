@@ -278,7 +278,7 @@ class EXP msrStaff : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             int                      previousMeasureEndInputLineNumber,
                             const mfMeasureNumber&   measureNumber,
-                            msrMeasureImplicitKind   measureImplicitKind);
+                            msrMeasureImplicitNumberKind   measureImplicitNumberKind);
 
     void                  cascadeSetNextMeasureNumberInStaff (
                             const mfInputLineNumber& inputLineNumber,

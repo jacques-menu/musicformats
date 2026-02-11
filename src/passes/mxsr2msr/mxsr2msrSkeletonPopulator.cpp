@@ -11036,17 +11036,17 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
     implicitString =
       elt->getAttributeValue ("implicit");
 
-  msrMeasureImplicitKind
-    measureImplicitKind =
-      msrMeasureImplicitKind::kMeasureImplicitKindNo; // default value
+  msrMeasureImplicitNumberKind
+    measureImplicitNumberKind =
+      msrMeasureImplicitNumberKind::kMeasureImplicitNumberKindNo; // default value
 
   if       (implicitString == "yes") {
-    measureImplicitKind =
-      msrMeasureImplicitKind::kMeasureImplicitKindYes;
+    measureImplicitNumberKind =
+      msrMeasureImplicitNumberKind::kMeasureImplicitNumberKindYes;
   }
   else  if (implicitString == "no") {
-    measureImplicitKind =
-      msrMeasureImplicitKind::kMeasureImplicitKindNo;
+    measureImplicitNumberKind =
+      msrMeasureImplicitNumberKind::kMeasureImplicitNumberKindNo;
   }
   else {
     if (! implicitString.empty ()) {
@@ -11084,7 +11084,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       "partName \"" << fCurrentPart->getPartName () << "\"" <<
       ", partMxmlID: \"" << fCurrentPart->getPartMxmlID () << "\"" <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber << "\"" <<
-      ", measureImplicitKind: " << measureImplicitKind <<
+      ", measureImplicitNumberKind: " << measureImplicitNumberKind <<
       ", nonControllingString: \"" << nonControllingString << "\"" <<
       ", widthValue: " << widthValue <<
       ", line " << elt->getInputLineNumber () <<
@@ -11134,7 +11134,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       elt->getInputLineNumber (),
       fPreviousMeasureInputLineNumber,
       fCurrentMeasureNumber,
-      measureImplicitKind);
+      measureImplicitNumberKind);
 
   fPreviousMeasureInputLineNumber = elt->getInputLineNumber ();
 

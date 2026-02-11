@@ -166,13 +166,13 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure implicit kind
 
-    void                  setMeasureImplicitKind (
-                            msrMeasureImplicitKind measureImplicitKind)
-                              { fMeasureImplicitKind = measureImplicitKind; }
+    void                  setMeasureImplicitNumberKind (
+                            msrMeasureImplicitNumberKind measureImplicitNumberKind)
+                              { fMeasureImplicitNumberKind = measureImplicitNumberKind; }
 
-    msrMeasureImplicitKind
-                          getMeasureImplicitKind () const
-                              { return fMeasureImplicitKind; }
+    msrMeasureImplicitNumberKind
+                          getMeasureImplicitNumberKind () const
+                              { return fMeasureImplicitNumberKind; }
 
 
     // measure 'first in segment' kind
@@ -772,8 +772,8 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure implicit kind
 
-    msrMeasureImplicitKind
-                          fMeasureImplicitKind;
+    msrMeasureImplicitNumberKind
+                          fMeasureImplicitNumberKind;
 
     // measure 'first in segment' kind
 

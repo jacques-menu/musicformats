@@ -196,7 +196,7 @@ class EXP msrSegment : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             int                      previousMeasureEndInputLineNumber,
                             const mfMeasureNumber&   measureNumber,
-                            msrMeasureImplicitKind   measureImplicitKind);
+                            msrMeasureImplicitNumberKind   measureImplicitNumberKind);
 
     void                  setNextMeasureNumberInSegment (
                             const mfInputLineNumber& inputLineNumber,
@@ -228,7 +228,7 @@ class EXP msrSegment : public msrElement
 //                             const mfInputLineNumber& inputLineNumber,
 //                             int                      previousMeasureEndInputLineNumber,
 //                             const mfMeasureNumber&   measureNumber,
-//                             msrMeasureImplicitKind   measureImplicitKind);
+//                             msrMeasureImplicitNumberKind   measureImplicitNumberKind);
 
     // multi-measure rests
 

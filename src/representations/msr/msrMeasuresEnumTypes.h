@@ -49,16 +49,16 @@ mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrMeasu
 std::string msrMeasureKindasShortStringForMeasuresSlices (
   msrMeasureKind measureKind);
 
-enum class msrMeasureImplicitKind {
-  kMeasureImplicitKindYes,
-  kMeasureImplicitKindNo
+enum class msrMeasureImplicitNumberKind {
+  kMeasureImplicitNumberKindYes,
+  kMeasureImplicitNumberKindNo
 };
 
-std::string msrMeasureImplicitKindAsString (
-  msrMeasureImplicitKind measureImplicitKind);
+std::string msrMeasureImplicitNumberKindAsString (
+  msrMeasureImplicitNumberKind measureImplicitNumberKind);
 
-std::ostream& operator << (std::ostream& os, const msrMeasureImplicitKind& elt);
-mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrMeasureImplicitKind elt);
+std::ostream& operator << (std::ostream& os, const msrMeasureImplicitNumberKind& elt);
+mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrMeasureImplicitNumberKind elt);
 
 //______________________________________________________________________________
 // data types

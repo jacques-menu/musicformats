@@ -139,33 +139,33 @@ std::string msrMeasureKindasShortStringForMeasuresSlices (
   return result;
 }
 
-std::string msrMeasureImplicitKindAsString (
-  msrMeasureImplicitKind measureImplicitKind)
+std::string msrMeasureImplicitNumberKindAsString (
+  msrMeasureImplicitNumberKind measureImplicitNumberKind)
 {
   std::string result;
 
-  switch (measureImplicitKind) {
-    case msrMeasureImplicitKind::kMeasureImplicitKindYes:
-      result = "kMeasureImplicitKindYes";
+  switch (measureImplicitNumberKind) {
+    case msrMeasureImplicitNumberKind::kMeasureImplicitNumberKindYes:
+      result = "kMeasureImplicitNumberKindYes";
       break;
-    case msrMeasureImplicitKind::kMeasureImplicitKindNo:
-      result = "kMeasureImplicitKindNo";
+    case msrMeasureImplicitNumberKind::kMeasureImplicitNumberKindNo:
+      result = "kMeasureImplicitNumberKindNo";
       break;
   } // switch
 
   return result;
 }
 
-std::ostream& operator << (std::ostream& os, const msrMeasureImplicitKind& elt)
+std::ostream& operator << (std::ostream& os, const msrMeasureImplicitNumberKind& elt)
 {
-  os << msrMeasureImplicitKindAsString (elt);
+  os << msrMeasureImplicitNumberKindAsString (elt);
   return os;
 }
 
-mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrMeasureImplicitKind elt)
+mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrMeasureImplicitNumberKind elt)
 {
   iss.getStringstream () <<
-    msrMeasureImplicitKindAsString (elt);
+    msrMeasureImplicitNumberKindAsString (elt);
 
   return iss;
 }

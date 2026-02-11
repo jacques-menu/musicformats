@@ -565,7 +565,7 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
   const mfInputLineNumber& inputLineNumber,
   int                      previousMeasureEndInputLineNumber,
   const mfMeasureNumber&   measureNumber,
-  msrMeasureImplicitKind   measureImplicitKind)
+  msrMeasureImplicitNumberKind   measureImplicitNumberKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresBasics ()) {
@@ -601,7 +601,7 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
           inputLineNumber,
           previousMeasureEndInputLineNumber,
           measureNumber,
-          measureImplicitKind);
+          measureImplicitNumberKind);
     } // for
   }
 }

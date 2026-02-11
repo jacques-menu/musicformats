@@ -340,7 +340,7 @@ S_msrMeasure LilyPondIssue34Generator::createMeasureInVoice (
         inputLineNumber,
         333, //         previousMeasureEndInputLineNumber, 0.9.62
         measureNumber,
-        msrMeasureImplicitKind::kMeasureImplicitKindNo);
+        msrMeasureImplicitNumberKind::kMeasureImplicitNumberKindNo);
 }
 
 //------------------------------------------------------------------------
