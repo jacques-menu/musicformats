@@ -125,92 +125,69 @@ std::ostream& operator << (
 }
 
 //________________________________________________________________________
-msr2msrTranslator::msr2msrTranslator ()
-{}
-
-msr2msrTranslator::~msr2msrTranslator ()
-{}
-
-//________________________________________________________________________
-S_msrScore msr2msrTranslator::translateMsrToMsr (
-  const S_msrScore& theMsrScore)
+msr2msrTranslator::msr2msrTranslator (
+  const S_msrScore& visitedMsrScore)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
-    theMsrScore != nullptr,
-    "theMsrScore is NULL");
+    visitedMsrScore != nullptr,
+    "visitedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // the MSR score we're visiting
-  fVisitedMsrScore = theMsrScore;
+  fVisitedMsrScore = visitedMsrScore;
 
   // create the resulting new MSR score
   fResultingNewMsrScore =
     msrScore::create (
       K_MF_INPUT_LINE_UNKNOWN_,
-      "msrScore::create()");
+      "msr2msrTranslator::msr2msrTranslator()");
+}
 
+msr2msrTranslator::~msr2msrTranslator ()
+{}
+
+//________________________________________________________________________
+S_msrScore msr2msrTranslator::translateMsrToMsr ()
+{
   // create a msrScore browser
   msrBrowser<msrScore> browser (this);
 
   // set the parts browsing order
-  theMsrScore->
+  fVisitedMsrScore->
     setStavesBrowingOrderKind (
       msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses);
 
   // browse the visited MSR score
   browser.browse (*fVisitedMsrScore);
 
-  // forget about the visited MSR score
-  fVisitedMsrScore = nullptr;
+//   // forget about the visited MSR score
+//   fVisitedMsrScore = nullptr;
 
   return fResultingNewMsrScore;
 }
 
 //________________________________________________________________________
 S_msrScore msr2msrTranslator::translateMsrToMsrAlongPathToVoice (
-  const S_msrScore&       theMsrScore,
   const S_msrPathToVoice& pathToVoice)
 {
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    theMsrScore != nullptr,
-    "theMsrScore is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    pathToVoice != nullptr,
-    "pathToVoice is NULL");
-
-  // the MSR score we're visiting
-  fVisitedMsrScore = theMsrScore;
-
-  // create the resulting MSR score
-  fResultingNewMsrScore =
-    msrScore::create (
-      K_MF_INPUT_LINE_UNKNOWN_,
-      "msrScore::create()");
-
   // create a msrScore browser
   msrBrowserAlongPathToVoice<msrScore> browser (
     this,
     pathToVoice);
 
   // set the parts browsing order
-  theMsrScore->
+  fVisitedMsrScore->
     setStavesBrowingOrderKind (
       msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars);
 
   // browse the visited MSR score
   browser.browse (*fVisitedMsrScore);
 
-  // forget about the visited MSR score
-  fVisitedMsrScore = nullptr;
+//   // forget about the visited MSR score
+//   fVisitedMsrScore = nullptr;
 
   return fResultingNewMsrScore;
 }

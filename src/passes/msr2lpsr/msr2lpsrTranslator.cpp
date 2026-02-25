@@ -72,9 +72,21 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-msr2lpsrTranslator::msr2lpsrTranslator ()
-  : msr2msrTranslator ()
-{}
+msr2lpsrTranslator::msr2lpsrTranslator (
+  const S_msrScore& visitedMsrScore)
+  : msr2msrTranslator (visitedMsrScore)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    visitedMsrScore != nullptr,
+    "visitedMsrScore is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  // the MSR score we're visiting
+  fVisitedMsrScore = visitedMsrScore;
+}
 
 msr2lpsrTranslator::~msr2lpsrTranslator ()
 {}
@@ -484,20 +496,8 @@ void msr2lpsrTranslator::computeLilypondScoreHeaderTitleAndSubTitle ()
 
 //________________________________________________________________________
 S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
-  const S_msrScore&          theMsrScore,
   const S_mfcMultiComponent& multiComponent)
 {
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    theMsrScore != nullptr,
-    "theMsrScore is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  // the MSR score we're visiting
-  fVisitedMsrScore = theMsrScore;
-
   // create another embedded MSR score for the LPSR score
   fCurrentMsrScoreClone =
     msrScore::create (
@@ -554,7 +554,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
   msrBrowser<msrScore> browser (this);
 
   // set the parts browsing order
-  theMsrScore->
+  fVisitedMsrScore->
     setStavesBrowingOrderKind (
       msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses);
 

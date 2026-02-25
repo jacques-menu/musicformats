@@ -24,7 +24,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 mfMusicformatsErrorKind executeStringMatcher (
-  const std::string& stringMatcherExpressionString,
+  const std::string& stringMatcherPatternString,
   const std::string& stringMatcherInputString);
 
 //_______________________________________________________________________________

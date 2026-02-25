@@ -10364,7 +10364,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
   // color JMI
 
   // forget about any previous texts and elisions found if any
-  fCurrentSyllableElementsList.clear ();
+//   fCurrentSyllableElementsList.clear (); // 2026.2
 
   // a <text/> markup puts an end to the effect of <extend/> JMI 0.9.67
   fCurrentSyllableExtendKind = msrSyllableExtendKind::kSyllableExtend_NONE;
@@ -10472,7 +10472,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_text& elt)
   if (gTraceOahGroup->getTraceLyrics ()) {
     ++gIndenter;
 
-    constexpr int fieldWidth = 23;
+    constexpr int fieldWidth = 29;
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
@@ -10482,7 +10482,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_text& elt)
       "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
+      "fCurrentStanzaName" << ": \"" << fCurrentStanzaName << "\"" <<
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentSyllabic" << ": " << fCurrentSyllabic <<
@@ -10796,7 +10796,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     fCurrentSyllableKind =
       msrSyllableKind::kSyllableSkipOnRestNote;
 
-//     if (! fCurrentSyllableElementsList.empty ()) {
+//     if (! fCurrentSyllableElementsList.empty ()) { 2026.2
 //       // register a skip in lyrics for rests with syllables
 //       fCurrentSyllableKind =
 //         msrSyllableKind::kSyllableOnRestNote;
@@ -25956,35 +25956,35 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
             currentNoteUplinkToMeasure);
 
 
-  //     // fetch the voice
-  //     S_msrVoice
-  //       theMsrVoice =
-  //         stanza->getStanzaUpLinkToVoice ();
-  //
-  //     // set the syllable's measure uplink
-  //     syllable->
-  //       setSyllableUpLinkToMeasure (
-  //         theMsrVoice->
-  //           fetchVoiceLastMeasure (inputStartLineNumber));
-  //
-  //     // fetch the part
-  //     S_msrPart
-  //       part =
-  //         theMsrVoice->
-  //           fetchVoiceUpLinkToPart ();
-  //
-  //     // fetch the part current measure position
-  //     mfPositionInMeasure
-  //       partCurrentDrawingPositionInMeasure =
-  //         part->
-  //           getPartCurrentDrawingPositionInMeasure ();
-  //
-  //     // append syllable to stanza
-  //     stanza->
-  //       appendSyllableToStanza (
-  //         syllable,
-  //         theMsrVoice->getVoiceLastAppendedMeasure (),
-  //         partCurrentDrawingPositionInMeasure);
+      // fetch the voice 2026.2
+      S_msrVoice
+        theMsrVoice =
+          stanza->getStanzaUpLinkToVoice ();
+
+      // set the syllable's measure uplink
+      syllable->
+        setSyllableUpLinkToMeasure (
+          theMsrVoice->
+            fetchVoiceLastMeasure (inputStartLineNumber));
+
+      // fetch the part
+      S_msrPart
+        part =
+          theMsrVoice->
+            fetchVoiceUpLinkToPart ();
+
+      // fetch the part current measure position
+      mfPositionInMeasure
+        partCurrentDrawingPositionInMeasure =
+          part->
+            getPartCurrentDrawingPositionInMeasure ();
+
+      // append syllable to stanza
+      stanza->
+        appendSyllableToStanza (
+          syllable,
+          theMsrVoice->getVoiceLastAppendedMeasure (),
+          partCurrentDrawingPositionInMeasure);
 
       } // for
 

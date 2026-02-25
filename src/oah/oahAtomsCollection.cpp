@@ -5039,7 +5039,7 @@ void oahCombinedBooleansAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fBooleanAtomsList" << ": ";
+    "fBooleanAtomsList" << ":1 ";
 
   if (! fBooleanAtomsList.size ()) {
     os <<
@@ -5127,7 +5127,7 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
   }
 
   os << std::left <<
-    "fBooleanAtomsList" << ": ";
+    "fBooleanAtomsList" << ": 2";
 
   if (! fBooleanAtomsList.size ()) {
     os << "[EMPTY]";
@@ -7584,7 +7584,7 @@ void oahCommonPrefixBooleansAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fBooleanAtomsList" << ": ";
+    "fBooleanAtomsList" << ": 3";
 
   if (! fBooleanAtomsList.size ()) {
     os << "[EMPTY]";
@@ -7750,7 +7750,7 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
   }
 
   os << std::left <<
-    "fBooleanAtomsList" << ": ";
+    "fBooleanAtomsList" << ": 4";
 
   if (! fBooleanAtomsList.size ()) {
     os << "[EMPTY]";

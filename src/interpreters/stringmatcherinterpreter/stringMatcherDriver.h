@@ -123,7 +123,7 @@ class stringMatcherDriver : public smartable
 
     // scanning
     bool                  fTraceScanning; // this interacts with the scanner
-    smi::location      fScannerLocation;
+    smi::location         fScannerLocation;
 
     // parsing
     Bool                  fDisplayServiceAndInput;

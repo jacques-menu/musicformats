@@ -80,7 +80,7 @@ static void catchSignals ()  {}
 
 //_______________________________________________________________________________
 mfMusicformatsErrorKind executeStringMatcher (
-  const std::string& stringMatcherExpressionString,
+  const std::string& stringMatcherPatternString,
   const std::string& stringMatcherInputString)
 {
   mfMusicformatsErrorKind
@@ -572,60 +572,70 @@ EXP int stringMatcher (
 //______________________________________________________________________________
 void testStringMatcher (std::ostream& os)
 {
+  // the pattern to accept xml but not lilypond
   S_stringMatcherNode
-    theExpression =
-
+    thePattern =
       stringMatcherAnd::create (
-
         stringMatcherString::create (
           "xml"),
-
         stringMatcherNot::create (
           stringMatcherString::create (
             "lilypond")
           )
         );
 
+  // display thePattern
   os <<
-    "theExpression:" <<
+    "thePattern as a tree:" <<
     std::endl;
 
   ++gIndenter;
   os <<
-    theExpression <<
+    thePattern <<
     std::endl;
   --gIndenter;
 
   os <<
-    "as string:" <<
+    "thePattern as a string:" <<
     std::endl;
 
   ++gIndenter;
   os <<
-    theExpression->asString () <<
+    thePattern->asString () <<
     std::endl <<
     std::endl;
   --gIndenter;
 
   os <<
-    "as string with full parentheses:" <<
+    "thePattern as a string with full parentheses:" <<
     std::endl;
 
   ++gIndenter;
   os <<
-    theExpression->asStringWithFullParentheses () <<
+    thePattern->asStringWithFullParentheses () <<
     std::endl;
   --gIndenter;
 
+  // the data to be matched
   std::string
     data1 =
-      "xml lilypond";
+      "convert xml to lilypond",
+    data2 =
+      "xml it nice per se";
 
   gLog <<
     "data1 = " << data1 <<
-    std::endl;
+    std::endl << std::endl;
 
-//   executeStringMatcher (data1);
+  // match data1 with thePattern
+  executeStringMatcher (
+    thePattern->asString (),
+    data1);
+
+  // match data2 with thePattern
+  executeStringMatcher (
+    thePattern->asString (),
+    data1);
 }
 
 

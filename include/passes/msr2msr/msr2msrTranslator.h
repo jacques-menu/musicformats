@@ -356,15 +356,14 @@ class EXP msr2msrTranslator :
 {
   public:
 
-                              msr2msrTranslator ();
+                              msr2msrTranslator (
+                                const S_msrScore& visitedMsrScore);
 
     virtual                   ~msr2msrTranslator ();
 
-    S_msrScore                translateMsrToMsr (
-                                const S_msrScore& theMsrScore);
+    S_msrScore                translateMsrToMsr ();
 
     S_msrScore                translateMsrToMsrAlongPathToVoice (
-                                const S_msrScore&       theMsrScore,
                                 const S_msrPathToVoice& pathToVoice);
 
   protected:
