@@ -34,19 +34,19 @@ typedef SMARTP<musicxml2mxsrException> S_musicxml2mxsrException;
 
 //______________________________________________________________________________
 EXP void musicxml2mxsrWarning (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& message);
+  const std::string&       message);
 
 EXP void musicxml2mxsrError (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
   const std::string&       message);
 
 EXP void musicxml2mxsrInternalError (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,

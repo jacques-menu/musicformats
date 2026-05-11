@@ -25872,7 +25872,7 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
       fCurrentNote->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceLyrics ()) { // JMI 2026.2
+  if (gTraceOahGroup->getTraceLyrics ()) { // JMI 2026.2
     std::stringstream ss;
 
     ss <<

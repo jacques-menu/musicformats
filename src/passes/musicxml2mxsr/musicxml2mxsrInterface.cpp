@@ -410,11 +410,11 @@ void checkDesiredEncoding (
         " doesn't contain any encoding specification; assuming it is " <<
         desiredEncoding;
 
-//       musicxml2mxsrWarning (
-      musicxml2mxsrError (
+      musicxml2mxsrWarning (
+//       musicxml2mxsrError ( // JMI 2026.2
         gServiceRunData->getInputSourceName (),
         1, // inputLineNumber,
-        __FILE__, mfInputLineNumber (__LINE__),
+//         __FILE__, mfInputLineNumber (__LINE__),
         ss.str ());
     }
 

@@ -22,9 +22,9 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 void musicxml2mxsrWarning (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
-  const std::string& message)
+  const std::string&       message)
 {
   waeWarning (
     "musicxml2mxsr",
@@ -34,7 +34,7 @@ void musicxml2mxsrWarning (
 }
 
 void musicxml2mxsrError (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
@@ -59,7 +59,7 @@ void musicxml2mxsrError (
 }
 
 void musicxml2mxsrInternalError (
-  const std::string& inputSourceName,
+  const std::string&       inputSourceName,
   const mfInputLineNumber& inputLineNumber,
   const std::string&       sourceCodeFileName,
   const mfInputLineNumber& sourceCodeLineNumber,
