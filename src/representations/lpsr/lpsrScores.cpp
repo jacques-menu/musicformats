@@ -536,7 +536,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeModulesName,
         schemeModulesDescription,
         schemeModulesCode);
@@ -589,7 +589,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeModulesName,
         schemeModulesDescription,
         schemeModulesCode);
@@ -641,7 +641,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeModulesName,
         schemeModulesDescription,
         schemeModulesCode);
@@ -708,7 +708,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeModulesName,
         schemeModulesDescription,
         schemeModulesCode);
@@ -775,7 +775,7 @@ tongue =
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -836,7 +836,7 @@ editorialAccidental =
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -894,7 +894,7 @@ ffffff = #(make-dynamic-script "ffffff")
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -1000,7 +1000,7 @@ tupletsCurvedBrackets = {
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -1060,7 +1060,7 @@ after =
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -1178,7 +1178,7 @@ tempoNotesRelationship =
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -1376,7 +1376,7 @@ glissandoTextOff = \revert Glissando.stencil
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -1450,7 +1450,7 @@ otherDynamic =
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -1776,7 +1776,7 @@ schleifer =
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -1853,7 +1853,7 @@ scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -1921,7 +1921,7 @@ damp = \markup {
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -1983,7 +1983,7 @@ dampAll = \markup
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -2050,7 +2050,7 @@ whiteNoteHeads =
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -2110,7 +2110,7 @@ boxAroundNextBarNumber = {
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -2210,7 +2210,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -2292,7 +2292,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -2356,7 +2356,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -2489,7 +2489,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -2610,7 +2610,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -2708,7 +2708,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -2789,7 +2789,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -2873,7 +2873,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);
@@ -2916,7 +2916,7 @@ R"(
   S_lpsrSchemeFunction
     schemeFunction =
       lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
+        1, // inputLineNumber, // JMI ???
         schemeFunctionName,
         schemeFunctionDescription,
         schemeFunctionCode);

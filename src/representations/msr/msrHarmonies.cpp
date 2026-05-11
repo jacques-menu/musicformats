@@ -3682,7 +3682,7 @@ void msrHarmonyDegree::setHarmonyDegreeUpLinkToHarmony (
     UpLinkToHarmony;
 }
 
-/* JMI ??? 0.9.71
+/* // JMI ??? 0.9.71
 int msrHarmonyDegree::harmonyDegreeAsSemitones () const
 {
 / *
@@ -3932,7 +3932,7 @@ msrHarmonyContents::msrHarmonyContents (
     rootChordElement =
       msrSemiTonesPitchAndOctave::create (
         fHarmonyContentsRootNote,
-        msrOctaveKind::kOctave0); // relative octave JMI ???
+        msrOctaveKind::kOctave0); // relative octave // JMI ???
 
   // add it to the harmony elements
   fHarmonyElementsVector.push_back (rootChordElement);
@@ -3968,7 +3968,7 @@ msrHarmonyContents::msrHarmonyContents (
       harmonyElement =
         msrSemiTonesPitchAndOctave::create (
           semiTonePitch,
-          msrOctaveKind::kOctave0); // relative octave JMI ???
+          msrOctaveKind::kOctave0); // relative octave // JMI ???
 
     // add it to the harmony elements
     fHarmonyElementsVector.push_back (harmonyElement);
@@ -4471,7 +4471,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
   newbornClone->setHarmoniesUpLinkToVoice (
     containingVoice);
 
-  // frame JMI ???
+  // frame // JMI ???
   newbornClone->fHarmonyFrame =
     fHarmonyFrame;
 
@@ -4677,7 +4677,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //
 //   // the offset can be negative, so we merely add it to positionInMeasure
 //   // to obtain the harmony's actual positionInMeasure
-//   // this overwrites it with the same value if fHarmonyWholeNotesOffset is null JMI ???
+//   // this overwrites it with the same value if fHarmonyWholeNotesOffset is null // JMI ???
 //   mfWholeNotes
 //     actualPositionInMeasure =
 //       positionInMeasure

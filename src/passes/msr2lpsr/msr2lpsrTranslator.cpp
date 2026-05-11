@@ -72,9 +72,20 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-msr2lpsrTranslator::msr2lpsrTranslator ()
-  : msr2msrTranslator ()
-{}
+msr2lpsrTranslator::msr2lpsrTranslator (const S_msrScore& theMsrScore)
+  : msr2msrTranslator (theMsrScore)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    theMsrScore != nullptr,
+    "theMsrScore is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  // the MSR score we're visiting
+  fVisitedMsrScore = theMsrScore;
+}
 
 msr2lpsrTranslator::~msr2lpsrTranslator ()
 {}
@@ -484,20 +495,8 @@ void msr2lpsrTranslator::computeLilypondScoreHeaderTitleAndSubTitle ()
 
 //________________________________________________________________________
 S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
-  const S_msrScore&          theMsrScore,
   const S_mfcMultiComponent& multiComponent)
 {
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    theMsrScore != nullptr,
-    "theMsrScore is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  // the MSR score we're visiting
-  fVisitedMsrScore = theMsrScore;
-
   // create another embedded MSR score for the LPSR score
   fCurrentMsrScoreClone =
     msrScore::create (
@@ -516,7 +515,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
     lpsrBookBlock::create (
       K_MF_INPUT_LINE_UNKNOWN_);
 
-  // set its header to that of the visited LPSR score JMI ???
+  // set its header to that of the visited LPSR score // JMI ???
   fCurrentLpsrBookBlock->
     setBookBlockHeader (
       fCurrentLpsrScoreHeader);
@@ -554,7 +553,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
   msrBrowser<msrScore> browser (this);
 
   // set the parts browsing order
-  theMsrScore->
+  fVisitedMsrScore->
     setStavesBrowingOrderKind (
       msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses);
 
@@ -2282,7 +2281,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          true || fCurrentVoiceOriginal->getVoiceIsMusicallyEmpty () // superfluous test JMI ??? JMI 0.9.72
+          true || fCurrentVoiceOriginal->getVoiceIsMusicallyEmpty () // superfluous test // JMI ??? JMI 0.9.72
         ) {
           // append the voice clone to the LPSR score elements list
           fResultingLpsr ->
@@ -2598,23 +2597,19 @@ void msr2lpsrTranslator::visitStart (S_msrStanza& elt)
 
   ++gIndenter;
 
-//  if (elt->getStanzaTextPresent ()) { // JMI
-    fCurrentStanzaClone =
-      elt->createStanzaNewbornClone (
-        fCurrentVoiceClone);
+  fCurrentStanzaClone =
+    elt->createStanzaNewbornClone (
+      fCurrentVoiceClone);
 
-    // append the stanza clone to the LPSR score elements list
-    fResultingLpsr ->
-      appendStanzaToLpsrScoreElementsList (
-        fCurrentStanzaClone);
+  // append the stanza clone to the LPSR score elements list
+  fResultingLpsr ->
+    appendStanzaToLpsrScoreElementsList (
+      fCurrentStanzaClone);
 
-    // append a use of the stanza to the current staff block
-    fCurrentStaffBlock ->
-      appendLyricsUseToStaffBlock (
-        fCurrentStanzaClone);
-//  }
-//  else
-  //  fCurrentStanzaClone = nullptr; // JMI
+  // append a use of the stanza to the current staff block
+  fCurrentStaffBlock ->
+    appendLyricsUseToStaffBlock (
+      fCurrentStanzaClone);
 
   fOnGoingStanza = true;
 }
@@ -2638,8 +2633,9 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
 
   // create the syllable clone
   fCurrentSyllableClone =
-    elt->createSyllableNewbornClone (
-      fCurrentPartClone);
+//     elt->createSyllableNewbornClone (
+//       fCurrentPartClone);
+    elt->createSyllableNewbornClone (); // 2026.2
 
   // append it to the current stanza clone or current note clone
   if (fOnGoingStanza) { // fCurrentStanzaClone JM
@@ -2668,12 +2664,13 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
         syllableElementsList =
           elt->getSyllableElementsList ();
 
-      if (syllableElementsList.size ()) {
+      if (! syllableElementsList.empty ()) {
         // build a single words value from the texts list
         // JMI create an msrWords instance for each???
-        std::string wordsValue =
-          syllableElementsListAsString (
-            elt-> getSyllableElementsList ());
+        std::string
+          wordsValue =
+            syllableElementsListAsString (
+              syllableElementsList);
 
         // create the words
 #ifdef MF_TRACE_IS_ENABLED
@@ -2751,9 +2748,9 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
       ss.str ());
   }
 
-  // a syllable ends the sysllable extend range if any
+  // a syllable ends the syllable extend range if any
   if (fOnGoingSyllableExtend) {
-    /* JMI ???
+    /* // JMI ???
     // create melisma end command
     S_lpsrMelismaCommand
       melismaCommand =
@@ -2816,7 +2813,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
           elt->getInputLineNumber (),
           fMeasuresStack.front (),
           msrRehearsalMarkKind::kRehearsalMarkNone,
-          elt->tempoWordsListAsString (" "), //JMI ???
+          elt->tempoWordsListAsString (" "), //// JMI ???
           elt->getTempoPlacementKind ());
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -3752,7 +3749,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
           ss.str ());
       }
 
-    /* JMI ???
+    /* // JMI ???
       if (fCurrentGraceNotesGroupClone) {
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceGraceNotes ()) {
@@ -3948,7 +3945,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
   switch (noteSyllableExtendKind) {
     case msrSyllable::kStandaloneSyllableExtend:
       {
-        / * JMI ???
+        / * // JMI ???
         // create melisma start command
         S_lpsrMelismaCommand
           melismaCommand =

@@ -30,7 +30,7 @@ enum class msrTechnicalKind {
   kTechnicalFingernails,
   kTechnicalHarmonic,
   kTechnicalHeel,
-  kTechnicalHole, // rich JMI ??? 0.9.66
+  kTechnicalHole, // rich // JMI ??? 0.9.66
   kTechnicalOpenString,
   kTechnicalSnapPizzicato,
   kTechnicalStopped,

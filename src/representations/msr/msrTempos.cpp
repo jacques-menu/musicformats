@@ -378,7 +378,7 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
     ss <<
       "Adding tempoNote '" <<
       tempoNote->asShortString () <<
-      // the information is missing to display it the normal way JMI ???
+      // the information is missing to display it the normal way // JMI ???
       "' to tempoTuplet '" <<
       asString () <<
       "'";
@@ -818,7 +818,7 @@ void msrTempoTuplet::print (std::ostream& os) const
     fMemberNotesDisplayWholeNotes <<
     std::endl << std::endl;
 
-/* JMI ???
+/* // JMI ???
   os << std::left <<
     std::setw (fieldWidth) <<
     "(measure position" << ": ";

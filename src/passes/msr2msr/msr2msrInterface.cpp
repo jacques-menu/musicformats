@@ -114,13 +114,12 @@ S_msrScore translateMsrToMsr (
 
   // the msr2msrTranslator
   msr2msrTranslator
-    translator;
+    translator (originalMsrScore);
 
   // build the resulting second MSR score
   S_msrScore
     resultingNewMsrScore =
-      translator.translateMsrToMsr (
-        originalMsrScore);
+      translator.translateMsrToMsr ();
 
   clock_t endClock = clock ();
 
@@ -287,13 +286,12 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
 
   // the msr2msrTranslator
   msr2msrTranslator
-    translator;
+    translator (originalMsrScore);
 
   // build the resulting new MSR score
   S_msrScore
     resultingNewMsrScore =
       translator.translateMsrToMsrAlongPathToVoice (
-        originalMsrScore,
         pathToVoice);
 
   clock_t endClock = clock ();

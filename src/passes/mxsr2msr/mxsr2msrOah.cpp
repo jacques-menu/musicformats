@@ -1761,8 +1761,8 @@ There can be several occurrences of this option.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "add-msr-words-from-the-msr-lyrics", "awftl",
-R"(Add MSR words with the MSR lyrics contents, keeping the latter untouched.
+        "add-msr-words-from-the-musicxml-lyrics", "amwftml",
+R"(Add MSR words with the MusicXML lyrics contents, keeping the latter untouched.
 This may come in handy when MusicXML data has been obtained from scanned images.)",
         "fAddMsrWordsFromTheMusicXMLLyrics",
         fAddMsrWordsFromTheMusicXMLLyrics));

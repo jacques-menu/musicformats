@@ -632,9 +632,9 @@ void displayMsrSummaryVisitor::visitStart (S_msrStanza& elt)
       syllablesSize,
       "syllable", "syllables");
 
-  if (! elt->getStanzaTextPresent ()) {
+  if (! elt->getStanzaContainsText ()) {
     gLog <<
-      " (no actual text)";
+      " (does not contain any text)";
   }
 
   gLog <<

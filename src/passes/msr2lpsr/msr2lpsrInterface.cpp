@@ -99,13 +99,12 @@ S_lpsrScore translateMsrToLpsr (
 
   // the msr2lpsrTranslator
   msr2lpsrTranslator
-    translator;
+    translator (originalMsrScore);
 
   // build the LPSR score
   S_lpsrScore
     resultingLpsr =
       translator.translateMsrToLpsr (
-        originalMsrScore,
         multiComponent);
 
   clock_t endClock = clock ();

@@ -224,7 +224,7 @@ void msr2guidoInsiderHandler::createTheMsr2guidoOptionGroups (
 
   // create the msr2mxsr OAH group
   appendGroupToHandler (
-    createGlobalMsr2mxsr2msrOahGroup ());
+    createGlobalMsr2mxsrOahGroup ());
 
   // create the extra OAH group
   appendGroupToHandler (
@@ -410,7 +410,7 @@ void msr2guidoInsiderHandler::enforceHandlerQuietness ()
   gMsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsr2mxsr2msrOahGroup->
+  gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
   gHarmoniesExtraOahGroup->

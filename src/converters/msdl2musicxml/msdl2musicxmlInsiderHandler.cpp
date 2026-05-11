@@ -223,7 +223,7 @@ void msdl2musicxmlInsiderHandler::createTheMsdl2xmlOptionGroups (
 
   // create the msr2mxsr OAH group
   appendGroupToHandler (
-    createGlobalMsr2mxsr2msrOahGroup ());
+    createGlobalMsr2mxsrOahGroup ());
 
   // create the extra OAH group
   appendGroupToHandler (
@@ -278,7 +278,7 @@ void msdl2musicxmlInsiderHandler::enforceHandlerQuietness ()
   gMsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsr2mxsr2msrOahGroup->
+  gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
   gHarmoniesExtraOahGroup->

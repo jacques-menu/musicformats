@@ -180,7 +180,7 @@ std::string languageFrench::convertTheMXSRIntoAnMSRSkeleton () const
   return "Conversion du MXSR en un squelette de MSR";
 }
 
-std::string languageFrench::populateTheMSRSkeletonFromMusicXMLData () const
+std::string languageFrench::browseTheMXSRToPopulateTheMSRSkeleton () const
 {
   return "Garnissage du squelette de MSR avec les données MusicXML";
 }

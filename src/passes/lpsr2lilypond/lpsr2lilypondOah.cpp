@@ -4503,7 +4503,7 @@ R"(Generate LilyPond code to show a box around all bar numbers.)",
     generateABoxAroundBarNumberAtom =
       oahMeasureNumberSetAtom::create (
         "generate-a-box-around-bar-number", "gababn",
-R"(Generate a box around LilyPond bar number BAR_NUMBER, // purist JMI ???
+R"(Generate a box around LilyPond bar number BAR_NUMBER, // purist // JMI ???
 where BAR_NUMBER is an integer.
 This implies that bar numbers are centered on the bars.
 There can be several occurrences of this option.)",

@@ -150,16 +150,16 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   }
 
 
-  // populate the MSR skeleton from the MXSR (pass 3)
+  // browse the MXSR to populate the MSR skeleton (pass 3)
   // ------------------------------------------------------
 
   try {
-    populateMsrSkeletonFromMxsr (
+    browseMxsrToPopulateMsrSkeleton (
       originalMxsr,
       firstMsrScore,
       eventsCollection,
       mfPassIDKind::kMfPassID_3,
-      gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
+      gLanguage->browseTheMXSRToPopulateTheMSRSkeleton ());
   } // try
 
   catch (mxsr2msrException& e) {

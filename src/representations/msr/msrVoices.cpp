@@ -1658,6 +1658,34 @@ void msrVoice::addStanzaToVoice (const S_msrStanza& stanza)
   fVoiceStanzasMap [stanzaNumber] = stanza;
 }
 
+void msrVoice::addStanzaToVoiceClone (const S_msrStanza& stanza)
+{
+  // get stanza number
+  const mfStanzaNumber&
+    stanzaNumber =
+      stanza->getStanzaNumber ();
+
+  // register stanza in this voice
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceLyrics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Adding stanza " << stanza->getStanzaName () <<
+      " (" << stanzaNumber <<
+      ") to voice clone " <<
+      fVoiceName;
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // add the stanza to this voice
+  fVoiceStanzasMap [stanzaNumber] = stanza;
+}
+
 void msrVoice::addStanzaToVoiceWithoutCatchUp (const S_msrStanza& stanza)
 {
   // get stanza number
@@ -2144,7 +2172,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 //           }
 //
 //           else {
-//             // ignore this measureElement and return nullptr JMI ???
+//             // ignore this measureElement and return nullptr // JMI ???
 //             /*
 //             std::stringstream ss;
 //
@@ -7105,7 +7133,7 @@ void msrVoice::appendMultiMeasureRestCloneToVoiceClone (
             currentRepeat =
               fVoicePendingRepeatsStack.front ();
 
-//           // grab the multi-measure rests segment, i.e. the voice's the voice segment JMI ??? ZAZA
+//           // grab the multi-measure rests segment, i.e. the voice's the voice segment // JMI ??? ZAZA
         }
 
         else {
@@ -7563,7 +7591,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
 //     "measureRepeatClone is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
-//   switch (fVoiceKind) { // superflous JMI ???
+//   switch (fVoiceKind) { // superflous // JMI ???
 //     case msrVoiceKind::kVoiceKindRegular:
 //     case msrVoiceKind::kVoiceKindDynamics:
 //     case msrVoiceKind::kVoiceKindHarmonies:
@@ -7595,7 +7623,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
 //             currentRepeat =
 //               fVoicePendingRepeatsStack.front ();
 //
-// //           // grab the measure repeat segment, i.e. the voice's the voice segment JMI ???
+// //           // grab the measure repeat segment, i.e. the voice's the voice segment // JMI ???
 // //           S_msrSegment
 // //             measureRepeatSegment =
 // //               fVoiceLastSegment;
@@ -9695,7 +9723,7 @@ void msrVoice::browseData (basevisitor* v)
     for (std::pair <mfStanzaNumber, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
-      if (stanza->getStanzaTextPresent ()) {
+      if (! stanza->getSyllables ().empty ()) { // 2026.2
         // browse the stanza
         msrBrowser<msrStanza> browser (v);
         browser.browse (*(stanza));
@@ -9901,7 +9929,7 @@ void msrVoice::print (std::ostream& os) const
 //
 //   if (fVoiceSegment) {
 //     ++gIndenter;
-//     // getSegmentAbsoluteNumber() could be used too JMI ??? 0.9.76
+//     // getSegmentAbsoluteNumber() could be used too // JMI ??? 0.9.76
 //     if (
 //       fVoiceSegment->getSegmentNumber ()
 //         !=
@@ -10410,7 +10438,7 @@ std::string fetchVoiceAsString (const S_msrVoice& voice)
 //             this);
 // */
 //
-//          // remember fVoiceCurrentMultiMeasureRest for later next measure number setting JMI ???
+//          // remember fVoiceCurrentMultiMeasureRest for later next measure number setting // JMI ???
 // #ifdef MF_TRACE_IS_ENABLED
 //         if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
 //           gLog <<

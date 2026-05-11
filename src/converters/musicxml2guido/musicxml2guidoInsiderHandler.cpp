@@ -226,7 +226,7 @@ void xml2gmnInsiderHandler::createTheXml2gmnOptionGroups (
 
   // create the msr2mxsr OAH group
   appendGroupToHandler (
-    createGlobalMsr2mxsr2msrOahGroup ());
+    createGlobalMsr2mxsrOahGroup ());
 
   // create the MXSR2guido OAH group
   appendGroupToHandler (
@@ -428,7 +428,7 @@ void xml2gmnInsiderHandler::enforceHandlerQuietness ()
   gMsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsr2mxsr2msrOahGroup->
+  gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
   gHarmoniesExtraOahGroup->

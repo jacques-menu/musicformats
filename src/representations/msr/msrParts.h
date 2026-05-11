@@ -451,7 +451,7 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendStaffDetailsToPart (
                             const S_msrStaffDetails& staffDetails);
 
-    // tuplets JMI ???
+    // tuplets // JMI ???
 
     // bar lines
 
@@ -487,7 +487,7 @@ class EXP msrPart : public msrPartGroupElement
                             const std::string&  repeatEndingNumber, // a string, because if may be "1, 2" for example
                             msrRepeatEndingKind repeatEndingKind);
 
-    /* JMI ???
+    /* // JMI ???
     void                  finalizeRepeatEndInPart (
                             const mfInputLineNumber& inputLineNumber,
                             const mfMeasureNumber& measureNumber,

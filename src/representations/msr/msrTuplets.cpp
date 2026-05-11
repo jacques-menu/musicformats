@@ -140,7 +140,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
         fTupletShowTypeKind,
         fTupletBracketPlacementKind);
 
-/* JMI ???
+/* // JMI ???
   newbornClone->fMeasureElementSoundingWholeNotes =
     fMeasureElementSoundingWholeNotes;
 
@@ -851,7 +851,7 @@ void msrTuplet::setTupletMembersPositionInMeasures (
       // nested tuplet
 //       currentPosition =
 //         tuplet->
-//           setTupletPositionInMeasure ( // a function JMI ??? 0.9.66
+//           setTupletPositionInMeasure ( // a function // JMI ??? 0.9.66
 //             measure,
 //             currentPosition);
 
@@ -1469,7 +1469,7 @@ std::string fetchTupletAsString (const S_msrTuplet& tuplet)
 //   return result;
 // }
 
-/* JMI ???
+/* // JMI ???
 void msrTuplet::finalizeTuplet (
   const mfInputLineNumber& inputLineNumber)
 {

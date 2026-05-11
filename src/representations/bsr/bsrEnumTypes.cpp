@@ -610,7 +610,7 @@ std::string bsrCellKindAsShortString (bsrCellKind cellKind)
 
   case kCellParagraph           : result = "FOO"; break; //{ bsrCellKind::kDots5, bsrCellKind::kDots1234 },
   case kCellAmpersand           : result = "FOO"; break; //{ bsrCellKind::kDots5, bsrCellKind::kDots123456 },
-  case kCellUpsilon             : result = "FOO"; break; //{ bsrCellKind::kDots45, bsrCellKind::kDots13456 }: result = "FOO"; break; // better name JMI ???
+  case kCellUpsilon             : result = "FOO"; break; //{ bsrCellKind::kDots45, bsrCellKind::kDots13456 }: result = "FOO"; break; // better name // JMI ???
   case kCellEuro                : result = "FOO"; break; //{ bsrCellKind::kDots45, bsrCellKind::kDots15 },
   case kCellDollar              : result = "FOO"; break; //{ bsrCellKind::kDots45, bsrCellKind::kDots234 },
   case kCellPound               : result = "FOO"; break; //{ bsrCellKind::kDots45, bsrCellKind::kDots123 },

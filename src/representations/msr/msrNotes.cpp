@@ -1506,7 +1506,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 
       dotsNumber,
 
-      mfDurationKind::kDuration_UNKNOWN_, // noteGraphicNotesDuration JMI ???
+      mfDurationKind::kDuration_UNKNOWN_, // noteGraphicNotesDuration // JMI ???
 
       msrQuarterTonesPitchKind::kQTP_Skip,  // noteQuarterTonesDisplayPitchKind
       noteOctave,
@@ -3970,7 +3970,7 @@ void msrNote::browseData (basevisitor* v)
     --gIndenter;
   }
 
-  // browse the syllables if any // NO JMI ??? 0.9.73 this is done elsewhere for xml2ly
+  // browse the syllables if any // NO // JMI ??? 0.9.73 this is done elsewhere for xml2ly
   if (fNoteSyllablesList.size ()) {
     ++gIndenter;
     for (S_msrSyllable syllable : fNoteSyllablesList) {
@@ -7453,13 +7453,11 @@ void msrNote::printFull (std::ostream& os) const
       os <<
         syllable->getSyllableKind () <<
           syllable->getSyllableExtendKind () <<
-        ": ";
+        ": " <<
 
-      syllableElementsListAsString (
-        syllable->getSyllableElementsList (),
-        os);
+        syllableElementsListAsString (
+          syllable->getSyllableElementsList () <
 
-      os <<
         ", stanza " <<
         syllable->
           getSyllableUpLinkToStanza ()->

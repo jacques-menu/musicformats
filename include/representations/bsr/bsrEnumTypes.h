@@ -807,7 +807,7 @@ enum class bsrCellKind2 {
   // other symbols
   kCellParagraph           , //{ bsrCellKind::kDots5, bsrCellKind::kDots1234 },
   kCellAmpersand           , //{ bsrCellKind::kDots5, bsrCellKind::kDots123456 },
-  kCellUpsilon             , //{ bsrCellKind::kDots45, bsrCellKind::kDots13456 }, // better name JMI ???
+  kCellUpsilon             , //{ bsrCellKind::kDots45, bsrCellKind::kDots13456 }, // better name // JMI ???
   kCellEuro                , //{ bsrCellKind::kDots45, bsrCellKind::kDots15 },
   kCellDollar              , //{ bsrCellKind::kDots45, bsrCellKind::kDots234 },
   kCellPound               , //{ bsrCellKind::kDots45, bsrCellKind::kDots123 },

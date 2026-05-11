@@ -155,16 +155,16 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
-  // populate the MSR skeleton from the MXSR (pass 3)
+  // browse the MXSR to populate the MSR skeleton (pass 3)
   // ------------------------------------------------------
 
   try {
-    populateMsrSkeletonFromMxsr (
+    browseMxsrToPopulateMsrSkeleton (
       theMxsr,
       firstMsrScore,
       eventsCollection,
       mfPassIDKind::kMfPassID_3,
-      gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
+      gLanguage->browseTheMXSRToPopulateTheMSRSkeleton ());
   } // try
 
   catch (mxsr2msrException& e) {

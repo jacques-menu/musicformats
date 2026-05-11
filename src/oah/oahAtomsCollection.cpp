@@ -6538,7 +6538,7 @@ void oahFactorizedStringAtom::applyValueLessAtom (std::ostream& os) // JMI 0.9.6
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // handle it at once JMI ???
+  // handle it at once // JMI ???
 
   fSelected = true;
 }
@@ -7380,7 +7380,7 @@ void oahCommonPrefixBooleansAtom::applyValueLessAtom (std::ostream& os)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // handle it at once JMI ??? 0.9.66
+  // handle it at once // JMI ??? 0.9.66
 
   fSelected = true;
 }

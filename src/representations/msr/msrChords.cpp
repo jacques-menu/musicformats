@@ -2479,8 +2479,8 @@ void msrChord::appendStemToChord (
         " and " << (*i)->asString () <<
         " don't have the same kind, but are in one and the same chord";
 
-// //      msrInternalError ( // not internal actually JMI ??? VITAL
-//       msrInternalWarning ( // not internal actually JMI ???
+// //      msrInternalError ( // not internal actually // JMI ??? VITAL
+//       msrInternalWarning ( // not internal actually // JMI ???
 //         gServiceRunData->getInputSourceName (),
 //         fInputLineNumber,
 //   //      __FILE__, mfInputLineNumber (__LINE__),

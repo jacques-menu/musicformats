@@ -1097,7 +1097,7 @@ mfWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
 
   switch (fTimeSignatureSymbolKind) {
     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
-      // senza misura, no measure length limitation JMI ??? 0.9.72
+      // senza misura, no measure length limitation // JMI ??? 0.9.72
       result = mfWholeNotes (INT_MAX, 1);
       break;
 

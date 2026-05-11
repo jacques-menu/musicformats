@@ -355,7 +355,8 @@ class EXP mxsr2msrOahGroup : public oahGroup
                           getWordsToSegnoAtom () const
                               { return fWordsToSegnoAtom; }
 
-    const std::set <std::string>&    getWordsToDalSegnoSet () const
+    const std::set <std::string>&
+                          getWordsToDalSegnoSet () const
                               { return fWordsToDalSegnoSet; }
     S_oahStringSetAtom
                           getWordsToDalSegnoAtom () const
@@ -888,7 +889,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  fTraceBackup;
     Bool                  fTraceForward;
 
-    // specific trace JMI move to traceOah JMI ??? 0.9.70
+    // specific trace JMI move to traceOah // JMI ??? 0.9.70
     // --------------------------------------
 
     Bool                  fTraceMxsr;

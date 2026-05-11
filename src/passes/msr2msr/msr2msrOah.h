@@ -343,7 +343,7 @@ class EXP msr2msrOahGroup : public oahGroup
     // private fields
     // ------------------------------------------------------
 
-    // avoid msr2msr? (for TESTS JMI ???)
+    // avoid msr2msr? (for TESTS // JMI ???)
     Bool                  fAvoidMsr2msr;
 
     // book

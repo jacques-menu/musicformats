@@ -3274,6 +3274,7 @@ void msrPart::finalizePart (
     // sort the staves to have harmonies above and
     // figured bass below the part
   if (false) // JMI 0.9.67
+  {
     fPartAllStavesList.sort (
       msrStaff::compareStavesToHaveFiguredBassesBelowCorrespondingPart);
 
@@ -3283,6 +3284,7 @@ void msrPart::finalizePart (
         finalizeStaff (
           inputLineNumber);
       } // for
+  }
   }
 
   // set score instrument names max lengths if relevant

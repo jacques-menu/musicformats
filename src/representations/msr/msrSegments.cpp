@@ -199,7 +199,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
   newbornClone->fSegmentAbsoluteNumber =
     fSegmentAbsoluteNumber;
 
-  // keep debug number fSegmentNumber unchanged JMI ???
+  // keep debug number fSegmentNumber unchanged // JMI ???
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSegmentsBasics ()) {
@@ -254,7 +254,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
   deepClone->fSegmentAbsoluteNumber =
     fSegmentAbsoluteNumber;
 
-  // keep debug number fSegmentNumber unchanged JMI ???
+  // keep debug number fSegmentNumber unchanged // JMI ???
 
   // the measure elements in the segment contain the mmusic
   size_t segmentElementsListSize =
@@ -3125,7 +3125,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
   // remove lastSegmentMeasure from the segment elements list
   fSegmentElementsList.pop_back ();
 
-  // remove fVoiceLastAppendedMeasure from fVoiceMeasuresFlatList JMI ??? 0.9.76
+  // remove fVoiceLastAppendedMeasure from fVoiceMeasuresFlatList // JMI ??? 0.9.76
 //   fVoiceMeasuresFlatList.pop_back ();
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -3154,7 +3154,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
   return result;
 }
 
-// void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
+// void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous // JMI ???
 //   const mfInputLineNumber& inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED

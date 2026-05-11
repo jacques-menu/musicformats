@@ -626,7 +626,7 @@ class EXP lpsrOahGroup : public oahGroup
     // measures
     // --------------------------------------
 
-    // replicate empty measure JMI ???
+    // replicate empty measure // JMI ???
     mfMeasureNumber       getReplicateEmptyMeasureNumber () const
                               { return fReplicateEmptyMeasureNumber; }
 
@@ -863,10 +863,10 @@ class EXP lpsrOahGroup : public oahGroup
     // measures
     // --------------------------------------
 
-    // replicate empty measure number JMI ???
+    // replicate empty measure number // JMI ???
     mfMeasureNumber       fReplicateEmptyMeasureNumber;
 
-    // replicate empty measure replicas JMI ???
+    // replicate empty measure replicas // JMI ???
     int                   fReplicateEmptyMeasureReplicas;
 
     // add empty measures

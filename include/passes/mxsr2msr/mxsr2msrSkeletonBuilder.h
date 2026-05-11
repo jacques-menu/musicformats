@@ -521,7 +521,7 @@ class EXP mxsr2msrSkeletonBuilder :
 
     // private methods
 
-    // several part groups may start and/or stop at the same position JMI ??? 0.9.69
+    // several part groups may start and/or stop at the same position // JMI ??? 0.9.69
     std::vector <S_mxsrPartGroupsList>
                               fStartedPartGroupsListsVector;
 

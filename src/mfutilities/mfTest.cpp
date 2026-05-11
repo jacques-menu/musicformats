@@ -39,27 +39,27 @@ void mfTest (std::ostream& os)
 
   gLog << "--------------" << std::endl;
 
-  testMfBasicTypes ();
-
-
-  mfInputLineNumber inputLineNumber = 33;
-  mfStaffNumber staffNumber = 17;
-
-  int i = 267;
-
-//   i = inputLineNumber;
-
-  inputLineNumber = i;
-
-//   inputLineNumber = staffNumber;
-
-//   staffNumber = inputLineNumber;
-
-  gLog <<
-    std::endl <<
-    "inputLineNumber: " << inputLineNumber << std::endl <<
-    "staffNumber: " << staffNumber << std::endl <<
-    std::endl;
+//   testMfBasicTypes ();
+//
+//
+//   mfInputLineNumber inputLineNumber = 33;
+//   mfStaffNumber staffNumber = 17;
+//
+//   int i = 267;
+//
+// //   i = inputLineNumber;
+//
+//   inputLineNumber = i;
+//
+// //   inputLineNumber = staffNumber;
+//
+// //   staffNumber = inputLineNumber;
+//
+//   gLog <<
+//     std::endl <<
+//     "inputLineNumber: " << inputLineNumber << std::endl <<
+//     "staffNumber: " << staffNumber << std::endl <<
+//     std::endl;
 }
 
 

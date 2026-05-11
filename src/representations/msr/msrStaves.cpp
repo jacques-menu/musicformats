@@ -713,7 +713,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       msrStaff::sStaffMaxRegularVoices <<
       std::endl;
 
-      /* JMI ???
+      /* // JMI ???
     musicxmlError (
 // JMI    musicxmlWarning ( JMI
       gServiceRunData->getInputSourceName (),
@@ -1525,7 +1525,7 @@ void msrStaff::registerVoiceInStaff (
           msrStaff::sStaffMaxRegularVoices <<
           std::endl;
 
-          /* JMI ???
+          /* // JMI ???
         musicxmlError (
     // JMI    musicxmlWarning ( JMI
           gServiceRunData->getInputSourceName (),
@@ -1626,7 +1626,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
           msrStaff::sStaffMaxRegularVoices <<
           std::endl;
 
-          /* JMI ???
+          /* // JMI ???
         musicxmlError (
     // JMI    musicxmlWarning ( JMI
           gServiceRunData->getInputSourceName (),
@@ -1759,7 +1759,7 @@ void msrStaff::registerVoiceInStaffClone (
           msrStaff::sStaffMaxRegularVoices <<
           std::endl;
 
-          /* JMI ???
+          /* // JMI ???
         musicxmlError (
     // JMI    musicxmlWarning ( JMI
           gServiceRunData->getInputSourceName (),

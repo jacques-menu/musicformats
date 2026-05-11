@@ -2,11 +2,8 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN"
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="2.0">
-  <movement-title>Syllable on rest</movement-title>
+  <movement-title>Syllable On Rest</movement-title>
   <identification>
-    <creator type="arranger">Y. Nagai</creator>
-    <creator type="arranger">K. Kobatake</creator>
-    <rights>Transcription donated to the public domain, 2005 by Tom Potter</rights>
     <encoding>
       <software>Finale 2005 for Windows</software>
       <software>Dolet 4.0 Beta 4 for Finale</software>
@@ -57,25 +54,6 @@
     <lyric-font font-family="ＭＳ ゴシック" font-size="10.25" name="verse"/>
     <lyric-language name="verse" xml:lang="ja"/>
   </defaults>
-  <credit page="1">
-    <credit-words default-x="607" default-y="1443" font-family="ＭＳ ゴシック" font-size="24" font-weight="bold" justify="center" valign="top" xml:lang="ja">Syllable on rest</credit-words>
-  </credit>
-  <credit page="1">
-    <credit-words default-x="1124" default-y="1345" font-size="12" font-weight="bold" justify="right" valign="top">Arr. Y. Nagai , K. Kobatake</credit-words>
-  </credit>
-  <credit page="1">
-    <credit-words default-x="602" default-y="73" font-size="9" halign="center" valign="bottom">Transcription donated to the public domain, 2005 by Tom Potter</credit-words>
-  </credit>
-  <credit page="1">
-    <credit-words default-x="129" default-y="244" font-size="11" valign="top">Source: "Japanese Popular Music: a collection of the popular music of Japan rendered in to the
-staff notation", by Y. Nagai and K. Kobatake, 2nd ed., Osaka, S. Miki &amp; Co., 1892, pp. 96-97.
-
-Transcribed into Finale music notation by Tom Potter, 2005.  See http://www.daisyfield.com/music/
-Lyrics added by Karen Tanaka and Michael Good, 2006. See http://www.recordare.com/</credit-words>
-  </credit>
-  <credit page="1">
-    <credit-words default-x="607" default-y="1395" font-size="24" font-weight="bold" halign="center" valign="top">Echigo-Jishi</credit-words>
-  </credit>
   <part-list>
     <score-part id="P1">
       <part-name print-object="no">MusicXML Part</part-name>
@@ -115,81 +93,6 @@ Lyrics added by Karen Tanaka and Michael Good, 2006. See http://www.recordare.co
           <line>2</line>
         </clef>
       </attributes>
-      <direction placement="above" directive="yes">
-        <direction-type>
-          <words default-y="23" font-size="12" font-weight="bold">Allegro</words>
-        </direction-type>
-        <sound tempo="92"/>
-      </direction>
-      <sound dynamics="98"/>
-      <note default-x="10">
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>12</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <dot/>
-        <stem default-y="-5">up</stem>
-      </note>
-      <note default-x="85">
-        <rest/>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>eighth</type>
-      </note>
-    </measure>
-    <!--=======================================================-->
-    <measure number="2" width="195">
-      <sound dynamics="83"/>
-      <note default-x="10">
-        <pitch>
-          <step>D</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>eighth</type>
-        <stem default-y="-10">up</stem>
-        <notations>
-          <dynamics default-y="-74" placement="below" relative-x="-3">
-            <mf/>
-          </dynamics>
-        </notations>
-      </note>
-      <note default-x="61">
-        <pitch>
-          <step>D</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>8</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <stem default-y="-10">up</stem>
-        <lyric default-y="-80" number="1">
-          <syllabic>single</syllabic>
-          <text>Syll.1</text>
-        </lyric>
-      </note>
-      <note default-x="143">
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>eighth</type>
-        <stem default-y="-5">up</stem>
-        <lyric default-y="-80" number="1">
-          <syllabic>single</syllabic>
-          <text>Syll.2</text>
-        </lyric>
-      </note>
-    </measure>
-    <!--=======================================================-->
-    <measure number="3" width="220">
-      <print new-system="yes"/>
       <note default-x="52">
         <rest/>
         <duration>4</duration>
@@ -197,52 +100,7 @@ Lyrics added by Karen Tanaka and Michael Good, 2006. See http://www.recordare.co
         <type>eighth</type>
         <lyric default-y="-80" number="1">
           <syllabic>single</syllabic>
-          <text>Syll.3</text>
-        </lyric>
-      </note>
-      <note default-x="94">
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>eighth</type>
-        <stem default-y="-7">up</stem>
-        <beam number="1">begin</beam>
-        <lyric default-y="-80" number="1">
-          <syllabic>single</syllabic>
-          <text>Syll.4</text>
-        </lyric>
-      </note>
-      <note default-x="135">
-        <pitch>
-          <step>F</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>eighth</type>
-        <stem default-y="-1">up</stem>
-        <beam number="1">continue</beam>
-        <lyric default-y="-80" number="1">
-          <syllabic>single</syllabic>
-          <text>Syll.5</text>
-        </lyric>
-      </note>
-      <note default-x="177">
-        <pitch>
-          <step>A</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>eighth</type>
-        <stem default-y="5">up</stem>
-        <beam number="1">end</beam>
-        <lyric default-y="-80" number="1">
-          <syllabic>single</syllabic>
-          <text>Syll.6</text>
+          <text>Jam...</text>
         </lyric>
       </note>
     </measure>

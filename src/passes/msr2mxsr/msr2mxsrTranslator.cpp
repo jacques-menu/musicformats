@@ -483,7 +483,7 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create an attributes comment
     std::stringstream ss;
     ss <<
@@ -584,7 +584,7 @@ void msr2mxsrTranslator::appendToMeasureDirection (
   Sxmlelement      elem,
   msrPlacementKind placementKind)
 {
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a direction comment
     std::stringstream ss;
     ss <<
@@ -716,7 +716,7 @@ void msr2mxsrTranslator::appendToNoteNotationsOrnaments (
     // append it to fCurrentNoteNotationsElement
     appendToNoteNotations (
       fCurrentNoteNotationsOrnamentsElement,
-      msrPlacementKind::kPlacement_UNKNOWN_); // no placement for '<ornaments/>', only <trill-mark> has JMI ???
+      msrPlacementKind::kPlacement_UNKNOWN_); // no placement for '<ornaments/>', only <trill-mark> has // JMI ???
   }
 
   // set elem's "placement" attribute if relevant
@@ -914,7 +914,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
 
   // append the score identification element if any to the score part wise element
   if (fScoreIdentificationElement) {
-    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       // create an identification comment
       std::stringstream ss;
       ss <<
@@ -964,7 +964,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
 
   // append the score defaults element if any to the score part wise element
   if (fScoreDefaultsElement) {
-    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       // create an defaults comment
       std::stringstream ss;
       ss <<
@@ -985,7 +985,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
     fPendingScoreCreditElementsList.size ();
 
   if (pendingScoreCreditElementsListSize) {
-    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       std::stringstream ss;
       ss <<
         " ===== " <<
@@ -1010,7 +1010,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
     } // for
   }
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create an part-list comment
     std::stringstream ss;
     ss <<
@@ -1035,7 +1035,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
   ) {
     Sxmlelement partElement = (*i);
 
-    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       // create a part comment
       std::stringstream ss;
       ss <<
@@ -1077,7 +1077,7 @@ void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
     workNumber =
       elt->getIdentificationWorkNumber (),
     optionsWorkNumber =
-      gGlobalMsr2mxsr2msrOahGroup->getWorkNumber ();
+      gGlobalMsr2mxsrOahGroup->getWorkNumber ();
 
   if (optionsWorkNumber.size ()) {
     workNumber = optionsWorkNumber;
@@ -1098,7 +1098,7 @@ void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
     workCreditTypeTitle =
       elt->getIdentificationWorkCreditTypeTitle (),
     optionsWorkCreditTypeTitle =
-      gGlobalMsr2mxsr2msrOahGroup->getWorkCreditTypeTitle ();
+      gGlobalMsr2mxsrOahGroup->getWorkCreditTypeTitle ();
 
   if (optionsWorkCreditTypeTitle.size ()) {
     workCreditTypeTitle = optionsWorkCreditTypeTitle;
@@ -1160,7 +1160,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     movementNumber =
       elt->getIdentificationMovementNumber (),
     optionsMovementNumber =
-      gGlobalMsr2mxsr2msrOahGroup->getMovementNumber ();
+      gGlobalMsr2mxsrOahGroup->getMovementNumber ();
 
   if (optionsMovementNumber.size ()) {
     movementNumber = optionsMovementNumber;
@@ -1179,7 +1179,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     movementTitle =
       elt->getIdentificationMovementTitle (),
     optionsMovementTitle =
-      gGlobalMsr2mxsr2msrOahGroup->getMovementTitle ();
+      gGlobalMsr2mxsrOahGroup->getMovementTitle ();
 
   if (optionsMovementTitle.size ()) {
     movementTitle = optionsMovementTitle;
@@ -2556,7 +2556,7 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
       {
-        if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+        if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
           // create a start comment
           std::stringstream ss;
           ss <<
@@ -2692,7 +2692,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
       {
-        if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+        if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
           // create an end comment
           std::stringstream ss;
           ss <<
@@ -2712,7 +2712,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
           partGroupElementsStackTop =
             fPartGroupElementsStack.front ();
 
-/* JMI ???
+/* // JMI ???
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
         // sanity check
         if (elt != partGroupElementsStackTop) {
@@ -2861,7 +2861,7 @@ if (false) // JMI
   // get the part shortest note's duration
   fPartShortestNoteWholeNotes =
     elt->getPartShortestNoteWholeNotes ();
-    /* JMI ???
+    /* // JMI ???
   fPartShortestNoteTupletFactor =
     elt->getPartShortestNoteTupletFactor ();
 
@@ -3276,7 +3276,7 @@ void msr2mxsrTranslator::visitStart (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a start comment
     std::stringstream ss;
     ss <<
@@ -3316,7 +3316,7 @@ void msr2mxsrTranslator::visitEnd (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create an end comment
     std::stringstream ss;
     ss <<
@@ -3399,7 +3399,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
   else {
     // no
 
-    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       // create a comment
       std::stringstream ss;
       ss <<
@@ -3435,7 +3435,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
       elt->getMeasureMxmlPrintLayout ();
 
   if (measureMxmlPrintLayout) {
-    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       // create a print comment
       std::stringstream ss;
       ss <<
@@ -4827,7 +4827,7 @@ void msr2mxsrTranslator::visitStart (S_msrChord& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a chord start comment
     std::stringstream ss;
     ss <<
@@ -4865,7 +4865,7 @@ void msr2mxsrTranslator::visitEnd (S_msrChord& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a chord end comment
     std::stringstream ss;
     ss <<
@@ -4907,7 +4907,7 @@ void msr2mxsrTranslator::visitStart (S_msrTuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a tuplet start comment
     std::stringstream ss;
     ss <<
@@ -4942,7 +4942,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a tuplet end comment
     std::stringstream ss;
     ss <<
@@ -5221,7 +5221,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     S_msrVoice
       noteVoice =
         theMsrNote->fetchNoteUpLinkToVoice ();
@@ -5330,7 +5330,7 @@ void msr2mxsrTranslator::appendAForwardToMeasure (
         fetchNoteUpLinkToVoice ()->
           getVoiceNumber ();
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     mfStaffNumber
       previousMSRNoteStaffNumber =
         fPreviousMSRNoteStaff->
@@ -7775,7 +7775,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
           getGraceNotesGroupAfterNote ();
 
     if (! (graceNotesGroupBeforeNote || graceNotesGroupAfterNote)) {
-      if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+      if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
         // create a note comment
         S_msrVoice
           noteVoice =
@@ -7832,7 +7832,7 @@ void msr2mxsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a start comment
     std::stringstream ss;
     ss <<
@@ -7865,7 +7865,7 @@ void msr2mxsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create an end comment
     std::stringstream ss;
     ss <<
@@ -8502,7 +8502,7 @@ void msr2mxsrTranslator::visitStart (S_msrFiguredBass& elt)
       appendFiguredBassToNote (
         fCurrentFiguredBassClone);
 
-    // don't append the figured bass to the part figured bass,  JMI ???
+    // don't append the figured bass to the part figured bass,  // JMI ???
     // this will be done below
   }
 
@@ -8602,23 +8602,19 @@ void msr2mxsrTranslator::visitStart (S_msrStanza& elt)
 
   ++gIndenter;
 
-//  if (elt->getStanzaTextPresent ()) { // JMI
-    fCurrentStanzaClone =
-      elt->createStanzaNewbornClone (
-        fCurrentVoiceClone);
+  fCurrentStanzaClone =
+    elt->createStanzaNewbornClone (
+      fCurrentVoiceClone);
 
-    // append the stanza clone to the LPSR score elements list
-    fResultingMusicxmlelement->
-      appendStanzaToLpsrScoreElementsList (
-        fCurrentStanzaClone);
+  // append the stanza clone to the LPSR score elements list
+  fResultingMusicxmlelement->
+    appendStanzaToLpsrScoreElementsList (
+      fCurrentStanzaClone);
 
-    // append a use of the stanza to the current staff block
-    fCurrentStaffBlock ->
-      appendLyricsUseToStaffBlock (
-        fCurrentStanzaClone);
-//  }
-//  else
-  //  fCurrentStanzaClone = 0; // JMI
+  // append a use of the stanza to the current staff block
+  fCurrentStaffBlock ->
+    appendLyricsUseToStaffBlock (
+      fCurrentStanzaClone);
 
   fOnGoingStanza = true;
 }
@@ -8696,11 +8692,13 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
         syllableElementsList =
           elt->getSyllableElementsList ();
 
-      if (syllableElementsList.size ()) {
+      if (! syllableElementsList.empty ()) {
         // build a single words value from the texts list
         // JMI create an msrWords instance for each???
-        std::string wordsValue =
-          elt->syllableElementsListAsString();
+        std::string
+          wordsValue =
+            syllableElementsListAsString (
+              elt->getSyllableElementsList ());
 
         // create the words
 #ifdef MF_TRACE_IS_ENABLED
@@ -8772,9 +8770,9 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
       ss.str ());
   }
 
-  // a syllable ends the sysllable extend range if any
+  // a syllable ends the syllable extend range if any
   if (fOnGoingSyllableExtend) {
-    / * JMI ???
+    / * // JMI ???
     // create melisma end command
     S_lpsrMelismaCommand
       melismaCommand =

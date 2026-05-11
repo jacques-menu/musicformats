@@ -503,7 +503,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLineContents& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-/* JMI ???
+/* // JMI ???
   fCurrentLine = elt->createLineNewbornClone ();
 
   fCurrentPage->
@@ -827,7 +827,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTempo& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-/* JMI ???
+/* // JMI ???
   if (fCurrentMusicHeading) {
     fCurrentMusicHeading->
       setMusicHeadingTempo (elt);

@@ -125,24 +125,9 @@ std::ostream& operator << (
 }
 
 //________________________________________________________________________
-msr2msrTranslator::msr2msrTranslator ()
-{}
-
-msr2msrTranslator::~msr2msrTranslator ()
-{}
-
-//________________________________________________________________________
-S_msrScore msr2msrTranslator::translateMsrToMsr (
+msr2msrTranslator::msr2msrTranslator (
   const S_msrScore& theMsrScore)
 {
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    theMsrScore != nullptr,
-    "theMsrScore is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
   // the MSR score we're visiting
   fVisitedMsrScore = theMsrScore;
 
@@ -151,12 +136,19 @@ S_msrScore msr2msrTranslator::translateMsrToMsr (
     msrScore::create (
       K_MF_INPUT_LINE_UNKNOWN_,
       "msrScore::create()");
+}
 
+msr2msrTranslator::~msr2msrTranslator ()
+{}
+
+//________________________________________________________________________
+S_msrScore msr2msrTranslator::translateMsrToMsr ()
+{
   // create a msrScore browser
   msrBrowser<msrScore> browser (this);
 
   // set the parts browsing order
-  theMsrScore->
+  fVisitedMsrScore->
     setStavesBrowingOrderKind (
       msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses);
 
@@ -171,38 +163,19 @@ S_msrScore msr2msrTranslator::translateMsrToMsr (
 
 //________________________________________________________________________
 S_msrScore msr2msrTranslator::translateMsrToMsrAlongPathToVoice (
-  const S_msrScore&       theMsrScore,
   const S_msrPathToVoice& pathToVoice)
 {
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    theMsrScore != nullptr,
-    "theMsrScore is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
     pathToVoice != nullptr,
     "pathToVoice is NULL");
-
-  // the MSR score we're visiting
-  fVisitedMsrScore = theMsrScore;
-
-  // create the resulting MSR score
-  fResultingNewMsrScore =
-    msrScore::create (
-      K_MF_INPUT_LINE_UNKNOWN_,
-      "msrScore::create()");
-
   // create a msrScore browser
   msrBrowserAlongPathToVoice<msrScore> browser (
     this,
     pathToVoice);
 
   // set the parts browsing order
-  theMsrScore->
+  fVisitedMsrScore->
     setStavesBrowingOrderKind (
       msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars);
 
@@ -2589,7 +2562,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
 //       appendFiguredBassToNote (
 //         fCurrentFiguredBassClone);
 
-    // don't append the figured bass to the part figured bass, JMI ??? 0.9.66
+    // don't append the figured bass to the part figured bass, // JMI ??? 0.9.66
     // this will be done below
   }
 
@@ -3036,18 +3009,14 @@ void msr2msrTranslator::visitStart (S_msrStanza& elt)
 
   ++gIndenter;
 
-//  if (elt->getStanzaTextPresent ()) { // JMI
-    fCurrentStanzaClone =
-      elt->createStanzaNewbornClone (
-        fCurrentVoiceClone);
+  fCurrentStanzaClone =
+    elt->createStanzaNewbornClone (
+      fCurrentVoiceClone);
 
-    // append the stanza clone to the current voice clone
-    fCurrentVoiceClone ->
-      addStanzaToVoice (
-        fCurrentStanzaClone);
-//  }
-//  else
-  //  fCurrentStanzaClone = msr; // JMI
+  // append the stanza clone to the current voice clone
+  fCurrentVoiceClone ->
+    addStanzaToVoiceClone (
+      fCurrentStanzaClone);
 
   fOnGoingStanza = true;
 }
@@ -3096,10 +3065,11 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 
   // create the syllable clone
   fCurrentSyllableClone =
-    elt->createSyllableNewbornClone (
-      fCurrentPartClone);
+//     elt->createSyllableNewbornClone (
+//       fCurrentPartClone);
+    elt->createSyllableNewbornClone (); // 2026.2
 
-//   // set the syllable's measure uplink
+//   // set the syllable's measure uplink // 2026.2
 //   syllable->
 //     setSyllableUpLinkToMeasure (fMeasuresStack.front ());
 
@@ -3124,24 +3094,26 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
     fCurrentSyllableClone->
       setSyllableUpLinkToNote (fCurrentNonGraceNoteClone);
 
-//     if (gGlobalMsr2msrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) { JMI ???
+//     if (gGlobalMxsr2msrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) { // JMI 2026.2 ???
 //       // get the syllable texts list
-//       const std::list <std::string>&
+//       const std::list <msrSyllableElement>&
 //         syllableElementsList =
 //           elt->getSyllableElementsList ();
 //
 //       if (! syllableElementsList.empty ()) {
 //         // build a single words value from the texts list
 //         // JMI create an msrWords instance for each???
-//         std::string wordsValue =
-//           elt->syllableElementsListAsString();
+//         std::string
+//           wordsValue =
+//             syllableElementsListAsString (
+//               elt->getSyllableElementsList ());
 //
 //         // create the words
 // #ifdef MF_TRACE_IS_ENABLED
 //         if (gTraceOahGroup->getTraceLyrics ()) {
-//     std::stringstream ss;
+//           std::stringstream ss;
 //
-//     ss <<
+//           ss <<
 //             "Changing lyrics " <<
 //             wordsValue <<
 //             " into words for note " <<
@@ -3173,9 +3145,9 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //         // append it to the current non-grace note
 // #ifdef MF_TRACE_IS_ENABLED
 //         if (gTraceOahGroup->getTraceWords ()) {
-//     std::stringstream ss;
+//           std::stringstream ss;
 //
-//     ss <<
+//           ss <<
 //             "Appending words " <<
 //             words->asShortString () <<
 //             " to note " <<
@@ -3204,9 +3176,9 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
       ss.str ());
   }
 
-  // a syllable ends the sysllable extend range if any
+  // a syllable ends the syllable extend range if any
   if (fOnGoingSyllableExtend) {
-    /* JMI ???
+    /* JMI 2026.2???
     // create melisma end command
     S_lpsrMelismaCommand
       melismaCommand =
@@ -3477,7 +3449,7 @@ void msr2msrTranslator::visitStart (S_msrTempo& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   if (gGlobalMsr2msrOahGroup->getConvertMusicXMLTemposToMsrRehearsalMarks ()) { JMI ???
+//   if (gGlobalMsr2msrOahGroup->getConvertMusicXMLTemposToMsrRehearsalMarks ()) { // JMI ???
 //     // create a rehearsal mark containing elt's words
 //
 //     S_msrRehearsalMark
@@ -3485,7 +3457,7 @@ void msr2msrTranslator::visitStart (S_msrTempo& elt)
 //         msrRehearsalMark::create (
 //           elt->getInputLineNumber (),
 //           msrRehearsalMarkKind::kRehearsalMarkNone,
-//           elt->tempoWordsListAsString (" "), //JMI ???
+//           elt->tempoWordsListAsString (" "), //// JMI ???
 //           elt->getTempoPlacementKind ());
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -4610,7 +4582,7 @@ void msr2msrTranslator::visitStart (S_msrSlur& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  /* JMI ???
+  /* // JMI ???
     Only the  first note of the chord should get the slur notation.
     Some applications print out the slur for all notes,
     i.e. a stop and a start in sequence:
@@ -4625,7 +4597,7 @@ void msr2msrTranslator::visitStart (S_msrSlur& elt)
   }
 
   else if (fOnGoingChord) {
-    // don't append a slur if we're inside a slur link JMI ???
+    // don't append a slur if we're inside a slur link // JMI ???
     if (fOnGoingNonGraceNote) {
       S_msrChordSlurLink
         chordSlurLink =
@@ -5712,7 +5684,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           ss.str ());
       }
 
-    /* JMI ???
+    /* // JMI ???
       if (fCurrentGraceNotesGroupClone) {
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceGraceNotes ()) {
@@ -5911,7 +5883,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
   switch (noteSyllableExtendKind) {
     case msrSyllable::kStandaloneSyllableExtend:
       {
-        / * JMI ???
+        / * // JMI ???
         // create melisma start command
         S_lpsrMelismaCommand
           melismaCommand =
@@ -6173,7 +6145,7 @@ void msr2msrTranslator::visitStart (S_msrBeam& elt)
   }
 
 //   if (fOnGoingChord) { // else ??? JMI
-//     // don't append a beam if we're inside a beam link JMI ???
+//     // don't append a beam if we're inside a beam link // JMI ???
 //     if (fOnGoingNonGraceNote) {
 //       S_msrChordBeamLink
 //         chordBeamLink =
@@ -7950,7 +7922,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //           measurePuristNumber <<
 //           ", line " << elt->getInputLineNumber ();
 //
-// /* JMI ???
+// /* // JMI ???
 //         msr2msrInternalError (
 //           gServiceRunData->getInputSourceName (),
 //           elt->getInputLineNumber (),

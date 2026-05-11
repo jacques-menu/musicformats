@@ -159,11 +159,11 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
-  // populate the MSR skeleton from the MXSR (pass 2b)
+  // browse the MXSR to populate the MSR skeleton (pass 2b)
   // ------------------------------------------------------
 
   try {
-    populateMsrSkeletonFromMxsr (
+    browseMxsrToPopulateMsrSkeleton (
       originalMxsr,
       firstMsrScore,
       eventsCollection,

@@ -395,9 +395,9 @@ std::string language::convertTheMXSRIntoAnMSRSkeleton () const
   return "Convert the MXSR into an MSR skeleton";
 }
 
-std::string language::populateTheMSRSkeletonFromMusicXMLData () const
+std::string language::browseTheMXSRToPopulateTheMSRSkeleton () const
 {
-  return "Populate the MSR skeleton from the MXSR";
+  return "Browse the MXSR to populate the MSR skeleton";
 }
 
 std::string language::convertTheFirstMSRIntoASecondMSR () const

@@ -3466,7 +3466,7 @@ void oahSubGroup::browseData (basevisitor* v)
       S_oahAtom atom = (*i);
 
       // browse the atom
-      /* JMI ???
+      /* // JMI ???
       gLog <<
         ".\\\" ==> Going to browse atom" <<
         " '" << atom->fetchNames () << '\'' <<
@@ -3559,7 +3559,7 @@ void oahSubGroup::printSummary (std::ostream& os) const
 
 void oahSubGroup::underlineSubGroupHeader (std::ostream& os) const
 {
-  /* JMI ???
+  /* // JMI ???
   for (size_t i = 0; i < fSubGroupHeader.size (); ++i) {
     os << "-";
   } // for
@@ -11312,7 +11312,7 @@ void oahHandler::includeOptionsFromFile (
           valuePartToBeUsed);
 
 //           // register its use
-//           registerAtomUse ( // JMIJMIJMI ???
+//           registerAtomUse ( // JMIJMI// JMI ???
 //             usedOption,
 //             optionName,
 //             valuePart);

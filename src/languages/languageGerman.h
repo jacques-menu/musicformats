@@ -74,7 +74,7 @@ class EXP languageGerman : public language
 //
 //     std::string          convertTheMXSRIntoAnMSRSkeleton () const override;
 //
-//     std::string          populateTheMSRSkeletonFromMusicXMLData () const override;
+//     std::string          browseTheMXSRToPopulateTheMSRSkeleton () const override;
 //
 //     std::string          convertTheFirstMSRIntoASecondMSR () const override;
 //

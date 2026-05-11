@@ -58,7 +58,7 @@ enum class msdlTokenKind {
   kTokenMinus,
   kTokenStar,
   kTokenSlash,
-  kTokenPercent, // don't keep JMI ???
+  kTokenPercent, // don't keep // JMI ???
 
   kTokenConcat,
 

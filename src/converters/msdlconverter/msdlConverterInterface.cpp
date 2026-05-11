@@ -301,16 +301,16 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 //   }
 //
-//   // populate the MSR skeleton from the MXSR (pass 2b)
+//   // browse the MXSR to populate the MSR skeleton (pass 2b)
 //   // ------------------------------------------------------
 //
 //   try {
-//     populateMsrSkeletonFromMxsr (
+//     browseMxsrToPopulateMsrSkeleton (
 //       theMxsr,
 //       firstMsrScore,
 //       eventsCollection,
 // 			 mfPassIDKind::kMfPassID_2b,
-// 			 gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
+// 			 gLanguage->browseTheMXSRToPopulateTheMSRSkeleton ());
 //   }
 //   catch (mxsr2msrException& e) {
 //     mfDisplayException (e, gOutput);

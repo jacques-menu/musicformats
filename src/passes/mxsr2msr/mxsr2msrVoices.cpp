@@ -165,7 +165,7 @@ gLog << std::endl << ss.str () << std::endl;
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // the tuplets starts are implicitly supposed to be in tuplet number order
-  // sort them in to be sure? JMI ??? 0.9.72
+  // sort them in to be sure? // JMI ??? 0.9.72
   fTupletsStack.push_front (tuplet);
 
 #ifdef MF_TRACE_IS_ENABLED

@@ -984,7 +984,7 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
 
     oahError (ss.str ());
 
-/* JMI ??? should work...
+/* // JMI ??? should work...
     printSubGroupSpecificHelp (
       gLog,
       showHarmonyAnalysisAtom->

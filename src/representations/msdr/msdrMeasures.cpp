@@ -194,7 +194,7 @@ void msdrMeasure::browseData (basevisitor* v)
     ) {
       S_msrStanza stanza = (*i).second;
 
-      if (stanza->getStanzaTextPresent ()) {
+      if (! stanza->getSyllables ().empty ()) {
         // browse the stanza
         msrBrowser<msrStanza> browser (v);
         browser.browse (*(stanza));

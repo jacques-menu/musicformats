@@ -2260,7 +2260,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
     setScoreMeasuresNumber (
       fScoreMeasuresNumber);
 
-/* JMI ??? THROW AWAY ??? 0.9.69
+/* // JMI ??? THROW AWAY ??? 0.9.69
   // fetch the identification from the credits if any
   fMsrScore ->
     fetchIdentificationFromCreditsIfAny (
@@ -7036,7 +7036,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  /* JMI ???
+  /* // JMI ???
     several harmonies can be attached to a given note,
     leading to as many harmonies voices in the current part
   */

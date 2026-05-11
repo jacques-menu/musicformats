@@ -2208,7 +2208,7 @@ void lpsrOahGroup::initializeLpsrOahGroup ()
   // --------------------------------------
   initializeLpsrLanguagesOptions ();
 
-/* superfluous JMI ???
+/* superfluous // JMI ???
   // transposition
   // --------------------------------------
   initializeLpsrTransposeOptions ();

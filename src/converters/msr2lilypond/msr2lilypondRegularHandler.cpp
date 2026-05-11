@@ -1417,7 +1417,7 @@ void msr2lilypondRegularHandler::createLyricsRegularGroup ()
   registerAtomInRegularSubgroup ("lilypond-dynamics-text-spanners-style", subGroup);
 
   registerAtomInRegularSubgroup ("ignore-musicxml-lyrics", subGroup);
-  registerAtomInRegularSubgroup ("add-msr-words-from-the-msr-lyrics", subGroup);
+  registerAtomInRegularSubgroup ("add-msr-words-from-the-musicxml-lyrics", subGroup);
 
   registerAtomInRegularSubgroup ("no-lilypond-lyrics", subGroup);
   registerAtomInRegularSubgroup ("lilypond-lyrics-durations-style", subGroup);

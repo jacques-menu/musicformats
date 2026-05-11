@@ -1678,7 +1678,7 @@ msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString 
 {
   msrQuarterTonesPitchesLanguageKind
     result =
-      msrQuarterTonesPitchesLanguageKind::kQTPEnglish;  // MSR default JMI ???
+      msrQuarterTonesPitchesLanguageKind::kQTPEnglish;  // MSR default // JMI ???
 
   std::map <std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =

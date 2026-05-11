@@ -362,7 +362,7 @@ msrStaffDetails::msrStaffDetails (
 {
   fStaffTypeKind = staffTypeKind;
 
-  fStaffLinesNumber = 5; // default value JMI ???
+  fStaffLinesNumber = 5; // default value // JMI ???
 
   fShowFretsKind = showFretsKind;
 

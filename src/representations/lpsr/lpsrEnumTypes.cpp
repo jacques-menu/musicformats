@@ -706,7 +706,7 @@ std::string syllableElementsListAsLilypondString (
 {
   std::stringstream ss;
 
-  if (syllableElementsList.size ()) {
+  if (! syllableElementsList.empty ()) {
     for (msrSyllableElement syllableElement : syllableElementsList) {
       ss <<
        syllableElement.getSyllableElementContents ();

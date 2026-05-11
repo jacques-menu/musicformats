@@ -366,7 +366,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const std::string& context)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // the stack cannot be empty JMI ???
+  // the stack cannot be empty // JMI ???
   // since msdlTokenKind::kTokenEOF is in the set at the bottom of the stack
 
   if (tokensSetsStackSize) {

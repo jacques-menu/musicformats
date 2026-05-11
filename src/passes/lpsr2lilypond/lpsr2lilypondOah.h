@@ -1871,7 +1871,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getNoMidi () const
                               { return fNoMidi; }
 
-/* JMI ???
+/* // JMI ???
     Bool                  getCreateScoreBlockMidiBlock () const
                               { return fetCreateScoreBlockMidiBlock; }
 */
@@ -1990,7 +1990,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // score notation
     // --------------------------------------
 
-    // lilypondScoreNotationKind     fScoreNotationKind; JMI ???
+    // lilypondScoreNotationKind     fScoreNotationKind; // JMI ???
     Bool                  fLilyJazz;
 
     Bool                  fJianpu;

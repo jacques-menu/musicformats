@@ -171,7 +171,7 @@ void enforceSomeOptions (
       // ------------------------------------------------------
 
 /*
-      gGlobalMsr2mxsr2msrOahGroup->setTraceDivisions ();
+      gGlobalMsr2mxsrOahGroup->setTraceDivisions ();
 
       gGlobalMxsr2msrOahGroup->setTraceMxsrVisitors ();
 */
@@ -179,7 +179,7 @@ void enforceSomeOptions (
 
     case mfMultiGenerationOutputKind::kGenerationGuido:
 /*
-     gGlobalMsr2mxsr2msrOahGroup->setTraceDivisions ();
+     gGlobalMsr2mxsrOahGroup->setTraceDivisions ();
 */
      break;
 

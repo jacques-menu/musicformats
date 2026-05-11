@@ -840,6 +840,9 @@ class EXP msrVoice : public msrElement
     void                  addStanzaToVoice (
                             const S_msrStanza& stanza);
 
+    void                  addStanzaToVoiceClone (
+                            const S_msrStanza& stanza);
+
     S_msrStanza           createStanzaInVoiceIfNotYetDone (
                             const mfInputLineNumber& inputLineNumber,
                             const mfStanzaNumber&    stanzaNumber,

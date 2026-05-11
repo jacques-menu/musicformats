@@ -246,12 +246,11 @@ class EXP msr2lpsrTranslator : public msr2msrTranslator
 {
   public:
 
-                              msr2lpsrTranslator ();
+                              msr2lpsrTranslator (const S_msrScore& theMsrScore);
 
     virtual                   ~msr2lpsrTranslator ();
 
     S_lpsrScore               translateMsrToLpsr (
-                                const S_msrScore&          theMsrScore,
                                 const S_mfcMultiComponent& multiComponent);
 
   protected:

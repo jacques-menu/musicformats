@@ -123,7 +123,7 @@ class EXP bsrScore : public bsrElement
     S_bsrTranscriptionNotes
                           fTranscriptionNotes;
 
-    int                   fBrailleLineLength; // cells JMI ???
+    int                   fBrailleLineLength; // cells // JMI ???
     int                   fBraillePageLength;
 
     std::list <S_bsrPage> fScorePagesList;

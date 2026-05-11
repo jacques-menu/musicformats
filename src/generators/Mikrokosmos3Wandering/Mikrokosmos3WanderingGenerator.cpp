@@ -73,14 +73,15 @@ if (true) // for tests JMI
         generationAPIKind);
 
 if (true) // for tests JMI
+{
   S_msrStaff
-    lowerStaff =
-      createAndPopulateLowerStaffInPart (
-        part,
-        generationAPIKind);
-
+  lowerStaff =
+  createAndPopulateLowerStaffInPart (
+    part,
+    generationAPIKind);
+}
+  
   // finalize the part
-
   part->
     finalizePartAndAllItsMeasures (
       mfInputLineNumber (__LINE__));

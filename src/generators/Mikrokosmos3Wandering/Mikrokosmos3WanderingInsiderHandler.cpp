@@ -465,7 +465,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
 
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMsr2mxsr2msrOahGroup ());
+        createGlobalMsr2mxsrOahGroup ());
       break;
 
     case mfMultiGenerationOutputKind::kGenerationGuido:
@@ -475,7 +475,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
 
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMsr2mxsr2msrOahGroup ());
+        createGlobalMsr2mxsrOahGroup ());
 
       // create the Guido generation OAH group
       appendGroupToHandler (
@@ -716,7 +716,7 @@ void Mikrokosmos3WanderingInsiderHandler::enforceHandlerQuietness ()
   gMsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsr2mxsr2msrOahGroup->
+  gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
   gHarmoniesExtraOahGroup->

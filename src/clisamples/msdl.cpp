@@ -166,7 +166,7 @@ static void catchSignals ()  {}
 //       // ------------------------------------------------------
 //
 // /*
-//       gGlobalMsr2mxsr2msrOahGroup->setTraceDivisions ();
+//       gGlobalMsr2mxsrOahGroup->setTraceDivisions ();
 //
 //       gGlobalMxsr2msrOahGroup->setTraceMxsrVisitors ();
 // */
@@ -174,7 +174,7 @@ static void catchSignals ()  {}
 //
 //     case mfMultiGenerationOutputKind::kGenerationGuido:
 // /*
-//      gGlobalMsr2mxsr2msrOahGroup->setTraceDivisions ();
+//      gGlobalMsr2mxsrOahGroup->setTraceDivisions ();
 // */
 //      break;
 //

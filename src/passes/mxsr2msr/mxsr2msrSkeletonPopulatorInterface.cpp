@@ -39,7 +39,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-void populateMsrSkeletonFromMxsr (
+void browseMxsrToPopulateMsrSkeleton (
   const Sxmlelement&    theMxsr,
   S_msrScore            scoreSkeletonToBePopulated,
   mxsrEventsCollection& theKnownEventsCollection,
@@ -51,7 +51,7 @@ void populateMsrSkeletonFromMxsr (
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
     theMxsr != nullptr,
-    "populateMsrSkeletonFromMxsr(): theMxsr is NULL");
+    "browseMxsrToPopulateMsrSkeleton(): theMxsr is NULL");
 
   mfAssert (
     __FILE__, mfInputLineNumber (__LINE__),
@@ -110,7 +110,7 @@ void populateMsrSkeletonFromMxsr (
   // check indentation
   if (gIndenter != 0) {
     gLog <<
-      "### populateMsrSkeletonFromMxsr gIndenter final value: " <<
+      "### browseMxsrToPopulateMsrSkeleton gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
       std::endl;

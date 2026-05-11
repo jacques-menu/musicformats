@@ -625,7 +625,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 
   // upLinks
 
-  // fMeasureUpLinkToSegment JMI ???
+  // fMeasureUpLinkToSegment // JMI ???
 
   return deepClone;
 }
@@ -746,7 +746,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
         measureNumber,
         containingSegment);
 
-  // set measureCopy's ordinal number JMI ???
+  // set measureCopy's ordinal number // JMI ???
   measureCopy->
     setMeasureOrdinalNumberInVoice (
       containingSegmentUpLinkToVoice->
@@ -1455,7 +1455,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
           elem);
 
         // register this measure as regular in case it was empty
-        // should be done elsewhere JMI ???
+        // should be done elsewhere // JMI ???
       }
 
       else {
@@ -2808,7 +2808,7 @@ void msrMeasure::appendNoteToMeasureAtPosition (
           fMeasureNumber,
           positionsDelta,
           positionsDelta,
-          0,   // dots number JMI ???
+          0,   // dots number // JMI ???
           "appendNoteToMeasureAtPosition()");
           /* JMI
           voice->
@@ -3747,7 +3747,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
         fMeasureNumber,
         duration,
         duration,
-        0,  // dots number JMI ???
+        0,  // dots number // JMI ???
         "createPaddingSkipNoteForVoice()");
         /* JMI
         voice->
@@ -6186,7 +6186,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
         // harmony?
         // don't assign currentHarmony here yet,
         // this would set it to nullptr if there's anything else
-        // after the last harmony in the voice JMI ??? 0.9.66
+        // after the last harmony in the voice // JMI ??? 0.9.66
         S_msrHarmony
           harmony =
             dynamic_cast<msrHarmony*>(&(*measureElement))

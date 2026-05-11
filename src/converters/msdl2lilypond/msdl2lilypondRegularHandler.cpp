@@ -1419,7 +1419,7 @@ void msdl2lilypondRegularHandler::createLyricsRegularGroup ()
   // atoms
 
   registerAtomInRegularSubgroup ("ignore-musicxml-lyrics", subGroup);
-  registerAtomInRegularSubgroup ("add-msr-words-from-the-msr-lyrics", subGroup);
+  registerAtomInRegularSubgroup ("add-msr-words-from-the-musicxml-lyrics", subGroup);
 
   registerAtomInRegularSubgroup ("no-lilypond-lyrics", subGroup);
   registerAtomInRegularSubgroup ("lilypond-lyrics-durations-style", subGroup);

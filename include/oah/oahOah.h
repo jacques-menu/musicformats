@@ -466,7 +466,7 @@ class EXP oahOahGroup : public oahGroup
                           fQueryOptionNameAtom;
 
     // find std::string
-//     std::string           fStringToBeFound; JMI ??? 0.9.66
+//     std::string           fStringToBeFound; // JMI ??? 0.9.66
     S_oahFindStringInHelpAtom   fFindStringInHelpAtom;
 
     // find std::string

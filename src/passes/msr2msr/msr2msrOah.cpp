@@ -932,7 +932,7 @@ R"()",
       oahBooleanAtom::create (
         "coalesce-empty-measures", "cem",
 R"(Coalesce-empty-measures empty measures instead of creating successive empty measures
-in the MSR score JMI ???.)",
+in the MSR score // JMI ???.)",
         "fCoalesceEmptyMeasures",
         fCoalesceEmptyMeasures));
 

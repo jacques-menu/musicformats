@@ -92,7 +92,7 @@ namespace MusicFormats
 //     mfMultiLineString                  operator&& (const mfMultiLineString& othermfMultiLineString) const;
 //     mfMultiLineString                  operator|| (const mfMultiLineString& othermfMultiLineString) const;
 //
-//     // compare value JMI ???
+//     // compare value // JMI ???
 //     mfMultiLineString                  operator == (const mfMultiLineString &othermfMultiLineString) const
 //                               { return fValue == othermfMultiLineString.fValue; }
 //     mfMultiLineString                  operator != (const mfMultiLineString &othermfMultiLineString) const

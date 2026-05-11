@@ -3119,7 +3119,7 @@ void msr2bsrTranslator::visitStart (S_msrFiguredBass& elt)
     fCurrentNonGraceNoteClone->
       appendFiguredBassToNote (fCurrentFiguredBassClone);
 
-    // don't append the figured bass to the part figured bass,  JMI ???
+    // don't append the figured bass to the part figured bass,  // JMI ???
     // this will be done below
   }
 
@@ -3416,23 +3416,19 @@ void msr2bsrTranslator::visitStart (S_msrStanza& elt)
 
   ++gIndenter;
 
-//  if (elt->getStanzaTextPresent ()) { // JMI
-    fCurrentStanzaClone =
-      elt->createStanzaNewbornClone (
-        fCurrentVoiceClone);
+  fCurrentStanzaClone =
+    elt->createStanzaNewbornClone (
+      fCurrentVoiceClone);
 
-    // append the stanza clone to the BSR score elements list
-    fResultingBsr ->
-      appendStanzaToScoreElements (
-        fCurrentStanzaClone);
+  // append the stanza clone to the BSR score elements list
+  fResultingBsr ->
+    appendStanzaToScoreElements (
+      fCurrentStanzaClone);
 
-    // append a use of the stanza to the current staff block
-    fCurrentStaffBlock ->
-      appendLyricsUseToStaffBlock (
-        fCurrentStanzaClone);
-//  }
-//  else
-  //  fCurrentStanzaClone = 0; // JMI
+  // append a use of the stanza to the current staff block
+  fCurrentStaffBlock ->
+    appendLyricsUseToStaffBlock (
+      fCurrentStanzaClone);
 
   fOnGoingStanza = true;
 }
@@ -3510,11 +3506,12 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
         syllableElementsList =
           elt->getSyllableElementsList ();
 
-      if (syllableElementsList.size ()) {
+      if (! syllableElementsList.empty ()) {
         // build a single words value from the texts list
         // JMI create an msrWords instance for each???
-        std::string wordsValue =
-          elt->syllableElementsListAsString();
+        std::string
+          wordsValue =
+            syllableElementsListAsString(syllableElementsList);
 
         // create the words
 #ifdef MF_TRACE_IS_ENABLED
@@ -3569,9 +3566,9 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
     }
   }
 
-  // a syllable ends the sysllable extend range if any
+  // a syllable ends the syllable extend range if any
   if (fOnGoingSyllableExtend) {
-    / * JMI ???
+    / * // JMI ???
     // create melisma end command
     S_bsrMelismaCommand
       melismaCommand =
@@ -5444,7 +5441,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
             fCurrentGraceNoteClone);
       }
 
-    / * JMI ???
+    / * // JMI ???
       if (fCurrentGraceNotesGroupClone) {
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceGraceNotes () || gTraceOahGroup->getTraceNotes ()) {
@@ -5606,7 +5603,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
   switch (noteSyllableExtendKind) {
     case msrSyllable::kStandaloneSyllableExtend:
       {
-        / * JMI ??? 0.9.66
+        / * // JMI ??? 0.9.66
         // create melisma start command
         S_bsrMelismaCommand
           melismaCommand =
@@ -6354,7 +6351,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-/ * JMI ???
+/ * // JMI ???
   fCurrentPartClone->
     prepareForRepeatInPart (
       elt->getInputLineNumber ());

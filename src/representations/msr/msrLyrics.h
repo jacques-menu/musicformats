@@ -184,11 +184,15 @@ class EXP msrSyllable : public msrElement
                             const msrTupletFactor&   syllableTupletFactor,
                             const S_msrStanza&       syllableUpLinkToStanza);
 
-    SMARTP<msrSyllable> createSyllableNewbornClone (
-                            const S_msrPart& containingPart); // JMI 0.9.67
+//     SMARTP<msrSyllable> createSyllableNewbornClone (
+//                             const S_msrPart& containingPart); // JMI 0.9.67
+//
+//     SMARTP<msrSyllable> createSyllableDeepClone (
+//                             const S_msrPart& containingPart);
 
-    SMARTP<msrSyllable> createSyllableDeepClone (
-                            const S_msrPart& containingPart);
+    SMARTP<msrSyllable> createSyllableNewbornClone (); // JMI 2026.2
+
+    SMARTP<msrSyllable> createSyllableDeepClone ();
 
   protected:
 
@@ -432,11 +436,11 @@ class EXP msrStanza : public msrElement
                           getSyllables () const
                               { return fSyllables; }
 
-    void                  setStanzaTextPresent ()
-                              { fStanzaTextPresent = true; }
+    void                  setStanzaContainsText ()
+                              { fStanzaContainsText = true; }
 
-    Bool                  getStanzaTextPresent () const
-                              { return fStanzaTextPresent; }
+    Bool                  getStanzaContainsText () const
+                              { return fStanzaContainsText; }
 
     // upLinks
     S_msrVoice            getStanzaUpLinkToVoice () const
@@ -565,7 +569,7 @@ class EXP msrStanza : public msrElement
     std::vector <S_msrSyllable>
                           fSyllables;
 
-    Bool                  fStanzaTextPresent;
+    Bool                  fStanzaContainsText;
 
     // position in measure
     mfPositionInMeasure   fStanzaMeasureCurrentPositionInMeasure;

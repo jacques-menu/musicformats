@@ -356,15 +356,14 @@ class EXP msr2msrTranslator :
 {
   public:
 
-                              msr2msrTranslator ();
+                              msr2msrTranslator (
+                                const S_msrScore& theMsrScore);
 
     virtual                   ~msr2msrTranslator ();
 
-    S_msrScore                translateMsrToMsr (
-                                const S_msrScore& theMsrScore);
+    S_msrScore                translateMsrToMsr ();
 
     S_msrScore                translateMsrToMsrAlongPathToVoice (
-                                const S_msrScore&       theMsrScore,
                                 const S_msrPathToVoice& pathToVoice);
 
   protected:
@@ -827,7 +826,7 @@ class EXP msr2msrTranslator :
 
     void                      displayPartHiddenMeasureAndBarLineDescrList ();
 
-    void                      handlePartHiddenMeasureAndBarLineDescrList (); // SUPERFLOUS JMI ??? 0.9.67
+    void                      handlePartHiddenMeasureAndBarLineDescrList (); // SUPERFLOUS // JMI ??? 0.9.67
 
 
     // harmonies
@@ -867,7 +866,7 @@ class EXP msr2msrTranslator :
     // is being visited too
     S_msrNote                 fCurrentNonGraceNoteClone;
 
-    // to help workaround LilyPond_Issue_34 JMI ??? 0.9.70
+    // to help workaround LilyPond_Issue_34 // JMI ??? 0.9.70
     S_msrNote                 fFirstNoteCloneInVoice;
 
     S_msrGraceNotesGroup      fCurrentSkipGraceNotesGroup;

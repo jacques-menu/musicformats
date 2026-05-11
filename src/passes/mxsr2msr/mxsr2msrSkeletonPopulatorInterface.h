@@ -25,7 +25,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-EXP void populateMsrSkeletonFromMxsr (
+EXP void browseMxsrToPopulateMsrSkeleton (
   const Sxmlelement&    theMxsr,
   S_msrScore            scoreSkeletonToBePopulated,
   mxsrEventsCollection& theKnownEventsCollection,

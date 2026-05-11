@@ -85,7 +85,7 @@ public:
     Bool                  operator || (const Bool& otherBool) const;
     Bool                  operator ^  (const Bool& otherBool) const;
 
-    // compare value JMI ???
+    // compare value // JMI ???
     Bool                  operator == (const Bool &otherBool) const
                               { return fBareValue == otherBool.fBareValue; }
     Bool                  operator != (const Bool &otherBool) const

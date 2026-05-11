@@ -570,7 +570,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // public services
     // ------------------------------------------------------
 
-    void                      populateMsrSkeletonFromMxsr (
+    void                      browseMxsrToPopulateMsrSkeleton (
                                 const Sxmlelement theMxsr);
 
     // visitors
@@ -2479,7 +2479,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // stems handling
     // ------------------------------------------------------
 
-    std::vector <S_msrStem>   fPendingStemsVector; // std::list JMI ???
+    std::vector <S_msrStem>   fPendingStemsVector; // std::list // JMI ???
 
 
     // beams handling

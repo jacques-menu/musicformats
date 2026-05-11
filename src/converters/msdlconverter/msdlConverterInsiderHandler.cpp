@@ -518,7 +518,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
     case mfMultiGenerationOutputKind::kGenerationMusicXML:
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMsr2mxsr2msrOahGroup ());
+        createGlobalMsr2mxsrOahGroup ());
 
       // create the msdl2musicxml OAH group
       appendGroupToHandler (
@@ -528,7 +528,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
     case mfMultiGenerationOutputKind::kGenerationGuido:
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMsr2mxsr2msrOahGroup ());
+        createGlobalMsr2mxsrOahGroup ());
 
       // create the xml2gmn OAH group
       appendGroupToHandler (
@@ -858,7 +858,7 @@ void msdlConverterInsiderHandler::enforceHandlerQuietness ()
   gMsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsr2mxsr2msrOahGroup->
+  gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
   gHarmoniesExtraOahGroup->

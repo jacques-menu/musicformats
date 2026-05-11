@@ -777,7 +777,7 @@ EXP void initializeServices ()
       appendPassToService (
         mfPass::create (
           mfPassIDKind::kMfPassID_3,
-          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
+          gLanguage->browseTheMXSRToPopulateTheMSRSkeleton ()));
 
     xml2brlService->
       appendPassToService (
@@ -837,7 +837,7 @@ EXP void initializeServices ()
       appendPassToService (
         mfPass::create (
           mfPassIDKind::kMfPassID_3,
-          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
+          gLanguage->browseTheMXSRToPopulateTheMSRSkeleton ()));
 
     xml2xmlService->
       appendPassToService (
@@ -897,7 +897,7 @@ EXP void initializeServices ()
       appendPassToService (
         mfPass::create (
           mfPassIDKind::kMfPassID_3,
-          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
+          gLanguage->browseTheMXSRToPopulateTheMSRSkeleton ()));
 
     xml2gmnService->
       appendPassToService (
@@ -956,7 +956,7 @@ EXP void initializeServices ()
       appendPassToService (
         mfPass::create (
           mfPassIDKind::kMfPassID_3,
-          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
+          gLanguage->browseTheMXSRToPopulateTheMSRSkeleton ()));
 
     filterService->
       appendPassToService (
@@ -1015,7 +1015,7 @@ EXP void initializeServices ()
       appendPassToService (
         mfPass::create (
           mfPassIDKind::kMfPassID_3,
-          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
+          gLanguage->browseTheMXSRToPopulateTheMSRSkeleton ()));
 
     msdlService->
       appendPassToService (

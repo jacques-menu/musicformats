@@ -115,7 +115,7 @@ class EXP language : public smartable
 
     virtual std::string   convertTheMXSRIntoAnMSRSkeleton () const;
 
-    virtual std::string   populateTheMSRSkeletonFromMusicXMLData () const;
+    virtual std::string   browseTheMXSRToPopulateTheMSRSkeleton () const;
 
     virtual std::string   convertTheFirstMSRIntoASecondMSR () const;
 

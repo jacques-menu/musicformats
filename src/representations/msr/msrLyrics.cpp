@@ -249,7 +249,9 @@ std::string syllableElementsListAsString (
 {
   std::stringstream ss;
 
-  if (syllableElementsList.size ()) {
+  ss << '[';
+
+  if (! syllableElementsList.empty ()) {
     std::list <msrSyllableElement>::const_iterator
       iBegin = syllableElementsList.begin (),
       iEnd   = syllableElementsList.end (),
@@ -261,6 +263,8 @@ std::string syllableElementsListAsString (
       ss << ", ";
     } // for
   }
+
+  ss << ']';
 
   return ss.str ();
 }
@@ -483,17 +487,15 @@ msrSyllable::msrSyllable (
 msrSyllable::~msrSyllable ()
 {}
 
-S_msrSyllable msrSyllable::createSyllableNewbornClone (
-  const S_msrPart& containingPart)
+S_msrSyllable msrSyllable::createSyllableNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of syllable '" <<
-      asString () <<
-      "'";
+      "Creating a newborn clone of syllable " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -501,13 +503,13 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    containingPart != nullptr,
-    "containingPart is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, mfInputLineNumber (__LINE__),
+//     containingPart != nullptr,
+//     "containingPart is NULL");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrSyllable
     newbornClone =
@@ -535,17 +537,15 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
   return newbornClone;
 }
 
-S_msrSyllable msrSyllable::createSyllableDeepClone (
-  const S_msrPart& containingPart)
+S_msrSyllable msrSyllable::createSyllableDeepClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of syllable '" <<
-      asString () <<
-      "'";
+      "Creating a newborn clone of syllable " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -553,13 +553,13 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, mfInputLineNumber (__LINE__),
-    containingPart != nullptr,
-    "containingPart is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, mfInputLineNumber (__LINE__),
+//     containingPart != nullptr,
+//     "containingPart is NULL");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrSyllable
     deepClone =
@@ -890,7 +890,7 @@ std::string msrSyllable::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Syllable " <<
+    "[Syllable" <<
     ", fSyllableElementsList: " <<
     syllableElementsListAsString (fSyllableElementsList) <<
     ", fSyllableKind: " << fSyllableKind <<
@@ -1199,7 +1199,7 @@ void msrStanza::initializeStanza ()
         mfMakeSingleWordFromString (
           mfStanzaNumberAsString (fStanzaNumber)));
 
-  fStanzaTextPresent = false;
+  fStanzaContainsText = false;
 
   fStanzaMeasureCurrentPositionInMeasure = K_POSITION_IN_MEASURE_ZERO;
 }
@@ -1253,8 +1253,8 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
     fStanzaPathLikeName;
 
   // contents
-  newbornClone->fStanzaTextPresent =
-    fStanzaTextPresent;
+  newbornClone->fStanzaContainsText =
+    fStanzaContainsText;
 
   // upLinks
   newbornClone->fStanzaUpLinkToVoice =
@@ -1314,12 +1314,13 @@ S_msrStanza msrStanza::createStanzaDeepClone (
     stanzaDeepClone->fSyllables.push_back (
       fSyllables [i]->
         createSyllableDeepClone (
-          containingVoice->
-            fetchVoiceUpLinkToPart ()));
+//           containingVoice->
+//             fetchVoiceUpLinkToPart ()));
+          ));
   } // for
 
-  stanzaDeepClone->fStanzaTextPresent =
-    fStanzaTextPresent;
+  stanzaDeepClone->fStanzaContainsText =
+    fStanzaContainsText;
 
   // upLinks
   stanzaDeepClone->fStanzaUpLinkToVoice =
@@ -1366,26 +1367,26 @@ void msrStanza::appendSyllableToStanza (
 #endif // MF_TRACE_IS_ENABLED
 
 //   // pad up stanza if relevant
-//   if (positionsDelta.getNumerator () != 0) { // JMI 0.9.70 BABASSE
-//     // create a skip on rest note syllable
-//     S_msrSyllable
-//       skipRestNoteSyllable =
-//         msrSyllable::create (
-//           syllable->getInputLineNumber (),
-//           msrSyllableKind::kSyllableSkipOnRestNote,
-//           msrSyllableExtendKind::kSyllableExtend_NONE,
-//           fStanzaNumber,
-//           positionsDelta,
-//           msrTupletFactor (1, 1),
-//           this);
-//
-//     // append it to this stanza
-//     fSyllables.push_back (skipRestNoteSyllable);
-//
-//     // account for syllable length
-//     fStanzaMeasureCurrentPositionInMeasure +=
-//       skipRestNoteSyllable->getSyllableWholeNotes ();
-//   }
+  if (positionsDelta.getNumerator () != 0) { // JMI 0.9.70 BABASSE 2026.2
+    // create a skip on rest note syllable
+    S_msrSyllable
+      skipRestNoteSyllable =
+        msrSyllable::create (
+          syllable->getInputLineNumber (),
+          msrSyllableKind::kSyllableSkipOnRestNote,
+          msrSyllableExtendKind::kSyllableExtend_NONE,
+          fStanzaNumber,
+          positionsDelta,
+          msrTupletFactor (1, 1),
+          this);
+
+    // append it to this stanza
+    fSyllables.push_back (skipRestNoteSyllable);
+
+    // account for syllable length
+    fStanzaMeasureCurrentPositionInMeasure +=
+      skipRestNoteSyllable->getSyllableWholeNotes ();
+  }
 
   // append syllable to this stanza
   fSyllables.push_back (syllable);
@@ -1411,7 +1412,7 @@ void msrStanza::appendSyllableToStanza (
     case msrSyllableKind::kSyllableEnd:
       // only now, in case addSyllableToStanza () is called
       // from LPSR for example
-      fStanzaTextPresent = true;
+      fStanzaContainsText = true;
       break;
 
     case msrSyllableKind::kSyllableOnRestNote:
@@ -1478,7 +1479,7 @@ void msrStanza::appendSyllableToStanzaClone (
     case msrSyllableKind::kSyllableEnd:
       // only now, in case addSyllableToStanza () is called
       // from LPSR for example
-      fStanzaTextPresent = true;
+      fStanzaContainsText = true;
       break;
 
     case msrSyllableKind::kSyllableOnRestNote:
@@ -1501,8 +1502,9 @@ void msrStanza::appendSyllableToStanzaClone (
 
 void msrStanza::appendMeasureEndSyllableToStanza (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrMeasure&        upLinkToMeasure,
-  const mfPositionInMeasure& partCurrentDrawingPositionInMeasure)
+  const S_msrMeasure&      upLinkToMeasure,
+  const mfPositionInMeasure&
+                           partCurrentDrawingPositionInMeasure)
 {
   // compute position delta
   mfWholeNotes
@@ -1516,7 +1518,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
     std::stringstream ss;
 
     ss <<
-      "Appending a measure end syllable " <<
+      "Appending a measure end syllable" <<
       " to stanza " << getStanzaName ();
 
     ss <<
@@ -1586,10 +1588,17 @@ void msrStanza::appendMeasureEndSyllableToStanza (
 //     setSyllableMeasureNumber (
 //       measureNumber);
 
-  // append measureEndSyllable to this stanza clone
-  appendSyllableToStanzaClone (
+  // fetch the part
+  S_msrPart
+    part =
+      fStanzaUpLinkToVoice->
+        fetchVoiceUpLinkToPart ();
+
+  // append measureEndSyllable to this stanza clone // 2026.2
+  appendSyllableToStanza (
     measureEndSyllable,
-    upLinkToMeasure);
+    upLinkToMeasure,
+    partCurrentDrawingPositionInMeasure);
 
   // reset measure whole notes
   fStanzaMeasureCurrentPositionInMeasure =
@@ -1601,7 +1610,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
 
 S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure)
+  const S_msrMeasure&      upLinkToMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
@@ -1634,10 +1643,26 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
         msrTupletFactor (),
         this);
 
+  // fetch the part
+  S_msrPart
+    part =
+      fStanzaUpLinkToVoice->
+        fetchVoiceUpLinkToPart ();
+
+  // fetch the part current measure position
+  mfPositionInMeasure
+    partCurrentDrawingPositionInMeasure =
+      part->
+        getPartCurrentDrawingPositionInMeasure ();
+
   // append syllable to this stanza clone
-  appendSyllableToStanzaClone (
+//   appendSyllableToStanzaClone (
+//     syllable,
+//     upLinkToMeasure);
+  appendSyllableToStanza (
     syllable,
-    upLinkToMeasure);
+    upLinkToMeasure,
+    partCurrentDrawingPositionInMeasure);
 
   --gIndenter;
 
@@ -1647,7 +1672,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
 
 S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure)
+  const S_msrMeasure&      upLinkToMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
@@ -1680,10 +1705,26 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
         msrTupletFactor (),
         this);
 
+  // fetch the part
+  S_msrPart
+    part =
+      fStanzaUpLinkToVoice->
+        fetchVoiceUpLinkToPart ();
+
+  // fetch the part current measure position
+  mfPositionInMeasure
+    partCurrentDrawingPositionInMeasure =
+      part->
+        getPartCurrentDrawingPositionInMeasure ();
+
   // append syllable to this stanza clone
-  appendSyllableToStanzaClone (
+//   appendSyllableToStanzaClone (
+//     syllable,
+//     upLinkToMeasure);
+  appendSyllableToStanza (
     syllable,
-    upLinkToMeasure);
+    upLinkToMeasure,
+    partCurrentDrawingPositionInMeasure);
 
   --gIndenter;
 
@@ -1840,10 +1881,26 @@ std::string msrStanza::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Stanza" <<
-//     ", fTechnicalWithFloatKind: " << fTechnicalWithFloatKind <<
-//     ", fTechnicalWithFloatValue :'" << fTechnicalWithFloatValue << '\'' <<
-//     ", fTechnicalWithFloatPlacementKind: " << fTechnicalWithFloatPlacementKind <<
+    "[Stanza";
+
+  if (fSyllables.empty ()) {
+    ss <<
+//       "(does not contain any text)" <<
+      "(No actual syllables)";
+  }
+
+  else {
+    if (! fSyllables.empty ()) {
+      for (S_msrSyllable syllable : fSyllables) {
+//         syllable->print (os);
+        ss <<
+          syllable->asShortString () <<
+          ", ";
+      } // for
+    }
+  }
+
+  ss <<
     ']';
 
   return ss.str ();
@@ -1861,21 +1918,28 @@ void msrStanza::print (std::ostream& os) const
 
   ++gIndenter;
 
-  if (! fStanzaTextPresent) {
+  os <<
+    "fSyllables:";
+  if (fSyllables.empty ()) {
     os <<
-      "(No actual text)" <<
+      " [EMPTY]" <<
       std::endl;
   }
 
   else {
-    if (fSyllables.size ()) {
-      for (S_msrSyllable syllable : fSyllables) {
+    os <<
+      std::endl;
+
+    ++gIndenter;
+
+    for (S_msrSyllable syllable : fSyllables) {
 //         syllable->print (os);
-        os <<
-          syllable->asShortString () <<
-          std::endl;
-      } // for
-    }
+      os <<
+        syllable->asShortString () <<
+        std::endl;
+    } // for
+
+    --gIndenter;
   }
 
   --gIndenter;
@@ -1895,18 +1959,25 @@ void msrStanza::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  if (! fStanzaTextPresent) {
+  os <<
+    "fSyllables:";
+  if (fSyllables.empty ()) {
     os <<
-      "(No actual text)" <<
+      " [EMPTY]" <<
       std::endl;
   }
 
   else {
-    if (fSyllables.size ()) {
-      for (S_msrSyllable syllable : fSyllables) {
+    os <<
+      std::endl;
+
+    ++gIndenter;
+
+    for (S_msrSyllable syllable : fSyllables) {
         syllable->printFull (os);
-      } // for
-    }
+    } // for
+
+    --gIndenter;
   }
 
   --gIndenter;

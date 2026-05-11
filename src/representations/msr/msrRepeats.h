@@ -736,7 +736,7 @@ class EXP msrRepeat : public msrSegmentElement
     // work fields
     // ------------------------------------------------------
 
-    // repeat build phase, used when building the repeat JMI ???
+    // repeat build phase, used when building the repeat // JMI ???
     msrRepeatBuildPhaseKind
                           fCurrentRepeatBuildPhaseKind;
 
