@@ -744,7 +744,7 @@ R"(
 tongue =
 #(define-music-function (parser location dots) (integer?)
    (let ((script (make-music 'ArticulationEvent
-                   'articulation-type "staccato")))
+                   'articulation-type 'staccato)))
      (set! (ly:music-property script 'tweaks)
            (acons 'stencil
              (lambda (grob)
@@ -1723,8 +1723,8 @@ R"(
 
 schleifer =
 #(define-music-function (parser location start) (ly:music?)
-   #{\once \override Slur $'direction = #UP
-     \once \override Slur $'stencil = $(lambda (grob)
+   #{\once \override Slur.direction = #UP
+     \once \override Slur.stencil = $(lambda (grob)
                                          (let* ((slur-stencil (ly:slur::print grob))
                                                 (Y-ext (ly:stencil-extent slur-stencil Y))
                                                 (text-stencil (ly:text-interface::print grob))
@@ -1739,7 +1739,7 @@ schleifer =
      \once \override Slur.text = \markup {
        \musicglyph #"scripts.prall"
      }
-     \once \override Slur $'control-points = $(lambda (grob)
+     \once \override Slur.control-points = $(lambda (grob)
                                                 (let* ((coords (ly:slur::calc-control-points grob))
                                                        (point-0 (list-ref coords 0))
                                                        (point-1 (list-ref coords 1))
@@ -1819,7 +1819,7 @@ R"(
                                    #:translate '(-0.2 . -0.5)
                                    #:path 0.25 '((moveto -0.2 0.5)
                                                  (curveto 0.2 2 -1.2 2.5 -1.7 2.5))))))
-scoopAbove = \once \override NoteHead #'stencil = #scoop-above-stencil
+scoopAbove = \once \override NoteHead.stencil = #scoop-above-stencil
 
 #(define (scoop-below-stencil grob)
    (ly:stencil-add
@@ -1829,7 +1829,7 @@ scoopAbove = \once \override NoteHead #'stencil = #scoop-above-stencil
                                    #:translate '(-0.2 . -0.5)
                                    #:path 0.25 '((moveto 0 0)
                                                  (curveto 0.2 -1 -1.2 -1.5 -1.7 -1.5))))))
-scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
+scoopBelow = \once \override NoteHead.stencil = #scoop-below-stencil
 
 %\relative c'' {
 %  \scoopAbove c2 \scoopBelow c2

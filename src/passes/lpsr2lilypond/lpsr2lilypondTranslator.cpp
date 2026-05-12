@@ -355,6 +355,7 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
   }
   cLilypondWithCloser = "}";
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    fLilypondCodeStream << std::endl;
     cLilypondWithCloser +=
       " %{ cLilypondWithCloser %} ";
   }
@@ -495,6 +496,7 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
   }
   cLilypondPartGroupCloser = ">> ";
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructure ()) {
+    fLilypondCodeStream << std::endl;
     cLilypondPartGroupCloser +=
       "%{ cLilypondPartGroupCloser %} ";
   }
@@ -2687,9 +2689,9 @@ void lpsr2lilypondTranslator::generateRegularNoteInMeasure (
       wholeNotesAsLilypondString (
         note->getInputLineNumber (),
         noteSoundingWholeNotes) <<
-        //*/
-      "*" <<
-      gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsRational ();
+      '*' <<
+      gGlobalLpsr2lilypondOahGroup->
+        getDelayedOrnamentsRational ().asFractionString ();
   }
 
   // generate the ties if any
@@ -2884,7 +2886,7 @@ void lpsr2lilypondTranslator::generateUnpitchedRestInMeasure (
 
         // generate the multiplying factor
         fLilypondCodeStream << // JMI
-          "*" <<
+          '*' <<
           noteSoundingWholeNotes <<
           "";
       }
@@ -3104,8 +3106,9 @@ void lpsr2lilypondTranslator::generateUnpitchedNoteInMeasure (
       wholeNotesAsLilypondString (
         note->getInputLineNumber (),
         noteSoundingWholeNotes) <<
-      "*" <<
-      gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsRational ();
+      '*' <<
+      gGlobalLpsr2lilypondOahGroup->
+        getDelayedOrnamentsRational ().asFractionString ();
   }
 
 /* JMI
@@ -4055,8 +4058,9 @@ void lpsr2lilypondTranslator::generateNoteInDoubleTremolo (
   if (note->getNoteDelayedTurnOrnament ()) {
     // c2*2/3 ( s2*1/3\turn JMI
     fLilypondCodeStream <<
-      "*" <<
-      gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsRational ();
+      '*' <<
+      gGlobalLpsr2lilypondOahGroup->
+        getDelayedOrnamentsRational ().asFractionString ();
   }
 
 /* JMI
@@ -4947,7 +4951,8 @@ void lpsr2lilypondTranslator::generateOrnament (
           remainingFraction =
             mfRational (1, 1)
               -
-            gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsRational ();
+            gGlobalLpsr2lilypondOahGroup->
+              getDelayedOrnamentsRational ();
 
         int
           numerator =
@@ -4962,7 +4967,7 @@ void lpsr2lilypondTranslator::generateOrnament (
         }
         fLilypondCodeStream <<
           upLinkToNoteNotesDuration <<
-          "*" <<
+          '*' <<
             denominator
             -
             numerator <<
@@ -5785,7 +5790,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
         ss);
     }
     ss <<
-      "*" <<
+      '*' <<
       harmonyTupletFactor.inverse ().asFractionString ();
   }
 
@@ -6264,8 +6269,8 @@ std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
     }
 
     ss <<
-      "*" <<
-      figuredBassTupletFactor.asRational ();
+      '*' <<
+      figuredBassTupletFactor.asFractionString ();
   }
 
   ss << cLilyPondSpace;
@@ -6642,7 +6647,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
 //     fLilypondCodeStream <<
 //       "% Pick your choice from the next two lines as needed" <<
 //       std::endl <<
-//       "%myPageBreak = { \\pageBreak }" <<
+//       "%myPageBreak = { \\pageBreak }" << elt->getNextBarPuristNumber () <<
 //       std::endl <<
 //       "myPageBreak = {}" <<
 //       std::endl << std::endl;
@@ -9865,6 +9870,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
       // don't generate the implicit outer-most part group block
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
+          std::endl <<
           " % end of implicit part group block " <<
           partGroup->fetchPartGroupInformationForTraceWithoutEndOfLines ();
       }
@@ -9874,6 +9880,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
 
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondStructureBasics ()) {
         fLilypondCodeStream <<
+          std::endl <<
           " % end of explicit part group block " <<
           partGroup->fetchPartGroupInformationForTraceWithoutEndOfLines ();
       }
@@ -13590,8 +13597,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
       }
 
       fLilypondCodeStream <<
-        "*" <<
-        figuredBassTupletFactor.asRational ();
+        '*' <<
+        figuredBassTupletFactor.asRational ().asFractionString ();
     }
 
     fLilypondCodeStream <<
@@ -14660,7 +14667,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
   #endif // MF_TRACE_IS_ENABLED
 
         fLilypondCodeStream <<
-          "\\pageBreak" <<
+          "\\pageBreak | % " << "elt->getNextBarPuristNumber ()" <<
           std::endl;
     }
 
@@ -14728,10 +14735,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
     // don't generate the stanza inside the code for the voice
-    gLog <<
-      "fOnGoingVoice: " << fOnGoingVoice << std::endl <<
-      "elt->getStanzaContainsText (): " << elt->getStanzaContainsText () <<
-      std::endl;
+//     gLog << // JMI 2026.2
+//       "fOnGoingVoice: " << fOnGoingVoice << std::endl <<
+//       "elt->getStanzaContainsText (): " << elt->getStanzaContainsText () <<
+//       std::endl;
 
     fGenerateOngoingNonEmptyStanza =
       true ||
@@ -15741,7 +15748,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
       fLilypondCodeStream <<
-        "\\pageBreak" <<
+        "\\pageBreak | % " << "elt->getNextBarPuristNumber ()" <<
         syllable->fetchSyllableMeasurePuristNumber () + 1 <<
         std::endl;
       break;
@@ -16856,12 +16863,6 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       " \\skip" <<
       durationAsLilypondStringIfItShouldBeGenerated (
         syllable->getInputLineNumber (),
-        syllable->getSyllableWholeNotes ()) <<
-
-      // durationAsLilypondStringIfItShouldBeGenerated is not adequate it seems,
-      // so let's generate it the hardwired way... // JMI 0.9.71
-      wholeNotesAsLilypondString (
-        syllable->getInputLineNumber (), // JMI JMI 2026.2
         syllable->getSyllableWholeNotes ()) <<
       cLilyPondSpace;
   }
