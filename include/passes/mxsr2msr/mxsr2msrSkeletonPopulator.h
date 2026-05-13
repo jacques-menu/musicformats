@@ -2099,6 +2099,12 @@ class EXP mxsr2msrSkeletonPopulator :
 		void											displayGatheredLyricInformations (
 																const std::string& context) const;
 
+    // the lyric markups are met before any possible staff change is known,
+    // so when fCurrentRecipientStaffNumber is not know for sure.
+    // the lyrics are thus kept pending until they can be appended to the correct stanza
+
+    std::map <mfStanzaNumber, std::list <S_msrSyllable>>
+                              fPendingSyllablesListMap;
 
     // harmonies handling
     // ------------------------------------------------------

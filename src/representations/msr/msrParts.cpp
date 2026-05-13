@@ -3448,10 +3448,10 @@ void msrPart::collectPartMeasuresSlices (
         staff->getStaffPathLikeName () <<
         "\" is NULL";
 
-      msrWarning (
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-        ss.str ());
+//       msrWarning ( // JMI disturbing 2026.2
+//         gServiceRunData->getInputSourceName (),
+//         inputLineNumber,
+//         ss.str ());
     }
     else {
       fPartMeasuresSlicesSequence->

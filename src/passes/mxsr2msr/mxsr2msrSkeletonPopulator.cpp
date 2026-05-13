@@ -10807,7 +10807,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     fCurrentSyllableKind =
       msrSyllableKind::kSyllableSkipOnRestNote;
 
-//     if (! fCurrentSyllableElementsList.empty ()) {
+//     if (! fCurrentSyllableElementsList.empty ()) { 2026.2
 //       // register a skip in lyrics for rests with syllables
 //       fCurrentSyllableKind =
 //         msrSyllableKind::kSyllableOnRestNote;
@@ -10944,6 +10944,75 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 
     // after the note has been created, appendSyllableToNote()
     // will be called in handleLyricsAfterCurrentNoteHasBeenHandled(),
+
+
+
+//     ****
+//       The syllable shoud be appended to the corresponding stanza right now,
+//       since there can be multiple such inside a <note /> markup
+//
+//       The stave and voice numbers are known at this point,
+//       so let's get the voice to access its stanzas
+//
+//     **** */
+
+    // remember the syllable as pending for insertion into its stanza
+    fPendingSyllablesListMap [fCurrentStanzaNumber].push_back (syllable);
+//
+//     // get the current recipient MSR voice's stanzas map
+//   // set the current recipient MSR voice
+//
+//   // set the current recipient MXSR voice // BAZAR BAZAR à anticiper juste!!!
+//   fCurrentRecipientMxsrVoice =
+//     fCurrentPartStaffMxsrVoicesMapMap
+//       [fCurrentRecipientStaffNumber] [fCurrentNoteMxmlVoiceNumber];
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, mfInputLineNumber (__LINE__),
+//     fCurrentRecipientMxsrVoice != nullptr,
+//     "fCurrentRecipientMxsrVoice is NULL");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   fCurrentRecipientMsrVoice =
+//     fCurrentRecipientMxsrVoice->getMsrVoice ();
+//
+//     const std::map <mfStanzaNumber, S_msrStanza>&
+//       voiceStanzasMap =
+//         fCurrentRecipientMsrVoice->
+//           getVoiceStanzasMap ();
+//
+//     // get the recipient stanza
+//     /*
+//       operator[] of std::map is not a const qualified member function.
+//
+//       A possible fix is to use the member function at(),
+//         which has this const qualified overload, for const qualified std::maps
+//     */
+//
+//     S_msrStanza // JMI 2026.2
+//       recipientStanza =
+//         voiceStanzasMap.at (fCurrentStanzaNumber);
+//
+//     // fetch the part
+//     S_msrPart
+//       part =
+//         fCurrentRecipientMsrVoice->
+//           fetchVoiceUpLinkToPart ();
+//
+//     // fetch the part current measure position
+//     mfPositionInMeasure
+//       partCurrentDrawingPositionInMeasure =
+//         part->
+//           getPartCurrentDrawingPositionInMeasure ();
+//
+//     // append syllable to recipientStanza
+//     recipientStanza->
+//       appendSyllableToStanza (
+//         syllable,
+//         fCurrentRecipientMsrVoice->getVoiceLastAppendedMeasure (),
+//         partCurrentDrawingPositionInMeasure);
   }
 
   // DON'T register current note as having lyrics,
@@ -24198,7 +24267,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     fCurrentRecipientStaffNumber =
       fCurrentNoteMxmlStaffNumber;
   }
-  // else {} ??? JMI
+  // else {} ??? JMI 2026.2
 
   handleStaffChangeTakeOffEventIfAny ();
 
@@ -25919,6 +25988,7 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
 //           fetchVoiceLastMeasure (
 //             currentNoteInputLineNumber));
 
+    // handle the note's syllables list
     for (S_msrSyllable syllable : fCurrentNoteSyllablesList) {
       // append syllable to currentNote
       fCurrentNote->
@@ -25935,12 +26005,33 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
           fCurrentRecipientMsrVoice->
             fetchVoiceLastMeasure (
               currentNoteInputLineNumber));
+    } // for
 
-      // get the current recipient MSR voice's stanzas map
-      const std::map <mfStanzaNumber, S_msrStanza>&
-        voiceStanzasMap =
-          fCurrentRecipientMsrVoice->
-            getVoiceStanzasMap ();
+    // forget about the current note syllables list
+    fCurrentNoteSyllablesList.clear ();
+
+
+
+
+
+    // get the recipient voice's stanzas map
+    const std::map <mfStanzaNumber, S_msrStanza>&
+      voiceStanzasMap =
+        fCurrentRecipientMsrVoice->
+          getVoiceStanzasMap ();
+
+    // handle the pending syllables list's map
+    for (
+      std::pair <mfStanzaNumber, std::list <S_msrSyllable>>
+        thePair :
+          fPendingSyllablesListMap
+    ) {
+      mfStanzaNumber
+        stanzaNumber =
+          thePair.first;
+
+      std::list <S_msrSyllable>& theSyllablesList (
+        thePair.second);
 
       // get the recipient stanza
       /*
@@ -25950,32 +26041,38 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
           which has this const qualified overload, for const qualified std::maps
       */
 
-      S_msrStanza
-        recipientStanza =
-          voiceStanzasMap.at (fCurrentStanzaNumber);
-
       // fetch the part
       S_msrPart
         part =
           fCurrentRecipientMsrVoice->
             fetchVoiceUpLinkToPart ();
 
-      // fetch the part current measure position
+      // get the part current measure position
       mfPositionInMeasure
         partCurrentDrawingPositionInMeasure =
           part->
             getPartCurrentDrawingPositionInMeasure ();
 
-      // append syllable to recipientStanza
-      recipientStanza->
-        appendSyllableToStanza (
-          syllable,
-          fCurrentRecipientMsrVoice->getVoiceLastAppendedMeasure (),
-          partCurrentDrawingPositionInMeasure);
+      // get the recipient stanza
+      S_msrStanza // JMI 2026.2
+        recipientStanza =
+          voiceStanzasMap.at (stanzaNumber);
+
+      for (S_msrSyllable syllable : theSyllablesList) {
+        // append syllable to recipientStanza
+        recipientStanza->
+          appendSyllableToStanza (
+            syllable,
+            fCurrentRecipientMsrVoice->getVoiceLastAppendedMeasure (),
+            partCurrentDrawingPositionInMeasure);
+      } // for
     } // for
 
-    // forget about the current note syllables list
-    fCurrentNoteSyllablesList.clear ();
+    // forget about those pending syllables
+    fPendingSyllablesListMap.clear ();
+
+
+
   }
 
   else {

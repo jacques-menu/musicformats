@@ -14927,8 +14927,33 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
     syllable->getSyllableKind () <<
     std::endl <<
 
+    std::setw (fieldWidth) <<
+    "getSyllableWholeNotes" << ": " <<
+    syllable->getSyllableWholeNotes () <<
     std::endl <<
 
+    std::setw (fieldWidth) <<
+    "getSyllableExtendKind" << ": " <<
+    syllable->getSyllableExtendKind () <<
+    std::endl;
+
+  fLilypondCodeStream << std::endl;
+
+  fLilypondCodeStream <<
+    std::setw (fieldWidth) <<
+    "getLyricsNotesDurationsKind" << ": " <<
+    gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind () <<
+    std::endl;
+
+  fLilypondCodeStream <<
+    std::setw (fieldWidth) <<
+    "fOnGoingExtend" << ": " <<
+    fOnGoingExtend <<
+    std::endl;
+
+  fLilypondCodeStream << std::endl;
+
+  fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
     "noteTheSyllableIsAttachedTo" << ": ";
 
@@ -14977,34 +15002,41 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
   else {
     fLilypondCodeStream << "[NULL]";
   }
+
   fLilypondCodeStream << std::endl;
+
+  S_msrStanza
+     syllableUpLinkToStanza =
+      syllable->
+        getSyllableUpLinkToStanza ();
+
+  if (syllableUpLinkToStanza) {
+    fLilypondCodeStream <<
+      std::setw (fieldWidth) <<
+      "getStanzaNumber" << ": " <<
+      syllableUpLinkToStanza->getStanzaNumber () <<
+      std::endl <<
+      std::setw (fieldWidth) <<
+      "getStanzaName" << ": " <<
+      syllableUpLinkToStanza->getStanzaName () <<
+      std::endl;
+  }
+  else {
+    fLilypondCodeStream <<
+    std::setw (fieldWidth) <<
+    "fSyllableUpLinkToStanza" << ": " << "[NULL]" <<
+    std::endl;
+  }
 
   fLilypondCodeStream << std::endl;
 
   if (noteTheSyllableIsAttachedTo) {
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
-      "wholeNotes" << ": " <<
+      "noteTheSyllableIsAttachedTo wholeNotes" << ": " <<
       noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes () <<
       std::endl;
   }
-
-  fLilypondCodeStream <<
-    std::setw (fieldWidth) <<
-    "getLyricsNotesDurationsKind" << ": " <<
-    gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind () <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "getSyllableExtendKind" << ": " <<
-    syllable->getSyllableExtendKind () <<
-    std::endl;
-
-  fLilypondCodeStream <<
-    std::setw (fieldWidth) <<
-    "fOnGoingExtend" << ": " <<
-    fOnGoingExtend <<
-    std::endl;
 
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
@@ -15201,11 +15233,11 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableBegin:
     // ----------------------------------------------------
-      // generate the syllable elements
-      fLilypondCodeStream <<
-        syllableElementsListAsLilypondString (
-          syllable->getSyllableElementsList ()) <<
-        cLilyPondSpace;
+//       // generate the syllable elements
+//       fLilypondCodeStream <<
+//         syllableElementsListAsLilypondString (
+//           syllable->getSyllableElementsList ()) <<
+//         cLilyPondSpace;
 
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
@@ -15268,11 +15300,11 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableMiddle:
     // ----------------------------------------------------
-      // generate the syllable elements
-      fLilypondCodeStream <<
-        syllableElementsListAsLilypondString (
-          syllable->getSyllableElementsList ()) <<
-        cLilyPondSpace;
+//       // generate the syllable elements
+//       fLilypondCodeStream <<
+//         syllableElementsListAsLilypondString (
+//           syllable->getSyllableElementsList ()) <<
+//         cLilyPondSpace;
 
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
@@ -15335,11 +15367,11 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableEnd:
     // ----------------------------------------------------
-      // generate the syllable elements
-      fLilypondCodeStream <<
-        syllableElementsListAsLilypondString (
-          syllable->getSyllableElementsList ()) <<
-        cLilyPondSpace;
+//       // generate the syllable elements
+//       fLilypondCodeStream <<
+//         syllableElementsListAsLilypondString (
+//           syllable->getSyllableElementsList ()) <<
+//         cLilyPondSpace;
 
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
@@ -15424,11 +15456,11 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-      // generate the syllable elements
-      fLilypondCodeStream <<
-        syllableElementsListAsLilypondString (
-          syllable->getSyllableElementsList ()) <<
-        cLilyPondSpace;
+//       // generate the syllable elements
+//       fLilypondCodeStream <<
+//         syllableElementsListAsLilypondString (
+//           syllable->getSyllableElementsList ()) <<
+//         cLilyPondSpace;
 
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:

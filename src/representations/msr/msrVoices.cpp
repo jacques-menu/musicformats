@@ -9959,7 +9959,7 @@ void msrVoice::print (std::ostream& os) const
     for (std::pair <mfStanzaNumber, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
-      os << stanza;
+      os << stanza << std::endl;
     } // for
 
     --gIndenter;
