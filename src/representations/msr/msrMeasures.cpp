@@ -1877,7 +1877,7 @@ void msrMeasure::setFullMeasureWholeNotesDuration (
     ss <<
       "Setting the full whole notes duration of measure " <<
       this->asShortString () <<
-      " to "  <<
+      " to " <<
       wholeNotes.asString ();
 
     gWaeHandler->waeTrace (
@@ -1905,7 +1905,7 @@ void msrMeasure::setMeasureCurrentPositionInMeasure (
     ss <<
       "Setting the current position in measure " <<
       this->asString () <<
-      " to "  <<
+      " to " <<
       positionInMeasure.asFractionString () <<
       " in voice " <<
       fMeasureUpLinkToSegment->
@@ -1971,9 +1971,9 @@ void msrMeasure::incrementMeasureCurrentPositionInMeasure (
     ss <<
       "Incrementing the current position in measure of measure " <<
       this->asShortString () <<
-      " from "  <<
+      " from " <<
       fMeasureCurrentPositionInMeasure <<
-      " by "  <<
+      " by " <<
       wholeNotesDelta.asFractionString () <<
       " to " <<
       newMeasurePositionInMeasure.asFractionString () <<

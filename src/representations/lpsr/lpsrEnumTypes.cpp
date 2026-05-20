@@ -132,8 +132,8 @@ int lpsrNumberOfDots (int n)
 //_______________________________________________________________________________
 std::string wholeNotesAsLilypondString (
   const mfInputLineNumber& inputLineNumber,
-  const mfWholeNotes& wholeNotes,
-  int&                 dotsNumber)
+  const mfWholeNotes&      wholeNotes,
+  int&                     dotsNumber)
 {
   // this algorithm is inspired by musicxml2ly
 
@@ -631,7 +631,7 @@ std::string wholeNotesAsLilypondString (
 
 std::string wholeNotesAsLilypondString (
   const mfInputLineNumber& inputLineNumber,
-  const mfWholeNotes& wholeNotes)
+  const mfWholeNotes&      wholeNotes)
 {
   int dotsNumber; // set by wholeNotesAsLilypondString() below, not used
 
@@ -645,7 +645,7 @@ std::string wholeNotesAsLilypondString (
 //_______________________________________________________________________________
 std::string dottedNotesDurationAsLilypondString (
   const mfInputLineNumber& inputLineNumber,
-  mfDottedNotesDuration dottedNotesDuration)
+  mfDottedNotesDuration    dottedNotesDuration)
 {
   return
     wholeNotesAsLilypondString (
@@ -656,7 +656,7 @@ std::string dottedNotesDurationAsLilypondString (
 
 std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
   const mfInputLineNumber& inputLineNumber,
-  mfDottedNotesDuration dottedNotesDuration)
+  mfDottedNotesDuration    dottedNotesDuration)
 {
   std::string result =
     wholeNotesAsLilypondString (
@@ -674,7 +674,7 @@ std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
 //_______________________________________________________________________________
 std::string multiMeasureRestsWholeNoteAsLilypondString (
   const mfInputLineNumber& inputLineNumber,
-  const mfWholeNotes& wholeNotes)
+  const mfWholeNotes&      wholeNotes)
 {
   std::stringstream ss;
 
@@ -1344,7 +1344,7 @@ std::ostream& operator << (std::ostream& os, const lpsrDynamicsTextSpannersStyle
 
 lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& dynamicsTextSpannersStyleKindString)
+  const std::string&       dynamicsTextSpannersStyleKindString)
 {
   lpsrDynamicsTextSpannersStyleKind result =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleNone;
@@ -1545,25 +1545,22 @@ std::string availableLilypondDurationsGenerationKinds (size_t namesListMaxLength
 // lyrics durations
 //______________________________________________________________________________
 
-std::map <std::string, lpsrLyricsNotesDurationsKind>
-  gGlobalLpsrLyricsNotesDurationsKindsMap;
+std::map <std::string, lpsrLyricsDurationsKind>
+  gGlobalLpsrLyricsDurationsKindsMap;
 
-std::string lpsrLyricsNotesDurationsKindAsString (
-  lpsrLyricsNotesDurationsKind lyricsNotesDurationsKind)
+std::string lpsrLyricsDurationsKindAsString (
+  lpsrLyricsDurationsKind lyricsDurationsKind)
 {
   std::string result;
 
   // no CamelCase here, these strings are used in the command line options
 
-  switch (lyricsNotesDurationsKind) {
-    case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+  switch (lyricsDurationsKind) {
+    case lpsrLyricsDurationsKind::kLyricsDurationsAutomatic:
       result = "automatic";
       break;
 
-    case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-      result = "implicit";
-      break;
-    case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+    case lpsrLyricsDurationsKind::kLyricsDurationsExplicit:
       result = "explicit";
       break;
   } // switch
@@ -1571,49 +1568,45 @@ std::string lpsrLyricsNotesDurationsKindAsString (
   return result;
 }
 
-std::ostream& operator << (std::ostream& os, const lpsrLyricsNotesDurationsKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrLyricsDurationsKind& elt)
 {
-  os << lpsrLyricsNotesDurationsKindAsString (elt);
+  os << lpsrLyricsDurationsKindAsString (elt);
   return os;
 }
 
-void initializeLpsrLyricsNotesDurationsKindsMap ()
+void initializeLpsrLyricsDurationsKindsMap ()
 {
   // register the LilyPond score output kinds
   // --------------------------------------
 
   // no CamelCase here, these strings are used in the command line options
 
-  gGlobalLpsrLyricsNotesDurationsKindsMap ["automatic"] =
-    lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic;
-  gGlobalLpsrLyricsNotesDurationsKindsMap ["explicit"] =
-    lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit;
-  gGlobalLpsrLyricsNotesDurationsKindsMap ["implicit"] =
-    lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit;
-  gGlobalLpsrLyricsNotesDurationsKindsMap ["explicit"] =
-    lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit;
+  gGlobalLpsrLyricsDurationsKindsMap ["automatic"] =
+    lpsrLyricsDurationsKind::kLyricsDurationsAutomatic;
+  gGlobalLpsrLyricsDurationsKindsMap ["explicit"] =
+    lpsrLyricsDurationsKind::kLyricsDurationsExplicit;
 }
 
-std::string availableLpsrLyricsNotesDurationsKinds (size_t namesListMaxLength)
+std::string availableLpsrLyricsDurationsKinds (size_t namesListMaxLength)
 {
   std::stringstream ss;
 
   size_t
-    lpsrLyricsNotesDurationsKindsMapSize =
-      gGlobalLpsrLyricsNotesDurationsKindsMap.size ();
+    lpsrLyricsDurationsKindsMapSize =
+      gGlobalLpsrLyricsDurationsKindsMap.size ();
 
-  if (lpsrLyricsNotesDurationsKindsMapSize) {
+  if (lpsrLyricsDurationsKindsMapSize) {
     size_t
       nextToLast =
-        lpsrLyricsNotesDurationsKindsMapSize - 1;
+        lpsrLyricsDurationsKindsMapSize - 1;
 
     size_t count = 0;
     size_t cumulatedLength = 0;
 
     for (
-      std::map <std::string, lpsrLyricsNotesDurationsKind>::const_iterator i =
-        gGlobalLpsrLyricsNotesDurationsKindsMap.begin ();
-      i != gGlobalLpsrLyricsNotesDurationsKindsMap.end ();
+      std::map <std::string, lpsrLyricsDurationsKind>::const_iterator i =
+        gGlobalLpsrLyricsDurationsKindsMap.begin ();
+      i != gGlobalLpsrLyricsDurationsKindsMap.end ();
       ++i
     ) {
       std::string theString = (*i).first;
@@ -1635,7 +1628,7 @@ std::string availableLpsrLyricsNotesDurationsKinds (size_t namesListMaxLength)
       if (count == nextToLast) {
         ss << " and ";
       }
-      else if (count != lpsrLyricsNotesDurationsKindsMapSize) {
+      else if (count != lpsrLyricsDurationsKindsMapSize) {
         ss << ", ";
       }
     } // for

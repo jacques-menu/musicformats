@@ -10788,6 +10788,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
   }
 
   if (fCurrentNoteIsARest) {
+    // there is a syllable on a rest
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyrics ()) {
       std::stringstream ss;
@@ -10807,7 +10808,10 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     fCurrentSyllableKind =
       msrSyllableKind::kSyllableSkipOnRestNote;
 
-//     if (! fCurrentSyllableElementsList.empty ()) { 2026.2
+//     if (! fCurrentSyllableElementsList.empty ()) { //  JMI 2026.2
+//     }
+
+//     if (! fCurrentSyllableElementsList.empty ()) { // JMI 2026.2
 //       // register a skip in lyrics for rests with syllables
 //       fCurrentSyllableKind =
 //         msrSyllableKind::kSyllableOnRestNote;
@@ -20763,7 +20767,7 @@ void mxsr2msrSkeletonPopulator::attachPendingTemposToVoice (
       std::stringstream ss;
 
       ss <<
-        "Attaching pending tempos to voice \""  <<
+        "Attaching pending tempos to voice \"" <<
         voice->getVoiceName () <<
         "\"";
 
@@ -20795,7 +20799,7 @@ void mxsr2msrSkeletonPopulator::attachPendingTemposToPart (
     std::stringstream ss;
 
     ss <<
-      "Attaching pending tempos to part \""  <<
+      "Attaching pending tempos to part \"" <<
       part->getPartName () <<
       "\"";
 
@@ -20827,7 +20831,7 @@ void mxsr2msrSkeletonPopulator::attachPendingTemposToPart (
 //       std::stringstream ss;
 //
 //       ss <<
-//         "Attaching pending barlines to voice \""  <<
+//         "Attaching pending barlines to voice \"" <<
 //         voice->getVoiceName () <<
 //         "\"";
 //
@@ -20862,7 +20866,7 @@ void mxsr2msrSkeletonPopulator::attachPendingBarLinesToPart (
     std::stringstream ss;
 
     ss <<
-      "Attaching pending barlines to part \""  <<
+      "Attaching pending barlines to part \"" <<
       part->getPartName () <<
       "\"";
 
@@ -20898,7 +20902,7 @@ void mxsr2msrSkeletonPopulator::attachPendingRehearsalMarksToPart (
     std::stringstream ss;
 
     ss <<
-      "Attaching pending rehearsals to part \""  <<
+      "Attaching pending rehearsals to part \"" <<
       part->getPartName () <<
       "\"";
 
@@ -20929,7 +20933,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLineBreaksToPart (
     std::stringstream ss;
 
     ss <<
-      "Attaching pending line breaks to part \""  <<
+      "Attaching pending line breaks to part \"" <<
       part->getPartName () <<
       "\"";
 
@@ -20962,7 +20966,7 @@ void mxsr2msrSkeletonPopulator::attachPendingPageBreaksToPart (
     std::stringstream ss;
 
     ss <<
-      "Attaching pending page breaks to part \""  <<
+      "Attaching pending page breaks to part \"" <<
       part->getPartName () <<
       "\"";
 

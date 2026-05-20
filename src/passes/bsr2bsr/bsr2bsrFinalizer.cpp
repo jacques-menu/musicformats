@@ -750,7 +750,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrKey& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrKey '" <<
       elt->asString () <<
-      "'"  <<
+      "'" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (

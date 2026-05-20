@@ -1,1 +1,1 @@
-#define MUSICFORMATS_VERSION_DATE "built on May 13, 2026"
+#define MUSICFORMATS_VERSION_DATE "built on May 20, 2026"

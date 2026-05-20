@@ -1390,7 +1390,7 @@ void msrTimeSignature::print (std::ostream& os) const
 {
   os <<
     "[TimeSignature" <<
-    ", line "  << fInputLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

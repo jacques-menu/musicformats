@@ -73,7 +73,7 @@ void initializeLPSR ()
     // LPSR lyrics durations kinds handling
     // ------------------------------------------------------
 
-    initializeLpsrLyricsNotesDurationsKindsMap ();
+    initializeLpsrLyricsDurationsKindsMap ();
 
     pPrivateThisMethodHasBeenRun = true;
   }

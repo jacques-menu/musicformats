@@ -900,47 +900,47 @@ typedef SMARTP<lilypondChordsDisplayAtom> S_lilypondChordsDisplayAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_lilypondChordsDisplayAtom& elt);
 
 //______________________________________________________________________________
-class EXP lilypondLyricsNotesDurationsKindAtom : public oahAtomStoringAValue
+class EXP lilypondLyricsDurationsKindAtom : public oahAtomStoringAValue
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<lilypondLyricsNotesDurationsKindAtom> create (
+    static SMARTP<lilypondLyricsDurationsKindAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            lpsrLyricsNotesDurationsKind&
-                                               lilypondLyricsNotesDurationsKindVariable);
+                            lpsrLyricsDurationsKind&
+                                               lilypondLyricsDurationsKindVariable);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          lilypondLyricsNotesDurationsKindAtom (
+                          lilypondLyricsDurationsKindAtom (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            lpsrLyricsNotesDurationsKind&
-                                               lilypondLyricsNotesDurationsKindVariable);
+                            lpsrLyricsDurationsKind&
+                                               lilypondLyricsDurationsKindVariable);
 
-    virtual               ~lilypondLyricsNotesDurationsKindAtom ();
+    virtual               ~lilypondLyricsDurationsKindAtom ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    void                  setLpsrLyricsNotesDurationsKindVariable (
-                            lpsrLyricsNotesDurationsKind value)
+    void                  setLpsrLyricsDurationsKindVariable (
+                            lpsrLyricsDurationsKind value)
                               {
-                                fLpsrLyricsNotesDurationsKindVariable = value;
+                                fLpsrLyricsDurationsKindVariable = value;
                               }
 
   public:
@@ -981,11 +981,11 @@ class EXP lilypondLyricsNotesDurationsKindAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    lpsrLyricsNotesDurationsKind&
-                          fLpsrLyricsNotesDurationsKindVariable;
+    lpsrLyricsDurationsKind&
+                          fLpsrLyricsDurationsKindVariable;
 };
-typedef SMARTP<lilypondLyricsNotesDurationsKindAtom> S_lilypondLyricsNotesDurationsKindAtom;
-EXP std::ostream& operator << (std::ostream& os, const S_lilypondLyricsNotesDurationsKindAtom& elt);
+typedef SMARTP<lilypondLyricsDurationsKindAtom> S_lilypondLyricsDurationsKindAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_lilypondLyricsDurationsKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValue
@@ -1847,12 +1847,12 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getAddLilypondStanzasNumbers () const
                               { return fAddLilypondStanzasNumbers; }
 
-    void                  setLyricsNotesDurationsKind (
-                            lpsrLyricsNotesDurationsKind value)
-                              { fLyricsNotesDurationsKind = value; }
-    lpsrLyricsNotesDurationsKind
-                          getLyricsNotesDurationsKind () const
-                              { return fLyricsNotesDurationsKind; }
+    void                  setLyricsDurationsKind (
+                            lpsrLyricsDurationsKind value)
+                              { fLyricsDurationsKind = value; }
+    lpsrLyricsDurationsKind
+                          getLyricsDurationsKind () const
+                              { return fLyricsDurationsKind; }
 
     // midi
     // --------------------------------------
@@ -2397,8 +2397,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fAddLilypondStanzasNumbers;
 
-    lpsrLyricsNotesDurationsKind
-                          fLyricsNotesDurationsKind;
+    lpsrLyricsDurationsKind
+                          fLyricsDurationsKind;
 
     // midi
     // --------------------------------------

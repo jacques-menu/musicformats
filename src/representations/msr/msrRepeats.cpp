@@ -169,7 +169,7 @@ void msrRepeatElement::initializeRepeatElement (
 //     std::endl <<
 //     "+-+-+-+-+-+-+-+- fRepeatElementDebugNumber: " <<
 //     fRepeatElementDebugNumber <<
-//     " +-+-+-+-+-+-+-+-"  <<
+//     " +-+-+-+-+-+-+-+-" <<
 //     std::endl << std::endl << std::endl;
 
 //   if (fRepeatElementDebugNumber == 2) abort ();

@@ -672,7 +672,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone ()
 //     measureNumber;
 // }
 //
-int msrSyllable::fetchSyllableMeasurePuristNumber () const // JMI 0.9.72 supeflous???
+int msrSyllable::fetchSyllableMeasurePuristNumber () const // JMI 2026.2 supeflous???
 {
   return 5315;
 
@@ -1380,12 +1380,12 @@ void msrStanza::appendSyllableToStanza (
           msrTupletFactor (1, 1),
           this);
 
-    // append it to this stanza
-    fSyllables.push_back (skipRestNoteSyllable);
-
-    // account for syllable length
-    fStanzaMeasureCurrentPositionInMeasure +=
-      skipRestNoteSyllable->getSyllableWholeNotes ();
+//     // append it to this stanza // JMI 2026.2
+//     fSyllables.push_back (skipRestNoteSyllable);
+//
+//     // account for syllable length
+//     fStanzaMeasureCurrentPositionInMeasure +=
+//       skipRestNoteSyllable->getSyllableWholeNotes ();
   }
 
   // append syllable to this stanza

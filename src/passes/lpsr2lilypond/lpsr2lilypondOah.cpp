@@ -2889,49 +2889,49 @@ std::ostream& operator << (std::ostream& os, const S_lilypondChordsDisplayAtom& 
 }
 
 //______________________________________________________________________________
-S_lilypondLyricsNotesDurationsKindAtom lilypondLyricsNotesDurationsKindAtom::create (
+S_lilypondLyricsDurationsKindAtom lilypondLyricsDurationsKindAtom::create (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  lpsrLyricsNotesDurationsKind&
-                     lilypondLyricsNotesDurationsKindVariable)
+  lpsrLyricsDurationsKind&
+                     lilypondLyricsDurationsKindVariable)
 {
-  lilypondLyricsNotesDurationsKindAtom* obj = new
-    lilypondLyricsNotesDurationsKindAtom (
+  lilypondLyricsDurationsKindAtom* obj = new
+    lilypondLyricsDurationsKindAtom (
       longName,
       shortName,
       description,
       valueSpecification,
       variableName,
-      lilypondLyricsNotesDurationsKindVariable);
+      lilypondLyricsDurationsKindVariable);
   assert (obj != nullptr);
   return obj;
 }
 
-lilypondLyricsNotesDurationsKindAtom::lilypondLyricsNotesDurationsKindAtom (
+lilypondLyricsDurationsKindAtom::lilypondLyricsDurationsKindAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  lpsrLyricsNotesDurationsKind&
-                     lilypondLyricsNotesDurationsKindVariable)
+  lpsrLyricsDurationsKind&
+                     lilypondLyricsDurationsKindVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
       description,
       valueSpecification,
       variableName),
-    fLpsrLyricsNotesDurationsKindVariable (
-      lilypondLyricsNotesDurationsKindVariable)
+    fLpsrLyricsDurationsKindVariable (
+      lilypondLyricsDurationsKindVariable)
 {}
 
-lilypondLyricsNotesDurationsKindAtom::~lilypondLyricsNotesDurationsKindAtom ()
+lilypondLyricsDurationsKindAtom::~lilypondLyricsDurationsKindAtom ()
 {}
 
-void lilypondLyricsNotesDurationsKindAtom::applyAtomWithValue (
+void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -2940,7 +2940,7 @@ void lilypondLyricsNotesDurationsKindAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'lilypondLyricsNotesDurationsKindAtom'";
+      "==> oahAtom is of type 'lilypondLyricsDurationsKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2956,7 +2956,7 @@ void lilypondLyricsNotesDurationsKindAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "==> oahAtom is of type 'lilypondLyricsNotesDurationsKindAtom'";
+      "==> oahAtom is of type 'lilypondLyricsDurationsKindAtom'";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2964,12 +2964,12 @@ void lilypondLyricsNotesDurationsKindAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map <std::string, lpsrLyricsNotesDurationsKind>::const_iterator
+  std::map <std::string, lpsrLyricsDurationsKind>::const_iterator
     it =
-      gGlobalLpsrLyricsNotesDurationsKindsMap.find (
+      gGlobalLpsrLyricsDurationsKindsMap.find (
         theString);
 
-  if (it == gGlobalLpsrLyricsNotesDurationsKindsMap.end ()) {
+  if (it == gGlobalLpsrLyricsDurationsKindsMap.end ()) {
     // no, lyrics alignment kind is unknown in the map
     std::stringstream ss;
 
@@ -2978,34 +2978,34 @@ void lilypondLyricsNotesDurationsKindAtom::applyAtomWithValue (
       "' is unknown" <<
       std::endl <<
       "The " <<
-      gGlobalLpsrLyricsNotesDurationsKindsMap.size () - 1 <<
+      gGlobalLpsrLyricsDurationsKindsMap.size () - 1 <<
       " known LPSR lyrics alignment kind are:" <<
       std::endl;
 
     ++gIndenter;
 
     ss <<
-      availableLpsrLyricsNotesDurationsKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableLpsrLyricsDurationsKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
     oahError (ss.str ());
   }
 
-  setLpsrLyricsNotesDurationsKindVariable (
+  setLpsrLyricsDurationsKindVariable (
     (*it).second);
 
   fSelected = true;
 }
 
-void lilypondLyricsNotesDurationsKindAtom::acceptIn (basevisitor* v)
+void lilypondLyricsDurationsKindAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lilypondLyricsNotesDurationsKindAtom::acceptIn ()";
+      ".\\\" ==> lilypondLyricsDurationsKindAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3013,17 +3013,17 @@ void lilypondLyricsNotesDurationsKindAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_lilypondLyricsNotesDurationsKindAtom>*
+  if (visitor<S_lilypondLyricsDurationsKindAtom>*
     p =
-      dynamic_cast<visitor<S_lilypondLyricsNotesDurationsKindAtom>*> (v)) {
-        S_lilypondLyricsNotesDurationsKindAtom elem = this;
+      dynamic_cast<visitor<S_lilypondLyricsDurationsKindAtom>*> (v)) {
+        S_lilypondLyricsDurationsKindAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lilypondLyricsNotesDurationsKindAtom::visitStart ()";
+            ".\\\" ==> Launching lilypondLyricsDurationsKindAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -3034,14 +3034,14 @@ void lilypondLyricsNotesDurationsKindAtom::acceptIn (basevisitor* v)
   }
 }
 
-void lilypondLyricsNotesDurationsKindAtom::acceptOut (basevisitor* v)
+void lilypondLyricsDurationsKindAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lilypondLyricsNotesDurationsKindAtom::acceptOut ()";
+      ".\\\" ==> lilypondLyricsDurationsKindAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3049,17 +3049,17 @@ void lilypondLyricsNotesDurationsKindAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_lilypondLyricsNotesDurationsKindAtom>*
+  if (visitor<S_lilypondLyricsDurationsKindAtom>*
     p =
-      dynamic_cast<visitor<S_lilypondLyricsNotesDurationsKindAtom>*> (v)) {
-        S_lilypondLyricsNotesDurationsKindAtom elem = this;
+      dynamic_cast<visitor<S_lilypondLyricsDurationsKindAtom>*> (v)) {
+        S_lilypondLyricsDurationsKindAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching lilypondLyricsNotesDurationsKindAtom::visitEnd ()";
+            ".\\\" ==> Launching lilypondLyricsDurationsKindAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, mfInputLineNumber (__LINE__),
@@ -3070,14 +3070,14 @@ void lilypondLyricsNotesDurationsKindAtom::acceptOut (basevisitor* v)
   }
 }
 
-void lilypondLyricsNotesDurationsKindAtom::browseData (basevisitor* v)
+void lilypondLyricsDurationsKindAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> lilypondLyricsNotesDurationsKindAtom::browseData ()";
+      ".\\\" ==> lilypondLyricsDurationsKindAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3086,36 +3086,36 @@ void lilypondLyricsNotesDurationsKindAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string lilypondLyricsNotesDurationsKindAtom::asShortNamedOptionString () const
+std::string lilypondLyricsDurationsKindAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
   ss <<
     '-' << fShortName << ' ' <<
-    lpsrLyricsNotesDurationsKindAsString (
-      fLpsrLyricsNotesDurationsKindVariable);
+    lpsrLyricsDurationsKindAsString (
+      fLpsrLyricsDurationsKindVariable);
 
   return ss.str ();
 }
 
-std::string lilypondLyricsNotesDurationsKindAtom::asActualLongNamedOptionString () const
+std::string lilypondLyricsDurationsKindAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
   ss <<
     '-' << fLongName << ' ' <<
-    lpsrLyricsNotesDurationsKindAsString (
-      fLpsrLyricsNotesDurationsKindVariable);
+    lpsrLyricsDurationsKindAsString (
+      fLpsrLyricsDurationsKindVariable);
 
   return ss.str ();
 }
 
-void lilypondLyricsNotesDurationsKindAtom::print (std::ostream& os) const
+void lilypondLyricsDurationsKindAtom::print (std::ostream& os) const
 {
   constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "lilypondLyricsNotesDurationsKindAtom:" <<
+    "lilypondLyricsDurationsKindAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -3129,15 +3129,15 @@ void lilypondLyricsNotesDurationsKindAtom::print (std::ostream& os) const
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fLpsrLyricsNotesDurationsKindVariable" << ": " <<
-    lpsrLyricsNotesDurationsKindAsString (
-      fLpsrLyricsNotesDurationsKindVariable) <<
+    "fLpsrLyricsDurationsKindVariable" << ": " <<
+    lpsrLyricsDurationsKindAsString (
+      fLpsrLyricsDurationsKindVariable) <<
     std::endl;
 
   --gIndenter;
 }
 
-void lilypondLyricsNotesDurationsKindAtom::displayAtomWithVariableOptionsValues (
+void lilypondLyricsDurationsKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -3145,8 +3145,8 @@ void lilypondLyricsNotesDurationsKindAtom::displayAtomWithVariableOptionsValues 
     std::setw (valueFieldWidth) <<
     fVariableName <<
     ": " <<
-    lpsrLyricsNotesDurationsKindAsString (
-      fLpsrLyricsNotesDurationsKindVariable);
+    lpsrLyricsDurationsKindAsString (
+      fLpsrLyricsDurationsKindVariable);
 
   switch (fEarlyOptionKind) {
     case oahEarlyOptionKind::kEarlyOptionNo:
@@ -3164,7 +3164,7 @@ void lilypondLyricsNotesDurationsKindAtom::displayAtomWithVariableOptionsValues 
   os << std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_lilypondLyricsNotesDurationsKindAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_lilypondLyricsDurationsKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -5001,35 +5001,38 @@ R"(Add stanzas numbers to lyrics in LilyPond.)",
   // lyrics durations
   // --------------------------------------
 
-  const lpsrLyricsNotesDurationsKind
-    lpsrLyricsNotesDurationsKindDefaultValue =
-//       lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic; // default value
-      lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit; // default value
+  const lpsrLyricsDurationsKind
+    lpsrLyricsDurationsKindDefaultValue =
+      lpsrLyricsDurationsKind::kLyricsDurationsAutomatic; // default value
 
-  fLyricsNotesDurationsKind = lpsrLyricsNotesDurationsKindDefaultValue;
+  fLyricsDurationsKind = lpsrLyricsDurationsKindDefaultValue;
 
   subGroup->
     appendAtomToSubGroup (
-      lilypondLyricsNotesDurationsKindAtom::create (
-        "lilypond-lyrics-durations-style", "lilylyrdurkind", // JMI 0.9.70
+      lilypondLyricsDurationsKindAtom::create (
+        "lilypond-lyrics-durations-mode", "lilylyrdurmode", // JMI 2026.2
           regex_replace (
             regex_replace (
               regex_replace (
-R"(The NUMBER LilyPond lyrics durations STYLEs available are:
+R"(The NUMBER LilyPond lyrics durations modes available are:
 LYRICS_DURATIONS_KINDS.
-Using 'implicit' prevents the creation of lyrics attached to rests by LilyPond,
-use 'explicit' in such cases.
-The default is 'DEFAULT_VALUE'.)",
+In automatic mode, stanzas contain the bare syllables,
+without duration specification nor rests.
+In explicit mode, all syllables must have a specified duration,
+such as 'music2.', analog to that of notes.
+Lilypond does not handle lyrics attached to rests in automatic mode:
+in such cases, Lilypond generation switches to explicit mode with a warning.
+The default mode is 'DEFAULT_VALUE'.)",
               std::regex ("NUMBER"),
-              std::to_string (gGlobalLpsrLyricsNotesDurationsKindsMap.size ())),
+              std::to_string (gGlobalLpsrLyricsDurationsKindsMap.size ())),
             std::regex ("LYRICS_DURATIONS_KINDS"),
-            availableLpsrLyricsNotesDurationsKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableLpsrLyricsDurationsKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
-          lpsrLyricsNotesDurationsKindAsString (
-            lpsrLyricsNotesDurationsKindDefaultValue)),
+          lpsrLyricsDurationsKindAsString (
+            lpsrLyricsDurationsKindDefaultValue)),
         "STYLE",
-        "fLyricsNotesDurationsKind",
-        fLyricsNotesDurationsKind));
+        "fLyricsDurationsKind",
+        fLyricsDurationsKind));
 }
 
 void lpsr2lilypondOahGroup::initializeLpsr2LilypondFontsOptions ()
@@ -6245,8 +6248,8 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       lpsrAccidentalStyleKindAsString (fAccidentalStyleKind) <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fLyricsNotesDurationsKind" << ": " <<
-      lpsrLyricsNotesDurationsKindAsString (fLyricsNotesDurationsKind) <<
+    std::setw (valueFieldWidth) << "fLyricsDurationsKind" << ": " <<
+      lpsrLyricsDurationsKindAsString (fLyricsDurationsKind) <<
       std::endl <<
 
     std::setw (valueFieldWidth) << "fCompressMeasureRestsInLilypond" << ": " <<
@@ -6881,8 +6884,8 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
       lpsrAccidentalStyleKindAsString (fAccidentalStyleKind) <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fLyricsNotesDurationsKind" << ": " <<
-      lpsrLyricsNotesDurationsKindAsString (fLyricsNotesDurationsKind) <<
+    std::setw (fieldWidth) << "fLyricsDurationsKind" << ": " <<
+      lpsrLyricsDurationsKindAsString (fLyricsDurationsKind) <<
       std::endl <<
 
     std::setw (fieldWidth) << "fCompressMeasureRestsInLilypond" << ": " <<

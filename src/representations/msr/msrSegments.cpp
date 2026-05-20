@@ -2263,7 +2263,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "fSegmentMeasuresList is empty"  <<
+//       "fSegmentMeasuresList is empty" <<
 //       " in segment " <<
 //       fSegmentAbsoluteNumber <<
 //       ", segmentNumber: " <<

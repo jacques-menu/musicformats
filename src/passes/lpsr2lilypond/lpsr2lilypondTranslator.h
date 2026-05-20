@@ -832,25 +832,34 @@ class EXP lpsr2lilypondTranslator :
     // durations
     // ------------------------------------------------------
 
-    mfWholeNotes          fLastMetWholeNotes;
+    // don't always generate a whole notes duration for notes and syllables
+    // one variable is enough, since voices and stanzas are not intermixed
+    mfWholeNotes          fLastGeneratedWholeNotes;
 
-    Bool                  wholeNotesDurationShouldBeGenerated (
+    Bool                  noteWholeNotesDurationShouldBeGenerated (
+                            const mfWholeNotes& wholeNotes);
+
+    Bool                  syllebleWholeNotesDurationShouldBeGenerated (
                             const mfWholeNotes& wholeNotes);
 
     void                  generateWholeNotesDuration (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfWholeNotes& wholeNotes);
+                            const mfWholeNotes&      wholeNotes);
 
     void                  generateWholeNotesDurationOnStream (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfWholeNotes& wholeNotes,
-                            std::ostream&       os);
+                            const mfWholeNotes&      wholeNotes,
+                            std::ostream&            os);
 
-    std::string           durationAsLilypondStringIfItShouldBeGenerated (
+    std::string           noteWholeNotesAsStringIfItShouldBeGenerated (
                             const mfInputLineNumber& inputLineNumber,
-                            const mfWholeNotes& wholeNotes);
+                            const mfWholeNotes&      wholeNotes);
 
-    std::string           notesDurationKindAsLilypondString (
+    std::string           syllableWholeNotesAsStringIfItShouldBeGenerated (
+                            const mfInputLineNumber& inputLineNumber,
+                            const mfWholeNotes&      wholeNotes);
+
+    std::string           durationKindAsLilypondString (
                             mfDurationKind notesDurationKind);
 
     // musically empty measures
@@ -1601,6 +1610,11 @@ class EXP lpsr2lilypondTranslator :
 
     Bool                  fOnGoingScoreBlock; // JMI
 
+    // set
+    // ------------------------------------------------------
+
+    std::string           cLilypondSet;
+
     // layout contexts
     // ------------------------------------------------------
 
@@ -1697,6 +1711,9 @@ class EXP lpsr2lilypondTranslator :
     // ------------------------------------------------------
 
     std::string           cLilypondNewLyrics;
+    std::string           cLilypondAssociatedVoice;
+
+    std::string           cLilypondSkip;
 
     Bool                  fOnGoingStanza;
     S_msrStanza           fCurrentStanza;
@@ -1707,6 +1724,32 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrSyllable& syllable);
 
     void                  generateLilypondSyllable (
+                            const S_msrSyllable& syllable);
+
+    void                  generateLilypondSyllableSingle (
+                            const S_msrSyllable& syllable);
+
+    void                  generateLilypondSyllableBegin (
+                            const S_msrSyllable& syllable);
+    void                  generateLilypondSyllableMiddle (
+                            const S_msrSyllable& syllable);
+    void                  generateLilypondSyllableEnd (
+                            const S_msrSyllable& syllable);
+
+    void                  generateLilypondSyllableOnRestNote (
+                            const S_msrSyllable& syllable);
+
+    void                  generateLilypondSyllableSkipOnRestNote (
+                            const S_msrSyllable& syllable);
+    void                  generateLilypondSyllableSkipOnNonRestNote (
+                            const S_msrSyllable& syllable);
+
+    void                  generateLilypondSyllableMeasureEnd (
+                            const S_msrSyllable& syllable);
+
+    void                  generateLilypondSyllableLineBreak (
+                            const S_msrSyllable& syllable);
+    void                  generateLilypondSyllablePageBreak (
                             const S_msrSyllable& syllable);
 
     void                  generateCodeBeforeSyllableIfRelevant (

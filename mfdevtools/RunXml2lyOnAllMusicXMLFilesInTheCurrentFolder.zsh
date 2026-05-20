@@ -68,6 +68,7 @@ esac
 
 echo "xlm2ly:"
 xml2ly --version
+# xml2ly --version -lilypond-lyrics-durations-mode explicit
 echo
 echo "OPTIONS_STRING : ${OPTIONS_STRING}"
 echo
@@ -198,7 +199,22 @@ function RunXml2lyOnFile ()
   LILYPOND_FILE_NAME="$SUFFIXLESS_FILE_NAME.ly"
   echo "LILYPOND_FILE_NAME:      $LILYPOND_FILE_NAME"
 
-  xml2ly -lilypond-run-date -lilypond-generation-infos ${OPTIONS_STRING} -output-file-name $LILYPOND_FILE_NAME $MUSICXML_FILE_NAME
+  if [ 0 -eq 0 ]; then
+    xml2ly \
+      -lilypond-run-date \
+      -lilypond-generation-infos \
+      ${OPTIONS_STRING} \
+      -output-file-name $LILYPOND_FILE_NAME $MUSICXML_FILE_NAME \
+      -lilypond-lyrics-durations-mode automatic
+  else
+    xml2ly \
+      -lilypond-run-date \
+      -lilypond-generation-infos \
+      ${OPTIONS_STRING} \
+      -output-file-name $LILYPOND_FILE_NAME $MUSICXML_FILE_NAME \
+      -lilypond-lyrics-durations-mode explicit
+  fi
+
   if [ -f $LILYPOND_FILE_NAME ]; then
     echo
     echo "--> resulting LilyPond file:"

@@ -419,7 +419,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       "fDoubleTremoloElementsWholeNotes: '" <<
       fDoubleTremoloElementsWholeNotes.asFractionString () << '\'' <<
       std::endl <<
-      "line " << note->getInputLineNumber ();
+      note->getInputLineNumber ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),

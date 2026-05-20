@@ -1625,12 +1625,12 @@ void msrTempo::print (std::ostream& os) const
     std::endl <<
 
 //     std::setw (fieldWidth) <<
-//     "fTempoEquivalentBeatUnit"  << ": " <<
+//     "fTempoEquivalentBeatUnit" << ": " <<
 //     fTempoEquivalentBeatUnit <<
 //     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTempoParenthesizedKind"  << ": " <<
+    "fTempoParenthesizedKind" << ": " <<
     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
     std::endl;
 
@@ -1754,12 +1754,12 @@ void msrTempo::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTempoEquivalentBeatUnit"  << ": " <<
+    "fTempoEquivalentBeatUnit" << ": " <<
     fTempoEquivalentBeatUnit <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "tempoParenthesizedKind"  << ": " <<
+    "tempoParenthesizedKind" << ": " <<
     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
     std::endl;
 
@@ -1866,7 +1866,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempo& elt)
 //     fTempoBeatUnit.asString () <<
 //     ": " <<
 //     fTempoPerMinute;
-// //     ", tempoParenthesizedKind: "  <<
+// //     ", tempoParenthesizedKind: " <<
 // //     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
 // //     ", line " << fInputLineNumber;
 //

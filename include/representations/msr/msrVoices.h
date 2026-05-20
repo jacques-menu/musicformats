@@ -12,6 +12,7 @@
 #ifndef ___msrVoices___
 #define ___msrVoices___
 
+#include <ios>
 #include <list>
 #include <map>
 
@@ -247,6 +248,12 @@ class EXP msrVoice : public msrElement
     const std::map <mfStanzaNumber, S_msrStanza>&
                           getVoiceStanzasMap () const
                               { return fVoiceStanzasMap; }
+
+    void                  setVoiceContainsSyllablesOnRests ();
+
+    Bool                  getVoiceContainsSyllablesOnRests () const
+                              { return fVoiceContainsSyllablesOnRests; }
+
 
     // voice last appended note
 
@@ -1037,6 +1044,10 @@ class EXP msrVoice : public msrElement
 
     std::map <mfStanzaNumber, S_msrStanza>
                           fVoiceStanzasMap;
+
+    // fVoiceContainsSyllablesOnRests is used to force explicit mode
+    // for lyrice in LilyPond generation
+    Bool                  fVoiceContainsSyllablesOnRests;
 
     // measures
 

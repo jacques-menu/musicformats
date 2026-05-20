@@ -406,7 +406,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondChordsDisplayAtom& elt)
 }
 
 //________________________________________________________________________
-void lpsr2lilypondOah2manPage::visitStart (S_lilypondLyricsNotesDurationsKindAtom& elt)
+void lpsr2lilypondOah2manPage::visitStart (S_lilypondLyricsDurationsKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
@@ -414,7 +414,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondLyricsNotesDurationsKindAto
 
     ss <<
       std::endl <<
-      ".\\\" --> Start visiting lilypondLyricsNotesDurationsKindAtom" <<
+      ".\\\" --> Start visiting lilypondLyricsDurationsKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -441,7 +441,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondLyricsNotesDurationsKindAto
 
 }
 
-void lpsr2lilypondOah2manPage::visitEnd (S_lilypondLyricsNotesDurationsKindAtom& elt)
+void lpsr2lilypondOah2manPage::visitEnd (S_lilypondLyricsDurationsKindAtom& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
@@ -449,7 +449,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondLyricsNotesDurationsKindAtom&
 
     ss <<
       std::endl <<
-      ".\\\" --> End visiting lilypondLyricsNotesDurationsKindAtom" <<
+      ".\\\" --> End visiting lilypondLyricsDurationsKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (

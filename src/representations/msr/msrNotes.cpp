@@ -4258,8 +4258,7 @@ std::string msrNote::noteCoreAndInputLineNumbersAsString () const
   ss <<
 		noteCoreAsString () <<
     ", " <<
-    mfInputLineNumberAsString (
-    	fInputLineNumber);
+    fInputLineNumber;
 
   return ss.str ();
 }
@@ -4271,8 +4270,7 @@ std::string msrNote::noteCoreAndInputLineNumbersAsString () const
 //   ss <<
 //   	"[Note" <<
 //     ", " <<
-//     mfInputLineNumberAsString (
-//     	fInputLineNumber) <<
+//     fInputLineNumber <<
 //     ", ";
 //
 //   switch (fNoteKind) {
@@ -4671,8 +4669,7 @@ std::string msrNote::asShortString () const
 
   ss <<
     ", " <<
-    mfInputLineNumberAsString (
-    	fInputLineNumber) <<
+    fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -4816,8 +4813,7 @@ std::string msrNote::asHeaderLessString () const
 
   ss <<
     ", " <<
-    mfInputLineNumberAsString (
-    	fInputLineNumber);
+    fInputLineNumber;
 
   return ss.str ();
 }
@@ -4841,8 +4837,7 @@ void msrNote::print (std::ostream& os) const
   os <<
     "[Note, " <<
 //     ", " <<
-//     mfInputLineNumberAsString (
-//     	fInputLineNumber) <<
+//     fInputLineNumber <<
 //     ", " <<
 //     noteForPrintAsString () <<
     asHeaderLessString () <<
@@ -5773,8 +5768,7 @@ void msrNote::printFull (std::ostream& os) const
   os <<
     "[Note, " <<
 //     ", " <<
-//     mfInputLineNumberAsString (
-//     	fInputLineNumber) <<
+//     fInputLineNumber <<
 //     ", " <<
 //     noteForPrintAsString () <<
     asHeaderLessString () <<
@@ -7509,8 +7503,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
     "[Note, " <<
     fNoteKind <<
     ' ' <<
-    mfInputLineNumberAsString (
-    	fInputLineNumber) <<
+    fInputLineNumber <<
     ", ";
 
   switch (fNoteKind) {
@@ -7802,8 +7795,7 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //   ss <<
 //   	"[Note, " <<
 //     ", " <<
-//     mfInputLineNumberAsString (
-//     	fInputLineNumber) <<
+//     fInputLineNumber <<
 //     ", ";
 //
 //   switch (fNoteKind) {
