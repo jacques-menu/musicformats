@@ -92,8 +92,8 @@ std::string msrSyllableKindAsString (
     case msrSyllableKind::kSyllableSkipOnRestNote:
       result = "kSyllableSkipOnRestNote";
       break;
-    case msrSyllableKind::kSyllableSkipOnNonRestNote:
-      result = "kSyllableSkipOnNonRestNote";
+    case msrSyllableKind::kSyllableSkipOnRegularNote:
+      result = "kSyllableSkipOnRegularNote";
       break;
 
     case msrSyllableKind::kSyllableMeasureEnd:
@@ -124,9 +124,6 @@ std::string msrSyllableExtendKindAsString (
   std::string result;
 
   switch (syllableExtendKind) {
-    case msrSyllableExtendKind::kSyllableExtend_NONE:
-      result = "kSyllableExtend_NONE";
-      break;
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
       result = "kSyllableExtendTypeLess";
       break;
@@ -251,16 +248,23 @@ std::string syllableElementsListAsString (
 
   ss << '[';
 
-  if (! syllableElementsList.empty ()) {
-    std::list <msrSyllableElement>::const_iterator
-      iBegin = syllableElementsList.begin (),
-      iEnd   = syllableElementsList.end (),
-      i      = iBegin;
+//   if (! syllableElementsList.empty ()) {
+//     std::list <msrSyllableElement>::const_iterator
+//       iBegin = syllableElementsList.begin (),
+//       iEnd   = syllableElementsList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       ss << (*i).asString ();
+//       if (++i == iEnd) break;
+//       ss << ", ";
+//     } // for
+//   }
 
-    for ( ; ; ) {
-      ss << (*i).asString ();
-      if (++i == iEnd) break;
-      ss << ", ";
+  if (! syllableElementsList.empty ()) { // KRAKRA 2026.2
+    for (msrSyllableElement syllableElement : syllableElementsList) {
+      ss <<
+        syllableElement.getSyllableElementContents ();
     } // for
   }
 
@@ -355,7 +359,7 @@ msrSyllable::msrSyllable (
     case msrSyllableKind::kSyllableEnd:
     case msrSyllableKind::kSyllableOnRestNote:
     case msrSyllableKind::kSyllableSkipOnRestNote:
-    case msrSyllableKind::kSyllableSkipOnNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRegularNote:
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         mfAssert ( // JMI 0.9.70 BABASSE
@@ -429,7 +433,7 @@ msrSyllable::msrSyllable (
     case msrSyllableKind::kSyllableEnd:
     case msrSyllableKind::kSyllableOnRestNote:
     case msrSyllableKind::kSyllableSkipOnRestNote:
-    case msrSyllableKind::kSyllableSkipOnNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRegularNote:
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         mfAssert ( // JMI 0.9.70 BABASSE
@@ -644,7 +648,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone ()
 //     case msrSyllableKind::kSyllableEnd:
 //     case msrSyllableKind::kSyllableOnRestNote:
 //     case msrSyllableKind::kSyllableSkipOnRestNote:
-//     case msrSyllableKind::kSyllableSkipOnNonRestNote:
+//     case msrSyllableKind::kSyllableSkipOnRegularNote:
 //       {
 //         std::stringstream ss;
 //
@@ -931,7 +935,7 @@ std::string msrSyllable::asString () const
     case msrSyllableKind::kSyllableEnd:
     case msrSyllableKind::kSyllableOnRestNote:
     case msrSyllableKind::kSyllableSkipOnRestNote:
-    case msrSyllableKind::kSyllableSkipOnNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRegularNote:
     case msrSyllableKind::kSyllableMeasureEnd:
     case msrSyllableKind::kSyllableLineBreak:
     case msrSyllableKind::kSyllablePageBreak:
@@ -967,6 +971,8 @@ void msrSyllable::print (std::ostream& os) const
 {
   os <<
     "[Syllable" <<
+    ", fSyllableElementsList: " <<
+    syllableElementsListAsString (fSyllableElementsList) <<
     ", line " << fInputLineNumber << ":" <<
     std::endl;
 
@@ -1027,6 +1033,8 @@ void msrSyllable::printFull (std::ostream& os) const
 {
   os <<
     "[Syllable" <<
+    ", fSyllableElementsList: " <<
+    syllableElementsListAsString (fSyllableElementsList) <<
     ", fSyllableKind: " <<
     fSyllableKind <<
     ", line " << fInputLineNumber <<
@@ -1037,16 +1045,6 @@ void msrSyllable::printFull (std::ostream& os) const
   constexpr int fieldWidth = 32;
 
   os << std::left <<
-    std::setw (fieldWidth) <<
-    "fSyllableElementsList" << ": " <<
-    syllableElementsListAsString (fSyllableElementsList) <<
-    std::endl <<
-
-//     std::setw (fieldWidth) <<
-//     "fSyllableKind" << ": " <<
-//     msrSyllableKindAsString (fSyllableKind) <<
-//     std::endl <<
-
     std::setw (fieldWidth) <<
     "fSyllableExtendKind" << ": " <<
     fSyllableExtendKind <<
@@ -1105,13 +1103,24 @@ void msrSyllable::printFull (std::ostream& os) const
     case msrSyllableKind::kSyllableEnd:
     case msrSyllableKind::kSyllableOnRestNote:
     case msrSyllableKind::kSyllableSkipOnRestNote:
-    case msrSyllableKind::kSyllableSkipOnNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRegularNote:
     case msrSyllableKind::kSyllableMeasureEnd:
     case msrSyllableKind::kSyllableLineBreak:
     case msrSyllableKind::kSyllablePageBreak:
       break;
   } // switch
   os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fSyllableElementsList" <<
+    std::endl;
+
+  ++gIndenter;
+  for (msrSyllableElement syllableElement : fSyllableElementsList) {
+    os <<
+      syllableElement;
+  } // for
 
   --gIndenter;
 
@@ -1374,7 +1383,7 @@ void msrStanza::appendSyllableToStanza (
         msrSyllable::create (
           syllable->getInputLineNumber (),
           msrSyllableKind::kSyllableSkipOnRestNote,
-          msrSyllableExtendKind::kSyllableExtend_NONE,
+          msrSyllableExtendKind::kSyllableExtendTypeLess,
           fStanzaNumber,
           positionsDelta,
           msrTupletFactor (1, 1),
@@ -1417,7 +1426,7 @@ void msrStanza::appendSyllableToStanza (
 
     case msrSyllableKind::kSyllableOnRestNote:
     case msrSyllableKind::kSyllableSkipOnRestNote:
-    case msrSyllableKind::kSyllableSkipOnNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRegularNote:
     case msrSyllableKind::kSyllableMeasureEnd:
     case msrSyllableKind::kSyllableLineBreak:
     case msrSyllableKind::kSyllablePageBreak:
@@ -1484,7 +1493,7 @@ void msrStanza::appendSyllableToStanzaClone (
 
     case msrSyllableKind::kSyllableOnRestNote:
     case msrSyllableKind::kSyllableSkipOnRestNote:
-    case msrSyllableKind::kSyllableSkipOnNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRegularNote:
     case msrSyllableKind::kSyllableMeasureEnd:
     case msrSyllableKind::kSyllableLineBreak:
     case msrSyllableKind::kSyllablePageBreak:
@@ -1556,7 +1565,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
 //         msrSyllable::create (
 //           inputLineNumber,
 //           msrSyllableKind::kSyllableSkipOnRestNote,
-//           msrSyllableExtendKind::kSyllableExtend_NONE,
+//           msrSyllableExtendKind::kSyllableExtendTypeLess,
 //           fStanzaNumber,
 //           positionsDelta,
 //           msrTupletFactor (1, 1),
@@ -1577,7 +1586,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
         inputLineNumber,
         upLinkToMeasure,
         msrSyllableKind::kSyllableMeasureEnd,
-        msrSyllableExtendKind::kSyllableExtend_NONE,
+        msrSyllableExtendKind::kSyllableExtendTypeLess,
         fStanzaNumber,
         K_WHOLE_NOTES_ZERO,
         msrTupletFactor (1, 1),
@@ -1637,7 +1646,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
         inputLineNumber,
         upLinkToMeasure,
         msrSyllableKind::kSyllableLineBreak,
-        msrSyllableExtendKind::kSyllableExtend_NONE,
+        msrSyllableExtendKind::kSyllableExtendTypeLess,
         fStanzaNumber,
         K_WHOLE_NOTES_ZERO,
         msrTupletFactor (),
@@ -1699,7 +1708,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
         inputLineNumber,
         upLinkToMeasure,
         msrSyllableKind::kSyllablePageBreak,
-        msrSyllableExtendKind::kSyllableExtend_NONE,
+        msrSyllableExtendKind::kSyllableExtendTypeLess,
         fStanzaNumber,
         K_WHOLE_NOTES_ZERO,
         msrTupletFactor (),

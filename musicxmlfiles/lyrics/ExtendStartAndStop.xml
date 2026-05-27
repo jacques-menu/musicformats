@@ -60,7 +60,6 @@
         <lyric default-y="-80" number="1">
           <syllabic>single</syllabic>
           <text>A</text>
-          <text>B</text>
           <extend type="start"/>
         </lyric>
       </note>
@@ -105,7 +104,7 @@
         <stem default-y="-35">down</stem>
         <lyric default-y="-80" number="1">
           <syllabic>single</syllabic>
-          <text>　</text>
+          <text>B</text>
         </lyric>
       </note>
       <note default-x="56">

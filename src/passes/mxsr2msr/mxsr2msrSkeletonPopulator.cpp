@@ -227,7 +227,7 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fCurrentSyllableKind =
     msrSyllableKind::kSyllableNone;
   fCurrentSyllableExtendKind =
-    msrSyllableExtendKind::kSyllableExtend_NONE;
+    msrSyllableExtendKind::kSyllableExtendTypeLess;
 
   fFirstSyllableInSlurKind =
     msrSyllableKind::kSyllableNone;
@@ -524,9 +524,7 @@ void mxsr2msrSkeletonPopulator::initializeNoteData ()
 
   // note lyrics
   fCurrentSyllableExtendKind =
-    msrSyllableExtendKind::kSyllableExtend_NONE;
-
-// JMI  fCurrentNoteSyllableExtendKind = kSyllableExtend_NONE; 0.9.67
+    msrSyllableExtendKind::kSyllableExtendTypeLess;
 }
 
 void mxsr2msrSkeletonPopulator::displayGatheredNoteInformations (
@@ -10366,8 +10364,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
   // forget about any previous texts and elisions found if any
   fCurrentSyllableElementsList.clear ();
 
-  // a <text/> markup puts an end to the effect of <extend/> JMI 0.9.67
-  fCurrentSyllableExtendKind = msrSyllableExtendKind::kSyllableExtend_NONE;
+  // a <text/> markup puts an end to the effect of <extend/> JMI 2026.2
+  fCurrentSyllableExtendKind = msrSyllableExtendKind::kSyllableExtendTypeLess;
 
   fOnGoingLyric = true;
 }
@@ -10586,7 +10584,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_extend& elt)
     elt->getAttributeValue ("type");
 
   fCurrentSyllableExtendKind =
-    msrSyllableExtendKind::kSyllableExtend_NONE; // default value
+    msrSyllableExtendKind::kSyllableExtendTypeLess; // default value
 
   if (fOnGoingLyric) {
     if      (extendType == "start") {
@@ -10734,13 +10732,29 @@ void mxsr2msrSkeletonPopulator::displayGatheredLyricInformations (
 
   gLog << std::left <<
     std::setw (fieldWidth) <<
-    "fCurrentRecipientMxsrVoice" <<
-    " = \"" <<
-    fCurrentRecipientMsrVoice->getVoiceName () <<
+    "fCurrentRecipientMxsrVoice" << ": ";
+  if (fCurrentRecipientMsrVoice) {
+    gLog <<
+      fCurrentRecipientMsrVoice->getVoiceName ();
+  }
+  else {
+    gLog << "[NULL]";
+  }
+  gLog << std::endl;
+
+  gLog << std::left <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fCurrentNote" << " = \"" << fCurrentNote->asShortString () << "\"" <<
-    std::endl;
+    "fCurrentNote" << ": ";
+   if (fCurrentNote) {
+    gLog <<
+      fCurrentNote->asShortString ();
+  }
+  else {
+    gLog << "[NULL]";
+  }
+  gLog << std::endl;
+
   --gIndenter;
 
 	gLog <<
@@ -10805,22 +10819,19 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    fCurrentSyllableKind =
-      msrSyllableKind::kSyllableSkipOnRestNote;
+//     fCurrentSyllableKind =
+//       msrSyllableKind::kSyllableOnRestNote;
 
-//     if (! fCurrentSyllableElementsList.empty ()) { //  JMI 2026.2
-//     }
-
-//     if (! fCurrentSyllableElementsList.empty ()) { // JMI 2026.2
-//       // register a skip in lyrics for rests with syllables
-//       fCurrentSyllableKind =
-//         msrSyllableKind::kSyllableOnRestNote;
-//     }
-//     else {
-//       // don't register a skip in lyrics for rests without syllables
-//       fCurrentSyllableKind =
-//         msrSyllableKind::kSyllableSkipOnRestNote;
-//     }
+    if (! fCurrentSyllableElementsList.empty ()) { // JMI 2026.2
+      // register a skip in lyrics for rests with syllables
+      fCurrentSyllableKind =
+        msrSyllableKind::kSyllableOnRestNote; // KRAKRA
+    }
+    else {
+      // don't register a skip in lyrics for rests without syllables
+      fCurrentSyllableKind =
+        msrSyllableKind::kSyllableSkipOnRestNote;
+    }
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -22171,7 +22182,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
                   msrSyllable::create (
                     slide->getInputLineNumber (),
                     msrSyllableKind::kSyllableSkipRest,
-                    msrSyllableExtendKind::kSyllableExtend_NONE, // fCurrentSyllableExtendKind, // JMI 0.9.67
+                    msrSyllableExtendKind::kSyllableExtendTypeLess, // fCurrentSyllableExtendKind, // JMI 0.9.67
                     fCurrentStanzaNumber,
                     fCurrentNoteSoundingWholeNotesFromNotesDuration,
                     stanza);
@@ -26100,7 +26111,7 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled ()
           syllableKind =
             fCurrentNoteIsARest // JMI ??? 0.9.70
               ? msrSyllableKind::kSyllableSkipOnRestNote
-              : msrSyllableKind::kSyllableSkipOnNonRestNote;
+              : msrSyllableKind::kSyllableSkipOnRegularNote;
 
         // create a skip syllable
         S_msrSyllable
@@ -29735,8 +29746,6 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //       fCurrentSyllableElementsList.empty ();
 //
 //     switch (fCurrentSyllableExtendKind) { // JMI 0.9.68
-//       case msrSyllableExtendKind::kSyllableExtend_NONE:
-//         break;
 //       case msrSyllableExtendKind::kSyllableExtendTypeLess:
 // //         doCreateASkipSyllable = true; // JMI
 //         break;
@@ -29786,7 +29795,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //             syllableKind =
 //             fCurrentNoteIsARest
 //               ? msrSyllableKind::kSyllableSkipOnRestNote
-//               : msrSyllableKind::kSyllableSkipOnNonRestNote;
+//               : msrSyllableKind::kSyllableSkipOnRegularNote;
 //
 //           // create a skip syllable
 //           S_msrSyllable

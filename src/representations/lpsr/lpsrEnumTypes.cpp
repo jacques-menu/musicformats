@@ -43,8 +43,8 @@ int lpsrNotesDurationBinaryLogarithm (int duration)
   int result = INT_MIN;
 
 /*
-with LilyPond's limitation to 128th of a whole note,
-valid denominators binary logarithms, i.e. their exponent, are:
+  with LilyPond's limitation to 128th of a whole note,
+  valid denominators binary logarithms, i.e. their exponent, are:
 */
 
   switch (duration) {
@@ -709,7 +709,7 @@ std::string syllableElementsListAsLilypondString (
   if (! syllableElementsList.empty ()) {
     for (msrSyllableElement syllableElement : syllableElementsList) {
       ss <<
-       syllableElement.getSyllableElementContents ();
+        syllableElement.getSyllableElementContents ();
     } // for
   }
 

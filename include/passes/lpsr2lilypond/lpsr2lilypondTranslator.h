@@ -862,8 +862,10 @@ class EXP lpsr2lilypondTranslator :
     std::string           durationKindAsLilypondString (
                             mfDurationKind notesDurationKind);
 
-    // musically empty measures
+    // measures
     // ------------------------------------------------------
+
+    std::string           cLilypondBarCheck;
 
     void                  generateMusicallyEmptyMeasure (
                             S_msrMeasure& measure);
@@ -1712,8 +1714,18 @@ class EXP lpsr2lilypondTranslator :
 
     std::string           cLilypondNewLyrics;
     std::string           cLilypondAssociatedVoice;
+    std::string           cLilypondLyricsTo;
 
     std::string           cLilypondSkip;
+
+    std::string           cLilypondSingleHyphen;
+    std::string           cLilypondDoubleHyphen;
+
+    std::string           cLilypondSingleUnderscore;
+    std::string           cLilypondDoubleUnderscore;
+
+
+
 
     Bool                  fOnGoingStanza;
     S_msrStanza           fCurrentStanza;
@@ -1723,6 +1735,7 @@ class EXP lpsr2lilypondTranslator :
     void                  generateSyllableDescripionAsComment (
                             const S_msrSyllable& syllable);
 
+    // syllables
     void                  generateLilypondSyllable (
                             const S_msrSyllable& syllable);
 
@@ -1741,7 +1754,7 @@ class EXP lpsr2lilypondTranslator :
 
     void                  generateLilypondSyllableSkipOnRestNote (
                             const S_msrSyllable& syllable);
-    void                  generateLilypondSyllableSkipOnNonRestNote (
+    void                  generateLilypondSyllableSkipOnRegularNote (
                             const S_msrSyllable& syllable);
 
     void                  generateLilypondSyllableMeasureEnd (
@@ -1752,19 +1765,34 @@ class EXP lpsr2lilypondTranslator :
     void                  generateLilypondSyllablePageBreak (
                             const S_msrSyllable& syllable);
 
-    void                  generateCodeBeforeSyllableIfRelevant (
+//     void                  generateCodeBeforeSyllableIfRelevant (
+//                             const S_msrSyllable& syllable);
+
+    // extenders
+    void                  handleLyricExtenderIfAnyAutomatically (
                             const S_msrSyllable& syllable);
 
-    void                  generateCodeAfterSyllableIfRelevant (
+    void                  handleLyricExtenderIfAnyAutomaticallySyllableSingle (
                             const S_msrSyllable& syllable);
 
-    void                  generateLyricExtenderAndOrSkipWithAutomaticDurations (
+    void                  handleLyricExtenderIfAnyAutomaticallySyllableBegin (
+                            const S_msrSyllable& syllable);
+    void                  handleLyricExtenderIfAnyAutomaticallySyllableMiddle (
+                            const S_msrSyllable& syllable);
+    void                  handleLyricExtenderIfAnyAutomaticallySyllableEnd (
                             const S_msrSyllable& syllable);
 
-    void                  generateLyricExtenderAndOrSkipWithImplicitDurations (
+    void                  handleLyricExtenderIfAnyExplicitly (
                             const S_msrSyllable& syllable);
 
-    void                  generateLyricExtenderAndOrSkipWithExplicitDurations (
+    void                  handleLyricExtenderIfAnyExplicitlySyllableSingle (
+                            const S_msrSyllable& syllable);
+
+    void                  handleLyricExtenderIfAnyExplicitlySyllableBegin (
+                            const S_msrSyllable& syllable);
+    void                  handleLyricExtenderIfAnyExplicitlySyllableMiddle (
+                            const S_msrSyllable& syllable);
+    void                  handleLyricExtenderIfAnyExplicitlySyllableEnd (
                             const S_msrSyllable& syllable);
 
     // octaves entry

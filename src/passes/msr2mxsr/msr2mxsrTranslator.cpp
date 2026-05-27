@@ -7054,7 +7054,7 @@ void msr2mxsrTranslator::appendNoteLyricsToNote (
 
         case msrSyllableKind::kSyllableSkipOnRestNote:
           break;
-        case msrSyllableKind::kSyllableSkipOnNonRestNote:
+        case msrSyllableKind::kSyllableSkipOnRegularNote:
           break;
 
         case msrSyllableKind::kSyllableMeasureEnd:
@@ -7111,9 +7111,6 @@ void msr2mxsrTranslator::appendNoteLyricsToNote (
         Bool doCreateAnExtendElement (true);
 
         switch (syllable->getSyllableExtendKind ()) {
-          case msrSyllableExtendKind::kSyllableExtend_NONE:
-            doCreateAnExtendElement = false;
-            break;
           case msrSyllableExtendKind::kSyllableExtendTypeLess:
             extendTypeString = "single";
             break;

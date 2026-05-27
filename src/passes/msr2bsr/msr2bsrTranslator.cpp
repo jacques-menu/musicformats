@@ -3511,7 +3511,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
         // JMI create an msrWords instance for each???
         std::string
           wordsValue =
-            syllableElementsListAsString(syllableElementsList);
+            syllableElementsListAsString (syllableElementsList);
 
         // create the words
 #ifdef MF_TRACE_IS_ENABLED

@@ -5,7 +5,7 @@
 		<encoding>
 			<software>Sibelius 2026.5</software>
 			<software>Dolet 8.3 for Sibelius</software>
-			<encoding-date>2026-05-19</encoding-date>
+			<encoding-date>2026-05-26</encoding-date>
 			<supports element='accidental' type='yes'/>
 			<supports element='transpose' type='yes'/>
 			<supports attribute='new-page' element='print' type='yes' value='yes'/>
@@ -69,7 +69,7 @@
 	</part-list>
 <!--=========================================================-->
 	<part id='P1'>
-		<measure number='1'>
+		<measure number='0' implicit='yes'>
 			<print>
 				<system-layout>
 					<top-system-distance>181.5625</top-system-distance>
@@ -88,7 +88,7 @@
 					<mode>major</mode>
 				</key>
 				<time>
-					<beats>3</beats>
+					<beats>4</beats>
 					<beat-type>4</beat-type>
 				</time>
 				<clef>
@@ -96,26 +96,6 @@
 					<line>2</line>
 				</clef>
 			</attributes>
-			<note>
-				<rest/>
-				<duration>768</duration>
-				<voice>1</voice>
-				<type>quarter</type>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>single</syllabic>
-					<text>Un</text>
-				</lyric>
-			</note>
-			<note>
-				<rest/>
-				<duration>768</duration>
-				<voice>1</voice>
-				<type>quarter</type>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>single</syllabic>
-					<text>deux</text>
-				</lyric>
-			</note>
 			<note>
 				<pitch>
 					<step>G</step>
@@ -125,42 +105,10 @@
 				<voice>1</voice>
 				<type>quarter</type>
 				<stem>up</stem>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>single</syllabic>
-					<text>sol</text>
-				</lyric>
 			</note>
 		</measure>
 <!--=========================================================-->
-		<measure number='2'>
-			<note>
-				<pitch>
-					<step>C</step>
-					<octave>5</octave>
-				</pitch>
-				<duration>768</duration>
-				<voice>1</voice>
-				<type>quarter</type>
-				<stem>down</stem>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>single</syllabic>
-					<text>do</text>
-				</lyric>
-			</note>
-			<note>
-				<pitch>
-					<step>B</step>
-					<octave>4</octave>
-				</pitch>
-				<duration>768</duration>
-				<voice>1</voice>
-				<type>quarter</type>
-				<stem>down</stem>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>single</syllabic>
-					<text>si</text>
-				</lyric>
-			</note>
+		<measure number='1'>
 			<note>
 				<pitch>
 					<step>A</step>
@@ -170,91 +118,119 @@
 				<voice>1</voice>
 				<type>quarter</type>
 				<stem>up</stem>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>single</syllabic>
-					<text>la</text>
-				</lyric>
 			</note>
-		</measure>
-<!--=========================================================-->
-		<measure number='3'>
 			<note>
 				<pitch>
 					<step>G</step>
 					<octave>4</octave>
 				</pitch>
-				<duration>192</duration>
+				<duration>384</duration>
 				<voice>1</voice>
-				<type>16th</type>
+				<type>eighth</type>
 				<stem>up</stem>
 				<beam number='1'>begin</beam>
-				<beam number='2'>begin</beam>
-				<notations>
-					<slur type='start' number='1'/>
-				</notations>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>single</syllabic>
-					<text>si</text>
-					<extend/>
-				</lyric>
 			</note>
 			<note>
 				<pitch>
 					<step>F</step>
 					<octave>4</octave>
 				</pitch>
-				<duration>192</duration>
-				<voice>1</voice>
-				<type>16th</type>
-				<stem>up</stem>
-				<beam number='1'>continue</beam>
-				<beam number='2'>end</beam>
-			</note>
-			<note>
-				<pitch>
-					<step>E</step>
-					<octave>4</octave>
-				</pitch>
 				<duration>384</duration>
-				<tie type='start'/>
 				<voice>1</voice>
 				<type>eighth</type>
 				<stem>up</stem>
 				<beam number='1'>end</beam>
-				<notations>
-					<tied type='start'/>
-				</notations>
 			</note>
 			<note>
 				<pitch>
 					<step>E</step>
 					<octave>4</octave>
 				</pitch>
-				<duration>384</duration>
-				<tie type='stop'/>
-				<voice>1</voice>
-				<type>eighth</type>
-				<stem>up</stem>
-				<notations>
-					<tied type='stop'/>
-					<slur type='stop' number='1'/>
-				</notations>
-			</note>
-			<note>
-				<rest/>
-				<duration>384</duration>
-				<voice>1</voice>
-				<type>eighth</type>
-			</note>
-			<note>
-				<rest/>
 				<duration>768</duration>
 				<voice>1</voice>
 				<type>quarter</type>
-				<lyric number='1' name='verse' default-y='-80'>
-					<syllabic>single</syllabic>
-					<text>trois</text>
-				</lyric>
+				<stem>up</stem>
+			</note>
+			<note>
+				<pitch>
+					<step>F</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number='2'>
+			<note>
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<stem>up</stem>
+			</note>
+			<backup>
+				<duration>1536</duration>
+			</backup>
+			<note>
+				<pitch>
+					<step>B</step>
+					<octave>3</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>2</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+			</note>
+			<note>
+				<pitch>
+					<step>A</step>
+					<octave>3</octave>
+				</pitch>
+				<duration>384</duration>
+				<voice>2</voice>
+				<type>eighth</type>
+				<stem>down</stem>
+				<beam number='1'>begin</beam>
+			</note>
+			<note>
+				<pitch>
+					<step>B</step>
+					<octave>3</octave>
+				</pitch>
+				<duration>384</duration>
+				<voice>2</voice>
+				<type>eighth</type>
+				<stem>down</stem>
+				<beam number='1'>end</beam>
+			</note>
+			<note>
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<stem>up</stem>
+			</note>
+			<backup>
+				<duration>1536</duration>
+			</backup>
+			<note>
+				<pitch>
+					<step>C</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>2</voice>
+				<type>half</type>
+				<stem>down</stem>
 			</note>
 			<barline location='right'>
 				<bar-style>light-heavy</bar-style>
