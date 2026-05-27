@@ -227,7 +227,7 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fCurrentSyllableKind =
     msrSyllableKind::kSyllableNone;
   fCurrentSyllableExtendKind =
-    msrSyllableExtendKind::kSyllableExtendTypeLess;
+    msrSyllableExtendKind::kSyllableExtend_NONE;
 
   fFirstSyllableInSlurKind =
     msrSyllableKind::kSyllableNone;
@@ -524,7 +524,7 @@ void mxsr2msrSkeletonPopulator::initializeNoteData ()
 
   // note lyrics
   fCurrentSyllableExtendKind =
-    msrSyllableExtendKind::kSyllableExtendTypeLess;
+    msrSyllableExtendKind::kSyllableExtend_NONE;
 }
 
 void mxsr2msrSkeletonPopulator::displayGatheredNoteInformations (
@@ -10365,7 +10365,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
   fCurrentSyllableElementsList.clear ();
 
   // a <text/> markup puts an end to the effect of <extend/> JMI 2026.2
-  fCurrentSyllableExtendKind = msrSyllableExtendKind::kSyllableExtendTypeLess;
+  fCurrentSyllableExtendKind =
+    msrSyllableExtendKind::kSyllableExtend_NONE; // default value
 
   fOnGoingLyric = true;
 }
@@ -10584,7 +10585,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_extend& elt)
     elt->getAttributeValue ("type");
 
   fCurrentSyllableExtendKind =
-    msrSyllableExtendKind::kSyllableExtendTypeLess; // default value
+    msrSyllableExtendKind::kSyllableExtend_NONE; // default value
 
   if (fOnGoingLyric) {
     if      (extendType == "start") {
@@ -10599,7 +10600,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_extend& elt)
       fCurrentSyllableExtendKind =
         msrSyllableExtendKind::kSyllableExtendTypeStop;
     }
-    else if (extendType.empty ()) {
+    else if (extendType.empty ()) { // JMI 2026.2 KRAKRA
       fCurrentSyllableExtendKind =
         msrSyllableExtendKind::kSyllableExtendTypeLess;
     }
@@ -22182,7 +22183,8 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
                   msrSyllable::create (
                     slide->getInputLineNumber (),
                     msrSyllableKind::kSyllableSkipRest,
-                    msrSyllableExtendKind::kSyllableExtendTypeLess, // fCurrentSyllableExtendKind, // JMI 0.9.67
+                    msrSyllableExtendKind::kSyllableExtend_NONE, // KRAKRA
+                    fCurrentSyllableExtendKind, // JMI 0.9.67
                     fCurrentStanzaNumber,
                     fCurrentNoteSoundingWholeNotesFromNotesDuration,
                     stanza);
@@ -29746,6 +29748,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //       fCurrentSyllableElementsList.empty ();
 //
 //     switch (fCurrentSyllableExtendKind) { // JMI 0.9.68
+//       case msrSyllableExtendKind::kSyllableExtend_NONE:
+//         break;
 //       case msrSyllableExtendKind::kSyllableExtendTypeLess:
 // //         doCreateASkipSyllable = true; // JMI
 //         break;

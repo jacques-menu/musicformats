@@ -7111,6 +7111,9 @@ void msr2mxsrTranslator::appendNoteLyricsToNote (
         Bool doCreateAnExtendElement (true);
 
         switch (syllable->getSyllableExtendKind ()) {
+          case msrSyllableExtendKind::kSyllableExtend_NONE:
+            extendTypeString = "NONE";
+            break;
           case msrSyllableExtendKind::kSyllableExtendTypeLess:
             extendTypeString = "single";
             break;

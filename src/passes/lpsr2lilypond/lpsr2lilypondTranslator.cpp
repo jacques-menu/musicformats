@@ -14871,10 +14871,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 
             // both double hyphens and double underscores can be used
             // to draw hyphenated lines and extenders under melismata correctly
-//             cLilypondSet << cLilypondAssociatedVoice << " = #\"" <<
-//             elt->
-//               getStanzaUpLinkToVoice ()->getVoicePathLikeName () <<
-//               std::endl <<
+
+            // cLilypondAssociatedVoice is also needed for explicit durations
+            cLilypondSet << cLilypondAssociatedVoice << " = #\"" <<
+            elt->
+              getStanzaUpLinkToVoice ()->getVoicePathLikeName () <<
+            "#\"" <<
+            std::endl <<
+
             cLilypondSet << "ignoreMelismata = ##t" <<
             std::endl;
           break;
@@ -15127,7 +15131,7 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
 
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "line" << ": " << syllable->getInputLineNumber () <<
+    "input line number" << ": " << syllable->getInputLineNumber () <<
     std::endl;
 
   fLilypondCodeStream <<
@@ -15302,8 +15306,54 @@ void lpsr2lilypondTranslator::generateLilypondSyllableMiddle (
       break;
   } // switch
 
-  handleLyricExtenderIfAnyAutomaticallySyllableMiddle (
-    syllable);
+  switch (gGlobalLpsr2lilypondOahGroup->getLyricsDurationsKind ()) {
+    case lpsrLyricsDurationsKind::kLyricsDurationsAutomatic:
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
+        fLilypondCodeStream <<
+          "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSkipOnRegularNote" <<
+          ", " << syllable->getInputLineNumber () <<
+          " %}" <<
+          std::endl;
+      }
+#endif // MF_TRACE_IS_ENABLED
+
+//         fLilypondCodeStream << // KRAKRA
+//           cLilypondSkip;
+//         generateWholeNotesDuration (
+//           syllable->getInputLineNumber (),
+//           syllable->getSyllableWholeNotes ());
+//         fLilypondCodeStream <<
+//           cLilyPondSpace;
+
+      handleLyricExtenderIfAnyAutomaticallySyllableMiddle (
+        syllable);
+      break;
+
+    case lpsrLyricsDurationsKind::kLyricsDurationsExplicit:
+#ifdef MF_TRACE_IS_ENABLED
+      if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
+        fLilypondCodeStream <<
+          "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableSkipOnRegularNote" <<
+          ", " << syllable->getInputLineNumber () <<
+          " %}" <<
+          std::endl;
+      }
+#endif // MF_TRACE_IS_ENABLED
+
+//       // generate the skip syllable
+//       fLilypondCodeStream <<
+//         cLilypondSkip;
+//       generateWholeNotesDuration (
+//         syllable->getInputLineNumber (),
+//         syllable->getSyllableWholeNotes ());
+//       fLilypondCodeStream <<
+//         cLilyPondSpace;
+
+      handleLyricExtenderIfAnyExplicitlySyllableMiddle (
+        syllable);
+      break;
+  } // switch
 }
 
 void lpsr2lilypondTranslator::generateLilypondSyllableEnd (
@@ -15352,6 +15402,39 @@ void lpsr2lilypondTranslator::generateLilypondSyllableEnd (
       fLastGeneratedWholeNotes = K_WHOLE_NOTES_UNKNOWN_; // JMI 0.9.67
       break;
   } // switch
+
+  Bool doGenerateADoubleUnderscore (false);
+
+  // what it the syllable's extend kind?
+  switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+//       doGenerateASingleUnderscore = true; // KRAKRA
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeLess:
+      doGenerateADoubleUnderscore = true;
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeStart:
+//       fOnGoingExtend = true;
+//       doGenerateASingleUnderscore = true;
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+//       doGenerateASingleUnderscore = true;
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeStop:
+//       fOnGoingExtend = false;
+      break;
+  } // switch
+
+  // should a double underscore be generated?
+  // ----------------------------------------------------
+  if (doGenerateADoubleUnderscore) {
+    fLilypondCodeStream <<
+      cLilypondDoubleUnderscore;
+  }
 }
 
 void lpsr2lilypondTranslator::generateLilypondSyllableOnRestNote (
@@ -15917,6 +16000,10 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableSingl
 
   // what it the syllable's extend kind?
   switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+//       doGenerateASingleUnderscore = true; // KRAKRA
+      break;
+
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
       doGenerateASingleUnderscore = true;
       break;
@@ -16028,6 +16115,10 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableBegin
 
   // what it the syllable's extend kind?
   switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+//       doGenerateADoubleHyphen = true;
+      break;
+
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
       doGenerateADoubleHyphen = true;
       break;
@@ -16148,6 +16239,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableMiddl
 #endif // MF_TRACE_IS_ENABLED
 
   Bool doGenerateASingleHyphen (false);
+  Bool doGenerateADoubleHyphen (false);
 
   Bool doGenerateASingleleUnderscore (false);
   Bool doGenerateADoubleUnderscore (false);
@@ -16157,10 +16249,15 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableMiddl
     noteTheSyllableIsAttachedTo =
       syllable->getSyllableUpLinkToNote ();
 
-//   doGenerateADoubleHyphen = true; KRAKRA
+  doGenerateADoubleHyphen = true; // 2026.2 KRAKRA
 
   // what it the syllable's extend kind?
   switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+//       fOnGoingExtend = true;
+//       doGenerateADoubleUnderscore = true;
+      break;
+
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
       fOnGoingExtend = true;
       doGenerateADoubleUnderscore = true;
@@ -16248,6 +16345,13 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableMiddl
   if (doGenerateASingleHyphen) {
     fLilypondCodeStream <<
       cLilypondSingleHyphen;
+  }
+
+  // should a double hyphen be generated?
+  // ----------------------------------------------------
+  if (doGenerateADoubleHyphen) {
+    fLilypondCodeStream <<
+      cLilypondDoubleHyphen;
   }
 
   // should a single underscore be generated?
@@ -16421,6 +16525,10 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableEnd (
 // //         cLilypondDoubleHyphen;
 //   // what it the syllable's extend kind?
 //       switch (syllable->getSyllableExtendKind ()) {
+//         case msrSyllableExtendKind::kSyllableExtend_NONE:
+//           doGenerateADoubleUnderscore = true;
+//           break;
+//
 //         case msrSyllableExtendKind::kSyllableExtendTypeLess:
 //           doGenerateADoubleUnderscore = true;
 //           break;
@@ -16450,6 +16558,10 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableEnd (
 // //         syllable);
 //   // what it the syllable's extend kind?
 //       switch (syllable->getSyllableExtendKind ()) {
+//         case msrSyllableExtendKind::kSyllableExtend_NONE:
+//           doGenerateADoubleUnderscore = true;
+//           break;
+//
 //         case msrSyllableExtendKind::kSyllableExtendTypeLess:
 //           doGenerateADoubleUnderscore = true;
 //           break;
@@ -16634,8 +16746,12 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitlySyllableSingle (
 
   // what it the syllable's extend kind?
   switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+//       doGenerateADoubleUnderscore = true; // KRAKRA
+      break;
+
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
-      doGenerateADoubleUnderscore = true;
+      doGenerateADoubleUnderscore = true; // KRAKRA
       break;
 
     case msrSyllableExtendKind::kSyllableExtendTypeStart:
@@ -16810,6 +16926,10 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitlySyllableBegin (
 
   // what it the syllable's extend kind?
   switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+      doGenerateADoubleHyphen = true;
+      break;
+
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
       doGenerateADoubleHyphen = true;
       break;
@@ -16950,6 +17070,10 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitlySyllableMiddle (
 
   // what it the syllable's extend kind?
   switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+      doGenerateADoubleHyphen = true; // KRAKRA
+      break;
+
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
 //       {
 //         if (noteTheSyllableIsAttachedTo) {
@@ -16965,7 +17089,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitlySyllableMiddle (
 //         }
 //       }
 
-      doGenerateASingleUnderscore = true;
+//       doGenerateASingleUnderscore = true; KRAKRA
       break;
 
     case msrSyllableExtendKind::kSyllableExtendTypeStart:
@@ -17067,6 +17191,10 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitlySyllableEnd (
 
 //       // what it the syllable's extend kind?
 //       switch (syllable->getSyllableExtendKind ()) {
+//         case msrSyllableExtendKind::kSyllableExtend_NONE:
+// //           doGenerateADoubleUnderscore = true;
+//           break;
+//
 //         case msrSyllableExtendKind::kSyllableExtendTypeLess:
 // //           doGenerateADoubleUnderscore = true;
 //           break;

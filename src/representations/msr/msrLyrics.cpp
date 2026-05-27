@@ -124,6 +124,9 @@ std::string msrSyllableExtendKindAsString (
   std::string result;
 
   switch (syllableExtendKind) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+      result = "kSyllableExtend_NONE";
+      break;
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
       result = "kSyllableExtendTypeLess";
       break;
@@ -1383,7 +1386,7 @@ void msrStanza::appendSyllableToStanza (
         msrSyllable::create (
           syllable->getInputLineNumber (),
           msrSyllableKind::kSyllableSkipOnRestNote,
-          msrSyllableExtendKind::kSyllableExtendTypeLess,
+          msrSyllableExtendKind::kSyllableExtend_NONE,
           fStanzaNumber,
           positionsDelta,
           msrTupletFactor (1, 1),
@@ -1565,7 +1568,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
 //         msrSyllable::create (
 //           inputLineNumber,
 //           msrSyllableKind::kSyllableSkipOnRestNote,
-//           msrSyllableExtendKind::kSyllableExtendTypeLess,
+//           msrSyllableExtendKind::kSyllableExtend_NONE,
 //           fStanzaNumber,
 //           positionsDelta,
 //           msrTupletFactor (1, 1),
@@ -1586,7 +1589,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
         inputLineNumber,
         upLinkToMeasure,
         msrSyllableKind::kSyllableMeasureEnd,
-        msrSyllableExtendKind::kSyllableExtendTypeLess,
+        msrSyllableExtendKind::kSyllableExtend_NONE,
         fStanzaNumber,
         K_WHOLE_NOTES_ZERO,
         msrTupletFactor (1, 1),
@@ -1646,7 +1649,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
         inputLineNumber,
         upLinkToMeasure,
         msrSyllableKind::kSyllableLineBreak,
-        msrSyllableExtendKind::kSyllableExtendTypeLess,
+        msrSyllableExtendKind::kSyllableExtend_NONE,
         fStanzaNumber,
         K_WHOLE_NOTES_ZERO,
         msrTupletFactor (),
@@ -1708,7 +1711,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
         inputLineNumber,
         upLinkToMeasure,
         msrSyllableKind::kSyllablePageBreak,
-        msrSyllableExtendKind::kSyllableExtendTypeLess,
+        msrSyllableExtendKind::kSyllableExtend_NONE,
         fStanzaNumber,
         K_WHOLE_NOTES_ZERO,
         msrTupletFactor (),

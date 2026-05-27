@@ -56,6 +56,7 @@ std::string msrSyllableKindAsString (
 std::ostream& operator << (std::ostream& os, const msrSyllableKind& elt);
 
 enum class msrSyllableExtendKind {
+  kSyllableExtend_NONE,
   kSyllableExtendTypeLess,
   kSyllableExtendTypeStart, kSyllableExtendTypeContinue, kSyllableExtendTypeStop
 };
