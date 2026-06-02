@@ -130,7 +130,7 @@ std::string lpsrNewLyricsBlock::asString () const
     "[NewLyricsBlock" <<
     ", fStanza: " << fStanza->getStanzaName () <<
     ", fVoice: " << fVoice->getVoiceName () <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

@@ -109,7 +109,7 @@ void mxsrVoice::pushTupletOntoTupletsStack (
       ", context: " << context <<
       ", fTupletsStack.size (): " <<
       fTupletsStack.size () <<
-      ", line " << tuplet->getInputLineNumber ();
+      ", " << tuplet->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -205,7 +205,7 @@ S_msrTuplet mxsrVoice::popInnerMostTuplet (
       ", context: " << context <<
       ", fTupletsStack.size (): " <<
       fTupletsStack.size () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     ss <<
       ", fCurrentOuterMostTuplet: ";
@@ -219,7 +219,7 @@ S_msrTuplet mxsrVoice::popInnerMostTuplet (
 
     ss <<
       ", context: " << context <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -269,7 +269,7 @@ void mxsrVoice::appendNoteToInnerMostTuplet (
     fMsrVoice->getVoiceName () <<
     "\"" <<
     ", context: " << context <<
-    ", line " << inputLineNumber <<
+    ", " << inputLineNumber <<
     std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -281,8 +281,8 @@ void mxsrVoice::appendNoteToInnerMostTuplet (
 
 void mxsrVoice::appendTupletToMsrVoice (
   const mfInputLineNumber& inputLineNumber,
-  const S_msrTuplet& tuplet,
-  const std::string& context)
+  const S_msrTuplet&       tuplet,
+  const std::string&       context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
@@ -293,7 +293,7 @@ void mxsrVoice::appendTupletToMsrVoice (
     fMsrVoice->getVoiceName () <<
     "\"" <<
     ", context: " << context <<
-    ", line " << inputLineNumber <<
+    ", " << inputLineNumber <<
     std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -320,7 +320,7 @@ void mxsrVoice::appendTupletWhereItBelongs (
       ", context: " << context <<
       ", fTupletsStack.size (): " <<
       fTupletsStack.size () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     ss <<
       ", fCurrentOuterMostTuplet: ";
@@ -334,7 +334,7 @@ void mxsrVoice::appendTupletWhereItBelongs (
 
     ss <<
       ", context: " << context <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -359,7 +359,7 @@ void mxsrVoice::appendTupletWhereItBelongs (
       tuplet->asString () <<
       " in voice \"" <<
       fMsrVoice->getVoiceName () <<
-      ", line " << inputLineNumber <<
+      ", " << inputLineNumber <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -381,7 +381,7 @@ void mxsrVoice::appendTupletWhereItBelongs (
       fTupletsStack.front ()->asString () <<
       " in voice \"" <<
       fMsrVoice->getVoiceName () <<
-      ", line " << inputLineNumber <<
+      ", " << inputLineNumber <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -419,7 +419,7 @@ void mxsrVoice::handleTupletBegin (
       tuplet->getTupletNumber () <<
       " in voice" <<
       currentNoteVoice->getVoiceName () <<
-      ", line " << tuplet->getInputLineNumber ();
+      ", " << tuplet->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -525,7 +525,7 @@ void mxsrVoice::handleTupletContinue (
         fetchInnerMostTuplet ()->asString () <<
         " in voice " <<
         currentNoteVoice->getVoiceName () <<
-        ", line " << note->getInputLineNumber () <<
+        ", " << note->getInputLineNumber () <<
         std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -546,7 +546,7 @@ void mxsrVoice::handleTupletContinue (
       note->
         asShortString () <<
       " cannot be handled, tuplets stack is empty" <<
-      ", line " << note->getInputLineNumber ();
+      ", " << note->getInputLineNumber ();
 
     mxsr2msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -635,7 +635,7 @@ void mxsrVoice::handleTupletEnd (
 //       "handleTupletEnd(): tuplet member note " <<
 //       note-> asShortString () <<
 //       " cannot be handled, tuplets stack is empty" <<
-//       ", line " << note->getInputLineNumber ();
+//       ", " << note->getInputLineNumber ();
 //
 //     mxsr2msrInternalError (
 //       gServiceRunData->getInputSourceName (),

@@ -118,7 +118,7 @@ msrLineBreak::msrLineBreak (
       ", fUserSelectedLineBreakKind: " <<
       msrUserSelectedLineBreakKindAsString (
         fUserSelectedLineBreakKind) <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -242,7 +242,7 @@ std::string msrLineBreak::asString () const
     ", fUserSelectedLineBreakKind: " <<
     msrUserSelectedLineBreakKindAsString (
       fUserSelectedLineBreakKind) <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

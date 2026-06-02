@@ -100,7 +100,7 @@ msrPageBreak::msrPageBreak (
       ", fUserSelectedPageBreakKind: " <<
       msrUserSelectedPageBreakKindAsString (
         fUserSelectedPageBreakKind) <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -228,7 +228,7 @@ std::string msrPageBreak::asString () const
     ", fUserSelectedPageBreakKind: " <<
     msrUserSelectedPageBreakKindAsString (
       fUserSelectedPageBreakKind) <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

@@ -261,7 +261,7 @@ std::string msrStaffTuning::asString () const
         getMsrQuarterTonesPitchesLanguageKind ()) <<
     ", fStaffTuningOctaveKind: " <<
     fStaffTuningOctaveKind <<
-    ", line " << fStaffTuningLineNumber <<
+    ", " << fStaffTuningLineNumber <<
     ']';
 
   return ss.str ();
@@ -271,7 +271,7 @@ void msrStaffTuning::print (std::ostream& os) const
 {
   os <<
     "[StaffTuning" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -498,7 +498,7 @@ std::string msrStaffDetails::asShortString () const
     "[StaffDetails" <<
     ", fStaffTypeKind: " <<
     fStaffTypeKind <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   // print the staff lines number
   ss << ", fStaffLinesNumber: " << fStaffLinesNumber;
@@ -520,7 +520,7 @@ void msrStaffDetails::print (std::ostream& os) const
 {
   os <<
     "[StaffDetails" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

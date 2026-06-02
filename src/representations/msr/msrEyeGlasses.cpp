@@ -235,7 +235,7 @@ std::string msrEyeGlasses::asString () const
 
   ss <<
     "EyeGlasses" <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }

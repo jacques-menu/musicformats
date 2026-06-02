@@ -269,7 +269,7 @@ std::string lpsrPaper::asString () const
     ", fEvenFooterMarkup: " << fEvenFooterMarkup;
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

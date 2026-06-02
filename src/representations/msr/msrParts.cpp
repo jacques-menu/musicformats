@@ -130,7 +130,7 @@ void msrPart::initializePart ()
       gMsrOahGroup->getMsrPartsRenamingMap ().find (fPartMxmlID);
 
   if (it != gMsrOahGroup->getMsrPartsRenamingMap ().end ()) {
-    // yes, rename the part accordinglingly
+    // YES, rename the part accordinglingly
     std::string chosenPartPathLikeName = (*it).second;
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -155,7 +155,7 @@ void msrPart::initializePart ()
   }
 
   else {
-    // coin the names from the argument
+    // NO, coin the names from the argument
     fPartPathLikeName =
       "Part_" + mfStringNumbersToEnglishWords (fPartMxmlID);
   }
@@ -312,7 +312,7 @@ void msrPart::registerStaffInPart (
       staffNumber <<
       " in part " <<
       fetchPartNameForTrace () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -361,7 +361,7 @@ void msrPart::registerStaffInPart (
         ss <<
           "a harmonies staff already exists in part " <<
           fetchPartNameForTrace () <<
-          ", line " << staff->getInputLineNumber ();
+          ", " << staff->getInputLineNumber ();
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
@@ -384,7 +384,7 @@ void msrPart::registerStaffInPart (
         ss <<
           "a figured bass staff already exists in part " <<
           fetchPartNameForTrace () <<
-          ", line " << staff->getInputLineNumber ();
+          ", " << staff->getInputLineNumber ();
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
@@ -413,7 +413,7 @@ void msrPart::setPartCurrentDrawingPositionInMeasure (
       fetchPartNameForTrace () <<
       " to " <<
       positionInMeasure <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -438,7 +438,7 @@ void msrPart::setPartCurrentDrawingPositionInMeasure (
       " in part " <<
       fetchPartNameForTrace () <<
       " since it is negative" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -460,7 +460,7 @@ void msrPart::resetPartCurrentDrawingPositionInMeasure (
     ss <<
       "Resetting part current drawing measure position to 0 in part " <<
       fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -487,7 +487,7 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
 //       wholeNotesDelta <<
 //       " in part " <<
 //       fetchPartNameForTrace () <<
-//       ", line " << inputLineNumber;
+//       ", " << inputLineNumber;
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
@@ -514,7 +514,7 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
       wholeNotesDelta <<
       ", making it newPartCurrentDrawingPositionInMeasure: " <<
       newPartCurrentDrawingPositionInMeasure <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -541,7 +541,7 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
 //       wholeNotesDelta <<
 //       " in part " <<
 //       fetchPartNameForTrace () <<
-//       ", line " << inputLineNumber;
+//       ", " << inputLineNumber;
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
@@ -568,7 +568,7 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
       wholeNotesDelta <<
       ", making it newPartCurrentDrawingPositionInMeasure: " <<
       newPartCurrentDrawingPositionInMeasure <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -591,7 +591,7 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
       " since that sets it to newPartCurrentDrawingPositionInMeasure " <<
       newPartCurrentDrawingPositionInMeasure <<
       ", which is negative " <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
 //     msrInternalError (
     msrInternalWarning (
@@ -669,7 +669,7 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
       fPartMxmlID <<
       ", \"" <<
       fPartName <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -692,7 +692,7 @@ void msrPart::setPartPathLikeName (const std::string& partPathLikeName)
       gMsrOahGroup->getMsrPartsRenamingMap ().find (fPartPathLikeName);
 
   if (it != gMsrOahGroup->getMsrPartsRenamingMap ().end ()) {
-    // yes, rename the part accordinglingly
+    // YES, rename the part accordinglingly
     fPartPathLikeName = (*it).second;
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -711,7 +711,7 @@ void msrPart::setPartPathLikeName (const std::string& partPathLikeName)
 #endif // MF_TRACE_IS_ENABLED
   }
   else {
-    // use the argument
+    // NO, use the argument
     fPartPathLikeName = partPathLikeName;
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -894,12 +894,12 @@ mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
       currentWholeNotesValue =
         fPartMeasuresWholeNotesVector.at (indexValue);
 
-    // yes
+    // YES
     result = currentWholeNotesValue;
   }
 
   catch (const std::out_of_range& e) {
-    // no
+    // NO
 
     std::stringstream ss;
 
@@ -909,7 +909,7 @@ mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
       ", partMeasuresWholeNotesVectorSize: " <<
       partMeasuresWholeNotesVectorSize <<
       ", indexValue: " << indexValue << " is out of bounds" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
 //     msrInternalWarningithLocationsDetails (
      msrInternalError (
@@ -932,7 +932,7 @@ mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
     ss <<
       "fetchPartMeasuresWholeNotesVectorAt() returns \"" <<
       result.asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1061,7 +1061,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
       wholeNotes.asString () <<
       " in part " << fetchPartNameForTrace () <<
       ", measureOrdinalNumber: " << measureOrdinalNumber <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1087,7 +1087,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
     ss <<
       "measureOrdinalNumber: " << measureOrdinalNumber <<
       ", index: " << index <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1101,7 +1101,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
       currentWholeNotesValue =
         fPartMeasuresWholeNotesVector.at (index);
 
-    // yes
+    // YES
 
     // allow for polymetrics in non-MusicXML contexts? JMI
 #ifdef MF_TRACE_IS_ENABLED
@@ -1557,7 +1557,7 @@ void msrPart::appendPageBreakToPart (
 //       "Inserting hidden measure and barLine at position " <<
 //       positionInMeasure.asString () <<
 //       "' in part clone " << fetchPartNameForTrace () <<
-//       ", line " << inputLineNumber;
+//       ", " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -1625,7 +1625,7 @@ void msrPart::cascadeHandleRepeatStartInPart (
     ss <<
       "Cascading handling a repeat start in part \"" <<
       fetchPartNameForTrace () <<
-      "\", line " << inputLineNumber;
+      "\", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1659,7 +1659,7 @@ void msrPart::cascadeHandleRepeatEndInPart (
     ss <<
       "Cascading handling a repeat end in part \"" <<
       fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1691,7 +1691,7 @@ void msrPart::cascadeHandleRepeatEndingStartInPart (
     ss <<
       "Cascading handling a repeat ENDING start in part \"" <<
       fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1727,7 +1727,7 @@ void msrPart::cascadeHandleRepeatEndingEndInPart (
       msrRepeatEndingKindAsStringForTrace (repeatEndingKind) <<
       " repeat ENDING end in part \"" <<
       fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1764,7 +1764,7 @@ void msrPart::finalizeRepeatEndInPart (
     ss <<
       "Finalizing a repeat upon its end in part \"" <<
       fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1873,7 +1873,7 @@ void msrPart::cascadeAppendMultiMeasureRestToPart (
         multiMeasureRestMeasuresNumber, "measure", "measures") <<
       " to part " <<
       fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2049,7 +2049,7 @@ S_msrStaff msrPart::addRegularStaffToPartByItsNumber (
     ss <<
       "Regular staff number " << staffNumber <<
       " already exists in part " << fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -2067,7 +2067,7 @@ S_msrStaff msrPart::addRegularStaffToPartByItsNumber (
       staffNumber <<
       " (" << staffKind << ")" <<
       " to part " << fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2114,7 +2114,7 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
     ss <<
       "Adding harmonies staff " <<
       " to part " << fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2166,7 +2166,7 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
     ss <<
       "Adding figured bass staff " <<
       " to part " << fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2243,7 +2243,7 @@ void msrPart::sortStavesByIncreasingNumber ()
       ", " <<
       fPartName <<
       " by increasing number";
-//       ", line " << voice->getInputLineNumber ();
+//       ", " << voice->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2317,7 +2317,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       fPartMxmlID <<
 //       ", " <<
 //       fPartName <<
-//       ", line " << inputLineNumber;
+//       ", " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -2362,7 +2362,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       staffNumber <<
 //       " in part \"" <<
 //       getPartName () <<
-//       "\", line " << inputLineNumber;
+//       "\", " << inputLineNumber;
 //
 //     msrError (
 //       gServiceRunData->getInputSourceName (),
@@ -2410,7 +2410,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       fPartMxmlID <<
 //       ", \"" <<
 //       fPartName <<
-// //       ", line " << voice->getInputLineNumber ();
+// //       ", " << voice->getInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -2429,7 +2429,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       voice->getVoiceName () <<
 //       "\", has already been registered in the regular voices map of part \"" << // JMI 0.9.70
 //       getPartName () <<
-//       "\", line " << voice->getInputLineNumber ();
+//       "\", " << voice->getInputLineNumber ();
 //
 //     msrError (
 //       gServiceRunData->getInputSourceName (),
@@ -2463,7 +2463,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       fPartMxmlID <<
 //       ", \"" <<
 //       fPartName <<
-// //       ", line " << voice->getInputLineNumber ();
+// //       ", " << voice->getInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -2482,7 +2482,7 @@ void msrPart::registerVoiceInPartVoicesList (
 //       voice->getVoiceName () <<
 //       "\", has already been registered in the regular voices map of part \"" << // JMI 0.9.70
 //       getPartName () <<
-//       "\", line " << voice->getInputLineNumber ();
+//       "\", " << voice->getInputLineNumber ();
 //
 //     msrError (
 //       gServiceRunData->getInputSourceName (),
@@ -2521,7 +2521,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       "Part \"" <<
       fetchPartNameForTrace () <<
       "\" already has a harmonies voice" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -2543,7 +2543,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       fetchPartNameForTrace () <<
       "\" with staff number " <<
       partHarmoniesStaffNumber <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2568,7 +2568,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       fetchPartNameForTrace () <<
       "\" with voice number " <<
       partHarmoniesVoiceNumber <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2613,7 +2613,7 @@ void msrPart::appendHarmonyToPart (
       " to part " <<
       fetchPartNameForTrace () <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2641,7 +2641,7 @@ void msrPart::appendHarmoniesListToPart (
       "Appending harmonies list to part " << // JMI 0.9.67 HARMFUL
       fetchPartNameForTrace () <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2673,7 +2673,7 @@ void msrPart::cascadeAppendFiguredBassesListToPart (
       "\" to part " <<
       fetchPartNameForTrace () <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2701,7 +2701,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       "Part \"" <<
       fetchPartNameForTrace () <<
       "\" already has a figured bass voice" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -2723,7 +2723,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       fetchPartNameForTrace () <<
       "\" with staff number " <<
       partFiguredBassStaffNumber <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2748,7 +2748,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       fetchPartNameForTrace () <<
       "\" with voice number " <<
       partFiguredBassVoiceNumber <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2793,7 +2793,7 @@ void msrPart::appendFiguredBassToPart (
       "\" to part " <<
       fetchPartNameForTrace () <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
-      ", line " << figuredBass->getInputLineNumber ();
+      ", " << figuredBass->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2826,7 +2826,7 @@ void msrPart::appendFiguredBassToPart (
 //           figuredBass->asString () <<
 //           " to part " <<
 //           fetchPartNameForTrace () <<
-//           ", line " << figuredBass->getInputLineNumber () <<
+//           ", " << figuredBass->getInputLineNumber () <<
 //           std::endl;
 //
 //           gWaeHandler->waeTrace (
@@ -2854,7 +2854,7 @@ void msrPart::appendFiguredBassToPart (
 //           figuredBassSupplierVoice->getVoiceKind () <<
 //           " voice \" " <<
 //           figuredBassSupplierVoice->getVoiceName () <<
-//     //           ", line " << figuredBass->getInputLineNumber ();
+//     //           ", " << figuredBass->getInputLineNumber ();
 //
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
@@ -2886,7 +2886,7 @@ void msrPart::appendFiguredBassToPartClone (
           figuredBass->asString () <<
           " to part clone " <<
           fetchPartNameForTrace () <<
-          ", line " << figuredBass->getInputLineNumber ();
+          ", " << figuredBass->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -2911,7 +2911,7 @@ void msrPart::appendFiguredBassToPartClone (
           figuredBassSupplierVoice->getVoiceKind () <<
           " voice " <<
           figuredBassSupplierVoice->getVoiceName () <<
-          ", line " << figuredBass->getInputLineNumber ();
+          ", " << figuredBass->getInputLineNumber ();
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -3016,7 +3016,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
     ss <<
       "addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded () in " <<
       fetchPartNameForTrace () <<
-      ", line " << skipGraceNotesGroup->getInputLineNumber ();
+      ", " << skipGraceNotesGroup->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3063,7 +3063,7 @@ void msrPart::cascadeFinalizeLastAppendedMeasureInPart (
     ss <<
       "Cascading finalizing last appended measure in part " <<
       fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3146,7 +3146,7 @@ void msrPart::displayPartStavesMap (
     mfSingularOrPlural (
       partStaffVoicesMapSize, "stave", "staves") <<
     ", context: " << context <<
-    ", line " << inputLineNumber <<
+    ", " << inputLineNumber <<
     ":" <<
     std::endl;
 
@@ -3246,7 +3246,7 @@ void msrPart::finalizePart (
     ss <<
       "Finalizing part " <<
       fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3307,7 +3307,7 @@ void msrPart::finalizePartClone (
     ss <<
       "Finalizing part clone " <<
       fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3348,7 +3348,7 @@ void msrPart::finalizePartAndAllItsMeasures (
     ss <<
       "Finalizing all the measures of part \"" <<
       fetchPartNameForTrace () <<
-      "\", line " << inputLineNumber;
+      "\", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3387,7 +3387,7 @@ void msrPart::collectPartMeasuresSlices (
       ' ' <<
       mfSingularOrPlural (
         partAllStavesListSize, "voice", "voices") <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3626,7 +3626,7 @@ void msrPart::browseData (basevisitor* v)
         ss <<
           "staves browsing order is unknown in score, part: \"" <<
           fetchPartNameForTrace () <<
-              ", line " << fInputLineNumber;
+              ", " << fInputLineNumber;
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -3724,7 +3724,7 @@ std::string msrPart::asString () const
     "\", fPartPathLikeName: " << fPartPathLikeName <<
     fPartName <<
     "\", fPartAllStavesList.size (): " << fPartAllStavesList.size () <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -3772,7 +3772,7 @@ void msrPart::print (std::ostream& os) const
     mfSingularOrPlural (
       fPartAllStavesList.size (), "staff", "staves") <<
     ")" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -3947,7 +3947,7 @@ void msrPart::printFull (std::ostream& os) const
     mfSingularOrPlural (
       fPartAllStavesList.size (), "staff", "staves") <<
     ")" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

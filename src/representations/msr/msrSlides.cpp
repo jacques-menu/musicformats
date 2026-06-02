@@ -203,7 +203,7 @@ std::string msrSlide::asString () const
     ", fSlideTypeKind: " << fSlideTypeKind <<
     ", fSlideLineTypeKind: " << fSlideLineTypeKind <<
     ", fSlideTextValue: \"" << fSlideTextValue << "\"" <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -212,7 +212,7 @@ void msrSlide::print (std::ostream& os) const
 {
   os <<
     "[Slide" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']' <<
     std::endl;
 

@@ -221,7 +221,7 @@ Bool msrPathToVoice::pathContainsVoice (const S_msrVoice& voice)
 //
 //   ss <<
 //     "Tie" << ' ' << msrPathToVoiceKindAsString (fTieKind) <<
-//     ", line " << fInputLineNumber;
+//     ", " << fInputLineNumber;
 //
 //   return ss.str ();
 // }

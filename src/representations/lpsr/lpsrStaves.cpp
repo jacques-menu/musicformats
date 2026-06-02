@@ -181,7 +181,7 @@ std::string lpsrNewStaffGroupBlock::asString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -333,7 +333,7 @@ std::string lpsrNewStaffTuningBlock::asString () const
 
   ss <<
     ", fStaffTuning: " << msrElementAsStringOrNULL (fStaffTuning) <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -506,7 +506,7 @@ std::string lpsrNewStaffBlock::asString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -726,7 +726,7 @@ std::string lpsrStaffBlock::asString () const
   ss <<
     ", fStaffBlockInstrumentName: " << fStaffBlockInstrumentName <<
     ", fStaffBlockShortInstrumentName: " << fStaffBlockShortInstrumentName <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

@@ -227,6 +227,11 @@ class EXP msrTimeSignature : public msrMeasureElement
     Bool                  getTimeIsCompound () const
                               { return fTimeIsCompound; }
 
+    void                  setTimeSignatureIsHidden (Bool value)
+                              { fTimeSignatureIsHidden = value; }
+    Bool                  getTimeSignatureIsHidden ()
+                              { return fTimeSignatureIsHidden; }
+
     const std::vector <S_msrTimeSignatureItem>&
                           getTimeSignatureItemsVector () const
                               { return fTimeSignatureItemsVector; }
@@ -282,6 +287,8 @@ class EXP msrTimeSignature : public msrMeasureElement
     // or if the only one has several beats numbers
     // i.e. 3/4 is not, (3+4)/8 is, and 2/4+3/4 is too
     Bool                  fTimeIsCompound;
+
+    Bool                  fTimeSignatureIsHidden;
 };
 typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
 EXP std::ostream& operator << (std::ostream& os, const S_msrTimeSignature& elt);

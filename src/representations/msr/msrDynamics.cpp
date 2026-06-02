@@ -418,7 +418,7 @@ void msrDynamic::print (std::ostream& os) const
     fDynamicKind <<
     ", fDynamicPlacementKind: " <<
     fDynamicPlacementKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 }
 
@@ -725,7 +725,7 @@ void msrCrescDecresc::print (std::ostream& os) const
 {
   os <<
     "[CrescDecresc " << fCrescDecrescKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   os << ']' << std::endl;
@@ -924,7 +924,7 @@ std::string msrWedge::asString () const
     ", fWedgeNumber: " << fWedgeNumber <<
     ", fWedgeKind: " << fWedgeKind <<
     ", fWedgeVoiceNumber: " << fWedgeVoiceNumber <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }

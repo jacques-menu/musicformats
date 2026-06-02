@@ -95,7 +95,7 @@ S_mxsrMultiMeasureRestEvent mxsrMultiMeasureRestEvent::create (
 //     ss <<
 //       "--> Registering multi-measure rest end event " <<
 //       multiMeasureRestEndEvent->asString () <<
-//       ", line " << eventInputLineNumber;
+//       ", " << eventInputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),

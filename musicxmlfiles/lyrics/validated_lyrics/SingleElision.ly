@@ -1,0 +1,172 @@
+\version "2.24.4"
+
+% Generated from "SingleElision.xml"
+% by xml2ly v2026.2 (built on June 02, 2026)
+% on Tuesday 2026-06-02 @ 06:38:24 CEST
+
+% The conversion command as supplied was: 
+%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos SingleElision.xml
+% or, with short option names:
+%      SingleElision.xml
+
+
+% Scheme function(s): "date & time"
+% A set of functions to obtain the LilyPond file creation or modification time.
+
+#(define commandLine                  (object->string (command-line)))
+#(define loc                          (+ (string-rindex commandLine #\space ) 2))
+#(define commandLineLength            (- (string-length commandLine) 2))
+#(define lilypondFileName             (substring commandLine loc commandLineLength))
+
+#(define lilypondFileDirName          (dirname lilypondFileName))
+#(define lilypondFileBaseName         (basename lilypondFileName))
+#(define lilypondFileSuffixlessName   (basename lilypondFileBaseName ".ly"))
+
+#(define pdfFileName                  (string-append lilypondFileSuffixlessName ".pdf"))
+#(define pdfFileFullName              (string-append lilypondFileDirName file-name-separator-string pdfFileName))
+
+#(define lilypondVersion              (object->string (lilypond-version)))
+#(define currentDate                  (strftime "%d/%m/%Y" (localtime (current-time))))
+#(define currentTime                  (strftime "%H:%M:%S" (localtime (current-time))))
+
+#(define lilypondFileModificationTime (stat:mtime (stat lilypondFileName)))
+
+#(define lilypondFileModificationTimeAsString (strftime "%A %d/%m/%Y, %H:%M:%S" (localtime lilypondFileModificationTime)))
+
+#(use-modules (srfi srfi-19))
+% https://www.gnu.org/software/guile/manual/html_node/SRFI_002d19-Date-to-string.html
+%#(define pdfFileCreationTime (date->string (current-date) "~A, ~B ~e ~Y ~H:~M:~S"))
+#(define pdfFileCreationTime (date->string (current-date) "~A ~d/~m/~Y, ~H:~M:~S"))
+
+
+\header {
+  movementTitle       = "Single Elision"
+  title               = "Single Elision"
+}
+
+\paper {
+  % horizontal-shift = 0.0\mm
+  % indent = 0.0\mm
+  % short-indent = 0.0\mm
+  
+  % markup-system-spacing-padding = 0.0\mm
+  % between-system-space = 0.0\mm
+  % page-top-space = 0.0\mm
+  
+  % page-count = -1
+  % system-count = -1
+  
+  oddHeaderMarkup = \markup {
+    \fill-line {
+      \unless \on-first-page {
+        \fromproperty #'page:page-number-std::string
+        ' '
+        \fromproperty #'header:title
+        ' '
+        \fromproperty #'header:subtitle
+      }
+    }
+  }
+
+  evenHeaderMarkup = \markup {
+    \fill-line {
+      \unless \on-first-page {
+        \fromproperty #'page:page-number-std::string
+        ' '
+        \fromproperty #'header:title
+        ' '
+        \fromproperty #'header:subtitle
+      }
+    }
+  }
+
+  oddFooterMarkup = \markup {
+    \tiny
+    \column {
+      \fill-line {
+        #(string-append
+"Score generated from MusicXML data by xml2ly v2026.2 (built on June 02, 2026) and LilyPond " (lilypond-version))
+      }
+      \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
+      \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
+     \fill-line { \column { \italic { \concat { "lilypondFileDirName: " \lilypondFileDirName } } } }
+     \fill-line { \column { \italic { \concat { "pdfFileFullName: " \pdfFileFullName } } } }
+%      \fill-line { \column { \italic { \concat { "lilypondFileBaseName: " \lilypondFileBaseName } } } }
+%      \fill-line { \column { \italic { \concat { "lilypondFileSuffixlessName: " \lilypondFileSuffixlessName } } } }
+%      \fill-line { \column { \italic { \concat { "pdfFileName: " \pdfFileName } } } }
+    }
+  }
+
+  % evenFooterMarkup = ""
+}
+
+\layout {
+  \context { \Score
+    autoBeaming = ##f % to display tuplets brackets
+  }
+  \context { \Voice
+  }
+}
+
+Part_POne_Staff_One_Voice_One = \absolute {
+  \language "nederlands"
+  
+  \clef "treble"
+  \key bes \major
+  \time 4/4
+  \stemDown bes'4 bes'8. c''16 \stemUp bes'8 [
+  ( a' ]
+  ) g'8. [
+  ( a'16 ]
+  ) \stemDown bes'4. ( c''8 ) d''4 r
+  \bar "|."
+}
+
+Part_POne_Staff_One_Voice_One_Stanza_One = \lyricmode {
+  % ===> using explicit lyrics durations mode
+  \set associatedVoice  = #"Part_POne_Staff_One_Voice_One#"
+  \set ignoreMelismata = ##t
+    Il4 mio8. te16 -- so8 8 "r‿n"8. -- 16 | % 5316
+    tan4. 8 to4 4 | % 5316
+
+}
+
+\book {
+
+  \score {
+    <<
+      
+      <<
+      
+        \new Staff  = "Part_POne_Staff_One"
+        \with {
+          instrumentName = "[Unnamed (treble staff)]"
+        }
+        <<
+          \context Voice = "Part_POne_Staff_One_Voice_One" <<
+            \Part_POne_Staff_One_Voice_One
+          >>
+          \new Lyrics
+            \with {
+            }
+            \Part_POne_Staff_One_Voice_One_Stanza_One
+        >>
+      
+      >>
+    
+    >>
+    
+    \layout {
+      \context { \Score
+        autoBeaming = ##f % to display tuplets brackets
+      }
+      \context { \Voice
+      }
+    }
+    
+    \midi {
+      \tempo 16 = 360
+    }
+  }
+  
+}

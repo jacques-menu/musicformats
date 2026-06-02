@@ -125,7 +125,7 @@ std::string lpsrBarNumberCheck::asString () const
   ss <<
     "[BarNumberCheck" <<
     ", fNextBarNumber: " << fNextBarNumber <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -247,7 +247,7 @@ std::string lpsrBarCommand::asString () const
 
   ss <<
     "[BarCommand" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

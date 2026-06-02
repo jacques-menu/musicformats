@@ -139,7 +139,7 @@ bsrTimeSignatureItem::bsrTimeSignatureItem (
 
     ss <<
       "Creating time signature item" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -364,7 +364,7 @@ std::string bsrTimeSignatureItem::asString () const
   } // switch
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -883,7 +883,7 @@ std::string bsrTimeSignature::asString () const
     bsrTimeSignatureKindAsString (fTimeKind) <<
     ", timeCellsList: " << fetchCellsList ()->asString () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -909,7 +909,7 @@ void bsrTimeSignature::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       timeSignatureItemsVectorSize, "item", "items") <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ":" <<
     std::endl;
 

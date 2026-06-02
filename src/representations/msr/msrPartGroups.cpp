@@ -163,7 +163,7 @@ msrPartGroup::msrPartGroup (
       "Creating part group '" << fPartGroupNumber << '\'' <<
       ", partGroupSequentialNumber: " << fPartGroupSequentialNumber <<
       ", nested in part group '" << fPartGroupUpLinkToContainingPartGroup << '\'' <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -240,7 +240,7 @@ msrPartGroup::msrPartGroup (
       "Creating part group '" << fPartGroupNumber << '\'' <<
       ", partGroupSequentialNumber: " << fPartGroupSequentialNumber <<
       ", nested in part group '" << fPartGroupUpLinkToContainingPartGroup << '\'' <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -748,7 +748,7 @@ void msrPartGroup::prependNestedGroupToPartGroup (
               nestedPartGroup->asString () <<
               " to outer-most part group " <<
               asString () <<
-              ", line " << nestedPartGroup->getInputLineNumber ();
+              ", " << nestedPartGroup->getInputLineNumber ();
 
               mfAssert (
                 __FILE__, mfInputLineNumber (__LINE__),
@@ -821,7 +821,7 @@ void msrPartGroup::appendNestedPartGroupToPartGroup (
               nestedPartGroup->asString () <<
               " to outer-most part group " <<
               asString () <<
-              ", line " << nestedPartGroup->getInputLineNumber ();
+              ", " << nestedPartGroup->getInputLineNumber ();
 
               mfAssert (
                 __FILE__, mfInputLineNumber (__LINE__),
@@ -1452,7 +1452,7 @@ std::string msrPartGroup::asString () const
     fPartGroupName <<
     ", " <<
     fetchPartGroupInformationForTrace () <<
-    ", line " << fInputLineNumber << // JMI non significant
+    ", " << fInputLineNumber << // JMI non significant
     ']';
 
   return ss.str ();
@@ -1471,7 +1471,7 @@ void msrPartGroup::print (std::ostream& os) const
     fPartGroupName <<
     ", " <<
     fetchPartGroupInformationForTrace () <<
-    ", line " << fInputLineNumber << // JMI non significant
+    ", " << fInputLineNumber << // JMI non significant
     std::endl;
 
   ++gIndenter;
@@ -1514,7 +1514,7 @@ void msrPartGroup::printFull (std::ostream& os) const
     ", " <<
     fetchPartGroupInformationForTrace () <<
 //     ", fPartGroupPartsMap.size(): " << fPartGroupPartsMap.size () <<
-    ", line " << fInputLineNumber << // JMI non significant
+    ", " << fInputLineNumber << // JMI non significant
     std::endl;
 
   ++gIndenter;

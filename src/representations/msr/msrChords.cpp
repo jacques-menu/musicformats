@@ -556,7 +556,7 @@ void msrChord::setChordGraceNotesGroupLinkBefore (
       asString () <<
       " to " <<
       chordChordGraceNotesGroupLinkBefore->asShortString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -582,7 +582,7 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
       asString () <<
       " to " <<
       chordChordGraceNotesGroupLinkAfter->asShortString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -860,7 +860,7 @@ void msrChord::copyNoteValuesToChord (
       note->asString () <<
       " to current chord " <<
       asString () <<
-      ", line " << note->getInputLineNumber ();
+      ", " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1579,7 +1579,7 @@ void msrChord::appendNoteBeamsListLinksToChord (
         " from note " << note->asString () <<
         " to chord" <<
         asString () <<
-        ", line " << note->getInputLineNumber ();
+        ", " << note->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -2542,7 +2542,7 @@ void msrChord::appendChordBeamLinkToChord (
 //     ss <<
 //       "Finalizing chord " <<
 //       asString () <<
-//       ", line " << inputLineNumber <<
+//       ", " << inputLineNumber <<
 //       std::endl <<
 //       "fMeasureElementPositionInMeasure: " <<
 //       std::endl <<
@@ -2953,7 +2953,7 @@ void msrChord::applyTupletMemberDisplayFactorToChordMembers (
       "Applying tuplet member sounding factor " <<
       actualNotes << '/' << normalNotes <<
       " to the members of chord " << asStringwithRawDivisions () <<
-      ", line " << fInputLineNumber <<
+      ", " << fInputLineNumber <<
       std::endl;
 
   for (
@@ -3011,7 +3011,7 @@ std::string msrChord::asString () const
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes <<
     ", fChordInKind: " << fChordInKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ", fChordNotesVector: <";
 
   if (fChordNotesVector.size ()) {
@@ -3051,7 +3051,7 @@ std::string msrChord::asShortString () const
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes <<
     ", fChordInKind: " << fChordInKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ", fChordNotesVector: <";
 
   if (fChordNotesVector.size ()) {
@@ -3100,7 +3100,7 @@ void msrChord::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fChordNotesVector.size (), "note", "notes") <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -3897,7 +3897,7 @@ void msrChord::printFull (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fChordNotesVector.size (), "note", "notes") <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -4776,7 +4776,7 @@ std::string msrChordBeamLink::asShortString () const
     fOriginalBeam->asShortString () <<
     ", fUpLinkToChord:" <<
     fUpLinkToChord->asShortString () <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -4792,7 +4792,7 @@ std::string msrChordBeamLink::asString () const
     fOriginalBeam->asString () <<
     ", fUpLinkToChord: " <<
     fUpLinkToChord->asString () <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -4802,7 +4802,7 @@ void msrChordBeamLink::printFull (std::ostream& os) const
 {
   os <<
     "[ChordBeamLink" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -4830,7 +4830,7 @@ void msrChordBeamLink::print (std::ostream& os) const
 {
   os <<
     "[ChordBeamLink" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -5033,7 +5033,7 @@ std::string msrChordSlurLink::asShortString () const
     fOriginalSlur->asShortString () <<
     ", fUpLinkToChord: " <<
     fUpLinkToChord->asShortString () <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -5049,7 +5049,7 @@ std::string msrChordSlurLink::asString () const
     fOriginalSlur->asString () <<
     ", fUpLinkToChord: " <<
     fUpLinkToChord <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -5059,7 +5059,7 @@ void msrChordSlurLink::print (std::ostream& os) const
 {
   os <<
     "[ChordSlurLink" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -5263,7 +5263,7 @@ std::string msrChordGraceNotesGroupLink::asShortString () const
     fOriginalGraceNotesGroup->asShortString () <<
     ", fUpLinkToChord \"" <<
     fUpLinkToChord->asShortString () <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -5279,7 +5279,7 @@ std::string msrChordGraceNotesGroupLink::asString () const
     fOriginalGraceNotesGroup->asString () <<
     ", fUpLinkToChord \"" <<
     fUpLinkToChord <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -5289,7 +5289,7 @@ void msrChordGraceNotesGroupLink::print (std::ostream& os) const
 {
   os <<
     "[ChordGraceNotesGroupLink" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -5316,7 +5316,7 @@ void msrChordGraceNotesGroupLink::printFull (std::ostream& os) const
 {
   os <<
     "[ChordGraceNotesGroupLink" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

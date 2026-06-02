@@ -130,7 +130,7 @@ std::string lpsrUseVoiceCommand::asString () const
 
   ss <<
     ", fVoice: " << fVoice <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

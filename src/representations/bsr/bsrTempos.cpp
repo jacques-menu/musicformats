@@ -314,7 +314,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
                 "tempoPerMinuteString '" <<
                 tempoPerMinuteString <<
                 "' is ill-formed" <<
-                ", line " << fInputLineNumber;
+                ", " << fInputLineNumber;
 
               bsrInternalError (
                 gServiceRunData->getInputSourceName (),
@@ -474,7 +474,7 @@ std::string bsrTempo::asString () const
     ", tempoCellsList: " <<
     fTempoCellsList->asShortString () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -523,7 +523,7 @@ void bsrTempo::print (std::ostream& os) const
 {
   os <<
     "Tempo" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

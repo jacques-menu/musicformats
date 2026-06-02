@@ -453,7 +453,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       fStringToMsrSemiTonesPitchAndOctaveMapVariable.find (partName);
 
   if (it != fStringToMsrSemiTonesPitchAndOctaveMapVariable.end ()) {
-    // yes, issue error message
+    // YES, issue error message
     std::stringstream ss;
 
     ss <<
@@ -465,6 +465,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
   }
 
   else {
+    // NO
     fStringToMsrSemiTonesPitchAndOctaveMapVariable [partName] =
       msrSemiTonesPitchAndOctave::createFromString (
         K_MF_INPUT_LINE_UNKNOWN_,
@@ -858,7 +859,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       fStringToMsrSemiTonesPitchAndOctaveMapVariable.find (PartMxmlID);
 
   if (it != fStringToMsrSemiTonesPitchAndOctaveMapVariable.end ()) {
-    // yes, issue error message
+    // YES, issue error message
     std::stringstream ss;
 
     ss <<
@@ -870,6 +871,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   }
 
   else {
+    // NO
     fStringToMsrSemiTonesPitchAndOctaveMapVariable [PartMxmlID] =
       msrSemiTonesPitchAndOctave::createFromString (
         K_MF_INPUT_LINE_UNKNOWN_,

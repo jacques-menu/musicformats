@@ -236,7 +236,7 @@ std::string lpsrParallelMusicBLock::asString () const
     ", fElementsSeparatorKind: " << fElementsSeparatorKind;
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

@@ -250,7 +250,7 @@ std::string bsrMusicHeading::asString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -281,7 +281,7 @@ void bsrMusicHeading::print (std::ostream& os) const
 {
   os <<
     "MusicHeading" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

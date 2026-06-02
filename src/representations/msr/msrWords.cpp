@@ -212,7 +212,7 @@ std::string msrWords::asString () const
 
   ss <<
     "Words" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ' ' <<
     fWordsContents << ", fWordsPlacementKind: " <<
     fWordsPlacementKind;
@@ -226,7 +226,7 @@ void msrWords::print (std::ostream& os) const
 
   os <<
     "[Words" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

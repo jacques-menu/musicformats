@@ -467,12 +467,12 @@ Bool msdlParser::checkMandatoryTokenKind (
 
   // is the current token kind tokenKind?
   if (fCurrentTokenKind == tokenKind) {
-    // yes, we found it
+    // YES, we found it
     result = true;
   }
 
   else {
-    // no, error, fCurrentToken is not the one we expected
+    // NO, error, fCurrentToken is not the one we expected
     fParserWaeHandler->
       unexpectedToken (fCurrentToken, context);
 
@@ -669,12 +669,12 @@ Bool msdlParser::checkOptionalTokenKind (
   else {
     // is the current token kind tokenKind?
     if (fCurrentTokenKind == tokenKind) {
-      // yes
+      // YES
       result = true;
     }
 
     else if (false) { // JMI
-      // no
+      // NO
 
       // consume tokens until one is found that is either
       // tokenKind or in the stopperTokensSet sets in the stack,

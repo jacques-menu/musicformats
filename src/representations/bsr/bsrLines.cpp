@@ -511,7 +511,7 @@ std::string bsrLine::asString () const
     ", cellsPerLine" << ": " << fCellsPerLine <<
     ", lineContents: " << fLineContentsList.size () <<
     ", cellsNumber" << ": " << fetchCellsNumber () <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }

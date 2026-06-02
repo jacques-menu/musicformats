@@ -214,7 +214,7 @@ std::string bsrPage::asString () const
     ", braillePageNumber" << ": " << fBraillePageNumber <<
     ", linesPerPage" << ": " << fLinesPerPage <<
     ", elements: " << fPageElementsList.size () <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -225,7 +225,7 @@ void bsrPage::print (std::ostream& os) const
     "Page" <<
     ", printPageNumber: " << fPrintPageNumber <<
     ", lineContentsNumber: " << fetchLineContentsNumber () <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

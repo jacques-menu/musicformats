@@ -238,7 +238,7 @@ std::string msrTransposition::asString () const
     ", fTranspositionChromatic: " << fTranspositionChromatic <<
     ", fTranspositionOctaveChange: " << fTranspositionOctaveChange <<
     ", fTranspositionDouble: " << fTranspositionDouble <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -250,7 +250,7 @@ void msrTransposition::print (std::ostream& os) const
 
   os <<
     "[Transpose" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

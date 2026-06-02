@@ -372,7 +372,7 @@ std::string msrBassFigure::asString () const
     fFigurePrefixKind <<
     ", suffix: " <<
     fFigureSuffixKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -548,7 +548,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
     ss <<
       "Creating a newborn clone of figured bass " <<
       asShortString () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -591,7 +591,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
     ss <<
       "Creating a deep clone of figuredBass " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -878,7 +878,7 @@ std::string msrFiguredBass::asString () const
 //     ", voicePosition: " << fMeasureElementVoicePosition;
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -973,7 +973,7 @@ std::string msrFiguredBass::asString () const
 // //     ", voicePosition: " << fMeasureElementVoicePosition;
 //
 //   ss <<
-//     ", line " << fInputLineNumber <<
+//     ", " << fInputLineNumber <<
 //     ']';
 //
 //   return ss.str ();
@@ -983,7 +983,7 @@ void msrFiguredBass::print (std::ostream& os) const
 {
   os <<
     "[FiguredBass" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

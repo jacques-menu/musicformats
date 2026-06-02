@@ -654,7 +654,7 @@ std::string msrBarLine::asShortString () const
     ", " <<
     ", fBarLineTimes: \"" <<
     fBarLineTimes << "\"" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -707,7 +707,7 @@ std::string msrBarLine::asString () const
     msrBarLineHasCodaKindAsString (
       fBarLineHasCodaKind) <<
 
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -719,7 +719,7 @@ void msrBarLine::printFull (std::ostream& os) const
     "[BarLine" <<
     ", fBarLineCategoryKind: " <<
     fBarLineCategoryKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -825,7 +825,7 @@ void msrBarLine::print (std::ostream& os) const
   os <<
     "[BarLine" <<
     ", " << fStyleKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

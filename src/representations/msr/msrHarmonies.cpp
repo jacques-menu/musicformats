@@ -2745,7 +2745,7 @@ void msrHarmonyInterval::print (std::ostream& os) const
     "fHarmonyIntervalIntervalKind" << ": " <<
     fHarmonyIntervalRelativeOctave <<
   /* JMI
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     */
     std::endl;
 
@@ -2845,7 +2845,7 @@ msrModeKind modeKindFromString (
       "mode std::string \"" <<
       modeString <<
       "\" is unknown" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     msrError (
       gServiceRunData->getInputSourceName (),
@@ -3865,7 +3865,7 @@ std::string msrHarmonyDegree::asString () const
     ", fHarmonyDegreeAlterationKind: " <<
     msrAlterationKindAsString (
       fHarmonyDegreeAlterationKind) <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -4204,7 +4204,7 @@ void msrHarmonyContents::print (std::ostream& os) const
   os <<
     "HarmonyContents" <<
   /* JMI
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     */
     std::endl;
 
@@ -4435,7 +4435,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
     ss <<
       "Creating a newborn clone of harmony " <<
       asShortString () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4488,7 +4488,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
     ss <<
       "Creating a deep clone of harmony " <<
       asShortString () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4620,7 +4620,7 @@ void msrHarmony::setHarmonyTupletFactor (
       asShortString () <<
       " to " <<
       tupletFactor.asString () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4789,7 +4789,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 //       this->asShortString () <<
 //       " in voice \"" <<
 //       fHarmoniesUpLinkToVoice->getVoiceName () <<
-//       "\", line " << inputLineNumber <<
+//       "\", " << inputLineNumber <<
 //       std::endl;
 //
 //       gWaeHandler->waeTrace (
@@ -5006,7 +5006,7 @@ std::string msrHarmony::asShortString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -5148,7 +5148,7 @@ std::string msrHarmony::asString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -5236,7 +5236,7 @@ std::string msrHarmony::asString () const
 //   }
 //
 //   ss <<
-//     ", line " << fInputLineNumber <<
+//     ", " << fInputLineNumber <<
 //     ']';
 //
 //   return ss.str ();
@@ -5246,7 +5246,7 @@ void msrHarmony::print (std::ostream& os) const
 {
   os <<
     "[Harmony" <<
-     ", line " << fInputLineNumber <<
+     ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -7217,7 +7217,7 @@ void msrHarmonyStructure::print (std::ostream& os) const
     mfSingularOrPlural (
       fHarmonyStructureIntervals.size (), "interval", "intervals") <<
   /* JMI
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     */
     std::endl;
 

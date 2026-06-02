@@ -116,7 +116,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
       fStringSetVariable.find (partName);
 
   if (it != fStringSetVariable.end ()) {
-    // yes, issue error message
+    // YES, issue error message
     std::stringstream ss;
 
     ss <<
@@ -129,6 +129,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
   }
 
   else {
+    // NO
     fStringSetVariable.insert (partName);
   }
 
@@ -446,7 +447,7 @@ void msrKeepPartAtom::applyAtomWithValue (
       fStringSetVariable.find (partName);
 
   if (it != fStringSetVariable.end ()) {
-    // yes, issue error message
+    // YES, issue error message
     std::stringstream ss;
 
     ss <<
@@ -459,6 +460,7 @@ void msrKeepPartAtom::applyAtomWithValue (
   }
 
   else {
+    // NO
     fStringSetVariable.insert (partName);
   }
 

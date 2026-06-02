@@ -194,7 +194,7 @@ msrClefKind msrClefKindFromString (
       "clef string \"" <<
       clefString <<
       "\" is unknown" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     msrError (
       gServiceRunData->getInputSourceName (),
@@ -680,7 +680,7 @@ std::string msrClef::asString () const
     "[Clef" <<
     ", fClefKind: " << msrClefKindAsString (fClefKind) <<
     ", fClefStaffNumber: " << fClefStaffNumber <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

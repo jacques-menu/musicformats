@@ -199,7 +199,7 @@ std::string msrSyllableElement::asString () const
     "[SyllableElement" <<
     ", fSyllableElementKind: " << fSyllableElementKind <<
     ", fSyllableElementContents: \"" << fSyllableElementContents << "\"" <<
-    ", line " << fInputLineNumber <<
+    ", fInputLineNumber: " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -217,14 +217,14 @@ void msrSyllableElement::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fSyllableElementKind" << ": " <<
-    fSyllableElementKind <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
     "fSyllableElementContents" << ": \"" <<
     fSyllableElementContents <<
     "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fSyllableElementKind" << ": " <<
+    fSyllableElementKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -251,23 +251,21 @@ std::string syllableElementsListAsString (
 
   ss << '[';
 
-//   if (! syllableElementsList.empty ()) {
-//     std::list <msrSyllableElement>::const_iterator
-//       iBegin = syllableElementsList.begin (),
-//       iEnd   = syllableElementsList.end (),
-//       i      = iBegin;
-//
-//     for ( ; ; ) {
-//       ss << (*i).asString ();
-//       if (++i == iEnd) break;
-//       ss << ", ";
-//     } // for
-//   }
-
   if (! syllableElementsList.empty ()) { // KRAKRA 2026.2
-    for (msrSyllableElement syllableElement : syllableElementsList) {
+    std::list <msrSyllableElement>::const_iterator
+      iBegin = syllableElementsList.begin (),
+      iEnd   = syllableElementsList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      msrSyllableElement syllableElement = (*i);
+
       ss <<
-        syllableElement.getSyllableElementContents ();
+        '\"' <<
+        syllableElement.getSyllableElementContents () <<
+        '\"';
+      if (++i == iEnd) break;
+      ss << ", ";
     } // for
   }
 
@@ -659,7 +657,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone ()
 //           "syllable with measure number '" <<
 //           measureNumber <<
 //           "' is no line nor page break" <<
-//           ", line " << fInputLineNumber; // JMI 0.9.70
+//           ", " << fInputLineNumber; // JMI 0.9.70
 //
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
@@ -712,6 +710,20 @@ void msrSyllable::appendSyllableElementToSyllable (
 
   fSyllableElementsList.push_back (
     syllableElement);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceLyrics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "===> This gives: " <<
+      asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, mfInputLineNumber (__LINE__),
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrSyllable::setSyllableUpLinkToNote (const S_msrNote& note)
@@ -901,8 +913,9 @@ std::string msrSyllable::asString () const
     ", fSyllableElementsList: " <<
     syllableElementsListAsString (fSyllableElementsList) <<
     ", fSyllableKind: " << fSyllableKind <<
-    ", fSyllableExtendKind: " << fSyllableExtendKind <<
+    ", " << fInputLineNumber <<
     ", fSyllableStanzaNumber: \"" << fSyllableStanzaNumber << "\"" <<
+    ", fSyllableExtendKind: " << fSyllableExtendKind <<
     ", fSyllableWholeNotes: " << fSyllableWholeNotes.asFractionString () <<
     ", fSyllableTupletFactor: " << fSyllableTupletFactor.asFractionString ();
 
@@ -917,11 +930,14 @@ std::string msrSyllable::asString () const
     }
 
   ss <<
-    ", line " << fInputLineNumber;
-
-  ss <<
-    ", " <<
-    syllableUpLinkToNoteAsString ();
+    ", fSyllableUpLinkToNote: ";
+  if (fSyllableUpLinkToNote) {
+    ss <<
+      fSyllableUpLinkToNote->asShortString ();
+  }
+  else {
+    ss << "[NULL]";
+  }
 
   switch (fSyllableKind) {
     case msrSyllableKind::kSyllableNone:
@@ -945,16 +961,6 @@ std::string msrSyllable::asString () const
       break;
   } // switch
 
-  ss << // JMI LENK
-    ", fSyllableUpLinkToNote: ";
-  if (fSyllableUpLinkToNote) {
-    ss <<
-      fSyllableUpLinkToNote->asShortString ();
-  }
-  else {
-    ss << "[NULL]";
-  }
-
   ss <<
     ", fSyllableUpLinkToStanza: ";
   if (fSyllableUpLinkToStanza) {
@@ -976,7 +982,11 @@ void msrSyllable::print (std::ostream& os) const
     "[Syllable" <<
     ", fSyllableElementsList: " <<
     syllableElementsListAsString (fSyllableElementsList) <<
-    ", line " << fInputLineNumber << ":" <<
+    ", fSyllableKind: " <<
+    fSyllableKind <<
+    ", " << fInputLineNumber <<
+    ", fSyllableStanzaNumber: \"" << fSyllableStanzaNumber << "\"" <<
+    ", " << fInputLineNumber << ":" <<
     std::endl;
 
   ++gIndenter;
@@ -992,9 +1002,9 @@ void msrSyllable::print (std::ostream& os) const
     "fSyllableExtendKind" << ": " << fSyllableExtendKind <<
     std::endl <<
 
-    std::setw (fieldWidth) <<
-    "fSyllableStanzaNumber" << ": \"" << fSyllableStanzaNumber << "\"" <<
-    std::endl <<
+//     std::setw (fieldWidth) <<
+//     "fSyllableStanzaNumber" << ": \"" << fSyllableStanzaNumber << "\"" <<
+//     std::endl <<
 
     std::setw (fieldWidth) <<
     "fSyllableWholeNotes" << ": " << fSyllableWholeNotes.asFractionString () <<
@@ -1005,6 +1015,7 @@ void msrSyllable::print (std::ostream& os) const
     std::endl;
 
   os << std::left <<
+    std::setw (fieldWidth) <<
     "fSyllableUpLinkToMeasure" << ": ";
   if (fSyllableUpLinkToMeasure) {
     os <<
@@ -1040,7 +1051,8 @@ void msrSyllable::printFull (std::ostream& os) const
     syllableElementsListAsString (fSyllableElementsList) <<
     ", fSyllableKind: " <<
     fSyllableKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
+    ", fSyllableStanzaNumber: \"" << fSyllableStanzaNumber << "\"" <<
     std::endl;
 
   ++gIndenter;
@@ -1053,11 +1065,11 @@ void msrSyllable::printFull (std::ostream& os) const
     fSyllableExtendKind <<
     std::endl <<
 
-    std::setw (fieldWidth) <<
-    "fSyllableStanzaNumber" << ": \"" <<
-    fSyllableStanzaNumber <<
-    "\"" <<
-    std::endl <<
+//     std::setw (fieldWidth) <<
+//     "fSyllableStanzaNumber" << ": \"" <<
+//     fSyllableStanzaNumber <<
+//     "\"" <<
+//     std::endl <<
 
     std::setw (fieldWidth) <<
     "fSyllableWholeNotes" << ": " <<
@@ -1370,7 +1382,7 @@ void msrStanza::appendSyllableToStanza (
       fStanzaMeasureCurrentPositionInMeasure.asString () <<
       ", positionsDelta: " <<
       positionsDelta.asString () <<
-      ", line " << syllable->getInputLineNumber ();
+      ", " << syllable->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1378,7 +1390,7 @@ void msrStanza::appendSyllableToStanza (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   // pad up stanza if relevant
+  // pad up stanza if relevant
   if (positionsDelta.getNumerator () != 0) { // JMI 0.9.70 BABASSE 2026.2
     // create a skip on rest note syllable
     S_msrSyllable
@@ -1392,12 +1404,12 @@ void msrStanza::appendSyllableToStanza (
           msrTupletFactor (1, 1),
           this);
 
-//     // append it to this stanza // JMI 2026.2
-//     fSyllables.push_back (skipRestNoteSyllable);
-//
-//     // account for syllable length
-//     fStanzaMeasureCurrentPositionInMeasure +=
-//       skipRestNoteSyllable->getSyllableWholeNotes ();
+    // append it to this stanza // JMI 2026.2
+    fSyllables.push_back (skipRestNoteSyllable);
+
+    // account for syllable length
+    fStanzaMeasureCurrentPositionInMeasure +=
+      skipRestNoteSyllable->getSyllableWholeNotes ();
   }
 
   // append syllable to this stanza
@@ -1443,6 +1455,28 @@ void msrStanza::appendSyllableToStanza (
         "syllable type has not been set");
       break;
   } // switch
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceLyrics ()) {
+    std::stringstream ss;
+
+    gLog <<
+      std::endl << std::endl <<
+      ">>>====== RESULTING " <<
+      getStanzaName () <<
+      "STANZA:" <<
+      std::endl;
+    print (gLog);
+    gLog <<
+      std::endl << std::endl <<
+      "<<<======" <<
+      std::endl << std::endl;
+
+//     gWaeHandler->waeTrace (
+//       __FILE__, mfInputLineNumber (__LINE__),
+//       ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrStanza::appendSyllableToStanzaClone (
@@ -1550,7 +1584,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
       fStanzaMeasureCurrentPositionInMeasure <<
       ", positionsDelta: " <<
       positionsDelta.asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1632,7 +1666,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
       "Appending a 'LineBreak' syllable" <<
       " to stanza " << getStanzaName () <<
       ", upLinkToMeasure: " << upLinkToMeasure->asShortString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1694,7 +1728,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
       "Appending a 'PageBreak' syllable" <<
       " to stanza " << getStanzaName () <<
       ", upLinkToMeasure: " << upLinkToMeasure->asShortString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1760,7 +1794,7 @@ void msrStanza::appendPaddingNoteToStanza ( // JMI USELESS??? 0.9.70
       fStanzaName <<
       "\" in voice \"" <<
       fStanzaUpLinkToVoice->getVoiceName () <<
-      "\", line " << inputLineNumber;
+      "\", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1944,12 +1978,22 @@ void msrStanza::print (std::ostream& os) const
 
     ++gIndenter;
 
-    for (S_msrSyllable syllable : fSyllables) {
-//         syllable->print (os);
-      os <<
-        syllable->asShortString () <<
-        std::endl;
-    } // for
+    if (! fSyllables.empty ()) {
+      std::vector <S_msrSyllable>::const_iterator
+        iBegin = fSyllables.begin (),
+        iEnd   = fSyllables.end (),
+        i      = iBegin;
+
+      for ( ; ; ) {
+        S_msrSyllable syllable = (*i);
+
+        os <<
+          syllable->asShortString () <<
+          std::endl;
+        if (++i == iEnd) break;
+        os << std::endl;
+      } // for
+    }
 
     --gIndenter;
   }
@@ -1985,8 +2029,19 @@ void msrStanza::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    for (S_msrSyllable syllable : fSyllables) {
-        syllable->printFull (os);
+    std::vector <S_msrSyllable>::const_iterator
+      iBegin = fSyllables.begin (),
+      iEnd   = fSyllables.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      S_msrSyllable syllable = (*i);
+
+      os <<
+        syllable->asShortString () <<
+        std::endl;
+      if (++i == iEnd) break;
+      os << std::endl;
     } // for
 
     --gIndenter;

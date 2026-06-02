@@ -211,7 +211,7 @@ std::string msrSegno::asString () const
   ss <<
     "Segno" <<
     ", fDalSegnoString :" << fStaffNumber <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -398,7 +398,7 @@ std::string msrDalSegno::asString () const
     ", fDalSegnoString: \"" << fDalSegnoString << "\"" <<
     ", fDalSegnoString: " << fStaffNumber <<
     ", fMeasureElementPositionInMeasure: " << fMeasureElementPositionInMeasure <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

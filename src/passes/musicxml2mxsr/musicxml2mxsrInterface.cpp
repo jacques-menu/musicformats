@@ -299,7 +299,7 @@ std::string uncompressMXLFile (
           // JMI if (posInString == stringFromLine.size () - 4) {
           if (posInString != stringFromLine.npos) {  // JMI STRANGISSIMO!!!
     //      if (posInString != stringFromLine.npos && stringFromLine != "files") {  // JMI STRANGISSIMO!!!
-            // yes, this is a MusicXML file
+            // YES, this is a MusicXML file
 
             // is this file part of META-INF?
             size_t
@@ -781,7 +781,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
 
   if (posInString == fileNameAsString.size () - 4) {
  // JMI  if (posInString != fileNameAsString.npos) {
-    // yes, this is a compressed file
+    // YES, this is a compressed file
 
     /* JMI OS dependent
     std::string uncompressedFileName =

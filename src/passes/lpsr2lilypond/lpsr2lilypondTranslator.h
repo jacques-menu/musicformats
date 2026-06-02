@@ -1795,6 +1795,12 @@ class EXP lpsr2lilypondTranslator :
     void                  handleLyricExtenderIfAnyExplicitlySyllableEnd (
                             const S_msrSyllable& syllable);
 
+    void                  handleLyricExtenderIfAnyAutomaticallySyllableMiddle_kSyllableSkipOnRegularNote (
+                            const S_msrSyllable& syllable);
+
+    void                  handleLyricExtenderIfAnyExplicitlySyllableMiddle_kSyllableSkipOnRegularNote (
+                            const S_msrSyllable& syllable);
+
     // octaves entry
     // ------------------------------------------------------
 

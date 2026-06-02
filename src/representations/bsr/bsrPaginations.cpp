@@ -193,7 +193,7 @@ std::string bsrPagination::asString () const
     ", printPageNumber: " << fPrintPageNumber <<
     ", braillePageNumber: " << fBraillePageNumber <<
     ", spacesCellsList: " << fPaginationCellsList <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -214,7 +214,7 @@ void bsrPagination::print (std::ostream& os) const
 {
   os <<
     "Pagination" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

@@ -322,7 +322,7 @@ std::string bsrDynamic::asString () const
     ", fDynamicsCellsList: " <<
     fDynamicsCellsList->asShortString () <<
     ", fSpacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -338,7 +338,7 @@ std::string bsrDynamic::asDebugString () const
     ", fDynamicsCellsList: " <<
     fDynamicsCellsList->asShortString () <<
     ", fSpacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -347,7 +347,7 @@ void bsrDynamic::print (std::ostream& os) const
 {
   os <<
     "Dynamics" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

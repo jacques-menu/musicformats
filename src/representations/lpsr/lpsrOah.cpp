@@ -756,7 +756,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       fStringToStringMapVariable.find (partName);
 
   if (it != fStringToStringMapVariable.end ()) {
-    // yes, issue error message
+    // YES, issue error message
     std::stringstream ss;
 
     ss <<
@@ -768,6 +768,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   }
 
   else {
+    // NO
     fStringToStringMapVariable [partName] = partInstrumentName;
   }
 

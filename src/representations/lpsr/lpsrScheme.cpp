@@ -200,7 +200,7 @@ std::string lpsrSchemeVariable::asString () const
     ", fVariableValue: " << fVariableValue <<
     ", fComment: " << fComment <<
     ", fEndOfLineKind: " << fEndOfLineKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -380,7 +380,7 @@ std::string lpsrSchemeFunction::asString () const
     ", fFunctionName: " << fFunctionName <<
     ", fFunctionDescription: " << fFunctionDescription <<
     ", fFunctionCode: " << fFunctionCode <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

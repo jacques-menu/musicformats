@@ -222,7 +222,7 @@ std::string msdrMeasure::asShortString () const
 
   ss <<
     "MSDR measure \"" << fMeasureNumber << "\"" <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -233,7 +233,7 @@ std::string msdrMeasure::asString () const
 
   ss <<
     "MSDR measure \"" << fMeasureNumber << "\"" <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -247,7 +247,7 @@ void msdrMeasure::displayMeasure (
     "*********>> Displaying MSDR measure \"" <<
     fMeasureNumber <<
     "\" (" << context << ")" <<
-    ", line " << inputLineNumber <<
+    ", " << inputLineNumber <<
     " contains:" <<
     std::endl;
 
@@ -264,7 +264,7 @@ void msdrMeasure::printFull (std::ostream& os) const
 {
   os <<
     "MSDR measure \"" << fMeasureNumber <<
-    "\", line " << fInputLineNumber <<
+    "\", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

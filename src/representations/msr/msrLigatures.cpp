@@ -233,7 +233,7 @@ std::string msrLigature::asString () const
     ", fLigatureLineEndKind" << ": " << fLigatureLineEndKind <<
     ", fLigatureLineTypeKind" << ": " << fLigatureLineTypeKind <<
     ", fLigaturePlacementKind" << ": " << fLigaturePlacementKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -244,7 +244,7 @@ void msrLigature::print (std::ostream& os) const
   os <<
     "[Ligature" <<
     ", fLigatureKind: " << fLigatureKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

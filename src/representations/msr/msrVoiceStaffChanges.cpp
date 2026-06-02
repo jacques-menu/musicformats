@@ -198,7 +198,7 @@ std::string msrVoiceStaffChange::asString () const
     "[VoiceStaffChange" <<
     ", fTakeOffStaff: " << fTakeOffStaff->getStaffPathLikeName () <<
     ", fLandingStaff: " << fLandingStaff->getStaffPathLikeName () <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -208,7 +208,7 @@ void msrVoiceStaffChange::print (std::ostream& os) const
 {
   os <<
     "[VoiceStaffChange" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

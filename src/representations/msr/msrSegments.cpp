@@ -65,7 +65,7 @@ S_msrSegment msrSegment::create (
     ss <<
       "Creating segment " <<
       obj->asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -97,7 +97,7 @@ S_msrSegment msrSegment::create (
       obj->asString () <<
       " with uplink to voice " <<
       fetchVoiceName (segmentUpLinkToVoice) <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -328,7 +328,7 @@ void msrSegment::setSegmentFirstMeasure (
       asShortString () <<
       " to " <<
       fetchMeasureAsString (measure) <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -355,7 +355,7 @@ void msrSegment::setSegmentLastMeasure (
       asShortString () <<
       " to " <<
       fetchMeasureAsString (measure) <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -498,7 +498,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
       this->asString () <<
       ", in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << inputLineNumber <<
+      ", " << inputLineNumber <<
       std::endl;
 
     msrInternalError (
@@ -536,7 +536,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
 //       this->asString () <<
 //       ", in voice " <<
 //       fetchVoiceName (fSegmentUpLinkToVoice) <<
-//       ", line " << inputLineNumber <<
+//       ", " << inputLineNumber <<
 //       std::endl;
 //
 //     gLog <<
@@ -569,7 +569,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItInSegment (
       asShortString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -608,7 +608,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItInSegment (
       fetchVoiceName (fSegmentUpLinkToVoice) <<
       ", measureFirstInSegmentKind: " <<
       measureFirstInSegmentKind <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -701,7 +701,7 @@ void msrSegment::setNextMeasureNumberInSegment (
         "s last measure " <<
         " in voice " <<
         fetchVoiceName (fSegmentUpLinkToVoice) <<
-        ", line " << inputLineNumber;
+        ", " << inputLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -783,7 +783,7 @@ void msrSegment::appendSegmentElementToSegment (
       asString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << segmentElement->getInputLineNumber ();
+      ", " << segmentElement->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -818,7 +818,7 @@ void msrSegment::appendRepeatToSegment (
       asShortString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << repeat->getInputLineNumber ();
+      ", " << repeat->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -928,7 +928,7 @@ void msrSegment::appendMeasureRepeatToSegment (
       asString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << measureRepeat->getInputLineNumber ();
+      ", " << measureRepeat->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -953,7 +953,7 @@ void msrSegment::appendBeatRepeatToSegment (
       asString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << beatRepeat->getInputLineNumber ();
+      ", " << beatRepeat->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -978,7 +978,7 @@ void msrSegment::appendMultiMeasureRestToSegment (
       asString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << multiMeasureRest->getInputLineNumber ();
+      ", " << multiMeasureRest->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1193,7 +1193,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //         " which is not a measure nor a measure rest" <<
 //         ", in voice " <<
 //         fetchVoiceName (fSegmentUpLinkToVoice) <<
-//         ", line " << fInputLineNumber; // JMI 0.9.64
+//         ", " << fInputLineNumber; // JMI 0.9.64
 //
 //       msrInternalError ( // JMI 0.9.64 ???
 //         gServiceRunData->getInputSourceName (),
@@ -1216,7 +1216,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       " which is not a measure nor a measure rest" <<
 //       ", in voice " <<
 //       fetchVoiceName (fSegmentUpLinkToVoice) <<
-//       ", line " << fInputLineNumber; // JMI 0.9.64
+//       ", " << fInputLineNumber; // JMI 0.9.64
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -1384,7 +1384,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
       "to segment clone " << asString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1424,7 +1424,7 @@ void msrSegment::appendHarmonyToSegment (
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1463,7 +1463,7 @@ void msrSegment::cascadeAppendHarmoniesListToSegment (
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1524,7 +1524,7 @@ void msrSegment::appendFiguredBassToSegment (
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1567,7 +1567,7 @@ void msrSegment::cascadeAppendFiguredBassesListToSegment (
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
       ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2250,7 +2250,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //       fSegmentNumber <<
 //       " in voice \"" <<
 //       fetchVoiceName (fSegmentUpLinkToVoice) <<
-//       "\", line " << inputLineNumber <<
+//       "\", " << inputLineNumber <<
 //       std::endl;
 //
 //       gWaeHandler->waeTrace (
@@ -2311,7 +2311,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //       fSegmentNumber <<
 //       " in voice \"" <<
 //       fetchVoiceName (fSegmentUpLinkToVoice) <<
-//       "\", line " << inputLineNumber;
+//       "\", " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -2344,7 +2344,7 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
       asString () <<
       " in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2432,7 +2432,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       asString () <<
       ", in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << measure->getInputLineNumber ();
+      ", " << measure->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2489,7 +2489,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
   // which don't go down the part-staff-voice-segment hierarchy JMI 0.9.76 ???
   if (fSegmentUpLinkToVoice) {
     if (! fSegmentUpLinkToVoice->getVoiceFirstMeasure ()) {
-      // yes, register it as such
+      // YES, register it as such
       fSegmentUpLinkToVoice->
         setVoiceFirstMeasure (measure);
 
@@ -2569,7 +2569,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
     ss <<
       ", in voice " <<
       fetchVoiceName (fSegmentUpLinkToVoice) <<
-      ", line " << measure->getInputLineNumber ();
+      ", " << measure->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2712,7 +2712,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
       "Appending voice staff change " <<
       voiceStaffChange->asString () <<
       " to segment " << asString () <<
-      ", line " << voiceStaffChange->getInputLineNumber ();
+      ", " << voiceStaffChange->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3023,7 +3023,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
       "Fetching last measure from segment " <<
       asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3086,7 +3086,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       "Removing last measure from segment " <<
       asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3164,7 +3164,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 //     ss <<
 //       "Finalizing all the measures of segment " <<
 //       asString () <<
-//       ", line " << inputLineNumber;
+//       ", " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -3303,7 +3303,7 @@ void msrSegment::displaySegment (
     std::endl <<
 
     " (" << context << ")" <<
-    ", line " << inputLineNumber <<
+    ", " << inputLineNumber <<
     " contains:" <<
     std::endl;
 
@@ -3401,7 +3401,7 @@ void msrSegment::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fSegmentElementsList.size (), "element", "elements") <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -3544,7 +3544,7 @@ void msrSegment::printFull (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fSegmentElementsList.size (), "element", "elements") <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

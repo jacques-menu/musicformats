@@ -82,7 +82,7 @@ msrClefKeyTimeSignatureOrderKind msrClefKeyTimeSignatureOrderKindFromString (
       "clef string \"" <<
       clefKeyTimeSignatureString <<
       "\" is unknown" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     msrError (
       gServiceRunData->getInputSourceName (),
@@ -240,7 +240,7 @@ msrClefKeyTimeSignatureGroup::msrClefKeyTimeSignatureGroup (
     ss <<
       "Creating an msrClefKeyTimeSignatureGroup" <<
       ", groupInputLineNumber: " << groupInputLineNumber <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -577,7 +577,7 @@ void msrClefKeyTimeSignatureGroup::browseData (basevisitor* v)
           "clef, key and time signature browsing order is unknown in score, msrClefKeyTimeSignatureGroup: \"" <<
           pClefKeyTimeSignatureOrderKind <<
           ", fGroupInputLineNumber: " << fGroupInputLineNumber <<
-          ", line " << fInputLineNumber;
+          ", " << fInputLineNumber;
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
@@ -659,7 +659,7 @@ std::string msrClefKeyTimeSignatureGroup::asString () const
   ss <<
     ", fGroupInputLineNumber: " << fGroupInputLineNumber <<
     ", fGroupItemsNumber: " << fGroupItemsNumber <<
-//     ", line " << fInputLineNumber << // JMI 0.9.70
+//     ", " << fInputLineNumber << // JMI 0.9.70
     ']';
 
   return ss.str ();

@@ -300,7 +300,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         currentHarmony->asString () <<
 //         " in voice \"" <<
 //         voice->getVoiceName () <<
-//         "\", line " << inputLineNumber <<
+//         "\", " << inputLineNumber <<
 //         std::endl;
 //
 //           gWaeHandler->waeTrace (
@@ -351,7 +351,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         reducedSoundingWholeNotes <<
 //         " in voice \"" <<
 //         voice->getVoiceName () <<
-//         "\", line " << inputLineNumber <<
+//         "\", " << inputLineNumber <<
 //         std::endl;
 //
 //           gWaeHandler->waeTrace (

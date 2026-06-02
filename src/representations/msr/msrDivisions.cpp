@@ -101,7 +101,7 @@ void msrDivisions::initializeDivisions ()
     ss <<
       "Initializing divisions" <<
       ", divisionsPerQuarterNote: " << fDivisionsPerQuarterNote <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),

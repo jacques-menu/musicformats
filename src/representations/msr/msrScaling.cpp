@@ -260,7 +260,7 @@ std::string msrScaling::asString () const
     "[Scaling" <<
     ", fMillimeters: " << fMillimeters <<
     ", fTenths: \"" << fTenths <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

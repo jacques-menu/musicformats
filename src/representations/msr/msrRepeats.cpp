@@ -79,7 +79,7 @@ S_msrRepeatElement msrRepeatElement::create (
       obj->asShortString () <<
       ", segmentKind: " <<
       segmentKind <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -113,7 +113,7 @@ S_msrRepeatElement msrRepeatElement::create (
       segmentKind <<
       ", upLinkToRepeat: " <<
       upLinkToRepeat->asShortString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -186,7 +186,7 @@ void msrRepeatElement::setRepeatElementSegment (S_msrSegment segment)
       segment->asString () <<
       " in repeat element " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -220,7 +220,7 @@ void msrRepeatElement::appendMeasureToRepeatElement (
       " to repeat element " <<
       asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -259,7 +259,7 @@ void msrRepeatElement::appendRepeatToRepeatElement (
       " to repeat element " <<
       asShortString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -287,7 +287,7 @@ void msrRepeatElement::appendRepeatToRepeatElement (
 //       " to repeat element " <<
 //       asString () <<
 //       " (" << context << ")" <<
-//       ", line " << inputLineNumber;
+//       ", " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -329,7 +329,7 @@ void msrRepeatElement::appendBeatRepeatToRepeatElement (
       " to repeat element " <<
       asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -356,7 +356,7 @@ void msrRepeatElement::appendMeasureRepeatToRepeatElement (
       " to repeat element " <<
       asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -391,7 +391,7 @@ void msrRepeatElement::appendMultiMeasureRestToRepeatElement (
       " to repeat element " <<
       asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -504,7 +504,7 @@ void msrRepeatElement::browseData (basevisitor* v)
 // {
 //   os <<
 //     "[RepeatElement" <<
-//     ", line " << fInputLineNumber <<
+//     ", " << fInputLineNumber <<
 //     std::endl;
 //
 // //   ++gIndenter;
@@ -539,7 +539,7 @@ void msrRepeatElement::browseData (basevisitor* v)
 // {
 //   os <<
 //     "[RepeatElement" <<
-//     ", line " << fInputLineNumber <<
+//     ", " << fInputLineNumber <<
 //     std::endl;
 //
 // //   ++gIndenter;
@@ -799,7 +799,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::createRepeatCommonPartNewbornClone (
 //       segment->asString () <<
 //       " to repeat COMMON PART " << asString () <<
 //       " (" << context << ")" <<
-//       ", line " << inputLineNumber;
+//       ", " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -832,7 +832,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
       repeat->asString () <<
       " to repeat COMMON PART " << asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -865,7 +865,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
       measureRepeat->asString () <<
       " to repeat COMMON PART " << asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -898,7 +898,7 @@ void msrRepeatCommonPart::appendMultiMeasureRestToRepeatCommonPart (
       multiMeasureRests->asString () <<
       " to repeat COMMON PART " << asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -931,7 +931,7 @@ void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
       voiceElement->asString () <<
       " to repeat COMMON PART " << asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1122,7 +1122,7 @@ std::string msrRepeatCommonPart::asString () const
     fetchSegmentAsShortString (fRepeatElementSegment) <<
     ", fRepeatElementUpLinkToRepeat: " <<
     fetchRepeatAsShortString (fRepeatElementUpLinkToRepeat) <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1134,7 +1134,7 @@ void msrRepeatCommonPart::print (std::ostream& os) const
     "[RepeatCommonPart" <<
     ", fRepeatElementDebugNumber: " <<
     fRepeatElementDebugNumber <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1211,7 +1211,7 @@ void msrRepeatCommonPart::printFull (std::ostream& os) const
     "[RepeatCommonPart" <<
     ", fRepeatElementDebugNumber: " <<
     fRepeatElementDebugNumber <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1393,7 +1393,7 @@ S_msrRepeatEnding msrRepeatEnding::create (
       obj->asString () <<
       "with uplink to repeat " <<
       fetchRepeatAsShortString (upLinkToRepeat) <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1435,7 +1435,7 @@ S_msrRepeatEnding msrRepeatEnding::createAsWellAsItsSegment (
       "with uplink to repeat " <<
       fetchRepeatAsShortString (upLinkToRepeat) <<
       " and its segment" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1547,7 +1547,7 @@ msrRepeatEnding::~msrRepeatEnding ()
 //       "Appending segment " << segment <<
 //       " to repeat ENDING " << asString () <<
 //       " (" << context << ")" <<
-//       ", line " << inputLineNumber;
+//       ", " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -1579,7 +1579,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
       "Appending repeat " << repeat <<
       " to repeat ENDING " << asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1612,7 +1612,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
       fetchMeasureRepeatAsShortString (measureRepeat) <<
       " to repeat ENDING " << asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1645,7 +1645,7 @@ void msrRepeatEnding::appendMultiMeasureRestToRepeatEnding (
       fetchMultiMeasureRestAsShortString (multiMeasureRests) <<
       " to repeat ENDING " << asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1677,7 +1677,7 @@ void msrRepeatEnding::appendVoiceElementToRepeatEnding (
       "Appending voice element " << voiceElement <<
       " to repeat ENDING " << asString () <<
       " (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1790,7 +1790,7 @@ std::string msrRepeatEnding::asString () const
     ", fRepeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
     ", fRepeatElementSegment: " <<
     fetchSegmentAsShortString (fRepeatElementSegment) <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1890,7 +1890,7 @@ void msrRepeatEnding::printFull (std::ostream& os) const
     fRepeatElementDebugNumber <<
     ", fRepeatEndingKind: " <<
     fRepeatEndingKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -2000,7 +2000,7 @@ S_msrRepeat msrRepeat::create (
     ss <<
       "Creating repeat " <<
       obj->asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2040,7 +2040,7 @@ S_msrRepeat msrRepeat::createWithCommonPart (
       "Creating repeat " <<
       obj->asString () <<
       " and its COMMON PART" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2075,7 +2075,7 @@ S_msrRepeat msrRepeat::createWithExplicitStartKind (
       obj->asString () <<
       " with repeat explicit startKind " <<
       repeatExplicitStartKind <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2108,7 +2108,7 @@ S_msrRepeat msrRepeat::createWithUplink (
       obj->asString () <<
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2147,7 +2147,7 @@ S_msrRepeat msrRepeat::createWithExplicitStartKindAndUplink (
       repeatExplicitStartKind <<
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2194,7 +2194,7 @@ S_msrRepeat msrRepeat::createWithExplicitStartKindAndCommonPart (
       " with repeat explicit startKind " <<
       repeatExplicitStartKind <<
       " and its COMMON PART" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2238,7 +2238,7 @@ S_msrRepeat msrRepeat::createWithCommonPartAndUplink (
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
       " and its COMMON PART" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2282,7 +2282,7 @@ S_msrRepeat msrRepeat::createWithUplinkAndCommonPartAndSegment (
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
       " and its COMMON PART with its segment" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2333,7 +2333,7 @@ S_msrRepeat msrRepeat::createWithExplicitStartKindAndUplinkAndCommonPart (
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
       " and its COMMON PART" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2390,7 +2390,7 @@ S_msrRepeat msrRepeat::createWithExplicitStartKindAndUplinkAndCommonPartAndSegme
       " with uplink to voice " <<
       fetchVoiceName (upLinkToVoice) <<
       " and its COMMON PART with its segment" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3210,7 +3210,7 @@ std::string msrRepeat::asShortString () const
 
   ss <<
     ", repeatEndingsNumber: " << repeatEndingsNumber <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -3270,7 +3270,7 @@ std::string msrRepeat::asString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -3285,7 +3285,7 @@ void msrRepeat::displayRepeat (
     "*********>> Repeat " <<
     asShortString () <<
     " (" << context << ")" <<
-    ", line " << inputLineNumber <<
+    ", " << inputLineNumber <<
     " contains:" <<
     std::endl;
 
@@ -3308,7 +3308,7 @@ void msrRepeat::print (std::ostream& os) const
     fRepeatTimes <<
 //     ", fCurrentRepeatBuildPhaseKind: " <<
 //     fCurrentRepeatBuildPhaseKind;
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -3385,7 +3385,7 @@ void msrRepeat::printFull (std::ostream& os) const
     fRepeatDebugNumber <<
     ", fRepeatTimes: " <<
     fRepeatTimes <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

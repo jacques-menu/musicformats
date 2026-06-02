@@ -145,7 +145,7 @@ std::string bsrTranscriptionNotesElement::asString () const
     "TranscriptionNotesElement" <<
     // JMI ", fTranscriptionNoteText: " <<
     ", \"" << fTranscriptionNoteText << "\"" <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -154,7 +154,7 @@ void bsrTranscriptionNotesElement::print (std::ostream& os) const
 {
   os <<
     "TranscriptionNotesElement" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

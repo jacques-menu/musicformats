@@ -264,7 +264,7 @@ std::string bsrNumber::asString () const
     ", numberCellsList: " <<
     fNumberCellsList->asShortString () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -288,7 +288,7 @@ void bsrNumber::print (std::ostream& os) const
 {
   os <<
     "Number" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

@@ -114,7 +114,7 @@ mxsrTupletEvent::mxsrTupletEvent (
 
 			", eventSequentialNumber: " <<
 			eventSequentialNumber <<
-			", line " << eventInputLineNumber;
+			", " << eventInputLineNumber;
 
 		gWaeHandler->waeTrace (
 			__FILE__, mfInputLineNumber (__LINE__),

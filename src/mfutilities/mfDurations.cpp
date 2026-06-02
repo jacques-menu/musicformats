@@ -474,7 +474,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
     ss <<
       "--> wholeNotesAndDotsNumberPitchAndOctaveAsString() 1 -------------------------------------" <<
       ", wholeNotes: " << wholeNotes.asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),

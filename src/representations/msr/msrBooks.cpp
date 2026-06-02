@@ -783,7 +783,7 @@ void msrBook::printFull (std::ostream& os) const
 {
   os <<
     "[MSR book" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

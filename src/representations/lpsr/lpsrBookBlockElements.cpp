@@ -169,7 +169,7 @@ std::string lpsrBookBlockElement::asString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -208,7 +208,7 @@ void lpsrBookBlockElement::print (std::ostream& os) const
   }
 
   os <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   --gIndenter;
 
@@ -520,7 +520,7 @@ std::string lpsrScoreBlock::asString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -783,7 +783,7 @@ std::string lpsrBookPartBlock::asString () const
   ss <<
     ", fBookBlockElementParallelMusicBlock " <<
     fBookBlockElementParallelMusicBlock->asString () <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1166,7 +1166,7 @@ std::string lpsrBookBlock::asString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

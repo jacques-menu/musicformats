@@ -177,7 +177,7 @@ std::string lpsrComment::asString () const
     "[Comment" <<
     ", fContents: " << fContents <<
     ", fCommentGapAfterwardsKind: " << fCommentGapAfterwardsKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

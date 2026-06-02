@@ -230,7 +230,7 @@ void msrMultiMeasureRest::appendMeasureToMultiMeasureRest (
         getSegmentUpLinkToVoice ();
 
   if (! voice->getVoiceFirstMeasure ()) {
-    // yes, register it as such
+    // YES, register it as such
     voice->
       setVoiceFirstMeasure (measure);
 
@@ -397,7 +397,7 @@ std::string msrMultiMeasureRest::asString () const
     fetchMultiMeasureRestMeasureSoundingNotes () <<
     ", " <<
 
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -412,7 +412,7 @@ void msrMultiMeasureRest::displayMultiMeasureRest (
     "*********>> Multi-measure rest " << context << " \"" <<
  // JMI   getVoiceName () <<
     "\"" <<
-    ", line " << inputLineNumber <<
+    ", " << inputLineNumber <<
     " contains:" <<
     std::endl;
 
@@ -429,7 +429,7 @@ void msrMultiMeasureRest::print (std::ostream& os) const
 {
   os <<
     "[MultiMeasureRest" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

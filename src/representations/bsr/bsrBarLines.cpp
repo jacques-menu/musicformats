@@ -254,7 +254,7 @@ std::string bsrBarLine::asString () const
     "BarLine" <<
     ", " << bsrBarLineKindAsString (fBarLineKind) <<
     ", barLineCellsList: " << fBarLineCellsList->asShortString () <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -281,7 +281,7 @@ void bsrBarLine::print (std::ostream& os) const
 {
   os <<
     "BarLine" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

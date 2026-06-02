@@ -192,7 +192,7 @@ std::string msrMxmlPrintLayout::asString () const
 
   ss <<
     "[MxmlPrintLayout" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -202,7 +202,7 @@ void msrMxmlPrintLayout::printFull (std::ostream& os) const
 {
   os <<
     "[MxmlPrintLayout" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -299,7 +299,7 @@ void msrMxmlPrintLayout::print (std::ostream& os) const
 {
   os <<
     "[MxmlPrintLayout" << // JMI 0.9.66
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']' <<
     std::endl;
 }

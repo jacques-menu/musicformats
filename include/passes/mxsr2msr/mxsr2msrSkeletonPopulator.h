@@ -1352,12 +1352,14 @@ class EXP mxsr2msrSkeletonPopulator :
 
 		void											displayCurrentPartStaffMsrVoicesMap (
                                 const mfInputLineNumber& inputLineNumber,
-																const std::string& context) const;
+																const std::string&       context) const;
 
     // we need a fast access to the voices and their handlers
     // indexes are staff number and voice number
     std::map <mfStaffNumber, std::map <mfVoiceNumber, S_mxsrVoice>>
                               fCurrentPartStaffMxsrVoicesMapMap;
+
+		void											displayCurrentPartStaffMxsrVoicesMapMap () const;
 
     // denormalization for speed
     S_mxsrVoice               fCurrentNoteMxsrVoice;
@@ -1368,8 +1370,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      populateCurrentPartStaffVoicesMapsFromPart (
                                 const S_msrPart& part);
-
-		void											displayCurrentPartStaffMxsrVoicesMap () const;
 
     // staff details handling
     // ------------------------------------------------------
@@ -2081,30 +2081,55 @@ class EXP mxsr2msrSkeletonPopulator :
     msrSyllableKind           fFirstSyllableInSlurKind;
     msrSyllableKind           fFirstSyllableInLigatureKind;
 
+    // the MXSR <lyric /> contents is represented as syllable in MSR
     std::list <msrSyllableElement>
-                              fCurrentSyllableElementsList;
+                              fCurrentMxsrLyricElementsList;
 
+    Bool                      fCurrentLyricContainsTypelessExtend;
     msrSyllableExtendKind     fCurrentSyllableExtendKind;
+
     std::string               fCurrentSyllableElision;
 
     mfStanzaNumber            fCurrentStanzaNumber;
     std::string               fCurrentStanzaName;
 
-    std::list <S_msrSyllable> fCurrentNoteSyllablesList;
+    std::list <S_msrSyllable> fCurrentLyricSyllablesList;
 
     Bool                      fLastHandledNoteInVoiceHasLyrics;
 
-    void                      handleLyricsAfterCurrentNoteHasBeenHandled ();
-
 		void											displayGatheredLyricInformations (
-																const std::string& context) const;
+                                const mfInputLineNumber& inputLineNumber,
+																const std::string&       context) const;
+
+    void                      handleLyricsAfterCurrentNoteHasBeenHandled (
+                                const mfInputLineNumber& inputLineNumber);
+
+    void                      createARegularSyllableAndAppendItToStanza (
+                                const mfInputLineNumber& inputLineNumber,
+                                msrSyllableKind          syllableKind,
+                                S_msrStanza              stanza) const;
+
+    void                      createASkipSyllableAndAppendItToStanza (
+                                const mfInputLineNumber& inputLineNumber,
+                                msrSyllableKind          syllableKind,
+                                S_msrStanza              stanza) const;
 
     // the lyric markups are met before any possible staff change is known,
     // so when fCurrentRecipientStaffNumber is not know for sure.
     // the lyrics are thus kept pending until they can be appended to the correct stanza
-
     std::map <mfStanzaNumber, std::list <S_msrSyllable>>
-                              fPendingSyllablesListMap;
+                              fPendingSyllablesListForStanzasMap;
+
+		void											displayPendingSyllablesListForStanzasMap (
+                                const mfInputLineNumber& inputLineNumber,
+																const std::string&       context) const;
+
+    // the effect of an <extend /> spans until a <lyric /> in the same stanza
+    std::set <mfStanzaNumber> fOnGoingTypeLessExtendStanzaNumbersSet;
+
+		void											displayOnGoingExtendStanzaNumbersSet (
+                                const mfInputLineNumber& inputLineNumber,
+																const std::string&       context) const;
 
     // harmonies handling
     // ------------------------------------------------------
@@ -2262,12 +2287,12 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      printVoicesLastMetNoteMap (
                                 const mfInputLineNumber& inputLineNumber,
-                                const std::string& context);
+                                const std::string&       context);
 
     void                      checkStep (
                                 const mfInputLineNumber& inputLineNumber,
-                                const std::string& stepValue,
-                                const std::string& markup);
+                                const std::string&       stepValue,
+                                const std::string&       markup);
 
     // note pitch
 

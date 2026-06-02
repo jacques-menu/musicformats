@@ -298,7 +298,7 @@ std::string bsrKey::asString () const
     ", numberOfAlterations: " << fNumberOfAlterations <<
     ", keyCellsList: " << fKeyCellsList->asShortString () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -383,7 +383,7 @@ void bsrKey::print (std::ostream& os) const
 {
   os <<
     "Key" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

@@ -203,7 +203,7 @@ std::string msrGlissando::asString () const
     ", fGlissandoTypeKind: " << fGlissandoTypeKind <<
     ", fGlissandoLineTypeKind: " << fGlissandoLineTypeKind <<
     ", fGlissandoTextValue: \"" << fGlissandoTextValue << "\"" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -213,7 +213,7 @@ void msrGlissando::print (std::ostream& os) const
 {
   os <<
     "[Glissando" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

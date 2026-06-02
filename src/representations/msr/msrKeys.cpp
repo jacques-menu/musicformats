@@ -89,7 +89,7 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
 
     ss <<
       "Creating Humdrum/Scot key item" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -267,7 +267,7 @@ std::string msrHumdrumScotKeyItem::asString () const
     fKeyAlterationKind <<
     ", fKeyOctaveKind" << ": " <<
     fKeyOctaveKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -285,7 +285,7 @@ std::string msrHumdrumScotKeyItem::asString () const
 //     fKeyAlterationKind <<
 //     ", fKeyOctaveKind" << ": " <<
 //     fKeyOctaveKind <<
-//     ", line " << fInputLineNumber;
+//     ", " << fInputLineNumber;
 //
 //   return ss.str ();
 // }
@@ -830,7 +830,7 @@ std::string msrKey::asString () const
   } // switch
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -863,7 +863,7 @@ std::string msrKey::asString () const
 //   } // switch
 //
 //   ss <<
-// // JMI    ", line " << fInputLineNumber <<
+// // JMI    ", " << fInputLineNumber <<
 //     ']';
 //
 //   return ss.str ();
@@ -886,7 +886,7 @@ void msrKey::print (std::ostream& os) const
             getMsrQuarterTonesPitchesLanguageKind ()) <<
         ' ' <<
         fModeKind <<
-        ", line " << fInputLineNumber;
+        ", " << fInputLineNumber;
       break;
 
     case msrKeyKind::kKeyHumdrumScot:
@@ -896,7 +896,7 @@ void msrKey::print (std::ostream& os) const
         ", " <<
         fHumdrumScotKeyItemsVector.size () <<
         " items" <<
-        ", line " << fInputLineNumber <<
+        ", " << fInputLineNumber <<
         std::endl;
 
       if (fHumdrumScotKeyItemsVector.size ()) {

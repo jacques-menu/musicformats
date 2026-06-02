@@ -477,7 +477,7 @@ void msrRenamePartAtom::applyAtomWithValue (
       fStringToStringMapVariable.find (oldPartName);
 
   if (it != fStringToStringMapVariable.end ()) {
-    // yes, issue error message
+    // YES, issue error message
     std::stringstream ss;
 
     ss <<
@@ -489,6 +489,7 @@ void msrRenamePartAtom::applyAtomWithValue (
   }
 
   else {
+    // NO
     fStringToStringMapVariable [oldPartName] = newPartName;
   }
 

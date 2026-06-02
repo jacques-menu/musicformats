@@ -654,7 +654,7 @@ std::string msrGraceNotesGroup::asShortString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -684,7 +684,7 @@ std::string msrGraceNotesGroup::asString () const
 
     ", fGraceNotesGroupMeasureNumber: \"" <<
     fGraceNotesGroupMeasureNumber <<
-    "\", line " << fInputLineNumber <<
+    "\", " << fInputLineNumber <<
     ", ";
 
   if (! fGraceNotesGroupElementsList.empty ()) {
@@ -732,7 +732,7 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
     "[GraceNotesGroup" <<
     ", fGraceNotesGroupKind: " <<
     fGraceNotesGroupKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ", " <<
     mfSingularOrPlural (
       fGraceNotesGroupElementsList.size (), "element", "elements") <<
@@ -832,7 +832,7 @@ void msrGraceNotesGroup::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fGraceNotesGroupElementsList.size (), "element", "elements") <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

@@ -113,7 +113,7 @@ S_msrNote msrNote::create (
       std::endl <<
       "Creating note" <<
       obj->asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1241,7 +1241,7 @@ S_msrNote msrNote::createRestNote (
     ss <<
       "Creating rest note " <<
       obj->asShortString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1297,7 +1297,7 @@ S_msrNote msrNote::createSkipNote (
     ss <<
       "Creating skip note " <<
       obj->asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1355,7 +1355,7 @@ S_msrNote msrNote::createSkipNoteWithContext (
       "Creating skip note " <<
       obj->asString () <<
       ", context: " << context <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1411,7 +1411,7 @@ S_msrNote msrNote::createGraceSkipNote (
     ss <<
       "Creating grace skip note " <<
       obj->asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1469,7 +1469,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
     ss <<
       "Creating rest note " <<
       obj->asShortString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1527,7 +1527,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
     ss <<
       "Creating skip note with octave " <<
       obj->asShortString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1586,7 +1586,7 @@ S_msrNote msrNote::createRegularNote (
     ss <<
       "Creating regular note " <<
       obj->asShortString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2169,7 +2169,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       obj->asShortString () <<
       " from semitones pitch and octave " <<
       semiTonesPitchAndOctave->asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2359,7 +2359,7 @@ void msrNote::setNoteBelongsToAChord ()
       "Setting note " <<
       asShortString () <<
       " to belong to a chord"
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2380,7 +2380,7 @@ void msrNote::setNoteBelongsToATuplet ()
       "Setting note " <<
       asShortString () <<
       " to belong to a tuplet"
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2569,7 +2569,7 @@ void msrNote::appendTechnicalToNote (
       technical->asString () <<
       " to note " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2593,7 +2593,7 @@ void msrNote::appendTechnicalWithIntegerToNote (
       technicalWithInteger->asString () <<
       " to note " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2618,7 +2618,7 @@ void msrNote::appendTechnicalWithFloatToNote (
       technicalWithFloat->asString () <<
       " to note " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2643,7 +2643,7 @@ void msrNote::appendTechnicalWithStringToNote (
       technicalWithString->asString () <<
       " to note " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2787,7 +2787,7 @@ void msrNote::setGraceNotesGroupBeforeNote (
       graceNotesGroupBefore->asString () <<
       " before note " <<
       asString () <<
-      ", line " << graceNotesGroupBefore->getInputLineNumber ();
+      ", " << graceNotesGroupBefore->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2816,7 +2816,7 @@ void msrNote::setGraceNotesGroupAfterNote (
       graceNotesGroupAfter->asString () <<
       " after note " <<
       asString () <<
-      ", line " << graceNotesGroupAfter->getInputLineNumber ();
+      ", " << graceNotesGroupAfter->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2843,7 +2843,7 @@ void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesG
     ss <<
       "Attaching afterGraceNotesGroup '" << afterGraceNotesGroup->asString () <<
       " to note " << asShortString () <<
-      ", line " << afterGraceNotesGroup->getInputLineNumber ();
+      ", " << afterGraceNotesGroup->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2868,7 +2868,7 @@ void msrNote::setNoteSingleTremolo (
       trem->asString () <<
       " to note " <<
       asString () <<
-      ", line " << trem->getInputLineNumber ();
+      ", " << trem->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2892,7 +2892,7 @@ void msrNote::appendDynamicToNote (
       dynamic->asString () <<
       " to note " <<
       asString () <<
-      ", line " << dynamic->getInputLineNumber ();
+      ", " << dynamic->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3414,7 +3414,7 @@ void msrNote::appendHarmonyToNote (
       harmony->asString () <<
       " to the harmonies list of " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3449,7 +3449,7 @@ void msrNote::appendHarmonyToNote (
 //       figuredBass->asString () <<
 //       " to the figured bass list of " <<
 //       asString () <<
-//       ", line " << fInputLineNumber <<
+//       ", " << fInputLineNumber <<
 //       std::endl;
 //
 //       gWaeHandler->waeTrace (
@@ -4373,7 +4373,7 @@ std::string msrNote::noteCoreAndInputLineNumbersAsString () const
 //   } // switch
 //
 //   ss <<
-//     ", line " << fInputLineNumber <<
+//     ", " << fInputLineNumber <<
 //     ']';
 //
 //   return ""; // JMI 0.9.67
@@ -7456,7 +7456,7 @@ void msrNote::printFull (std::ostream& os) const
         syllable->
           getSyllableUpLinkToStanza ()->
             getStanzaNumber () <<
-        ", line " << syllable->getInputLineNumber () <<
+        ", " << syllable->getInputLineNumber () <<
         ", syllableUpLinkToNote: " <<
         syllable->
           getSyllableUpLinkToNote ()->
@@ -7622,7 +7622,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
   } // switch
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -7927,7 +7927,7 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //   } // switch
 //
 //   ss <<
-//     ", line " << fInputLineNumber <<
+//     ", " << fInputLineNumber <<
 //     ']';
 //
 //   return ss.str ();

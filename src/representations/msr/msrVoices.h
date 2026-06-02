@@ -425,6 +425,9 @@ class EXP msrVoice : public msrElement
                             const S_msrClefKeyTimeSignatureGroup&
                               clefKeyTimeSignatureGroup);
 
+    Bool                  getVoiceHasNoTimesSignatur ()
+                              { return fVoiceHasNoTimesSignature; }
+
 //     void                  appendClefToVoice (
 //                             const S_msrClef& clef);
 //
@@ -1035,6 +1038,10 @@ class EXP msrVoice : public msrElement
     // musically empty voices
 
     Bool                  fVoiceIsMusicallyEmpty;
+
+    // clef, key, time signature
+
+    Bool                  fVoiceHasNoTimesSignature;
 
     // regular measure ends detection
 

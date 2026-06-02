@@ -482,7 +482,7 @@ void mfslInput::addName (
       fNamesSet.find (name);
 
   if (it != fNamesSet.end ()) {
-    // yes, issue error message
+    // YES, issue error message
     std::stringstream ss;
 
     ss <<
@@ -1299,7 +1299,7 @@ void mfslChoice::addLabel (
       fLabelsSet.find (label);
 
   if (it != fLabelsSet.end ()) {
-    // yes, issue error message
+    // YES, issue error message
     std::stringstream ss;
 
     ss <<

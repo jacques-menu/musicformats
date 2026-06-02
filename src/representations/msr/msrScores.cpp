@@ -761,7 +761,7 @@ void msrScore::printFull (std::ostream& os) const
 {
   os <<
     "***** [MSR Score full version *****" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

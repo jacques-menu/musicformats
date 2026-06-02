@@ -831,7 +831,7 @@ std::string msrDoubleTremolo::asShortString () const
     mfSingularOrPlural (
       fDoubleTremoloMarksNumber, "mark", "marks") <<
     ", placement: " << doubleTremoloPlacementKindAsString () <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -853,7 +853,7 @@ std::string msrDoubleTremolo::asString () const
 //     fDoubleTremoloSoundingWholeNotes.asFractionString () <<
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes.asFractionString () <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   if (fDoubleTremoloFirstElement) { // it may not be set yet
     ss <<
@@ -948,7 +948,7 @@ void msrDoubleTremolo::print (std::ostream& os) const
     "[DoubleTremolo" <<
     ", " << msrDoubleTremoloTypeKindAsString (fDoubleDoubleTremoloTypeKind) <<
     ", on " << msrDoubleTremoloKindAsString (fDoubleTremoloKind) <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   constexpr int fieldWidth = 32;

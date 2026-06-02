@@ -576,7 +576,7 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
       ", measureNumber: " <<
       measureNumber <<
       ", and appending it to staff \"" << fStaffPathLikeName << "\"" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -683,7 +683,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       "' as regular voice number '" <<
       fStaffRegularVoicesCounter <<
       "' of staff \"" << fStaffPathLikeName <<
-      "\", line " << inputLineNumber <<
+      "\", " << inputLineNumber <<
       "\", current measure number: " <<
       currentMeasureNumber;
  // JMI     " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
@@ -729,7 +729,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       fStaffRegularVoicesMap.find (voiceNumber);
 
   if (it != fStaffRegularVoicesMap.end ()) {
-    // yes
+    // YES
     S_msrVoice
       olderVoice = (*it).second;
 
@@ -744,7 +744,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       "\", " <<
       olderVoice->asShortString () <<
       " already exists with this same voiceNumber" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     msrInternalError ( // JMI ???
       gServiceRunData->getInputSourceName (),
@@ -783,7 +783,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "', voiceKind '" <<
           voiceKind <<
           "' in staff \"" << fStaffPathLikeName <<
-          "\", line " << inputLineNumber <<
+          "\", " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
      // JMI     " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
@@ -806,7 +806,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "', voiceKind '" <<
           voiceKind <<
           "' in staff \"" << fStaffPathLikeName <<
-          "\", line " << inputLineNumber <<
+          "\", " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
      // JMI     " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
@@ -1043,7 +1043,7 @@ void msrStaff::registerVoiceByItsNumber (
         ss <<
           "Sorting the voices in staff \"" <<
           fStaffPathLikeName << "\"" <<
-          ", line " << inputLineNumber;
+          ", " << inputLineNumber;
 
         gWaeHandler->waeTrace (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -1068,7 +1068,7 @@ void msrStaff::registerVoiceByItsNumber (
           "Sorting the voices in staff \"" <<
           fStaffPathLikeName << "\"" <<
           " with number " << staffNumber <<
-          ", line " << inputLineNumber;
+          ", " << inputLineNumber;
 
         gWaeHandler->waeTrace (
           __FILE__, mfInputLineNumber (__LINE__),
@@ -1202,7 +1202,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
      " by its number in staff \"" << fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1231,7 +1231,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
      " by its number in staff \"" << fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1262,7 +1262,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
      " in staff \"" << fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1317,7 +1317,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
     ss <<
       "Assigning sequential numbers to the regular voices in staff \"" <<
       fStaffPathLikeName <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1395,7 +1395,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1411,7 +1411,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       " in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
       " doesn't contain any regular voices, cannot fetch the first one" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     msrInternalError ( // JMI ???
       gServiceRunData->getInputSourceName (),
@@ -1487,7 +1487,7 @@ void msrStaff::registerVoiceInStaff (
       "\" as relative voice " <<
       fStaffRegularVoicesCounter <<
       " of staff \"" << fStaffPathLikeName <<
-      "\", line " << inputLineNumber;
+      "\", " << inputLineNumber;
 // JMI       " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
@@ -1648,7 +1648,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
       "\" as part level voice " <<
       fStaffRegularVoicesCounter <<
       " in staff \"" << fStaffPathLikeName <<
-      "\", line " << inputLineNumber;
+      "\", " << inputLineNumber;
 // JMI       " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
@@ -1725,7 +1725,7 @@ void msrStaff::registerVoiceInStaffClone (
       "\" as relative voice " <<
       fStaffRegularVoicesCounter <<
       " of staff clone \"" << fStaffPathLikeName <<
-      "\", line " << inputLineNumber;
+      "\", " << inputLineNumber;
 // JMI       " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
@@ -2365,7 +2365,7 @@ void msrStaff::appendPageBreakToStaff (
 //       fStaffPathLikeName <<
 //       "\" in part " <<
 //       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-//       ", line " << inputLineNumber;
+//       ", " << inputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -2427,7 +2427,7 @@ void msrStaff::cascadeHandleRepeatStartInStaff (
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2463,7 +2463,7 @@ void msrStaff::cascadeHandleRepeatEndInStaff (
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2499,7 +2499,7 @@ void msrStaff::cascadeHandleRepeatEndingStartInStaff (
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2537,7 +2537,7 @@ void msrStaff::cascadeHandleRepeatEndingEndInStaff (
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2576,7 +2576,7 @@ void msrStaff::finalizeRepeatEndInStaff (
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2677,7 +2677,7 @@ void msrStaff::cascadeAppendMultiMeasureRestToStaff (
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2747,7 +2747,7 @@ void msrStaff::cascadeAppendEmptyMeasuresToStaff (
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -2867,7 +2867,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
       fStaffPathLikeName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartNameForTrace () <<
-      ", line " << repeatEndingClone->getInputLineNumber ();
+      ", " << repeatEndingClone->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3104,7 +3104,7 @@ void msrStaff::cascadeFinalizeLastAppendedMeasureInStaff ( // cascade bottom
     ss <<
       "Cascading initializing last appended measure in staff \"" <<
       fStaffPathLikeName <<
-      "\", line " << inputLineNumber;
+      "\", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3210,7 +3210,7 @@ void msrStaff::finalizeStaff (const mfInputLineNumber& inputLineNumber)
     ss <<
       "Finalizing staff \"" <<
       fStaffPathLikeName << "\"" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3228,7 +3228,7 @@ void msrStaff::finalizeStaff (const mfInputLineNumber& inputLineNumber)
     ss <<
       "Finalizing the voices in staff \"" <<
       fStaffPathLikeName << "\"" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3262,7 +3262,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
       "Collecting measures from the staff voices into staff \"" <<
       fStaffPathLikeName <<
       "'s measures flat list vector" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -3296,7 +3296,7 @@ void msrStaff::collectStaffMeasuresSlices (
       ' ' <<
       mfSingularOrPlural (
         StaffAllVoicesMapSize, "voice", "voices") <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -4068,7 +4068,7 @@ void msrStaff::printFull (std::ostream& os) const
         voiceNumber <<
         ": " <<
         "Voice \"" << voice->getVoiceName () <<
-        "\", line " << voice->getInputLineNumber () <<
+        "\", " << voice->getInputLineNumber () <<
         std::endl;
 
       gIndenter.increment (3);

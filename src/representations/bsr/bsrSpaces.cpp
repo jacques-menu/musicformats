@@ -151,7 +151,7 @@ std::string bsrSpaces::asString () const
     ", numberOfSpaces: " << fNumberOfSpaces <<
     ", spacesCellsList: " << fSpacesCellsList <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -171,7 +171,7 @@ void bsrSpaces::print (std::ostream& os) const
 {
   os <<
     "Spaces" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

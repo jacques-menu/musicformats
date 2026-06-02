@@ -65,7 +65,7 @@ S_mxsrMultiMeasureRestEvent mxsrEventsCollection::createAMultiMeasureRestBegin (
     ss <<
       "--> Registering multi-measure rest begin event " <<
       multiMeasureRestBeginEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -86,7 +86,7 @@ void mxsrEventsCollection::registerMultiMeasureRestBegin (
     ss <<
       "--> Registering multi-measure rest begin event " <<
       multiMeasureRestBeginEvent->asString () <<
-      ", line " << multiMeasureRestBeginEvent->getEventInputLineNumber ();
+      ", " << multiMeasureRestBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -131,7 +131,7 @@ void mxsrEventsCollection::registerMultiMeasureRestBegin (
 //     ss <<
 //       "--> Registering multi-measure rest end event " <<
 //       multiMeasureRestEndEvent->asString () <<
-//       ", line " << eventInputLineNumber;
+//       ", " << eventInputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -152,7 +152,7 @@ void mxsrEventsCollection::registerMultiMeasureRestBegin (
 //     ss <<
 //       "--> Registering multi-measure rest end event " <<
 //       multiMeasureRestEndEvent->asString () <<
-//       ", line " << multiMeasureRestEndEvent->getEventInputLineNumber ();
+//       ", " << multiMeasureRestEndEvent->getEventInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -196,7 +196,7 @@ void mxsrEventsCollection::createAMultiMeasureRestEndAndRegisterIt (
     ss <<
       "--> Registering multi-measure rest end event " <<
       multiMeasureRestEndEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -211,7 +211,7 @@ void mxsrEventsCollection::createAMultiMeasureRestEndAndRegisterIt (
     ss <<
       "--> Registering multi-measure rest end event " <<
       multiMeasureRestEndEvent->asString () <<
-      ", line " << multiMeasureRestEndEvent->getEventInputLineNumber ();
+      ", " << multiMeasureRestEndEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -258,7 +258,7 @@ S_mxsrMeasureRepeatEvent mxsrEventsCollection::createAMeasureRepeatBegin (
     ss <<
       "--> Creating a measure repeat begin event " <<
       measureRepeatBeginEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -279,7 +279,7 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
     ss <<
       "--> Registering measure repeat begin event " <<
       measureRepeatBeginEvent->asString () <<
-      ", line " << measureRepeatBeginEvent->getEventInputLineNumber ();
+      ", " << measureRepeatBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -324,7 +324,7 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
 //     ss <<
 //       "--> Creating a measure repeat end event " <<
 //       measureRepeatEndEvent->asString () <<
-//       ", line " << eventInputLineNumber;
+//       ", " << eventInputLineNumber;
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -345,7 +345,7 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
 //     ss <<
 //       "--> Registering measure repeat end event " <<
 //       measureRepeatEndEvent->asString () <<
-//       ", line " << measureRepeatEndEvent->getMeasureNumber ();
+//       ", " << measureRepeatEndEvent->getMeasureNumber ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, mfInputLineNumber (__LINE__),
@@ -391,7 +391,7 @@ void mxsrEventsCollection::createAMeasureRepeatEndAndRegisterIt (
     ss <<
       "--> Creating a measure repeat end event " <<
       measureRepeatEndEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -406,7 +406,7 @@ void mxsrEventsCollection::createAMeasureRepeatEndAndRegisterIt (
     ss <<
       "--> Registering measure repeat end event " <<
       measureRepeatEndEvent->asString () <<
-      ", line " << measureRepeatEndEvent->getMeasureNumber ();
+      ", " << measureRepeatEndEvent->getMeasureNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -459,7 +459,7 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
     ss <<
       "--> Registering staff change event " <<
       staffChangeEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -513,7 +513,7 @@ void mxsrEventsCollection::registerStaffChangeLanding (
     ss <<
       "--> Registering staff change event " <<
       staffChangeEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -560,7 +560,7 @@ void mxsrEventsCollection::registerGraceBegin (
     ss <<
       "--> Registering grace note event " <<
       graceEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -604,7 +604,7 @@ void mxsrEventsCollection::registerGraceEnd (
     ss <<
       "--> Registering grace note event " <<
       graceEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -649,7 +649,7 @@ S_mxsrCueEvent mxsrEventsCollection::createACueBeginEvent (
     ss <<
       "--> Creating a cue begin event " <<
       cueEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -670,7 +670,7 @@ void mxsrEventsCollection::registerCueBeginEvent (
     ss <<
       "--> Registering cue begin event " <<
       cueBeginEvent->asString () <<
-      ", line " << cueBeginEvent->getEventInputLineNumber ();
+      ", " << cueBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -715,7 +715,7 @@ S_mxsrCueEvent mxsrEventsCollection::createACueEndEvent (
     ss <<
       "--> Creating a cue end event " <<
       cueEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -736,7 +736,7 @@ void mxsrEventsCollection::registerCueEndEvent (
     ss <<
       "--> Registering cue end event " <<
       cueEndEvent->asString () <<
-      ", line " << cueEndEvent->getEventInputLineNumber ();
+      ", " << cueEndEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -782,7 +782,7 @@ S_mxsrChordEvent mxsrEventsCollection::createAChordBeginEvent (
     ss <<
       "--> Creating a chord begin event " <<
       chordEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -803,7 +803,7 @@ void mxsrEventsCollection::registerChordBeginEvent (
     ss <<
       "--> Registering chord begin event " <<
       chordBeginEvent->asString () <<
-      ", line " << chordBeginEvent->getEventInputLineNumber ();
+      ", " << chordBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -848,7 +848,7 @@ EXP S_mxsrChordEvent mxsrEventsCollection::createAChordEndEvent (
     ss <<
       "--> Creating a chord end event " <<
       chordEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -869,7 +869,7 @@ void mxsrEventsCollection::registerChordEndEvent (
     ss <<
       "--> Registering chord end event " <<
       chordEndEvent->asString () <<
-      ", line " << chordEndEvent->getEventInputLineNumber ();
+      ", " << chordEndEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -918,7 +918,7 @@ S_mxsrTupletEvent mxsrEventsCollection::createATupletBeginEvent (
     ss <<
       "--> Creating a tuplet begin event " <<
       tupletEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -961,7 +961,7 @@ S_mxsrTupletEvent mxsrEventsCollection::createATupletEndEvent (
     ss <<
       "--> Creating tuplet end event " <<
       tupletEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      ", " << eventInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -982,7 +982,7 @@ void mxsrEventsCollection::registerTupletBeginEvent (
     ss <<
       "--> Registering tuplet begin event " <<
       tupletBeginEvent->asString () <<
-      ", line " << tupletBeginEvent->getEventInputLineNumber ();
+      ", " << tupletBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -1013,7 +1013,7 @@ void mxsrEventsCollection::registerTupletEndEvent (
     ss <<
       "--> Registering tuplet end event " <<
       tupletEndEvent->asString () <<
-      ", line " << tupletEndEvent->getNoteSequentialNumber ();
+      ", " << tupletEndEvent->getNoteSequentialNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),

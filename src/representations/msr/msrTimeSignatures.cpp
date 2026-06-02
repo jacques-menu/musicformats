@@ -176,7 +176,7 @@ msrTimeSignatureItem::msrTimeSignatureItem (
 
     ss <<
       "Creating time signature item" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -398,7 +398,7 @@ std::string msrTimeSignatureItem::asString () const
   } // switch
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -452,7 +452,7 @@ std::string msrTimeSignatureItem::asString () const
 //
 // /* JMI
 //   ss <<
-//     ", line " << fInputLineNumber;
+//     ", " << fInputLineNumber;
 // */
 //
 //   return ss.str ();
@@ -513,6 +513,8 @@ msrTimeSignature::msrTimeSignature (
   fTimeSignatureSymbolKind = timeSignatureSymbolKind;
 
   fTimeIsCompound = false;
+
+  fTimeSignatureIsHidden = false;
 }
 
 Bool msrTimeSignature::isEqualTo (S_msrTimeSignature otherTimeSignature) const
@@ -1111,7 +1113,7 @@ mfWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
             gLog <<
               "--> timeSignatureWholeNotesPerMeasure() 1 for " <<
               asString () <<
-              ", line " << fInputLineNumber <<
+              ", " << fInputLineNumber <<
             std::endl;
           }
       #endif // MF_TRACE_IS_ENABLED
@@ -1170,7 +1172,7 @@ mfWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
     gLog <<
       "--> timeSignatureWholeNotesPerMeasure() 2, result = " <<
       result <<
-      ", line " << fInputLineNumber <<
+      ", " << fInputLineNumber <<
     std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1275,6 +1277,8 @@ std::string msrTimeSignature::asString () const
         ss <<
           ", fTimeIsCompound: " <<
           fTimeIsCompound <<
+          ", fTimeSignatureIsHidden: " <<
+          fTimeSignatureIsHidden <<
           ", fTimeSignatureItemsVector.size(): " <<
           mfSingularOrPlural (
             fTimeSignatureItemsVector.size (), "item", "items");
@@ -1304,7 +1308,7 @@ std::string msrTimeSignature::asString () const
   } // switch
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1321,10 +1325,12 @@ std::string msrTimeSignature::asShortString () const
     fTimeSignatureSymbolKind <<
     ", fTimeIsCompound " <<
     fTimeIsCompound <<
+    ", fTimeSignatureIsHidden: " <<
+    fTimeSignatureIsHidden <<
     ", " <<
     mfSingularOrPlural (
       fTimeSignatureItemsVector.size (), "item", "items") <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
   */
@@ -1344,12 +1350,14 @@ std::string msrTimeSignature::asShortString () const
 //     fTimeSignatureSymbolKind <<
 //     ", fTimeIsCompound: " <<
 //     fTimeIsCompound;
+//     ", fTimeSignatureIsHidden: " <<
+//     fTimeSignatureIsHidden <<
 //     ", fTimeSignatureItemsVector.size(): " <<
 //     mfSingularOrPlural (
 //       fTimeSignatureItemsVector.size (), "item", "items") <<
 //     mfSingularOrPlural (
 //       fTimeSignatureItemsVector.size (), "item", "items") <<
-//     ", line " << fInputLineNumber;
+//     ", " << fInputLineNumber;
 // */
 //
 //   if (fTimeSignatureItemsVector.size ()) {
@@ -1390,7 +1398,7 @@ void msrTimeSignature::print (std::ostream& os) const
 {
   os <<
     "[TimeSignature" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1414,6 +1422,8 @@ void msrTimeSignature::print (std::ostream& os) const
           std::setw (fieldWidth) <<
           "fTimeIsCompound" << ": " <<
           fTimeIsCompound <<
+          ", fTimeSignatureIsHidden: " <<
+          fTimeSignatureIsHidden <<
           std::endl <<
           std::setw (fieldWidth) <<
           "fTimeSignatureItemsVector.size()" << ": " <<

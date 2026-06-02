@@ -43,6 +43,7 @@ enum class msrSyllableKind {
   kSyllableBegin, kSyllableMiddle, kSyllableEnd,
 
   kSyllableOnRestNote,
+
   kSyllableSkipOnRestNote,
   kSyllableSkipOnRegularNote,
 

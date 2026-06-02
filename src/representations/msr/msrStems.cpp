@@ -162,7 +162,7 @@ std::string msrStem::asString () const
     "[Stem" <<
     ", fStemKind: " <<
     fStemKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

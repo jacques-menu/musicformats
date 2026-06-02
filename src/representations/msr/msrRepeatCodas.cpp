@@ -261,7 +261,7 @@ std::string msrRepeatCoda::asString () const
 
   ss <<
     "RepeatCoda" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   return ss.str ();

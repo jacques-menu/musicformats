@@ -340,7 +340,7 @@ std::string bsrClef::asString () const
     ", fClefKind: " << fClefKind <<
     "fClefCellsList: " << fClefCellsList <<
     ", fSpacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -362,7 +362,7 @@ void bsrClef::print (std::ostream& os) const
 {
   os <<
     "Clef" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

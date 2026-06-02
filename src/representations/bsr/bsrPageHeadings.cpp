@@ -238,7 +238,7 @@ std::string bsrPageHeading::asString () const
 
   ss <<
     ", pageHeadingNumber: " << fPageHeadingNumber <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -266,7 +266,7 @@ void bsrPageHeading::print (std::ostream& os) const
 {
   os <<
     "PageHeading" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

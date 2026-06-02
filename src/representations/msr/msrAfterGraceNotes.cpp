@@ -240,7 +240,7 @@ void msrAfterGraceNotesGroupContents::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fMeasureElementsList.size (), "note", "notes") <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -500,7 +500,7 @@ void msrAfterGraceNotesGroup::print (std::ostream& os) const
 {
   os <<
     "[AfterGraceNotesGroup" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

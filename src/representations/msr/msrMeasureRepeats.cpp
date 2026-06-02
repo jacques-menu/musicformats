@@ -80,7 +80,7 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
       "Appending segment '" << segment <<
       "' to measureRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -112,7 +112,7 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
       "Appending measureRepeat '" << measureRepeat <<
       "' to measureRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -144,7 +144,7 @@ void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
       "Appending voice element '" << voiceElement <<
       "' to measureRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -351,7 +351,7 @@ void msrMeasureRepeatElement::printFull (std::ostream& os) const
 {
   os <<
     "MeasureRepeatElement" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -408,7 +408,7 @@ void msrMeasureRepeatElement::print (std::ostream& os) const
 {
   os <<
     "MeasureRepeatElement" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -657,7 +657,7 @@ std::string msrMeasureRepeatPattern::asString () const
   ss <<
 
     "MeasureRepeatPattern" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchMeasuresNumber (),
@@ -896,7 +896,7 @@ std::string msrMeasureRepeatReplicas::asString () const
   ss <<
 
     "MeasureRepeatReplicas" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchMeasuresNumber (),
@@ -1360,7 +1360,7 @@ std::string msrMeasureRepeat::asString () const
   ss <<
 
     "'MeasureRepeat" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchMeasureRepeatPatternMeasuresNumber (),
@@ -1394,7 +1394,7 @@ void msrMeasureRepeat::displayMeasureRepeat (
     std::endl <<
     fUpLinkToMeasureRepeatToVoice->getVoiceName () <<
     " (" << context << ")" <<
-    ", line " << inputLineNumber <<
+    ", " << inputLineNumber <<
     " contains:" <<
     std::endl;
 
@@ -1429,7 +1429,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
         : 0,
       "replica measure",
       "replicas measures") <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

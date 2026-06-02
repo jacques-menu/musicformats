@@ -209,7 +209,7 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 //             optionNameWithoutDash);
 //
 //       if (newMultiGenerationOutputKind != mfMultiGenerationOutputKind::kGeneration_UNKNOWN_) {
-//         // yes, optionNameWithoutDash is a multi generators output kind
+//         // YES, optionNameWithoutDash is a multi generators output kind
 //         if (result != mfMultiGenerationOutputKind::kGeneration_UNKNOWN_) {
 //           std::stringstream ss;
 //

@@ -61,7 +61,7 @@ void mnx2mnxsrOptionsBlock::registerOptionsInOptionsBlock (
       option->asString () <<
       "] in options block \"" <<
       fOptionsBlockName <<
-      "\", line " << drv.getScannerLocation () <<
+      "\", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -212,7 +212,7 @@ void mnx2mnxsrInput::setInputNameSuppliedByAnOption (
       "\" to \"" <<
       name <<
       "\", supplied by an option" <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -230,7 +230,7 @@ void mnx2mnxsrInput::selectInputName (
       fInputName <<
       "\" to \"" <<
       name <<
-      "\", line " << drv.getScannerLocation () <<
+      "\", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -285,7 +285,7 @@ void mnx2mnxsrInput::selectInputName (
 //               "\" by an option-supplied to the script" <<
 //               ", ignoring name \"" <<
 //               name <<
-//         //               "\", line " << drv.getScannerLocation () <<
+//         //               "\", " << drv.getScannerLocation () <<
 //               endl;
 //           }
 //
@@ -373,7 +373,7 @@ std::string mnx2mnxsrInput::getInputName (mnx2mnxsrDriver& drv) const
           ", name " <<
           fInputName <<
           "\", supplied to the script" <<
-          ", line " << drv.getScannerLocation () <<
+          ", " << drv.getScannerLocation () <<
           endl;
       }
       break;
@@ -387,7 +387,7 @@ std::string mnx2mnxsrInput::getInputName (mnx2mnxsrDriver& drv) const
           "\" has name \"" <<
           fInputName <<
           " \", set in the script" <<
-          ", line " << drv.getScannerLocation () <<
+          ", " << drv.getScannerLocation () <<
           endl;
       }
       break;
@@ -434,7 +434,7 @@ S_mnx2mnxsrOptionsBlock mnx2mnxsrInput::getInputOptionsBlockForName (
       name <<
       "\" in input \"" <<
       fInputName <<
-      "\", line " << drv.getScannerLocation () <<
+      "\", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -454,7 +454,7 @@ S_mnx2mnxsrOptionsBlock mnx2mnxsrInput::getInputOptionsBlockForName (
       name <<
       "\" is not known to input \"" <<
       fInputName <<
-      "\", line " << drv.getScannerLocation ();
+      "\", " << drv.getScannerLocation ();
 
     mnx2mnxsrError (
       ss.str (),
@@ -465,7 +465,7 @@ S_mnx2mnxsrOptionsBlock mnx2mnxsrInput::getInputOptionsBlockForName (
     gLog <<
       "<==== Result: \"" <<
       result <<
-      "\", line " << drv.getScannerLocation () <<
+      "\", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -482,7 +482,7 @@ void mnx2mnxsrInput::addName (
       fNamesSet.find (name);
 
   if (it != fNamesSet.end ()) {
-    // yes, issue error message
+    // YES, issue error message
     std::stringstream ss;
 
     ss <<
@@ -490,7 +490,7 @@ void mnx2mnxsrInput::addName (
       name <<
       "\" occurs more that once in input \"" <<
       fInputName <<
-      "\", line " << drv.getScannerLocation ();
+      "\", " << drv.getScannerLocation ();
 
     mnx2mnxsrError (
       ss.str (),
@@ -498,13 +498,14 @@ void mnx2mnxsrInput::addName (
   }
 
   else {
+    // NO
     if (gGlobalMnx2mnxsrInterpreterOahGroup->getTraceInputs ()) {
       gLog <<
         "====> Adding name \"" <<
         name <<
           " to input \"" <<
         fInputName <<
-          ", line " << drv.getScannerLocation () <<
+          ", " << drv.getScannerLocation () <<
         endl;
     }
 
@@ -549,7 +550,7 @@ void mnx2mnxsrInput::enrichNameOptionsBlock (
         optionsBlock->getOptionsBlockSize (),
         "option", "options") <<
       ')' <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -835,7 +836,7 @@ S_mnx2mnxsrInput mnx2mnxsrInputsTable::fetchInputByName (
       "====> Fetching input named \"" <<
       name <<
       "\" in inputs table" <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -874,7 +875,7 @@ S_mnx2mnxsrInput mnx2mnxsrInputsTable::fetchInputByNameNonConst (
       "====> Fetching input named \"" <<
       name <<
       "\" in inputs table (non-const)" <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -1029,7 +1030,7 @@ void mnx2mnxsrChoice::setChoiceLabelSuppliedByAnOption (
       "\" to \"" <<
       label <<
       "\", supplied by an option" <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -1047,7 +1048,7 @@ void mnx2mnxsrChoice::selectChoiceLabel (
       fChoiceName <<
       "\" to \"" <<
       label <<
-      "\", line " << drv.getScannerLocation () <<
+      "\", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -1102,7 +1103,7 @@ void mnx2mnxsrChoice::selectChoiceLabel (
               "\" by an option-supplied to the script" <<
               ", ignoring label \"" <<
               label <<
-                      "\", line " << drv.getScannerLocation () <<
+                      "\", " << drv.getScannerLocation () <<
               endl;
           }
 
@@ -1190,7 +1191,7 @@ std::string mnx2mnxsrChoice::getChoiceLabel (mnx2mnxsrDriver& drv) const
           ", label " <<
           fChoiceLabel <<
           "\", supplied to the script" <<
-          ", line " << drv.getScannerLocation () <<
+          ", " << drv.getScannerLocation () <<
           endl;
       }
       break;
@@ -1204,7 +1205,7 @@ std::string mnx2mnxsrChoice::getChoiceLabel (mnx2mnxsrDriver& drv) const
           "\" has label \"" <<
           fChoiceLabel <<
           " \", set in the script" <<
-          ", line " << drv.getScannerLocation () <<
+          ", " << drv.getScannerLocation () <<
           endl;
       }
       break;
@@ -1251,7 +1252,7 @@ S_mnx2mnxsrOptionsBlock mnx2mnxsrChoice::getChoiceOptionsBlockForLabel (
       label <<
       "\" in choice \"" <<
       fChoiceName <<
-      "\", line " << drv.getScannerLocation () <<
+      "\", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -1271,7 +1272,7 @@ S_mnx2mnxsrOptionsBlock mnx2mnxsrChoice::getChoiceOptionsBlockForLabel (
       label <<
       "\" is not known to choice \"" <<
       fChoiceName <<
-      "\", line " << drv.getScannerLocation ();
+      "\", " << drv.getScannerLocation ();
 
     mnx2mnxsrError (
       ss.str (),
@@ -1282,7 +1283,7 @@ S_mnx2mnxsrOptionsBlock mnx2mnxsrChoice::getChoiceOptionsBlockForLabel (
     gLog <<
       "<==== Result: \"" <<
       result <<
-      "\", line " << drv.getScannerLocation () <<
+      "\", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -1299,7 +1300,7 @@ void mnx2mnxsrChoice::addLabel (
       fLabelsSet.find (label);
 
   if (it != fLabelsSet.end ()) {
-    // yes, issue error message
+    // YES, issue error message
     std::stringstream ss;
 
     ss <<
@@ -1307,7 +1308,7 @@ void mnx2mnxsrChoice::addLabel (
       label <<
       "\" occurs more that once in choice \"" <<
       fChoiceName <<
-      "\", line " << drv.getScannerLocation ();
+      "\", " << drv.getScannerLocation ();
 
     mnx2mnxsrError (
       ss.str (),
@@ -1315,13 +1316,14 @@ void mnx2mnxsrChoice::addLabel (
   }
 
   else {
+    // NO
     if (gGlobalMnx2mnxsrInterpreterOahGroup->getTraceChoices ()) {
       gLog <<
         "====> Adding label \"" <<
         label <<
           " to choice \"" <<
         fChoiceName <<
-          ", line " << drv.getScannerLocation () <<
+          ", " << drv.getScannerLocation () <<
         endl;
     }
 
@@ -1366,7 +1368,7 @@ void mnx2mnxsrChoice::enrichLabelOptionsBlock (
         optionsBlock->getOptionsBlockSize (),
         "option", "options") <<
       ')' <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -1694,7 +1696,7 @@ S_mnx2mnxsrChoice mnx2mnxsrChoicesTable::fetchChoiceByName (
       "====> Fetching choice named \"" <<
       name <<
       "\" in choices table" <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -1733,7 +1735,7 @@ S_mnx2mnxsrChoice mnx2mnxsrChoicesTable::fetchChoiceByNameNonConst (
       "====> Fetching choice named \"" <<
       name <<
       "\" in choices table (non-const)" <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -1858,7 +1860,7 @@ mnx2mnxsrCaseChoiceStatement::mnx2mnxsrCaseChoiceStatement (
       ", caseChoice: [" <<
       fCaseChoice->asString () <<
       ']' <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -1882,7 +1884,7 @@ void mnx2mnxsrCaseChoiceStatement::registerCaseChoiceLabel (
       "\" in case statement: [" <<
       asString () <<
       ']' <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -1902,7 +1904,7 @@ void mnx2mnxsrCaseChoiceStatement::registerCaseChoiceLabel (
       fCaseChoice->getChoiceName () <<
       ", the labels are: " <<
       fCaseChoice->labelsSetAsString () <<
-      ", line " << drv.getScannerLocation ();
+      ", " << drv.getScannerLocation ();
 
     mnx2mnxsrError (
       ss.str (),
@@ -2061,7 +2063,7 @@ mnx2mnxsrCaseInputStatement::mnx2mnxsrCaseInputStatement (
       ", caseInput: [" <<
       fCaseInputInput->asString () <<
       ']' <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -2085,7 +2087,7 @@ void mnx2mnxsrCaseInputStatement::registerCaseInputName (
       "\" in case statement: [" <<
       asString () <<
       ']' <<
-      ", line " << drv.getScannerLocation () <<
+      ", " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -2105,7 +2107,7 @@ void mnx2mnxsrCaseInputStatement::registerCaseInputName (
       fCaseInputInput->getInputName () <<
       ", the names are: " <<
       fCaseInputInput->namesSetAsString () <<
-      ", line " << drv.getScannerLocation ();
+      ", " << drv.getScannerLocation ();
 
     mnx2mnxsrError (
       ss.str (),

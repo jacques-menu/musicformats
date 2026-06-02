@@ -3183,7 +3183,7 @@ std::string lpsrScore::asString () const
     ", fScoreLayout: " <<
        msrElementAsStringOrNULL (fScoreLayout) <<
 
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

@@ -44,7 +44,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
 
     ss <<
       "Creating hiddenMeasureAndBarLine" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -188,7 +188,7 @@ std::string msrHiddenMeasureAndBarLine::asString () const
   ss <<
     "HiddenMeasureAndBarLine" <<
     ", positionInMeasure: " << fMeasureElementPositionInMeasure.asString () <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }

@@ -81,7 +81,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
       "Appending segment '" << segment <<
       "' to beatRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -113,7 +113,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
       "Appending beatRepeat '" << beatRepeat <<
       "' to beatRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -145,7 +145,7 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
       "Appending voice element '" << voiceElement <<
       "' to beatRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -352,7 +352,7 @@ void msrBeatRepeatElement::printFull (std::ostream& os) const
 {
   os <<
     "BeatRepeatElement" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -409,7 +409,7 @@ void msrBeatRepeatElement::print (std::ostream& os)
 {
   os <<
     "BeatRepeatElement" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -658,7 +658,7 @@ std::string msrBeatRepeatPattern::asString () const
   ss <<
 
     "BeatRepeatPattern" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchMeasuresNumber (),
@@ -897,7 +897,7 @@ std::string msrBeatRepeatReplicas::asString () const
   ss <<
 
     "BeatRepeatReplicas" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchMeasuresNumber (),
@@ -1373,7 +1373,7 @@ std::string msrBeatRepeat::asString () const
   ss <<
 
     "[BeatRepeat" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchBeatRepeatPatternMeasuresNumber (),
@@ -1407,7 +1407,7 @@ void msrBeatRepeat::displayBeatRepeat (
     std::endl <<
     fUpLinkToBeatRepeatToVoice->getVoiceName () <<
     " (" << context << ")" <<
-    ", line " << inputLineNumber <<
+    ", " << inputLineNumber <<
     " contains:" <<
     std::endl;
 
@@ -1438,7 +1438,7 @@ void msrBeatRepeat::print (std::ostream& os) const
         : 0,
       "replica measure",
       "replicas measures") <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

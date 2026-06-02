@@ -127,7 +127,7 @@ std::string lpsrVariableUseCommand::asString () const
 
   ss <<
     ", fVariableName: " << fVariableName <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

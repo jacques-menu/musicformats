@@ -179,7 +179,7 @@ std::string lpsrPartGroupBlock::asString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

@@ -145,7 +145,7 @@ std::string wholeNotesAsLilypondString (
       "--> wholeNotesAsLilypondString() 1 -------------------------------------" <<
       ", wholeNotes: " << wholeNotes.asFractionString () <<
       ", dotsNumber: " << dotsNumber <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -180,7 +180,7 @@ std::string wholeNotesAsLilypondString (
     ss <<
      "%{ZERO_LENGTH: " <<
      wholeNotes.asString () << // JMI
-     ", line " <<
+     ", " <<
      inputLineNumber <<
      " %}";
 
@@ -200,11 +200,11 @@ std::string wholeNotesAsLilypondString (
 
     std::string message = s1.str ();
 
-    lpsrError ( // JMI 0.9.68
-//     lpsrWarning (
+//     lpsrError ( // JMI KRAKRA 2026.2
+    lpsrWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-     __FILE__, mfInputLineNumber (__LINE__),
+//      __FILE__, mfInputLineNumber (__LINE__),
       message);
 
     std::stringstream s2;
@@ -212,7 +212,7 @@ std::string wholeNotesAsLilypondString (
     s2 <<
       "%{ " <<
       message <<
-      ", line " << inputLineNumber <<
+      ", " << inputLineNumber <<
       " ???%}";
 
     return s2.str ();
@@ -1368,7 +1368,7 @@ lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
       "dynamics text spanners style string \"" <<
       dynamicsTextSpannersStyleKindString <<
       "\" is unknown" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     lpsrError (
       gServiceRunData->getInputSourceName (),

@@ -81,7 +81,7 @@ msrBarCheck::msrBarCheck (const mfInputLineNumber& inputLineNumber)
 
     ss <<
       "Creating a bare bar check" <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -104,7 +104,7 @@ msrBarCheck::msrBarCheck (
       "Creating a bar check" <<
       ", upLinkToMeasure: " <<
       upLinkToMeasure->asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -135,7 +135,7 @@ msrBarCheck::msrBarCheck (
       fNextBarPuristNumber <<
       ", upLinkToMeasure: " <<
       upLinkToMeasure->asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -282,7 +282,7 @@ std::string msrBarCheck::asString () const
     "[BarCheck" <<
     ", nextBarOriginalNumber = \"" << fNextBarOriginalNumber << "\"" <<
     ", nextBarPuristNumber = \"" << fNextBarPuristNumber << "\"" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

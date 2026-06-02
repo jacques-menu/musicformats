@@ -310,7 +310,7 @@ void msrTechnical::print (std::ostream& os) const
   os <<
     "Technical " <<
     asString () <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
 //    ", accidental mark" << ": " << technicalAccidentalMarkKindAsString () <<
     std::endl;
 }
@@ -452,7 +452,7 @@ void msrTechnicalWithInteger::print (std::ostream& os) const
   os <<
     "[TechnicalWithInteger" <<
     ", fTechnicalWithIntegerKind: " << fTechnicalWithIntegerKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -610,7 +610,7 @@ void msrTechnicalWithFloat::print (std::ostream& os) const
   os <<
     "[TechnicalWithFloat" <<
     ", fTechnicalWithFloatKind: " << fTechnicalWithFloatKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -765,7 +765,7 @@ std::string msrTechnicalWithString::asString () const
     ", fTechnicalWithStringTypeKind: " << fTechnicalWithStringTypeKind <<
     ", fTechnicalWithStringValue: \"" << fTechnicalWithStringValue << "\"" <<
     ", fTechnicalWithStringPlacementKind " << fTechnicalWithStringPlacementKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -775,7 +775,7 @@ void msrTechnicalWithString::print (std::ostream& os) const
 {
   os <<
     "[msrTechnicalWithString" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

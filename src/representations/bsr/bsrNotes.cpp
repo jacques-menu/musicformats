@@ -1306,7 +1306,7 @@ std::string bsrNote::asString () const
     ", cellsList (): " <<
     buildCellsList ()->asShortString () <<
     ", fSpacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -1326,7 +1326,7 @@ std::string bsrNote::asShortString () const // finalize this JMI
     ", cellsList (): " <<
     buildCellsList ()->asShortString () <<
     ", fSpacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -1359,7 +1359,7 @@ void bsrNote::print (std::ostream& os) const
 {
   os <<
     "Note" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

@@ -543,7 +543,7 @@ std::string lpsrFiguredBassContext::asString () const
   ss <<
     "[FiguredBassContext" <<
     ", fContextStaff: " << fContextStaff <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

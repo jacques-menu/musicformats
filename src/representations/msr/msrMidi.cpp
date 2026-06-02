@@ -154,7 +154,7 @@ std::string msrMidiTempo::asString () const
     "[MidiTempo" <<
     ", midiTempoNotesDuration = \"" << fMidiTempoNotesDuration << "\"" <<
     ", midiTempoPerSecond: " << fMidiTempoPerSecond <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']';
 
   return ss.str ();

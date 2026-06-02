@@ -5217,7 +5217,7 @@ S_oahPrefix oahHandler::fetchNameInHandlerPrefixesMap (
         name);
 
   if (it != fHandlerPrefixesMap.end ()) {
-    // yes, name is known in the map
+    // YES, name is known in the map
     result = (*it).second;
   }
 
@@ -5236,7 +5236,7 @@ S_oahElement oahHandler::fetchNameInNamesToElementsMap (
         name);
 
   if (it != fHandlerNamesToElementsMap.end ()) {
-    // yes, name is known in the map
+    // YES, name is known in the map
     result = (*it).second;
   }
 
@@ -8624,7 +8624,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
           singleCharacterString);
 
     if (it != fSingleCharacterNamesSet.end ()) {
-      // yes, singleCharacterString is known in the set
+      // YES, singleCharacterString is known in the set
       clusterElementsList.push_back (
         fetchElementByNameInHandler (
           singleCharacterString));
@@ -9096,14 +9096,14 @@ void oahHandler::handleOptionNameAndValueAtTopOahLevel (
     optionNameNonDashPart.find ("=");
 
   if (equalsSignPosition != std::string::npos) {
-    // yes, there's an equal sign
+    // YES, there's an equal sign
     handleNameContainingEqualSign ( // JMI NOT HERE BECAUSE IT'S DONE AFTERWARDS IN handleOptionNameCommon() ???
       optionNameNonDashPart,
       equalsSignPosition);
   }
 
   else {
-    // no, there's no equal sign
+    // NO, there's no equal sign
     // handle the current option name
       handleOptionsVectorOptionName (
         optionNameNonDashPart,
@@ -10205,7 +10205,7 @@ void oahHandler::handleKnownOptionsVectorElement (
         element);
 
   if (it != fHandlerCommandLineElementsMultiset.end ()) {
-    // yes, element is known in the list
+    // YES, element is known in the list
     if (! element->getMultipleOccurrencesAllowed ()) {
       std::stringstream ss;
 
@@ -10385,7 +10385,7 @@ void oahHandler::handleKnownArgvElement (
         element);
 
   if (it != fHandlerCommandLineElementsMultiset.end ()) {
-    // yes, element is known in the list
+    // YES, element is known in the list
     if (! element->getMultipleOccurrencesAllowed ()) {
       std::stringstream ss;
 
@@ -10780,14 +10780,14 @@ void oahHandler::handleOptionNameCommon (
     optionName.find ("=");
 
   if (equalsSignPosition != std::string::npos) {
-    // yes, there's an equal sign
+    // YES, there's an equal sign
     handleNameContainingEqualSign (
       optionName,
       equalsSignPosition);
   }
 
   else {
-    // is optionName known in options map?
+    // NO, is optionName known in options map?
     S_oahElement
       element =
         fetchNameInNamesToElementsMap (optionName);

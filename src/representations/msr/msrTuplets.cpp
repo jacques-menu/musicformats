@@ -1005,7 +1005,7 @@ std::string msrTuplet::asString () const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   ss <<
     ", getMeasureNumber: ";
@@ -1084,7 +1084,7 @@ std::string msrTuplet::asShortString () const
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
     ", fTupletBracketPlacementKind: " << fTupletBracketPlacementKind <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   ss <<
     ", getMeasureNumber: ";
@@ -1161,7 +1161,7 @@ void msrTuplet::printFull (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1283,7 +1283,7 @@ void msrTuplet::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1480,7 +1480,7 @@ void msrTuplet::finalizeTuplet (
     ss <<
       "Finalizing tuplet " <<
       asString () <<
-      ", line " << inputLineNumber;
+      ", " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),

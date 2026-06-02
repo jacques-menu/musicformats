@@ -192,7 +192,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
       fClefKindToClefKindMapVariable.find (originalClefKind);
 
   if (it != fClefKindToClefKindMapVariable.end ()) {
-    // yes, issue error message
+    // YES, issue error message
     std::stringstream ss;
 
     ss <<
@@ -205,6 +205,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   }
 
   else {
+    // NO
     msrClefKind
       destinationClefKind =
         msrClefKindFromString (

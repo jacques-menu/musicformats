@@ -1614,12 +1614,12 @@ std::string lpsr2lilypondTranslator::noteWholeNotesAsStringIfItShouldBeGenerated
 
   // should the duration be generated in all cases?
   if (gGlobalLpsr2lilypondOahGroup->getAllNotesDurations ()) {
-    // yes
+    // YES
     doGenerateExplicitNotesDuration = true;
   }
 
   else {
-    // let's see...
+    // NO, let's see...
     Bool
       wholeNotesIsANewDuration =
         wholeNotes != fLastGeneratedWholeNotes;
@@ -10349,7 +10349,7 @@ if (true) { // JMI 2026.2
       }
 
       else {
-        // yes, split the name into a chunks list
+        // YES, split the name into a chunks list
         // and generate a \markup{} // JMI ???
         fLilypondCodeStream <<
           std::endl <<
@@ -10395,7 +10395,7 @@ if (true) { // JMI 2026.2
       }
 
       else {
-        // yes, split the name into a chunks list
+        // YES, split the name into a chunks list
         // and generate a \markup{} // JMI ???
         fLilypondCodeStream <<
           std::endl <<
@@ -12969,7 +12969,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
   // center bar number?
   if (! gGlobalLpsr2lilypondOahGroup->getBoxAroundBarNumberSet ().empty ()) {
-    // yes, center the boxed bar number
+    // YES, center the boxed bar number
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
       std::stringstream ss;
@@ -13891,7 +13891,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         ||
       it != gGlobalLpsr2lilypondOahGroup->getBoxAroundBarNumberSet ().end ()
     ) {
-      // yes, generate a box around the bar number
+      // YES, generate a box around the bar number
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
         std::stringstream ss;
@@ -13926,7 +13926,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         !=
       gGlobalLpsr2lilypondOahGroup->getResetMeasureElementMeasureNumberMap ().end ()
     ) {
-      // yes, reset measure number
+      // YES, reset measure number
       mfMeasureNumber lilypondMeasureNumber = (*it).second;
 
       if (lilypondMeasureNumber != fCurrentMeasureNumber) {
@@ -14020,7 +14020,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       !=
     gGlobalLpsr2lilypondOahGroup->getShowMeasureNumbersAtMeasureSet ().end ()
   ) {
-    // yes, display the measure number
+    // YES, display the measure number
     fLilypondCodeStream <<
       "\\once \\override Score.BarNumber.break-visibility = ##f" <<
       std::endl;
@@ -14696,7 +14696,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
           getBreakLineAfterMeasureNumberSet ().find (fCurrentMeasureNumber);
 
     if (it != gGlobalLpsr2lilypondOahGroup->getBreakLineAfterMeasureNumberSet ().end ()) {
-      // yes, generate a line break command
+      // YES, generate a line break command
   #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
           std::stringstream ss;
@@ -14746,7 +14746,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
           getBreakPageAfterMeasureNumberSet ().find (fCurrentMeasureNumber);
 
     if (it != gGlobalLpsr2lilypondOahGroup->getBreakPageAfterMeasureNumberSet ().end ()) {
-      // yes, generate a page break command
+      // YES, generate a page break command
   #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTracePageBreaks ()) {
           std::stringstream ss;
@@ -15131,7 +15131,7 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
 
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "input line number" << ": " << syllable->getInputLineNumber () <<
+    "getInputLineNumber" << ": " << syllable->getInputLineNumber () <<
     std::endl;
 
   fLilypondCodeStream <<
@@ -15311,7 +15311,7 @@ void lpsr2lilypondTranslator::generateLilypondSyllableMiddle (
 #ifdef MF_TRACE_IS_ENABLED
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
-          "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSkipOnRegularNote" <<
+          "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableMiddle" <<
           ", " << syllable->getInputLineNumber () <<
           " %}" <<
           std::endl;
@@ -15334,7 +15334,7 @@ void lpsr2lilypondTranslator::generateLilypondSyllableMiddle (
 #ifdef MF_TRACE_IS_ENABLED
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
-          "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableSkipOnRegularNote" <<
+          "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableMiddle" <<
           ", " << syllable->getInputLineNumber () <<
           " %}" <<
           std::endl;
@@ -15536,8 +15536,6 @@ void lpsr2lilypondTranslator::generateLilypondSyllableSkipOnRestNote (
           syllable->getSyllableWholeNotes ()) <<
         cLilyPondSpace;
 
-
-
 //       fLilypondCodeStream <<
 //         "\"\"";
 //       generateWholeNotesDuration (
@@ -15572,8 +15570,10 @@ void lpsr2lilypondTranslator::generateLilypondSyllableSkipOnRegularNote (
         fLilypondCodeStream <<
           cLilyPondSpace;
 
-      handleLyricExtenderIfAnyAutomaticallySyllableMiddle (
-        syllable);
+        handleLyricExtenderIfAnyAutomaticallySyllableMiddle_kSyllableSkipOnRegularNote (
+          syllable);
+//         fLilypondCodeStream <<
+//           cLilypondSingleUnderscore;
       break;
 
     case lpsrLyricsDurationsKind::kLyricsDurationsExplicit:
@@ -15596,8 +15596,11 @@ void lpsr2lilypondTranslator::generateLilypondSyllableSkipOnRegularNote (
       fLilypondCodeStream <<
         cLilyPondSpace;
 
-      handleLyricExtenderIfAnyExplicitlySyllableMiddle (
+      handleLyricExtenderIfAnyExplicitlySyllableMiddle_kSyllableSkipOnRegularNote ( // KRAKRA
+//       handleLyricExtenderIfAnyExplicitlySyllableMiddle (
         syllable);
+//       fLilypondCodeStream <<
+//         cLilypondSingleUnderscore;
       break;
   } // switch
 }
@@ -15906,7 +15909,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 //           break;
 //
 //         case lpsrLyricsDurationsKind::kLyricsDurationsExplicit:
-// //           handleLyricExtenderIfAnyExplicitly (
+// //           handleLyricExtenderIfAnyAutomatically (
 // //             syllable);
 //           break;
 //       } // switch
@@ -16120,6 +16123,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableBegin
       break;
 
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
+      fOnGoingExtend = true;
       doGenerateADoubleHyphen = true;
       break;
 
@@ -16232,6 +16236,158 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableMiddl
     fLilypondCodeStream <<
       std::endl <<
       "%{ CODE_FOR_EXTENDER_AUTOMATIC_DURATIONS_kSyllableMiddle" <<
+      ", " << syllable->getInputLineNumber () <<
+      " %}" <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  Bool doGenerateASingleHyphen (false);
+  Bool doGenerateADoubleHyphen (false);
+
+  Bool doGenerateASingleleUnderscore (false);
+  Bool doGenerateADoubleUnderscore (false);
+
+  // get the note the syllable is attached to
+  S_msrNote
+    noteTheSyllableIsAttachedTo =
+      syllable->getSyllableUpLinkToNote ();
+
+  doGenerateADoubleHyphen = true; // 2026.2 KRAKRA
+
+  // what it the syllable's extend kind?
+  switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+//       fOnGoingExtend = true;
+//       doGenerateADoubleUnderscore = true;
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeLess:
+      fOnGoingExtend = true;
+      doGenerateADoubleUnderscore = true;
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeStart:
+      fOnGoingExtend = true;
+      doGenerateADoubleUnderscore = true;
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+      doGenerateADoubleUnderscore = true;
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeStop:
+      fOnGoingExtend = false;
+      break;
+  } // switch
+
+  if (noteTheSyllableIsAttachedTo) {
+    // take note's tie into account if any
+    const std::list <S_msrTie>& noteTiesList =
+      noteTheSyllableIsAttachedTo->getNoteTiesList ();
+
+    if (! noteTiesList.empty ()) {
+      for (S_msrTie noteTie : noteTiesList) {
+        switch (noteTie->getTieKind ()) {
+          case msrTieKind::kTieNone:
+            break;
+          case msrTieKind::kTieStart: // PAS CLAIR, VOIR GOAL
+            doGenerateASingleHyphen = true;
+            break;
+          case msrTieKind::kTieContinue:
+            doGenerateASingleHyphen = true;
+            break;
+          case msrTieKind::kTieStop:
+            break;
+          case msrTieKind::kTieLetRing:
+            break;
+        } // switch
+      } // for
+    }
+  }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
+    fLilypondCodeStream <<
+      "%{ =======>" <<
+      std::endl;
+
+    gIndenter++;
+
+    constexpr int fieldWidth = 28;
+
+    fLilypondCodeStream <<
+      syllable <<
+      std::endl;
+
+    fLilypondCodeStream << std::left <<
+      std::setw (fieldWidth) <<
+      "doGenerateASingleHyphen" << ": " <<
+      doGenerateASingleHyphen <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "doGenerateASingleleUnderscore" << ": " <<
+      doGenerateASingleleUnderscore <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "doGenerateADoubleUnderscore" << ": " <<
+      doGenerateADoubleUnderscore <<
+      std::endl;
+
+    gIndenter--;
+
+    fLilypondCodeStream <<
+      "%}" <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // should a single hyphen be generated?
+  // ----------------------------------------------------
+  if (doGenerateASingleHyphen) {
+    fLilypondCodeStream <<
+      cLilypondSingleHyphen;
+  }
+
+  // should a double hyphen be generated?
+  // ----------------------------------------------------
+  if (doGenerateADoubleHyphen) {
+    fLilypondCodeStream <<
+      cLilypondDoubleHyphen;
+  }
+
+  // should a single underscore be generated?
+  // ----------------------------------------------------
+  if (doGenerateASingleleUnderscore) {
+    fLilypondCodeStream <<
+      cLilypondSingleUnderscore;
+  }
+
+  // should a double underscore be generated?
+  // ----------------------------------------------------
+  if (doGenerateADoubleUnderscore) {
+    fLilypondCodeStream <<
+      cLilypondDoubleUnderscore;
+  }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
+    fLilypondCodeStream <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableMiddle_kSyllableSkipOnRegularNote (
+  const S_msrSyllable& syllable)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
+    fLilypondCodeStream <<
+      std::endl <<
+      "%{ CODE_FOR_EXTENDER_AUTOMATIC_DURATIONS_kSyllableSkipOnRegularNote" <<
       ", " << syllable->getInputLineNumber () <<
       " %}" <<
       std::endl;
@@ -16751,6 +16907,12 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitlySyllableSingle (
       break;
 
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
+//       fOnGoingExtend = true; // KRAKRA KRAKRA KRAKRA
+//
+//       if (fOnGoingExtend) {
+//         doGenerateADoubleUnderscore = true; // KRAKRA
+//       }
+
       doGenerateADoubleUnderscore = true; // KRAKRA
       break;
 
@@ -16870,7 +17032,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitlySyllableBegin (
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
     fLilypondCodeStream <<
       std::endl <<
-      "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS__kSyllableBegin" <<
+      "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS_kSyllableBegin" <<
       ", " << syllable->getInputLineNumber () <<
       " %}" <<
       std::endl;
@@ -17013,7 +17175,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitlySyllableMiddle (
   if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
     fLilypondCodeStream <<
       std::endl <<
-      "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS__kSyllableMiddle" <<
+      "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS_kSyllableMiddle" <<
       ", " << syllable->getInputLineNumber () <<
       " %}" <<
       std::endl;
@@ -17072,6 +17234,173 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitlySyllableMiddle (
   switch (syllable->getSyllableExtendKind ()) {
     case msrSyllableExtendKind::kSyllableExtend_NONE:
       doGenerateADoubleHyphen = true; // KRAKRA
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeLess:
+//       {
+//         if (noteTheSyllableIsAttachedTo) {
+//           // take note's slurs into account if any
+//           const std::list <S_msrSlur>&
+//             noteSlursList =
+//               noteTheSyllableIsAttachedTo->getNoteSlursList ();
+//
+//           // take note's ties into account if any
+//           if (! noteSlursList.empty ()) {
+//             doGenerateADoubleHyphen = true;
+//           }
+//         }
+//       }
+
+//       doGenerateASingleUnderscore = true; KRAKRA
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeStart:
+//           doGenerateASingleUnderscore = true;
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+//           doGenerateASingleUnderscore = true;
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeStop:
+      break;
+  } // switch
+
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
+    fLilypondCodeStream <<
+      "%{ =======>" <<
+      std::endl;
+
+    gIndenter++;
+
+    constexpr int fieldWidth = 28;
+
+//     syllable->printForTrace (
+//       fLilypondCodeStream,
+//       fieldWidth);
+
+    fLilypondCodeStream <<
+      syllable <<
+      std::endl;
+
+    fLilypondCodeStream << std::left <<
+      std::setw (fieldWidth) <<
+      "doGenerateASingleHyphen" << ": " <<
+      doGenerateASingleHyphen <<
+      std::endl <<
+      std::setw (fieldWidth) <<
+      "doGenerateADoubleHyphen" << ": " <<
+      doGenerateADoubleHyphen <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "doGenerateASingleUnderscore" << ": " <<
+      doGenerateASingleUnderscore <<
+      std::endl;
+
+    gIndenter--;
+
+    fLilypondCodeStream <<
+      "%}" <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // should a single hyphen be generated?
+  // ----------------------------------------------------
+  if (doGenerateASingleHyphen) {
+    fLilypondCodeStream <<
+      cLilypondSingleHyphen;
+  }
+
+  // should a double hyphen be generated?
+  // ----------------------------------------------------
+  if (doGenerateADoubleHyphen) {
+    fLilypondCodeStream <<
+      cLilypondDoubleHyphen;
+  }
+
+  // should a single underscore be generated?
+  // ----------------------------------------------------
+  if (doGenerateASingleUnderscore) {
+    fLilypondCodeStream <<
+      cLilypondSingleUnderscore;
+  }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
+    fLilypondCodeStream <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitlySyllableMiddle_kSyllableSkipOnRegularNote (
+  const S_msrSyllable& syllable)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
+    fLilypondCodeStream <<
+      std::endl <<
+      "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS_kSyllableSkipOnRegularNote_II" <<
+      ", " << syllable->getInputLineNumber () <<
+      " %}" <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  Bool doGenerateASingleHyphen (false);
+  Bool doGenerateADoubleHyphen (false);
+
+  Bool doGenerateASingleUnderscore (false);
+
+  // get the note the syllable is attached to
+  S_msrNote
+    noteTheSyllableIsAttachedTo =
+      syllable->getSyllableUpLinkToNote ();
+
+  if (noteTheSyllableIsAttachedTo) {
+    // take note's ties into account if any
+    const std::list <S_msrTie>& noteTiesList =
+      noteTheSyllableIsAttachedTo->getNoteTiesList ();
+
+    if (! noteTiesList.empty ()) {
+      for (S_msrTie noteTie : noteTiesList) {
+        switch (noteTie->getTieKind ()) {
+          case msrTieKind::kTieNone:
+            break;
+          case msrTieKind::kTieStart:
+            doGenerateASingleHyphen = true;
+            break;
+          case msrTieKind::kTieContinue:
+            doGenerateASingleHyphen = true;
+            break;
+          case msrTieKind::kTieStop:
+            break;
+          case msrTieKind::kTieLetRing:
+            break;
+         } // switch
+      } // for
+    }
+  }
+
+  if (noteTheSyllableIsAttachedTo) {
+    // take note's slurs into account if any
+    const std::list <S_msrSlur>&
+      noteSlursList =
+        noteTheSyllableIsAttachedTo->getNoteSlursList ();
+
+    if (! noteSlursList.empty ()) {
+      doGenerateASingleHyphen = true;
+    }
+  }
+
+  // what it the syllable's extend kind?
+  switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+//       doGenerateASingleUnderscore = true; // KRAKRA
       break;
 
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
@@ -17349,7 +17678,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitly (
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
-          "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS__kSyllableNone" <<
+          "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS_kSyllableNone" <<
           ", " << syllable->getInputLineNumber () <<
           " %}" <<
           std::endl;
@@ -17392,7 +17721,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitly (
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
-          "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS__kSyllableOnRestNote" <<
+          "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS_kSyllableOnRestNote" <<
           ", " << syllable->getInputLineNumber () <<
           " %}" <<
           std::endl;
@@ -17407,7 +17736,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitly (
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
-          "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS__kSyllableSkipOnRestNote" <<
+          "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS_kSyllableSkipOnRestNote" <<
           ", " << syllable->getInputLineNumber () <<
           " %}" <<
           std::endl;
@@ -17424,7 +17753,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitly (
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           std::endl <<
-          "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS__kSyllableSkipOnRegularNote" <<
+          "%{ %{ CODE_FOR_EXTENDER_EXPLICIT_DURATIONS_kSyllableSkipOnRegularNote_I" <<
           ", " << syllable->getInputLineNumber () <<
           " %}" <<
           std::endl;
@@ -17433,6 +17762,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyExplicitly (
 
       fLilypondCodeStream <<
         cLilypondDoubleHyphen;
+
       break;
 
     // ----------------------------------------------------
@@ -23199,7 +23529,7 @@ void lpsr2lilypondTranslator::generateNoteHeadAndStem (
 
         // has the note color been set? // JMI 0.9.65
         if (nonPrintNotesHeadColorRGBAtom->getSelected ()) {
-          // yes
+          // YES
           const msrColorRGB&
             theColorRGB =
               gGlobalLpsr2lilypondOahGroup->
@@ -23213,7 +23543,7 @@ void lpsr2lilypondTranslator::generateNoteHeadAndStem (
             std::endl;
         }
         else {
-          // no
+          // NO
 //             if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondBasics ()) {
 //               fLilypondCodeStream <<
 //                 "%{ " <<

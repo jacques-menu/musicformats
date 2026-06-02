@@ -567,7 +567,7 @@ std::string msrAccordionRegistration::asString () const
     ", highDotsNumber: " << fHighDotsNumber <<
     ", middleDotsNumber: " << fMiddleDotsNumber <<
     ", lowDotsNumber: " << fLowDotsNumber <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -813,7 +813,7 @@ std::string msrHarpPedalsTuning::asString () const
 
   ss <<
     "[HarpPedalsTuning" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ", ";
 
   if (fHarpPedalsAlterationKindsMap.size ()) {
@@ -851,7 +851,7 @@ void msrHarpPedalsTuning::print (std::ostream& os) const
 {
   os <<
     "[HarpPedalsTuning" <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   if (fHarpPedalsAlterationKindsMap.size ()) {
     ++gIndenter;
@@ -1137,7 +1137,7 @@ void msrPedal::print (std::ostream& os) const
     ", fPedalTypeKind: " << fPedalTypeKind <<
     ", fPedalLineKind: " << fPedalLineKind <<
     ", fPedalSignKind: " << fPedalSignKind <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     ']' <<
     std::endl;
 }
@@ -1292,7 +1292,7 @@ void msrDamp::print (std::ostream& os) const
 {
   os <<
     "Damp" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 }
 
@@ -1449,7 +1449,7 @@ void msrDampAll::print (std::ostream& os) const
 {
   os <<
     "DampAll" <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 }
 

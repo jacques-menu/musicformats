@@ -341,7 +341,7 @@ std::string bsrMeasure::asString () const
     ", brailleMeasureNumber: " << fBrailleMeasureNumber <<
     ", measureElementsList.size (): " << fMeasureLineElementsList.size () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -376,7 +376,7 @@ void bsrMeasure::print (std::ostream& os) const
   os <<
     "Measure" <<
     ", printMeasureNumber " << fPrintMeasureNumber <<
-    ", line " << fInputLineNumber <<
+    ", " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

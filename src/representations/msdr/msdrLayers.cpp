@@ -243,7 +243,7 @@ std::string msdrLayer::asShortString () const
 
   ss <<
     "MSDR layer '" << fLayerNumber << "', " <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -254,7 +254,7 @@ std::string msdrLayer::asString () const
 
   ss <<
     "MSDR layer '" << fLayerNumber << "', " <<
-    ", line " << fInputLineNumber;
+    ", " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -268,7 +268,7 @@ void msdrLayer::displayLayer (
     "*********>> Displaying MSDR layer '" <<
     fLayerNumber <<
     "' (" << context << ")" <<
-    ", line " << inputLineNumber <<
+    ", " << inputLineNumber <<
     " contains:" <<
     std::endl;
 
