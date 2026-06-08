@@ -907,7 +907,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  handleOverflowingMeasure (
                             const mfInputLineNumber& inputLineNumber,
-                            const S_msrVoice& voice);
+                            const S_msrVoice&        voice);
 
     void                  printMeasurePendingMeasureElementsList ();
 

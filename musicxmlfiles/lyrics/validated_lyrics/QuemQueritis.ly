@@ -2,12 +2,12 @@
 
 % Generated from "QuemQueritis.xml"
 % by xml2ly v2026.2 (built on June 02, 2026)
-% on Tuesday 2026-06-02 @ 06:39:24 CEST
+% on Tuesday 2026-06-02 @ 08:20:35 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos QuemQueritis.xml
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name QuemQueritis.ly QuemQueritis.xml -lilypond-lyrics-durations-mode explicit
 % or, with short option names:
-%      QuemQueritis.xml
+%     QuemQueritis.ly QuemQueritis.xml explicit
 
 
 % Scheme function(s): "date & time"

@@ -2,7 +2,7 @@
 
 % Generated from "AbsentExtendType.xml"
 % by xml2ly v2026.2 (built on June 02, 2026)
-% on Tuesday 2026-06-02 @ 06:29:44 CEST
+% on Tuesday 2026-06-02 @ 08:20:20 CEST
 
 % The conversion command as supplied was: 
 %  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name AbsentExtendType.ly AbsentExtendType.xml -lilypond-lyrics-durations-mode explicit

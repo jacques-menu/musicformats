@@ -2,12 +2,12 @@
 
 % Generated from "ExtendStartAndStop.xml"
 % by xml2ly v2026.2 (built on June 02, 2026)
-% on Tuesday 2026-06-02 @ 06:36:36 CEST
+% on Tuesday 2026-06-02 @ 08:20:31 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos ExtendStartAndStop.xml
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name ExtendStartAndStop.ly ExtendStartAndStop.xml -lilypond-lyrics-durations-mode explicit
 % or, with short option names:
-%      ExtendStartAndStop.xml
+%     ExtendStartAndStop.ly ExtendStartAndStop.xml explicit
 
 
 % Scheme function(s): "date & time"

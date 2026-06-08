@@ -2,12 +2,12 @@
 
 % Generated from "SimpleExtendWithRest1.xml"
 % by xml2ly v2026.2 (built on June 02, 2026)
-% on Tuesday 2026-06-02 @ 06:31:30 CEST
+% on Tuesday 2026-06-02 @ 08:20:36 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos SimpleExtendWithRest1.xml
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name SimpleExtendWithRest1.ly SimpleExtendWithRest1.xml -lilypond-lyrics-durations-mode explicit
 % or, with short option names:
-%      SimpleExtendWithRest1.xml
+%     SimpleExtendWithRest1.ly SimpleExtendWithRest1.xml explicit
 
 
 % Scheme function(s): "date & time"

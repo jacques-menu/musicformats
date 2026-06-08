@@ -2,12 +2,14 @@
 
 % Generated from "Lyrics.xml"
 % by xml2ly v2026.2 (built on June 02, 2026)
-% on Tuesday 2026-06-02 @ 06:26:25 CEST
+% on Tuesday 2026-06-02 @ 11:21:25 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name Lyrics.ly Lyrics.xml -lilypond-lyrics-durations-mode explicit
+%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos Lyrics.xml -dmsr1
+% or, with long option names:
+%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos Lyrics.xml -display-msr1
 % or, with short option names:
-%     Lyrics.ly Lyrics.xml explicit
+%      Lyrics.xml
 
 
 % Scheme function(s): "date & time"

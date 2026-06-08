@@ -2,7 +2,7 @@
 
 % Generated from "LyricsFromBarTwo.xml"
 % by xml2ly v2026.2 (built on June 02, 2026)
-% on Tuesday 2026-06-02 @ 06:29:51 CEST
+% on Tuesday 2026-06-02 @ 08:20:32 CEST
 
 % The conversion command as supplied was: 
 %  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name LyricsFromBarTwo.ly LyricsFromBarTwo.xml -lilypond-lyrics-durations-mode explicit

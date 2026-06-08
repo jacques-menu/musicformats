@@ -2,12 +2,12 @@
 
 % Generated from "SingleElision.xml"
 % by xml2ly v2026.2 (built on June 02, 2026)
-% on Tuesday 2026-06-02 @ 06:38:24 CEST
+% on Tuesday 2026-06-02 @ 08:20:37 CEST
 
 % The conversion command as supplied was: 
-%  xml2ly -auto-output-file-name -lilypond-run-date -lilypond-generation-infos SingleElision.xml
+%  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name SingleElision.ly SingleElision.xml -lilypond-lyrics-durations-mode explicit
 % or, with short option names:
-%      SingleElision.xml
+%     SingleElision.ly SingleElision.xml explicit
 
 
 % Scheme function(s): "date & time"

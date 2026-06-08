@@ -4793,6 +4793,7 @@ void msrMeasure::determineMeasureKind (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
+    true ||
     gTraceOahGroup->getTraceDurations ()
       ||
     gTraceOahGroup->getTraceMeasuresBasics ()

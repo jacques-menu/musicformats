@@ -3668,7 +3668,15 @@ void mxsr2msrSkeletonPopulator::handlePartMxmlID (
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  if (! fCurrentPart) {
+  mfAssert (
+    __FILE__, mfInputLineNumber (__LINE__),
+    fCurrentPart != nullptr, // JMI 2026.2
+    "fCurrentPart is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  if (! fCurrentPart) { // 2026.2
 //     // fetch fMsrScore's parts list
 //     std::list <S_msrPart> partsList;
 //
@@ -3676,7 +3684,6 @@ void mxsr2msrSkeletonPopulator::handlePartMxmlID (
 //       collectScorePartsInList (
 //         inputLineNumber,
 //         partsList);
-
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 

@@ -2,7 +2,7 @@
 
 % Generated from "SimpleExtendWithRest1_FROM_MUSESCORE.xml"
 % by xml2ly v2026.2 (built on June 02, 2026)
-% on Tuesday 2026-06-02 @ 06:29:53 CEST
+% on Tuesday 2026-06-02 @ 08:20:35 CEST
 
 % The conversion command as supplied was: 
 %  xml2ly -lilypond-run-date -lilypond-generation-infos -output-file-name SimpleExtendWithRest1_FROM_MUSESCORE.ly SimpleExtendWithRest1_FROM_MUSESCORE.xml -lilypond-lyrics-durations-mode explicit

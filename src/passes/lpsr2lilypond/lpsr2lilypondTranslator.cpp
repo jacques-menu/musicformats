@@ -9827,13 +9827,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
         case msrPartGroupSymbolKind::kPartGroupSymbolBrace: // JMI
           /*
            *
-           * check whether individual part have instrument names JMI
+           * check whether individual part have instrument names JMI 2026.2
            *
             if (! partGroupInstrumentName.empty ()) {
-              fLilypondCodeStream << = cLilypondNewPianoStaff;
+              fLilypondCodeStream << cLilypondNewPianoStaff;
             }
             else {
-              fLilypondCodeStream << = cLilypondNewGrandStaff;
+              fLilypondCodeStream << cLilypondNewGrandStaff;
             }
               */
           break;
@@ -9880,6 +9880,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
     fLilypondCodeStream <<
       "instrumentName = \"" <<
       partGroupInstrumentName <<
+      '\"' <<
       std::endl;
   }
 
@@ -10089,12 +10090,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
       fLilypondCodeStream <<
         "instrumentName = \"" <<
         partName <<
-          std::endl;
+        '\"' <<
+        std::endl;
     }
     if (! partAbbreviation.empty ()) {
       fLilypondCodeStream <<
         "shortInstrumentName = " <<
-       nameAsLilypondString (partAbbreviation) <<
+        nameAsLilypondString (partAbbreviation) <<
         std::endl;
     }
 
