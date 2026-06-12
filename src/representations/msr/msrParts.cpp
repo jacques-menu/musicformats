@@ -777,9 +777,10 @@ std::string msrPart::fetchPartNameForTrace () const
 
 void msrPart::cascadeCreateAMeasureAndAppendItInPart (
   const mfInputLineNumber& inputLineNumber,
-  int                    previousMeasureEndInputLineNumber,
-  const mfMeasureNumber& measureNumber,
-  msrMeasureImplicitNumberKind measureImplicitNumberKind)
+  int                      previousMeasureEndInputLineNumber,
+  const mfMeasureNumber&   measureNumber,
+  msrMeasureImplicitNumberKind
+                           measureImplicitNumberKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresBasics ()) {

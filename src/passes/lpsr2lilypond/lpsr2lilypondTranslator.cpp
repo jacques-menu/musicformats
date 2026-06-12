@@ -14128,7 +14128,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           upbeatNotesDuration =
             wholeNotesAsLilypondString (
               elt->getInputLineNumber (),
-              elt->getMeasureCurrentPositionInMeasure ().asWholeNotes ());
+              elt->getNextAppendPositionInMeasure ().asWholeNotes ());
 
         fLilypondCodeStream <<
           "\\partial " << upbeatNotesDuration <<
@@ -14147,7 +14147,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //           upbeatNotesDuration =
 //             wholeNotesAsLilypondString (
 //               elt->getInputLineNumber (),
-//               elt->getMeasureCurrentPositionInMeasure ());
+//               elt->getNextAppendPositionInMeasure ());
 //
 //         fLilypondCodeStream <<
 //           "\\partial " << upbeatNotesDuration <<
@@ -14166,7 +14166,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //           upbeatNotesDuration =
 //             wholeNotesAsLilypondString (
 //               elt->getInputLineNumber (),
-//               elt->getMeasureCurrentPositionInMeasure ());
+//               elt->getNextAppendPositionInMeasure ());
 //
 //         fLilypondCodeStream <<
 //           "\\partial " << upbeatNotesDuration <<
@@ -14182,17 +14182,17 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
 //       {
 //         mfPositionInMeasure
-//           measureCurrentPositionInMeasure =
-//             elt->getMeasureCurrentPositionInMeasure ();
+//           nextAppendPositionInMeasure =
+//             elt->getNextAppendPositionInMeasure ();
 //
 //         mfWholeNotes
-//           fullMeasureWholeNotesDuration =
-//             elt->getFullMeasureWholeNotesDuration ();
+//           measureCumulatedWholeNotesDurationFromTimeSignature =
+//             elt->getMeasureNominalWholeNotesDuration ();
 //
 //         // we should set the score measure whole notes in this case
 //         mfRational
-//           ratioToFullMeasureWholeNotesDuration =
-//             measureCurrentPositionInMeasure / fullMeasureWholeNotesDuration;
+//           ratioToMeasureCumulatedWholeNotesDurationFromTimeSignature =
+//             nextAppendPositionInMeasure / measureCumulatedWholeNotesDurationFromTimeSignature;
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //         if (gTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -14206,21 +14206,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //             ", " << elt->getInputLineNumber () <<
 //             std::endl <<
 //             std::setw (fieldWidth) <<
-//             "% measureCurrentPositionInMeasure: " <<
-//             measureCurrentPositionInMeasure.asString () <<
+//             "% nextAppendPositionInMeasure: " <<
+//             nextAppendPositionInMeasure.asString () <<
 //             std::endl <<
 //             std::setw (fieldWidth) <<
-//             "% fullMeasureWholeNotesDuration: " <<
-//             fullMeasureWholeNotesDuration.asString () <<
+//             "% measureCumulatedWholeNotesDurationFromTimeSignature: " <<
+//             measureCumulatedWholeNotesDurationFromTimeSignature.asString () <<
 //             std::endl <<
 //             std::setw (fieldWidth) <<
-//             "% ratioToFullMeasureWholeNotesDuration: " <<
-//             ratioToFullMeasureWholeNotesDuration.asString () <<
+//             "% ratioToMeasureCumulatedWholeNotesDurationFromTimeSignature: " <<
+//             ratioToMeasureCumulatedWholeNotesDurationFromTimeSignature.asString () <<
 //             std::endl << std::endl;
 //         }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//         if (ratioToFullMeasureWholeNotesDuration == mfRational (1, 1)) {
+//         if (ratioToMeasureCumulatedWholeNotesDurationFromTimeSignature == mfRational (1, 1)) {
 //           std::stringstream ss;
 //
 //           ss <<
@@ -14239,7 +14239,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //           /* JMI
 //           fLilypondCodeStream <<
 //             cLilypondSet << "Score.measureLength = #(ly:make-moment " <<
-//             measureCurrentPositionInMeasure.toString () <<
+//             nextAppendPositionInMeasure.toString () <<
 //             ")" <<
 //             std::endl;
 //     */
@@ -14257,8 +14257,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindOverFlowing:
       if (! fOnGoingVoiceCadenza) {
         mfPositionInMeasure
-          measureCurrentPositionInMeasure =
-            elt->getMeasureCurrentPositionInMeasure (); // JMI 0.9.72
+          nextAppendPositionInMeasure =
+            elt->getNextAppendPositionInMeasure (); // JMI 0.9.72
 
         fLilypondCodeStream <<
           std::endl;
@@ -14266,8 +14266,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           fLilypondCodeStream <<
             "%{ begin kMeasureKindOverFlowing, measure " <<
             fCurrentMeasureNumber <<
-            ", % measureCurrentPositionInMeasure: " <<
-            measureCurrentPositionInMeasure <<
+            ", % nextAppendPositionInMeasure: " <<
+            nextAppendPositionInMeasure <<
             " %}" <<
             std::endl;
         }
@@ -14378,7 +14378,7 @@ void lpsr2lilypondTranslator::generateMusicallyEmptyMeasure (
   fLilypondCodeStream <<
     wholeNotesAsLilypondString (
       measure->getInputLineNumber (),
-      measure->getFullMeasureWholeNotesDuration ());
+      measure->getMeasureNominalWholeNotesDuration ());
 
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     // generate information and line number as a comment
@@ -14638,7 +14638,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 //           fLilypondCodeStream <<
 //             wholeNotesAsLilypondString (
 //               elt->getInputLineNumber (),
-//               elt->getFullMeasureWholeNotesDuration ());
+//               elt->getMeasureNominalWholeNotesDuration ());
 //
 //           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
 //             // generate information and line number as a comment
@@ -15497,25 +15497,29 @@ void lpsr2lilypondTranslator::generateLilypondSyllableOnRestNote (
 void lpsr2lilypondTranslator::generateLilypondSyllableSkipOnRestNote (
   const S_msrSyllable& syllable)
 {
+gLog << "generateLilypondSyllableSkipOnRestNote" << std::endl;
+
   switch (gGlobalLpsr2lilypondOahGroup->getLyricsDurationsKind ()) {
+
     case lpsrLyricsDurationsKind::kLyricsDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
         fLilypondCodeStream <<
           "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSkipOnRestNote" <<
+          ", " << syllable->getSyllableWholeNotes () <<
           ", " << syllable->getInputLineNumber () <<
           " %}" <<
           std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
 
-//         fLilypondCodeStream <<
-//           cLilypondSkip;
-//         generateWholeNotesDuration (
-//           syllable->getInputLineNumber (),
-//           syllable->getSyllableWholeNotes ());
-//         fLilypondCodeStream <<
-//           cLilyPondSpace;
+//       fLilypondCodeStream <<
+//         cLilypondSkip;
+//       generateWholeNotesDuration (
+//         syllable->getInputLineNumber (),
+//         syllable->getSyllableWholeNotes ());
+//       fLilypondCodeStream <<
+//         cLilyPondSpace;
       break;
 
     case lpsrLyricsDurationsKind::kLyricsDurationsExplicit:
@@ -15552,7 +15556,10 @@ void lpsr2lilypondTranslator::generateLilypondSyllableSkipOnRestNote (
 void lpsr2lilypondTranslator::generateLilypondSyllableSkipOnRegularNote (
   const S_msrSyllable& syllable)
 {
+gLog << "generateLilypondSyllableSkipOnRegularNote" << std::endl;
+
   switch (gGlobalLpsr2lilypondOahGroup->getLyricsDurationsKind ()) {
+
     case lpsrLyricsDurationsKind::kLyricsDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
       if (gGlobalLpsr2lilypondOahGroup->getCommentLilypondLyrics ()) {
@@ -16116,7 +16123,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableBegin
     noteTheSyllableIsAttachedTo =
       syllable->getSyllableUpLinkToNote ();
 
-//   doGenerateADoubleHyphen = true; KRAKRA
+//   doGenerateADoubleHyphen = true; // 2026.2 KRAKRA
 
   // what it the syllable's extend kind?
   switch (syllable->getSyllableExtendKind ()) {
@@ -16143,7 +16150,7 @@ void lpsr2lilypondTranslator::handleLyricExtenderIfAnyAutomaticallySyllableBegin
       break;
   } // switch
 
-//   doGenerateASingleHyphen = false; // KRAKRA
+  doGenerateADoubleHyphen = true; // KRAKRA
 
   if (noteTheSyllableIsAttachedTo) {
     // take note's tie into account if any

@@ -5005,15 +5005,15 @@ R"(Add stanzas numbers to lyrics in LilyPond.)",
 
   const lpsrLyricsDurationsKind
     lpsrLyricsDurationsKindDefaultValue =
-//       lpsrLyricsDurationsKind::kLyricsDurationsAutomatic; // default value
-      lpsrLyricsDurationsKind::kLyricsDurationsExplicit; // default value
+      lpsrLyricsDurationsKind::kLyricsDurationsAutomatic; // default value
+//       lpsrLyricsDurationsKind::kLyricsDurationsExplicit; // default value
 
   fLyricsDurationsKind = lpsrLyricsDurationsKindDefaultValue;
 
   subGroup->
     appendAtomToSubGroup (
       lilypondLyricsDurationsKindAtom::create (
-        "lilypond-lyrics-durations-mode", "lilylyrdurmode", // JMI 2026.2
+        "lilypond-lyrics-durations-mode", "lilylyrdurmod", // JMI 2026.2
           regex_replace (
             regex_replace (
               regex_replace (
@@ -5283,7 +5283,7 @@ R"(Generate comments about figured basses.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "comment-lilypond-lyrics", "comlilylyrics",
+        "comment-lilypond-lyrics", "comlilylyr",
 R"(Generate comments about lyrics.)",
         "fCommentLilypondLyrics",
         fCommentLilypondLyrics));

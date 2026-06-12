@@ -1422,9 +1422,13 @@ void msrTimeSignature::print (std::ostream& os) const
           std::setw (fieldWidth) <<
           "fTimeIsCompound" << ": " <<
           fTimeIsCompound <<
-          ", fTimeSignatureIsHidden: " <<
+          std::endl <<
+
+          std::setw (fieldWidth) <<
+          "fTimeSignatureIsHidden: " << ": " <<
           fTimeSignatureIsHidden <<
           std::endl <<
+
           std::setw (fieldWidth) <<
           "fTimeSignatureItemsVector.size()" << ": " <<
           mfSingularOrPlural (

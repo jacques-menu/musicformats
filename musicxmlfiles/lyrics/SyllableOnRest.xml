@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN"
+                                "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="2.0">
+  <movement-title>Syllable On Rest</movement-title>
+  <identification>
+    <encoding>
+      <software>Finale 2005 for Windows</software>
+      <software>Dolet 4.0 Beta 4 for Finale</software>
+      <encoding-date>2007-06-19</encoding-date>
+      <supports attribute="new-system" element="print" type="yes" value="yes"/>
+      <supports attribute="new-page" element="print" type="yes" value="yes"/>
+    </encoding>
+  </identification>
+  <defaults>
+    <scaling>
+      <millimeters>7.2319</millimeters>
+      <tenths>40</tenths>
+    </scaling>
+    <page-layout>
+      <page-height>1545</page-height>
+      <page-width>1194</page-width>
+      <page-margins type="both">
+        <left-margin>105</left-margin>
+        <right-margin>70</right-margin>
+        <top-margin>10</top-margin>
+        <bottom-margin>70</bottom-margin>
+      </page-margins>
+    </page-layout>
+    <system-layout>
+      <system-margins>
+        <left-margin>10</left-margin>
+        <right-margin>0</right-margin>
+      </system-margins>
+      <system-distance>93</system-distance>
+      <top-system-distance>93</top-system-distance>
+    </system-layout>
+    <appearance>
+      <line-width type="stem">1.2457</line-width>
+      <line-width type="beam">4.2708</line-width>
+      <line-width type="staff">1.2457</line-width>
+      <line-width type="light barline">1.2457</line-width>
+      <line-width type="heavy barline">4.2708</line-width>
+      <line-width type="leger">1.2457</line-width>
+      <line-width type="ending">1.2457</line-width>
+      <line-width type="wedge">1.2457</line-width>
+      <line-width type="enclosure">1.2457</line-width>
+      <line-width type="tuplet bracket">1.2457</line-width>
+      <note-size type="grace">60</note-size>
+      <note-size type="cue">60</note-size>
+    </appearance>
+    <music-font font-family="Maestro" font-size="20.5"/>
+    <word-font font-family="Times New Roman" font-size="10.25"/>
+    <lyric-font font-family="ＭＳ ゴシック" font-size="10.25" name="verse"/>
+    <lyric-language name="verse" xml:lang="ja"/>
+  </defaults>
+  <part-list>
+    <score-part id="P1">
+      <part-name print-object="no">MusicXML Part</part-name>
+      <score-instrument id="P1-I2">
+        <instrument-name>Koto</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P1-I2">
+        <midi-channel>1</midi-channel>
+        <midi-program>108</midi-program>
+      </midi-instrument>
+    </score-part>
+  </part-list>
+  <!--=========================================================-->
+  <part id="P1">
+    <measure number="1" width="224">
+      <print>
+        <system-layout>
+          <system-margins>
+            <left-margin>69</left-margin>
+            <right-margin>0</right-margin>
+          </system-margins>
+          <top-system-distance>265</top-system-distance>
+        </system-layout>
+      </print>
+      <attributes>
+        <divisions>8</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>2</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+      </attributes>
+      <note default-x="52">
+        <rest/>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>eighth</type>
+        <lyric default-y="-80" number="1">
+          <syllabic>single</syllabic>
+          <text>Jam...</text>
+        </lyric>
+      </note>
+    </measure>
+  </part>
+  <!--=========================================================-->
+</score-partwise>

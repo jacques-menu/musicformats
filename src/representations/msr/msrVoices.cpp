@@ -382,7 +382,8 @@ void msrVoice::initializeVoice (
   fVoiceActualHarmoniesCounter = 0;
   fVoiceActualFiguredBassesCounter = 0;
 
-  // set a default 4/4 time, since there can be none JMI 0.9.68
+  // set a default 4/4 time, since there can be none
+  // JMI 2026.2 KRAKRA see QuemQueritis.xml
   this->setVoiceCurrentTimeSignature (
     msrTimeSignature::createFourQuartersTime (
       0)); // inputLineNumber
@@ -1833,11 +1834,11 @@ void msrVoice::setVoiceCurrentTimeSignature (
   const S_msrTimeSignature& timeSignature)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
     std::stringstream ss;
 
     ss <<
-      "Setting voice current time signature of " <<
+      "Setting current time signature of voice " <<
       asString () <<
       " to " <<
       timeSignature->asString ();
@@ -1921,7 +1922,8 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
       clefKeyTimeSignatureGroup->getTimeSignature ();
 
   if (timeSignatureToBeAdded) {
-    this->setVoiceCurrentTimeSignature (timeSignatureToBeAdded);
+    this->
+      setVoiceCurrentTimeSignature (timeSignatureToBeAdded);
   }
 
   // append clefKeyTimeSignatureGroup to the voice segment
@@ -2030,7 +2032,8 @@ void msrVoice::appendTimeSignatureToVoice (
   ++gIndenter;
 
   // set voice current timeSignature
-  this->setVoiceCurrentTimeSignature (timeSignature);
+  this->
+    setVoiceCurrentTimeSignature (timeSignature);
 
   // append timeSignature to the the voice segment
   fVoiceSegment->
@@ -2065,7 +2068,8 @@ void msrVoice::appendTimeSignatureToVoiceClone (
   ++gIndenter;
 
   // set voice current time signature
-  this->setVoiceCurrentTimeSignature (timeSignature);
+  this->
+    setVoiceCurrentTimeSignature (timeSignature);
 
   // append timeSignature to the the voice segment
   fVoiceSegment->
@@ -2706,7 +2710,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //       S_msrStanza stanza = thePair.second;
 //
 //       stanza->
-//         padUpToMeasureCurrentPositionInMeasureInStanza (
+//         padUpToNextAppendPositionInMeasureInStanza (
 //           inputLineNumber,
 //           wholeNotesPositionInMeasure);
 //     } // for
@@ -4694,9 +4698,9 @@ void msrVoice::handleNestedRepeatEndInVoice (
 
   // is there a measure splitting?
   if (
-    voiceLastMeasure->getMeasureCurrentPositionInMeasure ().asWholeNotes ()
+    voiceLastMeasure->getNextAppendPositionInMeasure ().asWholeNotes ()
       ==
-    voiceLastMeasure->getFullMeasureWholeNotesDuration ()
+    voiceLastMeasure->getMeasureNominalWholeNotesDuration ()
   ) {
     // this measure is incomplete and should be split
 #ifdef MF_TRACE_IS_ENABLED
@@ -6758,7 +6762,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
         lastAppendedMeasureClone->
           getMeasureOrdinalNumberInVoice (),
         lastAppendedMeasureClone->
-          getFullMeasureWholeNotesDuration ()); // JMI
+          getMeasureNominalWholeNotesDuration ()); // JMI
 
     // append it to the voice the voice segment
     fVoiceSegment->
@@ -6798,10 +6802,10 @@ void msrVoice::appendEmptyMeasuresToVoice (
   // get the empty measure whole notes wholeNotes
   // JMI maybe not OK if first measure such as after a repeat segment???
   mfWholeNotes
-    fullMeasureWholeNotesDuration; // JMI ??? = ??? 0.9.72
+    measureCumulatedWholeNotesDurationFromTimeSignature; // JMI ??? = ??? 0.9.72
 //      =
-//       fullMeasureWholeNotesDuration->
-//         getFullMeasureWholeNotesDuration ();
+//       measureCumulatedWholeNotesDurationFromTimeSignature->
+//         getMeasureNominalWholeNotesDuration ();
 
   for (int i = 1; i <= emptyMeasuresNumber; ++i) {
     // create a measure
@@ -6839,8 +6843,8 @@ void msrVoice::appendEmptyMeasuresToVoice (
 
   // set its whole notes wholeNotes JMI 0.9.70
 //   emptyMeasure->
-//     setFullMeasureWholeNotesDuration (
-//       fullMeasureWholeNotesDuration);
+//     setMeasureNominalWholeNotesDuration (
+//       measureCumulatedWholeNotesDurationFromTimeSignature);
 
   // create a rest the whole empty measure long
   S_msrNote
@@ -6848,8 +6852,8 @@ void msrVoice::appendEmptyMeasuresToVoice (
       msrNote::createRestNote (
         inputLineNumber,
         measureNumber,
-        fullMeasureWholeNotesDuration, // soundingWholeNotes
-        fullMeasureWholeNotesDuration, // displayWholeNotes
+        measureCumulatedWholeNotesDurationFromTimeSignature, // soundingWholeNotes
+        measureCumulatedWholeNotesDurationFromTimeSignature, // displayWholeNotes
         0); // dotsNumber
 
    wholeMeasureRestNote->
@@ -8565,10 +8569,10 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 
         // fetch last measure's full measure whole notes
         /* JMI
-        int fullMeasureWholeNotesDuration =
+        int measureCumulatedWholeNotesDurationFromTimeSignature =
           fVoiceSegment->
             getSegmentElementsList ().back ()->
-              getFullMeasureWholeNotesDuration ();
+              getMeasureNominalWholeNotesDuration ();
               */
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -10462,7 +10466,7 @@ std::string fetchVoiceAsString (const S_msrVoice& voice)
 //         fVoiceCurrentMultiMeasureRest =
 //           msrMultiMeasureRest::create (
 //             inputLineNumber,
-//             firstRestMeasure->getFullMeasureWholeNotesDuration (),
+//             firstRestMeasure->getMeasureNominalWholeNotesDuration (),
 //             multiMeasureRestMeasuresNumber,
 //             this);
 // */

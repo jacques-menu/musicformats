@@ -3089,7 +3089,7 @@ void msrChord::print (std::ostream& os) const
     chordMeasureFullLength =
       fMeasureElementUpLinkToMeasure
         ? fMeasureElementUpLinkToMeasure->
-            getFullMeasureWholeNotesDuration ()
+            getMeasureNominalWholeNotesDuration ()
         : K_WHOLE_NOTES_ZERO; // JMI
 
   os <<
@@ -3886,7 +3886,7 @@ void msrChord::printFull (std::ostream& os) const
     chordMeasureFullLength =
       fMeasureElementUpLinkToMeasure
         ? fMeasureElementUpLinkToMeasure->
-            getFullMeasureWholeNotesDuration ()
+            getMeasureNominalWholeNotesDuration ()
         : K_WHOLE_NOTES_ZERO; // JMI
 
   os <<

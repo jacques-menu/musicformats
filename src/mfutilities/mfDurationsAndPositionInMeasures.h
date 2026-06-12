@@ -42,15 +42,15 @@ std::ostream& operator << (std::ostream& os, const mfDurationKind& elt);
 
 EXP mfDurationKind mfDurationKindFromMxmlGraphicNoteType (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& durationString);
+  const std::string&       durationString);
 
 EXP mfDurationKind mfDurationKindFromInteger (
   const mfInputLineNumber& inputLineNumber,
-  int durationInteger);
+  int                      durationInteger);
 
 EXP mfDurationKind mfDurationKindFromString (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& durationString);
+  const std::string&       durationString);
 
 std::string mfDurationKindAsMusicXMLType (mfDurationKind notesDurationKind);
 
@@ -184,7 +184,7 @@ class EXP mfWholeNotes
     Bool                  operator >= (double num) const;
     Bool                  operator <  (double num) const;
     Bool                  operator <= (double num) const;
-    Bool                  operator == (double) const;
+    Bool                  operator == (double num) const;
 
     // conversions
 
@@ -250,7 +250,7 @@ int  mfDurationBinaryLogarithm (int duration);
 
 EXP mfWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
   mfDurationKind notesDurationKind,
-  int                  dotsNumber);
+  int             dotsNumber);
 
 EXP mfWholeNotes mfDurationKindAsWholeNotes (
   mfDurationKind notesDurationKind);
@@ -260,22 +260,22 @@ EXP mfDurationKind wholeNotesAsNotesDurationKind (mfWholeNotes wholeNotes);
 //______________________________________________________________________________
 EXP void checkNoteDurationKindAndWholeNotesDurationConsistency (
   const mfInputLineNumber& inputLineNumber,
-  mfDurationKind notesDurationKind,
-  mfWholeNotes        wholeNotesDuration);
+  mfDurationKind           notesDurationKind,
+  mfWholeNotes             wholeNotesDuration);
 
 //______________________________________________________________________________
 std::string wholeNotesAndDotsNumberPitchAndOctaveAsString ( // JMI 0.9.67
   const mfInputLineNumber& inputLineNumber,
-  const mfWholeNotes& wholeNotes,
-  int&                 dotsNumber);
+  const mfWholeNotes&      wholeNotes,
+  int&                     dotsNumber);
 
 std::string wholeNotesPitchAndOctaveAsString (
   const mfInputLineNumber& inputLineNumber,
-  const mfWholeNotes& wholeNotes);
+  const mfWholeNotes&      holeNotes);
 
 std::string multiMeasureRestsWholeNotesPitchAndOctaveAsString (
   const mfInputLineNumber& inputLineNumber, // JMI 0.9.67
-  const mfWholeNotes& wholeNotes);
+  const mfWholeNotes&      wholeNotes);
 
 //______________________________________________________________________________
 class EXP msrNotesDuration
@@ -289,7 +289,7 @@ class EXP msrNotesDuration
 
                           msrNotesDuration (
                             mfDurationKind notesDurationKind,
-                            int                  dotsNumber);
+                            int            dotsNumber);
 
     virtual               ~msrNotesDuration ();
 
@@ -367,7 +367,7 @@ class EXP mfDottedNotesDuration
 
                           mfDottedNotesDuration (
                             mfDurationKind notesDurationKind,
-                            int                  dotsNumber);
+                            int            dotsNumber);
 
     virtual               ~mfDottedNotesDuration ();
 
@@ -559,7 +559,7 @@ class EXP mfPositionInMeasure
     Bool                  operator >= (double num) const;
     Bool                  operator <  (double num) const;
     Bool                  operator <= (double num) const;
-    Bool                  operator == (double) const;
+    Bool                  operator == (double num) const;
 
     // conversions
 

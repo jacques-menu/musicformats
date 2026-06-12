@@ -196,7 +196,8 @@ class EXP msrSegment : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             int                      previousMeasureEndInputLineNumber,
                             const mfMeasureNumber&   measureNumber,
-                            msrMeasureImplicitNumberKind   measureImplicitNumberKind);
+                            msrMeasureImplicitNumberKind
+                                                     measureImplicitNumberKind);
 
     void                  setNextMeasureNumberInSegment (
                             const mfInputLineNumber& inputLineNumber,

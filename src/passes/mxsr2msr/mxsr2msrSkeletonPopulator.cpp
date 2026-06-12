@@ -433,7 +433,7 @@ void mxsr2msrSkeletonPopulator::initializeNoteData ()
 
   // note sounding duration
 
-  fCurrentNoteSoundingWholeNotesFromNotesDuration =
+  fCurrentNoteDurationAsWholeNotes =
     K_WHOLE_NOTES_UNKNOWN_;
 
   fCurrentNoteSoundingWholeNotes =
@@ -621,8 +621,8 @@ void mxsr2msrSkeletonPopulator::displayGatheredNoteInformations (
 
 
     std::setw (fieldWidth) <<
-    "fCurrentNoteSoundingWholeNotesFromNotesDuration" << ": " <<
-    fCurrentNoteSoundingWholeNotesFromNotesDuration <<
+    "fCurrentNoteDurationAsWholeNotes" << ": " <<
+    fCurrentNoteDurationAsWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fCurrentNoteSoundingWholeNotes" << ": " <<
@@ -5232,6 +5232,12 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // append the time signature item to the current time signature items vector
+//   gLog <<
+//     "*********** timeSignatureItem : " <<
+//     timeSignatureItem <<
+//     "*********** " <<
+//     std::endl;
+
   fCurrentTimeSignatureItemsVector.insert (
     fCurrentTimeSignatureItemsVector.end (),
     timeSignatureItem);
@@ -5437,6 +5443,12 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
   // populate the time signature with the time signature items
   if (! fCurrentTimeSignatureItemsVector.empty ()) {
     for (S_msrTimeSignatureItem timeSignatureItem : fCurrentTimeSignatureItemsVector) {
+//       gLog <<
+//         "*********** timeSignatureItem : " <<
+//         timeSignatureItem <<
+//         "*********** " <<
+//         std::endl;
+
       fCurrentTimeSignature->
         appendTimeSignatureItem (timeSignatureItem);
     } // for
@@ -5476,6 +5488,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
 
   else {
     S_msrStaff staff;
+
     try {
       staff =
         fCurrentPartStavesMapPtr->at (fCurrentTimeStaffNumber);
@@ -10914,7 +10927,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyricsBasics ()) {
-//   if (true || gTraceOahGroup->getTraceLyricsBasics ()) {
     gLog <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
       fCurrentSyllableKind <<
@@ -10974,10 +10986,12 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
         ", fCurrentSyllableKind: " <<
         fCurrentSyllableKind <<
 
-        ", fCurrentNoteSoundingWholeNotesFromNotesDuration: " <<
-        fCurrentNoteSoundingWholeNotesFromNotesDuration <<
+        ", fCurrentNoteDurationAsWholeNotes: " <<
+        fCurrentNoteDurationAsWholeNotes <<
         ", fCurrentNoteDisplayWholeNotesFromType: " <<
          fCurrentNoteDisplayWholeNotesFromType <<
+        ", fCurrentNoteSoundingWholeNotes: " <<
+         fCurrentNoteSoundingWholeNotes <<
 
         ", fCurrentMxsrLyricElementsList = \"" <<
         syllableElementsListAsString (fCurrentMxsrLyricElementsList) <<
@@ -11001,7 +11015,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
           fCurrentSyllableKind,
           fCurrentSyllableExtendKind,
           fCurrentStanzaNumber,
-          fCurrentNoteSoundingWholeNotesFromNotesDuration,
+//           fCurrentNoteDurationAsWholeNotes,
+          fCurrentNoteSoundingWholeNotes,
           msrTupletFactor (
             fCurrentNoteActualNotes,
             fCurrentNoteNormalNotes));
@@ -11141,10 +11156,10 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 //     **** */
 
     // remember the syllable as pending for insertion into its stanza
-    fPendingSyllablesListForStanzasMap [fCurrentStanzaNumber].push_back (syllable);
+    fPendingSyllablesListForStanzasMap [fCurrentStanzaNumber].
+      push_back (syllable);
 
 #ifdef MF_TRACE_IS_ENABLED
-//     if (true || gTraceOahGroup->getTraceLyrics ()) {
     if (gTraceOahGroup->getTraceLyrics ()) {
 
 //       displayPendingSyllablesListForStanzasMap (
@@ -11502,7 +11517,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
           forwardedToVoice->
             fetchVoiceLastMeasure (
               elt->getInputLineNumber ())->
-                getFullMeasureWholeNotesDuration ());
+                getMeasureNominalWholeNotesDuration ());
 
       fForwardedToVoicesList.pop_front ();
     } // while
@@ -11632,7 +11647,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
   }
 #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
-    // attach pending barlines if any to part
+    // attach pending barlines if any to current part
     if (! fPendingBarLinesList.empty ()) {
       attachPendingBarLinesToPart (fCurrentPart);
     }
@@ -13329,8 +13344,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    // set current grace note whole notes
-    fCurrentNoteSoundingWholeNotesFromNotesDuration =
+    // set current grace note duration as whole notes
+    fCurrentNoteDurationAsWholeNotes =
       mfWholeNotes (
         fCurrentNoteDuration,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
@@ -13340,8 +13355,10 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
       std::stringstream ss;
 
       ss <<
-        "fCurrentNoteSoundingWholeNotesFromNotesDuration: " <<
-        fCurrentNoteSoundingWholeNotesFromNotesDuration;
+        "fCurrentNoteDurationAsWholeNotes: " <<
+        fCurrentNoteDurationAsWholeNotes <<
+        ", fCurrentNoteSoundingWholeNotes: " <<
+        fCurrentNoteSoundingWholeNotes;
 
       gWaeHandler->waeTrace (
         __FILE__, mfInputLineNumber (__LINE__),
@@ -13353,7 +13370,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
     // set current grace note display whole notes
     // to note sounding whole notes
     fCurrentNoteDisplayWholeNotes =
-      fCurrentNoteSoundingWholeNotesFromNotesDuration; // by default
+      fCurrentNoteDurationAsWholeNotes; // by default
      */
   }
 
@@ -22376,7 +22393,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
                     msrSyllableExtendKind::kSyllableExtend_NONE, // KRAKRA
                     fCurrentSyllableExtendKind, // JMI 0.9.67
                     fCurrentStanzaNumber,
-                    fCurrentNoteSoundingWholeNotesFromNotesDuration,
+                    fCurrentNoteDurationAsWholeNotes,
                     stanza);
 
               // append syllable to current note's syllables list
@@ -22611,7 +22628,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
       // use the same duration as the one from the duration
       // internally ??? JMI 0.9.72
       fCurrentNoteDisplayWholeNotesFromType =
-        fCurrentNoteSoundingWholeNotesFromNotesDuration;
+        fCurrentNoteDurationAsWholeNotes;
       break;
 
     default:
@@ -22651,14 +22668,14 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 
     // set current rest sounding and display whole notes
     fCurrentNoteSoundingWholeNotes =
-      fCurrentNoteSoundingWholeNotesFromNotesDuration;
+      fCurrentNoteDurationAsWholeNotes;
 
     fCurrentNoteDisplayWholeNotes =
       fCurrentNoteDisplayWholeNotesFromType;
 
   /* JMI
     // set current note sounding and display whole notes
-    if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
+    if (fCurrentNoteDurationAsWholeNotes.getNumerator () == 0) {
       // only <type /> was found, no <duration /> was specified
       fCurrentNoteDisplayWholeNotes =
         fCurrentNoteDisplayWholeNotesFromType;
@@ -22669,7 +22686,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
     else {
       // <duration /> was found
       fCurrentNoteSoundingWholeNotes =
-        fCurrentNoteSoundingWholeNotesFromNotesDuration;
+        fCurrentNoteDurationAsWholeNotes;
 
       fCurrentNoteDisplayWholeNotes =
         fCurrentNoteSoundingWholeNotes; // same value by default
@@ -22686,10 +22703,10 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
     if (! fCurrentNoteIsAGraceNote) {
       // set current note sounding whole notes
       fCurrentNoteSoundingWholeNotes =
-        fCurrentNoteSoundingWholeNotesFromNotesDuration;
+        fCurrentNoteDurationAsWholeNotes;
 
       /* JMI
-      if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
+      if (fCurrentNoteDurationAsWholeNotes.getNumerator () == 0) {
         // only <type /> was found, no <duration /> was specified
         fCurrentNoteDisplayWholeNotes =
           fCurrentNoteDisplayWholeNotesFromType;
@@ -22697,7 +22714,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
       else {
         // <duration /> was found
         fCurrentNoteSoundingWholeNotes =
-          fCurrentNoteSoundingWholeNotesFromNotesDuration;
+          fCurrentNoteDurationAsWholeNotes;
 
         fCurrentNoteDisplayWholeNotes =
           fCurrentNoteSoundingWholeNotes; // same value by default
@@ -22739,14 +22756,14 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 //
 //     // set current rest sounding and display whole notes
 //     fCurrentNoteSoundingWholeNotes =
-//       fCurrentNoteSoundingWholeNotesFromNotesDuration;
+//       fCurrentNoteDurationAsWholeNotes;
 //
 //     fCurrentNoteDisplayWholeNotes =
 //       fCurrentNoteDisplayWholeNotesFromType;
 //
 //   /* JMI
 //     // set current note sounding and display whole notes
-//     if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
+//     if (fCurrentNoteDurationAsWholeNotes.getNumerator () == 0) {
 //       // only <type /> was found, no <duration /> was specified
 //       fCurrentNoteDisplayWholeNotes =
 //         fCurrentNoteDisplayWholeNotesFromType;
@@ -22757,7 +22774,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 //     else {
 //       // <duration /> was found
 //       fCurrentNoteSoundingWholeNotes =
-//         fCurrentNoteSoundingWholeNotesFromNotesDuration;
+//         fCurrentNoteDurationAsWholeNotes;
 //
 //       fCurrentNoteDisplayWholeNotes =
 //         fCurrentNoteSoundingWholeNotes; // same value by default
@@ -22847,7 +22864,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
   checkNoteDurationKindAndWholeNotesDurationConsistency (
     fCurrentNoteInputStartLineNumber,
     fCurrentNoteSoundingDurationKind,
-    fCurrentNoteSoundingWholeNotesFromNotesDuration);
+    fCurrentNoteDurationAsWholeNotes);
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // create the note
@@ -22988,7 +23005,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteWithCurrentInformations (
 
   // check <duration/> and <type/> consistency if relevant
   if (
-    fCurrentNoteSoundingWholeNotesFromNotesDuration
+    fCurrentNoteDurationAsWholeNotes
       !=
     fCurrentNoteDisplayWholeNotesFromType
       &&
@@ -23014,7 +23031,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteWithCurrentInformations (
 
           ss <<
             "note duration inconsistency: divisions indicates " <<
-            fCurrentNoteSoundingWholeNotesFromNotesDuration <<
+            fCurrentNoteDurationAsWholeNotes <<
             " while type indicates " <<
             fCurrentNoteDisplayWholeNotesFromType <<
             ", using the latter";
@@ -24220,7 +24237,7 @@ void mxsr2msrSkeletonPopulator::handleChordEnd ()
 //     fCurrentRecipientMsrVoice->
 //       fetchVoiceLastMeasure (
 //         fCurrentNoteInputStartLineNumber)->
-//           incrementMeasureCurrentPositionInMeasure (
+//           incrementNextAppendPositionInMeasure (
 //             fCurrentNoteInputStartLineNumber,
 //             fCurrentChord->getMeasureElementSoundingWholeNotes (),
 //             "handleChordEnd()");
@@ -24469,10 +24486,10 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     // hence the current recipient staff number
     // it is that of the current note by default
     fCurrentRecipientStaffNumber = fCurrentNoteMxmlStaffNumber;
-    gLog <<
-      std::endl << std::endl <<
-      "====+++>>> fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber <<
-      std::endl << std::endl;
+//     gLog <<
+//       std::endl << std::endl <<
+//       "====+++>>> fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber <<
+//       std::endl << std::endl;
   }
   // else {} ??? JMI 2026.2
 
@@ -26155,7 +26172,7 @@ void mxsr2msrSkeletonPopulator::createARegularSyllableAndAppendItToStanza (
         syllableKind, // KRAKRA
         fCurrentSyllableExtendKind, // JMI 0.9.67
         fCurrentStanzaNumber,
-        fCurrentNoteSoundingWholeNotesFromNotesDuration,
+        fCurrentNoteDurationAsWholeNotes,
         msrTupletFactor (
           fCurrentNoteActualNotes,
           fCurrentNoteNormalNotes),
@@ -26233,7 +26250,7 @@ void mxsr2msrSkeletonPopulator::createASkipSyllableAndAppendItToStanza (
   S_msrStanza              stanza) const
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
+  if (true || gTraceOahGroup->getTraceLyrics ()) {
     std::stringstream ss;
 
     ss <<
@@ -26260,7 +26277,8 @@ void mxsr2msrSkeletonPopulator::createASkipSyllableAndAppendItToStanza (
         syllableKind,
         fCurrentSyllableExtendKind,
         fCurrentStanzaNumber,
-        fCurrentNoteSoundingWholeNotesFromNotesDuration,
+//         fCurrentNoteDurationAsWholeNotes, // JMI 2026.2 KRAKRA
+        fCurrentNoteSoundingWholeNotes,
         msrTupletFactor (
           fCurrentNoteActualNotes,
           fCurrentNoteNormalNotes),
@@ -26435,7 +26453,7 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled (
 
       if (it != fPendingSyllablesListForStanzasMap.end ()) {
         // =========================================================
-        // there are syllable(s) attached to this note
+        // there ARE syllable(s) attached to this note
         // =========================================================
 
         // choose the syllable kind
@@ -26457,14 +26475,16 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled (
 
       else { // KRAKRA
         // =========================================================
-        // there are no note syllable(s) attached to this note
+        // there ARE NO syllable(s) attached to this note
         // =========================================================
 
         if (fOnGoingTypeLessExtendStanzaNumbersSet.count (stanzaNumber)) {
           // =========================================================
-          // this syllable-less note belongs to a stanza with an ongoing extend
+          // this syllable-less note belongs to a stanza WITH an ongoing extend
           // a skip syllable should be generated
           // =========================================================
+
+gLog << std::endl << "fCurrentNoteIsARest 1: " << fCurrentNoteIsARest << std::endl;
 
           // choose the syllable kind
           msrSyllableKind
@@ -26482,9 +26502,11 @@ void mxsr2msrSkeletonPopulator::handleLyricsAfterCurrentNoteHasBeenHandled (
 
         else {
           // =========================================================
-          // this syllable-less note belongs to a stanza with no ongoing extend
+          // this syllable-less note belongs to a stanza WITHOUT an ongoing extend
           // a skip syllable shoud be generated
           // =========================================================
+
+gLog << std::endl << "fCurrentNoteIsARest 2: " << fCurrentNoteIsARest << std::endl;
 
           // choose the syllable kind
           msrSyllableKind
@@ -26741,7 +26763,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInATuplet (
       setNoteKind (msrNoteKind::kNoteRegularInTuplet);
   }
 
-  if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
+  if (fCurrentNoteDurationAsWholeNotes.getNumerator () == 0) {
     // no duration has been found,
     // determine sounding from display whole notes
     regularNote->
@@ -26879,7 +26901,7 @@ void mxsr2msrSkeletonPopulator::handleARestInATuplet (
 //       setNoteKind (msrNoteKind::kNoteRegularInTuplet);
 //   }
 
-  if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
+  if (fCurrentNoteDurationAsWholeNotes.getNumerator () == 0) {
     // no duration has been found,
     // determine sounding from display whole notes
     rest->
@@ -26932,7 +26954,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChordInATuplet (
       msrNoteKind::kNoteRegularInChord);
 
   // apply tuplet sounding factor to note
-  if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
+  if (fCurrentNoteDurationAsWholeNotes.getNumerator () == 0) {
     // no duration has been found,
     // determine sounding from display whole notes
     newChordNote->
@@ -26995,7 +27017,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChordInATuplet (
         ss.str ());
     }
 
-    if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
+    if (fCurrentNoteDurationAsWholeNotes.getNumerator () == 0) {
       // no duration has been found,
       // determine sounding from display whole notes
       newChordNote->

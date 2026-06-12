@@ -464,8 +464,8 @@ EXP mfIndentedStringStream& operator << (
 //_______________________________________________________________________________
 std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
   const mfInputLineNumber& inputLineNumber,
-  const mfWholeNotes& wholeNotes,
-  int&                 dotsNumber)
+  const mfWholeNotes&      wholeNotes,
+  int&                     dotsNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceDurationsDetails ()) {
@@ -910,7 +910,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
 
 std::string wholeNotesPitchAndOctaveAsString (
   const mfInputLineNumber& inputLineNumber,
-  const mfWholeNotes& wholeNotes)
+  const mfWholeNotes&      wholeNotes)
 {
   int dotsNumber; // not used JMI 0.9.70
 
@@ -923,7 +923,7 @@ std::string wholeNotesPitchAndOctaveAsString (
 
 std::string multiMeasureRestsWholeNotesPitchAndOctaveAsString (
   const mfInputLineNumber& inputLineNumber, // JMI
-  const mfWholeNotes& wholeNotes)
+  const mfWholeNotes&      wholeNotes)
 {
   std::stringstream ss;
 
@@ -969,7 +969,7 @@ void testWholeNotes ()
 //______________________________________________________________________________
 mfDurationKind mfDurationKindFromMxmlGraphicNoteType (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& durationString)
+  const std::string&       durationString)
 {
   mfDurationKind result = mfDurationKind::kDuration_UNKNOWN_;
 
@@ -1034,7 +1034,7 @@ mfDurationKind mfDurationKindFromMxmlGraphicNoteType (
 
 EXP mfDurationKind mfDurationKindFromInteger (
   const mfInputLineNumber& inputLineNumber,
-  int durationInteger)
+  int                      durationInteger)
 {
   mfDurationKind result = mfDurationKind::kDuration_UNKNOWN_;
 
@@ -1081,7 +1081,7 @@ EXP mfDurationKind mfDurationKindFromInteger (
 
 mfDurationKind mfDurationKindFromString (
   const mfInputLineNumber& inputLineNumber,
-  const std::string& durationString)
+  const std::string&       durationString)
 {
   mfDurationKind result = mfDurationKind::kDuration_UNKNOWN_;
 
@@ -1146,7 +1146,7 @@ mfDurationKind mfDurationKindFromString (
 
 EXP mfWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
   mfDurationKind notesDurationKind,
-  int                  dotsNumber)
+  int            dotsNumber)
 {
   // convert duration into whole notes
   mfWholeNotes
@@ -1502,8 +1502,8 @@ std::ostream& operator << (std::ostream& os, const mfDurationKind& elt)
 //______________________________________________________________________________
 EXP void checkNoteDurationKindAndWholeNotesDurationConsistency (
   const mfInputLineNumber& inputLineNumber,
-  mfDurationKind notesDurationKind,
-  mfWholeNotes        wholeNotesDuration)
+  mfDurationKind           notesDurationKind,
+  mfWholeNotes             wholeNotesDuration)
 {
   Bool consistency (false);
 
@@ -1584,7 +1584,7 @@ msrNotesDuration::msrNotesDuration ()
 
 msrNotesDuration::msrNotesDuration (
   mfDurationKind notesDurationKind,
-  int                  dotsNumber)
+  int            dotsNumber)
 {
   fNotesDurationKind = notesDurationKind;
   fDotsNumber = dotsNumber;
@@ -1852,7 +1852,7 @@ mfDottedNotesDuration::mfDottedNotesDuration ()
 
 mfDottedNotesDuration::mfDottedNotesDuration (
   mfDurationKind notesDurationKind,
-  int                  dotsNumber)
+  int            dotsNumber)
 {
   fNotesDurationKind = notesDurationKind;
   fDotsNumber = dotsNumber;

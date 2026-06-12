@@ -519,7 +519,7 @@ class EXP msrStanza : public msrElement
                             const mfInputLineNumber& inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure);
 
-//     void                  padUpToMeasureCurrentPositionInMeasureInStanza ( // JMI 0.9.68
+//     void                  padUpToNextAppendPositionInMeasureInStanza ( // JMI 0.9.68
 //                             const mfInputLineNumber& inputLineNumber,
 //                             const mfWholeNotes& wholeNotes);
 
@@ -573,7 +573,7 @@ class EXP msrStanza : public msrElement
     Bool                  fStanzaContainsText;
 
     // position in measure
-    mfPositionInMeasure   fStanzaMeasureCurrentPositionInMeasure;
+    mfPositionInMeasure   fStanzaNextAppendPositionInMeasure;
 };
 
 using S_msrStanza = SMARTP<msrStanza>;

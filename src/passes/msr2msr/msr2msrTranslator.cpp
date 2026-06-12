@@ -2810,9 +2810,9 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
       {
         // fetch the measure whole notes duration from the current measure clone
         mfWholeNotes
-          fullMeasureWholeNotesDuration =
+          measureCumulatedWholeNotesDurationFromTimeSignature =
             currentMeasureClone->
-              getFullMeasureWholeNotesDuration ();
+              getMeasureNominalWholeNotesDuration ();
 
         // get the current voice clone time signature
         S_msrTimeSignature
@@ -2843,8 +2843,8 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 
           ss <<
             "--> kMeasureKindRegular" <<
-            ", fullMeasureWholeNotesDuration: " <<
-            fullMeasureWholeNotesDuration.asString () <<
+            ", measureCumulatedWholeNotesDurationFromTimeSignature: " <<
+            measureCumulatedWholeNotesDurationFromTimeSignature.asString () <<
             "', wholeNotesPerMeasure: " <<
             wholeNotesPerMeasure;
 
@@ -2901,7 +2901,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 //       elt->
 //         appendPaddingSkipNoteToMeasure (
 //           elt->getInputLineNumber (),
-//           elt->getFullMeasureWholeNotesDuration ());
+//           elt->getMeasureNominalWholeNotesDuration ());
 
 //         doCreateABarCheck = true;
 //         doCreateABarNumberCheck = true;
@@ -3370,10 +3370,16 @@ void msr2msrTranslator::visitStart (S_msrTimeSignature& elt)
   fCurrentClefKeyTimeSignatureGroup->
     setTimeSignature (elt);
 
-//   fCurrentStaffClone->
+//   fCurrentStaffClone-> 2026.2 KRAKRA
 //     appendTimeSignatureToStaff (
 //       fCurrentClefKeyTimeSignatureGroup->getGroupInputLineNumber (),
 //       elt);
+//   fCurrentPartClone->
+//     appendTimeSignatureToPart (
+//       fCurrentClefKeyTimeSignatureGroup->getGroupInputLineNumber (),
+//       elt);
+  fCurrentVoiceClone->
+    setVoiceCurrentTimeSignature (elt); // JMI 2026.2 KRAKRA
 }
 
 void msr2msrTranslator::visitEnd (S_msrTimeSignature& elt)
@@ -3384,6 +3390,7 @@ void msr2msrTranslator::visitEnd (S_msrTimeSignature& elt)
 
     ss <<
       "--> End visiting msrTimeSignature" <<
+      elt->asString () <<
       ", " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -5282,20 +5289,20 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
     std::stringstream ss;
 
     ss <<
-            "The first note of voice clone GFFF " <<
-            fCurrentVoiceClone->getVoiceName () <<
-            " is ";
+          "The first note of voice clone GFFF " <<
+          fCurrentVoiceClone->getVoiceName () <<
+          " is ";
 
-          if (fFirstNoteCloneInVoice) {
-            ss <<
-              fFirstNoteCloneInVoice->asShortString ();
-          }
-          else {
-            s <<
-              "[NULL]";
-          }
+        if (fFirstNoteCloneInVoice) {
+          ss <<
+            fFirstNoteCloneInVoice->asShortString ();
+        }
+        else {
           s <<
-             '\'';
+            "[NULL]";
+        }
+        s <<
+           '\'';
 
     gWaeHandler->waeTrace (
       __FILE__, mfInputLineNumber (__LINE__),
@@ -5368,7 +5375,6 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
       fOnGoingNonGraceNote = true;
   } // switch
 
-//* JMI 0.9.70
   // can we optimize graceNotesGroup into afterGraceNotesGroup?
   if (
     elt->getNoteIsFollowedByGraceNotesGroup ()
@@ -5403,7 +5409,6 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
     fCurrentAfterGraceNotesGroupElement =
       fCurrentNonGraceNoteClone;
   }
-//*/
 }
 
 void msr2msrTranslator::visitEnd (S_msrNote& elt)
@@ -5548,7 +5553,8 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 #endif // MF_TRACE_IS_ENABLED
 
       fMeasuresStack.front ()->
-        appendNoteToMeasure (fCurrentNonGraceNoteClone);
+        appendNoteToMeasure (
+          fCurrentNonGraceNoteClone);
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
@@ -5774,7 +5780,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 //           // increment the current measure's accumulated duration
 //           // by the current chord's duration
 //           fMeasuresStack.front ()->
-//             incrementMeasureCurrentPositionInMeasure (
+//             incrementNextAppendPositionInMeasure (
 //               elt->getInputLineNumber (),
 //               fCurrentNoteClone->getMeasureElementSoundingWholeNotes (),
 //               "msr2msrTranslator::visitEnd (S_msrNote& elt) 2: "

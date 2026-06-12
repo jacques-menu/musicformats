@@ -128,33 +128,46 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure whole notes
 
-    void                  setFullMeasureWholeNotesDuration (
+    void                  setMeasureNominalWholeNotesDuration (
                             const mfWholeNotes& wholeNotes);
 
-    const mfWholeNotes&   getFullMeasureWholeNotesDuration () const
-                              { return fFullMeasureWholeNotesDuration; }
+    const mfWholeNotes&   getMeasureNominalWholeNotesDuration () const
+                              { return fMeasureNominalWholeNotesDuration; }
 
-    void                  setMeasureCurrentPositionInMeasure (
+    void                  setNextAppendPositionInMeasure (
                             const mfInputLineNumber&   inputLineNumber,
                             const mfPositionInMeasure& positionInMeasure,
                             std::string                context);
 
-    void                  incrementMeasureCurrentPositionInMeasure (
-                            const mfInputLineNumber& inputLineNumber,
-                            const mfWholeNotes&      wholeNotesDelta,
-                            std::string              context);
-
-    mfPositionInMeasure   getMeasureCurrentPositionInMeasure () const
-                              { return fMeasureCurrentPositionInMeasure; }
-
-    mfWholeNotes          getMeasureWholeNotesDuration () const
-                              { return fMeasureWholeNotesDuration; }
+    mfWholeNotes          getMeasureCumulatedWholeNotesDuration () const
+                              { return fMeasureCumulatedWholeNotesDuration; }
 
     void                  setMeasureIsMusicallyEmpty (Bool value)
                               { fMeasureIsMusicallyEmpty = value; }
 
     Bool                  getMeasureIsMusicallyEmpty () const
                               { return fMeasureIsMusicallyEmpty; }
+
+    mfPositionInMeasure   getNextAppendPositionInMeasure () const
+                              { return fNextAppendPositionInMeasure; }
+
+    void                  setMeasureCumulatedWholeNotesDuration (
+                            const mfWholeNotes& duration);
+
+    void                  accountForElementInWholeNotesDuration (
+                            const mfInputLineNumber& inputLineNumber,
+                            const mfWholeNotes&      measureElementSoundingWholeNotes,
+                            std::string              context);
+
+    void                  incrementNextAppendPositionInMeasure (
+                            const mfInputLineNumber& inputLineNumber,
+                            const mfWholeNotes&      wholeNotesDelta,
+                            std::string              context);
+
+    void                  incrementMeasureCumulatedWholeNotesDuration (
+                            const mfInputLineNumber& inputLineNumber,
+                            const mfWholeNotes&      duration,
+                            std::string              context);
 
     // measure kind
 
@@ -296,7 +309,7 @@ class EXP msrMeasure : public msrSegmentElement
 
 //     // measure lengths, in whole notes
 //
-//     mfWholeNotes          fetchFullMeasureWholeNotesDuration_KEEP (
+//     mfWholeNotes          fetchMeasureCumulatedWholeNotesDurationFromTimeSignature_KEEP (
 //                             const mfInputLineNumber& inputLineNumber = 7327, // JMI 0.9.70 BABASSE
 //                             std::string context = "-- CONTEXT --") const;
 
@@ -312,7 +325,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // lengths
 
-//     std::string           fullMeasureWholeNotesDurationAndPitchAndOctaveAsString ();
+//     std::string           measureCumulatedWholeNotesDurationFromTimeSignatureAndPitchAndOctaveAsString ();
 
     // backup and padding
 
@@ -371,7 +384,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendTimeSignatureToMeasure (
                             const S_msrTimeSignature& timeSignature);
 
-    void                  setFullMeasureWholeNotesDurationFromTimeSignature ( // JMI 0.9.70 BABASSE SUPERFLOUS???
+    void                  setMeasureNominalWholeNotesDurationFromTimeSignature (
                             const S_msrTimeSignature& timeSignature);
 
     void                  appendTimeSignatureToMeasureClone (
@@ -678,12 +691,14 @@ class EXP msrMeasure : public msrSegmentElement
 
     std::string           asStringForMeasuresSlices () const override;
 
-    void                  displayMeasure (
-                            const mfInputLineNumber& inputLineNumber,
-                            const std::string& context);
-
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;
+
+    void                  displayMeasure (
+                            const mfInputLineNumber& inputLineNumber,
+                            const std::string&       context);
+
+    std::string           measureCurrentPositionInMeasurAndPitchAndOctaveAsString ();
 
   private:
 
@@ -706,8 +721,8 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengths, in whole notes
 
-    mfWholeNotes          fFullMeasureWholeNotesDuration;
-                            // denormalization from msrStaff, for efficiency // JMI 0.9.70 BABASSE
+    mfWholeNotes          fMeasureNominalWholeNotesDuration;
+                            // the durations corresponding to a full measure:
                             // meaningfull only when there is a time signature,
                             // but not for cadenzas
 
@@ -733,15 +748,15 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengths, in whole notes
 
-    mfPositionInMeasure   fMeasureCurrentPositionInMeasure;
+    mfPositionInMeasure   fNextAppendPositionInMeasure;
                             // this increases when musical elements
                             // are appended to the measure
 
-    mfWholeNotes          fMeasureWholeNotesDuration;
-                            // this is set from the above when the measure is finalized
+    mfWholeNotes          fMeasureCumulatedWholeNotesDuration;
+                            // this increases when musical elements
+                            // are appended to the measure
 
-    std::string           measureCurrentPositionInMeasurAndPitchAndOctaveAsString ();
-
+    // empty measure?
     Bool                  fMeasureIsMusicallyEmpty;
 
     // first measure in voice?
@@ -750,7 +765,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure print layout, MusicXML specific
 
-    S_msrMxmlPrintLayout fMeasureMxmlPrintLayout;
+    S_msrMxmlPrintLayout  fMeasureMxmlPrintLayout;
 
 /* JMI
     // measure shortest note

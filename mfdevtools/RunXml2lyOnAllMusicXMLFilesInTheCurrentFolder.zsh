@@ -199,7 +199,7 @@ function RunXml2lyOnFile ()
   LILYPOND_FILE_NAME="$SUFFIXLESS_FILE_NAME.ly"
   echo "LILYPOND_FILE_NAME:      $LILYPOND_FILE_NAME"
 
-  if [ 1 -eq 0 ]; then
+  if [ 0 -eq 0 ]; then
     xml2ly \
       -lilypond-run-date \
       -lilypond-generation-infos \

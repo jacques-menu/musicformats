@@ -555,7 +555,8 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItInSegment (
   const mfInputLineNumber& inputLineNumber,
   int                      previousMeasureEndInputLineNumber,
   const mfMeasureNumber&   measureNumber,
-  msrMeasureImplicitNumberKind   measureImplicitNumberKind)
+  msrMeasureImplicitNumberKind
+                           measureImplicitNumberKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresBasics ()) {
@@ -2505,9 +2506,9 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
         measure);
   }
   else {
-//     // set the measure full measure whole notes duration JMI 0.9.70
+//     // set the measure full measure whole notes duration JMI 2026.2
 //     measure->
-//       setFullMeasureWholeNotesDuration (
+//       setMeasureNominalWholeNotesDuration (
 //         fetchSegmentUpLinkToStaff ()->
 //           getStaffCurrentTimeSignature ()->
 //             timeSignatureWholeNotesPerMeasure ());

@@ -2330,7 +2330,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     // note sounding duration
 
-    mfWholeNotes              fCurrentNoteSoundingWholeNotesFromNotesDuration;
+    mfWholeNotes              fCurrentNoteDurationAsWholeNotes;
     mfWholeNotes              fCurrentNoteSoundingWholeNotes;
     mfDurationKind            fCurrentNoteSoundingDurationKind;
 

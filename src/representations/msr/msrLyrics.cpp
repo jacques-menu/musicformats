@@ -1225,7 +1225,7 @@ void msrStanza::initializeStanza ()
 
   fStanzaContainsText = false;
 
-  fStanzaMeasureCurrentPositionInMeasure = K_POSITION_IN_MEASURE_ZERO;
+  fStanzaNextAppendPositionInMeasure = K_POSITION_IN_MEASURE_ZERO;
 }
 
 msrStanza::~msrStanza ()
@@ -1367,7 +1367,7 @@ void msrStanza::appendSyllableToStanza (
     positionsDelta =
       partCurrentDrawingPositionInMeasure.asWholeNotes ()
         -
-      fStanzaMeasureCurrentPositionInMeasure.asWholeNotes ();
+      fStanzaNextAppendPositionInMeasure.asWholeNotes ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
@@ -1378,8 +1378,8 @@ void msrStanza::appendSyllableToStanza (
       " to stanza " << getStanzaName () <<
       ", partCurrentDrawingPositionInMeasure: " <<
       partCurrentDrawingPositionInMeasure.asString () <<
-      ", fStanzaMeasureCurrentPositionInMeasure: " <<
-      fStanzaMeasureCurrentPositionInMeasure.asString () <<
+      ", fStanzaNextAppendPositionInMeasure: " <<
+      fStanzaNextAppendPositionInMeasure.asString () <<
       ", positionsDelta: " <<
       positionsDelta.asString () <<
       ", " << syllable->getInputLineNumber ();
@@ -1408,7 +1408,7 @@ void msrStanza::appendSyllableToStanza (
     fSyllables.push_back (skipRestNoteSyllable);
 
     // account for syllable length
-    fStanzaMeasureCurrentPositionInMeasure +=
+    fStanzaNextAppendPositionInMeasure +=
       skipRestNoteSyllable->getSyllableWholeNotes ();
   }
 
@@ -1416,7 +1416,7 @@ void msrStanza::appendSyllableToStanza (
   fSyllables.push_back (syllable);
 
   // account for syllable length
-  fStanzaMeasureCurrentPositionInMeasure +=
+  fStanzaNextAppendPositionInMeasure +=
     syllable->getSyllableWholeNotes ();
 
   // set the syllable's stanza uplink
@@ -1505,7 +1505,7 @@ void msrStanza::appendSyllableToStanzaClone (
   fSyllables.push_back (syllable);
 
   // account for syllable length
-  fStanzaMeasureCurrentPositionInMeasure +=
+  fStanzaNextAppendPositionInMeasure +=
     syllable->getSyllableWholeNotes ();
 
   // set the syllable's stanza uplink
@@ -1557,7 +1557,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
     positionsDelta =
       partCurrentDrawingPositionInMeasure.asWholeNotes ()
         -
-      fStanzaMeasureCurrentPositionInMeasure.asWholeNotes ();
+      fStanzaNextAppendPositionInMeasure.asWholeNotes ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
@@ -1580,8 +1580,8 @@ void msrStanza::appendMeasureEndSyllableToStanza (
     ss <<
       ", partCurrentDrawingPositionInMeasure: " <<
       partCurrentDrawingPositionInMeasure <<
-      ", fStanzaMeasureCurrentPositionInMeasure: " <<
-      fStanzaMeasureCurrentPositionInMeasure <<
+      ", fStanzaNextAppendPositionInMeasure: " <<
+      fStanzaNextAppendPositionInMeasure <<
       ", positionsDelta: " <<
       positionsDelta.asString () <<
       ", " << inputLineNumber;
@@ -1612,7 +1612,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
 //     fSyllables.push_back (skipRestNoteSyllable);
 //
 //     // account for syllable length
-//     fStanzaMeasureCurrentPositionInMeasure +=
+//     fStanzaNextAppendPositionInMeasure +=
 //       skipRestNoteSyllable->getSyllableWholeNotes ();
 //   }
 
@@ -1647,7 +1647,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
     partCurrentDrawingPositionInMeasure);
 
   // reset measure whole notes
-  fStanzaMeasureCurrentPositionInMeasure =
+  fStanzaNextAppendPositionInMeasure =
     mfPositionInMeasure::createFromWholeNotes (
       K_WHOLE_NOTES_ZERO);
 

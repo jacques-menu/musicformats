@@ -453,12 +453,11 @@ void msrClefKeyTimeSignatureGroup::setTimeSignature (
     }
   }
 
-  // set the measure full measure whole notes duration JMI 0.9.70 BABASSE
+  // set the measure full measure whole notes duration JMI 2026.2 KRAKRA
   if (fMeasureElementUpLinkToMeasure) {
     fMeasureElementUpLinkToMeasure->
-      setFullMeasureWholeNotesDuration (
-        fTimeSignature->
-          timeSignatureWholeNotesPerMeasure ());
+      setMeasureNominalWholeNotesDurationFromTimeSignature (
+        fTimeSignature);
   }
 }
 

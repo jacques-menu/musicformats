@@ -565,7 +565,8 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
   const mfInputLineNumber& inputLineNumber,
   int                      previousMeasureEndInputLineNumber,
   const mfMeasureNumber&   measureNumber,
-  msrMeasureImplicitNumberKind   measureImplicitNumberKind)
+  msrMeasureImplicitNumberKind
+                           measureImplicitNumberKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresBasics ()) {
@@ -1992,15 +1993,15 @@ void msrStaff::appendKeyToStaff (
     }
 
     else {
-      if (key->isEqualTo (fStaffCurrentKey)) {
+      if (key->isEqualTo (fStaffCurrentKey)) { // JMI 2026.2 KRAKRA
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceKeys ()) {
           std::stringstream ss;
 
           ss <<
-            "Key '" <<
+            "Key " <<
             key->asString () <<
-            "' ignored because it is already present in staff " <<
+            " ignored because it is already present in staff " <<
             fStaffPathLikeName <<
             "\" in part " <<
             fStaffUpLinkToPart->fetchPartNameForTrace ();
@@ -2099,15 +2100,15 @@ void msrStaff::appendTimeSignatureToStaff (
     }
 
     else {
-      if (timeSignature->isEqualTo (fStaffCurrentTimeSignature)) {
+      if (timeSignature->isEqualTo (fStaffCurrentTimeSignature)) { // JMI 2026.2 KRAKRA
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTimeSignatures ()) {
           std::stringstream ss;
 
           ss <<
-            "Time '" <<
+            "Time " <<
             timeSignature->asString () <<
-            "' ignored because it is already present in staff " <<
+            " ignored because it is already present in staff " <<
             fStaffPathLikeName <<
             "\" in part " <<
             fStaffUpLinkToPart->fetchPartNameForTrace ();
@@ -2947,15 +2948,15 @@ void msrStaff::appendTranspositionToStaff (
   }
 
   else {
-    if (transposition->isEqualTo (fStaffCurrentTransposition)) {
+    if (transposition->isEqualTo (fStaffCurrentTransposition)) { // JMI 2026.2 KRAKRA
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceTranspositions ()) {
         std::stringstream ss;
 
         ss <<
-          "Transpose '" <<
+          "Transpose " <<
           transposition->asString () <<
-          "' ignored because it is already present in staff " <<
+          " ignored because it is already present in staff " <<
           fStaffPathLikeName <<
           "\" in part " <<
           fStaffUpLinkToPart->fetchPartNameForTrace ();

@@ -6202,7 +6202,7 @@ void msrNote::printFull (std::ostream& os) const
       fMeasureElementUpLinkToMeasure
         ?
           fMeasureElementUpLinkToMeasure->
-            getFullMeasureWholeNotesDuration ()
+            getMeasureNominalWholeNotesDuration ()
         : K_WHOLE_NOTES_ZERO; // JMI 0.9.67
 
   os << std::left <<
